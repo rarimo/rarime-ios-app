@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PRIVACY_POLICY_URL</key>
+	<string>${PRIVACY_POLICY_URL}</string>
+	<key>TERMS_OF_USE_URL</key>
+	<string>${TERMS_OF_USE_URL}</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Helvetica-Bold.otf</string>
+		<string>Helvetica-Regular.otf</string>
+	</array>
+</dict>
+</plist>
