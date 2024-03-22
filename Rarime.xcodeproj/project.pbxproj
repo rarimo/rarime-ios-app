@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C272BADA8A600FBB3B9 /* Icons.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
 		CE32CF522BAC981300E507B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE32CF512BAC981300E507B6 /* Lottie */; };
 		CE32CF542BAC983400E507B6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF532BAC983400E507B6 /* String.swift */; };
@@ -20,11 +21,11 @@
 		CE9E82BA2BA881F500AAF885 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9E82B92BA881F500AAF885 /* Assets.xcassets */; };
 		CE9E82CD2BA886A700AAF885 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE9E82CF2BA886A700AAF885 /* Localizable.strings */; };
 		CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82D62BA8917100AAF885 /* LottieView.swift */; };
-		CE9E82E12BA8974C00AAF885 /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CE9E82E02BA8974C00AAF885 /* Development.xcconfig */; };
 		CE9E82E92BA89DBE00AAF885 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82E82BA89DBE00AAF885 /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		561C3C272BADA8A600FBB3B9 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CE32CF532BAC983400E507B6 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		CE778B652BA99F6500B26485 /* helvetica_regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = helvetica_regular.otf; sourceTree = "<group>"; };
@@ -56,32 +57,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CE32CF552BAC987500E507B6 /* Models */ = {
+		561C3C262BADA89000FBB3B9 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				561C3C272BADA8A600FBB3B9 /* Icons.swift */,
 			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		CE32CF562BAC987A00E507B6 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		CE32CF572BAC987D00E507B6 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		CE32CF582BAC988000E507B6 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		CE778B5B2BA9976C00B26485 /* Fonts */ = {
@@ -122,8 +103,6 @@
 		CE778B7A2BA9D28A00B26485 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				CE32CF572BAC987D00E507B6 /* ViewModels */,
-				CE32CF552BAC987500E507B6 /* Models */,
 				CE778B7B2BA9D30100B26485 /* Views */,
 			);
 			path = Main;
@@ -186,6 +165,7 @@
 		CE9E82C62BA8851B00AAF885 /* Code */ = {
 			isa = PBXGroup;
 			children = (
+				561C3C262BADA89000FBB3B9 /* Enums */,
 				CE9E82CA2BA885B700AAF885 /* Utils */,
 				CE9E82C72BA8852700AAF885 /* Features */,
 			);
@@ -205,7 +185,6 @@
 		CE9E82C82BA8853900AAF885 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				CE32CF562BAC987A00E507B6 /* Models */,
 				CE778B772BA9C9FC00B26485 /* ViewModels */,
 				CE9E82C92BA8854E00AAF885 /* Views */,
 			);
@@ -231,7 +210,6 @@
 		CE9E82D12BA888F300AAF885 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				CE32CF582BAC988000E507B6 /* ViewModels */,
 				CE9E82E72BA89D9600AAF885 /* Models */,
 				CE9E82D52BA8915C00AAF885 /* Views */,
 			);
@@ -294,7 +272,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					CE9E82B12BA881F400AAF885 = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -330,7 +308,6 @@
 				CE9E82BA2BA881F500AAF885 /* Assets.xcassets in Resources */,
 				CE9E82CD2BA886A700AAF885 /* Localizable.strings in Resources */,
 				CE778B682BA99F6500B26485 /* helvetica_bold.otf in Resources */,
-				CE9E82E12BA8974C00AAF885 /* Development.xcconfig in Resources */,
 				CE778B672BA99F6500B26485 /* helvetica_regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,6 +327,7 @@
 				CE907DFA2BAC9ABC002F110C /* SwiftUI+Font.swift in Sources */,
 				CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */,
 				CE32CF542BAC983400E507B6 /* String.swift in Sources */,
+				561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */,
 				CE778B792BA9CA0A00B26485 /* AppView+ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,6 +448,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -483,6 +462,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
