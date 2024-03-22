@@ -20,7 +20,6 @@
 		CE9E82BA2BA881F500AAF885 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9E82B92BA881F500AAF885 /* Assets.xcassets */; };
 		CE9E82CD2BA886A700AAF885 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE9E82CF2BA886A700AAF885 /* Localizable.strings */; };
 		CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82D62BA8917100AAF885 /* LottieView.swift */; };
-		CE9E82E12BA8974C00AAF885 /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CE9E82E02BA8974C00AAF885 /* Development.xcconfig */; };
 		CE9E82E92BA89DBE00AAF885 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82E82BA89DBE00AAF885 /* Config.swift */; };
 /* End PBXBuildFile section */
 
@@ -262,7 +261,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					CE9E82B12BA881F400AAF885 = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -298,7 +297,6 @@
 				CE9E82BA2BA881F500AAF885 /* Assets.xcassets in Resources */,
 				CE9E82CD2BA886A700AAF885 /* Localizable.strings in Resources */,
 				CE778B682BA99F6500B26485 /* helvetica_bold.otf in Resources */,
-				CE9E82E12BA8974C00AAF885 /* Development.xcconfig in Resources */,
 				CE778B672BA99F6500B26485 /* helvetica_regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,6 +436,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -451,6 +450,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
