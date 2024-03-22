@@ -56,34 +56,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CE32CF552BAC987500E507B6 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		CE32CF562BAC987A00E507B6 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		CE32CF572BAC987D00E507B6 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		CE32CF582BAC988000E507B6 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		CE778B5B2BA9976C00B26485 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,8 +94,6 @@
 		CE778B7A2BA9D28A00B26485 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				CE32CF572BAC987D00E507B6 /* ViewModels */,
-				CE32CF552BAC987500E507B6 /* Models */,
 				CE778B7B2BA9D30100B26485 /* Views */,
 			);
 			path = Main;
@@ -205,7 +175,6 @@
 		CE9E82C82BA8853900AAF885 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				CE32CF562BAC987A00E507B6 /* Models */,
 				CE778B772BA9C9FC00B26485 /* ViewModels */,
 				CE9E82C92BA8854E00AAF885 /* Views */,
 			);
@@ -231,7 +200,6 @@
 		CE9E82D12BA888F300AAF885 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				CE32CF582BAC988000E507B6 /* ViewModels */,
 				CE9E82E72BA89D9600AAF885 /* Models */,
 				CE9E82D52BA8915C00AAF885 /* Views */,
 			);
