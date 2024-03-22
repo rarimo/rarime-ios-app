@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "arrow-counter-clockwise.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
