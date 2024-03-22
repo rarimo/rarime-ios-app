@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C272BADA8A600FBB3B9 /* Icons.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
 		CE32CF522BAC981300E507B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE32CF512BAC981300E507B6 /* Lottie */; };
 		CE32CF542BAC983400E507B6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF532BAC983400E507B6 /* String.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		561C3C272BADA8A600FBB3B9 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CE32CF532BAC983400E507B6 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		CE778B652BA99F6500B26485 /* helvetica_regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = helvetica_regular.otf; sourceTree = "<group>"; };
@@ -55,6 +57,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		561C3C262BADA89000FBB3B9 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				561C3C272BADA8A600FBB3B9 /* Icons.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		CE778B5B2BA9976C00B26485 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +165,7 @@
 		CE9E82C62BA8851B00AAF885 /* Code */ = {
 			isa = PBXGroup;
 			children = (
+				561C3C262BADA89000FBB3B9 /* Enums */,
 				CE9E82CA2BA885B700AAF885 /* Utils */,
 				CE9E82C72BA8852700AAF885 /* Features */,
 			);
@@ -316,6 +327,7 @@
 				CE907DFA2BAC9ABC002F110C /* SwiftUI+Font.swift in Sources */,
 				CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */,
 				CE32CF542BAC983400E507B6 /* String.swift in Sources */,
+				561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */,
 				CE778B792BA9CA0A00B26485 /* AppView+ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
