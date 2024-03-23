@@ -15,8 +15,7 @@ struct MainView: View {
                 .frame(width: 100, height: 100)
                 .foregroundStyle(.textPrimary)
             Text("Rarime")
-                .font(.title)
-                .fontWeight(.bold)
+                .h3()
                 .foregroundStyle(.textPrimary)
         }
             
