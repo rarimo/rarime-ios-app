@@ -16,7 +16,6 @@
 		561C3C412BADF0AA00FBB3B9 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 561C3C3D2BADF0AA00FBB3B9 /* Inter-Medium.ttf */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
 		CE32CF522BAC981300E507B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE32CF512BAC981300E507B6 /* Lottie */; };
-		CE32CF542BAC983400E507B6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF532BAC983400E507B6 /* String.swift */; };
 		CE778B792BA9CA0A00B26485 /* AppView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE778B782BA9CA0A00B26485 /* AppView+ViewModel.swift */; };
 		CE9E82B62BA881F400AAF885 /* RarimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82B52BA881F400AAF885 /* RarimeApp.swift */; };
 		CE9E82B82BA881F400AAF885 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82B72BA881F400AAF885 /* AppView.swift */; };
@@ -35,7 +34,6 @@
 		561C3C3C2BADF0AA00FBB3B9 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		561C3C3D2BADF0AA00FBB3B9 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		CE32CF532BAC983400E507B6 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		CE778B782BA9CA0A00B26485 /* AppView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppView+ViewModel.swift"; sourceTree = "<group>"; };
 		CE9E82B22BA881F400AAF885 /* Rarime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rarime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE9E82B52BA881F400AAF885 /* RarimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarimeApp.swift; sourceTree = "<group>"; };
@@ -70,13 +68,6 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
-		561C3C292BADBF0300FBB3B9 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		561C3C2D2BADC10300FBB3B9 /* Inter */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,7 +91,6 @@
 			isa = PBXGroup;
 			children = (
 				561C3C2A2BADBF1000FBB3B9 /* SwiftUI+Text.swift */,
-				CE32CF532BAC983400E507B6 /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -178,7 +168,7 @@
 		CE9E82C62BA8851B00AAF885 /* Code */ = {
 			isa = PBXGroup;
 			children = (
-				561C3C292BADBF0300FBB3B9 /* Extensions */,
+				CE778B6F2BA9A73700B26485 /* Extensions */,
 				561C3C262BADA89000FBB3B9 /* Enums */,
 				CE9E82CA2BA885B700AAF885 /* Utils */,
 				CE9E82C72BA8852700AAF885 /* Features */,
@@ -216,7 +206,6 @@
 		CE9E82CA2BA885B700AAF885 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				CE778B6F2BA9A73700B26485 /* Extensions */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -341,7 +330,6 @@
 				CE9E82B62BA881F400AAF885 /* RarimeApp.swift in Sources */,
 				561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */,
 				CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */,
-				CE32CF542BAC983400E507B6 /* String.swift in Sources */,
 				561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */,
 				561C3C2B2BADBF1000FBB3B9 /* SwiftUI+Text.swift in Sources */,
 				CE778B792BA9CA0A00B26485 /* AppView+ViewModel.swift in Sources */,
