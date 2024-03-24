@@ -7,16 +7,6 @@
 
 import SwiftUI
 
-enum SheetType: Identifiable {
-    case help
-
-    var id: String {
-        switch self {
-        case .help: return "help"
-        }
-    }
-}
-
 struct HomeView: View {
     @State private var currentSheet: SheetType?
 
@@ -24,27 +14,62 @@ struct HomeView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 16) {
-                    ForEach(0..<8) { index in
-                        Text("Item \(index)").subtitle1()
+                    HStack {
+                        Text("Welcome back!").h5().foregroundStyle(.textPrimary)
+                        Spacer()
+                        Button {
+                            currentSheet = .notifications
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        } label: {
+                            Image(Icons.bellFill).iconMedium()
+                        }.foregroundStyle(.textPrimary)
+                    }
+                    .padding(.top, 16)
+                    CardContainerView {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Dashboard").subtitle2().foregroundStyle(.textPrimary)
+                            Text("Overview of your account").body3().foregroundStyle(.textSecondary)
+                        }
+                    }
+                    CardContainerView {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Wallet").subtitle2().foregroundStyle(.textPrimary)
+                            Text("Manage your assets").body3().foregroundStyle(.textSecondary)
+                        }
+                    }
+                    CardContainerView {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Rewards").subtitle2().foregroundStyle(.textPrimary)
+                            Text("Participate and get rewarded").body3().foregroundStyle(.textSecondary)
+                        }
+                    }
+                    CardContainerView {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Credentials").subtitle2().foregroundStyle(.textPrimary)
+                            Text("Store your documents securely").body3().foregroundStyle(.textSecondary)
+                        }
+                    }
+                    CardContainerView {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Settings").subtitle2().foregroundStyle(.textPrimary)
+                            Text("Manage your account settings").body3().foregroundStyle(.textSecondary)
+                        }
                     }
                     Button {
                         currentSheet = .help
                         UIImpactFeedbackGenerator(style: .light).impactOccurred()
                     } label: {
-                        Text("Open drawer").buttonMedium().frame(maxWidth: .infinity)
+                        Text("Open sheet").buttonMedium().frame(maxWidth: .infinity)
                     }
                     .buttonStyle(PrimaryContainedButtonStyle())
-
-                    ForEach(0..<20) { index in
-                        Text("Item \(index)").subtitle1()
-                    }
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 20)
                 .padding(.bottom, 48)
             }
             .padding(.top, 1)
+            .background(.backgroundPrimary)
             .sheet(item: $currentSheet, content: {
-                Text("Drawer: \($0.id)")
+                Text("Sheet: \($0.id)")
             })
         }
     }

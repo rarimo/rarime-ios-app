@@ -21,7 +21,7 @@ struct MainView: View {
                     SettingsView().tag(MainTabs.settings)
                 }
                 .onAppear {
-                    // Remove background from tab bar
+                    // Remove tab bar background
                     let appearance = UITabBarAppearance()
                     appearance.configureWithTransparentBackground()
                     UITabBar.appearance().standardAppearance = appearance

@@ -23,6 +23,8 @@
 		563529EF2BB0732C0027C910 /* CredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529EE2BB0732C0027C910 /* CredentialsView.swift */; };
 		563529F12BB0736A0027C910 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529F02BB0736A0027C910 /* TabBarView.swift */; };
 		563529F42BB0768C0027C910 /* MainTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529F32BB0768C0027C910 /* MainTabs.swift */; };
+		563529F62BB077AB0027C910 /* CardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529F52BB077AB0027C910 /* CardContainerView.swift */; };
+		563529F82BB082A00027C910 /* SheetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529F72BB082A00027C910 /* SheetType.swift */; };
 		56AC033E2BB06A0500A34A00 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033D2BB06A0500A34A00 /* ButtonStyle.swift */; };
 		56AC03402BB06A2D00A34A00 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033F2BB06A2D00A34A00 /* Image.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
@@ -53,6 +55,8 @@
 		563529EE2BB0732C0027C910 /* CredentialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsView.swift; sourceTree = "<group>"; };
 		563529F02BB0736A0027C910 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		563529F32BB0768C0027C910 /* MainTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabs.swift; sourceTree = "<group>"; };
+		563529F52BB077AB0027C910 /* CardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerView.swift; sourceTree = "<group>"; };
+		563529F72BB082A00027C910 /* SheetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetType.swift; sourceTree = "<group>"; };
 		56AC033D2BB06A0500A34A00 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		56AC033F2BB06A2D00A34A00 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -84,8 +88,9 @@
 		561C3C262BADA89000FBB3B9 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				561C3C272BADA8A600FBB3B9 /* Icons.swift */,
 				561C3C382BADE64B00FBB3B9 /* Fonts.swift */,
+				561C3C272BADA8A600FBB3B9 /* Icons.swift */,
+				563529F72BB082A00027C910 /* SheetType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -208,10 +213,10 @@
 		CE778B6F2BA9A73700B26485 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				561C3C2A2BADBF1000FBB3B9 /* Text.swift */,
-				563529EA2BB072FD0027C910 /* UINavigationController.swift */,
 				56AC033F2BB06A2D00A34A00 /* Image.swift */,
 				561C3C422BAEE2D600FBB3B9 /* String.swift */,
+				561C3C2A2BADBF1000FBB3B9 /* Text.swift */,
+				563529EA2BB072FD0027C910 /* UINavigationController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -291,10 +296,10 @@
 			isa = PBXGroup;
 			children = (
 				CE9E82B52BA881F400AAF885 /* RarimeApp.swift */,
-				56AC033C2BB069F400A34A00 /* Styles */,
-				CE778B6F2BA9A73700B26485 /* Extensions */,
 				561C3C262BADA89000FBB3B9 /* Enums */,
+				CE778B6F2BA9A73700B26485 /* Extensions */,
 				CE9E82C72BA8852700AAF885 /* Modules */,
+				56AC033C2BB069F400A34A00 /* Styles */,
 			);
 			path = Code;
 			sourceTree = "<group>";
@@ -302,14 +307,14 @@
 		CE9E82C72BA8852700AAF885 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				CE9E82C82BA8853900AAF885 /* App */,
+				CE9E82D12BA888F300AAF885 /* Common */,
 				563529EC2BB073180027C910 /* Credentials */,
-				563529E02BB071930027C910 /* Settings */,
-				563529DC2BB0717D0027C910 /* Rewards */,
-				563529DB2BB071570027C910 /* Wallet */,
 				563529DA2BB0714A0027C910 /* Home */,
 				CE778B7A2BA9D28A00B26485 /* Main */,
-				CE9E82D12BA888F300AAF885 /* Common */,
-				CE9E82C82BA8853900AAF885 /* App */,
+				563529DC2BB0717D0027C910 /* Rewards */,
+				563529E02BB071930027C910 /* Settings */,
+				563529DB2BB071570027C910 /* Wallet */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -344,6 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				CE9E82D62BA8917100AAF885 /* LottieView.swift */,
+				563529F52BB077AB0027C910 /* CardContainerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -452,6 +458,7 @@
 				563529EF2BB0732C0027C910 /* CredentialsView.swift in Sources */,
 				563529F42BB0768C0027C910 /* MainTabs.swift in Sources */,
 				CE9E82E92BA89DBE00AAF885 /* Config.swift in Sources */,
+				563529F82BB082A00027C910 /* SheetType.swift in Sources */,
 				563529E92BB072B80027C910 /* HomeView.swift in Sources */,
 				CE9E82B62BA881F400AAF885 /* RarimeApp.swift in Sources */,
 				561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */,
@@ -465,6 +472,7 @@
 				563529EB2BB072FD0027C910 /* UINavigationController.swift in Sources */,
 				CE778B792BA9CA0A00B26485 /* AppView+ViewModel.swift in Sources */,
 				563529F12BB0736A0027C910 /* TabBarView.swift in Sources */,
+				563529F62BB077AB0027C910 /* CardContainerView.swift in Sources */,
 				563529E72BB072870027C910 /* WalletView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
