@@ -1,5 +1,5 @@
 //
-//  SwiftUI+Text.swift
+//  Text.swift
 //  Rarime
 //
 //  Created by Maksym Shopynskyi on 22.03.2024.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-func getFontFamily (weight: UIFont.Weight) -> String {
+func getFontFamily(weight: UIFont.Weight) -> String {
     if weight == .bold {
         return Fonts.interBold
     } else if weight == .semibold {
@@ -21,7 +21,7 @@ func getFontFamily (weight: UIFont.Weight) -> String {
 }
 
 extension Text {
-    func applyFont (fontSize: CGFloat, lineHeight: CGFloat, fontWeight: UIFont.Weight = .regular) -> some View {
+    func applyFont(fontSize: CGFloat, lineHeight: CGFloat, fontWeight: UIFont.Weight = .regular) -> some View {
         let font = UIFont(
             name: getFontFamily(weight: fontWeight),
             size: fontSize
@@ -34,118 +34,118 @@ extension Text {
     }
     
     // headline
-    func h1 () -> some View {
+    func h1() -> some View {
         self.applyFont(fontSize: 96, lineHeight: 96, fontWeight: .bold)
     }
     
-    func h2 () -> some View {
+    func h2() -> some View {
         self.applyFont(fontSize: 60, lineHeight: 70, fontWeight: .bold)
     }
     
-    func h3 () -> some View {
+    func h3() -> some View {
         self.applyFont(fontSize: 48, lineHeight: 56, fontWeight: .bold)
     }
     
-    func h4 () -> some View {
+    func h4() -> some View {
         self.applyFont(fontSize: 32, lineHeight: 40, fontWeight: .bold)
     }
     
-    func h5 () -> some View {
+    func h5() -> some View {
         self.applyFont(fontSize: 24, lineHeight: 30, fontWeight: .bold)
     }
     
-    func h6 () -> some View {
+    func h6() -> some View {
         self.applyFont(fontSize: 20, lineHeight: 24, fontWeight: .bold)
     }
     
     // subtitle
-    func subtitle1 () -> some View {
+    func subtitle1() -> some View {
         self.applyFont(fontSize: 24, lineHeight: 30, fontWeight: .semibold)
     }
     
-    func subtitle2 () -> some View {
+    func subtitle2() -> some View {
         self.applyFont(fontSize: 20, lineHeight: 24, fontWeight: .semibold)
     }
     
-    func subtitle3 () -> some View {
+    func subtitle3() -> some View {
         self.applyFont(fontSize: 16, lineHeight: 20, fontWeight: .semibold)
     }
     
-    func subtitle4 () -> some View {
+    func subtitle4() -> some View {
         self.applyFont(fontSize: 14, lineHeight: 18, fontWeight: .semibold)
     }
     
-    func subtitle5 () -> some View {
+    func subtitle5() -> some View {
         self.applyFont(fontSize: 12, lineHeight: 16, fontWeight: .semibold)
     }
     
     // body
-    func body1 () -> some View {
+    func body1() -> some View {
         self
             .applyFont(fontSize: 20, lineHeight: 24)
             .kerning(0.4)
     }
     
-    func body2 () -> some View {
+    func body2() -> some View {
         self
             .applyFont(fontSize: 16, lineHeight: 20)
             .kerning(0.32)
     }
     
-    func body3 () -> some View {
+    func body3() -> some View {
         self
             .applyFont(fontSize: 14, lineHeight: 20)
             .kerning(0.28)
     }
     
-    func body4 () -> some View {
+    func body4() -> some View {
         self
             .applyFont(fontSize: 12, lineHeight: 16)
             .kerning(0.24)
     }
     
     // button
-    func buttonLarge () -> some View {
+    func buttonLarge() -> some View {
         self.applyFont(fontSize: 16, lineHeight: 20, fontWeight: .medium)
     }
     
-    func buttonMedium () -> some View {
+    func buttonMedium() -> some View {
         self.applyFont(fontSize: 14, lineHeight: 18, fontWeight: .medium)
     }
     
-    func buttonSmall () -> some View {
+    func buttonSmall() -> some View {
         self.applyFont(fontSize: 12, lineHeight: 14, fontWeight: .medium)
     }
     
     // caption
-    func caption1 () -> some View {
+    func caption1() -> some View {
         self.applyFont(fontSize: 14, lineHeight: 18, fontWeight: .medium)
     }
     
-    func caption2 () -> some View {
+    func caption2() -> some View {
         self.applyFont(fontSize: 12, lineHeight: 16, fontWeight: .medium)
     }
     
-    func caption3 () -> some View {
+    func caption3() -> some View {
         self.applyFont(fontSize: 10, lineHeight: 12, fontWeight: .medium)
     }
     
     // overline
-    func overline1 () -> some View {
+    func overline1() -> some View {
         self
             .applyFont(fontSize: 14, lineHeight: 18, fontWeight: .bold)
             .kerning(0.56)
             .textCase(.uppercase)
     }
     
-    func overline2 () -> some View {
+    func overline2() -> some View {
         self
             .applyFont(fontSize: 12, lineHeight: 16, fontWeight: .bold)
             .kerning(0.48)
             .textCase(.uppercase)
     }
     
-    func overline3 () -> some View {
+    func overline3() -> some View {
         self
             .applyFont(fontSize: 10, lineHeight: 12, fontWeight: .bold)
             .kerning(0.4)

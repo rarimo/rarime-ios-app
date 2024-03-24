@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C272BADA8A600FBB3B9 /* Icons.swift */; };
-		561C3C2B2BADBF1000FBB3B9 /* SwiftUI+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C2A2BADBF1000FBB3B9 /* SwiftUI+Text.swift */; };
+		561C3C2B2BADBF1000FBB3B9 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C2A2BADBF1000FBB3B9 /* Text.swift */; };
 		561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C382BADE64B00FBB3B9 /* Fonts.swift */; };
 		561C3C3E2BADF0AA00FBB3B9 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 561C3C3A2BADF0AA00FBB3B9 /* Inter-Regular.ttf */; };
 		561C3C3F2BADF0AA00FBB3B9 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 561C3C3B2BADF0AA00FBB3B9 /* Inter-Bold.ttf */; };
@@ -28,7 +28,7 @@
 
 /* Begin PBXFileReference section */
 		561C3C272BADA8A600FBB3B9 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
-		561C3C2A2BADBF1000FBB3B9 /* SwiftUI+Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Text.swift"; sourceTree = "<group>"; };
+		561C3C2A2BADBF1000FBB3B9 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		561C3C382BADE64B00FBB3B9 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		561C3C3A2BADF0AA00FBB3B9 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		561C3C3B2BADF0AA00FBB3B9 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 		CE778B6F2BA9A73700B26485 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				561C3C2A2BADBF1000FBB3B9 /* SwiftUI+Text.swift */,
+				561C3C2A2BADBF1000FBB3B9 /* Text.swift */,
 				561C3C422BAEE2D600FBB3B9 /* String.swift */,
 			);
 			path = Extensions;
@@ -335,7 +335,7 @@
 				561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */,
 				CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */,
 				561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */,
-				561C3C2B2BADBF1000FBB3B9 /* SwiftUI+Text.swift in Sources */,
+				561C3C2B2BADBF1000FBB3B9 /* Text.swift in Sources */,
 				CE778B792BA9CA0A00B26485 /* AppView+ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
