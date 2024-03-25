@@ -8,15 +8,16 @@
 import Foundation
 import SwiftUI
 
-func getFontFamily(weight: UIFont.Weight) -> String {
-    if weight == .bold {
-        return Fonts.interBold
-    } else if weight == .semibold {
-        return Fonts.interSemibold
-    } else if weight == .medium {
-        return Fonts.interMedium
-    } else {
-        return Fonts.interRegular
+private func getFontFamily(weight: UIFont.Weight) -> String {
+    switch weight {
+        case .bold:
+            return Fonts.interBold
+        case .semibold:
+            return Fonts.interSemibold
+        case .medium:
+            return Fonts.interMedium
+        default:
+            return Fonts.interRegular
     }
 }
 
@@ -27,10 +28,12 @@ extension Text {
             size: fontSize
         ) ?? UIFont.systemFont(ofSize: fontSize, weight: fontWeight)
         
+        let lineSpacing = lineHeight - font.lineHeight
+        
         return self
             .font(Font(font))
-            .lineSpacing(lineHeight - font.lineHeight)
-            .padding(.vertical, (lineHeight - font.lineHeight) / 2)
+            .lineSpacing(lineSpacing)
+            .padding(.vertical, lineSpacing / 2)
     }
     
     // headline
