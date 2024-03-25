@@ -8,8 +8,10 @@
 	<string>${TERMS_OF_USE_URL}</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Helvetica-Bold.otf</string>
-		<string>Helvetica-Regular.otf</string>
+		<string>Inter-Bold.ttf</string>
+		<string>Inter-Medium.ttf</string>
+		<string>Inter-Regular.ttf</string>
+		<string>Inter-SemiBold.ttf</string>
 	</array>
 </dict>
 </plist>
