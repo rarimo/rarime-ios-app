@@ -10,12 +10,12 @@ import SwiftUI
 extension AppView {
     class ViewModel: ObservableObject {
         let config: Config
-        
+
         init() {
             do {
                 config = try Config()
-            } catch let error {
-                fatalError("appview model error: \(error)")
+            } catch {
+                fatalError("AppViewModel error: \(error)")
             }
         }
     }
