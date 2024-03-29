@@ -29,6 +29,8 @@
 		568B4FCE2BB6C274001C9C74 /* IntroStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FCD2BB6C274001C9C74 /* IntroStepView.swift */; };
 		568B4FD12BB6D88F001C9C74 /* HorizontalDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FD02BB6D88F001C9C74 /* HorizontalDivider.swift */; };
 		568B4FE02BB70852001C9C74 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 568B4FDF2BB70852001C9C74 /* Localizable.xcstrings */; };
+		568B4FE22BB70BEA001C9C74 /* GetStartedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FE12BB70BEA001C9C74 /* GetStartedView.swift */; };
+		568B4FE52BB70CAA001C9C74 /* IntroStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FE42BB70CAA001C9C74 /* IntroStep.swift */; };
 		56AC033E2BB06A0500A34A00 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033D2BB06A0500A34A00 /* ButtonStyle.swift */; };
 		56AC03402BB06A2D00A34A00 /* Image+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
@@ -64,6 +66,8 @@
 		568B4FCD2BB6C274001C9C74 /* IntroStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroStepView.swift; sourceTree = "<group>"; };
 		568B4FD02BB6D88F001C9C74 /* HorizontalDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalDivider.swift; sourceTree = "<group>"; };
 		568B4FDF2BB70852001C9C74 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		568B4FE12BB70BEA001C9C74 /* GetStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedView.swift; sourceTree = "<group>"; };
+		568B4FE42BB70CAA001C9C74 /* IntroStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroStep.swift; sourceTree = "<group>"; };
 		56AC033D2BB06A0500A34A00 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Icon.swift"; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 		568B4FC92BB6C156001C9C74 /* Intro */ = {
 			isa = PBXGroup;
 			children = (
+				568B4FE32BB70C97001C9C74 /* Enums */,
 				568B4FCA2BB6C15A001C9C74 /* Views */,
 			);
 			path = Intro;
@@ -212,9 +217,18 @@
 			isa = PBXGroup;
 			children = (
 				568B4FCB2BB6C164001C9C74 /* IntroView.swift */,
+				568B4FE12BB70BEA001C9C74 /* GetStartedView.swift */,
 				568B4FCD2BB6C274001C9C74 /* IntroStepView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		568B4FE32BB70C97001C9C74 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				568B4FE42BB70CAA001C9C74 /* IntroStep.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		56AC033C2BB069F400A34A00 /* Styles */ = {
@@ -482,6 +496,7 @@
 				561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */,
 				563529EF2BB0732C0027C910 /* CredentialsView.swift in Sources */,
 				563529F42BB0768C0027C910 /* MainTabs.swift in Sources */,
+				568B4FE52BB70CAA001C9C74 /* IntroStep.swift in Sources */,
 				CE9E82E92BA89DBE00AAF885 /* Config.swift in Sources */,
 				563529F82BB082A00027C910 /* SheetType.swift in Sources */,
 				563529E92BB072B80027C910 /* HomeView.swift in Sources */,
@@ -498,6 +513,7 @@
 				563529EB2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift in Sources */,
 				568B4FCE2BB6C274001C9C74 /* IntroStepView.swift in Sources */,
 				568B4FD12BB6D88F001C9C74 /* HorizontalDivider.swift in Sources */,
+				568B4FE22BB70BEA001C9C74 /* GetStartedView.swift in Sources */,
 				CE778B792BA9CA0A00B26485 /* AppView+ViewModel.swift in Sources */,
 				563529F12BB0736A0027C910 /* TabBarView.swift in Sources */,
 				563529F62BB077AB0027C910 /* CardContainerView.swift in Sources */,
