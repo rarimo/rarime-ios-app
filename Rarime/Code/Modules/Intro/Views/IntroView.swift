@@ -10,7 +10,7 @@ import SwiftUI
 enum IntroStep: Int, CaseIterable {
     case welcome, identity, privacy, rewards
 
-    var title: String {
+    var title: LocalizedStringResource {
         switch self {
         case .welcome: return "Welcome"
         case .identity: return "Plug your identity"
@@ -19,7 +19,7 @@ enum IntroStep: Int, CaseIterable {
         }
     }
 
-    var text: String {
+    var text: LocalizedStringResource {
         switch self {
         case .welcome: return "This is an app where your digital identity lives and enables you to connect with rest of the web in a fully private mode"
         case .identity: return "Convert existing identity documents into anonymous credentials"
@@ -155,8 +155,8 @@ struct GetStartedView: View {
 }
 
 struct GetStartedButton: View {
-    let title: String
-    let text: String
+    let title: LocalizedStringResource
+    let text: LocalizedStringResource
     let icon: String
     let action: () -> Void
 

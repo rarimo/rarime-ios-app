@@ -1,0 +1,99 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Back" : {
+
+    },
+    "Convert existing identity documents into anonymous credentials" : {
+
+    },
+    "Create a profile, add various credentials, and invite others to earn rewards in the process" : {
+
+    },
+    "Create new Identity" : {
+
+    },
+    "Credentials" : {
+
+    },
+    "Dashboard" : {
+
+    },
+    "Description text here" : {
+
+    },
+    "Get rewarded" : {
+
+    },
+    "Get Started" : {
+
+    },
+    "Import from MetaMask Snap" : {
+
+    },
+    "Login and access special parts of the web" : {
+
+    },
+    "Manage your account settings" : {
+
+    },
+    "Manage your assets" : {
+
+    },
+    "Next" : {
+
+    },
+    "Open sheet" : {
+
+    },
+    "Open wallet" : {
+
+    },
+    "Overview of your account" : {
+
+    },
+    "Participate and get rewarded" : {
+
+    },
+    "Plug your identity" : {
+
+    },
+    "Rewards" : {
+
+    },
+    "Select Authorisation Method" : {
+
+    },
+    "Settings" : {
+
+    },
+    "Sheet: %@" : {
+
+    },
+    "Skip" : {
+
+    },
+    "Store your documents securely" : {
+
+    },
+    "This is an app where your digital identity lives and enables you to connect with rest of the web in a fully private mode" : {
+
+    },
+    "Use them" : {
+
+    },
+    "Wallet" : {
+
+    },
+    "Wallet detail" : {
+
+    },
+    "Welcome" : {
+
+    },
+    "Welcome back!" : {
+
+    }
+  },
+  "version" : "1.0"
+}

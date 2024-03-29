@@ -55,25 +55,25 @@ struct SecondaryContainedButtonStyle: ButtonStyle {
 #Preview {
     VStack(alignment: .leading) {
         Button(action: {}) {
-            Text("Large").buttonLarge()
+            Text(String("Large")).buttonLarge()
         }
         .buttonStyle(PrimaryContainedButtonStyle())
         .controlSize(.large)
 
         Button(action: {}) {
-            Text("Regular").buttonMedium()
+            Text(String("Regular")).buttonMedium()
         }
         .buttonStyle(PrimaryContainedButtonStyle())
 
         Button(action: {}) {
-            Text("Small").buttonSmall()
+            Text(String("Small")).buttonSmall()
         }
         .buttonStyle(PrimaryContainedButtonStyle())
         .controlSize(.small)
 
         Button(action: {}) {
             HStack {
-                Text("Full width with icon").buttonMedium()
+                Text(String("Full width with icon")).buttonMedium()
                 Image(Icons.arrowRight).iconMedium()
             }
             .frame(maxWidth: .infinity)
@@ -81,7 +81,7 @@ struct SecondaryContainedButtonStyle: ButtonStyle {
         .buttonStyle(PrimaryContainedButtonStyle())
 
         Button(action: {}) {
-            Text("Secondary").buttonMedium().frame(maxWidth: .infinity)
+            Text(String("Secondary")).buttonMedium().frame(maxWidth: .infinity)
         }
         .buttonStyle(SecondaryContainedButtonStyle())
     }
