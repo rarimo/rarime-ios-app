@@ -11,8 +11,12 @@ struct AppView: View {
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
-        VStack {
-            MainView()
+        ZStack {
+            if viewModel.isIntroFinished {
+                MainView()
+            } else {
+                IntroView()
+            }
         }
         .environmentObject(viewModel)
     }

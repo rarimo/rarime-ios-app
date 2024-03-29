@@ -10,6 +10,7 @@ import SwiftUI
 extension AppView {
     class ViewModel: ObservableObject {
         let config: Config
+        @Published var isIntroFinished = false
 
         init() {
             do {
@@ -17,6 +18,10 @@ extension AppView {
             } catch {
                 fatalError("AppViewModel error: \(error)")
             }
+        }
+
+        func finishIntro() {
+            isIntroFinished = true
         }
     }
 }
