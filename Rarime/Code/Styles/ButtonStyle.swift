@@ -8,23 +8,31 @@
 import Foundation
 import SwiftUI
 
-private func getButtonHeight(_ controlSize: ControlSize) -> CGFloat {
+private func buttonHeight(_ controlSize: ControlSize) -> CGFloat {
     switch controlSize {
-    case .small: return 40
-    default: return 48
+    case .small: return 32
+    case .large: return 48
+    default: return 40
+    }
+}
+
+private func buttonPaddingHorizontal(_ controlSize: ControlSize) -> CGFloat {
+    switch controlSize {
+    case .small: return 16
+    case .large: return 32
+    default: return 24
     }
 }
 
 private let buttonCornerRadius: CGFloat = 1000
-private let buttonPaddingHorizontal: CGFloat = 32
 
 struct PrimaryContainedButtonStyle: ButtonStyle {
     @Environment(\.controlSize) var controlSize
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .frame(height: getButtonHeight(controlSize))
-            .padding(.horizontal, buttonPaddingHorizontal)
+            .frame(height: buttonHeight(controlSize))
+            .padding(.horizontal, buttonPaddingHorizontal(controlSize))
             .background(configuration.isPressed ? .primaryDark : .primaryMain)
             .foregroundColor(.baseBlack)
             .cornerRadius(buttonCornerRadius)
@@ -36,8 +44,8 @@ struct SecondaryContainedButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .frame(height: getButtonHeight(controlSize))
-            .padding(.horizontal, buttonPaddingHorizontal)
+            .frame(height: buttonHeight(controlSize))
+            .padding(.horizontal, buttonPaddingHorizontal(controlSize))
             .background(configuration.isPressed ? .componentPressed : .componentPrimary)
             .foregroundColor(.textPrimary)
             .cornerRadius(buttonCornerRadius)
@@ -47,12 +55,18 @@ struct SecondaryContainedButtonStyle: ButtonStyle {
 #Preview {
     VStack(alignment: .leading) {
         Button(action: {}) {
+            Text("Large").buttonLarge()
+        }
+        .buttonStyle(PrimaryContainedButtonStyle())
+        .controlSize(.large)
+
+        Button(action: {}) {
             Text("Regular").buttonMedium()
         }
         .buttonStyle(PrimaryContainedButtonStyle())
 
         Button(action: {}) {
-            Text("Small").buttonMedium()
+            Text("Small").buttonSmall()
         }
         .buttonStyle(PrimaryContainedButtonStyle())
         .controlSize(.small)
