@@ -15,7 +15,7 @@ struct VerifyIdentityView: View {
     @State var isErrorSheetPresented = false
 
     func verifyWords() -> Bool {
-        return selectedWords == ["explore", "apple", "features"]
+        return selectedWords == ["explore", "apple", "engage"]
     }
 
     var body: some View {
