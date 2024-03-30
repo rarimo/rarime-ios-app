@@ -23,25 +23,7 @@ struct VerifyIdentityView: View {
             step: 2,
             title: "Verify your recovery phrase",
             onBack: onBack,
-            nextButton: {
-                Button(action: {
-                    if verifyWords() {
-                        onNext()
-                    } else {
-                        isErrorSheetPresented = true
-                        UINotificationFeedbackGenerator().notificationOccurred(.error)
-                    }
-                }) {
-                    HStack(spacing: 8) {
-                        Text("Next").buttonLarge()
-                        Image(Icons.arrowRight).iconSmall()
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-                .disabled(selectedWords.contains(""))
-                .controlSize(.large)
-                .buttonStyle(PrimaryContainedButtonStyle())
-            }
+            nextButton: { continueButton }
         ) {
             CardContainerView {
                 VStack(spacing: 24) {
@@ -68,6 +50,26 @@ struct VerifyIdentityView: View {
                 })
             }
         }
+    }
+
+    var continueButton: some View {
+        Button(action: {
+            if verifyWords() {
+                onNext()
+            } else {
+                isErrorSheetPresented = true
+                UINotificationFeedbackGenerator().notificationOccurred(.error)
+            }
+        }) {
+            HStack(spacing: 8) {
+                Text("Next").buttonLarge()
+                Image(Icons.arrowRight).iconSmall()
+            }
+            .frame(maxWidth: .infinity)
+        }
+        .disabled(selectedWords.contains(""))
+        .controlSize(.large)
+        .buttonStyle(PrimaryContainedButtonStyle())
     }
 }
 
