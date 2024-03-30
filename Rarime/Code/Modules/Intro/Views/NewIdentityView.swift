@@ -36,7 +36,7 @@ struct NewIdentityView: View {
             nextButton: {
                 Button(action: onNext) {
                     HStack(spacing: 8) {
-                        Text("Continue").buttonMedium()
+                        Text("Continue").buttonLarge()
                         Image(Icons.arrowRight).iconSmall()
                     }
                     .frame(maxWidth: .infinity)

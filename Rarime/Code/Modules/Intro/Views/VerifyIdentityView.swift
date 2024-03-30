@@ -33,7 +33,7 @@ struct VerifyIdentityView: View {
                     }
                 }) {
                     HStack(spacing: 8) {
-                        Text("Next").buttonMedium()
+                        Text("Next").buttonLarge()
                         Image(Icons.arrowRight).iconSmall()
                     }
                     .frame(maxWidth: .infinity)
@@ -62,16 +62,10 @@ struct VerifyIdentityView: View {
                     )
                 }
             }
-            .sheet(isPresented: $isErrorSheetPresented) {
-                ZStack {
-                    Color.backgroundPure.edgesIgnoringSafeArea(.all)
-                    IncorrectSelectionView(onTryAgain: {
-                        isErrorSheetPresented = false
-                    })
-                    .padding(.vertical, 32)
-                }
-                .presentationDetents([.height(290)])
-                .presentationDragIndicator(.hidden)
+            .dynamicSheet(isPresented: $isErrorSheetPresented) {
+                IncorrectSelectionView(onTryAgain: {
+                    isErrorSheetPresented = false
+                })
             }
         }
     }
@@ -127,7 +121,9 @@ private struct IncorrectSelectionView: View {
     var body: some View {
         VStack(spacing: 16) {
             VStack {
-                Image(Icons.info).iconLarge().foregroundColor(.errorMain)
+                Image(Icons.info)
+                    .iconLarge()
+                    .foregroundColor(.errorMain)
             }
             .padding(20)
             .background(.errorLighter)
@@ -140,13 +136,15 @@ private struct IncorrectSelectionView: View {
                     .body2()
                     .foregroundColor(.textSecondary)
             }
-            HorizontalDivider().padding(.top, 16)
+            .padding(.top, 8)
+            HorizontalDivider()
+                .padding(.top, 16)
+                .padding(.horizontal, -20)
             Button(action: onTryAgain) {
                 Text("Try Again")
                     .buttonLarge()
                     .frame(maxWidth: .infinity)
             }
-            .padding(.horizontal, 20)
             .controlSize(.large)
             .buttonStyle(PrimaryContainedButtonStyle())
         }

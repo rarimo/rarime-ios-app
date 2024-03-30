@@ -52,24 +52,6 @@ struct IntroView: View {
                                 Text("Get Started").buttonMedium().frame(maxWidth: .infinity)
                             }
                             .buttonStyle(PrimaryContainedButtonStyle())
-                            .sheet(isPresented: $showSheet) {
-                                ZStack {
-                                    Color.backgroundPure.edgesIgnoringSafeArea(.all)
-                                    GetStartedView(
-                                        onCreate: {
-                                            showSheet.toggle()
-                                            path.append(.newIdentity)
-                                        },
-                                        onImport: {
-                                            showSheet.toggle()
-                                            path.append(.importIdentity)
-                                        }
-                                    )
-                                    .padding(.vertical, 32)
-                                }
-                                .presentationDetents([.height(320)])
-                                .presentationDragIndicator(.hidden)
-                            }
                         } else {
                             StepIndicator(steps: IntroStep.allCases.count, currentStep: currentStep)
                             Spacer()
@@ -86,6 +68,19 @@ struct IntroView: View {
                 .padding(.top, 24)
                 .padding(.bottom, 32)
                 .padding(.horizontal, 24)
+                .dynamicSheet(isPresented: $showSheet) {
+                    GetStartedView(
+                        onCreate: {
+                            showSheet.toggle()
+                            path.append(.newIdentity)
+                        },
+                        onImport: {
+                            showSheet.toggle()
+                            path.append(.importIdentity)
+                        }
+                    )
+                    .padding(.bottom, 24)
+                }
             }
             .navigationDestination(for: IdentityRoute.self) { route in
                 switch route {
