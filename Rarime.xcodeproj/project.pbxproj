@@ -33,6 +33,10 @@
 		568B4FE52BB70CAA001C9C74 /* IntroStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FE42BB70CAA001C9C74 /* IntroStep.swift */; };
 		56AC033E2BB06A0500A34A00 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033D2BB06A0500A34A00 /* ButtonStyle.swift */; };
 		56AC03402BB06A2D00A34A00 /* Image+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */; };
+		56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3002BB723A1002CF710 /* NewIdentityView.swift */; };
+		56DAA3032BB7248A002CF710 /* VerifyIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3022BB7248A002CF710 /* VerifyIdentityView.swift */; };
+		56DAA3052BB72E35002CF710 /* InfoAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3042BB72E35002CF710 /* InfoAlertView.swift */; };
+		56DAA3072BB77550002CF710 /* IdentityStepLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3062BB77550002CF710 /* IdentityStepLayoutView.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
 		CE32CF522BAC981300E507B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE32CF512BAC981300E507B6 /* Lottie */; };
 		CE778B792BA9CA0A00B26485 /* AppView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE778B782BA9CA0A00B26485 /* AppView+ViewModel.swift */; };
@@ -70,6 +74,10 @@
 		568B4FE42BB70CAA001C9C74 /* IntroStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroStep.swift; sourceTree = "<group>"; };
 		56AC033D2BB06A0500A34A00 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Icon.swift"; sourceTree = "<group>"; };
+		56DAA3002BB723A1002CF710 /* NewIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIdentityView.swift; sourceTree = "<group>"; };
+		56DAA3022BB7248A002CF710 /* VerifyIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyIdentityView.swift; sourceTree = "<group>"; };
+		56DAA3042BB72E35002CF710 /* InfoAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlertView.swift; sourceTree = "<group>"; };
+		56DAA3062BB77550002CF710 /* IdentityStepLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityStepLayoutView.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CE778B782BA9CA0A00B26485 /* AppView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppView+ViewModel.swift"; sourceTree = "<group>"; };
 		CE9E82B22BA881F400AAF885 /* Rarime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rarime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +225,9 @@
 			isa = PBXGroup;
 			children = (
 				568B4FCB2BB6C164001C9C74 /* IntroView.swift */,
+				56DAA3002BB723A1002CF710 /* NewIdentityView.swift */,
+				56DAA3022BB7248A002CF710 /* VerifyIdentityView.swift */,
+				56DAA3062BB77550002CF710 /* IdentityStepLayoutView.swift */,
 				568B4FE12BB70BEA001C9C74 /* GetStartedView.swift */,
 				568B4FCD2BB6C274001C9C74 /* IntroStepView.swift */,
 			);
@@ -387,6 +398,7 @@
 			isa = PBXGroup;
 			children = (
 				CE9E82D62BA8917100AAF885 /* LottieView.swift */,
+				56DAA3042BB72E35002CF710 /* InfoAlertView.swift */,
 				563529F52BB077AB0027C910 /* CardContainerView.swift */,
 				568B4FD02BB6D88F001C9C74 /* HorizontalDivider.swift */,
 			);
@@ -495,6 +507,7 @@
 				CE9E82B82BA881F400AAF885 /* AppView.swift in Sources */,
 				561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */,
 				563529EF2BB0732C0027C910 /* CredentialsView.swift in Sources */,
+				56DAA3032BB7248A002CF710 /* VerifyIdentityView.swift in Sources */,
 				563529F42BB0768C0027C910 /* MainTabs.swift in Sources */,
 				568B4FE52BB70CAA001C9C74 /* IntroStep.swift in Sources */,
 				CE9E82E92BA89DBE00AAF885 /* Config.swift in Sources */,
@@ -502,13 +515,16 @@
 				563529E92BB072B80027C910 /* HomeView.swift in Sources */,
 				CE9E82B62BA881F400AAF885 /* RarimeApp.swift in Sources */,
 				561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */,
+				56DAA3072BB77550002CF710 /* IdentityStepLayoutView.swift in Sources */,
 				563529E32BB071A50027C910 /* SettingsView.swift in Sources */,
+				56DAA3052BB72E35002CF710 /* InfoAlertView.swift in Sources */,
 				563529E52BB072060027C910 /* RewardsView.swift in Sources */,
 				CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */,
 				561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */,
 				561C3C2B2BADBF1000FBB3B9 /* Text+Typography.swift in Sources */,
 				561C3C2B2BADBF1000FBB3B9 /* Text+Typography.swift in Sources */,
 				568B4FCC2BB6C164001C9C74 /* IntroView.swift in Sources */,
+				56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */,
 				56AC033E2BB06A0500A34A00 /* ButtonStyle.swift in Sources */,
 				563529EB2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift in Sources */,
 				568B4FCE2BB6C274001C9C74 /* IntroStepView.swift in Sources */,

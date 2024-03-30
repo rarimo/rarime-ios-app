@@ -4,7 +4,16 @@
     "Back" : {
 
     },
+    "Continue" : {
+
+    },
     "Convert existing identity documents into anonymous credentials" : {
+
+    },
+    "Copied" : {
+
+    },
+    "Copy to clipboard" : {
 
     },
     "Create a profile, add various credentials, and invite others to earn rewards in the process" : {
@@ -22,6 +31,9 @@
     "Description text here" : {
 
     },
+    "Don’t share your recovery phrase with anyone" : {
+
+    },
     "Get rewarded" : {
 
     },
@@ -31,6 +43,12 @@
     "Import from MetaMask Snap" : {
 
     },
+    "Import Identity" : {
+
+    },
+    "Incorrect" : {
+
+    },
     "Login and access special parts of the web" : {
 
     },
@@ -38,6 +56,9 @@
 
     },
     "Manage your assets" : {
+
+    },
+    "New recovery phrase" : {
 
     },
     "Next" : {
@@ -64,6 +85,9 @@
     "Select Authorisation Method" : {
 
     },
+    "Selections not matched. please try again" : {
+
+    },
     "Settings" : {
 
     },
@@ -73,13 +97,35 @@
     "Skip" : {
 
     },
+    "Step %lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Step %1$lld/%2$lld"
+          }
+        }
+      }
+    },
     "Store your documents securely" : {
+
+    },
+    "This is a warning message" : {
+
+    },
+    "This is a warning message with an action button on the right" : {
 
     },
     "This is an app where your digital identity lives and enables you to connect with rest of the web in a fully private mode" : {
 
     },
+    "Try Again" : {
+
+    },
     "Use them" : {
+
+    },
+    "Verify your recovery phrase" : {
 
     },
     "Wallet" : {
@@ -92,6 +138,9 @@
 
     },
     "Welcome back!" : {
+
+    },
+    "Word #%lld" : {
 
     }
   },

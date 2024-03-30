@@ -14,8 +14,8 @@ struct CardContainerView<Content: View>: View {
         VStack(alignment: .leading, content: content)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(20)
-            .background(.backgroundOpacity)
-            .cornerRadius(24)
+            .background(.backgroundPure)
+            .clipShape(RoundedRectangle(cornerRadius: 24))
     }
 }
 
