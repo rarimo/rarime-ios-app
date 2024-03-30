@@ -22,13 +22,19 @@ struct IdentityStepLayoutView<Content: View, NextButton: View>: View {
             VStack {
                 HStack {
                     Button(action: onBack) {
-                        Image(Icons.caretLeft).iconMedium().foregroundColor(.textPrimary)
+                        Image(Icons.caretLeft)
+                            .iconMedium()
+                            .foregroundColor(.textPrimary)
                     }
                     Spacer()
-                    Text("Step \(step)/\(totalSteps)").body3().foregroundColor(.textSecondary)
+                    Text("Step \(step)/\(totalSteps)")
+                        .body3()
+                        .foregroundColor(.textSecondary)
                 }
                 VStack(alignment: .leading, spacing: 32) {
-                    Text(title).subtitle2().foregroundColor(.textPrimary)
+                    Text(title)
+                        .subtitle2()
+                        .foregroundColor(.textPrimary)
                     content()
                 }
                 .padding(.vertical, 24)
