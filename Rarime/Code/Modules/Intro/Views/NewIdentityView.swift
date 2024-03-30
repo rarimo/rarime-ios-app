@@ -42,7 +42,7 @@ struct NewIdentityView: View {
                     .frame(maxWidth: .infinity)
                 }
                 .controlSize(.large)
-                .buttonStyle(PrimaryContainedButtonStyle())
+                .buttonStyle(PrimaryButtonStyle())
             }
         ) {
             CardContainerView {

@@ -61,7 +61,7 @@ struct HomeView: View {
                     } label: {
                         Text("Open sheet").buttonMedium().frame(maxWidth: .infinity)
                     }
-                    .buttonStyle(PrimaryContainedButtonStyle())
+                    .buttonStyle(PrimaryButtonStyle())
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 48)

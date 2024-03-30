@@ -69,7 +69,7 @@ struct VerifyIdentityView: View {
         }
         .disabled(selectedWords.contains(""))
         .controlSize(.large)
-        .buttonStyle(PrimaryContainedButtonStyle())
+        .buttonStyle(PrimaryButtonStyle())
     }
 }
 
@@ -148,7 +148,7 @@ private struct IncorrectSelectionView: View {
                     .frame(maxWidth: .infinity)
             }
             .controlSize(.large)
-            .buttonStyle(PrimaryContainedButtonStyle())
+            .buttonStyle(PrimaryButtonStyle())
         }
     }
 }

@@ -34,6 +34,21 @@
     "Don’t share your recovery phrase with anyone" : {
 
     },
+    "Enable" : {
+
+    },
+    "Enable\nFace ID" : {
+
+    },
+    "Enable\nPasscode" : {
+
+    },
+    "Enable Face ID Authentication" : {
+
+    },
+    "Enable Passcode Authentication" : {
+
+    },
     "Get rewarded" : {
 
     },
@@ -56,6 +71,9 @@
 
     },
     "Manage your assets" : {
+
+    },
+    "Maybe Later" : {
 
     },
     "New recovery phrase" : {
