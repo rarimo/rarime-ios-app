@@ -49,6 +49,9 @@
     "Enable Passcode Authentication" : {
 
     },
+    "Enter Passcode" : {
+
+    },
     "Get rewarded" : {
 
     },
@@ -94,7 +97,13 @@
     "Participate and get rewarded" : {
 
     },
+    "Passcodes do not match" : {
+
+    },
     "Plug your identity" : {
+
+    },
+    "Repeat Passcode" : {
 
     },
     "Rewards" : {

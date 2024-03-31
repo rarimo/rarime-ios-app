@@ -29,11 +29,12 @@ struct EnableLayoutView: View {
                     .h4()
                     .foregroundStyle(.textPrimary)
                     .multilineTextAlignment(.center)
+                    .fixedSize()
                 Text(description)
                     .body3()
                     .foregroundStyle(.textSecondary)
             }
-            .padding(.top, 64)
+            .padding(.vertical, 64)
             Spacer()
             VStack(spacing: 16) {
                 HorizontalDivider()

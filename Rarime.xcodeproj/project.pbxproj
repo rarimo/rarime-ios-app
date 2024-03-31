@@ -41,6 +41,7 @@
 		56DAA30F2BB8C3CB002CF710 /* EnablePasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA30E2BB8C3CB002CF710 /* EnablePasscodeView.swift */; };
 		56DAA3112BB8C97D002CF710 /* EnableLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3102BB8C97D002CF710 /* EnableLayoutView.swift */; };
 		56DAA3132BB8CA4F002CF710 /* EnableFaceIdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3122BB8CA4F002CF710 /* EnableFaceIdView.swift */; };
+		56DAA3152BB8CC95002CF710 /* PasscodeFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3142BB8CC95002CF710 /* PasscodeFieldView.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
 		CE32CF522BAC981300E507B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE32CF512BAC981300E507B6 /* Lottie */; };
 		CE778B792BA9CA0A00B26485 /* AppView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE778B782BA9CA0A00B26485 /* AppView+ViewModel.swift */; };
@@ -86,6 +87,7 @@
 		56DAA30E2BB8C3CB002CF710 /* EnablePasscodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnablePasscodeView.swift; sourceTree = "<group>"; };
 		56DAA3102BB8C97D002CF710 /* EnableLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableLayoutView.swift; sourceTree = "<group>"; };
 		56DAA3122BB8CA4F002CF710 /* EnableFaceIdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableFaceIdView.swift; sourceTree = "<group>"; };
+		56DAA3142BB8CC95002CF710 /* PasscodeFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeFieldView.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CE778B782BA9CA0A00B26485 /* AppView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppView+ViewModel.swift"; sourceTree = "<group>"; };
 		CE9E82B22BA881F400AAF885 /* Rarime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rarime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -426,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				CE9E82D62BA8917100AAF885 /* LottieView.swift */,
+				56DAA3142BB8CC95002CF710 /* PasscodeFieldView.swift */,
 				56DAA3042BB72E35002CF710 /* InfoAlertView.swift */,
 				563529F52BB077AB0027C910 /* CardContainerView.swift */,
 				568B4FD02BB6D88F001C9C74 /* HorizontalDivider.swift */,
@@ -537,6 +540,7 @@
 				56DAA30B2BB8B977002CF710 /* View+DynamicSheet.swift in Sources */,
 				563529EF2BB0732C0027C910 /* CredentialsView.swift in Sources */,
 				56DAA3032BB7248A002CF710 /* VerifyIdentityView.swift in Sources */,
+				56DAA3152BB8CC95002CF710 /* PasscodeFieldView.swift in Sources */,
 				563529F42BB0768C0027C910 /* MainTabs.swift in Sources */,
 				568B4FE52BB70CAA001C9C74 /* IntroStep.swift in Sources */,
 				CE9E82E92BA89DBE00AAF885 /* Config.swift in Sources */,
