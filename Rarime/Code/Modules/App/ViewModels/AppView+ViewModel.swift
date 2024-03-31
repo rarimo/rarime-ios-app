@@ -48,5 +48,13 @@ extension AppView {
             isFaceIdSet = true
             isFaceIdEnabled = false
         }
+
+        func reset() {
+            isIntroFinished = false
+            isPasscodeSet = false
+            passcode = ""
+            isFaceIdSet = false
+            isFaceIdEnabled = false
+        }
     }
 }

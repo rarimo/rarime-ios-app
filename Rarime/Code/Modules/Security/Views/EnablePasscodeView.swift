@@ -7,54 +7,62 @@
 
 import SwiftUI
 
+private enum PasscodeRoute: Hashable {
+    case enterPasscode, repeatPasscode
+}
+
 struct EnablePasscodeView: View {
     @EnvironmentObject var viewModel: AppView.ViewModel
+
+    @State private var path = [PasscodeRoute]()
 
     @State private var passcode = ""
     @State private var repeatPasscode = ""
     @State private var repeatPasscodeError = ""
 
-    @State private var isPasscodeShown = false
-    @State private var isRepeatPasscodeShown = false
-
     var body: some View {
-        if isRepeatPasscodeShown {
-            PasscodeView(
-                passcode: $repeatPasscode,
-                errorMessage: $repeatPasscodeError,
-                title: "Repeat Passcode",
-                onFill: {
-                    if passcode == repeatPasscode {
-                        viewModel.enablePasscode(passcode)
-                    } else {
-                        repeatPasscodeError = String(localized: "Passcodes do not match")
-                    }
-                },
-                onClose: {
-                    passcode = ""
-                    repeatPasscode = ""
-                    repeatPasscodeError = ""
-                    isRepeatPasscodeShown = false
-                }
-            )
-        } else if isPasscodeShown {
-            PasscodeView(
-                passcode: $passcode,
-                title: "Enter Passcode",
-                onFill: { isRepeatPasscodeShown = true },
-                onClose: {
-                    passcode = ""
-                    isPasscodeShown = false
-                }
-            )
-        } else {
+        NavigationStack(path: $path) {
             EnableLayoutView(
                 icon: Icons.password,
                 title: "Enable\nPasscode",
                 description: "Enable Passcode Authentication",
-                enableAction: { isPasscodeShown = true },
+                enableAction: { path.append(.enterPasscode) },
                 skipAction: { viewModel.skipPasscode() }
             )
+            .navigationDestination(for: PasscodeRoute.self) { route in
+                switch route {
+                case .enterPasscode:
+                    PasscodeView(
+                        passcode: $passcode,
+                        title: "Enter Passcode",
+                        onFill: { path.append(.repeatPasscode) },
+                        onClose: {
+                            passcode = ""
+                            path.removeLast()
+                        }
+                    )
+                case .repeatPasscode:
+                    PasscodeView(
+                        passcode: $repeatPasscode,
+                        errorMessage: $repeatPasscodeError,
+                        title: "Repeat Passcode",
+                        onFill: {
+                            if passcode == repeatPasscode {
+                                viewModel.enablePasscode(passcode)
+                            } else {
+                                repeatPasscodeError = String(localized: "Passcodes do not match")
+                                FeedbackGenerator.shared.notify(.error)
+                            }
+                        },
+                        onClose: {
+                            passcode = ""
+                            repeatPasscode = ""
+                            repeatPasscodeError = ""
+                            path.removeLast()
+                        }
+                    )
+                }
+            }
         }
     }
 }
@@ -89,23 +97,24 @@ private struct PasscodeView: View {
                     .padding(.top, 20)
                     .padding(.trailing, 20)
             }
-            VStack(spacing: 100) {
+            VStack {
                 Text(title)
                     .h4()
                     .foregroundStyle(.textPrimary)
-                VStack {
-                    PasscodeFieldView(
-                        passcode: $passcode,
-                        errorMessage: $errorMessage,
-                        onFill: onFill
-                    )
-                    Spacer()
-                }
+                Spacer()
+                PasscodeFieldView(
+                    passcode: $passcode,
+                    errorMessage: $errorMessage,
+                    onFill: onFill
+                )
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding(.vertical, 120)
+            .padding(.top, 150)
+            .padding(.bottom, 16)
+            .padding(.horizontal, 8)
         }
         .background(.backgroundPure)
+        .navigationBarBackButtonHidden()
     }
 }
 

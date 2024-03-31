@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject var viewModel: AppView.ViewModel
+
     var body: some View {
-        Text("Settings")
+        VStack(spacing: 24) {
+            Text("Settings").subtitle2()
+            Button(action: { viewModel.reset() }) {
+                Text("Back to Intro").buttonMedium().frame(maxWidth: .infinity)
+            }
+            .buttonStyle(PrimaryButtonStyle())
+        }
+        .padding(.horizontal, 20)
     }
 }
 
