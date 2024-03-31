@@ -58,7 +58,7 @@ struct VerifyIdentityView: View {
                 onNext()
             } else {
                 isErrorSheetPresented = true
-                UINotificationFeedbackGenerator().notificationOccurred(.error)
+                FeedbackGenerator.shared.notify(.error)
             }
         }) {
             HStack(spacing: 8) {

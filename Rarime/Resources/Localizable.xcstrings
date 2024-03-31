@@ -1,7 +1,13 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Authentication Failed" : {
+
+    },
     "Back" : {
+
+    },
+    "Close" : {
 
     },
     "Continue" : {
@@ -14,6 +20,9 @@
 
     },
     "Copy to clipboard" : {
+
+    },
+    "Could not authenticate with Face ID. Please try again." : {
 
     },
     "Create a profile, add various credentials, and invite others to earn rewards in the process" : {
@@ -46,10 +55,16 @@
     "Enable Face ID Authentication" : {
 
     },
+    "Enable Face ID in Settings > Rarime." : {
+
+    },
     "Enable Passcode Authentication" : {
 
     },
     "Enter Passcode" : {
+
+    },
+    "Face ID Disabled" : {
 
     },
     "Get rewarded" : {

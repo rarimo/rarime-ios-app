@@ -6,6 +6,8 @@
 	<string>${PRIVACY_POLICY_URL}</string>
 	<key>TERMS_OF_USE_URL</key>
 	<string>${TERMS_OF_USE_URL}</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Enable Face ID Authentication</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Inter-Bold.ttf</string>

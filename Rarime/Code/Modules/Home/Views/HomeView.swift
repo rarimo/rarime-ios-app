@@ -19,7 +19,7 @@ struct HomeView: View {
                         Spacer()
                         Button {
                             currentSheet = .notifications
-                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                            FeedbackGenerator.shared.impact(.light)
                         } label: {
                             Image(Icons.bellFill).iconMedium()
                         }.foregroundStyle(.textPrimary)
@@ -57,7 +57,7 @@ struct HomeView: View {
                     }
                     Button {
                         currentSheet = .help
-                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        FeedbackGenerator.shared.impact(.light)
                     } label: {
                         Text("Open sheet").buttonMedium().frame(maxWidth: .infinity)
                     }

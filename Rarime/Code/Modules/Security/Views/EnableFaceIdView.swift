@@ -7,17 +7,48 @@
 
 import SwiftUI
 
+private enum FaceIdAuthError: Error {
+    case notAvailable
+    case failed
+}
+
 struct EnableFaceIdView: View {
     @EnvironmentObject var viewModel: AppView.ViewModel
+    @State private var isAlertShown = false
+    @State private var isNotAvailableError = false
 
     var body: some View {
         EnableLayoutView(
             icon: Icons.userFocus,
             title: "Enable\nFace ID",
             description: "Enable Face ID Authentication",
-            enableAction: { viewModel.enableFaceId() },
+            enableAction: {
+                FaceIdAuth.shared.authenticate(
+                    onSuccess: { viewModel.enableFaceId() },
+                    onFailure: {
+                        isNotAvailableError = false
+                        isAlertShown = true
+
+                    },
+                    onNotAvailable: {
+                        isNotAvailableError = false
+                        isAlertShown = true
+                    }
+                )
+            },
             skipAction: { viewModel.skipFaceId() }
         )
+        .alert(isPresented: $isAlertShown) {
+            Alert(
+                title: isNotAvailableError
+                    ? Text("Face ID Disabled")
+                    : Text("Authentication Failed"),
+                message: isNotAvailableError
+                    ? Text("Enable Face ID in Settings > Rarime.")
+                    : Text("Could not authenticate with Face ID. Please try again."),
+                dismissButton: .default(Text("Close"))
+            )
+        }
     }
 }
 
