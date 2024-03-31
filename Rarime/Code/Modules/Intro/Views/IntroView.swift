@@ -34,7 +34,7 @@ struct IntroView: View {
                     case .verifyIdentity:
                         VerifyIdentityView(
                             onBack: { path.removeLast() },
-                            onNext: { appViewModel.finishIntro() }
+                            onNext: { withAnimation { appViewModel.finishIntro() } }
                         )
                     case .importIdentity:
                         // TODO: Implement import identity

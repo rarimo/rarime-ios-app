@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
-    @EnvironmentObject var viewModel: AppView.ViewModel
+    @EnvironmentObject var appViewModel: AppView.ViewModel
     @State private var selectedTab = MainTabs.home
 
     var body: some View {
@@ -21,7 +21,7 @@ struct MainView: View {
                         RewardsView().tag(MainTabs.rewards)
                         CredentialsView().tag(MainTabs.credentials)
                         SettingsView()
-                            .environmentObject(viewModel)
+                            .environmentObject(appViewModel)
                             .tag(MainTabs.settings)
                     }
                     .onAppear {
@@ -41,4 +41,5 @@ struct MainView: View {
 
 #Preview {
     MainView()
+        .environmentObject(AppView.ViewModel())
 }

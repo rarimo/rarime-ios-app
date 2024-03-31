@@ -13,13 +13,13 @@ struct AppView: View {
     var body: some View {
         ZStack {
             if viewModel.isFaceIdSet {
-                MainView()
+                MainView().transition(.backslide)
             } else if viewModel.isPasscodeSet {
-                EnableFaceIdView()
+                EnableFaceIdView().transition(.backslide)
             } else if viewModel.isIntroFinished {
-                EnablePasscodeView()
+                EnablePasscodeView().transition(.backslide)
             } else {
-                IntroView()
+                IntroView().transition(.backslide)
             }
         }
         .environmentObject(viewModel)

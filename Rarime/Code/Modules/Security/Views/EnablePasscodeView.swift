@@ -12,7 +12,7 @@ private enum PasscodeRoute: Hashable {
 }
 
 struct EnablePasscodeView: View {
-    @EnvironmentObject var viewModel: AppView.ViewModel
+    @EnvironmentObject var appViewModel: AppView.ViewModel
 
     @State private var path = [PasscodeRoute]()
 
@@ -27,7 +27,7 @@ struct EnablePasscodeView: View {
                 title: "Enable\nPasscode",
                 description: "Enable Passcode Authentication",
                 enableAction: { path.append(.enterPasscode) },
-                skipAction: { viewModel.skipPasscode() }
+                skipAction: { withAnimation { appViewModel.skipPasscode() } }
             )
             .navigationDestination(for: PasscodeRoute.self) { route in
                 switch route {
@@ -48,7 +48,9 @@ struct EnablePasscodeView: View {
                         title: "Repeat Passcode",
                         onFill: {
                             if passcode == repeatPasscode {
-                                viewModel.enablePasscode(passcode)
+                                withAnimation {
+                                    appViewModel.enablePasscode(passcode)
+                                }
                             } else {
                                 repeatPasscodeError = String(localized: "Passcodes do not match")
                                 FeedbackGenerator.shared.notify(.error)
