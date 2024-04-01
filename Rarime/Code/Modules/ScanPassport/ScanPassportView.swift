@@ -24,11 +24,35 @@ struct ScanPassportView: View {
                 onClose: onClose
             ).transition(.backslide)
         case .readNFC:
-            Text("Read NFC").transition(.backslide)
+            ReadPassportNFCView(
+                onNext: { withAnimation { state = .selectData } },
+                onClose: onClose
+            ).transition(.backslide)
         case .selectData:
-            Text("Select Data").transition(.backslide)
+            ScanPassportLayoutView(
+                step: 3,
+                title: "Select Data",
+                text: "Selected data can be used as anonymised proofs",
+                onClose: onClose
+            ) {
+                Rectangle()
+                    .fill(.green)
+                    .frame(height: 500)
+                    .onTapGesture { withAnimation { state = .generateProof } }
+                Spacer()
+            }
+            .transition(.backslide)
         case .generateProof:
-            Text("Generate Proof").transition(.backslide)
+            VStack {
+                Text("Generate Proof")
+                Button(action: onClose) {
+                    Text("Close").buttonLarge()
+                }
+                .controlSize(.large)
+                .buttonStyle(PrimaryButtonStyle())
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .transition(.backslide)
         }
     }
 }

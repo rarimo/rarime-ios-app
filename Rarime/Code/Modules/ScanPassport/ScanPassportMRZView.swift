@@ -21,13 +21,12 @@ struct ScanPassportMRZView: View {
             Rectangle()
                 .fill(.black)
                 .frame(height: 300)
-                .padding(.top, 20)
                 .onTapGesture { onNext() }
             Text("Move your PASSPORT page inside the border")
                 .body3()
                 .foregroundStyle(.textSecondary)
                 .multilineTextAlignment(.center)
-                .padding(.top, 28)
+                .padding(.top, 32)
                 .frame(width: 250)
             Spacer()
         }
