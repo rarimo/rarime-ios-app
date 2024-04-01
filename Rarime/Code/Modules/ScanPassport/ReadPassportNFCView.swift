@@ -37,6 +37,7 @@ struct ReadPassportNFCView: View {
                 .controlSize(.large)
                 .buttonStyle(PrimaryButtonStyle())
             }
+            .padding(.bottom, 24)
         }
     }
 }

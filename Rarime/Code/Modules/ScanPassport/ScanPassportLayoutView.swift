@@ -44,7 +44,7 @@ struct ScanPassportLayoutView<Content: View>: View {
             content
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.vertical, 24)
+        .padding(.top, 24)
     }
 }
 

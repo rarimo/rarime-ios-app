@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "🎁 You will claim 80 / 85 RMO" : {
+
+    },
+    "Additional Data" : {
+
+    },
     "Authentication Failed" : {
 
     },
@@ -17,6 +23,9 @@
 
     },
     "Convert existing identity documents into anonymous credentials" : {
+
+    },
+    "Convert your data into ZK proofs" : {
 
     },
     "Copied" : {
@@ -41,6 +50,12 @@
 
     },
     "Description text here" : {
+
+    },
+    "Document class mode" : {
+
+    },
+    "Document number" : {
 
     },
     "Don’t share your recovery phrase with anyone" : {
@@ -70,7 +85,13 @@
     "Face ID Disabled" : {
 
     },
+    "Generate Proof" : {
+
+    },
     "Get rewarded" : {
+
+    },
+    "Get rewarded with 50 RRMO" : {
 
     },
     "Get Started" : {
@@ -85,7 +106,19 @@
     "Incorrect" : {
 
     },
+    "Issuing state code" : {
+
+    },
+    "Joshua Smith" : {
+
+    },
+    "Let's Start" : {
+
+    },
     "Login and access special parts of the web" : {
+
+    },
+    "Male, Age:24" : {
 
     },
     "Manage your account settings" : {
@@ -97,10 +130,19 @@
     "Maybe Later" : {
 
     },
+    "Move your PASSPORT page inside the border" : {
+
+    },
+    "Must data" : {
+
+    },
     "New recovery phrase" : {
 
     },
     "Next" : {
+
+    },
+    "NFC Reader" : {
 
     },
     "Open sheet" : {
@@ -118,7 +160,22 @@
     "Passcodes do not match" : {
 
     },
+    "Passport" : {
+
+    },
+    "Passport data is stored only on this device" : {
+
+    },
+    "Personal data never leaves the device" : {
+
+    },
+    "Place your passport cover to the back of your phone" : {
+
+    },
     "Plug your identity" : {
+
+    },
+    "Reading Passport data" : {
 
     },
     "Repeat Passcode" : {
@@ -127,7 +184,22 @@
     "Rewards" : {
 
     },
+    "Scan Passport" : {
+
+    },
+    "Scan your Passport" : {
+
+    },
+    "Select All" : {
+
+    },
     "Select Authorisation Method" : {
+
+    },
+    "Select Data" : {
+
+    },
+    "Selected data can be used as anonymised proofs" : {
 
     },
     "Selections not matched. please try again" : {
@@ -140,6 +212,9 @@
 
     },
     "Skip" : {
+
+    },
+    "Start" : {
 
     },
     "Step %lld/%lld" : {
@@ -155,6 +230,9 @@
     "Store your documents securely" : {
 
     },
+    "Text label" : {
+
+    },
     "This is a warning message" : {
 
     },
@@ -167,7 +245,13 @@
     "Try Again" : {
 
     },
+    "Use proofs across the ecosystem" : {
+
+    },
     "Use them" : {
+
+    },
+    "Value %lld" : {
 
     },
     "Verify your recovery phrase" : {
@@ -186,6 +270,9 @@
 
     },
     "Word #%lld" : {
+
+    },
+    "You'll need a biometric document" : {
 
     }
   },

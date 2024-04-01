@@ -29,19 +29,10 @@ struct ScanPassportView: View {
                 onClose: onClose
             ).transition(.backslide)
         case .selectData:
-            ScanPassportLayoutView(
-                step: 3,
-                title: "Select Data",
-                text: "Selected data can be used as anonymised proofs",
+            SelectPassportDataView(
+                onNext: { withAnimation { state = .generateProof } },
                 onClose: onClose
-            ) {
-                Rectangle()
-                    .fill(.green)
-                    .frame(height: 500)
-                    .onTapGesture { withAnimation { state = .generateProof } }
-                Spacer()
-            }
-            .transition(.backslide)
+            ).transition(.backslide)
         case .generateProof:
             VStack {
                 Text("Generate Proof")
