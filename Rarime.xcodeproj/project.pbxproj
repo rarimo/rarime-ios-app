@@ -41,6 +41,7 @@
 		56933DF52BBAC42E0068C894 /* ReadPassportNFCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DF42BBAC42E0068C894 /* ReadPassportNFCView.swift */; };
 		56933DF72BBAC7D10068C894 /* SelectPassportDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DF62BBAC7D10068C894 /* SelectPassportDataView.swift */; };
 		56933DFB2BBAFBD90068C894 /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DFA2BBAFBD90068C894 /* ToggleView.swift */; };
+		56933DFD2BBAFDD00068C894 /* PassportProofView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DFC2BBAFDD00068C894 /* PassportProofView.swift */; };
 		56AC033E2BB06A0500A34A00 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033D2BB06A0500A34A00 /* ButtonStyle.swift */; };
 		56AC03402BB06A2D00A34A00 /* Image+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */; };
 		56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3002BB723A1002CF710 /* NewIdentityView.swift */; };
@@ -97,6 +98,7 @@
 		56933DF42BBAC42E0068C894 /* ReadPassportNFCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadPassportNFCView.swift; sourceTree = "<group>"; };
 		56933DF62BBAC7D10068C894 /* SelectPassportDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPassportDataView.swift; sourceTree = "<group>"; };
 		56933DFA2BBAFBD90068C894 /* ToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleView.swift; sourceTree = "<group>"; };
+		56933DFC2BBAFDD00068C894 /* PassportProofView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportProofView.swift; sourceTree = "<group>"; };
 		56AC033D2BB06A0500A34A00 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Icon.swift"; sourceTree = "<group>"; };
 		56DAA3002BB723A1002CF710 /* NewIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIdentityView.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				56933DEC2BBAB0AB0068C894 /* PassportSheetView.swift */,
 				56933DEE2BBABD100068C894 /* ScanPassportView.swift */,
 				56933DF22BBAC2940068C894 /* ScanPassportMRZView.swift */,
+				56933DFC2BBAFDD00068C894 /* PassportProofView.swift */,
 				56933DF42BBAC42E0068C894 /* ReadPassportNFCView.swift */,
 				56933DF62BBAC7D10068C894 /* SelectPassportDataView.swift */,
 				56933DF02BBAC1B10068C894 /* ScanPassportLayoutView.swift */,
@@ -626,6 +629,7 @@
 				56933DF32BBAC2940068C894 /* ScanPassportMRZView.swift in Sources */,
 				563529F62BB077AB0027C910 /* CardContainerView.swift in Sources */,
 				563529E72BB072870027C910 /* WalletView.swift in Sources */,
+				56933DFD2BBAFDD00068C894 /* PassportProofView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

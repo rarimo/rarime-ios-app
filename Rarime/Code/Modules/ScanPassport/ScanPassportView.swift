@@ -34,16 +34,7 @@ struct ScanPassportView: View {
                 onClose: onClose
             ).transition(.backslide)
         case .generateProof:
-            VStack {
-                Text("Generate Proof")
-                Button(action: onClose) {
-                    Text("Close").buttonLarge()
-                }
-                .controlSize(.large)
-                .buttonStyle(PrimaryButtonStyle())
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .transition(.backslide)
+            PassportProofView(onFinish: onClose).transition(.backslide)
         }
     }
 }

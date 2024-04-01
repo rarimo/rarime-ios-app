@@ -1,10 +1,20 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "🎁 You will claim 80 / 85 RMO" : {
-
+    "🎁 You will claim %lld/%lld RMO" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "🎁 You will claim %1$lld/%2$lld RMO"
+          }
+        }
+      }
     },
     "Additional Data" : {
+
+    },
+    "All Done!" : {
 
     },
     "Authentication Failed" : {
@@ -43,10 +53,16 @@
     "Create new Identity" : {
 
     },
+    "Creating anonymized identity proof" : {
+
+    },
     "Credentials" : {
 
     },
     "Dashboard" : {
+
+    },
+    "Date of issue" : {
 
     },
     "Description text here" : {
@@ -59,6 +75,9 @@
 
     },
     "Don’t share your recovery phrase with anyone" : {
+
+    },
+    "Done" : {
 
     },
     "Enable" : {
@@ -82,10 +101,16 @@
     "Enter Passcode" : {
 
     },
+    "Error" : {
+
+    },
+    "Expiry date" : {
+
+    },
     "Face ID Disabled" : {
 
     },
-    "Generate Proof" : {
+    "Failed" : {
 
     },
     "Get rewarded" : {
@@ -95,6 +120,9 @@
 
     },
     "Get Started" : {
+
+    },
+    "Home Page" : {
 
     },
     "Import from MetaMask Snap" : {
@@ -136,6 +164,9 @@
     "Must data" : {
 
     },
+    "Nationality" : {
+
+    },
     "New recovery phrase" : {
 
     },
@@ -172,7 +203,16 @@
     "Place your passport cover to the back of your phone" : {
 
     },
+    "Please try again later" : {
+
+    },
+    "Please Wait..." : {
+
+    },
     "Plug your identity" : {
+
+    },
+    "Processing" : {
 
     },
     "Reading Passport data" : {
@@ -230,9 +270,6 @@
     "Store your documents securely" : {
 
     },
-    "Text label" : {
-
-    },
     "This is a warning message" : {
 
     },
@@ -251,9 +288,6 @@
     "Use them" : {
 
     },
-    "Value %lld" : {
-
-    },
     "Verify your recovery phrase" : {
 
     },
@@ -270,6 +304,9 @@
 
     },
     "Word #%lld" : {
+
+    },
+    "You will be redirected in 5sec" : {
 
     },
     "You'll need a biometric document" : {
