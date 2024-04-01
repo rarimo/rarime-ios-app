@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PassportSheetView: View {
+    let onStart: () -> Void
+
     var body: some View {
         VStack(spacing: 16) {
             VStack(spacing: 80) {
@@ -36,7 +38,7 @@ struct PassportSheetView: View {
             Spacer()
             HorizontalDivider()
                 .padding(.horizontal, -20)
-            Button(action: {}) {
+            Button(action: onStart) {
                 Text("Let's Start")
                     .buttonLarge()
                     .frame(maxWidth: .infinity)
@@ -62,7 +64,7 @@ struct PassportSheetView: View {
 
 #Preview {
     ZStack {
-        PassportSheetView()
+        PassportSheetView(onStart: {})
     }
     .padding(20)
 }
