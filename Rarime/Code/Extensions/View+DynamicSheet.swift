@@ -10,6 +10,8 @@ import SwiftUI
 let DEFAULT_SHEET_HEIGHT: CGFloat = 300
 
 private struct DynamicSheetHeightModifier: ViewModifier {
+    let fullScreen: Bool
+
     @State var sheetHeight: CGFloat = DEFAULT_SHEET_HEIGHT
 
     func body(content: Content) -> some View {
@@ -23,7 +25,7 @@ private struct DynamicSheetHeightModifier: ViewModifier {
                 return Color.clear
             }
         )
-        .presentationDetents([.height(sheetHeight)])
+        .presentationDetents(fullScreen ? [.large] : [.height(sheetHeight)])
     }
 }
 
@@ -38,6 +40,7 @@ extension View {
 
     func dynamicSheet<Content>(
         isPresented: Binding<Bool>,
+        fullScreen: Bool = false,
         onDismiss: (() -> Void)? = nil,
         @ViewBuilder content: @escaping () -> Content
     ) -> some View where Content: View {
@@ -58,11 +61,11 @@ extension View {
                 .padding(.bottom, 4)
                 .padding(.horizontal, 20)
                 .frame(maxWidth: .infinity)
-                // Make sheet height dynamic
-                .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                .modifier(DynamicSheetHeightModifier())
                 .presentationDragIndicator(.hidden)
                 .applyPresentationCornerRadius(24)
+                // Make sheet height dynamic
+                .fixedSize(horizontal: false, vertical: !fullScreen)
+                .modifier(DynamicSheetHeightModifier(fullScreen: fullScreen))
             }
         }
     }
