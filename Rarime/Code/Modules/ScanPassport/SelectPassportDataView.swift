@@ -8,10 +8,8 @@
 import Combine
 import SwiftUI
 
-struct PassportDataItem: Identifiable {
-    var id: ObjectIdentifier
-
-    let label: LocalizedStringKey
+struct PassportDataItem {
+    let label: LocalizedStringResource
     let value: String
     let reward: Int
     var isSelected: Bool = false
@@ -21,35 +19,39 @@ struct SelectPassportDataView: View {
     let onNext: () -> Void
     let onClose: () -> Void
 
-//    @State private var dataItems: [PassportDataItem] = [
-//        PassportDataItem(
-//            id: ObjectIdentifier()
-//            label: "Expiry date",
-//            value: "03/14/2060",
-//            reward: 10
-//        ),
-//        PassportDataItem(
-//            id: ObjectIdentifier(2),
-//            label: "Date of issue",
-//            value: "03/14/2024",
-//            reward: 5
-//        ),
-//        PassportDataItem(
-//            id: ObjectIdentifier(3),
-//            label: "Nationality",
-//            value: "USA",
-//            reward: 20
-//        )
-//    ]
-
-    @State private var isExpiryDateSelected = false
-    @State private var isDateOfIssueSelected = false
-    @State private var isNationalitySelected = false
+    @State private var dataItems: [PassportDataItem] = [
+        PassportDataItem(
+            label: "Expiry date",
+            value: "03/14/2060",
+            reward: 10
+        ),
+        PassportDataItem(
+            label: "Date of issue",
+            value: "03/14/2024",
+            reward: 5
+        ),
+        PassportDataItem(
+            label: "Nationality",
+            value: "USA",
+            reward: 20
+        )
+    ]
 
     @State private var isAllSelected = false
 
     private var isAllDataSelected: Bool {
-        isExpiryDateSelected && isDateOfIssueSelected && isNationalitySelected
+        dataItems.allSatisfy { $0.isSelected }
+    }
+
+    private let mustDataReward = 50
+    private var totalReward: Int {
+        mustDataReward + dataItems.reduce(0) { $0 + $1.reward }
+    }
+
+    private var selectedReward: Int {
+        mustDataReward + dataItems
+            .filter { $0.isSelected }
+            .reduce(0) { $0 + $1.reward }
     }
 
     var body: some View {
@@ -108,16 +110,12 @@ struct SelectPassportDataView: View {
                             }
                             VStack(spacing: 16) {
                                 HStack(spacing: 16) {
-                                    Toggle(isOn: $isAllSelected) {}
-                                        .toggleStyle(PrimarySwitchToggleStyle())
-//                                        .onReceive(Just(isAllSelected)) { value in
-//                                            isExpiryDateSelected = value
-//                                            isDateOfIssueSelected = value
-//                                            isNationalitySelected = value
-//                                        }
-                                        .onChange(of: isAllDataSelected) { newValue in
-                                            isAllSelected = newValue
+                                    ToggleView(isOn: .constant(isAllDataSelected)) { _ in
+                                        let newValue = !isAllDataSelected
+                                        for index in dataItems.indices {
+                                            dataItems[index].isSelected = newValue
                                         }
+                                    }
                                     Text("Select All")
                                         .subtitle4()
                                         .foregroundStyle(.textSecondary)
@@ -125,26 +123,14 @@ struct SelectPassportDataView: View {
                                     RewardChip(reward: 35, isActive: isAllSelected)
                                 }
                                 HorizontalDivider()
-//                                ForEach(dataItems.indices) { index in
-//                                    DataItemSelector(
-//                                        isOn: $dataItems[index].isSelected,
-//                                        label: "Expiry date",
-//                                        value: "03/14/2060",
-//                                        reward: 10
-//                                    )
-//                                }
-                                DataItemSelector(
-                                    isOn: $isDateOfIssueSelected,
-                                    label: "Date of issue",
-                                    value: "03/14/2024",
-                                    reward: 5
-                                )
-                                DataItemSelector(
-                                    isOn: $isNationalitySelected,
-                                    label: "Nationality",
-                                    value: "USA",
-                                    reward: 20
-                                )
+                                ForEach(dataItems.indices, id: \.self) { index in
+                                    DataItemSelector(
+                                        isOn: $dataItems[index].isSelected,
+                                        label: dataItems[index].label,
+                                        value: dataItems[index].value,
+                                        reward: dataItems[index].reward
+                                    )
+                                }
                             }
                         }
                     }
@@ -153,7 +139,7 @@ struct SelectPassportDataView: View {
                 .padding(.bottom, 16)
             }
             VStack(spacing: 12) {
-                Text("🎁 You will claim 80 / 85 RMO")
+                Text("🎁 You will claim \(selectedReward)/\(totalReward) RMO")
                     .body3()
                     .foregroundStyle(.textSecondary)
                 Button(action: onNext) {
@@ -190,8 +176,7 @@ struct DataItemSelector: View {
 
     var body: some View {
         HStack(spacing: 16) {
-            Toggle(isOn: $isOn) {}
-                .toggleStyle(PrimarySwitchToggleStyle())
+            ToggleView(isOn: $isOn)
             VStack(alignment: .leading, spacing: 4) {
                 Text(label)
                     .body3()
