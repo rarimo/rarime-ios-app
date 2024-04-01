@@ -7,28 +7,47 @@
 
 import SwiftUI
 
+private enum IdentityRoute: Hashable {
+    case newIdentity, verifyIdentity, importIdentity
+}
+
 struct IntroView: View {
     @EnvironmentObject var appViewModel: AppView.ViewModel
-    @State var currentStep = IntroStep.welcome.rawValue
+    @State private var currentStep = IntroStep.welcome.rawValue
     @State private var showSheet = false
+    @State private var path = [IdentityRoute]()
 
     var isLastStep: Bool {
         currentStep == IntroStep.allCases.count - 1
     }
 
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Spacer()
-                Button(action: { currentStep = IntroStep.allCases.count - 1 }) {
-                    Text("Skip")
-                        .buttonMedium()
-                        .foregroundStyle(.textSecondary)
+        NavigationStack(path: $path) {
+            introContent
+                .navigationDestination(for: IdentityRoute.self) { route in
+                    switch route {
+                    case .newIdentity:
+                        NewIdentityView(
+                            onBack: { path.removeLast() },
+                            onNext: { path.append(.verifyIdentity) }
+                        )
+                    case .verifyIdentity:
+                        VerifyIdentityView(
+                            onBack: { path.removeLast() },
+                            onNext: { appViewModel.finishIntro() }
+                        )
+                    case .importIdentity:
+                        // TODO: Implement import identity
+                        Text("Import Identity")
+                    }
                 }
-                .opacity(isLastStep ? 0 : 1)
-            }
-            .padding(.top, 20)
-            .padding(.trailing, 24)
+                .background(.backgroundPrimary)
+        }
+    }
+
+    var introContent: some View {
+        VStack(alignment: .leading) {
+            introHeader
             TabView(selection: $currentStep) {
                 ForEach(IntroStep.allCases, id: \.self) { item in
                     IntroStepView(step: item)
@@ -40,37 +59,61 @@ struct IntroView: View {
             Spacer()
             VStack(spacing: 24) {
                 HorizontalDivider()
-                HStack {
-                    if isLastStep {
-                        Button(action: { showSheet.toggle() }) {
-                            Text("Get Started").buttonMedium().frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(PrimaryContainedButtonStyle())
-                        .sheet(isPresented: $showSheet) {
-                            GetStartedView(
-                                onCreate: { appViewModel.finishIntro() },
-                                onImport: { appViewModel.finishIntro() }
-                            )
-                            .padding(.vertical, 32)
-                            .presentationDetents([.height(320)])
-                            .presentationDragIndicator(.hidden)
-                        }
-                    } else {
-                        StepIndicator(steps: IntroStep.allCases.count, currentStep: currentStep)
-                        Spacer()
-                        Button(action: { currentStep += 1 }) {
-                            HStack(spacing: 8) {
-                                Text("Next").buttonMedium()
-                                Image(Icons.arrowRight).iconMedium()
-                            }
-                        }
-                        .buttonStyle(PrimaryContainedButtonStyle())
-                    }
-                }
+                introActions
             }
             .padding(.top, 24)
             .padding(.bottom, 32)
             .padding(.horizontal, 24)
+        }
+    }
+
+    var introHeader: some View {
+        HStack {
+            Spacer()
+            Button(action: { currentStep = IntroStep.allCases.count - 1 }) {
+                Text("Skip")
+                    .buttonMedium()
+                    .foregroundStyle(.textSecondary)
+            }
+            .opacity(isLastStep ? 0 : 1)
+        }
+        .padding(.top, 20)
+        .padding(.trailing, 24)
+    }
+
+    var introActions: some View {
+        HStack {
+            if isLastStep {
+                Button(action: { showSheet.toggle() }) {
+                    Text("Get Started")
+                        .buttonMedium()
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(PrimaryContainedButtonStyle())
+            } else {
+                StepIndicator(steps: IntroStep.allCases.count, currentStep: currentStep)
+                Spacer()
+                Button(action: { currentStep += 1 }) {
+                    HStack(spacing: 8) {
+                        Text("Next").buttonMedium()
+                        Image(Icons.arrowRight).iconMedium()
+                    }
+                }
+                .buttonStyle(PrimaryContainedButtonStyle())
+            }
+        }
+        .dynamicSheet(isPresented: $showSheet) {
+            GetStartedView(
+                onCreate: {
+                    showSheet.toggle()
+                    path.append(.newIdentity)
+                },
+                onImport: {
+                    showSheet.toggle()
+                    path.append(.importIdentity)
+                }
+            )
+            .padding(.bottom, 24)
         }
     }
 }

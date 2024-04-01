@@ -28,26 +28,28 @@ private let buttonCornerRadius: CGFloat = 1000
 
 struct PrimaryContainedButtonStyle: ButtonStyle {
     @Environment(\.controlSize) var controlSize
+    @Environment(\.isEnabled) var isEnabled
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(height: buttonHeight(controlSize))
             .padding(.horizontal, buttonPaddingHorizontal(controlSize))
-            .background(configuration.isPressed ? .primaryDark : .primaryMain)
-            .foregroundColor(.baseBlack)
+            .background(isEnabled ? configuration.isPressed ? .primaryDark : .primaryMain : .componentDisabled)
+            .foregroundColor(isEnabled ? .baseBlack : .textDisabled)
             .cornerRadius(buttonCornerRadius)
     }
 }
 
 struct SecondaryContainedButtonStyle: ButtonStyle {
     @Environment(\.controlSize) var controlSize
+    @Environment(\.isEnabled) var isEnabled
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(height: buttonHeight(controlSize))
             .padding(.horizontal, buttonPaddingHorizontal(controlSize))
-            .background(configuration.isPressed ? .componentPressed : .componentPrimary)
-            .foregroundColor(.textPrimary)
+            .background(isEnabled ? configuration.isPressed ? .componentPressed : .componentPrimary : .componentDisabled)
+            .foregroundColor(isEnabled ? .textPrimary : .textDisabled)
             .cornerRadius(buttonCornerRadius)
     }
 }

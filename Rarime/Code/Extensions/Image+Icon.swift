@@ -16,7 +16,7 @@ extension Image {
     }
 
     func iconLarge() -> some View {
-        self.square(24)
+        self.square(32)
     }
 
     func iconMedium() -> some View {

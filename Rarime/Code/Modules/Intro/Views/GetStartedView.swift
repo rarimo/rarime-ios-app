@@ -18,7 +18,7 @@ struct GetStartedView: View {
                 Text("Get Started").h5().foregroundStyle(.textPrimary)
                 Text("Select Authorisation Method").body2().foregroundStyle(.textSecondary)
             }
-            VStack {
+            VStack(spacing: 16) {
                 GetStartedButton(
                     title: "Create new Identity",
                     text: "Description text here",
@@ -33,7 +33,6 @@ struct GetStartedView: View {
                 )
             }
         }
-        .padding(.horizontal, 24)
     }
 }
 
@@ -50,7 +49,7 @@ private struct GetStartedButton: View {
                     Image(icon).iconMedium().foregroundStyle(.textPrimary)
                 }
                 .padding(10)
-                .background(.backgroundPure)
+                .background(.backgroundOpacity)
                 .clipShape(Circle())
 
                 VStack(alignment: .leading, spacing: 4) {
@@ -62,7 +61,7 @@ private struct GetStartedButton: View {
             .frame(maxWidth: .infinity)
             .padding(.vertical, 20)
             .padding(.horizontal, 16)
-            .background(.backgroundPrimary)
+            .background(.componentPrimary)
             .clipShape(RoundedRectangle(cornerRadius: 16))
         }
     }
