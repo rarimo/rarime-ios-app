@@ -1,7 +1,16 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Authentication Failed" : {
+
+    },
     "Back" : {
+
+    },
+    "Back to Intro" : {
+
+    },
+    "Close" : {
 
     },
     "Continue" : {
@@ -14,6 +23,9 @@
 
     },
     "Copy to clipboard" : {
+
+    },
+    "Could not authenticate with Face ID. Please try again." : {
 
     },
     "Create a profile, add various credentials, and invite others to earn rewards in the process" : {
@@ -32,6 +44,30 @@
 
     },
     "Don’t share your recovery phrase with anyone" : {
+
+    },
+    "Enable" : {
+
+    },
+    "Enable\nFace ID" : {
+
+    },
+    "Enable\nPasscode" : {
+
+    },
+    "Enable Face ID Authentication" : {
+
+    },
+    "Enable Face ID in Settings > Rarime." : {
+
+    },
+    "Enable Passcode Authentication" : {
+
+    },
+    "Enter Passcode" : {
+
+    },
+    "Face ID Disabled" : {
 
     },
     "Get rewarded" : {
@@ -58,6 +94,9 @@
     "Manage your assets" : {
 
     },
+    "Maybe Later" : {
+
+    },
     "New recovery phrase" : {
 
     },
@@ -76,7 +115,13 @@
     "Participate and get rewarded" : {
 
     },
+    "Passcodes do not match" : {
+
+    },
     "Plug your identity" : {
+
+    },
+    "Repeat Passcode" : {
 
     },
     "Rewards" : {

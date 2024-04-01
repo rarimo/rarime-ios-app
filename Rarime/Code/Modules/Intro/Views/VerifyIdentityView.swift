@@ -58,7 +58,7 @@ struct VerifyIdentityView: View {
                 onNext()
             } else {
                 isErrorSheetPresented = true
-                UINotificationFeedbackGenerator().notificationOccurred(.error)
+                FeedbackGenerator.shared.notify(.error)
             }
         }) {
             HStack(spacing: 8) {
@@ -69,7 +69,7 @@ struct VerifyIdentityView: View {
         }
         .disabled(selectedWords.contains(""))
         .controlSize(.large)
-        .buttonStyle(PrimaryContainedButtonStyle())
+        .buttonStyle(PrimaryButtonStyle())
     }
 }
 
@@ -148,7 +148,7 @@ private struct IncorrectSelectionView: View {
                     .frame(maxWidth: .infinity)
             }
             .controlSize(.large)
-            .buttonStyle(PrimaryContainedButtonStyle())
+            .buttonStyle(PrimaryButtonStyle())
         }
     }
 }

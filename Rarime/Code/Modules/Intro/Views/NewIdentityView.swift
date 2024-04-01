@@ -42,7 +42,7 @@ struct NewIdentityView: View {
                     .frame(maxWidth: .infinity)
                 }
                 .controlSize(.large)
-                .buttonStyle(PrimaryContainedButtonStyle())
+                .buttonStyle(PrimaryButtonStyle())
             }
         ) {
             CardContainerView {
@@ -84,7 +84,7 @@ struct NewIdentityView: View {
 
             UIPasteboard.general.string = wordlist.joined(separator: " ")
             isCopied = true
-            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            FeedbackGenerator.shared.impact(.medium)
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 isCopied = false

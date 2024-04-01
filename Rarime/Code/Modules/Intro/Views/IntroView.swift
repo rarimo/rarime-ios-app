@@ -34,7 +34,7 @@ struct IntroView: View {
                     case .verifyIdentity:
                         VerifyIdentityView(
                             onBack: { path.removeLast() },
-                            onNext: { appViewModel.finishIntro() }
+                            onNext: { withAnimation { appViewModel.finishIntro() } }
                         )
                     case .importIdentity:
                         // TODO: Implement import identity
@@ -89,7 +89,7 @@ struct IntroView: View {
                         .buttonMedium()
                         .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(PrimaryContainedButtonStyle())
+                .buttonStyle(PrimaryButtonStyle())
             } else {
                 StepIndicator(steps: IntroStep.allCases.count, currentStep: currentStep)
                 Spacer()
@@ -99,7 +99,7 @@ struct IntroView: View {
                         Image(Icons.arrowRight).iconMedium()
                     }
                 }
-                .buttonStyle(PrimaryContainedButtonStyle())
+                .buttonStyle(PrimaryButtonStyle())
             }
         }
         .dynamicSheet(isPresented: $showSheet) {

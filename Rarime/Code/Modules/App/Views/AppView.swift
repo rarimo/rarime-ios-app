@@ -12,10 +12,14 @@ struct AppView: View {
 
     var body: some View {
         ZStack {
-            if viewModel.isIntroFinished {
-                MainView()
+            if viewModel.isFaceIdSet {
+                MainView().transition(.backslide)
+            } else if viewModel.isPasscodeSet {
+                EnableFaceIdView().transition(.backslide)
+            } else if viewModel.isIntroFinished {
+                EnablePasscodeView().transition(.backslide)
             } else {
-                IntroView()
+                IntroView().transition(.backslide)
             }
         }
         .environmentObject(viewModel)

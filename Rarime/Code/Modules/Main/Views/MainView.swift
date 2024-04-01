@@ -8,23 +8,28 @@
 import SwiftUI
 
 struct MainView: View {
+    @EnvironmentObject var appViewModel: AppView.ViewModel
     @State private var selectedTab = MainTabs.home
 
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
-                TabView(selection: $selectedTab) {
-                    HomeView().tag(MainTabs.home)
-                    WalletView().tag(MainTabs.wallet)
-                    RewardsView().tag(MainTabs.rewards)
-                    CredentialsView().tag(MainTabs.credentials)
-                    SettingsView().tag(MainTabs.settings)
-                }
-                .onAppear {
-                    // Remove tab bar background
-                    let appearance = UITabBarAppearance()
-                    appearance.configureWithTransparentBackground()
-                    UITabBar.appearance().standardAppearance = appearance
+                VStack {
+                    TabView(selection: $selectedTab) {
+                        HomeView().tag(MainTabs.home)
+                        WalletView().tag(MainTabs.wallet)
+                        RewardsView().tag(MainTabs.rewards)
+                        CredentialsView().tag(MainTabs.credentials)
+                        SettingsView()
+                            .environmentObject(appViewModel)
+                            .tag(MainTabs.settings)
+                    }
+                    .onAppear {
+                        // Remove tab bar background
+                        let appearance = UITabBarAppearance()
+                        appearance.configureWithTransparentBackground()
+                        UITabBar.appearance().standardAppearance = appearance
+                    }
                 }
                 TabBarView(selectedTab: $selectedTab)
             }
@@ -36,4 +41,5 @@ struct MainView: View {
 
 #Preview {
     MainView()
+        .environmentObject(AppView.ViewModel())
 }

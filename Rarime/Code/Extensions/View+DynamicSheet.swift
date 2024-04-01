@@ -84,7 +84,7 @@ extension View {
                         .frame(maxWidth: .infinity)
                 }
                 .padding(.top, 16)
-                .buttonStyle(PrimaryContainedButtonStyle())
+                .buttonStyle(PrimaryButtonStyle())
             }
         }
 }
