@@ -46,6 +46,12 @@
 		56933E012BBBFDD90068C894 /* CirclesLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E002BBBFDD90068C894 /* CirclesLoaderView.swift */; };
 		56933E032BBBFDFE0068C894 /* ProcessingChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E022BBBFDFE0068C894 /* ProcessingChipView.swift */; };
 		56933E052BBC00D60068C894 /* RewardChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E042BBC00D60068C894 /* RewardChip.swift */; };
+		56933E082BBC09990068C894 /* QKMRZScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 56933E072BBC09990068C894 /* QKMRZScanner */; };
+		56933E0C2BBC09D20068C894 /* MRZScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E0B2BBC09D20068C894 /* MRZScannerController.swift */; };
+		56933E0E2BBC09F10068C894 /* MRZScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E0D2BBC09F10068C894 /* MRZScannerView.swift */; };
+		56A6C7542BBC192800992562 /* Passport.json in Resources */ = {isa = PBXBuildFile; fileRef = 56A6C7532BBC192800992562 /* Passport.json */; };
+		56A6C7562BBC194800992562 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C7552BBC194800992562 /* Animations.swift */; };
+		56A6C75C2BBC2CD500992562 /* PassportUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C75B2BBC2CD500992562 /* PassportUtils.swift */; };
 		56AC033E2BB06A0500A34A00 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033D2BB06A0500A34A00 /* ButtonStyle.swift */; };
 		56AC03402BB06A2D00A34A00 /* Image+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */; };
 		56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3002BB723A1002CF710 /* NewIdentityView.swift */; };
@@ -107,6 +113,11 @@
 		56933E002BBBFDD90068C894 /* CirclesLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclesLoaderView.swift; sourceTree = "<group>"; };
 		56933E022BBBFDFE0068C894 /* ProcessingChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingChipView.swift; sourceTree = "<group>"; };
 		56933E042BBC00D60068C894 /* RewardChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardChip.swift; sourceTree = "<group>"; };
+		56933E0B2BBC09D20068C894 /* MRZScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRZScannerController.swift; sourceTree = "<group>"; };
+		56933E0D2BBC09F10068C894 /* MRZScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRZScannerView.swift; sourceTree = "<group>"; };
+		56A6C7532BBC192800992562 /* Passport.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Passport.json; sourceTree = "<group>"; };
+		56A6C7552BBC194800992562 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
+		56A6C75B2BBC2CD500992562 /* PassportUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportUtils.swift; sourceTree = "<group>"; };
 		56AC033D2BB06A0500A34A00 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Icon.swift"; sourceTree = "<group>"; };
 		56DAA3002BB723A1002CF710 /* NewIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIdentityView.swift; sourceTree = "<group>"; };
@@ -137,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE32CF522BAC981300E507B6 /* Lottie in Frameworks */,
+				56933E082BBC09990068C894 /* QKMRZScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +160,7 @@
 			children = (
 				561C3C382BADE64B00FBB3B9 /* Fonts.swift */,
 				561C3C272BADA8A600FBB3B9 /* Icons.swift */,
+				56A6C7552BBC194800992562 /* Animations.swift */,
 				563529F72BB082A00027C910 /* SheetType.swift */,
 				56933DFE2BBBFDA30068C894 /* ProcessingStatus.swift */,
 			);
@@ -257,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */,
+				56A6C75B2BBC2CD500992562 /* PassportUtils.swift */,
 				56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */,
 			);
 			path = Utilities;
@@ -295,15 +309,41 @@
 		56933DEB2BBAB0660068C894 /* ScanPassport */ = {
 			isa = PBXGroup;
 			children = (
+				56933E0A2BBC09B90068C894 /* Models */,
+				56933E092BBC09A90068C894 /* Views */,
+			);
+			path = ScanPassport;
+			sourceTree = "<group>";
+		};
+		56933E092BBC09A90068C894 /* Views */ = {
+			isa = PBXGroup;
+			children = (
 				56933DEC2BBAB0AB0068C894 /* PassportSheetView.swift */,
 				56933DEE2BBABD100068C894 /* ScanPassportView.swift */,
 				56933DF22BBAC2940068C894 /* ScanPassportMRZView.swift */,
+				56933E0D2BBC09F10068C894 /* MRZScannerView.swift */,
 				56933DFC2BBAFDD00068C894 /* PassportProofView.swift */,
 				56933DF42BBAC42E0068C894 /* ReadPassportNFCView.swift */,
 				56933DF62BBAC7D10068C894 /* SelectPassportDataView.swift */,
 				56933DF02BBAC1B10068C894 /* ScanPassportLayoutView.swift */,
 			);
-			path = ScanPassport;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		56933E0A2BBC09B90068C894 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				56933E0B2BBC09D20068C894 /* MRZScannerController.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		56A6C7522BBC18F100992562 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				56A6C7532BBC192800992562 /* Passport.json */,
+			);
+			path = Animations;
 			sourceTree = "<group>";
 		};
 		56AC033C2BB069F400A34A00 /* Styles */ = {
@@ -417,6 +457,7 @@
 		CE9E82C42BA8850800AAF885 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				56A6C7522BBC18F100992562 /* Animations */,
 				CE778B5B2BA9976C00B26485 /* Fonts */,
 				CE9E82B92BA881F500AAF885 /* Assets.xcassets */,
 				568B4FDF2BB70852001C9C74 /* Localizable.xcstrings */,
@@ -532,6 +573,7 @@
 			name = Rarime;
 			packageProductDependencies = (
 				CE32CF512BAC981300E507B6 /* Lottie */,
+				56933E072BBC09990068C894 /* QKMRZScanner */,
 			);
 			productName = Rarime;
 			productReference = CE9E82B22BA881F400AAF885 /* Rarime.app */;
@@ -563,6 +605,7 @@
 			mainGroup = CE9E82A92BA881F400AAF885;
 			packageReferences = (
 				CE32CF502BAC981300E507B6 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				56933E062BBC09990068C894 /* XCRemoteSwiftPackageReference "QKMRZScanner" */,
 			);
 			productRefGroup = CE9E82B32BA881F400AAF885 /* Products */;
 			projectDirPath = "";
@@ -584,6 +627,7 @@
 				561C3C412BADF0AA00FBB3B9 /* Inter-Medium.ttf in Resources */,
 				561C3C3F2BADF0AA00FBB3B9 /* Inter-Bold.ttf in Resources */,
 				561C3C402BADF0AA00FBB3B9 /* Inter-SemiBold.ttf in Resources */,
+				56A6C7542BBC192800992562 /* Passport.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,6 +669,7 @@
 				56933DED2BBAB0AB0068C894 /* PassportSheetView.swift in Sources */,
 				561C3C2B2BADBF1000FBB3B9 /* Text+Typography.swift in Sources */,
 				568B4FCC2BB6C164001C9C74 /* IntroView.swift in Sources */,
+				56A6C7562BBC194800992562 /* Animations.swift in Sources */,
 				56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */,
 				56AC033E2BB06A0500A34A00 /* ButtonStyle.swift in Sources */,
 				563529EB2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift in Sources */,
@@ -641,9 +686,12 @@
 				CE778B792BA9CA0A00B26485 /* AppView+ViewModel.swift in Sources */,
 				56933E032BBBFDFE0068C894 /* ProcessingChipView.swift in Sources */,
 				563529F12BB0736A0027C910 /* TabBarView.swift in Sources */,
+				56933E0E2BBC09F10068C894 /* MRZScannerView.swift in Sources */,
 				56933DF52BBAC42E0068C894 /* ReadPassportNFCView.swift in Sources */,
 				56933DF32BBAC2940068C894 /* ScanPassportMRZView.swift in Sources */,
+				56A6C75C2BBC2CD500992562 /* PassportUtils.swift in Sources */,
 				563529F62BB077AB0027C910 /* CardContainerView.swift in Sources */,
+				56933E0C2BBC09D20068C894 /* MRZScannerController.swift in Sources */,
 				563529E72BB072870027C910 /* WalletView.swift in Sources */,
 				56933DFD2BBAFDD00068C894 /* PassportProofView.swift in Sources */,
 			);
@@ -1088,6 +1136,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		56933E062BBC09990068C894 /* XCRemoteSwiftPackageReference "QKMRZScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Mattijah/QKMRZScanner";
+			requirement = {
+				branch = "master-spm";
+				kind = branch;
+			};
+		};
 		CE32CF502BAC981300E507B6 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:airbnb/lottie-spm.git";
@@ -1099,6 +1155,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		56933E072BBC09990068C894 /* QKMRZScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 56933E062BBC09990068C894 /* XCRemoteSwiftPackageReference "QKMRZScanner" */;
+			productName = QKMRZScanner;
+		};
 		CE32CF512BAC981300E507B6 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CE32CF502BAC981300E507B6 /* XCRemoteSwiftPackageReference "lottie-spm" */;

@@ -84,7 +84,7 @@ struct PassportProofView: View {
         VStack(spacing: 16) {
             HorizontalDivider()
             Button(action: onFinish) {
-                Text("Home Page")
+                Text("Back to Rewards")
                     .buttonLarge()
                     .frame(maxWidth: .infinity)
             }

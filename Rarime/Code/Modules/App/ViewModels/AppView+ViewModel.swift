@@ -10,12 +10,12 @@ import SwiftUI
 extension AppView {
     class ViewModel: ObservableObject {
         let config: Config
-        @Published var isIntroFinished = false
+        @Published var isIntroFinished = true
 
-        @Published var isPasscodeSet = false
+        @Published var isPasscodeSet = true
         @Published var passcode = ""
 
-        @Published var isFaceIdSet = false
+        @Published var isFaceIdSet = true
         @Published var isFaceIdEnabled = false
 
         init() {
