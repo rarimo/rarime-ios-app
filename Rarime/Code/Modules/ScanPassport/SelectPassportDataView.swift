@@ -8,7 +8,32 @@
 import Combine
 import SwiftUI
 
-struct PassportDataItem {
+// TODO: move logic to ViewModel
+private struct Passport {
+    let fullName: String
+    let sex: String
+    let age: String
+    let documentClassModel: String
+    let issuingStateCode: String
+    let documentNumber: String
+    let expirationDate: String
+    let dateOfIssue: String
+    let nationality: String
+}
+
+private let samplePassport = Passport(
+    fullName: "Joshua Smith",
+    sex: "Male",
+    age: "24",
+    documentClassModel: "P",
+    issuingStateCode: "USA",
+    documentNumber: "00AA00000",
+    expirationDate: "03/14/2060",
+    dateOfIssue: "03/14/2024",
+    nationality: "USA"
+)
+
+private struct PassportDataItem {
     let label: LocalizedStringResource
     let value: String
     let reward: Int
@@ -22,22 +47,20 @@ struct SelectPassportDataView: View {
     @State private var dataItems: [PassportDataItem] = [
         PassportDataItem(
             label: "Expiry date",
-            value: "03/14/2060",
+            value: samplePassport.expirationDate,
             reward: 10
         ),
         PassportDataItem(
             label: "Date of issue",
-            value: "03/14/2024",
+            value: samplePassport.dateOfIssue,
             reward: 5
         ),
         PassportDataItem(
             label: "Nationality",
-            value: "USA",
+            value: samplePassport.nationality,
             reward: 20
         )
     ]
-
-    @State private var isAllSelected = false
 
     private var isAllDataSelected: Bool {
         dataItems.allSatisfy { $0.isSelected }
@@ -63,83 +86,16 @@ struct SelectPassportDataView: View {
         ) {
             ScrollView {
                 VStack(spacing: 12) {
-                    CardContainerView {
-                        HStack {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("Joshua Smith")
-                                    .subtitle3()
-                                    .foregroundStyle(.textPrimary)
-                                Text("Male, Age:24")
-                                    .body3()
-                                    .foregroundStyle(.textSecondary)
-                            }
-                            Spacer()
-                            ZStack {
-                                Image(Icons.user)
-                                    .square(32)
-                                    .foregroundStyle(.textPrimary)
-                            }
-                            .padding(12)
-                            .background(.componentPrimary)
-                            .clipShape(Circle())
-                        }
-                    }
-                    CardContainerView {
-                        VStack(spacing: 20) {
-                            HStack {
-                                Text("Must data")
-                                    .subtitle3()
-                                    .foregroundStyle(.textPrimary)
-                                Spacer()
-                                RewardChip(reward: 50, isActive: true)
-                            }
-                            VStack(spacing: 16) {
-                                makeDataRow(label: "Document class mode", value: "P")
-                                makeDataRow(label: "Issuing state code", value: "USA")
-                                makeDataRow(label: "Document number", value: "00AA00000")
-                            }
-                        }
-                    }
-                    CardContainerView {
-                        VStack(spacing: 20) {
-                            HStack {
-                                Text("Additional Data")
-                                    .subtitle3()
-                                    .foregroundStyle(.textPrimary)
-                                Spacer()
-                            }
-                            VStack(spacing: 16) {
-                                HStack(spacing: 16) {
-                                    ToggleView(isOn: .constant(isAllDataSelected)) { _ in
-                                        let newValue = !isAllDataSelected
-                                        for index in dataItems.indices {
-                                            dataItems[index].isSelected = newValue
-                                        }
-                                    }
-                                    Text("Select All")
-                                        .subtitle4()
-                                        .foregroundStyle(.textSecondary)
-                                    Spacer()
-                                    RewardChip(reward: 35, isActive: isAllSelected)
-                                }
-                                HorizontalDivider()
-                                ForEach(dataItems.indices, id: \.self) { index in
-                                    DataItemSelector(
-                                        isOn: $dataItems[index].isSelected,
-                                        label: dataItems[index].label,
-                                        value: dataItems[index].value,
-                                        reward: dataItems[index].reward
-                                    )
-                                }
-                            }
-                        }
-                    }
+                    generalDataSection
+                    mustDataSection
+                    additionalDataSection
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 16)
             }
             VStack(spacing: 12) {
-                Text("🎁 You will claim \(selectedReward)/\(totalReward) RMO")
+                Text(
+                    "🎁 You will claim \(Text(String("\(selectedReward) /")).fontWeight(.semibold)) \(totalReward) RMO")
                     .body3()
                     .foregroundStyle(.textSecondary)
                 Button(action: onNext) {
@@ -158,7 +114,87 @@ struct SelectPassportDataView: View {
         .background(.backgroundPrimary)
     }
 
-    private func makeDataRow(label: LocalizedStringResource, value: String) -> some View {
+    private var generalDataSection: some View {
+        CardContainerView {
+            HStack {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(samplePassport.fullName)
+                        .subtitle3()
+                        .foregroundStyle(.textPrimary)
+                    Text("\(samplePassport.sex), Age: \(samplePassport.age)")
+                        .body3()
+                        .foregroundStyle(.textSecondary)
+                }
+                Spacer()
+                ZStack {
+                    Image(Icons.user)
+                        .square(32)
+                        .foregroundStyle(.textPrimary)
+                }
+                .padding(12)
+                .background(.componentPrimary)
+                .clipShape(Circle())
+            }
+        }
+    }
+
+    private var mustDataSection: some View {
+        CardContainerView {
+            VStack(spacing: 20) {
+                HStack {
+                    Text("Must data")
+                        .subtitle3()
+                        .foregroundStyle(.textPrimary)
+                    Spacer()
+                    RewardChip(reward: 50, isActive: true)
+                }
+                VStack(spacing: 16) {
+                    makeMustDataRow(label: "Document class mode", value: samplePassport.documentClassModel)
+                    makeMustDataRow(label: "Issuing state code", value: samplePassport.issuingStateCode)
+                    makeMustDataRow(label: "Document number", value: samplePassport.documentNumber)
+                }
+            }
+        }
+    }
+
+    private var additionalDataSection: some View {
+        CardContainerView {
+            VStack(spacing: 20) {
+                HStack {
+                    Text("Additional Data")
+                        .subtitle3()
+                        .foregroundStyle(.textPrimary)
+                    Spacer()
+                }
+                VStack(spacing: 16) {
+                    HStack(spacing: 16) {
+                        ToggleView(isOn: .constant(isAllDataSelected)) { _ in
+                            let newValue = !isAllDataSelected
+                            for index in dataItems.indices {
+                                dataItems[index].isSelected = newValue
+                            }
+                        }
+                        Text("Select All")
+                            .subtitle4()
+                            .foregroundStyle(.textSecondary)
+                        Spacer()
+                        RewardChip(reward: 35, isActive: isAllDataSelected)
+                    }
+                    HorizontalDivider()
+                    ForEach(dataItems.indices, id: \.self) { index in
+                        DataItemSelector(
+                            isOn: $dataItems[index].isSelected,
+                            label: dataItems[index].label,
+                            value: dataItems[index].value,
+                            reward: dataItems[index].reward
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private func makeMustDataRow(label: LocalizedStringResource, value: String) -> some View {
         HStack(spacing: 8) {
             Text(label).body3()
             Spacer()
@@ -168,7 +204,7 @@ struct SelectPassportDataView: View {
     }
 }
 
-struct DataItemSelector: View {
+private struct DataItemSelector: View {
     @Binding var isOn: Bool
     let label: LocalizedStringResource
     let value: String
@@ -188,29 +224,6 @@ struct DataItemSelector: View {
             Spacer()
             RewardChip(reward: reward, isActive: isOn)
         }
-    }
-}
-
-struct RewardChip: View {
-    let reward: Int
-    let isActive: Bool
-
-    init(reward: Int, isActive: Bool = false) {
-        self.reward = reward
-        self.isActive = isActive
-    }
-
-    var body: some View {
-        HStack(spacing: 4) {
-            Text(String("+\(reward)")).subtitle5()
-            Image(Icons.rarimo).iconSmall()
-        }
-        .padding(.vertical, 2)
-        .padding(.horizontal, 6)
-        .foregroundStyle(isActive ? .textPrimary : .textSecondary)
-        .background(isActive ? .warningLight : .componentPrimary)
-        .clipShape(Capsule())
-        .animation(.easeInOut(duration: 0.2), value: isActive)
     }
 }
 

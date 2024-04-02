@@ -42,6 +42,10 @@
 		56933DF72BBAC7D10068C894 /* SelectPassportDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DF62BBAC7D10068C894 /* SelectPassportDataView.swift */; };
 		56933DFB2BBAFBD90068C894 /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DFA2BBAFBD90068C894 /* ToggleView.swift */; };
 		56933DFD2BBAFDD00068C894 /* PassportProofView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DFC2BBAFDD00068C894 /* PassportProofView.swift */; };
+		56933DFF2BBBFDA30068C894 /* ProcessingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DFE2BBBFDA30068C894 /* ProcessingStatus.swift */; };
+		56933E012BBBFDD90068C894 /* CirclesLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E002BBBFDD90068C894 /* CirclesLoaderView.swift */; };
+		56933E032BBBFDFE0068C894 /* ProcessingChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E022BBBFDFE0068C894 /* ProcessingChipView.swift */; };
+		56933E052BBC00D60068C894 /* RewardChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E042BBC00D60068C894 /* RewardChip.swift */; };
 		56AC033E2BB06A0500A34A00 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033D2BB06A0500A34A00 /* ButtonStyle.swift */; };
 		56AC03402BB06A2D00A34A00 /* Image+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */; };
 		56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3002BB723A1002CF710 /* NewIdentityView.swift */; };
@@ -99,6 +103,10 @@
 		56933DF62BBAC7D10068C894 /* SelectPassportDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPassportDataView.swift; sourceTree = "<group>"; };
 		56933DFA2BBAFBD90068C894 /* ToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleView.swift; sourceTree = "<group>"; };
 		56933DFC2BBAFDD00068C894 /* PassportProofView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportProofView.swift; sourceTree = "<group>"; };
+		56933DFE2BBBFDA30068C894 /* ProcessingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingStatus.swift; sourceTree = "<group>"; };
+		56933E002BBBFDD90068C894 /* CirclesLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclesLoaderView.swift; sourceTree = "<group>"; };
+		56933E022BBBFDFE0068C894 /* ProcessingChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingChipView.swift; sourceTree = "<group>"; };
+		56933E042BBC00D60068C894 /* RewardChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardChip.swift; sourceTree = "<group>"; };
 		56AC033D2BB06A0500A34A00 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Icon.swift"; sourceTree = "<group>"; };
 		56DAA3002BB723A1002CF710 /* NewIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIdentityView.swift; sourceTree = "<group>"; };
@@ -141,6 +149,7 @@
 				561C3C382BADE64B00FBB3B9 /* Fonts.swift */,
 				561C3C272BADA8A600FBB3B9 /* Icons.swift */,
 				563529F72BB082A00027C910 /* SheetType.swift */,
+				56933DFE2BBBFDA30068C894 /* ProcessingStatus.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -477,6 +486,9 @@
 			children = (
 				CE9E82D62BA8917100AAF885 /* LottieView.swift */,
 				56DAA3142BB8CC95002CF710 /* PasscodeFieldView.swift */,
+				56933E022BBBFDFE0068C894 /* ProcessingChipView.swift */,
+				56933E002BBBFDD90068C894 /* CirclesLoaderView.swift */,
+				56933E042BBC00D60068C894 /* RewardChip.swift */,
 				56933DFA2BBAFBD90068C894 /* ToggleView.swift */,
 				56DAA3042BB72E35002CF710 /* InfoAlertView.swift */,
 				563529F52BB077AB0027C910 /* CardContainerView.swift */,
@@ -588,6 +600,7 @@
 				CE9E82B82BA881F400AAF885 /* AppView.swift in Sources */,
 				561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */,
 				56DAA30B2BB8B977002CF710 /* View+DynamicSheet.swift in Sources */,
+				56933DFF2BBBFDA30068C894 /* ProcessingStatus.swift in Sources */,
 				563529EF2BB0732C0027C910 /* CredentialsView.swift in Sources */,
 				56DAA3032BB7248A002CF710 /* VerifyIdentityView.swift in Sources */,
 				56DAA3152BB8CC95002CF710 /* PasscodeFieldView.swift in Sources */,
@@ -597,6 +610,7 @@
 				563529F82BB082A00027C910 /* SheetType.swift in Sources */,
 				563529E92BB072B80027C910 /* HomeView.swift in Sources */,
 				CE9E82B62BA881F400AAF885 /* RarimeApp.swift in Sources */,
+				56933E052BBC00D60068C894 /* RewardChip.swift in Sources */,
 				561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */,
 				56DAA3072BB77550002CF710 /* IdentityStepLayoutView.swift in Sources */,
 				56474ADA2BB9ED6E0017AA25 /* AnyTransition+Backslide.swift in Sources */,
@@ -604,6 +618,7 @@
 				563529E32BB071A50027C910 /* SettingsView.swift in Sources */,
 				56DAA3052BB72E35002CF710 /* InfoAlertView.swift in Sources */,
 				563529E52BB072060027C910 /* RewardsView.swift in Sources */,
+				56933E012BBBFDD90068C894 /* CirclesLoaderView.swift in Sources */,
 				CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */,
 				561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */,
 				561C3C2B2BADBF1000FBB3B9 /* Text+Typography.swift in Sources */,
@@ -624,6 +639,7 @@
 				56933DFB2BBAFBD90068C894 /* ToggleView.swift in Sources */,
 				56933DEF2BBABD100068C894 /* ScanPassportView.swift in Sources */,
 				CE778B792BA9CA0A00B26485 /* AppView+ViewModel.swift in Sources */,
+				56933E032BBBFDFE0068C894 /* ProcessingChipView.swift in Sources */,
 				563529F12BB0736A0027C910 /* TabBarView.swift in Sources */,
 				56933DF52BBAC42E0068C894 /* ReadPassportNFCView.swift in Sources */,
 				56933DF32BBAC2940068C894 /* ScanPassportMRZView.swift in Sources */,

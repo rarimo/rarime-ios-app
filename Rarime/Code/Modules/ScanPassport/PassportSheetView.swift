@@ -49,16 +49,14 @@ struct PassportSheetView: View {
         .padding(.top, 40)
     }
 
-    func makeListItem(_ number: String, _ text: LocalizedStringResource) -> some View {
+    private func makeListItem(_ number: String, _ text: LocalizedStringResource) -> some View {
         HStack(spacing: 12) {
             Text(number)
                 .subtitle4()
-                .foregroundStyle(.textPrimary)
                 .frame(width: 18)
-            Text(text)
-                .body3()
-                .foregroundStyle(.textPrimary)
+            Text(text).body3()
         }
+        .foregroundStyle(.textPrimary)
     }
 }
 

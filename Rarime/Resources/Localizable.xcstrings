@@ -1,12 +1,22 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "🎁 You will claim %lld/%lld RMO" : {
+    "%@, Age: %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "🎁 You will claim %1$lld/%2$lld RMO"
+            "value" : "%1$@, Age: %2$@"
+          }
+        }
+      }
+    },
+    "🎁 You will claim %@ %lld RMO" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "🎁 You will claim %1$@ %2$lld RMO"
           }
         }
       }
@@ -137,16 +147,10 @@
     "Issuing state code" : {
 
     },
-    "Joshua Smith" : {
-
-    },
     "Let's Start" : {
 
     },
     "Login and access special parts of the web" : {
-
-    },
-    "Male, Age:24" : {
 
     },
     "Manage your account settings" : {
@@ -306,7 +310,7 @@
     "Word #%lld" : {
 
     },
-    "You will be redirected in 5sec" : {
+    "You will be redirected in a few seconds" : {
 
     },
     "You'll need a biometric document" : {
