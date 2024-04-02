@@ -16,6 +16,7 @@ struct ScanPassportView: View {
 
     @State private var state: ScanPassportState = .scanMRZ
     @StateObject private var mrzScannerController = MRZScannerController()
+    @StateObject var nfcScannerController = NFCScannerController()
 
     var body: some View {
         switch state {
@@ -27,11 +28,14 @@ struct ScanPassportView: View {
             ).transition(.backslide)
         case .readNFC:
             ReadPassportNFCView(
+                mrzKey: mrzScannerController.mrzKey,
+                nfcScannerController: nfcScannerController,
                 onNext: { withAnimation { state = .selectData } },
                 onClose: onClose
             ).transition(.backslide)
         case .selectData:
             SelectPassportDataView(
+                nfcModel: nfcScannerController.nfcModel!,
                 onNext: { withAnimation { state = .generateProof } },
                 onClose: onClose
             ).transition(.backslide)

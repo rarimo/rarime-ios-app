@@ -6,6 +6,7 @@
 //
 
 import Combine
+import NFCPassportReader
 import SwiftUI
 
 // TODO: move logic to ViewModel
@@ -21,18 +22,6 @@ private struct Passport {
     let nationality: String
 }
 
-private let samplePassport = Passport(
-    fullName: "Joshua Smith",
-    sex: "Male",
-    age: "24",
-    documentClassModel: "P",
-    issuingStateCode: "USA",
-    documentNumber: "00AA00000",
-    expirationDate: "03/14/2060",
-    dateOfIssue: "03/14/2024",
-    nationality: "USA"
-)
-
 private struct PassportDataItem {
     let label: LocalizedStringResource
     let value: String
@@ -41,26 +30,34 @@ private struct PassportDataItem {
 }
 
 struct SelectPassportDataView: View {
+    var nfcModel: NFCPassportModel
     let onNext: () -> Void
     let onClose: () -> Void
 
-    @State private var dataItems: [PassportDataItem] = [
-        PassportDataItem(
-            label: "Expiry date",
-            value: samplePassport.expirationDate,
-            reward: 10
-        ),
-        PassportDataItem(
-            label: "Date of issue",
-            value: samplePassport.dateOfIssue,
-            reward: 5
-        ),
-        PassportDataItem(
-            label: "Nationality",
-            value: samplePassport.nationality,
-            reward: 20
-        )
-    ]
+    @State private var dataItems: [PassportDataItem]
+
+    init(nfcModel: NFCPassportModel, onNext: @escaping () -> Void, onClose: @escaping () -> Void) {
+        self.nfcModel = nfcModel
+        self.onNext = onNext
+        self.onClose = onClose
+        dataItems = [
+            PassportDataItem(
+                label: "Expiry date",
+                value: nfcModel.documentExpiryDate,
+                reward: 10
+            ),
+            PassportDataItem(
+                label: "Date of birth",
+                value: nfcModel.dateOfBirth,
+                reward: 5
+            ),
+            PassportDataItem(
+                label: "Nationality",
+                value: nfcModel.nationality,
+                reward: 20
+            )
+        ]
+    }
 
     private var isAllDataSelected: Bool {
         dataItems.allSatisfy { $0.isSelected }
@@ -118,22 +115,29 @@ struct SelectPassportDataView: View {
         CardContainerView {
             HStack {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(samplePassport.fullName)
+                    Text(String("\(nfcModel.firstName) \(nfcModel.lastName)"))
                         .subtitle3()
                         .foregroundStyle(.textPrimary)
-                    Text("\(samplePassport.sex), Age: \(samplePassport.age)")
+                    Text("\(nfcModel.gender), Age: \(nfcModel.dateOfBirth)")
                         .body3()
                         .foregroundStyle(.textSecondary)
                 }
                 Spacer()
-                ZStack {
-                    Image(Icons.user)
-                        .square(32)
-                        .foregroundStyle(.textPrimary)
+                if nfcModel.passportImage != nil {
+                    Image(uiImage: nfcModel.passportImage!)
+                        .square(56)
+                        .background(.componentPrimary)
+                        .clipShape(Circle())
+                } else {
+                    ZStack {
+                        Image(Icons.user)
+                            .square(32)
+                            .foregroundStyle(.textPrimary)
+                    }
+                    .padding(12)
+                    .background(.componentPrimary)
+                    .clipShape(Circle())
                 }
-                .padding(12)
-                .background(.componentPrimary)
-                .clipShape(Circle())
             }
         }
     }
@@ -149,9 +153,9 @@ struct SelectPassportDataView: View {
                     RewardChip(reward: 50, isActive: true)
                 }
                 VStack(spacing: 16) {
-                    makeMustDataRow(label: "Document class mode", value: samplePassport.documentClassModel)
-                    makeMustDataRow(label: "Issuing state code", value: samplePassport.issuingStateCode)
-                    makeMustDataRow(label: "Document number", value: samplePassport.documentNumber)
+                    makeMustDataRow(label: "Document class mode", value: nfcModel.documentType)
+                    makeMustDataRow(label: "Issuing state code", value: nfcModel.issuingAuthority)
+                    makeMustDataRow(label: "Document number", value: nfcModel.documentNumber)
                 }
             }
         }
@@ -227,6 +231,31 @@ private struct DataItemSelector: View {
     }
 }
 
+private struct PreviewView: View {
+    @State private var nfcModel: NFCPassportModel
+
+    init() {
+        nfcModel = NFCPassportModel()
+        nfcModel.firstName = "Joshua"
+        nfcModel.lastName = "Smith"
+        nfcModel.gender = "M"
+        nfcModel.dateOfBirth = "03/14/1990"
+        nfcModel.documentType = "P"
+        nfcModel.issuingAuthority = "USA"
+        nfcModel.documentNumber = "00AA00000"
+        nfcModel.documentExpiryDate = "03/14/2060"
+        nfcModel.nationality = "USA"
+    }
+
+    var body: some View {
+        SelectPassportDataView(
+            nfcModel: nfcModel,
+            onNext: {},
+            onClose: {}
+        )
+    }
+}
+
 #Preview {
-    SelectPassportDataView(onNext: {}, onClose: {})
+    PreviewView()
 }

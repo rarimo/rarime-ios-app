@@ -12,20 +12,6 @@ struct ScanPassportMRZView: View {
     let onNext: () -> Void
     let onClose: () -> Void
 
-    init(
-        mrzScannerController: MRZScannerController,
-        onNext: @escaping () -> Void,
-        onClose: @escaping () -> Void
-    ) {
-        self.mrzScannerController = mrzScannerController
-        self.onNext = onNext
-        self.onClose = onClose
-
-        mrzScannerController.setOnScanned {
-            onNext()
-        }
-    }
-
     var body: some View {
         ScanPassportLayoutView(
             step: 1,
@@ -49,6 +35,7 @@ struct ScanPassportMRZView: View {
             Spacer()
         }
         .onAppear {
+            mrzScannerController.setOnScanned { onNext() }
             mrzScannerController.startScanning()
         }
     }
