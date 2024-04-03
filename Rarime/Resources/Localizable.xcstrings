@@ -1,12 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%@, Age: %@" : {
+    "%@, Age: %lld" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@, Age: %2$@"
+            "value" : "%1$@, Age: %2$lld"
           }
         }
       }
@@ -129,6 +129,9 @@
     "Failed" : {
 
     },
+    "Female" : {
+
+    },
     "First Name" : {
 
     },
@@ -160,6 +163,9 @@
 
     },
     "Login and access special parts of the web" : {
+
+    },
+    "Male" : {
 
     },
     "Manage your account settings" : {
