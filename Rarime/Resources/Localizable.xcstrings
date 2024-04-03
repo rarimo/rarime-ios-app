@@ -27,6 +27,9 @@
     "All Done!" : {
 
     },
+    "Authenticating with passport..." : {
+
+    },
     "Authentication Failed" : {
 
     },
@@ -144,6 +147,9 @@
     "Get Started" : {
 
     },
+    "Hold your iPhone near an NFC enabled passport." : {
+
+    },
     "Import from MetaMask Snap" : {
 
     },
@@ -219,6 +225,9 @@
     "Passport Number" : {
 
     },
+    "Passport read successfully" : {
+
+    },
     "Personal data never leaves the device" : {
 
     },
@@ -238,6 +247,9 @@
 
     },
     "Reading Passport data" : {
+
+    },
+    "Reading passport data...\n\n%@" : {
 
     },
     "Repeat Passcode" : {
@@ -274,6 +286,9 @@
 
     },
     "Skip" : {
+
+    },
+    "Sorry, there was a problem reading the passport. Please try again" : {
 
     },
     "Start" : {

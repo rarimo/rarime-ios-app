@@ -38,13 +38,26 @@ class NFCScannerController: ObservableObject {
         let masterListURL = Bundle.main.url(forResource: "masterList", withExtension: ".pem")!
         
         let customMessageHandler: (NFCViewDisplayMessage) -> String? = { displayMessage in
+            // Forked from NFCViewDisplayMessage
+            func drawProgressBar(_ progress: Int) -> String {
+                let itemsCount = (progress / 20)
+                let full = String(repeating: "🟢 ", count: itemsCount)
+                let empty = String(repeating: "⚪️ ", count: 5 - itemsCount)
+                return "\(full)\(empty)"
+            }
+            
             let message: LocalizedStringResource?
             switch displayMessage {
                 case .requestPresentPassport:
                     message = "Hold your iPhone near an NFC enabled passport."
-                default:
-                    // Return nil for all other messages so we use the provided default
-                    message = nil
+                case .activeAuthentication, .authenticatingWithPassport:
+                    message = "Authenticating with passport..."
+                case .readingDataGroupProgress(_, let progress):
+                    message = "Reading passport data...\n\n\(drawProgressBar(progress))"
+                case .error:
+                    message = "Sorry, there was a problem reading the passport. Please try again"
+                case .successfulRead:
+                    message = "Passport read successfully"
             }
             
             return message == nil ? nil : String(localized: message!)
@@ -53,11 +66,7 @@ class NFCScannerController: ObservableObject {
         self.passport = try await PassportReader(masterListURL: masterListURL)
             .readPassport(
                 mrzKey: mrzKey,
-                tags: [
-                    .DG1,
-                    .DG2,
-                    .SOD,
-                ],
+                tags: [.DG1, .DG2, .SOD],
                 customDisplayMessage: customMessageHandler
             )
         
