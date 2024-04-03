@@ -32,3 +32,10 @@ struct CirclesLoaderView: View {
         .onAppear { isAnimating = true }
     }
 }
+
+#Preview {
+    VStack(spacing: 24) {
+        CirclesLoaderView()
+        CirclesLoaderView(size: 8, fillColor: .errorDark)
+    }
+}

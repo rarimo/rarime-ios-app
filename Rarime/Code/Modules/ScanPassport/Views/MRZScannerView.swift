@@ -2,11 +2,7 @@ import QKMRZScanner
 import SwiftUI
 
 struct MRZScannerView: UIViewRepresentable {
-    @ObservedObject var mrzScannerController: MRZScannerController
-    
-    init(mrzScannerController: MRZScannerController) {
-        self.mrzScannerController = mrzScannerController
-    }
+    @EnvironmentObject var mrzViewModel: MRZViewModel
     
     typealias UIViewType = QKMRZScannerView
     
@@ -15,8 +11,8 @@ struct MRZScannerView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: QKMRZScanner.QKMRZScannerView, context: Context) {
-        if mrzScannerController.isScanning {
-            uiView.delegate = mrzScannerController
+        if mrzViewModel.isScanning {
+            uiView.delegate = mrzViewModel
             uiView.startScanning()
             return
         }
@@ -26,5 +22,5 @@ struct MRZScannerView: UIViewRepresentable {
 }
 
 #Preview {
-    MRZScannerView(mrzScannerController: MRZScannerController())
+    MRZScannerView().environmentObject(MRZViewModel())
 }

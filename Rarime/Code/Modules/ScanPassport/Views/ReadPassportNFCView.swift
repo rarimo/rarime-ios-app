@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct ReadPassportNFCView: View {
-    var mrzKey: String
-    @ObservedObject var nfcScannerController: NFCScannerController
+    @EnvironmentObject var mrzViewModel: MRZViewModel
 
-    let onNext: () -> Void
+    let onNext: (_ passport: Passport) -> Void
     let onBack: () -> Void
     let onClose: () -> Void
 
@@ -33,7 +32,17 @@ struct ReadPassportNFCView: View {
             VStack(spacing: 16) {
                 HorizontalDivider()
                 Button(action: {
-                    nfcScannerController.read(mrzKey)
+                    NFCScanner.scanPassport(
+                        mrzViewModel.mrzKey,
+                        onCompletion: { result in
+                            switch result {
+                            case .success(let passport):
+                                self.onNext(passport)
+                            case .failure(let error):
+                                self.onBack()
+                            }
+                        }
+                    )
                 }) {
                     Text("Start")
                         .buttonLarge()
@@ -45,19 +54,14 @@ struct ReadPassportNFCView: View {
             }
             .padding(.bottom, 24)
         }
-        .onAppear {
-            nfcScannerController.setOnScanned { onNext() }
-            nfcScannerController.setOnError { onBack() }
-        }
     }
 }
 
 #Preview {
     ReadPassportNFCView(
-        mrzKey: "",
-        nfcScannerController: NFCScannerController(),
-        onNext: {},
+        onNext: { _ in },
         onBack: {},
         onClose: {}
     )
+    .environmentObject(MRZViewModel())
 }

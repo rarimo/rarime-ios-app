@@ -29,3 +29,10 @@ struct RewardChipView: View {
         .animation(.easeInOut(duration: 0.2), value: isActive)
     }
 }
+
+#Preview {
+    VStack(spacing: 24) {
+        RewardChipView(reward: 50, isActive: true)
+        RewardChipView(reward: 100)
+    }
+}

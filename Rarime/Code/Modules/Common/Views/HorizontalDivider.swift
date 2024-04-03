@@ -19,3 +19,12 @@ struct HorizontalDivider: View {
         color.frame(height: height)
     }
 }
+
+#Preview {
+    VStack(spacing: 24) {
+        HorizontalDivider()
+        HorizontalDivider(color: .warningDark, height: 2)
+        HorizontalDivider(color: .errorDark, height: 3)
+    }
+    .padding()
+}

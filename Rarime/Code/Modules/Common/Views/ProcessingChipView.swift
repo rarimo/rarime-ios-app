@@ -25,3 +25,11 @@ struct ProcessingChipView: View {
         .animation(.easeInOut, value: status)
     }
 }
+
+#Preview {
+    VStack {
+        ProcessingChipView(status: .processing)
+        ProcessingChipView(status: .success)
+        ProcessingChipView(status: .failure)
+    }
+}

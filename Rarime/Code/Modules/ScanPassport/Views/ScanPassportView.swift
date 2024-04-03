@@ -15,43 +15,40 @@ struct ScanPassportView: View {
     let onClose: () -> Void
 
     @State private var state: ScanPassportState = .scanMRZ
-    @StateObject private var viewModel = PassportViewModel()
 
-    @StateObject private var mrzScannerController = MRZScannerController()
-    @StateObject var nfcScannerController = NFCScannerController()
+    @StateObject private var passportViewModel = PassportViewModel()
+    @StateObject private var mrzViewModel = MRZViewModel()
 
     var body: some View {
         switch state {
         case .scanMRZ:
             ScanPassportMRZView(
-                mrzScannerController: mrzScannerController,
                 onNext: { withAnimation { state = .readNFC } },
                 onClose: onClose
             )
+            .environmentObject(mrzViewModel)
             .transition(.backslide)
         case .readNFC:
             ReadPassportNFCView(
-                mrzKey: mrzScannerController.mrzKey,
-                nfcScannerController: nfcScannerController,
-                onNext: {
-                    viewModel.fillProofDataItems(nfcPassport: nfcScannerController.passport!)
+                onNext: { passport in
+                    passportViewModel.setPassport(passport)
                     withAnimation { state = .selectData }
                 },
                 onBack: { withAnimation { state = .scanMRZ } },
                 onClose: onClose
             )
+            .environmentObject(mrzViewModel)
             .transition(.backslide)
         case .selectData:
             SelectPassportDataView(
-                passport: nfcScannerController.passport!,
                 onNext: { withAnimation { state = .generateProof } },
                 onClose: onClose
             )
-            .environmentObject(viewModel)
+            .environmentObject(passportViewModel)
             .transition(.backslide)
         case .generateProof:
             PassportProofView(onFinish: onClose)
-                .environmentObject(viewModel)
+                .environmentObject(passportViewModel)
                 .transition(.backslide)
         }
     }

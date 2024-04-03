@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum DateParseError: Error {
+    case invalidFormat
+}
+
 class DateUtil {
     static let passportDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -22,9 +26,9 @@ class DateUtil {
         return formatter
     }()
 
-    static func parsePassportDate(_ value: String) -> Date {
+    static func parsePassportDate(_ value: String) throws -> Date {
         guard let date = passportDateFormatter.date(from: value) else {
-            return Date()
+            throw DateParseError.invalidFormat
         }
 
         return date

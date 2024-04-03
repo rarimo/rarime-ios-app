@@ -13,7 +13,7 @@ private enum RewardsRoute: Hashable {
 
 struct RewardsView: View {
     @State private var isPassportSheetPresented = false
-    @State private var path = [RewardsRoute]()
+    @State private var path: [RewardsRoute] = []
 
     var body: some View {
         NavigationStack(path: $path) {

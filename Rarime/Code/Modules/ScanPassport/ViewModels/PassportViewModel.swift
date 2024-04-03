@@ -26,7 +26,11 @@ struct PassportProofDataItem: Identifiable {
     var formattedValue: String {
         switch valueType {
         case .date:
-            return DateUtil.mdyDateFormatter.string(from: DateUtil.parsePassportDate(value))
+            do {
+                return try DateUtil.mdyDateFormatter.string(from: DateUtil.parsePassportDate(value))
+            } catch {
+                return value
+            }
         case .text:
             return value
         }
@@ -36,8 +40,9 @@ struct PassportProofDataItem: Identifiable {
 private let requiredDataReward = 50
 
 class PassportViewModel: ObservableObject {
+    @Published var passport: Passport?
     @Published private var dataItems: [PassportProofDataItem]
-        
+
     init(dataItems: [PassportProofDataItem] = []) {
         self.dataItems = dataItems
     }
@@ -72,38 +77,39 @@ class PassportViewModel: ObservableObject {
             : .processing
     }
         
-    func fillProofDataItems(nfcPassport: NFCPassportModel) {
+    func setPassport(_ passport: Passport) {
+        self.passport = passport
         dataItems = [
             PassportProofDataItem(
                 label: "Document type",
-                value: nfcPassport.documentType,
+                value: passport.documentType,
                 isRequired: true
             ),
             PassportProofDataItem(
                 label: "Issuing authority",
-                value: nfcPassport.issuingAuthority,
+                value: passport.issuingAuthority,
                 isRequired: true
             ),
             PassportProofDataItem(
                 label: "Document number",
-                value: nfcPassport.documentNumber,
+                value: passport.documentNumber,
                 isRequired: true
             ),
             PassportProofDataItem(
                 label: "Expiry date",
-                value: nfcPassport.documentExpiryDate,
+                value: passport.documentExpiryDate,
                 valueType: .date,
                 reward: 10
             ),
             PassportProofDataItem(
                 label: "Date of birth",
-                value: nfcPassport.dateOfBirth,
+                value: passport.dateOfBirth,
                 valueType: .date,
                 reward: 5
             ),
             PassportProofDataItem(
                 label: "Nationality",
-                value: nfcPassport.nationality,
+                value: passport.nationality,
                 reward: 20
             )
         ]
@@ -114,18 +120,15 @@ class PassportViewModel: ObservableObject {
         dataItems[index].isSelected = isSelected
     }
         
+    @MainActor
     func processItem(id: UUID) async {
         guard let index = dataItems.firstIndex(where: { $0.id == id }) else { return }
-        DispatchQueue.main.async {
-            self.dataItems[index].processingStatus = .processing
-        }
-            
+        dataItems[index].processingStatus = .processing
+
         do {
             // TODO: Generate proof data
-            try await Task.sleep(nanoseconds: 2_000_000_000)
-            DispatchQueue.main.async {
-                self.dataItems[index].processingStatus = .success
-            }
+            try await Task.sleep(nanoseconds: UInt64(2) * NSEC_PER_SEC)
+            dataItems[index].processingStatus = .success
         } catch {
             dataItems[index].processingStatus = .failure
         }

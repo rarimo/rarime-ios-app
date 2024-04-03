@@ -1,12 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%@, Age: %lld" : {
+    "%@, Age: %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@, Age: %2$lld"
+            "value" : "%1$@, Age: %2$@"
           }
         }
       }

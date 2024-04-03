@@ -11,10 +11,12 @@ import SwiftUI
 
 struct SelectPassportDataView: View {
     @EnvironmentObject var passportViewModel: PassportViewModel
-
-    var passport: NFCPassportModel
     let onNext: () -> Void
     let onClose: () -> Void
+
+    private var passport: Passport {
+        passportViewModel.passport!
+    }
 
     private var isAllOptionalItemsSelected: Bool {
         passportViewModel.optionalDataItems.allSatisfy { $0.isSelected }
@@ -22,14 +24,6 @@ struct SelectPassportDataView: View {
 
     private var gender: LocalizedStringResource {
         return passport.gender == "M" ? "Male" : "Female"
-    }
-
-    private var age: Int {
-        return Calendar.current.dateComponents(
-            [.year],
-            from: DateUtil.parsePassportDate(passport.dateOfBirth),
-            to: Date()
-        ).year!
     }
 
     var body: some View {
@@ -72,10 +66,10 @@ struct SelectPassportDataView: View {
         CardContainerView {
             HStack {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(String("\(passport.firstName) \(passport.lastName)"))
+                    Text(passport.fullName)
                         .subtitle3()
                         .foregroundStyle(.textPrimary)
-                    Text("\(gender), Age: \(age)")
+                    Text("\(gender), Age: \(passport.ageString)")
                         .body3()
                         .foregroundStyle(.textSecondary)
                 }
@@ -188,30 +182,28 @@ private struct DataItemSelector: View {
 }
 
 private struct PreviewView: View {
-    @State private var passportModel: NFCPassportModel
     @StateObject private var viewModel = PassportViewModel()
-
-    init() {
-        passportModel = NFCPassportModel()
-        passportModel.firstName = "Joshua"
-        passportModel.lastName = "Smith"
-        passportModel.gender = "M"
-        passportModel.dateOfBirth = "900314"
-        passportModel.documentType = "P"
-        passportModel.issuingAuthority = "USA"
-        passportModel.documentNumber = "00AA00000"
-        passportModel.documentExpiryDate = "600314"
-        passportModel.nationality = "USA"
-    }
 
     var body: some View {
         SelectPassportDataView(
-            passport: passportModel,
             onNext: {},
             onClose: {}
         )
         .onAppear {
-            viewModel.fillProofDataItems(nfcPassport: passportModel)
+            viewModel.setPassport(
+                Passport(
+                    firstName: "Joshua",
+                    lastName: "Smith",
+                    gender: "M",
+                    passportImage: nil,
+                    documentType: "P",
+                    issuingAuthority: "USA",
+                    documentNumber: "00AA00000",
+                    documentExpiryDate: "900314",
+                    dateOfBirth: "600314",
+                    nationality: "USA"
+                )
+            )
         }
         .environmentObject(viewModel)
     }

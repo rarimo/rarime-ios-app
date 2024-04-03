@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ScanPassportMRZView: View {
-    @ObservedObject var mrzScannerController: MRZScannerController
+    @EnvironmentObject var mrzViewModel: MRZViewModel
     let onNext: () -> Void
     let onClose: () -> Void
 
@@ -20,7 +20,7 @@ struct ScanPassportMRZView: View {
             onClose: onClose
         ) {
             ZStack {
-                MRZScannerView(mrzScannerController: mrzScannerController)
+                MRZScannerView().environmentObject(mrzViewModel)
                 LottieView(animation: Animations.passport, contentMode: .scaleToFill)
                     .frame(width: 350, height: 256)
                     .padding(.bottom, 2)
@@ -35,16 +35,16 @@ struct ScanPassportMRZView: View {
             Spacer()
         }
         .onAppear {
-            mrzScannerController.setOnScanned { onNext() }
-            mrzScannerController.startScanning()
+            mrzViewModel.setOnScanned { onNext() }
+            mrzViewModel.startScanning()
         }
     }
 }
 
 #Preview {
     ScanPassportMRZView(
-        mrzScannerController: MRZScannerController(),
         onNext: {},
         onClose: {}
     )
+    .environmentObject(MRZViewModel())
 }

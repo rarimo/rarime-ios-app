@@ -1,7 +1,7 @@
 import QKMRZScanner
 import SwiftUI
 
-class MRZScannerController: ObservableObject, QKMRZScannerViewDelegate {
+class MRZViewModel: ObservableObject, QKMRZScannerViewDelegate {
     @Published var isScanning = false
     var mrzKey = ""
     var onScanned: () -> Void = {}
@@ -20,8 +20,8 @@ class MRZScannerController: ObservableObject, QKMRZScannerViewDelegate {
         onScanned()
     }
     
-    func setOnScanned(newOnScanned: @escaping () -> Void) {
-        onScanned = newOnScanned
+    func setOnScanned(onScanned: @escaping () -> Void) {
+        self.onScanned = onScanned
     }
     
     func startScanning() {

@@ -14,7 +14,7 @@ private enum PasscodeRoute: Hashable {
 struct EnablePasscodeView: View {
     @EnvironmentObject var appViewModel: AppView.ViewModel
 
-    @State private var path = [PasscodeRoute]()
+    @State private var path: [PasscodeRoute] = []
 
     @State private var passcode = ""
     @State private var repeatPasscode = ""
