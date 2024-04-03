@@ -32,7 +32,9 @@ struct ReadPassportNFCView: View {
             Spacer()
             VStack(spacing: 16) {
                 HorizontalDivider()
-                Button(action: { nfcScannerController.read(mrzKey) }) {
+                Button(action: {
+                    nfcScannerController.read(mrzKey)
+                }) {
                     Text("Start")
                         .buttonLarge()
                         .frame(maxWidth: .infinity)

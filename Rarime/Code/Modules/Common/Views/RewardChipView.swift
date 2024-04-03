@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RewardChip: View {
+struct RewardChipView: View {
     let reward: Int
     let isActive: Bool
 

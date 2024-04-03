@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct CirclesLoaderView: View {
-    let size: CGFloat = 4
+    var size: CGFloat = 4
+    var fillColor: Color = .warningDark
 
     @State private var isAnimating = false
 
@@ -16,7 +17,7 @@ struct CirclesLoaderView: View {
         HStack(spacing: 2) {
             ForEach(0 ..< 3) { index in
                 Circle()
-                    .fill(.warningDark)
+                    .fill(fillColor)
                     .frame(width: size, height: size)
                     .clipShape(Circle())
                     .offset(y: isAnimating ? size : -size)

@@ -36,7 +36,7 @@ struct RewardsView: View {
             }
             .buttonStyle(PrimaryButtonStyle())
             .dynamicSheet(isPresented: $isPassportSheetPresented, fullScreen: true) {
-                PassportSheetView(onStart: {
+                PassportIntroView(onStart: {
                     isPassportSheetPresented = false
                     path.append(.scanPassport)
                 })

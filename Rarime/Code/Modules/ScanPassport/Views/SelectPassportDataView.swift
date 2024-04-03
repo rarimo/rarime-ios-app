@@ -107,7 +107,7 @@ struct SelectPassportDataView: View {
                         .subtitle3()
                         .foregroundStyle(.textPrimary)
                     Spacer()
-                    RewardChip(reward: 50, isActive: true)
+                    RewardChipView(reward: 50, isActive: true)
                 }
                 VStack(spacing: 16) {
                     ForEach(passportViewModel.requiredDataItems) { item in
@@ -146,7 +146,7 @@ struct SelectPassportDataView: View {
                             .subtitle4()
                             .foregroundStyle(.textSecondary)
                         Spacer()
-                        RewardChip(reward: 35, isActive: isAllOptionalItemsSelected)
+                        RewardChipView(reward: 35, isActive: isAllOptionalItemsSelected)
                     }
                     HorizontalDivider()
                     ForEach(passportViewModel.optionalDataItems) { item in
@@ -182,7 +182,7 @@ private struct DataItemSelector: View {
                     .foregroundStyle(.textPrimary)
             }
             Spacer()
-            RewardChip(reward: item.reward, isActive: item.isSelected)
+            RewardChipView(reward: item.reward, isActive: item.isSelected)
         }
     }
 }

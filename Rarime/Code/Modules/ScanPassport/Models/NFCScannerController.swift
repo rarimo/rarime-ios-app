@@ -36,6 +36,19 @@ class NFCScannerController: ObservableObject {
     
     private func _read(_ mrzKey: String) async throws {
         let masterListURL = Bundle.main.url(forResource: "masterList", withExtension: ".pem")!
+        
+        let customMessageHandler: (NFCViewDisplayMessage) -> String? = { displayMessage in
+            let message: LocalizedStringResource?
+            switch displayMessage {
+                case .requestPresentPassport:
+                    message = "Hold your iPhone near an NFC enabled passport."
+                default:
+                    // Return nil for all other messages so we use the provided default
+                    message = nil
+            }
+            
+            return message == nil ? nil : String(localized: message!)
+        }
                 
         self.passport = try await PassportReader(masterListURL: masterListURL)
             .readPassport(
@@ -44,7 +57,8 @@ class NFCScannerController: ObservableObject {
                     .DG1,
                     .DG2,
                     .SOD,
-                ]
+                ],
+                customDisplayMessage: customMessageHandler
             )
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {

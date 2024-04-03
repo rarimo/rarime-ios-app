@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PassportSheetView: View {
+struct PassportIntroView: View {
     let onStart: () -> Void
 
     var body: some View {
@@ -62,7 +62,7 @@ struct PassportSheetView: View {
 
 #Preview {
     ZStack {
-        PassportSheetView(onStart: {})
+        PassportIntroView(onStart: {})
     }
     .padding(20)
 }

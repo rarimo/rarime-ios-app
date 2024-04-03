@@ -27,7 +27,8 @@ struct ScanPassportView: View {
                 mrzScannerController: mrzScannerController,
                 onNext: { withAnimation { state = .readNFC } },
                 onClose: onClose
-            ).transition(.backslide)
+            )
+            .transition(.backslide)
         case .readNFC:
             ReadPassportNFCView(
                 mrzKey: mrzScannerController.mrzKey,
