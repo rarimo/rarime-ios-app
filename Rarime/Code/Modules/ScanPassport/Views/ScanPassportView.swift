@@ -15,7 +15,7 @@ struct ScanPassportView: View {
     let onClose: () -> Void
 
     @State private var state: ScanPassportState = .scanMRZ
-    @StateObject private var viewModel = ViewModel()
+    @StateObject private var viewModel = PassportViewModel()
 
     @StateObject private var mrzScannerController = MRZScannerController()
     @StateObject var nfcScannerController = NFCScannerController()
@@ -33,15 +33,16 @@ struct ScanPassportView: View {
                 mrzKey: mrzScannerController.mrzKey,
                 nfcScannerController: nfcScannerController,
                 onNext: {
-                    viewModel.fillProofDataItems(passportModel: nfcScannerController.nfcModel!)
+                    viewModel.fillProofDataItems(nfcPassport: nfcScannerController.passport!)
                     withAnimation { state = .selectData }
                 },
+                onBack: { withAnimation { state = .scanMRZ } },
                 onClose: onClose
             )
             .transition(.backslide)
         case .selectData:
             SelectPassportDataView(
-                passport: nfcScannerController.nfcModel!,
+                passport: nfcScannerController.passport!,
                 onNext: { withAnimation { state = .generateProof } },
                 onClose: onClose
             )

@@ -10,7 +10,7 @@ import NFCPassportReader
 import SwiftUI
 
 struct SelectPassportDataView: View {
-    @EnvironmentObject var passportViewModel: ScanPassportView.ViewModel
+    @EnvironmentObject var passportViewModel: PassportViewModel
 
     var passport: NFCPassportModel
     let onNext: () -> Void
@@ -27,7 +27,7 @@ struct SelectPassportDataView: View {
     private var age: Int {
         return Calendar.current.dateComponents(
             [.year],
-            from: DateParser.parsePassportDate(passport.dateOfBirth),
+            from: DateUtil.parsePassportDate(passport.dateOfBirth),
             to: Date()
         ).year!
     }
@@ -189,7 +189,7 @@ private struct DataItemSelector: View {
 
 private struct PreviewView: View {
     @State private var passportModel: NFCPassportModel
-    @StateObject private var viewModel = ScanPassportView.ViewModel()
+    @StateObject private var viewModel = PassportViewModel()
 
     init() {
         passportModel = NFCPassportModel()
@@ -211,7 +211,7 @@ private struct PreviewView: View {
             onClose: {}
         )
         .onAppear {
-            viewModel.fillProofDataItems(passportModel: passportModel)
+            viewModel.fillProofDataItems(nfcPassport: passportModel)
         }
         .environmentObject(viewModel)
     }

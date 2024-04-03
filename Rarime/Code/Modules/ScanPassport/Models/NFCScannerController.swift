@@ -3,7 +3,7 @@ import OpenSSL
 import SwiftUI
 
 class NFCScannerController: ObservableObject {
-    var nfcModel: NFCPassportModel?
+    var passport: NFCPassportModel?
     
     var onScanned: () -> Void = {}
     var onError: () -> Void = {}
@@ -37,7 +37,7 @@ class NFCScannerController: ObservableObject {
     private func _read(_ mrzKey: String) async throws {
         let masterListURL = Bundle.main.url(forResource: "masterList", withExtension: ".pem")!
                 
-        self.nfcModel = try await PassportReader(masterListURL: masterListURL)
+        self.passport = try await PassportReader(masterListURL: masterListURL)
             .readPassport(
                 mrzKey: mrzKey,
                 tags: [

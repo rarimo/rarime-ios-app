@@ -12,6 +12,7 @@ struct ReadPassportNFCView: View {
     @ObservedObject var nfcScannerController: NFCScannerController
 
     let onNext: () -> Void
+    let onBack: () -> Void
     let onClose: () -> Void
 
     var body: some View {
@@ -44,6 +45,7 @@ struct ReadPassportNFCView: View {
         }
         .onAppear {
             nfcScannerController.setOnScanned { onNext() }
+            nfcScannerController.setOnError { onBack() }
         }
     }
 }
@@ -53,6 +55,7 @@ struct ReadPassportNFCView: View {
         mrzKey: "",
         nfcScannerController: NFCScannerController(),
         onNext: {},
+        onBack: {},
         onClose: {}
     )
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PassportProofView: View {
-    @EnvironmentObject var passportViewModel: ScanPassportView.ViewModel
+    @EnvironmentObject var passportViewModel: PassportViewModel
     let onFinish: () -> Void
 
     private func processItems() async {
@@ -131,7 +131,7 @@ private struct GeneralStatusView: View {
 
 #Preview {
     PassportProofView(onFinish: {})
-        .environmentObject(ScanPassportView.ViewModel(
+        .environmentObject(PassportViewModel(
             dataItems: [
                 PassportProofDataItem(label: "First Name", value: "", isSelected: true),
                 PassportProofDataItem(label: "Last Name", value: "", isSelected: true),

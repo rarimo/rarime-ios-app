@@ -56,9 +56,8 @@
 		56A6C7622BBC319200992562 /* NFCPassportReader in Frameworks */ = {isa = PBXBuildFile; productRef = 56A6C7612BBC319200992562 /* NFCPassportReader */; };
 		56A6C7642BBC31E800992562 /* Data+sha256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C7632BBC31E800992562 /* Data+sha256.swift */; };
 		56A6C7672BBC342A00992562 /* masterList.pem in Resources */ = {isa = PBXBuildFile; fileRef = 56A6C7662BBC342A00992562 /* masterList.pem */; };
-		56A6C76A2BBC57B700992562 /* ScanPassportView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C7692BBC57B700992562 /* ScanPassportView+ViewModel.swift */; };
-		56A6C76C2BBC6D0200992562 /* DateFormatterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C76B2BBC6D0200992562 /* DateFormatterUtil.swift */; };
-		56A6C76E2BBD474200992562 /* DateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C76D2BBD474200992562 /* DateParser.swift */; };
+		56A6C76A2BBC57B700992562 /* PassportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C7692BBC57B700992562 /* PassportViewModel.swift */; };
+		56A6C76E2BBD474200992562 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C76D2BBD474200992562 /* DateUtil.swift */; };
 		56AC033E2BB06A0500A34A00 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033D2BB06A0500A34A00 /* ButtonStyle.swift */; };
 		56AC03402BB06A2D00A34A00 /* Image+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */; };
 		56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3002BB723A1002CF710 /* NewIdentityView.swift */; };
@@ -129,9 +128,8 @@
 		56A6C75E2BBC309A00992562 /* NFCScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCScannerController.swift; sourceTree = "<group>"; };
 		56A6C7632BBC31E800992562 /* Data+sha256.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+sha256.swift"; sourceTree = "<group>"; };
 		56A6C7662BBC342A00992562 /* masterList.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = masterList.pem; sourceTree = "<group>"; };
-		56A6C7692BBC57B700992562 /* ScanPassportView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScanPassportView+ViewModel.swift"; sourceTree = "<group>"; };
-		56A6C76B2BBC6D0200992562 /* DateFormatterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterUtil.swift; sourceTree = "<group>"; };
-		56A6C76D2BBD474200992562 /* DateParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParser.swift; sourceTree = "<group>"; };
+		56A6C7692BBC57B700992562 /* PassportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportViewModel.swift; sourceTree = "<group>"; };
+		56A6C76D2BBD474200992562 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		56AC033D2BB06A0500A34A00 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Icon.swift"; sourceTree = "<group>"; };
 		56DAA3002BB723A1002CF710 /* NewIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIdentityView.swift; sourceTree = "<group>"; };
@@ -285,8 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */,
-				56A6C76B2BBC6D0200992562 /* DateFormatterUtil.swift */,
-				56A6C76D2BBD474200992562 /* DateParser.swift */,
+				56A6C76D2BBD474200992562 /* DateUtil.swift */,
 				56A6C75B2BBC2CD500992562 /* PassportUtils.swift */,
 				56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */,
 			);
@@ -376,7 +373,7 @@
 		56A6C7682BBC57A600992562 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				56A6C7692BBC57B700992562 /* ScanPassportView+ViewModel.swift */,
+				56A6C7692BBC57B700992562 /* PassportViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -703,7 +700,6 @@
 				56DAA30F2BB8C3CB002CF710 /* EnablePasscodeView.swift in Sources */,
 				563529E32BB071A50027C910 /* SettingsView.swift in Sources */,
 				56DAA3052BB72E35002CF710 /* InfoAlertView.swift in Sources */,
-				56A6C76C2BBC6D0200992562 /* DateFormatterUtil.swift in Sources */,
 				563529E52BB072060027C910 /* RewardsView.swift in Sources */,
 				56933E012BBBFDD90068C894 /* CirclesLoaderView.swift in Sources */,
 				CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */,
@@ -712,7 +708,7 @@
 				56933DED2BBAB0AB0068C894 /* PassportSheetView.swift in Sources */,
 				561C3C2B2BADBF1000FBB3B9 /* Text+Typography.swift in Sources */,
 				568B4FCC2BB6C164001C9C74 /* IntroView.swift in Sources */,
-				56A6C76E2BBD474200992562 /* DateParser.swift in Sources */,
+				56A6C76E2BBD474200992562 /* DateUtil.swift in Sources */,
 				56A6C7562BBC194800992562 /* Animations.swift in Sources */,
 				56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */,
 				56AC033E2BB06A0500A34A00 /* ButtonStyle.swift in Sources */,
@@ -731,7 +727,7 @@
 				CE778B792BA9CA0A00B26485 /* AppView+ViewModel.swift in Sources */,
 				56933E032BBBFDFE0068C894 /* ProcessingChipView.swift in Sources */,
 				563529F12BB0736A0027C910 /* TabBarView.swift in Sources */,
-				56A6C76A2BBC57B700992562 /* ScanPassportView+ViewModel.swift in Sources */,
+				56A6C76A2BBC57B700992562 /* PassportViewModel.swift in Sources */,
 				56933E0E2BBC09F10068C894 /* MRZScannerView.swift in Sources */,
 				56933DF52BBAC42E0068C894 /* ReadPassportNFCView.swift in Sources */,
 				56933DF32BBAC2940068C894 /* ScanPassportMRZView.swift in Sources */,
