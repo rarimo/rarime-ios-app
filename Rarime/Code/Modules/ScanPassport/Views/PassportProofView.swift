@@ -7,67 +7,25 @@
 
 import SwiftUI
 
-struct ProcessingDataItem: Identifiable {
-    var id = UUID()
-    var title: LocalizedStringResource
-    var status: ProcessingStatus = .processing
-}
-
 struct PassportProofView: View {
+    @EnvironmentObject var passportViewModel: ScanPassportView.ViewModel
     let onFinish: () -> Void
 
-    @State private var dataItems: [ProcessingDataItem] = [
-        ProcessingDataItem(title: "Document class mode"),
-        ProcessingDataItem(title: "Issuing state code"),
-        ProcessingDataItem(title: "Document number"),
-        ProcessingDataItem(title: "Expiry date"),
-        ProcessingDataItem(title: "Nationality"),
-    ]
-
-    private var generalStatus: ProcessingStatus {
-        if dataItems.allSatisfy({ $0.status == .success }) {
-            return .success
-        }
-
-        return dataItems.contains { $0.status == .failure }
-            ? .failure
-            : .processing
-    }
-
-    private func processItems() {
-        for index in dataItems.indices {
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) + 1) {
-                dataItems[index].status = .success
-                FeedbackGenerator.shared.impact(.light)
-            }
-        }
-    }
-
-    private func onGeneralStatusChange() {
-        if generalStatus == .success {
-            FeedbackGenerator.shared.notify(.success)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                onFinish()
-            }
-        } else if generalStatus == .failure {
-            FeedbackGenerator.shared.notify(.error)
+    private func processItems() async {
+        for item in passportViewModel.selectedDataItems {
+            await passportViewModel.processItem(id: item.id)
+            FeedbackGenerator.shared.impact(.light)
         }
     }
 
     var body: some View {
         VStack(spacing: 16) {
             VStack(spacing: 32) {
-                GeneralStatusView(status: generalStatus)
+                GeneralStatusView(status: passportViewModel.generalProcessingStatus)
                 HorizontalDivider()
                 VStack(spacing: 16) {
-                    ForEach(dataItems) { item in
-                        HStack(spacing: 4) {
-                            Text(item.title)
-                                .body3()
-                                .foregroundStyle(.textPrimary)
-                            Spacer()
-                            ProcessingChipView(status: item.status)
-                        }
+                    ForEach(passportViewModel.selectedDataItems) { item in
+                        ProcessingItemView(item: item)
                     }
                 }
             }
@@ -76,8 +34,11 @@ struct PassportProofView: View {
             footerView
         }
         .padding(.top, 80)
-        .onAppear { processItems() }
-        .onChange(of: generalStatus) { _ in onGeneralStatusChange() }
+        .task { await processItems() }
+        .onChange(of: passportViewModel.generalProcessingStatus) { val in
+            FeedbackGenerator.shared.notify(val == .success ?.success : .error)
+        }
+        .background(.backgroundPrimary)
     }
 
     private var footerView: some View {
@@ -88,13 +49,27 @@ struct PassportProofView: View {
                     .buttonLarge()
                     .frame(maxWidth: .infinity)
             }
-            .disabled(generalStatus == .processing)
+            .disabled(passportViewModel.generalProcessingStatus == .processing)
             .controlSize(.large)
             .buttonStyle(PrimaryButtonStyle())
             .padding(.horizontal, 20)
             .padding(.bottom, 24)
         }
-        .opacity(generalStatus == .processing ? 0 : 1)
+        .opacity(passportViewModel.generalProcessingStatus == .processing ? 0 : 1)
+    }
+}
+
+private struct ProcessingItemView: View {
+    let item: PassportProofDataItem
+
+    var body: some View {
+        HStack(spacing: 4) {
+            Text(item.label)
+                .body3()
+                .foregroundStyle(.textPrimary)
+            Spacer()
+            ProcessingChipView(status: item.processingStatus)
+        }
     }
 }
 
@@ -117,7 +92,7 @@ private struct GeneralStatusView: View {
         case .processing:
             return "Creating anonymized identity proof"
         case .success:
-            return "You will be redirected in a few seconds"
+            return "Your passport proof is ready"
         case .failure:
             return "Please try again later"
         }
@@ -156,4 +131,12 @@ private struct GeneralStatusView: View {
 
 #Preview {
     PassportProofView(onFinish: {})
+        .environmentObject(ScanPassportView.ViewModel(
+            dataItems: [
+                PassportProofDataItem(label: "First Name", value: "", isSelected: true),
+                PassportProofDataItem(label: "Last Name", value: "", isSelected: true),
+                PassportProofDataItem(label: "Date of Birth", value: "", isSelected: true),
+                PassportProofDataItem(label: "Passport Number", value: "", isSelected: true),
+            ]
+        ))
 }

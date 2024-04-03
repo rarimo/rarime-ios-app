@@ -78,13 +78,16 @@
     "Date of birth" : {
 
     },
+    "Date of Birth" : {
+
+    },
     "Description text here" : {
 
     },
-    "Document class mode" : {
+    "Document number" : {
 
     },
-    "Document number" : {
+    "Document type" : {
 
     },
     "Don’t share your recovery phrase with anyone" : {
@@ -126,6 +129,9 @@
     "Failed" : {
 
     },
+    "First Name" : {
+
+    },
     "Get rewarded" : {
 
     },
@@ -144,7 +150,10 @@
     "Incorrect" : {
 
     },
-    "Issuing state code" : {
+    "Issuing authority" : {
+
+    },
+    "Last Name" : {
 
     },
     "Let's Start" : {
@@ -199,6 +208,9 @@
 
     },
     "Passport data is stored only on this device" : {
+
+    },
+    "Passport Number" : {
 
     },
     "Personal data never leaves the device" : {
@@ -310,10 +322,10 @@
     "Word #%lld" : {
 
     },
-    "You will be redirected in a few seconds" : {
+    "You'll need a biometric document" : {
 
     },
-    "You'll need a biometric document" : {
+    "Your passport proof is ready" : {
 
     }
   },
