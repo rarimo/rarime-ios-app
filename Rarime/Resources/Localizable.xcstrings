@@ -1,6 +1,35 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@, Age: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, Age: %2$@"
+          }
+        }
+      }
+    },
+    "🎁 You will claim %@ %lld RMO" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "🎁 You will claim %1$@ %2$lld RMO"
+          }
+        }
+      }
+    },
+    "Additional Data" : {
+
+    },
+    "All Done!" : {
+
+    },
+    "Authenticating with passport..." : {
+
+    },
     "Authentication Failed" : {
 
     },
@@ -10,6 +39,9 @@
     "Back to Intro" : {
 
     },
+    "Back to Rewards" : {
+
+    },
     "Close" : {
 
     },
@@ -17,6 +49,9 @@
 
     },
     "Convert existing identity documents into anonymous credentials" : {
+
+    },
+    "Convert your data into ZK proofs" : {
 
     },
     "Copied" : {
@@ -34,16 +69,34 @@
     "Create new Identity" : {
 
     },
+    "Creating anonymized identity proof" : {
+
+    },
     "Credentials" : {
 
     },
     "Dashboard" : {
 
     },
+    "Date of birth" : {
+
+    },
+    "Date of Birth" : {
+
+    },
     "Description text here" : {
 
     },
+    "Document number" : {
+
+    },
+    "Document type" : {
+
+    },
     "Don’t share your recovery phrase with anyone" : {
+
+    },
+    "Done" : {
 
     },
     "Enable" : {
@@ -67,13 +120,34 @@
     "Enter Passcode" : {
 
     },
+    "Error" : {
+
+    },
+    "Expiry date" : {
+
+    },
     "Face ID Disabled" : {
+
+    },
+    "Failed" : {
+
+    },
+    "Female" : {
+
+    },
+    "First Name" : {
 
     },
     "Get rewarded" : {
 
     },
+    "Get rewarded with 50 RRMO" : {
+
+    },
     "Get Started" : {
+
+    },
+    "Hold your iPhone near an NFC enabled passport." : {
 
     },
     "Import from MetaMask Snap" : {
@@ -85,7 +159,19 @@
     "Incorrect" : {
 
     },
+    "Issuing authority" : {
+
+    },
+    "Last Name" : {
+
+    },
+    "Let's Start" : {
+
+    },
     "Login and access special parts of the web" : {
+
+    },
+    "Male" : {
 
     },
     "Manage your account settings" : {
@@ -97,10 +183,22 @@
     "Maybe Later" : {
 
     },
+    "Move your PASSPORT page inside the border" : {
+
+    },
+    "Must data" : {
+
+    },
+    "Nationality" : {
+
+    },
     "New recovery phrase" : {
 
     },
     "Next" : {
+
+    },
+    "NFC Reader" : {
 
     },
     "Open sheet" : {
@@ -118,7 +216,40 @@
     "Passcodes do not match" : {
 
     },
+    "Passport" : {
+
+    },
+    "Passport data is stored only on this device" : {
+
+    },
+    "Passport Number" : {
+
+    },
+    "Passport read successfully" : {
+
+    },
+    "Personal data never leaves the device" : {
+
+    },
+    "Place your passport cover to the back of your phone" : {
+
+    },
+    "Please try again later" : {
+
+    },
+    "Please Wait..." : {
+
+    },
     "Plug your identity" : {
+
+    },
+    "Processing" : {
+
+    },
+    "Reading Passport data" : {
+
+    },
+    "Reading passport data...\n\n%@" : {
 
     },
     "Repeat Passcode" : {
@@ -127,7 +258,22 @@
     "Rewards" : {
 
     },
+    "Scan Passport" : {
+
+    },
+    "Scan your Passport" : {
+
+    },
+    "Select All" : {
+
+    },
     "Select Authorisation Method" : {
+
+    },
+    "Select Data" : {
+
+    },
+    "Selected data can be used as anonymised proofs" : {
 
     },
     "Selections not matched. please try again" : {
@@ -140,6 +286,12 @@
 
     },
     "Skip" : {
+
+    },
+    "Sorry, there was a problem reading the passport. Please try again" : {
+
+    },
+    "Start" : {
 
     },
     "Step %lld/%lld" : {
@@ -167,6 +319,9 @@
     "Try Again" : {
 
     },
+    "Use proofs across the ecosystem" : {
+
+    },
     "Use them" : {
 
     },
@@ -186,6 +341,12 @@
 
     },
     "Word #%lld" : {
+
+    },
+    "You'll need a biometric document" : {
+
+    },
+    "Your passport proof is ready" : {
 
     }
   },

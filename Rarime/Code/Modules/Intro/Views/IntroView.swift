@@ -15,7 +15,7 @@ struct IntroView: View {
     @EnvironmentObject var appViewModel: AppView.ViewModel
     @State private var currentStep = IntroStep.welcome.rawValue
     @State private var showSheet = false
-    @State private var path = [IdentityRoute]()
+    @State private var path: [IdentityRoute] = []
 
     var isLastStep: Bool {
         currentStep == IntroStep.allCases.count - 1
