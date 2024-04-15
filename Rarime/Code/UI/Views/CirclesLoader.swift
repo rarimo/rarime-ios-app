@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CirclesLoaderView: View {
+struct CirclesLoader: View {
     var size: CGFloat = 4
     var fillColor: Color = .warningDark
 
@@ -35,7 +35,7 @@ struct CirclesLoaderView: View {
 
 #Preview {
     VStack(spacing: 24) {
-        CirclesLoaderView()
-        CirclesLoaderView(size: 8, fillColor: .errorDark)
+        CirclesLoader()
+        CirclesLoader(size: 8, fillColor: .errorDark)
     }
 }

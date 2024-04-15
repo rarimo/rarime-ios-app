@@ -38,13 +38,8 @@ struct PassportIntroView: View {
             Spacer()
             HorizontalDivider()
                 .padding(.horizontal, -20)
-            Button(action: onStart) {
-                Text("Let's Start")
-                    .buttonLarge()
-                    .frame(maxWidth: .infinity)
-            }
-            .controlSize(.large)
-            .buttonStyle(PrimaryButtonStyle())
+            AppButton(text: "Let's Start", action: onStart)
+                .controlSize(.large)
         }
         .padding(.top, 40)
     }

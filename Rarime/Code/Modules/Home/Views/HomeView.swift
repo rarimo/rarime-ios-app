@@ -25,43 +25,40 @@ struct HomeView: View {
                         }.foregroundStyle(.textPrimary)
                     }
                     .padding(.top, 16)
-                    CardContainerView {
+                    CardContainer {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Dashboard").subtitle2().foregroundStyle(.textPrimary)
                             Text("Overview of your account").body3().foregroundStyle(.textSecondary)
                         }
                     }
-                    CardContainerView {
+                    CardContainer {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Wallet").subtitle2().foregroundStyle(.textPrimary)
                             Text("Manage your assets").body3().foregroundStyle(.textSecondary)
                         }
                     }
-                    CardContainerView {
+                    CardContainer {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Rewards").subtitle2().foregroundStyle(.textPrimary)
                             Text("Participate and get rewarded").body3().foregroundStyle(.textSecondary)
                         }
                     }
-                    CardContainerView {
+                    CardContainer {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Credentials").subtitle2().foregroundStyle(.textPrimary)
                             Text("Store your documents securely").body3().foregroundStyle(.textSecondary)
                         }
                     }
-                    CardContainerView {
+                    CardContainer {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Settings").subtitle2().foregroundStyle(.textPrimary)
                             Text("Manage your account settings").body3().foregroundStyle(.textSecondary)
                         }
                     }
-                    Button {
+                    AppButton(text: "Open sheet") {
                         currentSheet = .help
                         FeedbackGenerator.shared.impact(.light)
-                    } label: {
-                        Text("Open sheet").buttonMedium().frame(maxWidth: .infinity)
                     }
-                    .buttonStyle(PrimaryButtonStyle())
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 48)

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CardContainerView<Content: View>: View {
+struct CardContainer<Content: View>: View {
     var content: () -> Content
 
     var body: some View {
@@ -21,7 +21,7 @@ struct CardContainerView<Content: View>: View {
 
 #Preview {
     VStack {
-        CardContainerView {
+        CardContainer {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Wallet").subtitle2()
                 Text("Manage your assets").body3()

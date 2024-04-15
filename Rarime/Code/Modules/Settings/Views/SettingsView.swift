@@ -13,10 +13,9 @@ struct SettingsView: View {
     var body: some View {
         VStack(spacing: 24) {
             Text("Settings").subtitle2()
-            Button(action: { appViewModel.reset() }) {
-                Text("Back to Intro").buttonMedium().frame(maxWidth: .infinity)
+            AppButton(text: "Back to Intro") {
+                appViewModel.reset()
             }
-            .buttonStyle(PrimaryButtonStyle())
         }
         .padding(.horizontal, 20)
     }

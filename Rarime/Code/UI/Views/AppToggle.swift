@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ToggleView: View {
+struct AppToggle: View {
     @Binding var isOn: Bool
     var onChanged: ((Bool) -> Void)?
 
@@ -48,7 +48,7 @@ private struct PreviewView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            ToggleView(isOn: $isOn)
+            AppToggle(isOn: $isOn)
         }
     }
 }

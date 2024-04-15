@@ -34,23 +34,19 @@ struct NewIdentityView: View {
             title: "New recovery phrase",
             onBack: onBack,
             nextButton: {
-                Button(action: onNext) {
-                    HStack(spacing: 8) {
-                        Text("Continue").buttonLarge()
-                        Image(Icons.arrowRight).iconSmall()
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-                .controlSize(.large)
-                .buttonStyle(PrimaryButtonStyle())
+                AppButton(
+                    text: "Continue",
+                    rightIcon: Icons.arrowRight,
+                    action: onNext
+                ).controlSize(.large)
             }
         ) {
-            CardContainerView {
+            CardContainer {
                 VStack(spacing: 20) {
                     wordsGrid
                     copyButton
                     HorizontalDivider()
-                    InfoAlertView(text: "Don’t share your recovery phrase with anyone") {}
+                    InfoAlert(text: "Don’t share your recovery phrase with anyone") {}
                 }
             }
         }

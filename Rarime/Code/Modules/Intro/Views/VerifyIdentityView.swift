@@ -25,7 +25,7 @@ struct VerifyIdentityView: View {
             onBack: onBack,
             nextButton: { continueButton }
         ) {
-            CardContainerView {
+            CardContainer {
                 VStack(spacing: 24) {
                     WordSelectorView(
                         wordNumber: 2,
@@ -53,23 +53,16 @@ struct VerifyIdentityView: View {
     }
 
     var continueButton: some View {
-        Button(action: {
+        AppButton(text: "Next", rightIcon: Icons.arrowRight) {
             if verifyWords() {
                 onNext()
             } else {
                 isErrorSheetPresented = true
                 FeedbackGenerator.shared.notify(.error)
             }
-        }) {
-            HStack(spacing: 8) {
-                Text("Next").buttonLarge()
-                Image(Icons.arrowRight).iconSmall()
-            }
-            .frame(maxWidth: .infinity)
         }
         .disabled(selectedWords.contains(""))
         .controlSize(.large)
-        .buttonStyle(PrimaryButtonStyle())
     }
 }
 
@@ -142,13 +135,9 @@ private struct IncorrectSelectionView: View {
             HorizontalDivider()
                 .padding(.top, 16)
                 .padding(.horizontal, -20)
-            Button(action: onTryAgain) {
-                Text("Try Again")
-                    .buttonLarge()
-                    .frame(maxWidth: .infinity)
-            }
-            .controlSize(.large)
-            .buttonStyle(PrimaryButtonStyle())
+
+            AppButton(text: "Try Again", action: onTryAgain)
+                .controlSize(.large)
         }
     }
 }
