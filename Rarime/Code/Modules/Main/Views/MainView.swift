@@ -16,7 +16,7 @@ struct MainView: View {
             ZStack(alignment: .bottom) {
                 VStack {
                     TabView(selection: $selectedTab) {
-                        HomeView().tag(MainTabs.home)
+                        HomeView(onBalanceTap: { selectedTab = .wallet }).tag(MainTabs.home)
                         WalletView().tag(MainTabs.wallet)
                         RewardsView().tag(MainTabs.rewards)
                         CredentialsView().tag(MainTabs.credentials)

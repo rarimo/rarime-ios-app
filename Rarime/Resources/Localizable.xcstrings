@@ -11,6 +11,9 @@
         }
       }
     },
+    "🇺🇦" : {
+
+    },
     "🎁 You will claim %@ %lld RMO" : {
       "localizations" : {
         "en" : {
@@ -20,6 +23,9 @@
           }
         }
       }
+    },
+    "0" : {
+
     },
     "Additional Data" : {
 
@@ -40,6 +46,18 @@
 
     },
     "Back to Rewards" : {
+
+    },
+    "Balance: RMO" : {
+
+    },
+    "Beta launch" : {
+
+    },
+    "Beta launch is focused on distributing tokens to Ukrainian identity holders" : {
+
+    },
+    "Button" : {
 
     },
     "Close" : {
@@ -73,9 +91,6 @@
 
     },
     "Credentials" : {
-
-    },
-    "Dashboard" : {
 
     },
     "Date of birth" : {
@@ -162,19 +177,22 @@
     "Issuing authority" : {
 
     },
+    "Join a waitlist" : {
+
+    },
     "Last Name" : {
 
     },
     "Let's Start" : {
 
     },
+    "Let’s Start" : {
+
+    },
     "Login and access special parts of the web" : {
 
     },
     "Male" : {
-
-    },
-    "Manage your account settings" : {
 
     },
     "Manage your assets" : {
@@ -201,16 +219,10 @@
     "NFC Reader" : {
 
     },
-    "Open sheet" : {
-
-    },
     "Open wallet" : {
 
     },
-    "Overview of your account" : {
-
-    },
-    "Participate and get rewarded" : {
+    "Other passport holders" : {
 
     },
     "Passcodes do not match" : {
@@ -243,7 +255,19 @@
     "Plug your identity" : {
 
     },
+    "Primary" : {
+
+    },
+    "Primary Medium" : {
+
+    },
+    "Primary Small" : {
+
+    },
     "Processing" : {
+
+    },
+    "Programable Airdrop" : {
 
     },
     "Reading Passport data" : {
@@ -264,6 +288,9 @@
     "Scan your Passport" : {
 
     },
+    "Secondary" : {
+
+    },
     "Select All" : {
 
     },
@@ -280,9 +307,6 @@
 
     },
     "Settings" : {
-
-    },
-    "Sheet: %@" : {
 
     },
     "Skip" : {
@@ -304,7 +328,7 @@
         }
       }
     },
-    "Store your documents securely" : {
+    "Tertiary" : {
 
     },
     "This is a warning message" : {
@@ -335,9 +359,6 @@
 
     },
     "Welcome" : {
-
-    },
-    "Welcome back!" : {
 
     },
     "Word #%lld" : {

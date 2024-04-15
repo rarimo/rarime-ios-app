@@ -24,7 +24,6 @@
 		563529F12BB0736A0027C910 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529F02BB0736A0027C910 /* TabBarView.swift */; };
 		563529F42BB0768C0027C910 /* MainTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529F32BB0768C0027C910 /* MainTabs.swift */; };
 		563529F62BB077AB0027C910 /* CardContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529F52BB077AB0027C910 /* CardContainer.swift */; };
-		563529F82BB082A00027C910 /* SheetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529F72BB082A00027C910 /* SheetType.swift */; };
 		56474AD62BB9860E0017AA25 /* FaceIdAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */; };
 		56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */; };
 		56474ADA2BB9ED6E0017AA25 /* AnyTransition+Backslide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */; };
@@ -97,7 +96,6 @@
 		563529F02BB0736A0027C910 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		563529F32BB0768C0027C910 /* MainTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabs.swift; sourceTree = "<group>"; };
 		563529F52BB077AB0027C910 /* CardContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainer.swift; sourceTree = "<group>"; };
-		563529F72BB082A00027C910 /* SheetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetType.swift; sourceTree = "<group>"; };
 		56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIdAuth.swift; sourceTree = "<group>"; };
 		56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
 		56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+Backslide.swift"; sourceTree = "<group>"; };
@@ -174,7 +172,6 @@
 				561C3C382BADE64B00FBB3B9 /* Fonts.swift */,
 				561C3C272BADA8A600FBB3B9 /* Icons.swift */,
 				56A6C7552BBC194800992562 /* Animations.swift */,
-				563529F72BB082A00027C910 /* SheetType.swift */,
 				56933DFE2BBBFDA30068C894 /* ProcessingStatus.swift */,
 			);
 			path = Enums;
@@ -707,7 +704,6 @@
 				563529F42BB0768C0027C910 /* MainTabs.swift in Sources */,
 				568B4FE52BB70CAA001C9C74 /* IntroStep.swift in Sources */,
 				CE9E82E92BA89DBE00AAF885 /* Config.swift in Sources */,
-				563529F82BB082A00027C910 /* SheetType.swift in Sources */,
 				563529E92BB072B80027C910 /* HomeView.swift in Sources */,
 				CE9E82B62BA881F400AAF885 /* RarimeApp.swift in Sources */,
 				56933E052BBC00D60068C894 /* RewardChipView.swift in Sources */,

@@ -8,70 +8,98 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var currentSheet: SheetType?
+    let onBalanceTap: () -> Void
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: 16) {
-                    HStack {
-                        Text("Welcome back!").h5().foregroundStyle(.textPrimary)
-                        Spacer()
-                        Button {
-                            currentSheet = .notifications
-                            FeedbackGenerator.shared.impact(.light)
-                        } label: {
-                            Image(Icons.bellFill).iconMedium()
-                        }.foregroundStyle(.textPrimary)
-                    }
-                    .padding(.top, 16)
-                    CardContainer {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Dashboard").subtitle2().foregroundStyle(.textPrimary)
-                            Text("Overview of your account").body3().foregroundStyle(.textSecondary)
+        VStack(alignment: .leading, spacing: 32) {
+            VStack(spacing: 8) {
+                HStack {
+                    Button(action: onBalanceTap) {
+                        HStack(spacing: 4) {
+                            Text("Balance: RMO").body3()
+                            Image(Icons.caretRight).iconSmall()
                         }
                     }
-                    CardContainer {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Wallet").subtitle2().foregroundStyle(.textPrimary)
-                            Text("Manage your assets").body3().foregroundStyle(.textSecondary)
-                        }
-                    }
-                    CardContainer {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Rewards").subtitle2().foregroundStyle(.textPrimary)
-                            Text("Participate and get rewarded").body3().foregroundStyle(.textSecondary)
-                        }
-                    }
-                    CardContainer {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Credentials").subtitle2().foregroundStyle(.textPrimary)
-                            Text("Store your documents securely").body3().foregroundStyle(.textSecondary)
-                        }
-                    }
-                    CardContainer {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Settings").subtitle2().foregroundStyle(.textPrimary)
-                            Text("Manage your account settings").body3().foregroundStyle(.textSecondary)
-                        }
-                    }
-                    AppButton(text: "Open sheet") {
-                        currentSheet = .help
-                        FeedbackGenerator.shared.impact(.light)
+                    .foregroundStyle(.textSecondary)
+                    Spacer()
+                    Button(action: {}) {
+                        Image(Icons.qrCode).iconMedium()
                     }
                 }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 48)
+
+                HStack {
+                    Text("0").h4().foregroundStyle(.textPrimary)
+                    Spacer()
+                    ZStack {
+                        Text("Beta launch")
+                            .body3()
+                            .foregroundStyle(.warningDark)
+                    }
+                    .padding(.vertical, 4)
+                    .padding(.horizontal, 12)
+                    .background(.warningLighter)
+                    .clipShape(Capsule())
+                }
             }
-            .padding(.top, 1)
-            .background(.backgroundPrimary)
-            .sheet(item: $currentSheet, content: {
-                Text("Sheet: \($0.id)")
-            })
+            .padding(.horizontal, 8)
+
+            VStack(spacing: 24) {
+                CardContainer {
+                    VStack(spacing: 20) {
+                        ZStack {
+                            Text("🇺🇦").h4()
+                        }
+                        .frame(width: 72, height: 72)
+                        .background(.componentPrimary)
+                        .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                        VStack(spacing: 8) {
+                            Text("Programable Airdrop")
+                                .h6()
+                                .foregroundStyle(.textPrimary)
+                            Text("Beta launch is focused on distributing tokens to Ukrainian identity holders")
+                                .body2()
+                                .multilineTextAlignment(.center)
+                                .foregroundStyle(.textSecondary)
+                        }
+                        HorizontalDivider()
+                        AppButton(text: "Let’s Start", rightIcon: Icons.arrowRight) {}
+                            .controlSize(.large)
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+                Button(action: {}) {
+                    CardContainer {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Other passport holders")
+                                    .subtitle3()
+                                    .foregroundStyle(.textPrimary)
+                                Text("Join a waitlist")
+                                    .body3()
+                                    .foregroundStyle(.textSecondary)
+                            }
+                            Spacer()
+                            ZStack {
+                                Image(Icons.caretRight)
+                                    .iconSmall()
+                            }
+                            .padding(4)
+                            .background(.primaryMain)
+                            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                            .foregroundStyle(.textPrimary)
+                        }
+                    }
+                }
+            }
+            Spacer()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 32)
+        .background(.backgroundPrimary)
     }
 }
 
 #Preview {
-    HomeView()
+    HomeView(onBalanceTap: {})
 }
