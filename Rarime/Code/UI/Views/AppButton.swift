@@ -117,16 +117,16 @@ struct AppButton: View {
 
     var label: some View {
         HStack(spacing: 8) {
-            if let iconLeft = leftIcon {
-                Image(iconLeft).square(iconSize)
+            if let leftIcon {
+                Image(leftIcon).square(iconSize)
             }
             switch controlSize {
             case .small: Text(text).buttonSmall()
             case .large: Text(text).buttonLarge()
             default: Text(text).buttonMedium()
             }
-            if let iconRight = rightIcon {
-                Image(iconRight).square(iconSize)
+            if let rightIcon {
+                Image(rightIcon).square(iconSize)
             }
         }
     }
