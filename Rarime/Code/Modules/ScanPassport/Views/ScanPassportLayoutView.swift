@@ -52,8 +52,8 @@ struct ScanPassportLayoutView<Content: View>: View {
 #Preview {
     ScanPassportLayoutView(
         step: 1,
-        title: LocalizedStringResource("Scan your Passport"),
-        text: LocalizedStringResource("Passport data is stored only on this device"),
+        title: LocalizedStringResource("Scan your Passport", table: "preview"),
+        text: LocalizedStringResource("Passport data is stored only on this device", table: "preview"),
         onClose: {}
     ) {
         Rectangle()

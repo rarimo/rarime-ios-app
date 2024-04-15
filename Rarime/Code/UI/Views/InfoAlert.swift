@@ -28,8 +28,8 @@ struct InfoAlert<Content: View>: View {
 
 #Preview {
     VStack(spacing: 16) {
-        InfoAlert(text: LocalizedStringResource("This is a warning message")) {}
-        InfoAlert(text: LocalizedStringResource("This is a warning message with an action button on the right")) {
+        InfoAlert(text: LocalizedStringResource("This is a warning message", table: "preview")) {}
+        InfoAlert(text: LocalizedStringResource("This is a warning message with an action button on the right", table: "preview")) {
             Button(action: {}) {
                 Image(Icons.caretRight).iconMedium()
             }

@@ -48,9 +48,6 @@
     "Beta launch" : {
 
     },
-    "Button" : {
-
-    },
     "Close" : {
 
     },
@@ -246,15 +243,6 @@
     "Please Wait..." : {
 
     },
-    "Primary" : {
-
-    },
-    "Primary Medium" : {
-
-    },
-    "Primary Small" : {
-
-    },
     "Processing" : {
 
     },
@@ -277,9 +265,6 @@
 
     },
     "Scan your Passport" : {
-
-    },
-    "Secondary" : {
 
     },
     "Select All" : {
@@ -320,15 +305,6 @@
       }
     },
     "Store your documents securely" : {
-
-    },
-    "Tertiary" : {
-
-    },
-    "This is a warning message" : {
-
-    },
-    "This is a warning message with an action button on the right" : {
 
     },
     "This is an app where your digital identity lives and enables you to connect with rest of the web in a fully private mode" : {

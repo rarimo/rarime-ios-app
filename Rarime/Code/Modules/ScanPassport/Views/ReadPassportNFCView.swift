@@ -17,8 +17,8 @@ struct ReadPassportNFCView: View {
     var body: some View {
         ScanPassportLayoutView(
             step: 2,
-            title: LocalizedStringResource("NFC Reader"),
-            text: LocalizedStringResource("Reading Passport data"),
+            title: "NFC Reader",
+            text: "Reading Passport data",
             onClose: onClose
         ) {
             Image("PassportNFC").square(280)
