@@ -5,52 +5,51 @@ struct PassportIntroView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            VStack(spacing: 80) {
-                Image("Passport")
-                    .resizable()
-                    .frame(width: 250, height: 152)
-                VStack(alignment: .leading, spacing: 24) {
-                    VStack(spacing: 12) {
-                        Text("Passport")
-                            .h4()
-                            .foregroundStyle(.textPrimary)
-                        Text("You'll need a biometric document")
-                            .body3()
-                            .foregroundStyle(.textSecondary)
-                    }
-                    .frame(maxWidth: .infinity)
-                    HorizontalDivider()
-                    VStack(alignment: .leading, spacing: 12) {
-                        makeListItem("1.", "Personal data never leaves the device")
-                        makeListItem("2.", "Convert your data into ZK proofs")
-                        makeListItem("3.", "Use proofs across the ecosystem")
-                        makeListItem("🎁", "Get rewarded with 50 RRMO")
-                    }
-                }
+            VStack(alignment: .leading, spacing: 32) {
+                header
+                HorizontalDivider()
+                programInfo
             }
             Spacer()
-            HorizontalDivider()
-                .padding(.horizontal, -20)
-            AppButton(text: "Let's Start", action: onStart)
+            AppButton(text: "Join the waitlist", rightIcon: Icons.arrowRight, action: onStart)
                 .controlSize(.large)
         }
         .padding(.top, 40)
     }
 
-    private func makeListItem(_ number: String, _ text: LocalizedStringResource) -> some View {
-        HStack(spacing: 12) {
-            Text(number)
-                .subtitle4()
-                .frame(width: 18)
-            Text(text).body3()
+    private var header: some View {
+        VStack(spacing: 16) {
+            Text("🌐")
+                .h4()
+                .frame(width: 72, height: 72)
+                .background(.componentPrimary)
+                .clipShape(Circle())
+            Text("Other passport holders")
+                .h6()
+                .foregroundStyle(.textPrimary)
+            Text("short description text here")
+                .body3()
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: 300)
+                .foregroundStyle(.textSecondary)
         }
-        .foregroundStyle(.textPrimary)
+        .frame(maxWidth: /*@START_MENU_TOKEN@*/ .infinity/*@END_MENU_TOKEN@*/)
+    }
+
+    private var programInfo: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors ")
+                .body3()
+                .foregroundStyle(.textPrimary)
+            Text("Full functional avaiable on: \(Text("July").fontWeight(.semibold))")
+                .body3()
+                .foregroundStyle(.warningMain)
+        }
     }
 }
 
 #Preview {
-    ZStack {
-        PassportIntroView(onStart: {})
-    }
-    .padding(20)
+    PassportIntroView(onStart: {})
+        .padding(20)
 }

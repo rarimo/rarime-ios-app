@@ -14,6 +14,9 @@
     "🇺🇦" : {
 
     },
+    "🌐" : {
+
+    },
     "🎁 You will claim %@ %lld RMO" : {
       "localizations" : {
         "en" : {
@@ -70,9 +73,6 @@
 
     },
     "Convert existing identity documents into anonymous credentials" : {
-
-    },
-    "Convert your data into ZK proofs" : {
 
     },
     "Copied" : {
@@ -165,9 +165,6 @@
     "Get rewarded" : {
 
     },
-    "Get rewarded with 50 RRMO" : {
-
-    },
     "Get rewarded with RMO tokens" : {
 
     },
@@ -192,16 +189,19 @@
     "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it h" : {
 
     },
+    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors " : {
+
+    },
     "Join a waitlist" : {
+
+    },
+    "Join the waitlist" : {
 
     },
     "July" : {
 
     },
     "Last Name" : {
-
-    },
-    "Let's Start" : {
 
     },
     "Let’s Start" : {
@@ -244,9 +244,6 @@
 
     },
     "Passcodes do not match" : {
-
-    },
-    "Passport" : {
 
     },
     "Passport data is stored only on this device" : {
@@ -327,6 +324,9 @@
     "Settings" : {
 
     },
+    "short description text here" : {
+
+    },
     "Skip" : {
 
     },
@@ -361,9 +361,6 @@
     "Try Again" : {
 
     },
-    "Use proofs across the ecosystem" : {
-
-    },
     "Use them" : {
 
     },
@@ -383,9 +380,6 @@
 
     },
     "Word #%lld" : {
-
-    },
-    "You'll need a biometric document" : {
 
     },
     "Your passport proof is ready" : {
