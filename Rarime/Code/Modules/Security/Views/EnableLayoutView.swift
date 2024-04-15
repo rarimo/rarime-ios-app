@@ -39,20 +39,14 @@ struct EnableLayoutView: View {
             VStack(spacing: 16) {
                 HorizontalDivider()
                 VStack(spacing: 8) {
-                    Button(action: enableAction) {
-                        Text("Enable")
-                            .buttonLarge()
-                            .frame(maxWidth: .infinity)
-                    }
+                    AppButton(text: "Enable", action: enableAction)
+                        .controlSize(.large)
+                    AppButton(
+                        variant: .tertiary,
+                        text: "Maybe Later",
+                        action: skipAction
+                    )
                     .controlSize(.large)
-                    .buttonStyle(PrimaryButtonStyle())
-                    Button(action: skipAction) {
-                        Text("Maybe Later")
-                            .buttonLarge()
-                            .frame(maxWidth: .infinity)
-                    }
-                    .controlSize(.large)
-                    .buttonStyle(TertiaryButtonStyle())
                 }
                 .padding(.horizontal, 20)
             }

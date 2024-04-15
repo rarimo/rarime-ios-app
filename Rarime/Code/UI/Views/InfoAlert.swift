@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InfoAlertView<Content: View>: View {
+struct InfoAlert<Content: View>: View {
     var text: LocalizedStringResource
     @ViewBuilder var actionButton: () -> Content
 
@@ -28,8 +28,8 @@ struct InfoAlertView<Content: View>: View {
 
 #Preview {
     VStack(spacing: 16) {
-        InfoAlertView(text: LocalizedStringResource("This is a warning message")) {}
-        InfoAlertView(text: LocalizedStringResource("This is a warning message with an action button on the right")) {
+        InfoAlert(text: LocalizedStringResource("This is a warning message")) {}
+        InfoAlert(text: LocalizedStringResource("This is a warning message with an action button on the right")) {
             Button(action: {}) {
                 Image(Icons.caretRight).iconMedium()
             }

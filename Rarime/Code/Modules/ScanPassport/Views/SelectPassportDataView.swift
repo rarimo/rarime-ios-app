@@ -34,26 +34,24 @@ struct SelectPassportDataView: View {
             onClose: onClose
         ) {
             ScrollView {
-                VStack(spacing: 12) {
-                    generalDataSection
-                    mustDataSection
-                    additionalDataSection
+                if passportViewModel.passport != nil {
+                    VStack(spacing: 12) {
+                        generalDataSection
+                        mustDataSection
+                        additionalDataSection
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 16)
                 }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 16)
             }
             VStack(spacing: 12) {
                 Text(
                     "🎁 You will claim \(Text(String("\(passportViewModel.selectedReward) /")).fontWeight(.semibold)) \(passportViewModel.totalReward) RMO")
                     .body3()
                     .foregroundStyle(.textSecondary)
-                Button(action: onNext) {
-                    Text("Continue")
-                        .buttonLarge()
-                        .frame(maxWidth: .infinity)
-                }
-                .controlSize(.large)
-                .buttonStyle(PrimaryButtonStyle())
+
+                AppButton(text: "Continue", action: onNext)
+                    .controlSize(.large)
             }
             .padding(.top, 12)
             .padding(.bottom, 24)
@@ -63,7 +61,7 @@ struct SelectPassportDataView: View {
     }
 
     private var generalDataSection: some View {
-        CardContainerView {
+        CardContainer {
             HStack {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(passport.fullName)
@@ -94,7 +92,7 @@ struct SelectPassportDataView: View {
     }
 
     private var mustDataSection: some View {
-        CardContainerView {
+        CardContainer {
             VStack(spacing: 20) {
                 HStack {
                     Text("Must data")
@@ -118,7 +116,7 @@ struct SelectPassportDataView: View {
     }
 
     private var additionalDataSection: some View {
-        CardContainerView {
+        CardContainer {
             VStack(spacing: 20) {
                 HStack {
                     Text("Additional Data")
@@ -128,7 +126,7 @@ struct SelectPassportDataView: View {
                 }
                 VStack(spacing: 16) {
                     HStack(spacing: 16) {
-                        ToggleView(isOn: Binding<Bool>(
+                        AppToggle(isOn: Binding<Bool>(
                             get: { isAllOptionalItemsSelected },
                             set: { newValue in
                                 for item in passportViewModel.optionalDataItems {
@@ -163,7 +161,7 @@ private struct DataItemSelector: View {
 
     var body: some View {
         HStack(spacing: 16) {
-            ToggleView(isOn: Binding<Bool>(
+            AppToggle(isOn: Binding<Bool>(
                 get: { item.isSelected },
                 set: { newValue in onSelect(newValue) }
             ))

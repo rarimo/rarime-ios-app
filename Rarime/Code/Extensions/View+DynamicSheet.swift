@@ -81,13 +81,11 @@ extension View {
                 Text(String("Lorem ipsum dolor sit amet, consectetur adipiscing elit."))
                     .body3()
                     .foregroundStyle(.textSecondary)
-                Button(action: { print("Button pressed") }) {
-                    Text(String("Button"))
-                        .buttonMedium()
-                        .frame(maxWidth: .infinity)
-                }
+                AppButton(
+                    text: LocalizedStringResource("Button"),
+                    action: { print("Button pressed") }
+                )
                 .padding(.top, 16)
-                .buttonStyle(PrimaryButtonStyle())
             }
         }
 }

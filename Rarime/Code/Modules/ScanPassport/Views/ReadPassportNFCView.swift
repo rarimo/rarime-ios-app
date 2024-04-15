@@ -31,26 +31,21 @@ struct ReadPassportNFCView: View {
             Spacer()
             VStack(spacing: 16) {
                 HorizontalDivider()
-                Button(action: {
+                AppButton(text: "Start") {
                     NFCScanner.scanPassport(
                         mrzViewModel.mrzKey,
                         onCompletion: { result in
                             switch result {
                             case .success(let passport):
                                 self.onNext(passport)
-                            case .failure(let error):
+                            case .failure:
                                 self.onBack()
                             }
                         }
                     )
-                }) {
-                    Text("Start")
-                        .buttonLarge()
-                        .frame(maxWidth: .infinity)
                 }
-                .padding(.horizontal, 20)
                 .controlSize(.large)
-                .buttonStyle(PrimaryButtonStyle())
+                .padding(.horizontal, 20)
             }
             .padding(.bottom, 24)
         }

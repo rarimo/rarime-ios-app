@@ -84,22 +84,15 @@ struct IntroView: View {
     var introActions: some View {
         HStack {
             if isLastStep {
-                Button(action: { showSheet.toggle() }) {
-                    Text("Get Started")
-                        .buttonMedium()
-                        .frame(maxWidth: .infinity)
+                AppButton(text: "Get Started") {
+                    showSheet.toggle()
                 }
-                .buttonStyle(PrimaryButtonStyle())
             } else {
                 StepIndicator(steps: IntroStep.allCases.count, currentStep: currentStep)
                 Spacer()
-                Button(action: { currentStep += 1 }) {
-                    HStack(spacing: 8) {
-                        Text("Next").buttonMedium()
-                        Image(Icons.arrowRight).iconMedium()
-                    }
+                AppButton(text: "Next", rightIcon: Icons.arrowRight, fullWidth: false) {
+                    currentStep += 1
                 }
-                .buttonStyle(PrimaryButtonStyle())
             }
         }
         .dynamicSheet(isPresented: $showSheet) {

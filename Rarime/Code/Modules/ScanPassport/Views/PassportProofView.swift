@@ -44,16 +44,11 @@ struct PassportProofView: View {
     private var footerView: some View {
         VStack(spacing: 16) {
             HorizontalDivider()
-            Button(action: onFinish) {
-                Text("Back to Rewards")
-                    .buttonLarge()
-                    .frame(maxWidth: .infinity)
-            }
-            .disabled(passportViewModel.generalProcessingStatus == .processing)
-            .controlSize(.large)
-            .buttonStyle(PrimaryButtonStyle())
-            .padding(.horizontal, 20)
-            .padding(.bottom, 24)
+            AppButton(text: "Back to Rewards", action: onFinish)
+                .disabled(passportViewModel.generalProcessingStatus == .processing)
+                .controlSize(.large)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 24)
         }
         .opacity(passportViewModel.generalProcessingStatus == .processing ? 0 : 1)
     }
@@ -103,7 +98,7 @@ private struct GeneralStatusView: View {
             ZStack {
                 ZStack {
                     if status == .processing {
-                        CirclesLoaderView()
+                        CirclesLoader()
                     } else {
                         Image(status.icon ?? Icons.dotsThreeOutline)
                             .square(24)

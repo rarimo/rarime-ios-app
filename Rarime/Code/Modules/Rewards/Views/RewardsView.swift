@@ -31,10 +31,9 @@ struct RewardsView: View {
     var rewardsContent: some View {
         VStack(spacing: 24) {
             Text("Rewards").subtitle2()
-            Button(action: { isPassportSheetPresented = true }) {
-                Text("Scan Passport").buttonMedium().frame(maxWidth: .infinity)
+            AppButton(text: "Scan Passport") {
+                isPassportSheetPresented = true
             }
-            .buttonStyle(PrimaryButtonStyle())
             .dynamicSheet(isPresented: $isPassportSheetPresented, fullScreen: true) {
                 PassportIntroView(onStart: {
                     isPassportSheetPresented = false
