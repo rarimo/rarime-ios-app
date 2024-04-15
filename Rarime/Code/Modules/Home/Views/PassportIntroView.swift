@@ -1,10 +1,3 @@
-//
-//  PassportSheetView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 01.04.2024.
-//
-
 import SwiftUI
 
 struct PassportIntroView: View {

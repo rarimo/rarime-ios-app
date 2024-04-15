@@ -60,6 +60,9 @@
     "Button" : {
 
     },
+    "By checking this box, you are agreeing to RariMe General Terms & Conditions, RariMe Privacy Notice  and Rarimo Airdrop Program Terms & Conditions" : {
+
+    },
     "Close" : {
 
     },
@@ -153,10 +156,19 @@
     "First Name" : {
 
     },
+    "Full functional avaiable on: %@" : {
+
+    },
+    "Full privacy via Zero Knowledge Proofs" : {
+
+    },
     "Get rewarded" : {
 
     },
     "Get rewarded with 50 RRMO" : {
+
+    },
+    "Get rewarded with RMO tokens" : {
 
     },
     "Get Started" : {
@@ -177,7 +189,13 @@
     "Issuing authority" : {
 
     },
+    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it h" : {
+
+    },
     "Join a waitlist" : {
+
+    },
+    "July" : {
 
     },
     "Last Name" : {
@@ -359,6 +377,9 @@
 
     },
     "Welcome" : {
+
+    },
+    "What is this?" : {
 
     },
     "Word #%lld" : {
