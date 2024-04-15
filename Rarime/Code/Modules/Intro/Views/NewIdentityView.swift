@@ -7,20 +7,7 @@
 
 import SwiftUI
 
-let wordlist = [
-    "domain",
-    "explore",
-    "lion",
-    "simple",
-    "apple",
-    "club",
-    "similar",
-    "music",
-    "party",
-    "engage",
-    "car",
-    "feature",
-]
+let privateKey = "d4f1dc5332e5f0263746a31d3563e42ad8bef24a8989d8b0a5ad71f8d5de28a6"
 
 struct NewIdentityView: View {
     let onBack: () -> Void
@@ -31,7 +18,7 @@ struct NewIdentityView: View {
     var body: some View {
         IdentityStepLayoutView(
             step: 1,
-            title: "New recovery phrase",
+            title: "Your Private Key",
             onBack: onBack,
             nextButton: {
                 AppButton(
@@ -43,33 +30,20 @@ struct NewIdentityView: View {
         ) {
             CardContainer {
                 VStack(spacing: 20) {
-                    wordsGrid
+                    ZStack {
+                        Text(privateKey)
+                            .body3()
+                            .foregroundStyle(.textPrimary)
+                            .multilineTextAlignment(.leading)
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 14)
+                    .background(.componentPrimary)
+                    .cornerRadius(8)
                     copyButton
                     HorizontalDivider()
-                    InfoAlert(text: "Don’t share your recovery phrase with anyone") {}
+                    InfoAlert(text: "Please store the private key safely and do not share it with anyone. If you lose this key, you will not be able to recover the account and will lose access forever.") {}
                 }
-            }
-        }
-    }
-
-    var wordsGrid: some View {
-        LazyVGrid(
-            columns: [
-                GridItem(.flexible(), spacing: 20),
-                GridItem(.flexible()),
-            ],
-            spacing: 20
-        ) {
-            ForEach(Array(wordlist.enumerated()), id: \.element) { index, word in
-                HStack {
-                    Text(String("\(index + 1).")).subtitle5().foregroundColor(.textPrimary)
-                    Text(word).body3().foregroundColor(.textPrimary)
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-                .background(.componentPrimary)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
             }
         }
     }
@@ -78,7 +52,7 @@ struct NewIdentityView: View {
         Button(action: {
             if isCopied { return }
 
-            UIPasteboard.general.string = wordlist.joined(separator: " ")
+            UIPasteboard.general.string = privateKey
             isCopied = true
             FeedbackGenerator.shared.impact(.medium)
 

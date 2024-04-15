@@ -12,9 +12,18 @@ struct IntroStepView: View {
 
     var body: some View {
         VStack {
-            VStack(alignment: .leading, spacing: 70) {
+            VStack(alignment: .leading, spacing: 24) {
                 Image(step.image).square(390)
                 VStack(alignment: .leading, spacing: 16) {
+                    ZStack {
+                        Text("Beta launch")
+                            .body3()
+                            .foregroundStyle(.warningDark)
+                    }
+                    .padding(.vertical, 4)
+                    .padding(.horizontal, 12)
+                    .background(.warningLight)
+                    .clipShape(Capsule())
                     Text(step.title).h4().foregroundStyle(.textPrimary)
                     Text(step.text).body2()
                         .foregroundStyle(.textSecondary)
@@ -27,5 +36,5 @@ struct IntroStepView: View {
 }
 
 #Preview {
-    IntroStepView(step: .privacy)
+    IntroStepView(step: .welcome)
 }

@@ -60,7 +60,6 @@
 		56A6C76E2BBD474200992562 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C76D2BBD474200992562 /* DateUtil.swift */; };
 		56AC03402BB06A2D00A34A00 /* Image+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */; };
 		56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3002BB723A1002CF710 /* NewIdentityView.swift */; };
-		56DAA3032BB7248A002CF710 /* VerifyIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3022BB7248A002CF710 /* VerifyIdentityView.swift */; };
 		56DAA3052BB72E35002CF710 /* InfoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3042BB72E35002CF710 /* InfoAlert.swift */; };
 		56DAA3072BB77550002CF710 /* IdentityStepLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3062BB77550002CF710 /* IdentityStepLayoutView.swift */; };
 		56DAA30B2BB8B977002CF710 /* View+DynamicSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA30A2BB8B977002CF710 /* View+DynamicSheet.swift */; };
@@ -132,7 +131,6 @@
 		56A6C76D2BBD474200992562 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Icon.swift"; sourceTree = "<group>"; };
 		56DAA3002BB723A1002CF710 /* NewIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIdentityView.swift; sourceTree = "<group>"; };
-		56DAA3022BB7248A002CF710 /* VerifyIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyIdentityView.swift; sourceTree = "<group>"; };
 		56DAA3042BB72E35002CF710 /* InfoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlert.swift; sourceTree = "<group>"; };
 		56DAA3062BB77550002CF710 /* IdentityStepLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityStepLayoutView.swift; sourceTree = "<group>"; };
 		56DAA30A2BB8B977002CF710 /* View+DynamicSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+DynamicSheet.swift"; sourceTree = "<group>"; };
@@ -312,7 +310,6 @@
 			children = (
 				568B4FCB2BB6C164001C9C74 /* IntroView.swift */,
 				56DAA3002BB723A1002CF710 /* NewIdentityView.swift */,
-				56DAA3022BB7248A002CF710 /* VerifyIdentityView.swift */,
 				56DAA3062BB77550002CF710 /* IdentityStepLayoutView.swift */,
 				568B4FE12BB70BEA001C9C74 /* GetStartedView.swift */,
 				568B4FCD2BB6C274001C9C74 /* IntroStepView.swift */,
@@ -701,7 +698,6 @@
 				56DAA30B2BB8B977002CF710 /* View+DynamicSheet.swift in Sources */,
 				56933DFF2BBBFDA30068C894 /* ProcessingStatus.swift in Sources */,
 				563529EF2BB0732C0027C910 /* CredentialsView.swift in Sources */,
-				56DAA3032BB7248A002CF710 /* VerifyIdentityView.swift in Sources */,
 				56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */,
 				56DAA3152BB8CC95002CF710 /* PasscodeFieldView.swift in Sources */,
 				563529F42BB0768C0027C910 /* MainTabs.swift in Sources */,
