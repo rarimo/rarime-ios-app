@@ -27,9 +27,6 @@ struct IdentityStepLayoutView<Content: View, NextButton: View>: View {
                             .foregroundColor(.textPrimary)
                     }
                     Spacer()
-                    Text("Step \(step)/\(totalSteps)")
-                        .body3()
-                        .foregroundColor(.textSecondary)
                 }
                 VStack(alignment: .leading, spacing: 32) {
                     Text(title)
@@ -40,7 +37,8 @@ struct IdentityStepLayoutView<Content: View, NextButton: View>: View {
                 .padding(.vertical, 24)
             }
             .frame(maxWidth: .infinity)
-            .padding(20)
+            .padding(.vertical, 20)
+            .padding(.horizontal, 12)
             Spacer()
             HStack {
                 nextButton()

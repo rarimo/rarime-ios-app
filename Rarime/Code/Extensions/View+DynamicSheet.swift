@@ -81,7 +81,7 @@ extension View {
                     .body3()
                     .foregroundStyle(.textSecondary)
                 AppButton(
-                    text: LocalizedStringResource("Button"),
+                    text: LocalizedStringResource("Button", table: "preview"),
                     action: { print("Button pressed") }
                 )
                 .padding(.top, 16)

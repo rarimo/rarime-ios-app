@@ -19,10 +19,9 @@ struct MainView: View {
                         HomeView(onBalanceTap: { selectedTab = .wallet }).tag(MainTabs.home)
                         WalletView().tag(MainTabs.wallet)
                         RewardsView().tag(MainTabs.rewards)
-                        CredentialsView().tag(MainTabs.credentials)
-                        SettingsView()
+                        ProfileView()
                             .environmentObject(appViewModel)
-                            .tag(MainTabs.settings)
+                            .tag(MainTabs.profile)
                     }
                     .onAppear {
                         // Remove tab bar background

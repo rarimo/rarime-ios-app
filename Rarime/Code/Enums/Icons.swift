@@ -8,6 +8,7 @@
 import Foundation
 
 enum Icons {
+    static let airdrop = "Airdrop"
     static let arrowCounterClockwise = "ArrowCounterClockwise"
     static let arrowDown = "ArrowDown"
     static let arrowLeft = "ArrowLeft"

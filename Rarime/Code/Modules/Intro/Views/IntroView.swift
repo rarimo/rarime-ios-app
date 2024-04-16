@@ -8,7 +8,7 @@
 import SwiftUI
 
 private enum IdentityRoute: Hashable {
-    case newIdentity, verifyIdentity, importIdentity
+    case newIdentity, importIdentity
 }
 
 struct IntroView: View {
@@ -29,11 +29,6 @@ struct IntroView: View {
                     case .newIdentity:
                         NewIdentityView(
                             onBack: { path.removeLast() },
-                            onNext: { path.append(.verifyIdentity) }
-                        )
-                    case .verifyIdentity:
-                        VerifyIdentityView(
-                            onBack: { path.removeLast() },
                             onNext: { withAnimation { appViewModel.finishIntro() } }
                         )
                     case .importIdentity:
@@ -41,7 +36,7 @@ struct IntroView: View {
                         Text("Import Identity")
                     }
                 }
-                .background(.backgroundPrimary)
+                .background(.backgroundPure)
         }
     }
 
@@ -84,8 +79,8 @@ struct IntroView: View {
     var introActions: some View {
         HStack {
             if isLastStep {
-                AppButton(text: "Get Started") {
-                    showSheet.toggle()
+                AppButton(text: "Create Account") {
+                    path.append(.newIdentity)
                 }
             } else {
                 StepIndicator(steps: IntroStep.allCases.count, currentStep: currentStep)

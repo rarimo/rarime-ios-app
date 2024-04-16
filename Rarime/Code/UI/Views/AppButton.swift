@@ -134,21 +134,21 @@ struct AppButton: View {
 
 #Preview {
     VStack {
-        AppButton(text: LocalizedStringResource("Primary"), action: {})
+        AppButton(text: LocalizedStringResource("Primary", table: "preview"), action: {})
             .controlSize(.large)
         AppButton(
-            text: LocalizedStringResource("Primary Medium"),
+            text: LocalizedStringResource("Primary Medium", table: "preview"),
             leftIcon: Icons.arrowLeft,
             rightIcon: Icons.arrowRight,
             fullWidth: false,
             action: {}
         )
-        AppButton(text: LocalizedStringResource("Primary Small"), fullWidth: false, action: {})
+        AppButton(text: LocalizedStringResource("Primary Small", table: "preview"), fullWidth: false, action: {})
             .controlSize(.small)
 
         AppButton(
             variant: .secondary,
-            text: LocalizedStringResource("Secondary"),
+            text: LocalizedStringResource("Secondary", table: "preview"),
             leftIcon: Icons.arrowLeft,
             rightIcon: Icons.arrowRight,
             action: {}
@@ -156,7 +156,7 @@ struct AppButton: View {
 
         AppButton(
             variant: .tertiary,
-            text: LocalizedStringResource("Tertiary"),
+            text: LocalizedStringResource("Tertiary", table: "preview"),
             leftIcon: Icons.arrowLeft,
             rightIcon: Icons.arrowRight,
             action: {}

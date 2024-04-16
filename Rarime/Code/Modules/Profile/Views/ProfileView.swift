@@ -1,18 +1,18 @@
 //
-//  SettingsView.swift
+//  ProfileView.swift
 //  Rarime
 //
-//  Created by Maksym Shopynskyi on 24.03.2024.
+//  Created by Maksym Shopynskyi on 15.04.2024.
 //
 
 import SwiftUI
 
-struct SettingsView: View {
+struct ProfileView: View {
     @EnvironmentObject var appViewModel: AppView.ViewModel
 
     var body: some View {
         VStack(spacing: 24) {
-            Text("Settings").subtitle2()
+            Text("Profile").subtitle2()
             AppButton(text: "Back to Intro") {
                 appViewModel.reset()
             }
@@ -22,5 +22,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+    ProfileView()
 }
