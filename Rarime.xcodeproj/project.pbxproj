@@ -71,6 +71,7 @@
 		56E2D9172BCE938F006E725D /* ActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9162BCE938F006E725D /* ActionCard.swift */; };
 		56E2D9192BCE94CA006E725D /* RarimeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9182BCE94CA006E725D /* RarimeInfoView.swift */; };
 		56E2D91B2BCEA66A006E725D /* PassportCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D91A2BCEA66A006E725D /* PassportCard.swift */; };
+		56E2D91E2BCEC90B006E725D /* HomeView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D91D2BCEC90B006E725D /* HomeView+ViewModel.swift */; };
 		56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F48BBD2BC02E82001F3AA4 /* AppButton.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
 		CE32CF522BAC981300E507B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE32CF512BAC981300E507B6 /* Lottie */; };
@@ -146,6 +147,7 @@
 		56E2D9162BCE938F006E725D /* ActionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCard.swift; sourceTree = "<group>"; };
 		56E2D9182BCE94CA006E725D /* RarimeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarimeInfoView.swift; sourceTree = "<group>"; };
 		56E2D91A2BCEA66A006E725D /* PassportCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportCard.swift; sourceTree = "<group>"; };
+		56E2D91D2BCEC90B006E725D /* HomeView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeView+ViewModel.swift"; sourceTree = "<group>"; };
 		56F48BBD2BC02E82001F3AA4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CE778B782BA9CA0A00B26485 /* AppView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppView+ViewModel.swift"; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 		563529DA2BB0714A0027C910 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				56E2D91C2BCEC8FE006E725D /* ViewModels */,
 				563529DF2BB0718E0027C910 /* Views */,
 			);
 			path = Home;
@@ -240,10 +243,10 @@
 			isa = PBXGroup;
 			children = (
 				563529E82BB072B80027C910 /* HomeView.swift */,
-				56E2D91A2BCEA66A006E725D /* PassportCard.swift */,
 				56CC01E42BCD81AA008CEBE0 /* AirdropIntroView.swift */,
 				56933DEC2BBAB0AB0068C894 /* PassportIntroView.swift */,
 				56E2D9182BCE94CA006E725D /* RarimeInfoView.swift */,
+				56E2D91A2BCEA66A006E725D /* PassportCard.swift */,
 				56E2D9142BCE7FC4006E725D /* HomeIntroLayoutView.swift */,
 			);
 			path = Views;
@@ -411,6 +414,14 @@
 				56DAA3102BB8C97D002CF710 /* EnableLayoutView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		56E2D91C2BCEC8FE006E725D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				56E2D91D2BCEC90B006E725D /* HomeView+ViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		56F48BBB2BC02DD0001F3AA4 /* UI */ = {
@@ -715,6 +726,7 @@
 				56E2D9192BCE94CA006E725D /* RarimeInfoView.swift in Sources */,
 				56CC01E52BCD81AA008CEBE0 /* AirdropIntroView.swift in Sources */,
 				56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */,
+				56E2D91E2BCEC90B006E725D /* HomeView+ViewModel.swift in Sources */,
 				56DAA3152BB8CC95002CF710 /* PasscodeFieldView.swift in Sources */,
 				563529F42BB0768C0027C910 /* MainTabs.swift in Sources */,
 				568B4FE52BB70CAA001C9C74 /* IntroStep.swift in Sources */,

@@ -7,34 +7,26 @@ private enum HomeRoute: Hashable {
 struct HomeView: View {
     let onBalanceTap: () -> Void
 
+    @State private var path: [HomeRoute] = []
+    @StateObject private var viewModel = ViewModel()
+
     @State private var isAirdropSheetPresented = false
     @State private var isPassportSheetPresented = false
     @State private var isRarimeSheetPresented = false
-
-    @State private var path: [HomeRoute] = []
-    @State private var passportCardLook = PassportCardLook.black
-    @State private var hasPassport = true
-
-    let passport = Passport(
-        firstName: "Joshua",
-        lastName: "Smith",
-        gender: "M",
-        passportImage: nil,
-        documentType: "P",
-        issuingAuthority: "USA",
-        documentNumber: "00AA00000",
-        documentExpiryDate: "900314",
-        dateOfBirth: "970314",
-        nationality: "USA"
-    )
 
     var body: some View {
         NavigationStack(path: $path) {
             content.navigationDestination(for: HomeRoute.self) { route in
                 switch route {
                 case .scanPassport:
-                    ScanPassportView(onClose: { path.removeLast() })
-                        .navigationBarBackButtonHidden()
+                    ScanPassportView(
+                        onComplete: { passport in
+                            viewModel.setPassport(passport)
+                            path.removeLast()
+                        },
+                        onClose: { path.removeLast() }
+                    )
+                    .navigationBarBackButtonHidden()
                 }
             }
         }
@@ -44,12 +36,12 @@ struct HomeView: View {
         VStack(alignment: .leading, spacing: 32) {
             header
             VStack(spacing: 24) {
-                if hasPassport {
+                if let passport = viewModel.passport {
                     PassportCard(
-                        look: passportCardLook,
+                        look: viewModel.passportCardLook,
                         passport: passport,
-                        onLookChange: { look in passportCardLook = look },
-                        onDelete: { hasPassport = false }
+                        onLookChange: { look in viewModel.setPassportCardLook(look) },
+                        onDelete: { viewModel.removePassport() }
                     )
                     rarimeCard
                 } else {

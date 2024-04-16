@@ -47,14 +47,23 @@ struct PassportCard: View {
     }
 
     private var cardContent: some View {
-        VStack(spacing: 24) {
+        return VStack(spacing: 24) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Image(Icons.user)
-                        .iconLarge()
-                        .padding(12)
-                        .background(look.foregroundColor.opacity(0.05))
-                        .clipShape(Circle())
+                    if passport.passportImage != nil {
+                        Image(uiImage: passport.passportImage!)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 56, height: 56)
+                            .background(.white)
+                            .clipShape(Circle())
+                    } else {
+                        Image(Icons.user)
+                            .iconLarge()
+                            .padding(12)
+                            .background(look.foregroundColor.opacity(0.05))
+                            .clipShape(Circle())
+                    }
                     Text(passport.fullName)
                         .h6()
                         .padding(.top, 16)
@@ -101,7 +110,11 @@ struct PassportCard: View {
                 .foregroundStyle(.textSecondary)
             HStack(spacing: 16) {
                 ForEach(PassportCardLook.allCases, id: \.self) { look in
-                    PassportLookOption(look: look, onLookChange: onLookChange)
+                    PassportLookOption(
+                        look: look,
+                        isActive: look == self.look,
+                        onLookChange: onLookChange
+                    )
                 }
             }
             HorizontalDivider()
@@ -126,6 +139,7 @@ struct PassportCard: View {
 
 private struct PassportLookOption: View {
     let look: PassportCardLook
+    let isActive: Bool
     let onLookChange: (PassportCardLook) -> Void
 
     var body: some View {
@@ -156,7 +170,7 @@ private struct PassportLookOption: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 16)
         .padding(.horizontal, 24)
-        .background(look == look ? .componentPrimary : .clear)
+        .background(isActive ? .componentPrimary : .clear)
         .cornerRadius(8)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
