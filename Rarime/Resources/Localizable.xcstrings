@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@ Years Old" : {
+
+    },
     "%@, Age: %@" : {
       "localizations" : {
         "en" : {
@@ -60,7 +63,13 @@
     "Beta launch is focused on distributing tokens to Ukrainian identity holders" : {
 
     },
+    "Black" : {
+
+    },
     "By checking this box, you are agreeing to RariMe General Terms & Conditions, RariMe Privacy Notice  and Rarimo Airdrop Program Terms & Conditions" : {
+
+    },
+    "CARD VISUAL" : {
 
     },
     "Close" : {
@@ -100,6 +109,9 @@
 
     },
     "Date of Birth" : {
+
+    },
+    "Delete Card" : {
 
     },
     "Description text here" : {
@@ -168,6 +180,9 @@
     "Get Started" : {
 
     },
+    "Green" : {
+
+    },
     "Hold your iPhone near an NFC enabled passport." : {
 
     },
@@ -198,6 +213,9 @@
     "Last Name" : {
 
     },
+    "Learn more about RariMe App" : {
+
+    },
     "Let’s Start" : {
 
     },
@@ -226,6 +244,9 @@
 
     },
     "NFC Reader" : {
+
+    },
+    "Okay" : {
 
     },
     "Open wallet" : {
@@ -270,6 +291,9 @@
     "Programable Airdrop" : {
 
     },
+    "RARIME" : {
+
+    },
     "Reading Passport data" : {
 
     },
@@ -280,9 +304,6 @@
 
     },
     "Rewards" : {
-
-    },
-    "Scan Passport" : {
 
     },
     "Scan your Passport" : {
@@ -298,6 +319,12 @@
 
     },
     "Selected data can be used as anonymised proofs" : {
+
+    },
+    "Settings" : {
+
+    },
+    "Sex" : {
 
     },
     "short description text here" : {
@@ -334,7 +361,13 @@
     "Welcome" : {
 
     },
+    "What is RariMe?" : {
+
+    },
     "What is this?" : {
+
+    },
+    "White" : {
 
     },
     "Your passport proof is ready" : {

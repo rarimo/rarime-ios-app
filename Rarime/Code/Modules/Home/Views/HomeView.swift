@@ -9,27 +9,53 @@ struct HomeView: View {
 
     @State private var isAirdropSheetPresented = false
     @State private var isPassportSheetPresented = false
+    @State private var isRarimeSheetPresented = false
+
     @State private var path: [HomeRoute] = []
+    @State private var passportCardLook = PassportCardLook.black
+    @State private var hasPassport = true
+
+    let passport = Passport(
+        firstName: "Joshua",
+        lastName: "Smith",
+        gender: "M",
+        passportImage: nil,
+        documentType: "P",
+        issuingAuthority: "USA",
+        documentNumber: "00AA00000",
+        documentExpiryDate: "900314",
+        dateOfBirth: "970314",
+        nationality: "USA"
+    )
 
     var body: some View {
         NavigationStack(path: $path) {
-            homeContent
-                .navigationDestination(for: HomeRoute.self) { route in
-                    switch route {
-                    case .scanPassport:
-                        ScanPassportView(onClose: { path.removeLast() })
-                            .navigationBarBackButtonHidden()
-                    }
+            content.navigationDestination(for: HomeRoute.self) { route in
+                switch route {
+                case .scanPassport:
+                    ScanPassportView(onClose: { path.removeLast() })
+                        .navigationBarBackButtonHidden()
                 }
+            }
         }
     }
 
-    var homeContent: some View {
+    private var content: some View {
         VStack(alignment: .leading, spacing: 32) {
             header
             VStack(spacing: 24) {
-                airdropCard
-                otherPassportsCard
+                if hasPassport {
+                    PassportCard(
+                        look: passportCardLook,
+                        passport: passport,
+                        onLookChange: { look in passportCardLook = look },
+                        onDelete: { hasPassport = false }
+                    )
+                    rarimeCard
+                } else {
+                    airdropCard
+                    otherPassportsCard
+                }
             }
             Spacer()
         }
@@ -39,7 +65,7 @@ struct HomeView: View {
         .background(.backgroundPrimary)
     }
 
-    var header: some View {
+    private var header: some View {
         VStack(spacing: 8) {
             HStack {
                 Button(action: onBalanceTap) {
@@ -70,7 +96,7 @@ struct HomeView: View {
         .padding(.horizontal, 8)
     }
 
-    var airdropCard: some View {
+    private var airdropCard: some View {
         CardContainer {
             VStack(spacing: 20) {
                 Text("🇺🇦")
@@ -103,34 +129,28 @@ struct HomeView: View {
         }
     }
 
-    var otherPassportsCard: some View {
-        CardContainer {
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Other passport holders")
-                        .subtitle3()
-                        .foregroundStyle(.textPrimary)
-                    Text("Join a waitlist")
-                        .body3()
-                        .foregroundStyle(.textSecondary)
-                }
-                Spacer()
-                ZStack {
-                    Image(Icons.caretRight)
-                        .iconSmall()
-                }
-                .padding(4)
-                .background(.primaryMain)
-                .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-                .foregroundStyle(.baseBlack)
-            }
-        }
+    private var otherPassportsCard: some View {
+        ActionCard(
+            title: "Other passport holders",
+            description: "Join a waitlist"
+        )
         .onTapGesture { isPassportSheetPresented = true }
         .dynamicSheet(isPresented: $isPassportSheetPresented, fullScreen: true) {
             PassportIntroView(onStart: {
                 isPassportSheetPresented = false
                 path.append(.scanPassport)
             })
+        }
+    }
+
+    private var rarimeCard: some View {
+        ActionCard(
+            title: "RARIME",
+            description: "Learn more about RariMe App"
+        )
+        .onTapGesture { isRarimeSheetPresented = true }
+        .dynamicSheet(isPresented: $isRarimeSheetPresented, fullScreen: true) {
+            RarimeInfoView(onClose: { isRarimeSheetPresented = false })
         }
     }
 }

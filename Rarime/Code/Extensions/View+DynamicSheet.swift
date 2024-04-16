@@ -41,6 +41,7 @@ extension View {
     func dynamicSheet<Content>(
         isPresented: Binding<Bool>,
         fullScreen: Bool = false,
+        title: LocalizedStringResource? = nil,
         onDismiss: (() -> Void)? = nil,
         @ViewBuilder content: @escaping () -> Content
     ) -> some View where Content: View {
@@ -52,13 +53,21 @@ extension View {
                         .iconMedium()
                         .foregroundColor(.textPrimary)
                 }
-                .padding(.top, 20)
+                .padding(.top, 22)
                 .padding(.trailing, 20)
-                VStack {
+                VStack(spacing: 0) {
+                    if let title {
+                        VStack(alignment: .leading, spacing: 20) {
+                            Text(title)
+                                .h6()
+                                .foregroundStyle(.textPrimary)
+                                .padding(.horizontal, 20)
+                            HorizontalDivider()
+                        }
+                        .padding(.top, 20)
+                    }
                     content()
                 }
-                .padding(.top, 32)
-                .padding(.bottom, 4)
                 .frame(maxWidth: .infinity)
                 .presentationDragIndicator(.hidden)
                 .applyPresentationCornerRadius(24)
@@ -72,11 +81,8 @@ extension View {
 
 #Preview {
     Text(String("Sheet"))
-        .dynamicSheet(isPresented: .constant(true)) {
+        .dynamicSheet(isPresented: .constant(true), title: LocalizedStringResource("Sheet Title", table: "preview")) {
             VStack(alignment: .leading, spacing: 4) {
-                Text(String("Sheet Title"))
-                    .h5()
-                    .foregroundStyle(.textPrimary)
                 Text(String("Lorem ipsum dolor sit amet, consectetur adipiscing elit."))
                     .body3()
                     .foregroundStyle(.textSecondary)
@@ -86,6 +92,6 @@ extension View {
                 )
                 .padding(.top, 16)
             }
-            .padding(.horizontal, 20)
+            .padding(20)
         }
 }

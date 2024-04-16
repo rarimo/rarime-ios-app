@@ -28,7 +28,7 @@ struct HomeIntroLayoutView<Icon: View, Content: View>: View {
             HorizontalDivider()
             content()
         }
-        .padding(.top, 8)
+        .padding(.top, 40)
         .padding(.horizontal, 20)
     }
 }

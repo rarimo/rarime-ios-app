@@ -33,6 +33,7 @@ struct GetStartedView: View {
                 )
             }
         }
+        .padding(.top, 32)
         .padding(.horizontal, 20)
     }
 }
