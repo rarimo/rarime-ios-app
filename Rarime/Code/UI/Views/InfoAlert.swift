@@ -14,13 +14,13 @@ struct InfoAlert<Content: View>: View {
     var body: some View {
         HStack(spacing: 8) {
             Image(Icons.info).iconMedium()
-            Text(text).body3()
+            Text(text).body4()
             Spacer()
             actionButton()
         }
         .padding(8)
         .foregroundColor(.warningDarker)
-        .background(.warningLight)
+        .background(.warningLighter)
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .fixedSize(horizontal: false, vertical: true)
     }
@@ -28,8 +28,8 @@ struct InfoAlert<Content: View>: View {
 
 #Preview {
     VStack(spacing: 16) {
-        InfoAlert(text: LocalizedStringResource("This is a warning message")) {}
-        InfoAlert(text: LocalizedStringResource("This is a warning message with an action button on the right")) {
+        InfoAlert(text: LocalizedStringResource("This is a warning message", table: "preview")) {}
+        InfoAlert(text: LocalizedStringResource("This is a warning message with an action button on the right", table: "preview")) {
             Button(action: {}) {
                 Image(Icons.caretRight).iconMedium()
             }

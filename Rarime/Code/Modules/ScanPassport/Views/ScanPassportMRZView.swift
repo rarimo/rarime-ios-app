@@ -15,8 +15,8 @@ struct ScanPassportMRZView: View {
     var body: some View {
         ScanPassportLayoutView(
             step: 1,
-            title: LocalizedStringResource("Scan your Passport"),
-            text: LocalizedStringResource("Passport data is stored only on this device"),
+            title: "Scan your Passport",
+            text: "Passport data is stored only on this device",
             onClose: onClose
         ) {
             ZStack {

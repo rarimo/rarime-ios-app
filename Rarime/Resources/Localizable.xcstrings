@@ -42,6 +42,12 @@
     "Back to Rewards" : {
 
     },
+    "Become a Citizen" : {
+
+    },
+    "Beta launch" : {
+
+    },
     "Close" : {
 
     },
@@ -64,6 +70,9 @@
 
     },
     "Create a profile, add various credentials, and invite others to earn rewards in the process" : {
+
+    },
+    "Create Account" : {
 
     },
     "Create new Identity" : {
@@ -91,9 +100,6 @@
 
     },
     "Document type" : {
-
-    },
-    "Don’t share your recovery phrase with anyone" : {
 
     },
     "Done" : {
@@ -156,9 +162,6 @@
     "Import Identity" : {
 
     },
-    "Incorrect" : {
-
-    },
     "Issuing authority" : {
 
     },
@@ -166,9 +169,6 @@
 
     },
     "Let's Start" : {
-
-    },
-    "Login and access special parts of the web" : {
 
     },
     "Male" : {
@@ -234,16 +234,19 @@
     "Place your passport cover to the back of your phone" : {
 
     },
+    "Please store the private key safely and do not share it with anyone. If you lose this key, you will not be able to recover the account and will lose access forever." : {
+
+    },
     "Please try again later" : {
 
     },
     "Please Wait..." : {
 
     },
-    "Plug your identity" : {
+    "Processing" : {
 
     },
-    "Processing" : {
+    "Profile" : {
 
     },
     "Reading Passport data" : {
@@ -276,9 +279,6 @@
     "Selected data can be used as anonymised proofs" : {
 
     },
-    "Selections not matched. please try again" : {
-
-    },
     "Settings" : {
 
     },
@@ -307,25 +307,10 @@
     "Store your documents securely" : {
 
     },
-    "This is a warning message" : {
-
-    },
-    "This is a warning message with an action button on the right" : {
-
-    },
     "This is an app where your digital identity lives and enables you to connect with rest of the web in a fully private mode" : {
 
     },
-    "Try Again" : {
-
-    },
     "Use proofs across the ecosystem" : {
-
-    },
-    "Use them" : {
-
-    },
-    "Verify your recovery phrase" : {
 
     },
     "Wallet" : {
@@ -340,13 +325,13 @@
     "Welcome back!" : {
 
     },
-    "Word #%lld" : {
-
-    },
     "You'll need a biometric document" : {
 
     },
     "Your passport proof is ready" : {
+
+    },
+    "Your Private Key" : {
 
     }
   },

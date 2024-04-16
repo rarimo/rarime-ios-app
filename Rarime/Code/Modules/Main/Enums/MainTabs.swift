@@ -8,15 +8,14 @@
 import Foundation
 
 enum MainTabs: Int, CaseIterable {
-    case home, wallet, rewards, credentials, settings
+    case home, wallet, rewards, profile
 
     var iconName: String {
         switch self {
         case .home: return Icons.houseSimple
         case .wallet: return Icons.wallet
-        case .rewards: return Icons.gift
-        case .credentials: return Icons.identificationCard
-        case .settings: return Icons.dotsThreeOutline
+        case .rewards: return Icons.airdrop
+        case .profile: return Icons.user
         }
     }
 
@@ -24,9 +23,8 @@ enum MainTabs: Int, CaseIterable {
         switch self {
         case .home: return Icons.houseSimpleFill
         case .wallet: return Icons.walletFilled
-        case .rewards: return Icons.giftFill
-        case .credentials: return Icons.identificationCardFill
-        case .settings: return Icons.dotsThreeOutline
+        case .rewards: return Icons.airdrop
+        case .profile: return Icons.user
         }
     }
 }
