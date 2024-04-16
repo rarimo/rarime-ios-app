@@ -68,6 +68,7 @@
 		56DAA3112BB8C97D002CF710 /* EnableLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3102BB8C97D002CF710 /* EnableLayoutView.swift */; };
 		56DAA3132BB8CA4F002CF710 /* EnableFaceIdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3122BB8CA4F002CF710 /* EnableFaceIdView.swift */; };
 		56DAA3152BB8CC95002CF710 /* PasscodeFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3142BB8CC95002CF710 /* PasscodeFieldView.swift */; };
+		56E2D9152BCE7FC4006E725D /* HomeIntroLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9142BCE7FC4006E725D /* HomeIntroLayoutView.swift */; };
 		56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F48BBD2BC02E82001F3AA4 /* AppButton.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
 		CE32CF522BAC981300E507B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE32CF512BAC981300E507B6 /* Lottie */; };
@@ -140,6 +141,7 @@
 		56DAA3102BB8C97D002CF710 /* EnableLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableLayoutView.swift; sourceTree = "<group>"; };
 		56DAA3122BB8CA4F002CF710 /* EnableFaceIdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableFaceIdView.swift; sourceTree = "<group>"; };
 		56DAA3142BB8CC95002CF710 /* PasscodeFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeFieldView.swift; sourceTree = "<group>"; };
+		56E2D9142BCE7FC4006E725D /* HomeIntroLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIntroLayoutView.swift; sourceTree = "<group>"; };
 		56F48BBD2BC02E82001F3AA4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CE778B782BA9CA0A00B26485 /* AppView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppView+ViewModel.swift"; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			children = (
 				563529E82BB072B80027C910 /* HomeView.swift */,
 				56933DEC2BBAB0AB0068C894 /* PassportIntroView.swift */,
+				56E2D9142BCE7FC4006E725D /* HomeIntroLayoutView.swift */,
 				56CC01E42BCD81AA008CEBE0 /* AirdropIntroView.swift */,
 			);
 			path = Views;
@@ -738,6 +741,7 @@
 				56474AD62BB9860E0017AA25 /* FaceIdAuth.swift in Sources */,
 				56933DF12BBAC1B10068C894 /* ScanPassportLayoutView.swift in Sources */,
 				56933DFB2BBAFBD90068C894 /* AppToggle.swift in Sources */,
+				56E2D9152BCE7FC4006E725D /* HomeIntroLayoutView.swift in Sources */,
 				56933DEF2BBABD100068C894 /* ScanPassportView.swift in Sources */,
 				CE778B792BA9CA0A00B26485 /* AppView+ViewModel.swift in Sources */,
 				567AEC9B2BBD9B8100A20E83 /* Passport.swift in Sources */,

@@ -132,13 +132,11 @@ private struct IncorrectSelectionView: View {
                     .foregroundColor(.textSecondary)
             }
             .padding(.top, 8)
-            HorizontalDivider()
-                .padding(.top, 16)
-                .padding(.horizontal, -20)
-
+            HorizontalDivider().padding(.top, 16)
             AppButton(text: "Try Again", action: onTryAgain)
                 .controlSize(.large)
         }
+        .padding(.horizontal, 20)
     }
 }
 

@@ -59,7 +59,6 @@ extension View {
                 }
                 .padding(.top, 32)
                 .padding(.bottom, 4)
-                .padding(.horizontal, 20)
                 .frame(maxWidth: .infinity)
                 .presentationDragIndicator(.hidden)
                 .applyPresentationCornerRadius(24)
@@ -87,5 +86,6 @@ extension View {
                 )
                 .padding(.top, 16)
             }
+            .padding(.horizontal, 20)
         }
 }

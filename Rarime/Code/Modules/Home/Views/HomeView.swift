@@ -29,7 +29,7 @@ struct HomeView: View {
             header
             VStack(spacing: 24) {
                 airdropCard
-                otherPassportsButton
+                otherPassportsCard
             }
             Spacer()
         }
@@ -103,30 +103,29 @@ struct HomeView: View {
         }
     }
 
-    var otherPassportsButton: some View {
-        Button(action: { isPassportSheetPresented = true }) {
-            CardContainer {
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Other passport holders")
-                            .subtitle3()
-                            .foregroundStyle(.textPrimary)
-                        Text("Join a waitlist")
-                            .body3()
-                            .foregroundStyle(.textSecondary)
-                    }
-                    Spacer()
-                    ZStack {
-                        Image(Icons.caretRight)
-                            .iconSmall()
-                    }
-                    .padding(4)
-                    .background(.primaryMain)
-                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-                    .foregroundStyle(.textPrimary)
+    var otherPassportsCard: some View {
+        CardContainer {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Other passport holders")
+                        .subtitle3()
+                        .foregroundStyle(.textPrimary)
+                    Text("Join a waitlist")
+                        .body3()
+                        .foregroundStyle(.textSecondary)
                 }
+                Spacer()
+                ZStack {
+                    Image(Icons.caretRight)
+                        .iconSmall()
+                }
+                .padding(4)
+                .background(.primaryMain)
+                .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                .foregroundStyle(.baseBlack)
             }
         }
+        .onTapGesture { isPassportSheetPresented = true }
         .dynamicSheet(isPresented: $isPassportSheetPresented, fullScreen: true) {
             PassportIntroView(onStart: {
                 isPassportSheetPresented = false
