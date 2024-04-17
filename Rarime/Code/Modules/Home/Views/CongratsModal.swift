@@ -28,7 +28,7 @@ struct CongratsModal: View {
                                     Text(isClaimed ? "Congrats!" : "You’ve joined the waitlist")
                                         .h6()
                                         .foregroundStyle(.textPrimary)
-                                    Text(isClaimed ? "You’ve received 3 RMO tokens" : "We will notify when you become eligible")
+                                    Text(isClaimed ? "You’ve received \(RARIMO_AIRDROP_REWARD) RMO tokens" : "We will notify when you become eligible")
                                         .body2()
                                         .multilineTextAlignment(.center)
                                         .foregroundStyle(.textSecondary)

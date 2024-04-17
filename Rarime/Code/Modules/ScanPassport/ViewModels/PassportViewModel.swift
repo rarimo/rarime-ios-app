@@ -1,7 +1,5 @@
 import SwiftUI
 
-private let requiredDataReward = 3
-
 enum PassportProofState: Int, CaseIterable {
     // TODO: Implement proof states
     case readingData, applyingZK, createProfile, finalizing
@@ -21,10 +19,6 @@ class PassportViewModel: ObservableObject {
     @Published var proofState: PassportProofState = .readingData
     @Published var processingStatus: ProcessingStatus = .processing
     @Published var isClaiming = false
-
-    var totalReward: Int {
-        requiredDataReward
-    }
 
     var isEligibleForReward: Bool {
         passport?.nationality == "UKR"

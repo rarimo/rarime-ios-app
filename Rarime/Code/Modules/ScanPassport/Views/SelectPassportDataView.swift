@@ -65,7 +65,7 @@ struct SelectPassportDataView: View {
                         .subtitle3()
                         .foregroundStyle(.textPrimary)
                     Spacer()
-                    RewardChipView(reward: passportViewModel.totalReward, isActive: true)
+                    RewardChipView(reward: RARIMO_AIRDROP_REWARD, isActive: true)
                         .opacity(passportViewModel.isEligibleForReward ? 1 : 0)
                 }
                 VStack(spacing: 16) {

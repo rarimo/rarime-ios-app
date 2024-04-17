@@ -30,7 +30,7 @@ struct ClaimTokensView: View {
                         .overlay(Circle().stroke(.backgroundPrimary, lineWidth: 2))
                 }
                 VStack(spacing: 12) {
-                    Text("Claim \(passportViewModel.totalReward) RMO tokens")
+                    Text("Claim \(RARIMO_AIRDROP_REWARD) RMO tokens")
                         .h6()
                         .foregroundStyle(.textPrimary)
                     Text("It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, ")

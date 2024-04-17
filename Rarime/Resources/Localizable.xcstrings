@@ -372,7 +372,7 @@
     "You’ve joined the waitlist" : {
 
     },
-    "You’ve received 3 RMO tokens" : {
+    "You’ve received %lld RMO tokens" : {
 
     },
     "Your passport proof is ready" : {
