@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CongratsModalView: View {
+struct CongratsModal: View {
     @Binding var open: Bool
     var isClaimed: Bool
 
@@ -10,12 +10,12 @@ struct CongratsModalView: View {
                 ZStack {
                     CardContainer {
                         ZStack(alignment: .top) {
-                            Image("Confetti")
+                            Image(Images.confetti)
                                 .resizable()
                                 .frame(width: 220, height: 160)
                             VStack(spacing: 20) {
                                 if isClaimed {
-                                    Image("RewardCoin").square(100)
+                                    Image(Images.rewardCoin).square(100)
                                 } else {
                                     Image(Icons.check)
                                         .square(24)
@@ -50,5 +50,5 @@ struct CongratsModalView: View {
 }
 
 #Preview {
-    CongratsModalView(open: .constant(true), isClaimed: true)
+    CongratsModal(open: .constant(true), isClaimed: true)
 }

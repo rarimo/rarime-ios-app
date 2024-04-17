@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct HomeIntroLayoutView<Icon: View, Content: View>: View {
+struct HomeIntroLayout<Icon: View, Content: View>: View {
     let title: LocalizedStringResource
     let description: LocalizedStringResource
     let icon: Icon
@@ -34,7 +34,7 @@ struct HomeIntroLayoutView<Icon: View, Content: View>: View {
 }
 
 #Preview {
-    HomeIntroLayoutView(
+    HomeIntroLayout(
         title: LocalizedStringResource("Other passport holders", table: "preview"),
         description: LocalizedStringResource("short description text here", table: "preview"),
         icon: Image(Icons.bell).iconLarge()

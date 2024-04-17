@@ -21,7 +21,7 @@ struct ReadPassportNFCView: View {
             text: "Reading Passport data",
             onClose: onClose
         ) {
-            Image("PassportNFC").square(280)
+            Image(Images.passportNfc).square(280)
             Text("Place your passport cover to the back of your phone")
                 .body3()
                 .foregroundStyle(.textSecondary)

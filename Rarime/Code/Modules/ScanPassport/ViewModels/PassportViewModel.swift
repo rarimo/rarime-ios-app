@@ -38,7 +38,7 @@ class PassportViewModel: ObservableObject {
     func generateProof() async {
         do {
             // TODO: Generate proof
-            try await Task.sleep(nanoseconds: 1 / 2 * NSEC_PER_SEC)
+            try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
             proofState = .applyingZK
             try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
             proofState = .createProfile

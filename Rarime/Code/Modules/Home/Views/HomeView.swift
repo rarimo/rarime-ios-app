@@ -40,29 +40,37 @@ struct HomeView: View {
     }
 
     private var content: some View {
-        VStack(alignment: .leading, spacing: 32) {
-            header
-            VStack(spacing: 24) {
-                if let passport = viewModel.passport {
-                    PassportCard(
-                        look: viewModel.passportCardLook,
-                        passport: passport,
-                        onLookChange: { look in viewModel.setPassportCardLook(look) },
-                        onDelete: { viewModel.removePassport() }
-                    )
-                    rarimeCard
-                } else {
-                    airdropCard
-                    otherPassportsCard
+        VStack(spacing: 24) {
+            Text("Beta launch")
+                .body3()
+                .frame(maxWidth: .infinity)
+                .foregroundStyle(.warningDark)
+                .padding(.vertical, 4)
+                .background(.warningLighter)
+            VStack(alignment: .leading, spacing: 32) {
+                header
+                VStack(spacing: 24) {
+                    if let passport = viewModel.passport {
+                        PassportCard(
+                            look: viewModel.passportCardLook,
+                            passport: passport,
+                            onLookChange: { look in viewModel.setPassportCardLook(look) },
+                            onDelete: { viewModel.removePassport() }
+                        )
+                        rarimeCard
+                    } else {
+                        airdropCard
+                        otherPassportsCard
+                    }
                 }
+                Spacer()
             }
-            Spacer()
+            .padding(.horizontal, 12)
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 32)
+        .padding(.top, 1)
         .background(.backgroundPrimary)
         .blur(radius: isCongratsModalShown ? 12 : 0)
-        .overlay(CongratsModalView(open: $isCongratsModalShown, isClaimed: isClaimed))
+        .overlay(CongratsModal(open: $isCongratsModalShown, isClaimed: isClaimed))
     }
 
     private var header: some View {
@@ -84,13 +92,6 @@ struct HomeView: View {
             HStack {
                 Text("0").h4().foregroundStyle(.textPrimary)
                 Spacer()
-                Text("Beta launch")
-                    .body3()
-                    .foregroundStyle(.warningDark)
-                    .padding(.vertical, 4)
-                    .padding(.horizontal, 12)
-                    .background(.warningLighter)
-                    .clipShape(Capsule())
             }
         }
         .padding(.horizontal, 8)
