@@ -79,7 +79,7 @@ struct AppButton: View {
     var leftIcon: String?
     var rightIcon: String?
 
-    var fullWidth: Bool = true
+    var width: CGFloat? = .infinity
     var action: () -> Void
 
     @Environment(\.controlSize) var controlSize
@@ -108,7 +108,7 @@ struct AppButton: View {
         Button(action: action) {
             label
                 .frame(height: height)
-                .frame(maxWidth: fullWidth ? .infinity : nil)
+                .frame(maxWidth: width)
                 .padding(.horizontal, paddingHorizontal)
         }
         .buttonStyle(AppButtonStyle(variant: variant))
@@ -140,10 +140,10 @@ struct AppButton: View {
             text: LocalizedStringResource("Primary Medium", table: "preview"),
             leftIcon: Icons.arrowLeft,
             rightIcon: Icons.arrowRight,
-            fullWidth: false,
+            width: nil,
             action: {}
         )
-        AppButton(text: LocalizedStringResource("Primary Small", table: "preview"), fullWidth: false, action: {})
+        AppButton(text: LocalizedStringResource("Primary Small", table: "preview"), width: nil, action: {})
             .controlSize(.small)
 
         AppButton(

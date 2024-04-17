@@ -20,6 +20,9 @@
         }
       }
     },
+    "+3 RMO" : {
+
+    },
     "🇺🇦" : {
 
     },
@@ -36,7 +39,16 @@
     "0" : {
 
     },
+    "3" : {
+
+    },
+    "21 Dec, 2024" : {
+
+    },
     "Additional Data" : {
+
+    },
+    "Airdrop" : {
 
     },
     "All Done!" : {
@@ -48,7 +60,7 @@
     "Authentication Failed" : {
 
     },
-    "Back" : {
+    "Available RMO" : {
 
     },
     "Back to Intro" : {
@@ -120,6 +132,9 @@
     "Delete Card" : {
 
     },
+    "Deposit Adress" : {
+
+    },
     "Description text here" : {
 
     },
@@ -153,6 +168,9 @@
     "Enter Passcode" : {
 
     },
+    "Enter text here" : {
+
+    },
     "Error" : {
 
     },
@@ -166,6 +184,9 @@
 
     },
     "Female" : {
+
+    },
+    "Field Label" : {
 
     },
     "First Name" : {
@@ -255,9 +276,6 @@
     "Okay" : {
 
     },
-    "Open wallet" : {
-
-    },
     "Other passport holders" : {
 
     },
@@ -306,6 +324,12 @@
     "Reading passport data...\n\n%@" : {
 
     },
+    "Receive" : {
+
+    },
+    "Receive RMO" : {
+
+    },
     "Repeat Passcode" : {
 
     },
@@ -327,6 +351,12 @@
     "Selected data can be used as anonymised proofs" : {
 
     },
+    "Send" : {
+
+    },
+    "Send RMO" : {
+
+    },
     "Settings" : {
 
     },
@@ -337,6 +367,9 @@
 
     },
     "Skip" : {
+
+    },
+    "Some hint text" : {
 
     },
     "Sorry, there was a problem reading the passport. Please try again" : {
@@ -358,10 +391,10 @@
     "This is an app where your digital identity lives and enables you to connect with rest of the web in a fully private mode" : {
 
     },
-    "Wallet" : {
+    "Transactions" : {
 
     },
-    "Wallet detail" : {
+    "Wallet" : {
 
     },
     "Welcome" : {
@@ -374,6 +407,12 @@
 
     },
     "White" : {
+
+    },
+    "Withdraw the RMO token" : {
+
+    },
+    "You can use the QR code or the wallet address to deposit the RMO token to your account" : {
 
     },
     "Your passport proof is ready" : {

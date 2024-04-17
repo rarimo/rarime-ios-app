@@ -1,11 +1,3 @@
-//
-//  Text.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 22.03.2024.
-//
-
-import Foundation
 import SwiftUI
 
 private func getFontFamily(weight: UIFont.Weight) -> String {
@@ -21,7 +13,7 @@ private func getFontFamily(weight: UIFont.Weight) -> String {
     }
 }
 
-extension Text {
+extension View {
     func applyFont(fontSize: CGFloat, lineHeight: CGFloat, fontWeight: UIFont.Weight = .regular) -> some View {
         let font = UIFont(
             name: getFontFamily(weight: fontWeight),

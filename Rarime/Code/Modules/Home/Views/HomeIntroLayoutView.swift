@@ -39,8 +39,8 @@ struct HomeIntroLayoutView<Icon: View, Content: View>: View {
         description: LocalizedStringResource("short description text here", table: "preview"),
         icon: Image(Icons.bell).iconLarge()
     ) {
-//        Rectangle()
-//            .fill(.backgroundPrimary)
-//            .frame(width: .infinity, height: 200)
+       Rectangle()
+           .fill(.backgroundPrimary)
+           .frame(width: .infinity, height: 200)
     }
 }
