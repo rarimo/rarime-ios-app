@@ -50,20 +50,10 @@ struct PassportCard: View {
         return VStack(spacing: 24) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 8) {
-                    if passport.passportImage != nil {
-                        Image(uiImage: passport.passportImage!)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 56, height: 56)
-                            .background(.white)
-                            .clipShape(Circle())
-                    } else {
-                        Image(Icons.user)
-                            .iconLarge()
-                            .padding(12)
-                            .background(look.foregroundColor.opacity(0.05))
-                            .clipShape(Circle())
-                    }
+                    PassportImageView(
+                        image: passport.passportImage,
+                        bgColor: look.foregroundColor.opacity(0.05)
+                    )
                     Text(passport.fullName)
                         .h6()
                         .padding(.top, 16)

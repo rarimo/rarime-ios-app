@@ -1,18 +1,5 @@
 import SwiftUI
 
-let passport = Passport(
-    firstName: "Joshua",
-    lastName: "Smith",
-    gender: "M",
-    passportImage: nil,
-    documentType: "P",
-    issuingAuthority: "USA",
-    documentNumber: "00AA00000",
-    documentExpiryDate: "900314",
-    dateOfBirth: "970314",
-    nationality: "USA"
-)
-
 extension HomeView {
     class ViewModel: ObservableObject {
         @Published var passport: Passport? = nil

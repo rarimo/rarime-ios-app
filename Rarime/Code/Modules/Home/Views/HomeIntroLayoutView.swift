@@ -24,7 +24,7 @@ struct HomeIntroLayoutView<Icon: View, Content: View>: View {
                     .frame(maxWidth: 300)
                     .foregroundStyle(.textSecondary)
             }
-            .frame(maxWidth: /*@START_MENU_TOKEN@*/ .infinity/*@END_MENU_TOKEN@*/)
+            .frame(maxWidth: .infinity)
             HorizontalDivider()
             content()
         }

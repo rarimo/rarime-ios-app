@@ -97,7 +97,7 @@ struct HomeView: View {
                     .h4()
                     .frame(width: 72, height: 72)
                     .background(.componentPrimary)
-                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                    .clipShape(Circle())
                 VStack(spacing: 8) {
                     Text("Programable Airdrop")
                         .h6()

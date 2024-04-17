@@ -72,21 +72,7 @@ struct SelectPassportDataView: View {
                         .foregroundStyle(.textSecondary)
                 }
                 Spacer()
-                if passport.passportImage != nil {
-                    Image(uiImage: passport.passportImage!)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 56)
-                } else {
-                    ZStack {
-                        Image(Icons.user)
-                            .square(32)
-                            .foregroundStyle(.textPrimary)
-                    }
-                    .padding(12)
-                    .background(.componentPrimary)
-                    .clipShape(Circle())
-                }
+                PassportImageView(image: passport.passportImage)
             }
         }
     }
