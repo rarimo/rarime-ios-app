@@ -1,10 +1,3 @@
-//
-//  ScanPassportView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 01.04.2024.
-//
-
 import SwiftUI
 
 private enum ScanPassportState {
@@ -12,6 +5,7 @@ private enum ScanPassportState {
 }
 
 struct ScanPassportView: View {
+    let onComplete: (Passport) -> Void
     let onClose: () -> Void
 
     @State private var state: ScanPassportState = .scanMRZ
@@ -47,7 +41,7 @@ struct ScanPassportView: View {
             .environmentObject(passportViewModel)
             .transition(.backslide)
         case .generateProof:
-            PassportProofView(onFinish: onClose)
+            PassportProofView(onFinish: { onComplete(passportViewModel.passport!) })
                 .environmentObject(passportViewModel)
                 .transition(.backslide)
         }
@@ -55,5 +49,8 @@ struct ScanPassportView: View {
 }
 
 #Preview {
-    ScanPassportView(onClose: {})
+    ScanPassportView(
+        onComplete: { _ in },
+        onClose: {}
+    )
 }

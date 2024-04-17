@@ -16,13 +16,12 @@ struct MainView: View {
             ZStack(alignment: .bottom) {
                 VStack {
                     TabView(selection: $selectedTab) {
-                        HomeView().tag(MainTabs.home)
+                        HomeView(onBalanceTap: { selectedTab = .wallet }).tag(MainTabs.home)
                         WalletView().tag(MainTabs.wallet)
                         RewardsView().tag(MainTabs.rewards)
-                        ProfileView()
-                            .environmentObject(appViewModel)
-                            .tag(MainTabs.profile)
+                        ProfileView().tag(MainTabs.profile)
                     }
+                    .environmentObject(appViewModel)
                     .onAppear {
                         // Remove tab bar background
                         let appearance = UITabBarAppearance()

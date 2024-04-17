@@ -1,6 +1,15 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    " and " : {
+
+    },
+    ", " : {
+
+    },
+    "%@ Years Old" : {
+
+    },
     "%@, Age: %@" : {
       "localizations" : {
         "en" : {
@@ -11,6 +20,9 @@
         }
       }
     },
+    "🇺🇦" : {
+
+    },
     "🎁 You will claim %@ %lld RMO" : {
       "localizations" : {
         "en" : {
@@ -20,6 +32,9 @@
           }
         }
       }
+    },
+    "0" : {
+
     },
     "Additional Data" : {
 
@@ -39,7 +54,7 @@
     "Back to Intro" : {
 
     },
-    "Back to Rewards" : {
+    "Balance: RMO" : {
 
     },
     "Become a Citizen" : {
@@ -48,16 +63,28 @@
     "Beta launch" : {
 
     },
+    "Beta launch is focused on distributing tokens to Ukrainian identity holders" : {
+
+    },
+    "Black" : {
+
+    },
+    "By checking this box, you are agreeing to " : {
+
+    },
+    "CARD VISUAL" : {
+
+    },
     "Close" : {
+
+    },
+    "Complete" : {
 
     },
     "Continue" : {
 
     },
     "Convert existing identity documents into anonymous credentials" : {
-
-    },
-    "Convert your data into ZK proofs" : {
 
     },
     "Copied" : {
@@ -84,13 +111,13 @@
     "Credentials" : {
 
     },
-    "Dashboard" : {
-
-    },
     "Date of birth" : {
 
     },
     "Date of Birth" : {
+
+    },
+    "Delete Card" : {
 
     },
     "Description text here" : {
@@ -144,13 +171,22 @@
     "First Name" : {
 
     },
+    "Full functional available on: %@" : {
+
+    },
+    "Full privacy via Zero Knowledge Proofs" : {
+
+    },
     "Get rewarded" : {
 
     },
-    "Get rewarded with 50 RRMO" : {
+    "Get rewarded with RMO tokens" : {
 
     },
     "Get Started" : {
+
+    },
+    "Green" : {
 
     },
     "Hold your iPhone near an NFC enabled passport." : {
@@ -165,16 +201,31 @@
     "Issuing authority" : {
 
     },
+    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it h" : {
+
+    },
+    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors " : {
+
+    },
+    "Join a waitlist" : {
+
+    },
+    "Join the waitlist" : {
+
+    },
+    "July" : {
+
+    },
     "Last Name" : {
 
     },
-    "Let's Start" : {
+    "Learn more about RariMe App" : {
+
+    },
+    "Let’s Start" : {
 
     },
     "Male" : {
-
-    },
-    "Manage your account settings" : {
 
     },
     "Manage your assets" : {
@@ -201,22 +252,16 @@
     "NFC Reader" : {
 
     },
-    "Open sheet" : {
+    "Okay" : {
 
     },
     "Open wallet" : {
 
     },
-    "Overview of your account" : {
-
-    },
-    "Participate and get rewarded" : {
+    "Other passport holders" : {
 
     },
     "Passcodes do not match" : {
-
-    },
-    "Passport" : {
 
     },
     "Passport data is stored only on this device" : {
@@ -249,6 +294,12 @@
     "Profile" : {
 
     },
+    "Programable Airdrop" : {
+
+    },
+    "RARIME" : {
+
+    },
     "Reading Passport data" : {
 
     },
@@ -259,9 +310,6 @@
 
     },
     "Rewards" : {
-
-    },
-    "Scan Passport" : {
 
     },
     "Scan your Passport" : {
@@ -282,7 +330,10 @@
     "Settings" : {
 
     },
-    "Sheet: %@" : {
+    "Sex" : {
+
+    },
+    "short description text here" : {
 
     },
     "Skip" : {
@@ -304,13 +355,7 @@
         }
       }
     },
-    "Store your documents securely" : {
-
-    },
     "This is an app where your digital identity lives and enables you to connect with rest of the web in a fully private mode" : {
-
-    },
-    "Use proofs across the ecosystem" : {
 
     },
     "Wallet" : {
@@ -322,10 +367,13 @@
     "Welcome" : {
 
     },
-    "Welcome back!" : {
+    "What is RariMe?" : {
 
     },
-    "You'll need a biometric document" : {
+    "What is this?" : {
+
+    },
+    "White" : {
 
     },
     "Your passport proof is ready" : {
