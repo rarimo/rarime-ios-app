@@ -12,9 +12,9 @@ struct WalletView: View {
             content.navigationDestination(for: WalletRoute.self) { route in
                 switch route {
                 case .send:
-                    Text("Send")
+                    WalletSendView(onBack: { path.removeLast() })
                 case .receive:
-                    Text("Receive")
+                    WalletReceiveView(onBack: { path.removeLast() })
                 }
             }
         }

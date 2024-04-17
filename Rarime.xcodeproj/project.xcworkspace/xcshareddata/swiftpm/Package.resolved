@@ -23,7 +23,7 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:rarimo/NFCPassportReader.git",
       "state" : {
-        "revision" : "82c42a72ebb202c575fc7877fd3607e37688f3c2"
+        "revision" : "0dbc64af5c568bca64c1180a3524b5b1c2f921b7"
       }
     },
     {
@@ -51,6 +51,33 @@
       "state" : {
         "branch" : "master-spm",
         "revision" : "2600de3c3317ca8d96e81a4bbcf26547f3c92d1c"
+      }
+    },
+    {
+      "identity" : "qrcode",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/qrcode.git",
+      "state" : {
+        "revision" : "52ef3be47e2a8553a096574b78827eebea3bf207",
+        "version" : "18.4.1"
+      }
+    },
+    {
+      "identity" : "swift-qrcode-generator",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/swift-qrcode-generator",
+      "state" : {
+        "revision" : "2b1980b825f08a81ccc762b0c4d17fcde9d5e953",
+        "version" : "2.0.2"
+      }
+    },
+    {
+      "identity" : "swiftimagereadwrite",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/SwiftImageReadWrite",
+      "state" : {
+        "revision" : "96361ba7f9dce5184d95aba8ea90d9faa4acabb2",
+        "version" : "1.6.1"
       }
     },
     {
