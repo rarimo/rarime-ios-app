@@ -7,6 +7,8 @@ private enum HomeRoute: Hashable {
 struct HomeView: View {
     let onBalanceTap: () -> Void
 
+    @EnvironmentObject var appViewModel: AppView.ViewModel
+
     @State private var path: [HomeRoute] = []
     @StateObject private var viewModel = ViewModel()
 
@@ -111,10 +113,13 @@ struct HomeView: View {
                 }
                 .controlSize(.large)
                 .dynamicSheet(isPresented: $isAirdropSheetPresented, fullScreen: true) {
-                    AirdropIntroView(onStart: {
-                        isAirdropSheetPresented = false
-                        path.append(.scanPassport)
-                    })
+                    AirdropIntroView(
+                        onStart: {
+                            isAirdropSheetPresented = false
+                            path.append(.scanPassport)
+                        }
+                    )
+                    .environmentObject(appViewModel)
                 }
             }
             .frame(maxWidth: .infinity)
@@ -149,4 +154,5 @@ struct HomeView: View {
 
 #Preview {
     HomeView(onBalanceTap: {})
+        .environmentObject(AppView.ViewModel())
 }

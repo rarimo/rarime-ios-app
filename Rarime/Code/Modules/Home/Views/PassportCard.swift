@@ -176,7 +176,10 @@ private struct PassportLookOption: View {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(.componentPrimary, lineWidth: 1)
         )
-        .onTapGesture { onLookChange(look) }
+        .onTapGesture {
+            onLookChange(look)
+            FeedbackGenerator.shared.impact(.light)
+        }
     }
 }
 

@@ -12,7 +12,7 @@ struct AppView: View {
 
     var body: some View {
         ZStack {
-            if !viewModel.isFaceIdSet {
+            if viewModel.isFaceIdSet {
                 MainView().transition(.backslide)
             } else if viewModel.isPasscodeSet {
                 EnableFaceIdView().transition(.backslide)

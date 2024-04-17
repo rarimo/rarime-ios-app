@@ -2,6 +2,21 @@ import SwiftUI
 
 struct AirdropIntroView: View {
     let onStart: () -> Void
+    @EnvironmentObject var appViewModel: AppView.ViewModel
+
+    @State private var termsChecked = false
+
+    private var termsURL: String {
+        appViewModel.config.general.termsOfUseURL.absoluteString
+    }
+
+    private var privacyURL: String {
+        appViewModel.config.general.privacyPolicyURL.absoluteString
+    }
+
+    private var airdropTermsURL: String {
+        appViewModel.config.general.termsOfUseURL.absoluteString
+    }
 
     var body: some View {
         VStack(spacing: 16) {
@@ -22,7 +37,7 @@ struct AirdropIntroView: View {
                     Text("It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it h")
                         .body3()
                         .foregroundStyle(.textPrimary)
-                    Text("Full functional avaiable on: \(Text("July").fontWeight(.semibold))")
+                    Text("Full functional available on: \(Text("July").fontWeight(.semibold))")
                         .body3()
                         .foregroundStyle(.warningMain)
                 }
@@ -30,17 +45,24 @@ struct AirdropIntroView: View {
             Spacer()
             HorizontalDivider()
             HStack(alignment: .top, spacing: 8) {
-                Rectangle()
-                    .fill(.backgroundPrimary)
-                    .frame(width: 20, height: 20)
-                Text("By checking this box, you are agreeing to RariMe General Terms & Conditions, RariMe Privacy Notice  and Rarimo Airdrop Program Terms & Conditions")
-                    .body4()
-                    .foregroundStyle(.textSecondary)
+                AppCheckbox(checked: $termsChecked)
+                (
+                    Text("By checking this box, you are agreeing to ") +
+                        Text(.init("[RariMe General Terms & Conditions](\(termsURL))")).underline() +
+                        Text(", ") +
+                        Text(.init("[RariMe Privacy Notice](\(privacyURL))")).underline() +
+                        Text(" and ") +
+                        Text(.init("[Rarimo Airdrop Program Terms & Conditions](\(airdropTermsURL))")).underline()
+                )
+                .body4()
+                .tint(.textSecondary)
+                .foregroundStyle(.textSecondary)
                 Spacer()
             }
             .padding(.horizontal, 20)
             AppButton(text: "Continue", action: onStart)
                 .controlSize(.large)
+                .disabled(!termsChecked)
                 .padding(.horizontal, 20)
         }
     }
@@ -58,4 +80,5 @@ struct AirdropIntroView: View {
 
 #Preview {
     AirdropIntroView(onStart: {})
+        .environmentObject(AppView.ViewModel())
 }

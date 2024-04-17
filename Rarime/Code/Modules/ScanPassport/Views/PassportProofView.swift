@@ -44,7 +44,7 @@ struct PassportProofView: View {
     private var footerView: some View {
         VStack(spacing: 16) {
             HorizontalDivider()
-            AppButton(text: "Back to Rewards", action: onFinish)
+            AppButton(text: "Complete", action: onFinish)
                 .disabled(passportViewModel.generalProcessingStatus == .processing)
                 .controlSize(.large)
                 .padding(.horizontal, 20)

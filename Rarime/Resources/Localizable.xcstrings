@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    " and " : {
+
+    },
+    ", " : {
+
+    },
     "%@ Years Old" : {
 
     },
@@ -48,9 +54,6 @@
     "Back to Intro" : {
 
     },
-    "Back to Rewards" : {
-
-    },
     "Balance: RMO" : {
 
     },
@@ -66,13 +69,16 @@
     "Black" : {
 
     },
-    "By checking this box, you are agreeing to RariMe General Terms & Conditions, RariMe Privacy Notice  and Rarimo Airdrop Program Terms & Conditions" : {
+    "By checking this box, you are agreeing to " : {
 
     },
     "CARD VISUAL" : {
 
     },
     "Close" : {
+
+    },
+    "Complete" : {
 
     },
     "Continue" : {
@@ -165,7 +171,7 @@
     "First Name" : {
 
     },
-    "Full functional avaiable on: %@" : {
+    "Full functional available on: %@" : {
 
     },
     "Full privacy via Zero Knowledge Proofs" : {
