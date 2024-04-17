@@ -12,5 +12,5 @@
 SLASH=/
 
 // MARK: Intro
-PRIVACY_POLICY_URL = "https:${SLASH}/example.com"
-TERMS_OF_USE_URL = "https:${SLASH}/example.com"
+PRIVACY_POLICY_URL = "https:${SLASH}/staging.rarimo.com"
+TERMS_OF_USE_URL = "https:${SLASH}/staging.rarimo.com"
