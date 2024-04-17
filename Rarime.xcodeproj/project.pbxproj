@@ -341,12 +341,12 @@
 			children = (
 				56933DEC2BBAB0AB0068C894 /* PassportIntroView.swift */,
 				56933DEE2BBABD100068C894 /* ScanPassportView.swift */,
-				56933DF02BBAC1B10068C894 /* ScanPassportLayoutView.swift */,
 				56933DF22BBAC2940068C894 /* ScanPassportMRZView.swift */,
-				56933E0D2BBC09F10068C894 /* MRZScannerView.swift */,
 				56933DF42BBAC42E0068C894 /* ReadPassportNFCView.swift */,
 				56933DF62BBAC7D10068C894 /* SelectPassportDataView.swift */,
 				56933DFC2BBAFDD00068C894 /* PassportProofView.swift */,
+				56933DF02BBAC1B10068C894 /* ScanPassportLayoutView.swift */,
+				56933E0D2BBC09F10068C894 /* MRZScannerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
