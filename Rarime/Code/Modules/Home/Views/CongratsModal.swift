@@ -19,7 +19,7 @@ struct CongratsModal: View {
                                 } else {
                                     Image(Icons.check)
                                         .square(24)
-                                        .foregroundStyle(.baseWhite)
+                                        .foregroundStyle(.backgroundPure)
                                         .padding(28)
                                         .background(.successMain)
                                         .clipShape(Circle())

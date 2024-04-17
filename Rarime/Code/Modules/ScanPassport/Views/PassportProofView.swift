@@ -128,7 +128,6 @@ private struct GeneralStatusView: View {
                     .foregroundStyle(.textSecondary)
                     .multilineTextAlignment(.center)
             }
-            .frame(width: 150)
         }
     }
 }
