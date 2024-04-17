@@ -2,9 +2,10 @@ import NFCPassportReader
 import SwiftUI
 
 struct SelectPassportDataView: View {
-    @EnvironmentObject var passportViewModel: PassportViewModel
     let onNext: () -> Void
     let onClose: () -> Void
+
+    @EnvironmentObject var passportViewModel: PassportViewModel
 
     private var passport: Passport {
         passportViewModel.passport!
@@ -64,7 +65,8 @@ struct SelectPassportDataView: View {
                         .subtitle3()
                         .foregroundStyle(.textPrimary)
                     Spacer()
-                    RewardChipView(reward: 3, isActive: true)
+                    RewardChipView(reward: passportViewModel.totalReward, isActive: true)
+                        .opacity(passportViewModel.isEligibleForReward ? 1 : 0)
                 }
                 VStack(spacing: 16) {
                     makeDocumentRow(label: "Document class mode", value: passport.documentType)

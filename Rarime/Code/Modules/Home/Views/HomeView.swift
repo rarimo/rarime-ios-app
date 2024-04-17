@@ -16,14 +16,19 @@ struct HomeView: View {
     @State private var isPassportSheetPresented = false
     @State private var isRarimeSheetPresented = false
 
+    @State private var isCongratsModalShown = false
+    @State private var isClaimed = false
+
     var body: some View {
         NavigationStack(path: $path) {
             content.navigationDestination(for: HomeRoute.self) { route in
                 switch route {
                 case .scanPassport:
                     ScanPassportView(
-                        onComplete: { passport in
+                        onComplete: { passport, isClaimed in
                             viewModel.setPassport(passport)
+                            isCongratsModalShown = true
+                            self.isClaimed = isClaimed
                             path.removeLast()
                         },
                         onClose: { path.removeLast() }
@@ -53,10 +58,11 @@ struct HomeView: View {
             }
             Spacer()
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.horizontal, 12)
         .padding(.vertical, 32)
         .background(.backgroundPrimary)
+        .blur(radius: isCongratsModalShown ? 12 : 0)
+        .overlay(CongratsModalView(open: $isCongratsModalShown, isClaimed: isClaimed))
     }
 
     private var header: some View {

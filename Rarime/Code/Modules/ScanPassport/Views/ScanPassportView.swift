@@ -1,11 +1,11 @@
 import SwiftUI
 
 private enum ScanPassportState {
-    case scanMRZ, readNFC, selectData, generateProof
+    case scanMRZ, readNFC, selectData, generateProof, claimTokens
 }
 
 struct ScanPassportView: View {
-    let onComplete: (Passport) -> Void
+    let onComplete: (_ passport: Passport, _ isClaimed: Bool) -> Void
     let onClose: () -> Void
 
     @State private var state: ScanPassportState = .scanMRZ
@@ -41,7 +41,20 @@ struct ScanPassportView: View {
             .environmentObject(passportViewModel)
             .transition(.backslide)
         case .generateProof:
-            PassportProofView(onFinish: { onComplete(passportViewModel.passport!) })
+            PassportProofView(
+                onFinish: {
+                    if passportViewModel.isEligibleForReward {
+                        withAnimation { state = .claimTokens }
+                    } else {
+                        onComplete(passportViewModel.passport!, false)
+                    }
+                },
+                onClose: onClose
+            )
+            .environmentObject(passportViewModel)
+            .transition(.backslide)
+        case .claimTokens:
+            ClaimTokensView(onFinish: { onComplete(passportViewModel.passport!, true) })
                 .environmentObject(passportViewModel)
                 .transition(.backslide)
         }
@@ -50,7 +63,7 @@ struct ScanPassportView: View {
 
 #Preview {
     ScanPassportView(
-        onComplete: { _ in },
+        onComplete: { _, _ in },
         onClose: {}
     )
 }
