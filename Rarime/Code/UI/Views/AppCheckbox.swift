@@ -8,15 +8,13 @@ struct AppCheckbox: View {
         ZStack {
             Image(Icons.check)
                 .iconSmall()
-                .foregroundStyle(.baseWhite)
+                .foregroundStyle(.textPrimary)
                 .opacity(checked ? 1 : 0)
         }
         .frame(width: 20, height: 20)
-        .background(checked ? .successMain : .componentPrimary)
+        .background(checked ? .primaryDark : .componentPrimary)
         .clipShape(RoundedRectangle(cornerRadius: 4))
-        .overlay(
-            RoundedRectangle(cornerRadius: 4)
-                .stroke(checked ? .successMain : .componentPrimary, lineWidth: 1))
+        .overlay(RoundedRectangle(cornerRadius: 4).stroke(.componentPrimary, lineWidth: 1))
         .animation(.easeInOut(duration: 0.2), value: checked)
         .onTapGesture {
             checked.toggle()

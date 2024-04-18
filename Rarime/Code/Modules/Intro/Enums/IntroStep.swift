@@ -28,9 +28,9 @@ enum IntroStep: Int, CaseIterable {
 
     var image: String {
         switch self {
-        case .welcome: return "IntroApp"
-        case .identity: return "IntroIdentity"
-        case .rewards: return "IntroGifts"
+        case .welcome: return Images.introApp
+        case .identity: return Images.introIdentity
+        case .rewards: return Images.introGifts
         }
     }
 }

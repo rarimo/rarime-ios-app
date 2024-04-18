@@ -1,12 +1,3 @@
-//
-//  Icons.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 22.03.2024.
-//
-
-import Foundation
-
 enum Icons {
     static let airdrop = "Airdrop"
     static let arrowCounterClockwise = "ArrowCounterClockwise"

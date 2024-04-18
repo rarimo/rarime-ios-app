@@ -21,7 +21,7 @@ struct ReadPassportNFCView: View {
             text: "Reading Passport data",
             onClose: onClose
         ) {
-            Image("PassportNFC").square(280)
+            Image(Images.passportNfc).square(280)
             Text("Place your passport cover to the back of your phone")
                 .body3()
                 .foregroundStyle(.textSecondary)
@@ -29,25 +29,24 @@ struct ReadPassportNFCView: View {
                 .padding(.top, 48)
                 .frame(width: 250)
             Spacer()
-            VStack(spacing: 16) {
-                HorizontalDivider()
-                AppButton(text: "Start") {
-                    NFCScanner.scanPassport(
-                        mrzViewModel.mrzKey,
-                        onCompletion: { result in
-                            switch result {
-                            case .success(let passport):
-                                self.onNext(passport)
-                            case .failure:
-                                self.onBack()
-                            }
+            AppButton(text: "Scan") {
+                NFCScanner.scanPassport(
+                    mrzViewModel.mrzKey,
+                    onCompletion: { result in
+                        switch result {
+                        case .success(let passport):
+                            self.onNext(passport)
+                        case .failure:
+                            self.onBack()
                         }
-                    )
-                }
-                .controlSize(.large)
-                .padding(.horizontal, 20)
+                    }
+                )
             }
-            .padding(.bottom, 24)
+            .controlSize(.large)
+            .padding(.top, 12)
+            .padding(.bottom, 20)
+            .padding(.horizontal, 20)
+            .background(.backgroundPure)
         }
     }
 }
