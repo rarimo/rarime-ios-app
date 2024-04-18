@@ -26,6 +26,13 @@ class DateUtil {
         return formatter
     }()
 
+    static let richDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM, yyyy"
+        formatter.timeZone = .gmt
+        return formatter
+    }()
+
     static func parsePassportDate(_ value: String) throws -> Date {
         guard let date = passportDateFormatter.date(from: value) else {
             throw DateParseError.invalidFormat

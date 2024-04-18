@@ -5,6 +5,7 @@ private enum WalletRoute: String, Hashable {
 }
 
 struct WalletView: View {
+    @EnvironmentObject private var viewModel: WalletViewModel
     @State private var path: [WalletRoute] = []
 
     var body: some View {
@@ -44,7 +45,7 @@ struct WalletView: View {
                 Text("Available RMO")
                     .body3()
                     .foregroundStyle(.textSecondary)
-                Text("3")
+                Text(viewModel.balance.formatted())
                     .h4()
                     .foregroundStyle(.textPrimary)
             }
@@ -75,27 +76,46 @@ struct WalletView: View {
                 Text("Transactions")
                     .subtitle3()
                     .foregroundStyle(.textPrimary)
-                HStack(spacing: 16) {
-                    Image(Icons.airdrop)
-                        .iconMedium()
-                        .padding(10)
-                        .background(.componentPrimary)
+                ForEach(viewModel.transactions) { tx in
+                    TransactionItem(tx: tx)
+                }
+                if viewModel.transactions.isEmpty {
+                    Text("No transactions yet")
+                        .body3()
                         .foregroundStyle(.textSecondary)
-                        .clipShape(Circle())
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Airdrop")
-                            .subtitle4()
-                            .foregroundStyle(.textPrimary)
-                        Text("21 Dec, 2024")
-                            .body4()
-                            .foregroundStyle(.textSecondary)
-                    }
-                    Spacer()
-                    Text("+3 RMO")
-                        .subtitle5()
-                        .foregroundStyle(.successMain)
                 }
             }
+        }
+    }
+}
+
+private struct TransactionItem: View {
+    var tx: Transaction
+
+    var balanceModifier: String {
+        tx.type == .sent ? "-" : "+"
+    }
+
+    var body: some View {
+        HStack(spacing: 16) {
+            Image(tx.icon)
+                .iconMedium()
+                .padding(10)
+                .background(.componentPrimary)
+                .foregroundStyle(.textSecondary)
+                .clipShape(Circle())
+            VStack(alignment: .leading, spacing: 4) {
+                Text(tx.title)
+                    .subtitle4()
+                    .foregroundStyle(.textPrimary)
+                Text(DateUtil.richDateFormatter.string(from: tx.date))
+                    .body4()
+                    .foregroundStyle(.textSecondary)
+            }
+            Spacer()
+            Text("\(balanceModifier)\(tx.amount.formatted()) RMO")
+                .subtitle5()
+                .foregroundStyle(tx.type == .sent ? .errorMain : .successMain)
         }
     }
 }
@@ -103,4 +123,5 @@ struct WalletView: View {
 #Preview {
     WalletView()
         .environmentObject(MainView.ViewModel())
+        .environmentObject(WalletViewModel())
 }

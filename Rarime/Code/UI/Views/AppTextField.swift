@@ -6,6 +6,7 @@ struct AppTextField<Hint: View, Action: View>: View {
 
     var label: LocalizedStringResource?
     var placeholder: LocalizedStringKey
+    var keyboardType: UIKeyboardType = .default
 
     @ViewBuilder let action: Action
     @ViewBuilder let hint: Hint
@@ -26,6 +27,7 @@ struct AppTextField<Hint: View, Action: View>: View {
                     self.placeholder,
                     text: self.$text
                 )
+                .keyboardType(keyboardType)
                 .body3()
                 .frame(height: 20)
                 .onChange(of: text) { _ in

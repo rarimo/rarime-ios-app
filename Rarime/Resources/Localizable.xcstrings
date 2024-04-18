@@ -7,6 +7,9 @@
     ", " : {
 
     },
+    "%@ RMO" : {
+
+    },
     "%@ Years Old" : {
 
     },
@@ -20,8 +23,15 @@
         }
       }
     },
-    "+3 RMO" : {
-
+    "%@%@ RMO" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@%2$@ RMO"
+          }
+        }
+      }
     },
     "🇺🇦" : {
 
@@ -36,22 +46,7 @@
         }
       }
     },
-    "0" : {
-
-    },
-    "0.0" : {
-
-    },
-    "0.00 RMO" : {
-
-    },
-    "3" : {
-
-    },
-    "21 Dec, 2024" : {
-
-    },
-    "120.591 RMO" : {
+    "0.0 RMO" : {
 
     },
     "Additional Data" : {
@@ -294,6 +289,9 @@
     "NFC Reader" : {
 
     },
+    "No transactions yet" : {
+
+    },
     "Okay" : {
 
     },
@@ -417,9 +415,6 @@
           }
         }
       }
-    },
-    "The field is required" : {
-
     },
     "This is an app where your digital identity lives and enables you to connect with rest of the web in a fully private mode" : {
 

@@ -16,6 +16,7 @@
 		560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 560F0C292BD114EE00067054 /* CodeScanner */; };
 		560F0C2C2BD133A000067054 /* MainViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C2B2BD133A000067054 /* MainViewLayout.swift */; };
 		560F0C2F2BD135D400067054 /* MainView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C2E2BD135D400067054 /* MainView+ViewModel.swift */; };
+		560F0C322BD1576100067054 /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C312BD1576100067054 /* WalletViewModel.swift */; };
 		561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C272BADA8A600FBB3B9 /* Icons.swift */; };
 		561C3C2B2BADBF1000FBB3B9 /* View+Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C2A2BADBF1000FBB3B9 /* View+Typography.swift */; };
 		561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C382BADE64B00FBB3B9 /* Fonts.swift */; };
@@ -102,6 +103,7 @@
 		560F0C262BD1146C00067054 /* ScanQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRView.swift; sourceTree = "<group>"; };
 		560F0C2B2BD133A000067054 /* MainViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewLayout.swift; sourceTree = "<group>"; };
 		560F0C2E2BD135D400067054 /* MainView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+ViewModel.swift"; sourceTree = "<group>"; };
+		560F0C312BD1576100067054 /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
 		561C3C272BADA8A600FBB3B9 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		561C3C2A2BADBF1000FBB3B9 /* View+Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Typography.swift"; sourceTree = "<group>"; };
 		561C3C382BADE64B00FBB3B9 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -213,6 +215,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		560F0C302BD1575800067054 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				560F0C312BD1576100067054 /* WalletViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		561C3C262BADA89000FBB3B9 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +257,7 @@
 		563529DB2BB071570027C910 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				560F0C302BD1575800067054 /* ViewModels */,
 				563529DE2BB071890027C910 /* Views */,
 			);
 			path = Wallet;
@@ -792,6 +803,7 @@
 				561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */,
 				561C3C2B2BADBF1000FBB3B9 /* View+Typography.swift in Sources */,
 				56933DED2BBAB0AB0068C894 /* PassportIntroView.swift in Sources */,
+				560F0C322BD1576100067054 /* WalletViewModel.swift in Sources */,
 				561C3C2B2BADBF1000FBB3B9 /* View+Typography.swift in Sources */,
 				568B4FCC2BB6C164001C9C74 /* IntroView.swift in Sources */,
 				560F0C1F2BD027EA00067054 /* WalletReceiveView.swift in Sources */,

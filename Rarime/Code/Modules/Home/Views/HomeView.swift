@@ -7,6 +7,7 @@ private enum HomeRoute: Hashable {
 struct HomeView: View {
     @EnvironmentObject var appViewModel: AppView.ViewModel
     @EnvironmentObject var mainViewModel: MainView.ViewModel
+    @EnvironmentObject var walletViewModel: WalletViewModel
 
     @State private var path: [HomeRoute] = []
     @StateObject private var viewModel = ViewModel()
@@ -77,7 +78,7 @@ struct HomeView: View {
             }
 
             HStack {
-                Text("0").h4().foregroundStyle(.textPrimary)
+                Text(walletViewModel.balance.formatted()).h4().foregroundStyle(.textPrimary)
                 Spacer()
                 Text("Beta launch")
                     .body3()
@@ -157,4 +158,5 @@ struct HomeView: View {
     HomeView()
         .environmentObject(AppView.ViewModel())
         .environmentObject(MainView.ViewModel())
+        .environmentObject(WalletViewModel())
 }

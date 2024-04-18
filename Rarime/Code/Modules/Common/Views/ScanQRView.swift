@@ -23,7 +23,14 @@ struct ScanQRView: View {
                 Color.black
                     .opacity(0.7)
                     .mask(MaskShape(size: 235).fill(style: FillStyle(eoFill: true)))
+                // TODO: use enum
                 Image("QrFrame").square(240)
+                Text("Place QR code within the frame to scan")
+                    .body3()
+                    .foregroundStyle(.baseWhite)
+                    .multilineTextAlignment(.center)
+                    .frame(width: 200)
+                    .padding(.top, 320)
             }
             .ignoresSafeArea()
 
@@ -50,7 +57,7 @@ private struct MaskShape: Shape {
     let size: Double
 
     func path(in rect: CGRect) -> Path {
-        var cgSize = CGSize(width: size, height: size)
+        let cgSize = CGSize(width: size, height: size)
 
         var path = Rectangle().path(in: rect)
         path.addPath(

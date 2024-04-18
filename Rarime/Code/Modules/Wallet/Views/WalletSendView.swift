@@ -3,6 +3,8 @@ import SwiftUI
 struct WalletSendView: View {
     let onBack: () -> Void
 
+    @EnvironmentObject private var viewModel: WalletViewModel
+
     @State private var address = ""
     @State private var addressErrorMessage = ""
 
@@ -60,11 +62,14 @@ struct WalletSendView: View {
                             text: $amount,
                             errorMessage: .constant(""),
                             label: "Amount",
-                            placeholder: "0.0",
+                            placeholder: "0.0 RMO",
+                            keyboardType: .decimalPad,
                             action: {
                                 HStack(spacing: 16) {
                                     VerticalDivider()
-                                    Button(action: {}) {
+                                    Button(action: {
+                                        amount = String(viewModel.balance)
+                                    }) {
                                         Text("MAX")
                                             .buttonMedium()
                                             .foregroundStyle(.textSecondary)
@@ -78,7 +83,7 @@ struct WalletSendView: View {
                                     .body4()
                                     .foregroundStyle(.textSecondary)
                                 Spacer()
-                                Text("120.591 RMO")
+                                Text("\(viewModel.balance.formatted()) RMO")
                                     .body4()
                                     .foregroundStyle(.textPrimary)
                             }
@@ -87,33 +92,38 @@ struct WalletSendView: View {
                 }
                 .padding(.horizontal, 20)
                 Spacer()
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Receiver gets")
-                            .body4()
-                            .foregroundStyle(.textSecondary)
-                        Text("0.00 RMO")
-                            .subtitle3()
-                            .foregroundStyle(.textPrimary)
-                    }
-                    Spacer()
-                    AppButton(
-                        text: "Send",
-                        width: 100,
-                        action: {}
-                    )
-                    .controlSize(.large)
-                }
-                .padding(.top, 12)
-                .padding(.bottom, 20)
-                .padding(.horizontal, 24)
-                .frame(maxWidth: .infinity)
-                .background(.backgroundPure)
+                footer
             }
         }
+    }
+
+    var footer: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Receiver gets")
+                    .body4()
+                    .foregroundStyle(.textSecondary)
+                Text("\((Double(amount) ?? 0.0).formatted()) RMO")
+                    .subtitle3()
+                    .foregroundStyle(.textPrimary)
+            }
+            Spacer()
+            AppButton(
+                text: "Send",
+                width: 100,
+                action: {}
+            )
+            .controlSize(.large)
+        }
+        .padding(.top, 12)
+        .padding(.bottom, 20)
+        .padding(.horizontal, 24)
+        .frame(maxWidth: .infinity)
+        .background(.backgroundPure)
     }
 }
 
 #Preview {
     WalletSendView(onBack: {})
+        .environmentObject(WalletViewModel())
 }
