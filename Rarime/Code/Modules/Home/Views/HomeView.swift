@@ -5,9 +5,8 @@ private enum HomeRoute: Hashable {
 }
 
 struct HomeView: View {
-    let onBalanceTap: () -> Void
-
     @EnvironmentObject var appViewModel: AppView.ViewModel
+    let onBalanceTap: () -> Void
 
     @State private var path: [HomeRoute] = []
     @StateObject private var viewModel = ViewModel()
@@ -16,7 +15,7 @@ struct HomeView: View {
     @State private var isPassportSheetPresented = false
     @State private var isRarimeSheetPresented = false
 
-    @State private var isCongratsModalShown = false
+    @State private var isCongratsShown = false
     @State private var isClaimed = false
 
     var body: some View {
@@ -27,7 +26,7 @@ struct HomeView: View {
                     ScanPassportView(
                         onComplete: { passport, isClaimed in
                             viewModel.setPassport(passport)
-                            isCongratsModalShown = true
+                            isCongratsShown = true
                             self.isClaimed = isClaimed
                             path.removeLast()
                         },
@@ -69,8 +68,8 @@ struct HomeView: View {
         }
         .padding(.top, 1)
         .background(.backgroundPrimary)
-        .blur(radius: isCongratsModalShown ? 12 : 0)
-        .overlay(CongratsModal(open: $isCongratsModalShown, isClaimed: isClaimed))
+        .blur(radius: isCongratsShown ? 12 : 0)
+        .overlay(CongratsView(open: $isCongratsShown, isClaimed: isClaimed))
     }
 
     private var header: some View {

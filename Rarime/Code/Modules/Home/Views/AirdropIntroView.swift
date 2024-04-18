@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct AirdropIntroView: View {
-    let onStart: () -> Void
     @EnvironmentObject var appViewModel: AppView.ViewModel
+    let onStart: () -> Void
 
     @State private var termsChecked = false
 

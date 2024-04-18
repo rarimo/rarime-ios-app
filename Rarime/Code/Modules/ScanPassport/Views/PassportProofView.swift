@@ -13,7 +13,9 @@ struct PassportProofView: View {
         do {
             try await Task.sleep(nanoseconds: NSEC_PER_SEC)
             onFinish()
-        } catch { /* empty */ }
+        } catch {
+            LoggerUtil.passport.error("Error while waiting for success state: \(error)")
+        }
     }
 
     var body: some View {

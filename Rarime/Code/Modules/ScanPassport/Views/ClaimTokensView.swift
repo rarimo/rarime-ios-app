@@ -9,7 +9,9 @@ struct ClaimTokensView: View {
             try await passportViewModel.claimTokens()
             FeedbackGenerator.shared.notify(.success)
             onFinish()
-        } catch { /* empty */ }
+        } catch {
+            LoggerUtil.passport.error("Error while claiming tokens: \(error)")
+        }
     }
 
     var body: some View {

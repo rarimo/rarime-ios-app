@@ -2,10 +2,9 @@ import NFCPassportReader
 import SwiftUI
 
 struct SelectPassportDataView: View {
+    @EnvironmentObject var passportViewModel: PassportViewModel
     let onNext: () -> Void
     let onClose: () -> Void
-
-    @EnvironmentObject var passportViewModel: PassportViewModel
 
     private var passport: Passport {
         passportViewModel.passport!

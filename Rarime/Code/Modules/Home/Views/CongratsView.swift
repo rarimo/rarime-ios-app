@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CongratsModal: View {
+struct CongratsView: View {
     @Binding var open: Bool
     var isClaimed: Bool
 
@@ -50,5 +50,5 @@ struct CongratsModal: View {
 }
 
 #Preview {
-    CongratsModal(open: .constant(true), isClaimed: true)
+    CongratsView(open: .constant(true), isClaimed: true)
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		560F0C342BD175EB00067054 /* LoggerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C332BD175EB00067054 /* LoggerUtil.swift */; };
 		561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C272BADA8A600FBB3B9 /* Icons.swift */; };
 		561C3C2B2BADBF1000FBB3B9 /* Text+Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C2A2BADBF1000FBB3B9 /* Text+Typography.swift */; };
 		561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C382BADE64B00FBB3B9 /* Fonts.swift */; };
@@ -75,7 +76,7 @@
 		56E2D9202BCED460006E725D /* AppCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D91F2BCED460006E725D /* AppCheckbox.swift */; };
 		56E2D9222BCFBA0B006E725D /* PassportImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9212BCFBA0B006E725D /* PassportImageView.swift */; };
 		56E2D9242BCFDD42006E725D /* ClaimTokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9232BCFDD42006E725D /* ClaimTokensView.swift */; };
-		56E2D9262BCFE65C006E725D /* CongratsModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9252BCFE65C006E725D /* CongratsModal.swift */; };
+		56E2D9262BCFE65C006E725D /* CongratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9252BCFE65C006E725D /* CongratsView.swift */; };
 		56E2D9282BCFF5DE006E725D /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9272BCFF5DE006E725D /* Images.swift */; };
 		56E2D92A2BCFFB6B006E725D /* Airdrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9292BCFFB6B006E725D /* Airdrop.swift */; };
 		56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F48BBD2BC02E82001F3AA4 /* AppButton.swift */; };
@@ -90,6 +91,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		560F0C332BD175EB00067054 /* LoggerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerUtil.swift; sourceTree = "<group>"; };
 		561C3C272BADA8A600FBB3B9 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		561C3C2A2BADBF1000FBB3B9 /* Text+Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Typography.swift"; sourceTree = "<group>"; };
 		561C3C382BADE64B00FBB3B9 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -157,7 +159,7 @@
 		56E2D91F2BCED460006E725D /* AppCheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCheckbox.swift; sourceTree = "<group>"; };
 		56E2D9212BCFBA0B006E725D /* PassportImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportImageView.swift; sourceTree = "<group>"; };
 		56E2D9232BCFDD42006E725D /* ClaimTokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimTokensView.swift; sourceTree = "<group>"; };
-		56E2D9252BCFE65C006E725D /* CongratsModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratsModal.swift; sourceTree = "<group>"; };
+		56E2D9252BCFE65C006E725D /* CongratsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
 		56E2D9272BCFF5DE006E725D /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		56E2D9292BCFFB6B006E725D /* Airdrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Airdrop.swift; sourceTree = "<group>"; };
 		56F48BBD2BC02E82001F3AA4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
@@ -257,7 +259,7 @@
 				56E2D9182BCE94CA006E725D /* RarimeInfoView.swift */,
 				56E2D91A2BCEA66A006E725D /* PassportCard.swift */,
 				56E2D9142BCE7FC4006E725D /* HomeIntroLayout.swift */,
-				56E2D9252BCFE65C006E725D /* CongratsModal.swift */,
+				56E2D9252BCFE65C006E725D /* CongratsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -306,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */,
+				560F0C332BD175EB00067054 /* LoggerUtil.swift */,
 				56A6C76D2BBD474200992562 /* DateUtil.swift */,
 				56A6C75B2BBC2CD500992562 /* PassportUtils.swift */,
 				56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */,
@@ -774,6 +777,7 @@
 				561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */,
 				561C3C2B2BADBF1000FBB3B9 /* Text+Typography.swift in Sources */,
 				56933DED2BBAB0AB0068C894 /* PassportIntroView.swift in Sources */,
+				560F0C342BD175EB00067054 /* LoggerUtil.swift in Sources */,
 				561C3C2B2BADBF1000FBB3B9 /* Text+Typography.swift in Sources */,
 				568B4FCC2BB6C164001C9C74 /* IntroView.swift in Sources */,
 				56A6C76E2BBD474200992562 /* DateUtil.swift in Sources */,
@@ -807,7 +811,7 @@
 				56933E0C2BBC09D20068C894 /* MRZViewModel.swift in Sources */,
 				563529E72BB072870027C910 /* WalletView.swift in Sources */,
 				56933DFD2BBAFDD00068C894 /* PassportProofView.swift in Sources */,
-				56E2D9262BCFE65C006E725D /* CongratsModal.swift in Sources */,
+				56E2D9262BCFE65C006E725D /* CongratsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

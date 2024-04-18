@@ -42,6 +42,7 @@ class PassportViewModel: ObservableObject {
             processingStatus = .success
         } catch {
             processingStatus = .failure
+            LoggerUtil.passport.error("Error while generating proof: \(error)")
         }
     }
 
