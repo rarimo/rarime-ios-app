@@ -32,7 +32,7 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:rarimo/NFCPassportReader.git",
       "state" : {
-        "revision" : "0dbc64af5c568bca64c1180a3524b5b1c2f921b7"
+        "revision" : "82c42a72ebb202c575fc7877fd3607e37688f3c2"
       }
     },
     {

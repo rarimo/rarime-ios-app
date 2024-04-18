@@ -45,7 +45,7 @@ struct Passport {
             lastName: model.lastName,
             gender: model.gender,
             passportImage: model.passportImage,
-            documentType: model.documentSubType,
+            documentType: model.documentType,
             issuingAuthority: model.issuingAuthority,
             documentNumber: model.documentNumber,
             documentExpiryDate: model.documentExpiryDate,

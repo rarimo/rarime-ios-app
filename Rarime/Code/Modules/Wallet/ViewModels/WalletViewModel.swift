@@ -47,15 +47,4 @@ class WalletViewModel: ObservableObject {
             print(error.localizedDescription)
         }
     }
-
-    @MainActor
-    func send(amount: Double, to: String) async {
-        // TODO: Send the RMO token
-        do {
-            try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
-        } catch {
-            print(error.localizedDescription)
-        }
-        balance -= amount
-    }
 }

@@ -1319,7 +1319,7 @@
 			repositoryURL = "git@github.com:rarimo/NFCPassportReader.git";
 			requirement = {
 				kind = revision;
-				revision = 0dbc64af5c568bca64c1180a3524b5b1c2f921b7;
+				revision = 82c42a72ebb202c575fc7877fd3607e37688f3c2;
 			};
 		};
 		CE32CF502BAC981300E507B6 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
