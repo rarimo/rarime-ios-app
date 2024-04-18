@@ -24,27 +24,23 @@ class WalletViewModel: ObservableObject {
     }
 
     @MainActor
-    func claimAirdrop() async {
+    func claimAirdrop() async throws {
         if isClaimed {
             return
         }
 
         // TODO: Claim RMO token
-        do {
-            try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC)
-            balance += 3.0
-            transactions.append(
-                Transaction(
-                    title: String(localized: "Airdrop"),
-                    icon: Icons.airdrop,
-                    amount: 3.0,
-                    date: Date(),
-                    type: .received
-                )
+        try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC)
+        balance += 3.0
+        transactions.append(
+            Transaction(
+                title: String(localized: "Airdrop"),
+                icon: Icons.airdrop,
+                amount: 3.0,
+                date: Date(),
+                type: .received
             )
-            isClaimed = true
-        } catch {
-            print(error.localizedDescription)
-        }
+        )
+        isClaimed = true
     }
 }

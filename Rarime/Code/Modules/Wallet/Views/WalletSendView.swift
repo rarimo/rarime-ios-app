@@ -90,7 +90,7 @@ struct WalletSendView: View {
                         }
                     }
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 12)
                 Spacer()
                 footer
             }

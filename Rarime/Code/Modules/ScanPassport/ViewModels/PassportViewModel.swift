@@ -18,7 +18,6 @@ class PassportViewModel: ObservableObject {
     @Published var passport: Passport?
     @Published var proofState: PassportProofState = .readingData
     @Published var processingStatus: ProcessingStatus = .processing
-    @Published var isClaiming = false
 
     var isEligibleForReward: Bool {
         passport?.nationality == "UKR"
@@ -44,13 +43,5 @@ class PassportViewModel: ObservableObject {
             processingStatus = .failure
             LoggerUtil.passport.error("Error while generating proof: \(error)")
         }
-    }
-
-    @MainActor
-    func claimTokens() async throws {
-        isClaiming = true
-        // TODO: Claim tokens
-        try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC)
-        isClaiming = false
     }
 }

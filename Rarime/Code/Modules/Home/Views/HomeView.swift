@@ -40,35 +40,37 @@ struct HomeView: View {
     }
 
     private var content: some View {
-        VStack(spacing: 24) {
-            Text("Beta launch")
-                .body3()
-                .frame(maxWidth: .infinity)
-                .foregroundStyle(.warningDark)
-                .padding(.vertical, 4)
-                .background(.warningLighter)
-            VStack(alignment: .leading, spacing: 32) {
-                header
-                VStack(spacing: 24) {
-                    if let passport = viewModel.passport {
-                        PassportCard(
-                            look: viewModel.passportCardLook,
-                            passport: passport,
-                            onLookChange: { look in viewModel.setPassportCardLook(look) },
-                            onDelete: { viewModel.removePassport() }
-                        )
-                        rarimeCard
-                    } else {
-                        airdropCard
-                        otherPassportsCard
+        MainViewLayout {
+            VStack(spacing: 24) {
+                Text("Beta launch")
+                    .body3()
+                    .frame(maxWidth: .infinity)
+                    .foregroundStyle(.warningDark)
+                    .padding(.vertical, 4)
+                    .background(.warningLighter)
+                VStack(alignment: .leading, spacing: 32) {
+                    header
+                    VStack(spacing: 24) {
+                        if let passport = viewModel.passport {
+                            PassportCard(
+                                look: viewModel.passportCardLook,
+                                passport: passport,
+                                onLookChange: { look in viewModel.setPassportCardLook(look) },
+                                onDelete: { viewModel.removePassport() }
+                            )
+                            rarimeCard
+                        } else {
+                            airdropCard
+                            otherPassportsCard
+                        }
                     }
+                    Spacer()
                 }
-                Spacer()
+                .padding(.horizontal, 12)
             }
-            .padding(.horizontal, 12)
+            .padding(.top, 1)
+            .background(.backgroundPrimary)
         }
-        .padding(.top, 1)
-        .background(.backgroundPrimary)
         .blur(radius: isCongratsShown ? 12 : 0)
         .overlay(CongratsView(open: $isCongratsShown, isClaimed: isClaimed))
     }
