@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct WalletRouteLayout<Content: View>: View {
-    let title: LocalizedStringResource
-    let description: LocalizedStringResource
+    let title: String
+    let description: String
     let onBack: () -> Void
 
     @ViewBuilder var content: () -> Content
@@ -35,8 +35,8 @@ struct WalletRouteLayout<Content: View>: View {
 
 #Preview {
     WalletRouteLayout(
-        title: LocalizedStringResource("Wallet Route Title", table: "preview"),
-        description: LocalizedStringResource("Lorem ipsum dolor sit amet", table: "preview"),
+        title: "Wallet Route Title",
+        description: "Lorem ipsum dolor sit amet consectetur adipiscing elit",
         onBack: {}
     ) {
         VStack {

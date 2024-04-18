@@ -1,18 +1,48 @@
 import SwiftUI
 
 struct AppTextField<Hint: View, Action: View>: View {
+    @Environment(\.isEnabled) var isEnabled
+
     @Binding var text: String
     @Binding var errorMessage: String
 
-    var label: LocalizedStringResource?
-    var placeholder: LocalizedStringKey
-    var keyboardType: UIKeyboardType = .default
+    var label: String?
+    var placeholder: String
+    var keyboardType: UIKeyboardType
 
-    @ViewBuilder let action: Action
-    @ViewBuilder let hint: Hint
+    @ViewBuilder let action: () -> Action
+    @ViewBuilder let hint: () -> Hint
+
+    @FocusState private var isFocused: Bool
+
+    init(
+        text: Binding<String>,
+        errorMessage: Binding<String>,
+        label: String? = nil,
+        placeholder: String,
+        keyboardType: UIKeyboardType = .default,
+        @ViewBuilder action: @escaping () -> Action = { EmptyView() },
+        @ViewBuilder hint: @escaping () -> Hint = { EmptyView() }
+    ) {
+        self._text = text
+        self._errorMessage = errorMessage
+
+        self.label = label
+        self.placeholder = placeholder
+        self.keyboardType = keyboardType
+
+        self.action = action
+        self.hint = hint
+    }
 
     var isError: Bool {
         !errorMessage.isEmpty
+    }
+
+    var borderColor: Color {
+        if !isEnabled { return .componentDisabled }
+        if isError { return .errorMain }
+        return isFocused ? .componentPressed : .componentPrimary
     }
 
     var body: some View {
@@ -20,7 +50,7 @@ struct AppTextField<Hint: View, Action: View>: View {
             if let label {
                 Text(label)
                     .subtitle4()
-                    .foregroundStyle(.textPrimary)
+                    .foregroundStyle(isEnabled ? .textPrimary : .textDisabled)
             }
             HStack(spacing: 8) {
                 TextField(
@@ -28,18 +58,23 @@ struct AppTextField<Hint: View, Action: View>: View {
                     text: self.$text
                 )
                 .keyboardType(keyboardType)
+                .focused($isFocused)
+                .disabled(!isEnabled)
                 .body3()
                 .frame(height: 20)
+                .padding(.vertical, 14)
+                .onTapGesture { isFocused = true }
                 .onChange(of: text) { _ in
                     self.errorMessage = ""
                 }
-                action
+                action()
             }
-            .padding(.vertical, 14)
             .padding(.horizontal, 16)
-            .background(
+            .background(isEnabled ? .clear : .componentDisabled)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(.componentPrimary, lineWidth: 1)
+                    .stroke(borderColor, lineWidth: 1)
             )
 
             if isError {
@@ -49,7 +84,7 @@ struct AppTextField<Hint: View, Action: View>: View {
                 }
                 .foregroundStyle(.errorMain)
             } else {
-                hint
+                hint()
             }
         }
     }
@@ -60,11 +95,11 @@ private struct PreviewView: View {
     @State private var errorMessage = "Some error message"
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 24) {
             AppTextField(
                 text: self.$text,
-                errorMessage: self.$errorMessage,
-                label: "Field Label",
+                errorMessage: .constant(""),
+                label: "Regulart",
                 placeholder: "Enter text here",
                 action: {
                     Image(Icons.qrCode)
@@ -78,6 +113,19 @@ private struct PreviewView: View {
                     Image(Icons.info).iconSmall()
                 }
             }
+            AppTextField(
+                text: self.$text,
+                errorMessage: self.$errorMessage,
+                label: "Error",
+                placeholder: "Enter text here"
+            )
+            AppTextField(
+                text: self.$text,
+                errorMessage: .constant(""),
+                label: "Disabled",
+                placeholder: "Enter text here"
+            )
+            .disabled(true)
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)

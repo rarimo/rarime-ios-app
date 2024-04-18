@@ -46,9 +46,6 @@
         }
       }
     },
-    "0.0 RMO" : {
-
-    },
     "Additional Data" : {
 
     },
@@ -178,9 +175,6 @@
     "Enter Passcode" : {
 
     },
-    "Enter text here" : {
-
-    },
     "Error" : {
 
     },
@@ -194,9 +188,6 @@
 
     },
     "Female" : {
-
-    },
-    "Field Label" : {
 
     },
     "First Name" : {
@@ -313,6 +304,9 @@
     "Personal data never leaves the device" : {
 
     },
+    "Place QR code within the frame to scan" : {
+
+    },
     "Place your passport cover to the back of your phone" : {
 
     },
@@ -335,9 +329,6 @@
 
     },
     "RARIME" : {
-
-    },
-    "rarimo1..." : {
 
     },
     "Reading Passport data" : {

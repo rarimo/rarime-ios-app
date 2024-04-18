@@ -38,8 +38,8 @@ struct WalletSendView: View {
 
     var content: some View {
         WalletRouteLayout(
-            title: "Send RMO",
-            description: "Withdraw the RMO token",
+            title: String(localized: "Send RMO"),
+            description: String(localized: "Withdraw the RMO token"),
             onBack: onBack
         ) {
             VStack {
@@ -48,7 +48,7 @@ struct WalletSendView: View {
                         AppTextField(
                             text: $address,
                             errorMessage: $addressErrorMessage,
-                            label: "Address",
+                            label: String(localized: "Address"),
                             placeholder: "rarimo1...",
                             action: {
                                 Button(action: toggleScan) {
@@ -57,11 +57,11 @@ struct WalletSendView: View {
                                         .foregroundStyle(.textSecondary)
                                 }
                             }
-                        ) {}
+                        )
                         AppTextField(
                             text: $amount,
                             errorMessage: .constant(""),
-                            label: "Amount",
+                            label: String(localized: "Amount"),
                             placeholder: "0.0 RMO",
                             keyboardType: .decimalPad,
                             action: {

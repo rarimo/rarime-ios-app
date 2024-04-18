@@ -9,8 +9,8 @@ struct WalletReceiveView: View {
 
     var body: some View {
         WalletRouteLayout(
-            title: "Receive RMO",
-            description: "You can use the QR code or the wallet address to deposit the RMO token to your account",
+            title: String(localized: "Receive RMO"),
+            description: String(localized: "You can use the QR code or the wallet address to deposit the RMO token to your account"),
             onBack: onBack
         ) {
             CardContainer {
