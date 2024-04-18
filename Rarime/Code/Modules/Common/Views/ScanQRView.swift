@@ -23,8 +23,7 @@ struct ScanQRView: View {
                 Color.black
                     .opacity(0.7)
                     .mask(MaskShape(size: 235).fill(style: FillStyle(eoFill: true)))
-                // TODO: use enum
-                Image("QrFrame").square(240)
+                Image(Images.qrFrame).square(240)
                 Text("Place QR code within the frame to scan")
                     .body3()
                     .foregroundStyle(.baseWhite)
