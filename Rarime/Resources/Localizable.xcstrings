@@ -39,19 +39,34 @@
     "0" : {
 
     },
+    "0.0" : {
+
+    },
+    "0.00 RMO" : {
+
+    },
     "3" : {
 
     },
     "21 Dec, 2024" : {
 
     },
+    "120.591 RMO" : {
+
+    },
     "Additional Data" : {
+
+    },
+    "Address" : {
 
     },
     "Airdrop" : {
 
     },
     "All Done!" : {
+
+    },
+    "Amount" : {
 
     },
     "Authenticating with passport..." : {
@@ -61,6 +76,9 @@
 
     },
     "Available RMO" : {
+
+    },
+    "Available:" : {
 
     },
     "Back to Intro" : {
@@ -130,9 +148,6 @@
 
     },
     "Delete Card" : {
-
-    },
-    "Deposit Adress" : {
 
     },
     "Description text here" : {
@@ -252,6 +267,9 @@
     "Manage your assets" : {
 
     },
+    "MAX" : {
+
+    },
     "Maybe Later" : {
 
     },
@@ -318,6 +336,9 @@
     "RARIME" : {
 
     },
+    "rarimo1..." : {
+
+    },
     "Reading Passport data" : {
 
     },
@@ -330,10 +351,16 @@
     "Receive RMO" : {
 
     },
+    "Receiver gets" : {
+
+    },
     "Repeat Passcode" : {
 
     },
     "Rewards" : {
+
+    },
+    "Scan QR" : {
 
     },
     "Scan your Passport" : {
@@ -419,6 +446,9 @@
 
     },
     "Your Private Key" : {
+
+    },
+    "Your Rarimo Adress" : {
 
     }
   },

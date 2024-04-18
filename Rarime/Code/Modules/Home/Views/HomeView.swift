@@ -5,9 +5,8 @@ private enum HomeRoute: Hashable {
 }
 
 struct HomeView: View {
-    let onBalanceTap: () -> Void
-
     @EnvironmentObject var appViewModel: AppView.ViewModel
+    @EnvironmentObject var mainViewModel: MainView.ViewModel
 
     @State private var path: [HomeRoute] = []
     @StateObject private var viewModel = ViewModel()
@@ -35,34 +34,36 @@ struct HomeView: View {
     }
 
     private var content: some View {
-        VStack(alignment: .leading, spacing: 32) {
-            header
-            VStack(spacing: 24) {
-                if let passport = viewModel.passport {
-                    PassportCard(
-                        look: viewModel.passportCardLook,
-                        passport: passport,
-                        onLookChange: { look in viewModel.setPassportCardLook(look) },
-                        onDelete: { viewModel.removePassport() }
-                    )
-                    rarimeCard
-                } else {
-                    airdropCard
-                    otherPassportsCard
+        MainViewLayout {
+            VStack(alignment: .leading, spacing: 32) {
+                header
+                VStack(spacing: 24) {
+                    if let passport = viewModel.passport {
+                        PassportCard(
+                            look: viewModel.passportCardLook,
+                            passport: passport,
+                            onLookChange: { look in viewModel.setPassportCardLook(look) },
+                            onDelete: { viewModel.removePassport() }
+                        )
+                        rarimeCard
+                    } else {
+                        airdropCard
+                        otherPassportsCard
+                    }
                 }
+                Spacer()
             }
-            Spacer()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 32)
+            .background(.backgroundPrimary)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.horizontal, 12)
-        .padding(.vertical, 32)
-        .background(.backgroundPrimary)
     }
 
     private var header: some View {
         VStack(spacing: 8) {
             HStack {
-                Button(action: onBalanceTap) {
+                Button(action: { mainViewModel.selectTab(.wallet) }) {
                     HStack(spacing: 4) {
                         Text("Balance: RMO").body3()
                         Image(Icons.caretRight).iconSmall()
@@ -153,6 +154,7 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(onBalanceTap: {})
+    HomeView()
         .environmentObject(AppView.ViewModel())
+        .environmentObject(MainView.ViewModel())
 }

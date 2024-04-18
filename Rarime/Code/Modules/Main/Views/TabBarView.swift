@@ -13,15 +13,12 @@ struct TabBarView: View {
     var body: some View {
         HStack {
             ForEach(MainTabs.allCases, id: \.self) { item in
-                Button {
-                    selectedTab = item
-                } label: {
-                    CustomTabItem(
-                        icon: item.iconName,
-                        activeIcon: item.activeIconName,
-                        isActive: selectedTab == item
-                    )
-                }
+                CustomTabItem(
+                    icon: item.iconName,
+                    activeIcon: item.activeIconName,
+                    isActive: selectedTab == item
+                )
+                .onTapGesture { selectedTab = item }
             }
         }
         .padding(4)

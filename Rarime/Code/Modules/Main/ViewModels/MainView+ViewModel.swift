@@ -1,11 +1,4 @@
-//
-//  MainTabs.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 24.03.2024.
-//
-
-import Foundation
+import SwiftUI
 
 enum MainTabs: Int, CaseIterable {
     case home, wallet, rewards, profile
@@ -25,6 +18,16 @@ enum MainTabs: Int, CaseIterable {
         case .wallet: return Icons.walletFilled
         case .rewards: return Icons.airdrop
         case .profile: return Icons.user
+        }
+    }
+}
+
+extension MainView {
+    class ViewModel: ObservableObject {
+        @Published var selectedTab: MainTabs = .home
+
+        func selectTab(_ tab: MainTabs) {
+            selectedTab = tab
         }
     }
 }

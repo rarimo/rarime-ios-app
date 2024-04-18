@@ -17,7 +17,7 @@ struct WalletReceiveView: View {
                 VStack(spacing: 20) {
                     QRCodeView(code: address)
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Deposit Adress")
+                        Text("Your Rarimo Adress")
                             .subtitle4()
                             .foregroundStyle(.textPrimary)
                         HStack(spacing: 16) {

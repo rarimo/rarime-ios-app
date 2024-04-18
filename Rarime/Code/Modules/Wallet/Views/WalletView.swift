@@ -1,7 +1,7 @@
 import SwiftUI
 
-private enum WalletRoute: Hashable {
-    case send, receive
+private enum WalletRoute: String, Hashable {
+    case receive, send
 }
 
 struct WalletView: View {
@@ -11,26 +11,28 @@ struct WalletView: View {
         NavigationStack(path: $path) {
             content.navigationDestination(for: WalletRoute.self) { route in
                 switch route {
-                case .send:
-                    WalletSendView(onBack: { path.removeLast() })
                 case .receive:
                     WalletReceiveView(onBack: { path.removeLast() })
+                case .send:
+                    WalletSendView(onBack: { path.removeLast() })
                 }
             }
         }
     }
 
     private var content: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            header
-            VStack {
-                transactionsCard
-                Spacer()
+        MainViewLayout {
+            VStack(alignment: .leading, spacing: 12) {
+                header
+                VStack {
+                    transactionsCard
+                    Spacer()
+                }
+                .padding(.horizontal, 12)
             }
-            .padding(.horizontal, 12)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.backgroundPrimary)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.backgroundPrimary)
     }
 
     private var header: some View {
@@ -100,4 +102,5 @@ struct WalletView: View {
 
 #Preview {
     WalletView()
+        .environmentObject(MainView.ViewModel())
 }

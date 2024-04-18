@@ -1,39 +1,24 @@
-//
-//  MainView.swift
-//  Rarime
-//
-//  Created by Ivan Lele on 21.03.2024.
-//
-
 import SwiftUI
 
 struct MainView: View {
     @EnvironmentObject var appViewModel: AppView.ViewModel
-    @State private var selectedTab = MainTabs.home
+    @StateObject private var viewModel = ViewModel()
 
     var body: some View {
-        NavigationStack {
-            ZStack(alignment: .bottom) {
-                VStack {
-                    TabView(selection: $selectedTab) {
-                        HomeView(onBalanceTap: { selectedTab = .wallet }).tag(MainTabs.home)
-                        WalletView().tag(MainTabs.wallet)
-                        RewardsView().tag(MainTabs.rewards)
-                        ProfileView().tag(MainTabs.profile)
-                    }
-                    .environmentObject(appViewModel)
-                    .onAppear {
-                        // Remove tab bar background
-                        let appearance = UITabBarAppearance()
-                        appearance.configureWithTransparentBackground()
-                        UITabBar.appearance().standardAppearance = appearance
-                    }
-                }
-                TabBarView(selectedTab: $selectedTab)
+        ZStack {
+            switch viewModel.selectedTab {
+                case .home:
+                    HomeView()
+                case .wallet:
+                    WalletView()
+                case .rewards:
+                    RewardsView()
+                case .profile:
+                    ProfileView()
             }
-            .edgesIgnoringSafeArea(.bottom)
         }
-        .tint(.textPrimary)
+        .environmentObject(appViewModel)
+        .environmentObject(viewModel)
     }
 }
 
