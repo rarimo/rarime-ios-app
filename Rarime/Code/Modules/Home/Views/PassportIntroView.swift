@@ -5,7 +5,7 @@ struct PassportIntroView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            HomeIntroLayoutView(
+            HomeIntroLayout(
                 title: "Other passport holders",
                 description: "short description text here",
                 icon: Image(Icons.globeSimple).iconLarge()

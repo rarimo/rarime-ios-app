@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct AirdropIntroView: View {
-    let onStart: () -> Void
     @EnvironmentObject var appViewModel: AppView.ViewModel
+    let onStart: () -> Void
 
     @State private var termsChecked = false
 
@@ -20,7 +20,7 @@ struct AirdropIntroView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            HomeIntroLayoutView(
+            HomeIntroLayout(
                 title: "Programable Airdrop",
                 description: "Beta launch is focused on distributing tokens to Ukrainian identity holders",
                 icon: Text("🇺🇦").h4()

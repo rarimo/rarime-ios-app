@@ -97,10 +97,19 @@
     "CARD VISUAL" : {
 
     },
+    "Claim" : {
+
+    },
+    "Claim %lld RMO tokens" : {
+
+    },
+    "Claiming..." : {
+
+    },
     "Close" : {
 
     },
-    "Complete" : {
+    "Congrats!" : {
 
     },
     "Continue" : {
@@ -127,16 +136,10 @@
     "Create new Identity" : {
 
     },
-    "Creating anonymized identity proof" : {
+    "Creating a confidential profile" : {
 
     },
     "Credentials" : {
-
-    },
-    "Date of birth" : {
-
-    },
-    "Date of Birth" : {
 
     },
     "Delete Card" : {
@@ -145,10 +148,10 @@
     "Description text here" : {
 
     },
-    "Document number" : {
+    "Document class mode" : {
 
     },
-    "Document type" : {
+    "Document number" : {
 
     },
     "Done" : {
@@ -178,9 +181,6 @@
     "Error" : {
 
     },
-    "Expiry date" : {
-
-    },
     "Face ID Disabled" : {
 
     },
@@ -190,7 +190,7 @@
     "Female" : {
 
     },
-    "First Name" : {
+    "Finalizing" : {
 
     },
     "Full functional available on: %@" : {
@@ -229,6 +229,9 @@
     "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it h" : {
 
     },
+    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, " : {
+
+    },
     "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors " : {
 
     },
@@ -239,9 +242,6 @@
 
     },
     "July" : {
-
-    },
-    "Last Name" : {
 
     },
     "Learn more about RariMe App" : {
@@ -262,7 +262,7 @@
     "Maybe Later" : {
 
     },
-    "Move your PASSPORT page inside the border" : {
+    "Move your passport page inside the border" : {
 
     },
     "Must data" : {
@@ -293,9 +293,6 @@
 
     },
     "Passport data is stored only on this device" : {
-
-    },
-    "Passport Number" : {
 
     },
     "Passport read successfully" : {
@@ -331,6 +328,9 @@
     "RARIME" : {
 
     },
+    "Reading Data" : {
+
+    },
     "Reading Passport data" : {
 
     },
@@ -358,7 +358,7 @@
     "Scan your Passport" : {
 
     },
-    "Select All" : {
+    "Scan your Passport" : {
 
     },
     "Select Authorisation Method" : {
@@ -367,7 +367,7 @@
     "Select Data" : {
 
     },
-    "Selected data can be used as anonymised proofs" : {
+    "Selected data will create a confidential profile" : {
 
     },
     "Send" : {
@@ -394,9 +394,6 @@
     "Sorry, there was a problem reading the passport. Please try again" : {
 
     },
-    "Start" : {
-
-    },
     "Step %lld/%lld" : {
       "localizations" : {
         "en" : {
@@ -407,6 +404,9 @@
         }
       }
     },
+    "Thanks!" : {
+
+    },
     "This is an app where your digital identity lives and enables you to connect with rest of the web in a fully private mode" : {
 
     },
@@ -414,6 +414,9 @@
 
     },
     "Wallet" : {
+
+    },
+    "We will notify when you become eligible" : {
 
     },
     "Welcome" : {

@@ -16,14 +16,19 @@ struct HomeView: View {
     @State private var isPassportSheetPresented = false
     @State private var isRarimeSheetPresented = false
 
+    @State private var isCongratsShown = false
+    @State private var isClaimed = false
+
     var body: some View {
         NavigationStack(path: $path) {
             content.navigationDestination(for: HomeRoute.self) { route in
                 switch route {
                 case .scanPassport:
                     ScanPassportView(
-                        onComplete: { passport in
+                        onComplete: { passport, isClaimed in
                             viewModel.setPassport(passport)
+                            isCongratsShown = true
+                            self.isClaimed = isClaimed
                             path.removeLast()
                         },
                         onClose: { path.removeLast() }
@@ -35,7 +40,13 @@ struct HomeView: View {
     }
 
     private var content: some View {
-        MainViewLayout {
+        VStack(spacing: 24) {
+            Text("Beta launch")
+                .body3()
+                .frame(maxWidth: .infinity)
+                .foregroundStyle(.warningDark)
+                .padding(.vertical, 4)
+                .background(.warningLighter)
             VStack(alignment: .leading, spacing: 32) {
                 header
                 VStack(spacing: 24) {
@@ -54,11 +65,12 @@ struct HomeView: View {
                 }
                 Spacer()
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding(.horizontal, 12)
-            .padding(.vertical, 32)
-            .background(.backgroundPrimary)
         }
+        .padding(.top, 1)
+        .background(.backgroundPrimary)
+        .blur(radius: isCongratsShown ? 12 : 0)
+        .overlay(CongratsView(open: $isCongratsShown, isClaimed: isClaimed))
     }
 
     private var header: some View {
@@ -80,13 +92,6 @@ struct HomeView: View {
             HStack {
                 Text(walletViewModel.balance.formatted()).h4().foregroundStyle(.textPrimary)
                 Spacer()
-                Text("Beta launch")
-                    .body3()
-                    .foregroundStyle(.warningDark)
-                    .padding(.vertical, 4)
-                    .padding(.horizontal, 12)
-                    .background(.warningLighter)
-                    .clipShape(Capsule())
             }
         }
         .padding(.horizontal, 8)
