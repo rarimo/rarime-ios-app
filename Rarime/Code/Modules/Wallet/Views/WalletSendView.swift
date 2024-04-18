@@ -4,9 +4,37 @@ struct WalletSendView: View {
     let onBack: () -> Void
 
     @State private var address = ""
+    @State private var addressErrorMessage = ""
+
     @State private var amount = ""
 
+    @State private var isScanning = false
+
+    func toggleScan() {
+        withAnimation(.easeInOut(duration: 0.2)) {
+            isScanning.toggle()
+        }
+    }
+
     var body: some View {
+        ZStack {
+            if isScanning {
+                ScanQRView(onBack: { toggleScan() }) { result in
+                    toggleScan()
+                    if result.starts(with: "rarimo1") {
+                        address = result
+                    } else {
+                        addressErrorMessage = String(localized: "Invalid Rarimo address")
+                    }
+                }
+                .transition(.move(edge: .bottom))
+            } else {
+                content
+            }
+        }
+    }
+
+    var content: some View {
         WalletRouteLayout(
             title: "Send RMO",
             description: "Withdraw the RMO token",
@@ -17,13 +45,15 @@ struct WalletSendView: View {
                     VStack(spacing: 20) {
                         AppTextField(
                             text: $address,
-                            errorMessage: .constant(""),
+                            errorMessage: $addressErrorMessage,
                             label: "Address",
                             placeholder: "rarimo1...",
                             action: {
-                                Image(Icons.qrCode)
-                                    .iconMedium()
-                                    .foregroundStyle(.textSecondary)
+                                Button(action: toggleScan) {
+                                    Image(Icons.qrCode)
+                                        .iconMedium()
+                                        .foregroundStyle(.textSecondary)
+                                }
                             }
                         ) {}
                         AppTextField(

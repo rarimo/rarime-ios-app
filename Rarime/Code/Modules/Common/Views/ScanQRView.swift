@@ -1,0 +1,72 @@
+import CodeScanner
+import SwiftUI
+
+struct ScanQRView: View {
+    var onBack: () -> Void
+    var onScan: (String) -> Void
+
+    var body: some View {
+        ZStack {
+            CodeScannerView(codeTypes: [.qr]) { response in
+                switch response {
+                case .success(let result):
+                    onScan(result.string)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    onScan("")
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea()
+
+            ZStack {
+                Color.black
+                    .opacity(0.7)
+                    .mask(MaskShape(size: 235).fill(style: FillStyle(eoFill: true)))
+                Image("QrFrame").square(240)
+            }
+            .ignoresSafeArea()
+
+            VStack {
+                HStack {
+                    Button(action: onBack) {
+                        Image(Icons.caretLeft).iconMedium()
+                    }
+                    Spacer()
+                    Text("Scan QR").subtitle4()
+                    Spacer()
+                    Rectangle().frame(width: 20, height: 0)
+                }
+                .foregroundStyle(.baseWhite)
+                .padding(20)
+                Spacer()
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+private struct MaskShape: Shape {
+    let size: Double
+
+    func path(in rect: CGRect) -> Path {
+        var cgSize = CGSize(width: size, height: size)
+
+        var path = Rectangle().path(in: rect)
+        path.addPath(
+            RoundedRectangle(cornerRadius: 10)
+                .path(in: CGRect(
+                    x: rect.midX - cgSize.width / 2,
+                    y: rect.midY - cgSize.height / 2,
+                    width: size,
+                    height: size
+                ))
+        )
+
+        return path
+    }
+}
+
+#Preview {
+    ScanQRView(onBack: {}, onScan: { _ in })
+}

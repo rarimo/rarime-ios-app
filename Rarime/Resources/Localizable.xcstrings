@@ -234,6 +234,9 @@
     "Import Identity" : {
 
     },
+    "Invalid Rarimo address" : {
+
+    },
     "Issuing authority" : {
 
     },
@@ -414,6 +417,9 @@
           }
         }
       }
+    },
+    "The field is required" : {
+
     },
     "This is an app where your digital identity lives and enables you to connect with rest of the web in a fully private mode" : {
 

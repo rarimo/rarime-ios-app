@@ -27,7 +27,10 @@ struct AppTextField<Hint: View, Action: View>: View {
                     text: self.$text
                 )
                 .body3()
-                .onChange(of: self.text) { _ in self.errorMessage = "" }
+                .frame(height: 20)
+                .onChange(of: text) { _ in
+                    self.errorMessage = ""
+                }
                 action
             }
             .padding(.vertical, 14)
