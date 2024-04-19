@@ -36,6 +36,9 @@
     "🇺🇦" : {
 
     },
+    "Account" : {
+
+    },
     "Address" : {
 
     },
@@ -48,7 +51,13 @@
     "Amount" : {
 
     },
+    "App version: 1.0" : {
+
+    },
     "Applying Zero Knowledge" : {
+
+    },
+    "Auth Method" : {
 
     },
     "Authenticating with passport..." : {
@@ -64,9 +73,6 @@
 
     },
     "Available:" : {
-
-    },
-    "Back to Intro" : {
 
     },
     "Balance: RMO" : {
@@ -135,10 +141,16 @@
     "Credentials" : {
 
     },
+    "Dark Mode" : {
+
+    },
     "Delete Card" : {
 
     },
     "Description text here" : {
+
+    },
+    "DID: Didq234234rw3423" : {
 
     },
     "Document class mode" : {
@@ -168,10 +180,19 @@
     "Enable Passcode Authentication" : {
 
     },
+    "English" : {
+
+    },
     "Enter Passcode" : {
 
     },
     "Error" : {
+
+    },
+    "Export Keys" : {
+
+    },
+    "Face ID" : {
 
     },
     "Face ID Disabled" : {
@@ -240,10 +261,16 @@
     "July" : {
 
     },
+    "Language" : {
+
+    },
     "Learn more about RariMe App" : {
 
     },
     "Let’s Start" : {
+
+    },
+    "Light Mode" : {
 
     },
     "Male" : {
@@ -285,6 +312,9 @@
     "Other passport holders" : {
 
     },
+    "Passcode" : {
+
+    },
     "Passcodes do not match" : {
 
     },
@@ -310,6 +340,9 @@
 
     },
     "Please Wait..." : {
+
+    },
+    "Privacy Policy" : {
 
     },
     "Processing" : {
@@ -346,9 +379,6 @@
 
     },
     "Scan" : {
-
-    },
-    "Scan QR" : {
 
     },
     "Scan QR" : {
@@ -400,7 +430,16 @@
         }
       }
     },
+    "System" : {
+
+    },
+    "Terms of Use" : {
+
+    },
     "Thanks!" : {
+
+    },
+    "Theme" : {
 
     },
     "This is an app where your digital identity lives and enables you to connect with rest of the web in a fully private mode" : {

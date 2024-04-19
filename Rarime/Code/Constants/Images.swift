@@ -8,4 +8,8 @@ enum Images {
     static let rewardCoin = "RewardCoin"
 
     static let qrFrame = "QrFrame"
+
+    static let lightTheme = "LightTheme"
+    static let darkTheme = "DarkTheme"
+    static let systemTheme = "SystemTheme"
 }

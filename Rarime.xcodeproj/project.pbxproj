@@ -92,6 +92,12 @@
 		56E2D92A2BCFFB6B006E725D /* Airdrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9292BCFFB6B006E725D /* Airdrop.swift */; };
 		56E2D92D2BD0196B006E725D /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D92C2BD0196B006E725D /* QRCodeView.swift */; };
 		56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */ = {isa = PBXBuildFile; productRef = 56E2D9312BD01E71006E725D /* NFCPassportReader */; };
+		56E6AD452BD272D100E4DDC1 /* AuthMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD442BD272D100E4DDC1 /* AuthMethodView.swift */; };
+		56E6AD472BD272FB00E4DDC1 /* ExportKeysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD462BD272FB00E4DDC1 /* ExportKeysView.swift */; };
+		56E6AD492BD2731100E4DDC1 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD482BD2731100E4DDC1 /* LanguageView.swift */; };
+		56E6AD4B2BD2732300E4DDC1 /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4A2BD2732300E4DDC1 /* ThemeView.swift */; };
+		56E6AD4D2BD273BC00E4DDC1 /* ProfileRouteLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */; };
+		56E6AD4F2BD2756200E4DDC1 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */; };
 		56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F48BBD2BC02E82001F3AA4 /* AppButton.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
 		CE32CF522BAC981300E507B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE32CF512BAC981300E507B6 /* Lottie */; };
@@ -185,6 +191,12 @@
 		56E2D9272BCFF5DE006E725D /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		56E2D9292BCFFB6B006E725D /* Airdrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Airdrop.swift; sourceTree = "<group>"; };
 		56E2D92C2BD0196B006E725D /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
+		56E6AD442BD272D100E4DDC1 /* AuthMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethodView.swift; sourceTree = "<group>"; };
+		56E6AD462BD272FB00E4DDC1 /* ExportKeysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportKeysView.swift; sourceTree = "<group>"; };
+		56E6AD482BD2731100E4DDC1 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
+		56E6AD4A2BD2732300E4DDC1 /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
+		56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouteLayout.swift; sourceTree = "<group>"; };
+		56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
 		56F48BBD2BC02E82001F3AA4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CE778B782BA9CA0A00B26485 /* AppView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppView+ViewModel.swift"; sourceTree = "<group>"; };
@@ -328,6 +340,11 @@
 			isa = PBXGroup;
 			children = (
 				56722F1F2BCD62BB00300AD0 /* ProfileView.swift */,
+				56E6AD442BD272D100E4DDC1 /* AuthMethodView.swift */,
+				56E6AD462BD272FB00E4DDC1 /* ExportKeysView.swift */,
+				56E6AD482BD2731100E4DDC1 /* LanguageView.swift */,
+				56E6AD4A2BD2732300E4DDC1 /* ThemeView.swift */,
+				56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -684,6 +701,7 @@
 				56933E022BBBFDFE0068C894 /* ProcessingChipView.swift */,
 				56933E042BBC00D60068C894 /* RewardChipView.swift */,
 				56E2D9212BCFBA0B006E725D /* PassportImageView.swift */,
+				56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -806,12 +824,14 @@
 				56933DFF2BBBFDA30068C894 /* ProcessingStatus.swift in Sources */,
 				56E2D9172BCE938F006E725D /* ActionCard.swift in Sources */,
 				563529EF2BB0732C0027C910 /* CredentialsView.swift in Sources */,
+				56E6AD4D2BD273BC00E4DDC1 /* ProfileRouteLayout.swift in Sources */,
 				56E2D91B2BCEA66A006E725D /* PassportCard.swift in Sources */,
 				56E2D9192BCE94CA006E725D /* RarimeInfoView.swift in Sources */,
 				56CC01E52BCD81AA008CEBE0 /* AirdropIntroView.swift in Sources */,
 				560F0C232BD02DFD00067054 /* WalletSendView.swift in Sources */,
 				56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */,
 				56E2D9222BCFBA0B006E725D /* PassportImageView.swift in Sources */,
+				56E6AD452BD272D100E4DDC1 /* AuthMethodView.swift in Sources */,
 				56E2D91E2BCEC90B006E725D /* HomeView+ViewModel.swift in Sources */,
 				56DAA3152BB8CC95002CF710 /* PasscodeFieldView.swift in Sources */,
 				560F0C2C2BD133A000067054 /* MainViewLayout.swift in Sources */,
@@ -843,6 +863,7 @@
 				56A6C7562BBC194800992562 /* Animations.swift in Sources */,
 				56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */,
 				56E2D9242BCFDD42006E725D /* ClaimTokensView.swift in Sources */,
+				56E6AD492BD2731100E4DDC1 /* LanguageView.swift in Sources */,
 				563529EB2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift in Sources */,
 				56DAA3132BB8CA4F002CF710 /* EnableFaceIdView.swift in Sources */,
 				56E2D92D2BD0196B006E725D /* QRCodeView.swift in Sources */,
@@ -850,15 +871,18 @@
 				568B4FD12BB6D88F001C9C74 /* Divider.swift in Sources */,
 				56DAA3112BB8C97D002CF710 /* EnableLayoutView.swift in Sources */,
 				56E2D9202BCED460006E725D /* AppCheckbox.swift in Sources */,
+				56E6AD472BD272FB00E4DDC1 /* ExportKeysView.swift in Sources */,
 				568B4FE22BB70BEA001C9C74 /* GetStartedView.swift in Sources */,
 				56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */,
 				56474AD62BB9860E0017AA25 /* FaceIdAuth.swift in Sources */,
 				56933DF12BBAC1B10068C894 /* ScanPassportLayoutView.swift in Sources */,
 				560F0C272BD1146C00067054 /* ScanQRView.swift in Sources */,
 				56933DFB2BBAFBD90068C894 /* AppToggle.swift in Sources */,
+				56E6AD4B2BD2732300E4DDC1 /* ThemeView.swift in Sources */,
 				56E2D9152BCE7FC4006E725D /* HomeIntroLayout.swift in Sources */,
 				56933DEF2BBABD100068C894 /* ScanPassportView.swift in Sources */,
 				CE778B792BA9CA0A00B26485 /* AppView+ViewModel.swift in Sources */,
+				56E6AD4F2BD2756200E4DDC1 /* SafariWebView.swift in Sources */,
 				567AEC9B2BBD9B8100A20E83 /* Passport.swift in Sources */,
 				56933E032BBBFDFE0068C894 /* ProcessingChipView.swift in Sources */,
 				563529F12BB0736A0027C910 /* TabBarView.swift in Sources */,
