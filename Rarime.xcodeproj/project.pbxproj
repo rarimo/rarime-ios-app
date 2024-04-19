@@ -84,6 +84,8 @@
 		56E2D91E2BCEC90B006E725D /* HomeView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D91D2BCEC90B006E725D /* HomeView+ViewModel.swift */; };
 		56E2D9202BCED460006E725D /* AppCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D91F2BCED460006E725D /* AppCheckbox.swift */; };
 		56E2D9222BCFBA0B006E725D /* PassportImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9212BCFBA0B006E725D /* PassportImageView.swift */; };
+		56E2D92D2BD0196B006E725D /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D92C2BD0196B006E725D /* QRCodeView.swift */; };
+		56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */ = {isa = PBXBuildFile; productRef = 56E2D9312BD01E71006E725D /* NFCPassportReader */; };
 		56E2D9242BCFDD42006E725D /* ClaimTokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9232BCFDD42006E725D /* ClaimTokensView.swift */; };
 		56E2D9262BCFE65C006E725D /* CongratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9252BCFE65C006E725D /* CongratsView.swift */; };
 		56E2D9282BCFF5DE006E725D /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9272BCFF5DE006E725D /* Images.swift */; };
@@ -183,6 +185,7 @@
 		56E2D91D2BCEC90B006E725D /* HomeView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeView+ViewModel.swift"; sourceTree = "<group>"; };
 		56E2D91F2BCED460006E725D /* AppCheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCheckbox.swift; sourceTree = "<group>"; };
 		56E2D9212BCFBA0B006E725D /* PassportImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportImageView.swift; sourceTree = "<group>"; };
+		56E2D92C2BD0196B006E725D /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		56E2D9232BCFDD42006E725D /* ClaimTokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimTokensView.swift; sourceTree = "<group>"; };
 		56E2D9252BCFE65C006E725D /* CongratsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
 		56E2D9272BCFF5DE006E725D /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };

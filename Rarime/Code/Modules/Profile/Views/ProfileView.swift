@@ -72,7 +72,7 @@ struct ProfileView: View {
                             ProfileRow(
                                 icon: Icons.sun,
                                 title: String(localized: "Theme"),
-                                value: "Light",
+                                value: "System",
                                 action: { path.append(.theme) }
                             )
                             ProfileRow(
@@ -89,7 +89,7 @@ struct ProfileView: View {
                                 title: String(localized: "Terms of Use"),
                                 action: { isTermsSheetPresented = true }
                             )
-                            .popover(isPresented: $isTermsSheetPresented) {
+                            .fullScreenCover(isPresented: $isTermsSheetPresented) {
                                 SafariWebView(url: appViewModel.config.general.termsOfUseURL)
                                     .ignoresSafeArea()
                             }

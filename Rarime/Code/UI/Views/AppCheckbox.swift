@@ -8,7 +8,7 @@ struct AppCheckbox: View {
         ZStack {
             Image(Icons.check)
                 .iconSmall()
-                .foregroundStyle(.textPrimary)
+                .foregroundStyle(.baseBlack)
                 .opacity(checked ? 1 : 0)
         }
         .frame(width: 20, height: 20)
