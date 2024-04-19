@@ -8,6 +8,9 @@ struct ProfileView: View {
     @EnvironmentObject var appViewModel: AppView.ViewModel
     @State private var path: [ProfileRoute] = []
 
+    @State private var isPrivacySheetPresented = false
+    @State private var isTermsSheetPresented = false
+
     var body: some View {
         NavigationStack(path: $path) {
             content.navigationDestination(for: ProfileRoute.self) { route in
@@ -75,13 +78,21 @@ struct ProfileView: View {
                             ProfileRow(
                                 icon: Icons.question,
                                 title: String(localized: "Privacy Policy"),
-                                action: {}
+                                action: { isPrivacySheetPresented = true }
                             )
+                            .fullScreenCover(isPresented: $isPrivacySheetPresented) {
+                                SafariWebView(url: appViewModel.config.general.privacyPolicyURL)
+                                    .ignoresSafeArea()
+                            }
                             ProfileRow(
                                 icon: Icons.flag,
                                 title: String(localized: "Terms of Use"),
-                                action: {}
+                                action: { isTermsSheetPresented = true }
                             )
+                            .popover(isPresented: $isTermsSheetPresented) {
+                                SafariWebView(url: appViewModel.config.general.termsOfUseURL)
+                                    .ignoresSafeArea()
+                            }
                         }
                     }
                     Text("App version: 1.0")
