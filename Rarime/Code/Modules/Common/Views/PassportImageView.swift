@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PassportImageView: View {
     var image: UIImage?
+    var size: CGFloat = 56
     var bgColor: Color = .backgroundPrimary
 
     var body: some View {
@@ -9,14 +10,14 @@ struct PassportImageView: View {
             Image(uiImage: image)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 56, height: 56)
+                .frame(width: size, height: size)
                 .background(.white)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(.componentPrimary, lineWidth: 1))
         } else {
             Image(Icons.user)
-                .iconLarge()
-                .padding(12)
+                .square(size * 0.5)
+                .padding(size * 0.25)
                 .background(bgColor)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(.componentPrimary, lineWidth: 1))
