@@ -8,7 +8,14 @@ struct LanguageView: View {
             title: String(localized: "Language"),
             onBack: onBack
         ) {
-            Text("Language")
+            CardContainer {
+                HStack {
+                    Text("English").subtitle4()
+                    Spacer()
+                    Image(Icons.check).iconMedium()
+                }
+                .foregroundColor(.textPrimary)
+            }
         }
     }
 }

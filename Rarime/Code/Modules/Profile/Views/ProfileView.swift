@@ -115,26 +115,27 @@ private struct ProfileRow: View {
     let action: () -> Void
 
     var body: some View {
-        HStack {
-            Image(icon)
-                .iconMedium()
-                .padding(6)
-                .background(.componentPrimary, in: Circle())
-                .foregroundStyle(.textPrimary)
-            Text(title)
-                .subtitle4()
-                .foregroundStyle(.textPrimary)
-            Spacer()
-            if let value {
-                Text(value)
-                    .body3()
+        Button(action: action) {
+            HStack {
+                Image(icon)
+                    .iconMedium()
+                    .padding(6)
+                    .background(.componentPrimary, in: Circle())
+                    .foregroundStyle(.textPrimary)
+                Text(title)
+                    .subtitle4()
+                    .foregroundStyle(.textPrimary)
+                Spacer()
+                if let value {
+                    Text(value)
+                        .body3()
+                        .foregroundStyle(.textSecondary)
+                }
+                Image(Icons.caretRight)
+                    .iconSmall()
                     .foregroundStyle(.textSecondary)
             }
-            Image(Icons.caretRight)
-                .iconSmall()
-                .foregroundStyle(.textSecondary)
         }
-        .onTapGesture(perform: action)
     }
 }
 
