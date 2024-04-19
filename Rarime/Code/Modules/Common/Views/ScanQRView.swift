@@ -12,7 +12,7 @@ struct ScanQRView: View {
                 case .success(let result):
                     onScan(result.string)
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    LoggerUtil.qr.error("Failed to scan QR code: \(error)")
                     onScan("")
                 }
             }
