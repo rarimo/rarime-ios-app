@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-let privateKey = "d4f1dc5332e5f0263746a31d3563e42ad8bef24a8989d8b0a5ad71f8d5de28a6"
+private let privateKey = "d4f1dc5332e5f0263746a31d3563e42ad8bef24a8989d8b0a5ad71f8d5de28a6"
 
 struct NewIdentityView: View {
     let onBack: () -> Void

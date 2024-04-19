@@ -1,10 +1,3 @@
-//
-//  ToggleView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 01.04.2024.
-//
-
 import SwiftUI
 
 struct AppToggle: View {
@@ -14,7 +7,7 @@ struct AppToggle: View {
     var body: some View {
         HStack {
             RoundedRectangle(cornerRadius: 16, style: .circular)
-                .fill(isOn ? .successMain : .componentPrimary)
+                .fill(isOn ? .primaryDark : .componentPrimary)
                 .frame(width: 40, height: 24)
                 .overlay(
                     Circle()
