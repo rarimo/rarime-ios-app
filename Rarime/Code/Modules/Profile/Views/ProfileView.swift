@@ -1,9 +1,31 @@
 import SwiftUI
 
+private enum ProfileRoute: Hashable {
+    case authMethod, exportKeys, language, theme
+}
+
 struct ProfileView: View {
     @EnvironmentObject var appViewModel: AppView.ViewModel
+    @State private var path: [ProfileRoute] = []
 
     var body: some View {
+        NavigationStack(path: $path) {
+            content.navigationDestination(for: ProfileRoute.self) { route in
+                switch route {
+                case .authMethod:
+                    AuthMethodView(onBack: { path.removeLast() })
+                case .exportKeys:
+                    ExportKeysView(onBack: { path.removeLast() })
+                case .language:
+                    LanguageView(onBack: { path.removeLast() })
+                case .theme:
+                    ThemeView(onBack: { path.removeLast() })
+                }
+            }
+        }
+    }
+
+    var content: some View {
         MainViewLayout {
             VStack(alignment: .leading, spacing: 20) {
                 Text("Profile").subtitle2()
@@ -27,12 +49,12 @@ struct ProfileView: View {
                             ProfileRow(
                                 icon: Icons.userFocus,
                                 title: String(localized: "Auth Method"),
-                                action: {}
+                                action: { path.append(.authMethod) }
                             )
                             ProfileRow(
                                 icon: Icons.key,
                                 title: String(localized: "Export Keys"),
-                                action: {}
+                                action: { path.append(.exportKeys) }
                             )
                         }
                     }
@@ -42,13 +64,13 @@ struct ProfileView: View {
                                 icon: Icons.globeSimple,
                                 title: String(localized: "Language"),
                                 value: "English",
-                                action: {}
+                                action: { path.append(.language) }
                             )
                             ProfileRow(
                                 icon: Icons.sun,
                                 title: String(localized: "Theme"),
                                 value: "Light",
-                                action: {}
+                                action: { path.append(.theme) }
                             )
                             ProfileRow(
                                 icon: Icons.question,
@@ -101,6 +123,7 @@ private struct ProfileRow: View {
                 .iconSmall()
                 .foregroundStyle(.textSecondary)
         }
+        .onTapGesture(perform: action)
     }
 }
 
