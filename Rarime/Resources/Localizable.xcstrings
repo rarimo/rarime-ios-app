@@ -7,6 +7,9 @@
     ", " : {
 
     },
+    "%@ RMO" : {
+
+    },
     "%@ Years Old" : {
 
     },
@@ -20,13 +23,29 @@
         }
       }
     },
+    "%@%@ RMO" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@%2$@ RMO"
+          }
+        }
+      }
+    },
     "🇺🇦" : {
 
     },
-    "0" : {
+    "Address" : {
+
+    },
+    "Airdrop" : {
 
     },
     "All Done!" : {
+
+    },
+    "Amount" : {
 
     },
     "Applying Zero Knowledge" : {
@@ -38,7 +57,10 @@
     "Authentication Failed" : {
 
     },
-    "Back" : {
+    "Available RMO" : {
+
+    },
+    "Available:" : {
 
     },
     "Back to Intro" : {
@@ -188,6 +210,9 @@
     "Import Identity" : {
 
     },
+    "Invalid Rarimo address" : {
+
+    },
     "Issuing state code" : {
 
     },
@@ -221,6 +246,9 @@
     "Manage your assets" : {
 
     },
+    "MAX" : {
+
+    },
     "Maybe Later" : {
 
     },
@@ -242,10 +270,10 @@
     "NFC Reader" : {
 
     },
-    "Okay" : {
+    "No transactions yet" : {
 
     },
-    "Open wallet" : {
+    "Okay" : {
 
     },
     "Other passport holders" : {
@@ -261,6 +289,9 @@
 
     },
     "Personal data never leaves the device" : {
+
+    },
+    "Place QR code within the frame to scan" : {
 
     },
     "Place your passport cover to the back of your phone" : {
@@ -296,6 +327,15 @@
     "Reading passport data...\n\n%@" : {
 
     },
+    "Receive" : {
+
+    },
+    "Receive RMO" : {
+
+    },
+    "Receiver gets" : {
+
+    },
     "Repeat Passcode" : {
 
     },
@@ -303,6 +343,9 @@
 
     },
     "Scan" : {
+
+    },
+    "Scan QR" : {
 
     },
     "Scan your Passport" : {
@@ -317,6 +360,12 @@
     "Selected data will create a confidential profile" : {
 
     },
+    "Send" : {
+
+    },
+    "Send RMO" : {
+
+    },
     "Settings" : {
 
     },
@@ -327,6 +376,9 @@
 
     },
     "Skip" : {
+
+    },
+    "Some hint text" : {
 
     },
     "Sorry, there was a problem reading the passport. Please try again" : {
@@ -348,10 +400,10 @@
     "This is an app where your digital identity lives and enables you to connect with rest of the web in a fully private mode" : {
 
     },
-    "Wallet" : {
+    "Transactions" : {
 
     },
-    "Wallet detail" : {
+    "Wallet" : {
 
     },
     "We will notify when you become eligible" : {
@@ -369,6 +421,12 @@
     "White" : {
 
     },
+    "Withdraw the RMO token" : {
+
+    },
+    "You can use the QR code or the wallet address to deposit the RMO token to your account" : {
+
+    },
     "You’ve joined the waitlist" : {
 
     },
@@ -379,6 +437,9 @@
 
     },
     "Your Private Key" : {
+
+    },
+    "Your Rarimo Adress" : {
 
     }
   },

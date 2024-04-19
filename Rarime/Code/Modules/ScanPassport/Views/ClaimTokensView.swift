@@ -1,12 +1,16 @@
 import SwiftUI
 
 struct ClaimTokensView: View {
-    @EnvironmentObject var passportViewModel: PassportViewModel
+    @EnvironmentObject var viewModel: WalletViewModel
     let onFinish: () -> Void
 
+    @State private var isClaiming = false
+
     private func claimTokens() async {
+        defer { isClaiming = false }
         do {
-            try await passportViewModel.claimTokens()
+            isClaiming = true
+            try await viewModel.claimAirdrop()
             FeedbackGenerator.shared.notify(.success)
             onFinish()
         } catch {
@@ -53,14 +57,14 @@ struct ClaimTokensView: View {
         VStack(spacing: 16) {
             HorizontalDivider()
             AppButton(
-                text: passportViewModel.isClaiming ? "Claiming..." : "Claim",
+                text: isClaiming ? "Claiming..." : "Claim",
                 action: {
                     Task {
                         await claimTokens()
                     }
                 }
             )
-            .disabled(passportViewModel.isClaiming)
+            .disabled(isClaiming)
             .controlSize(.large)
             .padding(.horizontal, 20)
             .padding(.bottom, 20)
@@ -70,5 +74,5 @@ struct ClaimTokensView: View {
 
 #Preview {
     ClaimTokensView(onFinish: {})
-        .environmentObject(PassportViewModel())
+        .environmentObject(WalletViewModel())
 }

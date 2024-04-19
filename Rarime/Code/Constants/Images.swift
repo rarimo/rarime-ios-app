@@ -6,4 +6,6 @@ enum Images {
     static let passportNfc = "PassportNFC"
     static let confetti = "Confetti"
     static let rewardCoin = "RewardCoin"
+
+    static let qrFrame = "QrFrame"
 }

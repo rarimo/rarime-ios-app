@@ -7,9 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		560F0C1D2BD0234300067054 /* QRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 560F0C1C2BD0234300067054 /* QRCode */; };
+		560F0C1F2BD027EA00067054 /* WalletReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C1E2BD027EA00067054 /* WalletReceiveView.swift */; };
+		560F0C212BD027FB00067054 /* WalletRouteLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C202BD027FB00067054 /* WalletRouteLayout.swift */; };
+		560F0C232BD02DFD00067054 /* WalletSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C222BD02DFD00067054 /* WalletSendView.swift */; };
+		560F0C252BD036F900067054 /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C242BD036F900067054 /* AppTextField.swift */; };
+		560F0C272BD1146C00067054 /* ScanQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C262BD1146C00067054 /* ScanQRView.swift */; };
+		560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 560F0C292BD114EE00067054 /* CodeScanner */; };
+		560F0C2C2BD133A000067054 /* MainViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C2B2BD133A000067054 /* MainViewLayout.swift */; };
+		560F0C2F2BD135D400067054 /* MainView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C2E2BD135D400067054 /* MainView+ViewModel.swift */; };
+		560F0C322BD1576100067054 /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C312BD1576100067054 /* WalletViewModel.swift */; };
 		560F0C342BD175EB00067054 /* LoggerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C332BD175EB00067054 /* LoggerUtil.swift */; };
 		561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C272BADA8A600FBB3B9 /* Icons.swift */; };
-		561C3C2B2BADBF1000FBB3B9 /* Text+Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C2A2BADBF1000FBB3B9 /* Text+Typography.swift */; };
+		561C3C2B2BADBF1000FBB3B9 /* View+Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C2A2BADBF1000FBB3B9 /* View+Typography.swift */; };
 		561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C382BADE64B00FBB3B9 /* Fonts.swift */; };
 		561C3C3E2BADF0AA00FBB3B9 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 561C3C3A2BADF0AA00FBB3B9 /* Inter-Regular.ttf */; };
 		561C3C3F2BADF0AA00FBB3B9 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 561C3C3B2BADF0AA00FBB3B9 /* Inter-Bold.ttf */; };
@@ -22,7 +32,6 @@
 		563529EB2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529EA2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift */; };
 		563529EF2BB0732C0027C910 /* CredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529EE2BB0732C0027C910 /* CredentialsView.swift */; };
 		563529F12BB0736A0027C910 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529F02BB0736A0027C910 /* TabBarView.swift */; };
-		563529F42BB0768C0027C910 /* MainTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529F32BB0768C0027C910 /* MainTabs.swift */; };
 		563529F62BB077AB0027C910 /* CardContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529F52BB077AB0027C910 /* CardContainer.swift */; };
 		56474AD62BB9860E0017AA25 /* FaceIdAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */; };
 		56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */; };
@@ -31,7 +40,7 @@
 		567AEC9B2BBD9B8100A20E83 /* Passport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567AEC9A2BBD9B8100A20E83 /* Passport.swift */; };
 		568B4FCC2BB6C164001C9C74 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FCB2BB6C164001C9C74 /* IntroView.swift */; };
 		568B4FCE2BB6C274001C9C74 /* IntroStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FCD2BB6C274001C9C74 /* IntroStepView.swift */; };
-		568B4FD12BB6D88F001C9C74 /* HorizontalDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FD02BB6D88F001C9C74 /* HorizontalDivider.swift */; };
+		568B4FD12BB6D88F001C9C74 /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FD02BB6D88F001C9C74 /* Divider.swift */; };
 		568B4FE02BB70852001C9C74 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 568B4FDF2BB70852001C9C74 /* Localizable.xcstrings */; };
 		568B4FE22BB70BEA001C9C74 /* GetStartedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FE12BB70BEA001C9C74 /* GetStartedView.swift */; };
 		568B4FE52BB70CAA001C9C74 /* IntroStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FE42BB70CAA001C9C74 /* IntroStep.swift */; };
@@ -54,7 +63,6 @@
 		56A6C7562BBC194800992562 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C7552BBC194800992562 /* Animations.swift */; };
 		56A6C75C2BBC2CD500992562 /* PassportUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C75B2BBC2CD500992562 /* PassportUtils.swift */; };
 		56A6C75F2BBC309A00992562 /* NFCScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C75E2BBC309A00992562 /* NFCScanner.swift */; };
-		56A6C7622BBC319200992562 /* NFCPassportReader in Frameworks */ = {isa = PBXBuildFile; productRef = 56A6C7612BBC319200992562 /* NFCPassportReader */; };
 		56A6C7672BBC342A00992562 /* masterList.pem in Resources */ = {isa = PBXBuildFile; fileRef = 56A6C7662BBC342A00992562 /* masterList.pem */; };
 		56A6C76A2BBC57B700992562 /* PassportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C7692BBC57B700992562 /* PassportViewModel.swift */; };
 		56A6C76E2BBD474200992562 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C76D2BBD474200992562 /* DateUtil.swift */; };
@@ -75,6 +83,8 @@
 		56E2D91E2BCEC90B006E725D /* HomeView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D91D2BCEC90B006E725D /* HomeView+ViewModel.swift */; };
 		56E2D9202BCED460006E725D /* AppCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D91F2BCED460006E725D /* AppCheckbox.swift */; };
 		56E2D9222BCFBA0B006E725D /* PassportImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9212BCFBA0B006E725D /* PassportImageView.swift */; };
+		56E2D92D2BD0196B006E725D /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D92C2BD0196B006E725D /* QRCodeView.swift */; };
+		56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */ = {isa = PBXBuildFile; productRef = 56E2D9312BD01E71006E725D /* NFCPassportReader */; };
 		56E2D9242BCFDD42006E725D /* ClaimTokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9232BCFDD42006E725D /* ClaimTokensView.swift */; };
 		56E2D9262BCFE65C006E725D /* CongratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9252BCFE65C006E725D /* CongratsView.swift */; };
 		56E2D9282BCFF5DE006E725D /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9272BCFF5DE006E725D /* Images.swift */; };
@@ -91,9 +101,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		560F0C1E2BD027EA00067054 /* WalletReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletReceiveView.swift; sourceTree = "<group>"; };
+		560F0C202BD027FB00067054 /* WalletRouteLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRouteLayout.swift; sourceTree = "<group>"; };
+		560F0C222BD02DFD00067054 /* WalletSendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSendView.swift; sourceTree = "<group>"; };
+		560F0C242BD036F900067054 /* AppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextField.swift; sourceTree = "<group>"; };
+		560F0C262BD1146C00067054 /* ScanQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRView.swift; sourceTree = "<group>"; };
+		560F0C2B2BD133A000067054 /* MainViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewLayout.swift; sourceTree = "<group>"; };
+		560F0C2E2BD135D400067054 /* MainView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+ViewModel.swift"; sourceTree = "<group>"; };
+		560F0C312BD1576100067054 /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
 		560F0C332BD175EB00067054 /* LoggerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerUtil.swift; sourceTree = "<group>"; };
 		561C3C272BADA8A600FBB3B9 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
-		561C3C2A2BADBF1000FBB3B9 /* Text+Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Typography.swift"; sourceTree = "<group>"; };
+		561C3C2A2BADBF1000FBB3B9 /* View+Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Typography.swift"; sourceTree = "<group>"; };
 		561C3C382BADE64B00FBB3B9 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		561C3C3A2BADF0AA00FBB3B9 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		561C3C3B2BADF0AA00FBB3B9 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
@@ -106,7 +124,6 @@
 		563529EA2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+HiddenNavBar.swift"; sourceTree = "<group>"; };
 		563529EE2BB0732C0027C910 /* CredentialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsView.swift; sourceTree = "<group>"; };
 		563529F02BB0736A0027C910 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
-		563529F32BB0768C0027C910 /* MainTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabs.swift; sourceTree = "<group>"; };
 		563529F52BB077AB0027C910 /* CardContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainer.swift; sourceTree = "<group>"; };
 		56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIdAuth.swift; sourceTree = "<group>"; };
 		56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
@@ -115,7 +132,7 @@
 		567AEC9A2BBD9B8100A20E83 /* Passport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passport.swift; sourceTree = "<group>"; };
 		568B4FCB2BB6C164001C9C74 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		568B4FCD2BB6C274001C9C74 /* IntroStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroStepView.swift; sourceTree = "<group>"; };
-		568B4FD02BB6D88F001C9C74 /* HorizontalDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalDivider.swift; sourceTree = "<group>"; };
+		568B4FD02BB6D88F001C9C74 /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
 		568B4FDF2BB70852001C9C74 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		568B4FE12BB70BEA001C9C74 /* GetStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedView.swift; sourceTree = "<group>"; };
 		568B4FE42BB70CAA001C9C74 /* IntroStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroStep.swift; sourceTree = "<group>"; };
@@ -158,6 +175,7 @@
 		56E2D91D2BCEC90B006E725D /* HomeView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeView+ViewModel.swift"; sourceTree = "<group>"; };
 		56E2D91F2BCED460006E725D /* AppCheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCheckbox.swift; sourceTree = "<group>"; };
 		56E2D9212BCFBA0B006E725D /* PassportImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportImageView.swift; sourceTree = "<group>"; };
+		56E2D92C2BD0196B006E725D /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		56E2D9232BCFDD42006E725D /* ClaimTokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimTokensView.swift; sourceTree = "<group>"; };
 		56E2D9252BCFE65C006E725D /* CongratsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
 		56E2D9272BCFF5DE006E725D /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
@@ -181,15 +199,40 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				560F0C1D2BD0234300067054 /* QRCode in Frameworks */,
 				CE32CF522BAC981300E507B6 /* Lottie in Frameworks */,
-				56A6C7622BBC319200992562 /* NFCPassportReader in Frameworks */,
+				56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */,
 				56933E082BBC09990068C894 /* QKMRZScanner in Frameworks */,
+				560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		560F0C1B2BD0234300067054 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		560F0C2D2BD135CA00067054 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				560F0C2E2BD135D400067054 /* MainView+ViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		560F0C302BD1575800067054 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				560F0C312BD1576100067054 /* WalletViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		561C3C262BADA89000FBB3B9 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +264,7 @@
 		563529DB2BB071570027C910 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				560F0C302BD1575800067054 /* ViewModels */,
 				563529DE2BB071890027C910 /* Views */,
 			);
 			path = Wallet;
@@ -246,6 +290,9 @@
 			isa = PBXGroup;
 			children = (
 				563529E62BB072870027C910 /* WalletView.swift */,
+				560F0C1E2BD027EA00067054 /* WalletReceiveView.swift */,
+				560F0C222BD02DFD00067054 /* WalletSendView.swift */,
+				560F0C202BD027FB00067054 /* WalletRouteLayout.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -294,14 +341,6 @@
 				563529EE2BB0732C0027C910 /* CredentialsView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		563529F22BB0767E0027C910 /* Enums */ = {
-			isa = PBXGroup;
-			children = (
-				563529F32BB0768C0027C910 /* MainTabs.swift */,
-			);
-			path = Enums;
 			sourceTree = "<group>";
 		};
 		56474AD42BB985E00017AA25 /* Utilities */ = {
@@ -463,10 +502,11 @@
 			children = (
 				56F48BBD2BC02E82001F3AA4 /* AppButton.swift */,
 				56933DFA2BBAFBD90068C894 /* AppToggle.swift */,
+				560F0C242BD036F900067054 /* AppTextField.swift */,
 				56E2D91F2BCED460006E725D /* AppCheckbox.swift */,
 				563529F52BB077AB0027C910 /* CardContainer.swift */,
 				56933E002BBBFDD90068C894 /* CirclesLoader.swift */,
-				568B4FD02BB6D88F001C9C74 /* HorizontalDivider.swift */,
+				568B4FD02BB6D88F001C9C74 /* Divider.swift */,
 				56DAA3042BB72E35002CF710 /* InfoAlert.swift */,
 			);
 			path = Views;
@@ -487,7 +527,7 @@
 				56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */,
 				561C3C422BAEE2D600FBB3B9 /* String+Error.swift */,
 				56DAA30A2BB8B977002CF710 /* View+DynamicSheet.swift */,
-				561C3C2A2BADBF1000FBB3B9 /* Text+Typography.swift */,
+				561C3C2A2BADBF1000FBB3B9 /* View+Typography.swift */,
 				563529EA2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift */,
 			);
 			path = Extensions;
@@ -504,7 +544,7 @@
 		CE778B7A2BA9D28A00B26485 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				563529F22BB0767E0027C910 /* Enums */,
+				560F0C2D2BD135CA00067054 /* ViewModels */,
 				CE778B7B2BA9D30100B26485 /* Views */,
 			);
 			path = Main;
@@ -514,6 +554,7 @@
 			isa = PBXGroup;
 			children = (
 				CE32CF4E2BAC97A800E507B6 /* MainView.swift */,
+				560F0C2B2BD133A000067054 /* MainViewLayout.swift */,
 				563529F02BB0736A0027C910 /* TabBarView.swift */,
 			);
 			path = Views;
@@ -524,6 +565,7 @@
 			children = (
 				CE9E82B42BA881F400AAF885 /* Rarime */,
 				CE9E82B32BA881F400AAF885 /* Products */,
+				560F0C1B2BD0234300067054 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -629,7 +671,9 @@
 			isa = PBXGroup;
 			children = (
 				CE9E82D62BA8917100AAF885 /* LottieView.swift */,
+				560F0C262BD1146C00067054 /* ScanQRView.swift */,
 				56E2D9162BCE938F006E725D /* ActionCard.swift */,
+				56E2D92C2BD0196B006E725D /* QRCodeView.swift */,
 				56DAA3142BB8CC95002CF710 /* PasscodeFieldView.swift */,
 				56933E022BBBFDFE0068C894 /* ProcessingChipView.swift */,
 				56933E042BBC00D60068C894 /* RewardChipView.swift */,
@@ -674,7 +718,9 @@
 			packageProductDependencies = (
 				CE32CF512BAC981300E507B6 /* Lottie */,
 				56933E072BBC09990068C894 /* QKMRZScanner */,
-				56A6C7612BBC319200992562 /* NFCPassportReader */,
+				56E2D9312BD01E71006E725D /* NFCPassportReader */,
+				560F0C1C2BD0234300067054 /* QRCode */,
+				560F0C292BD114EE00067054 /* CodeScanner */,
 			);
 			productName = Rarime;
 			productReference = CE9E82B22BA881F400AAF885 /* Rarime.app */;
@@ -707,7 +753,9 @@
 			packageReferences = (
 				CE32CF502BAC981300E507B6 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				56933E062BBC09990068C894 /* XCRemoteSwiftPackageReference "QKMRZScanner" */,
-				56A6C7602BBC319200992562 /* XCRemoteSwiftPackageReference "NFCPassportReader" */,
+				56E2D92F2BD01C77006E725D /* XCRemoteSwiftPackageReference "qrcode" */,
+				56E2D9302BD01E71006E725D /* XCRemoteSwiftPackageReference "NFCPassportReader" */,
+				560F0C282BD114EE00067054 /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = CE9E82B32BA881F400AAF885 /* Products */;
 			projectDirPath = "";
@@ -754,16 +802,18 @@
 				56E2D91B2BCEA66A006E725D /* PassportCard.swift in Sources */,
 				56E2D9192BCE94CA006E725D /* RarimeInfoView.swift in Sources */,
 				56CC01E52BCD81AA008CEBE0 /* AirdropIntroView.swift in Sources */,
+				560F0C232BD02DFD00067054 /* WalletSendView.swift in Sources */,
 				56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */,
 				56E2D9222BCFBA0B006E725D /* PassportImageView.swift in Sources */,
 				56E2D91E2BCEC90B006E725D /* HomeView+ViewModel.swift in Sources */,
 				56DAA3152BB8CC95002CF710 /* PasscodeFieldView.swift in Sources */,
-				563529F42BB0768C0027C910 /* MainTabs.swift in Sources */,
+				560F0C2C2BD133A000067054 /* MainViewLayout.swift in Sources */,
 				568B4FE52BB70CAA001C9C74 /* IntroStep.swift in Sources */,
 				CE9E82E92BA89DBE00AAF885 /* Config.swift in Sources */,
 				563529E92BB072B80027C910 /* HomeView.swift in Sources */,
 				56722F202BCD62BB00300AD0 /* ProfileView.swift in Sources */,
 				CE9E82B62BA881F400AAF885 /* RarimeApp.swift in Sources */,
+				560F0C212BD027FB00067054 /* WalletRouteLayout.swift in Sources */,
 				56933E052BBC00D60068C894 /* RewardChipView.swift in Sources */,
 				561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */,
 				56E2D92A2BCFFB6B006E725D /* Airdrop.swift in Sources */,
@@ -775,25 +825,29 @@
 				56933E012BBBFDD90068C894 /* CirclesLoader.swift in Sources */,
 				CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */,
 				561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */,
-				561C3C2B2BADBF1000FBB3B9 /* Text+Typography.swift in Sources */,
+				561C3C2B2BADBF1000FBB3B9 /* View+Typography.swift in Sources */,
 				56933DED2BBAB0AB0068C894 /* PassportIntroView.swift in Sources */,
+				560F0C322BD1576100067054 /* WalletViewModel.swift in Sources */,
+				561C3C2B2BADBF1000FBB3B9 /* View+Typography.swift in Sources */,
 				560F0C342BD175EB00067054 /* LoggerUtil.swift in Sources */,
-				561C3C2B2BADBF1000FBB3B9 /* Text+Typography.swift in Sources */,
 				568B4FCC2BB6C164001C9C74 /* IntroView.swift in Sources */,
+				560F0C1F2BD027EA00067054 /* WalletReceiveView.swift in Sources */,
 				56A6C76E2BBD474200992562 /* DateUtil.swift in Sources */,
 				56A6C7562BBC194800992562 /* Animations.swift in Sources */,
 				56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */,
 				56E2D9242BCFDD42006E725D /* ClaimTokensView.swift in Sources */,
 				563529EB2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift in Sources */,
 				56DAA3132BB8CA4F002CF710 /* EnableFaceIdView.swift in Sources */,
+				56E2D92D2BD0196B006E725D /* QRCodeView.swift in Sources */,
 				568B4FCE2BB6C274001C9C74 /* IntroStepView.swift in Sources */,
-				568B4FD12BB6D88F001C9C74 /* HorizontalDivider.swift in Sources */,
+				568B4FD12BB6D88F001C9C74 /* Divider.swift in Sources */,
 				56DAA3112BB8C97D002CF710 /* EnableLayoutView.swift in Sources */,
 				56E2D9202BCED460006E725D /* AppCheckbox.swift in Sources */,
 				568B4FE22BB70BEA001C9C74 /* GetStartedView.swift in Sources */,
 				56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */,
 				56474AD62BB9860E0017AA25 /* FaceIdAuth.swift in Sources */,
 				56933DF12BBAC1B10068C894 /* ScanPassportLayoutView.swift in Sources */,
+				560F0C272BD1146C00067054 /* ScanQRView.swift in Sources */,
 				56933DFB2BBAFBD90068C894 /* AppToggle.swift in Sources */,
 				56E2D9152BCE7FC4006E725D /* HomeIntroLayout.swift in Sources */,
 				56933DEF2BBABD100068C894 /* ScanPassportView.swift in Sources */,
@@ -804,10 +858,12 @@
 				56A6C76A2BBC57B700992562 /* PassportViewModel.swift in Sources */,
 				56933E0E2BBC09F10068C894 /* MRZScannerView.swift in Sources */,
 				56933DF52BBAC42E0068C894 /* ReadPassportNFCView.swift in Sources */,
+				560F0C2F2BD135D400067054 /* MainView+ViewModel.swift in Sources */,
 				56E2D9282BCFF5DE006E725D /* Images.swift in Sources */,
 				56933DF32BBAC2940068C894 /* ScanPassportMRZView.swift in Sources */,
 				56A6C75C2BBC2CD500992562 /* PassportUtils.swift in Sources */,
 				563529F62BB077AB0027C910 /* CardContainer.swift in Sources */,
+				560F0C252BD036F900067054 /* AppTextField.swift in Sources */,
 				56933E0C2BBC09D20068C894 /* MRZViewModel.swift in Sources */,
 				563529E72BB072870027C910 /* WalletView.swift in Sources */,
 				56933DFD2BBAFDD00068C894 /* PassportProofView.swift in Sources */,
@@ -1262,6 +1318,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		560F0C282BD114EE00067054 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = exactVersion;
+				version = 2.4.1;
+			};
+		};
 		56933E062BBC09990068C894 /* XCRemoteSwiftPackageReference "QKMRZScanner" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Mattijah/QKMRZScanner";
@@ -1270,7 +1334,15 @@
 				kind = branch;
 			};
 		};
-		56A6C7602BBC319200992562 /* XCRemoteSwiftPackageReference "NFCPassportReader" */ = {
+		56E2D92F2BD01C77006E725D /* XCRemoteSwiftPackageReference "qrcode" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dagronf/qrcode.git";
+			requirement = {
+				kind = exactVersion;
+				version = 18.4.1;
+			};
+		};
+		56E2D9302BD01E71006E725D /* XCRemoteSwiftPackageReference "NFCPassportReader" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:rarimo/NFCPassportReader.git";
 			requirement = {
@@ -1289,14 +1361,24 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		560F0C1C2BD0234300067054 /* QRCode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 56E2D92F2BD01C77006E725D /* XCRemoteSwiftPackageReference "qrcode" */;
+			productName = QRCode;
+		};
+		560F0C292BD114EE00067054 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 560F0C282BD114EE00067054 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
 		56933E072BBC09990068C894 /* QKMRZScanner */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 56933E062BBC09990068C894 /* XCRemoteSwiftPackageReference "QKMRZScanner" */;
 			productName = QKMRZScanner;
 		};
-		56A6C7612BBC319200992562 /* NFCPassportReader */ = {
+		56E2D9312BD01E71006E725D /* NFCPassportReader */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 56A6C7602BBC319200992562 /* XCRemoteSwiftPackageReference "NFCPassportReader" */;
+			package = 56E2D9302BD01E71006E725D /* XCRemoteSwiftPackageReference "NFCPassportReader" */;
 			productName = NFCPassportReader;
 		};
 		CE32CF512BAC981300E507B6 /* Lottie */ = {

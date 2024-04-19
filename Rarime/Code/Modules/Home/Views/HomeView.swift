@@ -6,7 +6,8 @@ private enum HomeRoute: Hashable {
 
 struct HomeView: View {
     @EnvironmentObject var appViewModel: AppView.ViewModel
-    let onBalanceTap: () -> Void
+    @EnvironmentObject var mainViewModel: MainView.ViewModel
+    @EnvironmentObject var walletViewModel: WalletViewModel
 
     @State private var path: [HomeRoute] = []
     @StateObject private var viewModel = ViewModel()
@@ -39,35 +40,37 @@ struct HomeView: View {
     }
 
     private var content: some View {
-        VStack(spacing: 24) {
-            Text("Beta launch")
-                .body3()
-                .frame(maxWidth: .infinity)
-                .foregroundStyle(.warningDark)
-                .padding(.vertical, 4)
-                .background(.warningLighter)
-            VStack(alignment: .leading, spacing: 32) {
-                header
-                VStack(spacing: 24) {
-                    if let passport = viewModel.passport {
-                        PassportCard(
-                            look: viewModel.passportCardLook,
-                            passport: passport,
-                            onLookChange: { look in viewModel.setPassportCardLook(look) },
-                            onDelete: { viewModel.removePassport() }
-                        )
-                        rarimeCard
-                    } else {
-                        airdropCard
-                        otherPassportsCard
+        MainViewLayout {
+            VStack(spacing: 24) {
+                Text("Beta launch")
+                    .body3()
+                    .frame(maxWidth: .infinity)
+                    .foregroundStyle(.warningDark)
+                    .padding(.vertical, 4)
+                    .background(.warningLighter)
+                VStack(alignment: .leading, spacing: 32) {
+                    header
+                    VStack(spacing: 24) {
+                        if let passport = viewModel.passport {
+                            PassportCard(
+                                look: viewModel.passportCardLook,
+                                passport: passport,
+                                onLookChange: { look in viewModel.setPassportCardLook(look) },
+                                onDelete: { viewModel.removePassport() }
+                            )
+                            rarimeCard
+                        } else {
+                            airdropCard
+                            otherPassportsCard
+                        }
                     }
+                    Spacer()
                 }
-                Spacer()
+                .padding(.horizontal, 12)
             }
-            .padding(.horizontal, 12)
+            .padding(.top, 1)
+            .background(.backgroundPrimary)
         }
-        .padding(.top, 1)
-        .background(.backgroundPrimary)
         .blur(radius: isCongratsShown ? 12 : 0)
         .overlay(CongratsView(open: $isCongratsShown, isClaimed: isClaimed))
     }
@@ -75,7 +78,7 @@ struct HomeView: View {
     private var header: some View {
         VStack(spacing: 8) {
             HStack {
-                Button(action: onBalanceTap) {
+                Button(action: { mainViewModel.selectTab(.wallet) }) {
                     HStack(spacing: 4) {
                         Text("Balance: RMO").body3()
                         Image(Icons.caretRight).iconSmall()
@@ -89,7 +92,7 @@ struct HomeView: View {
             }
 
             HStack {
-                Text("0").h4().foregroundStyle(.textPrimary)
+                Text(walletViewModel.balance.formatted()).h4().foregroundStyle(.textPrimary)
                 Spacer()
             }
         }
@@ -159,6 +162,8 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(onBalanceTap: {})
+    HomeView()
         .environmentObject(AppView.ViewModel())
+        .environmentObject(MainView.ViewModel())
+        .environmentObject(WalletViewModel())
 }

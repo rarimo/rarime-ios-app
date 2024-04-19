@@ -85,7 +85,7 @@ struct IntroView: View {
             } else {
                 StepIndicator(steps: IntroStep.allCases.count, currentStep: currentStep)
                 Spacer()
-                AppButton(text: "Next", rightIcon: Icons.arrowRight, fullWidth: false) {
+                AppButton(text: "Next", rightIcon: Icons.arrowRight, width: nil) {
                     currentStep += 1
                 }
             }
