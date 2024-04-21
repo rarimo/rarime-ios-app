@@ -1,15 +1,7 @@
-//
-//  CreateIdentityView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 29.03.2024.
-//
-
 import SwiftUI
 
-private let privateKey = "d4f1dc5332e5f0263746a31d3563e42ad8bef24a8989d8b0a5ad71f8d5de28a6"
-
 struct NewIdentityView: View {
+    @EnvironmentObject private var identityManager: IdentityManager
     let onBack: () -> Void
     let onNext: () -> Void
 
@@ -31,7 +23,7 @@ struct NewIdentityView: View {
             CardContainer {
                 VStack(spacing: 20) {
                     ZStack {
-                        Text(privateKey)
+                        Text(identityManager.privateKey)
                             .body3()
                             .foregroundStyle(.textPrimary)
                             .multilineTextAlignment(.leading)
@@ -52,7 +44,7 @@ struct NewIdentityView: View {
         Button(action: {
             if isCopied { return }
 
-            UIPasteboard.general.string = privateKey
+            UIPasteboard.general.string = identityManager.privateKey
             isCopied = true
             FeedbackGenerator.shared.impact(.medium)
 
@@ -71,4 +63,5 @@ struct NewIdentityView: View {
 
 #Preview {
     NewIdentityView(onBack: {}, onNext: {})
+        .environmentObject(IdentityManager())
 }

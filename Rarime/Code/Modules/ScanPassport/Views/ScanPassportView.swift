@@ -5,8 +5,7 @@ private enum ScanPassportState {
 }
 
 struct ScanPassportView: View {
-    @EnvironmentObject var walletViewModel: WalletViewModel
-
+    @EnvironmentObject private var walletManager: WalletManager
     let onComplete: (_ passport: Passport, _ isClaimed: Bool) -> Void
     let onClose: () -> Void
 
@@ -45,7 +44,7 @@ struct ScanPassportView: View {
         case .generateProof:
             PassportProofView(
                 onFinish: {
-                    if passportViewModel.isEligibleForReward, !walletViewModel.isClaimed {
+                    if passportViewModel.isEligibleForReward, !walletManager.isClaimed {
                         withAnimation { state = .claimTokens }
                     } else {
                         onComplete(passportViewModel.passport!, false)
@@ -68,5 +67,5 @@ struct ScanPassportView: View {
         onComplete: { _, _ in },
         onClose: {}
     )
-    .environmentObject(WalletViewModel())
+    .environmentObject(WalletManager())
 }

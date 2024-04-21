@@ -1,10 +1,3 @@
-//
-//  IntroView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 29.03.2024.
-//
-
 import SwiftUI
 
 private enum IdentityRoute: Hashable {
@@ -12,7 +5,8 @@ private enum IdentityRoute: Hashable {
 }
 
 struct IntroView: View {
-    @EnvironmentObject var appViewModel: AppView.ViewModel
+    var onFinish: () -> Void
+
     @State private var currentStep = IntroStep.welcome.rawValue
     @State private var showSheet = false
     @State private var path: [IdentityRoute] = []
@@ -29,7 +23,7 @@ struct IntroView: View {
                     case .newIdentity:
                         NewIdentityView(
                             onBack: { path.removeLast() },
-                            onNext: { withAnimation { appViewModel.finishIntro() } }
+                            onNext: { withAnimation { onFinish() } }
                         )
                     case .importIdentity:
                         // TODO: Implement import identity
@@ -122,6 +116,5 @@ private struct StepIndicator: View {
 }
 
 #Preview {
-    IntroView()
-        .environmentObject(AppView.ViewModel())
+    IntroView(onFinish: {})
 }

@@ -1,21 +1,21 @@
 import SwiftUI
 
 struct AirdropIntroView: View {
-    @EnvironmentObject var appViewModel: AppView.ViewModel
-    let onStart: () -> Void
+    @EnvironmentObject private var configManager: ConfigManager
 
+    let onStart: () -> Void
     @State private var termsChecked = false
 
     private var termsURL: String {
-        appViewModel.config.general.termsOfUseURL.absoluteString
+        configManager.termsOfUseURL.absoluteString
     }
 
     private var privacyURL: String {
-        appViewModel.config.general.privacyPolicyURL.absoluteString
+        configManager.privacyPolicyURL.absoluteString
     }
 
     private var airdropTermsURL: String {
-        appViewModel.config.general.termsOfUseURL.absoluteString
+        configManager.termsOfUseURL.absoluteString
     }
 
     var body: some View {
@@ -80,5 +80,5 @@ struct AirdropIntroView: View {
 
 #Preview {
     AirdropIntroView(onStart: {})
-        .environmentObject(AppView.ViewModel())
+        .environmentObject(ConfigManager())
 }

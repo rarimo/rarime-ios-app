@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct LanguageView: View {
+    @EnvironmentObject private var settingsManager: SettingsManager
     let onBack: () -> Void
 
     var body: some View {
@@ -10,7 +11,7 @@ struct LanguageView: View {
         ) {
             CardContainer {
                 HStack {
-                    Text("English").subtitle4()
+                    Text(settingsManager.language.title).subtitle4()
                     Spacer()
                     Image(Icons.check).iconMedium()
                 }
@@ -22,4 +23,5 @@ struct LanguageView: View {
 
 #Preview {
     LanguageView(onBack: {})
+        .environmentObject(SettingsManager())
 }

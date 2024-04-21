@@ -5,7 +5,11 @@ private enum ProfileRoute: Hashable {
 }
 
 struct ProfileView: View {
-    @EnvironmentObject var appViewModel: AppView.ViewModel
+    @EnvironmentObject private var configManager: ConfigManager
+    @EnvironmentObject private var settingsManager: SettingsManager
+    @EnvironmentObject private var passportManager: PassportManager
+    @EnvironmentObject private var identityManager: IdentityManager
+
     @State private var path: [ProfileRoute] = []
 
     @State private var isPrivacySheetPresented = false
@@ -36,15 +40,15 @@ struct ProfileView: View {
                     CardContainer {
                         HStack {
                             VStack(alignment: .leading, spacing: 8) {
-                                Text("Account")
+                                Text(passportManager.passport?.fullName ?? String(localized: "Account"))
                                     .subtitle3()
                                     .foregroundStyle(.textPrimary)
-                                Text("DID: Didq234234rw3423")
+                                Text("DID: \(identityManager.formattedDid)")
                                     .body4()
                                     .foregroundStyle(.textSecondary)
                             }
                             Spacer()
-                            PassportImageView(image: nil, size: 40)
+                            PassportImageView(image: passportManager.passport?.passportImage, size: 40)
                         }
                     }
                     CardContainer {
@@ -66,13 +70,13 @@ struct ProfileView: View {
                             ProfileRow(
                                 icon: Icons.globeSimple,
                                 title: String(localized: "Language"),
-                                value: "English",
+                                value: settingsManager.language.title,
                                 action: { path.append(.language) }
                             )
                             ProfileRow(
                                 icon: Icons.sun,
                                 title: String(localized: "Theme"),
-                                value: "System",
+                                value: settingsManager.colorScheme.title,
                                 action: { path.append(.theme) }
                             )
                             ProfileRow(
@@ -81,7 +85,7 @@ struct ProfileView: View {
                                 action: { isPrivacySheetPresented = true }
                             )
                             .fullScreenCover(isPresented: $isPrivacySheetPresented) {
-                                SafariWebView(url: appViewModel.config.general.privacyPolicyURL)
+                                SafariWebView(url: configManager.privacyPolicyURL)
                                     .ignoresSafeArea()
                             }
                             ProfileRow(
@@ -90,12 +94,12 @@ struct ProfileView: View {
                                 action: { isTermsSheetPresented = true }
                             )
                             .fullScreenCover(isPresented: $isTermsSheetPresented) {
-                                SafariWebView(url: appViewModel.config.general.termsOfUseURL)
+                                SafariWebView(url: configManager.termsOfUseURL)
                                     .ignoresSafeArea()
                             }
                         }
                     }
-                    Text("App version: 1.0")
+                    Text("App version: \(configManager.version)")
                         .body4()
                         .foregroundStyle(.textDisabled)
                 }
@@ -141,6 +145,10 @@ private struct ProfileRow: View {
 
 #Preview {
     ProfileView()
-        .environmentObject(AppView.ViewModel())
         .environmentObject(MainView.ViewModel())
+        .environmentObject(ConfigManager())
+        .environmentObject(SettingsManager())
+        .environmentObject(PassportManager())
+        .environmentObject(IdentityManager())
+        .environmentObject(SecurityManager())
 }
