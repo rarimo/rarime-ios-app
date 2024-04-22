@@ -1,30 +1,8 @@
 import SwiftUI
 
-enum AppColorScheme: CaseIterable {
-    case light, dark, system
-
-    var title: String {
-        switch self {
-        case .light: String(localized: "Light Mode")
-        case .dark: String(localized: "Dark Mode")
-        case .system: String(localized: "System")
-        }
-    }
-
-    var image: String {
-        switch self {
-        case .light: Images.lightTheme
-        case .dark: Images.darkTheme
-        case .system: Images.systemTheme
-        }
-    }
-}
-
 struct ThemeView: View {
+    @EnvironmentObject private var settingsManager: SettingsManager
     let onBack: () -> Void
-
-    // TODO: Move to ViewModel
-    @State private var selectedColorScheme: AppColorScheme = .system
 
     var body: some View {
         ProfileRouteLayout(
@@ -35,9 +13,10 @@ struct ThemeView: View {
                 ForEach(AppColorScheme.allCases, id: \.self) { scheme in
                     ThemeRow(
                         scheme: scheme,
-                        isSelected: selectedColorScheme == scheme
+                        isSelected: settingsManager.colorScheme == scheme
                     ) {
-                        selectedColorScheme = scheme
+                        settingsManager.setColorScheme(scheme)
+                        FeedbackGenerator.shared.impact(.light)
                     }
                 }
             }
@@ -78,6 +57,16 @@ private struct ThemeRow: View {
     }
 }
 
+private struct PreviewView: View {
+    @StateObject private var settingsManager = SettingsManager()
+
+    var body: some View {
+        ThemeView(onBack: {})
+            .preferredColorScheme(settingsManager.colorScheme.rawScheme)
+            .environmentObject(settingsManager)
+    }
+}
+
 #Preview {
-    ThemeView(onBack: {})
+    PreviewView()
 }

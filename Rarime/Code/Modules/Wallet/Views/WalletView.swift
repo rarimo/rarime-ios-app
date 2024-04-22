@@ -5,7 +5,7 @@ private enum WalletRoute: String, Hashable {
 }
 
 struct WalletView: View {
-    @EnvironmentObject private var viewModel: WalletViewModel
+    @EnvironmentObject private var walletManager: WalletManager
     @State private var path: [WalletRoute] = []
 
     var body: some View {
@@ -45,7 +45,7 @@ struct WalletView: View {
                 Text("Available RMO")
                     .body3()
                     .foregroundStyle(.textSecondary)
-                Text(viewModel.balance.formatted())
+                Text(walletManager.balance.formatted())
                     .h4()
                     .foregroundStyle(.textPrimary)
             }
@@ -76,10 +76,10 @@ struct WalletView: View {
                 Text("Transactions")
                     .subtitle3()
                     .foregroundStyle(.textPrimary)
-                ForEach(viewModel.transactions) { tx in
+                ForEach(walletManager.transactions) { tx in
                     TransactionItem(tx: tx)
                 }
-                if viewModel.transactions.isEmpty {
+                if walletManager.transactions.isEmpty {
                     Text("No transactions yet")
                         .body3()
                         .foregroundStyle(.textSecondary)
@@ -123,5 +123,5 @@ private struct TransactionItem: View {
 #Preview {
     WalletView()
         .environmentObject(MainView.ViewModel())
-        .environmentObject(WalletViewModel())
+        .environmentObject(WalletManager())
 }

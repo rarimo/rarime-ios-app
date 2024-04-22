@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ClaimTokensView: View {
-    @EnvironmentObject var viewModel: WalletViewModel
+    @EnvironmentObject private var walletManager: WalletManager
     let onFinish: () -> Void
 
     @State private var isClaiming = false
@@ -10,7 +10,7 @@ struct ClaimTokensView: View {
         defer { isClaiming = false }
         do {
             isClaiming = true
-            try await viewModel.claimAirdrop()
+            try await walletManager.claimAirdrop()
             FeedbackGenerator.shared.notify(.success)
             onFinish()
         } catch {
@@ -74,5 +74,5 @@ struct ClaimTokensView: View {
 
 #Preview {
     ClaimTokensView(onFinish: {})
-        .environmentObject(WalletViewModel())
+        .environmentObject(WalletManager())
 }

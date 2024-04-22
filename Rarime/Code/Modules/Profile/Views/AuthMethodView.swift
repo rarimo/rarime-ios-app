@@ -1,11 +1,8 @@
 import SwiftUI
 
 struct AuthMethodView: View {
+    @EnvironmentObject private var securityManager: SecurityManager
     let onBack: () -> Void
-
-    // TODO: Move to ViewModel
-    @State private var isFaceIdEnabled = false
-    @State private var isPasscodeEnabled = false
 
     var body: some View {
         ProfileRouteLayout(
@@ -14,12 +11,19 @@ struct AuthMethodView: View {
         ) {
             VStack(spacing: 24) {
                 AuthMethodRow(
-                    isOn: $isFaceIdEnabled,
+                    isOn: Binding(
+                        get: { securityManager.faceIdState == .enabled },
+                        set: { $0 ? securityManager.enableFaceId() : securityManager.disableFaceId() }
+                    ),
                     icon: Icons.userFocus,
                     label: String(localized: "Face ID")
                 )
                 AuthMethodRow(
-                    isOn: $isPasscodeEnabled,
+                    isOn: Binding(
+                        get: { securityManager.passcodeState == .enabled },
+                        // TODO: Display passcode setup view
+                        set: { $0 ? securityManager.enablePasscode("1234") : securityManager.disablePasscode() }
+                    ),
                     icon: Icons.password,
                     label: String(localized: "Passcode")
                 )
@@ -51,4 +55,5 @@ private struct AuthMethodRow: View {
 
 #Preview {
     AuthMethodView(onBack: {})
+        .environmentObject(SecurityManager())
 }

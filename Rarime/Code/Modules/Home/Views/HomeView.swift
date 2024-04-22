@@ -1,16 +1,15 @@
 import SwiftUI
 
 private enum HomeRoute: Hashable {
-    case scanPassport
+    case scanPassport, scanQR
 }
 
 struct HomeView: View {
-    @EnvironmentObject var appViewModel: AppView.ViewModel
-    @EnvironmentObject var mainViewModel: MainView.ViewModel
-    @EnvironmentObject var walletViewModel: WalletViewModel
+    @EnvironmentObject private var passportManager: PassportManager
+    @EnvironmentObject private var walletManager: WalletManager
+    @EnvironmentObject private var mainViewModel: MainView.ViewModel
 
     @State private var path: [HomeRoute] = []
-    @StateObject private var viewModel = ViewModel()
 
     @State private var isAirdropSheetPresented = false
     @State private var isPassportSheetPresented = false
@@ -26,12 +25,18 @@ struct HomeView: View {
                 case .scanPassport:
                     ScanPassportView(
                         onComplete: { passport, isClaimed in
-                            viewModel.setPassport(passport)
+                            passportManager.setPassport(passport)
                             isCongratsShown = true
                             self.isClaimed = isClaimed
                             path.removeLast()
                         },
                         onClose: { path.removeLast() }
+                    )
+                    .navigationBarBackButtonHidden()
+                case .scanQR:
+                    ScanQRView(
+                        onBack: { path.removeLast() },
+                        onScan: { _ in path.removeLast() }
                     )
                     .navigationBarBackButtonHidden()
                 }
@@ -51,12 +56,12 @@ struct HomeView: View {
                 VStack(alignment: .leading, spacing: 32) {
                     header
                     VStack(spacing: 24) {
-                        if let passport = viewModel.passport {
+                        if let passport = passportManager.passport {
                             PassportCard(
-                                look: viewModel.passportCardLook,
+                                look: passportManager.passportCardLook,
                                 passport: passport,
-                                onLookChange: { look in viewModel.setPassportCardLook(look) },
-                                onDelete: { viewModel.removePassport() }
+                                onLookChange: { look in passportManager.setPassportCardLook(look) },
+                                onDelete: { passportManager.removePassport() }
                             )
                             rarimeCard
                         } else {
@@ -86,13 +91,15 @@ struct HomeView: View {
                 }
                 .foregroundStyle(.textSecondary)
                 Spacer()
-                Button(action: {}) {
+                Button(action: { path.append(.scanQR) }) {
                     Image(Icons.qrCode).iconMedium()
                 }
             }
 
             HStack {
-                Text(walletViewModel.balance.formatted()).h4().foregroundStyle(.textPrimary)
+                Text(walletManager.balance.formatted())
+                    .h4()
+                    .foregroundStyle(.textPrimary)
                 Spacer()
             }
         }
@@ -128,7 +135,6 @@ struct HomeView: View {
                             path.append(.scanPassport)
                         }
                     )
-                    .environmentObject(appViewModel)
                 }
             }
             .frame(maxWidth: .infinity)
@@ -163,7 +169,7 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
-        .environmentObject(AppView.ViewModel())
         .environmentObject(MainView.ViewModel())
-        .environmentObject(WalletViewModel())
+        .environmentObject(PassportManager())
+        .environmentObject(WalletManager())
 }

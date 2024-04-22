@@ -1,31 +1,29 @@
-//
-//  AppView.swift
-//  Rarime
-//
-//  Created by Ivan Lele on 18.03.2024.
-//
-
 import SwiftUI
 
 struct AppView: View {
+    @EnvironmentObject private var securityManager: SecurityManager
+    @EnvironmentObject private var settingsManager: SettingsManager
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
         ZStack {
-            if viewModel.isFaceIdSet {
+            if securityManager.faceIdState != .unset {
                 MainView().transition(.backslide)
-            } else if viewModel.isPasscodeSet {
+            } else if securityManager.passcodeState != .unset {
                 EnableFaceIdView().transition(.backslide)
             } else if viewModel.isIntroFinished {
                 EnablePasscodeView().transition(.backslide)
             } else {
-                IntroView().transition(.backslide)
+                IntroView(onFinish: { viewModel.finishIntro() })
+                    .transition(.backslide)
             }
         }
-        .environmentObject(viewModel)
+        .preferredColorScheme(settingsManager.colorScheme.rawScheme)
     }
 }
 
 #Preview {
     AppView()
+        .environmentObject(SecurityManager())
+        .environmentObject(SettingsManager())
 }

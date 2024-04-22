@@ -1,19 +1,12 @@
-//
-//  Passport.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 03.04.2024.
-//
-
 import Foundation
 import NFCPassportReader
 import UIKit
 
-struct Passport {
+struct Passport: Codable {
     var firstName: String
     var lastName: String
     var gender: String
-    var passportImage: UIImage?
+    var passportImageRaw: String?
     var documentType: String
     var issuingAuthority: String
     var documentNumber: String
@@ -23,6 +16,18 @@ struct Passport {
 
     var fullName: String {
         "\(firstName) \(lastName)"
+    }
+
+    var passportImage: UIImage? {
+        guard let passportImageRaw = passportImageRaw else {
+            return nil
+        }
+
+        if let data = Data(base64Encoded: passportImageRaw, options: .ignoreUnknownCharacters) {
+            return UIImage(data: data)
+        } else {
+            return nil
+        }
     }
 
     var ageString: String {
@@ -44,7 +49,9 @@ struct Passport {
             firstName: model.firstName,
             lastName: model.lastName,
             gender: model.gender,
-            passportImage: model.passportImage,
+            passportImageRaw: model.passportImage?
+                .pngData()?
+                .base64EncodedString(options: .endLineWithLineFeed),
             documentType: model.documentType,
             issuingAuthority: model.issuingAuthority,
             documentNumber: model.documentNumber,

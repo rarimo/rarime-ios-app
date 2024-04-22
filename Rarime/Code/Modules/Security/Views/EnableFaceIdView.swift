@@ -13,7 +13,7 @@ private enum FaceIdAuthError: Error {
 }
 
 struct EnableFaceIdView: View {
-    @EnvironmentObject var appViewModel: AppView.ViewModel
+    @EnvironmentObject private var securityManager: SecurityManager
     @State private var isAlertShown = false
     @State private var isNotAvailableError = false
 
@@ -24,7 +24,7 @@ struct EnableFaceIdView: View {
             description: "Enable Face ID Authentication",
             enableAction: {
                 FaceIdAuth.shared.authenticate(
-                    onSuccess: { withAnimation { appViewModel.enableFaceId() } },
+                    onSuccess: { withAnimation { securityManager.enableFaceId() } },
                     onFailure: {
                         isNotAvailableError = false
                         isAlertShown = true
@@ -36,7 +36,7 @@ struct EnableFaceIdView: View {
                     }
                 )
             },
-            skipAction: { withAnimation { appViewModel.skipFaceId() } }
+            skipAction: { withAnimation { securityManager.disableFaceId() } }
         )
         .alert(isPresented: $isAlertShown) {
             Alert(
@@ -54,5 +54,5 @@ struct EnableFaceIdView: View {
 
 #Preview {
     EnableFaceIdView()
-        .environmentObject(AppView.ViewModel())
+        .environmentObject(SecurityManager())
 }

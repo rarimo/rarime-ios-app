@@ -100,7 +100,7 @@ private struct PreviewView: View {
                     firstName: "Joshua",
                     lastName: "Smith",
                     gender: "M",
-                    passportImage: nil,
+                    passportImageRaw: nil,
                     documentType: "P",
                     issuingAuthority: "USA",
                     documentNumber: "00AA00000",

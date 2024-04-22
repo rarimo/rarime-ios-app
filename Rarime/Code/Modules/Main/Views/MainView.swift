@@ -2,7 +2,6 @@ import SwiftUI
 
 struct MainView: View {
     @StateObject private var viewModel = ViewModel()
-    @StateObject private var walletViewModel = WalletViewModel()
 
     var body: some View {
         ZStack {
@@ -14,11 +13,9 @@ struct MainView: View {
             }
         }
         .environmentObject(viewModel)
-        .environmentObject(walletViewModel)
     }
 }
 
 #Preview {
     MainView()
-        .environmentObject(AppView.ViewModel())
 }

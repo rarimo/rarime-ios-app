@@ -1,9 +1,8 @@
 import SwiftUI
 
 struct WalletSendView: View {
+    @EnvironmentObject private var walletManager: WalletManager
     let onBack: () -> Void
-
-    @EnvironmentObject private var viewModel: WalletViewModel
 
     @State private var address = ""
     @State private var addressErrorMessage = ""
@@ -68,7 +67,7 @@ struct WalletSendView: View {
                                 HStack(spacing: 16) {
                                     VerticalDivider()
                                     Button(action: {
-                                        amount = String(viewModel.balance)
+                                        amount = String(walletManager.balance)
                                     }) {
                                         Text("MAX")
                                             .buttonMedium()
@@ -83,7 +82,7 @@ struct WalletSendView: View {
                                     .body4()
                                     .foregroundStyle(.textSecondary)
                                 Spacer()
-                                Text("\(viewModel.balance.formatted()) RMO")
+                                Text("\(walletManager.balance.formatted()) RMO")
                                     .body4()
                                     .foregroundStyle(.textPrimary)
                             }
@@ -125,5 +124,5 @@ struct WalletSendView: View {
 
 #Preview {
     WalletSendView(onBack: {})
-        .environmentObject(WalletViewModel())
+        .environmentObject(WalletManager())
 }

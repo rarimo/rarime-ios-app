@@ -51,7 +51,7 @@
     "Amount" : {
 
     },
-    "App version: 1.0" : {
+    "App version: %@" : {
 
     },
     "Applying Zero Knowledge" : {
@@ -150,7 +150,7 @@
     "Description text here" : {
 
     },
-    "DID: Didq234234rw3423" : {
+    "DID: %@" : {
 
     },
     "Document class mode" : {
@@ -178,9 +178,6 @@
 
     },
     "Enable Passcode Authentication" : {
-
-    },
-    "English" : {
 
     },
     "Enter Passcode" : {
