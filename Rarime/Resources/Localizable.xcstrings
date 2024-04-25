@@ -93,6 +93,9 @@
     "By checking this box, you are agreeing to " : {
 
     },
+    "Cancel" : {
+
+    },
     "CARD VISUAL" : {
 
     },
@@ -138,7 +141,13 @@
     "Dark Mode" : {
 
     },
+    "Delete" : {
+
+    },
     "Delete Card" : {
+
+    },
+    "Delete passport card?" : {
 
     },
     "Description text here" : {
@@ -485,6 +494,9 @@
 
     },
     "You can use the QR code or the wallet address to deposit the RMO token to your account" : {
+
+    },
+    "You will have to scan the passport again to restore it." : {
 
     },
     "You’ve joined the waitlist" : {

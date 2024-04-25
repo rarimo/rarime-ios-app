@@ -36,6 +36,7 @@ struct PassportCard: View {
     var onDelete: () -> Void
 
     @State private var isSettingsSheetPresented = false
+    @State private var isDeleteConfirmationShown = false
 
     var body: some View {
         cardContent.dynamicSheet(
@@ -49,19 +50,11 @@ struct PassportCard: View {
     private var cardContent: some View {
         return VStack(spacing: 24) {
             HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 8) {
-                    PassportImageView(
-                        image: passport.passportImage,
-                        bgColor: look.foregroundColor.opacity(0.05)
-                    )
-                    .blur(radius: isIncognito ? 12 : 0)
-                    Text(isIncognito ? String("••••• •••••••") : passport.fullName)
-                        .h6()
-                        .padding(.top, 16)
-                    Text(isIncognito ? String("••• ••••• •••") : String(localized: "\(passport.ageString) Years Old"))
-                        .body2()
-                        .opacity(0.56)
-                }
+                PassportImageView(
+                    image: passport.passportImage,
+                    bgColor: look.foregroundColor.opacity(0.05)
+                )
+                .blur(radius: isIncognito ? 12 : 0)
                 Spacer()
                 HStack(spacing: 16) {
                     Image(isIncognito ? Icons.eyeSlash : Icons.eye)
@@ -78,6 +71,14 @@ struct PassportCard: View {
                         .onTapGesture { isSettingsSheetPresented.toggle() }
                 }
             }
+            VStack(alignment: .leading, spacing: 8) {
+                Text(isIncognito ? String("••••• •••••••") : passport.fullName)
+                    .h6()
+                Text(isIncognito ? String("••• ••••• •••") : String(localized: "\(passport.ageString) Years Old"))
+                    .body2()
+                    .opacity(0.56)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
             HorizontalDivider(color: look.foregroundColor.opacity(0.05))
             VStack(spacing: 16) {
                 makePassportInfoRow(
@@ -120,7 +121,7 @@ struct PassportCard: View {
                 }
             }
             HorizontalDivider()
-            Button(action: onDelete) {
+            Button(action: { isDeleteConfirmationShown = true }) {
                 HStack(spacing: 16) {
                     Image(Icons.trashSimple)
                         .iconMedium()
@@ -136,6 +137,17 @@ struct PassportCard: View {
         }
         .padding(.top, 16)
         .padding(.horizontal, 20)
+        .alert(
+            "Delete passport card?",
+            isPresented: $isDeleteConfirmationShown,
+            actions: {
+                Button("Delete", role: .destructive) { onDelete() }
+                Button("Cancel", role: .cancel) {}
+            },
+            message: {
+                Text("You will have to scan the passport again to restore it.")
+            }
+        )
     }
 }
 
