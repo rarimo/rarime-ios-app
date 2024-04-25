@@ -58,9 +58,15 @@ struct HomeView: View {
                     VStack(spacing: 24) {
                         if let passport = passportManager.passport {
                             PassportCard(
-                                look: passportManager.passportCardLook,
                                 passport: passport,
-                                onLookChange: { look in passportManager.setPassportCardLook(look) },
+                                look: Binding(
+                                    get: { passportManager.passportCardLook },
+                                    set: { passportManager.setPassportCardLook($0) }
+                                ),
+                                isIncognito: Binding(
+                                    get: { passportManager.isIncognitoMode },
+                                    set: { passportManager.setIncognitoMode($0) }
+                                ),
                                 onDelete: { passportManager.removePassport() }
                             )
                             rarimeCard

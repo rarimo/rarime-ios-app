@@ -153,6 +153,9 @@
     "DID: %@" : {
 
     },
+    "Document #" : {
+
+    },
     "Document class mode" : {
 
     },
@@ -400,9 +403,6 @@
 
     },
     "Settings" : {
-
-    },
-    "Sex" : {
 
     },
     "short description text here" : {
