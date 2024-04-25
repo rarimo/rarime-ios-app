@@ -108,6 +108,9 @@
 		56E6AD4D2BD273BC00E4DDC1 /* ProfileRouteLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */; };
 		56E6AD4F2BD2756200E4DDC1 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */; };
 		56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F48BBD2BC02E82001F3AA4 /* AppButton.swift */; };
+		CE0DA0D32BDA574200696503 /* libwitnesscalc_registerIdentity2688.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0DA0D22BDA574200696503 /* libwitnesscalc_registerIdentity2688.a */; };
+		CE0DA0D52BDA5DC700696503 /* libwitnesscalc_registerIdentity2704.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0DA0D42BDA5DC700696503 /* libwitnesscalc_registerIdentity2704.a */; };
+		CE0DA0D72BDA6F1900696503 /* EvmTxResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
 		CE32CF522BAC981300E507B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE32CF512BAC981300E507B6 /* Lottie */; };
 		CE68BE3D2BD9B23D00D92EBB /* ZkProof.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */; };
@@ -134,8 +137,6 @@
 		CEC562052BD923B4002D4954 /* libwitnesscalc_queryIdentity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC561FE2BD923B3002D4954 /* libwitnesscalc_queryIdentity.a */; };
 		CEC562062BD923B4002D4954 /* libgmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC562012BD923B4002D4954 /* libgmp.a */; };
 		CEC562072BD923B4002D4954 /* libfq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC562022BD923B4002D4954 /* libfq.a */; };
-		CEC5620C2BD9250B002D4954 /* libwitnesscalc_registerIdentity2688.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC5620A2BD9250B002D4954 /* libwitnesscalc_registerIdentity2688.a */; };
-		CEC5620D2BD9250B002D4954 /* libwitnesscalc_registerIdentity2704.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC5620B2BD9250B002D4954 /* libwitnesscalc_registerIdentity2704.a */; };
 		CEC5620F2BD925D6002D4954 /* Circuits.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC5620E2BD925D6002D4954 /* Circuits.swift */; };
 		CEC562112BD926AA002D4954 /* ZKUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC562102BD926AA002D4954 /* ZKUtils.swift */; };
 		CEC562192BD92B3E002D4954 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC562132BD9281A002D4954 /* libresolv.9.tbd */; };
@@ -242,6 +243,9 @@
 		56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouteLayout.swift; sourceTree = "<group>"; };
 		56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
 		56F48BBD2BC02E82001F3AA4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
+		CE0DA0D22BDA574200696503 /* libwitnesscalc_registerIdentity2688.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity2688.a; sourceTree = "<group>"; };
+		CE0DA0D42BDA5DC700696503 /* libwitnesscalc_registerIdentity2704.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity2704.a; sourceTree = "<group>"; };
+		CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmTxResponse.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZkProof.swift; sourceTree = "<group>"; };
 		CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relayer.swift; sourceTree = "<group>"; };
@@ -271,8 +275,6 @@
 		CEC562022BD923B4002D4954 /* libfq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfq.a; sourceTree = "<group>"; };
 		CEC562082BD923D6002D4954 /* witnesscalc_registerIdentity2688.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity2688.h; sourceTree = "<group>"; };
 		CEC562092BD923D6002D4954 /* witnesscalc_registerIdentity2704.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity2704.h; sourceTree = "<group>"; };
-		CEC5620A2BD9250B002D4954 /* libwitnesscalc_registerIdentity2688.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity2688.a; sourceTree = "<group>"; };
-		CEC5620B2BD9250B002D4954 /* libwitnesscalc_registerIdentity2704.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity2704.a; sourceTree = "<group>"; };
 		CEC5620E2BD925D6002D4954 /* Circuits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circuits.swift; sourceTree = "<group>"; };
 		CEC562102BD926AA002D4954 /* ZKUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZKUtils.swift; sourceTree = "<group>"; };
 		CEC562132BD9281A002D4954 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
@@ -290,9 +292,9 @@
 				CEC5621A2BD92B3E002D4954 /* libresolv.tbd in Frameworks */,
 				CEC562062BD923B4002D4954 /* libgmp.a in Frameworks */,
 				560F0C1D2BD0234300067054 /* QRCode in Frameworks */,
-				CEC5620D2BD9250B002D4954 /* libwitnesscalc_registerIdentity2704.a in Frameworks */,
 				CEC562072BD923B4002D4954 /* libfq.a in Frameworks */,
 				CE32CF522BAC981300E507B6 /* Lottie in Frameworks */,
+				CE0DA0D32BDA574200696503 /* libwitnesscalc_registerIdentity2688.a in Frameworks */,
 				5655E43A2BD51F5100B86C5C /* KeychainAccess in Frameworks */,
 				CE68BE452BD9B6EA00D92EBB /* Web3 in Frameworks */,
 				CEC562052BD923B4002D4954 /* libwitnesscalc_queryIdentity.a in Frameworks */,
@@ -305,8 +307,8 @@
 				CE7210312BD807140043DB7F /* ZipArchive in Frameworks */,
 				560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */,
 				CE68BE4D2BD9BB7000D92EBB /* Identity.xcframework in Frameworks */,
+				CE0DA0D52BDA5DC700696503 /* libwitnesscalc_registerIdentity2704.a in Frameworks */,
 				CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */,
-				CEC5620C2BD9250B002D4954 /* libwitnesscalc_registerIdentity2688.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +477,7 @@
 				CEF251392BD6E22700050507 /* User.swift */,
 				CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */,
 				CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */,
+				CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -837,8 +840,8 @@
 				CE68BE4C2BD9BB7000D92EBB /* Identity.xcframework */,
 				CEC562082BD923D6002D4954 /* witnesscalc_registerIdentity2688.h */,
 				CEC562092BD923D6002D4954 /* witnesscalc_registerIdentity2704.h */,
-				CEC5620A2BD9250B002D4954 /* libwitnesscalc_registerIdentity2688.a */,
-				CEC5620B2BD9250B002D4954 /* libwitnesscalc_registerIdentity2704.a */,
+				CE0DA0D42BDA5DC700696503 /* libwitnesscalc_registerIdentity2704.a */,
+				CE0DA0D22BDA574200696503 /* libwitnesscalc_registerIdentity2688.a */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562022BD923B4002D4954 /* libfq.a */,
 				CEC561FB2BD923B3002D4954 /* libfr.a */,
@@ -1014,6 +1017,7 @@
 				CEC5620F2BD925D6002D4954 /* Circuits.swift in Sources */,
 				563529EB2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift in Sources */,
 				56DAA3132BB8CA4F002CF710 /* EnableFaceIdView.swift in Sources */,
+				CE0DA0D72BDA6F1900696503 /* EvmTxResponse.swift in Sources */,
 				CE68BE3F2BD9B4B200D92EBB /* Relayer.swift in Sources */,
 				5655E4212BD2C3A200B86C5C /* IdentityManager.swift in Sources */,
 				56E2D92D2BD0196B006E725D /* QRCodeView.swift in Sources */,

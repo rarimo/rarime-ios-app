@@ -10,9 +10,6 @@ class ZKUtils {
         _ privateInputsJson: Data,
         _ descriptionFileData: Data
     ) throws -> Data {
-        print("privateInputsJson: \(privateInputsJson.utf8)")
-        print("descriptionFileData: \(descriptionFileData.count)")
-        
         return try _calcWtnsRegisterIdentity2688(privateInputsJson, descriptionFileData)
     }
     

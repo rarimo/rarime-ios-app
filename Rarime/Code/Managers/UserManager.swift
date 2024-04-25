@@ -34,7 +34,7 @@ class UserManager: ObservableObject {
                 
                 self.registerZkProof = registerZkProof
             }
-        } catch {
+            } catch {
             fatalError("\(error)")
         }
     }
@@ -49,6 +49,8 @@ class UserManager: ObservableObject {
         let zkProofJson = try JSONEncoder().encode(zkProof)
         
         try AppKeychain.setValue(.registerZkProof, zkProofJson)
+        
+        self.registerZkProof = zkProof
     }
     
     var userAddress: String {
@@ -118,8 +120,6 @@ class UserManager: ObservableObject {
     }
     
     func register(_ registerZkProof: ZkProof, _ passport: Passport) async throws {
-        guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
-        
         let proofJson = try JSONEncoder().encode(registerZkProof)
         
         let sod = try DataGroup15([UInt8](passport.dg15))

@@ -8,7 +8,7 @@ class Relayer {
         self.url = url
     }
     
-    func register(_ calldata: Data) async throws -> Data {
+    func register(_ calldata: Data) async throws -> EvmTxResponse {
         var requestURL = url
         requestURL.append(path: "/integrations/registration-relayer/v1/register")
         
@@ -20,7 +20,7 @@ class Relayer {
             parameters: payload,
             encoder: JSONParameterEncoder.default
         )
-        .serializingData()
+        .serializingDecodable(EvmTxResponse.self)
         .result
         .get()
     }

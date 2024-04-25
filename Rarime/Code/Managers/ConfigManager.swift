@@ -80,9 +80,9 @@ extension ConfigManager {
         init() {
             do {
                 guard
-                    var relayerURLRaw = Bundle.main.object(forInfoDictionaryKey: "RELAYER_URL") as? String,
-                    var evmRpcURLRaw = Bundle.main.object(forInfoDictionaryKey: "EVM_RPC_URL") as? String,
-                    var registerContractAddressRaw = Bundle.main.object(forInfoDictionaryKey: "REGISTER_CONTRACT_ADDRESS") as? String
+                    let relayerURLRaw = Bundle.main.object(forInfoDictionaryKey: "RELAYER_URL") as? String,
+                    let evmRpcURLRaw = Bundle.main.object(forInfoDictionaryKey: "EVM_RPC_URL") as? String,
+                    let registerContractAddressRaw = Bundle.main.object(forInfoDictionaryKey: "REGISTER_CONTRACT_ADDRESS") as? String
                 else {
                     throw "some config value aren't initialized"
                 }
@@ -96,7 +96,7 @@ extension ConfigManager {
                 
                 self.relayerURL = relayerURL
                 self.evmRpcURL = evmRpcURL
-                self.registerContractAddress = registerContractAddressRaw
+                self.registerContractAddress = String(registerContractAddressRaw.dropFirst().dropLast())
             } catch {
                 fatalError("ConfigManager.API init error: \(error)")
             }

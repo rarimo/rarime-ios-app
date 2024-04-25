@@ -16,10 +16,10 @@ PRIVACY_POLICY_URL = "https:${SLASH}/rarimo.com"
 TERMS_OF_USE_URL = "https:${SLASH}/rarimo.com"
 
 // Mark: CircuitData
-REGISTER_IDENTITY_CIRCUIT_DATA_URL_0 = "https:${SLASH}/github.com/rarimo/rarime-circuit-data/raw/main/registerIdentity2688.zip?download="
-REGISTER_IDENTITY_CIRCUIT_DATA_URL_1 = "https:${SLASH}/github.com/rarimo/rarime-circuit-data/raw/main/registerIdentity2704.zip?download="
+REGISTER_IDENTITY_CIRCUIT_DATA_URL_0 = "https:${SLASH}/github.com/rarimo/rarime-circuit-data/releases/download/v0.0.1/registerIdentity2688.zip"
+REGISTER_IDENTITY_CIRCUIT_DATA_URL_1 = "https:${SLASH}/github.com/rarimo/rarime-circuit-data/releases/download/v0.0.1/registerIdentity2704.zip"
 
 // Mark: API
 RELAYER_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
 EVM_RPC_URL = "https:${SLASH}/rpc.evm.node1.mainnet-beta.rarimo.com"
-REGISTER_CONTRACT_ADDRESS = "0x9aDAc5C0895A76BE9dD227eA36b80982e7EbE0Bc"
+REGISTER_CONTRACT_ADDRESS = "0x9a780683B771d98cdfa8526039D005128807b66F"
