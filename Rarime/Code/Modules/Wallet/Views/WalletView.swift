@@ -49,20 +49,22 @@ struct WalletView: View {
                     .h4()
                     .foregroundStyle(.textPrimary)
             }
-            HorizontalDivider()
-            HStack(spacing: 12) {
-                AppButton(
-                    variant: .secondary,
-                    text: "Receive",
-                    leftIcon: Icons.arrowDown,
-                    action: { path.append(.receive) }
-                )
-                AppButton(
-                    variant: .secondary,
-                    text: "Send",
-                    leftIcon: Icons.arrowUp,
-                    action: { path.append(.send) }
-                )
+            VStack(spacing: 20) {
+                HorizontalDivider()
+                HStack(spacing: 12) {
+                    AppButton(
+                        variant: .secondary,
+                        text: "Receive",
+                        leftIcon: Icons.arrowDown,
+                        action: { path.append(.receive) }
+                    )
+                    AppButton(
+                        variant: .secondary,
+                        text: "Send",
+                        leftIcon: Icons.arrowUp,
+                        action: { path.append(.send) }
+                    )
+                }
             }
         }
         .padding(20)

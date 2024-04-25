@@ -9,14 +9,31 @@ struct LanguageView: View {
             title: String(localized: "Language"),
             onBack: onBack
         ) {
-            CardContainer {
-                HStack {
-                    Text(settingsManager.language.title).subtitle4()
-                    Spacer()
-                    Image(Icons.check).iconMedium()
+            VStack(spacing: 12) {
+                ForEach(AppLanguage.allCases, id: \.self) { language in
+                    LanguageItem(
+                        language: language,
+                        isSelected: settingsManager.language == language
+                    ) {
+                        settingsManager.setLanguage(language)
+                        FeedbackGenerator.shared.impact(.light)
+                    }
                 }
-                .foregroundColor(.textPrimary)
             }
+        }
+    }
+}
+
+private struct LanguageItem: View {
+    let language: AppLanguage
+    let isSelected: Bool
+    let onSelect: () -> Void
+
+    var body: some View {
+        AppRadioButton(isSelected: isSelected, onSelect: onSelect) {
+            Text(language.title)
+                .subtitle4()
+                .foregroundStyle(.textPrimary)
         }
     }
 }

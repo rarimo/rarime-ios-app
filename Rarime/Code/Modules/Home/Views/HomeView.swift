@@ -98,7 +98,9 @@ struct HomeView: View {
                 .foregroundStyle(.textSecondary)
                 Spacer()
                 Button(action: { path.append(.scanQR) }) {
-                    Image(Icons.qrCode).iconMedium()
+                    Image(Icons.qrCode)
+                        .iconMedium()
+                        .foregroundStyle(.textPrimary)
                 }
             }
 
