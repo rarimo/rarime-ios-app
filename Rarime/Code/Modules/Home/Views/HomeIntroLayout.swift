@@ -13,6 +13,7 @@ struct HomeIntroLayout<Icon: View, Content: View>: View {
                 icon
                     .frame(width: 72, height: 72)
                     .background(.componentPrimary)
+                    .foregroundStyle(.textPrimary)
                     .clipShape(Circle())
                 Text(title)
                     .h6()

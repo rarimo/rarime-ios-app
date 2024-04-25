@@ -11,6 +11,7 @@ struct HomeView: View {
 
     @State private var path: [HomeRoute] = []
 
+    @State private var isBetaLaunchSheetPresented = false
     @State private var isAirdropSheetPresented = false
     @State private var isPassportSheetPresented = false
     @State private var isRarimeSheetPresented = false
@@ -47,12 +48,19 @@ struct HomeView: View {
     private var content: some View {
         MainViewLayout {
             VStack(spacing: 24) {
-                Text("Beta launch")
-                    .body3()
-                    .frame(maxWidth: .infinity)
-                    .foregroundStyle(.warningDark)
-                    .padding(.vertical, 4)
-                    .background(.warningLighter)
+                HStack {
+                    Text("Beta launch").body3()
+                    Image(Icons.info)
+                        .iconSmall()
+                        .onTapGesture { isBetaLaunchSheetPresented = true }
+                        .dynamicSheet(isPresented: $isBetaLaunchSheetPresented, fullScreen: true) {
+                            BetaLaunchView(onClose: { isBetaLaunchSheetPresented = false })
+                        }
+                }
+                .frame(maxWidth: .infinity)
+                .foregroundStyle(.warningDark)
+                .padding(.vertical, 4)
+                .background(.warningLighter)
                 VStack(alignment: .leading, spacing: 32) {
                     header
                     VStack(spacing: 24) {

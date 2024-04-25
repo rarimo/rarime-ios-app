@@ -108,6 +108,7 @@
 		56E6AD4D2BD273BC00E4DDC1 /* ProfileRouteLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */; };
 		56E6AD4F2BD2756200E4DDC1 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */; };
 		56E7AD0A2BDAA4F000D3A258 /* AppRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7AD092BDAA4F000D3A258 /* AppRadioButton.swift */; };
+		56E7AD0C2BDAA9C100D3A258 /* BetaLaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7AD0B2BDAA9C100D3A258 /* BetaLaunchView.swift */; };
 		56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F48BBD2BC02E82001F3AA4 /* AppButton.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
 		CE32CF522BAC981300E507B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE32CF512BAC981300E507B6 /* Lottie */; };
@@ -215,6 +216,7 @@
 		56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouteLayout.swift; sourceTree = "<group>"; };
 		56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
 		56E7AD092BDAA4F000D3A258 /* AppRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRadioButton.swift; sourceTree = "<group>"; };
+		56E7AD0B2BDAA9C100D3A258 /* BetaLaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaLaunchView.swift; sourceTree = "<group>"; };
 		56F48BBD2BC02E82001F3AA4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CE9E82B22BA881F400AAF885 /* Rarime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rarime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -330,6 +332,7 @@
 				56CC01E42BCD81AA008CEBE0 /* AirdropIntroView.swift */,
 				56933DEC2BBAB0AB0068C894 /* PassportIntroView.swift */,
 				56E2D9182BCE94CA006E725D /* RarimeInfoView.swift */,
+				56E7AD0B2BDAA9C100D3A258 /* BetaLaunchView.swift */,
 				56E2D91A2BCEA66A006E725D /* PassportCard.swift */,
 				56E2D9142BCE7FC4006E725D /* HomeIntroLayout.swift */,
 				56E2D9252BCFE65C006E725D /* CongratsView.swift */,
@@ -866,6 +869,7 @@
 				56933E052BBC00D60068C894 /* RewardChipView.swift in Sources */,
 				561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */,
 				56E2D92A2BCFFB6B006E725D /* Airdrop.swift in Sources */,
+				56E7AD0C2BDAA9C100D3A258 /* BetaLaunchView.swift in Sources */,
 				56DAA3072BB77550002CF710 /* IdentityStepLayoutView.swift in Sources */,
 				56474ADA2BB9ED6E0017AA25 /* AnyTransition+Backslide.swift in Sources */,
 				56DAA30F2BB8C3CB002CF710 /* EnablePasscodeView.swift in Sources */,
