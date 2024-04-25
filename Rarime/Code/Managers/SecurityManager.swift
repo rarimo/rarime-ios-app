@@ -24,13 +24,16 @@ class SecurityManager: ObservableObject {
     init() {
         passcodeState = SecurityItemState(rawValue: AppUserDefaults.shared.passcodeState)!
         faceIdState = SecurityItemState(rawValue: AppUserDefaults.shared.faceIdState)!
-        passcode = try! AppKeychain.getValue(.passcode) ?? ""
+        
+        let passcodeBytes = (try? AppKeychain.getValue(.passcode) ?? Data()) ?? Data()
+        
+        passcode = passcodeBytes.utf8
     }
 
     func enablePasscode(_ newPasscode: String) {
         passcodeState = .enabled
         passcode = newPasscode
-        try? AppKeychain.setValue(.passcode, newPasscode)
+        try? AppKeychain.setValue(.passcode, newPasscode.data(using: .utf8) ?? Data())
     }
 
     func disablePasscode() {

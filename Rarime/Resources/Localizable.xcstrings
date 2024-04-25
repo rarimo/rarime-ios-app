@@ -150,9 +150,6 @@
     "Description text here" : {
 
     },
-    "DID: %@" : {
-
-    },
     "Document class mode" : {
 
     },
@@ -160,6 +157,9 @@
 
     },
     "Done" : {
+
+    },
+    "Downloading additional data" : {
 
     },
     "Enable" : {

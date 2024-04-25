@@ -2,17 +2,18 @@ import SwiftUI
 
 struct PassportProofView: View {
     @EnvironmentObject var passportViewModel: PassportViewModel
-    let onFinish: () -> Void
+    
+    let onFinish: (ZkProof) -> Void
     let onClose: () -> Void
 
     private func generateProof() async {
-        await passportViewModel.generateProof()
-        if passportViewModel.processingStatus != .success { return }
-
-        // Wait for a while to show the success state
         do {
+            let zkProof = try await passportViewModel.generateProof()
+            if passportViewModel.processingStatus != .success { return }
+            
             try await Task.sleep(nanoseconds: NSEC_PER_SEC)
-            onFinish()
+            
+            onFinish(zkProof)
         } catch {
             LoggerUtil.passport.error("Error while waiting for success state: \(error)")
         }
@@ -135,6 +136,12 @@ private struct GeneralStatusView: View {
 }
 
 #Preview {
-    PassportProofView(onFinish: {}, onClose: {})
+    @StateObject var userManager = UserManager.shared
+    
+    return PassportProofView(onFinish: { _ in }, onClose: {})
         .environmentObject(PassportViewModel())
+        .environmentObject(UserManager.shared)
+        .onAppear {
+            let _ = try? userManager.createNewUser()
+        }
 }

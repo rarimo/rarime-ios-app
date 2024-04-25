@@ -28,20 +28,33 @@ class PassportViewModel: ObservableObject {
     }
 
     @MainActor
-    func generateProof() async {
+    func generateProof() async throws -> ZkProof {
         do {
-            // TODO: Generate proof
+            guard let passport else { throw "failed to get passport" }
+            
             try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
             proofState = .applyingZK
+            
+            guard let proof = try await UserManager.shared.generateRegisterIdentityProof(passport) else {
+                throw "failed to generate proof, invalid circuit type"
+            }
+            
             try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
             proofState = .createProfile
+            
+            try await UserManager.shared.register(proof, passport)
+            
             try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
             proofState = .finalizing
             try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
             processingStatus = .success
+            
+            return proof
         } catch {
             processingStatus = .failure
             LoggerUtil.passport.error("Error while generating proof: \(error)")
+            
+            throw error
         }
     }
 }

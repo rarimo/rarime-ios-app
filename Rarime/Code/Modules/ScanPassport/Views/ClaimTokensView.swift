@@ -1,7 +1,10 @@
 import SwiftUI
 
 struct ClaimTokensView: View {
+    @EnvironmentObject var passportViewModel: PassportViewModel
     @EnvironmentObject private var walletManager: WalletManager
+    @EnvironmentObject private var userManager: UserManager
+    
     let onFinish: () -> Void
 
     @State private var isClaiming = false
@@ -10,6 +13,17 @@ struct ClaimTokensView: View {
         defer { isClaiming = false }
         do {
             isClaiming = true
+            
+            guard let passport = passportViewModel.passport else { throw "failed to get passport" }
+            guard let registerZkProof = userManager.registerZkProof else { throw "failed to get registerZkProof" }
+            
+            let queryZkProof = try await userManager.generateAirdropQueryProof(
+                registerZkProof,
+                passport
+            )
+            
+            try await userManager.airDrop(queryZkProof)
+            
             try await walletManager.claimAirdrop()
             FeedbackGenerator.shared.notify(.success)
             onFinish()
@@ -74,5 +88,7 @@ struct ClaimTokensView: View {
 
 #Preview {
     ClaimTokensView(onFinish: {})
-        .environmentObject(WalletManager())
+        .environmentObject(WalletManager.shared)
+        .environmentObject(UserManager.shared)
+        .environmentObject(PassportViewModel())
 }

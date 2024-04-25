@@ -30,4 +30,13 @@ public class AppUserDefaults: ObservableObject {
 
     @AppStorage("is_airdrop_claimed")
     public var isAirdropClaimed = false
+    
+    @AppStorage("is_first_launch")
+    public var isFirstLaunch = true
+    
+    @AppStorage("register_circuit_metadata")
+    public var registerCircuitMetadata: Data = "{}".data(using: .utf8)!
+    
+    @AppStorage("is_circuit_data_downloaded")
+    public var isCircuitDataDownloaded = false
 }

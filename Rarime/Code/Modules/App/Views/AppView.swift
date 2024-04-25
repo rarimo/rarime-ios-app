@@ -7,7 +7,9 @@ struct AppView: View {
 
     var body: some View {
         ZStack {
-            if securityManager.faceIdState != .unset {
+            if !viewModel.isCircuitDataDownloaded {
+                PreDownloadView(onFinish: viewModel.finishCircuitData).transition(.backslide)
+            } else if securityManager.faceIdState != .unset {
                 MainView().transition(.backslide)
             } else if securityManager.passcodeState != .unset {
                 EnableFaceIdView().transition(.backslide)

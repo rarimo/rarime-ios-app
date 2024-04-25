@@ -36,7 +36,6 @@ class WalletManager: ObservableObject {
             return
         }
 
-        // TODO: Claim RMO token
         try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC)
         balance += 3.0
         transactions.append(

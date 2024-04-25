@@ -6,6 +6,9 @@ private enum ScanPassportState {
 
 struct ScanPassportView: View {
     @EnvironmentObject private var walletManager: WalletManager
+    @EnvironmentObject private var userManager: UserManager
+    @EnvironmentObject private var circuitDataManager: CircuitDataManager
+    
     let onComplete: (_ passport: Passport, _ isClaimed: Bool) -> Void
     let onClose: () -> Void
 
@@ -43,11 +46,17 @@ struct ScanPassportView: View {
             .transition(.backslide)
         case .generateProof:
             PassportProofView(
-                onFinish: {
-                    if passportViewModel.isEligibleForReward, !walletManager.isClaimed {
-                        withAnimation { state = .claimTokens }
-                    } else {
-                        onComplete(passportViewModel.passport!, false)
+                onFinish: { registerZKProof in
+                    do {
+                        try userManager.saveRegisterZkProof(registerZKProof)
+                        
+                        if passportViewModel.isEligibleForReward, !walletManager.isClaimed {
+                            withAnimation { state = .claimTokens }
+                        } else {
+                            onComplete(passportViewModel.passport!, false)
+                        }
+                    } catch {
+                        LoggerUtil.passport.error("unexpected error: \(error)")
                     }
                 },
                 onClose: onClose
@@ -55,17 +64,26 @@ struct ScanPassportView: View {
             .environmentObject(passportViewModel)
             .transition(.backslide)
         case .claimTokens:
-            ClaimTokensView(onFinish: { onComplete(passportViewModel.passport!, true) })
-                .environmentObject(passportViewModel)
-                .transition(.backslide)
+            ClaimTokensView(
+                onFinish: { onComplete(passportViewModel.passport!, true) }
+            )
+            .environmentObject(passportViewModel)
+            .transition(.backslide)
         }
     }
 }
 
 #Preview {
-    ScanPassportView(
+    let userManager = UserManager.shared
+    
+    return ScanPassportView(
         onComplete: { _, _ in },
         onClose: {}
     )
     .environmentObject(WalletManager())
+    .environmentObject(userManager)
+    .environmentObject(CircuitDataManager.shared)
+    .onAppear {
+        _ = try? userManager.createNewUser()
+    }
 }
