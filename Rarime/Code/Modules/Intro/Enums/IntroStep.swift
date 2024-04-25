@@ -1,35 +1,31 @@
-//
-//  IntroStep.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 29.03.2024.
-//
-
 import Foundation
 
 enum IntroStep: Int, CaseIterable {
-    case welcome, identity, rewards
+    case welcome, incognito, proofs, rewards
 
     var title: LocalizedStringResource {
         switch self {
         case .welcome: return "Welcome"
-        case .identity: return "Become a Citizen"
+        case .incognito: return "Incognito"
+        case .proofs: return "Proofs"
         case .rewards: return "Get rewarded"
         }
     }
 
     var text: LocalizedStringResource {
         switch self {
-        case .welcome: return "This is an app where your digital identity lives and enables you to connect with rest of the web in a fully private mode"
-        case .identity: return "Convert existing identity documents into anonymous credentials"
-        case .rewards: return "Create a profile, add various credentials, and invite others to earn rewards in the process"
+        case .welcome: return "This app is where your digital identities live, enabling you to go incognito across the web."
+        case .incognito: return "Ensuring your history, reputation and actions are not lost, but still remain confidential controlled by you."
+        case .proofs: return "Prove your eligibility, belonging, identity, and contributions — all without revealing who you are."
+        case .rewards: return "Start building your incognito profile and earn rewards as an early community member."
         }
     }
 
     var image: String {
         switch self {
         case .welcome: return Images.introApp
-        case .identity: return Images.introIdentity
+        case .incognito: return Images.introPrivacy
+        case .proofs: return Images.introShield
         case .rewards: return Images.introGifts
         }
     }
