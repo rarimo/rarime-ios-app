@@ -25,11 +25,15 @@ struct WalletView: View {
         MainViewLayout {
             VStack(alignment: .leading, spacing: 12) {
                 header
-                VStack {
-                    transactionsCard
-                    Spacer()
+                RefreshableScrollView(
+                    onRefresh: { try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC) }
+                ) { _ in
+                    VStack {
+                        transactionsCard
+                        Spacer()
+                    }
+                    .padding(.horizontal, 12)
                 }
-                .padding(.horizontal, 12)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.backgroundPrimary)
