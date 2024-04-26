@@ -37,6 +37,11 @@ struct PassportCard: View {
 
     @State private var isSettingsSheetPresented = false
     @State private var isDeleteConfirmationShown = false
+    @State private var isHolding = false
+
+    var isInfoHidden: Bool {
+        isIncognito && !isHolding
+    }
 
     var body: some View {
         cardContent.dynamicSheet(
@@ -54,7 +59,7 @@ struct PassportCard: View {
                     image: passport.passportImage,
                     bgColor: look.foregroundColor.opacity(0.05)
                 )
-                .blur(radius: isIncognito ? 12 : 0)
+                .blur(radius: isInfoHidden ? 12 : 0)
                 Spacer()
                 HStack(spacing: 16) {
                     Image(isIncognito ? Icons.eyeSlash : Icons.eye)
@@ -72,9 +77,9 @@ struct PassportCard: View {
                 }
             }
             VStack(alignment: .leading, spacing: 8) {
-                Text(isIncognito ? String("••••• •••••••") : passport.fullName)
+                Text(isInfoHidden ? String("••••• •••••••") : passport.fullName)
                     .h6()
-                Text(isIncognito ? String("••• ••••• •••") : String(localized: "\(passport.ageString) Years Old"))
+                Text(isInfoHidden ? String("••• ••••• •••") : String(localized: "\(passport.ageString) Years Old"))
                     .body2()
                     .opacity(0.56)
             }
@@ -83,11 +88,11 @@ struct PassportCard: View {
             VStack(spacing: 16) {
                 makePassportInfoRow(
                     title: String(localized: "Nationality"),
-                    value: isIncognito ? String("•••") : passport.nationality
+                    value: isInfoHidden ? String("•••") : passport.nationality
                 )
                 makePassportInfoRow(
                     title: String(localized: "Document #"),
-                    value: isIncognito ? String("••••••••") : passport.documentNumber
+                    value: isInfoHidden ? String("••••••••") : passport.documentNumber
                 )
             }
         }
@@ -96,6 +101,16 @@ struct PassportCard: View {
         .background(look.backgroundColor)
         .foregroundStyle(look.foregroundColor)
         .clipShape(RoundedRectangle(cornerRadius: 16))
+        .gesture(
+            DragGesture(minimumDistance: 0)
+                .onChanged { _ in
+                    if isIncognito, !isHolding {
+                        isHolding = true
+                        FeedbackGenerator.shared.impact(.light)
+                    }
+                }
+                .onEnded { _ in isHolding = false }
+        )
     }
 
     private func makePassportInfoRow(title: String, value: String) -> some View {
