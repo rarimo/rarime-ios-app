@@ -21,15 +21,14 @@ class PassportManager: ObservableObject {
 
     func setPassport(_ passport: Passport) {
         self.passport = passport
+        setPassportCardLook(.white)
+        setIncognitoMode(true)
         try? AppKeychain.setValue(.passport, try String(data: JSONEncoder().encode(passport), encoding: .utf8)!)
     }
 
     func removePassport() {
         passport = nil
-        passportCardLook = .black
-
         try? AppKeychain.removeValue(.passport)
-        AppUserDefaults.shared.passportCardLook = passportCardLook.rawValue
     }
 
     func setPassportCardLook(_ look: PassportCardLook) {
