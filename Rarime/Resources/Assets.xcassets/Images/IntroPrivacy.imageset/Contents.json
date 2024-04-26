@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "intro_privacy.png",
+      "filename" : "intro_identity.png",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "intro_privacy 1.png",
+      "filename" : "intro_identity 1.png",
       "idiom" : "universal"
     }
   ],

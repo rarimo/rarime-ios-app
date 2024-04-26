@@ -18,7 +18,10 @@ struct TabBarView: View {
                     activeIcon: item.activeIconName,
                     isActive: selectedTab == item
                 )
-                .onTapGesture { selectedTab = item }
+                .onTapGesture {
+                    selectedTab = item
+                    FeedbackGenerator.shared.impact(.light)
+                }
             }
         }
         .padding(4)

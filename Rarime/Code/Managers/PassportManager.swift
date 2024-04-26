@@ -5,12 +5,14 @@ class PassportManager: ObservableObject {
 
     @Published private(set) var passport: Passport?
     @Published private(set) var passportCardLook: PassportCardLook
+    @Published private(set) var isIncognitoMode: Bool
 
     init() {
         if let passport = try? AppKeychain.getValue(.passport) {
             self.passport = try? JSONDecoder().decode(Passport.self, from: passport.data(using: .utf8)!)
         }
         passportCardLook = PassportCardLook(rawValue: AppUserDefaults.shared.passportCardLook)!
+        isIncognitoMode = AppUserDefaults.shared.isPassportIncognitoMode
     }
 
     var isEligibleForReward: Bool {
@@ -33,5 +35,10 @@ class PassportManager: ObservableObject {
     func setPassportCardLook(_ look: PassportCardLook) {
         passportCardLook = look
         AppUserDefaults.shared.passportCardLook = look.rawValue
+    }
+
+    func setIncognitoMode(_ isIncognito: Bool) {
+        isIncognitoMode = isIncognito
+        AppUserDefaults.shared.isPassportIncognitoMode = isIncognito
     }
 }

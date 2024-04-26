@@ -25,11 +25,15 @@ struct WalletView: View {
         MainViewLayout {
             VStack(alignment: .leading, spacing: 12) {
                 header
-                VStack {
-                    transactionsCard
-                    Spacer()
+                RefreshableScrollView(
+                    onRefresh: { try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC) }
+                ) { _ in
+                    VStack {
+                        transactionsCard
+                        Spacer()
+                    }
+                    .padding(.horizontal, 12)
                 }
-                .padding(.horizontal, 12)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.backgroundPrimary)
@@ -49,20 +53,22 @@ struct WalletView: View {
                     .h4()
                     .foregroundStyle(.textPrimary)
             }
-            HorizontalDivider()
-            HStack(spacing: 12) {
-                AppButton(
-                    variant: .secondary,
-                    text: "Receive",
-                    leftIcon: Icons.arrowDown,
-                    action: { path.append(.receive) }
-                )
-                AppButton(
-                    variant: .secondary,
-                    text: "Send",
-                    leftIcon: Icons.arrowUp,
-                    action: { path.append(.send) }
-                )
+            VStack(spacing: 20) {
+                HorizontalDivider()
+                HStack(spacing: 12) {
+                    AppButton(
+                        variant: .secondary,
+                        text: "Receive",
+                        leftIcon: Icons.arrowDown,
+                        action: { path.append(.receive) }
+                    )
+                    AppButton(
+                        variant: .secondary,
+                        text: "Send",
+                        leftIcon: Icons.arrowUp,
+                        action: { path.append(.send) }
+                    )
+                }
             }
         }
         .padding(20)

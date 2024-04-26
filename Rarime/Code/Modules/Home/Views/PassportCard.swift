@@ -29,13 +29,14 @@ enum PassportCardLook: Int, CaseIterable {
 }
 
 struct PassportCard: View {
-    var look: PassportCardLook
-    var passport: Passport
+    let passport: Passport
+    @Binding var look: PassportCardLook
+    @Binding var isIncognito: Bool
 
-    var onLookChange: (PassportCardLook) -> Void
     var onDelete: () -> Void
 
     @State private var isSettingsSheetPresented = false
+    @State private var isDeleteConfirmationShown = false
 
     var body: some View {
         cardContent.dynamicSheet(
@@ -49,32 +50,44 @@ struct PassportCard: View {
     private var cardContent: some View {
         return VStack(spacing: 24) {
             HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 8) {
-                    PassportImageView(
-                        image: passport.passportImage,
-                        bgColor: look.foregroundColor.opacity(0.05)
-                    )
-                    Text(passport.fullName)
-                        .h6()
-                        .padding(.top, 16)
-                    Text("\(passport.ageString) Years Old")
-                        .body2()
-                        .opacity(0.56)
-                }
+                PassportImageView(
+                    image: passport.passportImage,
+                    bgColor: look.foregroundColor.opacity(0.05)
+                )
+                .blur(radius: isIncognito ? 12 : 0)
                 Spacer()
-                Image(Icons.dotsThreeOutline)
-                    .iconMedium()
-                    .padding(8)
-                    .background(look.foregroundColor.opacity(0.05))
-                    .clipShape(Circle())
-                    .onTapGesture { isSettingsSheetPresented.toggle() }
+                HStack(spacing: 16) {
+                    Image(isIncognito ? Icons.eyeSlash : Icons.eye)
+                        .iconMedium()
+                        .padding(8)
+                        .background(look.foregroundColor.opacity(0.05))
+                        .clipShape(Circle())
+                        .onTapGesture { isIncognito.toggle() }
+                    Image(Icons.dotsThreeOutline)
+                        .iconMedium()
+                        .padding(8)
+                        .background(look.foregroundColor.opacity(0.05))
+                        .clipShape(Circle())
+                        .onTapGesture { isSettingsSheetPresented.toggle() }
+                }
             }
+            VStack(alignment: .leading, spacing: 8) {
+                Text(isIncognito ? String("••••• •••••••") : passport.fullName)
+                    .h6()
+                Text(isIncognito ? String("••• ••••• •••") : String(localized: "\(passport.ageString) Years Old"))
+                    .body2()
+                    .opacity(0.56)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
             HorizontalDivider(color: look.foregroundColor.opacity(0.05))
             VStack(spacing: 16) {
-                makePassportInfoRow(title: "Nationality", value: passport.nationality)
                 makePassportInfoRow(
-                    title: "Sex",
-                    value: String(localized: passport.gender == "M" ? "Male" : "Female")
+                    title: String(localized: "Nationality"),
+                    value: isIncognito ? String("•••") : passport.nationality
+                )
+                makePassportInfoRow(
+                    title: String(localized: "Document #"),
+                    value: isIncognito ? String("••••••••") : passport.documentNumber
                 )
             }
         }
@@ -85,7 +98,7 @@ struct PassportCard: View {
         .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 
-    private func makePassportInfoRow(title: LocalizedStringResource, value: String) -> some View {
+    private func makePassportInfoRow(title: String, value: String) -> some View {
         HStack {
             Text(title).body3().opacity(0.56)
             Spacer()
@@ -103,12 +116,12 @@ struct PassportCard: View {
                     PassportLookOption(
                         look: look,
                         isActive: look == self.look,
-                        onLookChange: onLookChange
+                        onLookChange: { self.look = $0 }
                     )
                 }
             }
             HorizontalDivider()
-            Button(action: onDelete) {
+            Button(action: { isDeleteConfirmationShown = true }) {
                 HStack(spacing: 16) {
                     Image(Icons.trashSimple)
                         .iconMedium()
@@ -124,6 +137,17 @@ struct PassportCard: View {
         }
         .padding(.top, 16)
         .padding(.horizontal, 20)
+        .alert(
+            "Delete passport card?",
+            isPresented: $isDeleteConfirmationShown,
+            actions: {
+                Button("Delete", role: .destructive) { onDelete() }
+                Button("Cancel", role: .cancel) {}
+            },
+            message: {
+                Text("You will have to scan the passport again to restore it.")
+            }
+        )
     }
 }
 
@@ -187,12 +211,13 @@ private struct PreviewView: View {
         nationality: "USA"
     )
     @State private var look: PassportCardLook = .black
+    @State private var isIncognito: Bool = false
 
     var body: some View {
         PassportCard(
-            look: look,
             passport: passport,
-            onLookChange: { look in self.look = look },
+            look: $look,
+            isIncognito: $isIncognito,
             onDelete: {}
         )
     }

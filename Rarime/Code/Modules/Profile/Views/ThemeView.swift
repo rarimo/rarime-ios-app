@@ -11,7 +11,7 @@ struct ThemeView: View {
         ) {
             VStack(spacing: 12) {
                 ForEach(AppColorScheme.allCases, id: \.self) { scheme in
-                    ThemeRow(
+                    ThemeItem(
                         scheme: scheme,
                         isSelected: settingsManager.colorScheme == scheme
                     ) {
@@ -24,13 +24,13 @@ struct ThemeView: View {
     }
 }
 
-private struct ThemeRow: View {
+private struct ThemeItem: View {
     let scheme: AppColorScheme
     let isSelected: Bool
-    let action: () -> Void
+    let onSelect: () -> Void
 
     var body: some View {
-        Button(action: action) {
+        AppRadioButton(isSelected: isSelected, onSelect: onSelect) {
             HStack(spacing: 16) {
                 Image(scheme.image)
                     .resizable()
@@ -38,21 +38,7 @@ private struct ThemeRow: View {
                 Text(scheme.title)
                     .subtitle4()
                     .foregroundStyle(.textPrimary)
-                Spacer()
-                Circle()
-                    .stroke(.componentHovered, lineWidth: 2)
-                    .frame(width: 16)
-                    .overlay(
-                        Circle()
-                            .stroke(isSelected ? .primaryDark : .clear, lineWidth: 5)
-                            .frame(width: 13)
-                    )
             }
-            .padding(16)
-            .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(.componentHovered, lineWidth: 1)
-            )
         }
     }
 }

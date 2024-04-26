@@ -1,6 +1,7 @@
 enum Images {
     static let introApp = "IntroApp"
-    static let introIdentity = "IntroIdentity"
+    static let introPrivacy = "IntroPrivacy"
+    static let introShield = "IntroShield"
     static let introGifts = "IntroGifts"
 
     static let passportNfc = "PassportNFC"

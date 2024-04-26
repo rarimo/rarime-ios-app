@@ -11,6 +11,7 @@ struct HomeView: View {
 
     @State private var path: [HomeRoute] = []
 
+    @State private var isBetaLaunchSheetPresented = false
     @State private var isAirdropSheetPresented = false
     @State private var isPassportSheetPresented = false
     @State private var isRarimeSheetPresented = false
@@ -46,32 +47,49 @@ struct HomeView: View {
 
     private var content: some View {
         MainViewLayout {
-            VStack(spacing: 24) {
-                Text("Beta launch")
-                    .body3()
+            RefreshableScrollView(
+                onRefresh: { try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC) }
+            ) { _ in
+                VStack(spacing: 24) {
+                    HStack {
+                        Text("Beta launch").body3()
+                        Image(Icons.info)
+                            .iconSmall()
+                            .onTapGesture { isBetaLaunchSheetPresented = true }
+                            .dynamicSheet(isPresented: $isBetaLaunchSheetPresented, fullScreen: true) {
+                                BetaLaunchView(onClose: { isBetaLaunchSheetPresented = false })
+                            }
+                    }
                     .frame(maxWidth: .infinity)
                     .foregroundStyle(.warningDark)
                     .padding(.vertical, 4)
                     .background(.warningLighter)
-                VStack(alignment: .leading, spacing: 32) {
-                    header
-                    VStack(spacing: 24) {
-                        if let passport = passportManager.passport {
-                            PassportCard(
-                                look: passportManager.passportCardLook,
-                                passport: passport,
-                                onLookChange: { look in passportManager.setPassportCardLook(look) },
-                                onDelete: { passportManager.removePassport() }
-                            )
-                            rarimeCard
-                        } else {
-                            airdropCard
-                            otherPassportsCard
+                    VStack(alignment: .leading, spacing: 32) {
+                        header
+                        VStack(spacing: 24) {
+                            if let passport = passportManager.passport {
+                                PassportCard(
+                                    passport: passport,
+                                    look: Binding(
+                                        get: { passportManager.passportCardLook },
+                                        set: { passportManager.setPassportCardLook($0) }
+                                    ),
+                                    isIncognito: Binding(
+                                        get: { passportManager.isIncognitoMode },
+                                        set: { passportManager.setIncognitoMode($0) }
+                                    ),
+                                    onDelete: { passportManager.removePassport() }
+                                )
+                                rarimeCard
+                            } else {
+                                airdropCard
+                                otherPassportsCard
+                            }
                         }
+                        Spacer()
                     }
-                    Spacer()
+                    .padding(.horizontal, 12)
                 }
-                .padding(.horizontal, 12)
             }
             .padding(.top, 1)
             .background(.backgroundPrimary)
@@ -92,7 +110,9 @@ struct HomeView: View {
                 .foregroundStyle(.textSecondary)
                 Spacer()
                 Button(action: { path.append(.scanQR) }) {
-                    Image(Icons.qrCode).iconMedium()
+                    Image(Icons.qrCode)
+                        .iconMedium()
+                        .foregroundStyle(.textPrimary)
                 }
             }
 
