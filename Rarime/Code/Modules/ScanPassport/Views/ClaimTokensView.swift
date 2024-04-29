@@ -25,6 +25,9 @@ struct ClaimTokensView: View {
             try await userManager.airDrop(queryZkProof)
             
             try await walletManager.claimAirdrop()
+            
+            userManager.balance += 3.0
+            
             FeedbackGenerator.shared.notify(.success)
             onFinish()
         } catch {

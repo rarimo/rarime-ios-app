@@ -37,5 +37,13 @@
 	<string>${EVM_RPC_URL}</string>
 	<key>REGISTER_CONTRACT_ADDRESS</key>
 	<string>${REGISTER_CONTRACT_ADDRESS}</string>
+	<key>COSMOS_RPC_URL</key>
+	<string>${COSMOS_RPC_URL}</string>
+	<key>CHAIN_ID</key>
+	<string>${CHAIN_ID}</string>
+	<key>DENOM</key>
+	<string>${DENOM}</string>
+	<key>RPC_IP</key>
+	<string>${RPC_IP}</string>
 </dict>
 </plist>

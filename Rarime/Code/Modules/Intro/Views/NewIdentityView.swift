@@ -68,7 +68,7 @@ struct NewIdentityView: View {
             }
         }
         .onAppear(perform: createNewUser)
-        .onDisappear(perform: createNewUser)
+        .onDisappear(perform: cleanup)
     }
 
     var copyButton: some View {

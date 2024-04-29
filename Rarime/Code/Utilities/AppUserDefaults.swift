@@ -22,9 +22,6 @@ public class AppUserDefaults: ObservableObject {
     @AppStorage("language")
     public var language = AppLanguage.engish.rawValue
 
-    @AppStorage("wallet_balance")
-    public var walletBalance = 0.0
-
     @AppStorage("wallet_transactions")
     public var walletTransactions = Data()
 

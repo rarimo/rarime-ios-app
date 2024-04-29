@@ -12,6 +12,8 @@ class UserManager: ObservableObject {
     
     @Published var registerZkProof: ZkProof?
     
+    @Published var balance: Double
+    
     init() {
         do {
             // Data stored in Keychain cannot be deleted after uninstalling the app,
@@ -21,20 +23,21 @@ class UserManager: ObservableObject {
                 if try AppKeychain.valueExists(.privateKey) {
                     try AppKeychain.removeValue(.privateKey)
                     try AppKeychain.removeValue(.registerZkProof)
+                    try AppKeychain.removeValue(.passport)
                 }
                 
                 AppUserDefaults.shared.isFirstLaunch = false
             }
             
             self.user = try User.load()
-            
+            self.balance = 0
             
             if let registerZkProofJson = try AppKeychain.getValue(.registerZkProof) {
                 let registerZkProof = try JSONDecoder().decode(ZkProof.self, from: registerZkProofJson)
                 
                 self.registerZkProof = registerZkProof
             }
-            } catch {
+        } catch {
             fatalError("\(error)")
         }
     }
@@ -192,5 +195,31 @@ class UserManager: ObservableObject {
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
         let _ = try await relayer.airdrop(queryZkProof, to: rarimoAddress)
+    }
+    
+    func fetchBalanse() async throws -> String {
+        let address = userAddress
+        
+        let cosmos = Cosmos(ConfigManager.shared.api.cosmosRpcURL)
+        let spendableBalances = try await cosmos.getSpendableBalances(address)
+        
+        return spendableBalances.balances.first?.amount ?? "0"
+    }
+    
+    func sendTokens(_ destination: String, _ amount: String) async throws {
+        guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
+        
+        let profileInitializer = IdentityProfile()
+        let profile = try profileInitializer.newProfile(secretKey)
+        
+        let response = try profile.walletSend(
+            destination,
+            amount: amount,
+            chainID: ConfigManager.shared.cosmos.chainId,
+            denom: ConfigManager.shared.cosmos.denom,
+            rpcIP: ConfigManager.shared.cosmos.rpcIp
+        )
+        
+        print(response.utf8)
     }
 }

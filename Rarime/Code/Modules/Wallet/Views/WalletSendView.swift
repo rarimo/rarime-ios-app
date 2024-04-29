@@ -2,6 +2,8 @@ import SwiftUI
 
 struct WalletSendView: View {
     @EnvironmentObject private var walletManager: WalletManager
+    @EnvironmentObject private var userManager: UserManager
+    
     let onBack: () -> Void
 
     @State private var address = ""
@@ -10,6 +12,9 @@ struct WalletSendView: View {
     @State private var amount = ""
 
     @State private var isScanning = false
+    @State private var isTransfering = false
+    
+    @State private var cancelables: [Task<(), Never>] = []
 
     func toggleScan() {
         withAnimation(.easeInOut(duration: 0.2)) {
@@ -29,10 +34,14 @@ struct WalletSendView: View {
                     }
                 }
                 .transition(.move(edge: .bottom))
+            } else if isTransfering {
+                ProgressView()
+                    .controlSize(.large)
             } else {
                 content
             }
         }
+        .onDisappear(perform: cleanup)
     }
 
     var content: some View {
@@ -62,12 +71,12 @@ struct WalletSendView: View {
                             errorMessage: .constant(""),
                             label: String(localized: "Amount"),
                             placeholder: "0.0 RMO",
-                            keyboardType: .decimalPad,
+                            keyboardType: .numberPad,
                             action: {
                                 HStack(spacing: 16) {
                                     VerticalDivider()
                                     Button(action: {
-                                        amount = String(walletManager.balance)
+                                        amount = String(userManager.balance)
                                     }) {
                                         Text("MAX")
                                             .buttonMedium()
@@ -82,7 +91,7 @@ struct WalletSendView: View {
                                     .body4()
                                     .foregroundStyle(.textSecondary)
                                 Spacer()
-                                Text("\(walletManager.balance.formatted()) RMO")
+                                Text("\(userManager.balance.formatted()) RMO")
                                     .body4()
                                     .foregroundStyle(.textPrimary)
                             }
@@ -110,7 +119,7 @@ struct WalletSendView: View {
             AppButton(
                 text: "Send",
                 width: 100,
-                action: {}
+                action: transfer
             )
             .controlSize(.large)
         }
@@ -120,9 +129,42 @@ struct WalletSendView: View {
         .frame(maxWidth: .infinity)
         .background(.backgroundPure)
     }
+    
+    func transfer() {
+        isTransfering = true
+        
+        let createNewUserCancelable = Task { @MainActor in
+            defer {
+                self.isTransfering = false
+            }
+            
+            do {
+                try await userManager.sendTokens(address, amount)
+                
+                try await Task.sleep(nanoseconds: NSEC_PER_SEC * 3)
+                
+                let balance = try await userManager.fetchBalanse()
+                
+                userManager.balance = Double(balance) ?? 0
+            } catch is CancellationError {
+                return
+            } catch {
+                LoggerUtil.intro.error("failed to send tokens: \(error)")
+            }
+        }
+        
+        self.cancelables.append(createNewUserCancelable)
+    }
+    
+    func cleanup() {
+        for cancelable in cancelables {
+            cancelable.cancel()
+        }
+    }
 }
 
 #Preview {
     WalletSendView(onBack: {})
         .environmentObject(WalletManager())
+        .environmentObject(UserManager.shared)
 }

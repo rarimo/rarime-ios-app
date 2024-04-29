@@ -116,3 +116,6 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+# Temporaly ignoring Identity.xcframework due to the problem with the GitHub LFS
+Frameworks/Identity.xcframework/**

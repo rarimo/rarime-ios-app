@@ -1,8 +1,0 @@
-framework module "Identity" {
-	header "ref.h"
-    header "Identity.objc.h"
-    header "Universe.objc.h"
-    header "Identity.h"
-
-    export *
-}

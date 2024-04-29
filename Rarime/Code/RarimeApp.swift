@@ -5,13 +5,13 @@ struct RarimeApp: App {
     var body: some Scene {
         WindowGroup {
             AppView()
+                .environmentObject(UserManager.shared)
                 .environmentObject(ConfigManager.shared)
                 .environmentObject(SecurityManager.shared)
                 .environmentObject(IdentityManager.shared)
                 .environmentObject(WalletManager.shared)
-                .environmentObject(PassportManager.shared)
                 .environmentObject(SettingsManager.shared)
-                .environmentObject(UserManager.shared)
+                .environmentObject(PassportManager.shared)
                 .environmentObject(CircuitDataManager.shared)
         }
     }
