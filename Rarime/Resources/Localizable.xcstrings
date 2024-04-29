@@ -78,10 +78,10 @@
     "Balance: RMO" : {
 
     },
-    "Become a Citizen" : {
+    "Beta launch" : {
 
     },
-    "Beta launch" : {
+    "Beta Launch" : {
 
     },
     "Beta launch is focused on distributing tokens to Ukrainian identity holders" : {
@@ -91,6 +91,9 @@
 
     },
     "By checking this box, you are agreeing to " : {
+
+    },
+    "Cancel" : {
 
     },
     "CARD VISUAL" : {
@@ -114,9 +117,6 @@
     "Continue" : {
 
     },
-    "Convert existing identity documents into anonymous credentials" : {
-
-    },
     "Copied" : {
 
     },
@@ -124,9 +124,6 @@
 
     },
     "Could not authenticate with Face ID. Please try again." : {
-
-    },
-    "Create a profile, add various credentials, and invite others to earn rewards in the process" : {
 
     },
     "Create Account" : {
@@ -144,10 +141,19 @@
     "Dark Mode" : {
 
     },
+    "Delete" : {
+
+    },
     "Delete Card" : {
 
     },
+    "Delete passport card?" : {
+
+    },
     "Description text here" : {
+
+    },
+    "Document #" : {
 
     },
     "Document class mode" : {
@@ -180,6 +186,12 @@
     "Enable Passcode Authentication" : {
 
     },
+    "English" : {
+
+    },
+    "Ensuring your history, reputation and actions are not lost, but still remain confidential controlled by you." : {
+
+    },
     "Enter Passcode" : {
 
     },
@@ -210,6 +222,9 @@
     "Full privacy via Zero Knowledge Proofs" : {
 
     },
+    "Georgian" : {
+
+    },
     "Get rewarded" : {
 
     },
@@ -229,6 +244,9 @@
 
     },
     "Import Identity" : {
+
+    },
+    "Incognito" : {
 
     },
     "Invalid Rarimo address" : {
@@ -351,6 +369,12 @@
     "Programable Airdrop" : {
 
     },
+    "Proofs" : {
+
+    },
+    "Prove your eligibility, belonging, identity, and contributions — all without revealing who you are." : {
+
+    },
     "RARIME" : {
 
     },
@@ -402,9 +426,6 @@
     "Settings" : {
 
     },
-    "Sex" : {
-
-    },
     "short description text here" : {
 
     },
@@ -415,6 +436,9 @@
 
     },
     "Sorry, there was a problem reading the passport. Please try again" : {
+
+    },
+    "Start building your incognito profile and earn rewards as an early community member." : {
 
     },
     "Step %lld/%lld" : {
@@ -439,10 +463,13 @@
     "Theme" : {
 
     },
-    "This is an app where your digital identity lives and enables you to connect with rest of the web in a fully private mode" : {
+    "This app is where your digital identities live, enabling you to go incognito across the web." : {
 
     },
     "Transactions" : {
+
+    },
+    "Ukrainian" : {
 
     },
     "Wallet" : {
@@ -467,6 +494,9 @@
 
     },
     "You can use the QR code or the wallet address to deposit the RMO token to your account" : {
+
+    },
+    "You will have to scan the passport again to restore it." : {
 
     },
     "You’ve joined the waitlist" : {

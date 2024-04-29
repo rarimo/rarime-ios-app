@@ -107,6 +107,10 @@
 		56E6AD4B2BD2732300E4DDC1 /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4A2BD2732300E4DDC1 /* ThemeView.swift */; };
 		56E6AD4D2BD273BC00E4DDC1 /* ProfileRouteLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */; };
 		56E6AD4F2BD2756200E4DDC1 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */; };
+		56E7AD0A2BDAA4F000D3A258 /* AppRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7AD092BDAA4F000D3A258 /* AppRadioButton.swift */; };
+		56E7AD0C2BDAA9C100D3A258 /* BetaLaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7AD0B2BDAA9C100D3A258 /* BetaLaunchView.swift */; };
+		56E7AD0E2BDAD70200D3A258 /* RefreshableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7AD0D2BDAD70200D3A258 /* RefreshableScrollView.swift */; };
+		56E7AD112BDBA81000D3A258 /* PullToRefreshSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 56E7AD102BDBA81000D3A258 /* PullToRefreshSwiftUI */; };
 		56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F48BBD2BC02E82001F3AA4 /* AppButton.swift */; };
 		CE0DA0D32BDA574200696503 /* libwitnesscalc_registerIdentity2688.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0DA0D22BDA574200696503 /* libwitnesscalc_registerIdentity2688.a */; };
 		CE0DA0D52BDA5DC700696503 /* libwitnesscalc_registerIdentity2704.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0DA0D42BDA5DC700696503 /* libwitnesscalc_registerIdentity2704.a */; };
@@ -245,6 +249,9 @@
 		56E6AD4A2BD2732300E4DDC1 /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
 		56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouteLayout.swift; sourceTree = "<group>"; };
 		56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
+		56E7AD092BDAA4F000D3A258 /* AppRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRadioButton.swift; sourceTree = "<group>"; };
+		56E7AD0B2BDAA9C100D3A258 /* BetaLaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaLaunchView.swift; sourceTree = "<group>"; };
+		56E7AD0D2BDAD70200D3A258 /* RefreshableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableScrollView.swift; sourceTree = "<group>"; };
 		56F48BBD2BC02E82001F3AA4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		CE0DA0D22BDA574200696503 /* libwitnesscalc_registerIdentity2688.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity2688.a; sourceTree = "<group>"; };
 		CE0DA0D42BDA5DC700696503 /* libwitnesscalc_registerIdentity2704.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity2704.a; sourceTree = "<group>"; };
@@ -297,6 +304,7 @@
 				CEC562192BD92B3E002D4954 /* libresolv.9.tbd in Frameworks */,
 				CEC5621A2BD92B3E002D4954 /* libresolv.tbd in Frameworks */,
 				CEC562062BD923B4002D4954 /* libgmp.a in Frameworks */,
+				56E7AD112BDBA81000D3A258 /* PullToRefreshSwiftUI in Frameworks */,
 				560F0C1D2BD0234300067054 /* QRCode in Frameworks */,
 				CEC562072BD923B4002D4954 /* libfq.a in Frameworks */,
 				CE32CF522BAC981300E507B6 /* Lottie in Frameworks */,
@@ -397,9 +405,11 @@
 			isa = PBXGroup;
 			children = (
 				563529E82BB072B80027C910 /* HomeView.swift */,
+				56E7AD0D2BDAD70200D3A258 /* RefreshableScrollView.swift */,
 				56CC01E42BCD81AA008CEBE0 /* AirdropIntroView.swift */,
 				56933DEC2BBAB0AB0068C894 /* PassportIntroView.swift */,
 				56E2D9182BCE94CA006E725D /* RarimeInfoView.swift */,
+				56E7AD0B2BDAA9C100D3A258 /* BetaLaunchView.swift */,
 				56E2D91A2BCEA66A006E725D /* PassportCard.swift */,
 				56E2D9142BCE7FC4006E725D /* HomeIntroLayout.swift */,
 				56E2D9252BCFE65C006E725D /* CongratsView.swift */,
@@ -630,6 +640,7 @@
 			isa = PBXGroup;
 			children = (
 				56F48BBD2BC02E82001F3AA4 /* AppButton.swift */,
+				56E7AD092BDAA4F000D3A258 /* AppRadioButton.swift */,
 				56933DFA2BBAFBD90068C894 /* AppToggle.swift */,
 				560F0C242BD036F900067054 /* AppTextField.swift */,
 				56E2D91F2BCED460006E725D /* AppCheckbox.swift */,
@@ -893,6 +904,7 @@
 				CE68BE442BD9B6EA00D92EBB /* Web3 */,
 				CE68BE462BD9B6EA00D92EBB /* Web3ContractABI */,
 				CE68BE482BD9B6EA00D92EBB /* Web3PromiseKit */,
+				56E7AD102BDBA81000D3A258 /* PullToRefreshSwiftUI */,
 			);
 			productName = Rarime;
 			productReference = CE9E82B22BA881F400AAF885 /* Rarime.app */;
@@ -932,6 +944,7 @@
 				CE72102C2BD7F6780043DB7F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				CE72102F2BD807140043DB7F /* XCRemoteSwiftPackageReference "ZipArchive" */,
 				CE68BE432BD9B6EA00D92EBB /* XCRemoteSwiftPackageReference "Web3.swift" */,
+				56E7AD0F2BDBA81000D3A258 /* XCRemoteSwiftPackageReference "PullToRefreshSwiftUI" */,
 			);
 			productRefGroup = CE9E82B32BA881F400AAF885 /* Products */;
 			projectDirPath = "";
@@ -1000,6 +1013,7 @@
 				561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */,
 				CE0DA0D92BDA927000696503 /* AirDropResponse.swift in Sources */,
 				56E2D92A2BCFFB6B006E725D /* Airdrop.swift in Sources */,
+				56E7AD0C2BDAA9C100D3A258 /* BetaLaunchView.swift in Sources */,
 				56DAA3072BB77550002CF710 /* IdentityStepLayoutView.swift in Sources */,
 				CE68BE3D2BD9B23D00D92EBB /* ZkProof.swift in Sources */,
 				56474ADA2BB9ED6E0017AA25 /* AnyTransition+Backslide.swift in Sources */,
@@ -1060,6 +1074,7 @@
 				CEF251382BD6E17800050507 /* UserManager.swift in Sources */,
 				5655E4252BD2C3B500B86C5C /* PassportManager.swift in Sources */,
 				563529F12BB0736A0027C910 /* TabBarView.swift in Sources */,
+				56E7AD0E2BDAD70200D3A258 /* RefreshableScrollView.swift in Sources */,
 				56A6C76A2BBC57B700992562 /* PassportViewModel.swift in Sources */,
 				56933E0E2BBC09F10068C894 /* MRZScannerView.swift in Sources */,
 				CEC561FA2BD90E3B002D4954 /* PreDownloadView.swift in Sources */,
@@ -1074,6 +1089,7 @@
 				56933E0C2BBC09D20068C894 /* MRZViewModel.swift in Sources */,
 				563529E72BB072870027C910 /* WalletView.swift in Sources */,
 				5655E43C2BD522E800B86C5C /* AppLanguage.swift in Sources */,
+				56E7AD0A2BDAA4F000D3A258 /* AppRadioButton.swift in Sources */,
 				56933DFD2BBAFDD00068C894 /* PassportProofView.swift in Sources */,
 				56E2D9262BCFE65C006E725D /* CongratsView.swift in Sources */,
 			);
@@ -1590,6 +1606,14 @@
 				revision = 7da7abf3137dcd3abab9d89ae93d5a9be5c6c398;
 			};
 		};
+		56E7AD0F2BDBA81000D3A258 /* XCRemoteSwiftPackageReference "PullToRefreshSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/shakurocom/PullToRefreshSwiftUI.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.3.1;
+			};
+		};
 		CE32CF502BAC981300E507B6 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:airbnb/lottie-spm.git";
@@ -1649,6 +1673,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 56E2D9302BD01E71006E725D /* XCRemoteSwiftPackageReference "NFCPassportReader" */;
 			productName = NFCPassportReader;
+		};
+		56E7AD102BDBA81000D3A258 /* PullToRefreshSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 56E7AD0F2BDBA81000D3A258 /* XCRemoteSwiftPackageReference "PullToRefreshSwiftUI" */;
+			productName = PullToRefreshSwiftUI;
 		};
 		CE32CF512BAC981300E507B6 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

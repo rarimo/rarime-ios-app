@@ -16,6 +16,9 @@ public class AppUserDefaults: ObservableObject {
     @AppStorage("passport_card_look")
     public var passportCardLook = PassportCardLook.black.rawValue
 
+    @AppStorage("is_passport_incognito_mode")
+    public var isPassportIncognitoMode = false
+
     @AppStorage("color_scheme")
     public var colorScheme = AppColorScheme.system.rawValue
 
