@@ -26,7 +26,9 @@ struct ClaimTokensView: View {
             
             try await walletManager.claimAirdrop()
             
-            userManager.balance += 3.0
+            let balance = try await userManager.fetchBalanse()
+            
+            userManager.balance = Double(balance) ?? 0
             
             FeedbackGenerator.shared.notify(.success)
             onFinish()
@@ -91,7 +93,7 @@ struct ClaimTokensView: View {
 
 #Preview {
     ClaimTokensView(onFinish: {})
-        .environmentObject(WalletManager.shared)
-        .environmentObject(UserManager.shared)
+        .environmentObject(WalletManager())
+        .environmentObject(UserManager())
         .environmentObject(PassportViewModel())
 }

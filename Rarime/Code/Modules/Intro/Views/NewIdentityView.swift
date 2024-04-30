@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct NewIdentityView: View {
-    @EnvironmentObject private var identityManager: IdentityManager
     @EnvironmentObject private var userManager: UserManager
     let onBack: () -> Void
     let onNext: () -> Void
@@ -94,7 +93,7 @@ struct NewIdentityView: View {
     }
     
     func createNewUser() {
-        let createNewUserCancelable = Task { @MainActor in
+        let cancelable = Task { @MainActor in
             do {
                 try userManager.createNewUser()
             } catch is CancellationError {
@@ -104,7 +103,7 @@ struct NewIdentityView: View {
             }
         }
         
-        self.cancelables.append(createNewUserCancelable)
+        self.cancelables.append(cancelable)
     }
     
     func cleanup() {
@@ -116,6 +115,5 @@ struct NewIdentityView: View {
 
 #Preview {
     NewIdentityView(onBack: {}, onNext: {})
-        .environmentObject(IdentityManager())
-        .environmentObject(UserManager.shared)
+        .environmentObject(UserManager())
 }

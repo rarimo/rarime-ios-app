@@ -10,11 +10,9 @@ extension AppView {
             AppUserDefaults.shared.isIntroFinished = true
         }
         
-        func finishCircuitData() {
-            DispatchQueue.main.async {
-                self.isCircuitDataDownloaded = true
-                AppUserDefaults.shared.isCircuitDataDownloaded = true
-            }
+        func finishCircuitDataDownloading() {
+            self.isCircuitDataDownloaded = true
+            AppUserDefaults.shared.isCircuitDataDownloaded = true
         }
     }
 }

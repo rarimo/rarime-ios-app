@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct ExportKeysView: View {
-    @EnvironmentObject private var identityManager: IdentityManager
     @EnvironmentObject private var userManager: UserManager
     let onBack: () -> Void
 
@@ -63,7 +62,6 @@ struct ExportKeysView: View {
     @StateObject var userManager = UserManager.shared
     
     return ExportKeysView(onBack: {})
-        .environmentObject(IdentityManager())
         .environmentObject(userManager)
         .onAppear {
             _ = try? userManager.createNewUser()

@@ -20,7 +20,7 @@ class UserManager: ObservableObject {
             // so we need to check Keychain on hits from previous installations
             // and delete all data that could not be deleted otherwise
             if AppUserDefaults.shared.isFirstLaunch {
-                if try AppKeychain.valueExists(.privateKey) {
+                if try AppKeychain.containsValue(.privateKey) {
                     try AppKeychain.removeValue(.privateKey)
                     try AppKeychain.removeValue(.registerZkProof)
                     try AppKeychain.removeValue(.passport)
@@ -206,7 +206,9 @@ class UserManager: ObservableObject {
         return spendableBalances.balances.first?.amount ?? "0"
     }
     
-    func sendTokens(_ destination: String, _ amount: String) async throws {
+    func sendTokens(_ destination: String, _ amount: String) async throws -> CosmosTransferResponse {
+//        let amoundToSend = 
+        
         guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
         
         let profileInitializer = IdentityProfile()
@@ -220,6 +222,6 @@ class UserManager: ObservableObject {
             rpcIP: ConfigManager.shared.cosmos.rpcIp
         )
         
-        print(response.utf8)
+        return try JSONDecoder().decode(CosmosTransferResponse.self, from: response)
     }
 }

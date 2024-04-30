@@ -25,7 +25,7 @@ class Relayer {
         .get()
     }
     
-    func airdrop(_ queryZkProof: ZkProof, to destionation: String) async throws -> AirDropResponse {
+    func airdrop(_ queryZkProof: ZkProof, to destionation: String) async throws -> AirdropResponse {
         var requestURL = url
         requestURL.append(path: "/integrations/airdrop-svc/airdrops")
         
@@ -48,7 +48,7 @@ class Relayer {
             parameters: payload,
             encoder: JSONParameterEncoder.default
         )
-        .serializingDecodable(AirDropResponse.self)
+        .serializingDecodable(AirdropResponse.self)
         .result
         .get()
     }

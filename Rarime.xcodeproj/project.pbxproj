@@ -37,7 +37,6 @@
 		56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */; };
 		56474ADA2BB9ED6E0017AA25 /* AnyTransition+Backslide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */; };
 		5655E41F2BD2C39B00B86C5C /* WalletManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E41E2BD2C39B00B86C5C /* WalletManager.swift */; };
-		5655E4212BD2C3A200B86C5C /* IdentityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E4202BD2C3A200B86C5C /* IdentityManager.swift */; };
 		5655E4232BD2C3AC00B86C5C /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E4222BD2C3AC00B86C5C /* SettingsManager.swift */; };
 		5655E4252BD2C3B500B86C5C /* PassportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E4242BD2C3B500B86C5C /* PassportManager.swift */; };
 		5655E4282BD2C3FD00B86C5C /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E4272BD2C3FD00B86C5C /* Transaction.swift */; };
@@ -146,10 +145,11 @@
 		CEC562192BD92B3E002D4954 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC562132BD9281A002D4954 /* libresolv.9.tbd */; };
 		CEC5621A2BD92B3E002D4954 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC562142BD9281A002D4954 /* libresolv.tbd */; };
 		CED909D02BDBA9FC0065E949 /* Cosmos.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED909CF2BDBA9FC0065E949 /* Cosmos.swift */; };
-		CED909DE2BDBECBF0065E949 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED909DD2BDBECBF0065E949 /* Identity.xcframework */; };
 		CED909E02BDC1E0F0065E949 /* Rarimo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED909DF2BDC1E0F0065E949 /* Rarimo.swift */; };
 		CEF251382BD6E17800050507 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251372BD6E17800050507 /* UserManager.swift */; };
 		CEF2513A2BD6E22700050507 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251392BD6E22700050507 /* User.swift */; };
+		CEF8C7F72BE0DE9700F8E1A4 /* CosmosTransferResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF8C7F62BE0DE9700F8E1A4 /* CosmosTransferResponse.swift */; };
+		CEF8C7F92BE0E66F00F8E1A4 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF8C7F82BE0E66F00F8E1A4 /* Identity.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -181,7 +181,6 @@
 		56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
 		56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+Backslide.swift"; sourceTree = "<group>"; };
 		5655E41E2BD2C39B00B86C5C /* WalletManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletManager.swift; sourceTree = "<group>"; };
-		5655E4202BD2C3A200B86C5C /* IdentityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityManager.swift; sourceTree = "<group>"; };
 		5655E4222BD2C3AC00B86C5C /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		5655E4242BD2C3B500B86C5C /* PassportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportManager.swift; sourceTree = "<group>"; };
 		5655E4272BD2C3FD00B86C5C /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -290,10 +289,11 @@
 		CEC562132BD9281A002D4954 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		CEC562142BD9281A002D4954 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		CED909CF2BDBA9FC0065E949 /* Cosmos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cosmos.swift; sourceTree = "<group>"; };
-		CED909DD2BDBECBF0065E949 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CED909DF2BDC1E0F0065E949 /* Rarimo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rarimo.swift; sourceTree = "<group>"; };
 		CEF251372BD6E17800050507 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		CEF251392BD6E22700050507 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CEF8C7F62BE0DE9700F8E1A4 /* CosmosTransferResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosTransferResponse.swift; sourceTree = "<group>"; };
+		CEF8C7F82BE0E66F00F8E1A4 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,7 +320,7 @@
 				CEC562042BD923B4002D4954 /* librapidsnark.a in Frameworks */,
 				CE7210312BD807140043DB7F /* ZipArchive in Frameworks */,
 				560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */,
-				CED909DE2BDBECBF0065E949 /* Identity.xcframework in Frameworks */,
+				CEF8C7F92BE0E66F00F8E1A4 /* Identity.xcframework in Frameworks */,
 				CE0DA0D52BDA5DC700696503 /* libwitnesscalc_registerIdentity2704.a in Frameworks */,
 				CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */,
 			);
@@ -474,7 +474,6 @@
 			isa = PBXGroup;
 			children = (
 				5655E4292BD2C7C800B86C5C /* ConfigManager.swift */,
-				5655E4202BD2C3A200B86C5C /* IdentityManager.swift */,
 				5655E4242BD2C3B500B86C5C /* PassportManager.swift */,
 				5655E4312BD2CF6900B86C5C /* SecurityManager.swift */,
 				5655E4222BD2C3AC00B86C5C /* SettingsManager.swift */,
@@ -496,6 +495,7 @@
 				CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */,
 				CE0DA0D82BDA927000696503 /* AirDropResponse.swift */,
 				CED909CF2BDBA9FC0065E949 /* Cosmos.swift */,
+				CEF8C7F62BE0DE9700F8E1A4 /* CosmosTransferResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -857,7 +857,7 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CED909DD2BDBECBF0065E949 /* Identity.xcframework */,
+				CEF8C7F82BE0E66F00F8E1A4 /* Identity.xcframework */,
 				CEC562082BD923D6002D4954 /* witnesscalc_registerIdentity2688.h */,
 				CEC562092BD923D6002D4954 /* witnesscalc_registerIdentity2704.h */,
 				CE0DA0D42BDA5DC700696503 /* libwitnesscalc_registerIdentity2704.a */,
@@ -1028,6 +1028,7 @@
 				5655E42A2BD2C7C800B86C5C /* ConfigManager.swift in Sources */,
 				563529E92BB072B80027C910 /* HomeView.swift in Sources */,
 				56722F202BCD62BB00300AD0 /* ProfileView.swift in Sources */,
+				CEF8C7F72BE0DE9700F8E1A4 /* CosmosTransferResponse.swift in Sources */,
 				CE9E82B62BA881F400AAF885 /* RarimeApp.swift in Sources */,
 				560F0C212BD027FB00067054 /* WalletRouteLayout.swift in Sources */,
 				56933E052BBC00D60068C894 /* RewardChipView.swift in Sources */,
@@ -1066,7 +1067,6 @@
 				56DAA3132BB8CA4F002CF710 /* EnableFaceIdView.swift in Sources */,
 				CE0DA0D72BDA6F1900696503 /* EvmTxResponse.swift in Sources */,
 				CE68BE3F2BD9B4B200D92EBB /* Relayer.swift in Sources */,
-				5655E4212BD2C3A200B86C5C /* IdentityManager.swift in Sources */,
 				56E2D92D2BD0196B006E725D /* QRCodeView.swift in Sources */,
 				568B4FCE2BB6C274001C9C74 /* IntroStepView.swift in Sources */,
 				568B4FD12BB6D88F001C9C74 /* Divider.swift in Sources */,

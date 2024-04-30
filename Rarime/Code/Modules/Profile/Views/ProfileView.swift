@@ -8,7 +8,6 @@ struct ProfileView: View {
     @EnvironmentObject private var configManager: ConfigManager
     @EnvironmentObject private var settingsManager: SettingsManager
     @EnvironmentObject private var passportManager: PassportManager
-    @EnvironmentObject private var identityManager: IdentityManager
     @EnvironmentObject private var userManager: UserManager
 
     @State private var path: [ProfileRoute] = []
@@ -152,7 +151,6 @@ private struct ProfileRow: View {
         .environmentObject(ConfigManager())
         .environmentObject(SettingsManager())
         .environmentObject(PassportManager())
-        .environmentObject(IdentityManager())
         .environmentObject(SecurityManager())
         .environmentObject(userManager)
         .onAppear {

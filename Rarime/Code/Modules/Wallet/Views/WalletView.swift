@@ -132,5 +132,5 @@ private struct TransactionItem: View {
     WalletView()
         .environmentObject(MainView.ViewModel())
         .environmentObject(WalletManager())
-        .environmentObject(UserManager.shared)
+        .environmentObject(UserManager())
 }

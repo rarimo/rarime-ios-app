@@ -1,16 +1,15 @@
 import Foundation
 
-struct AirdropResponse: Codable {
-    let data: AirdropResponseData
-    let included: [String]
+struct CosmosTransferResponse: Codable {
+    let data: CosmosTransferData
 }
 
-struct AirdropResponseData: Codable {
+struct CosmosTransferData: Codable {
     let id, type: String
-    let attributes: AirdropResponseAttributes
+    let attributes: CosmosTransferAttributes
 }
 
-struct AirdropResponseAttributes: Codable {
+struct CosmosTransferAttributes: Codable {
     let address, amount, createdAt, status: String
     let txHash, updatedAt: String
 

@@ -140,7 +140,7 @@ private struct GeneralStatusView: View {
     
     return PassportProofView(onFinish: { _ in }, onClose: {})
         .environmentObject(PassportViewModel())
-        .environmentObject(UserManager.shared)
+        .environmentObject(UserManager())
         .onAppear {
             let _ = try? userManager.createNewUser()
         }

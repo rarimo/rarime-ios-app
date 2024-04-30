@@ -1,9 +1,7 @@
 import Identity
 import Foundation
 
-class User {
-    static let storageKey = "User"
-    
+class User {    
     let secretKey: Data
     let profile: IdentityProfile
     

@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 struct WalletSendView: View {
     @EnvironmentObject private var walletManager: WalletManager
@@ -71,7 +72,7 @@ struct WalletSendView: View {
                             errorMessage: .constant(""),
                             label: String(localized: "Amount"),
                             placeholder: "0.0 RMO",
-                            keyboardType: .numberPad,
+                            keyboardType: .decimalPad,
                             action: {
                                 HStack(spacing: 16) {
                                     VerticalDivider()
@@ -94,6 +95,16 @@ struct WalletSendView: View {
                                 Text("\(userManager.balance.formatted()) RMO")
                                     .body4()
                                     .foregroundStyle(.textPrimary)
+                            }
+                        }
+                        .onReceive(Just(amount)) { newValue in
+                            let filtered = newValue.filter { "0123456789,.".contains($0) }
+                            if filtered != newValue {
+                                self.amount = filtered
+                            }
+                            
+                            if filtered.contains(",") {
+                                self.amount = filtered.replacingOccurrences(of: ",", with: ".")
                             }
                         }
                     }
@@ -133,15 +144,18 @@ struct WalletSendView: View {
     func transfer() {
         isTransfering = true
         
-        let createNewUserCancelable = Task { @MainActor in
+        let cancelable = Task { @MainActor in
             defer {
                 self.isTransfering = false
             }
             
             do {
-                try await userManager.sendTokens(address, amount)
+                let amountToSend = (Double(amount) ?? 0) * Double(Rarimo.rarimoTokenMantis)
+                let amountToSendRaw = Int(amountToSend.rounded())
                 
-                try await Task.sleep(nanoseconds: NSEC_PER_SEC * 3)
+                let _ = try await userManager.sendTokens(address, amountToSendRaw.description)
+                
+                try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
                 
                 let balance = try await userManager.fetchBalanse()
                 
@@ -153,7 +167,7 @@ struct WalletSendView: View {
             }
         }
         
-        self.cancelables.append(createNewUserCancelable)
+        self.cancelables.append(cancelable)
     }
     
     func cleanup() {
@@ -161,10 +175,14 @@ struct WalletSendView: View {
             cancelable.cancel()
         }
     }
+    
+    func handleAmountOnReceive() {
+        
+    }
 }
 
 #Preview {
     WalletSendView(onBack: {})
         .environmentObject(WalletManager())
-        .environmentObject(UserManager.shared)
+        .environmentObject(UserManager())
 }

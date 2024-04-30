@@ -197,7 +197,7 @@ struct HomeView: View {
     }
     
     func fetchBalance() {
-        let createNewUserCancelable = Task { @MainActor in
+        let cancelable = Task { @MainActor in
             defer {
                 self.isBalanceFetching = false
             }
@@ -213,7 +213,7 @@ struct HomeView: View {
             }
         }
         
-        self.cancelables.append(createNewUserCancelable)
+        self.cancelables.append(cancelable)
     }
     
     func cleanup() {
@@ -228,5 +228,5 @@ struct HomeView: View {
         .environmentObject(MainView.ViewModel())
         .environmentObject(PassportManager())
         .environmentObject(WalletManager())
-        .environmentObject(UserManager.shared)
+        .environmentObject(UserManager())
 }

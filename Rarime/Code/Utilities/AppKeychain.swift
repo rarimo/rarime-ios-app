@@ -19,7 +19,7 @@ class AppKeychain {
         try keychain.set(value, key: key.rawValue)
     }
     
-    static func valueExists(_ key: AppKeychainItemKey) throws -> Bool {
+    static func containsValue(_ key: AppKeychainItemKey) throws -> Bool {
         try keychain.contains(key.rawValue)
     }
 
