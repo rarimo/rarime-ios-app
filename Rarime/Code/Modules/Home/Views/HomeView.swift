@@ -83,8 +83,7 @@ struct HomeView: View {
                                     isIncognito: Binding(
                                         get: { passportManager.isIncognitoMode },
                                         set: { passportManager.setIncognitoMode($0) }
-                                    ),
-                                    onDelete: { passportManager.removePassport() }
+                                    )
                                 )
                                 rarimeCard
                             } else {

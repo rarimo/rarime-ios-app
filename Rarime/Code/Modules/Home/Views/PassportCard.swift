@@ -1,42 +1,11 @@
 import SwiftUI
 
-enum PassportCardLook: Int, CaseIterable {
-    case green, black, white
-
-    var name: LocalizedStringResource {
-        switch self {
-        case .green: return "Green"
-        case .black: return "Black"
-        case .white: return "White"
-        }
-    }
-
-    var backgroundColor: Color {
-        switch self {
-        case .green: return .primaryMain
-        case .black: return .baseBlack
-        case .white: return .baseWhite
-        }
-    }
-
-    var foregroundColor: Color {
-        switch self {
-        case .green: return .baseBlack
-        case .black: return .baseWhite
-        case .white: return .baseBlack
-        }
-    }
-}
-
 struct PassportCard: View {
     let passport: Passport
     @Binding var look: PassportCardLook
     @Binding var isIncognito: Bool
 
-    var onDelete: () -> Void
-
     @State private var isSettingsSheetPresented = false
-    @State private var isDeleteConfirmationShown = false
     @State private var isHolding = false
 
     var isInfoHidden: Bool {
@@ -87,11 +56,11 @@ struct PassportCard: View {
             HorizontalDivider(color: look.foregroundColor.opacity(0.05))
             VStack(spacing: 16) {
                 makePassportInfoRow(
-                    title: String(localized: "Nationality"),
+                    title: isInfoHidden ? String("•••••••••") : String(localized: "Nationality"),
                     value: isInfoHidden ? String("•••") : passport.nationality
                 )
                 makePassportInfoRow(
-                    title: String(localized: "Document #"),
+                    title: isInfoHidden ? String("••••••••") : String(localized: "Document"),
                     value: isInfoHidden ? String("••••••••") : passport.documentNumber
                 )
             }
@@ -135,34 +104,9 @@ struct PassportCard: View {
                     )
                 }
             }
-            HorizontalDivider()
-            Button(action: { isDeleteConfirmationShown = true }) {
-                HStack(spacing: 16) {
-                    Image(Icons.trashSimple)
-                        .iconMedium()
-                        .padding(10)
-                        .background(.errorLighter)
-                        .foregroundStyle(.errorMain)
-                        .clipShape(Circle())
-                    Text("Delete Card")
-                        .buttonMedium()
-                        .foregroundStyle(.textPrimary)
-                }
-            }
         }
-        .padding(.top, 16)
+        .padding(.vertical, 16)
         .padding(.horizontal, 20)
-        .alert(
-            "Delete passport card?",
-            isPresented: $isDeleteConfirmationShown,
-            actions: {
-                Button("Delete", role: .destructive) { onDelete() }
-                Button("Cancel", role: .cancel) {}
-            },
-            message: {
-                Text("You will have to scan the passport again to restore it.")
-            }
-        )
     }
 }
 
@@ -236,8 +180,7 @@ private struct PreviewView: View {
         PassportCard(
             passport: passport,
             look: $look,
-            isIncognito: $isIncognito,
-            onDelete: {}
+            isIncognito: $isIncognito
         )
     }
 }

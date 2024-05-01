@@ -33,6 +33,7 @@
 		563529EF2BB0732C0027C910 /* CredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529EE2BB0732C0027C910 /* CredentialsView.swift */; };
 		563529F12BB0736A0027C910 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529F02BB0736A0027C910 /* TabBarView.swift */; };
 		563529F62BB077AB0027C910 /* CardContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529F52BB077AB0027C910 /* CardContainer.swift */; };
+		564169602BE273260057AC03 /* PassportCardLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5641695F2BE273260057AC03 /* PassportCardLook.swift */; };
 		56474AD62BB9860E0017AA25 /* FaceIdAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */; };
 		56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */; };
 		56474ADA2BB9ED6E0017AA25 /* AnyTransition+Backslide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */; };
@@ -177,6 +178,7 @@
 		563529EE2BB0732C0027C910 /* CredentialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsView.swift; sourceTree = "<group>"; };
 		563529F02BB0736A0027C910 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		563529F52BB077AB0027C910 /* CardContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainer.swift; sourceTree = "<group>"; };
+		5641695F2BE273260057AC03 /* PassportCardLook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportCardLook.swift; sourceTree = "<group>"; };
 		56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIdAuth.swift; sourceTree = "<group>"; };
 		56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
 		56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+Backslide.swift"; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				56933DFE2BBBFDA30068C894 /* ProcessingStatus.swift */,
 				5655E42F2BD2CA5500B86C5C /* AppColorScheme.swift */,
 				5655E43B2BD522E700B86C5C /* AppLanguage.swift */,
+				5641695F2BE273260057AC03 /* PassportCardLook.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1007,6 +1010,7 @@
 				CE9E82B82BA881F400AAF885 /* AppView.swift in Sources */,
 				561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */,
 				56DAA30B2BB8B977002CF710 /* View+DynamicSheet.swift in Sources */,
+				564169602BE273260057AC03 /* PassportCardLook.swift in Sources */,
 				56933DFF2BBBFDA30068C894 /* ProcessingStatus.swift in Sources */,
 				5655E4352BD5173200B86C5C /* AppView+ViewModel.swift in Sources */,
 				56E2D9172BCE938F006E725D /* ActionCard.swift in Sources */,
