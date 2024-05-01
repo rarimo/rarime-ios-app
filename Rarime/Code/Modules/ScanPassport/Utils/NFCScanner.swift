@@ -29,18 +29,24 @@ class NFCScanner {
         return message == nil ? nil : String(localized: message!)
     }
     
-    static func scanPassport(_ mrzKey: String, onCompletion: @escaping (Result<Passport, Error>) -> Void) {
+    static func scanPassport(
+        _ mrzKey: String,
+        _ challenge: Data,
+        onCompletion: @escaping (Result<Passport, Error>) -> Void
+    ) {
         Task { @MainActor in
             do {
-                let masterListURL = Bundle.main.url(forResource: "masterList", withExtension: ".pem")!
-                let nfcPassport = try await PassportReader(masterListURL: masterListURL)
+                let nfcPassport = try await PassportReader()
                     .readPassport(
                         mrzKey: mrzKey,
-                        tags: [.DG1, .DG2, .SOD],
-                        customDisplayMessage: customDisplayMessage
+                        tags: [.DG1, .DG2, .DG15, .SOD],
+                        customDisplayMessage: customDisplayMessage,
+                        activeAuthenticationChallenge: [UInt8](challenge)
                     )
-                                
-                onCompletion(.success(Passport.fromNFCPassportModel(nfcPassport)))
+                
+                guard let passport = Passport.fromNFCPassportModel(nfcPassport) else { throw "failed to read raw passport data" }
+                
+                onCompletion(.success(passport))
             } catch {
                 onCompletion(.failure(error))
             }

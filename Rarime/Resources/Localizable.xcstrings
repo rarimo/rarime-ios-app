@@ -141,9 +141,6 @@
     "Description text here" : {
 
     },
-    "DID: %@" : {
-
-    },
     "Document" : {
 
     },
@@ -154,6 +151,9 @@
 
     },
     "Done" : {
+
+    },
+    "Downloading additional data" : {
 
     },
     "Enable" : {

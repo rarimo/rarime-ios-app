@@ -6,6 +6,8 @@ private enum WalletRoute: String, Hashable {
 
 struct WalletView: View {
     @EnvironmentObject private var walletManager: WalletManager
+    @EnvironmentObject private var userManager: UserManager
+    
     @State private var path: [WalletRoute] = []
 
     var body: some View {
@@ -49,7 +51,7 @@ struct WalletView: View {
                 Text("Available RMO")
                     .body3()
                     .foregroundStyle(.textSecondary)
-                Text(walletManager.balance.formatted())
+                Text((userManager.balance / Double(Rarimo.rarimoTokenMantis)).formatted())
                     .h4()
                     .foregroundStyle(.textPrimary)
             }
@@ -130,4 +132,5 @@ private struct TransactionItem: View {
     WalletView()
         .environmentObject(MainView.ViewModel())
         .environmentObject(WalletManager())
+        .environmentObject(UserManager())
 }

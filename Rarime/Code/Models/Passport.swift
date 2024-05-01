@@ -1,6 +1,6 @@
+import UIKit
 import Foundation
 import NFCPassportReader
-import UIKit
 
 struct Passport: Codable {
     var firstName: String
@@ -13,7 +13,11 @@ struct Passport: Codable {
     var documentExpiryDate: String
     var dateOfBirth: String
     var nationality: String
-
+    let dg1: Data
+    let dg15: Data
+    let sod: Data
+    let signature: Data
+    
     var fullName: String {
         "\(firstName) \(lastName)"
     }
@@ -43,21 +47,39 @@ struct Passport: Codable {
             return "–"
         }
     }
+    
+    var encapsulatedContentSize: Int {
+        let sod = try? SOD([UInt8](self.sod))
+        
+        return ((try? sod?.getEncapsulatedContent())?.count ?? 0) * 8
+    }
 
-    static func fromNFCPassportModel(_ model: NFCPassportModel) -> Passport {
-        Passport(
+    static func fromNFCPassportModel(_ model: NFCPassportModel) -> Passport? {
+        guard
+            let dg1 = model.getDataGroup(.DG1),
+            let dg15 = model.getDataGroup(.DG15),
+            let sod = model.getDataGroup(.SOD)
+        else {
+            return nil
+        }
+        
+        return Passport(
             firstName: model.firstName,
             lastName: model.lastName,
             gender: model.gender,
             passportImageRaw: model.passportImage?
                 .pngData()?
                 .base64EncodedString(options: .endLineWithLineFeed),
-            documentType: model.documentType,
+            documentType: "P",
             issuingAuthority: model.issuingAuthority,
             documentNumber: model.documentNumber,
             documentExpiryDate: model.documentExpiryDate,
             dateOfBirth: model.dateOfBirth,
-            nationality: model.nationality
+            nationality: model.nationality,
+            dg1: Data(dg1.data),
+            dg15: Data(dg15.data),
+            sod: Data(sod.data),
+            signature: Data(model.activeAuthenticationSignature)
         )
     }
 }

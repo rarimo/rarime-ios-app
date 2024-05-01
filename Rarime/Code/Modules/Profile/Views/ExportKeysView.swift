@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ExportKeysView: View {
-    @EnvironmentObject private var identityManager: IdentityManager
+    @EnvironmentObject private var userManager: UserManager
     let onBack: () -> Void
 
     @State private var isCopied = false
@@ -16,14 +16,16 @@ struct ExportKeysView: View {
                     Text("Your Private Key")
                         .subtitle3()
                         .foregroundStyle(.textPrimary)
-                    Text(identityManager.privateKey)
-                        .body3()
-                        .foregroundStyle(.textPrimary)
-                        .multilineTextAlignment(.leading)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 14)
-                        .background(.componentPrimary)
-                        .cornerRadius(8)
+                    if let user = userManager.user {
+                        Text(user.secretKey.hex)
+                            .body3()
+                            .foregroundStyle(.textPrimary)
+                            .multilineTextAlignment(.leading)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 14)
+                            .background(.componentPrimary)
+                            .cornerRadius(8)
+                    }
                     copyButton
                     HorizontalDivider()
                     InfoAlert(text: "Please store the private key safely and do not share it with anyone. If you lose this key, you will not be able to recover the account and will lose access forever.") {}
@@ -42,8 +44,10 @@ struct ExportKeysView: View {
         .foregroundStyle(.textPrimary)
         .onTapGesture {
             if isCopied { return }
+            
+            guard let user = userManager.user else { return }
 
-            UIPasteboard.general.string = identityManager.privateKey
+            UIPasteboard.general.string = user.secretKey.hex
             isCopied = true
             FeedbackGenerator.shared.impact(.medium)
 
@@ -55,6 +59,11 @@ struct ExportKeysView: View {
 }
 
 #Preview {
-    ExportKeysView(onBack: {})
-        .environmentObject(IdentityManager())
+    @StateObject var userManager = UserManager.shared
+    
+    return ExportKeysView(onBack: {})
+        .environmentObject(userManager)
+        .onAppear {
+            _ = try? userManager.createNewUser()
+        }
 }

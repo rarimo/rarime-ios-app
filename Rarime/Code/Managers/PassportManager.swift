@@ -9,7 +9,7 @@ class PassportManager: ObservableObject {
 
     init() {
         if let passport = try? AppKeychain.getValue(.passport) {
-            self.passport = try? JSONDecoder().decode(Passport.self, from: passport.data(using: .utf8)!)
+            self.passport = try? JSONDecoder().decode(Passport.self, from: passport)
         }
         passportCardLook = PassportCardLook(rawValue: AppUserDefaults.shared.passportCardLook)!
         isIncognitoMode = AppUserDefaults.shared.isPassportIncognitoMode
@@ -23,7 +23,7 @@ class PassportManager: ObservableObject {
         self.passport = passport
         setPassportCardLook(.white)
         setIncognitoMode(true)
-        try? AppKeychain.setValue(.passport, try String(data: JSONEncoder().encode(passport), encoding: .utf8)!)
+        try? AppKeychain.setValue(.passport, JSONEncoder().encode(passport))
     }
 
     func removePassport() {

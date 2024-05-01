@@ -8,7 +8,7 @@ struct ProfileView: View {
     @EnvironmentObject private var configManager: ConfigManager
     @EnvironmentObject private var settingsManager: SettingsManager
     @EnvironmentObject private var passportManager: PassportManager
-    @EnvironmentObject private var identityManager: IdentityManager
+    @EnvironmentObject private var userManager: UserManager
 
     @State private var path: [ProfileRoute] = []
 
@@ -43,7 +43,7 @@ struct ProfileView: View {
                                 Text(passportManager.passport?.fullName ?? String(localized: "Account"))
                                     .subtitle3()
                                     .foregroundStyle(.textPrimary)
-                                Text("DID: \(identityManager.formattedDid)")
+                                Text(userManager.userAddress)
                                     .body4()
                                     .foregroundStyle(.textSecondary)
                             }
@@ -144,11 +144,16 @@ private struct ProfileRow: View {
 }
 
 #Preview {
-    ProfileView()
+    @StateObject var userManager = UserManager.shared
+    
+    return ProfileView()
         .environmentObject(MainView.ViewModel())
         .environmentObject(ConfigManager())
         .environmentObject(SettingsManager())
         .environmentObject(PassportManager())
-        .environmentObject(IdentityManager())
         .environmentObject(SecurityManager())
+        .environmentObject(userManager)
+        .onAppear {
+            _ = try? userManager.createNewUser()
+        }
 }

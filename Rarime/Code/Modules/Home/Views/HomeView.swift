@@ -8,6 +8,7 @@ struct HomeView: View {
     @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var mainViewModel: MainView.ViewModel
+    @EnvironmentObject private var userManager: UserManager
 
     @State private var path: [HomeRoute] = []
 
@@ -18,6 +19,9 @@ struct HomeView: View {
 
     @State private var isCongratsShown = false
     @State private var isClaimed = false
+    
+    @State private var isBalanceFetching = true
+    @State private var cancelables: [Task<(), Never>] = []
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -43,6 +47,8 @@ struct HomeView: View {
                 }
             }
         }
+        .onAppear(perform: fetchBalance)
+        .onDisappear(perform: cleanup)
     }
 
     private var content: some View {
@@ -116,9 +122,13 @@ struct HomeView: View {
             }
 
             HStack {
-                Text(walletManager.balance.formatted())
-                    .h4()
-                    .foregroundStyle(.textPrimary)
+                if isBalanceFetching {
+                    ProgressView()
+                } else {
+                    Text((userManager.balance / Double(Rarimo.rarimoTokenMantis)).formatted())
+                        .h4()
+                        .foregroundStyle(.textPrimary)
+                }
                 Spacer()
             }
         }
@@ -184,6 +194,32 @@ struct HomeView: View {
             RarimeInfoView(onClose: { isRarimeSheetPresented = false })
         }
     }
+    
+    func fetchBalance() {
+        let cancelable = Task { @MainActor in
+            defer {
+                self.isBalanceFetching = false
+            }
+            
+            do {
+                let balance = try await userManager.fetchBalanse()
+                
+                self.userManager.balance = Double(balance) ?? 0
+            } catch is CancellationError {
+                return
+            } catch {
+                LoggerUtil.intro.error("failed to fetch balance: \(error)")
+            }
+        }
+        
+        self.cancelables.append(cancelable)
+    }
+    
+    func cleanup() {
+        for cancelable in cancelables {
+            cancelable.cancel()
+        }
+    }
 }
 
 #Preview {
@@ -191,4 +227,5 @@ struct HomeView: View {
         .environmentObject(MainView.ViewModel())
         .environmentObject(PassportManager())
         .environmentObject(WalletManager())
+        .environmentObject(UserManager())
 }

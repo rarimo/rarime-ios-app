@@ -13,4 +13,6 @@ enum Images {
     static let lightTheme = "LightTheme"
     static let darkTheme = "DarkTheme"
     static let systemTheme = "SystemTheme"
+    
+    static let rarimeIcon = "RarimeIcon"
 }

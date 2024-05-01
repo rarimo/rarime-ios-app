@@ -106,7 +106,11 @@ private struct PreviewView: View {
                     documentNumber: "00AA00000",
                     documentExpiryDate: "900314",
                     dateOfBirth: "600314",
-                    nationality: "USA"
+                    nationality: "USA",
+                    dg1: Data(),
+                    dg15: Data(),
+                    sod: Data(),
+                    signature: Data()
                 )
             )
         }

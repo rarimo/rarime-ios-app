@@ -1,7 +1,10 @@
 import SwiftUI
+import Combine
 
 struct WalletSendView: View {
     @EnvironmentObject private var walletManager: WalletManager
+    @EnvironmentObject private var userManager: UserManager
+    
     let onBack: () -> Void
 
     @State private var address = ""
@@ -10,6 +13,9 @@ struct WalletSendView: View {
     @State private var amount = ""
 
     @State private var isScanning = false
+    @State private var isTransfering = false
+    
+    @State private var cancelables: [Task<(), Never>] = []
 
     func toggleScan() {
         withAnimation(.easeInOut(duration: 0.2)) {
@@ -29,10 +35,14 @@ struct WalletSendView: View {
                     }
                 }
                 .transition(.move(edge: .bottom))
+            } else if isTransfering {
+                ProgressView()
+                    .controlSize(.large)
             } else {
                 content
             }
         }
+        .onDisappear(perform: cleanup)
     }
 
     var content: some View {
@@ -67,7 +77,7 @@ struct WalletSendView: View {
                                 HStack(spacing: 16) {
                                     VerticalDivider()
                                     Button(action: {
-                                        amount = String(walletManager.balance)
+                                        amount = String(userManager.balance)
                                     }) {
                                         Text("MAX")
                                             .buttonMedium()
@@ -82,11 +92,12 @@ struct WalletSendView: View {
                                     .body4()
                                     .foregroundStyle(.textSecondary)
                                 Spacer()
-                                Text("\(walletManager.balance.formatted()) RMO")
+                                Text("\(userManager.balance.formatted()) RMO")
                                     .body4()
                                     .foregroundStyle(.textPrimary)
                             }
                         }
+                        .onReceive(Just(amount), perform: handleAmountOnReceive)
                     }
                 }
                 .padding(.horizontal, 12)
@@ -110,7 +121,7 @@ struct WalletSendView: View {
             AppButton(
                 text: "Send",
                 width: 100,
-                action: {}
+                action: transfer
             )
             .controlSize(.large)
         }
@@ -120,9 +131,56 @@ struct WalletSendView: View {
         .frame(maxWidth: .infinity)
         .background(.backgroundPure)
     }
+    
+    func transfer() {
+        isTransfering = true
+        
+        let cancelable = Task { @MainActor in
+            defer {
+                self.isTransfering = false
+            }
+            
+            do {
+                let amountToSend = (Double(amount) ?? 0) * Double(Rarimo.rarimoTokenMantis)
+                let amountToSendRaw = Int(amountToSend.rounded())
+                
+                let _ = try await userManager.sendTokens(address, amountToSendRaw.description)
+                
+                try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
+                
+                let balance = try await userManager.fetchBalanse()
+                
+                userManager.balance = Double(balance) ?? 0
+            } catch is CancellationError {
+                return
+            } catch {
+                LoggerUtil.intro.error("failed to send tokens: \(error)")
+            }
+        }
+        
+        self.cancelables.append(cancelable)
+    }
+    
+    func cleanup() {
+        for cancelable in cancelables {
+            cancelable.cancel()
+        }
+    }
+    
+    func handleAmountOnReceive(_ newValue: String) {
+        let filtered = newValue.filter { "0123456789,.".contains($0) }
+        if filtered != newValue {
+            self.amount = filtered
+        }
+        
+        if filtered.contains(",") {
+            self.amount = filtered.replacingOccurrences(of: ",", with: ".")
+        }
+    }
 }
 
 #Preview {
     WalletSendView(onBack: {})
         .environmentObject(WalletManager())
+        .environmentObject(UserManager())
 }

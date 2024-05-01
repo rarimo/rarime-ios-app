@@ -1,50 +1,82 @@
 import SwiftUI
 
 struct NewIdentityView: View {
-    @EnvironmentObject private var identityManager: IdentityManager
+    @EnvironmentObject private var userManager: UserManager
     let onBack: () -> Void
     let onNext: () -> Void
 
     @State private var isCopied = false
+    
+    @State private var cancelables: [Task<(), Never>] = []
 
     var body: some View {
         IdentityStepLayoutView(
-            step: 1,
             title: "Your Private Key",
-            onBack: onBack,
+            onBack: {
+                userManager.user = nil
+                
+                onBack()
+            },
             nextButton: {
-                AppButton(
-                    text: "Continue",
-                    rightIcon: Icons.arrowRight,
-                    action: onNext
-                ).controlSize(.large)
+                if let user = userManager.user {
+                    AppButton(
+                        text: "Continue",
+                        rightIcon: Icons.arrowRight,
+                        action: {
+                            do {
+                                try user.save()
+                            } catch {
+                                LoggerUtil.intro.error("failed to save user: \(error)")
+                                
+                                userManager.user = nil
+                                
+                                onBack()
+                                return
+                            }
+                            
+                            onNext()
+                        }
+                    ).controlSize(.large)
+                } else {
+                    ProgressView()
+                        .frame(maxWidth: .infinity)
+                }
             }
         ) {
             CardContainer {
                 VStack(spacing: 20) {
-                    ZStack {
-                        Text(identityManager.privateKey)
-                            .body3()
-                            .foregroundStyle(.textPrimary)
-                            .multilineTextAlignment(.leading)
+                    if let user = userManager.user {
+                        ZStack {
+                            Text(user.secretKey.hex)
+                                .body3()
+                                .foregroundStyle(.textPrimary)
+                                .multilineTextAlignment(.leading)
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 14)
+                        .background(.componentPrimary)
+                        .cornerRadius(8)
+                        copyButton
+                    } else {
+                        ProgressView()
+                            .padding(.vertical, 20)
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 14)
-                    .background(.componentPrimary)
-                    .cornerRadius(8)
-                    copyButton
                     HorizontalDivider()
                     InfoAlert(text: "Please store the private key safely and do not share it with anyone. If you lose this key, you will not be able to recover the account and will lose access forever.") {}
                 }
             }
         }
+        .onAppear(perform: createNewUser)
+        .onDisappear(perform: cleanup)
     }
 
     var copyButton: some View {
         Button(action: {
             if isCopied { return }
+            
+            guard let user = userManager.user else { return }
 
-            UIPasteboard.general.string = identityManager.privateKey
+            UIPasteboard.general.string = user.secretKey.hex
             isCopied = true
             FeedbackGenerator.shared.impact(.medium)
 
@@ -59,9 +91,29 @@ struct NewIdentityView: View {
             .foregroundStyle(.textPrimary)
         }
     }
+    
+    func createNewUser() {
+        let cancelable = Task { @MainActor in
+            do {
+                try userManager.createNewUser()
+            } catch is CancellationError {
+                return
+            } catch {
+                LoggerUtil.intro.error("failed to create new user: \(error)")
+            }
+        }
+        
+        self.cancelables.append(cancelable)
+    }
+    
+    func cleanup() {
+        for cancelable in cancelables {
+            cancelable.cancel()
+        }
+    }
 }
 
 #Preview {
     NewIdentityView(onBack: {}, onNext: {})
-        .environmentObject(IdentityManager())
+        .environmentObject(UserManager())
 }

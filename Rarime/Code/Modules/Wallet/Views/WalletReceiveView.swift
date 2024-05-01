@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct WalletReceiveView: View {
+    @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var walletManager: WalletManager
+    
     let onBack: () -> Void
 
     @State private var isCopied = false
@@ -14,13 +16,13 @@ struct WalletReceiveView: View {
         ) {
             CardContainer {
                 VStack(spacing: 20) {
-                    QRCodeView(code: walletManager.address)
+                    QRCodeView(code: userManager.userAddress)
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Your Rarimo Adress")
                             .subtitle4()
                             .foregroundStyle(.textPrimary)
                         HStack(spacing: 16) {
-                            Text(walletManager.address)
+                            Text(userManager.userAddress)
                                 .body3()
                                 .foregroundStyle(.textPrimary)
                                 .multilineTextAlignment(.leading)
@@ -30,7 +32,7 @@ struct WalletReceiveView: View {
                                 .onTapGesture {
                                     if isCopied { return }
 
-                                    UIPasteboard.general.string = walletManager.address
+                                    UIPasteboard.general.string = userManager.userAddress
                                     isCopied = true
                                     FeedbackGenerator.shared.impact(.medium)
 

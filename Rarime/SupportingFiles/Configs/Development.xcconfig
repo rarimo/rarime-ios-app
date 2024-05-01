@@ -1,16 +1,21 @@
-//
-//  Development.xcconfig
-//  Rarime
-//
-//  Created by Ivan Lele on 18.03.2024.
-//
-
-// Configuration settings file format documentation can be found at:
-// https://help.apple.com/xcode/#/dev745c5c974
-
 // MARK: General
 SLASH=/
 
 // MARK: Intro
 PRIVACY_POLICY_URL = "https:${SLASH}/staging.rarimo.com"
 TERMS_OF_USE_URL = "https:${SLASH}/staging.rarimo.com"
+
+// Mark: CircuitData
+REGISTER_IDENTITY_CIRCUIT_DATA_URL_0 = "https:${SLASH}/github.com/rarimo/rarime-circuit-data/releases/download/v0.0.1/registerIdentity2688.zip"
+REGISTER_IDENTITY_CIRCUIT_DATA_URL_1 = "https:${SLASH}/github.com/rarimo/rarime-circuit-data/releases/download/v0.0.1/registerIdentity2704.zip"
+
+// Mark: API
+RELAYER_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
+EVM_RPC_URL = "https:${SLASH}/rpc.evm.node1.mainnet-beta.rarimo.com"
+REGISTER_CONTRACT_ADDRESS = "0x9a780683B771d98cdfa8526039D005128807b66F"
+COSMOS_RPC_URL = "https:${SLASH}/rpc-api.node1.mainnet-beta.rarimo.com"
+
+// Mark: Cosmos
+CHAIN_ID = "rarimo_42-1"
+DENOM = "stake"
+RPC_IP = "104.196.227.66:9090"

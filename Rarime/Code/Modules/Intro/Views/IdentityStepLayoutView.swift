@@ -10,7 +10,6 @@ import SwiftUI
 let totalSteps = 2
 
 struct IdentityStepLayoutView<Content: View, NextButton: View>: View {
-    let step: Int
     let title: LocalizedStringResource
     let onBack: () -> Void
 
@@ -53,7 +52,6 @@ struct IdentityStepLayoutView<Content: View, NextButton: View>: View {
 
 #Preview {
     IdentityStepLayoutView(
-        step: 1,
         title: "New recovery phrase",
         onBack: {},
         nextButton: { Button("Next") {} }
