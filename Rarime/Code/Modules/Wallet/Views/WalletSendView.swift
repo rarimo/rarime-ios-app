@@ -97,16 +97,7 @@ struct WalletSendView: View {
                                     .foregroundStyle(.textPrimary)
                             }
                         }
-                        .onReceive(Just(amount)) { newValue in
-                            let filtered = newValue.filter { "0123456789,.".contains($0) }
-                            if filtered != newValue {
-                                self.amount = filtered
-                            }
-                            
-                            if filtered.contains(",") {
-                                self.amount = filtered.replacingOccurrences(of: ",", with: ".")
-                            }
-                        }
+                        .onReceive(Just(amount), perform: handleAmountOnReceive)
                     }
                 }
                 .padding(.horizontal, 12)
@@ -176,8 +167,15 @@ struct WalletSendView: View {
         }
     }
     
-    func handleAmountOnReceive() {
+    func handleAmountOnReceive(_ newValue: String) {
+        let filtered = newValue.filter { "0123456789,.".contains($0) }
+        if filtered != newValue {
+            self.amount = filtered
+        }
         
+        if filtered.contains(",") {
+            self.amount = filtered.replacingOccurrences(of: ",", with: ".")
+        }
     }
 }
 

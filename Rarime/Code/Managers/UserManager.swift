@@ -207,8 +207,6 @@ class UserManager: ObservableObject {
     }
     
     func sendTokens(_ destination: String, _ amount: String) async throws -> CosmosTransferResponse {
-//        let amoundToSend = 
-        
         guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
         
         let profileInitializer = IdentityProfile()
