@@ -20,7 +20,7 @@ struct HomeView: View {
     @State private var isCongratsShown = false
     @State private var isClaimed = false
     
-    @State private var isBalanceFetching = true
+    @State private var isBalanceFetching = false
     @State private var cancelables: [Task<(), Never>] = []
 
     var body: some View {
@@ -54,7 +54,10 @@ struct HomeView: View {
     private var content: some View {
         MainViewLayout {
             RefreshableScrollView(
-                onRefresh: { try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC) }
+                onRefresh: {
+                    fetchBalance()
+                    try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC)
+                }
             ) { _ in
                 VStack(spacing: 24) {
                     HStack {
@@ -196,6 +199,8 @@ struct HomeView: View {
     }
     
     func fetchBalance() {
+        isBalanceFetching = true
+        
         let cancelable = Task { @MainActor in
             defer {
                 self.isBalanceFetching = false

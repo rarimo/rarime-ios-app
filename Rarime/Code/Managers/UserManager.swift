@@ -86,7 +86,9 @@ class UserManager: ObservableObject {
             dg1: passport.dg1,
             dg15: passport.dg15,
             pubKeyPem: publicKeyPem.data(using: .utf8) ?? Data(),
-            signature: signature
+            signature: signature,
+            slavePem: Data(),
+            mastersPem: Data()
         )
         
         return inputs

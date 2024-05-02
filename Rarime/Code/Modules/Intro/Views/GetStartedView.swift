@@ -10,7 +10,6 @@ import SwiftUI
 
 struct GetStartedView: View {
     let onCreate: () -> Void
-    let onImport: () -> Void
 
     var body: some View {
         VStack(spacing: 32) {
@@ -24,12 +23,6 @@ struct GetStartedView: View {
                     text: "Description text here",
                     icon: Icons.userPlus,
                     action: onCreate
-                )
-                GetStartedButton(
-                    title: "Import from MetaMask Snap",
-                    text: "Description text here",
-                    icon: Icons.metamask,
-                    action: onImport
                 )
             }
         }
@@ -71,7 +64,6 @@ private struct GetStartedButton: View {
 
 #Preview {
     GetStartedView(
-        onCreate: {},
-        onImport: {}
+        onCreate: {}
     )
 }

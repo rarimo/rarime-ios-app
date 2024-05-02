@@ -116,6 +116,8 @@
 		CE0DA0D52BDA5DC700696503 /* libwitnesscalc_registerIdentity2704.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0DA0D42BDA5DC700696503 /* libwitnesscalc_registerIdentity2704.a */; };
 		CE0DA0D72BDA6F1900696503 /* EvmTxResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */; };
 		CE0DA0D92BDA927000696503 /* AirDropResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D82BDA927000696503 /* AirDropResponse.swift */; };
+		CE19CB432BE3842D00B26DF7 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE19CB422BE3842D00B26DF7 /* Identity.xcframework */; };
+		CE19CB452BE3865800B26DF7 /* CosmosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB442BE3865800B26DF7 /* CosmosManager.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
 		CE32CF522BAC981300E507B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE32CF512BAC981300E507B6 /* Lottie */; };
 		CE68BE3D2BD9B23D00D92EBB /* ZkProof.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */; };
@@ -150,7 +152,6 @@
 		CEF251382BD6E17800050507 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251372BD6E17800050507 /* UserManager.swift */; };
 		CEF2513A2BD6E22700050507 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251392BD6E22700050507 /* User.swift */; };
 		CEF8C7F72BE0DE9700F8E1A4 /* CosmosTransferResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF8C7F62BE0DE9700F8E1A4 /* CosmosTransferResponse.swift */; };
-		CEF8C7F92BE0E66F00F8E1A4 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF8C7F82BE0E66F00F8E1A4 /* Identity.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -258,6 +259,8 @@
 		CE0DA0D42BDA5DC700696503 /* libwitnesscalc_registerIdentity2704.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity2704.a; sourceTree = "<group>"; };
 		CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmTxResponse.swift; sourceTree = "<group>"; };
 		CE0DA0D82BDA927000696503 /* AirDropResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirDropResponse.swift; sourceTree = "<group>"; };
+		CE19CB422BE3842D00B26DF7 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
+		CE19CB442BE3865800B26DF7 /* CosmosManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosManager.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZkProof.swift; sourceTree = "<group>"; };
 		CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relayer.swift; sourceTree = "<group>"; };
@@ -295,7 +298,6 @@
 		CEF251372BD6E17800050507 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		CEF251392BD6E22700050507 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CEF8C7F62BE0DE9700F8E1A4 /* CosmosTransferResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosTransferResponse.swift; sourceTree = "<group>"; };
-		CEF8C7F82BE0E66F00F8E1A4 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,7 +324,7 @@
 				CEC562042BD923B4002D4954 /* librapidsnark.a in Frameworks */,
 				CE7210312BD807140043DB7F /* ZipArchive in Frameworks */,
 				560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */,
-				CEF8C7F92BE0E66F00F8E1A4 /* Identity.xcframework in Frameworks */,
+				CE19CB432BE3842D00B26DF7 /* Identity.xcframework in Frameworks */,
 				CE0DA0D52BDA5DC700696503 /* libwitnesscalc_registerIdentity2704.a in Frameworks */,
 				CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */,
 			);
@@ -483,6 +485,7 @@
 				5655E41E2BD2C39B00B86C5C /* WalletManager.swift */,
 				CEF251372BD6E17800050507 /* UserManager.swift */,
 				CE72102A2BD7EC410043DB7F /* CircuitDataManager.swift */,
+				CE19CB442BE3865800B26DF7 /* CosmosManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -860,7 +863,7 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CEF8C7F82BE0E66F00F8E1A4 /* Identity.xcframework */,
+				CE19CB422BE3842D00B26DF7 /* Identity.xcframework */,
 				CEC562082BD923D6002D4954 /* witnesscalc_registerIdentity2688.h */,
 				CEC562092BD923D6002D4954 /* witnesscalc_registerIdentity2704.h */,
 				CE0DA0D42BDA5DC700696503 /* libwitnesscalc_registerIdentity2704.a */,
@@ -1023,6 +1026,7 @@
 				560F0C232BD02DFD00067054 /* WalletSendView.swift in Sources */,
 				56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */,
 				56E2D9222BCFBA0B006E725D /* PassportImageView.swift in Sources */,
+				CE19CB452BE3865800B26DF7 /* CosmosManager.swift in Sources */,
 				56E6AD452BD272D100E4DDC1 /* AuthMethodView.swift in Sources */,
 				56DAA3152BB8CC95002CF710 /* PasscodeFieldView.swift in Sources */,
 				5655E4322BD2CF6900B86C5C /* SecurityManager.swift in Sources */,

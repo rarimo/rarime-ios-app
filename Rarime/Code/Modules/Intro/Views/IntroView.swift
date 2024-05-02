@@ -1,7 +1,7 @@
 import SwiftUI
 
 private enum IdentityRoute: Hashable {
-    case newIdentity, importIdentity
+    case newIdentity
 }
 
 struct IntroView: View {
@@ -25,9 +25,6 @@ struct IntroView: View {
                             onBack: { path.removeLast() },
                             onNext: { withAnimation { onFinish() } }
                         )
-                    case .importIdentity:
-                        // TODO: Implement import identity
-                        Text("Import Identity")
                     }
                 }
                 .background(.backgroundPure)
@@ -89,10 +86,6 @@ struct IntroView: View {
                 onCreate: {
                     showSheet.toggle()
                     path.append(.newIdentity)
-                },
-                onImport: {
-                    showSheet.toggle()
-                    path.append(.importIdentity)
                 }
             )
             .padding(.bottom, 24)
