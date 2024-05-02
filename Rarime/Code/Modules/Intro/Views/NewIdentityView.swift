@@ -14,7 +14,6 @@ struct NewIdentityView: View {
             title: "Your Private Key",
             onBack: {
                 userManager.user = nil
-                
                 onBack()
             },
             nextButton: {

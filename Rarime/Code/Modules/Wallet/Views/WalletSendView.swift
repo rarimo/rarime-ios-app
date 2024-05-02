@@ -92,7 +92,7 @@ struct WalletSendView: View {
                                     .body4()
                                     .foregroundStyle(.textSecondary)
                                 Spacer()
-                                Text("\(userManager.balance.formatted()) RMO")
+                                Text("\((userManager.balance / Double(Rarimo.rarimoTokenMantis)).formatted()) RMO")
                                     .body4()
                                     .foregroundStyle(.textPrimary)
                             }
@@ -141,16 +141,17 @@ struct WalletSendView: View {
             }
             
             do {
+                
                 let amountToSend = (Double(amount) ?? 0) * Double(Rarimo.rarimoTokenMantis)
                 let amountToSendRaw = Int(amountToSend.rounded())
                 
                 let _ = try await userManager.sendTokens(address, amountToSendRaw.description)
                 
+                self.walletManager.transfer(Double(amount) ?? 0)
+                
                 try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
                 
-                let balance = try await userManager.fetchBalanse()
-                
-                userManager.balance = Double(balance) ?? 0
+                onBack()
             } catch is CancellationError {
                 return
             } catch {

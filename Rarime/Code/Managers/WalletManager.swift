@@ -37,4 +37,17 @@ class WalletManager: ObservableObject {
         AppUserDefaults.shared.walletTransactions = try! JSONEncoder().encode(transactions)
         isClaimed = true
     }
+    
+    func transfer(_ amount: Double) {
+        transactions.append(
+            Transaction(
+                title: String(localized: "Transfer"),
+                icon: Icons.arrowUp,
+                amount: amount,
+                date: Date(),
+                type: .sent
+            )
+        )
+        AppUserDefaults.shared.walletTransactions = try! JSONEncoder().encode(transactions)
+    }
 }
