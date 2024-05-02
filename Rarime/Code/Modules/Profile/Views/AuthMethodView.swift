@@ -21,8 +21,7 @@ struct AuthMethodView: View {
                 AuthMethodRow(
                     isOn: Binding(
                         get: { securityManager.passcodeState == .enabled },
-                        // TODO: Display passcode setup view
-                        set: { $0 ? securityManager.enablePasscode("1234") : securityManager.disablePasscode() }
+                        set: { $0 ? securityManager.enablePasscode() : securityManager.disablePasscode() }
                     ),
                     icon: Icons.password,
                     label: String(localized: "Passcode")

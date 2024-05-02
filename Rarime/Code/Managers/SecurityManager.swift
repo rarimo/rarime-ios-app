@@ -21,26 +21,30 @@ class SecurityManager: ObservableObject {
 
     @Published private(set) var passcode: String
     
-    @Published var isPasscodeCorrect = false
+    @Published var isPasscodeCorrect: Bool
 
     init() {
-        passcodeState = SecurityItemState(rawValue: AppUserDefaults.shared.passcodeState)!
-        faceIdState = SecurityItemState(rawValue: AppUserDefaults.shared.faceIdState)!
+        let passcodeState = SecurityItemState(rawValue: AppUserDefaults.shared.passcodeState)!
+        let faceIdState = SecurityItemState(rawValue: AppUserDefaults.shared.faceIdState)!
         
         let passcodeBytes = (try? AppKeychain.getValue(.passcode) ?? Data()) ?? Data()
         
-        passcode = passcodeBytes.utf8
+        self.passcode = passcodeBytes.utf8
+        self.isPasscodeCorrect = passcodeState != .enabled
+        self.passcodeState = passcodeState
+        self.faceIdState = faceIdState
     }
 
-    func enablePasscode(_ newPasscode: String) {
+    func enablePasscode(_ newPasscode: String? = nil) {
         passcodeState = .enabled
-        passcode = newPasscode
-        try? AppKeychain.setValue(.passcode, newPasscode.data(using: .utf8) ?? Data())
+        if let newPasscode {
+            passcode = newPasscode
+            try? AppKeychain.setValue(.passcode, newPasscode.data(using: .utf8) ?? Data())
+        }
     }
 
     func disablePasscode() {
         passcodeState = .disabled
-        passcode = ""
         try? AppKeychain.removeValue(.passcode)
     }
 
