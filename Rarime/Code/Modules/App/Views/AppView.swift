@@ -11,8 +11,10 @@ struct AppView: View {
             // in favor of the embedded circuit data
             if !viewModel.isCircuitDataDownloaded {
                 PreDownloadView(onFinish: viewModel.finishCircuitDataDownloading).transition(.backslide)
-            } else if securityManager.faceIdState != .unset {
+            } else if securityManager.isPasscodeCorrect {
                 MainView().transition(.backslide)
+            } else if securityManager.faceIdState != .unset {
+                CheckPassportView()
             } else if securityManager.passcodeState != .unset {
                 EnableFaceIdView().transition(.backslide)
             } else if viewModel.isIntroFinished {

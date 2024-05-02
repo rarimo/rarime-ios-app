@@ -20,6 +20,8 @@ class SecurityManager: ObservableObject {
     }
 
     @Published private(set) var passcode: String
+    
+    @Published var isPasscodeCorrect = false
 
     init() {
         passcodeState = SecurityItemState(rawValue: AppUserDefaults.shared.passcodeState)!
