@@ -6,13 +6,17 @@ extension AppView {
         @Published var isCircuitDataDownloaded = AppUserDefaults.shared.isCircuitDataDownloaded
 
         func finishIntro() {
-            isIntroFinished = true
-            AppUserDefaults.shared.isIntroFinished = true
+            DispatchQueue.main.async {
+                self.isIntroFinished = true
+                AppUserDefaults.shared.isIntroFinished = true
+            }
         }
         
         func finishCircuitDataDownloading() {
-            self.isCircuitDataDownloaded = true
-            AppUserDefaults.shared.isCircuitDataDownloaded = true
+            DispatchQueue.main.async {
+                self.isCircuitDataDownloaded = true
+                AppUserDefaults.shared.isCircuitDataDownloaded = true
+            }
         }
     }
 }
