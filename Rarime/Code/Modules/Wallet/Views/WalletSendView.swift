@@ -11,6 +11,7 @@ struct WalletSendView: View {
     @State private var addressErrorMessage = ""
 
     @State private var amount = ""
+    @State private var amountErrorMessage = ""
 
     @State private var isScanning = false
     @State private var isTransfering = false
@@ -69,7 +70,7 @@ struct WalletSendView: View {
                         )
                         AppTextField(
                             text: $amount,
-                            errorMessage: .constant(""),
+                            errorMessage: $amountErrorMessage,
                             label: String(localized: "Amount"),
                             placeholder: "0.0 RMO",
                             keyboardType: .decimalPad,
@@ -141,9 +142,24 @@ struct WalletSendView: View {
             }
             
             do {
+                if !RarimoUtils.isValidAddress(address) {
+                    addressErrorMessage = String(localized: "Invalid Rarimo address")
+                    return
+                }
                 
                 let amountToSend = (Double(amount) ?? 0) * Double(Rarimo.rarimoTokenMantis)
                 let amountToSendRaw = Int(amountToSend.rounded())
+                
+                if userManager.balance < amountToSend {
+                    amountErrorMessage = String(localized: "Insufficient balance")
+                    return
+                }
+                
+                if amountToSend == 0 {
+                    amountErrorMessage = String(localized: "Amount must be greater than 0")
+                    
+                    return
+                }
                 
                 let _ = try await userManager.sendTokens(address, amountToSendRaw.description)
                 

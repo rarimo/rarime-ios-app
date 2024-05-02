@@ -51,6 +51,9 @@
     "Amount" : {
 
     },
+    "Amount must be greater than 0" : {
+
+    },
     "App version: %@" : {
 
     },
@@ -229,6 +232,9 @@
 
     },
     "Incognito" : {
+
+    },
+    "Insufficient balance" : {
 
     },
     "Invalid Rarimo address" : {

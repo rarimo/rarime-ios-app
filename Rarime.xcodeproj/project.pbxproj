@@ -118,6 +118,7 @@
 		CE0DA0D92BDA927000696503 /* AirDropResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D82BDA927000696503 /* AirDropResponse.swift */; };
 		CE19CB432BE3842D00B26DF7 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE19CB422BE3842D00B26DF7 /* Identity.xcframework */; };
 		CE19CB452BE3865800B26DF7 /* CosmosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB442BE3865800B26DF7 /* CosmosManager.swift */; };
+		CE19CB472BE39DA400B26DF7 /* RarimoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB462BE39DA400B26DF7 /* RarimoUtils.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
 		CE32CF522BAC981300E507B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE32CF512BAC981300E507B6 /* Lottie */; };
 		CE68BE3D2BD9B23D00D92EBB /* ZkProof.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */; };
@@ -261,6 +262,7 @@
 		CE0DA0D82BDA927000696503 /* AirDropResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirDropResponse.swift; sourceTree = "<group>"; };
 		CE19CB422BE3842D00B26DF7 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE19CB442BE3865800B26DF7 /* CosmosManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosManager.swift; sourceTree = "<group>"; };
+		CE19CB462BE39DA400B26DF7 /* RarimoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarimoUtils.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZkProof.swift; sourceTree = "<group>"; };
 		CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relayer.swift; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 				56A6C75B2BBC2CD500992562 /* PassportUtils.swift */,
 				56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */,
 				CEC562102BD926AA002D4954 /* ZKUtils.swift */,
+				CE19CB462BE39DA400B26DF7 /* RarimoUtils.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1050,6 +1053,7 @@
 				56DAA30F2BB8C3CB002CF710 /* EnablePasscodeView.swift in Sources */,
 				56DAA3052BB72E35002CF710 /* InfoAlert.swift in Sources */,
 				563529E52BB072060027C910 /* RewardsView.swift in Sources */,
+				CE19CB472BE39DA400B26DF7 /* RarimoUtils.swift in Sources */,
 				CE68BE422BD9B6A200D92EBB /* RegistrationContract.swift in Sources */,
 				56933E012BBBFDD90068C894 /* CirclesLoader.swift in Sources */,
 				CE72102B2BD7EC410043DB7F /* CircuitDataManager.swift in Sources */,
