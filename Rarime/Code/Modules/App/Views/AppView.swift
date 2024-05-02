@@ -17,7 +17,10 @@ struct AppView: View {
                 securityManager.isPasscodeCorrect
             {
                 MainView().transition(.backslide)
-            } else if securityManager.faceIdState != .unset {
+            } else if
+                securityManager.passcodeState != .unset,
+                securityManager.faceIdState != .unset
+            {
                 CheckPassportView()
             } else if securityManager.passcodeState != .unset {
                 EnableFaceIdView().transition(.backslide)

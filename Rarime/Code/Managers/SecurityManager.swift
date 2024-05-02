@@ -35,12 +35,15 @@ class SecurityManager: ObservableObject {
         self.faceIdState = faceIdState
     }
 
-    func enablePasscode(_ newPasscode: String? = nil) {
+    func enablePasscode() {
+        passcodeState = .unset
+    }
+    
+    func setPasscode(_ newPasscode: String) {
         passcodeState = .enabled
-        if let newPasscode {
-            passcode = newPasscode
-            try? AppKeychain.setValue(.passcode, newPasscode.data(using: .utf8) ?? Data())
-        }
+        
+        passcode = newPasscode
+        try? AppKeychain.setValue(.passcode, newPasscode.data(using: .utf8) ?? Data())
     }
 
     func disablePasscode() {

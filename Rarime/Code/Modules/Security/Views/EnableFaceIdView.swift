@@ -28,7 +28,6 @@ struct EnableFaceIdView: View {
                     onFailure: {
                         isNotAvailableError = false
                         isAlertShown = true
-
                     },
                     onNotAvailable: {
                         isNotAvailableError = false

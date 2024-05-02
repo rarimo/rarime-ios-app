@@ -49,7 +49,7 @@ struct EnablePasscodeView: View {
                         onFill: {
                             if passcode == repeatPasscode {
                                 withAnimation {
-                                    securityManager.enablePasscode(passcode)
+                                    securityManager.setPasscode(passcode)
                                 }
                             } else {
                                 repeatPasscodeError = String(localized: "Passcodes do not match")
