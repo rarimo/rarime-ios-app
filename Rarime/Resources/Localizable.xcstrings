@@ -7,6 +7,9 @@
     ", " : {
 
     },
+    "%@ ensures your history, reputation and actions are not lost, but remain confidential and under your control." : {
+
+    },
     "%@ RMO" : {
 
     },
@@ -33,13 +36,13 @@
         }
       }
     },
-    "🇺🇦" : {
-
-    },
     "Account" : {
 
     },
     "Address" : {
+
+    },
+    "Address: %@" : {
 
     },
     "Airdrop" : {
@@ -198,19 +201,10 @@
     "Finalizing" : {
 
     },
-    "Full functional available on: %@" : {
-
-    },
-    "Full privacy via Zero Knowledge Proofs" : {
-
-    },
     "Georgian" : {
 
     },
     "Get Rewarded" : {
-
-    },
-    "Get rewarded with RMO tokens" : {
 
     },
     "Go Incognito" : {
@@ -225,25 +219,19 @@
     "Import Identity" : {
 
     },
+    "Incognito mode" : {
+
+    },
     "Invalid Rarimo address" : {
 
     },
     "Issuing state code" : {
 
     },
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it h" : {
-
-    },
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors " : {
-
-    },
     "Join a waitlist" : {
 
     },
     "Join the waitlist" : {
-
-    },
-    "July" : {
 
     },
     "Language" : {
@@ -306,9 +294,6 @@
     "Passport read successfully" : {
 
     },
-    "Personal data never leaves the device" : {
-
-    },
     "Place QR code within the frame to scan" : {
 
     },
@@ -333,7 +318,7 @@
     "Profile" : {
 
     },
-    "Programable Airdrop" : {
+    "Programmable Airdrop" : {
 
     },
     "Proofs" : {
@@ -342,10 +327,16 @@
     "Prove your eligibility, belonging, identity, and contributions — all without revealing your personal details." : {
 
     },
+    "Prove your eligibility, belonging, identity, and contributions — without ever revealing personal data." : {
+
+    },
     "RARIME" : {
 
     },
     "RariMe ensures your history, reputation and actions are not lost, and remain under your control." : {
+
+    },
+    "RariMe is a self-custody identity wallet where no personal data ever leaves the device and everything is processed locally." : {
 
     },
     "Reading Data" : {
@@ -433,6 +424,9 @@
     "This airdrop is part of a humanitarian effort to help direct funds towards Ukraine." : {
 
     },
+    "This airdrop is part of a humanitarian effort to help direct funds towards Ukraine.\n\nIt showcases Rarimo’s identity infrastructure. and how it can be used by projects and organizations to directly reach civilians." : {
+
+    },
     "This app is where you privately store your digital identities, enabling you to go incognito across the web." : {
 
     },
@@ -440,6 +434,9 @@
 
     },
     "Ukrainian" : {
+
+    },
+    "Upcoming airdrops will include citizens from all over the world.\n\nCreate an incognito profile by scanning your passport, and we will notify you when you become eligible." : {
 
     },
     "Wallet" : {
@@ -451,7 +448,10 @@
     "Welcome" : {
 
     },
-    "What is this?" : {
+    "What is RariMe?" : {
+
+    },
+    "What’s that?" : {
 
     },
     "White" : {

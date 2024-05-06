@@ -21,9 +21,9 @@ struct AirdropIntroView: View {
     var body: some View {
         VStack(spacing: 16) {
             HomeIntroLayout(
-                title: "Programmable Airdrop",
-                description: "The beta launch is focused on distributing tokens to Ukrainian citizens",
-                icon: Text("🇺🇦").h4()
+                title: String(localized: "Programmable Airdrop"),
+                description: String(localized: "The beta launch is focused on distributing tokens to Ukrainian citizens"),
+                icon: Text(String("🇺🇦")).h4()
             ) {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("What’s that?")

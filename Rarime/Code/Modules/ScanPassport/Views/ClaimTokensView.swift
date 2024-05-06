@@ -47,7 +47,7 @@ struct ClaimTokensView: View {
                         .background(.backgroundPure)
                         .clipShape(Circle())
                         .overlay(Circle().stroke(.backgroundPrimary, lineWidth: 2))
-                    Text("🇺🇦")
+                    Text(String("🇺🇦"))
                         .h4()
                         .frame(width: 72, height: 72)
                         .background(.backgroundPure)

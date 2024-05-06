@@ -130,7 +130,7 @@ struct HomeView: View {
     private var airdropCard: some View {
         CardContainer {
             VStack(spacing: 20) {
-                Text("🇺🇦")
+                Text(String("🇺🇦"))
                     .h4()
                     .frame(width: 72, height: 72)
                     .background(.componentPrimary)

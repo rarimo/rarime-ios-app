@@ -18,7 +18,7 @@ struct RewardsView: View {
                         Text("Starting in July")
                             .h5()
                             .foregroundStyle(.textPrimary)
-                        Text("The rewards program will allow you to receive weekly airdrops.\nYou can earn additional rewards by using RariMe’s incognito proofs with other ecosystem apps.")
+                        Text("The rewards program will allow you to receive weekly airdrops.\n\nYou can earn additional rewards by using RariMe’s incognito proofs with other ecosystem apps.")
                             .body3()
                             .frame(maxWidth: 264)
                             .multilineTextAlignment(.center)

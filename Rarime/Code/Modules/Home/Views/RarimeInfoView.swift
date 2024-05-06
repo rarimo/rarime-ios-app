@@ -6,7 +6,7 @@ struct RarimeInfoView: View {
     var body: some View {
         VStack(spacing: 16) {
             HomeIntroLayout(
-                title: "What is RariMe?",
+                title: String(localized: "What is RariMe?"),
                 description: nil,
                 icon: Image(Icons.rarime).iconLarge()
             ) {
