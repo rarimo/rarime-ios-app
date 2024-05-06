@@ -38,7 +38,9 @@ struct ProfileView: View {
     var content: some View {
         MainViewLayout {
             VStack(alignment: .leading, spacing: 20) {
-                Text("Profile").subtitle2()
+                Text("Profile")
+                    .subtitle2()
+                    .padding(.horizontal, 8)
                 VStack(spacing: 12) {
                     CardContainer {
                         HStack {
