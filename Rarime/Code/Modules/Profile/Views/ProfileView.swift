@@ -1,7 +1,7 @@
 import SwiftUI
 
 private enum ProfileRoute: Hashable {
-    case authMethod, exportKeys, language, theme
+    case authMethod, exportKeys, language, theme, appIcon
 }
 
 struct ProfileView: View {
@@ -9,6 +9,7 @@ struct ProfileView: View {
     @EnvironmentObject private var settingsManager: SettingsManager
     @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var userManager: UserManager
+    @EnvironmentObject private var appIconManager: AppIconManager
 
     @State private var path: [ProfileRoute] = []
 
@@ -27,6 +28,8 @@ struct ProfileView: View {
                     LanguageView(onBack: { path.removeLast() })
                 case .theme:
                     ThemeView(onBack: { path.removeLast() })
+                case .appIcon:
+                    AppIconView(onBack: { path.removeLast() })
                 }
             }
         }
@@ -35,7 +38,9 @@ struct ProfileView: View {
     var content: some View {
         MainViewLayout {
             VStack(alignment: .leading, spacing: 20) {
-                Text("Profile").subtitle2()
+                Text("Profile")
+                    .subtitle2()
+                    .padding(.horizontal, 8)
                 VStack(spacing: 12) {
                     CardContainer {
                         HStack {
@@ -79,6 +84,14 @@ struct ProfileView: View {
                                 value: settingsManager.colorScheme.title,
                                 action: { path.append(.theme) }
                             )
+                            if appIconManager.isAppIconsSupported {
+                                ProfileRow(
+                                    icon: Icons.rarime,
+                                    title: String(localized: "App Icon"),
+                                    value: appIconManager.appIcon.title,
+                                    action: { path.append(.appIcon) }
+                                )
+                            }
                             ProfileRow(
                                 icon: Icons.question,
                                 title: String(localized: "Privacy Policy"),
@@ -152,6 +165,7 @@ private struct ProfileRow: View {
         .environmentObject(SettingsManager())
         .environmentObject(PassportManager())
         .environmentObject(SecurityManager())
+        .environmentObject(AppIconManager())
         .environmentObject(userManager)
         .onAppear {
             _ = try? userManager.createNewUser()

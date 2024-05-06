@@ -49,6 +49,9 @@
 		5655E43A2BD51F5100B86C5C /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 5655E4392BD51F5100B86C5C /* KeychainAccess */; };
 		5655E43C2BD522E800B86C5C /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E43B2BD522E700B86C5C /* AppLanguage.swift */; };
 		565915192BE91E1C0050795A /* WalletUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565915182BE91E1C0050795A /* WalletUtil.swift */; };
+		5659151B2BE927A20050795A /* AppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659151A2BE927A20050795A /* AppIconView.swift */; };
+		5659151D2BE92AA90050795A /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659151C2BE92AA90050795A /* AppIcon.swift */; };
+		5659151F2BE92B1F0050795A /* AppIconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659151E2BE92B1F0050795A /* AppIconManager.swift */; };
 		56722F202BCD62BB00300AD0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56722F1F2BCD62BB00300AD0 /* ProfileView.swift */; };
 		567AEC9B2BBD9B8100A20E83 /* Passport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567AEC9A2BBD9B8100A20E83 /* Passport.swift */; };
 		5689C8312BE8FDA600A4B767 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5689C8302BE8FDA600A4B767 /* Identity.xcframework */; };
@@ -196,6 +199,9 @@
 		5655E4362BD51E8E00B86C5C /* AppKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeychain.swift; sourceTree = "<group>"; };
 		5655E43B2BD522E700B86C5C /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
 		565915182BE91E1C0050795A /* WalletUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletUtil.swift; sourceTree = "<group>"; };
+		5659151A2BE927A20050795A /* AppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconView.swift; sourceTree = "<group>"; };
+		5659151C2BE92AA90050795A /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
+		5659151E2BE92B1F0050795A /* AppIconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconManager.swift; sourceTree = "<group>"; };
 		56722F1F2BCD62BB00300AD0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		567AEC9A2BBD9B8100A20E83 /* Passport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passport.swift; sourceTree = "<group>"; };
 		5689C8302BE8FDA600A4B767 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
@@ -349,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				56933DFE2BBBFDA30068C894 /* ProcessingStatus.swift */,
+				5659151C2BE92AA90050795A /* AppIcon.swift */,
 				5655E42F2BD2CA5500B86C5C /* AppColorScheme.swift */,
 				5655E43B2BD522E700B86C5C /* AppLanguage.swift */,
 				5641695F2BE273260057AC03 /* PassportCardLook.swift */,
@@ -440,6 +447,7 @@
 				56E6AD462BD272FB00E4DDC1 /* ExportKeysView.swift */,
 				56E6AD482BD2731100E4DDC1 /* LanguageView.swift */,
 				56E6AD4A2BD2732300E4DDC1 /* ThemeView.swift */,
+				5659151A2BE927A20050795A /* AppIconView.swift */,
 				56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */,
 			);
 			path = Views;
@@ -465,6 +473,7 @@
 		5655E41D2BD2C38E00B86C5C /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				5659151E2BE92B1F0050795A /* AppIconManager.swift */,
 				5655E4292BD2C7C800B86C5C /* ConfigManager.swift */,
 				5655E4242BD2C3B500B86C5C /* PassportManager.swift */,
 				5655E4312BD2CF6900B86C5C /* SecurityManager.swift */,
@@ -1083,6 +1092,7 @@
 				56474AD62BB9860E0017AA25 /* FaceIdAuth.swift in Sources */,
 				CEF2513A2BD6E22700050507 /* User.swift in Sources */,
 				56933DF12BBAC1B10068C894 /* ScanPassportLayoutView.swift in Sources */,
+				5659151B2BE927A20050795A /* AppIconView.swift in Sources */,
 				560F0C272BD1146C00067054 /* ScanQRView.swift in Sources */,
 				56933DFB2BBAFBD90068C894 /* AppToggle.swift in Sources */,
 				56E6AD4B2BD2732300E4DDC1 /* ThemeView.swift in Sources */,
@@ -1091,6 +1101,7 @@
 				56933DEF2BBABD100068C894 /* ScanPassportView.swift in Sources */,
 				56E6AD4F2BD2756200E4DDC1 /* SafariWebView.swift in Sources */,
 				567AEC9B2BBD9B8100A20E83 /* Passport.swift in Sources */,
+				5659151F2BE92B1F0050795A /* AppIconManager.swift in Sources */,
 				56933E032BBBFDFE0068C894 /* ProcessingChipView.swift in Sources */,
 				CEF251382BD6E17800050507 /* UserManager.swift in Sources */,
 				5655E4252BD2C3B500B86C5C /* PassportManager.swift in Sources */,
@@ -1109,6 +1120,7 @@
 				560F0C252BD036F900067054 /* AppTextField.swift in Sources */,
 				56933E0C2BBC09D20068C894 /* MRZViewModel.swift in Sources */,
 				563529E72BB072870027C910 /* WalletView.swift in Sources */,
+				5659151D2BE92AA90050795A /* AppIcon.swift in Sources */,
 				5655E43C2BD522E800B86C5C /* AppLanguage.swift in Sources */,
 				56E7AD0A2BDAA4F000D3A258 /* AppRadioButton.swift in Sources */,
 				56933DFD2BBAFDD00068C894 /* PassportProofView.swift in Sources */,
@@ -1250,7 +1262,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CE9E82E02BA8974C00AAF885 /* Development.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "GreenAndBlackIcon BlackAndGreenIcon";
+				ASSETCATALOG_COMPILER_APPICON_NAME = BlackAndWhiteIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rarime/Rarime.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -1297,7 +1310,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CE9E82E02BA8974C00AAF885 /* Development.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "GreenAndBlackIcon BlackAndGreenIcon";
+				ASSETCATALOG_COMPILER_APPICON_NAME = BlackAndWhiteIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rarime/Rarime.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -1410,7 +1424,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CE9E82E22BA8975F00AAF885 /* Production.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "GreenAndBlackIcon BlackAndGreenIcon";
+				ASSETCATALOG_COMPILER_APPICON_NAME = BlackAndWhiteIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rarime/Rarime.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -1516,7 +1531,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CE9E82E22BA8975F00AAF885 /* Production.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "GreenAndBlackIcon BlackAndGreenIcon";
+				ASSETCATALOG_COMPILER_APPICON_NAME = BlackAndWhiteIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rarime/Rarime.entitlements;
 				CODE_SIGN_STYLE = Automatic;

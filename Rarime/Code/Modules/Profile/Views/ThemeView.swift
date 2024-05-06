@@ -36,7 +36,7 @@ private struct ThemeItem: View {
                     .resizable()
                     .frame(width: 40, height: 48)
                 Text(scheme.title)
-                    .subtitle4()
+                    .buttonMedium()
                     .foregroundStyle(.textPrimary)
             }
         }
