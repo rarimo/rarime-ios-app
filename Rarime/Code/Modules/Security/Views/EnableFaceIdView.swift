@@ -21,7 +21,7 @@ struct EnableFaceIdView: View {
         EnableLayoutView(
             icon: Icons.userFocus,
             title: "Enable\nFace ID",
-            description: "Enable Face ID Authentication",
+            description: "Enable Face ID Login",
             enableAction: {
                 FaceIdAuth.shared.authenticate(
                     onSuccess: { withAnimation { securityManager.enableFaceId() } },

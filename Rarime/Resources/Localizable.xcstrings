@@ -126,9 +126,6 @@
     "Create Account" : {
 
     },
-    "Create new Identity" : {
-
-    },
     "Creating a confidential profile" : {
 
     },
@@ -136,9 +133,6 @@
 
     },
     "Dark Mode" : {
-
-    },
-    "Description text here" : {
 
     },
     "Document" : {
@@ -165,19 +159,19 @@
     "Enable\nPasscode" : {
 
     },
-    "Enable Face ID Authentication" : {
+    "Enable Face ID in Settings > Rarime." : {
 
     },
-    "Enable Face ID in Settings > Rarime." : {
+    "Enable Face ID Login" : {
 
     },
     "Enable Passcode Authentication" : {
 
     },
-    "English" : {
+    "Enable Passcode Login" : {
 
     },
-    "Ensuring your history, reputation and actions are not lost, but still remain confidential controlled by you." : {
+    "English" : {
 
     },
     "Enter Passcode" : {
@@ -213,13 +207,13 @@
     "Georgian" : {
 
     },
-    "Get rewarded" : {
+    "Get Rewarded" : {
 
     },
     "Get rewarded with RMO tokens" : {
 
     },
-    "Get Started" : {
+    "Go Incognito" : {
 
     },
     "Green" : {
@@ -228,13 +222,7 @@
     "Hold your iPhone near an NFC enabled passport." : {
 
     },
-    "Import from MetaMask Snap" : {
-
-    },
     "Import Identity" : {
-
-    },
-    "Incognito" : {
 
     },
     "Invalid Rarimo address" : {
@@ -360,10 +348,13 @@
     "Proofs" : {
 
     },
-    "Prove your eligibility, belonging, identity, and contributions — all without revealing who you are." : {
+    "Prove your eligibility, belonging, identity, and contributions — all without revealing your personal details." : {
 
     },
     "RARIME" : {
+
+    },
+    "RariMe ensures your history, reputation and actions are not lost, and remain under your control." : {
 
     },
     "Reading Data" : {
@@ -394,9 +385,6 @@
 
     },
     "Scan your Passport" : {
-
-    },
-    "Select Authorisation Method" : {
 
     },
     "Select Data" : {
@@ -451,7 +439,7 @@
     "Theme" : {
 
     },
-    "This app is where your digital identities live, enabling you to go incognito across the web." : {
+    "This app is where you privately store your digital identities, enabling you to go incognito across the web." : {
 
     },
     "Transactions" : {

@@ -25,7 +25,7 @@ struct EnablePasscodeView: View {
             EnableLayoutView(
                 icon: Icons.password,
                 title: "Enable\nPasscode",
-                description: "Enable Passcode Authentication",
+                description: "Enable Passcode Login",
                 enableAction: { path.append(.enterPasscode) },
                 skipAction: { withAnimation { securityManager.disablePasscode() } }
             )
