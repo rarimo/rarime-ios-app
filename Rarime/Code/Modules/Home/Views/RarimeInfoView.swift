@@ -7,22 +7,31 @@ struct RarimeInfoView: View {
         VStack(spacing: 16) {
             HomeIntroLayout(
                 title: "What is RariMe?",
-                description: "short description text here",
+                description: nil,
                 icon: Image(Icons.rarime).iconLarge()
             ) {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors ")
-                        .body3()
-                        .foregroundStyle(.textPrimary)
-                    Text("Full functional available on: \(Text("July").fontWeight(.semibold))")
-                        .body3()
-                        .foregroundStyle(.warningMain)
+                VStack(alignment: .leading, spacing: 16) {
+                    makeListItem(Text("RariMe is a self-custody identity wallet where no personal data ever leaves the device and everything is processed locally."))
+                    makeListItem(Text("Prove your eligibility, belonging, identity, and contributions — without ever revealing personal data."))
+                    makeListItem(Text("\(Text("Incognito mode").fontWeight(.bold).foregroundColor(.textPrimary)) ensures your history, reputation and actions are not lost, but remain confidential and under your control."))
                 }
             }
             Spacer()
             AppButton(text: "Okay", action: onClose)
                 .controlSize(.large)
                 .padding(.horizontal, 20)
+        }
+    }
+
+    private func makeListItem(_ text: Text) -> some View {
+        HStack(alignment: .top, spacing: 12) {
+            Circle()
+                .fill(.textSecondary)
+                .frame(width: 6, height: 6)
+                .padding(.top, 8)
+            text
+                .body2()
+                .foregroundStyle(.textSecondary)
         }
     }
 }

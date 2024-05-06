@@ -112,7 +112,6 @@
 		56E6AD4D2BD273BC00E4DDC1 /* ProfileRouteLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */; };
 		56E6AD4F2BD2756200E4DDC1 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */; };
 		56E7AD0A2BDAA4F000D3A258 /* AppRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7AD092BDAA4F000D3A258 /* AppRadioButton.swift */; };
-		56E7AD0C2BDAA9C100D3A258 /* BetaLaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7AD0B2BDAA9C100D3A258 /* BetaLaunchView.swift */; };
 		56E7AD0E2BDAD70200D3A258 /* RefreshableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7AD0D2BDAD70200D3A258 /* RefreshableScrollView.swift */; };
 		56E7AD112BDBA81000D3A258 /* PullToRefreshSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 56E7AD102BDBA81000D3A258 /* PullToRefreshSwiftUI */; };
 		56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F48BBD2BC02E82001F3AA4 /* AppButton.swift */; };
@@ -258,7 +257,6 @@
 		56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouteLayout.swift; sourceTree = "<group>"; };
 		56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
 		56E7AD092BDAA4F000D3A258 /* AppRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRadioButton.swift; sourceTree = "<group>"; };
-		56E7AD0B2BDAA9C100D3A258 /* BetaLaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaLaunchView.swift; sourceTree = "<group>"; };
 		56E7AD0D2BDAD70200D3A258 /* RefreshableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableScrollView.swift; sourceTree = "<group>"; };
 		56F48BBD2BC02E82001F3AA4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		CE0DA0D22BDA574200696503 /* libwitnesscalc_registerIdentity2688.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity2688.a; sourceTree = "<group>"; };
@@ -414,11 +412,9 @@
 			isa = PBXGroup;
 			children = (
 				563529E82BB072B80027C910 /* HomeView.swift */,
-				56E7AD0D2BDAD70200D3A258 /* RefreshableScrollView.swift */,
 				56CC01E42BCD81AA008CEBE0 /* AirdropIntroView.swift */,
 				56933DEC2BBAB0AB0068C894 /* PassportIntroView.swift */,
 				56E2D9182BCE94CA006E725D /* RarimeInfoView.swift */,
-				56E7AD0B2BDAA9C100D3A258 /* BetaLaunchView.swift */,
 				56E2D91A2BCEA66A006E725D /* PassportCard.swift */,
 				56E2D9142BCE7FC4006E725D /* HomeIntroLayout.swift */,
 				56E2D9252BCFE65C006E725D /* CongratsView.swift */,
@@ -821,6 +817,7 @@
 				56933E042BBC00D60068C894 /* RewardChipView.swift */,
 				56E2D9212BCFBA0B006E725D /* PassportImageView.swift */,
 				56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */,
+				56E7AD0D2BDAD70200D3A258 /* RefreshableScrollView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1036,7 +1033,6 @@
 				561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */,
 				CE0DA0D92BDA927000696503 /* AirDropResponse.swift in Sources */,
 				56E2D92A2BCFFB6B006E725D /* Airdrop.swift in Sources */,
-				56E7AD0C2BDAA9C100D3A258 /* BetaLaunchView.swift in Sources */,
 				56DAA3072BB77550002CF710 /* IdentityStepLayoutView.swift in Sources */,
 				CE68BE3D2BD9B23D00D92EBB /* ZkProof.swift in Sources */,
 				56474ADA2BB9ED6E0017AA25 /* AnyTransition+Backslide.swift in Sources */,

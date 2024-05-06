@@ -66,9 +66,6 @@
     "Authentication Failed" : {
 
     },
-    "Available in July" : {
-
-    },
     "Available RMO" : {
 
     },
@@ -79,12 +76,6 @@
 
     },
     "Beta launch" : {
-
-    },
-    "Beta Launch" : {
-
-    },
-    "Beta launch is focused on distributing tokens to Ukrainian identity holders" : {
 
     },
     "Black" : {
@@ -129,16 +120,25 @@
     "Creating a confidential profile" : {
 
     },
-    "Credentials" : {
+    "Creating an incognito profile" : {
 
     },
     "Dark Mode" : {
+
+    },
+    "Data generates an incognito profile" : {
+
+    },
+    "Data never leaves this device" : {
 
     },
     "Document" : {
 
     },
     "Document class mode" : {
+
+    },
+    "Document data" : {
 
     },
     "Document number" : {
@@ -231,13 +231,7 @@
     "Issuing state code" : {
 
     },
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem" : {
-
-    },
     "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it h" : {
-
-    },
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, " : {
 
     },
     "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors " : {
@@ -307,9 +301,6 @@
 
     },
     "Passcodes do not match" : {
-
-    },
-    "Passport data is stored only on this device" : {
 
     },
     "Passport read successfully" : {
@@ -387,12 +378,6 @@
     "Scan your Passport" : {
 
     },
-    "Select Data" : {
-
-    },
-    "Selected data will create a confidential profile" : {
-
-    },
     "Send" : {
 
     },
@@ -400,9 +385,6 @@
 
     },
     "Settings" : {
-
-    },
-    "short description text here" : {
 
     },
     "Skip" : {
@@ -415,6 +397,9 @@
 
     },
     "Start building your incognito profile and earn rewards as an early community member." : {
+
+    },
+    "Starting in July" : {
 
     },
     "Step %lld/%lld" : {
@@ -436,7 +421,16 @@
     "Thanks!" : {
 
     },
+    "The beta launch is focused on distributing tokens to Ukrainian citizens" : {
+
+    },
+    "The rewards program will allow you to receive weekly airdrops.\nYou can earn additional rewards by using RariMe’s incognito proofs with other ecosystem apps." : {
+
+    },
     "Theme" : {
+
+    },
+    "This airdrop is part of a humanitarian effort to help direct funds towards Ukraine." : {
 
     },
     "This app is where you privately store your digital identities, enabling you to go incognito across the web." : {
@@ -455,9 +449,6 @@
 
     },
     "Welcome" : {
-
-    },
-    "What is RariMe?" : {
 
     },
     "What is this?" : {
@@ -484,7 +475,7 @@
     "Your Private Key" : {
 
     },
-    "Your Rarimo Adress" : {
+    "Your Rarimo Address" : {
 
     }
   },

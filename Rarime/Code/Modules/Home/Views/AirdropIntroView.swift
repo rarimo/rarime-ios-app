@@ -21,25 +21,17 @@ struct AirdropIntroView: View {
     var body: some View {
         VStack(spacing: 16) {
             HomeIntroLayout(
-                title: "Programable Airdrop",
-                description: "Beta launch is focused on distributing tokens to Ukrainian identity holders",
+                title: "Programmable Airdrop",
+                description: "The beta launch is focused on distributing tokens to Ukrainian citizens",
                 icon: Text("🇺🇦").h4()
             ) {
                 VStack(alignment: .leading, spacing: 12) {
-                    makeListItem("1.", "Personal data never leaves the device")
-                    makeListItem("2.", "Full privacy via Zero Knowledge Proofs")
-                    makeListItem("3.", "Get rewarded with RMO tokens")
-                }
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("What is this?")
+                    Text("What’s that?")
                         .overline2()
                         .foregroundStyle(.textSecondary)
-                    Text("It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it h")
+                    Text("This airdrop is part of a humanitarian effort to help direct funds towards Ukraine.\n\nIt showcases Rarimo’s identity infrastructure. and how it can be used by projects and organizations to directly reach civilians.")
                         .body3()
                         .foregroundStyle(.textPrimary)
-                    Text("Full functional available on: \(Text("July").fontWeight(.semibold))")
-                        .body3()
-                        .foregroundStyle(.warningMain)
                 }
             }
             Spacer()
