@@ -1,10 +1,3 @@
-//
-//  ScanPassportLayoutView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 01.04.2024.
-//
-
 import SwiftUI
 
 private let TOTAL_STEPS = 3

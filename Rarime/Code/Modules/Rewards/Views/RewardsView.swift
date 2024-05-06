@@ -15,11 +15,12 @@ struct RewardsView: View {
                         .background(.secondaryMain, in: Circle())
                         .foregroundStyle(.primaryMain)
                     VStack(spacing: 8) {
-                        Text("Available in July")
+                        Text("Starting in July")
                             .h5()
                             .foregroundStyle(.textPrimary)
-                        Text("It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem")
+                        Text("The rewards program will allow you to receive weekly airdrops.\nYou can earn additional rewards by using RariMe’s incognito proofs with other ecosystem apps.")
                             .body3()
+                            .frame(maxWidth: 264)
                             .multilineTextAlignment(.center)
                             .foregroundStyle(.textSecondary)
                     }

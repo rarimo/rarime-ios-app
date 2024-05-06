@@ -17,8 +17,8 @@ struct SelectPassportDataView: View {
     var body: some View {
         ScanPassportLayoutView(
             step: 3,
-            title: "Select Data",
-            text: "Selected data will create a confidential profile",
+            title: "Document data",
+            text: "Data generates an incognito profile",
             onClose: onClose
         ) {
             if passportViewModel.passport != nil {

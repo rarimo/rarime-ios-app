@@ -7,7 +7,7 @@ private enum WalletRoute: String, Hashable {
 struct WalletView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
-    
+
     @State private var path: [WalletRoute] = []
 
     var body: some View {
@@ -28,7 +28,7 @@ struct WalletView: View {
             VStack(alignment: .leading, spacing: 12) {
                 header
                 RefreshableScrollView(
-                    onRefresh: { try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC) }
+                    onRefresh: { try await Task.sleep(nanoseconds: 1_200_000_000) }
                 ) { _ in
                     VStack {
                         transactionsCard
