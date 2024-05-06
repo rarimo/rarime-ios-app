@@ -2,7 +2,7 @@ import SwiftUI
 
 struct PassportProofView: View {
     @EnvironmentObject var passportViewModel: PassportViewModel
-    
+
     let onFinish: (ZkProof) -> Void
     let onClose: () -> Void
 
@@ -10,9 +10,9 @@ struct PassportProofView: View {
         do {
             let zkProof = try await passportViewModel.generateProof()
             if passportViewModel.processingStatus != .success { return }
-            
+
             try await Task.sleep(nanoseconds: NSEC_PER_SEC)
-            
+
             onFinish(zkProof)
         } catch {
             LoggerUtil.passport.error("Error while waiting for success state: \(error)")
@@ -21,9 +21,8 @@ struct PassportProofView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            VStack(spacing: 32) {
+            VStack(spacing: 40) {
                 GeneralStatusView(status: passportViewModel.processingStatus)
-                HorizontalDivider()
                 VStack(spacing: 16) {
                     ForEach(PassportProofState.allCases, id: \.self) { item in
                         ProcessingItemView(
@@ -32,6 +31,8 @@ struct PassportProofView: View {
                         )
                     }
                 }
+                .padding(20)
+                .background(.backgroundPure, in: RoundedRectangle(cornerRadius: 24))
             }
             .padding(.horizontal, 20)
             Spacer()
@@ -99,7 +100,7 @@ private struct GeneralStatusView: View {
 
     private var text: LocalizedStringResource {
         switch status {
-        case .processing: "Creating a confidential profile"
+        case .processing: "Creating an incognito profile"
         case .success: "Your passport proof is ready"
         case .failure: "Please try again later"
         }
@@ -137,11 +138,11 @@ private struct GeneralStatusView: View {
 
 #Preview {
     @StateObject var userManager = UserManager.shared
-    
+
     return PassportProofView(onFinish: { _ in }, onClose: {})
         .environmentObject(PassportViewModel())
         .environmentObject(UserManager())
         .onAppear {
-            let _ = try? userManager.createNewUser()
+            _ = try? userManager.createNewUser()
         }
 }

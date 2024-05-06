@@ -3,7 +3,7 @@ import SwiftUI
 struct WalletReceiveView: View {
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var walletManager: WalletManager
-    
+
     let onBack: () -> Void
 
     @State private var isCopied = false
@@ -18,7 +18,7 @@ struct WalletReceiveView: View {
                 VStack(spacing: 20) {
                     QRCodeView(code: userManager.userAddress)
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Your Rarimo Adress")
+                        Text("Your Rarimo Address")
                             .subtitle4()
                             .foregroundStyle(.textPrimary)
                         HStack(spacing: 16) {

@@ -1,10 +1,3 @@
-//
-//  ScanPassportMRZView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 01.04.2024.
-//
-
 import SwiftUI
 
 struct ScanPassportMRZView: View {
@@ -16,7 +9,7 @@ struct ScanPassportMRZView: View {
         ScanPassportLayoutView(
             step: 1,
             title: "Scan your Passport",
-            text: "Passport data is stored only on this device",
+            text: "Data never leaves this device",
             onClose: onClose
         ) {
             ZStack {

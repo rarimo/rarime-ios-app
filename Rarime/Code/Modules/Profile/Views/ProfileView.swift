@@ -40,10 +40,10 @@ struct ProfileView: View {
                     CardContainer {
                         HStack {
                             VStack(alignment: .leading, spacing: 8) {
-                                Text(passportManager.passport?.fullName ?? String(localized: "Account"))
+                                Text("Account")
                                     .subtitle3()
                                     .foregroundStyle(.textPrimary)
-                                Text(userManager.userAddress)
+                                Text("Address: \(WalletUtil.formatAddress(userManager.userAddress))")
                                     .body4()
                                     .foregroundStyle(.textSecondary)
                             }
@@ -145,7 +145,7 @@ private struct ProfileRow: View {
 
 #Preview {
     @StateObject var userManager = UserManager.shared
-    
+
     return ProfileView()
         .environmentObject(MainView.ViewModel())
         .environmentObject(ConfigManager())

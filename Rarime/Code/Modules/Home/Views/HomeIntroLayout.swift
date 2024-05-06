@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct HomeIntroLayout<Icon: View, Content: View>: View {
-    let title: LocalizedStringResource
-    let description: LocalizedStringResource
+    let title: String
+    let description: String?
     let icon: Icon
 
     @ViewBuilder var content: () -> Content
@@ -18,26 +18,28 @@ struct HomeIntroLayout<Icon: View, Content: View>: View {
                 Text(title)
                     .h6()
                     .foregroundStyle(.textPrimary)
-                Text(description)
-                    .body3()
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: 300)
-                    .foregroundStyle(.textSecondary)
+                if let description {
+                    Text(description)
+                        .body3()
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: 300)
+                        .foregroundStyle(.textSecondary)
+                }
             }
             .frame(maxWidth: .infinity)
             HorizontalDivider()
             content()
         }
         .padding(.top, 40)
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 24)
     }
 }
 
 #Preview {
     HomeIntroLayout(
-        title: LocalizedStringResource("Other passport holders", table: "preview"),
-        description: LocalizedStringResource("short description text here", table: "preview"),
+        title: "Other passport holders",
+        description: "short description text here",
         icon: Image(Icons.bell).iconLarge()
     ) {
         Rectangle()

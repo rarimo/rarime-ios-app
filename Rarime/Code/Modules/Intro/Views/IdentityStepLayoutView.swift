@@ -1,10 +1,3 @@
-//
-//  PhraseStepLayoutView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 30.03.2024.
-//
-
 import SwiftUI
 
 let totalSteps = 2

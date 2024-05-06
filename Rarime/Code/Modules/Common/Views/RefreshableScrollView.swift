@@ -34,11 +34,10 @@ struct RefreshableScrollView<Content: View>: View {
                 case .idle:
                     Color.clear
                 case .pulling(let progress):
-                    Image(Icons.rarime).square(progress * iconSize)
+                    Image(Icons.detective).square(progress * iconSize)
                 case .refreshing, .finishing:
-                    PulseAnimationView {
-                        Image(Icons.rarime).square(iconSize)
-                    }
+                    LottieView(animation: Animations.incognito)
+                        .frame(width: iconSize, height: iconSize)
                 }
             }
         ) { _ in
@@ -64,7 +63,7 @@ private struct PulseAnimationView<Content: View>: View {
 
 #Preview {
     RefreshableScrollView(
-        onRefresh: { try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC) }
+        onRefresh: { try await Task.sleep(nanoseconds: 1_200_000_000) }
     ) { _ in
         VStack {
             Color(.componentPrimary)

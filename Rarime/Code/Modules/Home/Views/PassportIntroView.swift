@@ -6,17 +6,14 @@ struct PassportIntroView: View {
     var body: some View {
         VStack(spacing: 16) {
             HomeIntroLayout(
-                title: "Other passport holders",
-                description: "short description text here",
+                title: String(localized: "Other passport holders"),
+                description: nil,
                 icon: Image(Icons.globeSimple).iconLarge()
             ) {
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors ")
+                    Text("Upcoming airdrops will include citizens from all over the world.\n\nCreate an incognito profile by scanning your passport, and we will notify you when you become eligible.")
                         .body3()
                         .foregroundStyle(.textPrimary)
-                    Text("Full functional available on: \(Text("July").fontWeight(.semibold))")
-                        .body3()
-                        .foregroundStyle(.warningMain)
                 }
             }
             Spacer()

@@ -15,3 +15,13 @@ extension AppLanguage {
         }
     }
 }
+
+extension AppLanguage {
+    var flag: String {
+        switch self {
+        case .engish: return "🇺🇸"
+        case .ukrainian: return "🇺🇦"
+        case .georgian: return "🇬🇪"
+        }
+    }
+}

@@ -31,9 +31,14 @@ private struct LanguageItem: View {
 
     var body: some View {
         AppRadioButton(isSelected: isSelected, onSelect: onSelect) {
-            Text(language.title)
-                .subtitle4()
-                .foregroundStyle(.textPrimary)
+            HStack(spacing: 16) {
+                Text(language.flag)
+                    .h6()
+                    .foregroundStyle(.textPrimary)
+                Text(language.title)
+                    .subtitle4()
+                    .foregroundStyle(.textPrimary)
+            }
         }
     }
 }

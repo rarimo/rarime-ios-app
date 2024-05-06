@@ -7,6 +7,9 @@
     ", " : {
 
     },
+    "%@ ensures your history, reputation and actions are not lost, but remain confidential and under your control." : {
+
+    },
     "%@ RMO" : {
 
     },
@@ -33,13 +36,13 @@
         }
       }
     },
-    "🇺🇦" : {
-
-    },
     "Account" : {
 
     },
     "Address" : {
+
+    },
+    "Address: %@" : {
 
     },
     "Airdrop" : {
@@ -66,9 +69,6 @@
     "Authentication Failed" : {
 
     },
-    "Available in July" : {
-
-    },
     "Available RMO" : {
 
     },
@@ -79,12 +79,6 @@
 
     },
     "Beta launch" : {
-
-    },
-    "Beta Launch" : {
-
-    },
-    "Beta launch is focused on distributing tokens to Ukrainian identity holders" : {
 
     },
     "Black" : {
@@ -126,25 +120,28 @@
     "Create Account" : {
 
     },
-    "Create new Identity" : {
-
-    },
     "Creating a confidential profile" : {
 
     },
-    "Credentials" : {
+    "Creating an incognito profile" : {
 
     },
     "Dark Mode" : {
 
     },
-    "Description text here" : {
+    "Data generates an incognito profile" : {
+
+    },
+    "Data never leaves this device" : {
 
     },
     "Document" : {
 
     },
     "Document class mode" : {
+
+    },
+    "Document data" : {
 
     },
     "Document number" : {
@@ -165,19 +162,19 @@
     "Enable\nPasscode" : {
 
     },
-    "Enable Face ID Authentication" : {
+    "Enable Face ID in Settings > Rarime." : {
 
     },
-    "Enable Face ID in Settings > Rarime." : {
+    "Enable Face ID Login" : {
 
     },
     "Enable Passcode Authentication" : {
 
     },
-    "English" : {
+    "Enable Passcode Login" : {
 
     },
-    "Ensuring your history, reputation and actions are not lost, but still remain confidential controlled by you." : {
+    "English" : {
 
     },
     "Enter Passcode" : {
@@ -204,22 +201,13 @@
     "Finalizing" : {
 
     },
-    "Full functional available on: %@" : {
-
-    },
-    "Full privacy via Zero Knowledge Proofs" : {
-
-    },
     "Georgian" : {
 
     },
-    "Get rewarded" : {
+    "Get Rewarded" : {
 
     },
-    "Get rewarded with RMO tokens" : {
-
-    },
-    "Get Started" : {
+    "Go Incognito" : {
 
     },
     "Green" : {
@@ -228,13 +216,10 @@
     "Hold your iPhone near an NFC enabled passport." : {
 
     },
-    "Import from MetaMask Snap" : {
-
-    },
     "Import Identity" : {
 
     },
-    "Incognito" : {
+    "Incognito mode" : {
 
     },
     "Invalid Rarimo address" : {
@@ -243,25 +228,10 @@
     "Issuing state code" : {
 
     },
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem" : {
-
-    },
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it h" : {
-
-    },
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, " : {
-
-    },
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors " : {
-
-    },
     "Join a waitlist" : {
 
     },
     "Join the waitlist" : {
-
-    },
-    "July" : {
 
     },
     "Language" : {
@@ -321,13 +291,7 @@
     "Passcodes do not match" : {
 
     },
-    "Passport data is stored only on this device" : {
-
-    },
     "Passport read successfully" : {
-
-    },
-    "Personal data never leaves the device" : {
 
     },
     "Place QR code within the frame to scan" : {
@@ -354,16 +318,25 @@
     "Profile" : {
 
     },
-    "Programable Airdrop" : {
+    "Programmable Airdrop" : {
 
     },
     "Proofs" : {
 
     },
-    "Prove your eligibility, belonging, identity, and contributions — all without revealing who you are." : {
+    "Prove your eligibility, belonging, identity, and contributions — all without revealing your personal details." : {
+
+    },
+    "Prove your eligibility, belonging, identity, and contributions — without ever revealing personal data." : {
 
     },
     "RARIME" : {
+
+    },
+    "RariMe ensures your history, reputation and actions are not lost, and remain under your control." : {
+
+    },
+    "RariMe is a self-custody identity wallet where no personal data ever leaves the device and everything is processed locally." : {
 
     },
     "Reading Data" : {
@@ -396,15 +369,6 @@
     "Scan your Passport" : {
 
     },
-    "Select Authorisation Method" : {
-
-    },
-    "Select Data" : {
-
-    },
-    "Selected data will create a confidential profile" : {
-
-    },
     "Send" : {
 
     },
@@ -412,9 +376,6 @@
 
     },
     "Settings" : {
-
-    },
-    "short description text here" : {
 
     },
     "Skip" : {
@@ -427,6 +388,9 @@
 
     },
     "Start building your incognito profile and earn rewards as an early community member." : {
+
+    },
+    "Starting in July" : {
 
     },
     "Step %lld/%lld" : {
@@ -448,16 +412,31 @@
     "Thanks!" : {
 
     },
+    "The beta launch is focused on distributing tokens to Ukrainian citizens" : {
+
+    },
+    "The rewards program will allow you to receive weekly airdrops.\nYou can earn additional rewards by using RariMe’s incognito proofs with other ecosystem apps." : {
+
+    },
     "Theme" : {
 
     },
-    "This app is where your digital identities live, enabling you to go incognito across the web." : {
+    "This airdrop is part of a humanitarian effort to help direct funds towards Ukraine." : {
+
+    },
+    "This airdrop is part of a humanitarian effort to help direct funds towards Ukraine.\n\nIt showcases Rarimo’s identity infrastructure. and how it can be used by projects and organizations to directly reach civilians." : {
+
+    },
+    "This app is where you privately store your digital identities, enabling you to go incognito across the web." : {
 
     },
     "Transactions" : {
 
     },
     "Ukrainian" : {
+
+    },
+    "Upcoming airdrops will include citizens from all over the world.\n\nCreate an incognito profile by scanning your passport, and we will notify you when you become eligible." : {
 
     },
     "Wallet" : {
@@ -472,7 +451,7 @@
     "What is RariMe?" : {
 
     },
-    "What is this?" : {
+    "What’s that?" : {
 
     },
     "White" : {
@@ -496,7 +475,7 @@
     "Your Private Key" : {
 
     },
-    "Your Rarimo Adress" : {
+    "Your Rarimo Address" : {
 
     }
   },

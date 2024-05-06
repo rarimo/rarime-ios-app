@@ -1,10 +1,3 @@
-//
-//  ReadPassportNFCView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 01.04.2024.
-//
-
 import SwiftUI
 
 struct ReadPassportNFCView: View {
@@ -55,7 +48,7 @@ struct ReadPassportNFCView: View {
 
 #Preview {
     let userManager = UserManager.shared
-    
+
     return ReadPassportNFCView(
         onNext: { _ in },
         onBack: {},

@@ -27,7 +27,7 @@ struct PassportImageView: View {
 
 #Preview {
     VStack {
-        PassportImageView(image: UIImage(named: Images.introApp))
+        PassportImageView(image: UIImage(named: Images.passportNfc))
         PassportImageView(image: nil, bgColor: .primaryMain)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)

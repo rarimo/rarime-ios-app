@@ -12,16 +12,15 @@ struct HomeView: View {
 
     @State private var path: [HomeRoute] = []
 
-    @State private var isBetaLaunchSheetPresented = false
     @State private var isAirdropSheetPresented = false
     @State private var isPassportSheetPresented = false
     @State private var isRarimeSheetPresented = false
 
     @State private var isCongratsShown = false
     @State private var isClaimed = false
-    
+
     @State private var isBalanceFetching = true
-    @State private var cancelables: [Task<(), Never>] = []
+    @State private var cancelables: [Task<Void, Never>] = []
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -54,22 +53,15 @@ struct HomeView: View {
     private var content: some View {
         MainViewLayout {
             RefreshableScrollView(
-                onRefresh: { try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC) }
+                onRefresh: { try await Task.sleep(nanoseconds: 1_200_000_000) }
             ) { _ in
                 VStack(spacing: 24) {
-                    HStack {
-                        Text("Beta launch").body3()
-                        Image(Icons.info)
-                            .iconSmall()
-                            .onTapGesture { isBetaLaunchSheetPresented = true }
-                            .dynamicSheet(isPresented: $isBetaLaunchSheetPresented, fullScreen: true) {
-                                BetaLaunchView(onClose: { isBetaLaunchSheetPresented = false })
-                            }
-                    }
-                    .frame(maxWidth: .infinity)
-                    .foregroundStyle(.warningDark)
-                    .padding(.vertical, 4)
-                    .background(.warningLighter)
+                    Text("Beta launch")
+                        .body3()
+                        .frame(maxWidth: .infinity)
+                        .foregroundStyle(.warningDark)
+                        .padding(.vertical, 4)
+                        .background(.warningLighter)
                     VStack(alignment: .leading, spacing: 32) {
                         header
                         VStack(spacing: 24) {
@@ -138,16 +130,16 @@ struct HomeView: View {
     private var airdropCard: some View {
         CardContainer {
             VStack(spacing: 20) {
-                Text("🇺🇦")
+                Text(String("🇺🇦"))
                     .h4()
                     .frame(width: 72, height: 72)
                     .background(.componentPrimary)
                     .clipShape(Circle())
                 VStack(spacing: 8) {
-                    Text("Programable Airdrop")
+                    Text("Programmable Airdrop")
                         .h6()
                         .foregroundStyle(.textPrimary)
-                    Text("Beta launch is focused on distributing tokens to Ukrainian identity holders")
+                    Text("The beta launch is focused on distributing tokens to Ukrainian citizens")
                         .body2()
                         .multilineTextAlignment(.center)
                         .foregroundStyle(.textSecondary)
@@ -194,16 +186,16 @@ struct HomeView: View {
             RarimeInfoView(onClose: { isRarimeSheetPresented = false })
         }
     }
-    
+
     func fetchBalance() {
         let cancelable = Task { @MainActor in
             defer {
                 self.isBalanceFetching = false
             }
-            
+
             do {
                 let balance = try await userManager.fetchBalanse()
-                
+
                 self.userManager.balance = Double(balance) ?? 0
             } catch is CancellationError {
                 return
@@ -211,10 +203,10 @@ struct HomeView: View {
                 LoggerUtil.intro.error("failed to fetch balance: \(error)")
             }
         }
-        
-        self.cancelables.append(cancelable)
+
+        cancelables.append(cancelable)
     }
-    
+
     func cleanup() {
         for cancelable in cancelables {
             cancelable.cancel()

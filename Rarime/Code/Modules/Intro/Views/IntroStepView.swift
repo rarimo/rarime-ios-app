@@ -1,10 +1,3 @@
-//
-//  IntroStepView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 29.03.2024.
-//
-
 import SwiftUI
 
 struct IntroStepView: View {
@@ -13,7 +6,11 @@ struct IntroStepView: View {
     var body: some View {
         VStack {
             VStack(alignment: .leading, spacing: 24) {
-                Image(step.image).square(390)
+                ZStack {
+                    LottieView(animation: step.animation)
+                        .frame(maxWidth: step.animationWidth)
+                }
+                .frame(maxWidth: .infinity)
                 VStack(alignment: .leading, spacing: 16) {
                     ZStack {
                         Text("Beta launch")
