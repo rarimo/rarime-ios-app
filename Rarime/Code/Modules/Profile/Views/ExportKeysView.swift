@@ -13,9 +13,6 @@ struct ExportKeysView: View {
         ) {
             CardContainer {
                 VStack(alignment: .leading, spacing: 20) {
-                    Text("Your Private Key")
-                        .subtitle3()
-                        .foregroundStyle(.textPrimary)
                     if let user = userManager.user {
                         Text(user.secretKey.hex)
                             .body3()
@@ -44,7 +41,7 @@ struct ExportKeysView: View {
         .foregroundStyle(.textPrimary)
         .onTapGesture {
             if isCopied { return }
-            
+
             guard let user = userManager.user else { return }
 
             UIPasteboard.general.string = user.secretKey.hex
@@ -60,7 +57,7 @@ struct ExportKeysView: View {
 
 #Preview {
     @StateObject var userManager = UserManager.shared
-    
+
     return ExportKeysView(onBack: {})
         .environmentObject(userManager)
         .onAppear {

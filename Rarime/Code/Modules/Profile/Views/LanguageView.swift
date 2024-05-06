@@ -36,7 +36,7 @@ private struct LanguageItem: View {
                     .h6()
                     .foregroundStyle(.textPrimary)
                 Text(language.title)
-                    .subtitle4()
+                    .buttonMedium()
                     .foregroundStyle(.textPrimary)
             }
         }
