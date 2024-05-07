@@ -31,24 +31,30 @@ struct EnableFaceIdView: View {
 
                     },
                     onNotAvailable: {
-                        isNotAvailableError = false
+                        isNotAvailableError = true
                         isAlertShown = true
                     }
                 )
             },
             skipAction: { withAnimation { securityManager.disableFaceId() } }
         )
-        .alert(isPresented: $isAlertShown) {
-            Alert(
-                title: isNotAvailableError
-                    ? Text("Face ID Disabled")
-                    : Text("Authentication Failed"),
-                message: isNotAvailableError
-                    ? Text("Enable Face ID in Settings > Rarime.")
-                    : Text("Could not authenticate with Face ID. Please try again."),
-                dismissButton: .default(Text("Close"))
-            )
-        }
+        .alert(
+            isNotAvailableError ? "Face ID Disabled" : "Authentication Failed",
+            isPresented: $isAlertShown,
+            actions: {
+                Button("Cancel", role: .cancel) {}
+                if isNotAvailableError {
+                    Button("Open Settings") {
+                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                    }
+                }
+            },
+            message: {
+                isNotAvailableError
+                    ? Text("Enable Face ID in Settings > RariMe.")
+                    : Text("Could not authenticate with Face ID. Please try again.")
+            }
+        )
     }
 }
 

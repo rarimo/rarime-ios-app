@@ -1274,7 +1274,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Rarime;
+				INFOPLIST_KEY_CFBundleDisplayName = RariMe;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "You need to authenticate on your phone to unlock the app";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Passport Machine Readable Zone Reading";
@@ -1324,7 +1324,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Rarime;
+				INFOPLIST_KEY_CFBundleDisplayName = RariMe;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "You need to authenticate on your phone to unlock the app";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Passport Machine Readable Zone Reading";
@@ -1440,7 +1440,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Rarime;
+				INFOPLIST_KEY_CFBundleDisplayName = RariMe;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "You need to authenticate on your phone to unlock the app";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Passport Machine Readable Zone Reading";
@@ -1549,7 +1549,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Rarime;
+				INFOPLIST_KEY_CFBundleDisplayName = RariMe;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "You need to authenticate on your phone to unlock the app";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Passport Machine Readable Zone Reading";
