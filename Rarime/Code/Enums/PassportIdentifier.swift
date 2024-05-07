@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 enum PassportIdentifier: String, CaseIterable {
-    case nationality, documentId, expiryDate, issueDate
+    case nationality, documentId, expiryDate, birthDate
 }
 
 extension PassportIdentifier {
@@ -11,7 +11,7 @@ extension PassportIdentifier {
         case .nationality: String(localized: "Nationality")
         case .documentId: String(localized: "Document ID")
         case .expiryDate: String(localized: "Expiry date")
-        case .issueDate: String(localized: "Issue date")
+        case .birthDate: String(localized: "Birth date")
         }
     }
 }
@@ -22,7 +22,7 @@ extension PassportIdentifier {
         case .nationality: 0
         case .documentId: 1
         case .expiryDate: 2
-        case .issueDate: 3
+        case .birthDate: 3
         }
     }
 }
@@ -35,9 +35,8 @@ extension PassportIdentifier {
         case .expiryDate:
             let date = try? DateUtil.parsePassportDate(passport.documentExpiryDate)
             return date == nil ? "–" : DateUtil.mdyDateFormatter.string(from: date!)
-        // TODO: Replace or delete
-        case .issueDate:
-            let date = try? DateUtil.parsePassportDate(passport.documentExpiryDate)
+        case .birthDate:
+            let date = try? DateUtil.parsePassportDate(passport.dateOfBirth)
             return date == nil ? "–" : DateUtil.mdyDateFormatter.string(from: date!)
         }
     }
@@ -49,7 +48,7 @@ extension PassportIdentifier {
         case .nationality: "•••••••••"
         case .documentId: "•••••••••••"
         case .expiryDate: "•••••••••"
-        case .issueDate: "•••••••••"
+        case .birthDate: "•••••••••"
         }
     }
 }
@@ -60,7 +59,7 @@ extension PassportIdentifier {
         case .nationality: "•••"
         case .documentId: "••••••••"
         case .expiryDate: "••••••"
-        case .issueDate: "••••••"
+        case .birthDate: "••••••"
         }
     }
 }
