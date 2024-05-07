@@ -4,6 +4,7 @@ struct PassportCard: View {
     let passport: Passport
     @Binding var look: PassportCardLook
     @Binding var isIncognito: Bool
+    @Binding var identifiers: [PassportIdentifier]
 
     @State private var isSettingsSheetPresented = false
     @State private var isHolding = false
@@ -22,6 +23,9 @@ struct PassportCard: View {
     }
 
     private var cardContent: some View {
+        let fullNameValue = isInfoHidden ? "••••• •••••••" : passport.fullName
+        let ageValue = isInfoHidden ? "••• ••••• •••" : String(localized: "\(passport.ageString) Years Old")
+
         return VStack(spacing: 24) {
             HStack(alignment: .top) {
                 PassportImageView(
@@ -46,24 +50,20 @@ struct PassportCard: View {
                 }
             }
             VStack(alignment: .leading, spacing: 8) {
-                Text(isInfoHidden ? String("••••• •••••••") : passport.fullName)
-                    .h6()
-                Text(isInfoHidden ? String("••• ••••• •••") : String(localized: "\(passport.ageString) Years Old"))
-                    .body2()
-                    .opacity(0.56)
+                Text(fullNameValue).h6()
+                Text(ageValue).body2().opacity(0.56)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             HorizontalDivider(color: look.foregroundColor.opacity(0.05))
-            VStack(spacing: 16) {
-                makePassportInfoRow(
-                    title: isInfoHidden ? String("•••••••••") : String(localized: "Nationality"),
-                    value: isInfoHidden ? String("•••") : passport.nationality
-                )
-                makePassportInfoRow(
-                    title: isInfoHidden ? String("••••••••") : String(localized: "Document"),
-                    value: isInfoHidden ? String("••••••••") : passport.documentNumber
-                )
+            VStack(alignment: .leading, spacing: 16) {
+                ForEach(identifiers, id: \.self) { identifier in
+                    makePassportInfoRow(
+                        title: isInfoHidden ? identifier.titleStub : identifier.title,
+                        value: isInfoHidden ? identifier.valueStub : identifier.getPassportValue(from: passport)
+                    )
+                }
             }
+            .frame(minHeight: 56, alignment: .top)
         }
         .frame(maxWidth: .infinity)
         .padding(24)
@@ -104,6 +104,8 @@ struct PassportCard: View {
                     )
                 }
             }
+            HorizontalDivider()
+            PassportIdentifiersPicker(identifiers: $identifiers)
         }
         .padding(.vertical, 16)
         .padding(.horizontal, 20)
@@ -156,6 +158,40 @@ private struct PassportLookOption: View {
     }
 }
 
+private struct PassportIdentifiersPicker: View {
+    @Binding var identifiers: [PassportIdentifier]
+    let MAX_IDENTIFIERS = 2
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Data").overline3()
+                Text("Shows two identifiers on the card").body4()
+            }
+            .foregroundStyle(.textSecondary)
+            ForEach(PassportIdentifier.allCases, id: \.self) { identifier in
+                let isSelected = identifiers.contains(identifier)
+                HStack {
+                    Text(identifier.title)
+                        .subtitle4()
+                        .foregroundStyle(.textPrimary)
+                    Spacer()
+                    AppToggle(
+                        isOn: .constant(isSelected),
+                        onChanged: { _ in
+                            let newIdentifiers = isSelected
+                                ? identifiers.filter { $0 != identifier }
+                                : identifiers + [identifier]
+                            identifiers = newIdentifiers.sorted { $0.order < $1.order }
+                        }
+                    )
+                    .disabled(identifiers.count >= MAX_IDENTIFIERS && !isSelected)
+                }
+            }
+        }
+    }
+}
+
 private struct PreviewView: View {
     let passport = Passport(
         firstName: "Joshua",
@@ -175,12 +211,14 @@ private struct PreviewView: View {
     )
     @State private var look: PassportCardLook = .black
     @State private var isIncognito: Bool = false
+    @State private var identifiers: [PassportIdentifier] = [.nationality, .documentId]
 
     var body: some View {
         PassportCard(
             passport: passport,
             look: $look,
-            isIncognito: $isIncognito
+            isIncognito: $isIncognito,
+            identifiers: $identifiers
         )
     }
 }

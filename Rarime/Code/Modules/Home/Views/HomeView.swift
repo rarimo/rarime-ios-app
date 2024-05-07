@@ -62,26 +62,28 @@ struct HomeView: View {
                         .foregroundStyle(.warningDark)
                         .padding(.vertical, 4)
                         .background(.warningLighter)
-                    VStack(alignment: .leading, spacing: 32) {
+                    VStack(alignment: .leading, spacing: 24) {
                         header
-                        VStack(spacing: 24) {
-                            if let passport = passportManager.passport {
-                                PassportCard(
-                                    passport: passport,
-                                    look: Binding(
-                                        get: { passportManager.passportCardLook },
-                                        set: { passportManager.setPassportCardLook($0) }
-                                    ),
-                                    isIncognito: Binding(
-                                        get: { passportManager.isIncognitoMode },
-                                        set: { passportManager.setIncognitoMode($0) }
-                                    )
+                        if let passport = passportManager.passport {
+                            PassportCard(
+                                passport: passport,
+                                look: Binding(
+                                    get: { passportManager.passportCardLook },
+                                    set: { passportManager.setPassportCardLook($0) }
+                                ),
+                                isIncognito: Binding(
+                                    get: { passportManager.isIncognitoMode },
+                                    set: { passportManager.setIncognitoMode($0) }
+                                ),
+                                identifiers: Binding(
+                                    get: { passportManager.passportIdentifiers },
+                                    set: { passportManager.setPassportIdentifiers($0) }
                                 )
-                                rarimeCard
-                            } else {
-                                airdropCard
-                                otherPassportsCard
-                            }
+                            )
+                            rarimeCard
+                        } else {
+                            airdropCard
+                            otherPassportsCard
                         }
                         Spacer()
                     }

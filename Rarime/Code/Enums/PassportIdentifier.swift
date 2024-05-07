@@ -1,0 +1,66 @@
+import Foundation
+import SwiftUI
+
+enum PassportIdentifier: String, CaseIterable {
+    case nationality, documentId, expiryDate, issueDate
+}
+
+extension PassportIdentifier {
+    var title: String {
+        switch self {
+        case .nationality: String(localized: "Nationality")
+        case .documentId: String(localized: "Document ID")
+        case .expiryDate: String(localized: "Expiry date")
+        case .issueDate: String(localized: "Issue date")
+        }
+    }
+}
+
+extension PassportIdentifier {
+    var order: Int {
+        switch self {
+        case .nationality: 0
+        case .documentId: 1
+        case .expiryDate: 2
+        case .issueDate: 3
+        }
+    }
+}
+
+extension PassportIdentifier {
+    func getPassportValue(from passport: Passport) -> String {
+        switch self {
+        case .nationality: return passport.nationality
+        case .documentId: return passport.documentNumber
+        case .expiryDate:
+            let date = try? DateUtil.parsePassportDate(passport.documentExpiryDate)
+            return date == nil ? "–" : DateUtil.mdyDateFormatter.string(from: date!)
+        // TODO: Replace or delete
+        case .issueDate:
+            let date = try? DateUtil.parsePassportDate(passport.documentExpiryDate)
+            return date == nil ? "–" : DateUtil.mdyDateFormatter.string(from: date!)
+        }
+    }
+}
+
+extension PassportIdentifier {
+    var titleStub: String {
+        switch self {
+        case .nationality: "•••••••••"
+        case .documentId: "•••••••••••"
+        case .expiryDate: "•••••••••"
+        case .issueDate: "•••••••••"
+        }
+    }
+}
+
+extension PassportIdentifier {
+    var valueStub: String {
+        switch self {
+        case .nationality: "•••"
+        case .documentId: "••••••••"
+        case .expiryDate: "••••••"
+        case .issueDate: "••••••"
+        }
+    }
+}

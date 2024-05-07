@@ -5,6 +5,7 @@ class PassportManager: ObservableObject {
 
     @Published private(set) var passport: Passport?
     @Published private(set) var passportCardLook: PassportCardLook
+    @Published private(set) var passportIdentifiers: [PassportIdentifier]
     @Published private(set) var isIncognitoMode: Bool
 
     init() {
@@ -13,6 +14,9 @@ class PassportManager: ObservableObject {
         }
         passportCardLook = PassportCardLook(rawValue: AppUserDefaults.shared.passportCardLook)!
         isIncognitoMode = AppUserDefaults.shared.isPassportIncognitoMode
+
+        let rawIdentifiers = try! JSONDecoder().decode([String].self, from: AppUserDefaults.shared.passportIdentifiers)
+        passportIdentifiers = rawIdentifiers.map { PassportIdentifier(rawValue: $0)! }
     }
 
     var isEligibleForReward: Bool {
@@ -39,5 +43,10 @@ class PassportManager: ObservableObject {
     func setIncognitoMode(_ isIncognito: Bool) {
         isIncognitoMode = isIncognito
         AppUserDefaults.shared.isPassportIncognitoMode = isIncognito
+    }
+
+    func setPassportIdentifiers(_ identifiers: [PassportIdentifier]) {
+        passportIdentifiers = identifiers
+        AppUserDefaults.shared.passportIdentifiers = try! JSONEncoder().encode(identifiers.map { $0.rawValue })
     }
 }

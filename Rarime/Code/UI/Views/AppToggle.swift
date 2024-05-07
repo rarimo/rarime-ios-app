@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct AppToggle: View {
+    @Environment(\.isEnabled) var isEnabled
+
     @Binding var isOn: Bool
     var onChanged: ((Bool) -> Void)?
 
@@ -16,6 +18,7 @@ struct AppToggle: View {
                         .padding(2)
                         .offset(x: isOn ? 8 : -8))
                 .animation(.easeInOut(duration: 0.2), value: isOn)
+                .opacity(isEnabled ? 1 : 0.6)
                 .onTapGesture {
                     isOn.toggle()
                     onChanged?(isOn)

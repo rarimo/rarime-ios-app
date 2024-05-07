@@ -16,6 +16,12 @@ public class AppUserDefaults: ObservableObject {
     @AppStorage("passport_card_look")
     public var passportCardLook = PassportCardLook.black.rawValue
 
+    @AppStorage("passport_identifiers")
+    public var passportIdentifiers = try! JSONEncoder().encode([
+        PassportIdentifier.nationality.rawValue,
+        PassportIdentifier.documentId.rawValue,
+    ])
+
     @AppStorage("is_passport_incognito_mode")
     public var isPassportIncognitoMode = false
 
@@ -30,13 +36,13 @@ public class AppUserDefaults: ObservableObject {
 
     @AppStorage("is_airdrop_claimed")
     public var isAirdropClaimed = false
-    
+
     @AppStorage("is_first_launch")
     public var isFirstLaunch = true
-    
+
     @AppStorage("register_circuit_metadata")
     public var registerCircuitMetadata: Data = "{}".data(using: .utf8)!
-    
+
     @AppStorage("is_circuit_data_downloaded")
     public var isCircuitDataDownloaded = false
 }

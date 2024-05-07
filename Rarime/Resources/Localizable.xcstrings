@@ -141,19 +141,22 @@
     "Dark Mode" : {
 
     },
+    "Data" : {
+
+    },
     "Data generates an incognito profile" : {
 
     },
     "Data never leaves this device" : {
 
     },
-    "Document" : {
-
-    },
     "Document class mode" : {
 
     },
     "Document data" : {
+
+    },
+    "Document ID" : {
 
     },
     "Document number" : {
@@ -193,6 +196,9 @@
 
     },
     "Error" : {
+
+    },
+    "Expiry date" : {
 
     },
     "Export Keys" : {
@@ -238,6 +244,9 @@
 
     },
     "Invalid Rarimo address" : {
+
+    },
+    "Issue date" : {
 
     },
     "Issuing state code" : {
@@ -394,6 +403,9 @@
 
     },
     "Settings" : {
+
+    },
+    "Shows two identifiers on the card" : {
 
     },
     "Skip" : {
