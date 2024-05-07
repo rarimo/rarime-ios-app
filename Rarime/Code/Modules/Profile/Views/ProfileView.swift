@@ -76,7 +76,9 @@ struct ProfileView: View {
                                 icon: Icons.globeSimple,
                                 title: String(localized: "Language"),
                                 value: settingsManager.language.title,
-                                action: { path.append(.language) }
+                                action: {
+                                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                                }
                             )
                             ProfileRow(
                                 icon: Icons.sun,
