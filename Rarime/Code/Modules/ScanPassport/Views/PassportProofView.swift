@@ -2,12 +2,13 @@ import SwiftUI
 
 struct PassportProofView: View {
     @EnvironmentObject var passportViewModel: PassportViewModel
+    @EnvironmentObject var userManager: UserManager
     
     let onFinish: (ZkProof) -> Void
     let onClose: () -> Void
 
     private func generateProof() async {
-        do {
+        do {            
             let zkProof = try await passportViewModel.generateProof()
             if passportViewModel.processingStatus != .success { return }
             

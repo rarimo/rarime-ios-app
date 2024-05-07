@@ -32,6 +32,10 @@ class PassportViewModel: ObservableObject {
         do {
             guard let passport else { throw "failed to get passport" }
             
+            try await UserManager.shared.registerMasterCertificate(passport)
+            
+            LoggerUtil.passport.info("Passport master certificate is registered")
+            
             try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
             proofState = .applyingZK
             

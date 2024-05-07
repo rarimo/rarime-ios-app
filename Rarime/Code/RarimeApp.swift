@@ -11,7 +11,6 @@ struct RarimeApp: App {
                 .environmentObject(WalletManager.shared)
                 .environmentObject(SettingsManager.shared)
                 .environmentObject(PassportManager.shared)
-                .environmentObject(CircuitDataManager.shared)
         }
     }
 }

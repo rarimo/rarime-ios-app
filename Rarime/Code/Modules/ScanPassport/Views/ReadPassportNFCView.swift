@@ -38,7 +38,8 @@ struct ReadPassportNFCView: View {
                         switch result {
                         case .success(let passport):
                             self.onNext(passport)
-                        case .failure:
+                        case .failure(let error):
+                            LoggerUtil.passport.error("failed to read passport data: \(error)")
                             self.onBack()
                         }
                     }

@@ -7,7 +7,6 @@ private enum ScanPassportState {
 struct ScanPassportView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
-    @EnvironmentObject private var circuitDataManager: CircuitDataManager
     
     let onComplete: (_ passport: Passport, _ isClaimed: Bool) -> Void
     let onClose: () -> Void
@@ -82,7 +81,6 @@ struct ScanPassportView: View {
     )
     .environmentObject(WalletManager())
     .environmentObject(userManager)
-    .environmentObject(CircuitDataManager.shared)
     .onAppear {
         _ = try? userManager.createNewUser()
     }

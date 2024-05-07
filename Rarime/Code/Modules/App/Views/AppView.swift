@@ -7,11 +7,7 @@ struct AppView: View {
 
     var body: some View {
         ZStack {
-            // With the new circuit version, we are going to get rid of this
-            // in favor of the embedded circuit data
-            if !viewModel.isCircuitDataDownloaded {
-                PreDownloadView(onFinish: viewModel.finishCircuitDataDownloading).transition(.backslide)
-            } else if
+            if
                 securityManager.passcodeState != .unset,
                 securityManager.faceIdState != .unset,
                 securityManager.isPasscodeCorrect

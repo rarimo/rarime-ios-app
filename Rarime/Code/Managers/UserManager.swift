@@ -68,6 +68,7 @@ class UserManager: ObservableObject {
         guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
 
         let sod = try SOD([UInt8](passport.sod))
+        let dg15 = try DataGroup15([UInt8](passport.dg15))
         
         let encapsulatedContent = try sod.getEncapsulatedContent()
         let signedAttributes = try sod.getSignedAttributes()
@@ -80,6 +81,8 @@ class UserManager: ObservableObject {
         let profileInitializer = IdentityProfile()
         let profile = try profileInitializer.newProfile(secretKey)
         
+        let isEcdsaActiveAuthentication: Bool = dg15.ecdsaPublicKey != nil
+        
         let inputs = try profile.buildRegisterIdentityInputs(
             encapsulatedContent,
             signedAttributes: signedAttributes,
@@ -87,8 +90,8 @@ class UserManager: ObservableObject {
             dg15: passport.dg15,
             pubKeyPem: publicKeyPem.data(using: .utf8) ?? Data(),
             signature: signature,
-            slavePem: Data(),
-            mastersPem: Data()
+            isEcdsaActiveAuthentication: isEcdsaActiveAuthentication,
+            certificatesSMTProofJSON: Data()
         )
         
         return inputs
@@ -97,26 +100,9 @@ class UserManager: ObservableObject {
     func generateRegisterIdentityProof(_ passport: Passport) async throws -> ZkProof? {
         let inputs = try buildRegistrationCircuits(passport)
         
-        let encapsulatedContentSize = passport.encapsulatedContentSize
+        let wtns = try ZKUtils.calcWtnsRegisterIdentityUniversal(inputs)
         
-        guard let curcuitData = try CircuitDataManager.shared.getRegisterIdentityCircuitData(encapsulatedContentSize) else {
-            return nil
-        }
-        
-        let wtns: Data? = try {
-            switch encapsulatedContentSize {
-            case ENCAPSULATED_CONTENT_2688:
-                return try ZKUtils.calcWtnsRegisterIdentity2688(inputs, curcuitData.circutDat)
-            case ENCAPSULATED_CONTENT_2704:
-                return try ZKUtils.calcWtnsRegisterIdentity2704(inputs, curcuitData.circutDat)
-            default:
-                return nil
-            }
-        }()
-        
-        guard let wtns else { throw "unknown encapsulatedContentSize: \(encapsulatedContentSize)" }
-        
-        let (proofJson, pubSignalsJson) = try ZKUtils.groth16Prover(curcuitData.circuitZkey, wtns)
+        let (proofJson, pubSignalsJson) = try ZKUtils.groth16RegisterIdentityUniversal(wtns)
         
         let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
         let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
@@ -145,6 +131,43 @@ class UserManager: ObservableObject {
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
         
         let _ = try await relayer.register(calldata)
+    }
+    
+    func registerMasterCertificate(_ passport: Passport) async throws {
+        let sod = try SOD([UInt8](passport.sod))
+        
+        guard let cert = try OpenSSLUtils.getX509CertificatesFromPKCS7(pkcs7Der: Data(sod.pkcs7CertificateData)).first else {
+            throw "Slave certificate in sod is missing"
+        }
+        
+        let certPem = cert.certToPEM().data(using: .utf8) ?? Data()
+        
+        let registrationContract = try RegistrationContract()
+        
+        let certificatesSMTAddress = try await registrationContract.certificatesSmt()
+        
+        let certificatesSMTContract = try PoseidonSMT(contractAddress: certificatesSMTAddress)
+        
+        let x509Utils = IdentityX509Util()
+        
+        let masterCertificateIndex = try x509Utils.getMasterCertificateIndex(certPem, mastersPem: Certificates.ICAO)
+        
+        let proof = try await certificatesSMTContract.getProof(masterCertificateIndex)
+        
+        if proof.existence {
+            return
+        }
+        
+        let calldataBuilder = IdentityCallDataBuilder()
+        let calldata = try calldataBuilder.buildRegisterCertificateCalldata(certPem, mastersPem: Certificates.ICAO)
+        
+        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
+        
+        let response = try await relayer.register(calldata)
+        
+        let eth = Ethereum()
+        
+        try await eth.waitForTxSuccess(response.data.attributes.txHash)
     }
     
     func generateAirdropQueryProof(_ registerZkProof: ZkProof, _ passport: Passport) async throws -> ZkProof {
