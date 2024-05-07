@@ -23,7 +23,7 @@ public class AppUserDefaults: ObservableObject {
     public var colorScheme = AppColorScheme.system.rawValue
 
     @AppStorage("language")
-    public var language = AppLanguage.engish.rawValue
+    public var language = AppLanguage.english.rawValue
 
     @AppStorage("wallet_transactions")
     public var walletTransactions = Data()

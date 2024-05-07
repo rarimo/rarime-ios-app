@@ -96,6 +96,9 @@
     "By checking this box, you are agreeing to " : {
 
     },
+    "Cancel" : {
+
+    },
     "CARD VISUAL" : {
 
     },
@@ -171,7 +174,7 @@
     "Enable\nPasscode" : {
 
     },
-    "Enable Face ID in Settings > Rarime." : {
+    "Enable Face ID in Settings > RariMe." : {
 
     },
     "Enable Face ID Login" : {
@@ -292,6 +295,9 @@
 
     },
     "Okay" : {
+
+    },
+    "Open Settings" : {
 
     },
     "Other passport holders" : {
