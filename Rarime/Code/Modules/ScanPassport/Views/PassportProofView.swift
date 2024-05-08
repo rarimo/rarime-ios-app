@@ -32,7 +32,7 @@ struct PassportProofView: View {
                     }
                 }
                 .padding(20)
-                .background(.backgroundPure, in: RoundedRectangle(cornerRadius: 24))
+                .background(.backgroundOpacity, in: RoundedRectangle(cornerRadius: 24))
             }
             .padding(.horizontal, 20)
             Spacer()

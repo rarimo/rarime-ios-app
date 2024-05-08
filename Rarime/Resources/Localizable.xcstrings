@@ -84,6 +84,9 @@
     "Beta launch" : {
 
     },
+    "Birth date" : {
+
+    },
     "Black" : {
 
     },
@@ -141,19 +144,22 @@
     "Dark Mode" : {
 
     },
+    "Data" : {
+
+    },
     "Data generates an incognito profile" : {
 
     },
     "Data never leaves this device" : {
 
     },
-    "Document" : {
-
-    },
     "Document class mode" : {
 
     },
     "Document data" : {
+
+    },
+    "Document ID" : {
 
     },
     "Document number" : {
@@ -193,6 +199,9 @@
 
     },
     "Error" : {
+
+    },
+    "Expiry date" : {
 
     },
     "Export Keys" : {
@@ -394,6 +403,9 @@
 
     },
     "Settings" : {
+
+    },
+    "Shows two identifiers on the card" : {
 
     },
     "Skip" : {
