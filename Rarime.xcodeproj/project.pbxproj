@@ -942,7 +942,6 @@
 				en,
 				Base,
 				uk,
-				ka,
 			);
 			mainGroup = CE9E82A92BA881F400AAF885;
 			packageReferences = (

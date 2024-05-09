@@ -11,11 +11,11 @@ enum ProcessingStatus {
         }
     }
 
-    var text: LocalizedStringResource {
+    var text: String {
         switch self {
-        case .processing: "Processing"
-        case .success: "Done"
-        case .failure: "Failed"
+        case .processing: String(localized: "Processing")
+        case .success: String(localized: "Done")
+        case .failure: String(localized: "Failed")
         }
     }
 

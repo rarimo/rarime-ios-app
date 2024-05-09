@@ -29,7 +29,7 @@ struct AirdropIntroView: View {
                     Text("What’s that?")
                         .overline2()
                         .foregroundStyle(.textSecondary)
-                    Text("This airdrop is part of a humanitarian effort to help direct funds towards Ukraine.\n\nIt showcases Rarimo’s identity infrastructure. and how it can be used by projects and organizations to directly reach civilians.")
+                    Text("This airdrop is part of a humanitarian effort to help direct funds towards Ukraine.\n\nIt showcases Rarimo’s identity infrastructure and how it can be used by projects and organizations to directly reach civilians.")
                         .body3()
                         .foregroundStyle(.textPrimary)
                 }
@@ -40,11 +40,11 @@ struct AirdropIntroView: View {
                 AppCheckbox(checked: $termsChecked)
                 (
                     Text("By checking this box, you are agreeing to ") +
-                        Text(.init("[RariMe General Terms & Conditions](\(termsURL))")).underline() +
+                        Text(.init("[\(String(localized: "RariMe General Terms & Conditions"))](\(termsURL))")).underline() +
                         Text(", ") +
-                        Text(.init("[RariMe Privacy Notice](\(privacyURL))")).underline() +
+                        Text(.init("[\(String(localized: "RariMe Privacy Notice"))](\(privacyURL))")).underline() +
                         Text(" and ") +
-                        Text(.init("[Rarimo Airdrop Program Terms & Conditions](\(airdropTermsURL))")).underline()
+                        Text(.init("[\(String(localized: "Rarimo Airdrop Program Terms & Conditions"))](\(airdropTermsURL))")).underline()
                 )
                 .body4()
                 .tint(.textSecondary)

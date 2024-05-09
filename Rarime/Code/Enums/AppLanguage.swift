@@ -3,7 +3,6 @@ import Foundation
 enum AppLanguage: String, CaseIterable {
     case english = "en"
     case ukrainian = "uk"
-    case georgian = "ka"
 }
 
 extension AppLanguage {
@@ -11,7 +10,6 @@ extension AppLanguage {
         switch self {
         case .english: return String(localized: "English")
         case .ukrainian: return String(localized: "Ukrainian")
-        case .georgian: return String(localized: "Georgian")
         }
     }
 }
@@ -21,7 +19,6 @@ extension AppLanguage {
         switch self {
         case .english: return "🇺🇸"
         case .ukrainian: return "🇺🇦"
-        case .georgian: return "🇬🇪"
         }
     }
 }

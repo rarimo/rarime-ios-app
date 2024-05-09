@@ -23,8 +23,8 @@ struct CardContainer<Content: View>: View {
     VStack {
         CardContainer {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Wallet").subtitle2()
-                Text("Manage your assets").body3()
+                Text(String("Wallet")).subtitle2()
+                Text(String("Manage your assets")).body3()
             }
         }
     }
