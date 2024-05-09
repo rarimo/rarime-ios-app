@@ -7,11 +7,11 @@ struct NewIdentityView: View {
 
     @State private var isCopied = false
     
-    @State private var cancelables: [Task<(), Never>] = []
+    @State private var cancelables: [Task<Void, Never>] = []
 
     var body: some View {
         IdentityStepLayoutView(
-            title: "Your Private Key",
+            title: String(localized: "Your Private Key"),
             onBack: {
                 userManager.user = nil
                 
@@ -103,7 +103,7 @@ struct NewIdentityView: View {
             }
         }
         
-        self.cancelables.append(cancelable)
+        cancelables.append(cancelable)
     }
     
     func cleanup() {

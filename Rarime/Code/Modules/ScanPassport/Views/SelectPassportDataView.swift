@@ -70,7 +70,7 @@ struct SelectPassportDataView: View {
                 VStack(spacing: 16) {
                     makeDocumentRow(label: "Document class mode", value: passport.documentType)
                     makeDocumentRow(label: "Issuing state code", value: passport.issuingAuthority)
-                    makeDocumentRow(label: "Document number", value: passport.documentNumber)
+                    makeDocumentRow(label: "Document ID", value: passport.documentNumber)
                 }
             }
         }

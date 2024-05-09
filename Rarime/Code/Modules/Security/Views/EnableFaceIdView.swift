@@ -1,10 +1,3 @@
-//
-//  EnableFaceIdView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 31.03.2024.
-//
-
 import SwiftUI
 
 private enum FaceIdAuthError: Error {
@@ -20,8 +13,8 @@ struct EnableFaceIdView: View {
     var body: some View {
         EnableLayoutView(
             icon: Icons.userFocus,
-            title: "Enable\nFace ID",
-            description: "Enable Face ID Login",
+            title: String(localized: "Enable\nFace ID"),
+            description: String(localized: "Enable Face ID Login"),
             enableAction: {
                 FaceIdAuth.shared.authenticate(
                     onSuccess: { withAnimation { securityManager.enableFaceId() } },

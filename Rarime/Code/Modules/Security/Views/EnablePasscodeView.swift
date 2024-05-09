@@ -1,10 +1,3 @@
-//
-//  EnablePasscodeView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 31.03.2024.
-//
-
 import SwiftUI
 
 private enum PasscodeRoute: Hashable {
@@ -24,8 +17,8 @@ struct EnablePasscodeView: View {
         NavigationStack(path: $path) {
             EnableLayoutView(
                 icon: Icons.password,
-                title: "Enable\nPasscode",
-                description: "Enable Passcode Login",
+                title: String(localized: "Enable\nPasscode"),
+                description: String(localized: "Enable Passcode Login"),
                 enableAction: { path.append(.enterPasscode) },
                 skipAction: { withAnimation { securityManager.disablePasscode() } }
             )

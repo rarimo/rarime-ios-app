@@ -3,7 +3,7 @@ import SwiftUI
 let totalSteps = 2
 
 struct IdentityStepLayoutView<Content: View, NextButton: View>: View {
-    let title: LocalizedStringResource
+    let title: String
     let onBack: () -> Void
 
     @ViewBuilder var nextButton: () -> NextButton

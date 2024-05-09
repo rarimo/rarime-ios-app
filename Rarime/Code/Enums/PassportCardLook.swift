@@ -4,11 +4,11 @@ import SwiftUI
 enum PassportCardLook: Int, CaseIterable {
     case green, black, white
 
-    var name: LocalizedStringResource {
+    var name: String {
         switch self {
-        case .green: return "Green"
-        case .black: return "Black"
-        case .white: return "White"
+        case .green: return String(localized: "Green")
+        case .black: return String(localized: "Black")
+        case .white: return String(localized: "White")
         }
     }
 

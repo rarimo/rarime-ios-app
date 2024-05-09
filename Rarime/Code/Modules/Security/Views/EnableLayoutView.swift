@@ -1,16 +1,9 @@
-//
-//  EnableLayoutView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 31.03.2024.
-//
-
 import SwiftUI
 
 struct EnableLayoutView: View {
     let icon: String
-    let title: LocalizedStringResource
-    let description: LocalizedStringResource
+    let title: String
+    let description: String
     let enableAction: () -> Void
     let skipAction: () -> Void
 
