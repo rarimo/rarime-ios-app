@@ -6,11 +6,6 @@
 	<string>${PRIVACY_POLICY_URL}</string>
 	<key>TERMS_OF_USE_URL</key>
 	<string>${TERMS_OF_USE_URL}</string>
-	<key>REGISTER_IDENTITY_CIRCUIT_DATA_URLS</key>
-	<array>
-		<string>${REGISTER_IDENTITY_CIRCUIT_DATA_URL_0}</string>
-		<string>${REGISTER_IDENTITY_CIRCUIT_DATA_URL_1}</string>
-	</array>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Enable Face ID Authentication</string>
 	<key>UIAppFonts</key>

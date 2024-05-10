@@ -22,7 +22,11 @@ class PoseidonSMT {
     }
     
     func getProof(_ key: Data) async throws -> SMTProof {
-        let response = try registrationContract["getProof"]!(key).call().wait()
+        var index = Data()
+        index.append(Data(repeating: 0, count: 32 - key.count))
+        index.append(key)
+        
+        let response = try registrationContract["getProof"]!(index).call().wait()
         
         guard let proof = response[""] as? [String: Any] else {
             throw "Proof is not hex"

@@ -16,8 +16,19 @@ class Ethereum {
     func isTxSuccessful(_ txHash: String) async throws -> Bool {
         let txHash = try EthereumData.string(txHash)
         
-        guard let receipt = try web3.eth.getTransactionReceipt(transactionHash: txHash).wait() else {
-            throw "Transaction receipt is nil"
+        var receipt: EthereumTransactionReceiptObject
+        do {
+            guard let responseReceipt = try web3.eth.getTransactionReceipt(transactionHash: txHash).wait() else {
+                throw "Transaction receipt is nil"
+            }
+            
+            receipt = responseReceipt
+        } catch {
+            if "\(error)".contains("emptyResponse") {
+                return false
+            }
+            
+            throw "Failed to get transaction receipt: \(error)"
         }
         
         guard let status = receipt.status else {
@@ -29,11 +40,13 @@ class Ethereum {
     
     func waitForTxSuccess(_ txHash: String) async throws {
         while true {
-            if try await isTxSuccessful(txHash) {
+            let isTxSuccessfulResult = try await isTxSuccessful(txHash)
+            
+            if isTxSuccessfulResult {
                 return
             }
             
-            try await Task.sleep(nanoseconds: NSEC_PER_SEC)
+            try await Task.sleep(nanoseconds: NSEC_PER_SEC * 3)
         }
     }
 }

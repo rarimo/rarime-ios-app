@@ -394,6 +394,11 @@
   {
     "inputs": [
       {
+        "internalType": "bytes32",
+        "name": "certificatesRoot_",
+        "type": "bytes32"
+      },
+      {
         "internalType": "uint256",
         "name": "identityKey_",
         "type": "uint256"
@@ -506,6 +511,11 @@
   },
   {
     "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "certificatesRoot_",
+        "type": "bytes32"
+      },
       {
         "internalType": "uint256",
         "name": "identityKey_",

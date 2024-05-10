@@ -12,6 +12,8 @@ class UserManager: ObservableObject {
     
     @Published var registerZkProof: ZkProof?
     
+    @Published var masterCertProof: SMTProof?
+    
     @Published var balance: Double
     
     init() {
@@ -64,11 +66,29 @@ class UserManager: ObservableObject {
         (try? self.user?.profile.getRegistrationChallenge()) ?? Data()
     }
     
-    func buildRegistrationCircuits(_ passport: Passport) throws -> Data {
+    func buildRegistrationCircuits(_ passport: Passport) async throws -> Data {
         guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
 
         let sod = try SOD([UInt8](passport.sod))
         let dg15 = try DataGroup15([UInt8](passport.dg15))
+        
+        guard let cert = try OpenSSLUtils.getX509CertificatesFromPKCS7(pkcs7Der: Data(sod.pkcs7CertificateData)).first else {
+            throw "Slave certificate in sod is missing"
+        }
+        
+        let certPem = cert.certToPEM().data(using: .utf8) ?? Data()
+        
+        let registrationContract = try RegistrationContract()
+        
+        let certificatesSMTAddress = try await registrationContract.certificatesSmt()
+        
+        let certificatesSMTContract = try PoseidonSMT(contractAddress: certificatesSMTAddress)
+        
+        let x509Utils = IdentityX509Util()
+        
+        let slaveCertificateIndex = try x509Utils.getSlaveCertificateIndex(certPem, mastersPem: Certificates.ICAO)
+        
+        let proof = try await certificatesSMTContract.getProof(slaveCertificateIndex)
         
         let encapsulatedContent = try sod.getEncapsulatedContent()
         let signedAttributes = try sod.getSignedAttributes()
@@ -91,14 +111,18 @@ class UserManager: ObservableObject {
             pubKeyPem: publicKeyPem.data(using: .utf8) ?? Data(),
             signature: signature,
             isEcdsaActiveAuthentication: isEcdsaActiveAuthentication,
-            certificatesSMTProofJSON: Data()
+            certificatesSMTProofJSON: try JSONEncoder().encode(proof)
         )
+        
+        DispatchQueue.main.async {
+            self.masterCertProof = proof
+        }        
         
         return inputs
     }
     
     func generateRegisterIdentityProof(_ passport: Passport) async throws -> ZkProof? {
-        let inputs = try buildRegistrationCircuits(passport)
+        let inputs = try await buildRegistrationCircuits(passport)
         
         let wtns = try ZKUtils.calcWtnsRegisterIdentityUniversal(inputs)
         
@@ -111,13 +135,25 @@ class UserManager: ObservableObject {
     }
     
     func register(_ registerZkProof: ZkProof, _ passport: Passport) async throws {
+        guard let masterCertProof = self.masterCertProof else { throw "Master certificate proof is missing" }
+        
         let proofJson = try JSONEncoder().encode(registerZkProof)
         
-        let sod = try DataGroup15([UInt8](passport.dg15))
+        let dg15 = try DataGroup15([UInt8](passport.dg15))
         
-        guard let pubkey = sod.rsaPublicKey else { throw "Public key is missing" }
+        var pubkey: OpaquePointer
         
-        let pubKeyPem = OpenSSLUtils.pubKeyToPEM(pubKey: pubkey).data(using: .utf8)
+        if let rsaPublicKey = dg15.rsaPublicKey {
+            pubkey = rsaPublicKey
+        } else if let ecdsaPublicKey = dg15.ecdsaPublicKey {
+            pubkey = ecdsaPublicKey
+        } else {
+            throw "Public key is missing"
+        }
+        
+        guard let pubKeyPem = OpenSSLUtils.pubKeyToPEM(pubKey: pubkey).data(using: .utf8) else {
+            throw "Failed to convert public key to PEM"
+        }
         
         let calldataBuilder = IdentityCallDataBuilder()
         
@@ -125,7 +161,7 @@ class UserManager: ObservableObject {
             proofJson,
             signature: passport.signature,
             pubKeyPem: pubKeyPem,
-            encapsulatedContentSize: passport.encapsulatedContentSize
+            certificatesRootRaw: masterCertProof.root
         )
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
@@ -150,9 +186,9 @@ class UserManager: ObservableObject {
         
         let x509Utils = IdentityX509Util()
         
-        let masterCertificateIndex = try x509Utils.getMasterCertificateIndex(certPem, mastersPem: Certificates.ICAO)
+        let slaveCertificateIndex = try x509Utils.getSlaveCertificateIndex(certPem, mastersPem: Certificates.ICAO)
         
-        let proof = try await certificatesSMTContract.getProof(masterCertificateIndex)
+        let proof = try await certificatesSMTContract.getProof(slaveCertificateIndex)
         
         if proof.existence {
             return

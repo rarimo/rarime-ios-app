@@ -2,7 +2,8 @@
   "data" : [
     {
       "filename" : "registerIdentityUniversal.dat",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "universal-type-identifier" : "dyn.ah62d4rv4ge80k2py"
     }
   ],
   "info" : {

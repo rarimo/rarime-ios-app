@@ -8,7 +8,6 @@ class ConfigManager: ObservableObject {
     let termsOfUseURL: URL
     let version: String
     
-    let circuitData: CircuitData
     let api: API
     let cosmos: Cosmos
 
@@ -33,42 +32,10 @@ class ConfigManager: ObservableObject {
             self.termsOfUseURL = termsOfUseURL
             self.version = version
             
-            self.circuitData = CircuitData()
             self.api = API()
             self.cosmos = Cosmos()
         } catch {
             fatalError("ConfigManager init error: \(error)")
-        }
-    }
-}
-
-extension ConfigManager {
-    class CircuitData {
-        let registerIdentityCircuitDataURLs: [URL]
-        
-        init() {
-            do {
-                guard
-                    let registerIdentityCircuitDataURLsRaw = Bundle.main.object(forInfoDictionaryKey: "REGISTER_IDENTITY_CIRCUIT_DATA_URLS") as? [String]
-                else {
-                    throw "failed to read REGISTER_IDENTITY_CIRCUIT_DATA_URLS"
-                }
-                
-                var registerIdentityCircuitDataURLs: [URL] = []
-                for registerIdentityCircuitDataURLRaw in registerIdentityCircuitDataURLsRaw {
-                    guard
-                        let registerIdentityCircuitDataURL = URL(string: String(registerIdentityCircuitDataURLRaw.dropFirst().dropLast()))
-                    else {
-                        throw "invalid URL, REGISTER_IDENTITY_CIRCUIT_DATA_URL: \(registerIdentityCircuitDataURLRaw)"
-                    }
-                    
-                    registerIdentityCircuitDataURLs.append(registerIdentityCircuitDataURL)
-                }
-                
-                self.registerIdentityCircuitDataURLs = registerIdentityCircuitDataURLs
-            } catch {
-                fatalError("ConfigManager.CircuitData init error: \(error)")
-            }
         }
     }
 }

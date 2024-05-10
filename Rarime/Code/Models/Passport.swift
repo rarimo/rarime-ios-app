@@ -10,7 +10,7 @@ struct Passport: Codable {
     var documentType: String
     var issuingAuthority: String
     var documentNumber: String
-    var documentExpiryDate: String
+    var documentExpiryDate: String 
     var dateOfBirth: String
     var nationality: String
     let dg1: Data

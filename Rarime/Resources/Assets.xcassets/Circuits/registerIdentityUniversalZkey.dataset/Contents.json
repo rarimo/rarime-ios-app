@@ -1,8 +1,9 @@
 {
   "data" : [
     {
-      "filename" : "registerIdentityUniversal.zkey",
-      "idiom" : "universal"
+      "filename" : "circuit_final.zkey",
+      "idiom" : "universal",
+      "universal-type-identifier" : "dyn.ah62d4rv4ge81y45fte"
     }
   ],
   "info" : {
