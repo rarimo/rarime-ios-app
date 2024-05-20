@@ -117,7 +117,7 @@ struct HomeView: View {
 
             HStack {
                 if isBalanceFetching {
-                    ProgressView()
+                    ProgressView().frame(height: 40)
                 } else {
                     Text((userManager.balance / Double(Rarimo.rarimoTokenMantis)).formatted())
                         .h4()

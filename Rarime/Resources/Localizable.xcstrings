@@ -293,6 +293,16 @@
         }
       }
     },
+    "Camera Permission" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доступ до камери"
+          }
+        }
+      }
+    },
     "Cancel" : {
       "localizations" : {
         "uk" : {
@@ -989,6 +999,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Помістіть обкладинку паспорта на задню панель телефону"
+          }
+        }
+      }
+    },
+    "Please allow camera access in settings to continue" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Для продовження, будь ласка, надайте доступ до камери в налаштуваннях"
           }
         }
       }

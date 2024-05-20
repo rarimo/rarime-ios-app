@@ -13,10 +13,12 @@ struct ScanPassportMRZView: View {
             onClose: onClose
         ) {
             ZStack {
-                MRZScannerView().environmentObject(mrzViewModel)
-                LottieView(animation: Animations.passport, contentMode: .scaleToFill)
-                    .frame(width: 350, height: 256)
-                    .padding(.bottom, 2)
+                CameraPermissionView(delay: 0.5, onCancel: onClose) {
+                    MRZScannerView().environmentObject(mrzViewModel)
+                    LottieView(animation: Animations.passport, contentMode: .scaleToFill)
+                        .frame(width: 350, height: 256)
+                        .padding(.bottom, 2)
+                }
             }
             .frame(height: 300)
             Text("Move your passport page inside the border")
