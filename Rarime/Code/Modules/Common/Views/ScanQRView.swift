@@ -7,17 +7,19 @@ struct ScanQRView: View {
 
     var body: some View {
         ZStack {
-            CodeScannerView(codeTypes: [.qr]) { response in
-                switch response {
-                case .success(let result):
-                    onScan(result.string)
-                case .failure(let error):
-                    LoggerUtil.qr.error("Failed to scan QR code: \(error)")
-                    onScan("")
+            CameraPermissionView(onCancel: onBack) {
+                CodeScannerView(codeTypes: [.qr]) { response in
+                    switch response {
+                    case .success(let result):
+                        onScan(result.string)
+                    case .failure(let error):
+                        LoggerUtil.qr.error("Failed to scan QR code: \(error)")
+                        onScan("")
+                    }
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .ignoresSafeArea()
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .ignoresSafeArea()
 
             ZStack {
                 Color.black
