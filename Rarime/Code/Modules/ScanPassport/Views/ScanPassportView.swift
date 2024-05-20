@@ -30,6 +30,8 @@ struct ScanPassportView: View {
                 onNext: { passport in
                     passportViewModel.setPassport(passport)
                     withAnimation { state = .selectData }
+                    
+                    LoggerUtil.passport.info("Passport read successfully: \(passport.fullName)")
                 },
                 onBack: { withAnimation { state = .scanMRZ } },
                 onClose: onClose
@@ -49,13 +51,17 @@ struct ScanPassportView: View {
                     do {
                         try userManager.saveRegisterZkProof(registerZKProof)
                         
+                        LoggerUtil.passport.info("Registration proof generated successfully")
+                        
                         if passportViewModel.isEligibleForReward, !walletManager.isClaimed {
+                            LoggerUtil.passport.info("User is eligible for reward")
+                            
                             withAnimation { state = .claimTokens }
                         } else {
                             onComplete(passportViewModel.passport!, false)
                         }
                     } catch {
-                        LoggerUtil.passport.error("unexpected error: \(error)")
+                        LoggerUtil.passport.error("unexpected error: \(error.localizedDescription)")
                     }
                 },
                 onClose: onClose

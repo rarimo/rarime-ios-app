@@ -7,16 +7,16 @@ struct PassportProofView: View {
     let onFinish: (ZkProof) -> Void
     let onClose: () -> Void
 
-    private func generateProof() async {
+    private func register() async {
         do {            
-            let zkProof = try await passportViewModel.generateProof()
+            let zkProof = try await passportViewModel.register()
             if passportViewModel.processingStatus != .success { return }
             
             try await Task.sleep(nanoseconds: NSEC_PER_SEC)
             
             onFinish(zkProof)
         } catch {
-            LoggerUtil.passport.error("Error while waiting for success state: \(error)")
+            LoggerUtil.passport.error("error while registering passport: \(error.localizedDescription)")
         }
     }
 
@@ -39,7 +39,7 @@ struct PassportProofView: View {
             footerView
         }
         .padding(.top, 80)
-        .task { await generateProof() }
+        .task { await register() }
         .onChange(of: passportViewModel.proofState) { _ in
             FeedbackGenerator.shared.impact(.light)
         }

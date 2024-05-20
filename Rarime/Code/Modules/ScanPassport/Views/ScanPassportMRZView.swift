@@ -35,7 +35,11 @@ struct ScanPassportMRZView: View {
             Spacer()
         }
         .onAppear {
-            mrzViewModel.setOnScanned { onNext() }
+            mrzViewModel.setOnScanned {
+                LoggerUtil.passport.info("MRZ scanned")
+                
+                onNext()
+            }
             mrzViewModel.startScanning()
         }
     }

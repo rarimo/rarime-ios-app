@@ -15,3 +15,8 @@ COSMOS_RPC_URL = "https:${SLASH}/rpc-api.node1.mainnet-beta.rarimo.com"
 CHAIN_ID = "rarimo_42-1"
 DENOM = "stake"
 RPC_IP = "104.196.227.66:9090"
+
+// Mark: CertificatesStorage
+MASTER_CERTIFICATES_BUCKETNAME = "rarimo-temp"
+MASTER_CERTIFICATES_FILENAME = "icaopkd-list.ldif"
+ICAO_COSMOS_RPC = "core-api.node1.mainnet-beta.rarimo.com:443"

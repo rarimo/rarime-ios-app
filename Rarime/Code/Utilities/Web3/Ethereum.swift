@@ -5,6 +5,8 @@ import Web3PromiseKit
 import Web3ContractABI
 
 class Ethereum {
+    static let TX_PULL_INTERVAL: UInt64 = NSEC_PER_SEC * 3
+    
     static let TX_SUCCESS_CODE: EthereumQuantity = 1
     
     let web3: Web3
@@ -13,7 +15,7 @@ class Ethereum {
         self.web3 = Web3(rpcURL: ConfigManager.shared.api.evmRpcURL.absoluteString)
     }
     
-    func isTxSuccessful(_ txHash: String) async throws -> Bool {
+    func isTxSuccessful(_ txHash: String) async throws -> Bool? {
         let txHash = try EthereumData.string(txHash)
         
         var receipt: EthereumTransactionReceiptObject
@@ -25,14 +27,14 @@ class Ethereum {
             receipt = responseReceipt
         } catch {
             if "\(error)".contains("emptyResponse") {
-                return false
+                return nil
             }
             
             throw "Failed to get transaction receipt: \(error)"
         }
         
         guard let status = receipt.status else {
-            return false
+            return nil
         }
         
         return status == Ethereum.TX_SUCCESS_CODE
@@ -42,11 +44,15 @@ class Ethereum {
         while true {
             let isTxSuccessfulResult = try await isTxSuccessful(txHash)
             
-            if isTxSuccessfulResult {
-                return
+            if let isTxSuccessfulResult {
+                if isTxSuccessfulResult {
+                    break
+                }
+                
+                throw "Transaction failed"
             }
             
-            try await Task.sleep(nanoseconds: NSEC_PER_SEC * 3)
+            try await Task.sleep(nanoseconds: Ethereum.TX_PULL_INTERVAL)
         }
     }
 }

@@ -40,7 +40,7 @@ class UserManager: ObservableObject {
                 self.registerZkProof = registerZkProof
             }
         } catch {
-            fatalError("\(error)")
+            fatalError("\(error.localizedDescription)")
         }
     }
     
@@ -114,9 +114,7 @@ class UserManager: ObservableObject {
             certificatesSMTProofJSON: try JSONEncoder().encode(proof)
         )
         
-        DispatchQueue.main.async {
-            self.masterCertProof = proof
-        }        
+        DispatchQueue.main.async { self.masterCertProof = proof }
         
         return inputs
     }
@@ -165,11 +163,15 @@ class UserManager: ObservableObject {
         )
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
+        let response = try await relayer.register(calldata)
         
-        let _ = try await relayer.register(calldata)
+        LoggerUtil.common.info("Register EVM Tx Hash: \(response.data.attributes.txHash)")
+        
+        let eth = Ethereum()
+        try await eth.waitForTxSuccess(response.data.attributes.txHash)
     }
     
-    func registerMasterCertificate(_ passport: Passport) async throws {
+    func registerCertificate(_ passport: Passport) async throws {
         let sod = try SOD([UInt8](passport.sod))
         
         guard let cert = try OpenSSLUtils.getX509CertificatesFromPKCS7(pkcs7Der: Data(sod.pkcs7CertificateData)).first else {
@@ -179,7 +181,7 @@ class UserManager: ObservableObject {
         let certPem = cert.certToPEM().data(using: .utf8) ?? Data()
         
         let registrationContract = try RegistrationContract()
-        
+
         let certificatesSMTAddress = try await registrationContract.certificatesSmt()
         
         let certificatesSMTContract = try PoseidonSMT(contractAddress: certificatesSMTAddress)
@@ -190,16 +192,21 @@ class UserManager: ObservableObject {
         
         let proof = try await certificatesSMTContract.getProof(slaveCertificateIndex)
         
-        if proof.existence {
-            return
-        }
+        if proof.existence { return }
         
         let calldataBuilder = IdentityCallDataBuilder()
-        let calldata = try calldataBuilder.buildRegisterCertificateCalldata(certPem, mastersPem: Certificates.ICAO)
+        let calldata = try calldataBuilder.buildRegisterCertificateCalldata(
+            ConfigManager.shared.certificatesStorage.icaoCosmosRpc,
+            slavePem: certPem,
+            masterCertificatesBucketname: ConfigManager.shared.certificatesStorage.masterCertificatesBucketname,
+            masterCertificatesFilename: ConfigManager.shared.certificatesStorage.masterCertificatesFilename
+        )
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
         
         let response = try await relayer.register(calldata)
+        
+        LoggerUtil.common.info("Register certificate EVM Tx Hash: \(response.data.attributes.txHash)")
         
         let eth = Ethereum()
         
@@ -211,10 +218,20 @@ class UserManager: ObservableObject {
         
         let registrationContract = try RegistrationContract()
         
-        let smtProof = try await registrationContract.getProof(
+        let registrationSmtEvmAddress = try await registrationContract.registrationSmt()
+        
+        let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtEvmAddress)
+        
+        var error: NSError? = nil
+        let proofIndex = IdentityCalculateProofIndex(
             registerZkProof.pubSignals[0],
-            registerZkProof.pubSignals[2]
+            registerZkProof.pubSignals[2],
+            &error
         )
+        if let error { throw error }
+        guard let proofIndex else { throw "proof index is not initialized" }
+        
+        let smtProof = try await registrationSmtContract.getProof(proofIndex)
         
         let smtProofJson = try JSONEncoder().encode(smtProof)
         

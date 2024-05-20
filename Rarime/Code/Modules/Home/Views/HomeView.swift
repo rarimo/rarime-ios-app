@@ -213,7 +213,7 @@ struct HomeView: View {
             } catch is CancellationError {
                 return
             } catch {
-                LoggerUtil.intro.error("failed to fetch balance: \(error)")
+                LoggerUtil.intro.error("failed to fetch balance: \(error.localizedDescription)")
             }
         }
         

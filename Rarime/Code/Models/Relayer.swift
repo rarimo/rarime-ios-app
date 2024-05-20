@@ -14,12 +14,15 @@ class Relayer {
         
         let payload = RegisterRequest(data: RegisterRequestData(txData: "0x" + calldata.hex))
         
+        let payloadJSON = try JSONEncoder().encode(payload)        
+        
         return try await AF.request(
             requestURL,
             method: .post,
             parameters: payload,
             encoder: JSONParameterEncoder.default
         )
+        .validate(OpenApiError.catchInstance)
         .serializingDecodable(EvmTxResponse.self)
         .result
         .get()
@@ -46,6 +49,7 @@ class Relayer {
             parameters: payload,
             encoder: JSONParameterEncoder.default
         )
+        .validate(OpenApiError.catchInstance)
         .serializingDecodable(AirdropResponse.self)
         .result
         .get()

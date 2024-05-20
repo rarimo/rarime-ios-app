@@ -105,6 +105,18 @@ class RegistrationContract {
         return address
     }
     
+    func registrationSmt() async throws -> EthereumAddress {
+        let method = registrationContract["registrationSmt"]!
+        
+        let response = try method().call().wait()
+        
+        guard let address = response[""] as? EthereumAddress else {
+            throw "CertificatesSmt is not address"
+        }
+        
+        return address
+    }
+    
     func icaoMasterTreeMerkleRoot() async throws -> Data {
         let response = try registrationContract["icaoMasterTreeMerkleRoot"]!().call().wait()
         

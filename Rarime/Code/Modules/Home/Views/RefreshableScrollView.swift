@@ -15,7 +15,7 @@ struct RefreshableScrollView<Content: View>: View {
             isRefreshing = true
             try await onRefresh()
         } catch {
-            LoggerUtil.common.error("[RefreshableScrollView] Refresh error: \(error)")
+            LoggerUtil.common.error("[RefreshableScrollView] Refresh error: \(error.localizedDescription)")
         }
     }
 

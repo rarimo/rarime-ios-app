@@ -40,5 +40,11 @@
 	<string>${DENOM}</string>
 	<key>RPC_IP</key>
 	<string>${RPC_IP}</string>
+	<key>MASTER_CERTIFICATES_BUCKETNAME</key>
+	<string>${MASTER_CERTIFICATES_BUCKETNAME}</string>
+	<key>MASTER_CERTIFICATES_FILENAME</key>
+	<string>${MASTER_CERTIFICATES_FILENAME}</string>
+	<key>ICAO_COSMOS_RPC</key>
+	<string>${ICAO_COSMOS_RPC}</string>
 </dict>
 </plist>

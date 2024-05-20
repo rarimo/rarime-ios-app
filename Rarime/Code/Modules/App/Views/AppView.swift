@@ -1,9 +1,14 @@
+import OSLog
 import SwiftUI
 
 struct AppView: View {
+    @EnvironmentObject private var alertManager: AlertManager
     @EnvironmentObject private var securityManager: SecurityManager
     @EnvironmentObject private var settingsManager: SettingsManager
     @StateObject private var viewModel = ViewModel()
+    
+    @State private var isAlertPresented = false
+    @State private var alert: Alert?
 
     var body: some View {
         ZStack {
@@ -28,11 +33,19 @@ struct AppView: View {
             }
         }
         .preferredColorScheme(settingsManager.colorScheme.rawScheme)
+        .onReceive(AlertManager.shared.alertsSubject) { alert in
+            self.isAlertPresented = true
+            self.alert = alert
+        }
+        .alert(isPresented: $isAlertPresented) {
+            self.alert ?? Alert(title: Text("Unknown"))
+        }
     }
 }
 
 #Preview {
     AppView()
+        .environmentObject(AlertManager())
         .environmentObject(SecurityManager())
         .environmentObject(SettingsManager())
 }
