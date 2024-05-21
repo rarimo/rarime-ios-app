@@ -8,7 +8,7 @@ TERMS_OF_USE_URL = "https:${SLASH}/staging.rarimo.com"
 // Mark: API
 RELAYER_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
 EVM_RPC_URL = "https:${SLASH}/rpc.evm.node1.mainnet-beta.rarimo.com"
-REGISTER_CONTRACT_ADDRESS = "0x49E2b2eAE2c1Fc53822E76D9cc6F4fC1d3641292"
+REGISTER_CONTRACT_ADDRESS = "0x31C9baC74fa7482cDCf33d09B8476250b460B058"
 COSMOS_RPC_URL = "https:${SLASH}/rpc-api.node1.mainnet-beta.rarimo.com"
 
 // Mark: Cosmos

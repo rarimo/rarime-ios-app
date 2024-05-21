@@ -51,8 +51,6 @@ struct ScanPassportView: View {
                     do {
                         try userManager.saveRegisterZkProof(registerZKProof)
                         
-                        LoggerUtil.passport.info("Registration proof generated successfully")
-                        
                         if passportViewModel.isEligibleForReward, !walletManager.isClaimed {
                             LoggerUtil.passport.info("User is eligible for reward")
                             

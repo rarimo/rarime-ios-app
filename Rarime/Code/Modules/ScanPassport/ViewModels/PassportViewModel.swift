@@ -41,10 +41,14 @@ class PassportViewModel: ObservableObject {
                 throw "failed to generate proof, invalid circuit type"
             }
             
+            LoggerUtil.common.info("Passport registration proof generated")
+            
             try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
             proofState = .createProfile
             
             try await UserManager.shared.register(proof, passport)
+            
+            LoggerUtil.common.info("Passport registration succeed")
             
             try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
             proofState = .finalizing

@@ -9,12 +9,12 @@ import SwiftUI
 
 class PoseidonSMT {
     let web3: Web3
-    let registrationContract: DynamicContract
+    let contract: DynamicContract
     
     init(contractAddress: EthereumAddress) throws {
         self.web3 = Web3(rpcURL: ConfigManager.shared.api.evmRpcURL.absoluteString)
         
-        self.registrationContract = try web3.eth.Contract(
+        self.contract = try web3.eth.Contract(
             json: ContractABI.poseidonSMTAbiJSON,
             abiKey: nil,
             address: contractAddress
@@ -26,7 +26,7 @@ class PoseidonSMT {
         index.append(Data(repeating: 0, count: 32 - key.count))
         index.append(key)
         
-        let response = try registrationContract["getProof"]!(index).call().wait()
+        let response = try contract["getProof"]!(index).call().wait()
         
         guard let proof = response[""] as? [String: Any] else {
             throw "Proof is not hex"
@@ -52,7 +52,7 @@ class PoseidonSMT {
     }
     
     func getRoot() async throws -> Data {
-        let response = try registrationContract["getRoot"]!().call().wait()
+        let response = try contract["getRoot"]!().call().wait()
         
         guard let root = response[""] as? Data else {
             throw "Response does not contain root"

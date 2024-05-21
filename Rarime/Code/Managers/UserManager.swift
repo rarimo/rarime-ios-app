@@ -88,7 +88,7 @@ class UserManager: ObservableObject {
         
         let slaveCertificateIndex = try x509Utils.getSlaveCertificateIndex(certPem, mastersPem: Certificates.ICAO)
         
-        let proof = try await certificatesSMTContract.getProof(slaveCertificateIndex)
+        let certificateProof = try await certificatesSMTContract.getProof(slaveCertificateIndex)
         
         let encapsulatedContent = try sod.getEncapsulatedContent()
         let signedAttributes = try sod.getSignedAttributes()
@@ -111,10 +111,10 @@ class UserManager: ObservableObject {
             pubKeyPem: publicKeyPem.data(using: .utf8) ?? Data(),
             signature: signature,
             isEcdsaActiveAuthentication: isEcdsaActiveAuthentication,
-            certificatesSMTProofJSON: try JSONEncoder().encode(proof)
+            certificatesSMTProofJSON: try JSONEncoder().encode(certificateProof)
         )
         
-        DispatchQueue.main.async { self.masterCertProof = proof }
+        DispatchQueue.main.async { self.masterCertProof = certificateProof }
         
         return inputs
     }
@@ -165,7 +165,7 @@ class UserManager: ObservableObject {
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
         let response = try await relayer.register(calldata)
         
-        LoggerUtil.common.info("Register EVM Tx Hash: \(response.data.attributes.txHash)")
+        LoggerUtil.common.info("Passport register EVM Tx Hash: \(response.data.attributes.txHash)")
         
         let eth = Ethereum()
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
@@ -192,7 +192,11 @@ class UserManager: ObservableObject {
         
         let proof = try await certificatesSMTContract.getProof(slaveCertificateIndex)
         
-        if proof.existence { return }
+        if proof.existence {
+            LoggerUtil.common.info("Passport certificate is already registered")
+            
+            return
+        }
         
         let calldataBuilder = IdentityCallDataBuilder()
         let calldata = try calldataBuilder.buildRegisterCertificateCalldata(

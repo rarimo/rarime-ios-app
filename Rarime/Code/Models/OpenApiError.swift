@@ -1,10 +1,15 @@
 import Foundation
 import Alamofire
 
+struct OpenApiErrorMeta: Codable {
+    let error: String
+    let field: String
+}
+
 struct OpenApiError: Codable {
     let title: String
-    let detail: String?
-    let status: Int
+    let status: String
+    let meta: OpenApiErrorMeta?
 }
 
 typealias OpenApiErrors = [OpenApiError]
@@ -15,7 +20,16 @@ struct OpenApiErrorResponse: Codable {
 
 extension OpenApiErrors {
     var localizedDescription: String {
-        return self.map({ error in error.title }).joined(separator: ", ")
+        return self.map(
+            { error in
+                var errorMessage = error.title
+                if let meta = error.meta {
+                    errorMessage += ": \(meta.field): \(meta.error)"
+                }
+                
+                return errorMessage
+            }
+        ).joined(separator: ", ")
     }
 }
 
@@ -32,6 +46,8 @@ extension OpenApiError {
             return .failure(Errors.serviceDown(request?.url))
         case 400...499:
             guard let data else { return .failure(Errors.unknownServiceError) }
+            
+            LoggerUtil.common.debug("response Data: \(data.utf8)")
             
             let decoder = JSONDecoder()
             let response = try? decoder.decode(OpenApiErrorResponse.self, from: data)
