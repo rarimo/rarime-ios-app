@@ -7,4 +7,9 @@ class RarimoUtils {
         let range = NSRange(location: 0, length: address.utf16.count)
         return regex?.firstMatch(in: address, options: [], range: range) != nil
     }
+    
+    static func formatAddress(_ address: String) -> String {
+       guard address.count > 20 else { return address }
+       return "\(address.prefix(12))...\(address.suffix(8))"
+   }
 }

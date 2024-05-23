@@ -21,9 +21,6 @@
         }
       }
     },
-    "(minutes) minutes and (seconds) seconds" : {
-
-    },
     "%@ ensures your history, reputation and actions are not lost, but remain confidential and under your control." : {
       "localizations" : {
         "uk" : {
@@ -82,6 +79,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$@%2$@ RMO"
+          }
+        }
+      }
+    },
+    "%d minutes and %d seconds" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$d minutes and %2$d seconds"
           }
         }
       }
@@ -755,7 +762,7 @@
     "Insufficient balance" : {
 
     },
-    "Invalid HTTP status code: (statusCode)" : {
+    "Invalid HTTP status code: %d" : {
 
     },
     "Invalid Rarimo address" : {
@@ -947,7 +954,7 @@
     "One of our services is down, try again later" : {
 
     },
-    "One of our services is down, try again later. RequestURL=(requestURL?.absoluteString ?? \"nil\")" : {
+    "One of our services is down, try again later. RequestURL=%@" : {
 
     },
     "Open Settings" : {
@@ -1618,7 +1625,7 @@
         }
       }
     },
-    "Your account is locked. Please try again in (bannedTime) here?" : {
+    "Your account is locked. Please try again in %@ here?" : {
 
     },
     "Your passport proof is ready" : {

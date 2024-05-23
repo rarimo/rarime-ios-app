@@ -48,7 +48,7 @@ struct ProfileView: View {
                                 Text("Account")
                                     .subtitle3()
                                     .foregroundStyle(.textPrimary)
-                                Text("Address: \(WalletUtil.formatAddress(userManager.userAddress))")
+                                Text("Address: \(RarimoUtils.formatAddress(userManager.userAddress))")
                                     .body4()
                                     .foregroundStyle(.textSecondary)
                             }

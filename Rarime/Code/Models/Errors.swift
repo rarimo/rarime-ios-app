@@ -20,9 +20,11 @@ extension Errors: LocalizedError {
         case .unknownServiceError:
             return NSLocalizedString("Unknown service error", comment: "")
         case .invalidHTTPStatusCode(let statusCode):
-            return NSLocalizedString("Invalid HTTP status code: \(statusCode)", comment: "")
+            return String(format: NSLocalizedString("Invalid HTTP status code: %d", comment: ""), statusCode)
         case .serviceDown(let requestURL):
-            return NSLocalizedString("One of our services is down, try again later. RequestURL=\(requestURL?.absoluteString ?? "nil")", comment: "")
+            let url = requestURL?.absoluteString ?? "nil"
+            
+            return String(format: NSLocalizedString("One of our services is down, try again later. RequestURL=%@", comment: ""), url)
         case .userCreationFailed:
             return NSLocalizedString("User creation failed", comment: "")
         case .unknown:
@@ -41,7 +43,7 @@ extension Errors {
         case .unknownServiceError:
             return NSLocalizedString("Unknown service error", comment: "")
         case .invalidHTTPStatusCode(let statusCode):
-            return NSLocalizedString("Invalid HTTP status code: \(statusCode)", comment: "")
+            return String(format: NSLocalizedString("Invalid HTTP status code: %d", comment: ""), statusCode)
         case .serviceDown(_):
             return NSLocalizedString("One of our services is down, try again later", comment: "")
         case .userCreationFailed:

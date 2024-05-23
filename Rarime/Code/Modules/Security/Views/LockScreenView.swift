@@ -82,12 +82,16 @@ struct LockScreenView: View {
         
         var bannedTime = timeRemaining(to: banTime)
         
-        errorMessage = NSLocalizedString("Your account is locked. Please try again in \(bannedTime) here?", comment: "")
+        errorMessage = String(format: NSLocalizedString("Your account is locked. Please try again in %@ here?", comment: ""), bannedTime)
         
         FeedbackGenerator.shared.notify(.error)
         
         Task { @MainActor in
-            let banTimeEndInSecs = banTime.timeIntervalSince1970 - Date().timeIntervalSince1970
+            var banTimeEndInSecs = banTime.timeIntervalSince1970 - Date().timeIntervalSince1970
+            
+            if banTimeEndInSecs < 0 {
+                banTimeEndInSecs = 0
+            }
             
             try? await Task.sleep(nanoseconds: UInt64(banTimeEndInSecs) * NSEC_PER_SEC)
             
@@ -115,7 +119,7 @@ fileprivate func timeRemaining(to futureDate: Date) -> String {
     let minutes = Int(interval) / 60
     let seconds = Int(interval) % 60
     
-    return NSLocalizedString("\(minutes) minutes and \(seconds) seconds", comment: "")
+    return String(format: NSLocalizedString("%d minutes and %d seconds", comment: ""), minutes, seconds)
 }
 
 #Preview {
