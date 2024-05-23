@@ -244,14 +244,19 @@ class UserManager: ObservableObject {
         let profile = try profileInitializer.newProfile(secretKey)
         
         let (passportInfo, identityInfo) = try await registrationContract.getPassportInfo(registerZkProof.pubSignals[0])
+        
+        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
+        let aidropParams = try await relayer.getAirdropParams()
 
         let queryProofInputs = try profile.buildAirdropQueryIdentityInputs(
             passport.dg1,
             smtProofJSON: smtProofJson,
-            selector: "23073",
+            selector: aidropParams.data.attributes.querySelector,
             pkPassportHash: registerZkProof.pubSignals[0],
             issueTimestamp: identityInfo.issueTimestamp.description,
-            identityCounter: passportInfo.identityReissueCounter.description
+            identityCounter: passportInfo.identityReissueCounter.description,
+            eventID: aidropParams.data.attributes.eventID,
+            startedAt: Int64(aidropParams.data.attributes.startedAt)
         )
         
         let wtns = try ZKUtils.calcWtnsQueryIdentity(queryProofInputs)
@@ -282,13 +287,17 @@ class UserManager: ObservableObject {
         let profileInitializer = IdentityProfile()
         let profile = try profileInitializer.newProfile(secretKey)
         
+        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
+        let airdropParams = try await relayer.getAirdropParams()
+        
         var error: NSError? = nil
-        let airdropEventNullifier = profile.calculateAirdropEventNullifier(&error)
+        let airdropEventNullifier = profile.calculateAirdropEventNullifier(
+            airdropParams.data.attributes.eventID,
+            error: &error
+        )
         if let error {
             throw error
         }
-        
-        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
         
         do {
             let _ = try await relayer.getAirdropInfo(airdropEventNullifier)

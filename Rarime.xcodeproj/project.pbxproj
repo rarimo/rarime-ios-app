@@ -153,7 +153,7 @@
 		CEC562112BD926AA002D4954 /* ZKUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC562102BD926AA002D4954 /* ZKUtils.swift */; };
 		CEC562192BD92B3E002D4954 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC562132BD9281A002D4954 /* libresolv.9.tbd */; };
 		CEC9D8E72BFF41A800EACD0F /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */; };
-		CEC9D8EF2BFF6A0B00EACD0F /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC9D8EE2BFF6A0B00EACD0F /* Identity.xcframework */; };
+		CEC9D8F32BFF998100EACD0F /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC9D8F22BFF998100EACD0F /* Identity.xcframework */; };
 		CED909D02BDBA9FC0065E949 /* Cosmos.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED909CF2BDBA9FC0065E949 /* Cosmos.swift */; };
 		CED909E02BDC1E0F0065E949 /* Rarimo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED909DF2BDC1E0F0065E949 /* Rarimo.swift */; };
 		CEDB9DCC2BFDF60900BCF074 /* libwitnesscalc_queryIdentity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB9DCB2BFDF60900BCF074 /* libwitnesscalc_queryIdentity.a */; };
@@ -310,7 +310,7 @@
 		CEC562132BD9281A002D4954 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		CEC562142BD9281A002D4954 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
-		CEC9D8EE2BFF6A0B00EACD0F /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
+		CEC9D8F22BFF998100EACD0F /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CED909CF2BDBA9FC0065E949 /* Cosmos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cosmos.swift; sourceTree = "<group>"; };
 		CED909DF2BDC1E0F0065E949 /* Rarimo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rarimo.swift; sourceTree = "<group>"; };
 		CEDB9DCB2BFDF60900BCF074 /* libwitnesscalc_queryIdentity.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_queryIdentity.a; sourceTree = "<group>"; };
@@ -338,7 +338,7 @@
 				5655E43A2BD51F5100B86C5C /* KeychainAccess in Frameworks */,
 				CE68BE452BD9B6EA00D92EBB /* Web3 in Frameworks */,
 				CE72102E2BD7F6780043DB7F /* Alamofire in Frameworks */,
-				CEC9D8EF2BFF6A0B00EACD0F /* Identity.xcframework in Frameworks */,
+				CEC9D8F32BFF998100EACD0F /* Identity.xcframework in Frameworks */,
 				56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */,
 				56933E082BBC09990068C894 /* QKMRZScanner in Frameworks */,
 				CE68BE472BD9B6EA00D92EBB /* Web3ContractABI in Frameworks */,
@@ -879,9 +879,9 @@
 				CE7130872BEE5414003C63DA /* libwitnesscalc_registerIdentityUniversal.a */,
 				CEC562022BD923B4002D4954 /* libfq.a */,
 				CEDC4D7B2BE9162E00459D4E /* witnesscalc_registerIdentityUniversal.h */,
-				CEC9D8EE2BFF6A0B00EACD0F /* Identity.xcframework */,
 				CEC561FB2BD923B3002D4954 /* libfr.a */,
 				CEDB9DCB2BFDF60900BCF074 /* libwitnesscalc_queryIdentity.a */,
+				CEC9D8F22BFF998100EACD0F /* Identity.xcframework */,
 				CEC562012BD923B4002D4954 /* libgmp.a */,
 				CEC561FC2BD923B3002D4954 /* librapidsnark.a */,
 				CEC562002BD923B3002D4954 /* prover.h */,
