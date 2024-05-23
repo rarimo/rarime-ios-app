@@ -41,8 +41,6 @@ class Relayer {
             )
         )
         
-        let payloadJSON = try JSONEncoder().encode(payload)
-        
         return try await AF.request(
             requestURL,
             method: .post,
