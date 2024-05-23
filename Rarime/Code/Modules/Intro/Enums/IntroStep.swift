@@ -6,27 +6,36 @@ enum IntroStep: Int, CaseIterable {
     var title: LocalizedStringResource {
         switch self {
         case .welcome: return "Welcome"
-        case .incognito: return "Incognito"
+        case .incognito: return "Go Incognito"
         case .proofs: return "Proofs"
-        case .rewards: return "Get rewarded"
+        case .rewards: return "Get Rewarded"
         }
     }
 
     var text: LocalizedStringResource {
         switch self {
-        case .welcome: return "This app is where your digital identities live, enabling you to go incognito across the web."
-        case .incognito: return "Ensuring your history, reputation and actions are not lost, but still remain confidential controlled by you."
-        case .proofs: return "Prove your eligibility, belonging, identity, and contributions — all without revealing who you are."
+        case .welcome: return "This app is where you privately store your digital identities, enabling you to go incognito across the web."
+        case .incognito: return "RariMe ensures your history, reputation and actions are not lost, and remain under your control."
+        case .proofs: return "Prove your eligibility, belonging, identity, and contributions — all without revealing your personal details."
         case .rewards: return "Start building your incognito profile and earn rewards as an early community member."
         }
     }
 
-    var image: String {
+    var animation: String {
         switch self {
-        case .welcome: return Images.introApp
-        case .incognito: return Images.introPrivacy
-        case .proofs: return Images.introShield
-        case .rewards: return Images.introGifts
+        case .welcome: return Animations.introWelcome
+        case .incognito: return Animations.introIncognito
+        case .proofs: return Animations.introProofs
+        case .rewards: return Animations.introRewards
+        }
+    }
+
+    var animationWidth: CGFloat {
+        switch self {
+        case .welcome: return 390
+        case .incognito: return 342
+        case .proofs: return 320
+        case .rewards: return 200
         }
     }
 }

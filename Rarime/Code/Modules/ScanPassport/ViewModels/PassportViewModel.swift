@@ -1,7 +1,6 @@
 import SwiftUI
 
 enum PassportProofState: Int, CaseIterable {
-    // TODO: Implement proof states
     case readingData, applyingZK, createProfile, finalizing
 
     var title: LocalizedStringResource {

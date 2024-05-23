@@ -1,10 +1,3 @@
-//
-//  EnableFaceIdView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 31.03.2024.
-//
-
 import SwiftUI
 
 private enum FaceIdAuthError: Error {
@@ -20,8 +13,8 @@ struct EnableFaceIdView: View {
     var body: some View {
         EnableLayoutView(
             icon: Icons.userFocus,
-            title: "Enable\nFace ID",
-            description: "Enable Face ID Authentication",
+            title: String(localized: "Enable\nFace ID"),
+            description: String(localized: "Enable Face ID Login"),
             enableAction: {
                 FaceIdAuth.shared.authenticate(
                     onSuccess: { withAnimation { securityManager.enableFaceId() } },
@@ -30,24 +23,30 @@ struct EnableFaceIdView: View {
                         isAlertShown = true
                     },
                     onNotAvailable: {
-                        isNotAvailableError = false
+                        isNotAvailableError = true
                         isAlertShown = true
                     }
                 )
             },
             skipAction: { withAnimation { securityManager.disableFaceId() } }
         )
-        .alert(isPresented: $isAlertShown) {
-            Alert(
-                title: isNotAvailableError
-                    ? Text("Face ID Disabled")
-                    : Text("Authentication Failed"),
-                message: isNotAvailableError
-                    ? Text("Enable Face ID in Settings > Rarime.")
-                    : Text("Could not authenticate with Face ID. Please try again."),
-                dismissButton: .default(Text("Close"))
-            )
-        }
+        .alert(
+            isNotAvailableError ? "Face ID Disabled" : "Authentication Failed",
+            isPresented: $isAlertShown,
+            actions: {
+                Button("Cancel", role: .cancel) {}
+                if isNotAvailableError {
+                    Button("Open Settings") {
+                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                    }
+                }
+            },
+            message: {
+                isNotAvailableError
+                    ? Text("Enable Face ID in Settings > RariMe.")
+                    : Text("Could not authenticate with Face ID. Please try again.")
+            }
+        )
     }
 }
 

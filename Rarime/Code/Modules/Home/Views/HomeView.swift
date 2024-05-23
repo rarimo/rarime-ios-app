@@ -12,16 +12,15 @@ struct HomeView: View {
 
     @State private var path: [HomeRoute] = []
 
-    @State private var isBetaLaunchSheetPresented = false
     @State private var isAirdropSheetPresented = false
     @State private var isPassportSheetPresented = false
     @State private var isRarimeSheetPresented = false
 
     @State private var isCongratsShown = false
     @State private var isClaimed = false
-    
-    @State private var isBalanceFetching = false
-    @State private var cancelables: [Task<(), Never>] = []
+
+    @State private var isBalanceFetching = true
+    @State private var cancelables: [Task<Void, Never>] = []
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -60,39 +59,34 @@ struct HomeView: View {
                 }
             ) { _ in
                 VStack(spacing: 24) {
-                    HStack {
-                        Text("Beta launch").body3()
-                        Image(Icons.info)
-                            .iconSmall()
-                            .onTapGesture { isBetaLaunchSheetPresented = true }
-                            .dynamicSheet(isPresented: $isBetaLaunchSheetPresented, fullScreen: true) {
-                                BetaLaunchView(onClose: { isBetaLaunchSheetPresented = false })
-                            }
-                    }
-                    .frame(maxWidth: .infinity)
-                    .foregroundStyle(.warningDark)
-                    .padding(.vertical, 4)
-                    .background(.warningLighter)
-                    VStack(alignment: .leading, spacing: 32) {
+                    Text("Beta launch")
+                        .body3()
+                        .frame(maxWidth: .infinity)
+                        .foregroundStyle(.warningDark)
+                        .padding(.vertical, 4)
+                        .background(.warningLighter)
+                    VStack(alignment: .leading, spacing: 24) {
                         header
-                        VStack(spacing: 24) {
-                            if let passport = passportManager.passport {
-                                PassportCard(
-                                    passport: passport,
-                                    look: Binding(
-                                        get: { passportManager.passportCardLook },
-                                        set: { passportManager.setPassportCardLook($0) }
-                                    ),
-                                    isIncognito: Binding(
-                                        get: { passportManager.isIncognitoMode },
-                                        set: { passportManager.setIncognitoMode($0) }
-                                    )
+                        if let passport = passportManager.passport {
+                            PassportCard(
+                                passport: passport,
+                                look: Binding(
+                                    get: { passportManager.passportCardLook },
+                                    set: { passportManager.setPassportCardLook($0) }
+                                ),
+                                isIncognito: Binding(
+                                    get: { passportManager.isIncognitoMode },
+                                    set: { passportManager.setIncognitoMode($0) }
+                                ),
+                                identifiers: Binding(
+                                    get: { passportManager.passportIdentifiers },
+                                    set: { passportManager.setPassportIdentifiers($0) }
                                 )
-                                rarimeCard
-                            } else {
-                                airdropCard
-                                otherPassportsCard
-                            }
+                            )
+                            rarimeCard
+                        } else {
+                            airdropCard
+                            otherPassportsCard
                         }
                         Spacer()
                     }
@@ -126,7 +120,7 @@ struct HomeView: View {
 
             HStack {
                 if isBalanceFetching {
-                    ProgressView()
+                    ProgressView().frame(height: 40)
                 } else {
                     Text((userManager.balance / Double(Rarimo.rarimoTokenMantis)).formatted())
                         .h4()
@@ -141,16 +135,16 @@ struct HomeView: View {
     private var airdropCard: some View {
         CardContainer {
             VStack(spacing: 20) {
-                Text("🇺🇦")
+                Text(String("🇺🇦"))
                     .h4()
                     .frame(width: 72, height: 72)
                     .background(.componentPrimary)
                     .clipShape(Circle())
                 VStack(spacing: 8) {
-                    Text("Programable Airdrop")
+                    Text("Programmable Airdrop")
                         .h6()
                         .foregroundStyle(.textPrimary)
-                    Text("Beta launch is focused on distributing tokens to Ukrainian identity holders")
+                    Text("The beta launch is focused on distributing tokens to Ukrainian citizens")
                         .body2()
                         .multilineTextAlignment(.center)
                         .foregroundStyle(.textSecondary)
@@ -197,7 +191,7 @@ struct HomeView: View {
             RarimeInfoView(onClose: { isRarimeSheetPresented = false })
         }
     }
-    
+
     func fetchBalance() {
         isBalanceFetching = true
         
@@ -205,10 +199,10 @@ struct HomeView: View {
             defer {
                 self.isBalanceFetching = false
             }
-            
+
             do {
                 let balance = try await userManager.fetchBalanse()
-                
+
                 self.userManager.balance = Double(balance) ?? 0
             } catch is CancellationError {
                 return
@@ -216,10 +210,10 @@ struct HomeView: View {
                 LoggerUtil.intro.error("failed to fetch balance: \(error.localizedDescription)")
             }
         }
-        
-        self.cancelables.append(cancelable)
+
+        cancelables.append(cancelable)
     }
-    
+
     func cleanup() {
         for cancelable in cancelables {
             cancelable.cancel()

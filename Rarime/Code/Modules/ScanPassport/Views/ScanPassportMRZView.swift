@@ -1,10 +1,3 @@
-//
-//  ScanPassportMRZView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 01.04.2024.
-//
-
 import SwiftUI
 
 struct ScanPassportMRZView: View {
@@ -16,14 +9,16 @@ struct ScanPassportMRZView: View {
         ScanPassportLayoutView(
             step: 1,
             title: "Scan your Passport",
-            text: "Passport data is stored only on this device",
+            text: "Data never leaves this device",
             onClose: onClose
         ) {
             ZStack {
-                MRZScannerView().environmentObject(mrzViewModel)
-                LottieView(animation: Animations.passport, contentMode: .scaleToFill)
-                    .frame(width: 350, height: 256)
-                    .padding(.bottom, 2)
+                CameraPermissionView(delay: 0.5, onCancel: onClose) {
+                    MRZScannerView().environmentObject(mrzViewModel)
+                    LottieView(animation: Animations.passport, contentMode: .scaleToFill)
+                        .frame(width: 350, height: 256)
+                        .padding(.bottom, 2)
+                }
             }
             .frame(height: 300)
             Text("Move your passport page inside the border")

@@ -17,8 +17,8 @@ struct SelectPassportDataView: View {
     var body: some View {
         ScanPassportLayoutView(
             step: 3,
-            title: "Select Data",
-            text: "Selected data will create a confidential profile",
+            title: "Document data",
+            text: "Data generates an incognito profile",
             onClose: onClose
         ) {
             if passportViewModel.passport != nil {
@@ -70,7 +70,7 @@ struct SelectPassportDataView: View {
                 VStack(spacing: 16) {
                     makeDocumentRow(label: "Document class mode", value: passport.documentType)
                     makeDocumentRow(label: "Issuing state code", value: passport.issuingAuthority)
-                    makeDocumentRow(label: "Document number", value: passport.documentNumber)
+                    makeDocumentRow(label: "Document ID", value: passport.documentNumber)
                 }
             }
         }

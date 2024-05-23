@@ -9,8 +9,8 @@ struct AuthMethodView: View {
             title: String(localized: "Auth Method"),
             onBack: onBack
         ) {
-            VStack(spacing: 24) {
-                AuthMethodRow(
+            VStack(spacing: 12) {
+                AuthMethodItem(
                     isOn: Binding(
                         get: { securityManager.faceIdState == .enabled },
                         set: { $0 ? securityManager.enableFaceId() : securityManager.disableFaceId() }
@@ -18,7 +18,7 @@ struct AuthMethodView: View {
                     icon: Icons.userFocus,
                     label: String(localized: "Face ID")
                 )
-                AuthMethodRow(
+                AuthMethodItem(
                     isOn: Binding(
                         get: { securityManager.passcodeState == .enabled },
                         set: { $0 ? securityManager.enablePasscode() : securityManager.disablePasscode() }
@@ -31,7 +31,7 @@ struct AuthMethodView: View {
     }
 }
 
-private struct AuthMethodRow: View {
+private struct AuthMethodItem: View {
     @Binding var isOn: Bool
     let icon: String
     let label: String
@@ -49,6 +49,8 @@ private struct AuthMethodRow: View {
             Spacer()
             AppToggle(isOn: $isOn)
         }
+        .padding(16)
+        .background(.backgroundOpacity, in: RoundedRectangle(cornerRadius: 12))
     }
 }
 

@@ -1,10 +1,3 @@
-//
-//  Buttons.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 05.04.2024.
-//
-
 import SwiftUI
 
 enum ButtonVariant {

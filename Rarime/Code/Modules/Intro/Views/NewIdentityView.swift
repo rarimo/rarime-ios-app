@@ -7,11 +7,11 @@ struct NewIdentityView: View {
 
     @State private var isCopied = false
     
-    @State private var cancelables: [Task<(), Never>] = []
+    @State private var cancelables: [Task<Void, Never>] = []
 
     var body: some View {
         IdentityStepLayoutView(
-            title: "Your Private Key",
+            title: String(localized: "Your Private Key"),
             onBack: {
                 userManager.user = nil
                 onBack()
@@ -65,7 +65,7 @@ struct NewIdentityView: View {
                 }
             }
         }
-        // TODO: Somehow it's called twice, we need to find why, I've made a quick hack, but it's better to find a its source
+        // TODO: Somehow it's called twice, we need to find why, I've made a quick hack, but it's better to find its source
         .onAppear(perform: createNewUser)
         .onDisappear(perform: cleanup)
     }
@@ -111,7 +111,7 @@ struct NewIdentityView: View {
             }
         }
         
-        self.cancelables.append(cancelable)
+        cancelables.append(cancelable)
     }
     
     func cleanup() {

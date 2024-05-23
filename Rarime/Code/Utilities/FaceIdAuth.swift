@@ -1,10 +1,3 @@
-//
-//  FaceIdAuth.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 31.03.2024.
-//
-
 import Foundation
 import LocalAuthentication
 

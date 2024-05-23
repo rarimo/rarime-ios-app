@@ -8,7 +8,6 @@ struct IntroView: View {
     var onFinish: () -> Void
 
     @State private var currentStep = IntroStep.welcome.rawValue
-    @State private var showSheet = false
     @State private var path: [IdentityRoute] = []
 
     var isLastStep: Bool {
@@ -80,15 +79,6 @@ struct IntroView: View {
                     currentStep += 1
                 }
             }
-        }
-        .dynamicSheet(isPresented: $showSheet) {
-            GetStartedView(
-                onCreate: {
-                    showSheet.toggle()
-                    path.append(.newIdentity)
-                }
-            )
-            .padding(.bottom, 24)
         }
     }
 }

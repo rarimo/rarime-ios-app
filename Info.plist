@@ -2,12 +2,64 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundleAlternateIcons</key>
+		<dict>
+			<key>BlackAndGreenIcon</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>BlackAndGreenIcon</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>GreenAndBlackIcon</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>GreenAndBlackIcon</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+		</dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>BlackAndWhiteIcon</string>
+			</array>
+			<key>UIPrerenderedIcon</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>CHAIN_ID</key>
+	<string>${CHAIN_ID}</string>
+	<key>COSMOS_RPC_URL</key>
+	<string>${COSMOS_RPC_URL}</string>
+	<key>DENOM</key>
+	<string>${DENOM}</string>
+	<key>EVM_RPC_URL</key>
+	<string>${EVM_RPC_URL}</string>
 	<key>PRIVACY_POLICY_URL</key>
 	<string>${PRIVACY_POLICY_URL}</string>
-	<key>TERMS_OF_USE_URL</key>
-	<string>${TERMS_OF_USE_URL}</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Enable Face ID Authentication</string>
+	<key>REGISTER_CONTRACT_ADDRESS</key>
+	<string>${REGISTER_CONTRACT_ADDRESS}</string>
+	<key>REGISTER_IDENTITY_CIRCUIT_DATA_URLS</key>
+	<array>
+		<string>${REGISTER_IDENTITY_CIRCUIT_DATA_URL_0}</string>
+		<string>${REGISTER_IDENTITY_CIRCUIT_DATA_URL_1}</string>
+	</array>
+	<key>RELAYER_URL</key>
+	<string>${RELAYER_URL}</string>
+	<key>RPC_IP</key>
+	<string>${RPC_IP}</string>
+	<key>TERMS_OF_USE_URL</key>
+	<string>${TERMS_OF_USE_URL}</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Inter-Bold.ttf</string>

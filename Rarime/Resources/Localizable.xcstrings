@@ -2,16 +2,54 @@
   "sourceLanguage" : "en",
   "strings" : {
     " and " : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " та "
+          }
+        }
+      }
     },
     ", " : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ", "
+          }
+        }
+      }
+    },
+    "%@ ensures your history, reputation and actions are not lost, but remain confidential and under your control." : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ гарантує, що ваша репутація та історія дій залишатимуться конфіденційними під вашим контролем."
+          }
+        }
+      }
     },
     "%@ RMO" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ RMO"
+          }
+        }
+      }
     },
     "%@ Years Old" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ років"
+          }
+        }
+      }
     },
     "%@, Age: %@" : {
       "localizations" : {
@@ -19,6 +57,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@, Age: %2$@"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, вік: %2$@"
           }
         }
       }
@@ -30,209 +74,680 @@
             "state" : "new",
             "value" : "%1$@%2$@ RMO"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@%2$@ RMO"
+          }
         }
       }
     },
-    "🇺🇦" : {
-
-    },
     "Account" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Акаунт"
+          }
+        }
+      }
     },
     "Address" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Адреса"
+          }
+        }
+      }
+    },
+    "Address: %@" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Адреса: %@"
+          }
+        }
+      }
     },
     "Airdrop" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Airdrop"
+          }
+        }
+      }
     },
     "All Done!" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Виконано!"
+          }
+        }
+      }
     },
     "Amount" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сума"
+          }
+        }
+      }
+    },
+    "App Icon" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Іконка додатку"
+          }
+        }
+      }
     },
     "Amount must be greater than 0" : {
 
     },
     "App version: %@" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Версія додатку: %@"
+          }
+        }
+      }
     },
     "Applying Zero Knowledge" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Застосування Zero Knowledge"
+          }
+        }
+      }
     },
     "Auth Method" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Метод входу"
+          }
+        }
+      }
     },
     "Authenticating with passport..." : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перевірка за паспортом..."
+          }
+        }
+      }
     },
     "Authentication Failed" : {
-
-    },
-    "Available in July" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помилка автентифікації"
+          }
+        }
+      }
     },
     "Available RMO" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доступно RMO"
+          }
+        }
+      }
     },
     "Available:" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доступно:"
+          }
+        }
+      }
     },
     "Balance: RMO" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Баланс: RMO"
+          }
+        }
+      }
     },
     "Beta launch" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бета-запуск"
+          }
+        }
+      }
     },
-    "Beta Launch" : {
-
-    },
-    "Beta launch is focused on distributing tokens to Ukrainian identity holders" : {
-
+    "Birth date" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дата народження"
+          }
+        }
+      }
     },
     "Black" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чорна"
+          }
+        }
+      }
+    },
+    "Black & Green" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чорно-зелена"
+          }
+        }
+      }
+    },
+    "Black & White" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Біло-чорна"
+          }
+        }
+      }
     },
     "By checking this box, you are agreeing to " : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поставивши галочку, ви погоджуєтеся з "
+          }
+        }
+      }
+    },
+    "Camera Permission" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доступ до камери"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасувати"
+          }
+        }
+      }
     },
     "CARD VISUAL" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ВИГЛЯД КАРТКИ"
+          }
+        }
+      }
     },
     "Claim" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отримати винагороду"
+          }
+        }
+      }
     },
     "Claim %lld RMO tokens" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отримати %lld токени RMO"
+          }
+        }
+      }
     },
     "Claiming..." : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отримання..."
+          }
+        }
+      }
     },
     "Close" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Закрити"
+          }
+        }
+      }
     },
     "Congrats!" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вітання!"
+          }
+        }
+      }
     },
     "Continue" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продовжити"
+          }
+        }
+      }
     },
     "Copied" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скопійовано"
+          }
+        }
+      }
     },
     "Copy to clipboard" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Копіювати"
+          }
+        }
+      }
     },
     "Could not authenticate with Face ID. Please try again." : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося автентифікувати через Face ID. Будь ласка спробуйте ще раз."
+          }
+        }
+      }
     },
     "Create Account" : {
-
-    },
-    "Create new Identity" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Створити акаунт"
+          }
+        }
+      }
     },
     "Creating a confidential profile" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Створення конфіденційного профілю"
+          }
+        }
+      }
     },
-    "Credentials" : {
-
+    "Creating an incognito profile" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Створення анонімного профілю"
+          }
+        }
+      }
     },
     "Dark Mode" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Темна"
+          }
+        }
+      }
     },
-    "Description text here" : {
-
+    "Data" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дані"
+          }
+        }
+      }
     },
-    "Document" : {
-
+    "Data generates an incognito profile" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Необхідні для створення анонімного профілю"
+          }
+        }
+      }
+    },
+    "Data never leaves this device" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дані ніколи не залишають цей телефон"
+          }
+        }
+      }
     },
     "Document class mode" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Клас документа"
+          }
+        }
+      }
     },
-    "Document number" : {
-
+    "Document data" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дані документа"
+          }
+        }
+      }
+    },
+    "Document ID" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Номер документа"
+          }
+        }
+      }
     },
     "Done" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Готово"
+          }
+        }
+      }
     },
     "Enable" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Увімкнути"
+          }
+        }
+      }
     },
     "Enable\nFace ID" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Увімкнути\nFace ID"
+          }
+        }
+      }
     },
     "Enable\nPasscode" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Увімкнути\nПІН-код"
+          }
+        }
+      }
     },
-    "Enable Face ID Authentication" : {
-
+    "Enable Face ID in Settings > RariMe." : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Увімкніть Face ID: Налаштування -> RariMe."
+          }
+        }
+      }
     },
-    "Enable Face ID in Settings > Rarime." : {
-
+    "Enable Face ID Login" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Увімкнути вхід через Face ID"
+          }
+        }
+      }
     },
-    "Enable Passcode Authentication" : {
-
+    "Enable Passcode Login" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Увімкнути вхід за ПІН-кодом"
+          }
+        }
+      }
     },
     "English" : {
-
-    },
-    "Ensuring your history, reputation and actions are not lost, but still remain confidential controlled by you." : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Англійська"
+          }
+        }
+      }
     },
     "Enter passcode" : {
 
     },
     "Enter Passcode" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Уведіть ПІН-код"
+          }
+        }
+      }
     },
     "Error" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помилка"
+          }
+        }
+      }
+    },
+    "Expiry date" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дата закінчення"
+          }
+        }
+      }
     },
     "Export Keys" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Експорт ключів"
+          }
+        }
+      }
     },
     "Face ID" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Face ID"
+          }
+        }
+      }
     },
     "Face ID Disabled" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Face ID вимкнено"
+          }
+        }
+      }
     },
     "Failed" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помилка"
+          }
+        }
+      }
     },
     "Female" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жінка"
+          }
+        }
+      }
     },
     "Finalizing" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Завершення"
+          }
+        }
+      }
     },
-    "Full functional available on: %@" : {
-
+    "Get Rewarded" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нагороди"
+          }
+        }
+      }
     },
-    "Full privacy via Zero Knowledge Proofs" : {
-
-    },
-    "Georgian" : {
-
-    },
-    "Get rewarded" : {
-
-    },
-    "Get rewarded with RMO tokens" : {
-
-    },
-    "Get Started" : {
-
+    "Go Incognito" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Режим інкогніто"
+          }
+        }
+      }
     },
     "Green" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зелена"
+          }
+        }
+      }
+    },
+    "Green & Black" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зелено-чорна"
+          }
+        }
+      }
     },
     "Hold your iPhone near an NFC enabled passport." : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тримайте iPhone біля паспорта з підтримкою NFC."
+          }
+        }
+      }
     },
-    "Incognito" : {
-
+    "Incognito mode" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Режим інкогніто"
+          }
+        }
+      }
     },
     "Insufficient balance" : {
 
@@ -241,85 +756,200 @@
 
     },
     "Invalid Rarimo address" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Недійсна адреса Rarimo"
+          }
+        }
+      }
     },
     "Invalid response body" : {
 
     },
     "Issuing state code" : {
-
-    },
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem" : {
-
-    },
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it h" : {
-
-    },
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, " : {
-
-    },
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors " : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Орган, що видав"
+          }
+        }
+      }
     },
     "Join a waitlist" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доєднатися до очікування"
+          }
+        }
+      }
     },
     "Join the waitlist" : {
-
-    },
-    "July" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доєднатися до очікування"
+          }
+        }
+      }
     },
     "Language" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мова"
+          }
+        }
+      }
     },
     "Learn more about RariMe App" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дізнатися більше про додаток RariMe"
+          }
+        }
+      }
     },
     "Let’s Start" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Почнімо"
+          }
+        }
+      }
     },
     "Light Mode" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Світла"
+          }
+        }
+      }
     },
     "Male" : {
-
-    },
-    "Manage your assets" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чоловік"
+          }
+        }
+      }
     },
     "MAX" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "МАКС"
+          }
+        }
+      }
     },
     "Maybe Later" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пізніше"
+          }
+        }
+      }
     },
     "Move your passport page inside the border" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Наведіть рамку на сторінку вашого парпорта"
+          }
+        }
+      }
     },
     "Must data" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Необхідні дані"
+          }
+        }
+      }
     },
     "Nationality" : {
-
-    },
-    "New recovery phrase" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Національність"
+          }
+        }
+      }
     },
     "Next" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Далі"
+          }
+        }
+      }
     },
     "NFC Reader" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зчитування NFC"
+          }
+        }
+      }
     },
     "No transactions yet" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Транзакцій ще немає"
+          }
+        }
+      }
     },
     "Ok" : {
 
     },
     "Okay" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Окей"
+          }
+        }
+      }
+    },
+    "Open Settings" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "До налаштувань"
+          }
+        }
+      }
     },
     "One of our services is down, try again later" : {
 
@@ -328,121 +958,414 @@
 
     },
     "Other passport holders" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Інші власники паспортів"
+          }
+        }
+      }
     },
     "Passcode" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ПІН-код"
+          }
+        }
+      }
     },
     "Passcodes do not match" : {
-
-    },
-    "Passport data is stored only on this device" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ПІН-коди не збігаються"
+          }
+        }
+      }
     },
     "Passport read successfully" : {
-
-    },
-    "Personal data never leaves the device" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Паспорт успішно прочитаний"
+          }
+        }
+      }
     },
     "Place QR code within the frame to scan" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помістіть QR-код у рамку для сканування"
+          }
+        }
+      }
     },
     "Place your passport cover to the back of your phone" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помістіть обкладинку паспорта на задню панель телефону"
+          }
+        }
+      }
+    },
+    "Please allow camera access in settings to continue" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Для продовження, будь ласка, надайте доступ до камери в налаштуваннях"
+          }
+        }
+      }
     },
     "Please store the private key safely and do not share it with anyone. If you lose this key, you will not be able to recover the account and will lose access forever." : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Будь ласка, зберігайте приватний ключ у безпеці та нікому не передавайте його. Якщо ви втратите цей ключ, ви не зможете відновити акаунт і назавжди втратите доступ до нього."
+          }
+        }
+      }
     },
     "Please try again later" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Будь-ласка, спробуйте пізніше"
+          }
+        }
+      }
     },
     "Please Wait..." : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зачекайте..."
+          }
+        }
+      }
     },
     "Privacy Policy" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Політика конфіденційності"
+          }
+        }
+      }
     },
     "Processing" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обробка"
+          }
+        }
+      }
     },
     "Profile" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профіль"
+          }
+        }
+      }
     },
-    "Programable Airdrop" : {
-
+    "Programmable Airdrop" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Програмований Airdrop"
+          }
+        }
+      }
     },
     "Proofs" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Докази"
+          }
+        }
+      }
     },
-    "Prove your eligibility, belonging, identity, and contributions — all without revealing who you are." : {
-
+    "Prove your eligibility, belonging, identity, and contributions — all without revealing your personal details." : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Підтверджуйте свою особу, внески та правомочність без розкриття ваших персональних даних"
+          }
+        }
+      }
+    },
+    "Prove your eligibility, belonging, identity, and contributions — without ever revealing personal data." : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Підтверджуйте свою особу, внески та правомочність без розкриття ваших персональних даних"
+          }
+        }
+      }
     },
     "RARIME" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RARIME"
+          }
+        }
+      }
+    },
+    "RariMe ensures your history, reputation and actions are not lost, and remain under your control." : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RariMe гарантує, що ваша репутація та історія дій залишаються під вашим контролем."
+          }
+        }
+      }
+    },
+    "RariMe General Terms & Conditions" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "загальними положення та умовами RariMe"
+          }
+        }
+      }
+    },
+    "RariMe is a self-custody identity wallet where no personal data ever leaves the device and everything is processed locally." : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RariMe — це ідентифікаційний гаманець із самоохороною, у якому жодні особисті дані ніколи не залишають пристрій і все обробляється локально."
+          }
+        }
+      }
+    },
+    "RariMe Privacy Notice" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "політикою конфіденційності RariMe"
+          }
+        }
+      }
+    },
+    "Rarimo Airdrop Program Terms & Conditions" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "правилами та умовами програми Rarimo Airdrop"
+          }
+        }
+      }
     },
     "Reading Data" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зчитування даних"
+          }
+        }
+      }
     },
     "Reading Passport data" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зчитування даних паспорта"
+          }
+        }
+      }
     },
     "Reading passport data...\n\n%@" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зчитування даних паспорта...\n\n%@"
+          }
+        }
+      }
     },
     "Receive" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отримати"
+          }
+        }
+      }
     },
     "Receive RMO" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отримати RMO"
+          }
+        }
+      }
     },
     "Receiver gets" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Буде отримано"
+          }
+        }
+      }
     },
     "Repeat Passcode" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Повторіть ПІН-код"
+          }
+        }
+      }
     },
     "Scan" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сканувати"
+          }
+        }
+      }
     },
     "Scan QR" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QR сканер"
+          }
+        }
+      }
     },
     "Scan your Passport" : {
-
-    },
-    "Select Authorisation Method" : {
-
-    },
-    "Select Data" : {
-
-    },
-    "Selected data will create a confidential profile" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відскануйте ваш паспорт"
+          }
+        }
+      }
     },
     "Send" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Надіслати"
+          }
+        }
+      }
     },
     "Send RMO" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Надіcлати RMO"
+          }
+        }
+      }
     },
     "Settings" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налаштування"
+          }
+        }
+      }
     },
-    "short description text here" : {
-
+    "Shows two identifiers on the card" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Виберіть два ідентифікатори на картці"
+          }
+        }
+      }
     },
     "Skip" : {
-
-    },
-    "Some hint text" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пропустити"
+          }
+        }
+      }
     },
     "Sorry, there was a problem reading the passport. Please try again" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вибачте, виникла проблема при зчитуванні паспорта. Будь ласка, спробуйте ще раз"
+          }
+        }
+      }
     },
     "Start building your incognito profile and earn rewards as an early community member." : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Створіть свій анонімний профіль та отримайте винагороду як ранній учасник спільноти."
+          }
+        }
+      }
+    },
+    "Starting in July" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Стартуємо у липні"
+          }
+        }
+      }
     },
     "Step %lld/%lld" : {
       "localizations" : {
@@ -451,32 +1374,137 @@
             "state" : "new",
             "value" : "Step %1$lld/%2$lld"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Крок %1$lld/%2$lld"
+          }
         }
       }
     },
     "System" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Системна"
+          }
+        }
+      }
     },
     "Terms of Use" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Умови використання"
+          }
+        }
+      }
     },
     "Thanks!" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дякую!"
+          }
+        }
+      }
+    },
+    "The beta launch is focused on distributing tokens to Ukrainian citizens" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мета бета-запуску – роздача токенів громадянам України"
+          }
+        }
+      }
+    },
+    "The rewards program will allow you to receive weekly airdrops.\n\nYou can earn additional rewards by using RariMe’s incognito proofs with other ecosystem apps." : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Програма винагород дозволить вам отримувати щотижневі Airdrop'и.\n\nВи зможете отримати додаткові винагороди, використовуючи анонімні докази RariMe з іншими програмами екосистеми."
+          }
+        }
+      }
     },
     "Theme" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тема"
+          }
+        }
+      }
     },
-    "This app is where your digital identities live, enabling you to go incognito across the web." : {
-
+    "This airdrop is part of a humanitarian effort to help direct funds towards Ukraine." : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цей Airdrop є частиною гуманітарної допомоги для спрямування коштів до України."
+          }
+        }
+      }
+    },
+    "This airdrop is part of a humanitarian effort to help direct funds towards Ukraine.\n\nIt showcases Rarimo’s identity infrastructure and how it can be used by projects and organizations to directly reach civilians." : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цей Airdrop є частиною гуманітарної допомоги для спрямування коштів до України.\n\nВін демонструє інфраструктуру ідентифікації Rarimo і те, як вона може бути використана проектами та організаціями для безпосереднього залучення громадян."
+          }
+        }
+      }
+    },
+    "This app is where you privately store your digital identities, enabling you to go incognito across the web." : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "У додатку ви можете зберігати свої ідентифікаційні дані, щоб анонімно користуватися мережею"
+          }
+        }
+      }
     },
     "Transactions" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Транзакції"
+          }
+        }
+      }
     },
     "Transfer" : {
 
     },
     "Ukrainian" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Українська"
+          }
+        }
+      }
+    },
+    "Upcoming airdrops will include citizens from all over the world.\n\nCreate an incognito profile by scanning your passport, and we will notify you when you become eligible." : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Майбутні Airdrop'и включатимуть громадян з усього світу.\n\nСтворіть свій анонімний профіль, відсканувавши паспорт. Ми повідомимо вас, коли ви зможете доєднатися до програми."
+          }
+        }
+      }
     },
     "Unknown" : {
 
@@ -488,43 +1516,134 @@
 
     },
     "Wallet" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Гаманець"
+          }
+        }
+      }
     },
     "We will notify when you become eligible" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ми повідомимо, коли ви зможете доєднатися"
+          }
+        }
+      }
     },
     "Welcome" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Привіт!"
+          }
+        }
+      }
     },
     "What is RariMe?" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Що таке RariMe?"
+          }
+        }
+      }
     },
-    "What is this?" : {
-
+    "What’s that?" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Що це?"
+          }
+        }
+      }
     },
     "White" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Біла"
+          }
+        }
+      }
     },
     "Withdraw the RMO token" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відправляйте ваші токени RMO на інший гаманець"
+          }
+        }
+      }
     },
     "You can use the QR code or the wallet address to deposit the RMO token to your account" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Використовуйте цей QR-код або адресу гаманця, щоб внести токен RMO на свій рахунок"
+          }
+        }
+      }
     },
     "You’ve joined the waitlist" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ви приєдналися до очікування"
+          }
+        }
+      }
     },
     "You’ve received %lld RMO tokens" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ви отримали %lld токени RMO"
+          }
+        }
+      }
     },
     "Your passport proof is ready" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваш доказ паспорту готовий"
+          }
+        }
+      }
     },
     "Your Private Key" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваш приватний ключ"
+          }
+        }
+      }
     },
-    "Your Rarimo Adress" : {
-
+    "Your Rarimo Address" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваша адреса Rarimo"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

@@ -8,7 +8,7 @@ class SettingsManager: ObservableObject {
 
     init() {
         colorScheme = AppColorScheme(rawValue: AppUserDefaults.shared.colorScheme)!
-        language = AppLanguage(rawValue: AppUserDefaults.shared.language)!
+        language = AppLanguage.fromIdentifier(Locale.current.identifier)
     }
 
     func setColorScheme(_ colorScheme: AppColorScheme) {

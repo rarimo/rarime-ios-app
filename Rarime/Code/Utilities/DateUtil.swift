@@ -1,10 +1,3 @@
-//
-//  DateParser.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 03.04.2024.
-//
-
 import Foundation
 
 enum DateParseError: Error {

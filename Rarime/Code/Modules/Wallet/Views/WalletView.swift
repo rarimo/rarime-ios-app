@@ -7,7 +7,7 @@ private enum WalletRoute: String, Hashable {
 struct WalletView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
-    
+
     @State private var path: [WalletRoute] = []
     
     @State private var isBalanceFetching = false
