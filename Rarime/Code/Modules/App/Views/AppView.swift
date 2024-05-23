@@ -1,18 +1,28 @@
+import OSLog
 import SwiftUI
 
 struct AppView: View {
+    @EnvironmentObject private var alertManager: AlertManager
     @EnvironmentObject private var securityManager: SecurityManager
     @EnvironmentObject private var settingsManager: SettingsManager
     @StateObject private var viewModel = ViewModel()
+    
+    @State private var isAlertPresented = false
+    @State private var alert: Alert?
 
     var body: some View {
         ZStack {
-            // With the new circuit version, we are going to get rid of this
-            // in favor of the embedded circuit data
-            if !viewModel.isCircuitDataDownloaded {
-                PreDownloadView(onFinish: viewModel.finishCircuitDataDownloading).transition(.backslide)
-            } else if securityManager.faceIdState != .unset {
+            if
+                securityManager.passcodeState != .unset,
+                securityManager.faceIdState != .unset,
+                securityManager.isPasscodeCorrect
+            {
                 MainView().transition(.backslide)
+            } else if
+                securityManager.passcodeState != .unset,
+                securityManager.faceIdState != .unset
+            {
+                LockScreenView()
             } else if securityManager.passcodeState != .unset {
                 EnableFaceIdView().transition(.backslide)
             } else if viewModel.isIntroFinished {
@@ -23,11 +33,19 @@ struct AppView: View {
             }
         }
         .preferredColorScheme(settingsManager.colorScheme.rawScheme)
+        .onReceive(AlertManager.shared.alertsSubject) { alert in
+            self.isAlertPresented = true
+            self.alert = alert
+        }
+        .alert(isPresented: $isAlertPresented) {
+            self.alert ?? Alert(title: Text("Unknown"))
+        }
     }
 }
 
 #Preview {
     AppView()
+        .environmentObject(AlertManager())
         .environmentObject(SecurityManager())
         .environmentObject(SettingsManager())
 }

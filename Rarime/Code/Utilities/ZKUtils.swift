@@ -6,16 +6,15 @@ class ZKUtils {
     static let PROOF_SIZE = UInt(4 * 1024 * 1024)
     static let PUB_SIGNALS_SIZE = UInt(4 * 1024 * 1024)
     
-    static public func calcWtnsRegisterIdentity2688(
-        _ privateInputsJson: Data,
-        _ descriptionFileData: Data
+    static public func calcWtnsRegisterIdentityUniversal(
+        _ privateInputsJson: Data
     ) throws -> Data {
-        return try _calcWtnsRegisterIdentity2688(privateInputsJson, descriptionFileData)
+        return try _calcWtnsRegisterIdentityUniversal(Circuits.registerIdentityUniversalDat, privateInputsJson)
     }
     
-    static private func _calcWtnsRegisterIdentity2688(
-        _ privateInputsJson: Data,
-        _ descriptionFileData: Data
+    static private func _calcWtnsRegisterIdentityUniversal(
+        _ descriptionFileData: Data,
+        _ privateInputsJson: Data
     ) throws -> Data {
 #if targetEnvironment(simulator)
         return Data()
@@ -25,39 +24,7 @@ class ZKUtils {
         let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
         let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
         
-        let result = witnesscalc_registerIdentity2688(
-            (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
-            (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
-            wtnsBuffer, wtnsSize,
-            errorBuffer, ERROR_SIZE
-        )
-        
-        try handleWitnessError(result, errorBuffer, wtnsSize)
-        
-        return Data(bytes: wtnsBuffer, count: Int(wtnsSize.pointee))
-#endif
-    }
-    
-    static public func calcWtnsRegisterIdentity2704(
-        _ privateInputsJson: Data,
-        _ descriptionFileData: Data
-    ) throws -> Data {
-        return try _calcWtnsRegisterIdentity2704(privateInputsJson, descriptionFileData)
-    }
-    
-    static private func _calcWtnsRegisterIdentity2704(
-        _ privateInputsJson: Data,
-        _ descriptionFileData: Data
-    ) throws -> Data {
-#if targetEnvironment(simulator)
-        return Data()
-#else
-        let wtnsSize = UnsafeMutablePointer<UInt>.allocate(capacity: Int(1));
-        wtnsSize.initialize(to: WITNESS_SIZE)
-        let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
-        let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
-        
-        let result = witnesscalc_registerIdentity2704(
+        let result = witnesscalc_registerIdentityUniversal(
             (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
             (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
             wtnsBuffer, wtnsSize,
@@ -101,6 +68,10 @@ class ZKUtils {
     
     static public func groth16QueryIdentity(_ wtns: Data) throws -> (proof: Data, pubSignals: Data) {
         return try groth16Prover(Circuits.queryIdentityZkey, wtns)
+    }
+    
+    static public func groth16RegisterIdentityUniversal(_ wtns: Data) throws -> (proof: Data, pubSignals: Data) {
+        return try groth16Prover(Circuits.registerIdentityUniversalZkey, wtns)
     }
     
     static public func groth16Prover(_ zkey: Data, _ wtns: Data) throws -> (proof: Data, pubSignals: Data) {

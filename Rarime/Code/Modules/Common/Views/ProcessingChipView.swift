@@ -1,10 +1,3 @@
-//
-//  ProcessingChipView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 02.04.2024.
-//
-
 import SwiftUI
 
 struct ProcessingChipView: View {

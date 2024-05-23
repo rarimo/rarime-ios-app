@@ -7,7 +7,6 @@ private enum ScanPassportState {
 struct ScanPassportView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
-    @EnvironmentObject private var circuitDataManager: CircuitDataManager
     
     let onComplete: (_ passport: Passport, _ isClaimed: Bool) -> Void
     let onClose: () -> Void
@@ -31,6 +30,8 @@ struct ScanPassportView: View {
                 onNext: { passport in
                     passportViewModel.setPassport(passport)
                     withAnimation { state = .selectData }
+                    
+                    LoggerUtil.passport.info("Passport read successfully: \(passport.fullName)")
                 },
                 onBack: { withAnimation { state = .scanMRZ } },
                 onClose: onClose
@@ -50,13 +51,18 @@ struct ScanPassportView: View {
                     do {
                         try userManager.saveRegisterZkProof(registerZKProof)
                         
-                        if passportViewModel.isEligibleForReward, !walletManager.isClaimed {
+                        if passportViewModel.isEligibleForReward,
+                           !passportViewModel.isAirdropClaimed,
+                           !walletManager.isClaimed
+                        {
+                            LoggerUtil.passport.info("User is eligible for reward")
+                            
                             withAnimation { state = .claimTokens }
                         } else {
                             onComplete(passportViewModel.passport!, false)
                         }
                     } catch {
-                        LoggerUtil.passport.error("unexpected error: \(error)")
+                        LoggerUtil.passport.error("unexpected error: \(error.localizedDescription)")
                     }
                 },
                 onClose: onClose
@@ -82,7 +88,6 @@ struct ScanPassportView: View {
     )
     .environmentObject(WalletManager())
     .environmentObject(userManager)
-    .environmentObject(CircuitDataManager.shared)
     .onAppear {
         _ = try? userManager.createNewUser()
     }

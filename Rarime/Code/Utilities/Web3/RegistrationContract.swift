@@ -48,9 +48,14 @@ class RegistrationContract {
             throw "Proof does not contain root"
         }
         
+        guard let existence = proof["existence"] as? Bool else {
+            throw "Proof does not contain existense"
+        }
+        
         return SMTProof(
             root: root,
-            siblings: siblings
+            siblings: siblings,
+            existence: existence
         )
     }
     
@@ -87,11 +92,46 @@ class RegistrationContract {
         
         return (passportInfo, identityInfo)
     }
+    
+    func certificatesSmt() async throws -> EthereumAddress {
+        let method = registrationContract["certificatesSmt"]!
+        
+        let response = try method().call().wait()
+        
+        guard let address = response[""] as? EthereumAddress else {
+            throw "CertificatesSmt is not address"
+        }
+        
+        return address
+    }
+    
+    func registrationSmt() async throws -> EthereumAddress {
+        let method = registrationContract["registrationSmt"]!
+        
+        let response = try method().call().wait()
+        
+        guard let address = response[""] as? EthereumAddress else {
+            throw "CertificatesSmt is not address"
+        }
+        
+        return address
+    }
+    
+    func icaoMasterTreeMerkleRoot() async throws -> Data {
+        let response = try registrationContract["icaoMasterTreeMerkleRoot"]!().call().wait()
+        
+        guard let root = response[""] as? Data else {
+            throw "Response does not contain root"
+        }
+        
+        return root
+    }
 }
 
 struct SMTProof: Codable {
     let root: Data
     let siblings: [Data]
+    let existence: Bool
 }
 
 struct PassportInfo: Codable {

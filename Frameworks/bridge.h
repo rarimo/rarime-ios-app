@@ -3,7 +3,6 @@
 
 #include "prover.h"
 #include "witnesscalc_queryIdentity.h"
-#include "witnesscalc_registerIdentity2688.h"
-#include "witnesscalc_registerIdentity2704.h"
+#include "witnesscalc_registerIdentityUniversal.h"
 
 #endif /* bridge_h */

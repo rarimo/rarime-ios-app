@@ -53,7 +53,10 @@ struct HomeView: View {
     private var content: some View {
         MainViewLayout {
             RefreshableScrollView(
-                onRefresh: { try await Task.sleep(nanoseconds: 1_200_000_000) }
+                onRefresh: {
+                    fetchBalance()
+                    try await Task.sleep(nanoseconds: 1_200_000_000)
+                }
             ) { _ in
                 VStack(spacing: 24) {
                     Text("Beta launch")
@@ -190,6 +193,8 @@ struct HomeView: View {
     }
 
     func fetchBalance() {
+        isBalanceFetching = true
+        
         let cancelable = Task { @MainActor in
             defer {
                 self.isBalanceFetching = false
@@ -202,7 +207,7 @@ struct HomeView: View {
             } catch is CancellationError {
                 return
             } catch {
-                LoggerUtil.intro.error("failed to fetch balance: \(error)")
+                LoggerUtil.intro.error("failed to fetch balance: \(error.localizedDescription)")
             }
         }
 

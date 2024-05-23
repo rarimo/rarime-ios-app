@@ -9,6 +9,9 @@ struct WalletView: View {
     @EnvironmentObject private var userManager: UserManager
 
     @State private var path: [WalletRoute] = []
+    
+    @State private var isBalanceFetching = false
+    @State private var cancelables: [Task<(), Never>] = []
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -28,7 +31,10 @@ struct WalletView: View {
             VStack(alignment: .leading, spacing: 12) {
                 header
                 RefreshableScrollView(
-                    onRefresh: { try await Task.sleep(nanoseconds: 1_200_000_000) }
+                    onRefresh: {
+                        fetchBalance()
+                        try await Task.sleep(nanoseconds: 1_200_000_000)
+                    }
                 ) { _ in
                     VStack {
                         transactionsCard
@@ -40,6 +46,8 @@ struct WalletView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.backgroundPrimary)
         }
+        .onAppear(perform: fetchBalance)
+        .onDisappear(perform: cleanup)
     }
 
     private var header: some View {
@@ -51,9 +59,13 @@ struct WalletView: View {
                 Text("Available RMO")
                     .body3()
                     .foregroundStyle(.textSecondary)
-                Text((userManager.balance / Double(Rarimo.rarimoTokenMantis)).formatted())
-                    .h4()
-                    .foregroundStyle(.textPrimary)
+                if isBalanceFetching {
+                    ProgressView()
+                } else {
+                    Text((userManager.balance / Double(Rarimo.rarimoTokenMantis)).formatted())
+                        .h4()
+                        .foregroundStyle(.textPrimary)
+                }
             }
             VStack(spacing: 20) {
                 HorizontalDivider()
@@ -93,6 +105,35 @@ struct WalletView: View {
                         .foregroundStyle(.textSecondary)
                 }
             }
+        }
+    }
+    
+    func fetchBalance() {
+        isBalanceFetching = true
+        
+        let cancelable = Task { @MainActor in
+            
+            defer {
+                self.isBalanceFetching = false
+            }
+            
+            do {
+                let balance = try await userManager.fetchBalanse()
+                
+                self.userManager.balance = Double(balance) ?? 0
+            } catch is CancellationError {
+                return
+            } catch {
+                LoggerUtil.intro.error("failed to fetch balance: \(error.localizedDescription)")
+            }
+        }
+        
+        self.cancelables.append(cancelable)
+    }
+    
+    func cleanup() {
+        for cancelable in cancelables {
+            cancelable.cancel()
         }
     }
 }

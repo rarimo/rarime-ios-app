@@ -24,7 +24,7 @@ class WalletManager: ObservableObject {
             return
         }
 
-        try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC)
+        try await Task.sleep(nanoseconds: 1_200_000_000)
         transactions.append(
             Transaction(
                 title: String(localized: "Airdrop"),
@@ -36,5 +36,18 @@ class WalletManager: ObservableObject {
         )
         AppUserDefaults.shared.walletTransactions = try! JSONEncoder().encode(transactions)
         isClaimed = true
+    }
+    
+    func transfer(_ amount: Double) {
+        transactions.append(
+            Transaction(
+                title: String(localized: "Send"),
+                icon: Icons.arrowUp,
+                amount: amount,
+                date: Date(),
+                type: .sent
+            )
+        )
+        AppUserDefaults.shared.walletTransactions = try! JSONEncoder().encode(transactions)
     }
 }

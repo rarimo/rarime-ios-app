@@ -2,72 +2,33 @@ import Foundation
 
 class ConfigManager: ObservableObject {
     static let shared = ConfigManager()
-
-    // TODO: Create General subclass and move this there
-    let privacyPolicyURL: URL
-    let termsOfUseURL: URL
-    let version: String
     
-    let circuitData: CircuitData
+    let general: General
     let api: API
     let cosmos: Cosmos
+    let certificatesStorage: CertificatesStorage
 
     init() {
-        do {
-            guard
-                let privacyPolicyURLRaw = Bundle.main.object(forInfoDictionaryKey: "PRIVACY_POLICY_URL") as? String,
-                let termsOfUseURLRaw = Bundle.main.object(forInfoDictionaryKey: "TERMS_OF_USE_URL") as? String,
-                let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
-            else {
-                throw "some config value aren't initialized"
-            }
-
-            guard
-                let privacyPolicyURL = URL(string: String(privacyPolicyURLRaw.dropFirst().dropLast())),
-                let termsOfUseURL = URL(string: String(termsOfUseURLRaw.dropFirst().dropLast()))
-            else {
-                throw "PRIVACY_POLICY_URL and/or TERMS_OF_USE_URL aren't URLs"
-            }
-
-            self.privacyPolicyURL = privacyPolicyURL
-            self.termsOfUseURL = termsOfUseURL
-            self.version = version
-            
-            self.circuitData = CircuitData()
-            self.api = API()
-            self.cosmos = Cosmos()
-        } catch {
-            fatalError("ConfigManager init error: \(error)")
-        }
+        self.general = General()
+        self.api = API()
+        self.cosmos = Cosmos()
+        self.certificatesStorage = CertificatesStorage()
     }
 }
 
 extension ConfigManager {
-    class CircuitData {
-        let registerIdentityCircuitDataURLs: [URL]
+    class General {
+        let privacyPolicyURL: URL
+        let termsOfUseURL: URL
+        let version: String
         
         init() {
             do {
-                guard
-                    let registerIdentityCircuitDataURLsRaw = Bundle.main.object(forInfoDictionaryKey: "REGISTER_IDENTITY_CIRCUIT_DATA_URLS") as? [String]
-                else {
-                    throw "failed to read REGISTER_IDENTITY_CIRCUIT_DATA_URLS"
-                }
-                
-                var registerIdentityCircuitDataURLs: [URL] = []
-                for registerIdentityCircuitDataURLRaw in registerIdentityCircuitDataURLsRaw {
-                    guard
-                        let registerIdentityCircuitDataURL = URL(string: String(registerIdentityCircuitDataURLRaw.dropFirst().dropLast()))
-                    else {
-                        throw "invalid URL, REGISTER_IDENTITY_CIRCUIT_DATA_URL: \(registerIdentityCircuitDataURLRaw)"
-                    }
-                    
-                    registerIdentityCircuitDataURLs.append(registerIdentityCircuitDataURL)
-                }
-                
-                self.registerIdentityCircuitDataURLs = registerIdentityCircuitDataURLs
+                self.privacyPolicyURL = try readURLFromInfoPlist(key: "PRIVACY_POLICY_URL")
+                self.termsOfUseURL = try readURLFromInfoPlist(key: "TERMS_OF_USE_URL")
+                self.version = try readStringFromInfoPlist(key: "CFBundleShortVersionString")
             } catch {
-                fatalError("ConfigManager.CircuitData init error: \(error)")
+                fatalError("ConfigManager.General init error: \(error.localizedDescription)")
             }
         }
     }
@@ -82,29 +43,12 @@ extension ConfigManager {
         
         init() {
             do {
-                guard
-                    let relayerURLRaw = Bundle.main.object(forInfoDictionaryKey: "RELAYER_URL") as? String,
-                    let evmRpcURLRaw = Bundle.main.object(forInfoDictionaryKey: "EVM_RPC_URL") as? String,
-                    let registerContractAddressRaw = Bundle.main.object(forInfoDictionaryKey: "REGISTER_CONTRACT_ADDRESS") as? String,
-                    let cosmosRpcURLRaw = Bundle.main.object(forInfoDictionaryKey: "COSMOS_RPC_URL") as? String
-                else {
-                    throw "some config value aren't initialized"
-                }
-            
-                guard
-                    let relayerURL = URL(string: String(relayerURLRaw.dropFirst().dropLast())),
-                    let evmRpcURL = URL(string: String(evmRpcURLRaw.dropFirst().dropLast())),
-                    let cosmosRpcURL = URL(string: String(cosmosRpcURLRaw.dropFirst().dropLast()))
-                else {
-                    throw "some of config entries aren't URLs"
-                }
-                
-                self.relayerURL = relayerURL
-                self.evmRpcURL = evmRpcURL
-                self.registerContractAddress = String(registerContractAddressRaw.dropFirst().dropLast())
-                self.cosmosRpcURL = cosmosRpcURL
+                self.relayerURL = try readURLFromInfoPlist(key: "RELAYER_URL")
+                self.evmRpcURL = try readURLFromInfoPlist(key: "EVM_RPC_URL")
+                self.registerContractAddress = try readStringFromInfoPlist(key: "REGISTER_CONTRACT_ADDRESS")
+                self.cosmosRpcURL = try readURLFromInfoPlist(key: "COSMOS_RPC_URL")
             } catch {
-                fatalError("ConfigManager.API init error: \(error)")
+                fatalError("ConfigManager.API init error: \(error.localizedDescription)")
             }
         }
     }
@@ -118,20 +62,48 @@ extension ConfigManager {
         
         init() {
             do {
-                guard
-                    let chainId = Bundle.main.object(forInfoDictionaryKey: "CHAIN_ID") as? String,
-                    let denom = Bundle.main.object(forInfoDictionaryKey: "DENOM") as? String,
-                    let rpcIp = Bundle.main.object(forInfoDictionaryKey: "RPC_IP") as? String
-                else {
-                    throw "some config value aren't initialized"
-                }
-                
-                self.chainId = String(chainId.dropFirst().dropLast())
-                self.denom = String(denom.dropFirst().dropLast())
-                self.rpcIp = String(rpcIp.dropFirst().dropLast())
+                self.chainId = try readStringFromInfoPlist(key: "CHAIN_ID")
+                self.denom = try readStringFromInfoPlist(key: "DENOM")
+                self.rpcIp = try readStringFromInfoPlist(key: "RPC_IP")
             } catch {
-                fatalError("ConfigManager.Cosmos init error: \(error)")
+                fatalError("ConfigManager.Cosmos init error: \(error.localizedDescription)")
             }
         }
     }
+}
+
+extension ConfigManager {
+    class CertificatesStorage {
+        let icaoCosmosRpc: String
+        let masterCertificatesBucketname: String
+        let masterCertificatesFilename: String
+        
+        init() {
+            do {
+                self.icaoCosmosRpc = try readStringFromInfoPlist(key: "ICAO_COSMOS_RPC")
+                self.masterCertificatesBucketname = try readStringFromInfoPlist(key: "MASTER_CERTIFICATES_BUCKETNAME")
+                self.masterCertificatesFilename = try readStringFromInfoPlist(key: "MASTER_CERTIFICATES_FILENAME")
+            } catch {
+                fatalError("ConfigManager.CertificatesStorage init error: \(error.localizedDescription)")
+            }
+        }
+    }
+}
+
+// Although we normally return an optional parameter when we get some value for a key,
+// in our case it is better to throw an error to improve the readability of errors
+fileprivate func readStringFromInfoPlist(key: String) throws -> String {
+    guard let value = Bundle.main.object(forInfoDictionaryKey: key) as? String else {
+        throw "Couldn't find \(key) in Info.plist"
+    }
+    
+    return String(value.dropFirst().dropLast())
+}
+
+fileprivate func readURLFromInfoPlist(key: String) throws -> URL {
+    let value = try readStringFromInfoPlist(key: key)
+    
+    guard let url = URL(string: value) else { throw "\(key) isn't URL" }
+    
+    return url
 }

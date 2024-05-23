@@ -48,7 +48,7 @@ struct ProfileView: View {
                                 Text("Account")
                                     .subtitle3()
                                     .foregroundStyle(.textPrimary)
-                                Text("Address: \(WalletUtil.formatAddress(userManager.userAddress))")
+                                Text("Address: \(RarimoUtils.formatAddress(userManager.userAddress))")
                                     .body4()
                                     .foregroundStyle(.textSecondary)
                             }
@@ -100,7 +100,7 @@ struct ProfileView: View {
                                 action: { isPrivacySheetPresented = true }
                             )
                             .fullScreenCover(isPresented: $isPrivacySheetPresented) {
-                                SafariWebView(url: configManager.privacyPolicyURL)
+                                SafariWebView(url: configManager.general.privacyPolicyURL)
                                     .ignoresSafeArea()
                             }
                             ProfileRow(
@@ -109,12 +109,12 @@ struct ProfileView: View {
                                 action: { isTermsSheetPresented = true }
                             )
                             .fullScreenCover(isPresented: $isTermsSheetPresented) {
-                                SafariWebView(url: configManager.termsOfUseURL)
+                                SafariWebView(url: configManager.general.termsOfUseURL)
                                     .ignoresSafeArea()
                             }
                         }
                     }
-                    Text("App version: \(configManager.version)")
+                    Text("App version: \(configManager.general.version)")
                         .body4()
                         .foregroundStyle(.textDisabled)
                 }

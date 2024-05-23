@@ -7,15 +7,15 @@ struct AirdropIntroView: View {
     @State private var termsChecked = false
 
     private var termsURL: String {
-        configManager.termsOfUseURL.absoluteString
+        configManager.general.termsOfUseURL.absoluteString
     }
 
     private var privacyURL: String {
-        configManager.privacyPolicyURL.absoluteString
+        configManager.general.privacyPolicyURL.absoluteString
     }
 
     private var airdropTermsURL: String {
-        configManager.termsOfUseURL.absoluteString
+        configManager.general.termsOfUseURL.absoluteString
     }
 
     var body: some View {

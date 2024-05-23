@@ -1,10 +1,3 @@
-//
-//  InfoAlertView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 29.03.2024.
-//
-
 import SwiftUI
 
 struct InfoAlert<Content: View>: View {

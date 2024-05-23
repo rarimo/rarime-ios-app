@@ -22,7 +22,7 @@ struct ClaimTokensView: View {
                 passport
             )
             
-            try await userManager.airDrop(queryZkProof)
+            try await userManager.airdrop(queryZkProof)
             
             try await walletManager.claimAirdrop()
             
@@ -33,7 +33,11 @@ struct ClaimTokensView: View {
             FeedbackGenerator.shared.notify(.success)
             onFinish()
         } catch {
-            LoggerUtil.passport.error("Error while claiming tokens: \(error)")
+            LoggerUtil.passport.error("Error while claiming tokens: \(error.localizedDescription)")
+            
+            FeedbackGenerator.shared.notify(.error)
+            
+            AlertManager.shared.emitError(.serviceDown(nil))
         }
     }
 

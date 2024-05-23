@@ -1,10 +1,3 @@
-//
-//  RewardChip.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 02.04.2024.
-//
-
 import SwiftUI
 
 struct RewardChipView: View {

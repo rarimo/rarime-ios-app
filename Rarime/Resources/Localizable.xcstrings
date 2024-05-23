@@ -83,6 +83,16 @@
         }
       }
     },
+    "%d minutes and %d seconds" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$d minutes and %2$d seconds"
+          }
+        }
+      }
+    },
     "Account" : {
       "localizations" : {
         "uk" : {
@@ -142,6 +152,9 @@
           }
         }
       }
+    },
+    "Amount must be greater than 0" : {
+
     },
     "App Icon" : {
       "localizations" : {
@@ -523,16 +536,6 @@
         }
       }
     },
-    "Downloading additional data" : {
-      "localizations" : {
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Завантаження додаткових даних"
-          }
-        }
-      }
-    },
     "Enable" : {
       "localizations" : {
         "uk" : {
@@ -602,6 +605,9 @@
           }
         }
       }
+    },
+    "Enter passcode" : {
+
     },
     "Enter Passcode" : {
       "localizations" : {
@@ -753,6 +759,12 @@
         }
       }
     },
+    "Insufficient balance" : {
+
+    },
+    "Invalid HTTP status code: %d" : {
+
+    },
     "Invalid Rarimo address" : {
       "localizations" : {
         "uk" : {
@@ -762,6 +774,9 @@
           }
         }
       }
+    },
+    "Invalid response body" : {
+
     },
     "Issuing state code" : {
       "localizations" : {
@@ -923,6 +938,9 @@
         }
       }
     },
+    "Ok" : {
+
+    },
     "Okay" : {
       "localizations" : {
         "uk" : {
@@ -932,6 +950,12 @@
           }
         }
       }
+    },
+    "One of our services is down, try again later" : {
+
+    },
+    "One of our services is down, try again later. RequestURL=%@" : {
+
     },
     "Open Settings" : {
       "localizations" : {
@@ -962,6 +986,9 @@
           }
         }
       }
+    },
+    "Passcode is incorrect" : {
+
     },
     "Passcodes do not match" : {
       "localizations" : {
@@ -1479,6 +1506,12 @@
         }
       }
     },
+    "Unknown" : {
+
+    },
+    "Unknown service error" : {
+
+    },
     "Upcoming airdrops will include citizens from all over the world.\n\nCreate an incognito profile by scanning your passport, and we will notify you when you become eligible." : {
       "localizations" : {
         "uk" : {
@@ -1488,6 +1521,9 @@
           }
         }
       }
+    },
+    "User creation failed" : {
+
     },
     "Wallet" : {
       "localizations" : {
@@ -1588,6 +1624,9 @@
           }
         }
       }
+    },
+    "Your account is locked. Please try again in %@ here?" : {
+
     },
     "Your passport proof is ready" : {
       "localizations" : {

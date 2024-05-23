@@ -2,7 +2,6 @@ import Foundation
 
 struct AirdropResponse: Codable {
     let data: AirdropResponseData
-    let included: [String]
 }
 
 struct AirdropResponseData: Codable {
@@ -11,14 +10,13 @@ struct AirdropResponseData: Codable {
 }
 
 struct AirdropResponseAttributes: Codable {
-    let address, amount, createdAt, status: String
-    let txHash, updatedAt: String
+    let address, amount, createdAt, nullifier: String
+    let status, updatedAt: String
 
     enum CodingKeys: String, CodingKey {
         case address, amount
         case createdAt = "created_at"
-        case status
-        case txHash = "tx_hash"
+        case nullifier, status
         case updatedAt = "updated_at"
     }
 }

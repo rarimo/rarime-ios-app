@@ -1,10 +1,3 @@
-//
-//  PasscodeFieldView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 31.03.2024.
-//
-
 import SwiftUI
 
 private let passcodeLength: Int = 4
@@ -56,6 +49,7 @@ struct PasscodeFieldView: View {
                     .caption2()
                     .foregroundColor(.errorMain)
                     .padding(.top, 64)
+                    .multilineTextAlignment(.center)
             }
         }
         .frame(minHeight: 90)

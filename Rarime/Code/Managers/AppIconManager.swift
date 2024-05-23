@@ -17,7 +17,7 @@ class AppIconManager: ObservableObject {
     func setAppIcon(_ icon: AppIcon) {
         UIApplication.shared.setAlternateIconName(icon == .blackAndWhite ? nil : icon.rawValue) { error in
             if let error = error {
-                LoggerUtil.general.error("Error setting the app icon: \(error.localizedDescription)")
+                LoggerUtil.common.error("Error setting the app icon: \(error.localizedDescription)")
             } else {
                 self.appIcon = icon
             }

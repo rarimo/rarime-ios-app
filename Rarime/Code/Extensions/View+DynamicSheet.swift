@@ -1,10 +1,3 @@
-//
-//  View+DynamicSheet.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 30.03.2024.
-//
-
 import SwiftUI
 
 let DEFAULT_SHEET_HEIGHT: CGFloat = 300

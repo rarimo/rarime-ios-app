@@ -14,7 +14,6 @@ struct NewIdentityView: View {
             title: String(localized: "Your Private Key"),
             onBack: {
                 userManager.user = nil
-                
                 onBack()
             },
             nextButton: {
@@ -26,7 +25,7 @@ struct NewIdentityView: View {
                             do {
                                 try user.save()
                             } catch {
-                                LoggerUtil.intro.error("failed to save user: \(error)")
+                                LoggerUtil.intro.error("failed to save user: \(error.localizedDescription)")
                                 
                                 userManager.user = nil
                                 
@@ -66,6 +65,7 @@ struct NewIdentityView: View {
                 }
             }
         }
+        // TODO: Somehow it's called twice, we need to find why, I've made a quick hack, but it's better to find its source
         .onAppear(perform: createNewUser)
         .onDisappear(perform: cleanup)
     }
@@ -93,13 +93,21 @@ struct NewIdentityView: View {
     }
     
     func createNewUser() {
+        if userManager.user != nil {
+            return
+        }
+        
         let cancelable = Task { @MainActor in
             do {
                 try userManager.createNewUser()
+                
+                LoggerUtil.intro.info("New user created: \(userManager.userAddress)")
             } catch is CancellationError {
                 return
             } catch {
-                LoggerUtil.intro.error("failed to create new user: \(error)")
+                LoggerUtil.intro.error("failed to create new user: \(error.localizedDescription)")
+                
+                AlertManager.shared.emitError(.userCreationFailed)
             }
         }
         

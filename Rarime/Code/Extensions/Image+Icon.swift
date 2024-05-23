@@ -1,10 +1,3 @@
-//
-//  Image.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 24.03.2024.
-//
-
 import Foundation
 import SwiftUI
 

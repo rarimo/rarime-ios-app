@@ -1,10 +1,3 @@
-//
-//  CardContainerView.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 24.03.2024.
-//
-
 import SwiftUI
 
 struct CardContainer<Content: View>: View {
