@@ -22,7 +22,7 @@ struct AppView: View {
                 securityManager.passcodeState != .unset,
                 securityManager.faceIdState != .unset
             {
-                CheckPassportView()
+                LockScreenView()
             } else if securityManager.passcodeState != .unset {
                 EnableFaceIdView().transition(.backslide)
             } else if viewModel.isIntroFinished {

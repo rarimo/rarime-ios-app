@@ -21,6 +21,9 @@
         }
       }
     },
+    "(minutes) minutes and (seconds) seconds" : {
+
+    },
     "%@ ensures your history, reputation and actions are not lost, but remain confidential and under your control." : {
       "localizations" : {
         "uk" : {
@@ -143,6 +146,9 @@
         }
       }
     },
+    "Amount must be greater than 0" : {
+
+    },
     "App Icon" : {
       "localizations" : {
         "uk" : {
@@ -152,9 +158,6 @@
           }
         }
       }
-    },
-    "Amount must be greater than 0" : {
-
     },
     "App version: %@" : {
       "localizations" : {
@@ -941,6 +944,12 @@
         }
       }
     },
+    "One of our services is down, try again later" : {
+
+    },
+    "One of our services is down, try again later. RequestURL=(requestURL?.absoluteString ?? \"nil\")" : {
+
+    },
     "Open Settings" : {
       "localizations" : {
         "uk" : {
@@ -950,12 +959,6 @@
           }
         }
       }
-    },
-    "One of our services is down, try again later" : {
-
-    },
-    "One of our services is down, try again later. RequestURL=(requestURL?.absoluteString ?? \"nil\")" : {
-
     },
     "Other passport holders" : {
       "localizations" : {
@@ -976,6 +979,9 @@
           }
         }
       }
+    },
+    "Passcode is incorrect" : {
+
     },
     "Passcodes do not match" : {
       "localizations" : {
@@ -1483,9 +1489,6 @@
         }
       }
     },
-    "Transfer" : {
-
-    },
     "Ukrainian" : {
       "localizations" : {
         "uk" : {
@@ -1496,6 +1499,12 @@
         }
       }
     },
+    "Unknown" : {
+
+    },
+    "Unknown service error" : {
+
+    },
     "Upcoming airdrops will include citizens from all over the world.\n\nCreate an incognito profile by scanning your passport, and we will notify you when you become eligible." : {
       "localizations" : {
         "uk" : {
@@ -1505,12 +1514,6 @@
           }
         }
       }
-    },
-    "Unknown" : {
-
-    },
-    "Unknown service error" : {
-
     },
     "User creation failed" : {
 
@@ -1614,6 +1617,9 @@
           }
         }
       }
+    },
+    "Your account is locked. Please try again in (bannedTime) here?" : {
+
     },
     "Your passport proof is ready" : {
       "localizations" : {

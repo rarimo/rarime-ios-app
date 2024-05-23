@@ -125,7 +125,7 @@
 		CE0DA0D72BDA6F1900696503 /* EvmTxResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */; };
 		CE0DA0D92BDA927000696503 /* AirDropResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D82BDA927000696503 /* AirDropResponse.swift */; };
 		CE19CB472BE39DA400B26DF7 /* RarimoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB462BE39DA400B26DF7 /* RarimoUtils.swift */; };
-		CE19CB492BE3AD4200B26DF7 /* CheckPassportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB482BE3AD4200B26DF7 /* CheckPassportView.swift */; };
+		CE19CB492BE3AD4200B26DF7 /* LockScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB482BE3AD4200B26DF7 /* LockScreenView.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
 		CE32CF522BAC981300E507B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE32CF512BAC981300E507B6 /* Lottie */; };
 		CE68BE3D2BD9B23D00D92EBB /* ZkProof.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */; };
@@ -281,7 +281,7 @@
 		CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmTxResponse.swift; sourceTree = "<group>"; };
 		CE0DA0D82BDA927000696503 /* AirDropResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirDropResponse.swift; sourceTree = "<group>"; };
 		CE19CB462BE39DA400B26DF7 /* RarimoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarimoUtils.swift; sourceTree = "<group>"; };
-		CE19CB482BE3AD4200B26DF7 /* CheckPassportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPassportView.swift; sourceTree = "<group>"; };
+		CE19CB482BE3AD4200B26DF7 /* LockScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenView.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZkProof.swift; sourceTree = "<group>"; };
 		CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relayer.swift; sourceTree = "<group>"; };
@@ -633,7 +633,7 @@
 				56DAA30E2BB8C3CB002CF710 /* EnablePasscodeView.swift */,
 				56DAA3122BB8CA4F002CF710 /* EnableFaceIdView.swift */,
 				56DAA3102BB8C97D002CF710 /* EnableLayoutView.swift */,
-				CE19CB482BE3AD4200B26DF7 /* CheckPassportView.swift */,
+				CE19CB482BE3AD4200B26DF7 /* LockScreenView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1120,7 +1120,7 @@
 				56933DFB2BBAFBD90068C894 /* AppToggle.swift in Sources */,
 				56E6AD4B2BD2732300E4DDC1 /* ThemeView.swift in Sources */,
 				56E2D9152BCE7FC4006E725D /* HomeIntroLayout.swift in Sources */,
-				CE19CB492BE3AD4200B26DF7 /* CheckPassportView.swift in Sources */,
+				CE19CB492BE3AD4200B26DF7 /* LockScreenView.swift in Sources */,
 				CEDC4D832BE949F300459D4E /* Ethereum.swift in Sources */,
 				5655E4282BD2C3FD00B86C5C /* Transaction.swift in Sources */,
 				56933DEF2BBABD100068C894 /* ScanPassportView.swift in Sources */,

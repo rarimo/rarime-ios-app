@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CheckPassportView: View {
+struct LockScreenView: View {
     private static let MAX_PASSCODE_ATTEMPTS = 5
     private static let BAN_TIME = 60 * 5
     
@@ -47,13 +47,13 @@ struct CheckPassportView: View {
         }
         
         if passcode != securityManager.passcode {
-            errorMessage = "Passcode is incorrect"
+            errorMessage = NSLocalizedString("Passcode is incorrect", comment: "")
             FeedbackGenerator.shared.notify(.error)
             
             failedAttempts += 1
             
-            if failedAttempts >= CheckPassportView.MAX_PASSCODE_ATTEMPTS {
-                let newBanTimeEnd = Date().addingTimeInterval(TimeInterval(CheckPassportView.BAN_TIME))
+            if failedAttempts >= LockScreenView.MAX_PASSCODE_ATTEMPTS {
+                let newBanTimeEnd = Date().addingTimeInterval(TimeInterval(LockScreenView.BAN_TIME))
                 
                 
                 AppUserDefaults.shared.banTimeEnd = newBanTimeEnd
@@ -80,7 +80,10 @@ struct CheckPassportView: View {
             return
         }
         
-        errorMessage = "You are banned to " + banTime.formatted(date: .omitted, time: .standard)
+        var bannedTime = timeRemaining(to: banTime)
+        
+        errorMessage = NSLocalizedString("Your account is locked. Please try again in \(bannedTime) here?", comment: "")
+        
         FeedbackGenerator.shared.notify(.error)
         
         Task { @MainActor in
@@ -105,7 +108,17 @@ struct CheckPassportView: View {
     }
 }
 
+fileprivate func timeRemaining(to futureDate: Date) -> String {
+    let currentDate = Date()
+    let interval = futureDate.timeIntervalSince(currentDate)
+    
+    let minutes = Int(interval) / 60
+    let seconds = Int(interval) % 60
+    
+    return NSLocalizedString("\(minutes) minutes and \(seconds) seconds", comment: "")
+}
+
 #Preview {
-    CheckPassportView()
+    LockScreenView()
         .environmentObject(SecurityManager.shared)
 }

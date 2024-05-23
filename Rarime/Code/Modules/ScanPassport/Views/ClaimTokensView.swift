@@ -15,7 +15,7 @@ struct ClaimTokensView: View {
             isClaiming = true
             
             guard let passport = passportViewModel.passport else { throw "failed to get passport" }
-            guard let registerZkProof = userManager.registerZkProof else { throw "failed to get registerZkPr oof" }
+            guard let registerZkProof = userManager.registerZkProof else { throw "failed to get registerZkProof" }
             
             let queryZkProof = try await userManager.generateAirdropQueryProof(
                 registerZkProof,

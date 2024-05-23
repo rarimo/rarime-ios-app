@@ -49,6 +49,7 @@ struct PasscodeFieldView: View {
                     .caption2()
                     .foregroundColor(.errorMain)
                     .padding(.top, 64)
+                    .multilineTextAlignment(.center)
             }
         }
         .frame(minHeight: 90)

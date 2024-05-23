@@ -55,7 +55,7 @@ struct HomeView: View {
             RefreshableScrollView(
                 onRefresh: {
                     fetchBalance()
-                    try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC)
+                    try await Task.sleep(nanoseconds: 1_200_000_000)
                 }
             ) { _ in
                 VStack(spacing: 24) {

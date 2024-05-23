@@ -24,7 +24,7 @@ class WalletManager: ObservableObject {
             return
         }
 
-        try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC)
+        try await Task.sleep(nanoseconds: 1_200_000_000)
         transactions.append(
             Transaction(
                 title: String(localized: "Airdrop"),
@@ -41,7 +41,7 @@ class WalletManager: ObservableObject {
     func transfer(_ amount: Double) {
         transactions.append(
             Transaction(
-                title: String(localized: "Transfer"),
+                title: String(localized: "Send"),
                 icon: Icons.arrowUp,
                 amount: amount,
                 date: Date(),
