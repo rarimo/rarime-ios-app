@@ -15,14 +15,14 @@ struct ClaimTokensView: View {
             isClaiming = true
             
             guard let passport = passportViewModel.passport else { throw "failed to get passport" }
-            guard let registerZkProof = userManager.registerZkProof else { throw "failed to get registerZkProof" }
+            guard let registerZkProof = userManager.registerZkProof else { throw "failed to get registerZkPr oof" }
             
             let queryZkProof = try await userManager.generateAirdropQueryProof(
                 registerZkProof,
                 passport
             )
             
-            try await userManager.airDrop(queryZkProof)
+            try await userManager.airdrop(queryZkProof)
             
             try await walletManager.claimAirdrop()
             
@@ -34,6 +34,10 @@ struct ClaimTokensView: View {
             onFinish()
         } catch {
             LoggerUtil.passport.error("Error while claiming tokens: \(error.localizedDescription)")
+            
+            FeedbackGenerator.shared.notify(.error)
+            
+            AlertManager.shared.emitError(.serviceDown(nil))
         }
     }
 

@@ -1,3 +1,4 @@
+import Alamofire
 import SwiftUI
 import Identity
 import NFCPassportReader
@@ -243,18 +244,14 @@ class UserManager: ObservableObject {
         let profile = try profileInitializer.newProfile(secretKey)
         
         let (passportInfo, identityInfo) = try await registrationContract.getPassportInfo(registerZkProof.pubSignals[0])
-        
-        let queryProofInputs = try profile.buildQueryIdentityInputs(
+
+        let queryProofInputs = try profile.buildAirdropQueryIdentityInputs(
             passport.dg1,
             smtProofJSON: smtProofJson,
-            selector: "39",
+            selector: "23073",
             pkPassportHash: registerZkProof.pubSignals[0],
             issueTimestamp: identityInfo.issueTimestamp.description,
-            identityCounter: passportInfo.identityReissueCounter.description,
-            timestampLowerbound: "0",
-            timestampUpperbound: "0",
-            identityCounterLowerbound: "1",
-            identityCounterUpperbound: "0"
+            identityCounter: passportInfo.identityReissueCounter.description
         )
         
         let wtns = try ZKUtils.calcWtnsQueryIdentity(queryProofInputs)
@@ -267,7 +264,7 @@ class UserManager: ObservableObject {
         return ZkProof(proof: proof, pubSignals: pubSignals)
     }
     
-    func airDrop(_ queryZkProof: ZkProof) async throws {
+    func airdrop(_ queryZkProof: ZkProof) async throws {
         guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
         
         let profileInitializer = IdentityProfile()
@@ -277,6 +274,46 @@ class UserManager: ObservableObject {
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
         let _ = try await relayer.airdrop(queryZkProof, to: rarimoAddress)
+    }
+    
+    func isAirdropClaimed() async throws -> Bool {
+        guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
+        
+        let profileInitializer = IdentityProfile()
+        let profile = try profileInitializer.newProfile(secretKey)
+        
+        var error: NSError? = nil
+        let airdropEventNullifier = profile.calculateAirdropEventNullifier(&error)
+        if let error {
+            throw error
+        }
+        
+        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
+        
+        do {
+            let _ = try await relayer.getAirdropInfo(airdropEventNullifier)
+        } catch let error {
+            guard let error = error as? AFError else { throw error }
+            
+            guard case .responseValidationFailed(let errorReason) = error else { throw error }
+            
+            guard case .customValidationFailed(let validationError) = errorReason else { throw error }
+            
+            guard let localError = validationError as? Errors else { throw error }
+            
+            guard case .openAPIErrors(let openApiErrors) = localError else { throw error }
+            
+            guard let openApiError = openApiErrors.first else { throw error }
+            
+            if openApiError.status == HTTPStatusCode.notFound.rawValue {
+                return false
+            }
+            
+            throw error
+        }
+        
+        
+        return true
     }
     
     func fetchBalanse() async throws -> String {

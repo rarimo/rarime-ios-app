@@ -6,7 +6,7 @@ func ErrorAlert(
 ) -> Alert {
     Alert(
         title: Text("Error"),
-        message: Text(error.errorDescription ?? "Unknown"),
+        message: Text(error.localizedDescription ?? "Unknown"),
         dismissButton: dismissButton
     )
 }

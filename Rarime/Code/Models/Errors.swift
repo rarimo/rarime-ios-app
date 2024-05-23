@@ -30,3 +30,24 @@ extension Errors: LocalizedError {
         }
     }
 }
+
+extension Errors {
+    var localizedDescription: String {
+        switch self {
+        case .openAPIErrors(let errors):
+            return NSLocalizedString(errors.localizedDescription, comment: "")
+        case .invalidResponseBody:
+            return NSLocalizedString("Invalid response body", comment: "")
+        case .unknownServiceError:
+            return NSLocalizedString("Unknown service error", comment: "")
+        case .invalidHTTPStatusCode(let statusCode):
+            return NSLocalizedString("Invalid HTTP status code: \(statusCode)", comment: "")
+        case .serviceDown(_):
+            return NSLocalizedString("One of our services is down, try again later", comment: "")
+        case .userCreationFailed:
+            return NSLocalizedString("User creation failed", comment: "")
+        case .unknown:
+            return NSLocalizedString("Unknown", comment: "")
+        }
+    }
+}

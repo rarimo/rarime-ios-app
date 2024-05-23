@@ -14,8 +14,6 @@ class Relayer {
         
         let payload = RegisterRequest(data: RegisterRequestData(txData: "0x" + calldata.hex))
         
-        let payloadJSON = try JSONEncoder().encode(payload)        
-        
         return try await AF.request(
             requestURL,
             method: .post,
@@ -43,6 +41,8 @@ class Relayer {
             )
         )
         
+        let payloadJSON = try JSONEncoder().encode(payload)
+        
         return try await AF.request(
             requestURL,
             method: .post,
@@ -51,6 +51,20 @@ class Relayer {
         )
         .validate(OpenApiError.catchInstance)
         .serializingDecodable(AirdropResponse.self)
+        .result
+        .get()
+    }
+    
+    func getAirdropInfo(_ nullifier: String) async throws -> GetAirdropResponse {
+        var requestURL = url
+        requestURL.append(path: "/integrations/airdrop-svc/airdrops/\(nullifier)")
+        
+        return try await AF.request(
+            requestURL,
+            method: .get
+        )
+        .validate(OpenApiError.catchInstance)
+        .serializingDecodable(GetAirdropResponse.self)
         .result
         .get()
     }
@@ -84,3 +98,27 @@ struct AirdropRequestAttributes: Codable {
         case zkProof = "zk_proof"
     }
 }
+
+struct GetAirdropResponse: Codable {
+    let data: GetAirdropResponseData
+}
+
+struct GetAirdropResponseData: Codable {
+    let id, type: String
+    let attributes: GetAirdropResponseAttributes
+}
+
+struct GetAirdropResponseAttributes: Codable {
+    let address, nullifier, status: String
+    let createdAt, updatedAt: Date
+    let amount, txHash: String
+
+    enum CodingKeys: String, CodingKey {
+        case address, nullifier, status
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case amount
+        case txHash = "tx_hash"
+    }
+}
+

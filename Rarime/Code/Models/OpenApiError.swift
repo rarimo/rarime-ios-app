@@ -47,8 +47,6 @@ extension OpenApiError {
         case 400...499:
             guard let data else { return .failure(Errors.unknownServiceError) }
             
-            LoggerUtil.common.debug("response Data: \(data.utf8)")
-            
             let decoder = JSONDecoder()
             let response = try? decoder.decode(OpenApiErrorResponse.self, from: data)
             guard let response else { return .failure(Errors.invalidResponseBody) }

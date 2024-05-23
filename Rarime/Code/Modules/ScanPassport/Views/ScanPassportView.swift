@@ -51,7 +51,10 @@ struct ScanPassportView: View {
                     do {
                         try userManager.saveRegisterZkProof(registerZKProof)
                         
-                        if passportViewModel.isEligibleForReward, !walletManager.isClaimed {
+                        if passportViewModel.isEligibleForReward,
+                           !passportViewModel.isAirdropClaimed,
+                           !walletManager.isClaimed
+                        {
                             LoggerUtil.passport.info("User is eligible for reward")
                             
                             withAnimation { state = .claimTokens }

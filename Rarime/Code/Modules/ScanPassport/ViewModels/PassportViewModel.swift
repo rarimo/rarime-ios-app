@@ -18,6 +18,8 @@ class PassportViewModel: ObservableObject {
     @Published var passport: Passport?
     @Published var proofState: PassportProofState = .readingData
     @Published var processingStatus: ProcessingStatus = .processing
+    
+    @Published var isAirdropClaimed = false
 
     var isEligibleForReward: Bool {
         passport?.nationality == "UKR"
@@ -52,6 +54,9 @@ class PassportViewModel: ObservableObject {
             
             try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
             proofState = .finalizing
+            
+            isAirdropClaimed = try await UserManager.shared.isAirdropClaimed()
+            
             try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
             processingStatus = .success
             
