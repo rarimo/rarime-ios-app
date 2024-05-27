@@ -54,6 +54,7 @@ enum Icons {
     static let logout = "Logout"
     static let magnifyingGlass = "MagnifyingGlass"
     static let mapPin = "MapPin"
+    static let message = "Message"
     static let metamask = "Metamask"
     static let moon = "Moon"
     static let palette = "Palette"

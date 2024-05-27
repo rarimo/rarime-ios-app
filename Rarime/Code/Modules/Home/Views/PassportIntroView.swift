@@ -15,6 +15,7 @@ struct PassportIntroView: View {
                         .body3()
                         .foregroundStyle(.textPrimary)
                 }
+                InfoAlert(text: "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport.") {}
             }
             Spacer()
             AppButton(text: "Join the waitlist", rightIcon: Icons.arrowRight, action: onStart)
