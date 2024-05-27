@@ -78,7 +78,7 @@ struct WalletSendView: View {
                                 HStack(spacing: 16) {
                                     VerticalDivider()
                                     Button(action: {
-                                        amount = String(userManager.balance)
+                                        amount = String(userManager.balance / Double(Rarimo.rarimoTokenMantis))
                                     }) {
                                         Text("MAX")
                                             .buttonMedium()
