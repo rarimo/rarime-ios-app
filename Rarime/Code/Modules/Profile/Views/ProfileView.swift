@@ -1,4 +1,5 @@
 import SwiftUI
+import MessageUI
 
 private enum ProfileRoute: Hashable {
     case authMethod, exportKeys, language, theme, appIcon
@@ -15,6 +16,7 @@ struct ProfileView: View {
 
     @State private var isPrivacySheetPresented = false
     @State private var isTermsSheetPresented = false
+    @State private var isShareWithDeveloper = false
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -111,6 +113,19 @@ struct ProfileView: View {
                             .fullScreenCover(isPresented: $isTermsSheetPresented) {
                                 SafariWebView(url: configManager.general.termsOfUseURL)
                                     .ignoresSafeArea()
+                            }
+                            if MFMailComposeViewController.canSendMail() {
+                                ProfileRow(
+                                    icon: Icons.share,
+                                    title: "Share feedback with developers",
+                                    action: { isShareWithDeveloper = true }
+                                )
+                                .fullScreenCover(isPresented: $isShareWithDeveloper) {
+                                    ShareFeedbackMailView(
+                                        isShowing: $isShareWithDeveloper,
+                                        result: .constant(nil)
+                                    )
+                                }
                             }
                         }
                     }

@@ -6,13 +6,13 @@ func ErrorAlert(
 ) -> Alert {
     Alert(
         title: Text("Error"),
-        message: Text(error.localizedDescription ?? "Unknown"),
+        message: Text(error.localizedDescription),
         dismissButton: dismissButton
     )
 }
 
 #Preview {
-    let alert = ErrorAlert(.unknown)
+    let alert = ErrorAlert(.unknown(nil))
     
     return VStack {}
         .alert(isPresented: .constant(true), content: { alert })

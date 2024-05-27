@@ -12,6 +12,7 @@ struct AppView: View {
 
     var body: some View {
         ZStack {
+            // TODO: It's look ugly
             if
                 securityManager.passcodeState != .unset,
                 securityManager.faceIdState != .unset,

@@ -20,3 +20,6 @@ RPC_IP = "104.196.227.66:9090"
 MASTER_CERTIFICATES_BUCKETNAME = "rarimo-temp"
 MASTER_CERTIFICATES_FILENAME = "icaopkd-list.ldif"
 ICAO_COSMOS_RPC = "core-api.node1.mainnet-beta.rarimo.com:443"
+
+// MARK: Feedback
+FEEDBACK_EMAIL = "ivan.lele@distributedlab.com"

@@ -154,6 +154,8 @@
 		CEC562192BD92B3E002D4954 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC562132BD9281A002D4954 /* libresolv.9.tbd */; };
 		CEC9D8E72BFF41A800EACD0F /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */; };
 		CEC9D8F32BFF998100EACD0F /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC9D8F22BFF998100EACD0F /* Identity.xcframework */; };
+		CED314672C0483BD00DF31D5 /* ShareFeedbackMailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED314662C0483BD00DF31D5 /* ShareFeedbackMailView.swift */; };
+		CED314692C04889D00DF31D5 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED314682C04889D00DF31D5 /* UIDevice+modelName.swift */; };
 		CED909D02BDBA9FC0065E949 /* Cosmos.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED909CF2BDBA9FC0065E949 /* Cosmos.swift */; };
 		CED909E02BDC1E0F0065E949 /* Rarimo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED909DF2BDC1E0F0065E949 /* Rarimo.swift */; };
 		CEDB9DCC2BFDF60900BCF074 /* libwitnesscalc_queryIdentity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB9DCB2BFDF60900BCF074 /* libwitnesscalc_queryIdentity.a */; };
@@ -311,6 +313,8 @@
 		CEC562142BD9281A002D4954 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		CEC9D8F22BFF998100EACD0F /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
+		CED314662C0483BD00DF31D5 /* ShareFeedbackMailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareFeedbackMailView.swift; sourceTree = "<group>"; };
+		CED314682C04889D00DF31D5 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
 		CED909CF2BDBA9FC0065E949 /* Cosmos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cosmos.swift; sourceTree = "<group>"; };
 		CED909DF2BDC1E0F0065E949 /* Rarimo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rarimo.swift; sourceTree = "<group>"; };
 		CEDB9DCB2BFDF60900BCF074 /* libwitnesscalc_queryIdentity.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_queryIdentity.a; sourceTree = "<group>"; };
@@ -715,6 +719,7 @@
 				CE72101D2BD7BD9D0043DB7F /* Data+Utf8.swift */,
 				CE7210282BD7D0D10043DB7F /* String+Hex.swift */,
 				CE7210322BD818020043DB7F /* Double+Rounded.swift */,
+				CED314682C04889D00DF31D5 /* UIDevice+modelName.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -859,6 +864,7 @@
 				56E2D9212BCFBA0B006E725D /* PassportImageView.swift */,
 				56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */,
 				56E7AD0D2BDAD70200D3A258 /* RefreshableScrollView.swift */,
+				CED314662C0483BD00DF31D5 /* ShareFeedbackMailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1057,6 +1063,7 @@
 				560F0C212BD027FB00067054 /* WalletRouteLayout.swift in Sources */,
 				56933E052BBC00D60068C894 /* RewardChipView.swift in Sources */,
 				561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */,
+				CED314692C04889D00DF31D5 /* UIDevice+modelName.swift in Sources */,
 				CE0DA0D92BDA927000696503 /* AirDropResponse.swift in Sources */,
 				56E2D92A2BCFFB6B006E725D /* Airdrop.swift in Sources */,
 				56DAA3072BB77550002CF710 /* IdentityStepLayoutView.swift in Sources */,
@@ -1075,6 +1082,7 @@
 				560F0C342BD175EB00067054 /* LoggerUtil.swift in Sources */,
 				568B4FCC2BB6C164001C9C74 /* IntroView.swift in Sources */,
 				560F0C1F2BD027EA00067054 /* WalletReceiveView.swift in Sources */,
+				CED314672C0483BD00DF31D5 /* ShareFeedbackMailView.swift in Sources */,
 				5655E4302BD2CA5500B86C5C /* AppColorScheme.swift in Sources */,
 				CED909D02BDBA9FC0065E949 /* Cosmos.swift in Sources */,
 				56A6C76E2BBD474200992562 /* DateUtil.swift in Sources */,

@@ -7,12 +7,14 @@ class ConfigManager: ObservableObject {
     let api: API
     let cosmos: Cosmos
     let certificatesStorage: CertificatesStorage
+    let feedback: Feedback
 
     init() {
         self.general = General()
         self.api = API()
         self.cosmos = Cosmos()
         self.certificatesStorage = CertificatesStorage()
+        self.feedback = Feedback()
     }
 }
 
@@ -85,6 +87,20 @@ extension ConfigManager {
                 self.masterCertificatesFilename = try readStringFromInfoPlist(key: "MASTER_CERTIFICATES_FILENAME")
             } catch {
                 fatalError("ConfigManager.CertificatesStorage init error: \(error.localizedDescription)")
+            }
+        }
+    }
+}
+
+extension ConfigManager {
+    class Feedback {
+        let feedbackEmail: String
+        
+        init() {
+            do {
+                self.feedbackEmail = try readStringFromInfoPlist(key: "FEEDBACK_EMAIL")
+            } catch {
+                fatalError("ConfigManager.Feedback init error: \(error.localizedDescription)")
             }
         }
     }

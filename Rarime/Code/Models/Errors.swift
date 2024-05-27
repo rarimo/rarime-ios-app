@@ -7,7 +7,7 @@ enum Errors: Error {
     case invalidHTTPStatusCode(Int)
     case serviceDown(URL?)
     case userCreationFailed
-    case unknown
+    case unknown(String?)
 }
 
 extension Errors: LocalizedError {
