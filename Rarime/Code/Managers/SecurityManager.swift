@@ -48,6 +48,7 @@ class SecurityManager: ObservableObject {
 
     func disablePasscode() {
         passcodeState = .disabled
+        disableFaceId()
         try? AppKeychain.removeValue(.passcode)
     }
 

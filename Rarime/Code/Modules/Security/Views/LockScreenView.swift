@@ -34,7 +34,9 @@ struct LockScreenView: View {
         
         FaceIdAuth.shared.authenticate(
             onSuccess: {
-                securityManager.isPasscodeCorrect = true
+                DispatchQueue.main.async {
+                    securityManager.isPasscodeCorrect = true
+                }
             }, onFailure: {
                 FeedbackGenerator.shared.notify(.error)
             }, onNotAvailable: {}
@@ -80,7 +82,7 @@ struct LockScreenView: View {
             return
         }
         
-        var bannedTime = timeRemaining(to: banTime)
+        let bannedTime = timeRemaining(to: banTime)
         
         errorMessage = String(format: NSLocalizedString("Your account is locked. Please try again in %@ here?", comment: ""), bannedTime)
         
