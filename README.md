@@ -14,6 +14,14 @@ Requires iOS 16 or higher.
 
 [![App Store Image](https://rarime-landing-test.netlify.app/images/app-store.svg)](https://apps.apple.com)
 
+## Requirements
+
+- Go 1.12.3
+- [gobind](https://godoc.org/golang.org/x/mobile/cmd/gobind)
+
+## Prebuild
+
+Run the `prebuild.sh` script to generate the Go bindings for the iOS app.
 
 ## Features
 

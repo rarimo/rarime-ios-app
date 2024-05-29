@@ -913,7 +913,6 @@
 			buildPhases = (
 				CE9E82AE2BA881F400AAF885 /* Sources */,
 				CE9E82AF2BA881F400AAF885 /* Frameworks */,
-				CEB4C2852BDFFC1300EC163D /* ShellScript */,
 				CE9E82B02BA881F400AAF885 /* Resources */,
 			);
 			buildRules = (
@@ -1008,26 +1007,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		CEB4C2852BDFFC1300EC163D /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n\nset -e\n\nif  [ ! -d \"Build\" ]; then\n    mkdir Build\nfi\n\ncd Build\n\n# Step 1: Pull the repository if not already pulled\nif [ ! -d \"rarime-mobile-identity-sdk\" ]; then\n    git clone git@github.com:rarimo/rarime-mobile-identity-sdk.git\nfi\n\n# Step 2: Run the build script if the xcframework folder does not exist\nif [ ! -d \"rarime-mobile-identity-sdk/Frameworks/Identity.xcframework\" ]; then\n    export PATH=\"$PATH:/usr/local/go/bin/\"\n    export PATH=\"$PATH:$HOME/go/bin\"\n\n    cd rarime-mobile-identity-sdk\n    go get -u golang.org/x/mobile/bind\n    gomobile bind -target ios -o ./Frameworks/Identity.xcframework\n    cd ..\nfi\n\n# Step 3: Move the xcframework folder to the Frameworks folder if not already moved\nif [ ! -d \"../Frameworks/Identity.xcframework\" ]; then\n    mv rarime-mobile-identity-sdk/Frameworks/Identity.xcframework ../Frameworks/\nfi\n\nexit 0\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CE9E82AE2BA881F400AAF885 /* Sources */ = {

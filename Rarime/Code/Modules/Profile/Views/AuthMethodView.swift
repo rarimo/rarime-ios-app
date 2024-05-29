@@ -18,6 +18,7 @@ struct AuthMethodView: View {
                     icon: Icons.userFocus,
                     label: String(localized: "Face ID")
                 )
+                .disabled(securityManager.passcodeState == .disabled)
                 AuthMethodItem(
                     isOn: Binding(
                         get: { securityManager.passcodeState == .enabled },
