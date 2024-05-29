@@ -116,7 +116,7 @@ struct ProfileView: View {
                             }
                             if MFMailComposeViewController.canSendMail() {
                                 ProfileRow(
-                                    icon: Icons.message,
+                                    icon: Icons.chat,
                                     title: "Send Feedback",
                                     action: { isShareWithDeveloper = true }
                                 )
