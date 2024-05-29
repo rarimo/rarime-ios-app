@@ -117,7 +117,7 @@ struct ProfileView: View {
                             if MFMailComposeViewController.canSendMail() {
                                 ProfileRow(
                                     icon: Icons.chat,
-                                    title: "Send Feedback",
+                                    title: "Give us Feedback",
                                     action: { isShareWithDeveloper = true }
                                 )
                                 .fullScreenCover(isPresented: $isShareWithDeveloper) {
