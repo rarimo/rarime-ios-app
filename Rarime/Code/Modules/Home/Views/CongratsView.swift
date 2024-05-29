@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct CongratsView: View {
-    @Binding var open: Bool
+    var open: Bool
     var isClaimed: Bool
+    var onClose: () -> Void
 
     var body: some View {
         ZStack {
@@ -34,7 +35,7 @@ struct CongratsView: View {
                             }
                             HorizontalDivider()
                             VStack(spacing: 4) {
-                                AppButton(variant: .primary, text: isClaimed ? "Thanks!" : "Okay", action: { open = false })
+                                AppButton(variant: .primary, text: isClaimed ? "Thanks!" : "Okay", action: onClose)
                                     .controlSize(.large)
                                 if isClaimed {
                                     ShareLink(
@@ -68,5 +69,5 @@ struct CongratsView: View {
 }
 
 #Preview {
-    CongratsView(open: .constant(true), isClaimed: true)
+    CongratsView(open: true, isClaimed: true, onClose: {})
 }

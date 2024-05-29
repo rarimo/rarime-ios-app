@@ -54,7 +54,8 @@ struct HomeView: View {
                         showTerms: true,
                         passport: passportManager.passport,
                         onFinish: {
-                            fetchBalance()
+                            isClaimed = true
+                            isCongratsShown = true
                             path.removeLast()
                         },
                         onClose: { path.removeLast() }
@@ -117,7 +118,16 @@ struct HomeView: View {
             .background(.backgroundPrimary)
         }
         .blur(radius: isCongratsShown ? 12 : 0)
-        .overlay(CongratsView(open: $isCongratsShown, isClaimed: isClaimed))
+        .overlay(
+            CongratsView(
+                open: isCongratsShown,
+                isClaimed: isClaimed,
+                onClose: {
+                    isCongratsShown = false
+                    fetchBalance()
+                }
+            )
+        )
     }
 
     private var header: some View {
