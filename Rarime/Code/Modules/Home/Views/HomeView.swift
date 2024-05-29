@@ -16,11 +16,16 @@ struct HomeView: View {
     @State private var isPassportSheetPresented = false
     @State private var isRarimeSheetPresented = false
 
-    @State private var isCongratsShown = true
-    @State private var isClaimed = true
+    @State private var isAirdropFlow = false
+    @State private var isCongratsShown = false
+    @State private var isClaimed = false
 
     @State private var isBalanceFetching = true
     @State private var cancelables: [Task<Void, Never>] = []
+
+    var canClaimAirdrop: Bool {
+        !walletManager.isClaimed && passportManager.isEligibleForReward && userManager.registerZkProof != nil
+    }
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -28,6 +33,7 @@ struct HomeView: View {
                 switch route {
                 case .scanPassport:
                     ScanPassportView(
+                        showTerms: !isAirdropFlow,
                         onComplete: { passport, isClaimed in
                             passportManager.setPassport(passport)
                             isCongratsShown = true
@@ -47,7 +53,11 @@ struct HomeView: View {
                     ClaimTokensView(
                         showTerms: true,
                         passport: passportManager.passport,
-                        onFinish: { path.removeLast() }
+                        onFinish: {
+                            fetchBalance()
+                            path.removeLast()
+                        },
+                        onClose: { path.removeLast() }
                     )
                     .navigationBarBackButtonHidden()
                 }
@@ -90,7 +100,9 @@ struct HomeView: View {
                                     set: { passportManager.setPassportIdentifiers($0) }
                                 )
                             )
-                            claimCard
+                            if canClaimAirdrop {
+                                claimCard
+                            }
                             rarimeCard
                         } else {
                             airdropCard
@@ -167,6 +179,7 @@ struct HomeView: View {
                     AirdropIntroView(
                         onStart: {
                             isAirdropSheetPresented = false
+                            isAirdropFlow = true
                             path.append(.scanPassport)
                         }
                     )
@@ -185,6 +198,7 @@ struct HomeView: View {
         .dynamicSheet(isPresented: $isPassportSheetPresented, fullScreen: true) {
             PassportIntroView(onStart: {
                 isPassportSheetPresented = false
+                isAirdropFlow = false
                 path.append(.scanPassport)
             })
         }

@@ -93,6 +93,9 @@
         }
       }
     },
+    "🇺🇦" : {
+
+    },
     "Account" : {
       "localizations" : {
         "uk" : {
@@ -887,9 +890,6 @@
         }
       }
     },
-    "More" : {
-
-    },
     "Move your passport page inside the border" : {
       "localizations" : {
         "uk" : {
@@ -1345,10 +1345,7 @@
         }
       }
     },
-    "Share achievements" : {
-
-    },
-    "Share on socials" : {
+    "Share Achievements" : {
 
     },
     "Shows two identifiers on the card" : {
@@ -1426,9 +1423,6 @@
           }
         }
       }
-    },
-    "Telegram" : {
-
     },
     "Terms of Use" : {
       "localizations" : {
@@ -1618,9 +1612,6 @@
           }
         }
       }
-    },
-    "X" : {
-
     },
     "You can use the QR code or the wallet address to deposit the RMO token to your account" : {
       "localizations" : {

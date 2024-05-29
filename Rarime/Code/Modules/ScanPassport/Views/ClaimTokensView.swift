@@ -7,14 +7,21 @@ struct ClaimTokensView: View {
     let showTerms: Bool
     let passport: Passport?
     let onFinish: () -> Void
+    let onClose: () -> Void
 
     @State private var isClaiming: Bool
     @State private var termsChecked: Bool
     
-    init(showTerms: Bool = false, passport: Passport?, onFinish: @escaping () -> Void) {
+    init(
+        showTerms: Bool = false,
+        passport: Passport?,
+        onFinish: @escaping () -> Void,
+        onClose: @escaping () -> Void
+    ) {
         self.showTerms = showTerms
         self.passport = passport
         self.onFinish = onFinish
+        self.onClose = onClose
         
         self.isClaiming = false
         self.termsChecked = !showTerms
@@ -51,40 +58,49 @@ struct ClaimTokensView: View {
     }
 
     var body: some View {
-        VStack(spacing: 16) {
-            VStack(spacing: 32) {
-                HStack(spacing: -32) {
-                    Image(Icons.rarimo)
-                        .iconLarge()
-                        .padding(20)
-                        .background(.backgroundPure)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(.backgroundPrimary, lineWidth: 2))
-                    Text(String("🇺🇦"))
-                        .h4()
-                        .frame(width: 72, height: 72)
-                        .background(.backgroundPure)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(.backgroundPrimary, lineWidth: 2))
+        ZStack(alignment: .topTrailing) {
+            VStack(spacing: 16) {
+                VStack(spacing: 32) {
+                    HStack(spacing: -32) {
+                        Image(Icons.rarimo)
+                            .iconLarge()
+                            .padding(20)
+                            .background(.backgroundPure)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(.backgroundPrimary, lineWidth: 2))
+//                        Text(String("🇺🇦"))
+                        Text("🇺🇦")
+                            .h4()
+                            .frame(width: 72, height: 72)
+                            .background(.backgroundPure)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(.backgroundPrimary, lineWidth: 2))
+                    }
+                    VStack(spacing: 12) {
+                        Text("Claim \(RARIMO_AIRDROP_REWARD) RMO tokens")
+                            .h6()
+                            .foregroundStyle(.textPrimary)
+                        Text("This airdrop is part of a humanitarian effort to help direct funds towards Ukraine.")
+                            .body3()
+                            .foregroundStyle(.textSecondary)
+                            .multilineTextAlignment(.center)
+                    }
                 }
-                VStack(spacing: 12) {
-                    Text("Claim \(RARIMO_AIRDROP_REWARD) RMO tokens")
-                        .h6()
-                        .foregroundStyle(.textPrimary)
-                    Text("This airdrop is part of a humanitarian effort to help direct funds towards Ukraine.")
-                        .body3()
-                        .foregroundStyle(.textSecondary)
-                        .multilineTextAlignment(.center)
+                .padding(.horizontal, 24)
+                Spacer()
+                footerView
+            }
+            .padding(.top, 80)
+            .background(.backgroundPrimary)
+            if !isClaiming {
+                Button(action: onClose) {
+                    Image(Icons.close)
+                        .iconMedium()
+                        .foregroundColor(.textPrimary)
+                        .padding(.top, 20)
+                        .padding(.trailing, 20)
                 }
             }
-            .padding(.horizontal, 24)
-            Spacer()
-            footerView
-        }
-        .padding(.top, 80)
-        .background(.backgroundPrimary)
-        .onAppear {
-            termsChecked = !showTerms
         }
     }
 
@@ -112,7 +128,7 @@ struct ClaimTokensView: View {
 }
 
 #Preview {
-    ClaimTokensView(showTerms: true, passport: nil, onFinish: {})
+    ClaimTokensView(showTerms: true, passport: nil, onFinish: {}, onClose: {})
         .environmentObject(WalletManager())
         .environmentObject(UserManager())
         .environmentObject(ConfigManager())
