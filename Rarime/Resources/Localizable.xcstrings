@@ -356,6 +356,9 @@
         }
       }
     },
+    "Claim rewards" : {
+
+    },
     "Claiming..." : {
       "localizations" : {
         "uk" : {
@@ -749,6 +752,12 @@
         }
       }
     },
+    "I've just received %lld RMO tokens! Participate in the airdrop: https://rarime.com" : {
+
+    },
+    "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport." : {
+
+    },
     "Incognito mode" : {
       "localizations" : {
         "uk" : {
@@ -877,6 +886,9 @@
           }
         }
       }
+    },
+    "More" : {
+
     },
     "Move your passport page inside the border" : {
       "localizations" : {
@@ -1270,6 +1282,9 @@
         }
       }
     },
+    "RMO Tokens Airdrop" : {
+
+    },
     "Scan" : {
       "localizations" : {
         "uk" : {
@@ -1329,6 +1344,12 @@
           }
         }
       }
+    },
+    "Share achievements" : {
+
+    },
+    "Share on socials" : {
+
     },
     "Shows two identifiers on the card" : {
       "localizations" : {
@@ -1405,6 +1426,9 @@
           }
         }
       }
+    },
+    "Telegram" : {
+
     },
     "Terms of Use" : {
       "localizations" : {
@@ -1595,6 +1619,9 @@
         }
       }
     },
+    "X" : {
+
+    },
     "You can use the QR code or the wallet address to deposit the RMO token to your account" : {
       "localizations" : {
         "uk" : {
@@ -1604,6 +1631,9 @@
           }
         }
       }
+    },
+    "You’ve earned %lld RMO" : {
+
     },
     "You’ve joined the waitlist" : {
       "localizations" : {

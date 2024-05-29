@@ -1,7 +1,7 @@
 import SwiftUI
 
 private enum HomeRoute: Hashable {
-    case scanPassport, scanQR
+    case scanPassport, scanQR, claimRewards
 }
 
 struct HomeView: View {
@@ -16,8 +16,8 @@ struct HomeView: View {
     @State private var isPassportSheetPresented = false
     @State private var isRarimeSheetPresented = false
 
-    @State private var isCongratsShown = false
-    @State private var isClaimed = false
+    @State private var isCongratsShown = true
+    @State private var isClaimed = true
 
     @State private var isBalanceFetching = true
     @State private var cancelables: [Task<Void, Never>] = []
@@ -43,6 +43,13 @@ struct HomeView: View {
                         onScan: { _ in path.removeLast() }
                     )
                     .navigationBarBackButtonHidden()
+                case .claimRewards:
+                    ClaimTokensView(
+                        showTerms: true,
+                        passport: passportManager.passport,
+                        onFinish: { path.removeLast() }
+                    )
+                    .navigationBarBackButtonHidden()
                 }
             }
         }
@@ -65,7 +72,7 @@ struct HomeView: View {
                         .foregroundStyle(.warningDark)
                         .padding(.vertical, 4)
                         .background(.warningLighter)
-                    VStack(alignment: .leading, spacing: 24) {
+                    VStack(alignment: .leading, spacing: 12) {
                         header
                         if let passport = passportManager.passport {
                             PassportCard(
@@ -83,6 +90,7 @@ struct HomeView: View {
                                     set: { passportManager.setPassportIdentifiers($0) }
                                 )
                             )
+                            claimCard
                             rarimeCard
                         } else {
                             airdropCard
@@ -111,11 +119,12 @@ struct HomeView: View {
                 }
                 .foregroundStyle(.textSecondary)
                 Spacer()
-                Button(action: { path.append(.scanQR) }) {
-                    Image(Icons.qrCode)
-                        .iconMedium()
-                        .foregroundStyle(.textPrimary)
-                }
+//                TODO: uncomment when QR proofs are ready
+//                Button(action: { path.append(.scanQR) }) {
+//                    Image(Icons.qrCode)
+//                        .iconMedium()
+//                        .foregroundStyle(.textPrimary)
+//                }
             }
 
             HStack {
@@ -169,8 +178,8 @@ struct HomeView: View {
 
     private var otherPassportsCard: some View {
         ActionCard(
-            title: "Other passport holders",
-            description: "Join a waitlist"
+            title: String(localized: "Other passport holders"),
+            description: String(localized: "Join a waitlist")
         )
         .onTapGesture { isPassportSheetPresented = true }
         .dynamicSheet(isPresented: $isPassportSheetPresented, fullScreen: true) {
@@ -183,8 +192,9 @@ struct HomeView: View {
 
     private var rarimeCard: some View {
         ActionCard(
-            title: "RARIME",
-            description: "Learn more about RariMe App"
+            title: String(localized: "RARIME"),
+            description: String(localized: "Learn more about RariMe App"),
+            icon: { Image(Icons.info).square(24).padding(8) }
         )
         .onTapGesture { isRarimeSheetPresented = true }
         .dynamicSheet(isPresented: $isRarimeSheetPresented, fullScreen: true) {
@@ -192,9 +202,18 @@ struct HomeView: View {
         }
     }
 
+    private var claimCard: some View {
+        ActionCard(
+            title: String(localized: "Claim rewards"),
+            description: String(localized: "You’ve earned \(RARIMO_AIRDROP_REWARD) RMO"),
+            icon: { Image(Images.rewardCoin).square(40) }
+        )
+        .onTapGesture { path.append(.claimRewards) }
+    }
+
     func fetchBalance() {
         isBalanceFetching = true
-        
+
         let cancelable = Task { @MainActor in
             defer {
                 self.isBalanceFetching = false

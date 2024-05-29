@@ -7,7 +7,7 @@ private enum ScanPassportState {
 struct ScanPassportView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
-    
+
     let onComplete: (_ passport: Passport, _ isClaimed: Bool) -> Void
     let onClose: () -> Void
 
@@ -30,7 +30,7 @@ struct ScanPassportView: View {
                 onNext: { passport in
                     passportViewModel.setPassport(passport)
                     withAnimation { state = .selectData }
-                    
+
                     LoggerUtil.passport.info("Passport read successfully: \(passport.fullName)")
                 },
                 onBack: { withAnimation { state = .scanMRZ } },
@@ -50,13 +50,13 @@ struct ScanPassportView: View {
                 onFinish: { registerZKProof in
                     do {
                         try userManager.saveRegisterZkProof(registerZKProof)
-                        
+
                         if passportViewModel.isEligibleForReward,
                            !passportViewModel.isAirdropClaimed,
                            !walletManager.isClaimed
                         {
                             LoggerUtil.passport.info("User is eligible for reward")
-                            
+
                             withAnimation { state = .claimTokens }
                         } else {
                             onComplete(passportViewModel.passport!, false)
@@ -71,6 +71,7 @@ struct ScanPassportView: View {
             .transition(.backslide)
         case .claimTokens:
             ClaimTokensView(
+                passport: passportViewModel.passport,
                 onFinish: { onComplete(passportViewModel.passport!, true) }
             )
             .environmentObject(passportViewModel)
@@ -81,7 +82,7 @@ struct ScanPassportView: View {
 
 #Preview {
     let userManager = UserManager.shared
-    
+
     return ScanPassportView(
         onComplete: { _, _ in },
         onClose: {}

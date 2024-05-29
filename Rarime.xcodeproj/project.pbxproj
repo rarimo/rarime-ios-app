@@ -88,6 +88,7 @@
 		56A6C76A2BBC57B700992562 /* PassportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C7692BBC57B700992562 /* PassportViewModel.swift */; };
 		56A6C76E2BBD474200992562 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C76D2BBD474200992562 /* DateUtil.swift */; };
 		56A88FCD2C04C78F00D3A64A /* ScanPassport.json in Resources */ = {isa = PBXBuildFile; fileRef = 56A88FCC2C04C78F00D3A64A /* ScanPassport.json */; };
+		56A88FCF2C062AB200D3A64A /* AirdropCheckboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A88FCE2C062AB200D3A64A /* AirdropCheckboxView.swift */; };
 		56AC03402BB06A2D00A34A00 /* Image+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */; };
 		56CC01E52BCD81AA008CEBE0 /* AirdropIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CC01E42BCD81AA008CEBE0 /* AirdropIntroView.swift */; };
 		56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3002BB723A1002CF710 /* NewIdentityView.swift */; };
@@ -248,6 +249,7 @@
 		56A6C7692BBC57B700992562 /* PassportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportViewModel.swift; sourceTree = "<group>"; };
 		56A6C76D2BBD474200992562 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		56A88FCC2C04C78F00D3A64A /* ScanPassport.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ScanPassport.json; sourceTree = "<group>"; };
+		56A88FCE2C062AB200D3A64A /* AirdropCheckboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirdropCheckboxView.swift; sourceTree = "<group>"; };
 		56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Icon.swift"; sourceTree = "<group>"; };
 		56CC01E42BCD81AA008CEBE0 /* AirdropIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirdropIntroView.swift; sourceTree = "<group>"; };
 		56DAA3002BB723A1002CF710 /* NewIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIdentityView.swift; sourceTree = "<group>"; };
@@ -857,6 +859,7 @@
 			isa = PBXGroup;
 			children = (
 				CE9E82D62BA8917100AAF885 /* LottieView.swift */,
+				56A88FCE2C062AB200D3A64A /* AirdropCheckboxView.swift */,
 				560F0C262BD1146C00067054 /* ScanQRView.swift */,
 				56E2D9162BCE938F006E725D /* ActionCard.swift */,
 				565E221B2BF7B33D00171692 /* CameraPermissionView.swift */,
@@ -1089,6 +1092,7 @@
 				CED314672C0483BD00DF31D5 /* ShareFeedbackMailView.swift in Sources */,
 				5655E4302BD2CA5500B86C5C /* AppColorScheme.swift in Sources */,
 				CED909D02BDBA9FC0065E949 /* Cosmos.swift in Sources */,
+				56A88FCF2C062AB200D3A64A /* AirdropCheckboxView.swift in Sources */,
 				56A6C76E2BBD474200992562 /* DateUtil.swift in Sources */,
 				56A6C7562BBC194800992562 /* Animations.swift in Sources */,
 				56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */,
