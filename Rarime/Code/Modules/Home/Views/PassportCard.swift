@@ -7,7 +7,7 @@ struct PassportCard: View {
     @Binding var identifiers: [PassportIdentifier]
 
     @State private var isSettingsSheetPresented = false
-    @State private var isHolding = false
+    @GestureState private var isHolding = false
 
     var isInfoHidden: Bool {
         isIncognito && !isHolding
@@ -72,14 +72,15 @@ struct PassportCard: View {
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .gesture(
             DragGesture(minimumDistance: 0)
-                .onChanged { _ in
-                    if isIncognito, !isHolding {
-                        isHolding = true
-                        FeedbackGenerator.shared.impact(.light)
-                    }
+                .updating($isHolding) { _, state, _ in
+                    state = true
                 }
-                .onEnded { _ in isHolding = false }
         )
+        .onChange(of: isHolding) { isHolding in
+            if isHolding && isIncognito {
+                FeedbackGenerator.shared.impact(.light)
+            }
+        }
     }
 
     private func makePassportInfoRow(title: String, value: String) -> some View {

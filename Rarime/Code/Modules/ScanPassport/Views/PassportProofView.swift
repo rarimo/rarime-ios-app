@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PassportProofView: View {
+    @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject var mrzViewModel: MRZViewModel
     @EnvironmentObject var passportViewModel: PassportViewModel
     let onFinish: (ZkProof) -> Void
@@ -51,6 +52,9 @@ struct PassportProofView: View {
         }
         .onChange(of: passportViewModel.processingStatus) { val in
             FeedbackGenerator.shared.notify(val == .success ? .success : .error)
+        }
+        .onChange(of: passportViewModel.isAirdropClaimed) { isAirdropClaimed in
+            self.walletManager.isClaimed = isAirdropClaimed
         }
         .sheet(isPresented: $passportViewModel.isUserRevoking) {
             RevocationNFCScan()
@@ -196,6 +200,7 @@ private struct RevocationNFCScan: View {
     @StateObject var userManager = UserManager.shared
 
     return PassportProofView(onFinish: { _ in }, onClose: {})
+        .environmentObject(WalletManager())
         .environmentObject(PassportViewModel())
         .environmentObject(MRZViewModel())
         .environmentObject(UserManager())

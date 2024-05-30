@@ -23,7 +23,12 @@ class PassportViewModel: ObservableObject {
     
     @Published var isUserRevoking = false
     @Published var revocationChallenge = Data()
-    @Published var isUserRevoked = false
+    @Published var isUserRevoked = false {
+        didSet {
+            UserManager.shared.isRevoked = isUserRevoked
+            AppUserDefaults.shared.isUserRevoked = isUserRevoked
+        }
+    }
     
     @Published var isUserRegistered = false
     

@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct CongratsView: View {
-    @Binding var open: Bool
+    var open: Bool
     var isClaimed: Bool
+    var onClose: () -> Void
 
     var body: some View {
         ZStack {
@@ -33,8 +34,26 @@ struct CongratsView: View {
                                     .foregroundStyle(.textSecondary)
                             }
                             HorizontalDivider()
-                            AppButton(text: isClaimed ? "Thanks!" : "Okay", action: { open = false })
-                                .controlSize(.large)
+                            VStack(spacing: 4) {
+                                AppButton(variant: .primary, text: isClaimed ? "Thanks!" : "Okay", action: onClose)
+                                    .controlSize(.large)
+                                if isClaimed {
+                                    ShareLink(
+                                        // TODO: update content
+                                        item: URL(string: "https://rarime.com")!,
+                                        subject: Text("RMO Tokens Airdrop"),
+                                        message: Text("I've just received \(RARIMO_AIRDROP_REWARD) RMO tokens! Participate in the airdrop: https://rarime.com")
+                                    ) {
+                                        HStack(spacing: 8) {
+                                            Image(Icons.share).iconMedium()
+                                            Text("Share Achievements").buttonLarge()
+                                        }
+                                        .frame(maxWidth: .infinity, maxHeight: 48.0)
+                                        .background(.componentPrimary, in: RoundedRectangle(cornerRadius: 1000.0))
+                                        .foregroundStyle(.textPrimary)
+                                    }
+                                }
+                            }
                         }
                     }
                     .padding(20)
@@ -50,5 +69,5 @@ struct CongratsView: View {
 }
 
 #Preview {
-    CongratsView(open: .constant(true), isClaimed: true)
+    CongratsView(open: true, isClaimed: true, onClose: {})
 }

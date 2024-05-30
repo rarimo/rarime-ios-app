@@ -17,6 +17,8 @@ class UserManager: ObservableObject {
     
     @Published var balance: Double
     
+    @Published var isRevoked = AppUserDefaults.shared.isUserRevoked
+    
     init() {
         do {
             // Data stored in Keychain cannot be deleted after uninstalling the app,

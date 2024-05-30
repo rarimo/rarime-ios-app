@@ -36,22 +36,8 @@ struct AirdropIntroView: View {
             }
             Spacer()
             HorizontalDivider()
-            HStack(alignment: .top, spacing: 8) {
-                AppCheckbox(checked: $termsChecked)
-                (
-                    Text("By checking this box, you are agreeing to ") +
-                        Text(.init("[\(String(localized: "RariMe General Terms & Conditions"))](\(termsURL))")).underline() +
-                        Text(", ") +
-                        Text(.init("[\(String(localized: "RariMe Privacy Notice"))](\(privacyURL))")).underline() +
-                        Text(" and ") +
-                        Text(.init("[\(String(localized: "Rarimo Airdrop Program Terms & Conditions"))](\(airdropTermsURL))")).underline()
-                )
-                .body4()
-                .tint(.textSecondary)
-                .foregroundStyle(.textSecondary)
-                Spacer()
-            }
-            .padding(.horizontal, 20)
+            AirdropCheckboxView(checked: $termsChecked)
+                .padding(.horizontal, 20)
             AppButton(text: "Continue", action: onStart)
                 .controlSize(.large)
                 .disabled(!termsChecked)
