@@ -1,20 +1,38 @@
 import SwiftUI
 
 struct ClaimTokensView: View {
-    @EnvironmentObject var passportViewModel: PassportViewModel
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
     
+    let showTerms: Bool
+    let passport: Passport?
     let onFinish: () -> Void
+    let onClose: () -> Void
 
-    @State private var isClaiming = false
+    @State private var isClaiming: Bool
+    @State private var termsChecked: Bool
+    
+    init(
+        showTerms: Bool = false,
+        passport: Passport?,
+        onFinish: @escaping () -> Void,
+        onClose: @escaping () -> Void
+    ) {
+        self.showTerms = showTerms
+        self.passport = passport
+        self.onFinish = onFinish
+        self.onClose = onClose
+        
+        self.isClaiming = false
+        self.termsChecked = !showTerms
+    }
 
     private func claimTokens() async {
         defer { isClaiming = false }
         do {
             isClaiming = true
             
-            guard let passport = passportViewModel.passport else { throw "failed to get passport" }
+            guard let passport = passport else { throw "failed to get passport" }
             guard let registerZkProof = userManager.registerZkProof else { throw "failed to get registerZkProof" }
             
             let queryZkProof = try await userManager.generateAirdropQueryProof(
@@ -23,11 +41,9 @@ struct ClaimTokensView: View {
             )
             
             try await userManager.airdrop(queryZkProof)
-            
             try await walletManager.claimAirdrop()
             
             let balance = try await userManager.fetchBalanse()
-            
             userManager.balance = Double(balance) ?? 0
             
             FeedbackGenerator.shared.notify(.success)
@@ -42,43 +58,56 @@ struct ClaimTokensView: View {
     }
 
     var body: some View {
-        VStack(spacing: 16) {
-            VStack(spacing: 32) {
-                HStack(spacing: -32) {
-                    Image(Icons.rarimo)
-                        .iconLarge()
-                        .padding(20)
-                        .background(.backgroundPure)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(.backgroundPrimary, lineWidth: 2))
-                    Text(String("🇺🇦"))
-                        .h4()
-                        .frame(width: 72, height: 72)
-                        .background(.backgroundPure)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(.backgroundPrimary, lineWidth: 2))
+        ZStack(alignment: .topTrailing) {
+            VStack(spacing: 16) {
+                VStack(spacing: 32) {
+                    HStack(spacing: -32) {
+                        Image(Icons.rarimo)
+                            .iconLarge()
+                            .padding(20)
+                            .background(.backgroundPure)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(.backgroundPrimary, lineWidth: 2))
+                        Text(String("🇺🇦"))
+                            .h4()
+                            .frame(width: 72, height: 72)
+                            .background(.backgroundPure)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(.backgroundPrimary, lineWidth: 2))
+                    }
+                    VStack(spacing: 12) {
+                        Text("Claim \(RARIMO_AIRDROP_REWARD) RMO tokens")
+                            .h6()
+                            .foregroundStyle(.textPrimary)
+                        Text("This airdrop is part of a humanitarian effort to help direct funds towards Ukraine.")
+                            .body3()
+                            .foregroundStyle(.textSecondary)
+                            .multilineTextAlignment(.center)
+                    }
                 }
-                VStack(spacing: 12) {
-                    Text("Claim \(RARIMO_AIRDROP_REWARD) RMO tokens")
-                        .h6()
-                        .foregroundStyle(.textPrimary)
-                    Text("This airdrop is part of a humanitarian effort to help direct funds towards Ukraine.")
-                        .body3()
-                        .foregroundStyle(.textSecondary)
-                        .multilineTextAlignment(.center)
+                .padding(.horizontal, 24)
+                Spacer()
+                footerView
+            }
+            .padding(.top, 80)
+            .background(.backgroundPrimary)
+            if !isClaiming {
+                Button(action: onClose) {
+                    Image(Icons.close)
+                        .iconMedium()
+                        .foregroundColor(.textPrimary)
+                        .padding(.top, 20)
+                        .padding(.trailing, 20)
                 }
             }
-            .padding(.horizontal, 24)
-            Spacer()
-            footerView
         }
-        .padding(.top, 80)
-        .background(.backgroundPrimary)
     }
 
     private var footerView: some View {
         VStack(spacing: 16) {
-            HorizontalDivider()
+            if showTerms {
+                AirdropCheckboxView(checked: $termsChecked)
+            }
             AppButton(
                 text: isClaiming ? "Claiming..." : "Claim",
                 action: {
@@ -87,17 +116,19 @@ struct ClaimTokensView: View {
                     }
                 }
             )
-            .disabled(isClaiming)
+            .disabled(isClaiming || !termsChecked)
             .controlSize(.large)
-            .padding(.horizontal, 20)
-            .padding(.bottom, 20)
         }
+        .padding(.horizontal, 20)
+        .padding(.top, 12)
+        .padding(.bottom, 20)
+        .background(.backgroundPure)
     }
 }
 
 #Preview {
-    ClaimTokensView(onFinish: {})
+    ClaimTokensView(showTerms: true, passport: nil, onFinish: {}, onClose: {})
         .environmentObject(WalletManager())
         .environmentObject(UserManager())
-        .environmentObject(PassportViewModel())
+        .environmentObject(ConfigManager())
 }

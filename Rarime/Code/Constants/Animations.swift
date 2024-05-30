@@ -5,4 +5,5 @@ enum Animations {
     static let introProofs = "IntroProofs"
     static let introRewards = "IntroRewards"
     static let incognito = "Incognito"
+    static let scanPassport = "ScanPassport"
 }

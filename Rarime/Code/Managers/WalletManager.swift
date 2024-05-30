@@ -12,6 +12,7 @@ class WalletManager: ObservableObject {
     }
 
     init() {
+        // TODO: check on the backend
         isClaimed = AppUserDefaults.shared.isAirdropClaimed
         transactions = AppUserDefaults.shared.walletTransactions.isEmpty
             ? []
@@ -37,7 +38,7 @@ class WalletManager: ObservableObject {
         AppUserDefaults.shared.walletTransactions = try! JSONEncoder().encode(transactions)
         isClaimed = true
     }
-    
+
     func transfer(_ amount: Double) {
         transactions.append(
             Transaction(

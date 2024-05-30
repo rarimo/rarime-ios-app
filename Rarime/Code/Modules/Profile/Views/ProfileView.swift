@@ -1,5 +1,5 @@
-import SwiftUI
 import MessageUI
+import SwiftUI
 
 private enum ProfileRoute: Hashable {
     case authMethod, exportKeys, language, theme, appIcon
@@ -116,8 +116,8 @@ struct ProfileView: View {
                             }
                             if MFMailComposeViewController.canSendMail() {
                                 ProfileRow(
-                                    icon: Icons.share,
-                                    title: "Share feedback with developers",
+                                    icon: Icons.chat,
+                                    title: "Give us Feedback",
                                     action: { isShareWithDeveloper = true }
                                 )
                                 .fullScreenCover(isPresented: $isShareWithDeveloper) {

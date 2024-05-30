@@ -20,6 +20,7 @@ enum Icons {
     static let chartBarFill = "ChartBarFill"
     static let chartBar = "ChartBar"
     static let chartLine = "ChartLine"
+    static let chat = "Chat"
     static let check = "Check"
     static let close = "Close"
     static let copySimple = "CopySimple"
