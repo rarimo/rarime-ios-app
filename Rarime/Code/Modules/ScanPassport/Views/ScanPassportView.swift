@@ -53,7 +53,7 @@ struct ScanPassportView: View {
                         
                         if 
                            !passportViewModel.isUserRevoked,
-                           !passportViewModel.isEligibleForReward,
+                           passportViewModel.isEligibleForReward,
                            !passportViewModel.isAirdropClaimed,
                            !walletManager.isClaimed
                         {
