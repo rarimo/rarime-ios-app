@@ -53,6 +53,25 @@ struct Passport: Codable {
         
         return ((try? sod?.getEncapsulatedContent())?.count ?? 0) * 8
     }
+    
+    func getDG15PublicKeyPEM() throws -> Data {
+        let dg15 = try DataGroup15([UInt8](dg15))
+        
+        var pubkey: OpaquePointer
+        if let rsaPublicKey = dg15.rsaPublicKey {
+            pubkey = rsaPublicKey
+        } else if let ecdsaPublicKey = dg15.ecdsaPublicKey {
+            pubkey = ecdsaPublicKey
+        } else {
+            throw "Public key is missing"
+        }
+        
+        guard let pubKeyPem = OpenSSLUtils.pubKeyToPEM(pubKey: pubkey).data(using: .utf8) else {
+            throw "Failed to convert public key to PEM"
+        }
+        
+        return pubKeyPem
+    }
 
     static func fromNFCPassportModel(_ model: NFCPassportModel) -> Passport? {
         guard

@@ -51,7 +51,9 @@ struct ScanPassportView: View {
                     do {
                         try userManager.saveRegisterZkProof(registerZKProof)
                         
-                        if passportViewModel.isEligibleForReward,
+                        if 
+                           !passportViewModel.isUserRevoked,
+                           !passportViewModel.isEligibleForReward,
                            !passportViewModel.isAirdropClaimed,
                            !walletManager.isClaimed
                         {
@@ -67,6 +69,7 @@ struct ScanPassportView: View {
                 },
                 onClose: onClose
             )
+            .environmentObject(mrzViewModel)
             .environmentObject(passportViewModel)
             .transition(.backslide)
         case .claimTokens:

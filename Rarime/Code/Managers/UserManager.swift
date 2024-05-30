@@ -133,40 +133,45 @@ class UserManager: ObservableObject {
         return ZkProof(proof: proof, pubSignals: pubSignals)
     }
     
-    func register(_ registerZkProof: ZkProof, _ passport: Passport) async throws {
+    func register(_ registerZkProof: ZkProof, _ passport: Passport, _ isRevoked: Bool) async throws {
         guard let masterCertProof = self.masterCertProof else { throw "Master certificate proof is missing" }
         
         let proofJson = try JSONEncoder().encode(registerZkProof)
         
-        let dg15 = try DataGroup15([UInt8](passport.dg15))
-        
-        var pubkey: OpaquePointer
-        
-        if let rsaPublicKey = dg15.rsaPublicKey {
-            pubkey = rsaPublicKey
-        } else if let ecdsaPublicKey = dg15.ecdsaPublicKey {
-            pubkey = ecdsaPublicKey
-        } else {
-            throw "Public key is missing"
-        }
-        
-        guard let pubKeyPem = OpenSSLUtils.pubKeyToPEM(pubKey: pubkey).data(using: .utf8) else {
-            throw "Failed to convert public key to PEM"
-        }
-        
         let calldataBuilder = IdentityCallDataBuilder()
-        
         let calldata = try calldataBuilder.buildRegisterCalldata(
             proofJson,
             signature: passport.signature,
-            pubKeyPem: pubKeyPem,
-            certificatesRootRaw: masterCertProof.root
+            pubKeyPem: try passport.getDG15PublicKeyPEM(),
+            certificatesRootRaw: masterCertProof.root,
+            isRevoced: isRevoked
         )
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
         let response = try await relayer.register(calldata)
         
         LoggerUtil.common.info("Passport register EVM Tx Hash: \(response.data.attributes.txHash)")
+        
+        let eth = Ethereum()
+        try await eth.waitForTxSuccess(response.data.attributes.txHash)
+    }
+    
+    func revoke(_ passportInfo: PassportInfo, _ passport: Passport) async throws {
+        let identityKey = passportInfo.activeIdentity
+        
+        let signature = passport.signature
+        
+        let calldataBuilder = IdentityCallDataBuilder()
+        let calldata = try calldataBuilder.buildRevoceCalldata(
+            identityKey,
+            signature: signature,
+            pubKeyPem: try passport.getDG15PublicKeyPEM()
+        )
+        
+        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
+        let response = try await relayer.register(calldata)
+        
+        LoggerUtil.common.info("Passport revoke EVM Tx Hash: \(response.data.attributes.txHash)")
         
         let eth = Ethereum()
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
@@ -208,13 +213,11 @@ class UserManager: ObservableObject {
         )
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        
         let response = try await relayer.register(calldata)
         
         LoggerUtil.common.info("Register certificate EVM Tx Hash: \(response.data.attributes.txHash)")
         
         let eth = Ethereum()
-        
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
     }
     

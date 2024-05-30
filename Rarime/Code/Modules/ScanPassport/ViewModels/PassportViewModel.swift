@@ -1,3 +1,4 @@
+import Combine
 import SwiftUI
 
 enum PassportProofState: Int, CaseIterable {
@@ -19,6 +20,12 @@ class PassportViewModel: ObservableObject {
     @Published var processingStatus: ProcessingStatus = .processing
     
     @Published var isAirdropClaimed = false
+    
+    @Published var isUserRevocing = false
+    @Published var revocationChallenge = Data()
+    @Published var isUserRevoked = false
+    
+    var revocationPassportPublisher =  PassthroughSubject<Passport, Error>()
 
     var isEligibleForReward: Bool {
         passport?.nationality == "UKR"
@@ -47,7 +54,37 @@ class PassportViewModel: ObservableObject {
             try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
             proofState = .createProfile
             
-            try await UserManager.shared.register(proof, passport)
+            let registrationContract = try RegistrationContract()
+            
+            let (passportInfo, _) = try await registrationContract.getPassportInfo(proof.pubSignals[0])
+            
+            let isUserRevocing = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
+            
+            if isUserRevocing {
+                LoggerUtil.common.info("Passport is registered, revocing")
+            } else {
+                LoggerUtil.common.info("Passport is not registered")
+            }
+            
+            if isUserRevocing {
+                // takes last 8 bytes of activeIdentity as revocation challenge
+                self.revocationChallenge = passportInfo.activeIdentity[24..<32]
+                
+                // This will trigger a sheet with a NFC scanning
+                self.isUserRevocing = isUserRevocing
+                
+                var iterator = self.revocationPassportPublisher.values.makeAsyncIterator()
+                
+                guard let passport = try await iterator.next() else {
+                    throw "failed to get passport"
+                }
+                
+                try await UserManager.shared.revoke(passportInfo, passport)
+                
+                self.isUserRevoked = true
+            }
+            
+            try await UserManager.shared.register(proof, passport, isUserRevocing)
             
             LoggerUtil.common.info("Passport registration succeed")
             
