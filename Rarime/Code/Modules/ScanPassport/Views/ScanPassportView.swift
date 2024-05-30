@@ -5,6 +5,7 @@ private enum ScanPassportState {
 }
 
 struct ScanPassportView: View {
+    @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
     
@@ -48,23 +49,19 @@ struct ScanPassportView: View {
         case .generateProof:
             PassportProofView(
                 onFinish: { registerZKProof in
-                    do {
-                        try userManager.saveRegisterZkProof(registerZKProof)
+                    userManager.registerZkProof = registerZKProof
+                    
+                    if 
+                       !passportViewModel.isUserRevoked,
+                       passportViewModel.isEligibleForReward,
+                       !passportViewModel.isAirdropClaimed,
+                       !walletManager.isClaimed
+                    {
+                        LoggerUtil.passport.info("User is eligible for reward")
                         
-                        if 
-                           !passportViewModel.isUserRevoked,
-                           passportViewModel.isEligibleForReward,
-                           !passportViewModel.isAirdropClaimed,
-                           !walletManager.isClaimed
-                        {
-                            LoggerUtil.passport.info("User is eligible for reward")
-                            
-                            withAnimation { state = .claimTokens }
-                        } else {
-                            onComplete(passportViewModel.passport!, false)
-                        }
-                    } catch {
-                        LoggerUtil.passport.error("unexpected error: \(error.localizedDescription)")
+                        withAnimation { state = .claimTokens }
+                    } else {
+                        onComplete(passportViewModel.passport!, false)
                     }
                 },
                 onClose: onClose
@@ -74,7 +71,9 @@ struct ScanPassportView: View {
             .transition(.backslide)
         case .claimTokens:
             ClaimTokensView(
-                onFinish: { onComplete(passportViewModel.passport!, true) }
+                onFinish: { isClaimed in
+                    onComplete(passportViewModel.passport!, isClaimed)
+                }
             )
             .environmentObject(passportViewModel)
             .transition(.backslide)
@@ -91,6 +90,7 @@ struct ScanPassportView: View {
     )
     .environmentObject(WalletManager())
     .environmentObject(userManager)
+    .environmentObject(PassportManager())
     .onAppear {
         _ = try? userManager.createNewUser()
     }

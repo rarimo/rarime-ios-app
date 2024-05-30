@@ -21,9 +21,11 @@ class PassportViewModel: ObservableObject {
     
     @Published var isAirdropClaimed = false
     
-    @Published var isUserRevocing = false
+    @Published var isUserRevoking = false
     @Published var revocationChallenge = Data()
     @Published var isUserRevoked = false
+    
+    @Published var isUserRegistered = false
     
     var revocationPassportPublisher =  PassthroughSubject<Passport, Error>()
 
@@ -58,20 +60,20 @@ class PassportViewModel: ObservableObject {
             
             let (passportInfo, _) = try await registrationContract.getPassportInfo(proof.pubSignals[0])
             
-            let isUserRevocing = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
+            let isUserRevoking = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
             
-            if isUserRevocing {
+            if isUserRevoking {
                 LoggerUtil.common.info("Passport is registered, revocing")
             } else {
                 LoggerUtil.common.info("Passport is not registered")
             }
             
-            if isUserRevocing {
+            if isUserRevoking {
                 // takes last 8 bytes of activeIdentity as revocation challenge
                 self.revocationChallenge = passportInfo.activeIdentity[24..<32]
                 
                 // This will trigger a sheet with a NFC scanning
-                self.isUserRevocing = isUserRevocing
+                self.isUserRevoking = isUserRevoking
                 
                 var iterator = self.revocationPassportPublisher.values.makeAsyncIterator()
                 
@@ -84,7 +86,12 @@ class PassportViewModel: ObservableObject {
                 self.isUserRevoked = true
             }
             
-            try await UserManager.shared.register(proof, passport, isUserRevocing)
+            try await UserManager.shared.register(proof, passport, isUserRevoking)
+            
+            PassportManager.shared.setPassport(passport)
+            try UserManager.shared.saveRegisterZkProof(proof)
+            
+            self.isUserRegistered = true
             
             LoggerUtil.common.info("Passport registration succeed")
             

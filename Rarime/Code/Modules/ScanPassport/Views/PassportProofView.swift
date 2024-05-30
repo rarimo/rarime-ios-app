@@ -15,6 +15,12 @@ struct PassportProofView: View {
 
             onFinish(zkProof)
         } catch {
+            if passportViewModel.isUserRegistered {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    onClose()
+                }
+            }
+            
             LoggerUtil.passport.error("error while registering passport: \(error.localizedDescription)")
         }
     }
@@ -46,7 +52,7 @@ struct PassportProofView: View {
         .onChange(of: passportViewModel.processingStatus) { val in
             FeedbackGenerator.shared.notify(val == .success ? .success : .error)
         }
-        .sheet(isPresented: $passportViewModel.isUserRevocing) {
+        .sheet(isPresented: $passportViewModel.isUserRevoking) {
             RevocationNFCScan()
                 .interactiveDismissDisabled()
         }
@@ -167,13 +173,13 @@ private struct RevocationNFCScan: View {
                             switch result {
                             case .success(let passport):
                                 passportViewModel.revocationPassportPublisher.send(passport)
-                                passportViewModel.isUserRevocing = false
+                                passportViewModel.isUserRevoking = false
                             case .failure(let error):
                                 LoggerUtil.passport.error("failed to read passport data: \(error.localizedDescription)")
                                 
                                 passportViewModel.revocationPassportPublisher.send(completion: .failure(error))
                                 
-                                passportViewModel.isUserRevocing = false
+                                passportViewModel.isUserRevoking = false
                             }
                         }
                     )
