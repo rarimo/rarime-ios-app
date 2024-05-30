@@ -68,7 +68,7 @@ class PassportViewModel: ObservableObject {
             let isUserRevoking = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
             
             if isUserRevoking {
-                LoggerUtil.common.info("Passport is registered, revocing")
+                LoggerUtil.common.info("Passport is registered, revoking")
             } else {
                 LoggerUtil.common.info("Passport is not registered")
             }
