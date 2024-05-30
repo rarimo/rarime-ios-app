@@ -6,7 +6,7 @@ struct ClaimTokensView: View {
     
     let showTerms: Bool
     let passport: Passport?
-    let onFinish: () -> Void
+    let onFinish: (Bool) -> Void
     let onClose: () -> Void
 
     @State private var isClaiming: Bool
@@ -15,7 +15,7 @@ struct ClaimTokensView: View {
     init(
         showTerms: Bool = false,
         passport: Passport?,
-        onFinish: @escaping () -> Void,
+        onFinish: @escaping (Bool) -> Void,
         onClose: @escaping () -> Void
     ) {
         self.showTerms = showTerms
@@ -47,11 +47,13 @@ struct ClaimTokensView: View {
             userManager.balance = Double(balance) ?? 0
             
             FeedbackGenerator.shared.notify(.success)
-            onFinish()
+            onFinish(true)
         } catch {
             LoggerUtil.passport.error("Error while claiming tokens: \(error.localizedDescription)")
             
             FeedbackGenerator.shared.notify(.error)
+            
+            onFinish(false)
             
             AlertManager.shared.emitError(.serviceDown(nil))
         }
@@ -127,7 +129,7 @@ struct ClaimTokensView: View {
 }
 
 #Preview {
-    ClaimTokensView(showTerms: true, passport: nil, onFinish: {}, onClose: {})
+    ClaimTokensView(showTerms: true, passport: nil, onFinish: { _ in }, onClose: {})
         .environmentObject(WalletManager())
         .environmentObject(UserManager())
         .environmentObject(ConfigManager())

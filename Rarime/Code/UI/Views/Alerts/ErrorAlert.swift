@@ -16,5 +16,4 @@ func ErrorAlert(
     
     return VStack {}
         .alert(isPresented: .constant(true), content: { alert })
-    
 }

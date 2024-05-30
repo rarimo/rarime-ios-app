@@ -1049,6 +1049,9 @@
         }
       }
     },
+    "Please scan your NFC card" : {
+
+    },
     "Please store the private key safely and do not share it with anyone. If you lose this key, you will not be able to recover the account and will lose access forever." : {
       "localizations" : {
         "uk" : {
@@ -1279,8 +1282,11 @@
         }
       }
     },
-    "RMO Tokens Airdrop" : {
+    "Revoke with NFC" : {
 
+    },
+    "RMO Tokens Airdrop" : {
+      
     },
     "Scan" : {
       "localizations" : {
@@ -1500,6 +1506,9 @@
           }
         }
       }
+    },
+    "This is required to revoke your passport" : {
+
     },
     "Transactions" : {
       "localizations" : {

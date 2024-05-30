@@ -5,6 +5,7 @@ private enum ScanPassportState {
 }
 
 struct ScanPassportView: View {
+    @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
 
@@ -49,32 +50,33 @@ struct ScanPassportView: View {
         case .generateProof:
             PassportProofView(
                 onFinish: { registerZKProof in
-                    do {
-                        try userManager.saveRegisterZkProof(registerZKProof)
-
-                        if passportViewModel.isEligibleForReward,
-                           !passportViewModel.isAirdropClaimed,
-                           !walletManager.isClaimed
-                        {
-                            LoggerUtil.passport.info("User is eligible for reward")
-
-                            withAnimation { state = .claimTokens }
-                        } else {
-                            onComplete(passportViewModel.passport!, false)
-                        }
-                    } catch {
-                        LoggerUtil.passport.error("unexpected error: \(error.localizedDescription)")
+                    userManager.registerZkProof = registerZKProof
+                    
+                    if 
+                       !passportViewModel.isUserRevoked,
+                       passportViewModel.isEligibleForReward,
+                       !passportViewModel.isAirdropClaimed,
+                       !walletManager.isClaimed
+                    {
+                        LoggerUtil.passport.info("User is eligible for reward")
+                        
+                        withAnimation { state = .claimTokens }
+                    } else {
+                        onComplete(passportViewModel.passport!, false)
                     }
                 },
                 onClose: onClose
             )
+            .environmentObject(mrzViewModel)
             .environmentObject(passportViewModel)
             .transition(.backslide)
         case .claimTokens:
             ClaimTokensView(
                 showTerms: showTerms,
                 passport: passportViewModel.passport,
-                onFinish: { onComplete(passportViewModel.passport!, true) },
+                onFinish: { isClaimed in
+                    onComplete(passportViewModel.passport!, isClaimed)
+                },
                 onClose: { onComplete(passportViewModel.passport!, false) }
             )
             .environmentObject(passportViewModel)
@@ -93,6 +95,7 @@ struct ScanPassportView: View {
     )
     .environmentObject(WalletManager())
     .environmentObject(userManager)
+    .environmentObject(PassportManager())
     .onAppear {
         _ = try? userManager.createNewUser()
     }

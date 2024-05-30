@@ -5,6 +5,8 @@ import Web3PromiseKit
 import Web3ContractABI
 
 class Ethereum {
+    static let ZERO_BYTES32: Data = Data(repeating: 0, count: 32)
+    
     static let TX_PULL_INTERVAL: UInt64 = NSEC_PER_SEC * 3
     
     static let TX_SUCCESS_CODE: EthereumQuantity = 1

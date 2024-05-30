@@ -5,18 +5,25 @@ class WalletManager: ObservableObject {
 
     @Published private(set) var transactions: [Transaction]
 
-    @Published private(set) var isClaimed: Bool {
+    @Published var isClaimed: Bool {
         didSet {
             AppUserDefaults.shared.isAirdropClaimed = isClaimed
         }
     }
 
     init() {
-        // TODO: check on the backend
-        isClaimed = AppUserDefaults.shared.isAirdropClaimed
+        isClaimed = true
         transactions = AppUserDefaults.shared.walletTransactions.isEmpty
             ? []
             : try! JSONDecoder().decode([Transaction].self, from: AppUserDefaults.shared.walletTransactions)
+        
+        Task {
+            do {
+                let isClaimed = try await UserManager.shared.isAirdropClaimed()
+                
+                DispatchQueue.main.async { self.isClaimed = isClaimed }
+            } catch {}
+        }
     }
 
     @MainActor

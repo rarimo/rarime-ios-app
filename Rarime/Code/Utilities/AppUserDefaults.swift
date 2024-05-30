@@ -52,4 +52,7 @@ public class AppUserDefaults: ObservableObject {
             UserDefaults.standard.set(self.banTimeEnd, forKey: "ban_time_end")
         }
     }
+    
+    @AppStorage("is_user_revoked")
+    public var isUserRevoked = false
 }

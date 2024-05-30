@@ -24,7 +24,10 @@ struct HomeView: View {
     @State private var cancelables: [Task<Void, Never>] = []
 
     var canClaimAirdrop: Bool {
-        !walletManager.isClaimed && passportManager.isEligibleForReward && userManager.registerZkProof != nil
+        !walletManager.isClaimed
+        && passportManager.isEligibleForReward
+        && !userManager.isRevoked
+        && userManager.registerZkProof != nil
     }
 
     var body: some View {
@@ -53,7 +56,7 @@ struct HomeView: View {
                     ClaimTokensView(
                         showTerms: true,
                         passport: passportManager.passport,
-                        onFinish: {
+                        onFinish: { _ in
                             isClaimed = true
                             isCongratsShown = true
                             path.removeLast()

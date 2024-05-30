@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct PassportProofView: View {
+    @EnvironmentObject private var walletManager: WalletManager
+    @EnvironmentObject var mrzViewModel: MRZViewModel
     @EnvironmentObject var passportViewModel: PassportViewModel
     let onFinish: (ZkProof) -> Void
     let onClose: () -> Void
@@ -14,6 +16,12 @@ struct PassportProofView: View {
 
             onFinish(zkProof)
         } catch {
+            if passportViewModel.isUserRegistered {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    onClose()
+                }
+            }
+            
             LoggerUtil.passport.error("error while registering passport: \(error.localizedDescription)")
         }
     }
@@ -43,7 +51,14 @@ struct PassportProofView: View {
             FeedbackGenerator.shared.impact(.light)
         }
         .onChange(of: passportViewModel.processingStatus) { val in
-            FeedbackGenerator.shared.notify(val == .success ?.success : .error)
+            FeedbackGenerator.shared.notify(val == .success ? .success : .error)
+        }
+        .onChange(of: passportViewModel.isAirdropClaimed) { isAirdropClaimed in
+            self.walletManager.isClaimed = isAirdropClaimed
+        }
+        .sheet(isPresented: $passportViewModel.isUserRevoking) {
+            RevocationNFCScan()
+                .interactiveDismissDisabled()
         }
         .background(.backgroundPrimary)
     }
@@ -135,11 +150,59 @@ private struct GeneralStatusView: View {
     }
 }
 
+private struct RevocationNFCScan: View {
+    @EnvironmentObject var mrzViewModel: MRZViewModel
+    @EnvironmentObject var passportViewModel: PassportViewModel
+    
+    var body: some View {
+        ZStack {
+            VStack(spacing: 16) {
+                Spacer()
+                Image(Icons.swap)
+                    .square(80)
+                    .foregroundStyle(.textPrimary)
+                Text("Please scan your NFC card")
+                    .h6()
+                    .foregroundStyle(.textPrimary)
+                Text("This is required to revoke your passport")
+                    .body3()
+                    .foregroundStyle(.textSecondary)
+                    .multilineTextAlignment(.center)
+                Spacer()
+                AppButton(text: "Revoke with NFC") {
+                    NFCScanner.scanPassport(
+                        mrzViewModel.mrzKey,
+                        passportViewModel.revocationChallenge,
+                        onCompletion: { result in
+                            switch result {
+                            case .success(let passport):
+                                passportViewModel.revocationPassportPublisher.send(passport)
+                                passportViewModel.isUserRevoking = false
+                            case .failure(let error):
+                                LoggerUtil.passport.error("failed to read passport data: \(error.localizedDescription)")
+                                
+                                passportViewModel.revocationPassportPublisher.send(completion: .failure(error))
+                                
+                                passportViewModel.isUserRevoking = false
+                            }
+                        }
+                    )
+                }
+                .controlSize(.large)
+            }
+            .padding(20)
+            .background(.backgroundOpacity, in: RoundedRectangle(cornerRadius: 24))
+        }
+    }
+}
+
 #Preview {
     @StateObject var userManager = UserManager.shared
 
     return PassportProofView(onFinish: { _ in }, onClose: {})
+        .environmentObject(WalletManager())
         .environmentObject(PassportViewModel())
+        .environmentObject(MRZViewModel())
         .environmentObject(UserManager())
         .onAppear {
             _ = try? userManager.createNewUser()
