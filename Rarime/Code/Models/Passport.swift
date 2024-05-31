@@ -101,4 +101,9 @@ struct Passport: Codable {
             signature: Data(model.activeAuthenticationSignature)
         )
     }
+    
+    func serialize() throws -> Data {
+        let encoder = JSONEncoder()
+        return try encoder.encode(self)
+    }
 }

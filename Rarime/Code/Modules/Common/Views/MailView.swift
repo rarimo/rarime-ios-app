@@ -2,11 +2,15 @@ import UIKit
 import SwiftUI
 import MessageUI
 
-struct ShareFeedbackMailView: UIViewControllerRepresentable {
+struct MailView: UIViewControllerRepresentable {
+    let subject: String
+    let attachment: Data
+    let fileName: String
+    
     @Binding var isShowing: Bool
     @Binding var result: Result<MFMailComposeResult, Error>?
 
-    class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
+    class Coordinator: NSObject, MFMailComposeViewControllerDelegate {        
         @Binding var isShowing: Bool
         @Binding var result: Result<MFMailComposeResult, Error>?
 
@@ -44,25 +48,15 @@ struct ShareFeedbackMailView: UIViewControllerRepresentable {
     }
 
     func makeUIViewController(
-        context: UIViewControllerRepresentableContext<ShareFeedbackMailView>
+        context: UIViewControllerRepresentableContext<MailView>
     ) -> MFMailComposeViewController {
         let recipient = ConfigManager.shared.feedback.feedbackEmail
-        let subject = "Feedback from: \(UIDevice.modelName)"
-        
-        LoggerUtil.common.info("Exporting logs")
-        
-        let logEntries = (try? LoggerUtil.export()) ?? []
-        let logData = logEntries.map { $0.description }.joined(separator: "\n")
-        
-        let attachment = logData.data(using: .utf8) ?? Data()
-        let mimeType = "text/plain"
-        let fileName = "logs.txt"
         
         let vc = MFMailComposeViewController()
         
         vc.setSubject(subject)
         vc.setToRecipients([recipient])
-        vc.addAttachmentData(attachment, mimeType: mimeType, fileName: fileName)
+        vc.addAttachmentData(attachment, mimeType: "text/plain", fileName: fileName)
         
         vc.mailComposeDelegate = context.coordinator
         
@@ -71,6 +65,6 @@ struct ShareFeedbackMailView: UIViewControllerRepresentable {
 
     func updateUIViewController(
         _ uiViewController: MFMailComposeViewController,
-        context: UIViewControllerRepresentableContext<ShareFeedbackMailView>
+        context: UIViewControllerRepresentableContext<MailView>
     ) {}
 }

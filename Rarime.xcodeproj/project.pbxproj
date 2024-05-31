@@ -148,6 +148,7 @@
 		CE9E82B82BA881F400AAF885 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82B72BA881F400AAF885 /* AppView.swift */; };
 		CE9E82BA2BA881F500AAF885 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9E82B92BA881F500AAF885 /* Assets.xcassets */; };
 		CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82D62BA8917100AAF885 /* LottieView.swift */; };
+		CEB91BBE2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB91BBD2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift */; };
 		CEC562032BD923B4002D4954 /* libfr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC561FB2BD923B3002D4954 /* libfr.a */; };
 		CEC562042BD923B4002D4954 /* librapidsnark.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC561FC2BD923B3002D4954 /* librapidsnark.a */; };
 		CEC562062BD923B4002D4954 /* libgmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC562012BD923B4002D4954 /* libgmp.a */; };
@@ -156,7 +157,7 @@
 		CEC562112BD926AA002D4954 /* ZKUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC562102BD926AA002D4954 /* ZKUtils.swift */; };
 		CEC562192BD92B3E002D4954 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC562132BD9281A002D4954 /* libresolv.9.tbd */; };
 		CEC9D8E72BFF41A800EACD0F /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */; };
-		CED314672C0483BD00DF31D5 /* ShareFeedbackMailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED314662C0483BD00DF31D5 /* ShareFeedbackMailView.swift */; };
+		CED314672C0483BD00DF31D5 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED314662C0483BD00DF31D5 /* MailView.swift */; };
 		CED314692C04889D00DF31D5 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED314682C04889D00DF31D5 /* UIDevice+modelName.swift */; };
 		CED909D02BDBA9FC0065E949 /* Cosmos.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED909CF2BDBA9FC0065E949 /* Cosmos.swift */; };
 		CED909E02BDC1E0F0065E949 /* Rarimo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED909DF2BDC1E0F0065E949 /* Rarimo.swift */; };
@@ -305,6 +306,7 @@
 		CE9E82E02BA8974C00AAF885 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		CE9E82E22BA8975F00AAF885 /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		CE9E82E62BA89CE300AAF885 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
+		CEB91BBD2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NFCPassportModel+getDataGroupsRead.swift"; sourceTree = "<group>"; };
 		CEC561FB2BD923B3002D4954 /* libfr.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfr.a; sourceTree = "<group>"; };
 		CEC561FC2BD923B3002D4954 /* librapidsnark.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librapidsnark.a; sourceTree = "<group>"; };
 		CEC561FD2BD923B3002D4954 /* witnesscalc_queryIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_queryIdentity.h; sourceTree = "<group>"; };
@@ -317,7 +319,7 @@
 		CEC562132BD9281A002D4954 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		CEC562142BD9281A002D4954 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
-		CED314662C0483BD00DF31D5 /* ShareFeedbackMailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareFeedbackMailView.swift; sourceTree = "<group>"; };
+		CED314662C0483BD00DF31D5 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		CED314682C04889D00DF31D5 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
 		CED909CF2BDBA9FC0065E949 /* Cosmos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cosmos.swift; sourceTree = "<group>"; };
 		CED909DF2BDC1E0F0065E949 /* Rarimo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rarimo.swift; sourceTree = "<group>"; };
@@ -725,6 +727,7 @@
 				CE7210282BD7D0D10043DB7F /* String+Hex.swift */,
 				CE7210322BD818020043DB7F /* Double+Rounded.swift */,
 				CED314682C04889D00DF31D5 /* UIDevice+modelName.swift */,
+				CEB91BBD2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -870,7 +873,7 @@
 				56E2D9212BCFBA0B006E725D /* PassportImageView.swift */,
 				56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */,
 				56E7AD0D2BDAD70200D3A258 /* RefreshableScrollView.swift */,
-				CED314662C0483BD00DF31D5 /* ShareFeedbackMailView.swift */,
+				CED314662C0483BD00DF31D5 /* MailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1021,6 +1024,7 @@
 				CE9E82B82BA881F400AAF885 /* AppView.swift in Sources */,
 				561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */,
 				56DAA30B2BB8B977002CF710 /* View+DynamicSheet.swift in Sources */,
+				CEB91BBE2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift in Sources */,
 				564169602BE273260057AC03 /* PassportCardLook.swift in Sources */,
 				56933DFF2BBBFDA30068C894 /* ProcessingStatus.swift in Sources */,
 				5655E4352BD5173200B86C5C /* AppView+ViewModel.swift in Sources */,
@@ -1068,7 +1072,7 @@
 				560F0C342BD175EB00067054 /* LoggerUtil.swift in Sources */,
 				568B4FCC2BB6C164001C9C74 /* IntroView.swift in Sources */,
 				560F0C1F2BD027EA00067054 /* WalletReceiveView.swift in Sources */,
-				CED314672C0483BD00DF31D5 /* ShareFeedbackMailView.swift in Sources */,
+				CED314672C0483BD00DF31D5 /* MailView.swift in Sources */,
 				5655E4302BD2CA5500B86C5C /* AppColorScheme.swift in Sources */,
 				CED909D02BDBA9FC0065E949 /* Cosmos.swift in Sources */,
 				56A88FCF2C062AB200D3A64A /* AirdropCheckboxView.swift in Sources */,
@@ -1663,7 +1667,7 @@
 			repositoryURL = "git@github.com:rarimo/NFCPassportReader.git";
 			requirement = {
 				kind = revision;
-				revision = 7da7abf3137dcd3abab9d89ae93d5a9be5c6c398;
+				revision = 9c1354d59148519340db448cd4c7aba852f5e8d9;
 			};
 		};
 		56E7AD0F2BDBA81000D3A258 /* XCRemoteSwiftPackageReference "PullToRefreshSwiftUI" */ = {

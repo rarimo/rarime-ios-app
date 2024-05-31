@@ -4,6 +4,9 @@ struct PassportProofView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject var mrzViewModel: MRZViewModel
     @EnvironmentObject var passportViewModel: PassportViewModel
+    
+    @State private var isRegistrationError: Bool = false
+    
     let onFinish: (ZkProof) -> Void
     let onClose: () -> Void
 
@@ -21,6 +24,8 @@ struct PassportProofView: View {
                     onClose()
                 }
             }
+            
+            self.isRegistrationError = true
             
             LoggerUtil.passport.error("error while registering passport: \(error.localizedDescription)")
         }
@@ -59,6 +64,9 @@ struct PassportProofView: View {
         .sheet(isPresented: $passportViewModel.isUserRevoking) {
             RevocationNFCScan()
                 .interactiveDismissDisabled()
+        }
+        .sheet(isPresented: $isRegistrationError) {
+            SendPassportView()
         }
         .background(.backgroundPrimary)
     }
@@ -192,6 +200,57 @@ private struct RevocationNFCScan: View {
             }
             .padding(20)
             .background(.backgroundOpacity, in: RoundedRectangle(cornerRadius: 24))
+        }
+    }
+}
+
+private struct SendPassportView: View {
+    @Environment(\.dismiss) private var dismiss
+    
+    @EnvironmentObject var passportViewModel: PassportViewModel
+    
+    @State private var isSending = false
+    
+    var body: some View {
+        ZStack {
+            if !isSending {
+                VStack(spacing: 16) {
+                    Spacer()
+                    Image(Icons.share)
+                        .square(80)
+                        .foregroundStyle(.textPrimary)
+                    Text("Unexpected error")
+                        .h6()
+                        .foregroundStyle(.textPrimary)
+                    Text("We try to support many different passports, but they consist of many different protocols. You can send us your passport and we will try to add it in the future.")
+                        .body3()
+                        .foregroundStyle(.textSecondary)
+                        .multilineTextAlignment(.center)
+                    Text("WARNING: All your passport data will be sent")
+                        .body4()
+                        .foregroundStyle(.red)
+                    Spacer()
+                    AppButton(text: "Send passport") {
+                        isSending = true
+                    }
+                    .controlSize(.large)
+                }
+                .padding(20)
+                .background(.backgroundOpacity, in: RoundedRectangle(cornerRadius: 24))
+            } else {
+                MailView(
+                    subject: "Passport from: \(UIDevice.modelName)",
+                    attachment: (try? passportViewModel.passport?.serialize()) ?? Data(),
+                    fileName: "passport.json",
+                    isShowing: $isSending,
+                    result: .constant(nil)
+                )
+            }
+        }
+        .onChange(of: isSending) { isSending in
+            if !isSending {
+                dismiss()
+            }
         }
     }
 }

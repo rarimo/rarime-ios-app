@@ -69,15 +69,15 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:rarimo/NFCPassportReader.git",
       "state" : {
-        "revision" : "7da7abf3137dcd3abab9d89ae93d5a9be5c6c398"
+        "revision" : "9c1354d59148519340db448cd4c7aba852f5e8d9"
       }
     },
     {
       "identity" : "openssl",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/krzyzanowskim/OpenSSL.git",
+      "location" : "https://github.com/rarimo/OpenSSL.git",
       "state" : {
-        "revision" : "0faf71a188bcfdf0245cab42886b9b240ca71c52",
+        "revision" : "51d2f5eac18da1d52d7ad61184aa6906c9013705",
         "version" : "1.1.2200"
       }
     },
