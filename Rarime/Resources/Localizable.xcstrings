@@ -1286,7 +1286,7 @@
 
     },
     "RMO Tokens Airdrop" : {
-      
+
     },
     "Scan" : {
       "localizations" : {
@@ -1327,6 +1327,9 @@
           }
         }
       }
+    },
+    "Send passport" : {
+
     },
     "Send RMO" : {
       "localizations" : {
@@ -1530,6 +1533,9 @@
         }
       }
     },
+    "Unexpected error" : {
+
+    },
     "Unknown" : {
 
     },
@@ -1558,6 +1564,12 @@
           }
         }
       }
+    },
+    "WARNING: All your passport data will be sent" : {
+
+    },
+    "We try to support many different passports, but they consist of many different protocols. You can send us your passport and we will try to add it in the future." : {
+
     },
     "We will notify when you become eligible" : {
       "localizations" : {
