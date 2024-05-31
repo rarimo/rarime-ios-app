@@ -17,6 +17,8 @@ struct ProfileView: View {
     @State private var isPrivacySheetPresented = false
     @State private var isTermsSheetPresented = false
     @State private var isShareWithDeveloper = false
+    
+    @State private var feedbackAttachment = Data()
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -121,10 +123,19 @@ struct ProfileView: View {
                                     action: { isShareWithDeveloper = true }
                                 )
                                 .fullScreenCover(isPresented: $isShareWithDeveloper) {
-                                    ShareFeedbackMailView(
-                                        isShowing: $isShareWithDeveloper,
-                                        result: .constant(nil)
-                                    )
+                                    if !feedbackAttachment.isEmpty {
+                                        MailView(
+                                            subject: "Feedback from: \(UIDevice.modelName)",
+                                            attachment: feedbackAttachment,
+                                            fileName: "logs.txt",
+                                            isShowing: $isShareWithDeveloper,
+                                            result: .constant(nil)
+                                        )
+                                    } else {
+                                        ProgressView()
+                                            .controlSize(.large)
+                                            .onAppear(perform: fetchLogsForFeedback)
+                                    }
                                 }
                             }
                         }
@@ -138,6 +149,17 @@ struct ProfileView: View {
             .padding(.vertical, 20)
             .padding(.horizontal, 12)
             .background(.backgroundPrimary)
+        }
+    }
+    
+    func fetchLogsForFeedback() {
+        Task { @MainActor in
+            LoggerUtil.common.info("Exporting logs")
+                    
+            let logEntries = (try? LoggerUtil.export()) ?? []
+            let logData = logEntries.map { $0.description }.joined(separator: "\n")
+            
+            self.feedbackAttachment = logData.data(using: .utf8) ?? Data()
         }
     }
 }
