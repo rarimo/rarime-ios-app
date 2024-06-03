@@ -682,7 +682,7 @@
         }
       }
     },
-    "Failed, %lld attemps left" : {
+    "Failed, %lld attempts left" : {
 
     },
     "Female" : {
@@ -1644,11 +1644,10 @@
         }
       }
     },
-<<<<<<< Updated upstream
-    "You’ve earned %lld RMO" : {
-=======
     "You entered wrong passcode.\nLoading time: %@" : {
->>>>>>> Stashed changes
+
+    },
+    "You’ve earned %lld RMO" : {
 
     },
     "You’ve joined the waitlist" : {

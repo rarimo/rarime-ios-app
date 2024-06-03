@@ -89,7 +89,7 @@ struct LockScreenView: View {
         
         if passcode != securityManager.passcode {
             failedAttempts += 1
-            errorMessage = String(localized: "Failed, \(LockScreenView.MAX_PASSCODE_ATTEMPTS - failedAttempts) attemps left")
+            errorMessage = String(localized: "Failed, \(LockScreenView.MAX_PASSCODE_ATTEMPTS - failedAttempts) attempts left")
             FeedbackGenerator.shared.notify(.error)
             
             if failedAttempts >= LockScreenView.MAX_PASSCODE_ATTEMPTS {
