@@ -2,7 +2,7 @@ import Alamofire
 import Foundation
 
 class UpdateManager: ObservableObject {
-    @Published var isDepraced: Optional<Bool> = nil
+    @Published var isDeprecated: Optional<Bool> = nil
     
     static let shared = UpdateManager()
     
@@ -33,14 +33,14 @@ class UpdateManager: ObservableObject {
     
     func checkForUpdate() async {
         do {
-            let isDepraced = try await isUpdateAvailable()
+            let isDeprecated = try await isUpdateAvailable()
             
             DispatchQueue.main.async {
-                self.isDepraced = isDepraced
+                self.isDeprecated = isDeprecated
             }
         } catch {
             DispatchQueue.main.async {
-                self.isDepraced = false
+                self.isDeprecated = false
             }
             
             LoggerUtil.common.error("Failed to check for update: \(error)")

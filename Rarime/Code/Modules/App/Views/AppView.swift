@@ -14,8 +14,8 @@ struct AppView: View {
     var body: some View {
         ZStack {
             // TODO: It's look ugly
-            if let isDepraced = updateManager.isDepraced {
-                if isDepraced {
+            if let isDeprecated = updateManager.isDeprecated {
+                if isDeprecated {
                     VersionUpdateView()
                 } else {
                     if
