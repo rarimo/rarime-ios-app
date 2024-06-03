@@ -3,18 +3,30 @@ import SwiftUI
 private let passcodeLength: Int = 4
 
 struct PasscodeFieldView: View {
+    @Environment(\.isEnabled) var isEnabled
+
     @Binding var passcode: String
     @Binding var errorMessage: String
+    var isFaceIdEnabled: Bool
     var onFill: () -> Void
+    var onFaceIdClick: () -> Void
 
-    init(passcode: Binding<String>, errorMessage: Binding<String> = .constant(""), onFill: @escaping () -> Void = {}) {
+    init(
+        passcode: Binding<String>,
+        errorMessage: Binding<String> = .constant(""),
+        isFaceIdEnabled: Bool = false,
+        onFill: @escaping () -> Void = {},
+        onFaceIdClick: @escaping () -> Void = {}
+    ) {
         self._errorMessage = errorMessage
         self._passcode = passcode
+        self.isFaceIdEnabled = isFaceIdEnabled
         self.onFill = onFill
+        self.onFaceIdClick = onFaceIdClick
     }
 
     func handleInput(_ input: String) {
-        if passcode.count >= passcodeLength { return }
+        if !isEnabled || passcode.count >= passcodeLength { return }
 
         passcode += input
         errorMessage = ""
@@ -44,15 +56,17 @@ struct PasscodeFieldView: View {
                 }
             }
 
-            if !errorMessage.isEmpty {
-                Text(errorMessage)
-                    .caption2()
-                    .foregroundColor(.errorMain)
-                    .padding(.top, 64)
-                    .multilineTextAlignment(.center)
-            }
+            Text(errorMessage)
+                .subtitle4()
+                .foregroundColor(.errorMain)
+                .frame(minWidth: 260, minHeight: 40)
+                .background(.errorLighter, in: RoundedRectangle(cornerRadius: 100))
+                .padding(.top, 180)
+                .multilineTextAlignment(.center)
+                .opacity(errorMessage.isEmpty ? 0 : 1)
         }
         .frame(minHeight: 90)
+        .opacity(isEnabled ? 1 : 0)
     }
 
     var numberKeyboard: some View {
@@ -64,14 +78,23 @@ struct PasscodeFieldView: View {
                         InputButton(action: { handleInput(value) }) {
                             Text(value).subtitle2()
                         }
+                        .disabled(!isEnabled)
                     }
                 }
             }
             HStack(spacing: 0) {
-                Spacer().frame(maxWidth: .infinity)
+                if isFaceIdEnabled {
+                    InputButton(action: onFaceIdClick) {
+                        Image(Icons.userFocus).square(24)
+                    }
+                    .disabled(!isEnabled)
+                } else {
+                    Spacer().frame(maxWidth: .infinity)
+                }
                 InputButton(action: { handleInput("0") }) {
                     Text(String("0")).subtitle2()
                 }
+                .disabled(!isEnabled)
                 InputButton(action: {
                     if passcode.isEmpty { return }
 
@@ -80,12 +103,15 @@ struct PasscodeFieldView: View {
                 }) {
                     Image(Icons.backspace).iconMedium()
                 }
+                .disabled(!isEnabled)
             }
         }
     }
 }
 
 private struct InputButton<Content: View>: View {
+    @Environment(\.isEnabled) var isEnabled
+
     let action: () -> Void
     @ViewBuilder let content: Content
 
@@ -99,6 +125,7 @@ private struct InputButton<Content: View>: View {
                 .frame(height: 64)
                 .foregroundStyle(.textPrimary)
         }
+        .disabled(!isEnabled)
     }
 }
 

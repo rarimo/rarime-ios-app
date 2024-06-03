@@ -8,21 +8,60 @@ struct LockScreenView: View {
     
     @State private var passcode = ""
     @State private var errorMessage = ""
+    @State private var lockedMessage = ""
     
     @State private var failedAttempts = 0
     
-    @State private var banTimeEnd = AppUserDefaults.shared.banTimeEnd 
+   @State private var banTimeEnd = AppUserDefaults.shared.banTimeEnd
     
     var body: some View {
-        PasscodeView(
-            passcode: $passcode,
-            errorMessage: $errorMessage,
-            title: "Enter passcode",
-            onFill: handlePasscode,
-            onClose: {},
-            isClosable: false
-        )
-        .disabled(banTimeEnd != nil)
+        ZStack {
+            ZStack(alignment: .top) {
+                VStack(spacing: 0) {
+                    VStack(spacing: 12) {
+                        Text(banTimeEnd == nil ? "Enter Passcode" : "Account Locked")
+                            .h4()
+                            .foregroundStyle(.textPrimary)
+                        Text(lockedMessage)
+                            .body3()
+                            .foregroundStyle(.textSecondary)
+                            .multilineTextAlignment(.center)
+                            .frame(minHeight: 40)
+                    }
+                    PasscodeFieldView(
+                        passcode: $passcode,
+                        errorMessage: $errorMessage,
+                        isFaceIdEnabled: securityManager.faceIdState == .enabled,
+                        onFill: handlePasscode,
+                        onFaceIdClick: authByFaceID
+                    )
+                    .disabled(banTimeEnd != nil)
+                }
+                .padding(.top, 48)
+                .padding(.bottom, 48)
+                .padding(.horizontal, 8)
+                .background(.backgroundPure)
+                .clipShape(
+                    .rect(
+                        topLeadingRadius: 24,
+                        bottomLeadingRadius: 0,
+                        bottomTrailingRadius: 0,
+                        topTrailingRadius: 24
+                    )
+                )
+                Image(banTimeEnd == nil ? Icons.user : Icons.lock)
+                    .iconLarge()
+                    .padding(24)
+                    .background(banTimeEnd == nil ? .primaryMain : .secondaryMain, in: Circle())
+                    .foregroundStyle(banTimeEnd == nil ? .baseBlack : .baseWhite)
+                    .overlay(Circle().stroke(.backgroundPure, lineWidth: 10))
+                    .padding(.top, -36)
+            }
+            .padding(.top, 190)
+        }
+        .ignoresSafeArea()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.backgroundPrimary)
         .onAppear(perform: authByFaceID)
         .onAppear(perform: handleBanTime)
     }
@@ -49,14 +88,12 @@ struct LockScreenView: View {
         }
         
         if passcode != securityManager.passcode {
-            errorMessage = NSLocalizedString("Passcode is incorrect", comment: "")
-            FeedbackGenerator.shared.notify(.error)
-            
             failedAttempts += 1
+            errorMessage = String(localized: "Failed, \(LockScreenView.MAX_PASSCODE_ATTEMPTS - failedAttempts) attemps left")
+            FeedbackGenerator.shared.notify(.error)
             
             if failedAttempts >= LockScreenView.MAX_PASSCODE_ATTEMPTS {
                 let newBanTimeEnd = Date().addingTimeInterval(TimeInterval(LockScreenView.BAN_TIME))
-                
                 
                 AppUserDefaults.shared.banTimeEnd = newBanTimeEnd
                 banTimeEnd = newBanTimeEnd
@@ -82,11 +119,8 @@ struct LockScreenView: View {
             return
         }
         
-        let bannedTime = timeRemaining(to: banTime)
-        
-        errorMessage = String(format: NSLocalizedString("Your account is locked. Please try again in %@ here?", comment: ""), bannedTime)
-        
         FeedbackGenerator.shared.notify(.error)
+        updateLockedMessage()
         
         Task { @MainActor in
             var banTimeEndInSecs = banTime.timeIntervalSince1970 - Date().timeIntervalSince1970
@@ -104,24 +138,39 @@ struct LockScreenView: View {
                     
                     passcode = ""
                     errorMessage = ""
+                    lockedMessage = ""
+                    failedAttempts = 0
                     
                     return
                 }
-                
-                
             }
+        }
+    }
+    
+    func updateLockedMessage() {
+        guard let banTime = banTimeEnd else {
+            return
+        }
+    
+        Task { @MainActor in
+            while banTime > Date() {
+                lockedMessage = String(localized: "You entered wrong passcode.\nLoading time: \(timeRemaining(to: banTime))")
+                try? await Task.sleep(nanoseconds: NSEC_PER_SEC)
+            }
+            
+            lockedMessage = ""
         }
     }
 }
 
-fileprivate func timeRemaining(to futureDate: Date) -> String {
+private func timeRemaining(to futureDate: Date) -> String {
     let currentDate = Date()
     let interval = futureDate.timeIntervalSince(currentDate)
     
     let minutes = Int(interval) / 60
     let seconds = Int(interval) % 60
     
-    return String(format: NSLocalizedString("%d minutes and %d seconds", comment: ""), minutes, seconds)
+    return String(localized: "\(minutes)m \(seconds)s")
 }
 
 #Preview {
