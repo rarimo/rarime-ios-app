@@ -125,6 +125,8 @@
 		CE0881A62BF77F4D00B31735 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0881A52BF77F4D00B31735 /* ErrorAlert.swift */; };
 		CE0DA0D72BDA6F1900696503 /* EvmTxResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */; };
 		CE0DA0D92BDA927000696503 /* AirDropResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D82BDA927000696503 /* AirDropResponse.swift */; };
+		CE0DC57B2C0DB33A00EFC0D7 /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DC57A2C0DB33A00EFC0D7 /* UpdateManager.swift */; };
+		CE0DC57D2C0DB9B200EFC0D7 /* VersionUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DC57C2C0DB9B200EFC0D7 /* VersionUpdateView.swift */; };
 		CE19CB472BE39DA400B26DF7 /* RarimoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB462BE39DA400B26DF7 /* RarimoUtils.swift */; };
 		CE19CB492BE3AD4200B26DF7 /* LockScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB482BE3AD4200B26DF7 /* LockScreenView.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
@@ -285,6 +287,8 @@
 		CE0881A52BF77F4D00B31735 /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmTxResponse.swift; sourceTree = "<group>"; };
 		CE0DA0D82BDA927000696503 /* AirDropResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirDropResponse.swift; sourceTree = "<group>"; };
+		CE0DC57A2C0DB33A00EFC0D7 /* UpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateManager.swift; sourceTree = "<group>"; };
+		CE0DC57C2C0DB9B200EFC0D7 /* VersionUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionUpdateView.swift; sourceTree = "<group>"; };
 		CE19CB462BE39DA400B26DF7 /* RarimoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarimoUtils.swift; sourceTree = "<group>"; };
 		CE19CB482BE3AD4200B26DF7 /* LockScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenView.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -504,6 +508,7 @@
 				5655E41E2BD2C39B00B86C5C /* WalletManager.swift */,
 				CEF251372BD6E17800050507 /* UserManager.swift */,
 				CE0881A02BF773CC00B31735 /* AlertManager.swift */,
+				CE0DC57A2C0DB33A00EFC0D7 /* UpdateManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -874,6 +879,7 @@
 				56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */,
 				56E7AD0D2BDAD70200D3A258 /* RefreshableScrollView.swift */,
 				CED314662C0483BD00DF31D5 /* MailView.swift */,
+				CE0DC57C2C0DB9B200EFC0D7 /* VersionUpdateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1100,6 +1106,7 @@
 				5655E4232BD2C3AC00B86C5C /* SettingsManager.swift in Sources */,
 				CEDC4D812BE9475400459D4E /* Certificates.swift in Sources */,
 				56E6AD472BD272FB00E4DDC1 /* ExportKeysView.swift in Sources */,
+				CE0DC57D2C0DB9B200EFC0D7 /* VersionUpdateView.swift in Sources */,
 				5655E42E2BD2C94F00B86C5C /* AppUserDefaults.swift in Sources */,
 				CE68BE4B2BD9B75100D92EBB /* ContractABI.swift in Sources */,
 				56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */,
@@ -1126,6 +1133,7 @@
 				CEF251382BD6E17800050507 /* UserManager.swift in Sources */,
 				5655E4252BD2C3B500B86C5C /* PassportManager.swift in Sources */,
 				563529F12BB0736A0027C910 /* TabBarView.swift in Sources */,
+				CE0DC57B2C0DB33A00EFC0D7 /* UpdateManager.swift in Sources */,
 				56E7AD0E2BDAD70200D3A258 /* RefreshableScrollView.swift in Sources */,
 				56A6C76A2BBC57B700992562 /* PassportViewModel.swift in Sources */,
 				56933E0E2BBC09F10068C894 /* MRZScannerView.swift in Sources */,
