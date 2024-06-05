@@ -3,7 +3,6 @@ import SwiftUI
 struct AssetsSlider: View {
     @State private var selectedTab = 0
     @State private var offset = CGFloat.zero
-    private let spacing: CGFloat = 12
 
     var body: some View {
         VStack(spacing: 20) {
@@ -24,6 +23,7 @@ struct AssetsSlider: View {
             .padding(.horizontal, 20)
             GeometryReader { geo in
                 let width = geo.size.width * 0.8
+                let spacing: CGFloat = 12
                 LazyHStack(spacing: spacing) {
                     Color.clear.frame(width: 8)
                     ForEach(0 ..< walletAssets.count, id: \.self) { idx in
@@ -78,7 +78,7 @@ private struct AssetCard: View {
                 Text(asset.balance.formatted())
                     .subtitle4()
                     .foregroundStyle(.textPrimary)
-                Text(try! String(asset.usdBalance == nil ? "---" : "≈$\(asset.usdBalance!.formatted())"))
+                Text(try! String(asset.usdBalance == nil ? "---" : "≈$\((asset.usdBalance ?? 0).formatted())"))
                     .caption3()
                     .foregroundStyle(.textSecondary)
             }

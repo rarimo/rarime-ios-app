@@ -109,7 +109,7 @@ struct WalletView: View {
                 }
                 .frame(height: 40)
                 .zIndex(1)
-                Text(try! String(selectedAsset.usdBalance == nil ? "---" : "≈$\(selectedAsset.usdBalance!.formatted())"))
+                Text(try! String(selectedAsset.usdBalance == nil ? "---" : "≈$\((selectedAsset.usdBalance ?? 0).formatted())"))
                     .caption2()
                     .foregroundStyle(.textSecondary)
             }
