@@ -74,13 +74,9 @@ struct Passport: Codable {
     }
 
     static func fromNFCPassportModel(_ model: NFCPassportModel) -> Passport? {
-        guard
-            let dg1 = model.getDataGroup(.DG1),
-            let dg15 = model.getDataGroup(.DG15),
-            let sod = model.getDataGroup(.SOD)
-        else {
-            return nil
-        }
+        let dg1 = model.getDataGroup(.DG1)?.data ?? []
+        let dg15 = model.getDataGroup(.DG15)?.data ?? []
+        let sod = model.getDataGroup(.SOD)?.data ?? []
         
         return Passport(
             firstName: model.firstName,
@@ -95,9 +91,9 @@ struct Passport: Codable {
             documentExpiryDate: model.documentExpiryDate,
             dateOfBirth: model.dateOfBirth,
             nationality: model.nationality,
-            dg1: Data(dg1.data),
-            dg15: Data(dg15.data),
-            sod: Data(sod.data),
+            dg1: Data(dg1),
+            dg15: Data(dg15),
+            sod: Data(sod),
             signature: Data(model.activeAuthenticationSignature)
         )
     }
