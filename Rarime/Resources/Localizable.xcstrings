@@ -85,12 +85,12 @@
         }
       }
     },
-    "%d minutes and %d seconds" : {
+    "%lldm %llds" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$d minutes and %2$d seconds"
+            "value" : "%1$lldm %2$llds"
           }
         }
       }
@@ -104,6 +104,9 @@
           }
         }
       }
+    },
+    "Account Locked" : {
+
     },
     "Address" : {
       "localizations" : {
@@ -615,9 +618,6 @@
         }
       }
     },
-    "Enter passcode" : {
-
-    },
     "Enter Passcode" : {
       "localizations" : {
         "uk" : {
@@ -687,6 +687,9 @@
           }
         }
       }
+    },
+    "Failed, %lld attempts left" : {
+
     },
     "Female" : {
       "localizations" : {
@@ -1005,9 +1008,6 @@
           }
         }
       }
-    },
-    "Passcode is incorrect" : {
-
     },
     "Passcodes do not match" : {
       "localizations" : {
@@ -1345,7 +1345,7 @@
     "Send %@" : {
 
     },
-    "Send passport" : {
+    "Send issue to the devs" : {
 
     },
     "Send RMO" : {
@@ -1676,6 +1676,9 @@
     "You can use the QR code or the wallet address to deposit the %@ token to your account" : {
 
     },
+    "You entered wrong passcode.\nLoading time: %@" : {
+
+    },
     "You’ve earned %lld RMO" : {
 
     },
@@ -1698,9 +1701,6 @@
           }
         }
       }
-    },
-    "Your account is locked. Please try again in %@ here?" : {
-
     },
     "Your Address" : {
 

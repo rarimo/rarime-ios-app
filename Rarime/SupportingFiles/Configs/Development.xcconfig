@@ -5,21 +5,21 @@ SLASH=/
 PRIVACY_POLICY_URL = "https:${SLASH}/staging.rarimo.com"
 TERMS_OF_USE_URL = "https:${SLASH}/staging.rarimo.com"
 
-// Mark: API
+// MARK: API
 RELAYER_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
 EVM_RPC_URL = "https:${SLASH}/rpc.evm.node1.mainnet-beta.rarimo.com"
 REGISTER_CONTRACT_ADDRESS = "0x31C9baC74fa7482cDCf33d09B8476250b460B058"
 COSMOS_RPC_URL = "https:${SLASH}/rpc-api.node1.mainnet-beta.rarimo.com"
 
-// Mark: Cosmos
+// MARK: Cosmos
 CHAIN_ID = "rarimo_42-1"
 DENOM = "stake"
 RPC_IP = "104.196.227.66:9090"
 
-// Mark: CertificatesStorage
+// MARK: CertificatesStorage
 MASTER_CERTIFICATES_BUCKETNAME = "rarimo-temp"
 MASTER_CERTIFICATES_FILENAME = "icaopkd-list.ldif"
 ICAO_COSMOS_RPC = "core-api.node1.mainnet-beta.rarimo.com:443"
 
 // MARK: Feedback
-FEEDBACK_EMAIL = "ivan.lele@distributedlab.com"
+FEEDBACK_EMAIL = "info@rarilabs.com"
