@@ -43,10 +43,16 @@
 	<string>${DENOM}</string>
 	<key>EVM_RPC_URL</key>
 	<string>${EVM_RPC_URL}</string>
+	<key>FEEDBACK_EMAIL</key>
+	<string>${FEEDBACK_EMAIL}</string>
+	<key>ICAO_COSMOS_RPC</key>
+	<string>${ICAO_COSMOS_RPC}</string>
+	<key>MASTER_CERTIFICATES_BUCKETNAME</key>
+	<string>${MASTER_CERTIFICATES_BUCKETNAME}</string>
+	<key>MASTER_CERTIFICATES_FILENAME</key>
+	<string>${MASTER_CERTIFICATES_FILENAME}</string>
 	<key>PRIVACY_POLICY_URL</key>
 	<string>${PRIVACY_POLICY_URL}</string>
-	<key>NSFaceIDUsageDescription</key>
-	<string>Enable Face ID Authentication</string>
 	<key>REGISTER_CONTRACT_ADDRESS</key>
 	<string>${REGISTER_CONTRACT_ADDRESS}</string>
 	<key>REGISTER_IDENTITY_CIRCUIT_DATA_URLS</key>
@@ -78,13 +84,5 @@
 		<string>A0000002480300</string>
 		<string>A00000045645444C2D3031</string>
 	</array>
-	<key>MASTER_CERTIFICATES_BUCKETNAME</key>
-	<string>${MASTER_CERTIFICATES_BUCKETNAME}</string>
-	<key>MASTER_CERTIFICATES_FILENAME</key>
-	<string>${MASTER_CERTIFICATES_FILENAME}</string>
-	<key>ICAO_COSMOS_RPC</key>
-	<string>${ICAO_COSMOS_RPC}</string>
-	<key>FEEDBACK_EMAIL</key>
-	<string>${FEEDBACK_EMAIL}</string>
 </dict>
 </plist>

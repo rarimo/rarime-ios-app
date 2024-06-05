@@ -230,7 +230,7 @@ private struct SendPassportView: View {
                         .body4()
                         .foregroundStyle(.red)
                     Spacer()
-                    AppButton(text: "Send passport") {
+                    AppButton(text: "Give us feedback") {
                         isSending = true
                     }
                     .controlSize(.large)

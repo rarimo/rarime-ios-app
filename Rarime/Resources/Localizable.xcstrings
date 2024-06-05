@@ -715,6 +715,9 @@
         }
       }
     },
+    "Give us feedback" : {
+
+    },
     "Go Incognito" : {
       "localizations" : {
         "uk" : {
@@ -1327,9 +1330,6 @@
           }
         }
       }
-    },
-    "Send passport" : {
-
     },
     "Send RMO" : {
       "localizations" : {
