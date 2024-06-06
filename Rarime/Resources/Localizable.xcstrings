@@ -725,9 +725,6 @@
         }
       }
     },
-    "Give us feedback" : {
-
-    },
     "Go Incognito" : {
       "localizations" : {
         "uk" : {
@@ -1357,6 +1354,9 @@
           }
         }
       }
+    },
+    "Send issue to the devs" : {
+
     },
     "Send RMO" : {
       "localizations" : {
