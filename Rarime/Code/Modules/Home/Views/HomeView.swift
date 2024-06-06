@@ -16,7 +16,6 @@ struct HomeView: View {
     @State private var isRewardsSheetPresented = false
     @State private var isRarimeSheetPresented = false
 
-    @State private var isUkrainianFlow = false
     @State private var isCongratsShown = false
     @State private var isClaimed = false
 
@@ -200,7 +199,6 @@ struct HomeView: View {
         .dynamicSheet(isPresented: $isUkrainianSheetPresented, fullScreen: true) {
             UkrainianIntroView(onStart: {
                 isUkrainianSheetPresented = false
-                isUkrainianFlow = true
                 path.append(.scanPassport)
             })
         }
