@@ -23,7 +23,7 @@ class NFCScanner {
         case .error(let tagError):
             switch tagError {
             case .TagNotValid: message = "Tag not valid."
-            case .MoreThanOneTagFound: message = "More than 1 tags was found. Please present only 1 tag."
+            case .MoreThanOneTagFound: message = "More than 1 tag was found. Please present only 1 tag."
             case .ConnectionError: message = "Connection error. Please try again."
             case .InvalidMRZKey: message = "MRZ Key not valid for this document."
             case .ResponseError(let reason, let sw1, let sw2):

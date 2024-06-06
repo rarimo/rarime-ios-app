@@ -1105,7 +1105,7 @@
     "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport" : {
 
     },
-    "If you would like to enroll your country in the early beta phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards" : {
+    "If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards" : {
 
     },
     "Import from private key" : {
@@ -1396,7 +1396,7 @@
     "Montserrat" : {
 
     },
-    "More than 1 tags was found. Please present only 1 tag." : {
+    "More than 1 tag was found. Please present only 1 tag." : {
 
     },
     "Morocco" : {

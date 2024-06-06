@@ -27,7 +27,7 @@ struct WaitlistPassportView: View {
             VStack(alignment: .leading, spacing: 24) {
                 Text("Become an ambassador")
                     .subtitle2()
-                Text("If you would like to enroll your country in the early beta phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards")
+                Text("If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards")
                     .body3()
                     .fixedSize(horizontal: false, vertical: true)
                 InfoAlert(text: "Information shared includes the data groups of the passport and the government signature") {}
