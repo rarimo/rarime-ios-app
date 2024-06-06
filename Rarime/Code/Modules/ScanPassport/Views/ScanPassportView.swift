@@ -51,15 +51,15 @@ struct ScanPassportView: View {
             PassportProofView(
                 onFinish: { registerZKProof in
                     userManager.registerZkProof = registerZKProof
-                    
-                    if 
-                       !passportViewModel.isUserRevoked,
-                       passportViewModel.isEligibleForReward,
-                       !passportViewModel.isAirdropClaimed,
-                       !walletManager.isClaimed
+
+                    if
+                        !passportViewModel.isUserRevoked,
+                        passportViewModel.isEligibleForReward,
+                        !passportViewModel.isAirdropClaimed,
+                        !walletManager.isClaimed
                     {
                         LoggerUtil.passport.info("User is eligible for reward")
-                        
+
                         withAnimation { state = .claimTokens }
                     } else {
                         onComplete(passportViewModel.passport!, false)

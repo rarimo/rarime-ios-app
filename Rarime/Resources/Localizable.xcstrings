@@ -256,6 +256,7 @@
       }
     },
     "Beta launch" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -344,6 +345,9 @@
           }
         }
       }
+    },
+    "Check your eligibility" : {
+
     },
     "Claim" : {
       "localizations" : {
@@ -783,9 +787,6 @@
     "Invalid address" : {
 
     },
-    "Invalid HTTP status code: %d" : {
-
-    },
     "Invalid Rarimo address" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -796,9 +797,6 @@
           }
         }
       }
-    },
-    "Invalid response body" : {
-
     },
     "Issuing state code" : {
       "localizations" : {
@@ -811,6 +809,7 @@
       }
     },
     "Join a waitlist" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -819,6 +818,9 @@
           }
         }
       }
+    },
+    "Join Rewards Program" : {
+
     },
     "Join the waitlist" : {
       "localizations" : {
@@ -973,12 +975,6 @@
         }
       }
     },
-    "One of our services is down, try again later" : {
-
-    },
-    "One of our services is down, try again later. RequestURL=%@" : {
-
-    },
     "Open Settings" : {
       "localizations" : {
         "uk" : {
@@ -1131,6 +1127,9 @@
           }
         }
       }
+    },
+    "Programmable rewards" : {
+
     },
     "Proofs" : {
       "localizations" : {
@@ -1560,13 +1559,13 @@
         }
       }
     },
+    "Ukrainian citizens" : {
+
+    },
     "Unexpected error" : {
 
     },
     "Unknown" : {
-
-    },
-    "Unknown service error" : {
 
     },
     "Upcoming airdrops will include citizens from all over the world.\n\nCreate an incognito profile by scanning your passport, and we will notify you when you become eligible." : {
@@ -1578,9 +1577,6 @@
           }
         }
       }
-    },
-    "User creation failed" : {
-
     },
     "Wallet" : {
       "localizations" : {

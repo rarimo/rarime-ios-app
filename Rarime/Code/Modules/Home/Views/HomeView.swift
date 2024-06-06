@@ -12,11 +12,11 @@ struct HomeView: View {
 
     @State private var path: [HomeRoute] = []
 
-    @State private var isAirdropSheetPresented = false
-    @State private var isPassportSheetPresented = false
+    @State private var isUkrainianSheetPresented = false
+    @State private var isRewardsSheetPresented = false
     @State private var isRarimeSheetPresented = false
 
-    @State private var isAirdropFlow = false
+    @State private var isUkrainianFlow = false
     @State private var isCongratsShown = false
     @State private var isClaimed = false
 
@@ -25,9 +25,9 @@ struct HomeView: View {
 
     var canClaimAirdrop: Bool {
         !walletManager.isClaimed
-        && passportManager.isEligibleForReward
-        && !userManager.isRevoked
-        && userManager.registerZkProof != nil
+            && passportManager.isEligibleForReward
+            && !userManager.isRevoked
+            && userManager.registerZkProof != nil
     }
 
     var body: some View {
@@ -36,7 +36,7 @@ struct HomeView: View {
                 switch route {
                 case .scanPassport:
                     ScanPassportView(
-                        showTerms: !isAirdropFlow,
+                        showTerms: isUkrainianFlow,
                         onComplete: { passport, isClaimed in
                             passportManager.setPassport(passport)
                             isCongratsShown = true
@@ -80,12 +80,6 @@ struct HomeView: View {
                 }
             ) { _ in
                 VStack(spacing: 24) {
-                    Text("Beta launch")
-                        .body3()
-                        .frame(maxWidth: .infinity)
-                        .foregroundStyle(.warningDark)
-                        .padding(.vertical, 4)
-                        .background(.warningLighter)
                     VStack(alignment: .leading, spacing: 12) {
                         header
                         if let passport = passportManager.passport {
@@ -107,17 +101,17 @@ struct HomeView: View {
                             if canClaimAirdrop {
                                 claimCard
                             }
-                            rarimeCard
                         } else {
-                            airdropCard
-                            otherPassportsCard
+                            rewardsCard
+                            ukrainianCitizensCard
                         }
+                        rarimeCard
                         Spacer()
                     }
                     .padding(.horizontal, 12)
                 }
             }
-            .padding(.top, 1)
+            .padding(.top, 32)
             .background(.backgroundPrimary)
         }
         .blur(radius: isCongratsShown ? 12 : 0)
@@ -166,33 +160,28 @@ struct HomeView: View {
         .padding(.horizontal, 8)
     }
 
-    private var airdropCard: some View {
+    private var rewardsCard: some View {
         CardContainer {
             VStack(spacing: 20) {
-                Text(String("🇺🇦"))
-                    .h4()
-                    .frame(width: 72, height: 72)
-                    .background(.componentPrimary)
-                    .clipShape(Circle())
+                Image(Images.rewardCoin).square(110)
                 VStack(spacing: 8) {
-                    Text("Programmable Airdrop")
+                    Text("Join Rewards Program")
                         .h6()
                         .foregroundStyle(.textPrimary)
-                    Text("The beta launch is focused on distributing tokens to Ukrainian citizens")
+                    Text("Check your eligibility")
                         .body2()
                         .multilineTextAlignment(.center)
                         .foregroundStyle(.textSecondary)
                 }
                 HorizontalDivider()
                 AppButton(text: "Let’s Start", rightIcon: Icons.arrowRight) {
-                    isAirdropSheetPresented = true
+                    isRewardsSheetPresented = true
                 }
                 .controlSize(.large)
-                .dynamicSheet(isPresented: $isAirdropSheetPresented, fullScreen: true) {
-                    AirdropIntroView(
+                .dynamicSheet(isPresented: $isRewardsSheetPresented, fullScreen: true) {
+                    RewardsIntroView(
                         onStart: {
-                            isAirdropSheetPresented = false
-                            isAirdropFlow = true
+                            isRewardsSheetPresented = false
                             path.append(.scanPassport)
                         }
                     )
@@ -202,16 +191,17 @@ struct HomeView: View {
         }
     }
 
-    private var otherPassportsCard: some View {
+    private var ukrainianCitizensCard: some View {
         ActionCard(
-            title: String(localized: "Other passport holders"),
-            description: String(localized: "Join a waitlist")
+            title: String(localized: "Ukrainian citizens"),
+            description: String(localized: "Programmable rewards"),
+            icon: { Text(try! String("🇺🇦")).frame(width: 40, height: 40) }
         )
-        .onTapGesture { isPassportSheetPresented = true }
-        .dynamicSheet(isPresented: $isPassportSheetPresented, fullScreen: true) {
-            PassportIntroView(onStart: {
-                isPassportSheetPresented = false
-                isAirdropFlow = false
+        .onTapGesture { isUkrainianSheetPresented = true }
+        .dynamicSheet(isPresented: $isUkrainianSheetPresented, fullScreen: true) {
+            UkrainianIntroView(onStart: {
+                isUkrainianSheetPresented = false
+                isUkrainianFlow = true
                 path.append(.scanPassport)
             })
         }
@@ -220,7 +210,8 @@ struct HomeView: View {
     private var rarimeCard: some View {
         ActionCard(
             title: String(localized: "RARIME"),
-            description: String(localized: "Learn more about RariMe App"),
+            description: String(localized: "Learn more about the App"),
+            transparent: true,
             icon: { Image(Icons.info).square(24).padding(8) }
         )
         .onTapGesture { isRarimeSheetPresented = true }
@@ -231,7 +222,7 @@ struct HomeView: View {
 
     private var claimCard: some View {
         ActionCard(
-            title: String(localized: "Claim rewards"),
+            title: String(localized: "Claim"),
             description: String(localized: "You’ve earned \(RARIMO_AIRDROP_REWARD) RMO"),
             icon: { Image(Images.rewardCoin).square(40) }
         )
@@ -273,4 +264,5 @@ struct HomeView: View {
         .environmentObject(PassportManager())
         .environmentObject(WalletManager())
         .environmentObject(UserManager())
+        .environmentObject(ConfigManager())
 }
