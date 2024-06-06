@@ -50,7 +50,7 @@ struct ImportIdentityView: View {
     
     func importIdentity() {
         do {
-            if !(try isValidatePrivateKey(privateKeyHex)) {
+            if !(try isValidPrivateKey(privateKeyHex)) {
                 privateKeyHex = ""
                 isInvalidPrivateKey = true
                 
@@ -76,7 +76,7 @@ struct ImportIdentityView: View {
     }
 }
 
-fileprivate func isValidatePrivateKey(_ privateKey: String) throws -> Bool {
+fileprivate func isValidPrivateKey(_ privateKey: String) throws -> Bool {
     let regex = try NSRegularExpression(
         pattern: "^[0-9a-fA-F]{64}$",
         options: .caseInsensitive
