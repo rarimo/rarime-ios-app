@@ -11,10 +11,6 @@ struct HomeIntroLayout<Icon: View, Content: View>: View {
         VStack(alignment: .leading, spacing: 32) {
             VStack(spacing: 16) {
                 icon
-                    .frame(width: 72, height: 72)
-                    .background(.componentPrimary)
-                    .foregroundStyle(.textPrimary)
-                    .clipShape(Circle())
                 Text(title)
                     .h6()
                     .foregroundStyle(.textPrimary)

@@ -8,7 +8,11 @@ struct RarimeInfoView: View {
             HomeIntroLayout(
                 title: String(localized: "What is RariMe?"),
                 description: nil,
-                icon: Image(Icons.rarime).iconLarge()
+                icon: Image(Icons.rarime)
+                    .iconLarge()
+                    .frame(width: 72, height: 72)
+                    .background(.componentPrimary, in: Circle())
+                    .foregroundStyle(.textPrimary)
             ) {
                 VStack(alignment: .leading, spacing: 16) {
                     makeListItem(Text("RariMe is a self-custody identity wallet where no personal data ever leaves the device and everything is processed locally."))

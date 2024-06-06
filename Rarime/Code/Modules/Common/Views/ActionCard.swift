@@ -3,41 +3,49 @@ import SwiftUI
 struct ActionCard<Icon: View>: View {
     let title: String
     let description: String
+    let transparent: Bool
     @ViewBuilder let icon: () -> Icon
 
     init(
         title: String,
         description: String,
+        transparent: Bool = false,
         @ViewBuilder icon: @escaping () -> Icon = { EmptyView() }
     ) {
         self.title = title
         self.description = description
+        self.transparent = transparent
         self.icon = icon
     }
 
     var body: some View {
-        CardContainer {
-            HStack {
-                HStack(spacing: 16) {
-                    icon()
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(title)
-                            .subtitle3()
-                            .foregroundStyle(.textPrimary)
-                        Text(description)
-                            .body3()
-                            .foregroundStyle(.textSecondary)
-                    }
+        HStack {
+            HStack(spacing: 16) {
+                icon()
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(title)
+                        .subtitle3()
+                        .foregroundStyle(.textPrimary)
+                    Text(description)
+                        .body3()
+                        .foregroundStyle(.textSecondary)
                 }
-                Spacer()
-                Image(Icons.caretRight)
-                    .iconSmall()
-                    .padding(4)
-                    .background(.primaryMain)
-                    .clipShape(Circle())
-                    .foregroundStyle(.baseBlack)
             }
+            Spacer()
+            Image(Icons.caretRight)
+                .iconSmall()
+                .padding(4)
+                .background(.primaryMain)
+                .clipShape(Circle())
+                .foregroundStyle(.baseBlack)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(20)
+        .background(transparent ? .clear : .backgroundOpacity, in: RoundedRectangle(cornerRadius: 24))
+        .overlay(
+            RoundedRectangle(cornerRadius: 24)
+                .stroke(.componentPrimary, lineWidth: transparent ? 1 : 0)
+        )
     }
 }
 
@@ -49,10 +57,14 @@ struct ActionCard<Icon: View>: View {
         )
         ActionCard(
             title: "Card with icon",
-            description: "Test action card with icon"
-        ) {
-            Image(Icons.bell).iconMedium()
-        }
+            description: "Test action card with icon",
+            icon: { Image(Icons.bell).iconMedium() }
+        )
+        ActionCard(
+            title: "Transparent card",
+            description: "Test action card",
+            transparent: true
+        )
     }
     .padding(12)
     .frame(maxHeight: .infinity)
