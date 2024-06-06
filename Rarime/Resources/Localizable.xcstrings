@@ -627,6 +627,9 @@
     "Create Incognito ID" : {
 
     },
+    "Create new Identity" : {
+
+    },
     "Creating a confidential profile" : {
       "localizations" : {
         "uk" : {
@@ -977,6 +980,9 @@
     "Gambia" : {
 
     },
+    "Generates new keys" : {
+
+    },
     "Georgia" : {
 
     },
@@ -992,6 +998,9 @@
           }
         }
       }
+    },
+    "Get Started" : {
+
     },
     "Ghana" : {
 
@@ -1099,6 +1108,9 @@
     "If you would like to enroll your country in the early beta phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards" : {
 
     },
+    "Import from private key" : {
+
+    },
     "Incognito mode" : {
       "localizations" : {
         "uk" : {
@@ -1122,6 +1134,9 @@
 
     },
     "Invalid HTTP status code: %d" : {
+
+    },
+    "Invalid private key" : {
 
     },
     "Invalid Rarimo address" : {
@@ -1677,6 +1692,9 @@
         }
       }
     },
+    "Private key" : {
+
+    },
     "Processing" : {
       "localizations" : {
         "uk" : {
@@ -1960,6 +1978,9 @@
           }
         }
       }
+    },
+    "Select Authorisation Method" : {
+
     },
     "Send" : {
       "localizations" : {
@@ -2347,6 +2368,9 @@
 
     },
     "User creation failed" : {
+
+    },
+    "Uses pregenerated keys" : {
 
     },
     "Uzbekistan" : {
