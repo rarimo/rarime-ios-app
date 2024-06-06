@@ -89,7 +89,6 @@ enum Icons {
     static let trophy = "Trophy"
     static let twitter = "Twitter"
     static let twitterX = "TwitterX"
-    static let usdc = "USDC"
     static let userCircle = "UserCircle"
     static let userFocus = "UserFocus"
     static let user = "User"
