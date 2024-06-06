@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PassportCard: View {
     let passport: Passport
+    let isWaitlist: Bool
     @Binding var look: PassportCardLook
     @Binding var isIncognito: Bool
     @Binding var identifiers: [PassportIdentifier]
@@ -13,18 +14,63 @@ struct PassportCard: View {
         isIncognito && !isHolding
     }
 
+    var isUnsupported: Bool {
+        UNSUPPORTED_REWARD_COUNTRIES.contains(
+            Country.fromISOCode(passport.nationality)
+        )
+    }
+
+    var isBadgeShown: Bool {
+        isWaitlist || isUnsupported
+    }
+
     var body: some View {
-        cardContent.dynamicSheet(
-            isPresented: $isSettingsSheetPresented,
-            title: "Settings"
-        ) {
-            cardSettings
+        VStack(spacing: isBadgeShown ? -48 : 0) {
+            if isBadgeShown {
+                passportBadge
+            }
+            cardContent.dynamicSheet(
+                isPresented: $isSettingsSheetPresented,
+                title: "Settings"
+            ) {
+                cardSettings
+            }
         }
+    }
+
+    private var passportBadge: some View {
+        HStack(spacing: 16) {
+            if isWaitlist {
+                Image(Icons.globeSimpleTime)
+                    .square(24)
+                    .foregroundStyle(.warningMain)
+            } else {
+                Image(Icons.globeSimpleX)
+                    .square(24)
+                    .foregroundStyle(.errorMain)
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                Text(isWaitlist ? "Waitlist country" : "Unsupported for rewards")
+                    .subtitle5()
+                    .foregroundStyle(.textPrimary)
+                if isWaitlist {
+                    Text("You will be notified once added")
+                        .body4()
+                        .foregroundStyle(.textSecondary)
+                }
+            }
+            Spacer()
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.top, 12)
+        .padding(.bottom, 60)
+        .padding(.horizontal, 20)
+        .background(.componentPrimary, in: RoundedRectangle(cornerRadius: 24))
     }
 
     private var cardContent: some View {
         let fullNameValue = isInfoHidden ? "••••• •••••••" : passport.fullName
-        let ageValue = isInfoHidden ? "••• ••••• •••" : String(localized: "\(passport.ageString) Years Old")
+        let ageValue = isInfoHidden ? "••• ••••• •••" : String(localized: "\(passport.ageString) years old")
 
         return VStack(spacing: 24) {
             HStack(alignment: .top) {
@@ -217,6 +263,7 @@ private struct PreviewView: View {
     var body: some View {
         PassportCard(
             passport: passport,
+            isWaitlist: true,
             look: $look,
             isIncognito: $isIncognito,
             identifiers: $identifiers

@@ -83,6 +83,7 @@ struct HomeView: View {
                         if let passport = passportManager.passport {
                             PassportCard(
                                 passport: passport,
+                                isWaitlist: userManager.registerZkProof == nil,
                                 look: Binding(
                                     get: { passportManager.passportCardLook },
                                     set: { passportManager.setPassportCardLook($0) }
