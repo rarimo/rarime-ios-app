@@ -1,10 +1,11 @@
-import SwiftUI
 import Combine
+import SwiftUI
 
 struct WalletSendView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
     
+    let token: WalletToken
     let onBack: () -> Void
 
     @State private var address = ""
@@ -16,7 +17,7 @@ struct WalletSendView: View {
     @State private var isScanning = false
     @State private var isTransfering = false
     
-    @State private var cancelables: [Task<(), Never>] = []
+    @State private var cancelables: [Task<Void, Never>] = []
 
     func toggleScan() {
         withAnimation(.easeInOut(duration: 0.2)) {
@@ -29,10 +30,11 @@ struct WalletSendView: View {
             if isScanning {
                 ScanQRView(onBack: { toggleScan() }) { result in
                     toggleScan()
-                    if result.starts(with: "rarimo1") {
+                    // TODO: validate according to the token type
+                    if RarimoUtils.isValidAddress(result) {
                         address = result
                     } else {
-                        addressErrorMessage = String(localized: "Invalid Rarimo address")
+                        addressErrorMessage = String(localized: "Invalid address")
                     }
                 }
                 .transition(.move(edge: .bottom))
@@ -48,8 +50,8 @@ struct WalletSendView: View {
 
     var content: some View {
         WalletRouteLayout(
-            title: String(localized: "Send RMO"),
-            description: String(localized: "Withdraw the RMO token"),
+            title: String(localized: "Send \(token.rawValue)"),
+            description: String(localized: "Withdraw the \(token.rawValue) token"),
             onBack: onBack
         ) {
             VStack {
@@ -59,7 +61,7 @@ struct WalletSendView: View {
                             text: $address,
                             errorMessage: $addressErrorMessage,
                             label: String(localized: "Address"),
-                            placeholder: "rarimo1...",
+                            placeholder: "Long press to paste",
                             action: {
                                 Button(action: toggleScan) {
                                     Image(Icons.qrCode)
@@ -72,12 +74,13 @@ struct WalletSendView: View {
                             text: $amount,
                             errorMessage: $amountErrorMessage,
                             label: String(localized: "Amount"),
-                            placeholder: "0.0 RMO",
+                            placeholder: "0.0 \(token.rawValue)",
                             keyboardType: .decimalPad,
                             action: {
                                 HStack(spacing: 16) {
                                     VerticalDivider()
                                     Button(action: {
+                                        // TODO: use balance according to the token type
                                         amount = String(userManager.balance / Double(Rarimo.rarimoTokenMantis))
                                     }) {
                                         Text("MAX")
@@ -93,7 +96,8 @@ struct WalletSendView: View {
                                     .body4()
                                     .foregroundStyle(.textSecondary)
                                 Spacer()
-                                Text("\((userManager.balance / Double(Rarimo.rarimoTokenMantis)).formatted()) RMO")
+                                // TODO: use balance according to the token type
+                                Text(try! String("\((userManager.balance / Double(Rarimo.rarimoTokenMantis)).formatted()) \(token.rawValue)"))
                                     .body4()
                                     .foregroundStyle(.textPrimary)
                             }
@@ -114,7 +118,7 @@ struct WalletSendView: View {
                 Text("Receiver gets")
                     .body4()
                     .foregroundStyle(.textSecondary)
-                Text("\((Double(amount) ?? 0.0).formatted()) RMO")
+                Text(try! String("\((Double(amount) ?? 0.0).formatted()) \(token.rawValue)"))
                     .subtitle3()
                     .foregroundStyle(.textPrimary)
             }
@@ -138,15 +142,17 @@ struct WalletSendView: View {
         
         let cancelable = Task { @MainActor in
             defer {
-                self.isTransfering = false
+                isTransfering = false
             }
             
             do {
+                // TODO: validate according to the token type
                 if !RarimoUtils.isValidAddress(address) {
-                    addressErrorMessage = String(localized: "Invalid Rarimo address")
+                    addressErrorMessage = String(localized: "Invalid address")
                     return
                 }
                 
+                // TODO: calculate according to the token type
                 let amountToSend = (Double(amount) ?? 0) * Double(Rarimo.rarimoTokenMantis)
                 let amountToSendRaw = Int(amountToSend.rounded())
                 
@@ -163,7 +169,7 @@ struct WalletSendView: View {
                 
                 let _ = try await userManager.sendTokens(address, amountToSendRaw.description)
                 
-                self.walletManager.transfer(Double(amount) ?? 0)
+                walletManager.transfer(Double(amount) ?? 0)
                 
                 try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
                 
@@ -175,7 +181,7 @@ struct WalletSendView: View {
             }
         }
         
-        self.cancelables.append(cancelable)
+        cancelables.append(cancelable)
     }
     
     func cleanup() {
@@ -187,17 +193,17 @@ struct WalletSendView: View {
     func handleAmountOnReceive(_ newValue: String) {
         let filtered = newValue.filter { "0123456789,.".contains($0) }
         if filtered != newValue {
-            self.amount = filtered
+            amount = filtered
         }
         
         if filtered.contains(",") {
-            self.amount = filtered.replacingOccurrences(of: ",", with: ".")
+            amount = filtered.replacingOccurrences(of: ",", with: ".")
         }
     }
 }
 
 #Preview {
-    WalletSendView(onBack: {})
+    WalletSendView(token: WalletToken.rmo, onBack: {})
         .environmentObject(WalletManager())
         .environmentObject(UserManager())
 }
