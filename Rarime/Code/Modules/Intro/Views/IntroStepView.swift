@@ -12,15 +12,6 @@ struct IntroStepView: View {
                 }
                 .frame(maxWidth: .infinity)
                 VStack(alignment: .leading, spacing: 16) {
-                    ZStack {
-                        Text("Beta launch")
-                            .body3()
-                            .foregroundStyle(.warningDark)
-                    }
-                    .padding(.vertical, 4)
-                    .padding(.horizontal, 12)
-                    .background(.warningLight)
-                    .clipShape(Capsule())
                     Text(step.title).h4().foregroundStyle(.textPrimary)
                     Text(step.text).body2()
                         .foregroundStyle(.textSecondary)

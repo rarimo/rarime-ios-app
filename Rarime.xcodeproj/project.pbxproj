@@ -26,6 +26,7 @@
 		561C3C402BADF0AA00FBB3B9 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 561C3C3C2BADF0AA00FBB3B9 /* Inter-SemiBold.ttf */; };
 		561C3C412BADF0AA00FBB3B9 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 561C3C3D2BADF0AA00FBB3B9 /* Inter-Medium.ttf */; };
 		561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C422BAEE2D600FBB3B9 /* String+Error.swift */; };
+		562241452C11E1B3000239FA /* RewardsIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562241442C11E1B3000239FA /* RewardsIntroView.swift */; };
 		563529E52BB072060027C910 /* RewardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529E42BB072060027C910 /* RewardsView.swift */; };
 		563529E72BB072870027C910 /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529E62BB072870027C910 /* WalletView.swift */; };
 		563529E92BB072B80027C910 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529E82BB072B80027C910 /* HomeView.swift */; };
@@ -65,7 +66,6 @@
 		568B4FD12BB6D88F001C9C74 /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FD02BB6D88F001C9C74 /* Divider.swift */; };
 		568B4FE02BB70852001C9C74 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 568B4FDF2BB70852001C9C74 /* Localizable.xcstrings */; };
 		568B4FE52BB70CAA001C9C74 /* IntroStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FE42BB70CAA001C9C74 /* IntroStep.swift */; };
-		56933DED2BBAB0AB0068C894 /* PassportIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DEC2BBAB0AB0068C894 /* PassportIntroView.swift */; };
 		56933DEF2BBABD100068C894 /* ScanPassportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DEE2BBABD100068C894 /* ScanPassportView.swift */; };
 		56933DF12BBAC1B10068C894 /* ScanPassportLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DF02BBAC1B10068C894 /* ScanPassportLayoutView.swift */; };
 		56933DF32BBAC2940068C894 /* ScanPassportMRZView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DF22BBAC2940068C894 /* ScanPassportMRZView.swift */; };
@@ -90,7 +90,7 @@
 		56A88FCD2C04C78F00D3A64A /* ScanPassport.json in Resources */ = {isa = PBXBuildFile; fileRef = 56A88FCC2C04C78F00D3A64A /* ScanPassport.json */; };
 		56A88FCF2C062AB200D3A64A /* AirdropCheckboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A88FCE2C062AB200D3A64A /* AirdropCheckboxView.swift */; };
 		56AC03402BB06A2D00A34A00 /* Image+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */; };
-		56CC01E52BCD81AA008CEBE0 /* AirdropIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CC01E42BCD81AA008CEBE0 /* AirdropIntroView.swift */; };
+		56CC01E52BCD81AA008CEBE0 /* UkrainianIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CC01E42BCD81AA008CEBE0 /* UkrainianIntroView.swift */; };
 		56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3002BB723A1002CF710 /* NewIdentityView.swift */; };
 		56DAA3052BB72E35002CF710 /* InfoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3042BB72E35002CF710 /* InfoAlert.swift */; };
 		56DAA3072BB77550002CF710 /* IdentityStepLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3062BB77550002CF710 /* IdentityStepLayoutView.swift */; };
@@ -191,6 +191,7 @@
 		561C3C3C2BADF0AA00FBB3B9 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		561C3C3D2BADF0AA00FBB3B9 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
 		561C3C422BAEE2D600FBB3B9 /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
+		562241442C11E1B3000239FA /* RewardsIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsIntroView.swift; sourceTree = "<group>"; };
 		563529E42BB072060027C910 /* RewardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsView.swift; sourceTree = "<group>"; };
 		563529E62BB072870027C910 /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
 		563529E82BB072B80027C910 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -229,7 +230,6 @@
 		568B4FD02BB6D88F001C9C74 /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
 		568B4FDF2BB70852001C9C74 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		568B4FE42BB70CAA001C9C74 /* IntroStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroStep.swift; sourceTree = "<group>"; };
-		56933DEC2BBAB0AB0068C894 /* PassportIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportIntroView.swift; sourceTree = "<group>"; };
 		56933DEE2BBABD100068C894 /* ScanPassportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPassportView.swift; sourceTree = "<group>"; };
 		56933DF02BBAC1B10068C894 /* ScanPassportLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPassportLayoutView.swift; sourceTree = "<group>"; };
 		56933DF22BBAC2940068C894 /* ScanPassportMRZView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPassportMRZView.swift; sourceTree = "<group>"; };
@@ -254,7 +254,7 @@
 		56A88FCC2C04C78F00D3A64A /* ScanPassport.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ScanPassport.json; sourceTree = "<group>"; };
 		56A88FCE2C062AB200D3A64A /* AirdropCheckboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirdropCheckboxView.swift; sourceTree = "<group>"; };
 		56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Icon.swift"; sourceTree = "<group>"; };
-		56CC01E42BCD81AA008CEBE0 /* AirdropIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirdropIntroView.swift; sourceTree = "<group>"; };
+		56CC01E42BCD81AA008CEBE0 /* UkrainianIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UkrainianIntroView.swift; sourceTree = "<group>"; };
 		56DAA3002BB723A1002CF710 /* NewIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIdentityView.swift; sourceTree = "<group>"; };
 		56DAA3042BB72E35002CF710 /* InfoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlert.swift; sourceTree = "<group>"; };
 		56DAA3062BB77550002CF710 /* IdentityStepLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityStepLayoutView.swift; sourceTree = "<group>"; };
@@ -448,8 +448,8 @@
 			isa = PBXGroup;
 			children = (
 				563529E82BB072B80027C910 /* HomeView.swift */,
-				56CC01E42BCD81AA008CEBE0 /* AirdropIntroView.swift */,
-				56933DEC2BBAB0AB0068C894 /* PassportIntroView.swift */,
+				562241442C11E1B3000239FA /* RewardsIntroView.swift */,
+				56CC01E42BCD81AA008CEBE0 /* UkrainianIntroView.swift */,
 				56E2D9182BCE94CA006E725D /* RarimeInfoView.swift */,
 				56E2D91A2BCEA66A006E725D /* PassportCard.swift */,
 				56E2D9142BCE7FC4006E725D /* HomeIntroLayout.swift */,
@@ -1039,7 +1039,7 @@
 				56E2D91B2BCEA66A006E725D /* PassportCard.swift in Sources */,
 				56E2D9192BCE94CA006E725D /* RarimeInfoView.swift in Sources */,
 				CEC562112BD926AA002D4954 /* ZKUtils.swift in Sources */,
-				56CC01E52BCD81AA008CEBE0 /* AirdropIntroView.swift in Sources */,
+				56CC01E52BCD81AA008CEBE0 /* UkrainianIntroView.swift in Sources */,
 				560F0C232BD02DFD00067054 /* WalletSendView.swift in Sources */,
 				56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */,
 				56E2D9222BCFBA0B006E725D /* PassportImageView.swift in Sources */,
@@ -1074,7 +1074,6 @@
 				CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */,
 				561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */,
 				561C3C2B2BADBF1000FBB3B9 /* View+Typography.swift in Sources */,
-				56933DED2BBAB0AB0068C894 /* PassportIntroView.swift in Sources */,
 				560F0C342BD175EB00067054 /* LoggerUtil.swift in Sources */,
 				568B4FCC2BB6C164001C9C74 /* IntroView.swift in Sources */,
 				560F0C1F2BD027EA00067054 /* WalletReceiveView.swift in Sources */,
@@ -1083,6 +1082,7 @@
 				CED909D02BDBA9FC0065E949 /* Cosmos.swift in Sources */,
 				56A88FCF2C062AB200D3A64A /* AirdropCheckboxView.swift in Sources */,
 				56A6C76E2BBD474200992562 /* DateUtil.swift in Sources */,
+				562241452C11E1B3000239FA /* RewardsIntroView.swift in Sources */,
 				56A6C7562BBC194800992562 /* Animations.swift in Sources */,
 				56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */,
 				56E2D9242BCFDD42006E725D /* ClaimTokensView.swift in Sources */,

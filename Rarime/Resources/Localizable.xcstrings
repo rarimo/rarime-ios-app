@@ -250,6 +250,7 @@
       }
     },
     "Beta launch" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -319,6 +320,9 @@
         }
       }
     },
+    "Campaign is focused on distributing rewards to Ukrainian citizens" : {
+
+    },
     "Cancel" : {
       "localizations" : {
         "uk" : {
@@ -339,6 +343,15 @@
         }
       }
     },
+    "Check eligibility" : {
+
+    },
+    "Check your eligibility" : {
+
+    },
+    "Checking eligibility happens via a scan of your biometric passport.\n\nYour data never leaves the device or is shared with any third party. Proof of citizenship is generated locally using Zero-Knowledge technology." : {
+
+    },
     "Claim" : {
       "localizations" : {
         "uk" : {
@@ -358,9 +371,6 @@
           }
         }
       }
-    },
-    "Claim rewards" : {
-
     },
     "Claiming..." : {
       "localizations" : {
@@ -715,9 +725,6 @@
         }
       }
     },
-    "Give us feedback" : {
-
-    },
     "Go Incognito" : {
       "localizations" : {
         "uk" : {
@@ -761,7 +768,7 @@
     "I've just received %lld RMO tokens! Participate in the airdrop: https://rarime.com" : {
 
     },
-    "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport." : {
+    "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport" : {
 
     },
     "Incognito mode" : {
@@ -803,7 +810,11 @@
         }
       }
     },
+    "It showcases Rarimo’s identity infrastructure and how it can be used by projects and organizations to directly reach civilians." : {
+
+    },
     "Join a waitlist" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -813,7 +824,11 @@
         }
       }
     },
+    "Join Rewards Program" : {
+
+    },
     "Join the waitlist" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -834,6 +849,7 @@
       }
     },
     "Learn more about RariMe App" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -842,6 +858,9 @@
           }
         }
       }
+    },
+    "Learn more about the App" : {
+
     },
     "Let’s Start" : {
       "localizations" : {
@@ -983,6 +1002,7 @@
       }
     },
     "Other passport holders" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1116,6 +1136,7 @@
       }
     },
     "Programmable Airdrop" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1124,6 +1145,9 @@
           }
         }
       }
+    },
+    "Programmable rewards" : {
+
     },
     "Proofs" : {
       "localizations" : {
@@ -1331,6 +1355,9 @@
         }
       }
     },
+    "Send issue to the devs" : {
+
+    },
     "Send RMO" : {
       "localizations" : {
         "uk" : {
@@ -1451,6 +1478,7 @@
       }
     },
     "The beta launch is focused on distributing tokens to Ukrainian citizens" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1494,6 +1522,7 @@
       }
     },
     "This airdrop is part of a humanitarian effort to help direct funds towards Ukraine.\n\nIt showcases Rarimo’s identity infrastructure and how it can be used by projects and organizations to directly reach civilians." : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1536,6 +1565,9 @@
         }
       }
     },
+    "Ukrainian citizens" : {
+
+    },
     "Unexpected error" : {
 
     },
@@ -1546,6 +1578,7 @@
 
     },
     "Upcoming airdrops will include citizens from all over the world.\n\nCreate an incognito profile by scanning your passport, and we will notify you when you become eligible." : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
