@@ -126,6 +126,9 @@
         }
       }
     },
+    "Afghanistan" : {
+
+    },
     "Airdrop" : {
       "localizations" : {
         "uk" : {
@@ -136,6 +139,15 @@
         }
       }
     },
+    "Aland Islands" : {
+
+    },
+    "Albania" : {
+
+    },
+    "Algeria" : {
+
+    },
     "All Done!" : {
       "localizations" : {
         "uk" : {
@@ -145,6 +157,9 @@
           }
         }
       }
+    },
+    "American Samoa" : {
+
     },
     "Amount" : {
       "localizations" : {
@@ -157,6 +172,21 @@
       }
     },
     "Amount must be greater than 0" : {
+
+    },
+    "Andorra" : {
+
+    },
+    "Angola" : {
+
+    },
+    "Anguilla" : {
+
+    },
+    "Antarctica" : {
+
+    },
+    "Antigua and Barbuda" : {
 
     },
     "App Icon" : {
@@ -188,6 +218,21 @@
           }
         }
       }
+    },
+    "Argentina" : {
+
+    },
+    "Armenia" : {
+
+    },
+    "Aruba" : {
+
+    },
+    "Australia" : {
+
+    },
+    "Austria" : {
+
     },
     "Auth Method" : {
       "localizations" : {
@@ -239,6 +284,15 @@
         }
       }
     },
+    "Azerbaijan" : {
+
+    },
+    "Bahamas" : {
+
+    },
+    "Bahrain" : {
+
+    },
     "Balance: RMO" : {
       "localizations" : {
         "uk" : {
@@ -249,7 +303,28 @@
         }
       }
     },
+    "Bangladesh" : {
+
+    },
+    "Barbados" : {
+
+    },
     "Become an ambassador" : {
+
+    },
+    "Belarus" : {
+
+    },
+    "Belgium" : {
+
+    },
+    "Belize" : {
+
+    },
+    "Benin" : {
+
+    },
+    "Bermuda" : {
 
     },
     "Beta launch" : {
@@ -262,6 +337,9 @@
           }
         }
       }
+    },
+    "Bhutan" : {
+
     },
     "Birth date" : {
       "localizations" : {
@@ -303,6 +381,39 @@
         }
       }
     },
+    "Bolivia" : {
+
+    },
+    "Bonaire" : {
+
+    },
+    "Bosnia and Herzegovina" : {
+
+    },
+    "Botswana" : {
+
+    },
+    "Bouvet Island" : {
+
+    },
+    "Brazil" : {
+
+    },
+    "British Indian Ocean Territory" : {
+
+    },
+    "Brunei Darussalam" : {
+
+    },
+    "Bulgaria" : {
+
+    },
+    "Burkina Faso" : {
+
+    },
+    "Burundi" : {
+
+    },
     "By checking this box, you are agreeing to " : {
       "localizations" : {
         "uk" : {
@@ -312,6 +423,12 @@
           }
         }
       }
+    },
+    "Cabo Verde" : {
+
+    },
+    "Cambodia" : {
+
     },
     "Camera Permission" : {
       "localizations" : {
@@ -323,7 +440,13 @@
         }
       }
     },
+    "Cameroon" : {
+
+    },
     "Campaign is focused on distributing rewards to Ukrainian citizens" : {
+
+    },
+    "Canada" : {
 
     },
     "Cancel" : {
@@ -346,6 +469,15 @@
         }
       }
     },
+    "Cayman Islands" : {
+
+    },
+    "Central African Republic" : {
+
+    },
+    "Chad" : {
+
+    },
     "Check eligibility" : {
 
     },
@@ -353,6 +485,15 @@
 
     },
     "Checking eligibility happens via a scan of your biometric passport.\n\nYour data never leaves the device or is shared with any third party. Proof of citizenship is generated locally using Zero-Knowledge technology." : {
+
+    },
+    "Chile" : {
+
+    },
+    "China" : {
+
+    },
+    "Christmas Island" : {
 
     },
     "Claim" : {
@@ -395,6 +536,18 @@
         }
       }
     },
+    "Cocos Islands" : {
+
+    },
+    "Colombia" : {
+
+    },
+    "Comoros" : {
+
+    },
+    "Congo" : {
+
+    },
     "Congrats!" : {
       "localizations" : {
         "uk" : {
@@ -418,6 +571,9 @@
         }
       }
     },
+    "Cook Islands" : {
+
+    },
     "Copied" : {
       "localizations" : {
         "uk" : {
@@ -437,6 +593,12 @@
           }
         }
       }
+    },
+    "Costa Rica" : {
+
+    },
+    "Cote d'Ivoire" : {
+
     },
     "Could not authenticate with Face ID. Please try again." : {
       "localizations" : {
@@ -481,6 +643,21 @@
         }
       }
     },
+    "Croatia" : {
+
+    },
+    "Cuba" : {
+
+    },
+    "Curacao" : {
+
+    },
+    "Cyprus" : {
+
+    },
+    "Czechia" : {
+
+    },
     "Dark Mode" : {
       "localizations" : {
         "uk" : {
@@ -521,6 +698,18 @@
         }
       }
     },
+    "Democratic People's Republic of Korea" : {
+
+    },
+    "Democratic Republic of the Congo" : {
+
+    },
+    "Denmark" : {
+
+    },
+    "Djibouti" : {
+
+    },
     "Document class mode" : {
       "localizations" : {
         "uk" : {
@@ -551,6 +740,12 @@
         }
       }
     },
+    "Dominica" : {
+
+    },
+    "Dominican Republic" : {
+
+    },
     "Done" : {
       "localizations" : {
         "uk" : {
@@ -560,6 +755,15 @@
           }
         }
       }
+    },
+    "Ecuador" : {
+
+    },
+    "Egypt" : {
+
+    },
+    "El Salvador" : {
+
     },
     "Enable" : {
       "localizations" : {
@@ -641,6 +845,12 @@
         }
       }
     },
+    "Equatorial Guinea" : {
+
+    },
+    "Eritrea" : {
+
+    },
     "Error" : {
       "localizations" : {
         "uk" : {
@@ -650,6 +860,15 @@
           }
         }
       }
+    },
+    "Estonia" : {
+
+    },
+    "Eswatini" : {
+
+    },
+    "Ethiopia" : {
+
     },
     "Expiry date" : {
       "localizations" : {
@@ -704,6 +923,12 @@
     "Failed, %lld attempts left" : {
 
     },
+    "Falkland Islands" : {
+
+    },
+    "Faroe Islands" : {
+
+    },
     "Female" : {
       "localizations" : {
         "uk" : {
@@ -714,6 +939,9 @@
         }
       }
     },
+    "Fiji" : {
+
+    },
     "Finalizing" : {
       "localizations" : {
         "uk" : {
@@ -723,6 +951,27 @@
           }
         }
       }
+    },
+    "Finland" : {
+
+    },
+    "France" : {
+
+    },
+    "French Guiana" : {
+
+    },
+    "French Polynesia" : {
+
+    },
+    "French Southern Territories" : {
+
+    },
+    "Gabon" : {
+
+    },
+    "Gambia" : {
+
     },
     "Georgia" : {
 
@@ -740,6 +989,12 @@
         }
       }
     },
+    "Ghana" : {
+
+    },
+    "Gibraltar" : {
+
+    },
     "Go Incognito" : {
       "localizations" : {
         "uk" : {
@@ -749,6 +1004,9 @@
           }
         }
       }
+    },
+    "Greece" : {
+
     },
     "Green" : {
       "localizations" : {
@@ -770,6 +1028,39 @@
         }
       }
     },
+    "Greenland" : {
+
+    },
+    "Grenada" : {
+
+    },
+    "Guadeloupe" : {
+
+    },
+    "Guam" : {
+
+    },
+    "Guatemala" : {
+
+    },
+    "Guernsey" : {
+
+    },
+    "Guinea" : {
+
+    },
+    "Guinea-Bissau" : {
+
+    },
+    "Guyana" : {
+
+    },
+    "Haiti" : {
+
+    },
+    "Heard Island and McDonald Islands" : {
+
+    },
     "Hold your iPhone near an NFC enabled passport." : {
       "localizations" : {
         "uk" : {
@@ -780,7 +1071,22 @@
         }
       }
     },
+    "Holy See" : {
+
+    },
+    "Honduras" : {
+
+    },
+    "Hong Kong" : {
+
+    },
+    "Hungary" : {
+
+    },
     "I've just received %lld RMO tokens! Participate in the airdrop: https://rarime.com" : {
+
+    },
+    "Iceland" : {
 
     },
     "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport" : {
@@ -798,6 +1104,12 @@
           }
         }
       }
+    },
+    "India" : {
+
+    },
+    "Indonesia" : {
+
     },
     "Information shared includes the data groups of the passport and the government signature" : {
 
@@ -821,6 +1133,21 @@
     "Invalid response body" : {
 
     },
+    "Iran" : {
+
+    },
+    "Iraq" : {
+
+    },
+    "Ireland" : {
+
+    },
+    "Isle of Man" : {
+
+    },
+    "Israel" : {
+
+    },
     "Issuing state code" : {
       "localizations" : {
         "uk" : {
@@ -832,6 +1159,18 @@
       }
     },
     "It showcases Rarimo’s identity infrastructure and how it can be used by projects and organizations to directly reach civilians." : {
+
+    },
+    "Italy" : {
+
+    },
+    "Jamaica" : {
+
+    },
+    "Japan" : {
+
+    },
+    "Jersey" : {
 
     },
     "Join a waitlist" : {
@@ -862,6 +1201,24 @@
         }
       }
     },
+    "Jordan" : {
+
+    },
+    "Kazakhstan" : {
+
+    },
+    "Kenya" : {
+
+    },
+    "Kiribati" : {
+
+    },
+    "Kuwait" : {
+
+    },
+    "Kyrgyzstan" : {
+
+    },
     "Language" : {
       "localizations" : {
         "uk" : {
@@ -871,6 +1228,12 @@
           }
         }
       }
+    },
+    "Laos" : {
+
+    },
+    "Latvia" : {
+
     },
     "Learn more about RariMe App" : {
       "extractionState" : "stale",
@@ -886,6 +1249,12 @@
     "Learn more about the App" : {
 
     },
+    "Lebanon" : {
+
+    },
+    "Lesotho" : {
+
+    },
     "Let’s Start" : {
       "localizations" : {
         "uk" : {
@@ -895,6 +1264,15 @@
           }
         }
       }
+    },
+    "Liberia" : {
+
+    },
+    "Libya" : {
+
+    },
+    "Liechtenstein" : {
+
     },
     "Light Mode" : {
       "localizations" : {
@@ -906,6 +1284,27 @@
         }
       }
     },
+    "Lithuania" : {
+
+    },
+    "Luxembourg" : {
+
+    },
+    "Macao" : {
+
+    },
+    "Madagascar" : {
+
+    },
+    "Malawi" : {
+
+    },
+    "Malaysia" : {
+
+    },
+    "Maldives" : {
+
+    },
     "Male" : {
       "localizations" : {
         "uk" : {
@@ -915,6 +1314,24 @@
           }
         }
       }
+    },
+    "Mali" : {
+
+    },
+    "Malta" : {
+
+    },
+    "Marshall Islands" : {
+
+    },
+    "Martinique" : {
+
+    },
+    "Mauritania" : {
+
+    },
+    "Mauritius" : {
+
     },
     "MAX" : {
       "localizations" : {
@@ -936,7 +1353,34 @@
         }
       }
     },
+    "Mayotte" : {
+
+    },
+    "Mexico" : {
+
+    },
+    "Micronesia" : {
+
+    },
+    "Moldova" : {
+
+    },
+    "Monaco" : {
+
+    },
+    "Mongolia" : {
+
+    },
+    "Montenegro" : {
+
+    },
+    "Montserrat" : {
+
+    },
     "More than 1 tags was found. Please present only 1 tag." : {
+
+    },
+    "Morocco" : {
 
     },
     "Move your passport page inside the border" : {
@@ -948,6 +1392,9 @@
           }
         }
       }
+    },
+    "Mozambique" : {
+
     },
     "MRZ Key not valid for this document." : {
 
@@ -962,6 +1409,12 @@
         }
       }
     },
+    "Myanmar" : {
+
+    },
+    "Namibia" : {
+
+    },
     "Nationality" : {
       "localizations" : {
         "uk" : {
@@ -971,6 +1424,21 @@
           }
         }
       }
+    },
+    "Nauru" : {
+
+    },
+    "Nepal" : {
+
+    },
+    "Netherlands" : {
+
+    },
+    "New Caledonia" : {
+
+    },
+    "New Zealand" : {
+
     },
     "Next" : {
       "localizations" : {
@@ -992,6 +1460,18 @@
         }
       }
     },
+    "Nicaragua" : {
+
+    },
+    "Niger" : {
+
+    },
+    "Nigeria" : {
+
+    },
+    "Niue" : {
+
+    },
     "No transactions yet" : {
       "localizations" : {
         "uk" : {
@@ -1001,6 +1481,18 @@
           }
         }
       }
+    },
+    "Norfolk Island" : {
+
+    },
+    "North Macedonia" : {
+
+    },
+    "Northern Mariana Islands" : {
+
+    },
+    "Norway" : {
+
     },
     "Ok" : {
 
@@ -1014,6 +1506,9 @@
           }
         }
       }
+    },
+    "Oman" : {
+
     },
     "One of our services is down, try again later" : {
 
@@ -1041,6 +1536,24 @@
           }
         }
       }
+    },
+    "Pakistan" : {
+
+    },
+    "Palau" : {
+
+    },
+    "Palestine" : {
+
+    },
+    "Panama" : {
+
+    },
+    "Papua New Guinea" : {
+
+    },
+    "Paraguay" : {
+
     },
     "Passcode" : {
       "localizations" : {
@@ -1071,6 +1584,15 @@
           }
         }
       }
+    },
+    "Peru" : {
+
+    },
+    "Philippines" : {
+
+    },
+    "Pitcairn" : {
+
     },
     "Place QR code within the frame to scan" : {
       "localizations" : {
@@ -1134,6 +1656,12 @@
           }
         }
       }
+    },
+    "Poland" : {
+
+    },
+    "Portugal" : {
+
     },
     "Privacy Policy" : {
       "localizations" : {
@@ -1208,6 +1736,12 @@
           }
         }
       }
+    },
+    "Puerto Rico" : {
+
+    },
+    "Qatar" : {
+
     },
     "RARIME" : {
       "localizations" : {
@@ -1339,13 +1873,58 @@
         }
       }
     },
+    "Republic of Korea" : {
+
+    },
+    "Reunion" : {
+
+    },
     "Revoke with NFC" : {
 
     },
     "RMO Tokens Airdrop" : {
 
     },
-    "Russia" : {
+    "Romania" : {
+
+    },
+    "Russian Federation" : {
+
+    },
+    "Rwanda" : {
+
+    },
+    "Saint Barthelemy" : {
+
+    },
+    "Saint Helena" : {
+
+    },
+    "Saint Kitts and Nevis" : {
+
+    },
+    "Saint Lucia" : {
+
+    },
+    "Saint Martin" : {
+
+    },
+    "Saint Pierre and Miquelon" : {
+
+    },
+    "Saint Vincent and the Grenadines" : {
+
+    },
+    "Samoa" : {
+
+    },
+    "San Marino" : {
+
+    },
+    "Sao Tome and Principe" : {
+
+    },
+    "Saudi Arabia" : {
 
     },
     "Scan" : {
@@ -1398,6 +1977,12 @@
         }
       }
     },
+    "Senegal" : {
+
+    },
+    "Serbia" : {
+
+    },
     "Settings" : {
       "localizations" : {
         "uk" : {
@@ -1407,6 +1992,9 @@
           }
         }
       }
+    },
+    "Seychelles" : {
+
     },
     "Share Achievements" : {
 
@@ -1421,6 +2009,15 @@
         }
       }
     },
+    "Sierra Leone" : {
+
+    },
+    "Singapore" : {
+
+    },
+    "Sint Maarten" : {
+
+    },
     "Skip" : {
       "localizations" : {
         "uk" : {
@@ -1430,6 +2027,18 @@
           }
         }
       }
+    },
+    "Slovakia" : {
+
+    },
+    "Slovenia" : {
+
+    },
+    "Solomon Islands" : {
+
+    },
+    "Somalia" : {
+
     },
     "Sorry, there was a problem reading the passport. %@. Error codes: [0x%u, 0x%u]" : {
       "localizations" : {
@@ -1450,6 +2059,21 @@
           }
         }
       }
+    },
+    "South Africa" : {
+
+    },
+    "South Georgia and the South Sandwich Islands" : {
+
+    },
+    "South Sudan" : {
+
+    },
+    "Spain" : {
+
+    },
+    "Sri Lanka" : {
+
     },
     "Start building your incognito profile and earn rewards as an early community member." : {
       "localizations" : {
@@ -1487,6 +2111,24 @@
         }
       }
     },
+    "Sudan" : {
+
+    },
+    "Suriname" : {
+
+    },
+    "Svalbard and Jan Mayen" : {
+
+    },
+    "Sweden" : {
+
+    },
+    "Switzerland" : {
+
+    },
+    "Syrian Arab Republic" : {
+
+    },
     "System" : {
       "localizations" : {
         "uk" : {
@@ -1500,6 +2142,15 @@
     "Tag not valid." : {
 
     },
+    "Taiwan" : {
+
+    },
+    "Tajikistan" : {
+
+    },
+    "Tanzania" : {
+
+    },
     "Terms of Use" : {
       "localizations" : {
         "uk" : {
@@ -1509,6 +2160,9 @@
           }
         }
       }
+    },
+    "Thailand" : {
+
     },
     "Thanks!" : {
       "localizations" : {
@@ -1588,6 +2242,18 @@
     "This is required to revoke your passport" : {
 
     },
+    "Timor-Leste" : {
+
+    },
+    "Togo" : {
+
+    },
+    "Tokelau" : {
+
+    },
+    "Tonga" : {
+
+    },
     "Transactions" : {
       "localizations" : {
         "uk" : {
@@ -1597,6 +2263,27 @@
           }
         }
       }
+    },
+    "Trinidad and Tobago" : {
+
+    },
+    "Tunisia" : {
+
+    },
+    "Turkey" : {
+
+    },
+    "Turkmenistan" : {
+
+    },
+    "Turks and Caicos Islands" : {
+
+    },
+    "Tuvalu" : {
+
+    },
+    "Uganda" : {
+
     },
     "Ukraine" : {
 
@@ -1615,6 +2302,9 @@
 
     },
     "Unfortunately, these passports are not eligible for rewards. However, you can use your incognito ID for other upcoming mini apps." : {
+
+    },
+    "United Arab Emirates" : {
 
     },
     "United Kingdom" : {
@@ -1646,7 +2336,28 @@
         }
       }
     },
+    "Uruguay" : {
+
+    },
     "User creation failed" : {
+
+    },
+    "Uzbekistan" : {
+
+    },
+    "Vanuatu" : {
+
+    },
+    "Venezuela" : {
+
+    },
+    "Vietnam" : {
+
+    },
+    "Virgin Islands, British" : {
+
+    },
+    "Virgin Islands, U.S." : {
 
     },
     "Waitlist passport" : {
@@ -1661,6 +2372,9 @@
           }
         }
       }
+    },
+    "Wallis and Futuna" : {
+
     },
     "We will notify when you become eligible" : {
       "localizations" : {
@@ -1681,6 +2395,9 @@
           }
         }
       }
+    },
+    "Western Sahara" : {
+
     },
     "What is RariMe?" : {
       "localizations" : {
@@ -1721,6 +2438,9 @@
           }
         }
       }
+    },
+    "Yemen" : {
+
     },
     "You can use the QR code or the wallet address to deposit the RMO token to your account" : {
       "localizations" : {
@@ -1787,6 +2507,12 @@
           }
         }
       }
+    },
+    "Zambia" : {
+
+    },
+    "Zimbabwe" : {
+
     }
   },
   "version" : "1.0"
