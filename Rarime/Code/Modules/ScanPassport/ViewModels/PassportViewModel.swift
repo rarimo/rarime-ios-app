@@ -37,6 +37,11 @@ class PassportViewModel: ObservableObject {
     var isEligibleForReward: Bool {
         passport?.nationality == "UKR"
     }
+    
+    var passportCountry: Country {
+        guard let passport = passport else { return .unknown }
+        return Country.fromISOCode(passport.nationality)
+    }
 
     func setPassport(_ passport: Passport) {
         self.passport = passport

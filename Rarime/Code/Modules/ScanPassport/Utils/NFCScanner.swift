@@ -20,8 +20,16 @@ class NFCScanner {
             message = "Authenticating with passport..."
         case .readingDataGroupProgress(_, let progress):
             message = "Reading passport data...\n\n\(drawProgressBar(progress))"
-        case .error:
-            message = "Sorry, there was a problem reading the passport. Please try again"
+        case .error(let tagError):
+            switch tagError {
+            case .TagNotValid: message = "Tag not valid."
+            case .MoreThanOneTagFound: message = "More than 1 tags was found. Please present only 1 tag."
+            case .ConnectionError: message = "Connection error. Please try again."
+            case .InvalidMRZKey: message = "MRZ Key not valid for this document."
+            case .ResponseError(let reason, let sw1, let sw2):
+                message = "Sorry, there was a problem reading the passport. \(reason). Error codes: [0x\(sw1), 0x\(sw2)]"
+            default: message = "Sorry, there was a problem reading the passport. Please try again"
+            }
         case .successfulRead:
             message = "Passport read successfully"
         }

@@ -249,6 +249,9 @@
         }
       }
     },
+    "Become an ambassador" : {
+
+    },
     "Beta launch" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -402,6 +405,9 @@
         }
       }
     },
+    "Connection error. Please try again." : {
+
+    },
     "Continue" : {
       "localizations" : {
         "uk" : {
@@ -451,6 +457,9 @@
           }
         }
       }
+    },
+    "Create Incognito ID" : {
+
     },
     "Creating a confidential profile" : {
       "localizations" : {
@@ -715,6 +724,12 @@
         }
       }
     },
+    "Georgia" : {
+
+    },
+    "Germany" : {
+
+    },
     "Get Rewarded" : {
       "localizations" : {
         "uk" : {
@@ -771,6 +786,9 @@
     "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport" : {
 
     },
+    "If you would like to enroll your country in the early beta phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards" : {
+
+    },
     "Incognito mode" : {
       "localizations" : {
         "uk" : {
@@ -780,6 +798,9 @@
           }
         }
       }
+    },
+    "Information shared includes the data groups of the passport and the government signature" : {
+
     },
     "Insufficient balance" : {
 
@@ -825,6 +846,9 @@
       }
     },
     "Join Rewards Program" : {
+
+    },
+    "Join the program" : {
 
     },
     "Join the waitlist" : {
@@ -912,6 +936,9 @@
         }
       }
     },
+    "More than 1 tags was found. Please present only 1 tag." : {
+
+    },
     "Move your passport page inside the border" : {
       "localizations" : {
         "uk" : {
@@ -921,6 +948,9 @@
           }
         }
       }
+    },
+    "MRZ Key not valid for this document." : {
+
     },
     "Must data" : {
       "localizations" : {
@@ -1315,6 +1345,9 @@
     "RMO Tokens Airdrop" : {
 
     },
+    "Russia" : {
+
+    },
     "Scan" : {
       "localizations" : {
         "uk" : {
@@ -1355,9 +1388,6 @@
         }
       }
     },
-    "Send issue to the devs" : {
-
-    },
     "Send RMO" : {
       "localizations" : {
         "uk" : {
@@ -1397,6 +1427,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Пропустити"
+          }
+        }
+      }
+    },
+    "Sorry, there was a problem reading the passport. %@. Error codes: [0x%u, 0x%u]" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sorry, there was a problem reading the passport. %1$@. Error codes: [0x%2$u, 0x%3$u]"
           }
         }
       }
@@ -1456,6 +1496,9 @@
           }
         }
       }
+    },
+    "Tag not valid." : {
+
     },
     "Terms of Use" : {
       "localizations" : {
@@ -1555,6 +1598,9 @@
         }
       }
     },
+    "Ukraine" : {
+
+    },
     "Ukrainian" : {
       "localizations" : {
         "uk" : {
@@ -1568,13 +1614,25 @@
     "Ukrainian citizens" : {
 
     },
-    "Unexpected error" : {
+    "Unfortunately, these passports are not eligible for rewards. However, you can use your incognito ID for other upcoming mini apps." : {
+
+    },
+    "United Kingdom" : {
+
+    },
+    "United States" : {
 
     },
     "Unknown" : {
 
     },
+    "Unknown Country" : {
+
+    },
     "Unknown service error" : {
+
+    },
+    "Unsupported country" : {
 
     },
     "Upcoming airdrops will include citizens from all over the world.\n\nCreate an incognito profile by scanning your passport, and we will notify you when you become eligible." : {
@@ -1591,6 +1649,9 @@
     "User creation failed" : {
 
     },
+    "Waitlist passport" : {
+
+    },
     "Wallet" : {
       "localizations" : {
         "uk" : {
@@ -1600,12 +1661,6 @@
           }
         }
       }
-    },
-    "WARNING: All your passport data will be sent" : {
-
-    },
-    "We try to support many different passports, but they consist of many different protocols. You can send us your passport and we will try to add it in the future." : {
-
     },
     "We will notify when you become eligible" : {
       "localizations" : {

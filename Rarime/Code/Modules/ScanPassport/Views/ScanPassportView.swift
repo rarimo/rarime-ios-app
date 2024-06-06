@@ -1,7 +1,13 @@
 import SwiftUI
 
 private enum ScanPassportState {
-    case scanMRZ, readNFC, selectData, generateProof, claimTokens
+    case scanMRZ
+    case readNFC
+    case selectData
+    case unsupportedCountry
+    case generateProof
+    case waitlistPassport
+    case claimTokens
 }
 
 struct ScanPassportView: View {
@@ -41,8 +47,18 @@ struct ScanPassportView: View {
             .transition(.backslide)
         case .selectData:
             SelectPassportDataView(
-                onNext: { withAnimation { state = .generateProof } },
+                onNext: {
+                    let isSupportedCountry = !UNSUPPORTED_REWARD_COUNTRIES.contains(passportViewModel.passportCountry)
+                    withAnimation { state = isSupportedCountry ? .generateProof : .unsupportedCountry }
+                },
                 onClose: onClose
+            )
+            .environmentObject(passportViewModel)
+            .transition(.backslide)
+        case .unsupportedCountry:
+            UnsupportedCountryView(
+                onCreate: { withAnimation { state = .generateProof } },
+                onCancel: onClose
             )
             .environmentObject(passportViewModel)
             .transition(.backslide)
@@ -64,9 +80,17 @@ struct ScanPassportView: View {
                         onComplete(passportViewModel.passport!, false)
                     }
                 },
-                onClose: onClose
+                onClose: onClose,
+                onError: { withAnimation { state = .waitlistPassport } }
             )
             .environmentObject(mrzViewModel)
+            .environmentObject(passportViewModel)
+            .transition(.backslide)
+        case .waitlistPassport:
+            WaitlistPassportView(
+                onNext: { onComplete(passportViewModel.passport!, false) },
+                onCancel: onClose
+            )
             .environmentObject(passportViewModel)
             .transition(.backslide)
         case .claimTokens:
