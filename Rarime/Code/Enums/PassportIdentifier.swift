@@ -30,7 +30,7 @@ extension PassportIdentifier {
 extension PassportIdentifier {
     func getPassportValue(from passport: Passport) -> String {
         switch self {
-        case .nationality: return passport.nationality
+        case .nationality: return Country.fromISOCode(passport.nationality).flag
         case .documentId: return passport.documentNumber
         case .expiryDate:
             let date = try? DateUtil.parsePassportDate(passport.documentExpiryDate)

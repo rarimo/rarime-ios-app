@@ -41,7 +41,11 @@
         }
       }
     },
+    "%@ years old" : {
+
+    },
     "%@ Years Old" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2325,6 +2329,9 @@
     "Unsupported country" : {
 
     },
+    "Unsupported for rewards" : {
+
+    },
     "Upcoming airdrops will include citizens from all over the world.\n\nCreate an incognito profile by scanning your passport, and we will notify you when you become eligible." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2360,6 +2367,9 @@
     "Virgin Islands, U.S." : {
 
     },
+    "Waitlist country" : {
+
+    },
     "Waitlist passport" : {
 
     },
@@ -2377,6 +2387,7 @@
 
     },
     "We will notify when you become eligible" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2453,6 +2464,12 @@
       }
     },
     "You entered wrong passcode.\nLoading time: %@" : {
+
+    },
+    "You will be notified once added" : {
+
+    },
+    "You will be notified once your country is added" : {
 
     },
     "You’ve earned %lld RMO" : {

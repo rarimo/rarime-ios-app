@@ -37,6 +37,8 @@ enum Icons {
     static let giftFill = "GiftFill"
     static let gift = "Gift"
     static let globeSimple = "GlobeSimple"
+    static let globeSimpleTime = "GlobeSimpleTime"
+    static let globeSimpleX = "GlobeSimpleX"
     static let headset = "Headset"
     static let history = "History"
     static let house = "House"
