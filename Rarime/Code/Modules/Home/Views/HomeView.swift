@@ -36,7 +36,6 @@ struct HomeView: View {
                 switch route {
                 case .scanPassport:
                     ScanPassportView(
-                        showTerms: isUkrainianFlow,
                         onComplete: { passport, isClaimed in
                             passportManager.setPassport(passport)
                             isCongratsShown = true

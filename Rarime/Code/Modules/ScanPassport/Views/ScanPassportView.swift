@@ -9,7 +9,6 @@ struct ScanPassportView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
 
-    let showTerms: Bool
     let onComplete: (_ passport: Passport, _ isClaimed: Bool) -> Void
     let onClose: () -> Void
 
@@ -72,7 +71,7 @@ struct ScanPassportView: View {
             .transition(.backslide)
         case .claimTokens:
             ClaimTokensView(
-                showTerms: showTerms,
+                showTerms: false,
                 passport: passportViewModel.passport,
                 onFinish: { isClaimed in
                     onComplete(passportViewModel.passport!, isClaimed)
@@ -89,7 +88,6 @@ struct ScanPassportView: View {
     let userManager = UserManager.shared
 
     return ScanPassportView(
-        showTerms: true,
         onComplete: { _, _ in },
         onClose: {}
     )
