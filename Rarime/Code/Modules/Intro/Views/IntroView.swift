@@ -1,13 +1,14 @@
 import SwiftUI
 
 private enum IdentityRoute: Hashable {
-    case newIdentity
+    case newIdentity, importIdentity
 }
 
 struct IntroView: View {
     var onFinish: () -> Void
 
     @State private var currentStep = IntroStep.welcome.rawValue
+    @State private var showSheet = false
     @State private var path: [IdentityRoute] = []
 
     var isLastStep: Bool {
@@ -23,6 +24,11 @@ struct IntroView: View {
                         NewIdentityView(
                             onBack: { path.removeLast() },
                             onNext: { withAnimation { onFinish() } }
+                        )
+                    case .importIdentity:
+                        ImportIdentityView(
+                            onNext: { withAnimation { onFinish() } },
+                            onBack: { path.removeLast() }
                         )
                     }
                 }
@@ -70,7 +76,7 @@ struct IntroView: View {
         HStack {
             if isLastStep {
                 AppButton(text: "Create Account") {
-                    path.append(.newIdentity)
+                    showSheet = true
                 }
             } else {
                 StepIndicator(steps: IntroStep.allCases.count, currentStep: currentStep)
@@ -79,6 +85,19 @@ struct IntroView: View {
                     currentStep += 1
                 }
             }
+        }
+        .dynamicSheet(isPresented: $showSheet) {
+            GetStartedView(
+                onCreate: {
+                    showSheet.toggle()
+                    path.append(.newIdentity)
+                },
+                onImport: {
+                    showSheet.toggle()
+                    path.append(.importIdentity)
+                }
+            )
+            .padding(.bottom, 24)
         }
     }
 }
@@ -100,4 +119,5 @@ private struct StepIndicator: View {
 
 #Preview {
     IntroView(onFinish: {})
+        .environmentObject(UserManager.shared)
 }
