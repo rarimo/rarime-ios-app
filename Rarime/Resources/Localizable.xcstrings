@@ -32,7 +32,6 @@
       }
     },
     "%@ RMO" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -69,7 +68,6 @@
       }
     },
     "%@%@ RMO" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -191,9 +189,6 @@
         }
       }
     },
-    "ASSETS (%lld)" : {
-
-    },
     "Auth Method" : {
       "localizations" : {
         "uk" : {
@@ -225,7 +220,6 @@
       }
     },
     "Available RMO" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -721,6 +715,9 @@
         }
       }
     },
+    "Give us feedback" : {
+
+    },
     "Go Incognito" : {
       "localizations" : {
         "uk" : {
@@ -780,14 +777,10 @@
     "Insufficient balance" : {
 
     },
-    "Invalid address" : {
-
-    },
     "Invalid HTTP status code: %d" : {
 
     },
     "Invalid Rarimo address" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1262,11 +1255,7 @@
         }
       }
     },
-    "Receive %@" : {
-
-    },
     "Receive RMO" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1342,14 +1331,7 @@
         }
       }
     },
-    "Send %@" : {
-
-    },
-    "Send issue to the devs" : {
-
-    },
     "Send RMO" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1534,12 +1516,6 @@
     "This is required to revoke your passport" : {
 
     },
-    "Total %@" : {
-
-    },
-    "Total Balance" : {
-
-    },
     "Transactions" : {
       "localizations" : {
         "uk" : {
@@ -1648,11 +1624,7 @@
         }
       }
     },
-    "Withdraw the %@ token" : {
-
-    },
     "Withdraw the RMO token" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1663,7 +1635,6 @@
       }
     },
     "You can use the QR code or the wallet address to deposit the RMO token to your account" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1672,9 +1643,6 @@
           }
         }
       }
-    },
-    "You can use the QR code or the wallet address to deposit the %@ token to your account" : {
-
     },
     "You entered wrong passcode.\nLoading time: %@" : {
 
@@ -1702,9 +1670,6 @@
         }
       }
     },
-    "Your Address" : {
-
-    },
     "Your passport proof is ready" : {
       "localizations" : {
         "uk" : {
@@ -1726,7 +1691,6 @@
       }
     },
     "Your Rarimo Address" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {

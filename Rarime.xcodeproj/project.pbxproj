@@ -26,8 +26,6 @@
 		561C3C402BADF0AA00FBB3B9 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 561C3C3C2BADF0AA00FBB3B9 /* Inter-SemiBold.ttf */; };
 		561C3C412BADF0AA00FBB3B9 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 561C3C3D2BADF0AA00FBB3B9 /* Inter-Medium.ttf */; };
 		561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C422BAEE2D600FBB3B9 /* String+Error.swift */; };
-		562241412C107B9B000239FA /* AssetsSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562241402C107B9B000239FA /* AssetsSlider.swift */; };
-		562241432C107E16000239FA /* AppDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562241422C107E16000239FA /* AppDropdown.swift */; };
 		563529E52BB072060027C910 /* RewardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529E42BB072060027C910 /* RewardsView.swift */; };
 		563529E72BB072870027C910 /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529E62BB072870027C910 /* WalletView.swift */; };
 		563529E92BB072B80027C910 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529E82BB072B80027C910 /* HomeView.swift */; };
@@ -193,8 +191,6 @@
 		561C3C3C2BADF0AA00FBB3B9 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		561C3C3D2BADF0AA00FBB3B9 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
 		561C3C422BAEE2D600FBB3B9 /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
-		562241402C107B9B000239FA /* AssetsSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsSlider.swift; sourceTree = "<group>"; };
-		562241422C107E16000239FA /* AppDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDropdown.swift; sourceTree = "<group>"; };
 		563529E42BB072060027C910 /* RewardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsView.swift; sourceTree = "<group>"; };
 		563529E62BB072870027C910 /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
 		563529E82BB072B80027C910 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -441,7 +437,6 @@
 			isa = PBXGroup;
 			children = (
 				563529E62BB072870027C910 /* WalletView.swift */,
-				562241402C107B9B000239FA /* AssetsSlider.swift */,
 				560F0C1E2BD027EA00067054 /* WalletReceiveView.swift */,
 				560F0C222BD02DFD00067054 /* WalletSendView.swift */,
 				560F0C202BD027FB00067054 /* WalletRouteLayout.swift */,
@@ -687,7 +682,6 @@
 				56F48BBD2BC02E82001F3AA4 /* AppButton.swift */,
 				56E7AD092BDAA4F000D3A258 /* AppRadioButton.swift */,
 				56933DFA2BBAFBD90068C894 /* AppToggle.swift */,
-				562241422C107E16000239FA /* AppDropdown.swift */,
 				560F0C242BD036F900067054 /* AppTextField.swift */,
 				56E2D91F2BCED460006E725D /* AppCheckbox.swift */,
 				5613F4312BD18409008E6CBE /* AppSkeleton.swift */,
@@ -1028,7 +1022,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				562241412C107B9B000239FA /* AssetsSlider.swift in Sources */,
 				56933DF72BBAC7D10068C894 /* SelectPassportDataView.swift in Sources */,
 				CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */,
 				5613F4322BD18409008E6CBE /* AppSkeleton.swift in Sources */,
@@ -1070,7 +1063,6 @@
 				CE0DA0D92BDA927000696503 /* AirDropResponse.swift in Sources */,
 				56E2D92A2BCFFB6B006E725D /* Airdrop.swift in Sources */,
 				56DAA3072BB77550002CF710 /* IdentityStepLayoutView.swift in Sources */,
-				562241432C107E16000239FA /* AppDropdown.swift in Sources */,
 				CE68BE3D2BD9B23D00D92EBB /* ZkProof.swift in Sources */,
 				56474ADA2BB9ED6E0017AA25 /* AnyTransition+Backslide.swift in Sources */,
 				56DAA30F2BB8C3CB002CF710 /* EnablePasscodeView.swift in Sources */,
