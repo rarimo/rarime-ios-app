@@ -442,6 +442,9 @@
         }
       }
     },
+    "Create new Identity" : {
+
+    },
     "Creating a confidential profile" : {
       "localizations" : {
         "uk" : {
@@ -705,6 +708,9 @@
         }
       }
     },
+    "Generates new keys" : {
+
+    },
     "Get Rewarded" : {
       "localizations" : {
         "uk" : {
@@ -715,7 +721,7 @@
         }
       }
     },
-    "Give us feedback" : {
+    "Get Started" : {
 
     },
     "Go Incognito" : {
@@ -764,6 +770,9 @@
     "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport." : {
 
     },
+    "Import from private key" : {
+
+    },
     "Incognito mode" : {
       "localizations" : {
         "uk" : {
@@ -778,6 +787,9 @@
 
     },
     "Invalid HTTP status code: %d" : {
+
+    },
+    "Invalid private key" : {
 
     },
     "Invalid Rarimo address" : {
@@ -1095,6 +1107,9 @@
         }
       }
     },
+    "Private key" : {
+
+    },
     "Processing" : {
       "localizations" : {
         "uk" : {
@@ -1321,6 +1336,9 @@
         }
       }
     },
+    "Select Authorisation Method" : {
+
+    },
     "Send" : {
       "localizations" : {
         "uk" : {
@@ -1330,6 +1348,9 @@
           }
         }
       }
+    },
+    "Send issue to the devs" : {
+
     },
     "Send RMO" : {
       "localizations" : {
@@ -1556,6 +1577,9 @@
       }
     },
     "User creation failed" : {
+
+    },
+    "Uses pregenerated keys" : {
 
     },
     "Wallet" : {

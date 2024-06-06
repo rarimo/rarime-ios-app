@@ -53,6 +53,10 @@ class UserManager: ObservableObject {
         self.user = try User(secretKey: secretKey)
     }
     
+    func createFromSecretKey(_ secretKey: Data) throws {
+        self.user = try User(secretKey: secretKey)
+    }
+    
     func saveRegisterZkProof(_ zkProof: ZkProof) throws {
         let zkProofJson = try JSONEncoder().encode(zkProof)
         
