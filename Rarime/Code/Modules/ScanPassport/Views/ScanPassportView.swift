@@ -38,7 +38,7 @@ struct ScanPassportView: View {
                     passportViewModel.setPassport(passport)
                     withAnimation { state = .selectData }
 
-                    LoggerUtil.passport.info("Passport read successfully: \(passport.fullName)")
+                    LoggerUtil.passport.info("Passport read successfully: \(passport.fullName, privacy: .public)")
                 },
                 onBack: { withAnimation { state = .scanMRZ } },
                 onClose: onClose

@@ -156,7 +156,7 @@ class UserManager: ObservableObject {
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
         let response = try await relayer.register(calldata)
         
-        LoggerUtil.common.info("Passport register EVM Tx Hash: \(response.data.attributes.txHash)")
+        LoggerUtil.common.info("Passport register EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
         
         let eth = Ethereum()
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
@@ -177,7 +177,7 @@ class UserManager: ObservableObject {
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
         let response = try await relayer.register(calldata)
         
-        LoggerUtil.common.info("Passport revoke EVM Tx Hash: \(response.data.attributes.txHash)")
+        LoggerUtil.common.info("Passport revoke EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
         
         let eth = Ethereum()
         try await eth.waitForTxSuccess(response.data.attributes.txHash)

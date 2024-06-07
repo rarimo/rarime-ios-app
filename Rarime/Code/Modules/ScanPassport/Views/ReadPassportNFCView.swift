@@ -32,7 +32,7 @@ struct ReadPassportNFCView: View {
                         case .success(let passport):
                             self.onNext(passport)
                         case .failure(let error):
-                            LoggerUtil.passport.error("failed to read passport data: \(error.localizedDescription)")
+                            LoggerUtil.passport.error("failed to read passport data: \(error.localizedDescription, privacy: .public)")
                             self.onBack()
                         }
                     }

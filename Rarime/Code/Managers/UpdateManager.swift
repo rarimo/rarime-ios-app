@@ -43,7 +43,7 @@ class UpdateManager: ObservableObject {
                 self.isDeprecated = false
             }
             
-            LoggerUtil.common.error("Failed to check for update: \(error)")
+            LoggerUtil.common.error("Failed to check for update: \(error, privacy: .public)")
         }
     }
 }
