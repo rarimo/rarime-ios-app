@@ -56,6 +56,7 @@ struct AppView: View {
                 await updateManager.checkForUpdate()
             }
         }
+        .environmentObject(viewModel)
     }
 }
 

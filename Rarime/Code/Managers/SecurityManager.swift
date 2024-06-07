@@ -7,13 +7,13 @@ enum SecurityItemState: Int {
 class SecurityManager: ObservableObject {
     static let shared = SecurityManager()
 
-    @Published private(set) var passcodeState: SecurityItemState {
+    @Published var passcodeState: SecurityItemState {
         didSet {
             AppUserDefaults.shared.passcodeState = passcodeState.rawValue
         }
     }
 
-    @Published private(set) var faceIdState: SecurityItemState {
+    @Published var faceIdState: SecurityItemState {
         didSet {
             AppUserDefaults.shared.faceIdState = faceIdState.rawValue
         }
