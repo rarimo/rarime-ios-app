@@ -264,6 +264,9 @@
         }
       }
     },
+    "Authenticating with passport...\n\n%@" : {
+
+    },
     "Authentication Failed" : {
       "localizations" : {
         "uk" : {
@@ -1088,6 +1091,7 @@
 
     },
     "Hold your iPhone near an NFC enabled passport." : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1096,6 +1100,9 @@
           }
         }
       }
+    },
+    "Hold your iPhone near an NFC enabled passport.\n" : {
+
     },
     "Holy See" : {
 
@@ -1874,7 +1881,18 @@
         }
       }
     },
+    "Reading passport data (%@)...\n\n%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Reading passport data (%1$@)...\n\n%2$@"
+          }
+        }
+      }
+    },
     "Reading passport data...\n\n%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
