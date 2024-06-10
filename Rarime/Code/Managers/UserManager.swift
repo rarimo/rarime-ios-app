@@ -19,7 +19,7 @@ class UserManager: ObservableObject {
     @Published var reservedBalance: Double
     @Published var isPassportTokensReserved: Bool
     
-    @Published var isRevoked = AppUserDefaults.shared.isUserRevoked
+    @Published var isRevoked: Bool
     
     init() {
         do {
@@ -40,6 +40,7 @@ class UserManager: ObservableObject {
             self.balance = 0
             self.reservedBalance = AppUserDefaults.shared.reservedBalance
             self.isPassportTokensReserved = AppUserDefaults.shared.isPassportTokensReserved
+            self.isRevoked = AppUserDefaults.shared.isUserRevoked
             
             if let registerZkProofJson = try AppKeychain.getValue(.registerZkProof) {
                 let registerZkProof = try JSONDecoder().decode(ZkProof.self, from: registerZkProofJson)
@@ -372,5 +373,28 @@ class UserManager: ObservableObject {
 
         AppUserDefaults.shared.reservedBalance = PASSPORT_RESERVE_TOKENS
         AppUserDefaults.shared.isPassportTokensReserved = true
+    }
+    
+    func reset() {
+        AppUserDefaults.shared.reservedBalance = 0.0
+        AppUserDefaults.shared.isPassportTokensReserved = false
+        AppUserDefaults.shared.isUserRevoked = false
+        
+        do {
+            try AppKeychain.removeValue(.privateKey)
+            try AppKeychain.removeValue(.registerZkProof)
+            try AppKeychain.removeValue(.passport)
+            
+            self.user = try User.load()
+            self.balance = 0
+            self.reservedBalance = AppUserDefaults.shared.reservedBalance
+            self.isPassportTokensReserved = AppUserDefaults.shared.isPassportTokensReserved
+            
+            if let registerZkProofJson = try AppKeychain.getValue(.registerZkProof) {
+                self.registerZkProof = try JSONDecoder().decode(ZkProof.self, from: registerZkProofJson)
+            }
+        } catch {
+            fatalError("\(error.localizedDescription)")
+        }
     }
 }

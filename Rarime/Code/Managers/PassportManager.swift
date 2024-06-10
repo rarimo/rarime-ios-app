@@ -30,11 +30,6 @@ class PassportManager: ObservableObject {
         try? AppKeychain.setValue(.passport, JSONEncoder().encode(passport))
     }
 
-    func removePassport() {
-        passport = nil
-        try? AppKeychain.removeValue(.passport)
-    }
-
     func setPassportCardLook(_ look: PassportCardLook) {
         passportCardLook = look
         AppUserDefaults.shared.passportCardLook = look.rawValue
@@ -48,5 +43,13 @@ class PassportManager: ObservableObject {
     func setPassportIdentifiers(_ identifiers: [PassportIdentifier]) {
         passportIdentifiers = identifiers
         AppUserDefaults.shared.passportIdentifiers = try! JSONEncoder().encode(identifiers.map { $0.rawValue })
+    }
+
+    func reset() {
+        passport = nil
+        try? AppKeychain.removeValue(.passport)
+        setPassportCardLook(.white)
+        setPassportIdentifiers([.nationality, .documentId])
+        setIncognitoMode(true)
     }
 }

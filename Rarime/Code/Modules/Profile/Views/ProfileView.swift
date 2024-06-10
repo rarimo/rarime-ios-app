@@ -13,6 +13,7 @@ struct ProfileView: View {
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var appIconManager: AppIconManager
     @EnvironmentObject private var securityManager: SecurityManager
+    @EnvironmentObject private var walletManager: WalletManager
 
     @State private var path: [ProfileRoute] = []
 
@@ -174,15 +175,10 @@ struct ProfileView: View {
                 Button("Yes") {
                     do {
                         appViewModel.isIntroFinished = false
-                        securityManager.faceIdState = .unset
-                        securityManager.passcodeState = .unset
-
-                        AppUserDefaults.shared.isFirstLaunch = true
-
-                        try AppKeychain.removeValue(.privateKey)
-                        try AppKeychain.removeValue(.registerZkProof)
-                        try AppKeychain.removeValue(.passport)
-                        try AppKeychain.removeValue(.passcode)
+                        passportManager.reset()
+                        securityManager.reset()
+                        userManager.reset()
+                        walletManager.reset()
                     } catch {
                         LoggerUtil.common.error("failed to delete account: \(error.localizedDescription, privacy: .public)")
                     }
@@ -245,6 +241,7 @@ private struct ProfileRow: View {
         .environmentObject(PassportManager())
         .environmentObject(SecurityManager())
         .environmentObject(AppIconManager())
+        .environmentObject(WalletManager())
         .environmentObject(userManager)
         .onAppear {
             _ = try? userManager.createNewUser()
