@@ -10,4 +10,8 @@ enum Images {
     static let systemTheme = "SystemTheme"
 
     static let rarimeIcon = "RarimeIcon"
+
+    // TODO: remove when actual images are used
+    static let rewardsTest1 = "RewardsTest1"
+    static let rewardsTest2 = "RewardsTest2"
 }
