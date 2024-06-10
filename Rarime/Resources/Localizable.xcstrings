@@ -229,9 +229,6 @@
         }
       }
     },
-    "Are you sure that you want to delete your account" : {
-
-    },
     "Argentina" : {
 
     },
@@ -715,7 +712,10 @@
         }
       }
     },
-    "Delete account" : {
+    "Delete Account" : {
+
+    },
+    "Delete your account?" : {
 
     },
     "Democratic People's Republic of Korea" : {
@@ -2281,6 +2281,9 @@
           }
         }
       }
+    },
+    "This action is irreversible and will delete all your data." : {
+
     },
     "This airdrop is part of a humanitarian effort to help direct funds towards Ukraine." : {
       "localizations" : {
