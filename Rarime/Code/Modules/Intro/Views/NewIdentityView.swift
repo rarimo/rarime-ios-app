@@ -25,7 +25,7 @@ struct NewIdentityView: View {
                             do {
                                 try user.save()
                             } catch {
-                                LoggerUtil.intro.error("failed to save user: \(error.localizedDescription)")
+                                LoggerUtil.intro.error("failed to save user: \(error.localizedDescription, privacy: .public)")
                                 
                                 userManager.user = nil
                                 
@@ -101,11 +101,11 @@ struct NewIdentityView: View {
             do {
                 try userManager.createNewUser()
                 
-                LoggerUtil.intro.info("New user created: \(userManager.userAddress)")
+                LoggerUtil.intro.info("New user created: \(userManager.userAddress, privacy: .public)")
             } catch is CancellationError {
                 return
             } catch {
-                LoggerUtil.intro.error("failed to create new user: \(error.localizedDescription)")
+                LoggerUtil.intro.error("failed to create new user: \(error.localizedDescription, privacy: .public)")
                 
                 AlertManager.shared.emitError(.userCreationFailed)
             }

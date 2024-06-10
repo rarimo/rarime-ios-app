@@ -24,7 +24,7 @@ struct PassportProofView: View {
                 }
             }
 
-            LoggerUtil.passport.error("error while registering passport: \(error.localizedDescription)")
+            LoggerUtil.passport.error("error while registering passport: \(error.localizedDescription, privacy: .public)")
             onError()
         }
     }
@@ -182,7 +182,7 @@ private struct RevocationNFCScan: View {
                                 passportViewModel.revocationPassportPublisher.send(passport)
                                 passportViewModel.isUserRevoking = false
                             case .failure(let error):
-                                LoggerUtil.passport.error("failed to read passport data: \(error.localizedDescription)")
+                                LoggerUtil.passport.error("failed to read passport data: \(error.localizedDescription, privacy: .public)")
 
                                 passportViewModel.revocationPassportPublisher.send(completion: .failure(error))
 

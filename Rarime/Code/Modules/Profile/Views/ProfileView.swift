@@ -6,17 +6,20 @@ private enum ProfileRoute: Hashable {
 }
 
 struct ProfileView: View {
+    @EnvironmentObject private var appViewMode: AppView.ViewModel
     @EnvironmentObject private var configManager: ConfigManager
     @EnvironmentObject private var settingsManager: SettingsManager
     @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var appIconManager: AppIconManager
+    @EnvironmentObject private var securityManager: SecurityManager
 
     @State private var path: [ProfileRoute] = []
 
     @State private var isPrivacySheetPresented = false
     @State private var isTermsSheetPresented = false
     @State private var isShareWithDeveloper = false
+    @State private var isAccountDeleting = false
     
     @State private var feedbackAttachment = Data()
 
@@ -46,109 +49,143 @@ struct ProfileView: View {
                     .subtitle2()
                     .padding(.horizontal, 8)
                 VStack(spacing: 12) {
-                    CardContainer {
-                        HStack {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("Account")
-                                    .subtitle3()
-                                    .foregroundStyle(.textPrimary)
-                                Text("Address: \(RarimoUtils.formatAddress(userManager.userAddress))")
-                                    .body4()
-                                    .foregroundStyle(.textSecondary)
-                            }
-                            Spacer()
-                            PassportImageView(image: passportManager.passport?.passportImage, size: 40)
-                        }
-                    }
-                    CardContainer {
-                        VStack(spacing: 20) {
-                            ProfileRow(
-                                icon: Icons.userFocus,
-                                title: String(localized: "Auth Method"),
-                                action: { path.append(.authMethod) }
-                            )
-                            ProfileRow(
-                                icon: Icons.key,
-                                title: String(localized: "Export Keys"),
-                                action: { path.append(.exportKeys) }
-                            )
-                        }
-                    }
-                    CardContainer {
-                        VStack(spacing: 20) {
-                            ProfileRow(
-                                icon: Icons.globeSimple,
-                                title: String(localized: "Language"),
-                                value: settingsManager.language.title,
-                                action: {
-                                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                    ScrollView {
+                        CardContainer {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("Account")
+                                        .subtitle3()
+                                        .foregroundStyle(.textPrimary)
+                                    Text("Address: \(RarimoUtils.formatAddress(userManager.userAddress))")
+                                        .body4()
+                                        .foregroundStyle(.textSecondary)
                                 }
-                            )
-                            ProfileRow(
-                                icon: Icons.sun,
-                                title: String(localized: "Theme"),
-                                value: settingsManager.colorScheme.title,
-                                action: { path.append(.theme) }
-                            )
-                            if appIconManager.isAppIconsSupported {
+                                Spacer()
+                                PassportImageView(image: passportManager.passport?.passportImage, size: 40)
+                            }
+                        }
+                        CardContainer {
+                            VStack(spacing: 20) {
                                 ProfileRow(
-                                    icon: Icons.rarime,
-                                    title: String(localized: "App Icon"),
-                                    value: appIconManager.appIcon.title,
-                                    action: { path.append(.appIcon) }
+                                    icon: Icons.userFocus,
+                                    title: String(localized: "Auth Method"),
+                                    action: { path.append(.authMethod) }
+                                )
+                                ProfileRow(
+                                    icon: Icons.key,
+                                    title: String(localized: "Export Keys"),
+                                    action: { path.append(.exportKeys) }
                                 )
                             }
-                            ProfileRow(
-                                icon: Icons.question,
-                                title: String(localized: "Privacy Policy"),
-                                action: { isPrivacySheetPresented = true }
-                            )
-                            .fullScreenCover(isPresented: $isPrivacySheetPresented) {
-                                SafariWebView(url: configManager.general.privacyPolicyURL)
-                                    .ignoresSafeArea()
-                            }
-                            ProfileRow(
-                                icon: Icons.flag,
-                                title: String(localized: "Terms of Use"),
-                                action: { isTermsSheetPresented = true }
-                            )
-                            .fullScreenCover(isPresented: $isTermsSheetPresented) {
-                                SafariWebView(url: configManager.general.termsOfUseURL)
-                                    .ignoresSafeArea()
-                            }
-                            if MFMailComposeViewController.canSendMail() {
+                        }
+                        CardContainer {
+                            VStack(spacing: 20) {
                                 ProfileRow(
-                                    icon: Icons.chat,
-                                    title: "Give us Feedback",
-                                    action: { isShareWithDeveloper = true }
+                                    icon: Icons.globeSimple,
+                                    title: String(localized: "Language"),
+                                    value: settingsManager.language.title,
+                                    action: {
+                                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                                    }
                                 )
-                                .fullScreenCover(isPresented: $isShareWithDeveloper) {
-                                    if !feedbackAttachment.isEmpty {
-                                        MailView(
-                                            subject: "Feedback from: \(UIDevice.modelName)",
-                                            attachment: feedbackAttachment,
-                                            fileName: "logs.txt",
-                                            isShowing: $isShareWithDeveloper,
-                                            result: .constant(nil)
-                                        )
-                                    } else {
-                                        ProgressView()
-                                            .controlSize(.large)
-                                            .onAppear(perform: fetchLogsForFeedback)
+                                ProfileRow(
+                                    icon: Icons.sun,
+                                    title: String(localized: "Theme"),
+                                    value: settingsManager.colorScheme.title,
+                                    action: { path.append(.theme) }
+                                )
+                                if appIconManager.isAppIconsSupported {
+                                    ProfileRow(
+                                        icon: Icons.rarime,
+                                        title: String(localized: "App Icon"),
+                                        value: appIconManager.appIcon.title,
+                                        action: { path.append(.appIcon) }
+                                    )
+                                }
+                                ProfileRow(
+                                    icon: Icons.question,
+                                    title: String(localized: "Privacy Policy"),
+                                    action: { isPrivacySheetPresented = true }
+                                )
+                                .fullScreenCover(isPresented: $isPrivacySheetPresented) {
+                                    SafariWebView(url: configManager.general.privacyPolicyURL)
+                                        .ignoresSafeArea()
+                                }
+                                ProfileRow(
+                                    icon: Icons.flag,
+                                    title: String(localized: "Terms of Use"),
+                                    action: { isTermsSheetPresented = true }
+                                )
+                                .fullScreenCover(isPresented: $isTermsSheetPresented) {
+                                    SafariWebView(url: configManager.general.termsOfUseURL)
+                                        .ignoresSafeArea()
+                                }
+                                if MFMailComposeViewController.canSendMail() {
+                                    ProfileRow(
+                                        icon: Icons.chat,
+                                        title: "Give us Feedback",
+                                        action: { isShareWithDeveloper = true }
+                                    )
+                                    .fullScreenCover(isPresented: $isShareWithDeveloper) {
+                                        if !feedbackAttachment.isEmpty {
+                                            MailView(
+                                                subject: "Feedback from: \(UIDevice.modelName)",
+                                                attachment: feedbackAttachment,
+                                                fileName: "logs.txt",
+                                                isShowing: $isShareWithDeveloper,
+                                                result: .constant(nil)
+                                            )
+                                        } else {
+                                            ProgressView()
+                                                .controlSize(.large)
+                                                .onAppear(perform: fetchLogsForFeedback)
+                                        }
                                     }
                                 }
                             }
                         }
+                        CardContainer {
+                            VStack(spacing: 20) {
+                                Button("Delete account") {
+                                    isAccountDeleting = true
+                                }
+                                .buttonStyle(.plain)
+                                .foregroundStyle(.red)
+                            }
+                        }
                     }
-                    Text("App version: \(configManager.general.version)")
-                        .body4()
-                        .foregroundStyle(.textDisabled)
+                    VStack {
+                        Text("App version: \(configManager.general.version)")
+                            .body4()
+                            .foregroundStyle(.textDisabled)
+                            Spacer()
+                    }
+                    .frame(height: 100)
                 }
                 Spacer()
             }
             .padding(.vertical, 20)
             .padding(.horizontal, 12)
             .background(.backgroundPrimary)
+            .alert("Are you sure that you want to delete your account", isPresented: $isAccountDeleting) {
+                Button("No", role: .cancel) {
+                    self.isAccountDeleting = false
+                }
+                Button("Yes") {
+                    do {
+                        appViewMode.isIntroFinished = false
+                        
+                        securityManager.faceIdState = .unset
+                        securityManager.passcodeState = .unset
+                        
+                        try AppKeychain.removeValue(.privateKey)
+                        try AppKeychain.removeValue(.registerZkProof)
+                        try AppKeychain.removeValue(.passport)
+                    } catch {
+                        LoggerUtil.common.error("failed to delete account: \(error.localizedDescription, privacy: .public)")
+                    }
+                }
+            }
         }
     }
     
@@ -199,6 +236,7 @@ private struct ProfileRow: View {
     @StateObject var userManager = UserManager.shared
 
     return ProfileView()
+        .environmentObject(AppView.ViewModel())
         .environmentObject(MainView.ViewModel())
         .environmentObject(ConfigManager())
         .environmentObject(SettingsManager())

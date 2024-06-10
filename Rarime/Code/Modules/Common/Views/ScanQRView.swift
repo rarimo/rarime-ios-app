@@ -13,7 +13,7 @@ struct ScanQRView: View {
                     case .success(let result):
                         onScan(result.string)
                     case .failure(let error):
-                        LoggerUtil.qr.error("Failed to scan QR code: \(error)")
+                        LoggerUtil.qr.error("Failed to scan QR code: \(error, privacy: .public)")
                         onScan("")
                     }
                 }

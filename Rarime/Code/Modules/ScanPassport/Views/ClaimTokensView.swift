@@ -49,7 +49,7 @@ struct ClaimTokensView: View {
             FeedbackGenerator.shared.notify(.success)
             onFinish(true)
         } catch {
-            LoggerUtil.passport.error("Error while claiming tokens: \(error.localizedDescription)")
+            LoggerUtil.passport.error("Error while claiming tokens: \(error.localizedDescription, privacy: .public)")
             
             FeedbackGenerator.shared.notify(.error)
             
