@@ -60,7 +60,7 @@ struct SelectPassportDataView: View {
         CardContainer {
             VStack(spacing: 20) {
                 HStack {
-                    Text("Must data")
+                    Text("Identifiers")
                         .subtitle3()
                         .foregroundStyle(.textPrimary)
                     Spacer()
