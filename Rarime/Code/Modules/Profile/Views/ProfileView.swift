@@ -146,13 +146,19 @@ struct ProfileView: View {
                             }
                         }
                         CardContainer {
-                            VStack(spacing: 20) {
-                                Button("Delete account") {
-                                    isAccountDeleting = true
+                            Button(action: { isAccountDeleting = true }) {
+                                HStack {
+                                    Image(Icons.trashSimple)
+                                        .iconMedium()
+                                        .padding(6)
+                                        .background(.errorLighter, in: Circle())
+                                    Text("Delete Account")
+                                        .subtitle4()
+                                    Spacer()
                                 }
-                                .buttonStyle(.plain)
-                                .foregroundStyle(.red)
                             }
+                            .buttonStyle(.plain)
+                            .foregroundStyle(.errorMain)
                         }
                     }
                     VStack {
@@ -168,22 +174,25 @@ struct ProfileView: View {
             .padding(.vertical, 20)
             .padding(.horizontal, 12)
             .background(.backgroundPrimary)
-            .alert("Are you sure that you want to delete your account", isPresented: $isAccountDeleting) {
-                Button("No", role: .cancel) {
-                    self.isAccountDeleting = false
-                }
-                Button("Yes") {
-                    do {
+            .alert(
+                "Delete your account?",
+                isPresented: $isAccountDeleting,
+                actions: {
+                    Button("No", role: .cancel) {
+                        self.isAccountDeleting = false
+                    }
+                    Button("Yes", role: .destructive) {
                         appViewModel.isIntroFinished = false
                         passportManager.reset()
                         securityManager.reset()
                         userManager.reset()
                         walletManager.reset()
-                    } catch {
-                        LoggerUtil.common.error("failed to delete account: \(error.localizedDescription, privacy: .public)")
                     }
+                },
+                message: {
+                    Text("This action is irreversible and will delete all your data.")
                 }
-            }
+            )
         }
     }
 
