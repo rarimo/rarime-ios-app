@@ -1,7 +1,7 @@
 import SwiftUI
 
 private enum HomeRoute: Hashable {
-    case scanPassport, scanQR, claimRewards
+    case scanPassport, reserveTokens, claimRewards
 }
 
 struct HomeView: View {
@@ -16,6 +16,7 @@ struct HomeView: View {
     @State private var isRewardsSheetPresented = false
     @State private var isRarimeSheetPresented = false
 
+    @State private var isAirdropFlow = false
     @State private var isCongratsShown = false
     @State private var isClaimed = false
 
@@ -35,6 +36,7 @@ struct HomeView: View {
                 switch route {
                 case .scanPassport:
                     ScanPassportView(
+                        isAirdropFlow: isAirdropFlow,
                         onComplete: { passport, isClaimed in
                             passportManager.setPassport(passport)
                             isCongratsShown = true
@@ -44,10 +46,16 @@ struct HomeView: View {
                         onClose: { path.removeLast() }
                     )
                     .navigationBarBackButtonHidden()
-                case .scanQR:
-                    ScanQRView(
-                        onBack: { path.removeLast() },
-                        onScan: { _ in path.removeLast() }
+                case .reserveTokens:
+                    ReserveTokensView(
+                        showTerms: true,
+                        passport: passportManager.passport,
+                        onFinish: { _ in
+                            isClaimed = true
+                            isCongratsShown = true
+                            path.removeLast()
+                        },
+                        onClose: { path.removeLast() }
                     )
                     .navigationBarBackButtonHidden()
                 case .claimRewards:
@@ -97,6 +105,9 @@ struct HomeView: View {
                                     set: { passportManager.setPassportIdentifiers($0) }
                                 )
                             )
+                            if !userManager.isPassportTokensReserved {
+                                reserveTokensCard
+                            }
                             if canClaimAirdrop {
                                 claimCard
                             }
@@ -105,7 +116,7 @@ struct HomeView: View {
                             ukrainianCitizensCard
                         }
                         rarimeCard
-                        Spacer()
+                        Spacer().frame(height: 120)
                     }
                     .padding(.horizontal, 12)
                 }
@@ -118,6 +129,7 @@ struct HomeView: View {
             CongratsView(
                 open: isCongratsShown,
                 isClaimed: isClaimed,
+                isAirdropFlow: isAirdropFlow,
                 onClose: {
                     isCongratsShown = false
                     fetchBalance()
@@ -127,33 +139,20 @@ struct HomeView: View {
     }
 
     private var header: some View {
-        VStack(spacing: 8) {
-            HStack {
-                Button(action: { mainViewModel.selectTab(.wallet) }) {
-                    HStack(spacing: 4) {
-                        Text("Balance: RMO").body3()
-                        Image(Icons.caretRight).iconSmall()
-                    }
+        VStack(alignment: .leading, spacing: 8) {
+            Button(action: { mainViewModel.selectTab(.rewards) }) {
+                HStack(spacing: 4) {
+                    Text("Reserved RMO").body3()
+                    Image(Icons.caretRight).iconSmall()
                 }
-                .foregroundStyle(.textSecondary)
-                Spacer()
-//                TODO: uncomment when QR proofs are ready
-//                Button(action: { path.append(.scanQR) }) {
-//                    Image(Icons.qrCode)
-//                        .iconMedium()
-//                        .foregroundStyle(.textPrimary)
-//                }
             }
-
-            HStack {
-                if isBalanceFetching {
-                    ProgressView().frame(height: 40)
-                } else {
-                    Text((userManager.balance / Double(Rarimo.rarimoTokenMantis)).formatted())
-                        .h4()
-                        .foregroundStyle(.textPrimary)
-                }
-                Spacer()
+            .foregroundStyle(.textSecondary)
+            if isBalanceFetching {
+                ProgressView().frame(height: 40)
+            } else {
+                Text(userManager.reservedBalance.formatted())
+                    .h4()
+                    .foregroundStyle(.textPrimary)
             }
         }
         .padding(.horizontal, 8)
@@ -181,6 +180,7 @@ struct HomeView: View {
                     RewardsIntroView(
                         onStart: {
                             isRewardsSheetPresented = false
+                            isAirdropFlow = false
                             path.append(.scanPassport)
                         }
                     )
@@ -194,12 +194,13 @@ struct HomeView: View {
         ActionCard(
             title: String(localized: "Ukrainian citizens"),
             description: String(localized: "Programmable rewards"),
-            icon: { Text(try! String("🇺🇦")).frame(width: 40, height: 40) }
+            icon: { Text(Country.ukraine.flag).frame(width: 40, height: 40) }
         )
         .onTapGesture { isUkrainianSheetPresented = true }
         .dynamicSheet(isPresented: $isUkrainianSheetPresented, fullScreen: true) {
             UkrainianIntroView(onStart: {
                 isUkrainianSheetPresented = false
+                isAirdropFlow = true
                 path.append(.scanPassport)
             })
         }
@@ -218,11 +219,20 @@ struct HomeView: View {
         }
     }
 
+    private var reserveTokensCard: some View {
+        ActionCard(
+            title: String(localized: "Reserve tokens"),
+            description: String(localized: "You’re entitled for \(PASSPORT_RESERVE_TOKENS.formatted()) RMO"),
+            icon: { Image(Images.rewardCoin).square(40) }
+        )
+        .onTapGesture { path.append(.reserveTokens) }
+    }
+
     private var claimCard: some View {
         ActionCard(
             title: String(localized: "Claim"),
             description: String(localized: "You’ve earned \(RARIMO_AIRDROP_REWARD) RMO"),
-            icon: { Image(Images.rewardCoin).square(40) }
+            icon: { Text(Country.ukraine.flag).frame(width: 40, height: 40) }
         )
         .onTapGesture { path.append(.claimRewards) }
     }

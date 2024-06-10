@@ -87,6 +87,9 @@
         }
       }
     },
+    "%lld days left" : {
+
+    },
     "%lldm %llds" : {
       "localizations" : {
         "en" : {
@@ -108,6 +111,9 @@
       }
     },
     "Account Locked" : {
+
+    },
+    "Active tasks" : {
 
     },
     "Address" : {
@@ -301,6 +307,7 @@
 
     },
     "Balance: RMO" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1102,10 +1109,10 @@
     "Hungary" : {
 
     },
-    "I've just received %lld RMO tokens! Participate in the airdrop: https://rarime.com" : {
+    "Iceland" : {
 
     },
-    "Iceland" : {
+    "Identifiers" : {
 
     },
     "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport" : {
@@ -1290,6 +1297,9 @@
         }
       }
     },
+    "Level %lld" : {
+
+    },
     "Liberia" : {
 
     },
@@ -1308,6 +1318,9 @@
           }
         }
       }
+    },
+    "Limited time events" : {
+
     },
     "Lithuania" : {
 
@@ -1425,6 +1438,7 @@
 
     },
     "Must data" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1581,6 +1595,9 @@
 
     },
     "Paraguay" : {
+
+    },
+    "Participate and get rewarded: https://rarime.com" : {
 
     },
     "Passcode" : {
@@ -1824,6 +1841,9 @@
         }
       }
     },
+    "RariMe Rewards" : {
+
+    },
     "Rarimo Airdrop Program Terms & Conditions" : {
       "localizations" : {
         "uk" : {
@@ -1907,13 +1927,28 @@
     "Republic of Korea" : {
 
     },
+    "Reserve" : {
+
+    },
+    "Reserve %@ RMO tokens" : {
+
+    },
+    "Reserve tokens" : {
+
+    },
+    "Reserved RMO" : {
+
+    },
+    "Reserving..." : {
+
+    },
     "Reunion" : {
 
     },
     "Revoke with NFC" : {
 
     },
-    "RMO Tokens Airdrop" : {
+    "Rewards" : {
 
     },
     "Romania" : {
@@ -2120,6 +2155,7 @@
       }
     },
     "Starting in July" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2222,7 +2258,11 @@
     "The new version of the application is available in the App Store, it may contain critical improvements, so you have to download it" : {
 
     },
+    "The passport is in the allowlist" : {
+
+    },
     "The rewards program will allow you to receive weekly airdrops.\n\nYou can earn additional rewards by using RariMe’s incognito proofs with other ecosystem apps." : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2508,6 +2548,9 @@
     "You will be notified once your country is added" : {
 
     },
+    "You’re entitled for %@ RMO" : {
+
+    },
     "You’ve earned %lld RMO" : {
 
     },
@@ -2530,6 +2573,9 @@
           }
         }
       }
+    },
+    "You’ve reserved %@ RMO tokens" : {
+
     },
     "Your passport proof is ready" : {
       "localizations" : {

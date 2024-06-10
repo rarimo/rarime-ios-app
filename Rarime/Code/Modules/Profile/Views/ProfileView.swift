@@ -6,7 +6,7 @@ private enum ProfileRoute: Hashable {
 }
 
 struct ProfileView: View {
-    @EnvironmentObject private var appViewMode: AppView.ViewModel
+    @EnvironmentObject private var appViewModel: AppView.ViewModel
     @EnvironmentObject private var configManager: ConfigManager
     @EnvironmentObject private var settingsManager: SettingsManager
     @EnvironmentObject private var passportManager: PassportManager
@@ -20,7 +20,7 @@ struct ProfileView: View {
     @State private var isTermsSheetPresented = false
     @State private var isShareWithDeveloper = false
     @State private var isAccountDeleting = false
-    
+
     @State private var feedbackAttachment = Data()
 
     var body: some View {
@@ -158,7 +158,7 @@ struct ProfileView: View {
                         Text("App version: \(configManager.general.version)")
                             .body4()
                             .foregroundStyle(.textDisabled)
-                            Spacer()
+                        Spacer()
                     }
                     .frame(height: 100)
                 }
@@ -173,14 +173,16 @@ struct ProfileView: View {
                 }
                 Button("Yes") {
                     do {
-                        appViewMode.isIntroFinished = false
-                        
+                        appViewModel.isIntroFinished = false
                         securityManager.faceIdState = .unset
                         securityManager.passcodeState = .unset
-                        
+
+                        AppUserDefaults.shared.isFirstLaunch = true
+
                         try AppKeychain.removeValue(.privateKey)
                         try AppKeychain.removeValue(.registerZkProof)
                         try AppKeychain.removeValue(.passport)
+                        try AppKeychain.removeValue(.passcode)
                     } catch {
                         LoggerUtil.common.error("failed to delete account: \(error.localizedDescription, privacy: .public)")
                     }
@@ -188,14 +190,14 @@ struct ProfileView: View {
             }
         }
     }
-    
+
     func fetchLogsForFeedback() {
         Task { @MainActor in
             LoggerUtil.common.info("Exporting logs")
-                    
+
             let logEntries = (try? LoggerUtil.export()) ?? []
             let logData = logEntries.map { $0.description }.joined(separator: "\n")
-            
+
             self.feedbackAttachment = logData.data(using: .utf8) ?? Data()
         }
     }

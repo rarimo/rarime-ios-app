@@ -8,6 +8,7 @@ private enum ScanPassportState {
     case generateProof
     case waitlistPassport
     case claimTokens
+    case reserveTokens
 }
 
 struct ScanPassportView: View {
@@ -15,6 +16,7 @@ struct ScanPassportView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
 
+    let isAirdropFlow: Bool
     let onComplete: (_ passport: Passport, _ isClaimed: Bool) -> Void
     let onClose: () -> Void
 
@@ -66,6 +68,10 @@ struct ScanPassportView: View {
             PassportProofView(
                 onFinish: { registerZKProof in
                     userManager.registerZkProof = registerZKProof
+                    if !isAirdropFlow {
+                        withAnimation { state = .reserveTokens }
+                        return
+                    }
 
                     if
                         !passportViewModel.isUserRevoked,
@@ -74,7 +80,6 @@ struct ScanPassportView: View {
                         !walletManager.isClaimed
                     {
                         LoggerUtil.passport.info("User is eligible for reward")
-
                         withAnimation { state = .claimTokens }
                     } else {
                         onComplete(passportViewModel.passport!, false)
@@ -104,6 +109,17 @@ struct ScanPassportView: View {
             )
             .environmentObject(passportViewModel)
             .transition(.backslide)
+        case .reserveTokens:
+            ReserveTokensView(
+                showTerms: false,
+                passport: passportViewModel.passport,
+                onFinish: { isReserved in
+                    onComplete(passportViewModel.passport!, isReserved)
+                },
+                onClose: { onComplete(passportViewModel.passport!, false) }
+            )
+            .environmentObject(passportViewModel)
+            .transition(.backslide)
         }
     }
 }
@@ -112,6 +128,7 @@ struct ScanPassportView: View {
     let userManager = UserManager.shared
 
     return ScanPassportView(
+        isAirdropFlow: false,
         onComplete: { _, _ in },
         onClose: {}
     )

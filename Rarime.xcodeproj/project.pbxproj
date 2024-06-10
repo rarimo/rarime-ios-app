@@ -60,6 +60,7 @@
 		56722F202BCD62BB00300AD0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56722F1F2BCD62BB00300AD0 /* ProfileView.swift */; };
 		567AEC9B2BBD9B8100A20E83 /* Passport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567AEC9A2BBD9B8100A20E83 /* Passport.swift */; };
 		568350AC2BEA304B00B70E3D /* PassportIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568350AB2BEA304B00B70E3D /* PassportIdentifier.swift */; };
+		568820FA2C172C75001B729F /* ReserveTokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568820F92C172C75001B729F /* ReserveTokensView.swift */; };
 		5689C8332BE9008900A4B767 /* IntroWelcome.json in Resources */ = {isa = PBXBuildFile; fileRef = 5689C8322BE9008900A4B767 /* IntroWelcome.json */; };
 		5689C8352BE900B300A4B767 /* IntroProofs.json in Resources */ = {isa = PBXBuildFile; fileRef = 5689C8342BE900B300A4B767 /* IntroProofs.json */; };
 		5689C8372BE900D400A4B767 /* IntroIncognito.json in Resources */ = {isa = PBXBuildFile; fileRef = 5689C8362BE900D400A4B767 /* IntroIncognito.json */; };
@@ -230,6 +231,7 @@
 		56722F1F2BCD62BB00300AD0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		567AEC9A2BBD9B8100A20E83 /* Passport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passport.swift; sourceTree = "<group>"; };
 		568350AB2BEA304B00B70E3D /* PassportIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportIdentifier.swift; sourceTree = "<group>"; };
+		568820F92C172C75001B729F /* ReserveTokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTokensView.swift; sourceTree = "<group>"; };
 		5689C8322BE9008900A4B767 /* IntroWelcome.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IntroWelcome.json; sourceTree = "<group>"; };
 		5689C8342BE900B300A4B767 /* IntroProofs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IntroProofs.json; sourceTree = "<group>"; };
 		5689C8362BE900D400A4B767 /* IntroIncognito.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IntroIncognito.json; sourceTree = "<group>"; };
@@ -613,6 +615,7 @@
 				56933DFC2BBAFDD00068C894 /* PassportProofView.swift */,
 				56E2D9232BCFDD42006E725D /* ClaimTokensView.swift */,
 				56062B9F2C120B3400C9BF9B /* WaitlistPassportView.swift */,
+				568820F92C172C75001B729F /* ReserveTokensView.swift */,
 				56933DF02BBAC1B10068C894 /* ScanPassportLayoutView.swift */,
 				56933E0D2BBC09F10068C894 /* MRZScannerView.swift */,
 			);
@@ -1040,6 +1043,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				568820FA2C172C75001B729F /* ReserveTokensView.swift in Sources */,
 				56933DF72BBAC7D10068C894 /* SelectPassportDataView.swift in Sources */,
 				CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */,
 				5613F4322BD18409008E6CBE /* AppSkeleton.swift in Sources */,

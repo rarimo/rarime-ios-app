@@ -50,6 +50,7 @@ extension Country {
         case "BDI": .burundi
         case "BEL": .belgium
         case "BEN": .benin
+        case "BES": .bonaire
         case "BFA": .burkinaFaso
         case "BGD": .bangladesh
         case "BGR": .bulgaria
@@ -88,6 +89,9 @@ extension Country {
         case "CYM": .caymanIslands
         case "CYP": .cyprus
         case "CZE": .czechia
+        case "DEU": .germany
+        case "DJI": .djibouti
+        case "DMA": .dominica
         case "DNK": .denmark
         case "DOM": .dominicanRepublic
         case "DZA": .algeria
@@ -136,6 +140,7 @@ extension Country {
         case "IRN": .iran
         case "IRQ": .iraq
         case "ISL": .iceland
+        case "ISR": .israel
         case "ITA": .italy
         case "JAM": .jamaica
         case "JEY": .jersey
@@ -183,6 +188,7 @@ extension Country {
         case "MUS": .mauritius
         case "MWI": .malawi
         case "MYS": .malaysia
+        case "MYT": .mayotte
         case "NAM": .namibia
         case "NCL": .newCaledonia
         case "NER": .niger
@@ -216,49 +222,61 @@ extension Country {
         case "RUS": .russianFederation
         case "RWA": .rwanda
         case "SAU": .saudiArabia
+        case "SDN": .sudan
         case "SEN": .senegal
-        case "SRB": .serbia
-        case "SYC": .seychelles
-        case "SLE": .sierraLeone
         case "SGP": .singapore
+        case "SGS": .southGeorgiaAndTheSouthSandwichIslands
+        case "SHN": .saintHelena
+        case "SJM": .svalbardAndJanMayen
+        case "SLB": .solomonIslands
+        case "SLE": .sierraLeone
+        case "SLV": .elSalvador
+        case "SMR": .sanMarino
+        case "SOM": .somalia
+        case "SPM": .saintPierreAndMiquelon
+        case "SRB": .serbia
+        case "SSD": .southSudan
+        case "STP": .saoTomeAndPrincipe
+        case "SUR": .suriname
         case "SVK": .slovakia
         case "SVN": .slovenia
-        case "SLB": .solomonIslands
-        case "SOM": .somalia
-        case "ZAF": .southAfrica
-        case "SGS": .southGeorgiaAndTheSouthSandwichIslands
-        case "SSD": .southSudan
-        case "SDN": .sudan
-        case "SUR": .suriname
-        case "SJM": .svalbardAndJanMayen
         case "SWE": .sweden
+        case "SWZ": .eswatini
+        case "SXM": .sintMaarten
+        case "SYC": .seychelles
         case "SYR": .syrianArabRepublic
-        case "TWN": .taiwan
-        case "TJK": .tajikistan
-        case "TZA": .tanzania
-        case "THA": .thailand
-        case "TLS": .timorLeste
+        case "TCA": .turksAndCaicosIslands
+        case "TCD": .chad
         case "TGO": .togo
+        case "THA": .thailand
+        case "TJK": .tajikistan
         case "TKL": .tokelau
+        case "TKM": .turkmenistan
+        case "TLS": .timorLeste
         case "TON": .tonga
         case "TTO": .trinidadAndTobago
         case "TUN": .tunisia
         case "TUR": .turkey
-        case "TKM": .turkmenistan
-        case "TCA": .turksAndCaicosIslands
         case "TUV": .tuvalu
+        case "TWN": .taiwan
+        case "TZA": .tanzania
         case "UGA": .uganda
         case "UKR": .ukraine
-        case "USA": .unitedStates
+        case "UMI": .unitedStates
         case "URY": .uruguay
+        case "USA": .unitedStates
         case "UZB": .uzbekistan
-        case "VUT": .vanuatu
+        case "VAT": .holySee
+        case "VCT": .saintVincentAndTheGrenadines
         case "VEN": .venezuela
-        case "VNM": .vietnam
         case "VGB": .virginIslandsBritish
         case "VIR": .virginIslandsUS
+        case "VNM": .vietnam
+        case "VUT": .vanuatu
         case "WLF": .wallisAndFutuna
+        case "WSM": .samoa
         case "YEM": .yemen
+        case "ZAF": .southAfrica
         case "ZMB": .zambia
         case "ZWE": .zimbabwe
         default: .unknown
