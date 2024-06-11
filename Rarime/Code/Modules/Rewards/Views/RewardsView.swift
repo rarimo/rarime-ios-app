@@ -9,6 +9,7 @@ struct TaskEvent: Identifiable, Equatable {
     let icon: String
     let endDate: Date?
     let reward: Int
+    let actionURL: String?
 }
 
 private let limitedEvents: [TaskEvent] = [
@@ -18,7 +19,8 @@ private let limitedEvents: [TaskEvent] = [
         image: Images.rewardsTest1,
         icon: "",
         endDate: Date(timeIntervalSinceNow: 200000),
-        reward: 5
+        reward: 5,
+        actionURL: "https://example.com"
     ),
     TaskEvent(
         title: "Initial setup of identity credentials",
@@ -26,7 +28,8 @@ private let limitedEvents: [TaskEvent] = [
         image: Images.rewardsTest2,
         icon: "",
         endDate: Date(timeIntervalSinceNow: 500000),
-        reward: 5
+        reward: 5,
+        actionURL: "https://example.com"
     )
 ]
 
@@ -37,7 +40,8 @@ private let activeEvents: [TaskEvent] = [
         image: "",
         icon: Icons.users,
         endDate: nil,
-        reward: 5
+        reward: 5,
+        actionURL: "https://example.com"
     ),
     TaskEvent(
         title: "Getting a PoH credential",
@@ -45,7 +49,8 @@ private let activeEvents: [TaskEvent] = [
         image: "",
         icon: Icons.identificationCard,
         endDate: nil,
-        reward: 5
+        reward: 5,
+        actionURL: "https://example.com"
     )
 ]
 

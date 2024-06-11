@@ -11,6 +11,7 @@
 		56062B9C2C12032700C9BF9B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9B2C12032700C9BF9B /* Constants.swift */; };
 		56062B9E2C12096E00C9BF9B /* UnsupportedCountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9D2C12096E00C9BF9B /* UnsupportedCountryView.swift */; };
 		56062BA02C120B3400C9BF9B /* WaitlistPassportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9F2C120B3400C9BF9B /* WaitlistPassportView.swift */; };
+		5609B6C82C188C7500CB6A1F /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5609B6C72C188C7500CB6A1F /* MarkdownUI */; };
 		560F0C1D2BD0234300067054 /* QRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 560F0C1C2BD0234300067054 /* QRCode */; };
 		560F0C1F2BD027EA00067054 /* WalletReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C1E2BD027EA00067054 /* WalletReceiveView.swift */; };
 		560F0C212BD027FB00067054 /* WalletRouteLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C202BD027FB00067054 /* WalletRouteLayout.swift */; };
@@ -376,6 +377,7 @@
 				CE68BE472BD9B6EA00D92EBB /* Web3ContractABI in Frameworks */,
 				CEC562032BD923B4002D4954 /* libfr.a in Frameworks */,
 				CEC562042BD923B4002D4954 /* librapidsnark.a in Frameworks */,
+				5609B6C82C188C7500CB6A1F /* MarkdownUI in Frameworks */,
 				CE7210312BD807140043DB7F /* ZipArchive in Frameworks */,
 				CE7130882BEE5414003C63DA /* libwitnesscalc_registerIdentityUniversal.a in Frameworks */,
 				560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */,
@@ -969,6 +971,7 @@
 				CE68BE462BD9B6EA00D92EBB /* Web3ContractABI */,
 				CE68BE482BD9B6EA00D92EBB /* Web3PromiseKit */,
 				56E7AD102BDBA81000D3A258 /* PullToRefreshSwiftUI */,
+				5609B6C72C188C7500CB6A1F /* MarkdownUI */,
 			);
 			productName = Rarime;
 			productReference = CE9E82B22BA881F400AAF885 /* Rarime.app */;
@@ -1010,6 +1013,7 @@
 				CE72102F2BD807140043DB7F /* XCRemoteSwiftPackageReference "ZipArchive" */,
 				CE68BE432BD9B6EA00D92EBB /* XCRemoteSwiftPackageReference "Web3.swift" */,
 				56E7AD0F2BDBA81000D3A258 /* XCRemoteSwiftPackageReference "PullToRefreshSwiftUI" */,
+				5609B6C62C188C7500CB6A1F /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 			);
 			productRefGroup = CE9E82B32BA881F400AAF885 /* Products */;
 			projectDirPath = "";
@@ -1674,6 +1678,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5609B6C62C188C7500CB6A1F /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:gonzalezreal/swift-markdown-ui.git";
+			requirement = {
+				kind = exactVersion;
+				version = 2.3.0;
+			};
+		};
 		560F0C282BD114EE00067054 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/twostraws/CodeScanner";
@@ -1757,6 +1769,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5609B6C72C188C7500CB6A1F /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5609B6C62C188C7500CB6A1F /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
+		};
 		560F0C1C2BD0234300067054 /* QRCode */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 56E2D92F2BD01C77006E725D /* XCRemoteSwiftPackageReference "qrcode" */;

@@ -1,3 +1,4 @@
+import MarkdownUI
 import SwiftUI
 
 struct TaskEventView: View {
@@ -5,7 +6,7 @@ struct TaskEventView: View {
     let onBack: () -> Void
 
     var body: some View {
-        VStack(spacing: 32) {
+        VStack(spacing: 0) {
             HStack {
                 Button(action: onBack) {
                     Image(Icons.caretLeft).iconMedium()
@@ -17,7 +18,7 @@ struct TaskEventView: View {
             }
             .foregroundStyle(.textPrimary)
             .padding(.horizontal, 20)
-            VStack(spacing: 24) {
+            VStack(spacing: 8) {
                 HStack(alignment: .top, spacing: 16) {
                     VStack(alignment: .leading, spacing: 16) {
                         Text(event.title)
@@ -40,18 +41,31 @@ struct TaskEventView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
                 .frame(maxWidth: .infinity)
-                HorizontalDivider()
-                Text(event.description)
-                    .body3()
-                    .foregroundStyle(.textSecondary)
+                HorizontalDivider().padding(.top, 16)
+                ScrollView {
+                    Markdown(event.description)
+                        .body3()
+                        .foregroundStyle(.textPrimary)
+                        .padding(.top, 16)
+                }
                 Spacer()
             }
+            .padding(.top, 32)
             .padding(.horizontal, 20)
-            VStack(spacing: 16) {
-                HorizontalDivider()
-                AppButton(text: "Let's Start", action: {})
+            if let actionURL = event.actionURL {
+                VStack(spacing: 16) {
+                    HorizontalDivider()
+                    AppButton(
+                        text: "Let's Start",
+                        action: {
+                            if let url = URL(string: actionURL) {
+                                UIApplication.shared.open(url)
+                            }
+                        }
+                    )
                     .controlSize(.large)
                     .padding(.horizontal, 20)
+                }
             }
         }
         .padding(.vertical, 20)
@@ -62,11 +76,12 @@ struct TaskEventView: View {
     TaskEventView(
         event: TaskEvent(
             title: "Initial setup of identity credentials",
-            description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.Є",
+            description: "### Description\n\nThis task is to setup your identity credentials. You will need to provide your personal information and verify your identity.\n\n### Requirements\n\n- Personal Information\n- Identity Verification\n\n### Reward\n\n5 points\n\n### End Date\n\n2021-10-31 23:59:59",
             image: Images.rewardsTest1,
             icon: Icons.airdrop,
             endDate: Date(timeIntervalSinceNow: 200000),
-            reward: 5
+            reward: 5,
+            actionURL: "https://example.com"
         ),
         onBack: {}
     )
