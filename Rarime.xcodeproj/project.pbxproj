@@ -61,6 +61,7 @@
 		567AEC9B2BBD9B8100A20E83 /* Passport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567AEC9A2BBD9B8100A20E83 /* Passport.swift */; };
 		568350AC2BEA304B00B70E3D /* PassportIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568350AB2BEA304B00B70E3D /* PassportIdentifier.swift */; };
 		568820FA2C172C75001B729F /* ReserveTokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568820F92C172C75001B729F /* ReserveTokensView.swift */; };
+		568820FC2C1866FA001B729F /* TaskEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568820FB2C1866FA001B729F /* TaskEventView.swift */; };
 		5689C8332BE9008900A4B767 /* IntroWelcome.json in Resources */ = {isa = PBXBuildFile; fileRef = 5689C8322BE9008900A4B767 /* IntroWelcome.json */; };
 		5689C8352BE900B300A4B767 /* IntroProofs.json in Resources */ = {isa = PBXBuildFile; fileRef = 5689C8342BE900B300A4B767 /* IntroProofs.json */; };
 		5689C8372BE900D400A4B767 /* IntroIncognito.json in Resources */ = {isa = PBXBuildFile; fileRef = 5689C8362BE900D400A4B767 /* IntroIncognito.json */; };
@@ -232,6 +233,7 @@
 		567AEC9A2BBD9B8100A20E83 /* Passport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passport.swift; sourceTree = "<group>"; };
 		568350AB2BEA304B00B70E3D /* PassportIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportIdentifier.swift; sourceTree = "<group>"; };
 		568820F92C172C75001B729F /* ReserveTokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTokensView.swift; sourceTree = "<group>"; };
+		568820FB2C1866FA001B729F /* TaskEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEventView.swift; sourceTree = "<group>"; };
 		5689C8322BE9008900A4B767 /* IntroWelcome.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IntroWelcome.json; sourceTree = "<group>"; };
 		5689C8342BE900B300A4B767 /* IntroProofs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IntroProofs.json; sourceTree = "<group>"; };
 		5689C8362BE900D400A4B767 /* IntroIncognito.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IntroIncognito.json; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 			isa = PBXGroup;
 			children = (
 				563529E42BB072060027C910 /* RewardsView.swift */,
+				568820FB2C1866FA001B729F /* TaskEventView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1154,6 +1157,7 @@
 				5655E4282BD2C3FD00B86C5C /* Transaction.swift in Sources */,
 				56933DEF2BBABD100068C894 /* ScanPassportView.swift in Sources */,
 				56E6AD4F2BD2756200E4DDC1 /* SafariWebView.swift in Sources */,
+				568820FC2C1866FA001B729F /* TaskEventView.swift in Sources */,
 				567AEC9B2BBD9B8100A20E83 /* Passport.swift in Sources */,
 				5659151F2BE92B1F0050795A /* AppIconManager.swift in Sources */,
 				56933E032BBBFDFE0068C894 /* ProcessingChipView.swift in Sources */,

@@ -1,7 +1,7 @@
 import SwiftUI
 
 // TODO: use structs from points service
-private struct TaskEvent: Identifiable, Equatable {
+struct TaskEvent: Identifiable, Equatable {
     let id = UUID()
     let title: String
     let description: String
@@ -248,7 +248,7 @@ private struct ActiveEventItem: View {
     }
 }
 
-private struct RewardChip: View {
+struct RewardChip: View {
     let reward: Int
 
     var body: some View {
