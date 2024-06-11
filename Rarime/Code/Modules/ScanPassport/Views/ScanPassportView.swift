@@ -49,6 +49,7 @@ struct ScanPassportView: View {
             .transition(.backslide)
         case .selectData:
             SelectPassportDataView(
+                isAirdropFlow: isAirdropFlow,
                 onNext: {
                     let isSupportedCountry = !UNSUPPORTED_REWARD_COUNTRIES.contains(passportViewModel.passportCountry)
                     withAnimation { state = isSupportedCountry ? .generateProof : .unsupportedCountry }
