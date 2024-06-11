@@ -34,7 +34,9 @@ struct RefreshableScrollView<Content: View>: View {
                 case .idle:
                     Color.clear
                 case .pulling(let progress):
-                    Image(Icons.detective).square(progress * iconSize)
+                    Image(Icons.detective)
+                        .square(progress * iconSize)
+                        .foregroundStyle(.secondaryDark)
                 case .refreshing, .finishing:
                     LottieView(animation: Animations.incognito)
                         .frame(width: iconSize, height: iconSize)

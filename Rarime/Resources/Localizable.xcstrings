@@ -624,6 +624,9 @@
         }
       }
     },
+    "Create a new identity" : {
+
+    },
     "Create Account" : {
       "localizations" : {
         "uk" : {
@@ -635,9 +638,6 @@
       }
     },
     "Create Incognito ID" : {
-
-    },
-    "Create new Identity" : {
 
     },
     "Creating a confidential profile" : {
@@ -1128,7 +1128,7 @@
     "If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards" : {
 
     },
-    "Import from private key" : {
+    "Import from a private key" : {
 
     },
     "Incognito mode" : {
@@ -2041,7 +2041,7 @@
         }
       }
     },
-    "Select Authorisation Method" : {
+    "Select an authorization method" : {
 
     },
     "Send" : {

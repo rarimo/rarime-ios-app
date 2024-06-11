@@ -9,17 +9,17 @@ struct GetStartedView: View {
         VStack(spacing: 32) {
             VStack(spacing: 12) {
                 Text("Get Started").h5().foregroundStyle(.textPrimary)
-                Text("Select Authorisation Method").body2().foregroundStyle(.textSecondary)
+                Text("Select an authorization method").body2().foregroundStyle(.textSecondary)
             }
             VStack(spacing: 16) {
                 GetStartedButton(
-                    title: "Create new Identity",
+                    title: "Create a new identity",
                     text: "Generates new keys",
                     icon: Icons.userPlus,
                     action: onCreate
                 )
                 GetStartedButton(
-                    title: "Import from private key",
+                    title: "Import from a private key",
                     text: "Uses pregenerated keys",
                     icon: Icons.share1,
                     action: onImport
