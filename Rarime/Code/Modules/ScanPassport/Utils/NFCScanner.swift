@@ -15,11 +15,13 @@ class NFCScanner {
         let message: LocalizedStringResource?
         switch displayMessage {
         case .requestPresentPassport:
-            message = "Hold your iPhone near an NFC enabled passport."
-        case .activeAuthentication, .authenticatingWithPassport:
+            message = "Hold your iPhone near an NFC enabled passport.\n"
+        case .authenticatingWithPassport(let progress):
+            message = "Authenticating with passport...\n\n\(drawProgressBar(progress))"
+        case .activeAuthentication:
             message = "Authenticating with passport..."
-        case .readingDataGroupProgress(_, let progress):
-            message = "Reading passport data...\n\n\(drawProgressBar(progress))"
+        case .readingDataGroupProgress(let dataGroup, let progress):
+            message = "Reading passport data (\(dataGroup.getName()))...\n\n\(drawProgressBar(progress))"
         case .error(let tagError):
             switch tagError {
             case .TagNotValid: message = "Tag not valid."

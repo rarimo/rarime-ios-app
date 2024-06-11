@@ -50,10 +50,11 @@ private let activeEvents: [TaskEvent] = [
 ]
 
 struct RewardsView: View {
+    @EnvironmentObject private var userManager: UserManager
+
     // TODO: use values from points service
-    private let reservedBalance = 10
     private let currentLevel = 2
-    private let nextLevelBalance = 30
+    private let nextLevelBalance = 30.0
     private let leaderboardPosition = 241
 
     var body: some View {
@@ -97,7 +98,7 @@ struct RewardsView: View {
                         Text("Reserved RMO")
                             .body3()
                             .foregroundStyle(.textSecondary)
-                        Text(reservedBalance.formatted()).h5()
+                        Text(userManager.reservedBalance.formatted()).h5()
                     }
                     Spacer()
                     AppButton(text: "Claim", leftIcon: Icons.swap, width: nil, action: {})
@@ -111,11 +112,11 @@ struct RewardsView: View {
                             .iconSmall()
                             .foregroundStyle(.textPrimary)
                         Spacer()
-                        Text(String("\(reservedBalance.formatted())/\(nextLevelBalance.formatted())"))
+                        Text(String("\(userManager.reservedBalance.formatted())/\(nextLevelBalance.formatted())"))
                             .body4()
                             .foregroundStyle(.textSecondary)
                     }
-                    LinearProgressView(progress: 0.33)
+                    LinearProgressView(progress: userManager.reservedBalance / nextLevelBalance)
                 }
             }
         }
@@ -268,4 +269,5 @@ private struct RewardChip: View {
 #Preview {
     RewardsView()
         .environmentObject(MainView.ViewModel())
+        .environmentObject(UserManager())
 }

@@ -6,13 +6,14 @@ private enum ProfileRoute: Hashable {
 }
 
 struct ProfileView: View {
-    @EnvironmentObject private var appViewMode: AppView.ViewModel
+    @EnvironmentObject private var appViewModel: AppView.ViewModel
     @EnvironmentObject private var configManager: ConfigManager
     @EnvironmentObject private var settingsManager: SettingsManager
     @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var appIconManager: AppIconManager
     @EnvironmentObject private var securityManager: SecurityManager
+    @EnvironmentObject private var walletManager: WalletManager
 
     @State private var path: [ProfileRoute] = []
 
@@ -20,7 +21,7 @@ struct ProfileView: View {
     @State private var isTermsSheetPresented = false
     @State private var isShareWithDeveloper = false
     @State private var isAccountDeleting = false
-    
+
     @State private var feedbackAttachment = Data()
 
     var body: some View {
@@ -145,20 +146,26 @@ struct ProfileView: View {
                             }
                         }
                         CardContainer {
-                            VStack(spacing: 20) {
-                                Button("Delete account") {
-                                    isAccountDeleting = true
+                            Button(action: { isAccountDeleting = true }) {
+                                HStack {
+                                    Image(Icons.trashSimple)
+                                        .iconMedium()
+                                        .padding(6)
+                                        .background(.errorLighter, in: Circle())
+                                    Text("Delete Account")
+                                        .subtitle4()
+                                    Spacer()
                                 }
-                                .buttonStyle(.plain)
-                                .foregroundStyle(.red)
                             }
+                            .buttonStyle(.plain)
+                            .foregroundStyle(.errorMain)
                         }
                     }
                     VStack {
                         Text("App version: \(configManager.general.version)")
                             .body4()
                             .foregroundStyle(.textDisabled)
-                            Spacer()
+                        Spacer()
                     }
                     .frame(height: 100)
                 }
@@ -167,35 +174,35 @@ struct ProfileView: View {
             .padding(.vertical, 20)
             .padding(.horizontal, 12)
             .background(.backgroundPrimary)
-            .alert("Are you sure that you want to delete your account", isPresented: $isAccountDeleting) {
-                Button("No", role: .cancel) {
-                    self.isAccountDeleting = false
-                }
-                Button("Yes") {
-                    do {
-                        appViewMode.isIntroFinished = false
-                        
-                        securityManager.faceIdState = .unset
-                        securityManager.passcodeState = .unset
-                        
-                        try AppKeychain.removeValue(.privateKey)
-                        try AppKeychain.removeValue(.registerZkProof)
-                        try AppKeychain.removeValue(.passport)
-                    } catch {
-                        LoggerUtil.common.error("failed to delete account: \(error.localizedDescription, privacy: .public)")
+            .alert(
+                "Delete your account?",
+                isPresented: $isAccountDeleting,
+                actions: {
+                    Button("No", role: .cancel) {
+                        self.isAccountDeleting = false
                     }
+                    Button("Yes", role: .destructive) {
+                        appViewModel.isIntroFinished = false
+                        passportManager.reset()
+                        securityManager.reset()
+                        userManager.reset()
+                        walletManager.reset()
+                    }
+                },
+                message: {
+                    Text("This action is irreversible and will delete all your data.")
                 }
-            }
+            )
         }
     }
-    
+
     func fetchLogsForFeedback() {
         Task { @MainActor in
             LoggerUtil.common.info("Exporting logs")
-                    
+
             let logEntries = (try? LoggerUtil.export()) ?? []
             let logData = logEntries.map { $0.description }.joined(separator: "\n")
-            
+
             self.feedbackAttachment = logData.data(using: .utf8) ?? Data()
         }
     }
@@ -243,6 +250,7 @@ private struct ProfileRow: View {
         .environmentObject(PassportManager())
         .environmentObject(SecurityManager())
         .environmentObject(AppIconManager())
+        .environmentObject(WalletManager())
         .environmentObject(userManager)
         .onAppear {
             _ = try? userManager.createNewUser()

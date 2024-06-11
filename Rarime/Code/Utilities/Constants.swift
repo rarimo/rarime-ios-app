@@ -16,3 +16,5 @@ let UNSUPPORTED_REWARD_COUNTRIES: [Country] = [
     .yemen,
     .unknown
 ]
+
+let PASSPORT_RESERVE_TOKENS: Double = 5.0

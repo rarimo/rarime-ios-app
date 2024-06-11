@@ -3,6 +3,7 @@ import SwiftUI
 
 struct SelectPassportDataView: View {
     @EnvironmentObject var passportViewModel: PassportViewModel
+    let isAirdropFlow: Bool
     let onNext: () -> Void
     let onClose: () -> Void
 
@@ -64,8 +65,11 @@ struct SelectPassportDataView: View {
                         .subtitle3()
                         .foregroundStyle(.textPrimary)
                     Spacer()
-                    RewardChipView(reward: RARIMO_AIRDROP_REWARD, isActive: true)
-                        .opacity(passportViewModel.isEligibleForReward ? 1 : 0)
+                    RewardChipView(
+                        reward: isAirdropFlow ? RARIMO_AIRDROP_REWARD : Int(PASSPORT_RESERVE_TOKENS),
+                        isActive: true
+                    )
+                    .opacity(passportViewModel.isEligibleForReward ? 1 : 0)
                 }
                 VStack(spacing: 16) {
                     makeDocumentRow(label: "Document class mode", value: passport.documentType)
@@ -91,6 +95,7 @@ private struct PreviewView: View {
 
     var body: some View {
         SelectPassportDataView(
+            isAirdropFlow: false,
             onNext: {},
             onClose: {}
         )

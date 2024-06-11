@@ -3,7 +3,11 @@ import Foundation
 class WalletManager: ObservableObject {
     static let shared = WalletManager()
 
-    @Published private(set) var transactions: [Transaction]
+    @Published private(set) var transactions: [Transaction] {
+        didSet {
+            AppUserDefaults.shared.walletTransactions = try! JSONEncoder().encode(transactions)
+        }
+    }
 
     @Published var isClaimed: Bool {
         didSet {
@@ -16,11 +20,11 @@ class WalletManager: ObservableObject {
         transactions = AppUserDefaults.shared.walletTransactions.isEmpty
             ? []
             : try! JSONDecoder().decode([Transaction].self, from: AppUserDefaults.shared.walletTransactions)
-        
+
         Task {
             do {
                 let isClaimed = try await UserManager.shared.isAirdropClaimed()
-                
+
                 DispatchQueue.main.async { self.isClaimed = isClaimed }
             } catch {}
         }
@@ -42,7 +46,6 @@ class WalletManager: ObservableObject {
                 type: .received
             )
         )
-        AppUserDefaults.shared.walletTransactions = try! JSONEncoder().encode(transactions)
         isClaimed = true
     }
 
@@ -56,6 +59,10 @@ class WalletManager: ObservableObject {
                 type: .sent
             )
         )
-        AppUserDefaults.shared.walletTransactions = try! JSONEncoder().encode(transactions)
+    }
+
+    func reset() {
+        transactions = []
+        isClaimed = false
     }
 }
