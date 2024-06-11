@@ -1,7 +1,7 @@
 import Alamofire
-import SwiftUI
 import Identity
 import NFCPassportReader
+import SwiftUI
 
 private let ENCAPSULATED_CONTENT_2688: Int = 2688
 private let ENCAPSULATED_CONTENT_2704: Int = 2704
@@ -16,8 +16,10 @@ class UserManager: ObservableObject {
     @Published var masterCertProof: SMTProof?
     
     @Published var balance: Double
+    @Published var reservedBalance: Double
+    @Published var isPassportTokensReserved: Bool
     
-    @Published var isRevoked = AppUserDefaults.shared.isUserRevoked
+    @Published var isRevoked: Bool
     
     init() {
         do {
@@ -36,6 +38,9 @@ class UserManager: ObservableObject {
             
             self.user = try User.load()
             self.balance = 0
+            self.reservedBalance = AppUserDefaults.shared.reservedBalance
+            self.isPassportTokensReserved = AppUserDefaults.shared.isPassportTokensReserved
+            self.isRevoked = AppUserDefaults.shared.isUserRevoked
             
             if let registerZkProofJson = try AppKeychain.getValue(.registerZkProof) {
                 let registerZkProof = try JSONDecoder().decode(ZkProof.self, from: registerZkProofJson)
@@ -118,7 +123,7 @@ class UserManager: ObservableObject {
             pubKeyPem: publicKeyPem.data(using: .utf8) ?? Data(),
             signature: signature,
             isEcdsaActiveAuthentication: isEcdsaActiveAuthentication,
-            certificatesSMTProofJSON: try JSONEncoder().encode(certificateProof)
+            certificatesSMTProofJSON: JSONEncoder().encode(certificateProof)
         )
         
         DispatchQueue.main.async { self.masterCertProof = certificateProof }
@@ -148,7 +153,7 @@ class UserManager: ObservableObject {
         let calldata = try calldataBuilder.buildRegisterCalldata(
             proofJson,
             signature: passport.signature,
-            pubKeyPem: try passport.getDG15PublicKeyPEM(),
+            pubKeyPem: passport.getDG15PublicKeyPEM(),
             certificatesRootRaw: masterCertProof.root,
             isRevoced: isRevoked
         )
@@ -171,7 +176,7 @@ class UserManager: ObservableObject {
         let calldata = try calldataBuilder.buildRevoceCalldata(
             identityKey,
             signature: signature,
-            pubKeyPem: try passport.getDG15PublicKeyPEM()
+            pubKeyPem: passport.getDG15PublicKeyPEM()
         )
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
@@ -310,7 +315,7 @@ class UserManager: ObservableObject {
         
         do {
             let _ = try await relayer.getAirdropInfo(airdropEventNullifier)
-        } catch let error {
+        } catch {
             guard let error = error as? AFError else { throw error }
             
             guard case .responseValidationFailed(let errorReason) = error else { throw error }
@@ -330,12 +335,11 @@ class UserManager: ObservableObject {
             throw error
         }
         
-        
         return true
     }
     
     func fetchBalanse() async throws -> String {
-        let address = userAddress
+        let address = self.userAddress
         
         let cosmos = Cosmos(ConfigManager.shared.api.cosmosRpcURL)
         let spendableBalances = try await cosmos.getSpendableBalances(address)
@@ -358,5 +362,39 @@ class UserManager: ObservableObject {
         )
         
         return try JSONDecoder().decode(CosmosTransferResponse.self, from: response)
+    }
+    
+    func reserveTokens() async throws {
+        // TODO: implement reserve tokens
+        try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
+        
+        self.reservedBalance = PASSPORT_RESERVE_TOKENS
+        self.isPassportTokensReserved = true
+
+        AppUserDefaults.shared.reservedBalance = PASSPORT_RESERVE_TOKENS
+        AppUserDefaults.shared.isPassportTokensReserved = true
+    }
+    
+    func reset() {
+        AppUserDefaults.shared.reservedBalance = 0.0
+        AppUserDefaults.shared.isPassportTokensReserved = false
+        AppUserDefaults.shared.isUserRevoked = false
+        
+        do {
+            try AppKeychain.removeValue(.privateKey)
+            try AppKeychain.removeValue(.registerZkProof)
+            try AppKeychain.removeValue(.passport)
+            
+            self.user = try User.load()
+            self.balance = 0
+            self.reservedBalance = AppUserDefaults.shared.reservedBalance
+            self.isPassportTokensReserved = AppUserDefaults.shared.isPassportTokensReserved
+            
+            if let registerZkProofJson = try AppKeychain.getValue(.registerZkProof) {
+                self.registerZkProof = try JSONDecoder().decode(ZkProof.self, from: registerZkProofJson)
+            }
+        } catch {
+            fatalError("\(error.localizedDescription)")
+        }
     }
 }

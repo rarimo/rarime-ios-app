@@ -3,7 +3,18 @@ import SwiftUI
 struct CongratsView: View {
     var open: Bool
     var isClaimed: Bool
+    var isAirdropFlow: Bool
     var onClose: () -> Void
+
+    private var description: String {
+        if !isClaimed {
+            return String(localized: "You will be notified once your country is added")
+        }
+
+        return isAirdropFlow
+            ? String(localized: "You’ve received \(RARIMO_AIRDROP_REWARD) RMO tokens")
+            : String(localized: "You’ve reserved \(PASSPORT_RESERVE_TOKENS.formatted()) RMO tokens")
+    }
 
     var body: some View {
         ZStack {
@@ -28,7 +39,7 @@ struct CongratsView: View {
                                 Text(isClaimed ? "Congrats!" : "You’ve joined the waitlist")
                                     .h6()
                                     .foregroundStyle(.textPrimary)
-                                Text(isClaimed ? "You’ve received \(RARIMO_AIRDROP_REWARD) RMO tokens" : "You will be notified once your country is added")
+                                Text(description)
                                     .body2()
                                     .multilineTextAlignment(.center)
                                     .foregroundStyle(.textSecondary)
@@ -41,8 +52,8 @@ struct CongratsView: View {
                                     ShareLink(
                                         // TODO: update content
                                         item: URL(string: "https://rarime.com")!,
-                                        subject: Text("RMO Tokens Airdrop"),
-                                        message: Text("I've just received \(RARIMO_AIRDROP_REWARD) RMO tokens! Participate in the airdrop: https://rarime.com")
+                                        subject: Text("RariMe Rewards"),
+                                        message: Text("Participate and get rewarded: https://rarime.com")
                                     ) {
                                         HStack(spacing: 8) {
                                             Image(Icons.share).iconMedium()
@@ -69,5 +80,10 @@ struct CongratsView: View {
 }
 
 #Preview {
-    CongratsView(open: true, isClaimed: true, onClose: {})
+    CongratsView(
+        open: true,
+        isClaimed: true,
+        isAirdropFlow: true,
+        onClose: {}
+    )
 }

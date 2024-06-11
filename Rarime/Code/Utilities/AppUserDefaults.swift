@@ -45,14 +45,21 @@ public class AppUserDefaults: ObservableObject {
 
     @AppStorage("is_circuit_data_downloaded")
     public var isCircuitDataDownloaded = false
-    
+
     // Small hack to store Date in UserDefaults, because it's not supported by AppStorage
     public var banTimeEnd: Date? = UserDefaults.standard.object(forKey: "ban_time_end") as? Date {
         didSet {
-            UserDefaults.standard.set(self.banTimeEnd, forKey: "ban_time_end")
+            UserDefaults.standard.set(banTimeEnd, forKey: "ban_time_end")
         }
     }
-    
+
     @AppStorage("is_user_revoked")
     public var isUserRevoked = false
+
+    // TODO: remove when backend is ready
+    @AppStorage("reserved_balance")
+    public var reservedBalance = 0.0
+
+    @AppStorage("is_passport_tokens_reserved")
+    public var isPassportTokensReserved = false
 }

@@ -2,7 +2,7 @@ import Foundation
 
 class ConfigManager: ObservableObject {
     static let shared = ConfigManager()
-    
+
     let general: General
     let api: API
     let cosmos: Cosmos
@@ -23,7 +23,7 @@ extension ConfigManager {
         let privacyPolicyURL: URL
         let termsOfUseURL: URL
         let version: String
-        
+
         init() {
             do {
                 self.privacyPolicyURL = try readURLFromInfoPlist(key: "PRIVACY_POLICY_URL")
@@ -42,7 +42,7 @@ extension ConfigManager {
         let evmRpcURL: URL
         let registerContractAddress: String
         let cosmosRpcURL: URL
-        
+
         init() {
             do {
                 self.relayerURL = try readURLFromInfoPlist(key: "RELAYER_URL")
@@ -61,7 +61,7 @@ extension ConfigManager {
         let chainId: String
         let denom: String
         let rpcIp: String
-        
+
         init() {
             do {
                 self.chainId = try readStringFromInfoPlist(key: "CHAIN_ID")
@@ -79,7 +79,7 @@ extension ConfigManager {
         let icaoCosmosRpc: String
         let masterCertificatesBucketname: String
         let masterCertificatesFilename: String
-        
+
         init() {
             do {
                 self.icaoCosmosRpc = try readStringFromInfoPlist(key: "ICAO_COSMOS_RPC")
@@ -95,7 +95,7 @@ extension ConfigManager {
 extension ConfigManager {
     class Feedback {
         let feedbackEmail: String
-        
+
         init() {
             do {
                 self.feedbackEmail = try readStringFromInfoPlist(key: "FEEDBACK_EMAIL")
@@ -112,14 +112,16 @@ fileprivate func readStringFromInfoPlist(key: String) throws -> String {
     guard let value = Bundle.main.object(forInfoDictionaryKey: key) as? String else {
         throw "Couldn't find \(key) in Info.plist"
     }
-    
-    return String(value.dropFirst().dropLast())
+
+    return value.starts(with: "\"")
+        ? String(value.dropFirst().dropLast())
+        : value
 }
 
 fileprivate func readURLFromInfoPlist(key: String) throws -> URL {
     let value = try readStringFromInfoPlist(key: key)
-    
+
     guard let url = URL(string: value) else { throw "\(key) isn't URL" }
-    
+
     return url
 }
