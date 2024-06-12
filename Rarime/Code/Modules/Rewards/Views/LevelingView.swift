@@ -1,5 +1,6 @@
 import SwiftUI
 
+//  TODO: move to model
 private struct LevelReward {
     let title: String
     let description: String
@@ -71,7 +72,7 @@ private let pointsLevels: [PointsLevel] = [
     )
 ]
 
-struct RewardsLevelingView: View {
+struct LevelingView: View {
     let userLevel: Int
     let reservedBalance: Double
     @State private var selectedLevelIndex: Int
@@ -254,7 +255,7 @@ private struct LevelRewards: View {
 }
 
 #Preview {
-    RewardsLevelingView(
+    LevelingView(
         userLevel: 2,
         reservedBalance: 23.0
     )
