@@ -10,6 +10,7 @@ RELAYER_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
 EVM_RPC_URL = "https:${SLASH}/rpc.evm.node1.mainnet-beta.rarimo.com"
 REGISTER_CONTRACT_ADDRESS = "0x31C9baC74fa7482cDCf33d09B8476250b460B058"
 COSMOS_RPC_URL = "https:${SLASH}/rpc-api.node1.mainnet-beta.rarimo.com"
+POINTS_SERVICE_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
 
 // MARK: Cosmos
 CHAIN_ID = "rarimo_42-1"
