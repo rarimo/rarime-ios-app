@@ -202,29 +202,6 @@ private struct LimitedEventItem: View {
     }
 }
 
-private struct LinearProgressView: View {
-    let progress: Double
-
-    var body: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 100)
-                    .fill(.componentPrimary)
-                    .frame(width: geometry.size.width, height: 8)
-                RoundedRectangle(cornerRadius: 100)
-                    .fill(
-                        LinearGradient(
-                            colors: [.primaryMain, .primaryDark, .primaryDarker],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    )
-                    .frame(width: geometry.size.width * CGFloat(progress), height: 8)
-            }
-        }
-    }
-}
-
 private struct ActiveEventItem: View {
     let event: TaskEvent
 
@@ -250,24 +227,6 @@ private struct ActiveEventItem: View {
                 .iconSmall()
                 .foregroundStyle(.textSecondary)
         }
-    }
-}
-
-struct RewardChip: View {
-    let reward: Int
-
-    var body: some View {
-        HStack(spacing: 4) {
-            Text(String("+\(reward)")).subtitle5()
-            Image(Icons.rarimo).iconSmall()
-        }
-        .padding(.vertical, 2)
-        .padding(.horizontal, 6)
-        .foregroundStyle(.textSecondary)
-        .overlay(
-            RoundedRectangle(cornerRadius: 100)
-                .stroke(.componentPrimary)
-        )
     }
 }
 
