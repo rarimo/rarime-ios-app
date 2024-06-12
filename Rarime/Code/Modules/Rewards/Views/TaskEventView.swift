@@ -12,7 +12,12 @@ struct TaskEventView: View {
                     Image(Icons.caretLeft).iconMedium()
                 }
                 Spacer()
-                Button(action: {}) {
+                ShareLink(
+                    // TODO: update content
+                    item: URL(string: "https://rarime.com")!,
+                    subject: Text("RariMe Event"),
+                    message: Text("RariMe Event: \(event.title)\n\nParticipate and get rewarded: https://rarime.com")
+                ) {
                     Image(Icons.share).iconMedium()
                 }
             }
