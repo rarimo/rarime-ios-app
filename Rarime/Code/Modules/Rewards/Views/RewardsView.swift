@@ -8,7 +8,7 @@ struct TaskEvent: Identifiable, Equatable {
     let image: String
     let icon: String
     let endDate: Date?
-    let reward: Int
+    let reward: Double
     let actionURL: String?
 }
 
