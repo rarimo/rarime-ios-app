@@ -128,20 +128,28 @@ private struct BalancesTable: View {
                 .padding(.top, 16)
                 .padding(.horizontal, 16)
             ScrollView {
-                VStack(spacing: 0) {
-                    ForEach(otherBalances.indices, id: \.self) { i in
-                        BalanceItem(
-                            balance: otherBalances[i],
-                            isMyBalance: otherBalances[i].id == myBalance.id,
-                            highlighted: otherBalances[i].id == myBalance.id
-                        )
-                        if shouldShowDivider(at: i) {
-                            HorizontalDivider()
-                                .padding(.horizontal, 16)
+                ScrollViewReader { scrollView in
+                    VStack(spacing: 0) {
+                        ForEach(otherBalances.indices, id: \.self) { i in
+                            BalanceItem(
+                                balance: otherBalances[i],
+                                isMyBalance: otherBalances[i].id == myBalance.id,
+                                highlighted: otherBalances[i].id == myBalance.id
+                            )
+                            .id(otherBalances[i].id)
+                            if shouldShowDivider(at: i) {
+                                HorizontalDivider()
+                                    .padding(.horizontal, 16)
+                            }
                         }
                     }
+                    .onAppear {
+                        if hasMyBalance {
+                            scrollView.scrollTo(myBalance.id, anchor: .center)
+                        }
+                    }
+                    Spacer()
                 }
-                Spacer()
             }
             if !hasMyBalance {
                 VStack(spacing: 0) {
@@ -229,6 +237,7 @@ private struct BalanceItem: View {
             PointsBalance(id: "72beAoalsOSLals6", amount: 5, rank: 19, level: 1),
             PointsBalance(id: "82beAoalsOSLals7", amount: 4, rank: 20, level: 1)
         ],
-        myBalance: PointsBalance(id: "82beAoalsOSLalsk", amount: 1, rank: 92, level: 1)
+//        myBalance: PointsBalance(id: "82beAoalsOSLalsk", amount: 1, rank: 92, level: 1)
+        myBalance: PointsBalance(id: "12beAoalsOSLals1", amount: 55, rank: 4, level: 3)
     )
 }
