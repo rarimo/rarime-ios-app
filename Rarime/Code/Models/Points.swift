@@ -21,7 +21,7 @@ class Points {
             )
         )
         
-        let response = try await AF.request(requestUrl, method: .post)
+        let response = try await AF.request(requestUrl, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(CreatePointBalanceRequest.self)
             .result
@@ -83,7 +83,7 @@ class Points {
             )
         )
         
-        let response = try await AF.request(requestUrl, method: .patch)
+        let response = try await AF.request(requestUrl, method: .patch, parameters: requestPayload, encoder: JSONParameterEncoder.default)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(CreatePointBalanceRequest.self)
             .result
@@ -105,7 +105,7 @@ class Points {
             )
         )
         
-        let response = try await AF.request(requestUrl, method: .post)
+        let response = try await AF.request(requestUrl, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(VerifyPassportRequest.self)
             .result
@@ -147,7 +147,7 @@ class Points {
             )
         )
         
-        let response = try await AF.request(requestUrl, method: .post)
+        let response = try await AF.request(requestUrl, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(WithdrawPointsResponse.self)
             .result
@@ -226,7 +226,7 @@ class Points {
             )
         )
         
-        let response = try await AF.request(requestUrl, method: .post)
+        let response = try await AF.request(requestUrl, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(ClaimPointsForEvent.self)
             .result

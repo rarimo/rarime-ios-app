@@ -154,6 +154,9 @@
 		CE7210312BD807140043DB7F /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = CE7210302BD807140043DB7F /* ZipArchive */; };
 		CE7210332BD818020043DB7F /* Double+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7210322BD818020043DB7F /* Double+Rounded.swift */; };
 		CE7D8AAC2BFB52EE009AF212 /* OpenApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7D8AAB2BFB52EE009AF212 /* OpenApiError.swift */; };
+		CE8FEB582C1AE5740008381A /* Authorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB572C1AE5740008381A /* Authorize.swift */; };
+		CE8FEB5A2C1AF1BE0008381A /* DecentralizeAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB592C1AF1BE0008381A /* DecentralizeAuthManager.swift */; };
+		CE8FEB5C2C1AFC3F0008381A /* libwitnesscalc_auth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8FEB5B2C1AFC3F0008381A /* libwitnesscalc_auth.a */; };
 		CE9E82B62BA881F400AAF885 /* RarimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82B52BA881F400AAF885 /* RarimeApp.swift */; };
 		CE9E82B82BA881F400AAF885 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82B72BA881F400AAF885 /* AppView.swift */; };
 		CE9E82BA2BA881F500AAF885 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9E82B92BA881F500AAF885 /* Assets.xcassets */; };
@@ -318,6 +321,10 @@
 		CE7210282BD7D0D10043DB7F /* String+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Hex.swift"; sourceTree = "<group>"; };
 		CE7210322BD818020043DB7F /* Double+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Rounded.swift"; sourceTree = "<group>"; };
 		CE7D8AAB2BFB52EE009AF212 /* OpenApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenApiError.swift; sourceTree = "<group>"; };
+		CE8FEB572C1AE5740008381A /* Authorize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorize.swift; sourceTree = "<group>"; };
+		CE8FEB592C1AF1BE0008381A /* DecentralizeAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecentralizeAuthManager.swift; sourceTree = "<group>"; };
+		CE8FEB5B2C1AFC3F0008381A /* libwitnesscalc_auth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_auth.a; sourceTree = "<group>"; };
+		CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_auth.h; sourceTree = "<group>"; };
 		CE9E82B22BA881F400AAF885 /* Rarime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rarime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE9E82B52BA881F400AAF885 /* RarimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarimeApp.swift; sourceTree = "<group>"; };
 		CE9E82B72BA881F400AAF885 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
@@ -371,6 +378,7 @@
 				CE41C49E2C0777B70046AC33 /* Identity.xcframework in Frameworks */,
 				56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */,
 				56933E082BBC09990068C894 /* QKMRZScanner in Frameworks */,
+				CE8FEB5C2C1AFC3F0008381A /* libwitnesscalc_auth.a in Frameworks */,
 				CE68BE472BD9B6EA00D92EBB /* Web3ContractABI in Frameworks */,
 				CEC562032BD923B4002D4954 /* libfr.a in Frameworks */,
 				CEC562042BD923B4002D4954 /* librapidsnark.a in Frameworks */,
@@ -527,6 +535,7 @@
 				CEF251372BD6E17800050507 /* UserManager.swift */,
 				CE0881A02BF773CC00B31735 /* AlertManager.swift */,
 				CE0DC57A2C0DB33A00EFC0D7 /* UpdateManager.swift */,
+				CE8FEB592C1AF1BE0008381A /* DecentralizeAuthManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -547,6 +556,7 @@
 				CE7D8AAB2BFB52EE009AF212 /* OpenApiError.swift */,
 				CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */,
 				CE1FA5692C1708F100B2C191 /* Points.swift */,
+				CE8FEB572C1AE5740008381A /* Authorize.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -921,10 +931,12 @@
 			isa = PBXGroup;
 			children = (
 				CE41C49D2C0777B70046AC33 /* Identity.xcframework */,
+				CE8FEB5B2C1AFC3F0008381A /* libwitnesscalc_auth.a */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CE7130872BEE5414003C63DA /* libwitnesscalc_registerIdentityUniversal.a */,
 				CEC562022BD923B4002D4954 /* libfq.a */,
 				CEDC4D7B2BE9162E00459D4E /* witnesscalc_registerIdentityUniversal.h */,
+				CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */,
 				CEC561FB2BD923B3002D4954 /* libfr.a */,
 				CEDB9DCB2BFDF60900BCF074 /* libwitnesscalc_queryIdentity.a */,
 				CEC562012BD923B4002D4954 /* libgmp.a */,
@@ -1053,6 +1065,7 @@
 				56AC03402BB06A2D00A34A00 /* Image+Icon.swift in Sources */,
 				56A6C75F2BBC309A00992562 /* NFCScanner.swift in Sources */,
 				CE9E82B82BA881F400AAF885 /* AppView.swift in Sources */,
+				CE8FEB5A2C1AF1BE0008381A /* DecentralizeAuthManager.swift in Sources */,
 				561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */,
 				56DAA30B2BB8B977002CF710 /* View+DynamicSheet.swift in Sources */,
 				CEB91BBE2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift in Sources */,
@@ -1137,6 +1150,7 @@
 				CEDC4D812BE9475400459D4E /* Certificates.swift in Sources */,
 				56E6AD472BD272FB00E4DDC1 /* ExportKeysView.swift in Sources */,
 				CE0DC57D2C0DB9B200EFC0D7 /* VersionUpdateView.swift in Sources */,
+				CE8FEB582C1AE5740008381A /* Authorize.swift in Sources */,
 				5655E42E2BD2C94F00B86C5C /* AppUserDefaults.swift in Sources */,
 				CE68BE4B2BD9B75100D92EBB /* ContractABI.swift in Sources */,
 				56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */,

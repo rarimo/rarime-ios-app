@@ -9,11 +9,12 @@ struct HomeView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var mainViewModel: MainView.ViewModel
     @EnvironmentObject private var userManager: UserManager
+    
+    @Binding var isRewardsSheetPresented: Bool
 
     @State private var path: [HomeRoute] = []
 
     @State private var isUkrainianSheetPresented = false
-    @State private var isRewardsSheetPresented = false
     @State private var isRarimeSheetPresented = false
 
     @State private var isAirdropFlow = false
@@ -267,7 +268,7 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    HomeView(isRewardsSheetPresented: .constant(false))
         .environmentObject(MainView.ViewModel())
         .environmentObject(PassportManager())
         .environmentObject(WalletManager())
