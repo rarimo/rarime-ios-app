@@ -97,7 +97,7 @@ struct WalletView: View {
                     if isBalanceFetching {
                         ProgressView()
                     } else {
-                        Text((userManager.balance / Double(Rarimo.rarimoTokenMantis)).formatted())
+                        Text(RarimoUtils.formatBalance(userManager.balance))
                             .h4()
                             .foregroundStyle(.textPrimary)
                     }

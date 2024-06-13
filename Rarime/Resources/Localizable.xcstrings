@@ -35,7 +35,6 @@
       }
     },
     "%@ RMO" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -253,6 +252,9 @@
 
     },
     "Aruba" : {
+
+    },
+    "ASSETS (%lld)" : {
 
     },
     "Australia" : {
@@ -587,6 +589,9 @@
 
     },
     "Comoros" : {
+
+    },
+    "Confirm" : {
 
     },
     "Congo" : {
@@ -989,6 +994,9 @@
 
     },
     "Faroe Islands" : {
+
+    },
+    "Fee" : {
 
     },
     "Female" : {
@@ -2084,6 +2092,9 @@
     "Reunion" : {
 
     },
+    "Review Transaction" : {
+
+    },
     "Revoke with NFC" : {
 
     },
@@ -2181,9 +2192,6 @@
     "Send %@" : {
 
     },
-    "Send issue to the devs" : {
-
-    },
     "Send RMO" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2194,6 +2202,9 @@
           }
         }
       }
+    },
+    "Sending..." : {
+
     },
     "Senegal" : {
 
@@ -2486,6 +2497,12 @@
     "Tonga" : {
 
     },
+    "Total %@" : {
+
+    },
+    "Total Balance" : {
+
+    },
     "Transactions" : {
       "localizations" : {
         "uk" : {
@@ -2747,6 +2764,9 @@
       }
     },
     "You’ve reserved %@ RMO tokens" : {
+
+    },
+    "Your Address" : {
 
     },
     "Your passport proof is ready" : {

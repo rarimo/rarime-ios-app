@@ -16,8 +16,18 @@ struct WalletSendView: View {
 
     @State private var isScanning = false
     @State private var isTransfering = false
+    @State private var isConfirmationSheetPresented = false
     
     @State private var cancelables: [Task<Void, Never>] = []
+    
+    private var amountToSend: Double {
+        return (Double(amount) ?? 0) * Double(Rarimo.rarimoTokenMantis)
+    }
+    
+    // TODO: calculate according to the token type
+    private var fee: Double {
+        return 0
+    }
 
     func toggleScan() {
         withAnimation(.easeInOut(duration: 0.2)) {
@@ -38,9 +48,6 @@ struct WalletSendView: View {
                     }
                 }
                 .transition(.move(edge: .bottom))
-            } else if isTransfering {
-                ProgressView()
-                    .controlSize(.large)
             } else {
                 content
             }
@@ -70,6 +77,7 @@ struct WalletSendView: View {
                                 }
                             }
                         )
+                        .disabled(isTransfering)
                         AppTextField(
                             text: $amount,
                             errorMessage: $amountErrorMessage,
@@ -97,11 +105,12 @@ struct WalletSendView: View {
                                     .foregroundStyle(.textSecondary)
                                 Spacer()
                                 // TODO: use balance according to the token type
-                                Text(try! String("\((userManager.balance / Double(Rarimo.rarimoTokenMantis)).formatted()) \(token.rawValue)"))
+                                Text(try! String("\(RarimoUtils.formatBalance(userManager.balance)) \(token.rawValue)"))
                                     .body4()
                                     .foregroundStyle(.textPrimary)
                             }
                         }
+                        .disabled(isTransfering)
                         .onReceive(Just(amount), perform: handleAmountOnReceive)
                     }
                 }
@@ -118,7 +127,7 @@ struct WalletSendView: View {
                 Text("Receiver gets")
                     .body4()
                     .foregroundStyle(.textSecondary)
-                Text(try! String("\((Double(amount) ?? 0.0).formatted()) \(token.rawValue)"))
+                Text(try! String("\(RarimoUtils.formatBalance(amountToSend)) \(token.rawValue)"))
                     .subtitle3()
                     .foregroundStyle(.textPrimary)
             }
@@ -126,15 +135,76 @@ struct WalletSendView: View {
             AppButton(
                 text: "Send",
                 width: 100,
-                action: transfer
+                action: {
+                    if validateForm() {
+                        isConfirmationSheetPresented = true
+                    }
+                }
             )
             .controlSize(.large)
+            .disabled(isTransfering)
+            .dynamicSheet(isPresented: $isConfirmationSheetPresented, title: "Review Transaction") {
+                confirmationView
+            }
         }
         .padding(.top, 12)
         .padding(.bottom, 20)
         .padding(.horizontal, 24)
         .frame(maxWidth: .infinity)
         .background(.backgroundPure)
+    }
+    
+    var confirmationView: some View {
+        VStack(spacing: 24) {
+            VStack(spacing: 16) {
+                ConfirmationTextRow(
+                    title: String(localized: "Address"),
+                    value: RarimoUtils.formatAddress(address)
+                )
+                ConfirmationTextRow(
+                    title: String(localized: "Amount"),
+                    value: "\(RarimoUtils.formatBalance(amountToSend)) \(token.rawValue)"
+                )
+                ConfirmationTextRow(
+                    title: String(localized: "Fee"),
+                    value: "\(fee.formatted()) \(token.rawValue)"
+                )
+            }
+            VStack(spacing: 4) {
+                AppButton(
+                    text: isTransfering ? "Sending..." : "Confirm",
+                    action: transfer
+                )
+                .controlSize(.large)
+                .disabled(isTransfering)
+                AppButton(
+                    variant: .tertiary,
+                    text: "Cancel",
+                    action: { isConfirmationSheetPresented = false }
+                )
+                .controlSize(.large)
+            }
+        }
+        .padding(.top, 24)
+        .padding(.horizontal, 20)
+    }
+    
+    func validateForm() -> Bool {
+        // TODO: validate according to the token type
+        if !RarimoUtils.isValidAddress(address) {
+            addressErrorMessage = String(localized: "Invalid address")
+        }
+        
+        // TODO: calculate according to the token type
+        if userManager.balance < amountToSend {
+            amountErrorMessage = String(localized: "Insufficient balance")
+        }
+        
+        if amountToSend == 0 {
+            amountErrorMessage = String(localized: "Amount must be greater than 0")
+        }
+        
+        return addressErrorMessage.isEmpty && amountErrorMessage.isEmpty
     }
     
     func transfer() {
@@ -146,31 +216,12 @@ struct WalletSendView: View {
             }
             
             do {
-                // TODO: validate according to the token type
-                if !RarimoUtils.isValidAddress(address) {
-                    addressErrorMessage = String(localized: "Invalid address")
-                    return
-                }
-                
+                try await Task.sleep(nanoseconds: NSEC_PER_SEC * 3)
                 // TODO: calculate according to the token type
-                let amountToSend = (Double(amount) ?? 0) * Double(Rarimo.rarimoTokenMantis)
                 let amountToSendRaw = Int(amountToSend.rounded())
-                
-                if userManager.balance < amountToSend {
-                    amountErrorMessage = String(localized: "Insufficient balance")
-                    return
-                }
-                
-                if amountToSend == 0 {
-                    amountErrorMessage = String(localized: "Amount must be greater than 0")
-                    
-                    return
-                }
-                
                 let _ = try await userManager.sendTokens(address, amountToSendRaw.description)
                 
                 walletManager.transfer(Double(amount) ?? 0)
-                
                 try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
                 
                 onBack()
@@ -199,6 +250,20 @@ struct WalletSendView: View {
         if filtered.contains(",") {
             amount = filtered.replacingOccurrences(of: ",", with: ".")
         }
+    }
+}
+
+private struct ConfirmationTextRow: View {
+    var title: String
+    var value: String
+    
+    var body: some View {
+        HStack {
+            Text(title).body3()
+            Spacer()
+            Text(value).subtitle4()
+        }
+        .foregroundStyle(.textPrimary)
     }
 }
 
