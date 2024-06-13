@@ -3,17 +3,15 @@ import SwiftUI
 private let INVITE_REWARD = 3.0
 
 struct InviteFriendsView: View {
-    let activeCodes: [String]
-    let activatedCodes: [String]
-    let usedCodes: [String]
+    let balance: PointsBalance
     let onBack: () -> Void
 
     private var totalCodesCount: Int {
-        activeCodes.count + activatedCodes.count + usedCodes.count
+        balance.activeCodes!.count + balance.activatedCodes!.count + balance.usedCodes!.count
     }
 
     private var invitedCodesCount: Int {
-        totalCodesCount - activeCodes.count
+        totalCodesCount - balance.activeCodes!.count
     }
 
     var body: some View {
@@ -58,13 +56,13 @@ struct InviteFriendsView: View {
             .padding(.horizontal, 24)
             ScrollView {
                 VStack(spacing: 8) {
-                    ForEach(activeCodes, id: \.self) { code in
+                    ForEach(balance.activeCodes!, id: \.self) { code in
                         InviteCodeView(code: code, status: .active)
                     }
-                    ForEach(activatedCodes, id: \.self) { code in
+                    ForEach(balance.activatedCodes!, id: \.self) { code in
                         InviteCodeView(code: code, status: .activated)
                     }
-                    ForEach(usedCodes, id: \.self) { code in
+                    ForEach(balance.usedCodes!, id: \.self) { code in
                         InviteCodeView(code: code, status: .used)
                     }
                     Spacer()
@@ -160,9 +158,15 @@ private struct InviteCodeView: View {
 
 #Preview {
     InviteFriendsView(
-        activeCodes: ["zgsScguZ", "jerUsmac"],
-        activatedCodes: ["rCx18MZ4"],
-        usedCodes: ["73k3bdYaFWM", "9csIL7dW65m"],
+        balance: PointsBalance(
+            id: "42beAoalsOSLals3",
+            amount: 12,
+            rank: 16,
+            level: 2,
+            activeCodes: ["zgsScguZ", "jerUsmac"],
+            activatedCodes: ["rCx18MZ4"],
+            usedCodes: ["73k3bdYaFWM", "9csIL7dW65m"]
+        ),
         onBack: {}
     )
 }

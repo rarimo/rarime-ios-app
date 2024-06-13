@@ -2,8 +2,12 @@ import MarkdownUI
 import SwiftUI
 
 struct TaskEventView: View {
-    let event: TaskEvent
+    @EnvironmentObject var rewardsViewModel: RewardsViewModel
     let onBack: () -> Void
+
+    private var event: PointsEvent {
+        rewardsViewModel.selectedEvent!
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -16,7 +20,7 @@ struct TaskEventView: View {
                     // TODO: update content
                     item: URL(string: "https://rarime.com")!,
                     subject: Text("RariMe Event"),
-                    message: Text("RariMe Event: \(event.title)\n\nParticipate and get rewarded: https://rarime.com")
+                    message: Text("RariMe Event: \(event.meta.title)\n\nParticipate and get rewarded: https://rarime.com")
                 ) {
                     Image(Icons.share).iconMedium()
                 }
@@ -26,12 +30,12 @@ struct TaskEventView: View {
             VStack(spacing: 8) {
                 HStack(alignment: .top, spacing: 16) {
                     VStack(alignment: .leading, spacing: 16) {
-                        Text(event.title)
+                        Text(event.meta.title)
                             .subtitle2()
                             .foregroundStyle(.textPrimary)
                         HStack(spacing: 16) {
-                            RewardChip(reward: event.reward)
-                            if let endDate = event.endDate {
+                            RewardChip(reward: event.meta.reward)
+                            if let endDate = event.meta.expiresAt {
                                 Text("Exp: \(DateUtil.richDateFormatter.string(from: endDate))")
                                     .caption2()
                                     .foregroundStyle(.textSecondary)
@@ -39,7 +43,7 @@ struct TaskEventView: View {
                         }
                     }
                     Spacer()
-                    Image(event.image)
+                    Image(event.meta.logo)
                         .resizable()
                         .scaledToFill()
                         .frame(width: 64, height: 64)
@@ -48,16 +52,17 @@ struct TaskEventView: View {
                 .frame(maxWidth: .infinity)
                 HorizontalDivider().padding(.top, 16)
                 ScrollView {
-                    Markdown(event.description)
+                    Markdown(event.meta.description)
                         .body3()
                         .foregroundStyle(.textPrimary)
                         .padding(.top, 16)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 Spacer()
             }
             .padding(.top, 32)
             .padding(.horizontal, 20)
-            if let actionURL = event.actionURL {
+            if let actionURL = event.meta.actionURL {
                 VStack(spacing: 16) {
                     HorizontalDivider()
                     AppButton(
@@ -78,16 +83,19 @@ struct TaskEventView: View {
 }
 
 #Preview {
-    TaskEventView(
-        event: TaskEvent(
-            title: "Initial setup of identity credentials",
-            description: "### Description\n\nThis task is to setup your identity credentials. You will need to provide your personal information and verify your identity.\n\n### Requirements\n\n- Personal Information\n- Identity Verification\n\n### Reward\n\n5 points\n\n### End Date\n\n2021-10-31 23:59:59",
-            image: Images.rewardsTest1,
-            icon: Icons.airdrop,
-            endDate: Date(timeIntervalSinceNow: 200000),
-            reward: 5,
-            actionURL: "https://example.com"
-        ),
-        onBack: {}
-    )
+    TaskEventView(onBack: {})
+        .environmentObject(RewardsViewModel(
+            event: PointsEvent(
+                meta: PointsEventMeta(
+                    name: "initial_setup",
+                    title: "Initial setup of identity credentials",
+                    description: "### Description\n\nThis task is to setup your identity credentials. You will need to provide your personal information and verify your identity.\n\n### Requirements\n\n- Personal Information\n- Identity Verification\n\n### Reward\n\n5 points\n\n### End Date\n\n2021-10-31 23:59:59",
+                    shortDescription: "",
+                    reward: 5,
+                    expiresAt: Date(timeIntervalSinceNow: 200000),
+                    actionURL: "https://example.com",
+                    logo: Images.rewardsTest1
+                )
+            )
+        ))
 }

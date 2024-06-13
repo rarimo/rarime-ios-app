@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct ClaimRewardsView: View {
-    @EnvironmentObject private var userManager: UserManager
+    @EnvironmentObject var userManager: UserManager
 
+    let balance: PointsBalance
     let onBack: () -> Void
 
     @State private var amount = ""
@@ -52,7 +53,7 @@ struct ClaimRewardsView: View {
                     BalanceRow(
                         direction: String(localized: "From"),
                         label: String(localized: "Reserved"),
-                        balance: userManager.reservedBalance
+                        balance: balance.amount
                     )
                     HorizontalDivider().padding(.leading, 56)
                     BalanceRow(
@@ -110,6 +111,17 @@ private struct BalanceRow: View {
 }
 
 #Preview {
-    ClaimRewardsView(onBack: {})
-        .environmentObject(UserManager())
+    ClaimRewardsView(
+        balance: PointsBalance(
+            id: "42beAoalsOSLals3",
+            amount: 12,
+            rank: 16,
+            level: 2,
+            activeCodes: ["zgsScguZ", "jerUsmac"],
+            activatedCodes: ["rCx18MZ4"],
+            usedCodes: ["73k3bdYaFWM", "9csIL7dW65m"]
+        ),
+        onBack: {}
+    )
+    .environmentObject(UserManager())
 }

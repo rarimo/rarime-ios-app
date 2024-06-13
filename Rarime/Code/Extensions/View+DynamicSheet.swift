@@ -41,13 +41,6 @@ extension View {
         return sheet(isPresented: isPresented) {
             ZStack(alignment: .topTrailing) {
                 Color.backgroundPure.ignoresSafeArea(.container)
-                Button(action: { isPresented.wrappedValue = false }) {
-                    Image(Icons.close)
-                        .iconMedium()
-                        .foregroundColor(.textPrimary)
-                }
-                .padding(.top, 22)
-                .padding(.trailing, 20)
                 VStack(spacing: 0) {
                     if let title {
                         VStack(alignment: .leading, spacing: 20) {
@@ -67,6 +60,13 @@ extension View {
                 // Make sheet height dynamic
                 .fixedSize(horizontal: false, vertical: !fullScreen)
                 .modifier(DynamicSheetHeightModifier(fullScreen: fullScreen))
+                Button(action: { isPresented.wrappedValue = false }) {
+                    Image(Icons.close)
+                        .iconMedium()
+                        .foregroundColor(.textPrimary)
+                }
+                .padding(.top, 22)
+                .padding(.trailing, 20)
             }
         }
     }

@@ -18,6 +18,8 @@
 		5609B6D02C19939600CB6A1F /* LevelingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609B6CF2C19939600CB6A1F /* LevelingView.swift */; };
 		5609B6D22C19D8DF00CB6A1F /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609B6D12C19D8DF00CB6A1F /* LeaderboardView.swift */; };
 		5609B6D42C19F23800CB6A1F /* InviteFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609B6D32C19F23800CB6A1F /* InviteFriendsView.swift */; };
+		5609B6D62C19FFED00CB6A1F /* RewardsMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609B6D52C19FFED00CB6A1F /* RewardsMockData.swift */; };
+		5609B6D92C1A15F800CB6A1F /* RewardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609B6D82C1A15F800CB6A1F /* RewardsViewModel.swift */; };
 		560F0C1D2BD0234300067054 /* QRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 560F0C1C2BD0234300067054 /* QRCode */; };
 		560F0C1F2BD027EA00067054 /* WalletReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C1E2BD027EA00067054 /* WalletReceiveView.swift */; };
 		560F0C212BD027FB00067054 /* WalletRouteLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C202BD027FB00067054 /* WalletRouteLayout.swift */; };
@@ -200,6 +202,8 @@
 		5609B6CF2C19939600CB6A1F /* LevelingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelingView.swift; sourceTree = "<group>"; };
 		5609B6D12C19D8DF00CB6A1F /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		5609B6D32C19F23800CB6A1F /* InviteFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsView.swift; sourceTree = "<group>"; };
+		5609B6D52C19FFED00CB6A1F /* RewardsMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsMockData.swift; sourceTree = "<group>"; };
+		5609B6D82C1A15F800CB6A1F /* RewardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsViewModel.swift; sourceTree = "<group>"; };
 		560F0C1E2BD027EA00067054 /* WalletReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletReceiveView.swift; sourceTree = "<group>"; };
 		560F0C202BD027FB00067054 /* WalletRouteLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRouteLayout.swift; sourceTree = "<group>"; };
 		560F0C222BD02DFD00067054 /* WalletSendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSendView.swift; sourceTree = "<group>"; };
@@ -401,6 +405,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5609B6D72C1A15ED00CB6A1F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5609B6D82C1A15F800CB6A1F /* RewardsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		560F0C2D2BD135CA00067054 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,7 +465,9 @@
 		563529DC2BB0717D0027C910 /* Rewards */ = {
 			isa = PBXGroup;
 			children = (
+				5609B6D72C1A15ED00CB6A1F /* ViewModels */,
 				563529DD2BB071840027C910 /* Views */,
+				5609B6D52C19FFED00CB6A1F /* RewardsMockData.swift */,
 			);
 			path = Rewards;
 			sourceTree = "<group>";
@@ -1079,6 +1093,7 @@
 				56AC03402BB06A2D00A34A00 /* Image+Icon.swift in Sources */,
 				56A6C75F2BBC309A00992562 /* NFCScanner.swift in Sources */,
 				CE9E82B82BA881F400AAF885 /* AppView.swift in Sources */,
+				5609B6D92C1A15F800CB6A1F /* RewardsViewModel.swift in Sources */,
 				561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */,
 				56DAA30B2BB8B977002CF710 /* View+DynamicSheet.swift in Sources */,
 				CEB91BBE2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift in Sources */,
@@ -1161,6 +1176,7 @@
 				5655E41F2BD2C39B00B86C5C /* WalletManager.swift in Sources */,
 				56E2D9202BCED460006E725D /* AppCheckbox.swift in Sources */,
 				CE72101E2BD7BD9D0043DB7F /* Data+Utf8.swift in Sources */,
+				5609B6D62C19FFED00CB6A1F /* RewardsMockData.swift in Sources */,
 				5655E4232BD2C3AC00B86C5C /* SettingsManager.swift in Sources */,
 				CEDC4D812BE9475400459D4E /* Certificates.swift in Sources */,
 				56E6AD472BD272FB00E4DDC1 /* ExportKeysView.swift in Sources */,

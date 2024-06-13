@@ -1,86 +1,12 @@
 import SwiftUI
 
-//  TODO: move to model
-private struct LevelReward {
-    let title: String
-    let description: String
-    let icon: String
-}
-
-private struct PointsLevel {
-    let level: Int
-    let description: String
-    let minPoints: Int
-    let maxPoints: Int
-    let rewards: [LevelReward]
-}
-
-private let pointsLevels: [PointsLevel] = [
-    PointsLevel(
-        level: 1,
-        description: "Reserve tokens to unlock new levels and rewards",
-        minPoints: 0,
-        maxPoints: 10,
-        rewards: [
-            LevelReward(
-                title: "5 referrals",
-                description: "Invite more people, earn more rewards",
-                icon: Icons.users
-            ),
-            LevelReward(
-                title: "Rewards campaigns",
-                description: "Only level 1 specials",
-                icon: Icons.airdrop
-            )
-        ]
-    ),
-    PointsLevel(
-        level: 2,
-        description: "Reserve tokens to unlock new levels and rewards",
-        minPoints: 10,
-        maxPoints: 30,
-        rewards: [
-            LevelReward(
-                title: "10 extra referrals",
-                description: "Invite more people, earn more rewards",
-                icon: Icons.users
-            ),
-            LevelReward(
-                title: "Exclusive campaigns",
-                description: "Only level 2 specials",
-                icon: Icons.airdrop
-            )
-        ]
-    ),
-    PointsLevel(
-        level: 3,
-        description: "Reserve tokens to unlock new levels and rewards",
-        minPoints: 30,
-        maxPoints: 100,
-        rewards: [
-            LevelReward(
-                title: "20 extra referrals",
-                description: "Invite more people, earn more rewards",
-                icon: Icons.users
-            ),
-            LevelReward(
-                title: "Exclusive campaigns",
-                description: "Only level 3 specials",
-                icon: Icons.airdrop
-            )
-        ]
-    )
-]
-
 struct LevelingView: View {
-    let userLevel: Int
-    let reservedBalance: Double
+    let balance: PointsBalance
     @State private var selectedLevelIndex: Int
 
-    init(userLevel: Int, reservedBalance: Double) {
-        self.userLevel = userLevel
-        self.reservedBalance = reservedBalance
-        self._selectedLevelIndex = State(initialValue: userLevel - 1)
+    init(balance: PointsBalance) {
+        self.balance = balance
+        self._selectedLevelIndex = State(initialValue: balance.level - 1)
     }
 
     private var selectedLevel: PointsLevel {
@@ -92,13 +18,14 @@ struct LevelingView: View {
             Text("Leveling")
                 .subtitle4()
                 .foregroundStyle(.textPrimary)
-            CurrentLevelStatus(userLevel: userLevel)
+            CurrentLevelStatus(userLevel: balance.level)
             LevelsSlider(
                 selectedIndex: $selectedLevelIndex,
-                reservedBalance: reservedBalance
+                reservedBalance: balance.amount
             )
             LevelRewards(rewards: selectedLevel.rewards)
         }
+        .padding(.top, 24)
         .background(.backgroundPrimary)
     }
 }
@@ -169,6 +96,9 @@ private struct LevelsSlider: View {
                 }
             }
         }
+        .onChange(of: selectedIndex) { _ in
+            FeedbackGenerator.shared.impact(.light)
+        }
     }
 }
 
@@ -177,7 +107,7 @@ private struct LevelItem: View {
     let reservedBalance: Double
 
     var userBalance: Double {
-        min(reservedBalance, Double(level.maxPoints))
+        min(reservedBalance, level.maxBalance)
     }
 
     var body: some View {
@@ -199,11 +129,11 @@ private struct LevelItem: View {
                     Text(userBalance.formatted())
                         .subtitle3()
                         .foregroundStyle(.textPrimary)
-                    Text("/\(level.maxPoints)")
+                    Text("/\(level.maxBalance.formatted())")
                         .body4()
                         .foregroundStyle(.textSecondary)
                 }
-                LinearProgressView(progress: userBalance / Double(level.maxPoints))
+                LinearProgressView(progress: userBalance / Double(level.maxBalance))
             }
         }
         .padding(20)
@@ -255,8 +185,5 @@ private struct LevelRewards: View {
 }
 
 #Preview {
-    LevelingView(
-        userLevel: 2,
-        reservedBalance: 23.0
-    )
+    LevelingView(balance: PointsBalance(id: "42beAoalsOSLals3", amount: 12, rank: 16, level: 2))
 }

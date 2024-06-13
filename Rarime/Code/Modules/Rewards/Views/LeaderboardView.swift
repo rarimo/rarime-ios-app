@@ -1,12 +1,5 @@
 import SwiftUI
 
-// TODO: move to model
-struct PointsBalance {
-    var id: String
-    var amount: Double
-    var rank: Int
-}
-
 // TODO: move to utils
 private func formatBalanceId(_ id: String) -> String {
     let prefix = id.prefix(4)
@@ -18,25 +11,22 @@ struct LeaderboardView: View {
     let balances: [PointsBalance]
     let myBalance: PointsBalance
 
-    private var otherBalances: [PointsBalance] {
-        Array(balances.dropFirst(3))
-    }
-
     var body: some View {
         VStack(spacing: 0) {
             Text("Leaderboard")
                 .subtitle4()
                 .foregroundStyle(.textPrimary)
             HStack(alignment: .bottom, spacing: 12) {
-                TopLeaderView(balance: balances[1])
-                TopLeaderView(balance: balances[0])
-                TopLeaderView(balance: balances[2])
+                TopLeaderView(balance: balances[1], myBalance: myBalance)
+                TopLeaderView(balance: balances[0], myBalance: myBalance)
+                TopLeaderView(balance: balances[2], myBalance: myBalance)
             }
             .frame(maxWidth: .infinity)
             .padding(.top, 64)
             .padding(.horizontal, 24)
-            BalancesTable(balances: otherBalances, myBalance: myBalance)
+            BalancesTable(balances: balances, myBalance: myBalance)
         }
+        .padding(.top, 24)
         .background(.backgroundPrimary)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -44,6 +34,7 @@ struct LeaderboardView: View {
 
 private struct TopLeaderView: View {
     let balance: PointsBalance
+    let myBalance: PointsBalance
 
     var height: CGFloat {
         switch balance.rank {
@@ -55,11 +46,20 @@ private struct TopLeaderView: View {
 
     var body: some View {
         ZStack(alignment: .top) {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(spacing: 4) {
                 Spacer()
-                Text(formatBalanceId(balance.id))
-                    .caption3()
-                    .foregroundStyle(.textSecondary)
+                if balance.id == myBalance.id {
+                    Text("YOU")
+                        .overline3()
+                        .foregroundStyle(.textSecondary)
+                        .padding(.vertical, 2)
+                        .padding(.horizontal, 6)
+                        .background(.componentHovered, in: RoundedRectangle(cornerRadius: 100))
+                } else {
+                    Text(formatBalanceId(balance.id))
+                        .caption3()
+                        .foregroundStyle(.textSecondary)
+                }
                 HStack(spacing: 4) {
                     Text(balance.amount.formatted()).subtitle5()
                     Image(Icons.rarimo).iconSmall()
@@ -92,8 +92,24 @@ private struct BalancesTable: View {
     let balances: [PointsBalance]
     let myBalance: PointsBalance
 
+    private var otherBalances: [PointsBalance] {
+        Array(balances.dropFirst(3))
+    }
+
+    private var hasMyBalance: Bool {
+        balances.first(where: { $0.id == myBalance.id }) != nil
+    }
+
+    private func shouldShowDivider(at index: Int) -> Bool {
+        let isLast = index == otherBalances.count - 1
+        let isBeforeMyBalance = otherBalances[index].id == myBalance.id
+        let isAfterMyBalance = !isLast && otherBalances[index + 1].id == myBalance.id
+
+        return !isLast && !isBeforeMyBalance && !isAfterMyBalance
+    }
+
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 0) {
             HStack(spacing: 0) {
                 Text("PLACE")
                     .overline3()
@@ -107,24 +123,37 @@ private struct BalancesTable: View {
                     .overline3()
                     .foregroundStyle(.textSecondary)
             }
+            .padding(.horizontal, 16)
             HorizontalDivider()
+                .padding(.top, 16)
+                .padding(.horizontal, 16)
             ScrollView {
-                VStack(spacing: 16) {
-                    ForEach(balances, id: \.id) { balance in
-                        BalanceItem(balance: balance, isMyBalance: balance.id == myBalance.id)
-                        HorizontalDivider()
+                VStack(spacing: 0) {
+                    ForEach(otherBalances.indices, id: \.self) { i in
+                        BalanceItem(
+                            balance: otherBalances[i],
+                            isMyBalance: otherBalances[i].id == myBalance.id,
+                            highlighted: otherBalances[i].id == myBalance.id
+                        )
+                        if shouldShowDivider(at: i) {
+                            HorizontalDivider()
+                                .padding(.horizontal, 16)
+                        }
                     }
                 }
                 Spacer()
             }
-            VStack(spacing: 12) {
-                HorizontalDivider()
-                    .padding(.horizontal, -20)
-                BalanceItem(balance: myBalance, isMyBalance: true)
+            if !hasMyBalance {
+                VStack(spacing: 0) {
+                    HorizontalDivider()
+                        .padding(.horizontal, -20)
+                    BalanceItem(balance: myBalance, isMyBalance: true)
+                }
+                .padding(.bottom, 8)
             }
-            .padding(.bottom, 8)
         }
-        .padding(20)
+        .padding(.vertical, 20)
+        .padding(.horizontal, 4)
         .background(.backgroundPure, in: RoundedRectangle(cornerRadius: 24))
         .ignoresSafeArea()
     }
@@ -133,6 +162,13 @@ private struct BalancesTable: View {
 private struct BalanceItem: View {
     let balance: PointsBalance
     let isMyBalance: Bool
+    let highlighted: Bool
+
+    init(balance: PointsBalance, isMyBalance: Bool, highlighted: Bool = false) {
+        self.balance = balance
+        self.isMyBalance = isMyBalance
+        self.highlighted = highlighted
+    }
 
     var body: some View {
         HStack(spacing: 32) {
@@ -164,33 +200,35 @@ private struct BalanceItem: View {
             .frame(width: 72)
             .background(.componentPrimary, in: RoundedRectangle(cornerRadius: 48))
         }
+        .padding(16)
+        .background(highlighted ? .backgroundPrimary : .clear, in: RoundedRectangle(cornerRadius: 16))
     }
 }
 
 #Preview {
     LeaderboardView(
         balances: [
-            PointsBalance(id: "mhQeweiAJdiligRt", amount: 8520, rank: 1),
-            PointsBalance(id: "12beAoalsOSLals1", amount: 7520, rank: 2),
-            PointsBalance(id: "fkdbeweOJdilwq1b", amount: 6520, rank: 3),
-            PointsBalance(id: "12beAoalsOSLals1", amount: 5520, rank: 4),
-            PointsBalance(id: "12beAoalsOSLals2", amount: 4861, rank: 5),
-            PointsBalance(id: "12beAoalsOSLals3", amount: 4520, rank: 6),
-            PointsBalance(id: "12beAoalsOSLals4", amount: 3587, rank: 7),
-            PointsBalance(id: "12beAoalsOSLals5", amount: 3520, rank: 8),
-            PointsBalance(id: "12beAoalsOSLals6", amount: 3320, rank: 9),
-            PointsBalance(id: "12beAoalsOSLals7", amount: 3120, rank: 10),
-            PointsBalance(id: "mhQeweiAJdiligRw", amount: 2520, rank: 11),
-            PointsBalance(id: "12beAoalsOSLalsw", amount: 1820, rank: 12),
-            PointsBalance(id: "fkdbeweOJdilwq1w", amount: 920, rank: 13),
-            PointsBalance(id: "22beAoalsOSLals1", amount: 820, rank: 14),
-            PointsBalance(id: "32beAoalsOSLals2", amount: 761, rank: 15),
-            PointsBalance(id: "42beAoalsOSLals3", amount: 720, rank: 16),
-            PointsBalance(id: "52beAoalsOSLals4", amount: 687, rank: 17),
-            PointsBalance(id: "62beAoalsOSLals5", amount: 620, rank: 18),
-            PointsBalance(id: "72beAoalsOSLals6", amount: 520, rank: 19),
-            PointsBalance(id: "82beAoalsOSLals7", amount: 420, rank: 20)
+            PointsBalance(id: "mhQeweiAJdiligRt", amount: 85, rank: 1, level: 3),
+            PointsBalance(id: "12beAoalsOSLals0", amount: 75, rank: 2, level: 3),
+            PointsBalance(id: "fkdbeweOJdilwq1b", amount: 65, rank: 3, level: 3),
+            PointsBalance(id: "12beAoalsOSLals1", amount: 55, rank: 4, level: 3),
+            PointsBalance(id: "12beAoalsOSLals2", amount: 48, rank: 5, level: 3),
+            PointsBalance(id: "12beAoalsOSLals3", amount: 45, rank: 6, level: 3),
+            PointsBalance(id: "12beAoalsOSLals4", amount: 35, rank: 7, level: 3),
+            PointsBalance(id: "12beAoalsOSLals5", amount: 35, rank: 8, level: 3),
+            PointsBalance(id: "12beAoalsOSLals6", amount: 33, rank: 9, level: 3),
+            PointsBalance(id: "12beAoalsOSLals7", amount: 31, rank: 10, level: 3),
+            PointsBalance(id: "mhQeweiAJdiligRw", amount: 25, rank: 11, level: 2),
+            PointsBalance(id: "12beAoalsOSLalsw", amount: 18, rank: 12, level: 2),
+            PointsBalance(id: "fkdbeweOJdilwq1w", amount: 15, rank: 13, level: 2),
+            PointsBalance(id: "22beAoalsOSLals1", amount: 14, rank: 14, level: 2),
+            PointsBalance(id: "32beAoalsOSLals2", amount: 13, rank: 15, level: 2),
+            PointsBalance(id: "42beAoalsOSLals3", amount: 12, rank: 16, level: 2),
+            PointsBalance(id: "52beAoalsOSLals4", amount: 6, rank: 17, level: 1),
+            PointsBalance(id: "62beAoalsOSLals5", amount: 6, rank: 18, level: 1),
+            PointsBalance(id: "72beAoalsOSLals6", amount: 5, rank: 19, level: 1),
+            PointsBalance(id: "82beAoalsOSLals7", amount: 4, rank: 20, level: 1)
         ],
-        myBalance: PointsBalance(id: "42beAoalsOSLals3", amount: 4520, rank: 16)
+        myBalance: PointsBalance(id: "82beAoalsOSLalsk", amount: 1, rank: 92, level: 1)
     )
 }
