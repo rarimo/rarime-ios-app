@@ -11,6 +11,15 @@
 		56062B9C2C12032700C9BF9B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9B2C12032700C9BF9B /* Constants.swift */; };
 		56062B9E2C12096E00C9BF9B /* UnsupportedCountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9D2C12096E00C9BF9B /* UnsupportedCountryView.swift */; };
 		56062BA02C120B3400C9BF9B /* WaitlistPassportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9F2C120B3400C9BF9B /* WaitlistPassportView.swift */; };
+		5609B6C82C188C7500CB6A1F /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5609B6C72C188C7500CB6A1F /* MarkdownUI */; };
+		5609B6CA2C18950700CB6A1F /* ClaimRewardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609B6C92C18950700CB6A1F /* ClaimRewardsView.swift */; };
+		5609B6CC2C19922400CB6A1F /* LinearProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609B6CB2C19922400CB6A1F /* LinearProgressView.swift */; };
+		5609B6CE2C19926C00CB6A1F /* RewardChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609B6CD2C19926C00CB6A1F /* RewardChip.swift */; };
+		5609B6D02C19939600CB6A1F /* LevelingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609B6CF2C19939600CB6A1F /* LevelingView.swift */; };
+		5609B6D22C19D8DF00CB6A1F /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609B6D12C19D8DF00CB6A1F /* LeaderboardView.swift */; };
+		5609B6D42C19F23800CB6A1F /* InviteFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609B6D32C19F23800CB6A1F /* InviteFriendsView.swift */; };
+		5609B6D62C19FFED00CB6A1F /* RewardsMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609B6D52C19FFED00CB6A1F /* RewardsMockData.swift */; };
+		5609B6D92C1A15F800CB6A1F /* RewardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609B6D82C1A15F800CB6A1F /* RewardsViewModel.swift */; };
 		560F0C1D2BD0234300067054 /* QRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 560F0C1C2BD0234300067054 /* QRCode */; };
 		560F0C1F2BD027EA00067054 /* WalletReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C1E2BD027EA00067054 /* WalletReceiveView.swift */; };
 		560F0C212BD027FB00067054 /* WalletRouteLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C202BD027FB00067054 /* WalletRouteLayout.swift */; };
@@ -61,11 +70,13 @@
 		567AEC9B2BBD9B8100A20E83 /* Passport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567AEC9A2BBD9B8100A20E83 /* Passport.swift */; };
 		568350AC2BEA304B00B70E3D /* PassportIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568350AB2BEA304B00B70E3D /* PassportIdentifier.swift */; };
 		568820FA2C172C75001B729F /* ReserveTokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568820F92C172C75001B729F /* ReserveTokensView.swift */; };
+		568820FC2C1866FA001B729F /* TaskEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568820FB2C1866FA001B729F /* TaskEventView.swift */; };
+		568820FE2C18797E001B729F /* IncognitoDark.json in Resources */ = {isa = PBXBuildFile; fileRef = 568820FD2C18797E001B729F /* IncognitoDark.json */; };
 		5689C8332BE9008900A4B767 /* IntroWelcome.json in Resources */ = {isa = PBXBuildFile; fileRef = 5689C8322BE9008900A4B767 /* IntroWelcome.json */; };
 		5689C8352BE900B300A4B767 /* IntroProofs.json in Resources */ = {isa = PBXBuildFile; fileRef = 5689C8342BE900B300A4B767 /* IntroProofs.json */; };
 		5689C8372BE900D400A4B767 /* IntroIncognito.json in Resources */ = {isa = PBXBuildFile; fileRef = 5689C8362BE900D400A4B767 /* IntroIncognito.json */; };
 		5689C8392BE900FA00A4B767 /* IntroRewards.json in Resources */ = {isa = PBXBuildFile; fileRef = 5689C8382BE900FA00A4B767 /* IntroRewards.json */; };
-		5689C83B2BE90AD200A4B767 /* Incognito.json in Resources */ = {isa = PBXBuildFile; fileRef = 5689C83A2BE90AD200A4B767 /* Incognito.json */; };
+		5689C83B2BE90AD200A4B767 /* IncognitoLight.json in Resources */ = {isa = PBXBuildFile; fileRef = 5689C83A2BE90AD200A4B767 /* IncognitoLight.json */; };
 		568B4FCC2BB6C164001C9C74 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FCB2BB6C164001C9C74 /* IntroView.swift */; };
 		568B4FCE2BB6C274001C9C74 /* IntroStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FCD2BB6C274001C9C74 /* IntroStepView.swift */; };
 		568B4FD12BB6D88F001C9C74 /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FD02BB6D88F001C9C74 /* Divider.swift */; };
@@ -185,6 +196,14 @@
 		56062B9B2C12032700C9BF9B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		56062B9D2C12096E00C9BF9B /* UnsupportedCountryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsupportedCountryView.swift; sourceTree = "<group>"; };
 		56062B9F2C120B3400C9BF9B /* WaitlistPassportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitlistPassportView.swift; sourceTree = "<group>"; };
+		5609B6C92C18950700CB6A1F /* ClaimRewardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimRewardsView.swift; sourceTree = "<group>"; };
+		5609B6CB2C19922400CB6A1F /* LinearProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressView.swift; sourceTree = "<group>"; };
+		5609B6CD2C19926C00CB6A1F /* RewardChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardChip.swift; sourceTree = "<group>"; };
+		5609B6CF2C19939600CB6A1F /* LevelingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelingView.swift; sourceTree = "<group>"; };
+		5609B6D12C19D8DF00CB6A1F /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
+		5609B6D32C19F23800CB6A1F /* InviteFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsView.swift; sourceTree = "<group>"; };
+		5609B6D52C19FFED00CB6A1F /* RewardsMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsMockData.swift; sourceTree = "<group>"; };
+		5609B6D82C1A15F800CB6A1F /* RewardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsViewModel.swift; sourceTree = "<group>"; };
 		560F0C1E2BD027EA00067054 /* WalletReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletReceiveView.swift; sourceTree = "<group>"; };
 		560F0C202BD027FB00067054 /* WalletRouteLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRouteLayout.swift; sourceTree = "<group>"; };
 		560F0C222BD02DFD00067054 /* WalletSendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSendView.swift; sourceTree = "<group>"; };
@@ -232,11 +251,13 @@
 		567AEC9A2BBD9B8100A20E83 /* Passport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passport.swift; sourceTree = "<group>"; };
 		568350AB2BEA304B00B70E3D /* PassportIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportIdentifier.swift; sourceTree = "<group>"; };
 		568820F92C172C75001B729F /* ReserveTokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTokensView.swift; sourceTree = "<group>"; };
+		568820FB2C1866FA001B729F /* TaskEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEventView.swift; sourceTree = "<group>"; };
+		568820FD2C18797E001B729F /* IncognitoDark.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IncognitoDark.json; sourceTree = "<group>"; };
 		5689C8322BE9008900A4B767 /* IntroWelcome.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IntroWelcome.json; sourceTree = "<group>"; };
 		5689C8342BE900B300A4B767 /* IntroProofs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IntroProofs.json; sourceTree = "<group>"; };
 		5689C8362BE900D400A4B767 /* IntroIncognito.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IntroIncognito.json; sourceTree = "<group>"; };
 		5689C8382BE900FA00A4B767 /* IntroRewards.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IntroRewards.json; sourceTree = "<group>"; };
-		5689C83A2BE90AD200A4B767 /* Incognito.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Incognito.json; sourceTree = "<group>"; };
+		5689C83A2BE90AD200A4B767 /* IncognitoLight.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IncognitoLight.json; sourceTree = "<group>"; };
 		568B4FCB2BB6C164001C9C74 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		568B4FCD2BB6C274001C9C74 /* IntroStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroStepView.swift; sourceTree = "<group>"; };
 		568B4FD02BB6D88F001C9C74 /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
@@ -372,6 +393,7 @@
 				CE68BE472BD9B6EA00D92EBB /* Web3ContractABI in Frameworks */,
 				CEC562032BD923B4002D4954 /* libfr.a in Frameworks */,
 				CEC562042BD923B4002D4954 /* librapidsnark.a in Frameworks */,
+				5609B6C82C188C7500CB6A1F /* MarkdownUI in Frameworks */,
 				CE7210312BD807140043DB7F /* ZipArchive in Frameworks */,
 				CE7130882BEE5414003C63DA /* libwitnesscalc_registerIdentityUniversal.a in Frameworks */,
 				560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */,
@@ -383,6 +405,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5609B6D72C1A15ED00CB6A1F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5609B6D82C1A15F800CB6A1F /* RewardsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		560F0C2D2BD135CA00067054 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -435,7 +465,9 @@
 		563529DC2BB0717D0027C910 /* Rewards */ = {
 			isa = PBXGroup;
 			children = (
+				5609B6D72C1A15ED00CB6A1F /* ViewModels */,
 				563529DD2BB071840027C910 /* Views */,
+				5609B6D52C19FFED00CB6A1F /* RewardsMockData.swift */,
 			);
 			path = Rewards;
 			sourceTree = "<group>";
@@ -444,6 +476,12 @@
 			isa = PBXGroup;
 			children = (
 				563529E42BB072060027C910 /* RewardsView.swift */,
+				5609B6CF2C19939600CB6A1F /* LevelingView.swift */,
+				568820FB2C1866FA001B729F /* TaskEventView.swift */,
+				5609B6D32C19F23800CB6A1F /* InviteFriendsView.swift */,
+				5609B6C92C18950700CB6A1F /* ClaimRewardsView.swift */,
+				5609B6D12C19D8DF00CB6A1F /* LeaderboardView.swift */,
+				5609B6CD2C19926C00CB6A1F /* RewardChip.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -631,7 +669,8 @@
 				5689C8362BE900D400A4B767 /* IntroIncognito.json */,
 				5689C8382BE900FA00A4B767 /* IntroRewards.json */,
 				5689C8342BE900B300A4B767 /* IntroProofs.json */,
-				5689C83A2BE90AD200A4B767 /* Incognito.json */,
+				5689C83A2BE90AD200A4B767 /* IncognitoLight.json */,
+				568820FD2C18797E001B729F /* IncognitoDark.json */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -710,6 +749,7 @@
 				56933E002BBBFDD90068C894 /* CirclesLoader.swift */,
 				568B4FD02BB6D88F001C9C74 /* Divider.swift */,
 				56DAA3042BB72E35002CF710 /* InfoAlert.swift */,
+				5609B6CB2C19922400CB6A1F /* LinearProgressView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -963,6 +1003,7 @@
 				CE68BE462BD9B6EA00D92EBB /* Web3ContractABI */,
 				CE68BE482BD9B6EA00D92EBB /* Web3PromiseKit */,
 				56E7AD102BDBA81000D3A258 /* PullToRefreshSwiftUI */,
+				5609B6C72C188C7500CB6A1F /* MarkdownUI */,
 			);
 			productName = Rarime;
 			productReference = CE9E82B22BA881F400AAF885 /* Rarime.app */;
@@ -1004,6 +1045,7 @@
 				CE72102F2BD807140043DB7F /* XCRemoteSwiftPackageReference "ZipArchive" */,
 				CE68BE432BD9B6EA00D92EBB /* XCRemoteSwiftPackageReference "Web3.swift" */,
 				56E7AD0F2BDBA81000D3A258 /* XCRemoteSwiftPackageReference "PullToRefreshSwiftUI" */,
+				5609B6C62C188C7500CB6A1F /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 			);
 			productRefGroup = CE9E82B32BA881F400AAF885 /* Products */;
 			projectDirPath = "";
@@ -1019,13 +1061,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5689C83B2BE90AD200A4B767 /* Incognito.json in Resources */,
+				5689C83B2BE90AD200A4B767 /* IncognitoLight.json in Resources */,
 				CE9E82BA2BA881F500AAF885 /* Assets.xcassets in Resources */,
 				5689C8392BE900FA00A4B767 /* IntroRewards.json in Resources */,
 				5689C8372BE900D400A4B767 /* IntroIncognito.json in Resources */,
 				561C3C3E2BADF0AA00FBB3B9 /* Inter-Regular.ttf in Resources */,
 				568B4FE02BB70852001C9C74 /* Localizable.xcstrings in Resources */,
 				561C3C412BADF0AA00FBB3B9 /* Inter-Medium.ttf in Resources */,
+				568820FE2C18797E001B729F /* IncognitoDark.json in Resources */,
 				5689C8332BE9008900A4B767 /* IntroWelcome.json in Resources */,
 				561C3C3F2BADF0AA00FBB3B9 /* Inter-Bold.ttf in Resources */,
 				561C3C402BADF0AA00FBB3B9 /* Inter-SemiBold.ttf in Resources */,
@@ -1050,9 +1093,11 @@
 				56AC03402BB06A2D00A34A00 /* Image+Icon.swift in Sources */,
 				56A6C75F2BBC309A00992562 /* NFCScanner.swift in Sources */,
 				CE9E82B82BA881F400AAF885 /* AppView.swift in Sources */,
+				5609B6D92C1A15F800CB6A1F /* RewardsViewModel.swift in Sources */,
 				561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */,
 				56DAA30B2BB8B977002CF710 /* View+DynamicSheet.swift in Sources */,
 				CEB91BBE2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift in Sources */,
+				5609B6CC2C19922400CB6A1F /* LinearProgressView.swift in Sources */,
 				564169602BE273260057AC03 /* PassportCardLook.swift in Sources */,
 				56933DFF2BBBFDA30068C894 /* ProcessingStatus.swift in Sources */,
 				5655E4352BD5173200B86C5C /* AppView+ViewModel.swift in Sources */,
@@ -1093,6 +1138,7 @@
 				56DAA3052BB72E35002CF710 /* InfoAlert.swift in Sources */,
 				563529E52BB072060027C910 /* RewardsView.swift in Sources */,
 				CE19CB472BE39DA400B26DF7 /* RarimoUtils.swift in Sources */,
+				5609B6D22C19D8DF00CB6A1F /* LeaderboardView.swift in Sources */,
 				CE68BE422BD9B6A200D92EBB /* RegistrationContract.swift in Sources */,
 				56933E012BBBFDD90068C894 /* CirclesLoader.swift in Sources */,
 				CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */,
@@ -1130,6 +1176,7 @@
 				5655E41F2BD2C39B00B86C5C /* WalletManager.swift in Sources */,
 				56E2D9202BCED460006E725D /* AppCheckbox.swift in Sources */,
 				CE72101E2BD7BD9D0043DB7F /* Data+Utf8.swift in Sources */,
+				5609B6D62C19FFED00CB6A1F /* RewardsMockData.swift in Sources */,
 				5655E4232BD2C3AC00B86C5C /* SettingsManager.swift in Sources */,
 				CEDC4D812BE9475400459D4E /* Certificates.swift in Sources */,
 				56E6AD472BD272FB00E4DDC1 /* ExportKeysView.swift in Sources */,
@@ -1137,8 +1184,10 @@
 				5655E42E2BD2C94F00B86C5C /* AppUserDefaults.swift in Sources */,
 				CE68BE4B2BD9B75100D92EBB /* ContractABI.swift in Sources */,
 				56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */,
+				5609B6D02C19939600CB6A1F /* LevelingView.swift in Sources */,
 				CEF723142BF4BB9000E79198 /* Errors.swift in Sources */,
 				56474AD62BB9860E0017AA25 /* FaceIdAuth.swift in Sources */,
+				5609B6D42C19F23800CB6A1F /* InviteFriendsView.swift in Sources */,
 				CEDC4D7F2BE9267300459D4E /* PoseidonSMTContract.swift in Sources */,
 				CEF2513A2BD6E22700050507 /* User.swift in Sources */,
 				CE0881A12BF773CC00B31735 /* AlertManager.swift in Sources */,
@@ -1154,8 +1203,10 @@
 				5655E4282BD2C3FD00B86C5C /* Transaction.swift in Sources */,
 				56933DEF2BBABD100068C894 /* ScanPassportView.swift in Sources */,
 				56E6AD4F2BD2756200E4DDC1 /* SafariWebView.swift in Sources */,
+				568820FC2C1866FA001B729F /* TaskEventView.swift in Sources */,
 				567AEC9B2BBD9B8100A20E83 /* Passport.swift in Sources */,
 				5659151F2BE92B1F0050795A /* AppIconManager.swift in Sources */,
+				5609B6CE2C19926C00CB6A1F /* RewardChip.swift in Sources */,
 				56933E032BBBFDFE0068C894 /* ProcessingChipView.swift in Sources */,
 				CEF251382BD6E17800050507 /* UserManager.swift in Sources */,
 				5655E4252BD2C3B500B86C5C /* PassportManager.swift in Sources */,
@@ -1171,6 +1222,7 @@
 				56933DF32BBAC2940068C894 /* ScanPassportMRZView.swift in Sources */,
 				56A6C75C2BBC2CD500992562 /* PassportUtils.swift in Sources */,
 				563529F62BB077AB0027C910 /* CardContainer.swift in Sources */,
+				5609B6CA2C18950700CB6A1F /* ClaimRewardsView.swift in Sources */,
 				560F0C252BD036F900067054 /* AppTextField.swift in Sources */,
 				56933E0C2BBC09D20068C894 /* MRZViewModel.swift in Sources */,
 				563529E72BB072870027C910 /* WalletView.swift in Sources */,
@@ -1666,6 +1718,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5609B6C62C188C7500CB6A1F /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:gonzalezreal/swift-markdown-ui.git";
+			requirement = {
+				kind = exactVersion;
+				version = 2.3.0;
+			};
+		};
 		560F0C282BD114EE00067054 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/twostraws/CodeScanner";
@@ -1749,6 +1809,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5609B6C72C188C7500CB6A1F /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5609B6C62C188C7500CB6A1F /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
+		};
 		560F0C1C2BD0234300067054 /* QRCode */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 56E2D92F2BD01C77006E725D /* XCRemoteSwiftPackageReference "qrcode" */;

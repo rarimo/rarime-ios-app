@@ -21,7 +21,7 @@ enum IntroStep: Int, CaseIterable {
         }
     }
 
-    var animation: String {
+    var animation: ThemedAnimation {
         switch self {
         case .welcome: return Animations.introWelcome
         case .incognito: return Animations.introIncognito
