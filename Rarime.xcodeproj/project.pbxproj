@@ -139,7 +139,6 @@
 		CE31E54A2C11FE150039CAA5 /* ImportIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31E5492C11FE150039CAA5 /* ImportIdentityView.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
 		CE32CF522BAC981300E507B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE32CF512BAC981300E507B6 /* Lottie */; };
-		CE41C49E2C0777B70046AC33 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE41C49D2C0777B70046AC33 /* Identity.xcframework */; };
 		CE68BE3D2BD9B23D00D92EBB /* ZkProof.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */; };
 		CE68BE3F2BD9B4B200D92EBB /* Relayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */; };
 		CE68BE422BD9B6A200D92EBB /* RegistrationContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE412BD9B6A200D92EBB /* RegistrationContract.swift */; };
@@ -157,6 +156,8 @@
 		CE8FEB582C1AE5740008381A /* Authorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB572C1AE5740008381A /* Authorize.swift */; };
 		CE8FEB5A2C1AF1BE0008381A /* DecentralizeAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB592C1AF1BE0008381A /* DecentralizeAuthManager.swift */; };
 		CE8FEB5C2C1AFC3F0008381A /* libwitnesscalc_auth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8FEB5B2C1AFC3F0008381A /* libwitnesscalc_auth.a */; };
+		CE8FEB5F2C1AFF0A0008381A /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB5E2C1AFF0A0008381A /* JWT.swift */; };
+		CE8FEB622C1B03C10008381A /* AuthCircuitInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB612C1B03C10008381A /* AuthCircuitInputs.swift */; };
 		CE9E82B62BA881F400AAF885 /* RarimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82B52BA881F400AAF885 /* RarimeApp.swift */; };
 		CE9E82B82BA881F400AAF885 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82B72BA881F400AAF885 /* AppView.swift */; };
 		CE9E82BA2BA881F500AAF885 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9E82B92BA881F500AAF885 /* Assets.xcassets */; };
@@ -311,7 +312,6 @@
 		CE31E5452C11F4180039CAA5 /* GetStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedView.swift; sourceTree = "<group>"; };
 		CE31E5492C11FE150039CAA5 /* ImportIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportIdentityView.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		CE41C49D2C0777B70046AC33 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZkProof.swift; sourceTree = "<group>"; };
 		CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relayer.swift; sourceTree = "<group>"; };
 		CE68BE412BD9B6A200D92EBB /* RegistrationContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationContract.swift; sourceTree = "<group>"; };
@@ -325,6 +325,8 @@
 		CE8FEB592C1AF1BE0008381A /* DecentralizeAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecentralizeAuthManager.swift; sourceTree = "<group>"; };
 		CE8FEB5B2C1AFC3F0008381A /* libwitnesscalc_auth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_auth.a; sourceTree = "<group>"; };
 		CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_auth.h; sourceTree = "<group>"; };
+		CE8FEB5E2C1AFF0A0008381A /* JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
+		CE8FEB612C1B03C10008381A /* AuthCircuitInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCircuitInputs.swift; sourceTree = "<group>"; };
 		CE9E82B22BA881F400AAF885 /* Rarime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rarime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE9E82B52BA881F400AAF885 /* RarimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarimeApp.swift; sourceTree = "<group>"; };
 		CE9E82B72BA881F400AAF885 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
@@ -375,7 +377,6 @@
 				5655E43A2BD51F5100B86C5C /* KeychainAccess in Frameworks */,
 				CE68BE452BD9B6EA00D92EBB /* Web3 in Frameworks */,
 				CE72102E2BD7F6780043DB7F /* Alamofire in Frameworks */,
-				CE41C49E2C0777B70046AC33 /* Identity.xcframework in Frameworks */,
 				56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */,
 				56933E082BBC09990068C894 /* QKMRZScanner in Frameworks */,
 				CE8FEB5C2C1AFC3F0008381A /* libwitnesscalc_auth.a in Frameworks */,
@@ -543,6 +544,7 @@
 		5655E4262BD2C3F500B86C5C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CE8FEB602C1B03A70008381A /* Circtuits */,
 				567AEC9A2BBD9B8100A20E83 /* Passport.swift */,
 				5655E4272BD2C3FD00B86C5C /* Transaction.swift */,
 				CEF251392BD6E22700050507 /* User.swift */,
@@ -557,6 +559,7 @@
 				CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */,
 				CE1FA5692C1708F100B2C191 /* Points.swift */,
 				CE8FEB572C1AE5740008381A /* Authorize.swift */,
+				CE8FEB5E2C1AFF0A0008381A /* JWT.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -790,6 +793,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		CE8FEB602C1B03A70008381A /* Circtuits */ = {
+			isa = PBXGroup;
+			children = (
+				CE8FEB612C1B03C10008381A /* AuthCircuitInputs.swift */,
+			);
+			path = Circtuits;
+			sourceTree = "<group>";
+		};
 		CE9E82A92BA881F400AAF885 = {
 			isa = PBXGroup;
 			children = (
@@ -930,7 +941,6 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CE41C49D2C0777B70046AC33 /* Identity.xcframework */,
 				CE8FEB5B2C1AFC3F0008381A /* libwitnesscalc_auth.a */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CE7130872BEE5414003C63DA /* libwitnesscalc_registerIdentityUniversal.a */,
@@ -1150,7 +1160,9 @@
 				CEDC4D812BE9475400459D4E /* Certificates.swift in Sources */,
 				56E6AD472BD272FB00E4DDC1 /* ExportKeysView.swift in Sources */,
 				CE0DC57D2C0DB9B200EFC0D7 /* VersionUpdateView.swift in Sources */,
+				CE8FEB5F2C1AFF0A0008381A /* JWT.swift in Sources */,
 				CE8FEB582C1AE5740008381A /* Authorize.swift in Sources */,
+				CE8FEB622C1B03C10008381A /* AuthCircuitInputs.swift in Sources */,
 				5655E42E2BD2C94F00B86C5C /* AppUserDefaults.swift in Sources */,
 				CE68BE4B2BD9B75100D92EBB /* ContractABI.swift in Sources */,
 				56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */,

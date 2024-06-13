@@ -20,7 +20,7 @@ class Authorize {
         return response
     }
     
-    func authorizeUser(_ proof: ZkProof) async throws -> AuthorizeUserRequest {
+    func authorizeUser(_ proof: ZkProof) async throws -> AuthorizeUserResponse {
         let requestUrl = url.appendingPathComponent("integrations/decentralized-auth-svc/v1/authorize")
         
         let requestPayload = AuthorizeUserRequest(
@@ -35,7 +35,7 @@ class Authorize {
         
         let response = try await AF.request(requestUrl, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default)
             .validate(OpenApiError.catchInstance)
-            .serializingDecodable(AuthorizeUserRequest.self)
+            .serializingDecodable(AuthorizeUserResponse.self)
             .result
             .get()
         

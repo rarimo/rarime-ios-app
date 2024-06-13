@@ -305,7 +305,7 @@ class UserManager: ObservableObject {
         let airdropParams = try await relayer.getAirdropParams()
         
         var error: NSError? = nil
-        let airdropEventNullifier = profile.calculateAirdropEventNullifier(
+        let airdropEventNullifier = profile.calculateEventNullifierInt(
             airdropParams.data.attributes.eventID,
             error: &error
         )
