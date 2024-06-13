@@ -58,13 +58,15 @@ private struct TopLeaderView: View {
                 } else {
                     Text(formatBalanceId(balance.id))
                         .caption3()
-                        .foregroundStyle(.textSecondary)
+                        .foregroundStyle(balance.rank == 1 ? .baseBlack.opacity(0.5) : .textSecondary)
                 }
                 HStack(spacing: 4) {
-                    Text(balance.amount.formatted()).subtitle5()
-                    Image(Icons.rarimo).iconSmall()
+                    Text(balance.amount.formatted())
+                        .subtitle5()
+                    Image(Icons.rarimo)
+                        .iconSmall()
                 }
-                .foregroundStyle(.textPrimary)
+                .foregroundStyle(balance.rank == 1 ? .baseBlack : .textPrimary)
             }
             .padding(.vertical, 16)
             .frame(maxWidth: .infinity, maxHeight: height)
@@ -237,7 +239,6 @@ private struct BalanceItem: View {
             PointsBalance(id: "72beAoalsOSLals6", amount: 5, rank: 19, level: 1),
             PointsBalance(id: "82beAoalsOSLals7", amount: 4, rank: 20, level: 1)
         ],
-//        myBalance: PointsBalance(id: "82beAoalsOSLalsk", amount: 1, rank: 92, level: 1)
-        myBalance: PointsBalance(id: "12beAoalsOSLals1", amount: 55, rank: 4, level: 3)
+        myBalance: PointsBalance(id: "82beAoalsOSLalsk", amount: 1, rank: 92, level: 1)
     )
 }
