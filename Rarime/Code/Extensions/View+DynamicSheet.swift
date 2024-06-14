@@ -65,7 +65,7 @@ extension View {
                         .iconMedium()
                         .foregroundColor(.textPrimary)
                 }
-                .padding(.top, 22)
+                .padding(.top, 20)
                 .padding(.trailing, 20)
             }
         }
