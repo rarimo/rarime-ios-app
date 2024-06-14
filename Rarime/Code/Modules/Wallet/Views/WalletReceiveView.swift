@@ -1,28 +1,27 @@
 import SwiftUI
 
 struct WalletReceiveView: View {
-    @EnvironmentObject private var userManager: UserManager
-    @EnvironmentObject private var walletManager: WalletManager
-
+    let address: String
+    let token: WalletToken
     let onBack: () -> Void
 
     @State private var isCopied = false
 
     var body: some View {
         WalletRouteLayout(
-            title: String(localized: "Receive RMO"),
-            description: String(localized: "You can use the QR code or the wallet address to deposit the RMO token to your account"),
+            title: String(localized: "Receive \(token.rawValue)"),
+            description: String(localized: "You can use the QR code or the wallet address to deposit the \(token.rawValue) token to your account"),
             onBack: onBack
         ) {
             CardContainer {
                 VStack(spacing: 20) {
-                    QRCodeView(code: userManager.userAddress)
+                    QRCodeView(code: address)
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Your Rarimo Address")
+                        Text("Your Address")
                             .subtitle4()
                             .foregroundStyle(.textPrimary)
                         HStack(spacing: 16) {
-                            Text(userManager.userAddress)
+                            Text(address)
                                 .body3()
                                 .foregroundStyle(.textPrimary)
                                 .multilineTextAlignment(.leading)
@@ -32,7 +31,7 @@ struct WalletReceiveView: View {
                                 .onTapGesture {
                                     if isCopied { return }
 
-                                    UIPasteboard.general.string = userManager.userAddress
+                                    UIPasteboard.general.string = address
                                     isCopied = true
                                     FeedbackGenerator.shared.impact(.medium)
 
@@ -56,6 +55,9 @@ struct WalletReceiveView: View {
 }
 
 #Preview {
-    WalletReceiveView(onBack: {})
-        .environmentObject(WalletManager())
+    WalletReceiveView(
+        address: "0x39872a2f48fe565b1a7b8659a1358164e57d8efe",
+        token: WalletToken.rmo,
+        onBack: {}
+    )
 }

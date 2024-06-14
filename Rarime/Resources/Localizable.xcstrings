@@ -21,6 +21,9 @@
         }
       }
     },
+    "/%@" : {
+
+    },
     "%@ ensures your history, reputation and actions are not lost, but remain confidential and under your control." : {
       "localizations" : {
         "uk" : {
@@ -72,6 +75,7 @@
       }
     },
     "%@%@ RMO" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -87,7 +91,16 @@
         }
       }
     },
+    "%lld" : {
+
+    },
     "%lld days left" : {
+
+    },
+    "%lld extra referrals" : {
+
+    },
+    "%lld referrals" : {
 
     },
     "%lldm %llds" : {
@@ -111,6 +124,9 @@
       }
     },
     "Account Locked" : {
+
+    },
+    "Active" : {
 
     },
     "Active tasks" : {
@@ -238,6 +254,9 @@
     "Aruba" : {
 
     },
+    "ASSETS (%lld)" : {
+
+    },
     "Australia" : {
 
     },
@@ -278,6 +297,7 @@
       }
     },
     "Available RMO" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -304,6 +324,9 @@
 
     },
     "Bahrain" : {
+
+    },
+    "Balance" : {
 
     },
     "Balance: RMO" : {
@@ -530,6 +553,15 @@
         }
       }
     },
+    "Claim amount" : {
+
+    },
+    "Claim RMO" : {
+
+    },
+    "Claiming tokens results in a downgrade on the leaderboard" : {
+
+    },
     "Claiming..." : {
       "localizations" : {
         "uk" : {
@@ -557,6 +589,9 @@
 
     },
     "Comoros" : {
+
+    },
+    "Confirm" : {
 
     },
     "Congo" : {
@@ -624,6 +659,9 @@
         }
       }
     },
+    "Create a new identity" : {
+
+    },
     "Create Account" : {
       "localizations" : {
         "uk" : {
@@ -635,9 +673,6 @@
       }
     },
     "Create Incognito ID" : {
-
-    },
-    "Create new Identity" : {
 
     },
     "Creating a confidential profile" : {
@@ -858,6 +893,9 @@
         }
       }
     },
+    "Enter amount" : {
+
+    },
     "Enter Passcode" : {
       "localizations" : {
         "uk" : {
@@ -891,6 +929,12 @@
 
     },
     "Ethiopia" : {
+
+    },
+    "Exclusive campaigns" : {
+
+    },
+    "Exp: %@" : {
 
     },
     "Expiry date" : {
@@ -952,6 +996,9 @@
     "Faroe Islands" : {
 
     },
+    "Fee" : {
+
+    },
     "Female" : {
       "localizations" : {
         "uk" : {
@@ -988,6 +1035,12 @@
 
     },
     "French Southern Territories" : {
+
+    },
+    "From" : {
+
+    },
+    "From a reserved pool to a wallet" : {
 
     },
     "Gabon" : {
@@ -1128,7 +1181,10 @@
     "If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards" : {
 
     },
-    "Import from private key" : {
+    "Import from a private key" : {
+
+    },
+    "INCOGNITO ID" : {
 
     },
     "Incognito mode" : {
@@ -1153,6 +1209,9 @@
     "Insufficient balance" : {
 
     },
+    "Invalid address" : {
+
+    },
     "Invalid HTTP status code: %d" : {
 
     },
@@ -1160,6 +1219,7 @@
 
     },
     "Invalid Rarimo address" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1171,6 +1231,25 @@
     },
     "Invalid response body" : {
 
+    },
+    "Invite Friends" : {
+
+    },
+    "Invite more people, earn more rewards" : {
+
+    },
+    "Invite to RariMe" : {
+
+    },
+    "Invited %lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Invited %1$lld/%2$lld"
+          }
+        }
+      }
     },
     "Iran" : {
 
@@ -1219,6 +1298,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Доєднатися до очікування"
+          }
+        }
+      }
+    },
+    "Join RariMe with my invite code: %@\n\n%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Join RariMe with my invite code: %1$@\n\n%2$@"
           }
         }
       }
@@ -1274,6 +1363,9 @@
     "Latvia" : {
 
     },
+    "Leaderboard" : {
+
+    },
     "Learn more about RariMe App" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1294,6 +1386,9 @@
     "Lesotho" : {
 
     },
+    "Let's Start" : {
+
+    },
     "Let’s Start" : {
       "localizations" : {
         "uk" : {
@@ -1305,6 +1400,9 @@
       }
     },
     "Level %lld" : {
+
+    },
+    "Leveling" : {
 
     },
     "Liberia" : {
@@ -1474,6 +1572,9 @@
     "Nauru" : {
 
     },
+    "Need passport scan" : {
+
+    },
     "Nepal" : {
 
     },
@@ -1565,6 +1666,12 @@
     "One of our services is down, try again later. RequestURL=%@" : {
 
     },
+    "Only level %lld specials" : {
+
+    },
+    "Open App Store" : {
+
+    },
     "Open Settings" : {
       "localizations" : {
         "uk" : {
@@ -1637,6 +1744,9 @@
         }
       }
     },
+    "Passport scanned" : {
+
+    },
     "Peru" : {
 
     },
@@ -1644,6 +1754,9 @@
 
     },
     "Pitcairn" : {
+
+    },
+    "PLACE" : {
 
     },
     "Place QR code within the frame to scan" : {
@@ -1818,6 +1931,12 @@
         }
       }
     },
+    "RariMe Event" : {
+
+    },
+    "RariMe Event: %@\n\nParticipate and get rewarded: https://rarime.com" : {
+
+    },
     "RariMe General Terms & Conditions" : {
       "localizations" : {
         "uk" : {
@@ -1912,7 +2031,11 @@
         }
       }
     },
+    "Receive %@" : {
+
+    },
     "Receive RMO" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1954,6 +2077,15 @@
     "Reserve tokens" : {
 
     },
+    "Reserve tokens to unlock new levels and rewards" : {
+
+    },
+    "Reserved" : {
+
+    },
+    "RESERVED" : {
+
+    },
     "Reserved RMO" : {
 
     },
@@ -1963,10 +2095,16 @@
     "Reunion" : {
 
     },
+    "Review Transaction" : {
+
+    },
     "Revoke with NFC" : {
 
     },
     "Rewards" : {
+
+    },
+    "Rewards campaigns" : {
 
     },
     "Romania" : {
@@ -2041,7 +2179,7 @@
         }
       }
     },
-    "Select Authorisation Method" : {
+    "Select an authorization method" : {
 
     },
     "Send" : {
@@ -2054,7 +2192,11 @@
         }
       }
     },
+    "Send %@" : {
+
+    },
     "Send RMO" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2063,6 +2205,9 @@
           }
         }
       }
+    },
+    "Sending..." : {
+
     },
     "Senegal" : {
 
@@ -2084,6 +2229,9 @@
 
     },
     "Share Achievements" : {
+
+    },
+    "Short description text here" : {
 
     },
     "Shows two identifiers on the card" : {
@@ -2273,9 +2421,6 @@
         }
       }
     },
-    "The new version of the application is available in the App Store, it may contain critical improvements, so you have to download it" : {
-
-    },
     "The passport is in the allowlist" : {
 
     },
@@ -2340,6 +2485,12 @@
     "Timor-Leste" : {
 
     },
+    "To" : {
+
+    },
+    "To continue, please install the latest version of the app" : {
+
+    },
     "Togo" : {
 
     },
@@ -2347,6 +2498,12 @@
 
     },
     "Tonga" : {
+
+    },
+    "Total %@" : {
+
+    },
+    "Total Balance" : {
 
     },
     "Transactions" : {
@@ -2434,7 +2591,13 @@
         }
       }
     },
+    "Update app" : {
+
+    },
     "Uruguay" : {
+
+    },
+    "Used" : {
 
     },
     "User creation failed" : {
@@ -2534,7 +2697,11 @@
         }
       }
     },
+    "Withdraw the %@ token" : {
+
+    },
     "Withdraw the RMO token" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2550,7 +2717,11 @@
     "Yes" : {
 
     },
+    "YOU" : {
+
+    },
     "You can use the QR code or the wallet address to deposit the RMO token to your account" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2559,6 +2730,9 @@
           }
         }
       }
+    },
+    "You can use the QR code or the wallet address to deposit the %@ token to your account" : {
+
     },
     "You entered wrong passcode.\nLoading time: %@" : {
 
@@ -2598,6 +2772,9 @@
     "You’ve reserved %@ RMO tokens" : {
 
     },
+    "Your Address" : {
+
+    },
     "Your passport proof is ready" : {
       "localizations" : {
         "uk" : {
@@ -2619,6 +2796,7 @@
       }
     },
     "Your Rarimo Address" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {

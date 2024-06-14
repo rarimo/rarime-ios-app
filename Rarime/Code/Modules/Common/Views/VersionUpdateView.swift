@@ -2,12 +2,35 @@ import SwiftUI
 
 struct VersionUpdateView: View {
     var body: some View {
-        VStack {
-            Text("The new version of the application is available in the App Store, it may contain critical improvements, so you have to download it")
-                .multilineTextAlignment(.center)
-                .bold()
-                .frame(width: 300)
+        VStack(spacing: 32) {
+            Image(Images.gears)
+                .resizable()
+                .scaledToFit()
+                .frame(height: 136)
+            VStack(spacing: 8) {
+                Text("Update app")
+                    .subtitle1()
+                    .foregroundStyle(.textPrimary)
+                Text("To continue, please install the latest version of the app")
+                    .body3()
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(.textSecondary)
+            }
+            .frame(width: 250)
+            AppButton(
+                text: "Open App Store",
+                width: nil,
+                action: {
+                    // TODO: Replace {APP_ID} with real app id
+                    if let url = URL(string: "itms-appss://apps.apple.com/app/id{APP_ID}") {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                }
+            )
+            .controlSize(.large)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.backgroundPure)
     }
 }
 
