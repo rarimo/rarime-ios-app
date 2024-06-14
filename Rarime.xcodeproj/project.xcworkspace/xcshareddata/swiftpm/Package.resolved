@@ -1,5 +1,5 @@
 {
-  "originHash" : "d1ed6cf145c97e1207312357e0d8aa704b811c3aec93935793d87f0d8181a02b",
+  "originHash" : "da27d2fc31128813785213bd62f5701071dc1a47edd7a034e492a055a0a565e0",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -62,6 +62,15 @@
       "state" : {
         "revision" : "3bd43e12d6fb54654366a61f7cfaca787318b8ce",
         "version" : "4.4.1"
+      }
+    },
+    {
+      "identity" : "networkimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gonzalezreal/NetworkImage",
+      "state" : {
+        "revision" : "7aff8d1b31148d32c5933d75557d42f6323ee3d1",
+        "version" : "6.0.0"
       }
     },
     {
@@ -160,6 +169,15 @@
       "state" : {
         "revision" : "9bee2fdb79cc740081abd8ebd80738063d632286",
         "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "swift-markdown-ui",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:gonzalezreal/swift-markdown-ui.git",
+      "state" : {
+        "revision" : "ae799d015a5374708f7b4c85f3294c05f2a564e2",
+        "version" : "2.3.0"
       }
     },
     {

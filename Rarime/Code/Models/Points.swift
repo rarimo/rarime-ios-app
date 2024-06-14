@@ -8,7 +8,7 @@ class Points {
         self.url = url
     }
     
-    func createPointsBalance(_ nullifier: String, _ refaralCode: String) async throws -> CreatePointBalanceRequest {
+    func createPointsBalance(_ nullifier: String, _ refaralCode: String) async throws -> CreatePointBalanceResponse {
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances")
         
         let requestPayload = CreatePointBalanceRequest(
@@ -23,7 +23,7 @@ class Points {
         
         let response = try await AF.request(requestUrl, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default)
             .validate(OpenApiError.catchInstance)
-            .serializingDecodable(CreatePointBalanceRequest.self)
+            .serializingDecodable(CreatePointBalanceResponse.self)
             .result
             .get()
         
@@ -157,7 +157,7 @@ class Points {
     }
     
     func listEvents(
-        _ nullifier: String,
+        _ jwt: JWT,
         _ filterStatus: Optional<[String]> = nil,
         _ filterMetaStaticName: Optional<[String]> = nil,
         _ count: Optional<Bool> = nil,
@@ -165,8 +165,14 @@ class Points {
         _ pageNumber: Optional<Int> = nil,
         _ pageOrder: Optional<String> = nil
     ) async throws -> GetEventsResponse {
+        let headers = HTTPHeaders(
+            [
+                HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
+            ]
+        )
+        
         var query = [
-            URLQueryItem(name: "filter[nullifier]", value: nullifier)
+            URLQueryItem(name: "filter[nullifier]", value: jwt.payload.sub)
         ]
         
         if let filterStatus = filterStatus {
@@ -195,7 +201,7 @@ class Points {
         
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/events").appending(queryItems: query)
         
-        let response = try await AF.request(requestUrl)
+        let response = try await AF.request(requestUrl, headers: headers)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(GetEventsResponse.self)
             .result
@@ -466,14 +472,13 @@ struct GetEventsResponse: Codable {
 struct GetEventResponseData: Codable {
     let id, type: String
     let attributes: GetEventResponseAttributes
-    let relationships: GetEventResponseRelationships
 }
 
 struct GetEventResponseAttributes: Codable {
     let status: String
     let createdAt, updatedAt: Int
     let meta: GetEventResponseMeta
-    let pointsAmount: Int
+    let pointsAmount: Int?
 
     enum CodingKeys: String, CodingKey {
         case status
@@ -486,11 +491,9 @@ struct GetEventResponseAttributes: Codable {
 
 struct GetEventResponseMeta: Codable {
     let metaStatic: GetEventResponseStatic
-    let metaDynamic: GetEventResponseDynamic
 
     enum CodingKeys: String, CodingKey {
         case metaStatic = "static"
-        case metaDynamic = "dynamic"
     }
 }
 
@@ -502,9 +505,9 @@ struct GetEventResponseStatic: Codable {
     let name: String
     let reward: Int
     let title, description, shortDescription, frequency: String
-    let startsAt, expiresAt: String
-    let actionURL: String
-    let logo: String
+    let startsAt, expiresAt: String?
+    let actionURL: String?
+    let logo: String?
 
     enum CodingKeys: String, CodingKey {
         case name, reward, title, description
@@ -544,7 +547,7 @@ struct ClaimPointsForEventDataAttributes: Codable {
     let status: String
     let createdAt, updatedAt: Int
     let meta: ClaimPointsForEventMeta
-    let pointsAmount: Int
+    let pointsAmount: Int?
 
     enum CodingKeys: String, CodingKey {
         case status
@@ -557,11 +560,9 @@ struct ClaimPointsForEventDataAttributes: Codable {
 
 struct ClaimPointsForEventMeta: Codable {
     let metaStatic: ClaimPointsForEventStatic
-    let metaDynamic: ClaimPointsForEventDynamic
 
     enum CodingKeys: String, CodingKey {
         case metaStatic = "static"
-        case metaDynamic = "dynamic"
     }
 }
 
@@ -573,9 +574,9 @@ struct ClaimPointsForEventStatic: Codable {
     let name: String
     let reward: Int
     let title, description, shortDescription, frequency: String
-    let startsAt, expiresAt: String
-    let actionURL: String
-    let logo: String
+    let startsAt, expiresAt: String?
+    let actionURL: String?
+    let logo: String?
 
     enum CodingKeys: String, CodingKey {
         case name, reward, title, description
