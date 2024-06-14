@@ -1654,6 +1654,9 @@
     "Only level %lld specials" : {
 
     },
+    "Open App Store" : {
+
+    },
     "Open Settings" : {
       "localizations" : {
         "uk" : {
@@ -2389,9 +2392,6 @@
         }
       }
     },
-    "The new version of the application is available in the App Store, it may contain critical improvements, so you have to download it" : {
-
-    },
     "The passport is in the allowlist" : {
 
     },
@@ -2457,6 +2457,9 @@
 
     },
     "To" : {
+
+    },
+    "To continue, please install the latest version of the app" : {
 
     },
     "Togo" : {
@@ -2552,6 +2555,9 @@
           }
         }
       }
+    },
+    "Update app" : {
+
     },
     "Uruguay" : {
 
