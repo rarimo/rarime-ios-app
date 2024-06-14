@@ -75,6 +75,7 @@
       }
     },
     "%@%@ RMO" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -253,6 +254,9 @@
     "Aruba" : {
 
     },
+    "ASSETS (%lld)" : {
+
+    },
     "Australia" : {
 
     },
@@ -293,6 +297,7 @@
       }
     },
     "Available RMO" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -584,6 +589,9 @@
 
     },
     "Comoros" : {
+
+    },
+    "Confirm" : {
 
     },
     "Congo" : {
@@ -988,6 +996,9 @@
     "Faroe Islands" : {
 
     },
+    "Fee" : {
+
+    },
     "Female" : {
       "localizations" : {
         "uk" : {
@@ -1198,6 +1209,9 @@
     "Insufficient balance" : {
 
     },
+    "Invalid address" : {
+
+    },
     "Invalid HTTP status code: %d" : {
 
     },
@@ -1205,6 +1219,7 @@
 
     },
     "Invalid Rarimo address" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2013,7 +2028,11 @@
         }
       }
     },
+    "Receive %@" : {
+
+    },
     "Receive RMO" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2071,6 +2090,9 @@
 
     },
     "Reunion" : {
+
+    },
+    "Review Transaction" : {
 
     },
     "Revoke with NFC" : {
@@ -2167,7 +2189,11 @@
         }
       }
     },
+    "Send %@" : {
+
+    },
     "Send RMO" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2176,6 +2202,9 @@
           }
         }
       }
+    },
+    "Sending..." : {
+
     },
     "Senegal" : {
 
@@ -2468,6 +2497,12 @@
     "Tonga" : {
 
     },
+    "Total %@" : {
+
+    },
+    "Total Balance" : {
+
+    },
     "Transactions" : {
       "localizations" : {
         "uk" : {
@@ -2656,7 +2691,11 @@
         }
       }
     },
+    "Withdraw the %@ token" : {
+
+    },
     "Withdraw the RMO token" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2676,6 +2715,7 @@
 
     },
     "You can use the QR code or the wallet address to deposit the RMO token to your account" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2684,6 +2724,9 @@
           }
         }
       }
+    },
+    "You can use the QR code or the wallet address to deposit the %@ token to your account" : {
+
     },
     "You entered wrong passcode.\nLoading time: %@" : {
 
@@ -2723,6 +2766,9 @@
     "You’ve reserved %@ RMO tokens" : {
 
     },
+    "Your Address" : {
+
+    },
     "Your passport proof is ready" : {
       "localizations" : {
         "uk" : {
@@ -2744,6 +2790,7 @@
       }
     },
     "Your Rarimo Address" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {

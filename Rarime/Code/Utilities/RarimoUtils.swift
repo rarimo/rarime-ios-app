@@ -12,4 +12,8 @@ class RarimoUtils {
        guard address.count > 20 else { return address }
        return "\(address.prefix(12))...\(address.suffix(8))"
    }
+    
+    static func formatBalance(_ balance: Double) -> String {
+        return (balance / Double(Rarimo.rarimoTokenMantis)).formatted()
+    }
 }
