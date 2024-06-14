@@ -12,6 +12,7 @@ enum Images {
     static let rarimeIcon = "RarimeIcon"
 
     static let friends = "Friends"
+    static let gears = "Gears"
 
     // TODO: remove when actual images are used
     static let rewardsTest1 = "RewardsTest1"
