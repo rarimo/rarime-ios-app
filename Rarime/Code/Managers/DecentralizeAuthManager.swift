@@ -28,9 +28,9 @@ class DecentralizeAuthManager {
         let requestChallengeResponse = try await authorize.requestChallenge(nullifier)
         
         let authCircuitInputs = AuthCircuitInputs(
-            skIdentity: secretKey.hex,
+            skIdentity: secretKey.fullHex,
             eventID: DecentralizeAuthManager.AuthEventId,
-            eventData: requestChallengeResponse.data.attributes.challenge,
+            eventData: requestChallengeResponse.data.attributes.challenge.fullHex,
             revealPkIdentityHash: 0
         )
         
@@ -45,28 +45,19 @@ class DecentralizeAuthManager {
         
         let zkProof = ZkProof(proof: proof, pubSignals: pubSignals)
         
-        let authorizeUserResponse = try await self.authorize.authorizeUser(zkProof)
+        let authorizeUserResponse = try await self.authorize.authorizeUser(nullifier, zkProof)
         
         self.accessJwt = try JWT(authorizeUserResponse.data.attributes.accessToken.token)
         self.refreshJwt = try JWT(authorizeUserResponse.data.attributes.refreshToken.token)
     }
     
-    func refreshIfNeeded(_ secretKey: Data) async throws {
+    func refreshIfNeeded() async throws {
         guard let refreshJwt = self.refreshJwt else {
             return
         }
         
         if !refreshJwt.isExpiringIn5Minutes {
             return
-        }
-        
-        let profileInitializer = IdentityProfile()
-        let profile = try profileInitializer.newProfile(secretKey)
-        
-        var error: NSError?
-        let nullifier = profile.calculateEventNullifierHex(DecentralizeAuthManager.AuthEventId, error: &error)
-        if let error {
-            throw error
         }
         
         let refreshJwtReponse = try await authorize.refreshJwt(refreshJwt.raw)

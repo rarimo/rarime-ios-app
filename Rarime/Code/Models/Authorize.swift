@@ -10,7 +10,7 @@ class Authorize {
     
     func requestChallenge(_ nullifier: String) async throws -> GetChallengeResponse {
         let requestUrl = url.appendingPathComponent("integrations/decentralized-auth-svc/v1/authorize/\(nullifier)/challenge")
-        
+
         let response = try await AF.request(requestUrl)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(GetChallengeResponse.self)
@@ -20,12 +20,12 @@ class Authorize {
         return response
     }
     
-    func authorizeUser(_ proof: ZkProof) async throws -> AuthorizeUserResponse {
+    func authorizeUser(_ nullifier: String, _ proof: ZkProof) async throws -> AuthorizeUserResponse {
         let requestUrl = url.appendingPathComponent("integrations/decentralized-auth-svc/v1/authorize")
         
         let requestPayload = AuthorizeUserRequest(
             data: AuthorizeUserRequestData(
-                id: UUID().uuidString,
+                id: nullifier,
                 type: "authorize",
                 attributes: AuthorizeUserRequestAttributes(
                     proof: proof
@@ -85,7 +85,7 @@ struct GetChallengeResponseData: Codable {
 }
 
 struct GetChallengeResponseAttributes: Codable {
-    let challenge: String
+    let challenge: Data
 }
 
 struct AuthorizeUserRequest: Codable {
