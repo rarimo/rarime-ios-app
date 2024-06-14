@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AppTextField<Hint: View, Action: View>: View {
     @Environment(\.isEnabled) var isEnabled
+    @Environment(\.controlSize) var controlSize
 
     @Binding var text: String
     @Binding var errorMessage: String
@@ -62,7 +63,7 @@ struct AppTextField<Hint: View, Action: View>: View {
                 .disabled(!isEnabled)
                 .body3()
                 .frame(height: 20)
-                .padding(.vertical, 14)
+                .padding(.vertical, controlSize == .large ? 18 : 14)
                 .onTapGesture { isFocused = true }
                 .onChange(of: text) { _ in
                     self.errorMessage = ""
@@ -99,7 +100,7 @@ private struct PreviewView: View {
             AppTextField(
                 text: self.$text,
                 errorMessage: .constant(""),
-                label: "Regulart",
+                label: "Regular",
                 placeholder: "Enter text here",
                 action: {
                     Image(Icons.qrCode)
@@ -108,7 +109,7 @@ private struct PreviewView: View {
                 }
             ) {
                 HStack {
-                    Text(String("Some hint text")).caption2()
+                    Text(try! String("Some hint text")).caption2()
                     Spacer()
                     Image(Icons.info).iconSmall()
                 }
@@ -122,10 +123,11 @@ private struct PreviewView: View {
             AppTextField(
                 text: self.$text,
                 errorMessage: .constant(""),
-                label: "Disabled",
+                label: "Disabled large",
                 placeholder: "Enter text here"
             )
             .disabled(true)
+            .controlSize(.large)
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)

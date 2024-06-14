@@ -37,7 +37,7 @@ private let tertiaryColors = ButtonColors(
     foregroundDisabled: .textDisabled
 )
 
-private struct AppButtonStyle: ButtonStyle {
+struct AppButtonStyle: ButtonStyle {
     var variant: ButtonVariant
 
     @Environment(\.isEnabled) var isEnabled

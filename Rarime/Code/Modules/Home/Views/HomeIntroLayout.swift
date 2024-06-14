@@ -1,11 +1,26 @@
 import SwiftUI
 
-struct HomeIntroLayout<Icon: View, Content: View>: View {
+struct HomeIntroLayout<Icon: View, Subheader: View, Content: View>: View {
     let title: String
     let description: String?
     let icon: Icon
 
+    @ViewBuilder var subheader: () -> Subheader
     @ViewBuilder var content: () -> Content
+
+    init(
+        title: String,
+        description: String? = nil,
+        icon: Icon,
+        @ViewBuilder subheader: @escaping () -> Subheader = { EmptyView() },
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.title = title
+        self.description = description
+        self.icon = icon
+        self.subheader = subheader
+        self.content = content
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 32) {
@@ -24,6 +39,7 @@ struct HomeIntroLayout<Icon: View, Content: View>: View {
                 }
             }
             .frame(maxWidth: .infinity)
+            subheader()
             HorizontalDivider()
             content()
         }
