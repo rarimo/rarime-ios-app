@@ -112,6 +112,9 @@
         }
       }
     },
+    "About Reward Program" : {
+
+    },
     "Account" : {
       "localizations" : {
         "uk" : {
@@ -1155,6 +1158,12 @@
     "Hong Kong" : {
 
     },
+    "HOW CAN I GET A CODE?" : {
+
+    },
+    "HOW CAN I GET THIS CODE?" : {
+
+    },
     "Hungary" : {
 
     },
@@ -1199,6 +1208,9 @@
 
     },
     "Invalid HTTP status code: %d" : {
+
+    },
+    "Invalid invitation code" : {
 
     },
     "Invalid private key" : {
@@ -1260,6 +1272,9 @@
           }
         }
       }
+    },
+    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using" : {
+
     },
     "It showcases Rarimo’s identity infrastructure and how it can be used by projects and organizations to directly reach civilians." : {
 
@@ -1363,6 +1378,9 @@
       }
     },
     "Learn more about the App" : {
+
+    },
+    "Learn more about the program" : {
 
     },
     "Lebanon" : {
@@ -1891,6 +1909,12 @@
 
     },
     "Qatar" : {
+
+    },
+    "QUESTION TITLE 2" : {
+
+    },
+    "QUESTION TITLE 3" : {
 
     },
     "RARIME" : {
@@ -2686,6 +2710,12 @@
       }
     },
     "You entered wrong passcode.\nLoading time: %@" : {
+
+    },
+    "You must be invited by someone or receive a code that we post on our social channels" : {
+
+    },
+    "You must be invited or receive a code from social channels" : {
 
     },
     "You will be notified once added" : {
