@@ -6,14 +6,6 @@ struct InviteFriendsView: View {
     let balance: PointsBalanceRaw
     let onBack: () -> Void
 
-//    private var totalCodesCount: Int {
-//        balance.activeCodes!.count + balance.activatedCodes!.count + balance.usedCodes!.count
-//    }
-//
-//    private var invitedCodesCount: Int {
-//        totalCodesCount - balance.activeCodes!.count
-//    }
-
     var body: some View {
         ZStack(alignment: .topTrailing) {
             Image(Images.friends)
@@ -46,9 +38,11 @@ struct InviteFriendsView: View {
     private var invitedCard: some View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 4) {
-//                Text("Invited \(invitedCodesCount)/\(totalCodesCount)")
-//                    .subtitle3()
-//                    .foregroundStyle(.textPrimary)
+                if let codes = balance.referralCodes {
+                    Text("Invited \(codes.filter { $0.status == .rewarded }.count)")
+                        .subtitle3()
+                        .foregroundStyle(.textPrimary)
+                }
                 Text("Short description text here")
                     .body3()
                     .foregroundStyle(.textSecondary)
@@ -56,15 +50,6 @@ struct InviteFriendsView: View {
             .padding(.horizontal, 24)
             ScrollView {
                 VStack(spacing: 8) {
-//                    ForEach(balance.activeCodes!, id: \.self) { code in
-//                        InviteCodeView(code: code, status: .active)
-//                    }
-//                    ForEach(balance.activatedCodes!, id: \.self) { code in
-//                        InviteCodeView(code: code, status: .activated)
-//                    }
-//                    ForEach(balance.usedCodes!, id: \.self) { code in
-//                        InviteCodeView(code: code, status: .used)
-//                    }
                     if let codes = balance.referralCodes {
                         ForEach(codes, id: \.id) { code in
                             InviteCodeView(code: code.id, status: .active)
