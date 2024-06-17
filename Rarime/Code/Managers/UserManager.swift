@@ -427,7 +427,7 @@ class UserManager: ObservableObject {
         AppUserDefaults.shared.reservedBalance = 0.0
         AppUserDefaults.shared.isPassportTokensReserved = false
         AppUserDefaults.shared.isUserRevoked = false
-        AppUserDefaults.shared.userRefaralCode = ""
+        AppUserDefaults.shared.userRefarralCode = ""
         
         do {
             try AppKeychain.removeValue(.privateKey)

@@ -39,7 +39,7 @@ struct InviteFriendsView: View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 4) {
                 if let codes = balance.referralCodes {
-                    Text("Invited \(codes.filter { $0.status == .rewarded }.count)")
+                    Text("Invited \(codes.filter { $0.status == .rewarded }.count)/\(codes.count)")
                         .subtitle3()
                         .foregroundStyle(.textPrimary)
                 }
@@ -82,7 +82,7 @@ private enum InviteCodeStatus {
 
 private struct InviteCodeView: View {
     let code: String
-    let status: ReferalCodeStatus
+    let status: ReferralCodeStatus
 
     var invitationLink: String {
         // TODO: use URL from config

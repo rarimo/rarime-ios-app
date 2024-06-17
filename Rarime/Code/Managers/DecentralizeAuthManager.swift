@@ -1,18 +1,18 @@
 import Identity
 import Foundation
 
-class DecentralizeAuthManager: ObservableObject {
+class DecentralizedAuthManager: ObservableObject {
     static let AuthEventId = "0x77fabbc6cb41a11d4fb6918696b3550d5d602f252436dd587f9065b7c4e62b"
     
-    static let shared = DecentralizeAuthManager()
+    static let shared = DecentralizedAuthManager()
     
-    let authorize: Authorize
+    let authorize: AuthorizeService
     
     @Published var accessJwt: Optional<JWT> = nil
     @Published var refreshJwt: Optional<JWT> = nil
     
     init() {
-        self.authorize = Authorize(ConfigManager.shared.api.authorizeURL)
+        self.authorize = AuthorizeService(ConfigManager.shared.api.authorizeURL)
     }
     
     func initializeJWT(_ secretKey: Data) async throws {
@@ -20,7 +20,7 @@ class DecentralizeAuthManager: ObservableObject {
         let profile = try profileInitializer.newProfile(secretKey)
         
         var error: NSError?
-        let nullifier = profile.calculateEventNullifierHex(DecentralizeAuthManager.AuthEventId, error: &error)
+        let nullifier = profile.calculateEventNullifierHex(DecentralizedAuthManager.AuthEventId, error: &error)
         if let error {
             throw error
         }
@@ -29,7 +29,7 @@ class DecentralizeAuthManager: ObservableObject {
         
         let authCircuitInputs = AuthCircuitInputs(
             skIdentity: secretKey.fullHex,
-            eventID: DecentralizeAuthManager.AuthEventId,
+            eventID: DecentralizedAuthManager.AuthEventId,
             eventData: requestChallengeResponse.data.attributes.challenge.fullHex,
             revealPkIdentityHash: 0
         )
@@ -61,7 +61,7 @@ class DecentralizeAuthManager: ObservableObject {
             return
         }
         
-        if !refreshJwt.isExpiringIn5Minutes {
+        if !refreshJwt.isExpiringSoon {
             return
         }
         

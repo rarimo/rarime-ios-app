@@ -1,7 +1,7 @@
 import Alamofire
 import Foundation
 
-class Authorize {
+class AuthorizeService {
     let url: URL
     
     init(_ url: URL) {

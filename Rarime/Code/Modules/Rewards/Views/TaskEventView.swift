@@ -38,7 +38,7 @@ struct TaskEventView: View {
                         HStack(spacing: 16) {
                             RewardChip(reward: Double(event.attributes.meta.metaStatic.reward))
                             if let endDate = event.attributes.meta.metaStatic.expiresAt {
-                                Text("Exp: \(endDate))")
+                                Text("Exp: \(endDate)")
                                     .caption2()
                                     .foregroundStyle(.textSecondary)
                             }
@@ -47,7 +47,7 @@ struct TaskEventView: View {
                     Spacer()
                     CachedAsyncImage(url: URL(string: event.attributes.meta.metaStatic.logo ?? ""))
                         .scaledToFill()
-                        .frame(width: 20, height: 20)
+                        .frame(width: 64, height: 64)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
                 .frame(maxWidth: .infinity)

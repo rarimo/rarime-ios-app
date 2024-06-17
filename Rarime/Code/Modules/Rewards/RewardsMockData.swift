@@ -28,7 +28,7 @@ let inviteFriendEvent = GetEventResponseData(
                 startsAt: nil,
                 expiresAt: nil,
                 actionURL: nil,
-                logo: ""
+                logo: "https://pbs.twimg.com/profile_images/1639021161257263105/XmT0EBnK_400x400.jpg"
             )
         ),
         pointsAmount: nil

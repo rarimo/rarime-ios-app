@@ -7,7 +7,7 @@ private enum ViewState {
 
 struct RewardsIntroView: View {    
     @EnvironmentObject private var userManager: UserManager
-    @EnvironmentObject private var decentralizeAuthManager: DecentralizeAuthManager
+    @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     
     let onStart: () -> Void
     @State private var termsChecked = false
@@ -35,13 +35,13 @@ struct RewardsIntroView: View {
             do {
                 guard let user = userManager.user else { throw "user is not initalized" }
                 
-                if decentralizeAuthManager.accessJwt == nil {
-                    try await decentralizeAuthManager.initializeJWT(user.secretKey)
+                if decentralizedAuthManager.accessJwt == nil {
+                    try await decentralizedAuthManager.initializeJWT(user.secretKey)
                 }
                 
-                try await decentralizeAuthManager.refreshIfNeeded()
+                try await decentralizedAuthManager.refreshIfNeeded()
                 
-                guard let accessJwt = decentralizeAuthManager.accessJwt else { throw "accessJwt is nil" }
+                guard let accessJwt = decentralizedAuthManager.accessJwt else { throw "accessJwt is nil" }
                 
                 let pointsSvc = Points(ConfigManager.shared.api.pointsServiceURL)
                 let result = try await pointsSvc.createPointsBalance(
@@ -59,7 +59,7 @@ struct RewardsIntroView: View {
                     return
                 }
                 
-                self.codeErrorMessage = String(localized: "Honestly, I have no idea what could go wrong")
+                self.codeErrorMessage = String(localized: "Something went wrong")
             } catch {
                 do {
                     guard let error = error as? AFError else { throw error }
@@ -248,7 +248,7 @@ fileprivate func isValidReferalCodeFormat(_ string: String) -> Bool {
     
     return RewardsIntroView(onStart: {})
         .environmentObject(ConfigManager())
-        .environmentObject(DecentralizeAuthManager())
+        .environmentObject(DecentralizedAuthManager())
         .environmentObject(userManager)
         .onAppear {
             try? userManager.createNewUser()

@@ -53,6 +53,7 @@ class Points {
             .result
             .get()
         
+        // FIXME: make it better
         for (index, entry) in response.data.enumerated() {
             response.data[index].attributes.id = entry.id
         }
@@ -87,6 +88,7 @@ class Points {
             .result
             .get()
         
+        // FIXME: make it better
         response.data.attributes.id = response.data.id
         
         return response
@@ -405,10 +407,10 @@ struct PointsBalanceRaw: Codable {
 
 struct ReferalCode: Codable {
     let id: String
-    let status: ReferalCodeStatus
+    let status: ReferralCodeStatus
 }
 
-enum ReferalCodeStatus: String, Codable {
+enum ReferralCodeStatus: String, Codable {
     case active = "active"
     case banned = "banned"
     case limited = "limited"

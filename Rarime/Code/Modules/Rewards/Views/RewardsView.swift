@@ -7,7 +7,7 @@ private enum RewardsRoute: String, Hashable {
 
 struct RewardsView: View {
     @EnvironmentObject private var userManager: UserManager
-    @EnvironmentObject private var decentralizeAuthManager: DecentralizeAuthManager
+    @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     
     @StateObject private var rewardsViewModel = RewardsViewModel()
     @State private var path: [RewardsRoute] = []
@@ -107,7 +107,7 @@ struct RewardsView: View {
                             if !limitedEvents.isEmpty {
                                 limitedEventsCard(limitedEvents)
                             }
-                            activeEventsCard(notlimitedEvents)
+                            activeEventsCard
                         }
                         .padding(.horizontal, 12)
                     }
@@ -169,7 +169,7 @@ struct RewardsView: View {
         CardContainer {
             VStack(alignment: .leading, spacing: 20) {
                 HStack(spacing: 12) {
-                    Text("🔥")
+                    Text(verbatim: "🔥")
                         .subtitle5()
                         .frame(width: 24, height: 24)
                         .background(.warningLight, in: Circle())
@@ -197,7 +197,7 @@ struct RewardsView: View {
         }
     }
 
-    private func activeEventsCard(_ events: [GetEventResponseData]) -> some View {
+    private var activeEventsCard: some View {
         CardContainer {
             VStack(alignment: .leading, spacing: 20) {
                 Text("Active tasks")
@@ -208,7 +208,7 @@ struct RewardsView: View {
                         .onTapGesture {
                             path.append(.inviteFriends)
                         }
-                    ForEach(events, id: \.id) { event in
+                    ForEach(notlimitedEvents, id: \.id) { event in
                         ActiveEventItem(event: event)
                             .onTapGesture {
                                 rewardsViewModel.selectedEvent = event
@@ -225,13 +225,13 @@ struct RewardsView: View {
             do {
                 guard let user = userManager.user else { throw "user is not initalized" }
                 
-                if decentralizeAuthManager.accessJwt == nil {
-                    try await decentralizeAuthManager.initializeJWT(user.secretKey)
+                if decentralizedAuthManager.accessJwt == nil {
+                    try await decentralizedAuthManager.initializeJWT(user.secretKey)
                 }
                 
-                try await decentralizeAuthManager.refreshIfNeeded()
+                try await decentralizedAuthManager.refreshIfNeeded()
                 
-                guard let accessJwt = decentralizeAuthManager.accessJwt else { throw "accessJwt is nil" }
+                guard let accessJwt = decentralizedAuthManager.accessJwt else { throw "accessJwt is nil" }
                 
                 let points = Points(ConfigManager.shared.api.pointsServiceURL)
                 
@@ -252,13 +252,13 @@ struct RewardsView: View {
             do {
                 guard let user = userManager.user else { throw "user is not initalized" }
                 
-                if decentralizeAuthManager.accessJwt == nil {
-                    try await decentralizeAuthManager.initializeJWT(user.secretKey)
+                if decentralizedAuthManager.accessJwt == nil {
+                    try await decentralizedAuthManager.initializeJWT(user.secretKey)
                 }
                 
-                try await decentralizeAuthManager.refreshIfNeeded()
+                try await decentralizedAuthManager.refreshIfNeeded()
                 
-                guard let accessJwt = decentralizeAuthManager.accessJwt else { throw "accessJwt is nil" }
+                guard let accessJwt = decentralizedAuthManager.accessJwt else { throw "accessJwt is nil" }
                 
                 let points = Points(ConfigManager.shared.api.pointsServiceURL)
                 
@@ -316,12 +316,12 @@ private struct LimitedEventItem: View {
                             .resizable()
                             .scaledToFill()
                     } else {
-                        Circle()
+                        RoundedRectangle(cornerRadius: 8)
                             .fill(.additionalPureDark)
                     }
                 }
             )
-                .frame(width: 20, height: 20)
+                .frame(width: 64, height: 64)
                 .clipShape(RoundedRectangle(cornerRadius: 8))
             VStack(alignment: .leading, spacing: 8) {
                 Text(event.attributes.meta.metaStatic.title)
@@ -357,7 +357,7 @@ private struct ActiveEventItem: View {
                     }
                 }
             )
-                .frame(width: 20, height: 20)
+                .frame(width: 40, height: 40)
                 .background(.additionalPureDark, in: Circle())
                 .foregroundStyle(.baseWhite)
             VStack(alignment: .leading, spacing: 4) {
@@ -382,7 +382,7 @@ private struct ActiveEventItem: View {
     let userManager = UserManager()
     
     return RewardsView()
-        .environmentObject(DecentralizeAuthManager())
+        .environmentObject(DecentralizedAuthManager())
         .environmentObject(MainView.ViewModel())
         .environmentObject(userManager)
         .onAppear(perform: {

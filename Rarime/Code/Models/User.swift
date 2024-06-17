@@ -13,7 +13,7 @@ class User {
     
     var userReferalCode: String? {
         didSet {
-            AppUserDefaults.shared.userRefaralCode = userReferalCode ?? ""
+            AppUserDefaults.shared.userRefarralCode = userReferalCode ?? ""
         }
     }
     
@@ -24,7 +24,7 @@ class User {
         
         self.status = status
         
-        let userReferalCode = AppUserDefaults.shared.userRefaralCode
+        let userReferalCode = AppUserDefaults.shared.userRefarralCode
         if !userReferalCode.isEmpty {
             self.userReferalCode = userReferalCode
         }

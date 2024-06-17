@@ -35,7 +35,7 @@ class JWT {
         self.payload = try decoder.decode(JWTPayload.self, from: payloadData)
     }
     
-    var isExpiringIn5Minutes: Bool {
+    var isExpiringSoon: Bool {
         let now = Int(Date().timeIntervalSince1970)
         return payload.exp - now < 300
     }

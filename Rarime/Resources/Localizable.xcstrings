@@ -113,9 +113,6 @@
         }
       }
     },
-    "🔥" : {
-
-    },
     "About Reward Program" : {
 
     },
@@ -943,7 +940,7 @@
     "Exclusive campaigns" : {
 
     },
-    "Exp: %@)" : {
+    "Exp: %@" : {
 
     },
     "Expiry date" : {
@@ -1172,9 +1169,6 @@
     "Honduras" : {
 
     },
-    "Honestly, I have no idea what could go wrong" : {
-
-    },
     "Hong Kong" : {
 
     },
@@ -1262,8 +1256,15 @@
     "Invite to RariMe" : {
 
     },
-    "Invited %lld" : {
-
+    "Invited %lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Invited %1$lld/%2$lld"
+          }
+        }
+      }
     },
     "Iran" : {
 
@@ -2299,6 +2300,9 @@
 
     },
     "Somalia" : {
+
+    },
+    "Something went wrong" : {
 
     },
     "Sorry, there was a problem reading the passport. %@. Error codes: [0x%u, 0x%u]" : {
