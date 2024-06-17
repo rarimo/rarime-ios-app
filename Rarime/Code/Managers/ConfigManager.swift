@@ -42,6 +42,8 @@ extension ConfigManager {
         let evmRpcURL: URL
         let registerContractAddress: String
         let cosmosRpcURL: URL
+        let pointsServiceURL: URL
+        let authorizeURL: URL
 
         init() {
             do {
@@ -49,6 +51,8 @@ extension ConfigManager {
                 self.evmRpcURL = try readURLFromInfoPlist(key: "EVM_RPC_URL")
                 self.registerContractAddress = try readStringFromInfoPlist(key: "REGISTER_CONTRACT_ADDRESS")
                 self.cosmosRpcURL = try readURLFromInfoPlist(key: "COSMOS_RPC_URL")
+                self.pointsServiceURL = try readURLFromInfoPlist(key: "POINTS_SERVICE_URL")
+                self.authorizeURL = try readURLFromInfoPlist(key: "AUTHORIZE_URL")
             } catch {
                 fatalError("ConfigManager.API init error: \(error.localizedDescription)")
             }

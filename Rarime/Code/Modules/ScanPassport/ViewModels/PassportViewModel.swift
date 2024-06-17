@@ -48,7 +48,7 @@ class PassportViewModel: ObservableObject {
     }
 
     @MainActor
-    func register() async throws -> ZkProof {
+    func register(_ jwt: JWT) async throws -> ZkProof {
         do {
             guard let passport else { throw "failed to get passport" }
             
@@ -107,6 +107,11 @@ class PassportViewModel: ObservableObject {
             
             try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
             proofState = .finalizing
+            
+            let queryProof = try await UserManager.shared.generatePointsProof(proof, passport)
+            
+            let points = Points(ConfigManager.shared.api.pointsServiceURL)
+            let _ = try await points.verifyPassport(jwt, queryProof)
             
             isAirdropClaimed = try await UserManager.shared.isAirdropClaimed()
             

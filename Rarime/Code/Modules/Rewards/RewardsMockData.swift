@@ -1,22 +1,5 @@
 import Foundation
 
-// TODO: use structs from points service
-struct PointsEventMeta: Equatable {
-    let name: String
-    let title: String
-    let description: String
-    let shortDescription: String
-    let reward: Double
-    let expiresAt: Date?
-    let actionURL: String?
-    let logo: String
-}
-
-struct PointsEvent: Identifiable, Equatable {
-    let id = UUID()
-    let meta: PointsEventMeta
-}
-
 struct PointsBalance: Equatable {
     var id: String
     var amount: Double
@@ -27,82 +10,30 @@ struct PointsBalance: Equatable {
     var usedCodes: [String]?
 }
 
-let limitedEvents: [PointsEvent] = [
-    PointsEvent(
-        meta: PointsEventMeta(
-            name: "initial_setup",
-            title: "Initial setup of identity credentials",
-            description: "Full description text",
-            shortDescription: "Short description text",
-            reward: 5,
-            expiresAt: Date(timeIntervalSinceNow: 200000),
-            actionURL: "https://example.com",
-            logo: Images.rewardsTest1
-        )
-    ),
-    PointsEvent(
-        meta: PointsEventMeta(
-            name: "initial_setup",
-            title: "Initial setup of identity credentials",
-            description: "Full description text",
-            shortDescription: "Short description text",
-            reward: 5,
-            expiresAt: Date(timeIntervalSinceNow: 200000),
-            actionURL: "https://example.com",
-            logo: Images.rewardsTest2
-        )
+let inviteFriendEvent = GetEventResponseData(
+    id: "dasd",
+    type: "dasd",
+    attributes: GetEventResponseAttributes(
+        status: "active",
+        createdAt: Int(Date().timeIntervalSince1970),
+        updatedAt: Int(Date().timeIntervalSince1970),
+        meta: GetEventResponseMeta(
+            metaStatic: GetEventResponseStatic(
+                name: "invite_friends",
+                reward: 5,
+                title: "Invite users",
+                description: "Full description text",
+                shortDescription: "Invite friends in to app",
+                frequency: "always",
+                startsAt: nil,
+                expiresAt: nil,
+                actionURL: nil,
+                logo: "https://pbs.twimg.com/profile_images/1639021161257263105/XmT0EBnK_400x400.jpg"
+            )
+        ),
+        pointsAmount: nil
     )
-]
-
-let activeEvents: [PointsEvent] = [
-    PointsEvent(
-        meta: PointsEventMeta(
-            name: "invite_friends",
-            title: "Invite 5 users",
-            description: "Full description text",
-            shortDescription: "Invite friends in to app",
-            reward: 5,
-            expiresAt: nil,
-            actionURL: nil,
-            logo: Icons.users
-        )
-    ),
-    PointsEvent(
-        meta: PointsEventMeta(
-            name: "get_poh",
-            title: "Getting a PoH credential",
-            description: "Full description text",
-            shortDescription: "Short description text",
-            reward: 5,
-            expiresAt: nil,
-            actionURL: "https://example.com",
-            logo: Icons.identificationCard
-        )
-    )
-]
-
-let leaderboardBalances: [PointsBalance] = [
-    PointsBalance(id: "mhQeweiAJdiligRt", amount: 85, rank: 1, level: 3),
-    PointsBalance(id: "12beAoalsOSLals1", amount: 75, rank: 2, level: 3),
-    PointsBalance(id: "fkdbeweOJdilwq1b", amount: 65, rank: 3, level: 3),
-    PointsBalance(id: "12beAoalsOSLals1", amount: 55, rank: 4, level: 3),
-    PointsBalance(id: "12beAoalsOSLals2", amount: 48, rank: 5, level: 3),
-    PointsBalance(id: "12beAoalsOSLals3", amount: 45, rank: 6, level: 3),
-    PointsBalance(id: "12beAoalsOSLals4", amount: 35, rank: 7, level: 3),
-    PointsBalance(id: "12beAoalsOSLals5", amount: 35, rank: 8, level: 3),
-    PointsBalance(id: "12beAoalsOSLals6", amount: 33, rank: 9, level: 3),
-    PointsBalance(id: "12beAoalsOSLals7", amount: 31, rank: 10, level: 3),
-    PointsBalance(id: "mhQeweiAJdiligRw", amount: 25, rank: 11, level: 2),
-    PointsBalance(id: "12beAoalsOSLalsw", amount: 18, rank: 12, level: 2),
-    PointsBalance(id: "fkdbeweOJdilwq1w", amount: 15, rank: 13, level: 2),
-    PointsBalance(id: "22beAoalsOSLals1", amount: 14, rank: 14, level: 2),
-    PointsBalance(id: "32beAoalsOSLals2", amount: 13, rank: 15, level: 2),
-    PointsBalance(id: "42beAoalsOSLals3", amount: 12, rank: 16, level: 2),
-    PointsBalance(id: "52beAoalsOSLals4", amount: 6, rank: 17, level: 1),
-    PointsBalance(id: "62beAoalsOSLals5", amount: 6, rank: 18, level: 1),
-    PointsBalance(id: "72beAoalsOSLals6", amount: 5, rank: 19, level: 1),
-    PointsBalance(id: "82beAoalsOSLals7", amount: 4, rank: 20, level: 1)
-]
+)
 
 let myBalance = PointsBalance(
     id: "42beAoalsOSLals3",

@@ -1,5 +1,6 @@
 import OSLog
 import SwiftUI
+import Identity
 
 struct AppView: View {
     @EnvironmentObject private var updateManager: UpdateManager

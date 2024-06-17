@@ -8,8 +8,8 @@ private func formatBalanceId(_ id: String) -> String {
 }
 
 struct LeaderboardView: View {
-    let balances: [PointsBalance]
-    let myBalance: PointsBalance
+    let balances: [LeaderboardEntry]
+    let myBalance: PointsBalanceRaw
 
     var body: some View {
         VStack(spacing: 0) {
@@ -17,9 +17,11 @@ struct LeaderboardView: View {
                 .subtitle4()
                 .foregroundStyle(.textPrimary)
             HStack(alignment: .bottom, spacing: 12) {
-                TopLeaderView(balance: balances[1], myBalance: myBalance)
-                TopLeaderView(balance: balances[0], myBalance: myBalance)
-                TopLeaderView(balance: balances[2], myBalance: myBalance)
+                if balances.count > 3 {
+                    TopLeaderView(balance: balances[1], myBalance: myBalance)
+                    TopLeaderView(balance: balances[0], myBalance: myBalance)
+                    TopLeaderView(balance: balances[2], myBalance: myBalance)
+                }
             }
             .frame(maxWidth: .infinity)
             .padding(.top, 64)
@@ -33,8 +35,8 @@ struct LeaderboardView: View {
 }
 
 private struct TopLeaderView: View {
-    let balance: PointsBalance
-    let myBalance: PointsBalance
+    let balance: LeaderboardEntry
+    let myBalance: PointsBalanceRaw
 
     var height: CGFloat {
         switch balance.rank {
@@ -56,7 +58,7 @@ private struct TopLeaderView: View {
                         .padding(.horizontal, 6)
                         .background(.componentHovered, in: RoundedRectangle(cornerRadius: 100))
                 } else {
-                    Text(formatBalanceId(balance.id))
+                    Text(formatBalanceId(balance.id ?? ""))
                         .caption3()
                         .foregroundStyle(balance.rank == 1 ? .baseBlack.opacity(0.5) : .textSecondary)
                 }
@@ -91,10 +93,10 @@ private struct TopLeaderView: View {
 }
 
 private struct BalancesTable: View {
-    let balances: [PointsBalance]
-    let myBalance: PointsBalance
+    let balances: [LeaderboardEntry]
+    let myBalance: PointsBalanceRaw
 
-    private var otherBalances: [PointsBalance] {
+    private var otherBalances: [LeaderboardEntry] {
         Array(balances.dropFirst(3))
     }
 
@@ -157,7 +159,7 @@ private struct BalancesTable: View {
                 VStack(spacing: 0) {
                     HorizontalDivider()
                         .padding(.horizontal, -20)
-                    BalanceItem(balance: myBalance, isMyBalance: true)
+                    BalanceItem(balance: myBalance.toLeaderboardEntry(), isMyBalance: true)
                 }
                 .padding(.bottom, 8)
             }
@@ -170,11 +172,11 @@ private struct BalancesTable: View {
 }
 
 private struct BalanceItem: View {
-    let balance: PointsBalance
+    let balance: LeaderboardEntry
     let isMyBalance: Bool
     let highlighted: Bool
 
-    init(balance: PointsBalance, isMyBalance: Bool, highlighted: Bool = false) {
+    init(balance: LeaderboardEntry, isMyBalance: Bool, highlighted: Bool = false) {
         self.balance = balance
         self.isMyBalance = isMyBalance
         self.highlighted = highlighted
@@ -188,7 +190,7 @@ private struct BalanceItem: View {
                 .frame(width: 32, height: 32)
                 .overlay(Circle().stroke(.componentPrimary, lineWidth: 1))
             HStack(spacing: 16) {
-                Text(formatBalanceId(balance.id))
+                Text(formatBalanceId(balance.id ?? ""))
                     .subtitle4()
                     .foregroundStyle(.textPrimary)
                 if isMyBalance {
@@ -217,28 +219,15 @@ private struct BalanceItem: View {
 
 #Preview {
     LeaderboardView(
-        balances: [
-            PointsBalance(id: "mhQeweiAJdiligRt", amount: 85, rank: 1, level: 3),
-            PointsBalance(id: "12beAoalsOSLals0", amount: 75, rank: 2, level: 3),
-            PointsBalance(id: "fkdbeweOJdilwq1b", amount: 65, rank: 3, level: 3),
-            PointsBalance(id: "12beAoalsOSLals1", amount: 55, rank: 4, level: 3),
-            PointsBalance(id: "12beAoalsOSLals2", amount: 48, rank: 5, level: 3),
-            PointsBalance(id: "12beAoalsOSLals3", amount: 45, rank: 6, level: 3),
-            PointsBalance(id: "12beAoalsOSLals4", amount: 35, rank: 7, level: 3),
-            PointsBalance(id: "12beAoalsOSLals5", amount: 35, rank: 8, level: 3),
-            PointsBalance(id: "12beAoalsOSLals6", amount: 33, rank: 9, level: 3),
-            PointsBalance(id: "12beAoalsOSLals7", amount: 31, rank: 10, level: 3),
-            PointsBalance(id: "mhQeweiAJdiligRw", amount: 25, rank: 11, level: 2),
-            PointsBalance(id: "12beAoalsOSLalsw", amount: 18, rank: 12, level: 2),
-            PointsBalance(id: "fkdbeweOJdilwq1w", amount: 15, rank: 13, level: 2),
-            PointsBalance(id: "22beAoalsOSLals1", amount: 14, rank: 14, level: 2),
-            PointsBalance(id: "32beAoalsOSLals2", amount: 13, rank: 15, level: 2),
-            PointsBalance(id: "42beAoalsOSLals3", amount: 12, rank: 16, level: 2),
-            PointsBalance(id: "52beAoalsOSLals4", amount: 6, rank: 17, level: 1),
-            PointsBalance(id: "62beAoalsOSLals5", amount: 6, rank: 18, level: 1),
-            PointsBalance(id: "72beAoalsOSLals6", amount: 5, rank: 19, level: 1),
-            PointsBalance(id: "82beAoalsOSLals7", amount: 4, rank: 20, level: 1)
-        ],
-        myBalance: PointsBalance(id: "82beAoalsOSLalsk", amount: 1, rank: 92, level: 1)
+        balances: [],
+        myBalance: PointsBalanceRaw(
+            amount: 12,
+            isDisabled: false,
+            createdAt: Int(Date().timeIntervalSince1970),
+            updatedAt: Int(Date().timeIntervalSince1970),
+            rank: 12,
+            referralCodes: [],
+            level: 2
+        )
     )
 }

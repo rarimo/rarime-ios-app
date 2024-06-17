@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct PassportProofView: View {
+    @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var walletManager: WalletManager
+    @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject var mrzViewModel: MRZViewModel
     @EnvironmentObject var passportViewModel: PassportViewModel
 
@@ -11,7 +13,17 @@ struct PassportProofView: View {
 
     private func register() async {
         do {
-            let zkProof = try await passportViewModel.register()
+            guard let user = userManager.user else { throw "failed to get user" }
+            
+            if decentralizedAuthManager.accessJwt == nil {
+                try await decentralizedAuthManager.initializeJWT(user.secretKey)
+            }
+            
+            try await decentralizedAuthManager.refreshIfNeeded()
+            
+            guard let accessJwt = decentralizedAuthManager.accessJwt else { throw "accessJwt is nil" }
+            
+            let zkProof = try await passportViewModel.register(accessJwt)
             if passportViewModel.processingStatus != .success { return }
 
             try await Task.sleep(nanoseconds: NSEC_PER_SEC)
@@ -207,6 +219,7 @@ private struct RevocationNFCScan: View {
         .environmentObject(PassportViewModel())
         .environmentObject(MRZViewModel())
         .environmentObject(UserManager())
+        .environmentObject(DecentralizedAuthManager())
         .onAppear {
             _ = try? userManager.createNewUser()
         }

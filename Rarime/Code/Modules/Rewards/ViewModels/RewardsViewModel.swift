@@ -1,9 +1,13 @@
 import Foundation
 
 class RewardsViewModel: ObservableObject {
-    @Published var selectedEvent: PointsEvent?
+    @Published var selectedEvent: GetEventResponseData?
+    
+    @Published var pointsBalanceRaw: PointsBalanceRaw?
+    @Published var events: [GetEventResponseData] = []
+    @Published var leaderboard: [LeaderboardEntry] = []
 
-    init(event: PointsEvent? = nil) {
+    init(event: GetEventResponseData? = nil) {
         selectedEvent = event
     }
 }

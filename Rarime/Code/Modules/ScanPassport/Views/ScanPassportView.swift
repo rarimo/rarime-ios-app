@@ -94,7 +94,9 @@ struct ScanPassportView: View {
             .transition(.backslide)
         case .waitlistPassport:
             WaitlistPassportView(
-                onNext: { onComplete(passportViewModel.passport!, false) },
+                onNext: {                    
+                    onComplete(passportViewModel.passport!, false)
+                },
                 onCancel: onClose
             )
             .environmentObject(passportViewModel)

@@ -84,5 +84,9 @@
 		<string>A0000002480300</string>
 		<string>A00000045645444C2D3031</string>
 	</array>
+	<key>POINTS_SERVICE_URL</key>
+	<string>${POINTS_SERVICE_URL}</string>
+	<key>AUTHORIZE_URL</key>
+	<string>${AUTHORIZE_URL}</string>
 </dict>
 </plist>

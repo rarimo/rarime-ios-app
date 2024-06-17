@@ -62,4 +62,10 @@ public class AppUserDefaults: ObservableObject {
 
     @AppStorage("is_passport_tokens_reserved")
     public var isPassportTokensReserved = false
+    
+    @AppStorage("userStatus")
+    public var userStatus = User.Status.unscanned.rawValue
+    
+    @AppStorage("userRefarralCode")
+    public var userRefarralCode = ""
 }

@@ -9,6 +9,10 @@ extension Data {
             result.append(Self.hexAlphabet[Int(value % 0x10)])
         })
     }
+    
+    var fullHex: String {
+        "0x" + hex
+    }
 }
 
 extension Data {

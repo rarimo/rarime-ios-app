@@ -588,6 +588,9 @@
     "Cocos Islands" : {
 
     },
+    "Code is already used" : {
+
+    },
     "Colombia" : {
 
     },
@@ -2297,6 +2300,9 @@
 
     },
     "Somalia" : {
+
+    },
+    "Something went wrong" : {
 
     },
     "Sorry, there was a problem reading the passport. %@. Error codes: [0x%u, 0x%u]" : {

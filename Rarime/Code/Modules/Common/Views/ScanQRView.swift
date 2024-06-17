@@ -20,7 +20,6 @@ struct ScanQRView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .ignoresSafeArea()
             }
-
             ZStack {
                 Color.black
                     .opacity(0.7)
