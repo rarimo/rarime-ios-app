@@ -14,6 +14,7 @@ struct RewardsView: View {
     
     @State private var isRewardsLoaded = false
     @State private var isEventsLoaded = false
+    @State private var isLeaderboardLoaded = false
     @State private var isLeaderboardSheetShown: Bool = false
     @State private var isLevelingSheetShown: Bool = false
     
@@ -60,6 +61,7 @@ struct RewardsView: View {
         }
         .onAppear(perform: fetchRewads)
         .onAppear(perform: fetchEvents)
+        .onAppear(perform: fetchLeaderboard)
         .environmentObject(rewardsViewModel)
     }
 
@@ -73,21 +75,29 @@ struct RewardsView: View {
                                 .subtitle2()
                                 .foregroundStyle(.textPrimary)
                             Spacer()
-                            Button(action: { isLeaderboardSheetShown = true }) {
-                                HStack(spacing: 4) {
-                                    Image(Icons.trophy).iconSmall()
-                                    Text(myBalance.rank.formatted()).subtitle5()
+                            if isLeaderboardLoaded {
+                                if let balance = rewardsViewModel.pointsBalanceRaw {
+                                    Button(action: { isLeaderboardSheetShown = true }) {
+                                        HStack(spacing: 4) {
+                                            Image(Icons.trophy).iconSmall()
+                                            Text("\(balance.rank ?? 0)").subtitle5()
+                                        }
+                                        .padding(.vertical, 4)
+                                        .padding(.horizontal, 8)
+                                        .background(.warningLighter, in: RoundedRectangle(cornerRadius: 100))
+                                        .foregroundStyle(.warningDarker)
+                                    }
+                                    .dynamicSheet(isPresented: $isLeaderboardSheetShown, fullScreen: true) {
+                                        ZStack {
+                                            LeaderboardView(
+                                                balances: rewardsViewModel.leaderboard,
+                                                myBalance: balance
+                                            )
+                                        }
+                                    }
                                 }
-                                .padding(.vertical, 4)
-                                .padding(.horizontal, 8)
-                                .background(.warningLighter, in: RoundedRectangle(cornerRadius: 100))
-                                .foregroundStyle(.warningDarker)
-                            }
-                            .dynamicSheet(isPresented: $isLeaderboardSheetShown, fullScreen: true) {
-                                LeaderboardView(
-                                    balances: leaderboardBalances,
-                                    myBalance: myBalance
-                                )
+                            } else {
+                                ProgressView()
                             }
                         }
                         .padding(.top, 20)
@@ -260,6 +270,26 @@ struct RewardsView: View {
                 LoggerUtil.common.error("failed to fetch events: \(error, privacy: .public)")
                 
                 AlertManager.shared.emitError(.unknown("Unable to fetch events, try again later"))
+            }
+        }
+    }
+    
+    func fetchLeaderboard() {
+        Task { @MainActor in
+            do {
+                let points = Points(ConfigManager.shared.api.pointsServiceURL)
+                
+                let leaderboard = try await points.getLeaderboard(15, 0)
+                
+                self.rewardsViewModel.leaderboard = leaderboard.data.map { entry in
+                    entry.attributes
+                }
+                
+                self.isLeaderboardLoaded = true
+            } catch {
+                LoggerUtil.common.error("failed to fetch leaderboard: \(error, privacy: .public)")
+                
+                AlertManager.shared.emitError(.unknown("Unable to fetch leaderboard, try again later"))
             }
         }
     }

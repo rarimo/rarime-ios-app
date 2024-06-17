@@ -47,11 +47,15 @@ class Points {
         
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances").appending(queryItems: query)
         
-        let response = try await AF.request(requestUrl)
+        var response = try await AF.request(requestUrl)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(GetLeaderboardResponse.self)
             .result
             .get()
+        
+        for (index, entry) in response.data.enumerated() {
+            response.data[index].attributes.id = entry.id
+        }
         
         return response
     }
@@ -77,11 +81,13 @@ class Points {
         
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances/\(nullifier)").appending(queryItems: query)
         
-        let response = try await AF.request(requestUrl, headers: headers)
+        var response = try await AF.request(requestUrl, headers: headers)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(GetPointsBalanceResponse.self)
             .result
             .get()
+        
+        response.data.attributes.id = response.data.id
         
         return response
     }
@@ -201,8 +207,6 @@ class Points {
             ]
         )
         
-        LoggerUtil.common.info("jwt: \(jwt.raw), nullifier: \(jwt.payload.sub)")
-        
         var query = [
             URLQueryItem(name: "filter[nullifier]", value: jwt.payload.sub)
         ]
@@ -233,7 +237,7 @@ class Points {
         
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/events").appending(queryItems: query)
         
-        var jsonDecoder = JSONDecoder()
+        let jsonDecoder = JSONDecoder()
         jsonDecoder.dateDecodingStrategy = .iso8601
         
         let response = try await AF.request(requestUrl, headers: headers)
@@ -335,43 +339,40 @@ struct CreatePointBalanceResponseAttributes: Codable {
 }
 
 struct GetLeaderboardResponse: Codable {
-    let data: [GetLeaderboardResponseData]
+    var data: [GetLeaderboardResponseData]
 }
 
 struct GetLeaderboardResponseData: Codable {
     let id, type: String
-    let attributes: GetLeaderboardResponseAttributes
+    var attributes: LeaderboardEntry
 }
 
-struct GetLeaderboardResponseAttributes: Codable {
+struct LeaderboardEntry: Codable {
+    var id: String?
     let amount: Int
-    let isDisabled: Bool
     let createdAt, updatedAt, rank: Int
-    let activeReferralCodes, consumedReferralCodes: [String]
     let level: Int
 
     enum CodingKeys: String, CodingKey {
         case amount
-        case isDisabled = "is_disabled"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case rank
-        case activeReferralCodes = "active_referral_codes"
-        case consumedReferralCodes = "consumed_referral_codes"
         case level
     }
 }
 
 struct GetPointsBalanceResponse: Codable {
-    let data: GetPointsBalanceResponseData
+    var data: GetPointsBalanceResponseData
 }
 
 struct GetPointsBalanceResponseData: Codable {
     let id, type: String
-    let attributes: PointsBalanceRaw
+    var attributes: PointsBalanceRaw
 }
 
 struct PointsBalanceRaw: Codable {
+    var id: String?
     let amount: Int
     let isDisabled: Bool
     let createdAt, updatedAt: Int
@@ -380,6 +381,7 @@ struct PointsBalanceRaw: Codable {
     let level: Int
 
     enum CodingKeys: String, CodingKey {
+        case id
         case amount
         case isDisabled = "is_disabled"
         case createdAt = "created_at"
@@ -387,6 +389,17 @@ struct PointsBalanceRaw: Codable {
         case rank
         case referralCodes = "referral_codes"
         case level
+    }
+    
+    func toLeaderboardEntry() -> LeaderboardEntry {
+        return LeaderboardEntry(
+            id: id,
+            amount: amount,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            rank: rank ?? 0,
+            level: level
+        )
     }
 }
 
