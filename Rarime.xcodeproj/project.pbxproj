@@ -167,6 +167,7 @@
 		CE7210312BD807140043DB7F /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = CE7210302BD807140043DB7F /* ZipArchive */; };
 		CE7210332BD818020043DB7F /* Double+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7210322BD818020043DB7F /* Double+Rounded.swift */; };
 		CE7D8AAC2BFB52EE009AF212 /* OpenApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7D8AAB2BFB52EE009AF212 /* OpenApiError.swift */; };
+		CE8E707C2C20B4B800163453 /* JSONDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8E707B2C20B4B800163453 /* JSONDocument.swift */; };
 		CE8FEB582C1AE5740008381A /* AuthorizeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB572C1AE5740008381A /* AuthorizeService.swift */; };
 		CE8FEB5A2C1AF1BE0008381A /* DecentralizeAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB592C1AF1BE0008381A /* DecentralizeAuthManager.swift */; };
 		CE8FEB5C2C1AFC3F0008381A /* libwitnesscalc_auth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8FEB5B2C1AFC3F0008381A /* libwitnesscalc_auth.a */; };
@@ -350,6 +351,7 @@
 		CE7210282BD7D0D10043DB7F /* String+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Hex.swift"; sourceTree = "<group>"; };
 		CE7210322BD818020043DB7F /* Double+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Rounded.swift"; sourceTree = "<group>"; };
 		CE7D8AAB2BFB52EE009AF212 /* OpenApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenApiError.swift; sourceTree = "<group>"; };
+		CE8E707B2C20B4B800163453 /* JSONDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDocument.swift; sourceTree = "<group>"; };
 		CE8FEB572C1AE5740008381A /* AuthorizeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizeService.swift; sourceTree = "<group>"; };
 		CE8FEB592C1AF1BE0008381A /* DecentralizeAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecentralizeAuthManager.swift; sourceTree = "<group>"; };
 		CE8FEB5B2C1AFC3F0008381A /* libwitnesscalc_auth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_auth.a; sourceTree = "<group>"; };
@@ -610,6 +612,7 @@
 				CE1FA5692C1708F100B2C191 /* Points.swift */,
 				CE8FEB572C1AE5740008381A /* AuthorizeService.swift */,
 				CE8FEB5E2C1AFF0A0008381A /* JWT.swift */,
+				CE8E707B2C20B4B800163453 /* JSONDocument.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1139,6 +1142,7 @@
 				CE8FEB5A2C1AF1BE0008381A /* DecentralizeAuthManager.swift in Sources */,
 				5609B6D92C1A15F800CB6A1F /* RewardsViewModel.swift in Sources */,
 				561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */,
+				CE8E707C2C20B4B800163453 /* JSONDocument.swift in Sources */,
 				56DAA30B2BB8B977002CF710 /* View+DynamicSheet.swift in Sources */,
 				CEB91BBE2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift in Sources */,
 				5609B6CC2C19922400CB6A1F /* LinearProgressView.swift in Sources */,
