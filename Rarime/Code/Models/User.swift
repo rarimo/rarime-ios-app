@@ -6,6 +6,11 @@ class User {
     let profile: IdentityProfile
     
     var status: Status
+    var userReferalCode: String? {
+        didSet {
+            AppUserDefaults.shared.userRefaralCode = userReferalCode ?? ""
+        }
+    }
     
     required init(secretKey: Data, _ status: Status =  .unscanned) throws {
         self.secretKey = secretKey
@@ -13,6 +18,11 @@ class User {
         self.profile = try IdentityProfile().newProfile(secretKey)
         
         self.status = status
+        
+        let userReferalCode = AppUserDefaults.shared.userRefaralCode
+        if !userReferalCode.isEmpty {
+            self.userReferalCode = userReferalCode
+        }
     }
     
     static func load() throws -> Self? {

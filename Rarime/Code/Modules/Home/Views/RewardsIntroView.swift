@@ -1,10 +1,14 @@
 import SwiftUI
+import Alamofire
 
 private enum ViewState {
     case intro, about
 }
 
-struct RewardsIntroView: View {
+struct RewardsIntroView: View {    
+    @EnvironmentObject private var userManager: UserManager
+    @EnvironmentObject private var decentralizeAuthManager: DecentralizeAuthManager
+    
     let onStart: () -> Void
     @State private var termsChecked = false
     @State private var codeVerified = false
@@ -16,13 +20,63 @@ struct RewardsIntroView: View {
 
     private func verifyCode() {
         isVerifyingCode = true
-        // TODO: Implement code verification
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            let isValidCode = code != "I"
-            codeVerified = isValidCode
-            isVerifyingCode = false
+        
+        Task { @MainActor in
+            defer {
+                self.isVerifyingCode = false
+            }
+            
+            let isValidCode = isValidReferalCodeFormat(code)
+            
             if !isValidCode {
-                codeErrorMessage = String(localized: "Invalid invitation code")
+                self.codeErrorMessage = String(localized: "Invalid invitation code")
+            }
+            
+            do {
+                guard let user = userManager.user else { throw "user is not initalized" }
+                
+                if decentralizeAuthManager.accessJwt == nil {
+                    try await decentralizeAuthManager.initializeJWT(user.secretKey)
+                }
+                
+                try await decentralizeAuthManager.refreshIfNeeded()
+                
+                guard let accessJwt = decentralizeAuthManager.accessJwt else { throw "accessJwt is nil" }
+                
+                let pointsSvc = Points(ConfigManager.shared.api.pointsServiceURL)
+                let result = try await pointsSvc.createPointsBalance(
+                    accessJwt,
+                    code
+                )
+                
+                if !result.data.attributes.isDisabled {
+                    self.userManager.user?.userReferalCode = code
+                    
+                    self.codeVerified = true
+                    
+                    LoggerUtil.common.info("User verified code: \(code, privacy: .public)")
+                    
+                    return
+                }
+                
+                self.codeErrorMessage = String(localized: "Honestly, I have no idea what could go wrong")
+            } catch {
+                do {
+                    guard let error = error as? AFError else { throw error }
+                    
+                    let openApiHttpCode = try error.retriveOpenApiHttpCode()
+                    
+                    if openApiHttpCode == HTTPStatusCode.conflict.rawValue {
+                        self.codeErrorMessage = String(localized: "Code is already used")
+                        return
+                    }
+                    
+                    throw error
+                } catch {
+                    LoggerUtil.common.error("Failed to verify code: \(error, privacy: .public)")
+                    
+                    AlertManager.shared.emitError(Errors.unknown("Failed to verify code, one of services is down"))
+                }
             }
         }
     }
@@ -113,6 +167,9 @@ struct RewardsIntroView: View {
                 }
             }
         }
+        .onAppear {
+            self.codeVerified = userManager.user?.userReferalCode != nil
+        }
     }
 
     var aboutView: some View {
@@ -179,7 +236,21 @@ private struct SocialCard: View {
     }
 }
 
+fileprivate func isValidReferalCodeFormat(_ string: String) -> Bool {
+    let pattern = "^[a-zA-Z0-9]{11}$"
+    let regex = try? NSRegularExpression(pattern: pattern)
+    let range = NSRange(location: 0, length: string.utf16.count)
+    return regex?.firstMatch(in: string, options: [], range: range) != nil
+}
+
 #Preview {
-    RewardsIntroView(onStart: {})
+    let userManager = UserManager.shared
+    
+    return RewardsIntroView(onStart: {})
         .environmentObject(ConfigManager())
+        .environmentObject(DecentralizeAuthManager())
+        .environmentObject(userManager)
+        .onAppear {
+            try? userManager.createNewUser()
+        }
 }

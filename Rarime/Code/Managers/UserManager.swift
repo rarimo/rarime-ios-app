@@ -283,6 +283,54 @@ class UserManager: ObservableObject {
         return ZkProof(proof: proof, pubSignals: pubSignals)
     }
     
+    func generatePointsProof(_ registerZkProof: ZkProof, _ passport: Passport) async throws -> ZkProof {
+        guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
+        
+        let registrationContract = try RegistrationContract()
+        
+        let registrationSmtEvmAddress = try await registrationContract.registrationSmt()
+        
+        let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtEvmAddress)
+        
+        var error: NSError? = nil
+        let proofIndex = IdentityCalculateProofIndex(
+            registerZkProof.pubSignals[0],
+            registerZkProof.pubSignals[2],
+            &error
+        )
+        if let error { throw error }
+        guard let proofIndex else { throw "proof index is not initialized" }
+        
+        let smtProof = try await registrationSmtContract.getProof(proofIndex)
+        
+        let smtProofJson = try JSONEncoder().encode(smtProof)
+        
+        let profileInitializer = IdentityProfile()
+        let profile = try profileInitializer.newProfile(secretKey)
+        
+        let (passportInfo, identityInfo) = try await registrationContract.getPassportInfo(registerZkProof.pubSignals[0])
+        
+        let queryProofInputs = try profile.buildAirdropQueryIdentityInputs(
+            passport.dg1,
+            smtProofJSON: smtProofJson,
+            selector: "23073",
+            pkPassportHash: registerZkProof.pubSignals[0],
+            issueTimestamp: identityInfo.issueTimestamp.description,
+            identityCounter: passportInfo.identityReissueCounter.description,
+            eventID: Points.PointsEventId,
+            startedAt: 1715688000
+        )
+        
+        let wtns = try ZKUtils.calcWtnsQueryIdentity(queryProofInputs)
+        
+        let (proofJson, pubSignalsJson) = try ZKUtils.groth16QueryIdentity(wtns)
+        
+        let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
+        let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
+        
+        return ZkProof(proof: proof, pubSignals: pubSignals)
+    }
+    
     func airdrop(_ queryZkProof: ZkProof) async throws {
         guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
         
@@ -379,6 +427,7 @@ class UserManager: ObservableObject {
         AppUserDefaults.shared.reservedBalance = 0.0
         AppUserDefaults.shared.isPassportTokensReserved = false
         AppUserDefaults.shared.isUserRevoked = false
+        AppUserDefaults.shared.userRefaralCode = ""
         
         do {
             try AppKeychain.removeValue(.privateKey)
@@ -396,5 +445,15 @@ class UserManager: ObservableObject {
         } catch {
             fatalError("\(error.localizedDescription)")
         }
+    }
+    
+    func generateNullifierForEvent(_ eventId: String) throws -> String {
+        guard let user else { throw "User is not initalized" }
+        
+        var error: NSError?
+        let nullifier = user.profile.calculateEventNullifierHex(eventId, error: &error)
+        if let error { throw error}
+        
+        return nullifier
     }
 }

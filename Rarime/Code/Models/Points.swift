@@ -2,18 +2,26 @@ import Foundation
 import Alamofire
 
 class Points {
+    static let PointsEventId = "0x77fabbc6cb41a11d4fb6918696b3550d5d602f252436dd587f9065b7c4e62b"
+    
     let url: URL
     
     init(_ url: URL) {
         self.url = url
     }
     
-    func createPointsBalance(_ nullifier: String, _ refaralCode: String) async throws -> CreatePointBalanceResponse {
+    func createPointsBalance(_ jwt: JWT, _ refaralCode: String) async throws -> CreatePointBalanceResponse {
+        let headers = HTTPHeaders(
+            [
+                HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
+            ]
+        )
+        
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances")
         
         let requestPayload = CreatePointBalanceRequest(
             data: CreatePointBalanceRequestData(
-                id: nullifier,
+                id: jwt.payload.sub,
                 type: "create_balance",
                 attributes: CreatePointBalanceRequestAttributes(
                     referredBy: refaralCode
@@ -21,7 +29,7 @@ class Points {
             )
         )
         
-        let response = try await AF.request(requestUrl, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default)
+        let response = try await AF.request(requestUrl, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default, headers: headers)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(CreatePointBalanceResponse.self)
             .result
@@ -70,12 +78,18 @@ class Points {
         return response
     }
     
-    func activatePointsBalance(_ nullifier: String, _ refaralCode: String) async throws -> CreatePointBalanceRequest {
-        let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances/\(nullifier)")
+    func activatePointsBalance(_ jwt: JWT, _ refaralCode: String) async throws -> CreatePointBalanceRequest {
+        let headers = HTTPHeaders(
+            [
+                HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
+            ]
+        )
+        
+        let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances/\(jwt.payload.sub)")
         
         let requestPayload = CreatePointBalanceRequest(
             data: CreatePointBalanceRequestData(
-                id: nullifier,
+                id: jwt.payload.sub,
                 type: "update_balance",
                 attributes: CreatePointBalanceRequestAttributes(
                     referredBy: refaralCode
@@ -83,7 +97,7 @@ class Points {
             )
         )
         
-        let response = try await AF.request(requestUrl, method: .patch, parameters: requestPayload, encoder: JSONParameterEncoder.default)
+        let response = try await AF.request(requestUrl, method: .patch, parameters: requestPayload, encoder: JSONParameterEncoder.default, headers: headers)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(CreatePointBalanceRequest.self)
             .result
@@ -92,7 +106,15 @@ class Points {
         return response
     }
     
-    func verifyPassport(_ nullifier: String, _ zkProof: ZkProof) async throws -> VerifyPassportRequest {
+    func verifyPassport(_ jwt: JWT, _ zkProof: ZkProof) async throws -> VerifyPassportResponse {
+        let nullifier = jwt.payload.sub
+        
+        let headers = HTTPHeaders(
+            [
+                HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
+            ]
+        )
+        
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances/\(nullifier)/verifypassport")
         
         let requestPayload = VerifyPassportRequest(
@@ -105,9 +127,9 @@ class Points {
             )
         )
         
-        let response = try await AF.request(requestUrl, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default)
+        let response = try await AF.request(requestUrl, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default, headers: headers)
             .validate(OpenApiError.catchInstance)
-            .serializingDecodable(VerifyPassportRequest.self)
+            .serializingDecodable(VerifyPassportResponse.self)
             .result
             .get()
         
@@ -287,7 +309,6 @@ struct CreatePointBalanceResponseAttributes: Codable {
     let amount: Int
     let isDisabled: Bool
     let createdAt, updatedAt, rank: Int
-    let activeReferralCodes, consumedReferralCodes: [String]
     let level: Int
 
     enum CodingKeys: String, CodingKey {
@@ -296,8 +317,6 @@ struct CreatePointBalanceResponseAttributes: Codable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case rank
-        case activeReferralCodes = "active_referral_codes"
-        case consumedReferralCodes = "consumed_referral_codes"
         case level
     }
 }
@@ -631,4 +650,17 @@ struct ClaimPointsForEventRequest: Codable {
 
 struct ClaimPointsForEventRequestData: Codable {
     let id, type: String
+}
+
+struct VerifyPassportResponse: Codable {
+    let data: VerifyPassportResponseData
+}
+
+struct VerifyPassportResponseData: Codable {
+    let id, type: String
+    let attributes: VerifyPassportResponseAttributes
+}
+
+struct VerifyPassportResponseAttributes: Codable {
+    let claimed: Bool
 }

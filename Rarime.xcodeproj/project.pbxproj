@@ -39,9 +39,9 @@
 		561C3C402BADF0AA00FBB3B9 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 561C3C3C2BADF0AA00FBB3B9 /* Inter-SemiBold.ttf */; };
 		561C3C412BADF0AA00FBB3B9 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 561C3C3D2BADF0AA00FBB3B9 /* Inter-Medium.ttf */; };
 		561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C422BAEE2D600FBB3B9 /* String+Error.swift */; };
-		562241452C11E1B3000239FA /* RewardsIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562241442C11E1B3000239FA /* RewardsIntroView.swift */; };
 		562241412C107B9B000239FA /* AssetsSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562241402C107B9B000239FA /* AssetsSlider.swift */; };
 		562241432C107E16000239FA /* AppDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562241422C107E16000239FA /* AppDropdown.swift */; };
+		562241452C11E1B3000239FA /* RewardsIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562241442C11E1B3000239FA /* RewardsIntroView.swift */; };
 		563529E52BB072060027C910 /* RewardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529E42BB072060027C910 /* RewardsView.swift */; };
 		563529E72BB072870027C910 /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529E62BB072870027C910 /* WalletView.swift */; };
 		563529E92BB072B80027C910 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529E82BB072B80027C910 /* HomeView.swift */; };
@@ -152,6 +152,7 @@
 		CE31E54A2C11FE150039CAA5 /* ImportIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31E5492C11FE150039CAA5 /* ImportIdentityView.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
 		CE32CF522BAC981300E507B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE32CF512BAC981300E507B6 /* Lottie */; };
+		CE3E0D3B2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E0D3A2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift */; };
 		CE68BE3D2BD9B23D00D92EBB /* ZkProof.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */; };
 		CE68BE3F2BD9B4B200D92EBB /* Relayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */; };
 		CE68BE422BD9B6A200D92EBB /* RegistrationContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE412BD9B6A200D92EBB /* RegistrationContract.swift */; };
@@ -229,9 +230,9 @@
 		561C3C3C2BADF0AA00FBB3B9 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		561C3C3D2BADF0AA00FBB3B9 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
 		561C3C422BAEE2D600FBB3B9 /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
-		562241442C11E1B3000239FA /* RewardsIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsIntroView.swift; sourceTree = "<group>"; };
 		562241402C107B9B000239FA /* AssetsSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsSlider.swift; sourceTree = "<group>"; };
 		562241422C107E16000239FA /* AppDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDropdown.swift; sourceTree = "<group>"; };
+		562241442C11E1B3000239FA /* RewardsIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsIntroView.swift; sourceTree = "<group>"; };
 		563529E42BB072060027C910 /* RewardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsView.swift; sourceTree = "<group>"; };
 		563529E62BB072870027C910 /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
 		563529E82BB072B80027C910 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -338,6 +339,7 @@
 		CE31E5452C11F4180039CAA5 /* GetStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedView.swift; sourceTree = "<group>"; };
 		CE31E5492C11FE150039CAA5 /* ImportIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportIdentityView.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		CE3E0D3A2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AFError+RetriveOpenApiHttpCode.swift"; sourceTree = "<group>"; };
 		CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZkProof.swift; sourceTree = "<group>"; };
 		CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relayer.swift; sourceTree = "<group>"; };
 		CE68BE412BD9B6A200D92EBB /* RegistrationContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationContract.swift; sourceTree = "<group>"; };
@@ -819,6 +821,7 @@
 				CE7210322BD818020043DB7F /* Double+Rounded.swift */,
 				CED314682C04889D00DF31D5 /* UIDevice+modelName.swift */,
 				CEB91BBD2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift */,
+				CE3E0D3A2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1142,6 +1145,7 @@
 				56E6AD4D2BD273BC00E4DDC1 /* ProfileRouteLayout.swift in Sources */,
 				56E2D91B2BCEA66A006E725D /* PassportCard.swift in Sources */,
 				56E2D9192BCE94CA006E725D /* RarimeInfoView.swift in Sources */,
+				CE3E0D3B2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift in Sources */,
 				CEC562112BD926AA002D4954 /* ZKUtils.swift in Sources */,
 				56CC01E52BCD81AA008CEBE0 /* UkrainianIntroView.swift in Sources */,
 				560F0C232BD02DFD00067054 /* WalletSendView.swift in Sources */,

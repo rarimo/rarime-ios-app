@@ -1,15 +1,15 @@
 import Identity
 import Foundation
 
-class DecentralizeAuthManager {
+class DecentralizeAuthManager: ObservableObject {
     static let AuthEventId = "0x77fabbc6cb41a11d4fb6918696b3550d5d602f252436dd587f9065b7c4e62b"
     
     static let shared = DecentralizeAuthManager()
     
     let authorize: Authorize
     
-    var accessJwt: Optional<JWT> = nil
-    var refreshJwt: Optional<JWT> = nil
+    @Published var accessJwt: Optional<JWT> = nil
+    @Published var refreshJwt: Optional<JWT> = nil
     
     init() {
         self.authorize = Authorize(ConfigManager.shared.api.authorizeURL)
@@ -47,8 +47,13 @@ class DecentralizeAuthManager {
         
         let authorizeUserResponse = try await self.authorize.authorizeUser(nullifier, zkProof)
         
-        self.accessJwt = try JWT(authorizeUserResponse.data.attributes.accessToken.token)
-        self.refreshJwt = try JWT(authorizeUserResponse.data.attributes.refreshToken.token)
+        let accessJwt = try JWT(authorizeUserResponse.data.attributes.accessToken.token)
+        let refreshJwt = try JWT(authorizeUserResponse.data.attributes.refreshToken.token)
+        
+        DispatchQueue.main.async {
+            self.accessJwt = accessJwt
+            self.refreshJwt = refreshJwt
+        }
     }
     
     func refreshIfNeeded() async throws {

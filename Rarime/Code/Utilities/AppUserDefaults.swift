@@ -65,4 +65,7 @@ public class AppUserDefaults: ObservableObject {
     
     @AppStorage("userStatus")
     public var userStatus = User.Status.unscanned.rawValue
+    
+    @AppStorage("userRefaralCode")
+    public var userRefaralCode = ""
 }
