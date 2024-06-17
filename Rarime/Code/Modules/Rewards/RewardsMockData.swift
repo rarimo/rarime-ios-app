@@ -27,47 +27,30 @@ struct PointsBalance: Equatable {
     var usedCodes: [String]?
 }
 
-let limitedEvents: [PointsEvent] = [
-    PointsEvent(
-        meta: PointsEventMeta(
-            name: "initial_setup",
-            title: "Initial setup of identity credentials",
-            description: "Full description text",
-            shortDescription: "Short description text",
-            reward: 5,
-            expiresAt: Date(timeIntervalSinceNow: 200000),
-            actionURL: "https://example.com",
-            logo: Images.rewardsTest1
-        )
-    ),
-    PointsEvent(
-        meta: PointsEventMeta(
-            name: "initial_setup",
-            title: "Initial setup of identity credentials",
-            description: "Full description text",
-            shortDescription: "Short description text",
-            reward: 5,
-            expiresAt: Date(timeIntervalSinceNow: 200000),
-            actionURL: "https://example.com",
-            logo: Images.rewardsTest2
-        )
+let inviteFriendEvent = GetEventResponseData(
+    id: "dasd",
+    type: "dasd",
+    attributes: GetEventResponseAttributes(
+        status: "active",
+        createdAt: Int(Date().timeIntervalSince1970),
+        updatedAt: Int(Date().timeIntervalSince1970),
+        meta: GetEventResponseMeta(
+            metaStatic: GetEventResponseStatic(
+                name: "invite_friends",
+                reward: 5,
+                title: "Invite 5 users",
+                description: "Full description text",
+                shortDescription: "Invite friends in to app",
+                frequency: "always",
+                startsAt: nil,
+                expiresAt: nil,
+                actionURL: nil,
+                logo: ""
+            )
+        ),
+        pointsAmount: nil
     )
-]
-
-let activeEvents: [PointsEvent] = [
-    PointsEvent(
-        meta: PointsEventMeta(
-            name: "invite_friends",
-            title: "Invite 5 users",
-            description: "Full description text",
-            shortDescription: "Invite friends in to app",
-            reward: 5,
-            expiresAt: nil,
-            actionURL: nil,
-            logo: Icons.users
-        )
-    )
-]
+)
 
 let leaderboardBalances: [PointsBalance] = [
     PointsBalance(id: "mhQeweiAJdiligRt", amount: 85, rank: 1, level: 3),

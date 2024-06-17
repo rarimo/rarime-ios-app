@@ -201,6 +201,8 @@ class Points {
             ]
         )
         
+        LoggerUtil.common.info("jwt: \(jwt.raw), nullifier: \(jwt.payload.sub)")
+        
         var query = [
             URLQueryItem(name: "filter[nullifier]", value: jwt.payload.sub)
         ]
@@ -231,9 +233,12 @@ class Points {
         
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/events").appending(queryItems: query)
         
+        var jsonDecoder = JSONDecoder()
+        jsonDecoder.dateDecodingStrategy = .iso8601
+        
         let response = try await AF.request(requestUrl, headers: headers)
             .validate(OpenApiError.catchInstance)
-            .serializingDecodable(GetEventsResponse.self)
+            .serializingDecodable(GetEventsResponse.self, decoder: jsonDecoder)
             .result
             .get()
         
@@ -546,7 +551,7 @@ struct GetEventResponseStatic: Codable {
     let name: String
     let reward: Int
     let title, description, shortDescription, frequency: String
-    let startsAt, expiresAt: String?
+    let startsAt, expiresAt: Date?
     let actionURL: String?
     let logo: String?
 
@@ -615,7 +620,7 @@ struct ClaimPointsForEventStatic: Codable {
     let name: String
     let reward: Int
     let title, description, shortDescription, frequency: String
-    let startsAt, expiresAt: String?
+    let startsAt, expiresAt: Date?
     let actionURL: String?
     let logo: String?
 

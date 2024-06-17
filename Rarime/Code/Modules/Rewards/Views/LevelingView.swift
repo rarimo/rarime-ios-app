@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct LevelingView: View {
-    let balance: PointsBalance
+    let balance: PointsBalanceRaw
     @State private var selectedLevelIndex: Int
 
-    init(balance: PointsBalance) {
+    init(balance: PointsBalanceRaw) {
         self.balance = balance
         self._selectedLevelIndex = State(initialValue: balance.level - 1)
     }
@@ -21,7 +21,7 @@ struct LevelingView: View {
             CurrentLevelStatus(userLevel: balance.level)
             LevelsSlider(
                 selectedIndex: $selectedLevelIndex,
-                reservedBalance: balance.amount
+                reservedBalance: Double(balance.amount)
             )
             LevelRewards(rewards: selectedLevel.rewards)
         }
@@ -185,5 +185,15 @@ private struct LevelRewards: View {
 }
 
 #Preview {
-    LevelingView(balance: PointsBalance(id: "42beAoalsOSLals3", amount: 12, rank: 16, level: 2))
+    LevelingView(
+        balance: PointsBalanceRaw(
+            amount: 12,
+            isDisabled: false,
+            createdAt: 1,
+            updatedAt: 1,
+            rank: 1,
+            referralCodes: [],
+            level: 2
+        )
+    )
 }

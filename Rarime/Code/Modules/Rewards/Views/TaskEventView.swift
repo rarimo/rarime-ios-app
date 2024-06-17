@@ -1,11 +1,13 @@
 import MarkdownUI
 import SwiftUI
+import CachedAsyncImage
 
 struct TaskEventView: View {
     @EnvironmentObject var rewardsViewModel: RewardsViewModel
+    
     let onBack: () -> Void
 
-    private var event: PointsEvent {
+    private var event: GetEventResponseData {
         rewardsViewModel.selectedEvent!
     }
 
@@ -20,7 +22,7 @@ struct TaskEventView: View {
                     // TODO: update content
                     item: URL(string: "https://rarime.com")!,
                     subject: Text("RariMe Event"),
-                    message: Text("RariMe Event: \(event.meta.title)\n\nParticipate and get rewarded: https://rarime.com")
+                    message: Text("RariMe Event: \(event.attributes.meta.metaStatic.title)\n\nParticipate and get rewarded: https://rarime.com")
                 ) {
                     Image(Icons.share).iconMedium()
                 }
@@ -30,29 +32,28 @@ struct TaskEventView: View {
             VStack(spacing: 8) {
                 HStack(alignment: .top, spacing: 16) {
                     VStack(alignment: .leading, spacing: 16) {
-                        Text(event.meta.title)
+                        Text(event.attributes.meta.metaStatic.title)
                             .subtitle2()
                             .foregroundStyle(.textPrimary)
                         HStack(spacing: 16) {
-                            RewardChip(reward: event.meta.reward)
-                            if let endDate = event.meta.expiresAt {
-                                Text("Exp: \(DateUtil.richDateFormatter.string(from: endDate))")
+                            RewardChip(reward: Double(event.attributes.meta.metaStatic.reward))
+                            if let endDate = event.attributes.meta.metaStatic.expiresAt {
+                                Text("Exp: \(endDate))")
                                     .caption2()
                                     .foregroundStyle(.textSecondary)
                             }
                         }
                     }
                     Spacer()
-                    Image(event.meta.logo)
-                        .resizable()
+                    CachedAsyncImage(url: URL(string: event.attributes.meta.metaStatic.logo ?? ""))
                         .scaledToFill()
-                        .frame(width: 64, height: 64)
+                        .frame(width: 20, height: 20)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
                 .frame(maxWidth: .infinity)
                 HorizontalDivider().padding(.top, 16)
                 ScrollView {
-                    Markdown(event.meta.description)
+                    Markdown(event.attributes.meta.metaStatic.description)
                         .body3()
                         .foregroundStyle(.textPrimary)
                         .padding(.top, 16)
@@ -62,7 +63,7 @@ struct TaskEventView: View {
             }
             .padding(.top, 32)
             .padding(.horizontal, 20)
-            if let actionURL = event.meta.actionURL {
+            if let actionURL = event.attributes.meta.metaStatic.actionURL {
                 VStack(spacing: 16) {
                     HorizontalDivider()
                     AppButton(
@@ -85,17 +86,28 @@ struct TaskEventView: View {
 #Preview {
     TaskEventView(onBack: {})
         .environmentObject(RewardsViewModel(
-            event: PointsEvent(
-                meta: PointsEventMeta(
-                    name: "initial_setup",
-                    title: "Initial setup of identity credentials",
-                    description: "### Description\n\nThis task is to setup your identity credentials. You will need to provide your personal information and verify your identity.\n\n### Requirements\n\n- Personal Information\n- Identity Verification\n\n### Reward\n\n5 points\n\n### End Date\n\n2021-10-31 23:59:59",
-                    shortDescription: "",
-                    reward: 5,
-                    expiresAt: Date(timeIntervalSinceNow: 200000),
-                    actionURL: "https://example.com",
-                    logo: Images.rewardsTest1
-                )
+            event: GetEventResponseData(
+                id: "",
+                type: "",
+                attributes: GetEventResponseAttributes(
+                    status: "active",
+                    createdAt: Int(Date().timeIntervalSince1970),
+                    updatedAt: Int(Date().timeIntervalSince1970),
+                    meta: GetEventResponseMeta(
+                        metaStatic: GetEventResponseStatic(
+                            name: "",
+                            reward: 5,
+                            title: "lorem",
+                            description: "lorem",
+                            shortDescription: "lorem",
+                            frequency: "one-time",
+                            startsAt: Date(),
+                            expiresAt: Date(),
+                            actionURL: "https://example.com",
+                            logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg"
+                        )
+                    ),
+                    pointsAmount: nil)
             )
         ))
 }
