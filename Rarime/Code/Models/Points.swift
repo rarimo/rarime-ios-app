@@ -56,7 +56,15 @@ class Points {
         return response
     }
     
-    func getPointsBalance(_ nullifier: String, _ rank: Optional<Bool> = nil , _ referral_codes: Optional<Bool> = nil) async throws -> GetPointsBalanceResponse {
+    func getPointsBalance(_ jwt: JWT, _ rank: Optional<Bool> = nil , _ referral_codes: Optional<Bool> = nil) async throws -> GetPointsBalanceResponse {
+        let headers = HTTPHeaders(
+            [
+                HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
+            ]
+        )
+        
+        let nullifier = jwt.payload.sub
+        
         var query = [URLQueryItem]()
         
         if let rank = rank {
@@ -69,7 +77,7 @@ class Points {
         
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances/\(nullifier)").appending(queryItems: query)
         
-        let response = try await AF.request(requestUrl)
+        let response = try await AF.request(requestUrl, headers: headers)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(GetPointsBalanceResponse.self)
             .result
@@ -355,14 +363,15 @@ struct GetPointsBalanceResponse: Codable {
 
 struct GetPointsBalanceResponseData: Codable {
     let id, type: String
-    let attributes: GetPointsBalanceResponseAttributes
+    let attributes: PointsBalanceRaw
 }
 
-struct GetPointsBalanceResponseAttributes: Codable {
+struct PointsBalanceRaw: Codable {
     let amount: Int
     let isDisabled: Bool
-    let createdAt, updatedAt, rank: Int
-    let activeReferralCodes, consumedReferralCodes: [String]
+    let createdAt, updatedAt: Int
+    let rank: Int?
+    let referralCodes: [ReferalCode]?
     let level: Int
 
     enum CodingKeys: String, CodingKey {
@@ -371,10 +380,23 @@ struct GetPointsBalanceResponseAttributes: Codable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case rank
-        case activeReferralCodes = "active_referral_codes"
-        case consumedReferralCodes = "consumed_referral_codes"
+        case referralCodes = "referral_codes"
         case level
     }
+}
+
+struct ReferalCode: Codable {
+    let id: String
+    let status: ReferalCodeStatus
+}
+
+enum ReferalCodeStatus: String, Codable {
+    case active = "active"
+    case banned = "banned"
+    case limited = "limited"
+    case awaiting = "awaiting"
+    case rewarded = "rewarded"
+    case consumed = "consumed"
 }
 
 struct VerifyPassportRequest: Codable {

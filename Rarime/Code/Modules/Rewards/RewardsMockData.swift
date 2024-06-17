@@ -66,18 +66,6 @@ let activeEvents: [PointsEvent] = [
             actionURL: nil,
             logo: Icons.users
         )
-    ),
-    PointsEvent(
-        meta: PointsEventMeta(
-            name: "get_poh",
-            title: "Getting a PoH credential",
-            description: "Full description text",
-            shortDescription: "Short description text",
-            reward: 5,
-            expiresAt: nil,
-            actionURL: "https://example.com",
-            logo: Icons.identificationCard
-        )
     )
 ]
 

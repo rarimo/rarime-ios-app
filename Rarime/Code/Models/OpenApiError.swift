@@ -38,7 +38,7 @@ extension OpenApiError {
         _ request: URLRequest?,
         _ response: HTTPURLResponse,
         _ data: Data?
-    ) -> Result<Void, Error> {        
+    ) -> Result<Void, Error> {
         switch response.statusCode {
         case 200...299:
             return .success(())

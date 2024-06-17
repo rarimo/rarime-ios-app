@@ -113,6 +113,9 @@
         }
       }
     },
+    "🔥" : {
+
+    },
     "About Reward Program" : {
 
     },
@@ -1258,16 +1261,6 @@
     },
     "Invite to RariMe" : {
 
-    },
-    "Invited %lld/%lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Invited %1$lld/%2$lld"
-          }
-        }
-      }
     },
     "Iran" : {
 

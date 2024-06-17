@@ -3,16 +3,16 @@ import SwiftUI
 private let INVITE_REWARD = 3.0
 
 struct InviteFriendsView: View {
-    let balance: PointsBalance
+    let balance: PointsBalanceRaw
     let onBack: () -> Void
 
-    private var totalCodesCount: Int {
-        balance.activeCodes!.count + balance.activatedCodes!.count + balance.usedCodes!.count
-    }
-
-    private var invitedCodesCount: Int {
-        totalCodesCount - balance.activeCodes!.count
-    }
+//    private var totalCodesCount: Int {
+//        balance.activeCodes!.count + balance.activatedCodes!.count + balance.usedCodes!.count
+//    }
+//
+//    private var invitedCodesCount: Int {
+//        totalCodesCount - balance.activeCodes!.count
+//    }
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -46,9 +46,9 @@ struct InviteFriendsView: View {
     private var invitedCard: some View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Invited \(invitedCodesCount)/\(totalCodesCount)")
-                    .subtitle3()
-                    .foregroundStyle(.textPrimary)
+//                Text("Invited \(invitedCodesCount)/\(totalCodesCount)")
+//                    .subtitle3()
+//                    .foregroundStyle(.textPrimary)
                 Text("Short description text here")
                     .body3()
                     .foregroundStyle(.textSecondary)
@@ -56,14 +56,19 @@ struct InviteFriendsView: View {
             .padding(.horizontal, 24)
             ScrollView {
                 VStack(spacing: 8) {
-                    ForEach(balance.activeCodes!, id: \.self) { code in
-                        InviteCodeView(code: code, status: .active)
-                    }
-                    ForEach(balance.activatedCodes!, id: \.self) { code in
-                        InviteCodeView(code: code, status: .activated)
-                    }
-                    ForEach(balance.usedCodes!, id: \.self) { code in
-                        InviteCodeView(code: code, status: .used)
+//                    ForEach(balance.activeCodes!, id: \.self) { code in
+//                        InviteCodeView(code: code, status: .active)
+//                    }
+//                    ForEach(balance.activatedCodes!, id: \.self) { code in
+//                        InviteCodeView(code: code, status: .activated)
+//                    }
+//                    ForEach(balance.usedCodes!, id: \.self) { code in
+//                        InviteCodeView(code: code, status: .used)
+//                    }
+                    if let codes = balance.referralCodes {
+                        ForEach(codes, id: \.id) { code in
+                            InviteCodeView(code: code.id, status: .active)
+                        }
                     }
                     Spacer()
                 }
@@ -92,7 +97,7 @@ private enum InviteCodeStatus {
 
 private struct InviteCodeView: View {
     let code: String
-    let status: InviteCodeStatus
+    let status: ReferalCodeStatus
 
     var invitationLink: String {
         // TODO: use URL from config
@@ -138,13 +143,13 @@ private struct InviteCodeView: View {
                         Circle()
                             .fill(.componentHovered)
                             .frame(width: 4)
-                        Text(status == .used ? "Passport scanned" : "Need passport scan")
+                        Text(status == .rewarded ? "Passport scanned" : "Need passport scan")
                             .body4()
                     }
                     .foregroundStyle(.textSecondary)
                 }
                 Spacer()
-                RewardChip(reward: INVITE_REWARD, active: status == .used)
+                RewardChip(reward: INVITE_REWARD, active: status == .rewarded)
             }
             .padding(.vertical, 12)
             .padding(.horizontal, 16)
@@ -158,14 +163,14 @@ private struct InviteCodeView: View {
 
 #Preview {
     InviteFriendsView(
-        balance: PointsBalance(
-            id: "42beAoalsOSLals3",
+        balance: PointsBalanceRaw(
             amount: 12,
-            rank: 16,
-            level: 2,
-            activeCodes: ["zgsScguZ", "jerUsmac"],
-            activatedCodes: ["rCx18MZ4"],
-            usedCodes: ["73k3bdYaFWM", "9csIL7dW65m"]
+            isDisabled: false,
+            createdAt: Int(Date().timeIntervalSince1970),
+            updatedAt: Int(Date().timeIntervalSince1970),
+            rank: 12,
+            referralCodes: [],
+            level: 2
         ),
         onBack: {}
     )

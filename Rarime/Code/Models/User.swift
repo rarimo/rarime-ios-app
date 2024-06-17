@@ -5,7 +5,12 @@ class User {
     let secretKey: Data
     let profile: IdentityProfile
     
-    var status: Status
+    var status: Status {
+        didSet {
+            AppUserDefaults.shared.userStatus = status.rawValue
+        }
+    }
+    
     var userReferalCode: String? {
         didSet {
             AppUserDefaults.shared.userRefaralCode = userReferalCode ?? ""
@@ -42,7 +47,6 @@ class User {
 extension User {
     public enum Status: Int {
         case unscanned
-        case scanned
         case passportScanned
     }
 }

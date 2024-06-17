@@ -5,9 +5,13 @@ private enum RewardsRoute: String, Hashable {
 }
 
 struct RewardsView: View {
+    @EnvironmentObject private var userManager: UserManager
+    @EnvironmentObject private var decentralizeAuthManager: DecentralizeAuthManager
+    
     @StateObject private var rewardsViewModel = RewardsViewModel()
     @State private var path: [RewardsRoute] = []
-
+    
+    @State private var isRewardsLoaded = false
     @State private var isLeaderboardSheetShown: Bool = false
     @State private var isLevelingSheetShown: Bool = false
 
@@ -17,25 +21,38 @@ struct RewardsView: View {
     }
 
     var body: some View {
-        NavigationStack(path: $path) {
-            content.navigationDestination(for: RewardsRoute.self) { route in
-                switch route {
-                case .taskEvent:
-                    TaskEventView(onBack: { path.removeLast() })
-                        .environmentObject(rewardsViewModel)
-                case .inviteFriends:
-                    InviteFriendsView(
-                        balance: myBalance,
-                        onBack: { path.removeLast() }
-                    )
-                case .claimRewards:
-                    ClaimRewardsView(
-                        balance: myBalance,
-                        onBack: { path.removeLast() }
-                    )
+        ZStack {
+            if isRewardsLoaded {
+                NavigationStack(path: $path) {
+                    content.navigationDestination(for: RewardsRoute.self) { route in
+                        switch route {
+                        case .taskEvent:
+                            TaskEventView(onBack: { path.removeLast() })
+                                .environmentObject(rewardsViewModel)
+                        case .inviteFriends:
+                            ZStack {
+                                if let myBalance = rewardsViewModel.pointsBalanceRaw {
+                                    InviteFriendsView(
+                                        balance: myBalance,
+                                        onBack: { path.removeLast() }
+                                    )
+                                }
+                            }
+                        case .claimRewards:
+                            ClaimRewardsView(
+                                balance: myBalance,
+                                onBack: { path.removeLast() }
+                            )
+                        }
+                    }
                 }
+            } else {
+                ProgressView()
+                    .controlSize(.large)
             }
         }
+        .onAppear(perform: fetchRewads)
+        .environmentObject(rewardsViewModel)
     }
 
     var content: some View {
@@ -124,7 +141,7 @@ struct RewardsView: View {
         CardContainer {
             VStack(alignment: .leading, spacing: 20) {
                 HStack(spacing: 12) {
-                    Text(try! String("🔥"))
+                    Text("🔥")
                         .subtitle5()
                         .frame(width: 24, height: 24)
                         .background(.warningLight, in: Circle())
@@ -171,6 +188,33 @@ struct RewardsView: View {
                         }
                     }
                 }
+            }
+        }
+    }
+    
+    func fetchRewads() {
+        Task { @MainActor in
+            do {
+                guard let user = userManager.user else { throw "user is not initalized" }
+                
+                if decentralizeAuthManager.accessJwt == nil {
+                    try await decentralizeAuthManager.initializeJWT(user.secretKey)
+                }
+                
+                try await decentralizeAuthManager.refreshIfNeeded()
+                
+                guard let accessJwt = decentralizeAuthManager.accessJwt else { throw "accessJwt is nil" }
+                
+                let points = Points(ConfigManager.shared.api.pointsServiceURL)
+                
+                let balanceResponse = try await points.getPointsBalance(accessJwt, true, true)
+                
+                self.rewardsViewModel.pointsBalanceRaw = balanceResponse.data.attributes
+                isRewardsLoaded = true
+            } catch {
+                LoggerUtil.common.error("failed to fetch rewards: \(error.localizedDescription, privacy: .public)")
+                
+                AlertManager.shared.emitError(.unknown("Unable to fetch rewards, try again later"))
             }
         }
     }
@@ -237,7 +281,13 @@ private struct ActiveEventItem: View {
 }
 
 #Preview {
-    RewardsView()
+    let userManager = UserManager()
+    
+    return RewardsView()
+        .environmentObject(DecentralizeAuthManager())
         .environmentObject(MainView.ViewModel())
-        .environmentObject(UserManager())
+        .environmentObject(userManager)
+        .onAppear(perform: {
+            try? userManager.createNewUser()
+        })
 }
