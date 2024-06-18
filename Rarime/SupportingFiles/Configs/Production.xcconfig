@@ -25,3 +25,7 @@ ICAO_COSMOS_RPC = "core-api.node1.mainnet-beta.rarimo.com:443"
 
 // MARK: Feedback
 FEEDBACK_EMAIL = "info@rarilabs.com"
+
+// MARK: CircuitsData
+CIRCUIT_DATA_URL_0 = "https:${SLASH}/storage.googleapis.com/rarimo-store/rdi1/registerIdentityUniversalRSA2048-download.zip"
+CIRCUIT_DATA_URL_1 = "https:${SLASH}/storage.googleapis.com/rarimo-store/rdi1/registerIdentityUniversalRSA4096-download.zip"
