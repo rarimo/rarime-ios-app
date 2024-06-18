@@ -48,16 +48,23 @@ class PassportViewModel: ObservableObject {
     }
 
     @MainActor
-    func register(_ jwt: JWT) async throws -> ZkProof {
+    func register(
+        _ jwt: JWT,
+        _ downloadProgress: @escaping (String) -> Void = { _ in }
+    ) async throws -> ZkProof {
         do {
             guard let passport else { throw "failed to get passport" }
             
-            try await UserManager.shared.registerCertificate(passport)
+            let registeredCircuitData = try await UserManager.shared.registerCertificate(passport)
+            
+            let circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData, downloadProgress)
+            
+            downloadProgress("")
             
             try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
             proofState = .applyingZK
             
-            guard let proof = try await UserManager.shared.generateRegisterIdentityProof(passport) else {
+            guard let proof = try await UserManager.shared.generateRegisterIdentityProof(passport, circuitData, registeredCircuitData) else {
                 throw "failed to generate proof, invalid circuit type"
             }
             
@@ -66,9 +73,9 @@ class PassportViewModel: ObservableObject {
             try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
             proofState = .createProfile
             
-            let registrationContract = try RegistrationContract()
+            let stateKeeperContract = try StateKeeperContract()
             
-            let (passportInfo, _) = try await registrationContract.getPassportInfo(proof.pubSignals[0])
+            let (passportInfo, _) = try await stateKeeperContract.getPassportInfo(proof.pubSignals[0])
             
             let isUserRevoking = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
             
@@ -96,7 +103,15 @@ class PassportViewModel: ObservableObject {
                 self.isUserRevoked = true
             }
             
-            try await UserManager.shared.register(proof, passport, isUserRevoking)
+            var certificatePubKeySize: Int
+            switch registeredCircuitData {
+            case .registerIdentityUniversalRSA2048:
+                certificatePubKeySize = 2048
+            case .registerIdentityUniversalRSA4096:
+                certificatePubKeySize = 4096
+            }
+            
+            try await UserManager.shared.register(proof, passport, certificatePubKeySize, isUserRevoking)
             
             PassportManager.shared.setPassport(passport)
             try UserManager.shared.saveRegisterZkProof(proof)

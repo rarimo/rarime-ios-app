@@ -95,5 +95,9 @@
 		<key>registerIdentityUniversalRSA4096</key>
 		<string>${CIRCUIT_DATA_URL_1}</string>
 	</dict>
+	<key>CERTIFICATES_SMT_CONTRACT_ADDRESS</key>
+	<string>${CERTIFICATES_SMT_CONTRACT_ADDRESS}</string>
+	<key>STATE_KEEPER_CONTRACT_ADDRESS</key>
+	<string>${STATE_KEEPER_CONTRACT_ADDRESS}</string>
 </dict>
 </plist>

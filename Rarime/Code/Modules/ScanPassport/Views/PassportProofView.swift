@@ -10,6 +10,8 @@ struct PassportProofView: View {
     let onFinish: (ZkProof) -> Void
     let onClose: () -> Void
     let onError: () -> Void
+    
+    @State private var downloadingMessage = ""
 
     private func register() async {
         do {
@@ -23,7 +25,10 @@ struct PassportProofView: View {
             
             guard let accessJwt = decentralizedAuthManager.accessJwt else { throw "accessJwt is nil" }
             
-            let zkProof = try await passportViewModel.register(accessJwt)
+            let zkProof = try await passportViewModel.register(accessJwt) { message in
+                downloadingMessage = message
+            }
+            
             if passportViewModel.processingStatus != .success { return }
 
             try await Task.sleep(nanoseconds: NSEC_PER_SEC)
@@ -58,6 +63,11 @@ struct PassportProofView: View {
             }
             .padding(.horizontal, 20)
             Spacer()
+            Text(downloadingMessage)
+                .body3()
+                .foregroundStyle(.textSecondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 20)
             footerView
         }
         .padding(.top, 80)

@@ -2,6 +2,7 @@ import Alamofire
 import Identity
 import NFCPassportReader
 import SwiftUI
+import Web3
 
 private let ENCAPSULATED_CONTENT_2688: Int = 2688
 private let ENCAPSULATED_CONTENT_2704: Int = 2704
@@ -82,7 +83,6 @@ class UserManager: ObservableObject {
         guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
 
         let sod = try SOD([UInt8](passport.sod))
-        let dg15 = try DataGroup15([UInt8](passport.dg15))
         
         guard let cert = try OpenSSLUtils.getX509CertificatesFromPKCS7(pkcs7Der: Data(sod.pkcs7CertificateData)).first else {
             throw "Slave certificate in sod is missing"
@@ -90,9 +90,7 @@ class UserManager: ObservableObject {
         
         let certPem = cert.certToPEM().data(using: .utf8) ?? Data()
         
-        let registrationContract = try RegistrationContract()
-        
-        let certificatesSMTAddress = try await registrationContract.certificatesSmt()
+        let certificatesSMTAddress = try EthereumAddress(hex:  ConfigManager.shared.api.certificatesSmtContractAddress, eip55: false)
         
         let certificatesSMTContract = try PoseidonSMT(contractAddress: certificatesSMTAddress)
         
@@ -113,8 +111,6 @@ class UserManager: ObservableObject {
         let profileInitializer = IdentityProfile()
         let profile = try profileInitializer.newProfile(secretKey)
         
-        let isEcdsaActiveAuthentication: Bool = dg15.ecdsaPublicKey != nil
-        
         let inputs = try profile.buildRegisterIdentityInputs(
             encapsulatedContent,
             signedAttributes: signedAttributes,
@@ -122,7 +118,6 @@ class UserManager: ObservableObject {
             dg15: passport.dg15,
             pubKeyPem: publicKeyPem.data(using: .utf8) ?? Data(),
             signature: signature,
-            isEcdsaActiveAuthentication: isEcdsaActiveAuthentication,
             certificatesSMTProofJSON: JSONEncoder().encode(certificateProof)
         )
         
@@ -131,12 +126,19 @@ class UserManager: ObservableObject {
         return inputs
     }
     
-    func generateRegisterIdentityProof(_ passport: Passport) async throws -> ZkProof? {
+    func generateRegisterIdentityProof(_ passport: Passport, _ circuitData: CircuitData, _ registeredCircuitData: RegisteredCircuitData) async throws -> ZkProof? {
         let inputs = try await buildRegistrationCircuits(passport)
         
-        let wtns = try ZKUtils.calcWtnsRegisterIdentityUniversal(inputs)
+        var wtns: Data
         
-        let (proofJson, pubSignalsJson) = try ZKUtils.groth16RegisterIdentityUniversal(wtns)
+        switch registeredCircuitData {
+        case .registerIdentityUniversalRSA2048:
+            wtns = try ZKUtils.calcWtnsRegisterIdentityUniversalRSA2048(circuitData.circutDat, inputs)
+        case .registerIdentityUniversalRSA4096:
+            wtns = try ZKUtils.calcWtnsRegisterIdentityUniversalRSA4096(circuitData.circutDat, inputs)
+        }
+        
+        let (proofJson, pubSignalsJson) = try ZKUtils.groth16Prover(circuitData.circuitZkey, wtns)
         
         let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
         let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
@@ -144,7 +146,7 @@ class UserManager: ObservableObject {
         return ZkProof(proof: proof, pubSignals: pubSignals)
     }
     
-    func register(_ registerZkProof: ZkProof, _ passport: Passport, _ isRevoked: Bool) async throws {
+    func register(_ registerZkProof: ZkProof, _ passport: Passport, _ certificatePubKeySize: Int, _ isRevoked: Bool) async throws {
         guard let masterCertProof = self.masterCertProof else { throw "Master certificate proof is missing" }
         
         let proofJson = try JSONEncoder().encode(registerZkProof)
@@ -155,6 +157,7 @@ class UserManager: ObservableObject {
             signature: passport.signature,
             pubKeyPem: passport.getDG15PublicKeyPEM(),
             certificatesRootRaw: masterCertProof.root,
+            certificatePubKeySize: certificatePubKeySize,
             isRevoced: isRevoked
         )
         
@@ -188,18 +191,23 @@ class UserManager: ObservableObject {
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
     }
     
-    func registerCertificate(_ passport: Passport) async throws {
+    func registerCertificate(_ passport: Passport) async throws -> RegisteredCircuitData {
         let sod = try SOD([UInt8](passport.sod))
+        
+        let publicKey = try sod.getPublicKey()
+        let publicKeyPem = OpenSSLUtils.pubKeyToPEM(pubKey: publicKey)
+        let publicKeyPemData = publicKeyPem.data(using: .utf8) ?? Data()
+        
+        var publicKeySize: Int = 0
+        try IdentityX509Util().getRSASize(publicKeyPemData, ret0_: &publicKeySize)
         
         guard let cert = try OpenSSLUtils.getX509CertificatesFromPKCS7(pkcs7Der: Data(sod.pkcs7CertificateData)).first else {
             throw "Slave certificate in sod is missing"
         }
         
         let certPem = cert.certToPEM().data(using: .utf8) ?? Data()
-        
-        let registrationContract = try RegistrationContract()
 
-        let certificatesSMTAddress = try await registrationContract.certificatesSmt()
+        let certificatesSMTAddress = try EthereumAddress(hex:  ConfigManager.shared.api.certificatesSmtContractAddress, eip55: false)
         
         let certificatesSMTContract = try PoseidonSMT(contractAddress: certificatesSMTAddress)
         
@@ -212,7 +220,7 @@ class UserManager: ObservableObject {
         if proof.existence {
             LoggerUtil.common.info("Passport certificate is already registered")
             
-            return
+            return publicKeySize == 4096 ? .registerIdentityUniversalRSA4096 : .registerIdentityUniversalRSA2048
         }
         
         let calldataBuilder = IdentityCallDataBuilder()
@@ -230,11 +238,14 @@ class UserManager: ObservableObject {
         
         let eth = Ethereum()
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
+        
+        return publicKeySize == 4096 ? .registerIdentityUniversalRSA4096 : .registerIdentityUniversalRSA2048
     }
     
     func generateAirdropQueryProof(_ registerZkProof: ZkProof, _ passport: Passport) async throws -> ZkProof {
         guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
         
+        let stateKeeperContract = try StateKeeperContract()
         let registrationContract = try RegistrationContract()
         
         let registrationSmtEvmAddress = try await registrationContract.registrationSmt()
@@ -257,7 +268,7 @@ class UserManager: ObservableObject {
         let profileInitializer = IdentityProfile()
         let profile = try profileInitializer.newProfile(secretKey)
         
-        let (passportInfo, identityInfo) = try await registrationContract.getPassportInfo(registerZkProof.pubSignals[0])
+        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(registerZkProof.pubSignals[0])
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
         let aidropParams = try await relayer.getAirdropParams()
@@ -287,6 +298,7 @@ class UserManager: ObservableObject {
         guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
         
         let registrationContract = try RegistrationContract()
+        let stateKeeperContract = try StateKeeperContract()
         
         let registrationSmtEvmAddress = try await registrationContract.registrationSmt()
         
@@ -308,7 +320,7 @@ class UserManager: ObservableObject {
         let profileInitializer = IdentityProfile()
         let profile = try profileInitializer.newProfile(secretKey)
         
-        let (passportInfo, identityInfo) = try await registrationContract.getPassportInfo(registerZkProof.pubSignals[0])
+        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(registerZkProof.pubSignals[0])
         
         let queryProofInputs = try profile.buildAirdropQueryIdentityInputs(
             passport.dg1,
