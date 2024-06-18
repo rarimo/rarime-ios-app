@@ -246,16 +246,15 @@ class UserManager: ObservableObject {
         guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
         
         let stateKeeperContract = try StateKeeperContract()
-        let registrationContract = try RegistrationContract()
         
-        let registrationSmtEvmAddress = try await registrationContract.registrationSmt()
+        let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.api.registrationSmtContractAddress, eip55: false)
         
-        let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtEvmAddress)
+        let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
         
         var error: NSError? = nil
         let proofIndex = IdentityCalculateProofIndex(
             registerZkProof.pubSignals[0],
-            registerZkProof.pubSignals[2],
+            registerZkProof.pubSignals[3],
             &error
         )
         if let error { throw error }
@@ -297,17 +296,16 @@ class UserManager: ObservableObject {
     func generatePointsProof(_ registerZkProof: ZkProof, _ passport: Passport) async throws -> ZkProof {
         guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
         
-        let registrationContract = try RegistrationContract()
         let stateKeeperContract = try StateKeeperContract()
         
-        let registrationSmtEvmAddress = try await registrationContract.registrationSmt()
+        let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.api.registrationSmtContractAddress, eip55: false)
         
-        let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtEvmAddress)
+        let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
         
         var error: NSError? = nil
         let proofIndex = IdentityCalculateProofIndex(
             registerZkProof.pubSignals[0],
-            registerZkProof.pubSignals[2],
+            registerZkProof.pubSignals[3],
             &error
         )
         if let error { throw error }
