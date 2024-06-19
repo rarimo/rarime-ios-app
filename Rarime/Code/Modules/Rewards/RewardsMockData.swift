@@ -10,31 +10,6 @@ struct PointsBalance: Equatable {
     var usedCodes: [String]?
 }
 
-let inviteFriendEvent = GetEventResponseData(
-    id: "dasd",
-    type: "dasd",
-    attributes: GetEventResponseAttributes(
-        status: "active",
-        createdAt: Int(Date().timeIntervalSince1970),
-        updatedAt: Int(Date().timeIntervalSince1970),
-        meta: GetEventResponseMeta(
-            metaStatic: GetEventResponseStatic(
-                name: "invite_friends",
-                reward: 5,
-                title: "Invite users",
-                description: "Full description text",
-                shortDescription: "Invite friends in to app",
-                frequency: "always",
-                startsAt: nil,
-                expiresAt: nil,
-                actionURL: nil,
-                logo: "https://pbs.twimg.com/profile_images/1639021161257263105/XmT0EBnK_400x400.jpg"
-            )
-        ),
-        pointsAmount: nil
-    )
-)
-
 let myBalance = PointsBalance(
     id: "42beAoalsOSLals3",
     amount: 12,

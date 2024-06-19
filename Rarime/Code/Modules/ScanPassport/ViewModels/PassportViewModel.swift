@@ -49,7 +49,6 @@ class PassportViewModel: ObservableObject {
 
     @MainActor
     func register(
-        _ jwt: JWT,
         _ downloadProgress: @escaping (String) -> Void = { _ in }
     ) async throws -> ZkProof {
         do {
@@ -75,7 +74,14 @@ class PassportViewModel: ObservableObject {
             
             let stateKeeperContract = try StateKeeperContract()
             
-            let (passportInfo, _) = try await stateKeeperContract.getPassportInfo(proof.pubSignals[0])
+            let passportInfoKey: String
+            if passport.dg15.isEmpty {
+                passportInfoKey = proof.pubSignals[1]
+            } else {
+                passportInfoKey = proof.pubSignals[0]
+            }
+            
+            let (passportInfo, _) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
             
             let isUserRevoking = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
             
@@ -122,11 +128,6 @@ class PassportViewModel: ObservableObject {
             
             try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
             proofState = .finalizing
-            
-            let queryProof = try await UserManager.shared.generatePointsProof(proof, passport)
-            
-            let points = Points(ConfigManager.shared.api.pointsServiceURL)
-            let _ = try await points.verifyPassport(jwt, queryProof)
             
             isAirdropClaimed = try await UserManager.shared.isAirdropClaimed()
             

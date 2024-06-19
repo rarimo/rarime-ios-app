@@ -48,5 +48,6 @@ extension User {
     public enum Status: Int {
         case unscanned
         case passportScanned
+        case passportVerified
     }
 }

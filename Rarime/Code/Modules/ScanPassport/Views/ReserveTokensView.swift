@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ReserveTokensView: View {
+    @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var userManager: UserManager
 
     let showTerms: Bool
@@ -34,7 +35,21 @@ struct ReserveTokensView: View {
         defer { isReserving = false }
         do {
             isReserving = true
-            try await userManager.reserveTokens()
+            
+            guard let user = userManager.user else { throw "failed to get user" }
+            
+            if decentralizedAuthManager.accessJwt == nil {
+                try await decentralizedAuthManager.initializeJWT(user.secretKey)
+            }
+            
+            try await decentralizedAuthManager.refreshIfNeeded()
+            
+            guard let accessJwt = decentralizedAuthManager.accessJwt else { throw "accessJwt is nil" }
+            
+            guard let passport else { throw "passport is nil" }
+            guard let registerZkProof = userManager.registerZkProof else { throw "registerZkProof is nil" }
+            
+            try await userManager.reserveTokens(accessJwt, registerZkProof, passport)
             FeedbackGenerator.shared.notify(.success)
             onFinish(true)
         } catch {
@@ -112,6 +127,8 @@ struct ReserveTokensView: View {
 
 #Preview {
     ReserveTokensView(showTerms: true, passport: nil, onFinish: { _ in }, onClose: {})
+        .environmentObject(PassportViewModel())
         .environmentObject(UserManager())
         .environmentObject(ConfigManager())
+        .environmentObject(DecentralizedAuthManager())
 }

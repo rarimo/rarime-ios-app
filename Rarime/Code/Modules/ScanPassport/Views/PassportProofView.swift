@@ -14,18 +14,8 @@ struct PassportProofView: View {
     @State private var downloadingMessage = ""
 
     private func register() async {
-        do {
-            guard let user = userManager.user else { throw "failed to get user" }
-            
-            if decentralizedAuthManager.accessJwt == nil {
-                try await decentralizedAuthManager.initializeJWT(user.secretKey)
-            }
-            
-            try await decentralizedAuthManager.refreshIfNeeded()
-            
-            guard let accessJwt = decentralizedAuthManager.accessJwt else { throw "accessJwt is nil" }
-            
-            let zkProof = try await passportViewModel.register(accessJwt) { message in
+        do {            
+            let zkProof = try await passportViewModel.register() { message in
                 downloadingMessage = message
             }
             

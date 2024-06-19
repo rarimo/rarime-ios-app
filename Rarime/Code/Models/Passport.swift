@@ -55,6 +55,10 @@ struct Passport: Codable {
     }
     
     func getDG15PublicKeyPEM() throws -> Data {
+        if dg15.isEmpty {
+            return Data()
+        }
+        
         guard let dg15 = try? DataGroup15([UInt8](dg15)) else {
             return Data()
         }

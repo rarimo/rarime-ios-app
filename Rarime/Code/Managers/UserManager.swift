@@ -17,7 +17,6 @@ class UserManager: ObservableObject {
     @Published var masterCertProof: SMTProof?
     
     @Published var balance: Double
-    @Published var reservedBalance: Double
     @Published var isPassportTokensReserved: Bool
     
     @Published var isRevoked: Bool
@@ -39,7 +38,6 @@ class UserManager: ObservableObject {
             
             self.user = try User.load()
             self.balance = 0
-            self.reservedBalance = AppUserDefaults.shared.reservedBalance
             self.isPassportTokensReserved = AppUserDefaults.shared.isPassportTokensReserved
             self.isRevoked = AppUserDefaults.shared.isUserRevoked
             
@@ -234,7 +232,7 @@ class UserManager: ObservableObject {
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
         let response = try await relayer.register(calldata)
         
-        LoggerUtil.common.info("Register certificate EVM Tx Hash: \(response.data.attributes.txHash)")
+        LoggerUtil.common.info("Register certificate EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
         
         let eth = Ethereum()
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
@@ -251,9 +249,16 @@ class UserManager: ObservableObject {
         
         let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
         
+        let passportInfoKey: String
+        if passport.dg15.isEmpty {
+            passportInfoKey = registerZkProof.pubSignals[1]
+        } else {
+            passportInfoKey = registerZkProof.pubSignals[0]
+        }
+        
         var error: NSError? = nil
         let proofIndex = IdentityCalculateProofIndex(
-            registerZkProof.pubSignals[0],
+            passportInfoKey,
             registerZkProof.pubSignals[3],
             &error
         )
@@ -267,7 +272,7 @@ class UserManager: ObservableObject {
         let profileInitializer = IdentityProfile()
         let profile = try profileInitializer.newProfile(secretKey)
         
-        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(registerZkProof.pubSignals[0])
+        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
         let aidropParams = try await relayer.getAirdropParams()
@@ -276,7 +281,7 @@ class UserManager: ObservableObject {
             passport.dg1,
             smtProofJSON: smtProofJson,
             selector: aidropParams.data.attributes.querySelector,
-            pkPassportHash: registerZkProof.pubSignals[0],
+            pkPassportHash: passportInfoKey,
             issueTimestamp: identityInfo.issueTimestamp.description,
             identityCounter: passportInfo.identityReissueCounter.description,
             eventID: aidropParams.data.attributes.eventID,
@@ -302,9 +307,16 @@ class UserManager: ObservableObject {
         
         let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
         
+        let passportInfoKey: String
+        if passport.dg15.isEmpty {
+            passportInfoKey = registerZkProof.pubSignals[1]
+        } else {
+            passportInfoKey = registerZkProof.pubSignals[0]
+        }
+        
         var error: NSError? = nil
         let proofIndex = IdentityCalculateProofIndex(
-            registerZkProof.pubSignals[0],
+            passportInfoKey,
             registerZkProof.pubSignals[3],
             &error
         )
@@ -318,13 +330,13 @@ class UserManager: ObservableObject {
         let profileInitializer = IdentityProfile()
         let profile = try profileInitializer.newProfile(secretKey)
         
-        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(registerZkProof.pubSignals[0])
+        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
         
         let queryProofInputs = try profile.buildAirdropQueryIdentityInputs(
             passport.dg1,
             smtProofJSON: smtProofJson,
             selector: "23073",
-            pkPassportHash: registerZkProof.pubSignals[0],
+            pkPassportHash: passportInfoKey,
             issueTimestamp: identityInfo.issueTimestamp.description,
             identityCounter: passportInfo.identityReissueCounter.description,
             eventID: Points.PointsEventId,
@@ -405,6 +417,16 @@ class UserManager: ObservableObject {
         return spendableBalances.balances.first?.amount ?? "0"
     }
     
+    func fetchPointsBalance(_ jwt: JWT) async throws -> PointsBalanceRaw {
+        guard let user else { throw "user is not initalized" }
+        
+        let points = Points(ConfigManager.shared.api.pointsServiceURL)
+        
+        let balanceResponse = try await points.getPointsBalance(jwt, true, true)
+        
+        return balanceResponse.data.attributes
+    }
+    
     func sendTokens(_ destination: String, _ amount: String) async throws -> CosmosTransferResponse {
         guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
         
@@ -422,19 +444,22 @@ class UserManager: ObservableObject {
         return try JSONDecoder().decode(CosmosTransferResponse.self, from: response)
     }
     
-    func reserveTokens() async throws {
-        // TODO: implement reserve tokens
-        try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
+    func reserveTokens(_ jwt: JWT, _ registerProof: ZkProof, _ passport: Passport) async throws {
+        let queryProof = try await generatePointsProof(registerProof, passport)
         
-        self.reservedBalance = PASSPORT_RESERVE_TOKENS
-        self.isPassportTokensReserved = true
-
-        AppUserDefaults.shared.reservedBalance = PASSPORT_RESERVE_TOKENS
+        let points = Points(ConfigManager.shared.api.pointsServiceURL)
+        let _ = try await points.verifyPassport(jwt, queryProof)
+        
+        LoggerUtil.common.info("Passport verified, token reserved")
+        
+        DispatchQueue.main.async {
+            self.isPassportTokensReserved = true
+        }
+        
         AppUserDefaults.shared.isPassportTokensReserved = true
     }
     
     func reset() {
-        AppUserDefaults.shared.reservedBalance = 0.0
         AppUserDefaults.shared.isPassportTokensReserved = false
         AppUserDefaults.shared.isUserRevoked = false
         AppUserDefaults.shared.userRefarralCode = ""
@@ -446,7 +471,6 @@ class UserManager: ObservableObject {
             
             self.user = try User.load()
             self.balance = 0
-            self.reservedBalance = AppUserDefaults.shared.reservedBalance
             self.isPassportTokensReserved = AppUserDefaults.shared.isPassportTokensReserved
             
             if let registerZkProofJson = try AppKeychain.getValue(.registerZkProof) {

@@ -6,6 +6,7 @@ private enum RewardsRoute: String, Hashable {
 }
 
 struct RewardsView: View {
+    @EnvironmentObject private var mainViewModel: MainView.ViewModel
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     
@@ -23,7 +24,17 @@ struct RewardsView: View {
     }
     
     var notlimitedEvents: [GetEventResponseData] {
-        rewardsViewModel.events.filter( { $0.attributes.meta.metaStatic.expiresAt == nil })
+        var events = rewardsViewModel
+            .events
+            .filter( {$0.attributes.meta.metaStatic.expiresAt == nil })
+        
+        if let user = userManager.user {
+            if user.status != .unscanned {
+                events = events.filter( { $0.attributes.meta.metaStatic.name != "passport_scan" } )
+            }
+        }
+        
+        return events
     }
 
     private var nextLevelBalance: Double {
@@ -59,7 +70,7 @@ struct RewardsView: View {
                 }
             }
         }
-        .onAppear(perform: fetchRewads)
+        .onAppear(perform: fetchBalance)
         .onAppear(perform: fetchEvents)
         .onAppear(perform: fetchLeaderboard)
         .environmentObject(rewardsViewModel)
@@ -204,15 +215,18 @@ struct RewardsView: View {
                     .subtitle3()
                     .foregroundStyle(.textPrimary)
                 VStack(spacing: 16) {
-                    ActiveEventItem(event: inviteFriendEvent)
-                        .onTapGesture {
-                            path.append(.inviteFriends)
-                        }
-                    ForEach(notlimitedEvents, id: \.id) { event in
+                    ForEach(notlimitedEvents.reversed(), id: \.id) { event in
                         ActiveEventItem(event: event)
                             .onTapGesture {
-                                rewardsViewModel.selectedEvent = event
-                                path.append(.taskEvent)
+                                if event.attributes.meta.metaStatic.name == "referral_common" {
+                                    path.append(.inviteFriends)
+                                } else if event.attributes.meta.metaStatic.name == "passport_scan" {
+                                    mainViewModel.isRewardsSheetPresented = true
+                                    mainViewModel.selectedTab = .home
+                                } else {
+                                    rewardsViewModel.selectedEvent = event
+                                    path.append(.taskEvent)
+                                }
                             }
                     }
                 }
@@ -220,11 +234,15 @@ struct RewardsView: View {
         }
     }
     
-    func fetchRewads() {
+    func fetchBalance() {
         Task { @MainActor in
             do {
                 guard let user = userManager.user else { throw "user is not initalized" }
                 
+                if user.userReferalCode == nil {
+                    return
+                }
+                                
                 if decentralizedAuthManager.accessJwt == nil {
                     try await decentralizedAuthManager.initializeJWT(user.secretKey)
                 }
@@ -265,6 +283,7 @@ struct RewardsView: View {
                 let events = try await points.listEvents(accessJwt)
                 
                 self.rewardsViewModel.events = events.data
+
                 self.isEventsLoaded = true
             } catch {
                 LoggerUtil.common.error("failed to fetch events: \(error, privacy: .public)")
