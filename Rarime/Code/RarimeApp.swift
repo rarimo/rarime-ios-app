@@ -15,6 +15,7 @@ struct RarimeApp: App {
                 .environmentObject(AppIconManager.shared)
                 .environmentObject(UpdateManager.shared)
                 .environmentObject(DecentralizedAuthManager.shared)
+                .environmentObject(CircuitDataManager.shared)
         }
     }
 }

@@ -88,5 +88,18 @@
 	<string>${POINTS_SERVICE_URL}</string>
 	<key>AUTHORIZE_URL</key>
 	<string>${AUTHORIZE_URL}</string>
+	<key>CIRCUIT_DATA_URLS</key>
+	<dict>
+		<key>registerIdentityUniversalRSA2048</key>
+		<string>${CIRCUIT_DATA_URL_0}</string>
+		<key>registerIdentityUniversalRSA4096</key>
+		<string>${CIRCUIT_DATA_URL_1}</string>
+	</dict>
+	<key>CERTIFICATES_SMT_CONTRACT_ADDRESS</key>
+	<string>${CERTIFICATES_SMT_CONTRACT_ADDRESS}</string>
+	<key>REGISTRATION_SMT_CONTRACT_ADDRESS</key>
+	<string>${REGISTRATION_SMT_CONTRACT_ADDRESS}</string>
+	<key>STATE_KEEPER_CONTRACT_ADDRESS</key>
+	<string>${STATE_KEEPER_CONTRACT_ADDRESS}</string>
 </dict>
 </plist>

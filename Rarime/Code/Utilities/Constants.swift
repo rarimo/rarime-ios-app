@@ -17,4 +17,4 @@ let UNSUPPORTED_REWARD_COUNTRIES: [Country] = [
     .unknown
 ]
 
-let PASSPORT_RESERVE_TOKENS: Double = 5.0
+let PASSPORT_RESERVE_TOKENS: Double = 10.0

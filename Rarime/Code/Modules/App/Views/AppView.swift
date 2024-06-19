@@ -3,6 +3,7 @@ import SwiftUI
 import Identity
 
 struct AppView: View {
+    @EnvironmentObject private var circuitDataManager: CircuitDataManager
     @EnvironmentObject private var updateManager: UpdateManager
     @EnvironmentObject private var alertManager: AlertManager
     @EnvironmentObject private var securityManager: SecurityManager
@@ -63,6 +64,7 @@ struct AppView: View {
 
 #Preview {
     AppView()
+        .environmentObject(CircuitDataManager())
         .environmentObject(AlertManager())
         .environmentObject(SecurityManager())
         .environmentObject(SettingsManager())

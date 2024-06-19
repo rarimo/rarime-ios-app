@@ -3,19 +3,12 @@ import Foundation
 class ConfigManager: ObservableObject {
     static let shared = ConfigManager()
 
-    let general: General
-    let api: API
-    let cosmos: Cosmos
-    let certificatesStorage: CertificatesStorage
-    let feedback: Feedback
-
-    init() {
-        self.general = General()
-        self.api = API()
-        self.cosmos = Cosmos()
-        self.certificatesStorage = CertificatesStorage()
-        self.feedback = Feedback()
-    }
+    let general = General()
+    let api = API()
+    let cosmos = Cosmos()
+    let certificatesStorage = CertificatesStorage()
+    let feedback = Feedback()
+    let circuitData = CircuitData()
 }
 
 extension ConfigManager {
@@ -28,7 +21,7 @@ extension ConfigManager {
             do {
                 self.privacyPolicyURL = try readURLFromInfoPlist(key: "PRIVACY_POLICY_URL")
                 self.termsOfUseURL = try readURLFromInfoPlist(key: "TERMS_OF_USE_URL")
-                self.version = try readStringFromInfoPlist(key: "CFBundleShortVersionString")
+                self.version = try readFromInfoPlist(key: "CFBundleShortVersionString")
             } catch {
                 fatalError("ConfigManager.General init error: \(error.localizedDescription)")
             }
@@ -41,6 +34,9 @@ extension ConfigManager {
         let relayerURL: URL
         let evmRpcURL: URL
         let registerContractAddress: String
+        let certificatesSmtContractAddress: String
+        let registrationSmtContractAddress: String
+        let stateKeeperContractAddress: String
         let cosmosRpcURL: URL
         let pointsServiceURL: URL
         let authorizeURL: URL
@@ -49,7 +45,10 @@ extension ConfigManager {
             do {
                 self.relayerURL = try readURLFromInfoPlist(key: "RELAYER_URL")
                 self.evmRpcURL = try readURLFromInfoPlist(key: "EVM_RPC_URL")
-                self.registerContractAddress = try readStringFromInfoPlist(key: "REGISTER_CONTRACT_ADDRESS")
+                self.registerContractAddress = try readFromInfoPlist(key: "REGISTER_CONTRACT_ADDRESS")
+                self.certificatesSmtContractAddress = try readFromInfoPlist(key: "CERTIFICATES_SMT_CONTRACT_ADDRESS")
+                self.registrationSmtContractAddress = try readFromInfoPlist(key: "REGISTRATION_SMT_CONTRACT_ADDRESS")
+                self.stateKeeperContractAddress = try readFromInfoPlist(key: "STATE_KEEPER_CONTRACT_ADDRESS")
                 self.cosmosRpcURL = try readURLFromInfoPlist(key: "COSMOS_RPC_URL")
                 self.pointsServiceURL = try readURLFromInfoPlist(key: "POINTS_SERVICE_URL")
                 self.authorizeURL = try readURLFromInfoPlist(key: "AUTHORIZE_URL")
@@ -68,9 +67,9 @@ extension ConfigManager {
 
         init() {
             do {
-                self.chainId = try readStringFromInfoPlist(key: "CHAIN_ID")
-                self.denom = try readStringFromInfoPlist(key: "DENOM")
-                self.rpcIp = try readStringFromInfoPlist(key: "RPC_IP")
+                self.chainId = try readFromInfoPlist(key: "CHAIN_ID")
+                self.denom = try readFromInfoPlist(key: "DENOM")
+                self.rpcIp = try readFromInfoPlist(key: "RPC_IP")
             } catch {
                 fatalError("ConfigManager.Cosmos init error: \(error.localizedDescription)")
             }
@@ -86,11 +85,25 @@ extension ConfigManager {
 
         init() {
             do {
-                self.icaoCosmosRpc = try readStringFromInfoPlist(key: "ICAO_COSMOS_RPC")
-                self.masterCertificatesBucketname = try readStringFromInfoPlist(key: "MASTER_CERTIFICATES_BUCKETNAME")
-                self.masterCertificatesFilename = try readStringFromInfoPlist(key: "MASTER_CERTIFICATES_FILENAME")
+                self.icaoCosmosRpc = try readFromInfoPlist(key: "ICAO_COSMOS_RPC")
+                self.masterCertificatesBucketname = try readFromInfoPlist(key: "MASTER_CERTIFICATES_BUCKETNAME")
+                self.masterCertificatesFilename = try readFromInfoPlist(key: "MASTER_CERTIFICATES_FILENAME")
             } catch {
                 fatalError("ConfigManager.CertificatesStorage init error: \(error.localizedDescription)")
+            }
+        }
+    }
+}
+
+extension ConfigManager {
+    class CircuitData {
+        let circuitDataURLs: [String: URL]
+
+        init() {
+            do {
+                self.circuitDataURLs = try readURLDictionaryFromInfoPlist(key: "CIRCUIT_DATA_URLS")
+            } catch {
+                fatalError("ConfigManager.CircuitData init error: \(error)")
             }
         }
     }
@@ -102,7 +115,7 @@ extension ConfigManager {
 
         init() {
             do {
-                self.feedbackEmail = try readStringFromInfoPlist(key: "FEEDBACK_EMAIL")
+                self.feedbackEmail = try readFromInfoPlist(key: "FEEDBACK_EMAIL")
             } catch {
                 fatalError("ConfigManager.Feedback init error: \(error.localizedDescription)")
             }
@@ -110,22 +123,41 @@ extension ConfigManager {
     }
 }
 
-// Although we normally return an optional parameter when we get some value for a key,
-// in our case it is better to throw an error to improve the readability of errors
-fileprivate func readStringFromInfoPlist(key: String) throws -> String {
-    guard let value = Bundle.main.object(forInfoDictionaryKey: key) as? String else {
+fileprivate func readFromInfoPlist<T>(key: String) throws -> T {
+    guard let value = Bundle.main.object(forInfoDictionaryKey: key) as? T else {
         throw "Couldn't find \(key) in Info.plist"
     }
+    
+    if let value = value as? String {
+        return normalizeInfoPlistString(value) as! T
+    }
 
-    return value.starts(with: "\"")
-        ? String(value.dropFirst().dropLast())
-        : value
+    return value
 }
 
 fileprivate func readURLFromInfoPlist(key: String) throws -> URL {
-    let value = try readStringFromInfoPlist(key: key)
+    let value: String = try readFromInfoPlist(key: key)
 
     guard let url = URL(string: value) else { throw "\(key) isn't URL" }
 
     return url
+}
+
+fileprivate func readURLDictionaryFromInfoPlist(key: String) throws -> [String: URL] {
+    let value: [String: String] = try readFromInfoPlist(key: key)
+    
+    var result: [String: URL] = [:]
+    for item in value {
+        guard let url = URL(string: normalizeInfoPlistString(item.value)) else { throw "\(key) isn't URL" }
+        
+        result[item.key] = url
+    }
+
+    return result
+}
+
+fileprivate func normalizeInfoPlistString(_ value: String) -> String {
+    return value.starts(with: "\"")
+        ? String(value.dropFirst().dropLast())
+        : value
 }

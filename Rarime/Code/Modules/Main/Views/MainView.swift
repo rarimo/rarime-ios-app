@@ -5,12 +5,10 @@ struct MainView: View {
     
     @StateObject private var viewModel = ViewModel()
     
-    @State private var isRewardsSheetPresented = false
-    
     var body: some View {
         ZStack {
             switch viewModel.selectedTab {
-                case .home: HomeView(isRewardsSheetPresented: $isRewardsSheetPresented)
+                case .home: HomeView()
                 case .wallet: WalletView()
                 case .rewards: RewardsView()
                 case .profile: ProfileView()
@@ -18,8 +16,8 @@ struct MainView: View {
         }
         .environmentObject(viewModel)
         .onChange(of: viewModel.selectedTab) { selectedTab in            
-            if userManager.user?.status == .unscanned, selectedTab == .rewards {
-                self.isRewardsSheetPresented = true
+            if userManager.user?.userReferalCode == nil, selectedTab == .rewards {
+                self.viewModel.isRewardsSheetPresented = true
                 
                 self.viewModel.selectedTab = .home
             }
