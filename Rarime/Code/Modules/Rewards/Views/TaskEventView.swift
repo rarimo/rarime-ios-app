@@ -1,10 +1,10 @@
+import CachedAsyncImage
 import MarkdownUI
 import SwiftUI
-import CachedAsyncImage
 
 struct TaskEventView: View {
     @EnvironmentObject var rewardsViewModel: RewardsViewModel
-    
+
     let onBack: () -> Void
 
     private var event: GetEventResponseData {
@@ -38,17 +38,25 @@ struct TaskEventView: View {
                         HStack(spacing: 16) {
                             RewardChip(reward: Double(event.attributes.meta.metaStatic.reward))
                             if let endDate = event.attributes.meta.metaStatic.expiresAt {
-                                Text("Exp: \(endDate)")
+                                Text("Exp: \(DateUtil.richDateFormatter.string(from: endDate))")
                                     .caption2()
                                     .foregroundStyle(.textSecondary)
                             }
                         }
                     }
                     Spacer()
-                    CachedAsyncImage(url: URL(string: event.attributes.meta.metaStatic.logo ?? ""))
-                        .scaledToFill()
-                        .frame(width: 64, height: 64)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                    CachedAsyncImage(url: URL(string: event.attributes.meta.metaStatic.logo ?? "")) { completion in
+                        if let image = completion.image {
+                            image
+                                .resizable()
+                                .scaledToFill()
+                        } else {
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(.componentPrimary)
+                        }
+                    }
+                    .frame(width: 64, height: 64)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
                 .frame(maxWidth: .infinity)
                 HorizontalDivider().padding(.top, 16)
@@ -104,10 +112,11 @@ struct TaskEventView: View {
                             startsAt: Date(),
                             expiresAt: Date(),
                             actionURL: "https://example.com",
-                            logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg"
+                            logo: "https://storage.googleapis.com/rarimo-store/rarime-img/invite_friends.png"
                         )
                     ),
-                    pointsAmount: nil)
+                    pointsAmount: nil
+                )
             )
         ))
 }

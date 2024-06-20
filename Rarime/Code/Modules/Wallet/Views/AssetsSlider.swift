@@ -3,8 +3,9 @@ import SwiftUI
 struct AssetsSlider: View {
     @State private var selectedTab = 0
     @State private var offset = CGFloat.zero
-    
+
     let walletAssets: [WalletAsset]
+    let isLoading: Bool
 
     var body: some View {
         VStack(spacing: 20) {
@@ -29,7 +30,11 @@ struct AssetsSlider: View {
                 LazyHStack(spacing: spacing) {
                     Color.clear.frame(width: 8)
                     ForEach(0 ..< walletAssets.count, id: \.self) { idx in
-                        AssetCard(asset: walletAssets[idx]).frame(width: width)
+                        AssetCard(
+                            asset: walletAssets[idx],
+                            isLoading: isLoading
+                        )
+                        .frame(width: width)
                     }
                 }
                 .offset(x: CGFloat(-selectedTab) * (width + spacing) + offset)
@@ -57,6 +62,7 @@ struct AssetsSlider: View {
 
 private struct AssetCard: View {
     let asset: WalletAsset
+    let isLoading: Bool
 
     var icon: String {
         switch asset.token {
@@ -75,13 +81,17 @@ private struct AssetCard: View {
                 .body3()
                 .foregroundStyle(.textSecondary)
             Spacer()
-            VStack(alignment: .trailing, spacing: 4) {
-                Text(asset.balance.formatted())
-                    .subtitle4()
-                    .foregroundStyle(.textPrimary)
-                Text(try! String(asset.usdBalance == nil ? "---" : "≈$\((asset.usdBalance ?? 0).formatted())"))
-                    .caption3()
-                    .foregroundStyle(.textSecondary)
+            if isLoading {
+                ProgressView()
+            } else {
+                VStack(alignment: .trailing, spacing: 4) {
+                    Text(asset.balance.formatted())
+                        .subtitle4()
+                        .foregroundStyle(.textPrimary)
+                    Text(try! String(asset.usdBalance == nil ? "---" : "≈$\((asset.usdBalance ?? 0).formatted())"))
+                        .caption3()
+                        .foregroundStyle(.textSecondary)
+                }
             }
         }
         .padding(16)
@@ -90,5 +100,8 @@ private struct AssetCard: View {
 }
 
 #Preview {
-    AssetsSlider(walletAssets: [WalletAsset(token: WalletToken.rmo, balance: 3, usdBalance: nil)])
+    AssetsSlider(
+        walletAssets: [WalletAsset(token: WalletToken.rmo, balance: 3, usdBalance: nil)],
+        isLoading: false
+    )
 }

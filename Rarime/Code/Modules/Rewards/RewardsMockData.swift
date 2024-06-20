@@ -40,7 +40,7 @@ let pointsLevels: [PointsLevel] = [
         level: 1,
         description: String(localized: "Reserve tokens to unlock new levels and rewards"),
         minBalance: 0,
-        maxBalance: 10,
+        maxBalance: 30,
         rewards: [
             LevelReward(
                 title: String(localized: "\(5) referrals"),
@@ -57,8 +57,8 @@ let pointsLevels: [PointsLevel] = [
     PointsLevel(
         level: 2,
         description: String(localized: "Reserve tokens to unlock new levels and rewards"),
-        minBalance: 10,
-        maxBalance: 30,
+        minBalance: 30,
+        maxBalance: 50,
         rewards: [
             LevelReward(
                 title: String(localized: "\(10) extra referrals"),
@@ -75,7 +75,7 @@ let pointsLevels: [PointsLevel] = [
     PointsLevel(
         level: 3,
         description: String(localized: "Reserve tokens to unlock new levels and rewards"),
-        minBalance: 30,
+        minBalance: 50,
         maxBalance: 100,
         rewards: [
             LevelReward(

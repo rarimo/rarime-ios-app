@@ -12,8 +12,8 @@ enum WalletToken: String {
 // TODO: move to model/manager
 struct WalletAsset {
     let token: WalletToken
-    let balance: Double
-    let usdBalance: Double?
+    var balance: Double
+    var usdBalance: Double?
 }
 
 struct WalletView: View {
@@ -28,7 +28,11 @@ struct WalletView: View {
     // TODO: use the token from the manager and save to store
     @State private var token = WalletToken.rmo
 
-    @State private var selectedAsset: WalletAsset?
+    @State private var selectedAsset = WalletAsset(
+        token: WalletToken.rmo,
+        balance: 0,
+        usdBalance: nil
+    )
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -55,7 +59,7 @@ struct WalletView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     header
-                    AssetsSlider(walletAssets: selectedAsset != nil ? [selectedAsset!] : [])
+                    AssetsSlider(walletAssets: [selectedAsset], isLoading: isBalanceFetching)
                     transactionsList
                 }
                 .padding(.bottom, 120)
@@ -91,7 +95,7 @@ struct WalletView: View {
                 }
                 .frame(height: 40)
                 .zIndex(1)
-                Text(try! String(selectedAsset?.usdBalance == nil ? "---" : "≈$\((selectedAsset?.usdBalance ?? 0).formatted())"))
+                Text(try! String(selectedAsset.usdBalance == nil ? "---" : "≈$\((selectedAsset.usdBalance ?? 0).formatted())"))
                     .caption2()
                     .foregroundStyle(.textSecondary)
             }
@@ -150,14 +154,9 @@ struct WalletView: View {
 
             do {
                 let balance = try await userManager.fetchBalanse()
-
                 self.userManager.balance = Double(balance) ?? 0
-                
-                self.selectedAsset = WalletAsset(
-                    token: WalletToken.rmo,
-                    balance: self.userManager.balance / Double(Rarimo.rarimoTokenMantis),
-                    usdBalance: nil
-                )
+
+                self.selectedAsset.balance = self.userManager.balance / Double(Rarimo.rarimoTokenMantis)
             } catch is CancellationError {
                 return
             } catch {

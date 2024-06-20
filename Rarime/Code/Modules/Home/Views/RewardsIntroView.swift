@@ -1,11 +1,11 @@
-import SwiftUI
 import Alamofire
+import SwiftUI
 
 private enum ViewState {
     case intro, about
 }
 
-struct RewardsIntroView: View {    
+struct RewardsIntroView: View {
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     
@@ -171,6 +171,13 @@ struct RewardsIntroView: View {
             self.codeVerified = userManager.user?.userReferalCode != nil
         }
     }
+    
+    var excludedCountriesString: String {
+        UNSUPPORTED_REWARD_COUNTRIES
+            .filter { country in country != .unknown }
+            .map { country in country.name }
+            .joined(separator: ", ")
+    }
 
     var aboutView: some View {
         ZStack(alignment: .topLeading) {
@@ -180,31 +187,17 @@ struct RewardsIntroView: View {
                     .foregroundStyle(.textPrimary)
             }
             VStack(spacing: 32) {
-                Text("About Reward Program")
+                Text("About the reward program")
                     .subtitle4()
                     .foregroundStyle(.textPrimary)
-                Text("It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using")
+                Text("RMO tokens will be exclusively distributed via the RariMe app. To claim tokens, create an incognito profile using your biometric passport. Depending on which country issued the passport, you’ll either be able to claim a token right away or be put on a waitlist.\n\nIf you are added to the waitlist it means that you are eligible to claim tokens in the next wave of airdrops. The app will notify you when you are added.\n\nCertain jurisdictions are excluded from the reward program: \(excludedCountriesString)")
+                    .body3()
+                    .foregroundStyle(.textPrimary)
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("HOW CAN I GET THIS CODE?")
+                    Text("HOW CAN I GET THE INVITE CODE?")
                         .overline2()
                         .foregroundStyle(.textSecondary)
-                    Text("You must be invited by someone or receive a code that we post on our social channels")
-                        .body3()
-                        .foregroundStyle(.textPrimary)
-                }
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("QUESTION TITLE 2")
-                        .overline2()
-                        .foregroundStyle(.textSecondary)
-                    Text("You must be invited by someone or receive a code that we post on our social channels")
-                        .body3()
-                        .foregroundStyle(.textPrimary)
-                }
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("QUESTION TITLE 3")
-                        .overline2()
-                        .foregroundStyle(.textSecondary)
-                    Text("You must be invited by someone or receive a code that we post on our social channels")
+                    Text("The app’s rewards program is invite-only. Get invited by an authorized user or ask a community member for an invite code.")
                         .body3()
                         .foregroundStyle(.textPrimary)
                 }
@@ -236,7 +229,7 @@ private struct SocialCard: View {
     }
 }
 
-fileprivate func isValidReferalCodeFormat(_ string: String) -> Bool {
+private func isValidReferalCodeFormat(_ string: String) -> Bool {
     let pattern = "^[a-zA-Z0-9]{11}$"
     let regex = try? NSRegularExpression(pattern: pattern)
     let range = NSRange(location: 0, length: string.utf16.count)

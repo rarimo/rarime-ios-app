@@ -40,7 +40,7 @@ struct HomeView: View {
                         isAirdropFlow: isAirdropFlow,
                         onComplete: { passport, isClaimed in
                             userManager.user?.status = .passportScanned
-                            
+
                             passportManager.setPassport(passport)
                             isCongratsShown = true
                             self.isClaimed = isClaimed

@@ -1,24 +1,24 @@
-import Foundation
 import Alamofire
+import Foundation
 
 class Points {
     static let PointsEventId = "0x77fabbc6cb41a11d4fb6918696b3550d5d602f252436dd587f9065b7c4e62b"
-    
+
     let url: URL
-    
+
     init(_ url: URL) {
         self.url = url
     }
-    
+
     func createPointsBalance(_ jwt: JWT, _ refaralCode: String) async throws -> CreatePointBalanceResponse {
         let headers = HTTPHeaders(
             [
                 HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
             ]
         )
-        
+
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances")
-        
+
         let requestPayload = CreatePointBalanceRequest(
             data: CreatePointBalanceRequestData(
                 id: jwt.payload.sub,
@@ -28,81 +28,81 @@ class Points {
                 )
             )
         )
-        
+
         let response = try await AF.request(requestUrl, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default, headers: headers)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(CreatePointBalanceResponse.self)
             .result
             .get()
-        
+
         return response
     }
-    
+
     func getLeaderboard(_ pageLimit: Int, _ pageNumber: Int, _ pageOrder: String = "desc") async throws -> GetLeaderboardResponse {
         let query = [
             URLQueryItem(name: "page[limit]", value: String(pageLimit)),
             URLQueryItem(name: "page[number]", value: String(pageNumber)),
             URLQueryItem(name: "page[order]", value: pageOrder)
         ]
-        
+
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances").appending(queryItems: query)
-        
+
         var response = try await AF.request(requestUrl)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(GetLeaderboardResponse.self)
             .result
             .get()
-        
+
         // FIXME: make it better
         for (index, entry) in response.data.enumerated() {
             response.data[index].attributes.id = entry.id
         }
-        
+
         return response
     }
-    
-    func getPointsBalance(_ jwt: JWT, _ rank: Optional<Bool> = nil , _ referral_codes: Optional<Bool> = nil) async throws -> GetPointsBalanceResponse {
+
+    func getPointsBalance(_ jwt: JWT, _ rank: Bool? = nil, _ referral_codes: Bool? = nil) async throws -> GetPointsBalanceResponse {
         let headers = HTTPHeaders(
             [
                 HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
             ]
         )
-        
+
         let nullifier = jwt.payload.sub
-        
+
         var query = [URLQueryItem]()
-        
+
         if let rank = rank {
             query.append(URLQueryItem(name: "rank", value: String(rank)))
         }
-        
+
         if let referral_codes = referral_codes {
             query.append(URLQueryItem(name: "referral_codes", value: String(referral_codes)))
         }
-        
+
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances/\(nullifier)").appending(queryItems: query)
-        
+
         var response = try await AF.request(requestUrl, headers: headers)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(GetPointsBalanceResponse.self)
             .result
             .get()
-        
+
         // FIXME: make it better
         response.data.attributes.id = response.data.id
-        
+
         return response
     }
-    
+
     func activatePointsBalance(_ jwt: JWT, _ refaralCode: String) async throws -> CreatePointBalanceRequest {
         let headers = HTTPHeaders(
             [
                 HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
             ]
         )
-        
+
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances/\(jwt.payload.sub)")
-        
+
         let requestPayload = CreatePointBalanceRequest(
             data: CreatePointBalanceRequestData(
                 id: jwt.payload.sub,
@@ -112,27 +112,27 @@ class Points {
                 )
             )
         )
-        
+
         let response = try await AF.request(requestUrl, method: .patch, parameters: requestPayload, encoder: JSONParameterEncoder.default, headers: headers)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(CreatePointBalanceRequest.self)
             .result
             .get()
-        
+
         return response
     }
-    
+
     func verifyPassport(_ jwt: JWT, _ zkProof: ZkProof) async throws -> VerifyPassportResponse {
         let nullifier = jwt.payload.sub
-        
+
         let headers = HTTPHeaders(
             [
                 HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
             ]
         )
-        
+
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances/\(nullifier)/verifypassport")
-        
+
         let requestPayload = VerifyPassportRequest(
             data: VerifyPassportRequestData(
                 id: nullifier,
@@ -142,37 +142,37 @@ class Points {
                 )
             )
         )
-        
+
         let response = try await AF.request(requestUrl, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default, headers: headers)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(VerifyPassportResponse.self)
             .result
             .get()
-        
+
         return response
     }
-    
+
     func withdrawalHistory(_ nullifier: String, _ pageLimit: Int, _ pageNumber: Int, _ pageOrder: String = "desc") async throws -> WithdrawalHistoryResponse {
         let query = [
             URLQueryItem(name: "page[limit]", value: String(pageLimit)),
             URLQueryItem(name: "page[number]", value: String(pageNumber)),
             URLQueryItem(name: "page[order]", value: pageOrder)
         ]
-        
+
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances/\(nullifier)/withdrawals").appending(queryItems: query)
-        
+
         let response = try await AF.request(requestUrl)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(WithdrawalHistoryResponse.self)
             .result
             .get()
-        
+
         return response
     }
-    
+
     func withdrawPoints(_ nullifer: String, _ amount: Int, _ address: String, _ proof: ZkProof) async throws -> WithdrawPointsResponse {
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances/\(nullifer)/withdrawals")
-        
+
         let requestPayload = WithdrawPointsRequest(
             data: WithdrawPointsRequestData(
                 id: nullifer,
@@ -184,101 +184,105 @@ class Points {
                 )
             )
         )
-        
+
         let response = try await AF.request(requestUrl, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(WithdrawPointsResponse.self)
             .result
             .get()
-        
+
         return response
     }
-    
+
     func listEvents(
         _ jwt: JWT,
-        filterStatus: Optional<[String]> = nil,
-        filterMetaStaticName: Optional<[String]> = nil,
-        count: Optional<Bool> = nil,
-        pageLimit: Optional<Int> = nil,
-        pageNumber: Optional<Int> = nil,
-        pageOrder: Optional<String> = nil
+        filterStatus: [String]? = nil,
+        filterMetaStaticName: [EventNames]? = nil,
+        count: Bool? = nil,
+        pageLimit: Int? = nil,
+        pageNumber: Int? = nil,
+        pageOrder: String? = nil
     ) async throws -> GetEventsResponse {
         let headers = HTTPHeaders(
             [
                 HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
             ]
         )
-        
+
         var query = [
             URLQueryItem(name: "filter[nullifier]", value: jwt.payload.sub)
         ]
-        
+
         if let filterStatus = filterStatus {
-            query.append(contentsOf: filterStatus.map { URLQueryItem(name: "filter[status]", value: $0) })
+            let queryValue = filterStatus.joined(separator: ",")
+            query.append(URLQueryItem(name: "filter[status]", value: queryValue))
         }
-        
+
         if let filterMetaStaticName = filterMetaStaticName {
-            query.append(contentsOf: filterMetaStaticName.map { URLQueryItem(name: "filter[meta.static.name]", value: $0) })
+            let queryValue = filterMetaStaticName
+                .map { item in item.rawValue }
+                .joined(separator: ",")
+            query.append(URLQueryItem(name: "filter[meta.static.name]", value: queryValue))
         }
-        
+
         if let count = count {
             query.append(URLQueryItem(name: "count", value: String(count)))
         }
-        
+
         if let pageLimit = pageLimit {
             query.append(URLQueryItem(name: "page[limit]", value: String(pageLimit)))
         }
-        
+
         if let pageNumber = pageNumber {
             query.append(URLQueryItem(name: "page[number]", value: String(pageNumber)))
         }
-        
+
         if let pageOrder = pageOrder {
             query.append(URLQueryItem(name: "page[order]", value: pageOrder))
         }
-        
+
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/events").appending(queryItems: query)
-        
+
         let jsonDecoder = JSONDecoder()
         jsonDecoder.dateDecodingStrategy = .iso8601
-        
+
         let response = try await AF.request(requestUrl, headers: headers)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(GetEventsResponse.self, decoder: jsonDecoder)
             .result
             .get()
-        
+
         return response
     }
-    
+
     func getEvent(_ eventId: String) async throws -> GetEventResponse {
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/events/\(eventId)")
-        
+
         let response = try await AF.request(requestUrl)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(GetEventResponse.self)
             .result
             .get()
-        
+
         return response
     }
-    
+
     func claimPointsForEvent(_ eventId: String) async throws -> ClaimPointsForEvent {
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/events/\(eventId)")
-        
+
         let requestPayload = ClaimPointsForEventRequest(
             data: ClaimPointsForEventRequestData(
                 id: eventId,
                 type: "claim_points"
             )
         )
-        
+
         let response = try await AF.request(requestUrl, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(ClaimPointsForEvent.self)
             .result
             .get()
-        
+
         return response
     }
 }
@@ -392,7 +396,7 @@ struct PointsBalanceRaw: Codable {
         case referralCodes = "referral_codes"
         case level
     }
-    
+
     func toLeaderboardEntry() -> LeaderboardEntry {
         return LeaderboardEntry(
             id: id,
@@ -411,12 +415,12 @@ struct ReferalCode: Codable {
 }
 
 enum ReferralCodeStatus: String, Codable {
-    case active = "active"
-    case banned = "banned"
-    case limited = "limited"
-    case awaiting = "awaiting"
-    case rewarded = "rewarded"
-    case consumed = "consumed"
+    case active
+    case banned
+    case limited
+    case awaiting
+    case rewarded
+    case consumed
 }
 
 struct VerifyPassportRequest: Codable {
@@ -452,6 +456,7 @@ struct WithdrawalHistoryResponseAttributes: Codable {
         case createdAt = "created_at"
     }
 }
+
 struct WithdrawalHistoryResponseRelationships: Codable {
     let balance: WithdrawalHistoryResponseBalance
 }
@@ -705,4 +710,12 @@ struct VerifyPassportResponseData: Codable {
 
 struct VerifyPassportResponseAttributes: Codable {
     let claimed: Bool
+}
+
+enum EventNames: String, Codable {
+    case referralCommon = "referral_common"
+    case passportScan = "passport_scan"
+    case referralSpecific = "referral_specific"
+    case beReferred = "be_referred"
+    case freeWeekly = "free_weekly"
 }
