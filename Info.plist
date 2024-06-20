@@ -101,5 +101,9 @@
 	<string>${REGISTRATION_SMT_CONTRACT_ADDRESS}</string>
 	<key>STATE_KEEPER_CONTRACT_ADDRESS</key>
 	<string>${STATE_KEEPER_CONTRACT_ADDRESS}</string>
+	<key>AIRDROP_TERMS_URL</key>
+	<string>${AIRDROP_TERMS_URL}</string>
+	<key>REFERRAL_URL</key>
+	<string>${REFERRAL_URL}</string>
 </dict>
 </plist>

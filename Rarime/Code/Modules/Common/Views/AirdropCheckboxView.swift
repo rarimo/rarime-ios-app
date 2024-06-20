@@ -13,7 +13,7 @@ struct AirdropCheckboxView: View {
     }
 
     private var airdropTermsURL: String {
-        configManager.general.termsOfUseURL.absoluteString
+        configManager.general.airdropTerms.absoluteString
     }
 
     var body: some View {

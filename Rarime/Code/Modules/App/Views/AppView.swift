@@ -57,6 +57,8 @@ struct AppView: View {
             Task { @MainActor in
                 await updateManager.checkForUpdate()
             }
+            
+            UIApplication.shared.isIdleTimerDisabled = true
         }
         .environmentObject(viewModel)
     }
