@@ -14,6 +14,7 @@ struct ProfileView: View {
     @EnvironmentObject private var appIconManager: AppIconManager
     @EnvironmentObject private var securityManager: SecurityManager
     @EnvironmentObject private var walletManager: WalletManager
+    @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
 
     @State private var path: [ProfileRoute] = []
 
@@ -187,6 +188,7 @@ struct ProfileView: View {
                         securityManager.reset()
                         userManager.reset()
                         walletManager.reset()
+                        decentralizedAuthManager.reset()
                     }
                 },
                 message: {
@@ -251,6 +253,7 @@ private struct ProfileRow: View {
         .environmentObject(SecurityManager())
         .environmentObject(AppIconManager())
         .environmentObject(WalletManager())
+        .environmentObject(DecentralizedAuthManager())
         .environmentObject(userManager)
         .onAppear {
             _ = try? userManager.createNewUser()

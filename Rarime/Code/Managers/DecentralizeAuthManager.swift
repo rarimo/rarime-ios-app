@@ -1,5 +1,5 @@
-import Identity
 import Foundation
+import Identity
 import Semaphore
 
 class DecentralizedAuthManager: ObservableObject {
@@ -50,12 +50,12 @@ class DecentralizedAuthManager: ObservableObject {
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16Auth(wtns)
         
-        let proof = try JSONDecoder.init().decode(Proof.self, from: proofJson)
-        let pubSignals = try JSONDecoder.init().decode(PubSignals.self, from: pubSignalsJson)
+        let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
+        let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
         
         let zkProof = ZkProof(proof: proof, pubSignals: pubSignals)
         
-        let authorizeUserResponse = try await self.authorize.authorizeUser(nullifier, zkProof)
+        let authorizeUserResponse = try await authorize.authorizeUser(nullifier, zkProof)
         
         let accessJwt = try JWT(authorizeUserResponse.data.attributes.accessToken.token)
         let refreshJwt = try JWT(authorizeUserResponse.data.attributes.refreshToken.token)
@@ -67,7 +67,7 @@ class DecentralizedAuthManager: ObservableObject {
     }
     
     func refreshIfNeeded() async throws {
-        guard let refreshJwt = self.refreshJwt else {
+        guard let refreshJwt = refreshJwt else {
             return
         }
         
@@ -77,7 +77,12 @@ class DecentralizedAuthManager: ObservableObject {
         
         let refreshJwtReponse = try await authorize.refreshJwt(refreshJwt.raw)
         
-        self.accessJwt = try JWT(refreshJwtReponse.data.attributes.accessToken.token)
+        accessJwt = try JWT(refreshJwtReponse.data.attributes.accessToken.token)
         self.refreshJwt = try JWT(refreshJwtReponse.data.attributes.refreshToken.token)
+    }
+    
+    func reset() {
+        accessJwt = nil
+        refreshJwt = nil
     }
 }
