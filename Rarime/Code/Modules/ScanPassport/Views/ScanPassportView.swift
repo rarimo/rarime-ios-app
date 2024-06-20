@@ -69,22 +69,12 @@ struct ScanPassportView: View {
             PassportProofView(
                 onFinish: { registerZKProof in
                     userManager.registerZkProof = registerZKProof
-                    if !isAirdropFlow {
+                    if !isAirdropFlow && !passportManager.isUnsupportedForRewards {
                         withAnimation { state = .reserveTokens }
                         return
                     }
 
-                    if
-                        !passportViewModel.isUserRevoked,
-                        passportViewModel.isEligibleForReward,
-                        !passportViewModel.isAirdropClaimed,
-                        !walletManager.isClaimed
-                    {
-                        LoggerUtil.passport.info("User is eligible for reward")
-                        withAnimation { state = .claimTokens }
-                    } else {
-                        onComplete(passportViewModel.passport!, false)
-                    }
+                    onComplete(passportViewModel.passport!, false)
                 },
                 onClose: onClose,
                 onError: { withAnimation { state = .waitlistPassport } }
