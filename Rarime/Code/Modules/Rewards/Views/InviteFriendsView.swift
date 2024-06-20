@@ -76,10 +76,6 @@ struct InviteFriendsView: View {
     }
 }
 
-private enum InviteCodeStatus {
-    case active, activated, used
-}
-
 private struct InviteCodeView: View {
     let code: String
     let status: ReferralCodeStatus
