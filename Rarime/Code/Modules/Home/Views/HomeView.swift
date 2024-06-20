@@ -30,6 +30,12 @@ struct HomeView: View {
             && !userManager.isRevoked
             && userManager.registerZkProof != nil
     }
+    
+    var canReserveTokens: Bool {
+        !userManager.isPassportTokensReserved
+            && !passportManager.isUnsupportedForRewards
+            && userManager.registerZkProof != nil
+    }
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -109,7 +115,7 @@ struct HomeView: View {
                                     set: { passportManager.setPassportIdentifiers($0) }
                                 )
                             )
-                            if !userManager.isPassportTokensReserved {
+                            if canReserveTokens {
                                 reserveTokensCard
                             }
                             // TODO: uncomment it in the future release
