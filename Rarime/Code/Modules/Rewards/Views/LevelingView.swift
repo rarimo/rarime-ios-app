@@ -173,6 +173,12 @@ private struct LevelRewards: View {
                     .background(.componentPrimary, in: RoundedRectangle(cornerRadius: 12))
                     .frame(maxWidth: .infinity)
                 }
+
+                if rewards.isEmpty {
+                    Text("Start journey to unlock rewards")
+                        .body3()
+                        .foregroundStyle(.textSecondary)
+                }
             }
             Spacer()
         }
@@ -187,13 +193,13 @@ private struct LevelRewards: View {
 #Preview {
     LevelingView(
         balance: PointsBalanceRaw(
-            amount: 35,
+            amount: 12,
             isDisabled: false,
             createdAt: 1,
             updatedAt: 1,
             rank: 1,
             referralCodes: [],
-            level: 2
+            level: 1
         )
     )
 }

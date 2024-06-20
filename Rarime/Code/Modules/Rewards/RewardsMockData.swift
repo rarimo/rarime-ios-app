@@ -41,18 +41,7 @@ let pointsLevels: [PointsLevel] = [
         description: String(localized: "Reserve tokens to unlock new levels and rewards"),
         minBalance: 0,
         maxBalance: 30,
-        rewards: [
-            LevelReward(
-                title: String(localized: "\(5) referrals"),
-                description: String(localized: "Invite more people, earn more rewards"),
-                icon: Icons.users
-            ),
-            LevelReward(
-                title: String(localized: "Rewards campaigns"),
-                description: String(localized: "Only level \(1) specials"),
-                icon: Icons.airdrop
-            )
-        ]
+        rewards: []
     ),
     PointsLevel(
         level: 2,
@@ -79,14 +68,9 @@ let pointsLevels: [PointsLevel] = [
         maxBalance: 100,
         rewards: [
             LevelReward(
-                title: String(localized: "\(20) extra referrals"),
-                description: String(localized: "Invite more people, earn more rewards"),
-                icon: Icons.users
-            ),
-            LevelReward(
-                title: String(localized: "Exclusive campaigns"),
-                description: String(localized: "Only level \(3) specials"),
-                icon: Icons.airdrop
+                title: String(localized: "Staking"),
+                description: String(localized: "Earn more rewards"),
+                icon: Icons.rarimo
             )
         ]
     )
