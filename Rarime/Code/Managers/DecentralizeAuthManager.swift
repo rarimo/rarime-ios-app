@@ -1,5 +1,6 @@
 import Identity
 import Foundation
+import Semaphore
 
 class DecentralizedAuthManager: ObservableObject {
     static let AuthEventId = "0x77fabbc6cb41a11d4fb6918696b3550d5d602f252436dd587f9065b7c4e62b"
@@ -11,11 +12,20 @@ class DecentralizedAuthManager: ObservableObject {
     @Published var accessJwt: Optional<JWT> = nil
     @Published var refreshJwt: Optional<JWT> = nil
     
+    private let semaphore = AsyncSemaphore(value: 1)
+    
     init() {
         self.authorize = AuthorizeService(ConfigManager.shared.api.authorizeURL)
     }
     
     func initializeJWT(_ secretKey: Data) async throws {
+        await semaphore.wait()
+        defer { semaphore.signal() }
+        
+        if accessJwt != nil {
+            return
+        }
+        
         let profileInitializer = IdentityProfile()
         let profile = try profileInitializer.newProfile(secretKey)
         
