@@ -1454,7 +1454,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = RariMe;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "You need to authenticate on your phone to unlock the app";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Passport Machine Readable Zone Reading";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Used to read the MRZ from the document";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Enable Face ID Authentication";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1504,7 +1504,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = RariMe;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "You need to authenticate on your phone to unlock the app";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Passport Machine Readable Zone Reading";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Used to read the MRZ from the document";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Enable Face ID Authentication";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1620,7 +1620,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = RariMe;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "You need to authenticate on your phone to unlock the app";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Passport Machine Readable Zone Reading";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Used to read the MRZ from the document";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Enable Face ID Authentication";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1729,7 +1729,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = RariMe;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "You need to authenticate on your phone to unlock the app";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Passport Machine Readable Zone Reading";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Used to read the MRZ from the document";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Enable Face ID Authentication";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
