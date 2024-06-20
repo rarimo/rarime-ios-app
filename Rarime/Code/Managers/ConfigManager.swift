@@ -15,12 +15,14 @@ extension ConfigManager {
     class General {
         let privacyPolicyURL: URL
         let termsOfUseURL: URL
+        let airdropTerms: URL
         let version: String
 
         init() {
             do {
                 self.privacyPolicyURL = try readURLFromInfoPlist(key: "PRIVACY_POLICY_URL")
                 self.termsOfUseURL = try readURLFromInfoPlist(key: "TERMS_OF_USE_URL")
+                self.airdropTerms = try readURLFromInfoPlist(key: "AIRDROP_TERMS_URL")
                 self.version = try readFromInfoPlist(key: "CFBundleShortVersionString")
             } catch {
                 fatalError("ConfigManager.General init error: \(error.localizedDescription)")
@@ -40,6 +42,7 @@ extension ConfigManager {
         let cosmosRpcURL: URL
         let pointsServiceURL: URL
         let authorizeURL: URL
+        let referralURL: URL
 
         init() {
             do {
@@ -52,6 +55,7 @@ extension ConfigManager {
                 self.cosmosRpcURL = try readURLFromInfoPlist(key: "COSMOS_RPC_URL")
                 self.pointsServiceURL = try readURLFromInfoPlist(key: "POINTS_SERVICE_URL")
                 self.authorizeURL = try readURLFromInfoPlist(key: "AUTHORIZE_URL")
+                self.referralURL = try readURLFromInfoPlist(key: "REFERRAL_URL")
             } catch {
                 fatalError("ConfigManager.API init error: \(error.localizedDescription)")
             }

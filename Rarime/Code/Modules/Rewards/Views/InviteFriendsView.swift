@@ -52,7 +52,7 @@ struct InviteFriendsView: View {
                 VStack(spacing: 8) {
                     if let codes = balance.referralCodes {
                         ForEach(codes, id: \.id) { code in
-                            InviteCodeView(code: code.id, status: .active)
+                            InviteCodeView(code: code.id, status: code.status)
                         }
                     }
                     Spacer()
@@ -81,8 +81,7 @@ private struct InviteCodeView: View {
     let status: ReferralCodeStatus
 
     var invitationLink: String {
-        // TODO: use URL from config
-        "https://app.rarime.com/i/\(code)"
+        ConfigManager.shared.api.referralURL.appendingPathComponent("\(code)").absoluteString
     }
 
     var body: some View {
@@ -95,13 +94,12 @@ private struct InviteCodeView: View {
                     Text(invitationLink.dropFirst(8))
                         .body3()
                         .foregroundStyle(.textSecondary)
-                    Text("Active")
+                    Text(status.rawValue.uppercased())
                         .body4()
                         .foregroundStyle(.successDark)
                 }
                 Spacer()
                 ShareLink(
-                    // TODO: update content
                     item: URL(string: invitationLink)!,
                     subject: Text("Invite to RariMe"),
                     message: Text("Join RariMe with my invite code: \(code)\n\n\(invitationLink)")

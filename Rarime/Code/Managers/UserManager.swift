@@ -467,13 +467,11 @@ class UserManager: ObservableObject {
             try AppKeychain.removeValue(.registerZkProof)
             try AppKeychain.removeValue(.passport)
             
-            self.user = try User.load()
+            self.user = nil
             self.balance = 0
             self.isPassportTokensReserved = AppUserDefaults.shared.isPassportTokensReserved
             
-            if let registerZkProofJson = try AppKeychain.getValue(.registerZkProof) {
-                self.registerZkProof = try JSONDecoder().decode(ZkProof.self, from: registerZkProofJson)
-            }
+            self.registerZkProof = nil
         } catch {
             fatalError("\(error.localizedDescription)")
         }
