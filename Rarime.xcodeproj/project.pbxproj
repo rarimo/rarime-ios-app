@@ -157,6 +157,7 @@
 		CE3E0D3B2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E0D3A2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift */; };
 		CE51E2E52C21790700043D9A /* CircuitDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51E2E42C21790700043D9A /* CircuitDataManager.swift */; };
 		CE51E2FB2C21CA0B00043D9A /* StateKeeperContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51E2FA2C21CA0B00043D9A /* StateKeeperContract.swift */; };
+		CE61E8832C24240000940129 /* Semaphore in Frameworks */ = {isa = PBXBuildFile; productRef = CE61E8822C24240000940129 /* Semaphore */; };
 		CE68BE3D2BD9B23D00D92EBB /* ZkProof.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */; };
 		CE68BE3F2BD9B4B200D92EBB /* Relayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */; };
 		CE68BE422BD9B6A200D92EBB /* RegistrationContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE412BD9B6A200D92EBB /* RegistrationContract.swift */; };
@@ -415,6 +416,7 @@
 				5655E43A2BD51F5100B86C5C /* KeychainAccess in Frameworks */,
 				CE68BE452BD9B6EA00D92EBB /* Web3 in Frameworks */,
 				CE72102E2BD7F6780043DB7F /* Alamofire in Frameworks */,
+				CE61E8832C24240000940129 /* Semaphore in Frameworks */,
 				CE3C6BA52C2310190055A20A /* libwitnesscalc_registerIdentityUniversalRSA2048.a in Frameworks */,
 				56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */,
 				CE3C6BA42C2310190055A20A /* libwitnesscalc_registerIdentityUniversalRSA4096.a in Frameworks */,
@@ -1057,6 +1059,7 @@
 				56E7AD102BDBA81000D3A258 /* PullToRefreshSwiftUI */,
 				5609B6C72C188C7500CB6A1F /* MarkdownUI */,
 				CE9347722C205B340034885C /* CachedAsyncImage */,
+				CE61E8822C24240000940129 /* Semaphore */,
 			);
 			productName = Rarime;
 			productReference = CE9E82B22BA881F400AAF885 /* Rarime.app */;
@@ -1100,6 +1103,7 @@
 				56E7AD0F2BDBA81000D3A258 /* XCRemoteSwiftPackageReference "PullToRefreshSwiftUI" */,
 				5609B6C62C188C7500CB6A1F /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				CE9347712C205B340034885C /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
+				CE61E8812C24240000940129 /* XCRemoteSwiftPackageReference "Semaphore" */,
 			);
 			productRefGroup = CE9E82B32BA881F400AAF885 /* Products */;
 			projectDirPath = "";
@@ -1846,6 +1850,14 @@
 				version = 4.4.1;
 			};
 		};
+		CE61E8812C24240000940129 /* XCRemoteSwiftPackageReference "Semaphore" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:groue/Semaphore.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.0.8;
+			};
+		};
 		CE68BE432BD9B6EA00D92EBB /* XCRemoteSwiftPackageReference "Web3.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Boilertalk/Web3.swift.git";
@@ -1920,6 +1932,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE32CF502BAC981300E507B6 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		CE61E8822C24240000940129 /* Semaphore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE61E8812C24240000940129 /* XCRemoteSwiftPackageReference "Semaphore" */;
+			productName = Semaphore;
 		};
 		CE68BE442BD9B6EA00D92EBB /* Web3 */ = {
 			isa = XCSwiftPackageProductDependency;
