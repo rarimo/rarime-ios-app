@@ -196,12 +196,12 @@ class Points {
     
     func listEvents(
         _ jwt: JWT,
-        _ filterStatus: Optional<[String]> = nil,
-        _ filterMetaStaticName: Optional<[String]> = nil,
-        _ count: Optional<Bool> = nil,
-        _ pageLimit: Optional<Int> = nil,
-        _ pageNumber: Optional<Int> = nil,
-        _ pageOrder: Optional<String> = nil
+        filterStatus: Optional<[String]> = nil,
+        filterMetaStaticName: Optional<[String]> = nil,
+        count: Optional<Bool> = nil,
+        pageLimit: Optional<Int> = nil,
+        pageNumber: Optional<Int> = nil,
+        pageOrder: Optional<String> = nil
     ) async throws -> GetEventsResponse {
         let headers = HTTPHeaders(
             [

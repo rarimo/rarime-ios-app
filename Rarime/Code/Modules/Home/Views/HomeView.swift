@@ -5,12 +5,11 @@ private enum HomeRoute: Hashable {
 }
 
 struct HomeView: View {
+    @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
+    @EnvironmentObject private var mainViewModel: MainView.ViewModel
     @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var walletManager: WalletManager
-    @EnvironmentObject private var mainViewModel: MainView.ViewModel
     @EnvironmentObject private var userManager: UserManager
-
-    @Binding var isRewardsSheetPresented: Bool
 
     @State private var path: [HomeRoute] = []
 
@@ -22,6 +21,7 @@ struct HomeView: View {
     @State private var isClaimed = false
 
     @State private var isBalanceFetching = true
+    @State private var pointsBalance: PointsBalanceRaw? = nil
     @State private var cancelables: [Task<Void, Never>] = []
 
     var canClaimAirdrop: Bool {
@@ -52,6 +52,7 @@ struct HomeView: View {
                 case .reserveTokens:
                     ReserveTokensView(
                         showTerms: true,
+                        
                         passport: passportManager.passport,
                         onFinish: { _ in
                             isClaimed = true
@@ -111,14 +112,14 @@ struct HomeView: View {
                             if !userManager.isPassportTokensReserved {
                                 reserveTokensCard
                             }
-                            // TODO: uncomment when UKR case is ready
-                            // if canClaimAirdrop {
-                            //    claimCard
-                            // }
+                            // TODO: uncomment it in the future release
+//                            if canClaimAirdrop {
+//                                claimCard
+//                            }
                         } else {
                             rewardsCard
-                            // TODO: uncomment when UKR case is ready
-                            // ukrainianCitizensCard
+                            // TODO: uncomment it in the future release
+//                            ukrainianCitizensCard
                         }
                         rarimeCard
                         Spacer().frame(height: 120)
@@ -155,7 +156,7 @@ struct HomeView: View {
             if isBalanceFetching {
                 ProgressView().frame(height: 40)
             } else {
-                Text(userManager.reservedBalance.formatted())
+                Text("\(self.pointsBalance?.amount ?? 0)")
                     .h4()
                     .foregroundStyle(.textPrimary)
             }
@@ -178,13 +179,13 @@ struct HomeView: View {
                 }
                 HorizontalDivider()
                 AppButton(text: "Let’s Start", rightIcon: Icons.arrowRight) {
-                    isRewardsSheetPresented = true
+                    mainViewModel.isRewardsSheetPresented = true
                 }
                 .controlSize(.large)
-                .dynamicSheet(isPresented: $isRewardsSheetPresented, fullScreen: true) {
+                .dynamicSheet(isPresented: $mainViewModel.isRewardsSheetPresented, fullScreen: true) {
                     RewardsIntroView(
                         onStart: {
-                            isRewardsSheetPresented = false
+                            mainViewModel.isRewardsSheetPresented = false
                             isAirdropFlow = false
                             path.append(.scanPassport)
                         }
@@ -251,9 +252,19 @@ struct HomeView: View {
             }
 
             do {
-                let balance = try await userManager.fetchBalanse()
-
-                self.userManager.balance = Double(balance) ?? 0
+                guard let user = userManager.user else { throw "failed to get user" }
+                
+                if decentralizedAuthManager.accessJwt == nil {
+                    try await decentralizedAuthManager.initializeJWT(user.secretKey)
+                }
+                
+                try await decentralizedAuthManager.refreshIfNeeded()
+                
+                guard let accessJwt = decentralizedAuthManager.accessJwt else { throw "accessJwt is nil" }
+                
+                let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
+                
+                self.pointsBalance = pointsBalance
             } catch is CancellationError {
                 return
             } catch {
@@ -272,7 +283,7 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(isRewardsSheetPresented: .constant(false))
+    HomeView()
         .environmentObject(MainView.ViewModel())
         .environmentObject(PassportManager())
         .environmentObject(WalletManager())

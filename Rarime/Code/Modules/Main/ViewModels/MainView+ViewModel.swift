@@ -25,6 +25,8 @@ enum MainTabs: Int, CaseIterable {
 extension MainView {
     class ViewModel: ObservableObject {
         @Published var selectedTab: MainTabs = .home
+        
+        @Published var isRewardsSheetPresented = false
 
         func selectTab(_ tab: MainTabs) {
             selectedTab = tab

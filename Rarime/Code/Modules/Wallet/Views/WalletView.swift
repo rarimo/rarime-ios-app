@@ -7,7 +7,6 @@ private enum WalletRoute: String, Hashable {
 // TODO: move to model/manager
 enum WalletToken: String {
     case rmo = "RMO"
-    case usdc = "USDC"
 }
 
 // TODO: move to model/manager
@@ -16,20 +15,6 @@ struct WalletAsset {
     let balance: Double
     let usdBalance: Double?
 }
-
-// TODO: move to model/manager
-let walletAssets = [
-    WalletAsset(
-        token: WalletToken.rmo,
-        balance: 3,
-        usdBalance: nil
-    ),
-    WalletAsset(
-        token: WalletToken.usdc,
-        balance: 10,
-        usdBalance: 10.2
-    ),
-]
 
 struct WalletView: View {
     @EnvironmentObject private var walletManager: WalletManager
@@ -43,9 +28,7 @@ struct WalletView: View {
     // TODO: use the token from the manager and save to store
     @State private var token = WalletToken.rmo
 
-    var selectedAsset: WalletAsset {
-        walletAssets.first { $0.token == token } ?? walletAssets.first!
-    }
+    @State private var selectedAsset: WalletAsset?
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -72,7 +55,7 @@ struct WalletView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     header
-                    AssetsSlider()
+                    AssetsSlider(walletAssets: selectedAsset != nil ? [selectedAsset!] : [])
                     transactionsList
                 }
                 .padding(.bottom, 120)
@@ -103,13 +86,12 @@ struct WalletView: View {
                     }
                     AppDropdown(value: $token, options: [
                         DropdownOption(label: WalletToken.rmo.rawValue, value: WalletToken.rmo),
-                        DropdownOption(label: WalletToken.usdc.rawValue, value: WalletToken.usdc),
                     ])
                     .padding(.top, 8)
                 }
                 .frame(height: 40)
                 .zIndex(1)
-                Text(try! String(selectedAsset.usdBalance == nil ? "---" : "≈$\((selectedAsset.usdBalance ?? 0).formatted())"))
+                Text(try! String(selectedAsset?.usdBalance == nil ? "---" : "≈$\((selectedAsset?.usdBalance ?? 0).formatted())"))
                     .caption2()
                     .foregroundStyle(.textSecondary)
             }
@@ -170,6 +152,12 @@ struct WalletView: View {
                 let balance = try await userManager.fetchBalanse()
 
                 self.userManager.balance = Double(balance) ?? 0
+                
+                self.selectedAsset = WalletAsset(
+                    token: WalletToken.rmo,
+                    balance: self.userManager.balance / Double(Rarimo.rarimoTokenMantis),
+                    usdBalance: nil
+                )
             } catch is CancellationError {
                 return
             } catch {
@@ -233,7 +221,7 @@ private struct TransactionItem: View {
                     .foregroundStyle(.textSecondary)
             }
             Spacer()
-            Text(try! String("\(balanceModifier)\(tx.amount.formatted()) \(token.rawValue)"))
+            Text("\(balanceModifier)\(tx.amount.formatted()) \(token.rawValue)")
                 .subtitle5()
                 .foregroundStyle(tx.type == .sent ? .errorMain : .successMain)
         }

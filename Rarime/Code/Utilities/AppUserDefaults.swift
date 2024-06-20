@@ -56,9 +56,6 @@ public class AppUserDefaults: ObservableObject {
     @AppStorage("is_user_revoked")
     public var isUserRevoked = false
 
-    // TODO: remove when backend is ready
-    @AppStorage("reserved_balance")
-    public var reservedBalance = 0.0
 
     @AppStorage("is_passport_tokens_reserved")
     public var isPassportTokensReserved = false
