@@ -105,5 +105,7 @@
 	<string>${AIRDROP_TERMS_URL}</string>
 	<key>REFERRAL_URL</key>
 	<string>${REFERRAL_URL}</string>
+	<key>JOIN_REWARDS_KEY</key>
+	<string>${JOIN_REWARDS_KEY}</string>
 </dict>
 </plist>

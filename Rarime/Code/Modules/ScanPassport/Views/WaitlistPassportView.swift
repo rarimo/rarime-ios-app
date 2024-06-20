@@ -1,9 +1,9 @@
 import SwiftUI
-
-import SwiftUI
+import Identity
 
 struct WaitlistPassportView: View {
     @EnvironmentObject var passportViewModel: PassportViewModel
+    @EnvironmentObject var userManager: UserManager
 
     let onNext: () -> Void
     let onCancel: () -> Void
@@ -65,10 +65,39 @@ struct WaitlistPassportView: View {
                 result: .constant(nil)
             )
         }
+        .onAppear(perform: joinRewardsProgram)
+    }
+    
+    func joinRewardsProgram() {
+        Task { @MainActor in
+            do {
+                let country = passportViewModel.passport?.nationality ?? ""
+                
+                var nullifier = try userManager.generateNullifierForEvent(Points.PointsEventId)
+                
+                var error: NSError?
+                let hmacMessage = IdentityCalculateHmacMessage(nullifier, country, &error)
+                if let error {
+                    throw error
+                }
+                
+                let hmacSingature = HMACUtils.hmacSha256(hmacMessage ?? Data(), ConfigManager.shared.api.joinRewardsKey.data(using: .utf8) ?? Data())
+                
+                let points = Points(ConfigManager.shared.api.pointsServiceURL)
+                let _ = try await points.joinRewardsProgram(
+                    country,
+                    nullifier,
+                    hmacSingature.hex
+                )
+            } catch {
+                LoggerUtil.common.info("failed to join rewards program: \(error, privacy: .public)")
+            }
+        }
     }
 }
 
 #Preview {
     WaitlistPassportView(onNext: {}, onCancel: {})
         .environmentObject(PassportViewModel())
+        .environmentObject(UserManager())
 }

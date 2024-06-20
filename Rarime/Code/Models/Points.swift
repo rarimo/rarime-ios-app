@@ -285,6 +285,34 @@ class Points {
 
         return response
     }
+    
+    func joinRewardsProgram(_ country: String, _ nullifier: String, _ signature: String) async throws -> VerifyPassportResponse {
+        let headers = HTTPHeaders(
+            [
+                HTTPHeader(name: "Signature", value: signature)
+            ]
+        )
+        
+        let requestURL = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances/\(nullifier)/join_program")
+        
+        let requestPayload = JoinRewardsProgramRequest(
+            data: JoinRewardsProgramRequestData(
+                id: nullifier,
+                type: "join_program",
+                attributes: JoinRewardsProgramRequestAttributes(
+                    country: country
+                )
+            )
+        )
+        
+        let response = try await AF.request(requestURL, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default, headers: headers)
+            .validate(OpenApiError.catchInstance)
+            .serializingDecodable(VerifyPassportResponse.self)
+            .result
+            .get()
+
+        return response
+    }
 }
 
 struct CreatePointBalanceRequest: Codable {
@@ -710,6 +738,19 @@ struct VerifyPassportResponseData: Codable {
 
 struct VerifyPassportResponseAttributes: Codable {
     let claimed: Bool
+}
+
+struct JoinRewardsProgramRequest: Codable {
+    let data: JoinRewardsProgramRequestData
+}
+
+struct JoinRewardsProgramRequestData: Codable {
+    let id, type: String
+    let attributes: JoinRewardsProgramRequestAttributes
+}
+
+struct JoinRewardsProgramRequestAttributes: Codable {
+    let country: String
 }
 
 enum EventNames: String, Codable {
