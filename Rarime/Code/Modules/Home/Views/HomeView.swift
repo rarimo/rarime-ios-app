@@ -112,12 +112,14 @@ struct HomeView: View {
                             if !userManager.isPassportTokensReserved {
                                 reserveTokensCard
                             }
-                            if canClaimAirdrop {
-                                claimCard
-                            }
+                            // TODO: uncomment it in the future release
+//                            if canClaimAirdrop {
+//                                claimCard
+//                            }
                         } else {
                             rewardsCard
-                            ukrainianCitizensCard
+                            // TODO: uncomment it in the future release
+//                            ukrainianCitizensCard
                         }
                         rarimeCard
                         Spacer().frame(height: 120)

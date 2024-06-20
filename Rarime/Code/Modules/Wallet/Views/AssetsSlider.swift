@@ -3,6 +3,8 @@ import SwiftUI
 struct AssetsSlider: View {
     @State private var selectedTab = 0
     @State private var offset = CGFloat.zero
+    
+    let walletAssets: [WalletAsset]
 
     var body: some View {
         VStack(spacing: 20) {
@@ -59,7 +61,6 @@ private struct AssetCard: View {
     var icon: String {
         switch asset.token {
         case .rmo: Icons.rarimo
-        case .usdc: Icons.usdc
         }
     }
 
@@ -89,5 +90,5 @@ private struct AssetCard: View {
 }
 
 #Preview {
-    AssetsSlider()
+    AssetsSlider(walletAssets: [WalletAsset(token: WalletToken.rmo, balance: 3, usdBalance: nil)])
 }
