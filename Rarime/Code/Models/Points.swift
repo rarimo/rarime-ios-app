@@ -286,18 +286,19 @@ class Points {
         return response
     }
     
-    func joinRewardsProgram(_ country: String, _ nullifier: String, _ signature: String) async throws -> VerifyPassportResponse {
+    func joinRewardsProgram(_ jwt: JWT, _ country: String, _ signature: String) async throws -> VerifyPassportResponse {
         let headers = HTTPHeaders(
             [
-                HTTPHeader(name: "Signature", value: signature)
+                HTTPHeader(name: "Signature", value: signature),
+                HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
             ]
         )
         
-        let requestURL = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances/\(nullifier)/join_program")
+        let requestURL = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances/\(jwt.payload.sub)/join_program")
         
         let requestPayload = JoinRewardsProgramRequest(
             data: JoinRewardsProgramRequestData(
-                id: nullifier,
+                id: jwt.payload.sub,
                 type: "join_program",
                 attributes: JoinRewardsProgramRequestAttributes(
                     country: country
