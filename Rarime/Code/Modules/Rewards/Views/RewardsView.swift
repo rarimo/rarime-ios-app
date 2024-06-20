@@ -255,6 +255,11 @@ struct RewardsView: View {
                                 }
                             }
                     }
+                    if notlimitedEvents.isEmpty {
+                        Text("No active tasks")
+                            .body3()
+                            .foregroundStyle(.textSecondary)
+                    }
                 }
             }
         }
