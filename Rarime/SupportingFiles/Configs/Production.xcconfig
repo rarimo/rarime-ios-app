@@ -17,6 +17,7 @@ COSMOS_RPC_URL = "https:${SLASH}/rpc-api.node1.mainnet-beta.rarimo.com"
 POINTS_SERVICE_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
 AUTHORIZE_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
 REFERRAL_URL = "https:${SLASH}/app.rarime.com/r"
+JOIN_REWARDS_KEY = ""
 
 // MARK: Cosmos
 CHAIN_ID = "rarimo_42-1"

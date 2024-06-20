@@ -43,6 +43,7 @@ extension ConfigManager {
         let pointsServiceURL: URL
         let authorizeURL: URL
         let referralURL: URL
+        let joinRewardsKey: String
 
         init() {
             do {
@@ -56,6 +57,7 @@ extension ConfigManager {
                 self.pointsServiceURL = try readURLFromInfoPlist(key: "POINTS_SERVICE_URL")
                 self.authorizeURL = try readURLFromInfoPlist(key: "AUTHORIZE_URL")
                 self.referralURL = try readURLFromInfoPlist(key: "REFERRAL_URL")
+                self.joinRewardsKey = try readFromInfoPlist(key: "JOIN_REWARDS_KEY")
             } catch {
                 fatalError("ConfigManager.API init error: \(error.localizedDescription)")
             }

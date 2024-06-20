@@ -1,9 +1,10 @@
 import SwiftUI
-
-import SwiftUI
+import Identity
 
 struct WaitlistPassportView: View {
+    @EnvironmentObject var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject var passportViewModel: PassportViewModel
+    @EnvironmentObject var userManager: UserManager
 
     let onNext: () -> Void
     let onCancel: () -> Void
@@ -65,10 +66,52 @@ struct WaitlistPassportView: View {
                 result: .constant(nil)
             )
         }
+        .onAppear(perform: joinRewardsProgram)
+    }
+    
+    func joinRewardsProgram() {
+        Task { @MainActor in
+            do {
+                guard let user = userManager.user else { throw "failed to get user" }
+                
+                if decentralizedAuthManager.accessJwt == nil {
+                    try await decentralizedAuthManager.initializeJWT(user.secretKey)
+                }
+                
+                try await decentralizedAuthManager.refreshIfNeeded()
+                
+                guard let accessJwt = decentralizedAuthManager.accessJwt else { throw "accessJwt is nil" }
+                
+                let country = passportViewModel.passport?.nationality ?? ""
+                
+                var error: NSError?
+                let hmacMessage = IdentityCalculateHmacMessage(accessJwt.payload.sub, country, &error)
+                if let error {
+                    throw error
+                }
+                
+                let key = Data(hex: ConfigManager.shared.api.joinRewardsKey) ?? Data()
+                
+                let hmacSingature = HMACUtils.hmacSha256(hmacMessage ?? Data(), key)
+                
+                let points = Points(ConfigManager.shared.api.pointsServiceURL)
+                let _ = try await points.joinRewardsProgram(
+                    accessJwt,
+                    country,
+                    hmacSingature.hex
+                )
+                
+                LoggerUtil.common.info("User joined program")
+            } catch {
+                LoggerUtil.common.info("failed to join rewards program: \(error, privacy: .public)")
+            }
+        }
     }
 }
 
 #Preview {
     WaitlistPassportView(onNext: {}, onCancel: {})
         .environmentObject(PassportViewModel())
+        .environmentObject(UserManager())
+        .environmentObject(DecentralizedAuthManager())
 }
