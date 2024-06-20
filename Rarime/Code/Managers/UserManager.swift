@@ -417,9 +417,7 @@ class UserManager: ObservableObject {
         return spendableBalances.balances.first?.amount ?? "0"
     }
     
-    func fetchPointsBalance(_ jwt: JWT) async throws -> PointsBalanceRaw {
-        guard let user else { throw "user is not initalized" }
-        
+    func fetchPointsBalance(_ jwt: JWT) async throws -> PointsBalanceRaw {        
         let points = Points(ConfigManager.shared.api.pointsServiceURL)
         
         let balanceResponse = try await points.getPointsBalance(jwt, true, true)
