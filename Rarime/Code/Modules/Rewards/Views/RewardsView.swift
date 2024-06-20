@@ -1,5 +1,5 @@
-import SwiftUI
 import CachedAsyncImage
+import SwiftUI
 
 private enum RewardsRoute: String, Hashable {
     case taskEvent, inviteFriends, claimRewards
@@ -8,6 +8,7 @@ private enum RewardsRoute: String, Hashable {
 struct RewardsView: View {
     @EnvironmentObject private var mainViewModel: MainView.ViewModel
     @EnvironmentObject private var userManager: UserManager
+    @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     
     @StateObject private var rewardsViewModel = RewardsViewModel()
@@ -20,17 +21,17 @@ struct RewardsView: View {
     @State private var isLevelingSheetShown: Bool = false
     
     var limitedEvents: [GetEventResponseData] {
-        rewardsViewModel.events.filter( { $0.attributes.meta.metaStatic.expiresAt != nil })
+        rewardsViewModel.events.filter { $0.attributes.meta.metaStatic.expiresAt != nil }
     }
     
     var notlimitedEvents: [GetEventResponseData] {
         var events = rewardsViewModel
             .events
-            .filter( {$0.attributes.meta.metaStatic.expiresAt == nil })
+            .filter { $0.attributes.meta.metaStatic.expiresAt == nil }
         
         if let user = userManager.user {
             if user.status != .unscanned {
-                events = events.filter( { $0.attributes.meta.metaStatic.name != "passport_scan" } )
+                events = events.filter { $0.attributes.meta.metaStatic.name != EventNames.passportScan.rawValue }
             }
         }
         
@@ -42,6 +43,10 @@ struct RewardsView: View {
         
         let level = pointsLevels.first { $0.level == myBalance.level }
         return level?.maxBalance ?? 0.0
+    }
+    
+    private var isUnsupportedCountry: Bool {
+        passportManager.passport != nil && passportManager.isUnsupportedForRewards
     }
 
     var body: some View {
@@ -86,7 +91,7 @@ struct RewardsView: View {
                                 .subtitle2()
                                 .foregroundStyle(.textPrimary)
                             Spacer()
-                            if isLeaderboardLoaded {
+                            if isLeaderboardLoaded && !isUnsupportedCountry {
                                 if let balance = rewardsViewModel.pointsBalanceRaw {
                                     Button(action: { isLeaderboardSheetShown = true }) {
                                         HStack(spacing: 4) {
@@ -113,15 +118,36 @@ struct RewardsView: View {
                         }
                         .padding(.top, 20)
                         .padding(.horizontal, 20)
-                        VStack(spacing: 8) {
-                            balanceCard
-                            if !limitedEvents.isEmpty {
-                                limitedEventsCard(limitedEvents)
+                        if isUnsupportedCountry {
+                            VStack(spacing: 8) {
+                                Text(passportManager.passportCountry.flag)
+                                    .h4()
+                                    .frame(width: 72, height: 72)
+                                    .background(.componentPrimary, in: Circle())
+                                    .foregroundStyle(.textPrimary)
+                                Text("Unsupported country")
+                                    .h5()
+                                    .foregroundStyle(.textPrimary)
+                                    .padding(.top, 16)
+                                Text("Unfortunately, these passports are not eligible for rewards. However, you can use your incognito ID for other upcoming mini apps.")
+                                    .body3()
+                                    .multilineTextAlignment(.center)
+                                    .foregroundStyle(.textSecondary)
                             }
-                            activeEventsCard
+                            .padding(.top, 120)
+                            .padding(.horizontal, 32)
+                        } else {
+                            VStack(spacing: 8) {
+                                balanceCard
+                                if !limitedEvents.isEmpty {
+                                    limitedEventsCard(limitedEvents)
+                                }
+                                activeEventsCard
+                            }
+                            .padding(.horizontal, 12)
                         }
-                        .padding(.horizontal, 12)
                     }
+                    .padding(.bottom, 124)
                 }
                 .background(.backgroundPrimary)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -218,9 +244,9 @@ struct RewardsView: View {
                     ForEach(notlimitedEvents.reversed(), id: \.id) { event in
                         ActiveEventItem(event: event)
                             .onTapGesture {
-                                if event.attributes.meta.metaStatic.name == "referral_common" {
+                                if event.attributes.meta.metaStatic.name == EventNames.referralCommon.rawValue {
                                     path.append(.inviteFriends)
-                                } else if event.attributes.meta.metaStatic.name == "passport_scan" {
+                                } else if event.attributes.meta.metaStatic.name == EventNames.passportScan.rawValue {
                                     mainViewModel.isRewardsSheetPresented = true
                                     mainViewModel.selectedTab = .home
                                 } else {
@@ -273,15 +299,18 @@ struct RewardsView: View {
                 if decentralizedAuthManager.accessJwt == nil {
                     try await decentralizedAuthManager.initializeJWT(user.secretKey)
                 }
-                
+
                 try await decentralizedAuthManager.refreshIfNeeded()
-                
+
                 guard let accessJwt = decentralizedAuthManager.accessJwt else { throw "accessJwt is nil" }
-                
+
                 let points = Points(ConfigManager.shared.api.pointsServiceURL)
-                
-                let events = try await points.listEvents(accessJwt)
-                
+
+                let events = try await points.listEvents(
+                    accessJwt,
+                    filterMetaStaticName: [.passportScan, .referralCommon]
+                )
+
                 self.rewardsViewModel.events = events.data
 
                 self.isEventsLoaded = true
@@ -340,8 +369,8 @@ private struct LimitedEventItem: View {
                     }
                 }
             )
-                .frame(width: 64, height: 64)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
+            .frame(width: 64, height: 64)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
             VStack(alignment: .leading, spacing: 8) {
                 Text(event.attributes.meta.metaStatic.title)
                     .subtitle4()
@@ -376,9 +405,10 @@ private struct ActiveEventItem: View {
                     }
                 }
             )
-                .frame(width: 40, height: 40)
-                .background(.additionalPureDark, in: Circle())
-                .foregroundStyle(.baseWhite)
+            .frame(width: 40, height: 40)
+            .background(.additionalPureDark, in: Circle())
+            .foregroundStyle(.baseWhite)
+            .clipShape(Circle())
             VStack(alignment: .leading, spacing: 4) {
                 Text(event.attributes.meta.metaStatic.title)
                     .subtitle4()
@@ -403,6 +433,7 @@ private struct ActiveEventItem: View {
     return RewardsView()
         .environmentObject(DecentralizedAuthManager())
         .environmentObject(MainView.ViewModel())
+        .environmentObject(PassportManager())
         .environmentObject(userManager)
         .onAppear(perform: {
             try? userManager.createNewUser()

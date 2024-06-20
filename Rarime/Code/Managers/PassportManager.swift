@@ -23,6 +23,14 @@ class PassportManager: ObservableObject {
         passport?.nationality == "UKR"
     }
 
+    var passportCountry: Country {
+        .fromISOCode(passport?.nationality ?? "")
+    }
+
+    var isUnsupportedForRewards: Bool {
+        UNSUPPORTED_REWARD_COUNTRIES.contains(passportCountry)
+    }
+
     func setPassport(_ passport: Passport) {
         self.passport = passport
         setPassportCardLook(.white)
