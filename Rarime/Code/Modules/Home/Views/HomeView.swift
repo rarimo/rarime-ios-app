@@ -9,7 +9,7 @@ struct HomeView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var mainViewModel: MainView.ViewModel
     @EnvironmentObject private var userManager: UserManager
-    
+
     @Binding var isRewardsSheetPresented: Bool
 
     @State private var path: [HomeRoute] = []
@@ -40,7 +40,7 @@ struct HomeView: View {
                         isAirdropFlow: isAirdropFlow,
                         onComplete: { passport, isClaimed in
                             userManager.user?.status = .passportScanned
-                            
+
                             passportManager.setPassport(passport)
                             isCongratsShown = true
                             self.isClaimed = isClaimed
@@ -111,12 +111,14 @@ struct HomeView: View {
                             if !userManager.isPassportTokensReserved {
                                 reserveTokensCard
                             }
-                            if canClaimAirdrop {
-                                claimCard
-                            }
+                            // TODO: uncomment when UKR case is ready
+                            // if canClaimAirdrop {
+                            //    claimCard
+                            // }
                         } else {
                             rewardsCard
-                            ukrainianCitizensCard
+                            // TODO: uncomment when UKR case is ready
+                            // ukrainianCitizensCard
                         }
                         rarimeCard
                         Spacer().frame(height: 120)

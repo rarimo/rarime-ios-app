@@ -15,7 +15,7 @@ struct RarimeInfoView: View {
             ) {
                 VStack(alignment: .leading, spacing: 16) {
                     makeListItem(Text("RariMe is a self-custody identity wallet where no personal data ever leaves the device and everything is processed locally."))
-                    makeListItem(Text("Prove your eligibility, belonging, identity, and contributions — without ever revealing personal data."))
+                    makeListItem(Text("With RariMe, identity becomes private but verifiable."))
                     makeListItem(Text("\(Text("Incognito mode").fontWeight(.bold).foregroundColor(.textPrimary)) ensures your history, reputation and actions are not lost, but remain confidential and under your control."))
                 }
             }

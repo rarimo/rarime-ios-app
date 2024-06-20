@@ -17,7 +17,7 @@ struct MainView: View {
             }
         }
         .environmentObject(viewModel)
-        .onChange(of: viewModel.selectedTab) { selectedTab in            
+        .onChange(of: viewModel.selectedTab) { selectedTab in
             if userManager.user?.status == .unscanned, selectedTab == .rewards {
                 self.isRewardsSheetPresented = true
                 

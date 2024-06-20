@@ -187,7 +187,7 @@ private struct LevelRewards: View {
 #Preview {
     LevelingView(
         balance: PointsBalanceRaw(
-            amount: 12,
+            amount: 35,
             isDisabled: false,
             createdAt: 1,
             updatedAt: 1,

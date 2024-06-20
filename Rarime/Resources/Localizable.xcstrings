@@ -113,7 +113,7 @@
         }
       }
     },
-    "About Reward Program" : {
+    "About the reward program" : {
 
     },
     "Account" : {
@@ -1175,7 +1175,7 @@
     "HOW CAN I GET A CODE?" : {
 
     },
-    "HOW CAN I GET THIS CODE?" : {
+    "HOW CAN I GET THE INVITE CODE?" : {
 
     },
     "Hungary" : {
@@ -1290,9 +1290,6 @@
           }
         }
       }
-    },
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using" : {
-
     },
     "It showcases Rarimo’s identity infrastructure and how it can be used by projects and organizations to directly reach civilians." : {
 
@@ -1917,6 +1914,7 @@
       }
     },
     "Prove your eligibility, belonging, identity, and contributions — without ever revealing personal data." : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1930,12 +1928,6 @@
 
     },
     "Qatar" : {
-
-    },
-    "QUESTION TITLE 2" : {
-
-    },
-    "QUESTION TITLE 3" : {
 
     },
     "RARIME" : {
@@ -2132,6 +2124,9 @@
 
     },
     "Rewards campaigns" : {
+
+    },
+    "RMO tokens will be exclusively distributed via the RariMe app. To claim tokens, create an incognito profile using your biometric passport. Depending on which country issued the passport, you’ll either be able to claim a token right away or be put on a waitlist.\n\nIf you are added to the waitlist it means that you are eligible to claim tokens in the next wave of airdrops. The app will notify you when you are added.\n\nCertain jurisdictions are excluded from the reward program: %@" : {
 
     },
     "Romania" : {
@@ -2440,6 +2435,9 @@
         }
       }
     },
+    "The app’s rewards program is invite-only. Get invited by an authorized user or ask a community member for an invite code." : {
+
+    },
     "The beta launch is focused on distributing tokens to Ukrainian citizens" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2727,6 +2725,9 @@
         }
       }
     },
+    "With RariMe, identity becomes private but verifiable." : {
+
+    },
     "Withdraw the %@ token" : {
 
     },
@@ -2765,9 +2766,6 @@
 
     },
     "You entered wrong passcode.\nLoading time: %@" : {
-
-    },
-    "You must be invited by someone or receive a code that we post on our social channels" : {
 
     },
     "You must be invited or receive a code from social channels" : {
