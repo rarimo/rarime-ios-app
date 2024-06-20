@@ -22,12 +22,10 @@ struct InviteFriendsView: View {
                         Text("Invite Friends")
                             .h4()
                             .foregroundStyle(.textPrimary)
-                        Text("Short description text here")
-                            .body2()
-                            .foregroundStyle(.textSecondary)
                     }
                 }
                 .padding(20)
+                .padding(.bottom, 40)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 invitedCard
             }
@@ -43,9 +41,6 @@ struct InviteFriendsView: View {
                         .subtitle3()
                         .foregroundStyle(.textPrimary)
                 }
-                Text("Short description text here")
-                    .body3()
-                    .foregroundStyle(.textSecondary)
             }
             .padding(.horizontal, 24)
             ScrollView {
