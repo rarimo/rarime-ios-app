@@ -22,7 +22,7 @@ JOIN_REWARDS_KEY = "15690e4461abffc8a0057282af199b7345fa492d28ec1ae6004945938975
 // MARK: Cosmos
 CHAIN_ID = "rarimo_42-1"
 DENOM = "stake"
-RPC_IP = "104.196.227.66:9090"
+RPC_IP = "core-api.node1.mainnet-beta.rarimo.com:443"
 
 // MARK: CertificatesStorage
 MASTER_CERTIFICATES_BUCKETNAME = "rarimo-temp"
