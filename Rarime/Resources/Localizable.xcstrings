@@ -136,6 +136,9 @@
     "Account Locked" : {
 
     },
+    "Active" : {
+
+    },
     "Active tasks" : {
 
     },
@@ -1761,6 +1764,9 @@
         }
       }
     },
+    "Passport is already registered" : {
+
+    },
     "Passport read successfully" : {
       "localizations" : {
         "uk" : {
@@ -1816,9 +1822,6 @@
         }
       }
     },
-    "Please scan your NFC card" : {
-
-    },
     "Please store the private key safely and do not share it with anyone. If you lose this key, you will not be able to recover the account and will lose access forever." : {
       "localizations" : {
         "uk" : {
@@ -1848,6 +1851,9 @@
           }
         }
       }
+    },
+    "Please, scan your passport one more time to revoke your previous registration" : {
+
     },
     "Poland" : {
 
@@ -2126,10 +2132,10 @@
     "Review Transaction" : {
 
     },
-    "Revoke with NFC" : {
+    "Rewards" : {
 
     },
-    "Rewards" : {
+    "Rewards limit reached" : {
 
     },
     "RMO tokens will be exclusively distributed via the RariMe app. To claim tokens, create an incognito profile using your biometric passport. Depending on which country issued the passport, you’ll either be able to claim a token right away or be put on a waitlist.\n\nIf you are added to the waitlist it means that you are eligible to claim tokens in the next wave of airdrops. The app will notify you when you are added.\n\nCertain jurisdictions are excluded from the reward program: %@" : {
@@ -2177,6 +2183,12 @@
     "Saudi Arabia" : {
 
     },
+    "Save to files" : {
+
+    },
+    "Save your passport data" : {
+
+    },
     "Scan" : {
       "localizations" : {
         "uk" : {
@@ -2187,6 +2199,9 @@
         }
       }
     },
+    "Scan passport" : {
+
+    },
     "Scan QR" : {
       "localizations" : {
         "uk" : {
@@ -2196,6 +2211,9 @@
           }
         }
       }
+    },
+    "Scan your passport" : {
+
     },
     "Scan your Passport" : {
       "localizations" : {
@@ -2516,9 +2534,6 @@
         }
       }
     },
-    "This is required to revoke your passport" : {
-
-    },
     "Timor-Leste" : {
 
     },
@@ -2816,6 +2831,9 @@
 
     },
     "Your Address" : {
+
+    },
+    "Your passport data will be saved on your device. You can share it with us to join the rewards program" : {
 
     },
     "Your passport proof is ready" : {

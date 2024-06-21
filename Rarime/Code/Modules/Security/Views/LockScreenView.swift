@@ -12,7 +12,7 @@ struct LockScreenView: View {
     
     @State private var failedAttempts = 0
     
-   @State private var banTimeEnd = AppUserDefaults.shared.banTimeEnd
+    @State private var banTimeEnd = AppUserDefaults.shared.banTimeEnd
     
     var body: some View {
         ZStack {
@@ -67,7 +67,7 @@ struct LockScreenView: View {
     }
     
     func authByFaceID() {
-        if securityManager.faceIdState != .enabled {
+        if securityManager.faceIdState != .enabled || banTimeEnd != nil {
             return
         }
         
