@@ -592,9 +592,6 @@
     "Cocos Islands" : {
 
     },
-    "Code is already used" : {
-
-    },
     "Colombia" : {
 
     },
@@ -999,6 +996,9 @@
           }
         }
       }
+    },
+    "Failed to verify code, try again later" : {
+
     },
     "Failed, %lld attempts left" : {
 
