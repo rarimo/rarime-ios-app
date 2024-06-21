@@ -90,8 +90,16 @@ struct WaitlistPassportView: View {
                 
                 let country = passportViewModel.passport?.nationality ?? ""
                 
+                let dg1 = passportViewModel.passport?.dg1 ?? Data()
+                
+                var calculateAnonymousIDError: NSError?
+                let anonymousID = IdentityCalculateAnonymousID(dg1, Points.PointsEventId, &calculateAnonymousIDError)
+                if let calculateAnonymousIDError {
+                    throw calculateAnonymousIDError
+                }
+                
                 var error: NSError?
-                let hmacMessage = IdentityCalculateHmacMessage(accessJwt.payload.sub, country, &error)
+                let hmacMessage = IdentityCalculateHmacMessage(accessJwt.payload.sub, country, anonymousID, &error)
                 if let error {
                     throw error
                 }
@@ -104,7 +112,8 @@ struct WaitlistPassportView: View {
                 let _ = try await points.joinRewardsProgram(
                     accessJwt,
                     country,
-                    hmacSingature.hex
+                    hmacSingature.hex,
+                    anonymousID?.hex ?? ""
                 )
                 
                 LoggerUtil.common.info("User joined program")

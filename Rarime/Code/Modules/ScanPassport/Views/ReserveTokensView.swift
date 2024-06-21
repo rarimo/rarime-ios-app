@@ -1,4 +1,5 @@
 import SwiftUI
+import Alamofire
 
 struct ReserveTokensView: View {
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
@@ -11,6 +12,16 @@ struct ReserveTokensView: View {
 
     @State private var isReserving: Bool
     @State private var termsChecked: Bool
+    
+    @State private var isAlreadyReserved = false
+    
+    var reverveButtonText: LocalizedStringResource {
+        if isAlreadyReserved {
+            return "Close"
+        } else {
+            return isReserving ? "Reserving..." : "Reserve"
+        }
+    }
 
     init(
         showTerms: Bool = false,
@@ -53,10 +64,25 @@ struct ReserveTokensView: View {
             FeedbackGenerator.shared.notify(.success)
             onFinish(true)
         } catch {
-            LoggerUtil.passport.error("Error while reserving tokens: \(error.localizedDescription, privacy: .public)")
-            FeedbackGenerator.shared.notify(.error)
-            onFinish(false)
-            AlertManager.shared.emitError(.serviceDown(nil))
+            do {
+                guard let error = error as? AFError else { throw error }
+                
+                let openApiHttpCode = try error.retriveOpenApiHttpCode()
+                
+                if openApiHttpCode == HTTPStatusCode.conflict.rawValue {
+                    isAlreadyReserved = true
+                    isReserving = false
+                    
+                    return
+                }
+                
+                throw error
+            } catch {
+                LoggerUtil.passport.error("Error while reserving tokens: \(error.localizedDescription, privacy: .public)")
+                FeedbackGenerator.shared.notify(.error)
+                onFinish(false)
+                AlertManager.shared.emitError(.serviceDown(nil))
+            }
         }
     }
 
@@ -112,11 +138,25 @@ struct ReserveTokensView: View {
                 AirdropCheckboxView(checked: $termsChecked)
             }
             AppButton(
-                text: isReserving ? "Reserving..." : "Reserve",
-                action: { Task { await reserveTokens() } }
+                text: reverveButtonText,
+                action: {
+                    if isAlreadyReserved {
+                        onFinish(false)
+                        
+                        return
+                    }
+                    
+                    Task { await reserveTokens() }
+                }
             )
             .disabled(isReserving || !termsChecked)
             .controlSize(.large)
+            if isAlreadyReserved {
+                Text("You have already reserved tokens")
+                    .body3()
+                    .foregroundStyle(.red)
+                    .opacity(0.8)
+            }
         }
         .padding(.horizontal, 20)
         .padding(.top, 12)

@@ -122,11 +122,18 @@ class Points {
         return response
     }
 
-    func verifyPassport(_ jwt: JWT, _ zkProof: ZkProof) async throws -> VerifyPassportResponse {
+    func verifyPassport(
+        _ jwt: JWT,
+        _ zkProof: ZkProof,
+        _ signature: String,
+        _ country: String,
+        _ anonymousId: String
+    ) async throws -> VerifyPassportResponse {
         let nullifier = jwt.payload.sub
 
         let headers = HTTPHeaders(
             [
+                HTTPHeader(name: "Signature", value: signature),
                 HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
             ]
         )
@@ -138,6 +145,8 @@ class Points {
                 id: nullifier,
                 type: "verify_passport",
                 attributes: VerifyPassportRequestAttributes(
+                    anonymousId: anonymousId,
+                    country: country,
                     proof: zkProof
                 )
             )
@@ -286,7 +295,7 @@ class Points {
         return response
     }
     
-    func joinRewardsProgram(_ jwt: JWT, _ country: String, _ signature: String) async throws -> VerifyPassportResponse {
+    func joinRewardsProgram(_ jwt: JWT, _ country: String, _ signature: String, _ anonymousId: String) async throws -> VerifyPassportResponse {
         let headers = HTTPHeaders(
             [
                 HTTPHeader(name: "Signature", value: signature),
@@ -299,8 +308,9 @@ class Points {
         let requestPayload = JoinRewardsProgramRequest(
             data: JoinRewardsProgramRequestData(
                 id: jwt.payload.sub,
-                type: "join_program",
+                type: "verify_passport",
                 attributes: JoinRewardsProgramRequestAttributes(
+                    anonymousId: anonymousId,
                     country: country
                 )
             )
@@ -462,7 +472,14 @@ struct VerifyPassportRequestData: Codable {
 }
 
 struct VerifyPassportRequestAttributes: Codable {
+    let anonymousId: String
+    let country: String
     let proof: ZkProof
+    
+    enum CodingKeys: String, CodingKey {
+        case anonymousId = "anonymous_id"
+        case country, proof
+    }
 }
 
 struct WithdrawalHistoryResponse: Codable {
@@ -751,7 +768,13 @@ struct JoinRewardsProgramRequestData: Codable {
 }
 
 struct JoinRewardsProgramRequestAttributes: Codable {
+    let anonymousId: String
     let country: String
+    
+    enum CodingKeys: String, CodingKey {
+        case anonymousId = "anonymous_id"
+        case country = "country"
+    }
 }
 
 enum EventNames: String, Codable {
