@@ -60,6 +60,8 @@ struct WalletView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     header
                     AssetsSlider(walletAssets: [selectedAsset], isLoading: isBalanceFetching)
+                    HorizontalDivider()
+                        .padding(.horizontal, 20)
                     transactionsList
                 }
                 .padding(.bottom, 120)
@@ -122,25 +124,22 @@ struct WalletView: View {
     }
 
     private var transactionsList: some View {
-        VStack {
-            CardContainer {
-                VStack(alignment: .leading, spacing: 20) {
-                    Text("Transactions")
-                        .subtitle3()
-                        .foregroundStyle(.textPrimary)
-                    ForEach(walletManager.transactions) { tx in
-                        TransactionItem(tx: tx, token: token)
-                    }
-                    if walletManager.transactions.isEmpty {
-                        Text("No transactions yet")
-                            .body3()
-                            .foregroundStyle(.textSecondary)
-                    }
+        CardContainer {
+            VStack(alignment: .leading, spacing: 20) {
+                Text("Transactions")
+                    .subtitle3()
+                    .foregroundStyle(.textPrimary)
+                ForEach(walletManager.transactions) { tx in
+                    TransactionItem(tx: tx, token: token)
+                }
+                if walletManager.transactions.isEmpty {
+                    Text("No transactions yet")
+                        .body3()
+                        .foregroundStyle(.textSecondary)
                 }
             }
-            Spacer()
         }
-        .background(.backgroundOpacity)
+        .padding(.horizontal, 12)
     }
 
     func fetchBalance() {

@@ -37,7 +37,7 @@ struct InviteFriendsView: View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 4) {
                 if let codes = balance.referralCodes {
-                    Text("Invited \(codes.filter { $0.status == .rewarded }.count)/\(codes.count)")
+                    Text("Invited \(codes.filter { $0.status != .active }.count)/\(codes.count)")
                         .subtitle3()
                         .foregroundStyle(.textPrimary)
                 }
@@ -79,6 +79,16 @@ private struct InviteCodeView: View {
         ConfigManager.shared.api.referralURL.appendingPathComponent("\(code)").absoluteString
     }
 
+    var usedStatusText: String {
+        switch status {
+            case .awaiting: String(localized: "Scan your passport")
+            case .rewarded: String(localized: "Passport scanned")
+            case .banned: String(localized: "Unsupported country")
+            case .limited: String(localized: "Rewards limit reached")
+            default: String(localized: "Need passport scan")
+        }
+    }
+
     var body: some View {
         if status == .active {
             HStack {
@@ -89,7 +99,7 @@ private struct InviteCodeView: View {
                     Text(invitationLink.dropFirst(8))
                         .body3()
                         .foregroundStyle(.textSecondary)
-                    Text(status.rawValue.uppercased())
+                    Text("Active")
                         .body4()
                         .foregroundStyle(.successDark)
                 }
@@ -117,7 +127,7 @@ private struct InviteCodeView: View {
                         Circle()
                             .fill(.componentHovered)
                             .frame(width: 4)
-                        Text(status == .rewarded ? "Passport scanned" : "Need passport scan")
+                        Text(usedStatusText)
                             .body4()
                     }
                     .foregroundStyle(.textSecondary)

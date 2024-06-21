@@ -37,8 +37,12 @@ struct HomeView: View {
             && userManager.registerZkProof != nil
     }
 
+    var isWalletBalanceDisplayed: Bool {
+        passportManager.passport != nil && passportManager.isUnsupportedForRewards
+    }
+
     var displayedBalance: Double {
-        passportManager.isUnsupportedForRewards
+        isWalletBalanceDisplayed
             ? userManager.balance / Double(Rarimo.rarimoTokenMantis)
             : Double(pointsBalance?.amount ?? 0)
     }
@@ -159,10 +163,10 @@ struct HomeView: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: 8) {
             Button(action: {
-                mainViewModel.selectTab(passportManager.isUnsupportedForRewards ? .wallet : .rewards)
+                mainViewModel.selectTab(isWalletBalanceDisplayed ? .wallet : .rewards)
             }) {
                 HStack(spacing: 4) {
-                    Text(passportManager.isUnsupportedForRewards ? "Balance: RMO" : "Reserved RMO").body3()
+                    Text(isWalletBalanceDisplayed ? "Balance: RMO" : "Reserved RMO").body3()
                     Image(Icons.caretRight).iconSmall()
                 }
             }
@@ -266,7 +270,7 @@ struct HomeView: View {
             }
 
             do {
-                if passportManager.isUnsupportedForRewards {
+                if isWalletBalanceDisplayed {
                     let balance = try await userManager.fetchBalanse()
                     userManager.balance = Double(balance) ?? 0
                     return
