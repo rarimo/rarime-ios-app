@@ -32,15 +32,15 @@ class PassportViewModel: ObservableObject {
     
     @Published var isUserRegistered = false
     
-    var revocationPassportPublisher =  PassthroughSubject<Passport, Error>()
-
-    var isEligibleForReward: Bool {
-        passport?.nationality == "UKR"
-    }
+    var revocationPassportPublisher = PassthroughSubject<Passport, Error>()
     
     var passportCountry: Country {
         guard let passport = passport else { return .unknown }
         return Country.fromISOCode(passport.nationality)
+    }
+    
+    var isEligibleForReward: Bool {
+        !UNSUPPORTED_REWARD_COUNTRIES.contains(passportCountry)
     }
 
     func setPassport(_ passport: Passport) {
@@ -93,12 +93,12 @@ class PassportViewModel: ObservableObject {
             
             if isUserRevoking {
                 // takes last 8 bytes of activeIdentity as revocation challenge
-                self.revocationChallenge = passportInfo.activeIdentity[24..<32]
+                revocationChallenge = passportInfo.activeIdentity[24 ..< 32]
                 
                 // This will trigger a sheet with a NFC scanning
                 self.isUserRevoking = isUserRevoking
                 
-                var iterator = self.revocationPassportPublisher.values.makeAsyncIterator()
+                var iterator = revocationPassportPublisher.values.makeAsyncIterator()
                 
                 guard let passport = try await iterator.next() else {
                     throw "failed to get passport"
@@ -106,7 +106,7 @@ class PassportViewModel: ObservableObject {
                 
                 try await UserManager.shared.revoke(passportInfo, passport)
                 
-                self.isUserRevoked = true
+                isUserRevoked = true
             }
             
             var certificatePubKeySize: Int
@@ -122,7 +122,7 @@ class PassportViewModel: ObservableObject {
             PassportManager.shared.setPassport(passport)
             try UserManager.shared.saveRegisterZkProof(proof)
             
-            self.isUserRegistered = true
+            isUserRegistered = true
             
             LoggerUtil.common.info("Passport registration succeed")
             

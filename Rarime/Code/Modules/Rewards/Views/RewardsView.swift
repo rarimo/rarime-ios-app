@@ -91,29 +91,31 @@ struct RewardsView: View {
                                 .subtitle2()
                                 .foregroundStyle(.textPrimary)
                             Spacer()
-                            if isLeaderboardLoaded && !isUnsupportedCountry {
-                                if let balance = rewardsViewModel.pointsBalanceRaw {
-                                    Button(action: { isLeaderboardSheetShown = true }) {
-                                        HStack(spacing: 4) {
-                                            Image(Icons.trophy).iconSmall()
-                                            Text("\(balance.rank ?? 0)").subtitle5()
+                            if !isUnsupportedCountry {
+                                if isLeaderboardLoaded {
+                                    if let balance = rewardsViewModel.pointsBalanceRaw {
+                                        Button(action: { isLeaderboardSheetShown = true }) {
+                                            HStack(spacing: 4) {
+                                                Image(Icons.trophy).iconSmall()
+                                                Text("\(balance.rank ?? 0)").subtitle5()
+                                            }
+                                            .padding(.vertical, 4)
+                                            .padding(.horizontal, 8)
+                                            .background(.warningLighter, in: RoundedRectangle(cornerRadius: 100))
+                                            .foregroundStyle(.warningDarker)
                                         }
-                                        .padding(.vertical, 4)
-                                        .padding(.horizontal, 8)
-                                        .background(.warningLighter, in: RoundedRectangle(cornerRadius: 100))
-                                        .foregroundStyle(.warningDarker)
-                                    }
-                                    .dynamicSheet(isPresented: $isLeaderboardSheetShown, fullScreen: true) {
-                                        ZStack {
-                                            LeaderboardView(
-                                                balances: rewardsViewModel.leaderboard,
-                                                myBalance: balance
-                                            )
+                                        .dynamicSheet(isPresented: $isLeaderboardSheetShown, fullScreen: true) {
+                                            ZStack {
+                                                LeaderboardView(
+                                                    balances: rewardsViewModel.leaderboard,
+                                                    myBalance: balance
+                                                )
+                                            }
                                         }
                                     }
+                                } else {
+                                    ProgressView()
                                 }
-                            } else {
-                                ProgressView()
                             }
                         }
                         .padding(.top, 20)

@@ -1,5 +1,5 @@
-import SwiftUI
 import Identity
+import SwiftUI
 
 struct WaitlistPassportView: View {
     @EnvironmentObject var decentralizedAuthManager: DecentralizedAuthManager
@@ -41,7 +41,10 @@ struct WaitlistPassportView: View {
             AppButton(
                 text: "Join the program",
                 rightIcon: Icons.arrowRight,
-                action: { isSending = true }
+                action: {
+                    joinRewardsProgram()
+                    isSending = true
+                }
             )
             .controlSize(.large)
             AppButton(
@@ -66,10 +69,13 @@ struct WaitlistPassportView: View {
                 result: .constant(nil)
             )
         }
-        .onAppear(perform: joinRewardsProgram)
     }
     
     func joinRewardsProgram() {
+        if !passportViewModel.isEligibleForReward {
+            return
+        }
+        
         Task { @MainActor in
             do {
                 guard let user = userManager.user else { throw "failed to get user" }

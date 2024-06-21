@@ -337,7 +337,6 @@
 
     },
     "Balance: RMO" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
