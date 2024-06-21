@@ -1,8 +1,25 @@
-//
-//  JSONDocument.swift
-//  Rarime
-//
-//  Created by Maksym Shopynskyi on 21.06.2024.
-//
+import SwiftUI
+import UniformTypeIdentifiers
 
-import Foundation
+class JSONDocument: FileDocument {
+    let json: Data
+
+    static var readableContentTypes: [UTType] = [.json]
+
+    init(_ json: Data) {
+        self.json = json
+    }
+
+    required init(configuration: ReadConfiguration) throws {
+        if let data = configuration.file.regularFileContents {
+            self.json = data
+            return
+        }
+
+        self.json = Data()
+    }
+
+    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+        return FileWrapper(regularFileWithContents: json)
+    }
+}

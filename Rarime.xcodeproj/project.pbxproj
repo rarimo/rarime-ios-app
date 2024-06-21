@@ -69,6 +69,7 @@
 		5659151F2BE92B1F0050795A /* AppIconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659151E2BE92B1F0050795A /* AppIconManager.swift */; };
 		565E221C2BF7B33D00171692 /* CameraPermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565E221B2BF7B33D00171692 /* CameraPermissionView.swift */; };
 		56722F202BCD62BB00300AD0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56722F1F2BCD62BB00300AD0 /* ProfileView.swift */; };
+		567ADEC42C25CF32007070A7 /* JSONDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567ADEC32C25CF32007070A7 /* JSONDocument.swift */; };
 		567AEC9B2BBD9B8100A20E83 /* Passport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567AEC9A2BBD9B8100A20E83 /* Passport.swift */; };
 		568350AC2BEA304B00B70E3D /* PassportIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568350AB2BEA304B00B70E3D /* PassportIdentifier.swift */; };
 		568820FA2C172C75001B729F /* ReserveTokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568820F92C172C75001B729F /* ReserveTokensView.swift */; };
@@ -265,6 +266,7 @@
 		5659151E2BE92B1F0050795A /* AppIconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconManager.swift; sourceTree = "<group>"; };
 		565E221B2BF7B33D00171692 /* CameraPermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionView.swift; sourceTree = "<group>"; };
 		56722F1F2BCD62BB00300AD0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		567ADEC32C25CF32007070A7 /* JSONDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDocument.swift; sourceTree = "<group>"; };
 		567AEC9A2BBD9B8100A20E83 /* Passport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passport.swift; sourceTree = "<group>"; };
 		568350AB2BEA304B00B70E3D /* PassportIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportIdentifier.swift; sourceTree = "<group>"; };
 		568820F92C172C75001B729F /* ReserveTokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTokensView.swift; sourceTree = "<group>"; };
@@ -611,6 +613,7 @@
 				CE8FEB602C1B03A70008381A /* Circtuits */,
 				567AEC9A2BBD9B8100A20E83 /* Passport.swift */,
 				5655E4272BD2C3FD00B86C5C /* Transaction.swift */,
+				567ADEC32C25CF32007070A7 /* JSONDocument.swift */,
 				CEF251392BD6E22700050507 /* User.swift */,
 				CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */,
 				CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */,
@@ -1215,6 +1218,7 @@
 				CE31E54A2C11FE150039CAA5 /* ImportIdentityView.swift in Sources */,
 				560F0C1F2BD027EA00067054 /* WalletReceiveView.swift in Sources */,
 				CED314672C0483BD00DF31D5 /* MailView.swift in Sources */,
+				567ADEC42C25CF32007070A7 /* JSONDocument.swift in Sources */,
 				5655E4302BD2CA5500B86C5C /* AppColorScheme.swift in Sources */,
 				CED909D02BDBA9FC0065E949 /* Cosmos.swift in Sources */,
 				56A88FCF2C062AB200D3A64A /* AirdropCheckboxView.swift in Sources */,

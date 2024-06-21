@@ -1,4 +1,5 @@
 import Identity
+import MessageUI
 import SwiftUI
 
 struct WaitlistPassportView: View {
@@ -10,9 +11,15 @@ struct WaitlistPassportView: View {
     let onCancel: () -> Void
 
     @State private var isSending = false
+    @State private var isExporting = false
+    @State private var isCopied = false
 
     var country: Country {
         passportViewModel.passportCountry
+    }
+    
+    var serializedPassport: Data {
+        return (try? passportViewModel.passport?.serialize()) ?? Data()
     }
 
     var body: some View {
@@ -61,13 +68,17 @@ struct WaitlistPassportView: View {
             }
         }
         .dynamicSheet(isPresented: $isSending, fullScreen: true) {
-            MailView(
-                subject: "Passport from: \(UIDevice.modelName)",
-                attachment: (try? passportViewModel.passport?.serialize()) ?? Data(),
-                fileName: "passport.json",
-                isShowing: $isSending,
-                result: .constant(nil)
-            )
+            if MFMailComposeViewController.canSendMail() {
+                MailView(
+                    subject: "Passport from: \(UIDevice.modelName)",
+                    attachment: (try? passportViewModel.passport?.serialize()) ?? Data(),
+                    fileName: "passport.json",
+                    isShowing: $isSending,
+                    result: .constant(nil)
+                )
+            } else {
+                savePassportDataView
+            }
         }
     }
     
@@ -112,6 +123,90 @@ struct WaitlistPassportView: View {
                 LoggerUtil.common.info("failed to join rewards program: \(error, privacy: .public)")
             }
         }
+    }
+    
+    var savePassportDataView: some View {
+        VStack(alignment: .leading, spacing: 32) {
+            VStack(spacing: 16) {
+                Image(Icons.identificationCard)
+                    .iconLarge()
+                    .frame(width: 72, height: 72)
+                    .background(.componentPrimary, in: Circle())
+                    .foregroundStyle(.textPrimary)
+                Text("Save your passport data")
+                    .h6()
+                    .foregroundStyle(.textPrimary)
+                Text("Your passport data will be saved on your device. You can share it with us to expedite the support of your passport.")
+                    .body3()
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: 320)
+                    .foregroundStyle(.textSecondary)
+                HorizontalDivider()
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("HOW TO SHARE")
+                        .overline2()
+                        .foregroundStyle(.textSecondary)
+                    Text("1. Save passport data on your device")
+                        .body3()
+                        .foregroundStyle(.textPrimary)
+                    Text("2. Send the saved file to the email address below")
+                        .body3()
+                        .foregroundStyle(.textPrimary)
+                    HStack(spacing: 8) {
+                        Text(ConfigManager.shared.feedback.feedbackEmail)
+                            .body2()
+                            .foregroundStyle(.textPrimary)
+                        Image(isCopied ? Icons.check : Icons.copySimple).iconMedium()
+                    }
+                    .onTapGesture {
+                        if isCopied { return }
+                        UIPasteboard.general.string = ConfigManager.shared.feedback.feedbackEmail
+                        isCopied = true
+                        FeedbackGenerator.shared.impact(.medium)
+
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            isCopied = false
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 14)
+                    .background(.componentPrimary)
+                    .foregroundStyle(.textPrimary)
+                    .cornerRadius(8)
+                    Text("3. When we support your country, you will be notified in the app")
+                        .body3()
+                        .foregroundStyle(.textPrimary)
+                }
+                .frame(maxWidth: .infinity)
+            }
+            .frame(maxWidth: .infinity)
+            Spacer()
+            AppButton(
+                text: "Save to files",
+                rightIcon: Icons.arrowRight,
+                action: { isExporting = true }
+            )
+            .controlSize(.large)
+            .fileExporter(
+                isPresented: $isExporting,
+                document: JSONDocument(serializedPassport),
+                contentType: .json,
+                defaultFilename: "passport.json"
+            ) { result in
+                switch result {
+                case .success:
+                    LoggerUtil.common.info("Passport data saved")
+                    onNext()
+                case .failure(let error):
+                    LoggerUtil.common.error("Failed to save passport data: \(error, privacy: .public)")
+                }
+            }
+        }
+        .padding(.top, 80)
+        .padding(.bottom, 20)
+        .padding(.horizontal, 24)
     }
 }
 

@@ -120,6 +120,15 @@
         }
       }
     },
+    "1. Save passport data on your device" : {
+
+    },
+    "2. Send the saved file to the email address below" : {
+
+    },
+    "3. When we support your country, you will be notified in the app" : {
+
+    },
     "About the reward program" : {
 
     },
@@ -1185,6 +1194,9 @@
 
     },
     "HOW CAN I GET THE INVITE CODE?" : {
+
+    },
+    "HOW TO SHARE" : {
 
     },
     "Hungary" : {
@@ -2833,7 +2845,7 @@
     "Your Address" : {
 
     },
-    "Your passport data will be saved on your device. You can share it with us to join the rewards program" : {
+    "Your passport data will be saved on your device. You can share it with us to expedite the support of your passport." : {
 
     },
     "Your passport proof is ready" : {
