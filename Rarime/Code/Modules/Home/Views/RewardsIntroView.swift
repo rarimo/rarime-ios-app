@@ -66,13 +66,14 @@ struct RewardsIntroView: View {
                     
                     let openApiHttpCode = try error.retriveOpenApiHttpCode()
                     
-                    if openApiHttpCode == HTTPStatusCode.conflict.rawValue {
-                        self.codeErrorMessage = String(localized: "Code is already used")
+                    if openApiHttpCode == HTTPStatusCode.notFound.rawValue {
+                        self.codeErrorMessage = String(localized: "Invalid invitation code")
                         return
                     }
                     
                     throw error
                 } catch {
+                    self.codeErrorMessage = String(localized: "Failed to verify code, try again later")
                     LoggerUtil.common.error("Failed to verify code: \(error, privacy: .public)")
                     
                     AlertManager.shared.emitError(Errors.unknown("Failed to verify code, one of services is down"))
