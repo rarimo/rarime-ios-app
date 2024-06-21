@@ -26,15 +26,21 @@ struct HomeView: View {
 
     var canClaimAirdrop: Bool {
         !walletManager.isClaimed
-            && passportManager.isEligibleForReward
+            && passportManager.isEligibleForAirdrop
             && !userManager.isRevoked
             && userManager.registerZkProof != nil
     }
-    
+
     var canReserveTokens: Bool {
         !userManager.isPassportTokensReserved
             && !passportManager.isUnsupportedForRewards
             && userManager.registerZkProof != nil
+    }
+
+    var displayedBalance: Double {
+        passportManager.isUnsupportedForRewards
+            ? userManager.balance / Double(Rarimo.rarimoTokenMantis)
+            : Double(pointsBalance?.amount ?? 0)
     }
 
     var body: some View {
@@ -58,7 +64,7 @@ struct HomeView: View {
                 case .reserveTokens:
                     ReserveTokensView(
                         showTerms: true,
-                        
+
                         passport: passportManager.passport,
                         onFinish: { _ in
                             isClaimed = true
@@ -152,9 +158,11 @@ struct HomeView: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Button(action: { mainViewModel.selectTab(.rewards) }) {
+            Button(action: {
+                mainViewModel.selectTab(passportManager.isUnsupportedForRewards ? .wallet : .rewards)
+            }) {
                 HStack(spacing: 4) {
-                    Text("Reserved RMO").body3()
+                    Text(passportManager.isUnsupportedForRewards ? "Balance: RMO" : "Reserved RMO").body3()
                     Image(Icons.caretRight).iconSmall()
                 }
             }
@@ -162,7 +170,7 @@ struct HomeView: View {
             if isBalanceFetching {
                 ProgressView().frame(height: 40)
             } else {
-                Text("\(self.pointsBalance?.amount ?? 0)")
+                Text(displayedBalance.formatted())
                     .h4()
                     .foregroundStyle(.textPrimary)
             }
@@ -258,18 +266,24 @@ struct HomeView: View {
             }
 
             do {
+                if passportManager.isUnsupportedForRewards {
+                    let balance = try await userManager.fetchBalanse()
+                    userManager.balance = Double(balance) ?? 0
+                    return
+                }
+
                 guard let user = userManager.user else { throw "failed to get user" }
-                
+
                 if decentralizedAuthManager.accessJwt == nil {
                     try await decentralizedAuthManager.initializeJWT(user.secretKey)
                 }
-                
+
                 try await decentralizedAuthManager.refreshIfNeeded()
-                
+
                 guard let accessJwt = decentralizedAuthManager.accessJwt else { throw "accessJwt is nil" }
-                
+
                 let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
-                
+
                 self.pointsBalance = pointsBalance
             } catch is CancellationError {
                 return

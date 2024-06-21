@@ -19,7 +19,7 @@ class PassportManager: ObservableObject {
         passportIdentifiers = rawIdentifiers.map { PassportIdentifier(rawValue: $0)! }
     }
 
-    var isEligibleForReward: Bool {
+    var isEligibleForAirdrop: Bool {
         passport?.nationality == "UKR"
     }
 
