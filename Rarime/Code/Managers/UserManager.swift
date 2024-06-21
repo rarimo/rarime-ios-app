@@ -445,8 +445,30 @@ class UserManager: ObservableObject {
     func reserveTokens(_ jwt: JWT, _ registerProof: ZkProof, _ passport: Passport) async throws {
         let queryProof = try await generatePointsProof(registerProof, passport)
         
+        var calculateAnonymousIDError: NSError?
+        let anonymousID = IdentityCalculateAnonymousID(passport.dg1, Points.PointsEventId, &calculateAnonymousIDError)
+        if let calculateAnonymousIDError {
+            throw calculateAnonymousIDError
+        }
+        
+        var error: NSError?
+        let hmacMessage = IdentityCalculateHmacMessage(jwt.payload.sub, passport.nationality, anonymousID, &error)
+        if let error {
+            throw error
+        }
+        
+        let key = Data(hex: ConfigManager.shared.api.joinRewardsKey) ?? Data()
+        
+        let hmacSingature = HMACUtils.hmacSha256(hmacMessage ?? Data(), key)
+        
         let points = Points(ConfigManager.shared.api.pointsServiceURL)
-        let _ = try await points.verifyPassport(jwt, queryProof)
+        let _ = try await points.verifyPassport(
+            jwt,
+            queryProof,
+            hmacSingature.hex,
+            passport.nationality,
+            anonymousID?.hex ?? ""
+        )
         
         LoggerUtil.common.info("Passport verified, token reserved")
         
