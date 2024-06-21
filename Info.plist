@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AIRDROP_TERMS_URL</key>
+	<string>${AIRDROP_TERMS_URL}</string>
+	<key>AUTHORIZE_URL</key>
+	<string>${AUTHORIZE_URL}</string>
+	<key>CERTIFICATES_SMT_CONTRACT_ADDRESS</key>
+	<string>${CERTIFICATES_SMT_CONTRACT_ADDRESS}</string>
 	<key>CFBundleIcons</key>
 	<dict>
 		<key>CFBundleAlternateIcons</key>
@@ -37,6 +43,13 @@
 	</dict>
 	<key>CHAIN_ID</key>
 	<string>${CHAIN_ID}</string>
+	<key>CIRCUIT_DATA_URLS</key>
+	<dict>
+		<key>registerIdentityUniversalRSA2048</key>
+		<string>${CIRCUIT_DATA_URL_0}</string>
+		<key>registerIdentityUniversalRSA4096</key>
+		<string>${CIRCUIT_DATA_URL_1}</string>
+	</dict>
 	<key>COSMOS_RPC_URL</key>
 	<string>${COSMOS_RPC_URL}</string>
 	<key>DENOM</key>
@@ -47,12 +60,18 @@
 	<string>${FEEDBACK_EMAIL}</string>
 	<key>ICAO_COSMOS_RPC</key>
 	<string>${ICAO_COSMOS_RPC}</string>
+	<key>JOIN_REWARDS_KEY</key>
+	<string>${JOIN_REWARDS_KEY}</string>
 	<key>MASTER_CERTIFICATES_BUCKETNAME</key>
 	<string>${MASTER_CERTIFICATES_BUCKETNAME}</string>
 	<key>MASTER_CERTIFICATES_FILENAME</key>
 	<string>${MASTER_CERTIFICATES_FILENAME}</string>
+	<key>POINTS_SERVICE_URL</key>
+	<string>${POINTS_SERVICE_URL}</string>
 	<key>PRIVACY_POLICY_URL</key>
 	<string>${PRIVACY_POLICY_URL}</string>
+	<key>REFERRAL_URL</key>
+	<string>${REFERRAL_URL}</string>
 	<key>REGISTER_CONTRACT_ADDRESS</key>
 	<string>${REGISTER_CONTRACT_ADDRESS}</string>
 	<key>REGISTER_IDENTITY_CIRCUIT_DATA_URLS</key>
@@ -60,10 +79,14 @@
 		<string>${REGISTER_IDENTITY_CIRCUIT_DATA_URL_0}</string>
 		<string>${REGISTER_IDENTITY_CIRCUIT_DATA_URL_1}</string>
 	</array>
+	<key>REGISTRATION_SMT_CONTRACT_ADDRESS</key>
+	<string>${REGISTRATION_SMT_CONTRACT_ADDRESS}</string>
 	<key>RELAYER_URL</key>
 	<string>${RELAYER_URL}</string>
 	<key>RPC_IP</key>
 	<string>${RPC_IP}</string>
+	<key>STATE_KEEPER_CONTRACT_ADDRESS</key>
+	<string>${STATE_KEEPER_CONTRACT_ADDRESS}</string>
 	<key>TERMS_OF_USE_URL</key>
 	<string>${TERMS_OF_USE_URL}</string>
 	<key>UIAppFonts</key>
@@ -84,28 +107,5 @@
 		<string>A0000002480300</string>
 		<string>A00000045645444C2D3031</string>
 	</array>
-	<key>POINTS_SERVICE_URL</key>
-	<string>${POINTS_SERVICE_URL}</string>
-	<key>AUTHORIZE_URL</key>
-	<string>${AUTHORIZE_URL}</string>
-	<key>CIRCUIT_DATA_URLS</key>
-	<dict>
-		<key>registerIdentityUniversalRSA2048</key>
-		<string>${CIRCUIT_DATA_URL_0}</string>
-		<key>registerIdentityUniversalRSA4096</key>
-		<string>${CIRCUIT_DATA_URL_1}</string>
-	</dict>
-	<key>CERTIFICATES_SMT_CONTRACT_ADDRESS</key>
-	<string>${CERTIFICATES_SMT_CONTRACT_ADDRESS}</string>
-	<key>REGISTRATION_SMT_CONTRACT_ADDRESS</key>
-	<string>${REGISTRATION_SMT_CONTRACT_ADDRESS}</string>
-	<key>STATE_KEEPER_CONTRACT_ADDRESS</key>
-	<string>${STATE_KEEPER_CONTRACT_ADDRESS}</string>
-	<key>AIRDROP_TERMS_URL</key>
-	<string>${AIRDROP_TERMS_URL}</string>
-	<key>REFERRAL_URL</key>
-	<string>${REFERRAL_URL}</string>
-	<key>JOIN_REWARDS_KEY</key>
-	<string>${JOIN_REWARDS_KEY}</string>
 </dict>
 </plist>
