@@ -23,8 +23,6 @@ struct ProfileView: View {
     @State private var isShareWithDeveloper = false
     @State private var isAccountDeleting = false
 
-    @State private var feedbackAttachment = Data()
-
     var body: some View {
         NavigationStack(path: $path) {
             content.navigationDestination(for: ProfileRoute.self) { route in
@@ -129,19 +127,7 @@ struct ProfileView: View {
                                         action: { isShareWithDeveloper = true }
                                     )
                                     .fullScreenCover(isPresented: $isShareWithDeveloper) {
-                                        if !feedbackAttachment.isEmpty {
-                                            MailView(
-                                                subject: "Feedback from: \(UIDevice.modelName)",
-                                                attachment: feedbackAttachment,
-                                                fileName: "logs.txt",
-                                                isShowing: $isShareWithDeveloper,
-                                                result: .constant(nil)
-                                            )
-                                        } else {
-                                            ProgressView()
-                                                .controlSize(.large)
-                                                .onAppear(perform: fetchLogsForFeedback)
-                                        }
+                                        FeedbackMailView(isShowing: $isShareWithDeveloper)
                                     }
                                 }
                             }
@@ -195,17 +181,6 @@ struct ProfileView: View {
                     Text("This action is irreversible and will delete all your data.")
                 }
             )
-        }
-    }
-
-    func fetchLogsForFeedback() {
-        Task { @MainActor in
-            LoggerUtil.common.info("Exporting logs")
-
-            let logEntries = (try? LoggerUtil.export()) ?? []
-            let logData = logEntries.map { $0.description }.joined(separator: "\n")
-
-            self.feedbackAttachment = logData.data(using: .utf8) ?? Data()
         }
     }
 }
