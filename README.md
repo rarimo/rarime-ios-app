@@ -12,7 +12,7 @@ RariMe is a self-custody identity wallet that allows users to verify their eligi
 
 Requires iOS 16 or higher.
 
-[![App Store Image](https://rarime-landing-test.netlify.app/images/app-store.svg)](https://apps.apple.com)
+[![App Store Image](https://rarime-landing-test.netlify.app/images/app-store.svg)](https://apps.apple.com/app/rarime/id6503300598)
 
 ## Requirements
 
