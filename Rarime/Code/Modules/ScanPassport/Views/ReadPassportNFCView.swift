@@ -36,7 +36,8 @@ struct ReadPassportNFCView: View {
                         case .failure(let error):
                             LoggerUtil.passport.error("failed to read passport data: \(error.localizedDescription, privacy: .public)")
                             switch error {
-                            case NFCPassportReaderError.ResponseError(let reason, let sw1, let sw2):
+                            case NFCPassportReaderError.ResponseError(let reason, _, _)
+                                where reason == "Referenced data not found":
                                 onResponseError()
                             default:
                                 onBack()
