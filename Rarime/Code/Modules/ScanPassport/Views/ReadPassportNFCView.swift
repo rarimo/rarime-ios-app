@@ -1,3 +1,4 @@
+import NFCPassportReader
 import SwiftUI
 
 struct ReadPassportNFCView: View {
@@ -6,6 +7,7 @@ struct ReadPassportNFCView: View {
 
     let onNext: (_ passport: Passport) -> Void
     let onBack: () -> Void
+    let onResponseError: () -> Void
     let onClose: () -> Void
 
     var body: some View {
@@ -33,7 +35,13 @@ struct ReadPassportNFCView: View {
                             self.onNext(passport)
                         case .failure(let error):
                             LoggerUtil.passport.error("failed to read passport data: \(error.localizedDescription, privacy: .public)")
-                            self.onBack()
+                            switch error {
+                            case NFCPassportReaderError.ResponseError(let reason, _, _)
+                                where reason == "Referenced data not found":
+                                onResponseError()
+                            default:
+                                onBack()
+                            }
                         }
                     }
                 )
@@ -53,6 +61,7 @@ struct ReadPassportNFCView: View {
     return ReadPassportNFCView(
         onNext: { _ in },
         onBack: {},
+        onResponseError: {},
         onClose: {}
     )
     .environmentObject(MRZViewModel())

@@ -3,6 +3,7 @@ import SwiftUI
 private enum ScanPassportState {
     case scanMRZ
     case readNFC
+    case chipError
     case selectData
     case unsupportedCountry
     case generateProof
@@ -43,10 +44,14 @@ struct ScanPassportView: View {
                     LoggerUtil.passport.info("Passport read successfully: \(passport.fullName, privacy: .public)")
                 },
                 onBack: { withAnimation { state = .scanMRZ } },
+                onResponseError: { withAnimation { state = .chipError } },
                 onClose: onClose
             )
             .environmentObject(mrzViewModel)
             .transition(.backslide)
+        case .chipError:
+            PassportChipErrorView(onClose: onClose)
+                .transition(.backslide)
         case .selectData:
             SelectPassportDataView(
                 isAirdropFlow: isAirdropFlow,
@@ -69,7 +74,7 @@ struct ScanPassportView: View {
             PassportProofView(
                 onFinish: { registerZKProof in
                     userManager.registerZkProof = registerZKProof
-                    if !isAirdropFlow && !passportManager.isUnsupportedForRewards {
+                    if !isAirdropFlow, !passportManager.isUnsupportedForRewards {
                         withAnimation { state = .reserveTokens }
                         return
                     }
@@ -84,7 +89,7 @@ struct ScanPassportView: View {
             .transition(.backslide)
         case .waitlistPassport:
             WaitlistPassportView(
-                onNext: {                    
+                onNext: {
                     onComplete(passportViewModel.passport!, false)
                 },
                 onCancel: onClose
