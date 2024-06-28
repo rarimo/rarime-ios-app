@@ -4,7 +4,7 @@
 [![iOS 16+](https://img.shields.io/badge/iOS-16+-white.svg?style=flat&logo=apple)](https://developer.apple.com/ios/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](/LICENSE)
 
-RariMe is a self-custody identity wallet that allows users to verify their eligibility for Web3 services without exposing their personal data.
+RariMe is a self-custody identity wallet, that unlocks private but verifiable identities.
 
 ![App Image](images/app.png)
 
@@ -12,7 +12,7 @@ RariMe is a self-custody identity wallet that allows users to verify their eligi
 
 Requires iOS 16 or higher.
 
-[![App Store Image](https://rarime-landing-test.netlify.app/images/app-store.svg)](https://apps.apple.com)
+[![App Store Image](https://rarime-landing-test.netlify.app/images/app-store.svg)](https://apps.apple.com/app/rarime/id6503300598)
 
 ## Requirements
 

@@ -12,7 +12,7 @@ struct AppCheckbox: View {
                 .opacity(checked ? 1 : 0)
         }
         .frame(width: 20, height: 20)
-        .background(checked ? .primaryDark : .componentPrimary)
+        .background(checked ? .primaryMain : .componentPrimary)
         .clipShape(RoundedRectangle(cornerRadius: 4))
         .overlay(RoundedRectangle(cornerRadius: 4).stroke(.componentPrimary, lineWidth: 1))
         .animation(.easeInOut(duration: 0.2), value: checked)

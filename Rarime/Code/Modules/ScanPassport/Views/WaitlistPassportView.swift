@@ -10,6 +10,7 @@ struct WaitlistPassportView: View {
     let onNext: () -> Void
     let onCancel: () -> Void
 
+    @State private var isChecked = false
     @State private var isSending = false
     @State private var isExporting = false
     @State private var isCopied = false
@@ -38,7 +39,13 @@ struct WaitlistPassportView: View {
                 Text("If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards")
                     .body3()
                     .fixedSize(horizontal: false, vertical: true)
-                InfoAlert(text: "Information shared includes the data groups of the passport and the government signature") {}
+                HStack(alignment: .top, spacing: 12) {
+                    AppCheckbox(checked: $isChecked)
+                    Text("By checking this box, you are agreeing to share the data groups of the passport and the government signature")
+                        .body4()
+                        .fixedSize(horizontal: false, vertical: true)
+                        .foregroundStyle(.textSecondary)
+                }
             }
             .foregroundStyle(.textPrimary)
         }
@@ -49,8 +56,14 @@ struct WaitlistPassportView: View {
                 text: "Join the program",
                 rightIcon: Icons.arrowRight,
                 action: {
-                    joinRewardsProgram()
-                    isSending = true
+                    Task { @MainActor in
+                        await joinRewardsProgram()
+                        if isChecked {
+                            isSending = true
+                        } else {
+                            onNext()
+                        }
+                    }
                 }
             )
             .controlSize(.large)
@@ -82,49 +95,53 @@ struct WaitlistPassportView: View {
         }
     }
     
-    func joinRewardsProgram() {
+    func joinRewardsProgram() async {
         if !passportViewModel.isEligibleForReward {
             return
         }
         
-        Task { @MainActor in
-            do {
-                guard let user = userManager.user else { throw "failed to get user" }
+        do {
+            guard let user = userManager.user else { throw "failed to get user" }
                 
-                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-                
-                let country = passportViewModel.passport?.nationality ?? ""
-                
-                let dg1 = passportViewModel.passport?.dg1 ?? Data()
-                
-                var calculateAnonymousIDError: NSError?
-                let anonymousID = IdentityCalculateAnonymousID(dg1, Points.PointsEventId, &calculateAnonymousIDError)
-                if let calculateAnonymousIDError {
-                    throw calculateAnonymousIDError
-                }
-                
-                var error: NSError?
-                let hmacMessage = IdentityCalculateHmacMessage(accessJwt.payload.sub, country, anonymousID, &error)
-                if let error {
-                    throw error
-                }
-                
-                let key = Data(hex: ConfigManager.shared.api.joinRewardsKey) ?? Data()
-                
-                let hmacSingature = HMACUtils.hmacSha256(hmacMessage ?? Data(), key)
-                
-                let points = Points(ConfigManager.shared.api.pointsServiceURL)
-                let _ = try await points.joinRewardsProgram(
-                    accessJwt,
-                    country,
-                    hmacSingature.hex,
-                    anonymousID?.hex ?? ""
-                )
-                
-                LoggerUtil.common.info("User joined program")
-            } catch {
-                LoggerUtil.common.info("failed to join rewards program: \(error, privacy: .public)")
+            if decentralizedAuthManager.accessJwt == nil {
+                try await decentralizedAuthManager.initializeJWT(user.secretKey)
             }
+                
+            try await decentralizedAuthManager.refreshIfNeeded()
+                
+            guard let accessJwt = decentralizedAuthManager.accessJwt else { throw "accessJwt is nil" }
+                
+            let country = passportViewModel.passport?.nationality ?? ""
+                
+            let dg1 = passportViewModel.passport?.dg1 ?? Data()
+                
+            var calculateAnonymousIDError: NSError?
+            let anonymousID = IdentityCalculateAnonymousID(dg1, Points.PointsEventId, &calculateAnonymousIDError)
+            if let calculateAnonymousIDError {
+                throw calculateAnonymousIDError
+            }
+                
+            var error: NSError?
+            let hmacMessage = IdentityCalculateHmacMessage(accessJwt.payload.sub, country, anonymousID, &error)
+            if let error {
+                throw error
+            }
+                
+            let key = Data(hex: ConfigManager.shared.api.joinRewardsKey) ?? Data()
+                
+            let hmacSingature = HMACUtils.hmacSha256(hmacMessage ?? Data(), key)
+                
+            let points = Points(ConfigManager.shared.api.pointsServiceURL)
+            let _ = try await points.joinRewardsProgram(
+                accessJwt,
+                country,
+                hmacSingature.hex,
+                anonymousID?.hex ?? ""
+            )
+                
+            LoggerUtil.common.info("User joined program")
+        } catch {
+            LoggerUtil.common.info("failed to join rewards program: \(error, privacy: .public)")
         }
     }
     

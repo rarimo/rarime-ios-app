@@ -479,6 +479,9 @@
         }
       }
     },
+    "By checking this box, you are agreeing to share the data groups of the passport and the government signature" : {
+
+    },
     "Cabo Verde" : {
 
     },
@@ -1082,6 +1085,9 @@
     "Germany" : {
 
     },
+    "Get in touch" : {
+
+    },
     "Get Rewarded" : {
       "localizations" : {
         "uk" : {
@@ -1234,9 +1240,6 @@
 
     },
     "Indonesia" : {
-
-    },
-    "Information shared includes the data groups of the passport and the government signature" : {
 
     },
     "Insufficient balance" : {
@@ -2330,6 +2333,9 @@
     "Somalia" : {
 
     },
+    "Some passports have a problem with chip scans" : {
+
+    },
     "Something went wrong" : {
 
     },
@@ -2717,6 +2723,9 @@
           }
         }
       }
+    },
+    "We’re working on a fix" : {
+
     },
     "Welcome" : {
       "localizations" : {

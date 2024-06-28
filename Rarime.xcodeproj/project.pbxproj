@@ -85,6 +85,8 @@
 		568B4FD12BB6D88F001C9C74 /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FD02BB6D88F001C9C74 /* Divider.swift */; };
 		568B4FE02BB70852001C9C74 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 568B4FDF2BB70852001C9C74 /* Localizable.xcstrings */; };
 		568B4FE52BB70CAA001C9C74 /* IntroStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FE42BB70CAA001C9C74 /* IntroStep.swift */; };
+		568D45C82C29AC200065D467 /* PassportChipErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D45C72C29AC200065D467 /* PassportChipErrorView.swift */; };
+		568D45CA2C29AFCB0065D467 /* FeedbackMailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D45C92C29AFCB0065D467 /* FeedbackMailView.swift */; };
 		56933DEF2BBABD100068C894 /* ScanPassportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DEE2BBABD100068C894 /* ScanPassportView.swift */; };
 		56933DF12BBAC1B10068C894 /* ScanPassportLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DF02BBAC1B10068C894 /* ScanPassportLayoutView.swift */; };
 		56933DF32BBAC2940068C894 /* ScanPassportMRZView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DF22BBAC2940068C894 /* ScanPassportMRZView.swift */; };
@@ -282,6 +284,8 @@
 		568B4FD02BB6D88F001C9C74 /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
 		568B4FDF2BB70852001C9C74 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		568B4FE42BB70CAA001C9C74 /* IntroStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroStep.swift; sourceTree = "<group>"; };
+		568D45C72C29AC200065D467 /* PassportChipErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportChipErrorView.swift; sourceTree = "<group>"; };
+		568D45C92C29AFCB0065D467 /* FeedbackMailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackMailView.swift; sourceTree = "<group>"; };
 		56933DEE2BBABD100068C894 /* ScanPassportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPassportView.swift; sourceTree = "<group>"; };
 		56933DF02BBAC1B10068C894 /* ScanPassportLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPassportLayoutView.swift; sourceTree = "<group>"; };
 		56933DF22BBAC2940068C894 /* ScanPassportMRZView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPassportMRZView.swift; sourceTree = "<group>"; };
@@ -695,6 +699,7 @@
 				56933DF22BBAC2940068C894 /* ScanPassportMRZView.swift */,
 				56933DF42BBAC42E0068C894 /* ReadPassportNFCView.swift */,
 				56933DF62BBAC7D10068C894 /* SelectPassportDataView.swift */,
+				568D45C72C29AC200065D467 /* PassportChipErrorView.swift */,
 				56933DFC2BBAFDD00068C894 /* PassportProofView.swift */,
 				56E2D9232BCFDD42006E725D /* ClaimTokensView.swift */,
 				56062B9F2C120B3400C9BF9B /* WaitlistPassportView.swift */,
@@ -997,6 +1002,7 @@
 				56E7AD0D2BDAD70200D3A258 /* RefreshableScrollView.swift */,
 				CED314662C0483BD00DF31D5 /* MailView.swift */,
 				CE0DC57C2C0DB9B200EFC0D7 /* VersionUpdateView.swift */,
+				568D45C92C29AFCB0065D467 /* FeedbackMailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1168,7 +1174,9 @@
 				564169602BE273260057AC03 /* PassportCardLook.swift in Sources */,
 				56933DFF2BBBFDA30068C894 /* ProcessingStatus.swift in Sources */,
 				5655E4352BD5173200B86C5C /* AppView+ViewModel.swift in Sources */,
+				568D45C82C29AC200065D467 /* PassportChipErrorView.swift in Sources */,
 				56E2D9172BCE938F006E725D /* ActionCard.swift in Sources */,
+				568D45CA2C29AFCB0065D467 /* FeedbackMailView.swift in Sources */,
 				56E6AD4D2BD273BC00E4DDC1 /* ProfileRouteLayout.swift in Sources */,
 				56E2D91B2BCEA66A006E725D /* PassportCard.swift in Sources */,
 				56E2D9192BCE94CA006E725D /* RarimeInfoView.swift in Sources */,
