@@ -1,8 +1,8 @@
-//
-
 import SwiftUI
+import Alamofire
 
 struct ImportIdentityView: View {
+    @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var userManager: UserManager
     
     var onNext: () -> Void
@@ -10,6 +10,7 @@ struct ImportIdentityView: View {
     
     @State private var privateKeyHex = ""
     @State private var isInvalidPrivateKey = false
+    @State private var isImporting = false
     
     var body: some View {
         IdentityStepLayoutView(
@@ -23,7 +24,9 @@ struct ImportIdentityView: View {
                     text: "Continue",
                     rightIcon: Icons.arrowRight,
                     action: importIdentity
-                ).controlSize(.large)
+                )
+                .controlSize(.large)
+                .disabled(isImporting)
             }
         ) {
             VStack {
@@ -49,29 +52,66 @@ struct ImportIdentityView: View {
     }
     
     func importIdentity() {
+        self.isImporting = true
+        
+        Task { @MainActor in
+            defer {
+                self.isImporting = false
+            }
+            
+            do {
+                if !(try isValidPrivateKey(privateKeyHex)) {
+                    privateKeyHex = ""
+                    isInvalidPrivateKey = true
+                    
+                    return
+                }
+                
+                guard let privateKey = Data(hex: privateKeyHex) else {
+                    privateKeyHex = ""
+                    isInvalidPrivateKey = true
+                    
+                    return
+                }
+                
+                try userManager.createFromSecretKey(privateKey)
+                try userManager.user?.save()
+                
+                try await setReferralCodeIfUserHasPointsBalance()
+                
+                LoggerUtil.common.info("Identity was imported")
+                
+                onNext()
+            } catch {
+                LoggerUtil.common.error("failed to import identity: \(error, privacy: .public)")
+            }
+        }
+    }
+    
+    func setReferralCodeIfUserHasPointsBalance() async throws {
         do {
-            if !(try isValidPrivateKey(privateKeyHex)) {
-                privateKeyHex = ""
-                isInvalidPrivateKey = true
-                
-                return
-            }
+            guard let user = userManager.user else { throw "failed to get user" }
             
-            guard let privateKey = Data(hex: privateKeyHex) else {
-                privateKeyHex = ""
-                isInvalidPrivateKey = true
-                
-                return
-            }
+            let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
             
-            try userManager.createFromSecretKey(privateKey)
-            try userManager.user?.save()
+            let points = Points(ConfigManager.shared.api.pointsServiceURL)
+            let _ = try await points.getPointsBalance(accessJwt)
             
-            LoggerUtil.common.info("Identity was imported")
+            LoggerUtil.common.info("User has points balance, setting referral code")
             
-            onNext()
+            userManager.user?.userReferalCode = "placeholder"
         } catch {
-            LoggerUtil.common.error("failed to import identity")
+            guard let error = error as? AFError else { throw error }
+            
+            let openApiHttpCode = try error.retriveOpenApiHttpCode()
+            
+            if openApiHttpCode == HTTPStatusCode.notFound.rawValue {
+                LoggerUtil.common.info("User has no points balance")
+                
+                return
+            }
+            
+            throw error
         }
     }
 }
@@ -91,5 +131,6 @@ fileprivate func isValidPrivateKey(_ privateKey: String) throws -> Bool {
 
 #Preview {
     ImportIdentityView(onNext: {}, onBack: {})
+        .environmentObject(DecentralizedAuthManager.shared)
         .environmentObject(UserManager.shared)
 }

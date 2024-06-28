@@ -49,13 +49,7 @@ struct ReserveTokensView: View {
             
             guard let user = userManager.user else { throw "failed to get user" }
             
-            if decentralizedAuthManager.accessJwt == nil {
-                try await decentralizedAuthManager.initializeJWT(user.secretKey)
-            }
-            
-            try await decentralizedAuthManager.refreshIfNeeded()
-            
-            guard let accessJwt = decentralizedAuthManager.accessJwt else { throw "accessJwt is nil" }
+            let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
             
             guard let passport else { throw "passport is nil" }
             guard let registerZkProof = userManager.registerZkProof else { throw "registerZkProof is nil" }

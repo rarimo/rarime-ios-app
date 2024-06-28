@@ -276,13 +276,7 @@ struct RewardsView: View {
                     return
                 }
                                 
-                if decentralizedAuthManager.accessJwt == nil {
-                    try await decentralizedAuthManager.initializeJWT(user.secretKey)
-                }
-                
-                try await decentralizedAuthManager.refreshIfNeeded()
-                
-                guard let accessJwt = decentralizedAuthManager.accessJwt else { throw "accessJwt is nil" }
+                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
                 
                 let points = Points(ConfigManager.shared.api.pointsServiceURL)
                 
@@ -303,13 +297,7 @@ struct RewardsView: View {
             do {
                 guard let user = userManager.user else { throw "user is not initalized" }
                 
-                if decentralizedAuthManager.accessJwt == nil {
-                    try await decentralizedAuthManager.initializeJWT(user.secretKey)
-                }
-
-                try await decentralizedAuthManager.refreshIfNeeded()
-
-                guard let accessJwt = decentralizedAuthManager.accessJwt else { throw "accessJwt is nil" }
+                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
 
                 let points = Points(ConfigManager.shared.api.pointsServiceURL)
 
