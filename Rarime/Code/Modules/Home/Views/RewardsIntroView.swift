@@ -35,13 +35,7 @@ struct RewardsIntroView: View {
             do {
                 guard let user = userManager.user else { throw "user is not initalized" }
                 
-                if decentralizedAuthManager.accessJwt == nil {
-                    try await decentralizedAuthManager.initializeJWT(user.secretKey)
-                }
-                
-                try await decentralizedAuthManager.refreshIfNeeded()
-                
-                guard let accessJwt = decentralizedAuthManager.accessJwt else { throw "accessJwt is nil" }
+                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
                 
                 let pointsSvc = Points(ConfigManager.shared.api.pointsServiceURL)
                 let result = try await pointsSvc.createPointsBalance(

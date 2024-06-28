@@ -91,13 +91,7 @@ struct WaitlistPassportView: View {
             do {
                 guard let user = userManager.user else { throw "failed to get user" }
                 
-                if decentralizedAuthManager.accessJwt == nil {
-                    try await decentralizedAuthManager.initializeJWT(user.secretKey)
-                }
-                
-                try await decentralizedAuthManager.refreshIfNeeded()
-                
-                guard let accessJwt = decentralizedAuthManager.accessJwt else { throw "accessJwt is nil" }
+                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
                 
                 let country = passportViewModel.passport?.nationality ?? ""
                 
