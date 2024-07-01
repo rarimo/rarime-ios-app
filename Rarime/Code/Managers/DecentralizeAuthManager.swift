@@ -66,12 +66,28 @@ class DecentralizedAuthManager: ObservableObject {
         }
     }
     
-    func refreshIfNeeded() async throws {
+    func refreshIfNeeded(_ secretKey: Data) async throws {
         guard let refreshJwt = refreshJwt else {
             return
         }
         
-        if !refreshJwt.isExpiringSoon {
+        guard let accessJwt = accessJwt else {
+            return
+        }
+        
+        if accessJwt.isExpired {
+            try await initializeJWT(secretKey)
+            
+            return
+        }
+        
+        if !accessJwt.isExpiringSoon {
+            return
+        }
+        
+        if refreshJwt.isExpired {
+            try await initializeJWT(secretKey)
+            
             return
         }
         
@@ -91,7 +107,7 @@ class DecentralizedAuthManager: ObservableObject {
             try await self.initializeJWT(user.secretKey)
         }
 
-        try await self.refreshIfNeeded()
+        try await self.refreshIfNeeded(user.secretKey)
 
         guard let accessJwt = self.accessJwt else { throw "accessJwt is nil" }
         
