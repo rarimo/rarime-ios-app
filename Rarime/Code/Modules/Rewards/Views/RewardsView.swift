@@ -302,8 +302,6 @@ struct RewardsView: View {
                                 
                 let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
                 
-                let accessJwtJson = try JSONEncoder().encode(accessJwt)
-                
                 let points = Points(ConfigManager.shared.api.pointsServiceURL)
                 
                 let balanceResponse = try await points.getPointsBalance(accessJwt, true, true)
