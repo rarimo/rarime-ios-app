@@ -9,8 +9,8 @@ class DecentralizedAuthManager: ObservableObject {
     
     let authorize: AuthorizeService
     
-    @Published var accessJwt: Optional<JWT> = nil
-    @Published var refreshJwt: Optional<JWT> = nil
+    var accessJwt: JWT? = nil
+    var refreshJwt: JWT? = nil
     
     private let semaphore = AsyncSemaphore(value: 1)
     
@@ -19,12 +19,6 @@ class DecentralizedAuthManager: ObservableObject {
     }
     
     func initializeJWT(_ secretKey: Data) async throws {
-        if let accessJwt = accessJwt, let refreshJwt = refreshJwt {
-            if !accessJwt.isExpired && !refreshJwt.isExpired {
-                return
-            }
-        }
-        
         let profileInitializer = IdentityProfile()
         let profile = try profileInitializer.newProfile(secretKey)
         
@@ -59,17 +53,16 @@ class DecentralizedAuthManager: ObservableObject {
         let accessJwt = try JWT(authorizeUserResponse.data.attributes.accessToken.token)
         let refreshJwt = try JWT(authorizeUserResponse.data.attributes.refreshToken.token)
         
-        DispatchQueue.main.async {
-            self.accessJwt = accessJwt
-            self.refreshJwt = refreshJwt
-        }
+        self.accessJwt = accessJwt
+        self.refreshJwt = refreshJwt
     }
     
     func refreshIfNeeded(_ secretKey: Data) async throws {
         guard let refreshJwt = refreshJwt else { return }
         guard let accessJwt = accessJwt else { return }
         
-        if accessJwt.isExpired {
+        if accessJwt.isExpired && refreshJwt.isExpired {
+            reset()
             try await initializeJWT(secretKey)
             
             return
@@ -79,21 +72,13 @@ class DecentralizedAuthManager: ObservableObject {
             return
         }
         
-        if refreshJwt.isExpired {
-            try await initializeJWT(secretKey)
-            
-            return
-        }
-        
         let refreshJwtReponse = try await authorize.refreshJwt(refreshJwt.raw)
         
         let newAccessJwt = try JWT(refreshJwtReponse.data.attributes.accessToken.token)
         let newRefreshJwt = try JWT(refreshJwtReponse.data.attributes.refreshToken.token)
-        
-        DispatchQueue.main.async {
-            self.accessJwt = newAccessJwt
-            self.refreshJwt = newRefreshJwt
-        }
+
+        self.accessJwt = newAccessJwt
+        self.refreshJwt = newRefreshJwt
     }
     
     func getAccessJwt(_ user: User) async throws -> JWT {
@@ -112,7 +97,7 @@ class DecentralizedAuthManager: ObservableObject {
     }
     
     func reset() {
-        accessJwt = nil
-        refreshJwt = nil
+        self.accessJwt = nil
+        self.refreshJwt = nil
     }
 }
