@@ -19,11 +19,10 @@ class DecentralizedAuthManager: ObservableObject {
     }
     
     func initializeJWT(_ secretKey: Data) async throws {
-        await semaphore.wait()
-        defer { semaphore.signal() }
-        
-        if accessJwt != nil {
-            return
+        if let accessJwt = accessJwt, let refreshJwt = refreshJwt {
+            if !accessJwt.isExpired && !refreshJwt.isExpired {
+                return
+            }
         }
         
         let profileInitializer = IdentityProfile()
@@ -67,13 +66,8 @@ class DecentralizedAuthManager: ObservableObject {
     }
     
     func refreshIfNeeded(_ secretKey: Data) async throws {
-        guard let refreshJwt = refreshJwt else {
-            return
-        }
-        
-        guard let accessJwt = accessJwt else {
-            return
-        }
+        guard let refreshJwt = refreshJwt else { return }
+        guard let accessJwt = accessJwt else { return }
         
         if accessJwt.isExpired {
             try await initializeJWT(secretKey)
@@ -103,11 +97,14 @@ class DecentralizedAuthManager: ObservableObject {
     }
     
     func getAccessJwt(_ user: User) async throws -> JWT {
-        if self.accessJwt == nil {
+        await semaphore.wait()
+        defer { semaphore.signal() }
+        
+        if self.accessJwt == nil && self.refreshJwt == nil {
             try await self.initializeJWT(user.secretKey)
+        } else {
+            try await self.refreshIfNeeded(user.secretKey)
         }
-
-        try await self.refreshIfNeeded(user.secretKey)
 
         guard let accessJwt = self.accessJwt else { throw "accessJwt is nil" }
         

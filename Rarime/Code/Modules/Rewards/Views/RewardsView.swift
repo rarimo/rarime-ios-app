@@ -75,7 +75,6 @@ struct RewardsView: View {
                 }
             }
         }
-        .onAppear(perform: fetchBalance)
         .onAppear(perform: fetchEvents)
         .onAppear(perform: fetchLeaderboard)
         .environmentObject(rewardsViewModel)
@@ -297,9 +296,18 @@ struct RewardsView: View {
             do {
                 guard let user = userManager.user else { throw "user is not initalized" }
                 
+                if user.userReferalCode == nil {
+                    return
+                }
+                                
                 let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-
+                
                 let points = Points(ConfigManager.shared.api.pointsServiceURL)
+                
+                let balanceResponse = try await points.getPointsBalance(accessJwt, true, true)
+                
+                self.rewardsViewModel.pointsBalanceRaw = balanceResponse.data.attributes
+                isRewardsLoaded = true
 
                 let events = try await points.listEvents(
                     accessJwt,
