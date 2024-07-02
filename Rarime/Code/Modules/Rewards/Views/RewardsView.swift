@@ -266,31 +266,6 @@ struct RewardsView: View {
         }
     }
     
-    func fetchBalance() {
-        Task { @MainActor in
-            do {
-                guard let user = userManager.user else { throw "user is not initalized" }
-                
-                if user.userReferalCode == nil {
-                    return
-                }
-                                
-                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-                
-                let points = Points(ConfigManager.shared.api.pointsServiceURL)
-                
-                let balanceResponse = try await points.getPointsBalance(accessJwt, true, true)
-                
-                self.rewardsViewModel.pointsBalanceRaw = balanceResponse.data.attributes
-                isRewardsLoaded = true
-            } catch {
-                LoggerUtil.common.error("failed to fetch rewards: \(error.localizedDescription, privacy: .public)")
-                
-                AlertManager.shared.emitError(.unknown("Unable to fetch rewards, try again later"))
-            }
-        }
-    }
-    
     func fetchEvents() {
         Task { @MainActor in
             do {

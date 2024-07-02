@@ -1,6 +1,8 @@
 import Foundation
 
 class JWT: Codable {
+    static let SOON = 5
+    
     let raw: String
     
     let header: JWTHeader
@@ -37,7 +39,7 @@ class JWT: Codable {
     
     var isExpiringSoon: Bool {
         let now = Int(Date().timeIntervalSince1970)
-        return payload.exp - now < 300
+        return payload.exp - now < JWT.SOON
     }
     
     var isExpired: Bool {
