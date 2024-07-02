@@ -1,4 +1,5 @@
 import Combine
+import Identity
 import SwiftUI
 
 enum PassportProofState: Int, CaseIterable {
@@ -81,7 +82,26 @@ class PassportViewModel: ObservableObject {
                 passportInfoKey = proof.pubSignals[0]
             }
             
+            let profile = try IdentityProfile().newProfile(UserManager.shared.user?.secretKey)
+            
+            let currentIdentityKey = try profile.getPublicKeyHash()
+            
+            
             let (passportInfo, _) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
+            
+            if passportInfo.activeIdentity == currentIdentityKey {
+                LoggerUtil.common.info("Passport is already registered")
+                
+                PassportManager.shared.setPassport(passport)
+                try UserManager.shared.saveRegisterZkProof(proof)
+                
+                isUserRegistered = true
+                proofState = .finalizing
+                
+                processingStatus = .success
+                
+                return proof
+            }
             
             let isUserRevoking = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
             
