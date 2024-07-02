@@ -1,7 +1,7 @@
 import Foundation
 
 class JWT: Codable {
-    static let SOON = 5
+    static let SOON = 300
     
     let raw: String
     
