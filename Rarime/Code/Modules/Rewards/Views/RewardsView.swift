@@ -304,8 +304,6 @@ struct RewardsView: View {
                 
                 let accessJwtJson = try JSONEncoder().encode(accessJwt)
                 
-                LoggerUtil.common.debug("accessJwt: \(accessJwtJson.utf8)")
-                
                 let points = Points(ConfigManager.shared.api.pointsServiceURL)
                 
                 let balanceResponse = try await points.getPointsBalance(accessJwt, true, true)
