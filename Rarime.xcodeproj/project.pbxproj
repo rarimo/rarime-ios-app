@@ -151,7 +151,7 @@
 		CE19CB472BE39DA400B26DF7 /* RarimoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB462BE39DA400B26DF7 /* RarimoUtils.swift */; };
 		CE19CB492BE3AD4200B26DF7 /* LockScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB482BE3AD4200B26DF7 /* LockScreenView.swift */; };
 		CE1FA56A2C1708F100B2C191 /* Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1FA5692C1708F100B2C191 /* Points.swift */; };
-		CE2FB5582C25C632002B1F98 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2FB5572C25C632002B1F98 /* Identity.xcframework */; };
+		CE2E94A92C353C9000B9CA25 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2E94A82C353C9000B9CA25 /* Identity.xcframework */; };
 		CE31E5462C11F4180039CAA5 /* GetStartedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31E5452C11F4180039CAA5 /* GetStartedView.swift */; };
 		CE31E54A2C11FE150039CAA5 /* ImportIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31E5492C11FE150039CAA5 /* ImportIdentityView.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
@@ -348,7 +348,7 @@
 		CE19CB462BE39DA400B26DF7 /* RarimoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarimoUtils.swift; sourceTree = "<group>"; };
 		CE19CB482BE3AD4200B26DF7 /* LockScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenView.swift; sourceTree = "<group>"; };
 		CE1FA5692C1708F100B2C191 /* Points.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Points.swift; sourceTree = "<group>"; };
-		CE2FB5572C25C632002B1F98 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
+		CE2E94A82C353C9000B9CA25 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE31E5452C11F4180039CAA5 /* GetStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedView.swift; sourceTree = "<group>"; };
 		CE31E5492C11FE150039CAA5 /* ImportIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportIdentityView.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -428,7 +428,7 @@
 				CE3C6BA52C2310190055A20A /* libwitnesscalc_registerIdentityUniversalRSA2048.a in Frameworks */,
 				56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */,
 				CE3C6BA42C2310190055A20A /* libwitnesscalc_registerIdentityUniversalRSA4096.a in Frameworks */,
-				CE2FB5582C25C632002B1F98 /* Identity.xcframework in Frameworks */,
+				CE2E94A92C353C9000B9CA25 /* Identity.xcframework in Frameworks */,
 				56933E082BBC09990068C894 /* QKMRZScanner in Frameworks */,
 				CE8FEB5C2C1AFC3F0008381A /* libwitnesscalc_auth.a in Frameworks */,
 				CE68BE472BD9B6EA00D92EBB /* Web3ContractABI in Frameworks */,
@@ -1019,7 +1019,7 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CE2FB5572C25C632002B1F98 /* Identity.xcframework */,
+				CE2E94A82C353C9000B9CA25 /* Identity.xcframework */,
 				CE8FEB5B2C1AFC3F0008381A /* libwitnesscalc_auth.a */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562022BD923B4002D4954 /* libfq.a */,
@@ -1483,7 +1483,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1533,7 +1533,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1649,7 +1649,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1758,7 +1758,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
