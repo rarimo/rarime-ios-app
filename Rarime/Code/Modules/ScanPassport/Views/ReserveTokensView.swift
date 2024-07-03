@@ -63,7 +63,10 @@ struct ReserveTokensView: View {
                 
                 let openApiHttpCode = try error.retriveOpenApiHttpCode()
                 
-                if openApiHttpCode == HTTPStatusCode.conflict.rawValue {
+                if
+                    openApiHttpCode == HTTPStatusCode.conflict.rawValue
+                        || openApiHttpCode == HTTPStatusCode.tooManyRequests.rawValue
+                {
                     isAlreadyReserved = true
                     isReserving = false
                     

@@ -5,4 +5,5 @@ enum HTTPStatusCode: String {
     case created = "201"
     case notFound = "404"
     case conflict = "409"
+    case tooManyRequests = "429"
 }
