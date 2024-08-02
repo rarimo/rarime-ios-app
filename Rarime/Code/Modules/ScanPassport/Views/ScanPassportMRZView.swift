@@ -5,6 +5,8 @@ struct ScanPassportMRZView: View {
     let onNext: () -> Void
     let onClose: () -> Void
 
+    @State private var isManualMrzSheetPresented = false
+
     var body: some View {
         ScanPassportLayoutView(
             step: 1,
@@ -28,11 +30,26 @@ struct ScanPassportMRZView: View {
                 .padding(.top, 32)
                 .frame(width: 250)
             Spacer()
+            AppButton(
+                variant: .tertiary,
+                text: "Fill Manually",
+                leftIcon: Icons.pencilSimpleLine,
+                action: { isManualMrzSheetPresented = true }
+            )
+            .controlSize(.large)
+            .padding(20)
+            .dynamicSheet(isPresented: $isManualMrzSheetPresented, title: "Fill Manually") {
+                MrzFormView(onSubmitted: { mrzKey in
+                    mrzViewModel.setMrzKey(mrzKey)
+                    LoggerUtil.passport.info("MRZ filled manually")
+                    onNext()
+                })
+            }
         }
         .onAppear {
             mrzViewModel.setOnScanned {
                 LoggerUtil.passport.info("MRZ scanned")
-                
+
                 onNext()
             }
             mrzViewModel.startScanning()

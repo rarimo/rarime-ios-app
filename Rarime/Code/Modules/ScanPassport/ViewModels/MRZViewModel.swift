@@ -20,6 +20,10 @@ class MRZViewModel: ObservableObject, QKMRZScannerViewDelegate {
         onScanned()
     }
     
+    func setMrzKey(_ mrzKey: String) {
+        self.mrzKey = mrzKey
+    }
+    
     func setOnScanned(onScanned: @escaping () -> Void) {
         self.onScanned = onScanned
     }

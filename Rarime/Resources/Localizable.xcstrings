@@ -771,6 +771,12 @@
         }
       }
     },
+    "Date of birth (dd/mm/yy)" : {
+
+    },
+    "Date of expiry (dd/mm/yy)" : {
+
+    },
     "Delete Account" : {
 
     },
@@ -818,6 +824,9 @@
           }
         }
       }
+    },
+    "Document ID (AB123456)" : {
+
     },
     "Dominica" : {
 
@@ -916,6 +925,9 @@
           }
         }
       }
+    },
+    "Enter" : {
+
     },
     "Enter amount" : {
 
@@ -1037,6 +1049,9 @@
       }
     },
     "Fiji" : {
+
+    },
+    "Fill Manually" : {
 
     },
     "Finalizing" : {
@@ -1836,6 +1851,9 @@
           }
         }
       }
+    },
+    "Please fill these fields" : {
+
     },
     "Please store the private key safely and do not share it with anyone. If you lose this key, you will not be able to recover the account and will lose access forever." : {
       "localizations" : {

@@ -48,6 +48,7 @@
 		563529EB2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529EA2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift */; };
 		563529F12BB0736A0027C910 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529F02BB0736A0027C910 /* TabBarView.swift */; };
 		563529F62BB077AB0027C910 /* CardContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529F52BB077AB0027C910 /* CardContainer.swift */; };
+		563706792C5CF374002F3AF4 /* MrzFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563706782C5CF374002F3AF4 /* MrzFormView.swift */; };
 		564169602BE273260057AC03 /* PassportCardLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5641695F2BE273260057AC03 /* PassportCardLook.swift */; };
 		56474AD62BB9860E0017AA25 /* FaceIdAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */; };
 		56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */; };
@@ -248,6 +249,7 @@
 		563529EA2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+HiddenNavBar.swift"; sourceTree = "<group>"; };
 		563529F02BB0736A0027C910 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		563529F52BB077AB0027C910 /* CardContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainer.swift; sourceTree = "<group>"; };
+		563706782C5CF374002F3AF4 /* MrzFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MrzFormView.swift; sourceTree = "<group>"; };
 		5641695F2BE273260057AC03 /* PassportCardLook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportCardLook.swift; sourceTree = "<group>"; };
 		56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIdAuth.swift; sourceTree = "<group>"; };
 		56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
@@ -697,6 +699,7 @@
 				56933DEE2BBABD100068C894 /* ScanPassportView.swift */,
 				56062B9D2C12096E00C9BF9B /* UnsupportedCountryView.swift */,
 				56933DF22BBAC2940068C894 /* ScanPassportMRZView.swift */,
+				563706782C5CF374002F3AF4 /* MrzFormView.swift */,
 				56933DF42BBAC42E0068C894 /* ReadPassportNFCView.swift */,
 				56933DF62BBAC7D10068C894 /* SelectPassportDataView.swift */,
 				568D45C72C29AC200065D467 /* PassportChipErrorView.swift */,
@@ -1228,6 +1231,7 @@
 				CED314672C0483BD00DF31D5 /* MailView.swift in Sources */,
 				567ADEC42C25CF32007070A7 /* JSONDocument.swift in Sources */,
 				5655E4302BD2CA5500B86C5C /* AppColorScheme.swift in Sources */,
+				563706792C5CF374002F3AF4 /* MrzFormView.swift in Sources */,
 				CED909D02BDBA9FC0065E949 /* Cosmos.swift in Sources */,
 				56A88FCF2C062AB200D3A64A /* AirdropCheckboxView.swift in Sources */,
 				56A6C76E2BBD474200992562 /* DateUtil.swift in Sources */,
