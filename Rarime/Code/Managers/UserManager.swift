@@ -160,7 +160,7 @@ class UserManager: ObservableObject {
         )
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.register(calldata)
+        let response = try await relayer.register(calldata, ConfigManager.shared.api.registerContractAddress)
         
         LoggerUtil.common.info("Passport register EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
         
@@ -181,7 +181,7 @@ class UserManager: ObservableObject {
         )
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.register(calldata)
+        let response = try await relayer.register(calldata, ConfigManager.shared.api.registerContractAddress)
         
         LoggerUtil.common.info("Passport revoke EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
         
@@ -208,7 +208,7 @@ class UserManager: ObservableObject {
         let certificatesSMTAddress = try EthereumAddress(hex:  ConfigManager.shared.api.certificatesSmtContractAddress, eip55: false)
         
         let certificatesSMTContract = try PoseidonSMT(contractAddress: certificatesSMTAddress)
-        
+         
         let x509Utils = IdentityX509Util()
         
         let slaveCertificateIndex = try x509Utils.getSlaveCertificateIndex(certPem, mastersPem: Certificates.ICAO)
@@ -230,7 +230,7 @@ class UserManager: ObservableObject {
         )
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.register(calldata)
+        let response = try await relayer.register(calldata, ConfigManager.shared.api.registerContractAddress)
         
         LoggerUtil.common.info("Register certificate EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
         

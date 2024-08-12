@@ -8,11 +8,16 @@ class Relayer {
         self.url = url
     }
     
-    func register(_ calldata: Data) async throws -> EvmTxResponse {
+    func register(_ calldata: Data, _ destination: String? = nil) async throws -> EvmTxResponse {
         var requestURL = url
         requestURL.append(path: "/integrations/registration-relayer/v1/register")
         
-        let payload = RegisterRequest(data: RegisterRequestData(txData: "0x" + calldata.hex))
+        let payload = RegisterRequest(
+            data: RegisterRequestData(
+                txData: "0x" + calldata.hex,
+                destination: destination
+            )
+        )
         
         return try await AF.request(
             requestURL,
@@ -81,9 +86,11 @@ struct RegisterRequest: Codable {
 }
 struct RegisterRequestData: Codable {
     let txData: String
+    let destination: String?
 
     enum CodingKeys: String, CodingKey {
         case txData = "tx_data"
+        case destination
     }
 }
 
