@@ -9,7 +9,7 @@ AIRDROP_TERMS_URL = "https:${SLASH}/staging.rarime.com/airdrop-terms.html"
 // MARK: API
 RELAYER_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
 EVM_RPC_URL = "https:${SLASH}/rpc.evm.node1.mainnet-beta.rarimo.com"
-REGISTER_CONTRACT_ADDRESS = "0x5B216Aac3d38d22255a66b269D6d3B37027CD8f0"
+REGISTER_CONTRACT_ADDRESS = "0x31223f7317f0b3E05DC56e9E3DcD75959995acfb"
 CERTIFICATES_SMT_CONTRACT_ADDRESS = "0x4EECcb639990917fA43f7cbf23b5350e419DC129"
 REGISTRATION_SMT_CONTRACT_ADDRESS = "0x6FD2568A0a3692E2B0d6d4258845E57bcAc53Db2"
 STATE_KEEPER_CONTRACT_ADDRESS = "0x3CfB92B692045C73888904e6e81F9B78fcFC6FE4"
@@ -33,5 +33,5 @@ ICAO_COSMOS_RPC = "core-api.node1.mainnet-beta.rarimo.com:443"
 FEEDBACK_EMAIL = "info@rarilabs.com"
 
 // MARK: CircuitsData
-CIRCUIT_DATA_URL_0 = "https:${SLASH}/storage.googleapis.com/rarimo-store/rdi2/registerIdentityUniversalRSA2048-download.zip"
-CIRCUIT_DATA_URL_1 = "https:${SLASH}/storage.googleapis.com/rarimo-store/rdi2/registerIdentityUniversalRSA4096-download.zip"
+CIRCUIT_DATA_URL_0 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.1.0-alpha/registerIdentityUniversalRSA2048-download.zip"
+CIRCUIT_DATA_URL_1 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.1.0-alpha/registerIdentityUniversalRSA4096-download.zip"
