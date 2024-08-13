@@ -25,6 +25,12 @@ class CircuitDataManager: ObservableObject {
         _ circuitName: RegisteredCircuitData,
         _ downloadProgress: @escaping (String) -> Void = { _ in }
     ) async throws -> CircuitData {
+        if !AppUserDefaults.shared.isCircuitsStorageCleared {
+            try FileManager.default.removeItem(at: CircuitDataManager.saveDirectory)
+            
+            AppUserDefaults.shared.isCircuitsStorageCleared = true
+        }
+        
         guard let circuitDataURL = circuitDataURLs[circuitName.rawValue] else {
             throw "Circuit data URL not found"
         }

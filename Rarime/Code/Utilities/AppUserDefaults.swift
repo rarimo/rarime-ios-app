@@ -65,4 +65,7 @@ public class AppUserDefaults: ObservableObject {
     
     @AppStorage("userRefarralCode")
     public var userRefarralCode = ""
+    
+    @AppStorage("is_circuits_storage_cleared")
+    public var isCircuitsStorageCleared = false
 }
