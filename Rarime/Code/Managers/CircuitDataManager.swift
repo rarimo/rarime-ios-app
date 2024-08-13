@@ -26,7 +26,7 @@ class CircuitDataManager: ObservableObject {
         _ downloadProgress: @escaping (String) -> Void = { _ in }
     ) async throws -> CircuitData {
         if !AppUserDefaults.shared.isCircuitsStorageCleared {
-            try FileManager.default.removeItem(at: CircuitDataManager.saveDirectory)
+            try? FileManager.default.removeItem(at: CircuitDataManager.saveDirectory)
             
             AppUserDefaults.shared.isCircuitsStorageCleared = true
         }
