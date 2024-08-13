@@ -21,8 +21,7 @@ struct VersionUpdateView: View {
                 text: "Open App Store",
                 width: nil,
                 action: {
-                    // TODO: Replace {APP_ID} with real app id
-                    if let url = URL(string: "itms-appss://apps.apple.com/app/id{APP_ID}") {
+                    if let url = URL(string: "itms-appss://apps.apple.com/app/id6503300598") {
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     }
                 }
