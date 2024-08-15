@@ -6,10 +6,16 @@ private enum ViewState {
 }
 
 struct RewardsIntroView: View {
+#if DEVELOPMENT
+    static let isImportJsonSupported = true
+#else
+    static let isImportJsonSupported = false
+#endif
+    
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     
-    let onStart: () -> Void
+    let onStart: (Bool) -> Void
     @State private var termsChecked = false
     @State private var codeVerified = false
 
@@ -17,6 +23,8 @@ struct RewardsIntroView: View {
     @State private var codeErrorMessage = ""
     @State private var isVerifyingCode = false
     @State private var viewState: ViewState = .intro
+    
+    @State private var isImportJson = false
 
     private func verifyCode() {
         isVerifyingCode = true
@@ -122,6 +130,14 @@ struct RewardsIntroView: View {
                         .body3()
                         .foregroundStyle(.textPrimary)
                     InfoAlert(text: "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport") {}
+                    if RewardsIntroView.isImportJsonSupported {
+                        HStack {
+                            AppCheckbox(checked: $isImportJson)
+                            Text("Use JSON file")
+                                .body4()
+                                .foregroundStyle(.textSecondary)
+                        }
+                    }
                 } else {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("HOW CAN I GET A CODE?")
@@ -150,10 +166,12 @@ struct RewardsIntroView: View {
                 HorizontalDivider()
                 AirdropCheckboxView(checked: $termsChecked)
                     .padding(.horizontal, 20)
-                AppButton(text: "Check eligibility", action: onStart)
-                    .controlSize(.large)
-                    .disabled(!termsChecked)
-                    .padding(.horizontal, 20)
+                AppButton(text: "Check eligibility", action: {
+                    onStart(isImportJson)
+                })
+                .controlSize(.large)
+                .disabled(!termsChecked)
+                .padding(.horizontal, 20)
             } else {
                 Button(action: { viewState = .about }) {
                     Text("Learn more about the program")
@@ -234,7 +252,7 @@ private func isValidReferalCodeFormat(_ string: String) -> Bool {
 #Preview {
     let userManager = UserManager.shared
     
-    return RewardsIntroView(onStart: {})
+    return RewardsIntroView(onStart: { _ in })
         .environmentObject(ConfigManager())
         .environmentObject(DecentralizedAuthManager())
         .environmentObject(userManager)

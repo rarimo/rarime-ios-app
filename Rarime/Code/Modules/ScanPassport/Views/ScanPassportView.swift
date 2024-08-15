@@ -1,6 +1,7 @@
 import SwiftUI
 
 private enum ScanPassportState {
+    case importJson
     case scanMRZ
     case readNFC
     case chipError
@@ -20,6 +21,7 @@ struct ScanPassportView: View {
     let isAirdropFlow: Bool
     let onComplete: (_ passport: Passport, _ isClaimed: Bool) -> Void
     let onClose: () -> Void
+    let isImportJson: Bool
 
     @State private var state: ScanPassportState = .scanMRZ
 
@@ -28,6 +30,15 @@ struct ScanPassportView: View {
 
     var body: some View {
         switch state {
+        case .importJson:
+            ImportFileView(
+                onFinish: { passport in
+                    passportViewModel.setPassport(passport)
+                    withAnimation { state = .selectData }
+                },
+                onClose: onClose
+            )
+            .transition(.backslide)
         case .scanMRZ:
             ScanPassportMRZView(
                 onNext: { withAnimation { state = .readNFC } },
@@ -35,6 +46,7 @@ struct ScanPassportView: View {
             )
             .environmentObject(mrzViewModel)
             .transition(.backslide)
+            .onAppear { if isImportJson { state = .importJson } }
         case .readNFC:
             ReadPassportNFCView(
                 onNext: { passport in
@@ -126,9 +138,10 @@ struct ScanPassportView: View {
     let userManager = UserManager.shared
 
     return ScanPassportView(
-        isAirdropFlow: false,
+        isAirdropFlow: true,
         onComplete: { _, _ in },
-        onClose: {}
+        onClose: {},
+        isImportJson: true
     )
     .environmentObject(WalletManager())
     .environmentObject(userManager)
