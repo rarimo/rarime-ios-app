@@ -81,7 +81,7 @@ class Relayer {
     }
 }
 
-struct RegisterRequest: Codable {
+struct RegisterRequest: QuickCodable {
     let data: RegisterRequestData
 }
 struct RegisterRequestData: Codable {

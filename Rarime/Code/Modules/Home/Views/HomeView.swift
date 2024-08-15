@@ -19,6 +19,7 @@ struct HomeView: View {
     @State private var isAirdropFlow = false
     @State private var isCongratsShown = false
     @State private var isClaimed = false
+    @State private var isImportJson = false
 
     @State private var isBalanceFetching = true
     @State private var pointsBalance: PointsBalanceRaw? = nil
@@ -62,7 +63,8 @@ struct HomeView: View {
                             self.isClaimed = isClaimed
                             path.removeLast()
                         },
-                        onClose: { path.removeLast() }
+                        onClose: { path.removeLast() },
+                        isImportJson: isImportJson
                     )
                     .navigationBarBackButtonHidden()
                 case .reserveTokens:
@@ -202,10 +204,12 @@ struct HomeView: View {
                 .controlSize(.large)
                 .dynamicSheet(isPresented: $mainViewModel.isRewardsSheetPresented, fullScreen: true) {
                     RewardsIntroView(
-                        onStart: {
+                        onStart: { isImportJson in
                             mainViewModel.isRewardsSheetPresented = false
                             isAirdropFlow = false
                             path.append(.scanPassport)
+                            
+                            self.isImportJson = isImportJson
                         }
                     )
                 }
