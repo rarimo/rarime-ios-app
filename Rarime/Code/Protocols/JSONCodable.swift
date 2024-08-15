@@ -1,8 +1,8 @@
 import Foundation
 
-protocol QuickCodable: Codable {}
+protocol JSONCodable: Codable {}
 
-extension QuickCodable {
+extension JSONCodable {
     var json: Data {
         return (try? JSONEncoder().encode(self)) ?? Data()
     }

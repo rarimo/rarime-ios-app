@@ -81,7 +81,7 @@ class Relayer {
     }
 }
 
-struct RegisterRequest: QuickCodable {
+struct RegisterRequest: JSONCodable {
     let data: RegisterRequestData
 }
 struct RegisterRequestData: Codable {
