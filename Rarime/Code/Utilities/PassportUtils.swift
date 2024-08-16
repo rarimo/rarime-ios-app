@@ -75,4 +75,9 @@ class PassportUtils {
         
         return sum % 10
     }
+    
+    public static func normalizeNationality(_ rawNationality: String) -> String {
+        // Some passports (e.g. Germany) have one-letter codes instead of three-letter ones
+        return rawNationality.replacingOccurrences(of: "<", with: "")
+    }
 }
