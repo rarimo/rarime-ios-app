@@ -1,6 +1,6 @@
-import UIKit
 import Foundation
 import NFCPassportReader
+import UIKit
 
 struct Passport: Codable {
     var firstName: String
@@ -10,7 +10,7 @@ struct Passport: Codable {
     var documentType: String
     var issuingAuthority: String
     var documentNumber: String
-    var documentExpiryDate: String 
+    var documentExpiryDate: String
     var dateOfBirth: String
     var nationality: String
     let dg1: Data
@@ -92,11 +92,11 @@ struct Passport: Codable {
                 .pngData()?
                 .base64EncodedString(options: .endLineWithLineFeed),
             documentType: "P",
-            issuingAuthority: model.issuingAuthority,
+            issuingAuthority: PassportUtils.normalizeNationality(model.issuingAuthority),
             documentNumber: model.documentNumber,
             documentExpiryDate: model.documentExpiryDate,
             dateOfBirth: model.dateOfBirth,
-            nationality: model.nationality,
+            nationality: PassportUtils.normalizeNationality(model.nationality),
             dg1: Data(dg1),
             dg15: Data(dg15),
             sod: Data(sod),
