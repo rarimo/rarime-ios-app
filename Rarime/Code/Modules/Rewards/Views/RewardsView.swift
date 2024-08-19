@@ -107,7 +107,8 @@ struct RewardsView: View {
                                             ZStack {
                                                 LeaderboardView(
                                                     balances: rewardsViewModel.leaderboard,
-                                                    myBalance: balance
+                                                    myBalance: balance,
+                                                    totalParticipants: rewardsViewModel.totalParticipants
                                                 )
                                             }
                                         }
@@ -305,11 +306,12 @@ struct RewardsView: View {
             do {
                 let points = Points(ConfigManager.shared.api.pointsServiceURL)
                 
-                let leaderboard = try await points.getLeaderboard(15, 0)
+                let leaderboard = try await points.getLeaderboard(50, 0)
                 
                 self.rewardsViewModel.leaderboard = leaderboard.data.map { entry in
                     entry.attributes
                 }
+                self.rewardsViewModel.totalParticipants = leaderboard.meta.eventsCount
                 
                 self.isLeaderboardLoaded = true
             } catch {

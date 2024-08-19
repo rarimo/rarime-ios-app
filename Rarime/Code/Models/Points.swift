@@ -42,7 +42,8 @@ class Points {
         let query = [
             URLQueryItem(name: "page[limit]", value: String(pageLimit)),
             URLQueryItem(name: "page[number]", value: String(pageNumber)),
-            URLQueryItem(name: "page[order]", value: pageOrder)
+            URLQueryItem(name: "page[order]", value: pageOrder),
+            URLQueryItem(name: "count", value: "true")
         ]
 
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances").appending(queryItems: query)
@@ -294,7 +295,7 @@ class Points {
 
         return response
     }
-    
+
     func joinRewardsProgram(_ jwt: JWT, _ country: String, _ signature: String, _ anonymousId: String) async throws -> VerifyPassportResponse {
         let headers = HTTPHeaders(
             [
@@ -302,9 +303,9 @@ class Points {
                 HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
             ]
         )
-        
+
         let requestURL = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/balances/\(jwt.payload.sub)/join_program")
-        
+
         let requestPayload = JoinRewardsProgramRequest(
             data: JoinRewardsProgramRequestData(
                 id: jwt.payload.sub,
@@ -315,7 +316,7 @@ class Points {
                 )
             )
         )
-        
+
         let response = try await AF.request(requestURL, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default, headers: headers)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(VerifyPassportResponse.self)
@@ -385,11 +386,20 @@ struct CreatePointBalanceResponseAttributes: Codable {
 
 struct GetLeaderboardResponse: Codable {
     var data: [GetLeaderboardResponseData]
+    var meta: GetLeaderboardResponseMeta
 }
 
 struct GetLeaderboardResponseData: Codable {
     let id, type: String
     var attributes: LeaderboardEntry
+}
+
+struct GetLeaderboardResponseMeta: Codable {
+    let eventsCount: Int
+
+    enum CodingKeys: String, CodingKey {
+        case eventsCount = "events_count"
+    }
 }
 
 struct LeaderboardEntry: Codable {
@@ -475,7 +485,7 @@ struct VerifyPassportRequestAttributes: Codable {
     let anonymousId: String
     let country: String
     let proof: ZkProof
-    
+
     enum CodingKeys: String, CodingKey {
         case anonymousId = "anonymous_id"
         case country, proof
@@ -770,10 +780,10 @@ struct JoinRewardsProgramRequestData: Codable {
 struct JoinRewardsProgramRequestAttributes: Codable {
     let anonymousId: String
     let country: String
-    
+
     enum CodingKeys: String, CodingKey {
         case anonymousId = "anonymous_id"
-        case country = "country"
+        case country
     }
 }
 

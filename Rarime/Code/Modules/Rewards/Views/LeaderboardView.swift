@@ -10,12 +10,17 @@ private func formatBalanceId(_ id: String) -> String {
 struct LeaderboardView: View {
     let balances: [LeaderboardEntry]
     let myBalance: PointsBalanceRaw
+    let totalParticipants: Int
 
     var body: some View {
         VStack(spacing: 0) {
             Text("Leaderboard")
                 .subtitle4()
                 .foregroundStyle(.textPrimary)
+            Text("\(totalParticipants.formatted()) participants")
+                .caption3()
+                .foregroundStyle(.textSecondary)
+                .padding(.top, 2)
             HStack(alignment: .bottom, spacing: 12) {
                 if balances.count > 3 {
                     TopLeaderView(balance: balances[1], myBalance: myBalance)
@@ -228,6 +233,7 @@ private struct BalanceItem: View {
             rank: 12,
             referralCodes: [],
             level: 2
-        )
+        ),
+        totalParticipants: 35567
     )
 }
