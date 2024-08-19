@@ -108,7 +108,7 @@ struct RewardsView: View {
                                                 LeaderboardView(
                                                     balances: rewardsViewModel.leaderboard,
                                                     myBalance: balance,
-                                                    totalParticipants: 12300
+                                                    totalParticipants: rewardsViewModel.totalParticipants
                                                 )
                                             }
                                         }
