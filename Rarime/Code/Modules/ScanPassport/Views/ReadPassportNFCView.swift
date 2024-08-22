@@ -9,6 +9,8 @@ struct ReadPassportNFCView: View {
     let onBack: () -> Void
     let onResponseError: () -> Void
     let onClose: () -> Void
+    
+    @State private var useExtendedMode = false
 
     var body: some View {
         ScanPassportLayoutView(
@@ -25,33 +27,48 @@ struct ReadPassportNFCView: View {
                 .multilineTextAlignment(.center)
                 .frame(width: 250)
             Spacer()
-            AppButton(text: "Scan") {
-                NFCScanner.scanPassport(
-                    mrzViewModel.mrzKey,
-                    userManager.userChallenge,
-                    onCompletion: { result in
-                        switch result {
-                        case .success(let passport):
-                            self.onNext(passport)
-                        case .failure(let error):
-                            LoggerUtil.passport.error("failed to read passport data: \(error.localizedDescription, privacy: .public)")
-                            switch error {
-                            case NFCPassportReaderError.ResponseError(let reason, _, _)
-                                where reason == "Referenced data not found":
-                                onResponseError()
-                            default:
-                                onBack()
-                            }
-                        }
-                    }
-                )
-            }
+            AppButton(text: "Scan", action: scanPassport)
             .controlSize(.large)
             .padding(.top, 12)
             .padding(.bottom, 20)
             .padding(.horizontal, 20)
             .background(.backgroundPure)
         }
+    }
+    
+    func scanPassport() {
+        NFCScanner.scanPassport(
+            mrzViewModel.mrzKey,
+            userManager.userChallenge,
+            useExtendedMode,
+            onCompletion: { result in
+                switch result {
+                case .success(let passport):
+                    self.onNext(passport)
+                case .failure(let error):
+                    LoggerUtil.passport.error("failed to read passport data: \(error.localizedDescription, privacy: .public)")
+                    switch error {
+                    case NFCPassportReaderError.Unknown(_):
+                        if useExtendedMode {
+                            onBack()
+                            
+                            return
+                        }
+                        
+                        useExtendedMode = true
+                        
+                        AlertManager.shared.emitError(.unknown("A scanning error occurred. Attempting to use extended mode. Please try again."))
+                        
+                        scanPassport()
+                    case NFCPassportReaderError.ResponseError(let reason, _, _)
+                        where reason == "Referenced data not found":
+                        onResponseError()
+                    default:
+                        onBack()
+                    }
+                }
+            }
+        )
     }
 }
 

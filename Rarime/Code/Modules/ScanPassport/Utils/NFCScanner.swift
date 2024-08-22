@@ -42,6 +42,7 @@ class NFCScanner {
     static func scanPassport(
         _ mrzKey: String,
         _ challenge: Data,
+        _ useExtendedMode: Bool = true,
         onCompletion: @escaping (Result<Passport, Error>) -> Void
     ) {
         Task { @MainActor in
@@ -50,6 +51,7 @@ class NFCScanner {
                     .readPassport(
                         mrzKey: mrzKey,
                         tags: [.DG1, .DG2, .DG15, .SOD],
+                        useExtendedMode: useExtendedMode,
                         customDisplayMessage: customDisplayMessage,
                         activeAuthenticationChallenge: [UInt8](challenge)
                     )
