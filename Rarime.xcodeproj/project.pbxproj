@@ -1503,7 +1503,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 1.12;
+				MARKETING_VERSION = 1.12.1;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1553,7 +1553,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 1.12;
+				MARKETING_VERSION = 1.12.1;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1669,7 +1669,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 1.12;
+				MARKETING_VERSION = 1.12.1;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1778,7 +1778,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 1.12;
+				MARKETING_VERSION = 1.12.1;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1867,7 +1867,7 @@
 			repositoryURL = "git@github.com:rarimo/NFCPassportReader.git";
 			requirement = {
 				kind = revision;
-				revision = 9c1354d59148519340db448cd4c7aba852f5e8d9;
+				revision = deb4669a53d6351dc00787491b2b93f553ca4141;
 			};
 		};
 		56E7AD0F2BDBA81000D3A258 /* XCRemoteSwiftPackageReference "PullToRefreshSwiftUI" */ = {
