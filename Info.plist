@@ -96,6 +96,12 @@
 		<string>Inter-Regular.ttf</string>
 		<string>Inter-SemiBold.ttf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+		<string>remote-notification</string>
+	</array>
 	<key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
 	<array>
 		<string>A0000002471001</string>
@@ -107,5 +113,9 @@
 		<string>A0000002480300</string>
 		<string>A00000045645444C2D3031</string>
 	</array>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
+	<key>GENERAL_NOTIFICATION_TOPIC</key>
+	<string>${GENERAL_NOTIFICATION_TOPIC}</string>
 </dict>
 </plist>

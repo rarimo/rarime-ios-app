@@ -1685,6 +1685,9 @@
     "No active tasks" : {
 
     },
+    "No notifications" : {
+
+    },
     "No transactions yet" : {
       "localizations" : {
         "uk" : {
@@ -1705,6 +1708,9 @@
 
     },
     "Norway" : {
+
+    },
+    "Notifications" : {
 
     },
     "Ok" : {
