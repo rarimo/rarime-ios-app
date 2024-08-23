@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct MainView: View {
+    @EnvironmentObject private var notificationManager: NotificationManager
     @EnvironmentObject private var userManager: UserManager
     
     @StateObject private var viewModel = ViewModel()
@@ -20,6 +21,15 @@ struct MainView: View {
                 self.viewModel.isRewardsSheetPresented = true
                 
                 self.viewModel.selectedTab = .home
+            }
+        }
+        .onAppear(perform: checkNotificationPermission)
+    }
+    
+    func checkNotificationPermission() {
+        Task { @MainActor in
+            if !(await notificationManager.isAuthorized()) {
+                try? await notificationManager.request()
             }
         }
     }

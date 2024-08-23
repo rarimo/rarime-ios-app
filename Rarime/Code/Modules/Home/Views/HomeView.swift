@@ -1,10 +1,11 @@
 import SwiftUI
 
 private enum HomeRoute: Hashable {
-    case scanPassport, reserveTokens, claimRewards
+    case scanPassport, reserveTokens, claimRewards, notifications
 }
 
 struct HomeView: View {
+    @EnvironmentObject private var notificationManager: NotificationManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var mainViewModel: MainView.ViewModel
     @EnvironmentObject private var passportManager: PassportManager
@@ -92,6 +93,14 @@ struct HomeView: View {
                         onClose: { path.removeLast() }
                     )
                     .navigationBarBackButtonHidden()
+                case .notifications:
+                    NotificationsView(
+                        onBack: {
+                            path.removeLast()
+                        }
+                    )
+                    .environment(\.managedObjectContext, notificationManager.pushNotificationContainer.viewContext)
+                    .navigationBarBackButtonHidden()
                 }
             }
         }
@@ -163,25 +172,47 @@ struct HomeView: View {
     }
 
     private var header: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Button(action: {
-                mainViewModel.selectTab(isWalletBalanceDisplayed ? .wallet : .rewards)
-            }) {
-                HStack(spacing: 4) {
-                    Text(isWalletBalanceDisplayed ? "Balance: RMO" : "Reserved RMO").body3()
-                    Image(Icons.caretRight).iconSmall()
+        HStack {
+            VStack(alignment: .leading, spacing: 8) {
+                Button(action: {
+                    mainViewModel.selectTab(isWalletBalanceDisplayed ? .wallet : .rewards)
+                }) {
+                    HStack(spacing: 4) {
+                        Text(isWalletBalanceDisplayed ? "Balance: RMO" : "Reserved RMO").body3()
+                        Image(Icons.caretRight).iconSmall()
+                    }
+                }
+                .foregroundStyle(.textSecondary)
+                if isBalanceFetching {
+                    ProgressView().frame(height: 40)
+                } else {
+                    Text(displayedBalance.formatted())
+                        .h4()
+                        .foregroundStyle(.textPrimary)
                 }
             }
-            .foregroundStyle(.textSecondary)
-            if isBalanceFetching {
-                ProgressView().frame(height: 40)
-            } else {
-                Text(displayedBalance.formatted())
-                    .h4()
-                    .foregroundStyle(.textPrimary)
+            .padding(.horizontal, 8)
+            Spacer()
+            ZStack {
+                Image(Icons.bell)
+                    .iconMedium()
+                    .padding(10)
+                    .background(.primaryMain, in: Circle())
+                    .foregroundStyle(.baseBlack)
+                    .onTapGesture { path.append(.notifications) }
+                if notificationManager.unreadNotificationsCounter > 0 {
+                    ZStack {
+                        Circle()
+                            .foregroundStyle(.errorMain)
+                            .frame(width: 16, height: 16)
+                        Text("\(notificationManager.unreadNotificationsCounter)")
+                            .overline3()
+                            .foregroundStyle(.baseWhite)
+                    }
+                    .offset(x: 6, y: -6)
+                }
             }
         }
-        .padding(.horizontal, 8)
     }
 
     private var rewardsCard: some View {
@@ -315,4 +346,5 @@ struct HomeView: View {
         .environmentObject(WalletManager())
         .environmentObject(UserManager())
         .environmentObject(ConfigManager())
+        .environmentObject(NotificationManager())
 }
