@@ -8,27 +8,27 @@ struct CongratsView: View {
     var onClose: () -> Void
     
     private var title: String {
-        if !isClaimed {
-            if userManager.registerZkProof != nil {
-                return String(localized: "Congrats!")
-            }
-            
-            return String(localized: "You’ve joined the waitlist")
+        if isClaimed {
+            return String(localized: "Congrats!")
         }
-
-        return String(localized: "Congrats!")
+        
+        if userManager.registerZkProof != nil {
+            return String(localized: "Congrats!")
+        }
+        
+        return String(localized: "You’ve joined the waitlist")
     }
 
     private var description: String {
-        if !isClaimed {
-            if userManager.registerZkProof != nil {
-                return String(localized: "You successfully registered your identity!")
-            }
-            
-            return String(localized: "You will be notified once your country is added")
+        if isClaimed {
+            return String(localized: "You’ve reserved \(PASSPORT_RESERVE_TOKENS.formatted()) RMO tokens")
+        }
+        
+        if userManager.registerZkProof != nil {
+            return String(localized: "You successfully registered your identity!")
         }
 
-        return String(localized: "You’ve reserved \(PASSPORT_RESERVE_TOKENS.formatted()) RMO tokens")
+        return String(localized: "You will be notified once your country is added")
     }
 
     var body: some View {
