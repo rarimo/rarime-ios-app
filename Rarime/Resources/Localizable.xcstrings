@@ -24,16 +24,6 @@
     "/%@" : {
 
     },
-    "%@ %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$@"
-          }
-        }
-      }
-    },
     "%@ ensures your history, reputation and actions are not lost, but remain confidential and under your control." : {
       "localizations" : {
         "uk" : {
@@ -1236,6 +1226,12 @@
     "Identifiers" : {
 
     },
+    "Identity creation happens via a scan of your biometric passport.\n\nYour data never leaves the device or is shared with any third party. Proof of citizenship is generated locally using Zero-Knowledge technology." : {
+
+    },
+    "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport" : {
+
+    },
     "If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards" : {
 
     },
@@ -2105,7 +2101,7 @@
     "Receive %@" : {
 
     },
-    "Receive rewards for using Rarimo app" : {
+    "Receive rewards for using Rarime app" : {
 
     },
     "Receive RMO" : {
@@ -2356,9 +2352,6 @@
 
     },
     "Somalia" : {
-
-    },
-    "Some hint text" : {
 
     },
     "Some passports have a problem with chip scans" : {
@@ -2690,6 +2683,9 @@
 
     },
     "Uruguay" : {
+
+    },
+    "Use JSON file" : {
 
     },
     "Used" : {

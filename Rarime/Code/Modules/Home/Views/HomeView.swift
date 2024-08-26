@@ -15,6 +15,7 @@ struct HomeView: View {
     @State private var path: [HomeRoute] = []
 
     @State private var isRarimeSheetPresented = false
+    @State private var isCreateIdentityIntroPresented = false
 
     @State private var isCongratsShown = false
     @State private var isClaimed = false
@@ -159,6 +160,15 @@ struct HomeView: View {
                 }
             )
         )
+        .sheet(isPresented: $isCreateIdentityIntroPresented) {
+            CreateIdentityIntroView { isImportJson in
+                self.isImportJson = isImportJson
+                
+                self.isCreateIdentityIntroPresented = false
+                
+                path.append(.scanPassport)
+            }
+        }
     }
 
     private var header: some View {
@@ -220,8 +230,7 @@ struct HomeView: View {
                 }
                 HorizontalDivider()
                 AppButton(text: "Let’s Start", rightIcon: Icons.arrowRight) {
-                    mainViewModel.isRewardsSheetPresented = false
-                    path.append(.scanPassport)
+                    self.isCreateIdentityIntroPresented = true
                 }
                 .controlSize(.large)
             }
