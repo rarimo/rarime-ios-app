@@ -6,25 +6,17 @@ private enum ViewState {
 }
 
 struct RewardsIntroView: View {
-#if DEVELOPMENT
-    static let isImportJsonSupported = true
-#else
-    static let isImportJsonSupported = false
-#endif
-    
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     
-    let onStart: (Bool) -> Void
+    var onVerify: () -> Void
+    
     @State private var termsChecked = false
-    @State private var codeVerified = false
 
     @State private var code = ""
     @State private var codeErrorMessage = ""
     @State private var isVerifyingCode = false
     @State private var viewState: ViewState = .intro
-    
-    @State private var isImportJson = false
 
     private func verifyCode() {
         isVerifyingCode = true
@@ -54,9 +46,9 @@ struct RewardsIntroView: View {
                 if !result.data.attributes.isDisabled {
                     self.userManager.user?.userReferalCode = code
                     
-                    self.codeVerified = true
-                    
                     LoggerUtil.common.info("User verified code: \(code, privacy: .public)")
+                    
+                    onVerify()
                     
                     return
                 }
@@ -100,88 +92,56 @@ struct RewardsIntroView: View {
         VStack(spacing: 16) {
             HomeIntroLayout(
                 title: String(localized: "Join Rewards Program"),
-                description: String(localized: "Check your eligibility"),
+                description: String(localized: "Receive rewards for using RariMe app"),
                 icon: Image(Images.rewardCoin).square(110),
                 subheader: {
-                    if !codeVerified {
-                        AppTextField(
-                            text: $code,
-                            errorMessage: $codeErrorMessage,
-                            placeholder: "Enter invitation code",
-                            action: {
-                                Button(action: verifyCode) {
-                                    Image(Icons.arrowRight)
-                                        .iconMedium()
-                                        .padding(.vertical, 6)
-                                        .padding(.horizontal, 16)
-                                }
-                                .buttonStyle(AppButtonStyle(variant: .primary))
-                                .clipShape(RoundedRectangle(cornerRadius: 1000))
-                                .disabled(code.isEmpty || isVerifyingCode)
+                    AppTextField(
+                        text: $code,
+                        errorMessage: $codeErrorMessage,
+                        placeholder: "Enter invitation code",
+                        action: {
+                            Button(action: verifyCode) {
+                                Image(Icons.arrowRight)
+                                    .iconMedium()
+                                    .padding(.vertical, 6)
+                                    .padding(.horizontal, 16)
                             }
-                        )
-                        .controlSize(.large)
-                        .disabled(isVerifyingCode)
-                    }
+                            .buttonStyle(AppButtonStyle(variant: .primary))
+                            .clipShape(RoundedRectangle(cornerRadius: 1000))
+                            .disabled(code.isEmpty || isVerifyingCode)
+                        }
+                    )
+                    .controlSize(.large)
+                    .disabled(isVerifyingCode)
                 }
             ) {
-                if codeVerified {
-                    Text("Checking eligibility happens via a scan of your biometric passport.\n\nYour data never leaves the device or is shared with any third party. Proof of citizenship is generated locally using Zero-Knowledge technology.")
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("HOW CAN I GET A CODE?")
+                        .overline2()
+                        .foregroundStyle(.textSecondary)
+                    Text("You must be invited or receive a code from social channels")
                         .body3()
                         .foregroundStyle(.textPrimary)
-                    InfoAlert(text: "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport") {}
-                    if RewardsIntroView.isImportJsonSupported {
-                        HStack {
-                            AppCheckbox(checked: $isImportJson)
-                            Text("Use JSON file")
-                                .body4()
-                                .foregroundStyle(.textSecondary)
-                        }
-                    }
-                } else {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("HOW CAN I GET A CODE?")
-                            .overline2()
-                            .foregroundStyle(.textSecondary)
-                        Text("You must be invited or receive a code from social channels")
-                            .body3()
-                            .foregroundStyle(.textPrimary)
-                    }
-                    HStack(spacing: 16) {
-                        SocialCard(
-                            title: "X",
-                            icon: Icons.xCircle,
-                            url: URL(string: "https://twitter.com/Rarimo_protocol")!
-                        )
-                        SocialCard(
-                            title: "Discord",
-                            icon: Icons.discord,
-                            url: URL(string: "https://discord.gg/Bzjm5MDXrU")!
-                        )
-                    }
                 }
+                HStack(spacing: 16) {
+                    SocialCard(
+                        title: "X",
+                        icon: Icons.xCircle,
+                        url: URL(string: "https://twitter.com/Rarimo_protocol")!
+                    )
+                    SocialCard(
+                        title: "Discord",
+                        icon: Icons.discord,
+                        url: URL(string: "https://discord.gg/Bzjm5MDXrU")!
+                    )
+                }
+            }
+            Button(action: { viewState = .about }) {
+                Text("Learn more about the program")
+                    .buttonSmall()
+                    .foregroundStyle(.textSecondary)
             }
             Spacer()
-            if codeVerified {
-                HorizontalDivider()
-                AirdropCheckboxView(checked: $termsChecked)
-                    .padding(.horizontal, 20)
-                AppButton(text: "Check eligibility", action: {
-                    onStart(isImportJson)
-                })
-                .controlSize(.large)
-                .disabled(!termsChecked)
-                .padding(.horizontal, 20)
-            } else {
-                Button(action: { viewState = .about }) {
-                    Text("Learn more about the program")
-                        .buttonSmall()
-                        .foregroundStyle(.textSecondary)
-                }
-            }
-        }
-        .onAppear {
-            self.codeVerified = userManager.user?.userReferalCode != nil
         }
     }
     
@@ -252,7 +212,7 @@ private func isValidReferalCodeFormat(_ string: String) -> Bool {
 #Preview {
     let userManager = UserManager.shared
     
-    return RewardsIntroView(onStart: { _ in })
+    return RewardsIntroView() {}
         .environmentObject(ConfigManager())
         .environmentObject(DecentralizedAuthManager())
         .environmentObject(userManager)

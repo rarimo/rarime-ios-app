@@ -9,8 +9,6 @@ private enum ScanPassportState {
     case unsupportedCountry
     case generateProof
     case waitlistPassport
-    case claimTokens
-    case reserveTokens
 }
 
 struct ScanPassportView: View {
@@ -18,8 +16,7 @@ struct ScanPassportView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
 
-    let isAirdropFlow: Bool
-    let onComplete: (_ passport: Passport, _ isClaimed: Bool) -> Void
+    let onComplete: (_ passport: Passport) -> Void
     let onClose: () -> Void
     let isImportJson: Bool
 
@@ -66,7 +63,6 @@ struct ScanPassportView: View {
                 .transition(.backslide)
         case .selectData:
             SelectPassportDataView(
-                isAirdropFlow: isAirdropFlow,
                 onNext: {
                     let isSupportedCountry = !UNSUPPORTED_REWARD_COUNTRIES.contains(passportViewModel.passportCountry)
                     withAnimation { state = isSupportedCountry ? .generateProof : .unsupportedCountry }
@@ -86,12 +82,7 @@ struct ScanPassportView: View {
             PassportProofView(
                 onFinish: { registerZKProof in
                     userManager.registerZkProof = registerZKProof
-                    if !isAirdropFlow, !passportManager.isUnsupportedForRewards {
-                        withAnimation { state = .reserveTokens }
-                        return
-                    }
-
-                    onComplete(passportViewModel.passport!, false)
+                    onComplete(passportViewModel.passport!)
                 },
                 onClose: onClose,
                 onError: { withAnimation { state = .waitlistPassport } }
@@ -102,31 +93,9 @@ struct ScanPassportView: View {
         case .waitlistPassport:
             WaitlistPassportView(
                 onNext: {
-                    onComplete(passportViewModel.passport!, false)
+                    onComplete(passportViewModel.passport!)
                 },
                 onCancel: onClose
-            )
-            .environmentObject(passportViewModel)
-            .transition(.backslide)
-        case .claimTokens:
-            ClaimTokensView(
-                showTerms: false,
-                passport: passportViewModel.passport,
-                onFinish: { isClaimed in
-                    onComplete(passportViewModel.passport!, isClaimed)
-                },
-                onClose: { onComplete(passportViewModel.passport!, false) }
-            )
-            .environmentObject(passportViewModel)
-            .transition(.backslide)
-        case .reserveTokens:
-            ReserveTokensView(
-                showTerms: false,
-                passport: passportViewModel.passport,
-                onFinish: { isReserved in
-                    onComplete(passportViewModel.passport!, isReserved)
-                },
-                onClose: { onComplete(passportViewModel.passport!, false) }
             )
             .environmentObject(passportViewModel)
             .transition(.backslide)
@@ -138,8 +107,7 @@ struct ScanPassportView: View {
     let userManager = UserManager.shared
 
     return ScanPassportView(
-        isAirdropFlow: true,
-        onComplete: { _, _ in },
+        onComplete: { _ in },
         onClose: {},
         isImportJson: true
     )

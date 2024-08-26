@@ -112,7 +112,6 @@
 		56A88FCD2C04C78F00D3A64A /* ScanPassport.json in Resources */ = {isa = PBXBuildFile; fileRef = 56A88FCC2C04C78F00D3A64A /* ScanPassport.json */; };
 		56A88FCF2C062AB200D3A64A /* AirdropCheckboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A88FCE2C062AB200D3A64A /* AirdropCheckboxView.swift */; };
 		56AC03402BB06A2D00A34A00 /* Image+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */; };
-		56CC01E52BCD81AA008CEBE0 /* UkrainianIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CC01E42BCD81AA008CEBE0 /* UkrainianIntroView.swift */; };
 		56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3002BB723A1002CF710 /* NewIdentityView.swift */; };
 		56DAA3052BB72E35002CF710 /* InfoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3042BB72E35002CF710 /* InfoAlert.swift */; };
 		56DAA3072BB77550002CF710 /* IdentityStepLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3062BB77550002CF710 /* IdentityStepLayoutView.swift */; };
@@ -205,6 +204,8 @@
 		CE9E82B82BA881F400AAF885 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82B72BA881F400AAF885 /* AppView.swift */; };
 		CE9E82BA2BA881F500AAF885 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9E82B92BA881F500AAF885 /* Assets.xcassets */; };
 		CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82D62BA8917100AAF885 /* LottieView.swift */; };
+		CEA03F0A2C7C7A17002F218A /* View+IsLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA03F092C7C7A17002F218A /* View+IsLoading.swift */; };
+		CEA03F0C2C7C9319002F218A /* CreateIdentityIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA03F0B2C7C9319002F218A /* CreateIdentityIntroView.swift */; };
 		CEB8B2792C6A29520029DD80 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB8B2782C6A29520029DD80 /* Identity.xcframework */; };
 		CEB8B27C2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA2048.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB8B27A2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA2048.a */; };
 		CEB8B27D2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA4096.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB8B27B2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA4096.a */; };
@@ -357,7 +358,6 @@
 		56A88FCC2C04C78F00D3A64A /* ScanPassport.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ScanPassport.json; sourceTree = "<group>"; };
 		56A88FCE2C062AB200D3A64A /* AirdropCheckboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirdropCheckboxView.swift; sourceTree = "<group>"; };
 		56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Icon.swift"; sourceTree = "<group>"; };
-		56CC01E42BCD81AA008CEBE0 /* UkrainianIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UkrainianIntroView.swift; sourceTree = "<group>"; };
 		56DAA3002BB723A1002CF710 /* NewIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIdentityView.swift; sourceTree = "<group>"; };
 		56DAA3042BB72E35002CF710 /* InfoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlert.swift; sourceTree = "<group>"; };
 		56DAA3062BB77550002CF710 /* IdentityStepLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityStepLayoutView.swift; sourceTree = "<group>"; };
@@ -439,6 +439,8 @@
 		CE9E82E02BA8974C00AAF885 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		CE9E82E22BA8975F00AAF885 /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		CE9E82E62BA89CE300AAF885 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
+		CEA03F092C7C7A17002F218A /* View+IsLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+IsLoading.swift"; sourceTree = "<group>"; };
+		CEA03F0B2C7C9319002F218A /* CreateIdentityIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityIntroView.swift; sourceTree = "<group>"; };
 		CEB8B2782C6A29520029DD80 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CEB8B27A2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA2048.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentityUniversalRSA2048.a; sourceTree = "<group>"; };
 		CEB8B27B2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA4096.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentityUniversalRSA4096.a; sourceTree = "<group>"; };
@@ -586,6 +588,7 @@
 		563529DD2BB071840027C910 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				562241442C11E1B3000239FA /* RewardsIntroView.swift */,
 				563529E42BB072060027C910 /* RewardsView.swift */,
 				5609B6CF2C19939600CB6A1F /* LevelingView.swift */,
 				568820FB2C1866FA001B729F /* TaskEventView.swift */,
@@ -613,12 +616,11 @@
 			isa = PBXGroup;
 			children = (
 				563529E82BB072B80027C910 /* HomeView.swift */,
-				562241442C11E1B3000239FA /* RewardsIntroView.swift */,
-				56CC01E42BCD81AA008CEBE0 /* UkrainianIntroView.swift */,
 				56E2D9182BCE94CA006E725D /* RarimeInfoView.swift */,
 				56E2D91A2BCEA66A006E725D /* PassportCard.swift */,
 				56E2D9142BCE7FC4006E725D /* HomeIntroLayout.swift */,
 				56E2D9252BCFE65C006E725D /* CongratsView.swift */,
+				CEA03F0B2C7C9319002F218A /* CreateIdentityIntroView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -966,6 +968,7 @@
 				CEB91BBD2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift */,
 				CE3E0D3A2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift */,
 				CE3477612C78892F005E91FE /* View+Align.swift */,
+				CEA03F092C7C7A17002F218A /* View+IsLoading.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1359,7 +1362,6 @@
 				56E2D9192BCE94CA006E725D /* RarimeInfoView.swift in Sources */,
 				CE3E0D3B2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift in Sources */,
 				CEC562112BD926AA002D4954 /* ZKUtils.swift in Sources */,
-				56CC01E52BCD81AA008CEBE0 /* UkrainianIntroView.swift in Sources */,
 				560F0C232BD02DFD00067054 /* WalletSendView.swift in Sources */,
 				56062B9E2C12096E00C9BF9B /* UnsupportedCountryView.swift in Sources */,
 				56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */,
@@ -1462,6 +1464,7 @@
 				5659151B2BE927A20050795A /* AppIconView.swift in Sources */,
 				560F0C272BD1146C00067054 /* ScanQRView.swift in Sources */,
 				56933DFB2BBAFBD90068C894 /* AppToggle.swift in Sources */,
+				CEA03F0C2C7C9319002F218A /* CreateIdentityIntroView.swift in Sources */,
 				CE34775F2C7888E1005E91FE /* NotificationsView.swift in Sources */,
 				56E6AD4B2BD2732300E4DDC1 /* ThemeView.swift in Sources */,
 				56E2D9152BCE7FC4006E725D /* HomeIntroLayout.swift in Sources */,
@@ -1483,6 +1486,7 @@
 				56A6C76A2BBC57B700992562 /* PassportViewModel.swift in Sources */,
 				56933E0E2BBC09F10068C894 /* MRZScannerView.swift in Sources */,
 				56933DF52BBAC42E0068C894 /* ReadPassportNFCView.swift in Sources */,
+				CEA03F0A2C7C7A17002F218A /* View+IsLoading.swift in Sources */,
 				CE1FA56A2C1708F100B2C191 /* Points.swift in Sources */,
 				CE51E2E52C21790700043D9A /* CircuitDataManager.swift in Sources */,
 				560F0C2F2BD135D400067054 /* MainView+ViewModel.swift in Sources */,

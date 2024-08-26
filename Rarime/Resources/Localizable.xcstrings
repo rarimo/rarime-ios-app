@@ -154,6 +154,9 @@
     "Active tasks" : {
 
     },
+    "Add a Document" : {
+
+    },
     "Address" : {
       "localizations" : {
         "uk" : {
@@ -504,9 +507,6 @@
     "Cameroon" : {
 
     },
-    "Campaign is focused on distributing rewards to Ukrainian citizens" : {
-
-    },
     "Canada" : {
 
     },
@@ -537,15 +537,6 @@
 
     },
     "Chad" : {
-
-    },
-    "Check eligibility" : {
-
-    },
-    "Check your eligibility" : {
-
-    },
-    "Checking eligibility happens via a scan of your biometric passport.\n\nYour data never leaves the device or is shared with any third party. Proof of citizenship is generated locally using Zero-Knowledge technology." : {
 
     },
     "Chile" : {
@@ -697,6 +688,9 @@
       }
     },
     "Create Incognito ID" : {
+
+    },
+    "Create your digital identity" : {
 
     },
     "Creating a confidential profile" : {
@@ -1232,6 +1226,9 @@
     "Identifiers" : {
 
     },
+    "Identity creation happens via a scan of your biometric passport.\n\nYour data never leaves the device or is shared with any third party. Proof of citizenship is generated locally using Zero-Knowledge technology." : {
+
+    },
     "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport" : {
 
     },
@@ -1332,9 +1329,6 @@
           }
         }
       }
-    },
-    "It showcases Rarimo’s identity infrastructure and how it can be used by projects and organizations to directly reach civilians." : {
-
     },
     "Italy" : {
 
@@ -1947,9 +1941,6 @@
         }
       }
     },
-    "Programmable rewards" : {
-
-    },
     "Proofs" : {
       "localizations" : {
         "uk" : {
@@ -2108,6 +2099,9 @@
       }
     },
     "Receive %@" : {
+
+    },
+    "Receive rewards for using Rarime app" : {
 
     },
     "Receive RMO" : {
@@ -2647,9 +2641,6 @@
         }
       }
     },
-    "Ukrainian citizens" : {
-
-    },
     "Unfortunately, these passports are not eligible for rewards. However, you can use your incognito ID for other upcoming mini apps." : {
 
     },
@@ -2781,6 +2772,7 @@
       }
     },
     "What’s that?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2849,6 +2841,9 @@
     "You must be invited or receive a code from social channels" : {
 
     },
+    "You successfully registered your identity!" : {
+
+    },
     "You will be notified once added" : {
 
     },
@@ -2872,6 +2867,7 @@
       }
     },
     "You’ve received %lld RMO tokens" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {

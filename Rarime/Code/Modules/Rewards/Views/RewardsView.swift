@@ -14,6 +14,7 @@ struct RewardsView: View {
     @StateObject private var rewardsViewModel = RewardsViewModel()
     @State private var path: [RewardsRoute] = []
     
+    @State private var isCodeVerified = false
     @State private var isRewardsLoaded = false
     @State private var isEventsLoaded = false
     @State private var isLeaderboardLoaded = false
@@ -75,14 +76,19 @@ struct RewardsView: View {
                 }
             }
         }
-        .onAppear(perform: fetchEvents)
-        .onAppear(perform: fetchLeaderboard)
         .environmentObject(rewardsViewModel)
     }
 
     var content: some View {
         MainViewLayout {
-            if isRewardsLoaded {
+            if !isCodeVerified {
+                RewardsIntroView() {
+                    isCodeVerified = true
+                }
+                .onAppear {
+                    isCodeVerified = userManager.user?.userReferalCode != nil
+                }
+            } else {
                 ScrollView {
                     VStack(spacing: 24) {
                         HStack {
@@ -91,7 +97,7 @@ struct RewardsView: View {
                                 .foregroundStyle(.textPrimary)
                             Spacer()
                             if !isUnsupportedCountry {
-                                if isLeaderboardLoaded {
+                                VStack {
                                     if let balance = rewardsViewModel.pointsBalanceRaw {
                                         Button(action: { isLeaderboardSheetShown = true }) {
                                             HStack(spacing: 4) {
@@ -113,9 +119,8 @@ struct RewardsView: View {
                                             }
                                         }
                                     }
-                                } else {
-                                    ProgressView()
                                 }
+                                .isLoading(!isLeaderboardLoaded)
                             }
                         }
                         .padding(.top, 20)
@@ -153,9 +158,9 @@ struct RewardsView: View {
                 }
                 .background(.backgroundPrimary)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else {
-                ProgressView()
-                    .controlSize(.large)
+                .isLoading(!isRewardsLoaded)
+                .onAppear(perform: fetchEvents)
+                .onAppear(perform: fetchLeaderboard)
             }
         }
     }

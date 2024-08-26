@@ -122,3 +122,6 @@ Frameworks/Identity.xcframework/**
 
 # Ignore the Build folder
 Build/
+
+# Devs stuff
+*.dev.*

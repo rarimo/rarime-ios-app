@@ -14,10 +14,9 @@ struct HomeView: View {
 
     @State private var path: [HomeRoute] = []
 
-    @State private var isUkrainianSheetPresented = false
     @State private var isRarimeSheetPresented = false
+    @State private var isCreateIdentityIntroPresented = false
 
-    @State private var isAirdropFlow = false
     @State private var isCongratsShown = false
     @State private var isClaimed = false
     @State private var isImportJson = false
@@ -37,6 +36,7 @@ struct HomeView: View {
         !userManager.isPassportTokensReserved
             && !passportManager.isUnsupportedForRewards
             && userManager.registerZkProof != nil
+            && userManager.user?.userReferalCode != nil
     }
 
     var isWalletBalanceDisplayed: Bool {
@@ -55,13 +55,11 @@ struct HomeView: View {
                 switch route {
                 case .scanPassport:
                     ScanPassportView(
-                        isAirdropFlow: isAirdropFlow,
-                        onComplete: { passport, isClaimed in
+                        onComplete: { passport in
                             userManager.user?.status = .passportScanned
 
                             passportManager.setPassport(passport)
                             isCongratsShown = true
-                            self.isClaimed = isClaimed
                             path.removeLast()
                         },
                         onClose: { path.removeLast() },
@@ -139,14 +137,8 @@ struct HomeView: View {
                             if canReserveTokens {
                                 reserveTokensCard
                             }
-                            // TODO: uncomment it in the future release
-//                            if canClaimAirdrop {
-//                                claimCard
-//                            }
                         } else {
                             rewardsCard
-                            // TODO: uncomment it in the future release
-//                            ukrainianCitizensCard
                         }
                         rarimeCard
                         Spacer().frame(height: 120)
@@ -162,13 +154,21 @@ struct HomeView: View {
             CongratsView(
                 open: isCongratsShown,
                 isClaimed: isClaimed,
-                isAirdropFlow: isAirdropFlow,
                 onClose: {
                     isCongratsShown = false
                     fetchBalance()
                 }
             )
         )
+        .sheet(isPresented: $isCreateIdentityIntroPresented) {
+            CreateIdentityIntroView { isImportJson in
+                self.isImportJson = isImportJson
+                
+                self.isCreateIdentityIntroPresented = false
+                
+                path.append(.scanPassport)
+            }
+        }
     }
 
     private var header: some View {
@@ -220,48 +220,21 @@ struct HomeView: View {
             VStack(spacing: 20) {
                 Image(Images.rewardCoin).square(110)
                 VStack(spacing: 8) {
-                    Text("Join Rewards Program")
+                    Text("Add a Document")
                         .h6()
                         .foregroundStyle(.textPrimary)
-                    Text("Check your eligibility")
+                    Text("Create your digital identity")
                         .body2()
                         .multilineTextAlignment(.center)
                         .foregroundStyle(.textSecondary)
                 }
                 HorizontalDivider()
                 AppButton(text: "Let’s Start", rightIcon: Icons.arrowRight) {
-                    mainViewModel.isRewardsSheetPresented = true
+                    self.isCreateIdentityIntroPresented = true
                 }
                 .controlSize(.large)
-                .dynamicSheet(isPresented: $mainViewModel.isRewardsSheetPresented, fullScreen: true) {
-                    RewardsIntroView(
-                        onStart: { isImportJson in
-                            mainViewModel.isRewardsSheetPresented = false
-                            isAirdropFlow = false
-                            path.append(.scanPassport)
-                            
-                            self.isImportJson = isImportJson
-                        }
-                    )
-                }
             }
             .frame(maxWidth: .infinity)
-        }
-    }
-
-    private var ukrainianCitizensCard: some View {
-        ActionCard(
-            title: String(localized: "Ukrainian citizens"),
-            description: String(localized: "Programmable rewards"),
-            icon: { Text(Country.ukraine.flag).frame(width: 40, height: 40) }
-        )
-        .onTapGesture { isUkrainianSheetPresented = true }
-        .dynamicSheet(isPresented: $isUkrainianSheetPresented, fullScreen: true) {
-            UkrainianIntroView(onStart: {
-                isUkrainianSheetPresented = false
-                isAirdropFlow = true
-                path.append(.scanPassport)
-            })
         }
     }
 

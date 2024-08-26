@@ -16,13 +16,6 @@ struct MainView: View {
             }
         }
         .environmentObject(viewModel)
-        .onChange(of: viewModel.selectedTab) { selectedTab in            
-            if userManager.user?.userReferalCode == nil, selectedTab == .rewards {
-                self.viewModel.isRewardsSheetPresented = true
-                
-                self.viewModel.selectedTab = .home
-            }
-        }
         .onAppear(perform: checkNotificationPermission)
     }
     
@@ -43,6 +36,7 @@ struct MainView: View {
         .environmentObject(WalletManager())
         .environmentObject(UserManager())
         .environmentObject(ConfigManager())
+        .environmentObject(NotificationManager())
         .onAppear {
             _ = try? userManager.createNewUser()
         }
