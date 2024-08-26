@@ -24,6 +24,16 @@
     "/%@" : {
 
     },
+    "%@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@"
+          }
+        }
+      }
+    },
     "%@ ensures your history, reputation and actions are not lost, but remain confidential and under your control." : {
       "localizations" : {
         "uk" : {
@@ -152,6 +162,9 @@
 
     },
     "Active tasks" : {
+
+    },
+    "Add a Document" : {
 
     },
     "Address" : {
@@ -504,9 +517,6 @@
     "Cameroon" : {
 
     },
-    "Campaign is focused on distributing rewards to Ukrainian citizens" : {
-
-    },
     "Canada" : {
 
     },
@@ -537,15 +547,6 @@
 
     },
     "Chad" : {
-
-    },
-    "Check eligibility" : {
-
-    },
-    "Check your eligibility" : {
-
-    },
-    "Checking eligibility happens via a scan of your biometric passport.\n\nYour data never leaves the device or is shared with any third party. Proof of citizenship is generated locally using Zero-Knowledge technology." : {
 
     },
     "Chile" : {
@@ -697,6 +698,9 @@
       }
     },
     "Create Incognito ID" : {
+
+    },
+    "Create your digital identity" : {
 
     },
     "Creating a confidential profile" : {
@@ -1232,9 +1236,6 @@
     "Identifiers" : {
 
     },
-    "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport" : {
-
-    },
     "If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards" : {
 
     },
@@ -1332,9 +1333,6 @@
           }
         }
       }
-    },
-    "It showcases Rarimo’s identity infrastructure and how it can be used by projects and organizations to directly reach civilians." : {
-
     },
     "Italy" : {
 
@@ -1947,9 +1945,6 @@
         }
       }
     },
-    "Programmable rewards" : {
-
-    },
     "Proofs" : {
       "localizations" : {
         "uk" : {
@@ -2108,6 +2103,9 @@
       }
     },
     "Receive %@" : {
+
+    },
+    "Receive rewards for using Rarimo app" : {
 
     },
     "Receive RMO" : {
@@ -2358,6 +2356,9 @@
 
     },
     "Somalia" : {
+
+    },
+    "Some hint text" : {
 
     },
     "Some passports have a problem with chip scans" : {
@@ -2647,9 +2648,6 @@
         }
       }
     },
-    "Ukrainian citizens" : {
-
-    },
     "Unfortunately, these passports are not eligible for rewards. However, you can use your incognito ID for other upcoming mini apps." : {
 
     },
@@ -2692,9 +2690,6 @@
 
     },
     "Uruguay" : {
-
-    },
-    "Use JSON file" : {
 
     },
     "Used" : {
@@ -2781,6 +2776,7 @@
       }
     },
     "What’s that?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2849,6 +2845,9 @@
     "You must be invited or receive a code from social channels" : {
 
     },
+    "You successfully registered your identity!" : {
+
+    },
     "You will be notified once added" : {
 
     },
@@ -2872,6 +2871,7 @@
       }
     },
     "You’ve received %lld RMO tokens" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {

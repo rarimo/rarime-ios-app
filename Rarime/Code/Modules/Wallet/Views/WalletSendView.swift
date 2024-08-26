@@ -105,7 +105,7 @@ struct WalletSendView: View {
                                     .foregroundStyle(.textSecondary)
                                 Spacer()
                                 // TODO: use balance according to the token type
-                                Text(try! String("\(RarimoUtils.formatBalance(userManager.balance)) \(token.rawValue)"))
+                                Text("\(RarimoUtils.formatBalance(userManager.balance)) \(token.rawValue)")
                                     .body4()
                                     .foregroundStyle(.textPrimary)
                             }
@@ -127,7 +127,7 @@ struct WalletSendView: View {
                 Text("Receiver gets")
                     .body4()
                     .foregroundStyle(.textSecondary)
-                Text(try! String("\(RarimoUtils.formatBalance(amountToSend)) \(token.rawValue)"))
+                Text("\(RarimoUtils.formatBalance(amountToSend)) \(token.rawValue)")
                     .subtitle3()
                     .foregroundStyle(.textPrimary)
             }

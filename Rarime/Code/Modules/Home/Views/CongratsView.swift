@@ -1,19 +1,34 @@
 import SwiftUI
 
 struct CongratsView: View {
+    @EnvironmentObject private var userManager: UserManager
+    
     var open: Bool
     var isClaimed: Bool
-    var isAirdropFlow: Bool
     var onClose: () -> Void
+    
+    private var title: String {
+        if !isClaimed {
+            if userManager.registerZkProof != nil {
+                return String(localized: "Congrats!")
+            }
+            
+            return String(localized: "You’ve joined the waitlist")
+        }
+
+        return String(localized: "Congrats!")
+    }
 
     private var description: String {
         if !isClaimed {
+            if userManager.registerZkProof != nil {
+                return String(localized: "You successfully registered your identity!")
+            }
+            
             return String(localized: "You will be notified once your country is added")
         }
 
-        return isAirdropFlow
-            ? String(localized: "You’ve received \(RARIMO_AIRDROP_REWARD) RMO tokens")
-            : String(localized: "You’ve reserved \(PASSPORT_RESERVE_TOKENS.formatted()) RMO tokens")
+        return String(localized: "You’ve reserved \(PASSPORT_RESERVE_TOKENS.formatted()) RMO tokens")
     }
 
     var body: some View {
@@ -36,7 +51,7 @@ struct CongratsView: View {
                                     .clipShape(Circle())
                             }
                             VStack(spacing: 8) {
-                                Text(isClaimed ? "Congrats!" : "You’ve joined the waitlist")
+                                Text(title)
                                     .h6()
                                     .foregroundStyle(.textPrimary)
                                 Text(description)
@@ -82,8 +97,8 @@ struct CongratsView: View {
 #Preview {
     CongratsView(
         open: true,
-        isClaimed: true,
-        isAirdropFlow: true,
+        isClaimed: false,
         onClose: {}
     )
+    .environmentObject(UserManager())
 }

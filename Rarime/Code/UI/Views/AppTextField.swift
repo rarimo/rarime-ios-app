@@ -109,7 +109,7 @@ private struct PreviewView: View {
                 }
             ) {
                 HStack {
-                    Text(try! String("Some hint text")).caption2()
+                    Text("Some hint text").caption2()
                     Spacer()
                     Image(Icons.info).iconSmall()
                 }
