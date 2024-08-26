@@ -92,7 +92,7 @@ struct RewardsIntroView: View {
         VStack(spacing: 16) {
             HomeIntroLayout(
                 title: String(localized: "Join Rewards Program"),
-                description: String(localized: "Receive rewards for using Rarime app"),
+                description: String(localized: "Receive rewards for using RariMe app"),
                 icon: Image(Images.rewardCoin).square(110),
                 subheader: {
                     AppTextField(
