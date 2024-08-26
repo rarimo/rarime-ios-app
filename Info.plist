@@ -117,5 +117,9 @@
 	<false/>
 	<key>GENERAL_NOTIFICATION_TOPIC</key>
 	<string>${GENERAL_NOTIFICATION_TOPIC}</string>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	</array>
 </dict>
 </plist>
