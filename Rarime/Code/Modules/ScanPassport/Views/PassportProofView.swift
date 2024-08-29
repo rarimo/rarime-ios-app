@@ -189,6 +189,7 @@ private struct RevocationNFCScan: View {
                 NFCScanner.scanPassport(
                     mrzViewModel.mrzKey,
                     passportViewModel.revocationChallenge,
+                    false,
                     onCompletion: { result in
                         switch result {
                         case .success(let passport):

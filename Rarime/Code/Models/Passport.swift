@@ -21,6 +21,14 @@ struct Passport: Codable {
     var fullName: String {
         "\(firstName) \(lastName)"
     }
+    
+    var isExpired: Bool {
+        if let expiryDate = try? DateUtil.parsePassportDate(documentExpiryDate) {
+            return expiryDate < Date()
+        } else {
+            return true
+        }
+    }
 
     var passportImage: UIImage? {
         guard let passportImageRaw = passportImageRaw else {

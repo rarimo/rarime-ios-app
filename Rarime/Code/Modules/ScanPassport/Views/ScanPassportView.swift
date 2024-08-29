@@ -109,7 +109,7 @@ struct ScanPassportView: View {
     return ScanPassportView(
         onComplete: { _ in },
         onClose: {},
-        isImportJson: true
+        isImportJson: false
     )
     .environmentObject(WalletManager())
     .environmentObject(userManager)
