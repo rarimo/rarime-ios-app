@@ -343,8 +343,6 @@ class UserManager: ObservableObject {
             startedAt: 1715688000
         )
         
-        LoggerUtil.common.debug("queryProofInputs: \(queryProofInputs.utf8)")
-        
         let wtns = try ZKUtils.calcWtnsQueryIdentity(queryProofInputs)
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16QueryIdentity(wtns)
