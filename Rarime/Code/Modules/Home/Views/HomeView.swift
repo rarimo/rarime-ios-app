@@ -71,9 +71,12 @@ struct HomeView: View {
                         showTerms: true,
 
                         passport: passportManager.passport,
-                        onFinish: { _ in
-                            isClaimed = true
-                            isCongratsShown = true
+                        onFinish: { isClaimed in
+                            if isClaimed {
+                                self.isClaimed = isClaimed
+                                self.isCongratsShown = true
+                            }
+                            
                             path.removeLast()
                         },
                         onClose: { path.removeLast() }

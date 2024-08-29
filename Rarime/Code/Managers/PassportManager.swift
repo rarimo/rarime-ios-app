@@ -28,7 +28,7 @@ class PassportManager: ObservableObject {
     }
 
     var isUnsupportedForRewards: Bool {
-        UNSUPPORTED_REWARD_COUNTRIES.contains(passportCountry)
+        UNSUPPORTED_REWARD_COUNTRIES.contains(passportCountry) || passport?.isExpired ?? true
     }
 
     func setPassport(_ passport: Passport) {
