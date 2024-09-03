@@ -1,6 +1,6 @@
+import Identity
 import OSLog
 import SwiftUI
-import Identity
 
 struct AppView: View {
     @EnvironmentObject private var circuitDataManager: CircuitDataManager
@@ -9,12 +9,9 @@ struct AppView: View {
     @EnvironmentObject private var securityManager: SecurityManager
     @EnvironmentObject private var settingsManager: SettingsManager
     @StateObject private var viewModel = ViewModel()
-    
-    @State private var isAlertPresented = false
-    @State private var alert: Alert?
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .topLeading) {
             // TODO: It's look ugly
             if let isDeprecated = updateManager.isDeprecated {
                 if isDeprecated {
@@ -44,20 +41,14 @@ struct AppView: View {
                 ProgressView()
                     .controlSize(.large)
             }
+            AlertManagerView()
         }
         .preferredColorScheme(settingsManager.colorScheme.rawScheme)
-        .onReceive(AlertManager.shared.alertsSubject) { alert in
-            self.isAlertPresented = true
-            self.alert = alert
-        }
-        .alert(isPresented: $isAlertPresented) {
-            self.alert ?? Alert(title: Text("Unknown"))
-        }
         .onAppear {
             Task { @MainActor in
                 await updateManager.checkForUpdate()
             }
-            
+
             UIApplication.shared.isIdleTimerDisabled = true
         }
         .environmentObject(viewModel)

@@ -225,6 +225,9 @@
     "Amount must be greater than 0" : {
 
     },
+    "An error has occured, please try again" : {
+
+    },
     "Andorra" : {
 
     },
@@ -1088,6 +1091,9 @@
     "Gambia" : {
 
     },
+    "Generate Proof" : {
+
+    },
     "Generates new keys" : {
 
     },
@@ -1710,9 +1716,6 @@
     "Notifications" : {
 
     },
-    "Ok" : {
-
-    },
     "Okay" : {
       "localizations" : {
         "uk" : {
@@ -1747,6 +1750,9 @@
           }
         }
       }
+    },
+    "Operation completed successfully" : {
+
     },
     "Other passport holders" : {
       "extractionState" : "stale",
@@ -1881,6 +1887,9 @@
         }
       }
     },
+    "Please wait" : {
+
+    },
     "Please Wait..." : {
       "localizations" : {
         "uk" : {
@@ -1943,6 +1952,9 @@
           }
         }
       }
+    },
+    "Proof Request" : {
+
     },
     "Proofs" : {
       "localizations" : {
@@ -2440,6 +2452,9 @@
           }
         }
       }
+    },
+    "Success" : {
+
     },
     "Sudan" : {
 

@@ -14,6 +14,7 @@ struct MainView: View {
                 case .rewards: RewardsView()
                 case .profile: ProfileView()
             }
+            ExternalRequestsView()
         }
         .environmentObject(viewModel)
         .onAppear(perform: checkNotificationPermission)
