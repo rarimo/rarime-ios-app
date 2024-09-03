@@ -1238,6 +1238,9 @@
     "Import from a private key" : {
 
     },
+    "Import JSON" : {
+
+    },
     "INCOGNITO ID" : {
 
     },
@@ -2683,9 +2686,6 @@
 
     },
     "Uruguay" : {
-
-    },
-    "Use JSON file" : {
 
     },
     "Used" : {

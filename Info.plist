@@ -6,6 +6,10 @@
 	<string>${AIRDROP_TERMS_URL}</string>
 	<key>AUTHORIZE_URL</key>
 	<string>${AUTHORIZE_URL}</string>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	</array>
 	<key>CERTIFICATES_SMT_CONTRACT_ADDRESS</key>
 	<string>${CERTIFICATES_SMT_CONTRACT_ADDRESS}</string>
 	<key>CFBundleIcons</key>
@@ -41,6 +45,19 @@
 			<false/>
 		</dict>
 	</dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>CFBundleURLName</key>
+			<string>Rarilabs.RariMe</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>rarime</string>
+			</array>
+		</dict>
+	</array>
 	<key>CHAIN_ID</key>
 	<string>${CHAIN_ID}</string>
 	<key>CIRCUIT_DATA_URLS</key>
@@ -58,6 +75,10 @@
 	<string>${EVM_RPC_URL}</string>
 	<key>FEEDBACK_EMAIL</key>
 	<string>${FEEDBACK_EMAIL}</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
+	<key>GENERAL_NOTIFICATION_TOPIC</key>
+	<string>${GENERAL_NOTIFICATION_TOPIC}</string>
 	<key>ICAO_COSMOS_RPC</key>
 	<string>${ICAO_COSMOS_RPC}</string>
 	<key>JOIN_REWARDS_KEY</key>
@@ -112,14 +133,6 @@
 		<string>A0000002480200</string>
 		<string>A0000002480300</string>
 		<string>A00000045645444C2D3031</string>
-	</array>
-	<key>FirebaseAppDelegateProxyEnabled</key>
-	<false/>
-	<key>GENERAL_NOTIFICATION_TOPIC</key>
-	<string>${GENERAL_NOTIFICATION_TOPIC}</string>
-	<key>BGTaskSchedulerPermittedIdentifiers</key>
-	<array>
-		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	</array>
 </dict>
 </plist>
