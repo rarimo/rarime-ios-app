@@ -41,11 +41,11 @@ struct PassportScanTutorialButton: View {
 struct PassportScanTutorialView: View {
     let onStart: () -> Void
     
-    @State private var currentStep: PassportScanStep = .scanYourPassport
+    @State private var currentStep = PassportTutorialStep.scanYourPassport.rawValue
     
     var body: some View {
         TabView(selection: $currentStep) {
-            ForEach(PassportScanStep.allCases, id: \.self) { step in
+            ForEach(PassportTutorialStep.allCases, id: \.self) { step in
                 PassportScanTutorialStep(
                     step: step,
                     action: onStart,
@@ -60,15 +60,15 @@ struct PassportScanTutorialView: View {
 }
 
 private struct PassportScanTutorialStep: View {
-    let step: PassportScanStep
+    let step: PassportTutorialStep
     let action: () -> Void
-    @Binding var currentStep: PassportScanStep
+    @Binding var currentStep: Int
     @State private var player: AVPlayer
     
     init(
-        step: PassportScanStep,
+        step: PassportTutorialStep,
         action: @escaping () -> Void,
-        currentStep: Binding<PassportScanStep>
+        currentStep: Binding<Int>
     ) {
         self.step = step
         self.action = action
@@ -77,7 +77,7 @@ private struct PassportScanTutorialStep: View {
     }
     
     private var isLastStep: Bool {
-        step == PassportScanStep.allCases.last
+        step == PassportTutorialStep.allCases.last
     }
     
     private var screenHeight: CGFloat {
@@ -125,10 +125,10 @@ private struct PassportScanTutorialStep: View {
                         action()
                     }
                 } else {
-                    StepIndicator(steps: PassportScanStep.allCases.count, currentStep: step.rawValue)
+                    StepIndicator(steps: PassportTutorialStep.allCases.count, currentStep: step.rawValue)
                     Spacer()
                     AppButton(text: step.buttonText, rightIcon: Icons.arrowRight, width: nil) {
-                        currentStep = step.next
+                        currentStep += 1
                     }
                 }
             }

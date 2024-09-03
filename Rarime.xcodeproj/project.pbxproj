@@ -146,7 +146,7 @@
 		C75512872C8603D3000258AD /* ReadNfcPassport.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C75512852C8603D2000258AD /* ReadNfcPassport.mp4 */; };
 		C75512882C8603D3000258AD /* ScanMrzPassport.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C75512862C8603D3000258AD /* ScanMrzPassport.mp4 */; };
 		C755128A2C860414000258AD /* Videos.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75512892C860414000258AD /* Videos.swift */; };
-		C755128D2C86173A000258AD /* PassportScanStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755128C2C86173A000258AD /* PassportScanStep.swift */; };
+		C755128D2C86173A000258AD /* PassportTutorialStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755128C2C86173A000258AD /* PassportTutorialStep.swift */; };
 		C75512902C86F4BC000258AD /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
 		C75512942C870AFD000258AD /* StepIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75512932C870AFD000258AD /* StepIndicator.swift */; };
 		C7D585092C8208F3002F6407 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D585082C8208F3002F6407 /* Identity.xcframework */; };
@@ -395,7 +395,7 @@
 		C75512852C8603D2000258AD /* ReadNfcPassport.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ReadNfcPassport.mp4; sourceTree = "<group>"; };
 		C75512862C8603D3000258AD /* ScanMrzPassport.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ScanMrzPassport.mp4; sourceTree = "<group>"; };
 		C75512892C860414000258AD /* Videos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Videos.swift; sourceTree = "<group>"; };
-		C755128C2C86173A000258AD /* PassportScanStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportScanStep.swift; sourceTree = "<group>"; };
+		C755128C2C86173A000258AD /* PassportTutorialStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportTutorialStep.swift; sourceTree = "<group>"; };
 		C755128F2C86F4BC000258AD /* PushNotification.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PushNotification.xcdatamodel; sourceTree = "<group>"; };
 		C75512932C870AFD000258AD /* StepIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepIndicator.swift; sourceTree = "<group>"; };
 		C7D585082C8208F3002F6407 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
@@ -909,7 +909,7 @@
 		C755128B2C861712000258AD /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				C755128C2C86173A000258AD /* PassportScanStep.swift */,
+				C755128C2C86173A000258AD /* PassportTutorialStep.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1401,7 +1401,7 @@
 				56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */,
 				C755128A2C860414000258AD /* Videos.swift in Sources */,
 				56E2D9222BCFBA0B006E725D /* PassportImageView.swift in Sources */,
-				C755128D2C86173A000258AD /* PassportScanStep.swift in Sources */,
+				C755128D2C86173A000258AD /* PassportTutorialStep.swift in Sources */,
 				565E221C2BF7B33D00171692 /* CameraPermissionView.swift in Sources */,
 				56E6AD452BD272D100E4DDC1 /* AuthMethodView.swift in Sources */,
 				56062B9C2C12032700C9BF9B /* Constants.swift in Sources */,
@@ -2589,7 +2589,7 @@
 			children = (
 				C755128F2C86F4BC000258AD /* PushNotification.xcdatamodel */,
 			);
-			currentVersion = CE3D41BD2C77970E00D0AA65 /* PushNotification.xcdatamodel */;
+			currentVersion = C755128F2C86F4BC000258AD /* PushNotification.xcdatamodel */;
 			path = PushNotification.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

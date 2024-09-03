@@ -1,10 +1,3 @@
-//
-//  StepIndicator.swift
-//  Rarime
-//
-//  Created by Dmytro Ivaniv on 03.09.2024.
-//
-
 import SwiftUI
 
 struct StepIndicator: View {
