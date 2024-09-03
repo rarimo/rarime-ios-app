@@ -1272,7 +1272,7 @@
     "Invalid address" : {
 
     },
-    "Invalid HTTP status code: %d" : {
+    "Invalid HTTP status code: %lld" : {
 
     },
     "Invalid invitation code" : {
@@ -1727,9 +1727,6 @@
       }
     },
     "Oman" : {
-
-    },
-    "One of our services is down, try again later" : {
 
     },
     "One of our services is down, try again later. RequestURL=%@" : {

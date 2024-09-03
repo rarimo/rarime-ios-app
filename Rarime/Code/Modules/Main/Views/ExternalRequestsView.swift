@@ -11,6 +11,8 @@ private enum ExternalRequest: Equatable {
 }
 
 struct ExternalRequestsView: View {
+    @EnvironmentObject private var userManager: UserManager
+
     @State private var isSheetPresented = false
     @State private var externalRequest: ExternalRequest? = nil
 
@@ -39,7 +41,8 @@ struct ExternalRequestsView: View {
                 guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
                       let params = components.queryItems
                 else {
-                    LoggerUtil.common.error("Invalid RariMe URL: \(url.absoluteString)")
+                    LoggerUtil.common.error("Invalid RariMe app URL: \(url.absoluteString)")
+                    AlertManager.shared.emitError(.unknown("Invalid RariMe app URL"))
                     return
                 }
 
@@ -60,6 +63,13 @@ struct ExternalRequestsView: View {
               let callbackUrl = URL(string: rawCallbackUrl)
         else {
             LoggerUtil.common.error("Invalid proof request URL: \(params)")
+            AlertManager.shared.emitError(.unknown("Invalid proof request URL"))
+            return
+        }
+
+        if userManager.registerZkProof == nil {
+            LoggerUtil.common.error("Proof requests are not available, passport is not registered")
+            AlertManager.shared.emitError(.unknown("Proof requests are not available. Please create your identity first."))
             return
         }
 
