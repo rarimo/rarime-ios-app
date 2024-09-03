@@ -1417,6 +1417,9 @@
     "Leaderboard" : {
 
     },
+    "Learn how to scan passport correctly" : {
+
+    },
     "Learn more about RariMe App" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1438,6 +1441,9 @@
 
     },
     "Lesotho" : {
+
+    },
+    "Let's Scan" : {
 
     },
     "Let's Start" : {
@@ -1844,6 +1850,9 @@
           }
         }
       }
+    },
+    "Play video tutorial" : {
+
     },
     "Please allow camera access in settings to continue" : {
       "localizations" : {
@@ -2260,6 +2269,9 @@
           }
         }
       }
+    },
+    "Scan your passport’s first page inside the border" : {
+
     },
     "Select an authorization method" : {
 

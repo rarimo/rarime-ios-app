@@ -62,6 +62,7 @@ enum Icons {
     static let palette = "Palette"
     static let password = "Password"
     static let pencilSimpleLine = "PencilSimpleLine"
+    static let play = "Play"
     static let plus = "Plus"
     static let qrCode = "QrCode"
     static let questionFill = "QuestionFill"

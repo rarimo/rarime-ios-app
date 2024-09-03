@@ -142,6 +142,13 @@
 		56E7AD0E2BDAD70200D3A258 /* RefreshableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7AD0D2BDAD70200D3A258 /* RefreshableScrollView.swift */; };
 		56E7AD112BDBA81000D3A258 /* PullToRefreshSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 56E7AD102BDBA81000D3A258 /* PullToRefreshSwiftUI */; };
 		56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F48BBD2BC02E82001F3AA4 /* AppButton.swift */; };
+		C75512832C85F9D0000258AD /* PassportScanTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75512822C85F9D0000258AD /* PassportScanTutorialView.swift */; };
+		C75512872C8603D3000258AD /* ReadNfcPassport.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C75512852C8603D2000258AD /* ReadNfcPassport.mp4 */; };
+		C75512882C8603D3000258AD /* ScanMrzPassport.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C75512862C8603D3000258AD /* ScanMrzPassport.mp4 */; };
+		C755128A2C860414000258AD /* Videos.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75512892C860414000258AD /* Videos.swift */; };
+		C755128D2C86173A000258AD /* PassportScanStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755128C2C86173A000258AD /* PassportScanStep.swift */; };
+		C75512902C86F4BC000258AD /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
+		C7D585092C8208F3002F6407 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D585082C8208F3002F6407 /* Identity.xcframework */; };
 		CE0881A12BF773CC00B31735 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0881A02BF773CC00B31735 /* AlertManager.swift */; };
 		CE0881A62BF77F4D00B31735 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0881A52BF77F4D00B31735 /* ErrorAlert.swift */; };
 		CE0DA0D72BDA6F1900696503 /* EvmTxResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */; };
@@ -167,11 +174,9 @@
 		CE3477622C78892F005E91FE /* View+Align.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3477612C78892F005E91FE /* View+Align.swift */; };
 		CE3CD3AE2C6CCD0E008313B8 /* ImportFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD3AD2C6CCD0E008313B8 /* ImportFileView.swift */; };
 		CE3CD3B12C6CEBEF008313B8 /* JSONCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD3B02C6CEBEF008313B8 /* JSONCodable.swift */; };
-		CE3D41BE2C77970E00D0AA65 /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE3D41BC2C77970E00D0AA65 /* PushNotification.xcdatamodeld */; };
 		CE3D41C02C77974500D0AA65 /* PushNotificationsRaw.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D41BF2C77974500D0AA65 /* PushNotificationsRaw.swift */; };
 		CE3D41C82C779BC400D0AA65 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D41C72C779BC400D0AA65 /* NotificationService.swift */; };
 		CE3D41CC2C779BC400D0AA65 /* NotificationBackgroundProcessor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CE3D41C52C779BC400D0AA65 /* NotificationBackgroundProcessor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		CE3D41D42C779C6300D0AA65 /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE3D41BC2C77970E00D0AA65 /* PushNotification.xcdatamodeld */; };
 		CE3D41D62C779C8D00D0AA65 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5315C92C7769A20087D53D /* NotificationManager.swift */; };
 		CE3D41D72C779C9E00D0AA65 /* PushNotificationsRaw.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D41BF2C77974500D0AA65 /* PushNotificationsRaw.swift */; };
 		CE3E0D3B2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E0D3A2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift */; };
@@ -206,7 +211,6 @@
 		CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82D62BA8917100AAF885 /* LottieView.swift */; };
 		CEA03F0A2C7C7A17002F218A /* View+IsLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA03F092C7C7A17002F218A /* View+IsLoading.swift */; };
 		CEA03F0C2C7C9319002F218A /* CreateIdentityIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA03F0B2C7C9319002F218A /* CreateIdentityIntroView.swift */; };
-		CEA5934A2C80686800528448 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA593492C80686800528448 /* Identity.xcframework */; };
 		CEB8B27C2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA2048.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB8B27A2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA2048.a */; };
 		CEB8B27D2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA4096.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB8B27B2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA4096.a */; };
 		CEB91BBE2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB91BBD2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift */; };
@@ -386,6 +390,13 @@
 		56E7AD092BDAA4F000D3A258 /* AppRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRadioButton.swift; sourceTree = "<group>"; };
 		56E7AD0D2BDAD70200D3A258 /* RefreshableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableScrollView.swift; sourceTree = "<group>"; };
 		56F48BBD2BC02E82001F3AA4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
+		C75512822C85F9D0000258AD /* PassportScanTutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportScanTutorialView.swift; sourceTree = "<group>"; };
+		C75512852C8603D2000258AD /* ReadNfcPassport.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ReadNfcPassport.mp4; sourceTree = "<group>"; };
+		C75512862C8603D3000258AD /* ScanMrzPassport.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ScanMrzPassport.mp4; sourceTree = "<group>"; };
+		C75512892C860414000258AD /* Videos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Videos.swift; sourceTree = "<group>"; };
+		C755128C2C86173A000258AD /* PassportScanStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportScanStep.swift; sourceTree = "<group>"; };
+		C755128F2C86F4BC000258AD /* PushNotification.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PushNotification.xcdatamodel; sourceTree = "<group>"; };
+		C7D585082C8208F3002F6407 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE0881A02BF773CC00B31735 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		CE0881A52BF77F4D00B31735 /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmTxResponse.swift; sourceTree = "<group>"; };
@@ -403,7 +414,6 @@
 		CE3477612C78892F005E91FE /* View+Align.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Align.swift"; sourceTree = "<group>"; };
 		CE3CD3AD2C6CCD0E008313B8 /* ImportFileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFileView.swift; sourceTree = "<group>"; };
 		CE3CD3B02C6CEBEF008313B8 /* JSONCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCodable.swift; sourceTree = "<group>"; };
-		CE3D41BD2C77970E00D0AA65 /* PushNotification.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PushNotification.xcdatamodel; sourceTree = "<group>"; };
 		CE3D41BF2C77974500D0AA65 /* PushNotificationsRaw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationsRaw.swift; sourceTree = "<group>"; };
 		CE3D41C52C779BC400D0AA65 /* NotificationBackgroundProcessor.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationBackgroundProcessor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3D41C72C779BC400D0AA65 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -441,7 +451,6 @@
 		CE9E82E62BA89CE300AAF885 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		CEA03F092C7C7A17002F218A /* View+IsLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+IsLoading.swift"; sourceTree = "<group>"; };
 		CEA03F0B2C7C9319002F218A /* CreateIdentityIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityIntroView.swift; sourceTree = "<group>"; };
-		CEA593492C80686800528448 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CEB8B27A2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA2048.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentityUniversalRSA2048.a; sourceTree = "<group>"; };
 		CEB8B27B2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA4096.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentityUniversalRSA4096.a; sourceTree = "<group>"; };
 		CEB91BBD2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NFCPassportModel+getDataGroupsRead.swift"; sourceTree = "<group>"; };
@@ -509,7 +518,7 @@
 				CE7210312BD807140043DB7F /* ZipArchive in Frameworks */,
 				560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */,
 				CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */,
-				CEA5934A2C80686800528448 /* Identity.xcframework in Frameworks */,
+				C7D585092C8208F3002F6407 /* Identity.xcframework in Frameworks */,
 				CEDB9DCC2BFDF60900BCF074 /* libwitnesscalc_queryIdentity.a in Frameworks */,
 				CEB8B27D2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA4096.a in Frameworks */,
 			);
@@ -759,6 +768,7 @@
 		56933DEB2BBAB0660068C894 /* ScanPassport */ = {
 			isa = PBXGroup;
 			children = (
+				C755128B2C861712000258AD /* Enums */,
 				567AEC9C2BBDA13900A20E83 /* Utils */,
 				56A6C7682BBC57A600992562 /* ViewModels */,
 				56933E092BBC09A90068C894 /* Views */,
@@ -783,6 +793,7 @@
 				56933DF02BBAC1B10068C894 /* ScanPassportLayoutView.swift */,
 				56933E0D2BBC09F10068C894 /* MRZScannerView.swift */,
 				CE3CD3AD2C6CCD0E008313B8 /* ImportFileView.swift */,
+				C75512822C85F9D0000258AD /* PassportScanTutorialView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -850,6 +861,7 @@
 				CE68BE4A2BD9B75100D92EBB /* ContractABI.swift */,
 				CED909DF2BDC1E0F0065E949 /* Rarimo.swift */,
 				CEDC4D802BE9475400459D4E /* Certificates.swift */,
+				C75512892C860414000258AD /* Videos.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -880,6 +892,23 @@
 				5609B6CB2C19922400CB6A1F /* LinearProgressView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C75512842C860396000258AD /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				C75512852C8603D2000258AD /* ReadNfcPassport.mp4 */,
+				C75512862C8603D3000258AD /* ScanMrzPassport.mp4 */,
+			);
+			path = Videos;
+			sourceTree = "<group>";
+		};
+		C755128B2C861712000258AD /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				C755128C2C86173A000258AD /* PassportScanStep.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		CE0881A22BF77F3400B31735 /* Alerts */ = {
@@ -918,7 +947,7 @@
 		CE3D41BB2C7796B800D0AA65 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
-				CE3D41BC2C77970E00D0AA65 /* PushNotification.xcdatamodeld */,
+				C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -1043,6 +1072,7 @@
 		CE9E82C42BA8850800AAF885 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C75512842C860396000258AD /* Videos */,
 				56A6C7522BBC18F100992562 /* Animations */,
 				CE778B5B2BA9976C00B26485 /* Fonts */,
 				56A6C7652BBC340300992562 /* NFC */,
@@ -1147,7 +1177,7 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CEA593492C80686800528448 /* Identity.xcframework */,
+				C7D585082C8208F3002F6407 /* Identity.xcframework */,
 				CE8FEB5B2C1AFC3F0008381A /* libwitnesscalc_auth.a */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562022BD923B4002D4954 /* libfq.a */,
@@ -1296,6 +1326,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C75512872C8603D3000258AD /* ReadNfcPassport.mp4 in Resources */,
 				5689C83B2BE90AD200A4B767 /* IncognitoLight.json in Resources */,
 				CE9E82BA2BA881F500AAF885 /* Assets.xcassets in Resources */,
 				5689C8392BE900FA00A4B767 /* IntroRewards.json in Resources */,
@@ -1309,6 +1340,7 @@
 				561C3C3F2BADF0AA00FBB3B9 /* Inter-Bold.ttf in Resources */,
 				561C3C402BADF0AA00FBB3B9 /* Inter-SemiBold.ttf in Resources */,
 				5689C8352BE900B300A4B767 /* IntroProofs.json in Resources */,
+				C75512882C8603D3000258AD /* ScanMrzPassport.mp4 in Resources */,
 				56A6C7672BBC342A00992562 /* masterList.pem in Resources */,
 				56A88FCD2C04C78F00D3A64A /* ScanPassport.json in Resources */,
 				56A6C7542BBC192800992562 /* Passport.json in Resources */,
@@ -1325,7 +1357,6 @@
 				CE3D41D72C779C9E00D0AA65 /* PushNotificationsRaw.swift in Sources */,
 				CE34775A2C788620005E91FE /* String+Error.swift in Sources */,
 				CE3477582C788602005E91FE /* LoggerUtil.swift in Sources */,
-				CE3D41D42C779C6300D0AA65 /* PushNotification.xcdatamodeld in Sources */,
 				CE3D41D62C779C8D00D0AA65 /* NotificationManager.swift in Sources */,
 				CE3D41C82C779BC400D0AA65 /* NotificationService.swift in Sources */,
 				CE3477592C78860C005E91FE /* ConfigManager.swift in Sources */,
@@ -1365,7 +1396,9 @@
 				560F0C232BD02DFD00067054 /* WalletSendView.swift in Sources */,
 				56062B9E2C12096E00C9BF9B /* UnsupportedCountryView.swift in Sources */,
 				56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */,
+				C755128A2C860414000258AD /* Videos.swift in Sources */,
 				56E2D9222BCFBA0B006E725D /* PassportImageView.swift in Sources */,
+				C755128D2C86173A000258AD /* PassportScanStep.swift in Sources */,
 				565E221C2BF7B33D00171692 /* CameraPermissionView.swift in Sources */,
 				56E6AD452BD272D100E4DDC1 /* AuthMethodView.swift in Sources */,
 				56062B9C2C12032700C9BF9B /* Constants.swift in Sources */,
@@ -1448,7 +1481,6 @@
 				CE8FEB5F2C1AFF0A0008381A /* JWT.swift in Sources */,
 				CE8FEB582C1AE5740008381A /* AuthorizeService.swift in Sources */,
 				CE8FEB622C1B03C10008381A /* AuthCircuitInputs.swift in Sources */,
-				CE3D41BE2C77970E00D0AA65 /* PushNotification.xcdatamodeld in Sources */,
 				5655E42E2BD2C94F00B86C5C /* AppUserDefaults.swift in Sources */,
 				CE68BE4B2BD9B75100D92EBB /* ContractABI.swift in Sources */,
 				56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */,
@@ -1480,6 +1512,7 @@
 				56933E032BBBFDFE0068C894 /* ProcessingChipView.swift in Sources */,
 				CEF251382BD6E17800050507 /* UserManager.swift in Sources */,
 				5655E4252BD2C3B500B86C5C /* PassportManager.swift in Sources */,
+				C75512832C85F9D0000258AD /* PassportScanTutorialView.swift in Sources */,
 				563529F12BB0736A0027C910 /* TabBarView.swift in Sources */,
 				CE0DC57B2C0DB33A00EFC0D7 /* UpdateManager.swift in Sources */,
 				56E7AD0E2BDAD70200D3A258 /* RefreshableScrollView.swift in Sources */,
@@ -1498,6 +1531,7 @@
 				5609B6CA2C18950700CB6A1F /* ClaimRewardsView.swift in Sources */,
 				560F0C252BD036F900067054 /* AppTextField.swift in Sources */,
 				CE3CD3B12C6CEBEF008313B8 /* JSONCodable.swift in Sources */,
+				C75512902C86F4BC000258AD /* PushNotification.xcdatamodeld in Sources */,
 				56933E0C2BBC09D20068C894 /* MRZViewModel.swift in Sources */,
 				563529E72BB072870027C910 /* WalletView.swift in Sources */,
 				5659151D2BE92AA90050795A /* AppIcon.swift in Sources */,
@@ -2546,14 +2580,14 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		CE3D41BC2C77970E00D0AA65 /* PushNotification.xcdatamodeld */ = {
+		C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				CE3D41BD2C77970E00D0AA65 /* PushNotification.xcdatamodel */,
+				C755128F2C86F4BC000258AD /* PushNotification.xcdatamodel */,
 			);
-			currentVersion = CE3D41BD2C77970E00D0AA65 /* PushNotification.xcdatamodel */;
+			currentVersion = C755128F2C86F4BC000258AD /* PushNotification.xcdatamodel */;
 			name = PushNotification.xcdatamodeld;
-			path = /Users/user/Documents/Projects/rarimo/mobile/Rarime/Code/DataModels/PushNotification.xcdatamodeld;
+			path = /Users/dmytroivaniv/Desktop/PushNotification.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
