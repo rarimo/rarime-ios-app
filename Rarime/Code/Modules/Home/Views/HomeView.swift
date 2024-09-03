@@ -23,6 +23,9 @@ struct HomeView: View {
     @State private var isBalanceFetching = true
     @State private var pointsBalance: PointsBalanceRaw? = nil
     @State private var cancelables: [Task<Void, Never>] = []
+    
+    @State private var isTutorialPresented = false
+    @State private var isTutorialShown = AppUserDefaults.shared.isScanTutorialDisplayed
 
     var canClaimAirdrop: Bool {
         !walletManager.isClaimed
@@ -160,11 +163,16 @@ struct HomeView: View {
                 }
             )
         )
-        .sheet(isPresented: $isCreateIdentityIntroPresented) {
+        .sheet(isPresented: $isCreateIdentityIntroPresented, onDismiss: {
+            presentScanTutorialIfNeeded()
+        }) {
             CreateIdentityIntroView {
                 self.isCreateIdentityIntroPresented = false
                 path.append(.scanPassport)
             }
+        }
+        .dynamicSheet(isPresented: $isTutorialPresented, fullScreen: true) {
+            PassportScanTutorialView(onStart: { isTutorialPresented = false })
         }
     }
 
@@ -296,6 +304,14 @@ struct HomeView: View {
         }
 
         cancelables.append(cancelable)
+    }
+    
+    private func presentScanTutorialIfNeeded() {
+        if path.contains(.scanPassport) && !AppUserDefaults.shared.isScanTutorialDisplayed {
+            isTutorialPresented = !isTutorialShown
+            isTutorialShown = true
+            AppUserDefaults.shared.isScanTutorialDisplayed = true
+        }
     }
 
     func cleanup() {

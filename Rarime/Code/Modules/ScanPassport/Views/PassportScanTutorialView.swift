@@ -41,7 +41,7 @@ struct PassportScanTutorialButton: View {
 struct PassportScanTutorialView: View {
     let onStart: () -> Void
     
-    @State private var currentStep = PassportTutorialStep.scanYourPassport.rawValue
+    @State private var currentStep = PassportTutorialStep.removeCase.rawValue
     
     var body: some View {
         TabView(selection: $currentStep) {
@@ -117,6 +117,7 @@ private struct PassportScanTutorialStep: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(maxHeight: 100)
             Spacer()
             HorizontalDivider()
             HStack {

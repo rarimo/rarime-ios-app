@@ -1502,6 +1502,9 @@
     "Madagascar" : {
 
     },
+    "Make sure you remove the case from the device" : {
+
+    },
     "Malawi" : {
 
     },
@@ -1589,11 +1592,7 @@
     "Morocco" : {
 
     },
-    "Move your passport page insid e the border" : {
-
-    },
     "Move your passport page inside the border" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2140,6 +2139,9 @@
           }
         }
       }
+    },
+    "Remove case" : {
+
     },
     "Repeat Passcode" : {
       "localizations" : {

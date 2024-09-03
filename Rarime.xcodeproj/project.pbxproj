@@ -149,6 +149,7 @@
 		C755128D2C86173A000258AD /* PassportTutorialStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755128C2C86173A000258AD /* PassportTutorialStep.swift */; };
 		C75512902C86F4BC000258AD /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
 		C75512942C870AFD000258AD /* StepIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75512932C870AFD000258AD /* StepIndicator.swift */; };
+		C75512962C87617B000258AD /* RemoveCase.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C75512952C87617B000258AD /* RemoveCase.mp4 */; };
 		C7D585092C8208F3002F6407 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D585082C8208F3002F6407 /* Identity.xcframework */; };
 		CE0881A12BF773CC00B31735 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0881A02BF773CC00B31735 /* AlertManager.swift */; };
 		CE0881A62BF77F4D00B31735 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0881A52BF77F4D00B31735 /* ErrorAlert.swift */; };
@@ -398,6 +399,7 @@
 		C755128C2C86173A000258AD /* PassportTutorialStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportTutorialStep.swift; sourceTree = "<group>"; };
 		C755128F2C86F4BC000258AD /* PushNotification.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PushNotification.xcdatamodel; sourceTree = "<group>"; };
 		C75512932C870AFD000258AD /* StepIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepIndicator.swift; sourceTree = "<group>"; };
+		C75512952C87617B000258AD /* RemoveCase.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = RemoveCase.mp4; sourceTree = "<group>"; };
 		C7D585082C8208F3002F6407 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE0881A02BF773CC00B31735 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		CE0881A52BF77F4D00B31735 /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
@@ -900,6 +902,7 @@
 		C75512842C860396000258AD /* Videos */ = {
 			isa = PBXGroup;
 			children = (
+				C75512952C87617B000258AD /* RemoveCase.mp4 */,
 				C75512852C8603D2000258AD /* ReadNfcPassport.mp4 */,
 				C75512862C8603D3000258AD /* ScanMrzPassport.mp4 */,
 			);
@@ -1344,6 +1347,7 @@
 				561C3C402BADF0AA00FBB3B9 /* Inter-SemiBold.ttf in Resources */,
 				5689C8352BE900B300A4B767 /* IntroProofs.json in Resources */,
 				C75512882C8603D3000258AD /* ScanMrzPassport.mp4 in Resources */,
+				C75512962C87617B000258AD /* RemoveCase.mp4 in Resources */,
 				56A6C7672BBC342A00992562 /* masterList.pem in Resources */,
 				56A88FCD2C04C78F00D3A64A /* ScanPassport.json in Resources */,
 				56A6C7542BBC192800992562 /* Passport.json in Resources */,

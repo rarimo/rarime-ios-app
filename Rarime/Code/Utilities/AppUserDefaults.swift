@@ -56,7 +56,6 @@ public class AppUserDefaults: ObservableObject {
     @AppStorage("is_user_revoked")
     public var isUserRevoked = false
 
-
     @AppStorage("is_passport_tokens_reserved")
     public var isPassportTokensReserved = false
     
@@ -68,4 +67,7 @@ public class AppUserDefaults: ObservableObject {
     
     @AppStorage("is_circuits_storage_cleared")
     public var isCircuitsStorageCleared = false
+    
+    @AppStorage("isScanTutorialDisplayed")
+    public var isScanTutorialDisplayed = false
 }
