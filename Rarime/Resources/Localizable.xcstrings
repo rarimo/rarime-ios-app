@@ -1238,6 +1238,9 @@
     "Import from a private key" : {
 
     },
+    "Import JSON" : {
+
+    },
     "INCOGNITO ID" : {
 
     },
@@ -1586,7 +1589,11 @@
     "Morocco" : {
 
     },
+    "Move your passport page insid e the border" : {
+
+    },
     "Move your passport page inside the border" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2695,9 +2702,6 @@
 
     },
     "Uruguay" : {
-
-    },
-    "Use JSON file" : {
 
     },
     "Used" : {

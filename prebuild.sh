@@ -8,25 +8,36 @@ fi
 
 cd Build
 
-# Step 1: Pull the repository if not already pulled
+# Clone repository if it does not exist
 if [ ! -d "rarime-mobile-identity-sdk" ]; then
+    echo "⏳ Cloning the repository"
     git clone git@github.com:rarimo/rarime-mobile-identity-sdk.git
 fi
 
-# Step 2: Run the build script if the xcframework folder does not exist
-if [ ! -d "rarime-mobile-identity-sdk/Frameworks/Identity.xcframework" ]; then
-    export PATH="$PATH:/usr/local/go/bin/"
-    export PATH="$PATH:$HOME/go/bin"
+# Pull latest changes
+echo "⏳ Pulling latest changes"
+cd rarime-mobile-identity-sdk
+git stash
+git pull origin main
+cd ..
 
-    cd rarime-mobile-identity-sdk
-    go get -u golang.org/x/mobile/bind
-    gomobile bind -target ios -o ./Frameworks/Identity.xcframework
-    cd ..
-fi
+# Remove existing builds
+echo "⏳ Removing existing builds"
+rm -rf rarime-mobile-identity-sdk/Frameworks/Identity.xcframework
+rm -rf ../Frameworks/Identity.xcframework
 
-# Step 3: Move the xcframework folder to the Frameworks folder if not already moved
-if [ ! -d "../Frameworks/Identity.xcframework" ]; then
-    mv rarime-mobile-identity-sdk/Frameworks/Identity.xcframework ../Frameworks/
-fi
+# Run build script
+export PATH="$PATH:/usr/local/go/bin/"
+export PATH="$PATH:$HOME/go/bin"
 
+echo "⏳ Building SDK"
+cd rarime-mobile-identity-sdk
+go get -u golang.org/x/mobile/bind
+gomobile bind -target ios -o ./Frameworks/Identity.xcframework
+
+# Move built framework to the root directory
+cd ..
+mv rarime-mobile-identity-sdk/Frameworks/Identity.xcframework ../Frameworks/
+
+echo "✅ Build completed successfully"
 exit 0

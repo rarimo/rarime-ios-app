@@ -2589,9 +2589,8 @@
 			children = (
 				C755128F2C86F4BC000258AD /* PushNotification.xcdatamodel */,
 			);
-			currentVersion = C755128F2C86F4BC000258AD /* PushNotification.xcdatamodel */;
-			name = PushNotification.xcdatamodeld;
-			path = /Users/dmytroivaniv/Desktop/PushNotification.xcdatamodeld;
+			currentVersion = CE3D41BD2C77970E00D0AA65 /* PushNotification.xcdatamodel */;
+			path = PushNotification.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

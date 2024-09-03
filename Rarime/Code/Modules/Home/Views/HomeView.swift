@@ -19,7 +19,6 @@ struct HomeView: View {
 
     @State private var isCongratsShown = false
     @State private var isClaimed = false
-    @State private var isImportJson = false
 
     @State private var isBalanceFetching = true
     @State private var pointsBalance: PointsBalanceRaw? = nil
@@ -62,8 +61,7 @@ struct HomeView: View {
                             isCongratsShown = true
                             path.removeLast()
                         },
-                        onClose: { path.removeLast() },
-                        isImportJson: isImportJson
+                        onClose: { path.removeLast() }
                     )
                     .navigationBarBackButtonHidden()
                 case .reserveTokens:
@@ -76,7 +74,7 @@ struct HomeView: View {
                                 self.isClaimed = isClaimed
                                 self.isCongratsShown = true
                             }
-                            
+
                             path.removeLast()
                         },
                         onClose: { path.removeLast() }
@@ -149,7 +147,6 @@ struct HomeView: View {
                     .padding(.horizontal, 12)
                 }
             }
-            .padding(.top, 32)
             .background(.backgroundPrimary)
         }
         .blur(radius: isCongratsShown ? 12 : 0)
@@ -164,18 +161,15 @@ struct HomeView: View {
             )
         )
         .sheet(isPresented: $isCreateIdentityIntroPresented) {
-            CreateIdentityIntroView { isImportJson in
-                self.isImportJson = isImportJson
-                
+            CreateIdentityIntroView {
                 self.isCreateIdentityIntroPresented = false
-                
                 path.append(.scanPassport)
             }
         }
     }
 
     private var header: some View {
-        HStack {
+        HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 8) {
                 Button(action: {
                     mainViewModel.selectTab(isWalletBalanceDisplayed ? .wallet : .rewards)
@@ -194,28 +188,24 @@ struct HomeView: View {
                         .foregroundStyle(.textPrimary)
                 }
             }
-            .padding(.horizontal, 8)
             Spacer()
             ZStack {
                 Image(Icons.bell)
                     .iconMedium()
-                    .padding(10)
-                    .background(.primaryMain, in: Circle())
                     .foregroundStyle(.baseBlack)
                     .onTapGesture { path.append(.notifications) }
                 if notificationManager.unreadNotificationsCounter > 0 {
-                    ZStack {
-                        Circle()
-                            .foregroundStyle(.errorMain)
-                            .frame(width: 16, height: 16)
-                        Text("\(notificationManager.unreadNotificationsCounter)")
-                            .overline3()
-                            .foregroundStyle(.baseWhite)
-                    }
-                    .offset(x: 6, y: -6)
+                    Text(verbatim: notificationManager.unreadNotificationsCounter.formatted())
+                        .overline3()
+                        .foregroundStyle(.baseWhite)
+                        .frame(width: 16, height: 16)
+                        .background(.errorMain, in: Circle())
+                        .offset(x: 7, y: -8)
                 }
             }
         }
+        .padding(.top, 24)
+        .padding(.horizontal, 8)
     }
 
     private var rewardsCard: some View {
@@ -279,7 +269,7 @@ struct HomeView: View {
             defer {
                 self.isBalanceFetching = false
             }
-            
+
             if userManager.user?.userReferalCode == nil {
                 return
             }

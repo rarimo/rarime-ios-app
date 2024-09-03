@@ -18,7 +18,6 @@ struct ScanPassportView: View {
 
     let onComplete: (_ passport: Passport) -> Void
     let onClose: () -> Void
-    let isImportJson: Bool
 
     @State private var state: ScanPassportState = .scanMRZ
 
@@ -37,13 +36,25 @@ struct ScanPassportView: View {
             )
             .transition(.backslide)
         case .scanMRZ:
-            ScanPassportMRZView(
-                onNext: { withAnimation { state = .readNFC } },
-                onClose: onClose
-            )
+            VStack(spacing: 8) {
+                ScanPassportMRZView(
+                    onNext: { withAnimation { state = .readNFC } },
+                    onClose: onClose
+                )
+#if DEVELOPMENT
+                AppButton(
+                    text: "Import JSON",
+                    leftIcon: Icons.share1,
+                    action: { withAnimation { state = .importJson } }
+                )
+                .controlSize(.large)
+                .padding(.horizontal, 20)
+#endif
+            }
+            .padding(.bottom, 20)
+            .background(.backgroundPrimary)
             .environmentObject(mrzViewModel)
             .transition(.backslide)
-            .onAppear { if isImportJson { state = .importJson } }
         case .readNFC:
             ReadPassportNFCView(
                 onNext: { passport in
@@ -108,8 +119,7 @@ struct ScanPassportView: View {
 
     return ScanPassportView(
         onComplete: { _ in },
-        onClose: {},
-        isImportJson: false
+        onClose: {}
     )
     .environmentObject(WalletManager())
     .environmentObject(userManager)

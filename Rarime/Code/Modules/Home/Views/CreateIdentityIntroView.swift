@@ -1,17 +1,10 @@
-import SwiftUI
 import Alamofire
+import SwiftUI
 
 struct CreateIdentityIntroView: View {
-#if DEVELOPMENT
-    static let isImportJsonSupported = true
-#else
-    static let isImportJsonSupported = false
-#endif
-    
-    let onStart: (Bool) -> Void
-    
+    let onStart: () -> Void
+
     @State private var termsChecked = false
-    @State private var isImportJson = false
 
     var body: some View {
         VStack(spacing: 16) {
@@ -24,36 +17,25 @@ struct CreateIdentityIntroView: View {
                     .body3()
                     .foregroundStyle(.textPrimary)
                 InfoAlert(text: "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport") {}
-                if CreateIdentityIntroView.isImportJsonSupported {
-                    HStack {
-                        AppCheckbox(checked: $isImportJson)
-                        Text("Use JSON file")
-                            .body4()
-                            .foregroundStyle(.textSecondary)
-                    }
-                }
             }
             Spacer()
             HorizontalDivider()
             AirdropCheckboxView(checked: $termsChecked)
                 .padding(.horizontal, 20)
-            AppButton(text: "Continue", action: {
-                onStart(isImportJson)
-            })
-            .controlSize(.large)
-            .disabled(!termsChecked)
-            .padding(.horizontal, 20)
+            AppButton(text: "Continue", action: onStart)
+                .controlSize(.large)
+                .disabled(!termsChecked)
+                .padding(.horizontal, 20)
         }
     }
 }
 
 #Preview {
     let userManager = UserManager.shared
-    
-    return CreateIdentityIntroView(onStart: { _ in })
+
+    return CreateIdentityIntroView(onStart: {})
         .environmentObject(ConfigManager())
         .onAppear {
             try? userManager.createNewUser()
         }
 }
-
