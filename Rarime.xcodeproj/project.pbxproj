@@ -2552,8 +2552,7 @@
 				CE3D41BD2C77970E00D0AA65 /* PushNotification.xcdatamodel */,
 			);
 			currentVersion = CE3D41BD2C77970E00D0AA65 /* PushNotification.xcdatamodel */;
-			name = PushNotification.xcdatamodeld;
-			path = /Users/user/Documents/Projects/rarimo/mobile/Rarime/Code/DataModels/PushNotification.xcdatamodeld;
+			path = PushNotification.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

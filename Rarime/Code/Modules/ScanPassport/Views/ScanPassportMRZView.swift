@@ -27,7 +27,7 @@ struct ScanPassportMRZView: View {
                 .body3()
                 .foregroundStyle(.textSecondary)
                 .multilineTextAlignment(.center)
-                .padding(.top, 32)
+                .padding(.top, 24)
                 .frame(width: 250)
             Spacer()
             AppButton(
@@ -37,7 +37,7 @@ struct ScanPassportMRZView: View {
                 action: { isManualMrzSheetPresented = true }
             )
             .controlSize(.large)
-            .padding(20)
+            .padding(.horizontal, 20)
             .dynamicSheet(isPresented: $isManualMrzSheetPresented, title: "Fill Manually") {
                 MrzFormView(onSubmitted: { mrzKey in
                     mrzViewModel.setMrzKey(mrzKey)
