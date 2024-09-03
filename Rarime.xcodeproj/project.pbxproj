@@ -148,6 +148,7 @@
 		C755128A2C860414000258AD /* Videos.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75512892C860414000258AD /* Videos.swift */; };
 		C755128D2C86173A000258AD /* PassportScanStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755128C2C86173A000258AD /* PassportScanStep.swift */; };
 		C75512902C86F4BC000258AD /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
+		C75512942C870AFD000258AD /* StepIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75512932C870AFD000258AD /* StepIndicator.swift */; };
 		C7D585092C8208F3002F6407 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D585082C8208F3002F6407 /* Identity.xcframework */; };
 		CE0881A12BF773CC00B31735 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0881A02BF773CC00B31735 /* AlertManager.swift */; };
 		CE0881A62BF77F4D00B31735 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0881A52BF77F4D00B31735 /* ErrorAlert.swift */; };
@@ -396,6 +397,7 @@
 		C75512892C860414000258AD /* Videos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Videos.swift; sourceTree = "<group>"; };
 		C755128C2C86173A000258AD /* PassportScanStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportScanStep.swift; sourceTree = "<group>"; };
 		C755128F2C86F4BC000258AD /* PushNotification.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PushNotification.xcdatamodel; sourceTree = "<group>"; };
+		C75512932C870AFD000258AD /* StepIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepIndicator.swift; sourceTree = "<group>"; };
 		C7D585082C8208F3002F6407 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE0881A02BF773CC00B31735 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		CE0881A52BF77F4D00B31735 /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
@@ -890,6 +892,7 @@
 				568B4FD02BB6D88F001C9C74 /* Divider.swift */,
 				56DAA3042BB72E35002CF710 /* InfoAlert.swift */,
 				5609B6CB2C19922400CB6A1F /* LinearProgressView.swift */,
+				C75512932C870AFD000258AD /* StepIndicator.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1460,6 +1463,7 @@
 				56DAA3132BB8CA4F002CF710 /* EnableFaceIdView.swift in Sources */,
 				CE0DA0D72BDA6F1900696503 /* EvmTxResponse.swift in Sources */,
 				56062B9A2C12007A00C9BF9B /* Country.swift in Sources */,
+				C75512942C870AFD000258AD /* StepIndicator.swift in Sources */,
 				CE31E5462C11F4180039CAA5 /* GetStartedView.swift in Sources */,
 				CE68BE3F2BD9B4B200D92EBB /* Relayer.swift in Sources */,
 				CE61E88D2C247B4700940129 /* HMACUtils.swift in Sources */,

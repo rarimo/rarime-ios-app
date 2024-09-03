@@ -1,7 +1,13 @@
 import Foundation
 
 enum PassportScanStep: Int, CaseIterable {
-    case scanYourPassport, readingPassportData
+    case scanYourPassport
+    case readingPassportData
+    
+    var next: PassportScanStep {
+        let nextIndex = self.rawValue + 1
+        return PassportScanStep(rawValue: nextIndex) ?? .scanYourPassport
+    }
 
     var title: LocalizedStringResource {
         switch self {

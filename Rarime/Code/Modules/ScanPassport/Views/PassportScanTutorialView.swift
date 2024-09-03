@@ -41,20 +41,17 @@ struct PassportScanTutorialButton: View {
 struct PassportScanTutorialView: View {
     let onStart: () -> Void
     
-    @State private var currentStep = PassportScanStep.scanYourPassport.rawValue
+    @State private var currentStep: PassportScanStep = .scanYourPassport
     
     var body: some View {
         TabView(selection: $currentStep) {
-            ForEach(PassportScanStep.allCases, id: \.self) { item in
+            ForEach(PassportScanStep.allCases, id: \.self) { step in
                 PassportScanTutorialStep(
-                    title: item.title,
-                    description: item.text,
-                    videoURL: item.video,
-                    actionText: item.buttonText,
+                    step: step,
                     action: onStart,
                     currentStep: $currentStep
                 )
-                .tag(item.rawValue)
+                .tag(step.rawValue)
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
@@ -63,33 +60,24 @@ struct PassportScanTutorialView: View {
 }
 
 private struct PassportScanTutorialStep: View {
-    let title: LocalizedStringResource
-    let description: LocalizedStringResource
-    let videoURL: URL
-    let actionText: LocalizedStringResource
+    let step: PassportScanStep
     let action: () -> Void
-    @Binding var currentStep: Int
+    @Binding var currentStep: PassportScanStep
     @State private var player: AVPlayer
     
     init(
-        title: LocalizedStringResource,
-        description: LocalizedStringResource,
-        videoURL: URL,
-        actionText: LocalizedStringResource,
+        step: PassportScanStep,
         action: @escaping () -> Void,
-        currentStep: Binding<Int>
+        currentStep: Binding<PassportScanStep>
     ) {
-        self.title = title
-        self.description = description
-        self.videoURL = videoURL
-        self.actionText = actionText
+        self.step = step
         self.action = action
-        self.player = AVPlayer(url: videoURL)
+        self.player = AVPlayer(url: step.video)
         self._currentStep = currentStep
     }
     
     private var isLastStep: Bool {
-        currentStep == PassportScanStep.allCases.count - 1
+        step == PassportScanStep.allCases.last
     }
     
     private var screenHeight: CGFloat {
@@ -97,7 +85,7 @@ private struct PassportScanTutorialStep: View {
     }
     
     var body: some View {
-        VStack(spacing: 36) {
+        VStack(spacing: 32) {
             VideoPlayer(player: player)
                 .disabled(true)
                 .aspectRatio(362 / 404, contentMode: .fill)
@@ -115,15 +103,14 @@ private struct PassportScanTutorialStep: View {
                     player.pause()
                 }
             
-            
             VStack(alignment: .leading, spacing: 16) {
-                Text(title)
+                Text(step.title)
                     .h4()
                     .foregroundStyle(.textPrimary)
                     .multilineTextAlignment(.leading)
                     .fixedSize(horizontal: false, vertical: true)
                 
-                Text(description)
+                Text(step.text)
                     .body2()
                     .foregroundStyle(.textSecondary)
                     .multilineTextAlignment(.leading)
@@ -134,14 +121,14 @@ private struct PassportScanTutorialStep: View {
             HorizontalDivider()
             HStack {
                 if isLastStep {
-                    AppButton(text: actionText, rightIcon: Icons.arrowRight) {
+                    AppButton(text: step.buttonText, rightIcon: Icons.arrowRight) {
                         action()
                     }
                 } else {
-                    StepIndicator(steps: PassportScanStep.allCases.count, currentStep: currentStep)
+                    StepIndicator(steps: PassportScanStep.allCases.count, currentStep: step.rawValue)
                     Spacer()
-                    AppButton(text: actionText, rightIcon: Icons.arrowRight, width: nil) {
-                        currentStep += 1
+                    AppButton(text: step.buttonText, rightIcon: Icons.arrowRight, width: nil) {
+                        currentStep = step.next
                     }
                 }
             }
@@ -149,21 +136,6 @@ private struct PassportScanTutorialStep: View {
         .padding(.top, 60)
         .padding(.bottom, 16)
         .padding(.horizontal, 24)
-    }
-}
-
-private struct StepIndicator: View {
-    let steps: Int
-    let currentStep: Int
-    
-    var body: some View {
-        HStack(spacing: 8) {
-            ForEach(0 ..< steps, id: \.self) { index in
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(index == currentStep ? .primaryMain : .componentPrimary)
-                    .frame(width: index == currentStep ? 16 : 8, height: 8)
-            }
-        }
     }
 }
 
