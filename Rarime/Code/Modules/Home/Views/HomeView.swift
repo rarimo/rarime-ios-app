@@ -19,7 +19,6 @@ struct HomeView: View {
 
     @State private var isCongratsShown = false
     @State private var isClaimed = false
-    @State private var shouldShowTutorial = false
 
     @State private var isBalanceFetching = true
     @State private var pointsBalance: PointsBalanceRaw? = nil
