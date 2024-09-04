@@ -2140,7 +2140,7 @@
         }
       }
     },
-    "Remove case" : {
+    "Remove Case" : {
 
     },
     "Repeat Passcode" : {
@@ -2278,6 +2278,9 @@
           }
         }
       }
+    },
+    "Scan Your Passport" : {
+
     },
     "Scan your passport’s first page inside the border" : {
 
