@@ -136,7 +136,7 @@ private struct ProofRequestView: View {
                 onSuccess()
             } catch {
                 AlertManager.shared.emitError(.unknown("Failed to generate proof"))
-                LoggerUtil.common.error("Failed to generate proof: \(error)")
+                LoggerUtil.common.error("Failed to generate proof: \(error, privacy: .public)")
             }
         }
     }
