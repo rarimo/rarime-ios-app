@@ -30,7 +30,11 @@ class StateKeeperContract {
             throw error
         }
         
-        guard let passportKeyByts else { throw "Passport Key is not intialized" }
+        guard var passportKeyByts else { throw "Passport Key is not intialized" }
+        
+        if passportKeyByts.count < 32 {
+            passportKeyByts = [UInt8](repeating: 0, count: 32 - passportKeyByts.count) + passportKeyByts
+        }
         
         let response = try contract["getPassportInfo"]!(passportKeyByts).call().wait()
         
