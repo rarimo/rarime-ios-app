@@ -20,6 +20,8 @@ struct ScanPassportView: View {
     let onClose: () -> Void
 
     @State private var state: ScanPassportState = .scanMRZ
+    @State private var isTutorialPresented = false
+    @State private var isTutorialShown = AppUserDefaults.shared.isScanTutorialDisplayed
 
     @StateObject private var passportViewModel = PassportViewModel()
     @StateObject private var mrzViewModel = MRZViewModel()
@@ -41,6 +43,15 @@ struct ScanPassportView: View {
                     onNext: { withAnimation { state = .readNFC } },
                     onClose: onClose
                 )
+                .dynamicSheet(isPresented: $isTutorialPresented, fullScreen: true) {
+                    PassportScanTutorialView(onStart: { isTutorialPresented = false })
+                }
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        presentScanTutorialIfNeeded()
+                    }
+                }
+                
 #if DEVELOPMENT
                 AppButton(
                     text: "Import JSON",
@@ -110,6 +121,14 @@ struct ScanPassportView: View {
             )
             .environmentObject(passportViewModel)
             .transition(.backslide)
+        }
+    }
+    
+    private func presentScanTutorialIfNeeded() {
+        if !AppUserDefaults.shared.isScanTutorialDisplayed {
+            isTutorialPresented = !isTutorialShown
+            isTutorialShown = true
+            AppUserDefaults.shared.isScanTutorialDisplayed = true
         }
     }
 }

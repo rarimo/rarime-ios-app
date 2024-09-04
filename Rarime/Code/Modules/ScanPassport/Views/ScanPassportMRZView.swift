@@ -30,6 +30,8 @@ struct ScanPassportMRZView: View {
                 .padding(.top, 24)
                 .frame(width: 250)
             Spacer()
+            PassportScanTutorialButton()
+                .padding(.horizontal, 20)
             AppButton(
                 variant: .tertiary,
                 text: "Fill Manually",

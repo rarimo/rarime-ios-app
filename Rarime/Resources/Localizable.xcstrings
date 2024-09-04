@@ -1420,6 +1420,9 @@
     "Leaderboard" : {
 
     },
+    "Learn how to scan passport correctly" : {
+
+    },
     "Learn more about RariMe App" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1441,6 +1444,9 @@
 
     },
     "Lesotho" : {
+
+    },
+    "Let's Scan" : {
 
     },
     "Let's Start" : {
@@ -1494,6 +1500,9 @@
 
     },
     "Madagascar" : {
+
+    },
+    "Make sure you remove the case from the device" : {
 
     },
     "Malawi" : {
@@ -1848,6 +1857,9 @@
         }
       }
     },
+    "Play video tutorial" : {
+
+    },
     "Please allow camera access in settings to continue" : {
       "localizations" : {
         "uk" : {
@@ -2128,6 +2140,9 @@
         }
       }
     },
+    "Remove Case" : {
+
+    },
     "Repeat Passcode" : {
       "localizations" : {
         "uk" : {
@@ -2263,6 +2278,12 @@
           }
         }
       }
+    },
+    "Scan Your Passport" : {
+
+    },
+    "Scan your passport’s first page inside the border" : {
+
     },
     "Select an authorization method" : {
 
