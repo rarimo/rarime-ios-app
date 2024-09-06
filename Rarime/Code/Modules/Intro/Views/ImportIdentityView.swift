@@ -9,15 +9,25 @@ struct ImportIdentityView: View {
     var onBack: () -> Void
     
     @State private var privateKeyHex = ""
-    @State private var isInvalidPrivateKey = false
+    @State private var privateKeyHexError = ""
+    
+    @State private var isManualBackup = false
     @State private var isImporting = false
     
     var body: some View {
+        if isManualBackup {
+            manualImportView
+        } else {
+            backupView
+        }
+    }
+    
+    var manualImportView: some View {
         IdentityStepLayoutView(
             title: "Import Identity" ,
             onBack: {
                 userManager.user = nil
-                onBack()
+                isManualBackup = false
             },
             nextButton: {
                 AppButton(
@@ -32,21 +42,110 @@ struct ImportIdentityView: View {
             VStack {
                 CardContainer {
                     VStack(spacing: 20) {
-                        TextField(
-                            "Private key",
+                        AppTextField(
                             text: $privateKeyHex,
-                            prompt: isInvalidPrivateKey ? Text("Invalid private key").foregroundColor(.red) : nil
+                            errorMessage: $privateKeyHexError,
+                            placeholder: String(localized: "Your private key")
                         )
                         .onSubmit(importIdentity)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
-                        .onTapGesture {
-                            if isInvalidPrivateKey {
-                                isInvalidPrivateKey = false
-                            }
-                        }
+                        .disabled(isImporting)
                     }
                 }
+            }
+        }
+    }
+    
+    var backupView: some View {
+        ZStack(alignment: .topLeading) {
+            Button(action: onBack) {
+                Image(Icons.arrowLeft)
+                    .iconMedium()
+                    .foregroundStyle(.textPrimary)
+            }
+            .padding(.top, 20)
+            .padding(.leading, 20)
+            VStack(spacing: 32) {
+                VStack {
+                    Image(Icons.cloud)
+                        .square(72)
+                        .foregroundStyle(.primaryDarker)
+                }
+                .padding(40)
+                .background(.primaryLighter)
+                .clipShape(Circle())
+                VStack(spacing: 12) {
+                    Text("Restore your account")
+                        .h4()
+                        .foregroundStyle(.textPrimary)
+                    Text("You can restore your account using your iCloud backup or private key")
+                        .body2()
+                        .foregroundStyle(.textSecondary)
+                }
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 20)
+                Spacer()
+                VStack(spacing: 16) {
+                    HorizontalDivider()
+                    VStack(spacing: 8) {
+                        AppButton(
+                            text: "Restore with iCloud",
+                            action: restoreFromICloud
+                        )
+                        .controlSize(.large)
+                        .disabled(isImporting)
+                        AppButton(
+                            variant: .tertiary,
+                            text: "Restore manually",
+                            action: { isManualBackup = true }
+                        )
+                        .controlSize(.large)
+                        .disabled(isImporting)
+                    }
+                    .padding(.horizontal, 20)
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.top, 80)
+            .padding(.bottom, 16)
+        }
+        .background(.backgroundPure)
+    }
+    
+    func restoreFromICloud() {
+        isImporting = true
+        
+        Task { @MainActor in
+            defer {
+                self.isImporting = false
+            }
+            
+            do {
+                let isICloudAvailable = try await CloudStorage.shared.isICloudAvailable()
+                if !isICloudAvailable {
+                    AlertManager.shared.emitError(.unknown(String(localized: "iCloud is not available")))
+                    
+                    return
+                }
+                
+                userManager.user = try await User.loadFromCloud()
+                
+                if userManager.user == nil {
+                    AlertManager.shared.emitError(.unknown(String(localized: "No backup found in iCloud")))
+                    
+                    return
+                }
+                
+                try userManager.user?.save()
+                
+                try await setReferralCodeIfUserHasPointsBalance()
+                
+                LoggerUtil.common.info("Identity was imported")
+                
+                onNext()
+            } catch {
+                LoggerUtil.common.debug("Failed to restore from iCloud: \(error, privacy: .public)")
             }
         }
     }
@@ -61,16 +160,12 @@ struct ImportIdentityView: View {
             
             do {
                 if !(try isValidPrivateKey(privateKeyHex)) {
-                    privateKeyHex = ""
-                    isInvalidPrivateKey = true
-                    
+                    privateKeyHexError = String(localized: "Invalid private key")
                     return
                 }
                 
                 guard let privateKey = Data(hex: privateKeyHex) else {
-                    privateKeyHex = ""
-                    isInvalidPrivateKey = true
-                    
+                    privateKeyHexError = String(localized: "Invalid private key")
                     return
                 }
                 
