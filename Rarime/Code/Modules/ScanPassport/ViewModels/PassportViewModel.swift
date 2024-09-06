@@ -3,10 +3,11 @@ import Identity
 import SwiftUI
 
 enum PassportProofState: Int, CaseIterable {
-    case readingData, applyingZK, createProfile, finalizing
+    case downloadData, readingData, applyingZK, createProfile, finalizing
 
     var title: LocalizedStringResource {
         switch self {
+        case .downloadData: "Downloading Data"
         case .readingData: "Reading Data"
         case .applyingZK: "Applying Zero Knowledge"
         case .createProfile: "Creating a confidential profile"
@@ -17,7 +18,7 @@ enum PassportProofState: Int, CaseIterable {
 
 class PassportViewModel: ObservableObject {
     @Published var passport: Passport?
-    @Published var proofState: PassportProofState = .readingData
+    @Published var proofState: PassportProofState = .downloadData
     @Published var processingStatus: ProcessingStatus = .processing
     
     @Published var isAirdropClaimed = false
@@ -58,8 +59,7 @@ class PassportViewModel: ObservableObject {
             let registeredCircuitData = try await UserManager.shared.registerCertificate(passport)
             
             let circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData, downloadProgress)
-            
-            downloadProgress("")
+            proofState = .readingData
             
             try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
             proofState = .applyingZK
@@ -85,7 +85,6 @@ class PassportViewModel: ObservableObject {
             let profile = try IdentityProfile().newProfile(UserManager.shared.user?.secretKey)
             
             let currentIdentityKey = try profile.getPublicKeyHash()
-            
             
             let (passportInfo, _) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
             

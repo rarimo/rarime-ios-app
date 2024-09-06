@@ -11,6 +11,8 @@ struct ProcessingChipView: View {
             Text(status.text).overline3()
         }
         .frame(height: 24)
+        .fixedSize(horizontal: true, vertical: false)
+        .frame(minWidth: status.isDownloading ? 90 : nil, alignment: .center)
         .padding(.horizontal, 8)
         .background(status.backgroundColor)
         .clipShape(Capsule())
@@ -21,6 +23,7 @@ struct ProcessingChipView: View {
 
 #Preview {
     VStack {
+        ProcessingChipView(status: .downloading("10.1/20.2 MB"))
         ProcessingChipView(status: .processing)
         ProcessingChipView(status: .success)
         ProcessingChipView(status: .failure)
