@@ -2,13 +2,6 @@ import SwiftUI
 
 enum ProcessingStatus: Equatable {
     case downloading(String), processing, success, failure
-    
-    var isDownloading: Bool {
-        if case .downloading = self {
-            return true
-        }
-        return false
-    }
 
     var icon: String? {
         switch self {

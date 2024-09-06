@@ -2,6 +2,13 @@ import SwiftUI
 
 struct ProcessingChipView: View {
     let status: ProcessingStatus
+    
+    var minDownloadingWidth: CGFloat? {
+        if case .downloading(_) = status {
+            return 90
+        }
+        return nil
+    }
 
     var body: some View {
         HStack {
@@ -12,7 +19,7 @@ struct ProcessingChipView: View {
         }
         .frame(height: 24)
         .fixedSize(horizontal: true, vertical: false)
-        .frame(minWidth: status.isDownloading ? 90 : nil, alignment: .center)
+        .frame(minWidth: minDownloadingWidth, alignment: .center)
         .padding(.horizontal, 8)
         .background(status.backgroundColor)
         .clipShape(Capsule())
