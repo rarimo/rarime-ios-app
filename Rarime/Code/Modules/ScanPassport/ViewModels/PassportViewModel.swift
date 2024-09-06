@@ -3,11 +3,11 @@ import Identity
 import SwiftUI
 
 enum PassportProofState: Int, CaseIterable {
-    case downloadData, readingData, applyingZK, createProfile, finalizing
+    case downloadingData, readingData, applyingZK, createProfile, finalizing
 
     var title: LocalizedStringResource {
         switch self {
-        case .downloadData: "Downloading Data"
+        case .downloadingData: "Downloading Data"
         case .readingData: "Reading Data"
         case .applyingZK: "Applying Zero Knowledge"
         case .createProfile: "Creating a confidential profile"
@@ -18,7 +18,7 @@ enum PassportProofState: Int, CaseIterable {
 
 class PassportViewModel: ObservableObject {
     @Published var passport: Passport?
-    @Published var proofState: PassportProofState = .downloadData
+    @Published var proofState: PassportProofState = .downloadingData
     @Published var processingStatus: ProcessingStatus = .processing
     
     @Published var isAirdropClaimed = false

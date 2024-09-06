@@ -76,7 +76,7 @@ struct PassportProofView: View {
             passportViewModel.proofState.rawValue > item.rawValue
         if isSuccess { return .success }
 
-        if item == .downloadData {
+        if item == .downloadingData {
             if case let .downloading(progress) = passportViewModel.processingStatus {
                 return .downloading(progress)
             }

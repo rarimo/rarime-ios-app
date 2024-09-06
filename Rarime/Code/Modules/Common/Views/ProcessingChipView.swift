@@ -3,10 +3,8 @@ import SwiftUI
 struct ProcessingChipView: View {
     let status: ProcessingStatus
     
-    var minDownloadingWidth: CGFloat? {
-        if case .downloading(_) = status {
-            return 90
-        }
+    var minWidth: CGFloat? {
+        if case .downloading(_) = status { return 90 }
         return nil
     }
 
@@ -19,7 +17,7 @@ struct ProcessingChipView: View {
         }
         .frame(height: 24)
         .fixedSize(horizontal: true, vertical: false)
-        .frame(minWidth: minDownloadingWidth, alignment: .center)
+        .frame(minWidth: minWidth, alignment: .center)
         .padding(.horizontal, 8)
         .background(status.backgroundColor)
         .clipShape(Capsule())
