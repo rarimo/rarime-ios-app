@@ -853,6 +853,16 @@
         }
       }
     },
+    "Downloading Data" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Завантаження даних"
+          }
+        }
+      }
+    },
     "Earn more rewards" : {
 
     },
