@@ -20,9 +20,9 @@ struct ZkpView: View {
             Button(action: onBack) {
                 ZStack {
                     Circle()
-                        .foregroundStyle(.gray)
-                    Image(systemName: "xmark")
                         .foregroundStyle(.black)
+                    Image(systemName: "xmark")
+                        .foregroundStyle(.white)
                         .frame(width: 40, height: 40)
                 }
                     

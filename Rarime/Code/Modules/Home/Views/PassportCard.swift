@@ -80,13 +80,13 @@ struct PassportCard: View {
                 Button(action: onZkp) {
                     ZStack {
                         Circle()
-                            .foregroundStyle(.black)
+                            .foregroundStyle(PassportCardLook.black.backgroundColor)
                         Image(systemName: "square.and.arrow.up")
                             .frame(width: 25, height: 25)
                             .foregroundStyle(.white)
                     }
                 }
-                .frame(width: 35, height: 35)
+                .frame(width: 40, height: 40)
             }
             VStack(alignment: .leading, spacing: 8) {
                 Text(fullNameValue).h6()
