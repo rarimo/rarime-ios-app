@@ -39,7 +39,7 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>BlackAndWhiteIcon</string>
+				<string>BlackAndGreenIcon</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<false/>
@@ -134,5 +134,7 @@
 		<string>A0000002480300</string>
 		<string>A00000045645444C2D3031</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Dark</string>
 </dict>
 </plist>

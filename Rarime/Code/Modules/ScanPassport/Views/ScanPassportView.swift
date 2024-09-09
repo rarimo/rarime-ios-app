@@ -43,24 +43,6 @@ struct ScanPassportView: View {
                     onNext: { withAnimation { state = .readNFC } },
                     onClose: onClose
                 )
-                .dynamicSheet(isPresented: $isTutorialPresented, fullScreen: true) {
-                    PassportScanTutorialView(onStart: { isTutorialPresented = false })
-                }
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        presentScanTutorialIfNeeded()
-                    }
-                }
-                
-#if DEVELOPMENT
-                AppButton(
-                    text: "Import JSON",
-                    leftIcon: Icons.share1,
-                    action: { withAnimation { state = .importJson } }
-                )
-                .controlSize(.large)
-                .padding(.horizontal, 20)
-#endif
             }
             .padding(.bottom, 20)
             .background(.backgroundPrimary)
@@ -70,7 +52,7 @@ struct ScanPassportView: View {
             ReadPassportNFCView(
                 onNext: { passport in
                     passportViewModel.setPassport(passport)
-                    withAnimation { state = .selectData }
+                    withAnimation { state = .generateProof }
 
                     LoggerUtil.passport.info("Passport read successfully: \(passport.fullName, privacy: .public)")
                 },

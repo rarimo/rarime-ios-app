@@ -8,7 +8,7 @@ struct MainViewLayout<Content: View>: View {
         ZStack(alignment: .bottom) {
             content
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-            TabBarView(selectedTab: $mainViewModel.selectedTab)
+//            TabBarView(selectedTab: $mainViewModel.selectedTab)
         }
         .edgesIgnoringSafeArea(.bottom)
     }

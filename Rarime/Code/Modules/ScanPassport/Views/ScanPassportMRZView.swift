@@ -30,23 +30,6 @@ struct ScanPassportMRZView: View {
                 .padding(.top, 24)
                 .frame(width: 250)
             Spacer()
-            PassportScanTutorialButton()
-                .padding(.horizontal, 20)
-            AppButton(
-                variant: .tertiary,
-                text: "Fill Manually",
-                leftIcon: Icons.pencilSimpleLine,
-                action: { isManualMrzSheetPresented = true }
-            )
-            .controlSize(.large)
-            .padding(.horizontal, 20)
-            .dynamicSheet(isPresented: $isManualMrzSheetPresented, title: "Fill Manually") {
-                MrzFormView(onSubmitted: { mrzKey in
-                    mrzViewModel.setMrzKey(mrzKey)
-                    LoggerUtil.passport.info("MRZ filled manually")
-                    onNext()
-                })
-            }
         }
         .onAppear {
             mrzViewModel.setOnScanned {

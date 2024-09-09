@@ -50,7 +50,7 @@ class NFCScanner {
                 let nfcPassport = try await PassportReader()
                     .readPassport(
                         mrzKey: mrzKey,
-                        tags: [.DG1, .DG2, .DG15, .SOD],
+                        tags: [.DG1, .DG15, .SOD],
                         useExtendedMode: useExtendedMode,
                         customDisplayMessage: customDisplayMessage,
                         activeAuthenticationChallenge: [UInt8](challenge)

@@ -41,7 +41,11 @@ struct CongratsView: View {
                             .frame(width: 220, height: 160)
                         VStack(spacing: 20) {
                             if isClaimed {
-                                Image(Images.rewardCoin).square(100)
+                                Image(Images.rewardCoin)
+                                    .resizable()
+                                    .renderingMode(.template)
+                                    .foregroundStyle(.white)
+                                    .frame(width: 100, height: 100)
                             } else {
                                 Image(Icons.check)
                                     .square(24)

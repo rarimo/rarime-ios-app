@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct PassportCard: View {
+    let onZkp: () -> Void
+    
     let passport: Passport
     let isWaitlist: Bool
     @Binding var look: PassportCardLook
@@ -10,9 +12,7 @@ struct PassportCard: View {
     @State private var isSettingsSheetPresented = false
     @GestureState private var isHolding = false
 
-    var isInfoHidden: Bool {
-        isIncognito && !isHolding
-    }
+    var isInfoHidden = false
 
     var isUnsupported: Bool {
         UNSUPPORTED_REWARD_COUNTRIES.contains(
@@ -26,9 +26,6 @@ struct PassportCard: View {
 
     var body: some View {
         VStack(spacing: isBadgeShown ? -48 : 0) {
-            if isBadgeShown {
-                passportBadge
-            }
             cardContent.dynamicSheet(
                 isPresented: $isSettingsSheetPresented,
                 title: "Settings"
@@ -80,20 +77,16 @@ struct PassportCard: View {
                 )
                 .blur(radius: isInfoHidden ? 12 : 0)
                 Spacer()
-                HStack(spacing: 16) {
-                    Image(isIncognito ? Icons.eyeSlash : Icons.eye)
-                        .iconMedium()
-                        .padding(8)
-                        .background(look.foregroundColor.opacity(0.05))
-                        .clipShape(Circle())
-                        .onTapGesture { isIncognito.toggle() }
-                    Image(Icons.dotsThreeOutline)
-                        .iconMedium()
-                        .padding(8)
-                        .background(look.foregroundColor.opacity(0.05))
-                        .clipShape(Circle())
-                        .onTapGesture { isSettingsSheetPresented.toggle() }
+                Button(action: onZkp) {
+                    ZStack {
+                        Circle()
+                            .foregroundStyle(.black)
+                        Image(systemName: "square.and.arrow.up")
+                            .frame(width: 25, height: 25)
+                            .foregroundStyle(.white)
+                    }
                 }
+                .frame(width: 35, height: 35)
             }
             VStack(alignment: .leading, spacing: 8) {
                 Text(fullNameValue).h6()
@@ -102,19 +95,17 @@ struct PassportCard: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             HorizontalDivider(color: look.foregroundColor.opacity(0.05))
             VStack(alignment: .leading, spacing: 16) {
-                ForEach(identifiers, id: \.self) { identifier in
-                    makePassportInfoRow(
-                        title: isInfoHidden ? identifier.titleStub : identifier.title,
-                        value: isInfoHidden ? identifier.valueStub : identifier.getPassportValue(from: passport)
-                    )
-                }
+                makePassportInfoRow(
+                    title: PassportIdentifier.nationality.title,
+                    value: PassportIdentifier.nationality.getPassportValue(from: passport)
+                )
             }
-            .frame(minHeight: 56, alignment: .top)
+            .frame(minHeight: 26, alignment: .top)
         }
         .frame(maxWidth: .infinity)
         .padding(24)
-        .background(look.backgroundColor)
-        .foregroundStyle(look.foregroundColor)
+        .background(PassportCardLook.black.backgroundColor)
+        .foregroundStyle(PassportCardLook.black.foregroundColor)
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .gesture(
             DragGesture(minimumDistance: 0)
@@ -262,6 +253,7 @@ private struct PreviewView: View {
 
     var body: some View {
         PassportCard(
+            onZkp: {},
             passport: passport,
             isWaitlist: true,
             look: $look,

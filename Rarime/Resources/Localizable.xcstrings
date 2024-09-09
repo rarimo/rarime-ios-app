@@ -21,9 +21,6 @@
         }
       }
     },
-    "/%@" : {
-
-    },
     "%@ ensures your history, reputation and actions are not lost, but remain confidential and under your control." : {
       "localizations" : {
         "uk" : {
@@ -34,10 +31,8 @@
         }
       }
     },
-    "%@ participants" : {
-
-    },
     "%@ RMO" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -77,16 +72,6 @@
         }
       }
     },
-    "%@%@ %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@%2$@ %3$@"
-          }
-        }
-      }
-    },
     "%@%@ RMO" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -103,15 +88,6 @@
           }
         }
       }
-    },
-    "%lld" : {
-
-    },
-    "%lld days left" : {
-
-    },
-    "%lld extra referrals" : {
-
     },
     "%lldm %llds" : {
       "localizations" : {
@@ -132,9 +108,6 @@
     "3. When we support your country, you will be notified in the app" : {
 
     },
-    "About the reward program" : {
-
-    },
     "Account" : {
       "localizations" : {
         "uk" : {
@@ -148,16 +121,14 @@
     "Account Locked" : {
 
     },
-    "Active" : {
-
-    },
-    "Active tasks" : {
-
-    },
     "Add a Document" : {
 
     },
+    "Additional information required" : {
+
+    },
     "Address" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -213,6 +184,7 @@
 
     },
     "Amount" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -221,9 +193,6 @@
           }
         }
       }
-    },
-    "Amount must be greater than 0" : {
-
     },
     "Andorra" : {
 
@@ -261,6 +230,7 @@
       }
     },
     "Applying Zero Knowledge" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -277,9 +247,6 @@
 
     },
     "Aruba" : {
-
-    },
-    "ASSETS (%lld)" : {
 
     },
     "Australia" : {
@@ -333,6 +300,7 @@
       }
     },
     "Available:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -351,10 +319,8 @@
     "Bahrain" : {
 
     },
-    "Balance" : {
-
-    },
     "Balance: RMO" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -433,6 +399,7 @@
       }
     },
     "Black & White" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -568,15 +535,6 @@
         }
       }
     },
-    "Claim amount" : {
-
-    },
-    "Claim RMO" : {
-
-    },
-    "Claiming tokens results in a downgrade on the leaderboard" : {
-
-    },
     "Claiming..." : {
       "localizations" : {
         "uk" : {
@@ -604,9 +562,6 @@
 
     },
     "Comoros" : {
-
-    },
-    "Confirm" : {
 
     },
     "Congo" : {
@@ -690,10 +645,8 @@
     "Create Incognito ID" : {
 
     },
-    "Create your digital identity" : {
-
-    },
     "Creating a confidential profile" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -841,7 +794,7 @@
         }
       }
     },
-    "Earn more rewards" : {
+    "Downloading ciruit data" : {
 
     },
     "Ecuador" : {
@@ -926,9 +879,6 @@
     "Enter" : {
 
     },
-    "Enter amount" : {
-
-    },
     "Enter Passcode" : {
       "localizations" : {
         "uk" : {
@@ -962,12 +912,6 @@
 
     },
     "Ethiopia" : {
-
-    },
-    "Exclusive campaigns" : {
-
-    },
-    "Exp: %@" : {
 
     },
     "Expiry date" : {
@@ -1020,9 +964,6 @@
         }
       }
     },
-    "Failed to verify code, try again later" : {
-
-    },
     "Failed, %lld attempts left" : {
 
     },
@@ -1030,9 +971,6 @@
 
     },
     "Faroe Islands" : {
-
-    },
-    "Fee" : {
 
     },
     "Female" : {
@@ -1046,9 +984,6 @@
       }
     },
     "Fiji" : {
-
-    },
-    "Fill Manually" : {
 
     },
     "Finalizing" : {
@@ -1076,12 +1011,6 @@
     "French Southern Territories" : {
 
     },
-    "From" : {
-
-    },
-    "From a reserved pool to a wallet" : {
-
-    },
     "Gabon" : {
 
     },
@@ -1089,6 +1018,9 @@
 
     },
     "Generates new keys" : {
+
+    },
+    "Genereting ZKP" : {
 
     },
     "Georgia" : {
@@ -1143,6 +1075,7 @@
       }
     },
     "Green & Black" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1208,12 +1141,6 @@
     "Hong Kong" : {
 
     },
-    "HOW CAN I GET A CODE?" : {
-
-    },
-    "HOW CAN I GET THE INVITE CODE?" : {
-
-    },
     "HOW TO SHARE" : {
 
     },
@@ -1226,22 +1153,10 @@
     "Identifiers" : {
 
     },
-    "Identity creation happens via a scan of your biometric passport.\n\nYour data never leaves the device or is shared with any third party. Proof of citizenship is generated locally using Zero-Knowledge technology." : {
-
-    },
-    "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport" : {
-
-    },
     "If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards" : {
 
     },
     "Import from a private key" : {
-
-    },
-    "Import JSON" : {
-
-    },
-    "INCOGNITO ID" : {
 
     },
     "Incognito mode" : {
@@ -1260,16 +1175,7 @@
     "Indonesia" : {
 
     },
-    "Insufficient balance" : {
-
-    },
-    "Invalid address" : {
-
-    },
     "Invalid HTTP status code: %d" : {
-
-    },
-    "Invalid invitation code" : {
 
     },
     "Invalid private key" : {
@@ -1288,25 +1194,6 @@
     },
     "Invalid response body" : {
 
-    },
-    "Invite Friends" : {
-
-    },
-    "Invite more people, earn more rewards" : {
-
-    },
-    "Invite to RariMe" : {
-
-    },
-    "Invited %lld/%lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Invited %1$lld/%2$lld"
-          }
-        }
-      }
     },
     "Iran" : {
 
@@ -1356,19 +1243,6 @@
         }
       }
     },
-    "Join RariMe with my invite code: %@\n\n%@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Join RariMe with my invite code: %1$@\n\n%2$@"
-          }
-        }
-      }
-    },
-    "Join Rewards Program" : {
-
-    },
     "Join the program" : {
 
     },
@@ -1417,9 +1291,6 @@
     "Latvia" : {
 
     },
-    "Leaderboard" : {
-
-    },
     "Learn how to scan passport correctly" : {
 
     },
@@ -1434,12 +1305,6 @@
         }
       }
     },
-    "Learn more about the App" : {
-
-    },
-    "Learn more about the program" : {
-
-    },
     "Lebanon" : {
 
     },
@@ -1449,10 +1314,8 @@
     "Let's Scan" : {
 
     },
-    "Let's Start" : {
-
-    },
     "Let’s Start" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1461,12 +1324,6 @@
           }
         }
       }
-    },
-    "Level %lld" : {
-
-    },
-    "Leveling" : {
-
     },
     "Liberia" : {
 
@@ -1486,9 +1343,6 @@
           }
         }
       }
-    },
-    "Limited time events" : {
-
     },
     "Lithuania" : {
 
@@ -1543,6 +1397,7 @@
 
     },
     "MAX" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1638,9 +1493,6 @@
     "Nauru" : {
 
     },
-    "Need passport scan" : {
-
-    },
     "Nepal" : {
 
     },
@@ -1688,13 +1540,8 @@
     "No" : {
 
     },
-    "No active tasks" : {
-
-    },
-    "No notifications" : {
-
-    },
     "No transactions yet" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1714,9 +1561,6 @@
 
     },
     "Norway" : {
-
-    },
-    "Notifications" : {
 
     },
     "Ok" : {
@@ -1739,9 +1583,6 @@
 
     },
     "One of our services is down, try again later. RequestURL=%@" : {
-
-    },
-    "Only level %lld specials" : {
 
     },
     "Open App Store" : {
@@ -1809,9 +1650,6 @@
         }
       }
     },
-    "Passport is already registered" : {
-
-    },
     "Passport read successfully" : {
       "localizations" : {
         "uk" : {
@@ -1822,9 +1660,6 @@
         }
       }
     },
-    "Passport scanned" : {
-
-    },
     "Peru" : {
 
     },
@@ -1832,9 +1667,6 @@
 
     },
     "Pitcairn" : {
-
-    },
-    "PLACE" : {
 
     },
     "Place QR code within the frame to scan" : {
@@ -1902,9 +1734,6 @@
           }
         }
       }
-    },
-    "Please, scan your passport one more time to revoke your previous registration" : {
-
     },
     "Poland" : {
 
@@ -1994,6 +1823,7 @@
 
     },
     "RARIME" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2012,12 +1842,6 @@
           }
         }
       }
-    },
-    "RariMe Event" : {
-
-    },
-    "RariMe Event: %@\n\nParticipate and get rewarded: https://rarime.com" : {
-
     },
     "RariMe General Terms & Conditions" : {
       "localizations" : {
@@ -2063,6 +1887,7 @@
       }
     },
     "Reading Data" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2104,6 +1929,7 @@
       }
     },
     "Receive" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2112,12 +1938,6 @@
           }
         }
       }
-    },
-    "Receive %@" : {
-
-    },
-    "Receive rewards for using RariMe app" : {
-
     },
     "Receive RMO" : {
       "extractionState" : "stale",
@@ -2131,6 +1951,7 @@
       }
     },
     "Receiver gets" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2162,37 +1983,10 @@
     "Reserve %@ RMO tokens" : {
 
     },
-    "Reserve tokens" : {
-
-    },
-    "Reserve tokens to unlock new levels and rewards" : {
-
-    },
-    "Reserved" : {
-
-    },
-    "RESERVED" : {
-
-    },
-    "Reserved RMO" : {
-
-    },
     "Reserving..." : {
 
     },
     "Reunion" : {
-
-    },
-    "Review Transaction" : {
-
-    },
-    "Rewards" : {
-
-    },
-    "Rewards limit reached" : {
-
-    },
-    "RMO tokens will be exclusively distributed via the RariMe app. To claim tokens, create an incognito profile using your biometric passport. Depending on which country issued the passport, you’ll either be able to claim a token right away or be put on a waitlist.\n\nIf you are added to the waitlist it means that you are eligible to claim tokens in the next wave of airdrops. The app will notify you when you are added.\n\nCertain jurisdictions are excluded from the reward program: %@" : {
 
     },
     "Romania" : {
@@ -2243,6 +2037,9 @@
     "Save your passport data" : {
 
     },
+    "Saving data" : {
+
+    },
     "Scan" : {
       "localizations" : {
         "uk" : {
@@ -2266,7 +2063,7 @@
         }
       }
     },
-    "Scan your passport" : {
+    "Scan your document to retrive data for ZKPs" : {
 
     },
     "Scan your Passport" : {
@@ -2298,9 +2095,6 @@
         }
       }
     },
-    "Send %@" : {
-
-    },
     "Send RMO" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2311,9 +2105,6 @@
           }
         }
       }
-    },
-    "Sending..." : {
-
     },
     "Senegal" : {
 
@@ -2381,9 +2172,6 @@
     "Some passports have a problem with chip scans" : {
 
     },
-    "Something went wrong" : {
-
-    },
     "Sorry, there was a problem reading the passport. %@. Error codes: [0x%u, 0x%u]" : {
       "localizations" : {
         "en" : {
@@ -2419,9 +2207,6 @@
     "Sri Lanka" : {
 
     },
-    "Staking" : {
-
-    },
     "Start building your incognito profile and earn rewards as an early community member." : {
       "localizations" : {
         "uk" : {
@@ -2431,9 +2216,6 @@
           }
         }
       }
-    },
-    "Start journey to unlock rewards" : {
-
     },
     "Starting in July" : {
       "extractionState" : "stale",
@@ -2525,9 +2307,6 @@
         }
       }
     },
-    "The app’s rewards program is invite-only. Get invited by an authorized user or ask a community member for an invite code." : {
-
-    },
     "The beta launch is focused on distributing tokens to Ukrainian citizens" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2600,9 +2379,6 @@
     "Timor-Leste" : {
 
     },
-    "To" : {
-
-    },
     "To continue, please install the latest version of the app" : {
 
     },
@@ -2615,13 +2391,8 @@
     "Tonga" : {
 
     },
-    "Total %@" : {
-
-    },
-    "Total Balance" : {
-
-    },
     "Transactions" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2709,9 +2480,6 @@
     "Uruguay" : {
 
     },
-    "Used" : {
-
-    },
     "User creation failed" : {
 
     },
@@ -2743,6 +2511,7 @@
 
     },
     "Wallet" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2753,6 +2522,9 @@
       }
     },
     "Wallis and Futuna" : {
+
+    },
+    "We need to scan more ePassport data groups to be able to generate ZKP" : {
 
     },
     "We will notify when you become eligible" : {
@@ -2816,9 +2588,6 @@
     "With RariMe, identity becomes private but verifiable." : {
 
     },
-    "Withdraw the %@ token" : {
-
-    },
     "Withdraw the RMO token" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2836,9 +2605,6 @@
     "Yes" : {
 
     },
-    "YOU" : {
-
-    },
     "You can use the QR code or the wallet address to deposit the RMO token to your account" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2850,16 +2616,10 @@
         }
       }
     },
-    "You can use the QR code or the wallet address to deposit the %@ token to your account" : {
-
-    },
     "You entered wrong passcode.\nLoading time: %@" : {
 
     },
     "You have already reserved tokens" : {
-
-    },
-    "You must be invited or receive a code from social channels" : {
 
     },
     "You successfully registered your identity!" : {
@@ -2869,12 +2629,6 @@
 
     },
     "You will be notified once your country is added" : {
-
-    },
-    "You’re entitled for %@ RMO" : {
-
-    },
-    "You’ve earned %lld RMO" : {
 
     },
     "You’ve joined the waitlist" : {
@@ -2899,9 +2653,6 @@
       }
     },
     "You’ve reserved %@ RMO tokens" : {
-
-    },
-    "Your Address" : {
 
     },
     "Your passport data will be saved on your device. You can share it with us to expedite the support of your passport." : {

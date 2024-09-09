@@ -7,7 +7,7 @@ class AppIconManager: ObservableObject {
     @Published private(set) var appIcon: AppIcon
     
     init() {
-        self.appIcon = AppIcon(rawValue: UIApplication.shared.alternateIconName ?? "") ?? .blackAndWhite
+        self.appIcon = AppIcon(rawValue: UIApplication.shared.alternateIconName ?? "") ?? .blackAndGreen
     }
     
     var isAppIconsSupported: Bool {
@@ -18,7 +18,7 @@ class AppIconManager: ObservableObject {
         let oldIcon = self.appIcon
         self.appIcon = icon
 
-        UIApplication.shared.setAlternateIconName(icon == .blackAndWhite ? nil : icon.rawValue) { error in
+        UIApplication.shared.setAlternateIconName(icon == .blackAndGreen ? nil : icon.rawValue) { error in
             if let error = error {
                 LoggerUtil.common.error("Error setting the app icon: \(error.localizedDescription, privacy: .public)")
                 self.appIcon = oldIcon
