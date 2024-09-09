@@ -345,6 +345,18 @@
     "Azerbaijan" : {
 
     },
+    "Back up manually" : {
+
+    },
+    "Back up with iCloud" : {
+
+    },
+    "Back up your account" : {
+
+    },
+    "Backup already exists, try restore instead" : {
+
+    },
     "Bahamas" : {
 
     },
@@ -1020,6 +1032,9 @@
         }
       }
     },
+    "Failed to register, try again later" : {
+
+    },
     "Failed to verify code, try again later" : {
 
     },
@@ -1223,6 +1238,9 @@
     "Iceland" : {
 
     },
+    "iCloud is not available" : {
+
+    },
     "Identifiers" : {
 
     },
@@ -1233,9 +1251,6 @@
 
     },
     "If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards" : {
-
-    },
-    "Import from a private key" : {
 
     },
     "Import JSON" : {
@@ -1691,6 +1706,9 @@
     "No active tasks" : {
 
     },
+    "No backup found in iCloud" : {
+
+    },
     "No notifications" : {
 
     },
@@ -1922,9 +1940,6 @@
         }
       }
     },
-    "Private key" : {
-
-    },
     "Processing" : {
       "localizations" : {
         "uk" : {
@@ -2062,6 +2077,9 @@
         }
       }
     },
+    "Re-activate old profile" : {
+
+    },
     "Reading Data" : {
       "localizations" : {
         "uk" : {
@@ -2178,6 +2196,15 @@
 
     },
     "Reserving..." : {
+
+    },
+    "Restore manually" : {
+
+    },
+    "Restore with iCloud" : {
+
+    },
+    "Restore your account" : {
 
     },
     "Reunion" : {
@@ -2715,7 +2742,7 @@
     "User creation failed" : {
 
     },
-    "Uses pregenerated keys" : {
+    "Uses pregenerated keys or iClould" : {
 
     },
     "Uzbekistan" : {
@@ -2839,6 +2866,9 @@
     "YOU" : {
 
     },
+    "You can restore your account using your iCloud backup or private key" : {
+
+    },
     "You can use the QR code or the wallet address to deposit the RMO token to your account" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2901,6 +2931,9 @@
     "You’ve reserved %@ RMO tokens" : {
 
     },
+    "Your account is not backed up. If you lose your device, you will lose access to your account" : {
+
+    },
     "Your Address" : {
 
     },
@@ -2916,6 +2949,9 @@
           }
         }
       }
+    },
+    "Your private key" : {
+
     },
     "Your Private Key" : {
       "localizations" : {
