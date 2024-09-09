@@ -145,6 +145,7 @@
 		CE19CB472BE39DA400B26DF7 /* RarimoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB462BE39DA400B26DF7 /* RarimoUtils.swift */; };
 		CE19CB492BE3AD4200B26DF7 /* LockScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB482BE3AD4200B26DF7 /* LockScreenView.swift */; };
 		CE1FA56A2C1708F100B2C191 /* Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1FA5692C1708F100B2C191 /* Points.swift */; };
+		CE282BEC2C8F723600087DFD /* ZkpVariants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE282BEB2C8F723600087DFD /* ZkpVariants.swift */; };
 		CE31E5462C11F4180039CAA5 /* GetStartedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31E5452C11F4180039CAA5 /* GetStartedView.swift */; };
 		CE31E54A2C11FE150039CAA5 /* ImportIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31E5492C11FE150039CAA5 /* ImportIdentityView.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
@@ -355,6 +356,7 @@
 		CE19CB462BE39DA400B26DF7 /* RarimoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarimoUtils.swift; sourceTree = "<group>"; };
 		CE19CB482BE3AD4200B26DF7 /* LockScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenView.swift; sourceTree = "<group>"; };
 		CE1FA5692C1708F100B2C191 /* Points.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Points.swift; sourceTree = "<group>"; };
+		CE282BEB2C8F723600087DFD /* ZkpVariants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZkpVariants.swift; sourceTree = "<group>"; };
 		CE31E5452C11F4180039CAA5 /* GetStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedView.swift; sourceTree = "<group>"; };
 		CE31E5492C11FE150039CAA5 /* ImportIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportIdentityView.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -798,6 +800,14 @@
 			path = Alerts;
 			sourceTree = "<group>";
 		};
+		CE282BEA2C8F721D00087DFD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE282BEB2C8F723600087DFD /* ZkpVariants.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		CE3CD3AF2C6CEBD3008313B8 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -817,6 +827,7 @@
 		CE46FD862C8F6B4300110313 /* Zkp */ = {
 			isa = PBXGroup;
 			children = (
+				CE282BEA2C8F721D00087DFD /* Models */,
 				CE46FD872C8F6B4D00110313 /* ZkpView.swift */,
 			);
 			path = Zkp;
@@ -1252,6 +1263,7 @@
 				56E6AD492BD2731100E4DDC1 /* LanguageView.swift in Sources */,
 				CE0881A62BF77F4D00B31735 /* ErrorAlert.swift in Sources */,
 				CE7210332BD818020043DB7F /* Double+Rounded.swift in Sources */,
+				CE282BEC2C8F723600087DFD /* ZkpVariants.swift in Sources */,
 				CEC5620F2BD925D6002D4954 /* Circuits.swift in Sources */,
 				CED909E02BDC1E0F0065E949 /* Rarimo.swift in Sources */,
 				563529EB2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift in Sources */,
