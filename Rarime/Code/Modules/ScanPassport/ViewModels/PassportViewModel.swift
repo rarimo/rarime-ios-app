@@ -7,7 +7,7 @@ enum PassportProofState: Int, CaseIterable {
 
     var title: LocalizedStringResource {
         switch self {
-        case .readingData: "Downloading ciruit data"
+        case .readingData: "Downloading circuit data"
         case .applyingZK: "Genereting ZKP"
         case .createProfile: "Saving data"
         case .finalizing: "Finalizing"

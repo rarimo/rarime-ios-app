@@ -29,6 +29,8 @@ struct AppView: View {
         }
         .environmentObject(viewModel)
         .onAppear {
+            UIApplication.shared.isIdleTimerDisabled = true
+            
             if userManager.user != nil { return }
             
             do {
