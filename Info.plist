@@ -14,27 +14,6 @@
 	<string>${CERTIFICATES_SMT_CONTRACT_ADDRESS}</string>
 	<key>CFBundleIcons</key>
 	<dict>
-		<key>CFBundleAlternateIcons</key>
-		<dict>
-			<key>BlackAndGreenIcon</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>BlackAndGreenIcon</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-			<key>GreenAndBlackIcon</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>GreenAndBlackIcon</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-		</dict>
 		<key>CFBundlePrimaryIcon</key>
 		<dict>
 			<key>CFBundleIconFiles</key>

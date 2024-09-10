@@ -1480,7 +1480,6 @@
 			baseConfigurationReference = CE9E82E02BA8974C00AAF885 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "GreenAndBlackIcon BlackAndGreenIcon";
 				ASSETCATALOG_COMPILER_APPICON_NAME = BlackAndGreenIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rarime/Rarime.entitlements;
@@ -1531,7 +1530,6 @@
 			baseConfigurationReference = CE9E82E02BA8974C00AAF885 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "GreenAndBlackIcon BlackAndGreenIcon";
 				ASSETCATALOG_COMPILER_APPICON_NAME = BlackAndGreenIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rarime/Rarime.entitlements;
@@ -1648,7 +1646,6 @@
 			baseConfigurationReference = CE9E82E22BA8975F00AAF885 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "GreenAndBlackIcon BlackAndGreenIcon";
 				ASSETCATALOG_COMPILER_APPICON_NAME = BlackAndGreenIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rarime/Rarime.entitlements;
@@ -1758,7 +1755,6 @@
 			baseConfigurationReference = CE9E82E22BA8975F00AAF885 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "GreenAndBlackIcon BlackAndGreenIcon";
 				ASSETCATALOG_COMPILER_APPICON_NAME = BlackAndGreenIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rarime/Rarime.entitlements;
