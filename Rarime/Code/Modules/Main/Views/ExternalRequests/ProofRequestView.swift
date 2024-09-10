@@ -5,30 +5,81 @@ struct ProofRequestView: View {
     let onSuccess: () -> Void
     let onDismiss: () -> Void
 
-    @State private var isLoading = false
+    @State private var proofParamsResponse: GetProofParamsResponse? = nil
     @State private var isSubmitting = false
 
+    private var hasUniqueness: Bool {
+        Int(proofParamsResponse?.data.attributes.timestampUpperBound ?? "") != 0 && proofParamsResponse?.data.attributes.identityCounterUpperBound != 0
+    }
+
+    private var citizenship: String {
+        guard let mask = proofParamsResponse?.data.attributes.citizenshipMask else { return "" }
+        return String(data: Data(hex: mask), encoding: .utf8) ?? ""
+    }
+
+    private var birthDate: Date? {
+        guard let birthDateUpperBound = proofParamsResponse?.data.attributes.birthDateUpperBound else { return nil }
+        let birthDateString = String(data: Data(hex: birthDateUpperBound), encoding: .utf8) ?? ""
+        return DateUtil.passportDateFormatter.date(from: birthDateString)
+    }
+
+    private var minAge: Int? {
+        guard let birthDate else { return nil }
+        return Calendar.current.dateComponents([.year], from: birthDate, to: Date()).year
+    }
+
     var body: some View {
-        VStack(spacing: 32) {
-            VStack(spacing: 16) {
-                makeItemRow(title: "Proof Params URL", value: proofParamsUrl.absoluteString)
-            }
-            VStack(spacing: 4) {
-                AppButton(text: "Generate Proof", action: generateProof)
-                    .disabled(isSubmitting)
-                    .controlSize(.large)
-                AppButton(
-                    variant: .tertiary,
-                    text: "Cancel",
-                    action: onDismiss
-                )
-                .disabled(isSubmitting)
-                .controlSize(.large)
+        ZStack {
+            if proofParamsResponse == nil {
+                ProgressView()
+                    .padding(.vertical, 100)
+            } else {
+                VStack(spacing: 32) {
+                    VStack(spacing: 16) {
+                        makeItemRow(
+                            title: "ID",
+                            value: proofParamsResponse!.data.id
+                        )
+                        makeItemRow(
+                            title: "Uniqueness",
+                            value: hasUniqueness ? "Yes" : "No"
+                        )
+                        if minAge != nil {
+                            makeItemRow(
+                                title: "Age",
+                                value: "\(minAge!)+"
+                            )
+                        }
+                        if !citizenship.isEmpty {
+                            makeItemRow(
+                                title: "Nationality",
+                                value: Country.fromISOCode(citizenship).flag
+                            )
+                        }
+                    }
+                    VStack(spacing: 4) {
+                        AppButton(text: "Generate Proof", action: generateProof)
+                            .disabled(isSubmitting)
+                            .controlSize(.large)
+                        AppButton(
+                            variant: .tertiary,
+                            text: "Cancel",
+                            action: onDismiss
+                        )
+                        .disabled(isSubmitting)
+                        .controlSize(.large)
+                    }
+                }
             }
         }
         .padding(.horizontal, 20)
         .padding(.top, 24)
         .padding(.bottom, 8)
+        .onAppear {
+            Task { @MainActor in
+                await loadProofParams()
+            }
+        }
     }
 
     private func makeItemRow(title: String, value: String) -> some View {
@@ -41,6 +92,16 @@ struct ProofRequestView: View {
                 .multilineTextAlignment(.trailing)
         }
         .foregroundStyle(.textPrimary)
+    }
+
+    private func loadProofParams() async {
+        do {
+            proofParamsResponse = try await VerificatorApi.getProofParams(url: proofParamsUrl)
+        } catch {
+            AlertManager.shared.emitError(.unknown("Failed to load proof params"))
+            LoggerUtil.common.error("Failed to load proof params: \(error, privacy: .public)")
+            onDismiss()
+        }
     }
 
     private func generateProof() {
@@ -65,7 +126,7 @@ struct ProofRequestView: View {
     ZStack {}
         .dynamicSheet(isPresented: .constant(true), title: "Proof Request") {
             ProofRequestView(
-                proofParamsUrl: URL(string: "https://example.com")!,
+                proofParamsUrl: URL(string: "https://api.orgs.app.stage.rarime.com/integrations/verificator-svc/public/proof-params/0x19e8958c2c9cf59d1bab2933754513f5ac20f546c691f51b5b63c07e732dee06")!,
                 onSuccess: {},
                 onDismiss: {}
             )
