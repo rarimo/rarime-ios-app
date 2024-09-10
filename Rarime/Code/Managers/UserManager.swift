@@ -298,6 +298,61 @@ class UserManager: ObservableObject {
         return ZkProof(proof: proof, pubSignals: pubSignals)
     }
     
+    func generateZkp(_ registerZkProof: ZkProof, _ passport: Passport, selector: String) async throws -> ZkProof {
+        guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
+        
+        let stateKeeperContract = try StateKeeperContract()
+        
+        let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.api.registrationSmtContractAddress, eip55: false)
+        
+        let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
+        
+        let passportInfoKey: String
+        if passport.dg15.isEmpty {
+            passportInfoKey = registerZkProof.pubSignals[1]
+        } else {
+            passportInfoKey = registerZkProof.pubSignals[0]
+        }
+        
+        var error: NSError? = nil
+        let proofIndex = IdentityCalculateProofIndex(
+            passportInfoKey,
+            registerZkProof.pubSignals[3],
+            &error
+        )
+        if let error { throw error }
+        guard let proofIndex else { throw "proof index is not initialized" }
+        
+        let smtProof = try await registrationSmtContract.getProof(proofIndex)
+        
+        let smtProofJson = try JSONEncoder().encode(smtProof)
+        
+        let profileInitializer = IdentityProfile()
+        let profile = try profileInitializer.newProfile(secretKey)
+        
+        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
+
+        let queryProofInputs = try profile.buildAirdropQueryIdentityInputs(
+            passport.dg1,
+            smtProofJSON: smtProofJson,
+            selector: selector,
+            pkPassportHash: passportInfoKey,
+            issueTimestamp: identityInfo.issueTimestamp.description,
+            identityCounter: passportInfo.identityReissueCounter.description,
+            eventID: "0x77fabbc6cb41a11d4fb6918696b3550d5d602f252436dd587f9065b7c4e62b",
+            startedAt: Int64(Date().timeIntervalSince1970)
+        )
+        
+        let wtns = try ZKUtils.calcWtnsQueryIdentity(queryProofInputs)
+        
+        let (proofJson, pubSignalsJson) = try ZKUtils.groth16QueryIdentity(wtns)
+        
+        let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
+        let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
+        
+        return ZkProof(proof: proof, pubSignals: pubSignals)
+    }
+    
     func generatePointsProof(_ registerZkProof: ZkProof, _ passport: Passport) async throws -> ZkProof {
         guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
         

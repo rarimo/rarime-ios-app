@@ -21,26 +21,35 @@ struct ZkpView: View {
                 Spacer()
                 visualizeProof(proof)
                 Spacer()
-            } else if isGenerating {
-                Spacer()
-                ProgressView()
-                Spacer()
             } else {
                 variants
                     .padding()
                 Spacer()
-                AppButton(text: "Generate", action: generateProof)
-                .controlSize(.large)
-                .padding(.horizontal)
+                if isGenerating {
+                    ProgressView()
+                        .padding()
+                } else {
+                    AppButton(text: "Generate", action: generateProof)
+                        .controlSize(.large)
+                        .padding(.horizontal)
+                }
             }
         }
     }
     
     func visualizeProof(_ proof: ZkProof) -> some View {
         VStack {
-            Text(visualizeProofJson(proof))
-                .h5()
-                .foregroundStyle(.white)
+            ZStack {
+                RoundedRectangle(cornerRadius: 5)
+                    .foregroundStyle(.baseBlack)
+                ScrollView {
+                    Text(visualizeProofJson(proof))
+                        .body4()
+                        .foregroundStyle(.white)
+                }
+                .padding()
+            }
+            .frame(height: 500)
             Spacer()
             copyButton
         }
@@ -57,11 +66,23 @@ struct ZkpView: View {
     
     func generateProof() {
         isGenerating = true
-        defer { isGenerating = false }
-        
         Task { @MainActor in
+            defer { isGenerating = false }
+            
             do {
                 let selector = calculateSelector()
+                
+                guard let passport = passportManager.passport else {
+                    LoggerUtil.common.error("Passport is nil")
+                    return
+                }
+                
+                guard let registerZkProof = userManager.registerZkProof else  {
+                    LoggerUtil.common.error("Register Zk Proof is nil")
+                    return
+                }
+                
+                proof = try await userManager.generateZkp(registerZkProof, passport, selector: selector.description)
             } catch {
                 LoggerUtil.common.error("error: \(error)")
                 
