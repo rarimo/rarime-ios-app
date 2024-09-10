@@ -31,6 +31,9 @@
 		560F0C2F2BD135D400067054 /* MainView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C2E2BD135D400067054 /* MainView+ViewModel.swift */; };
 		560F0C342BD175EB00067054 /* LoggerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C332BD175EB00067054 /* LoggerUtil.swift */; };
 		5613F4322BD18409008E6CBE /* AppSkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5613F4312BD18409008E6CBE /* AppSkeleton.swift */; };
+		5617AB102C8F4469003947C9 /* VerificatorApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5617AB0F2C8F4469003947C9 /* VerificatorApi.swift */; };
+		5617AB132C8F47C2003947C9 /* ProofRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5617AB122C8F47C2003947C9 /* ProofRequestView.swift */; };
+		5617AB152C8F48BE003947C9 /* ExternalRequestsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5617AB142C8F48BE003947C9 /* ExternalRequestsManager.swift */; };
 		561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C272BADA8A600FBB3B9 /* Icons.swift */; };
 		561C3C2B2BADBF1000FBB3B9 /* View+Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C2A2BADBF1000FBB3B9 /* View+Typography.swift */; };
 		561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C382BADE64B00FBB3B9 /* Fonts.swift */; };
@@ -286,6 +289,9 @@
 		560F0C2E2BD135D400067054 /* MainView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+ViewModel.swift"; sourceTree = "<group>"; };
 		560F0C332BD175EB00067054 /* LoggerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerUtil.swift; sourceTree = "<group>"; };
 		5613F4312BD18409008E6CBE /* AppSkeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSkeleton.swift; sourceTree = "<group>"; };
+		5617AB0F2C8F4469003947C9 /* VerificatorApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificatorApi.swift; sourceTree = "<group>"; };
+		5617AB122C8F47C2003947C9 /* ProofRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofRequestView.swift; sourceTree = "<group>"; };
+		5617AB142C8F48BE003947C9 /* ExternalRequestsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalRequestsManager.swift; sourceTree = "<group>"; };
 		561C3C272BADA8A600FBB3B9 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		561C3C2A2BADBF1000FBB3B9 /* View+Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Typography.swift"; sourceTree = "<group>"; };
 		561C3C382BADE64B00FBB3B9 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -551,6 +557,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		5617AB112C8F47B1003947C9 /* ExternalRequests */ = {
+			isa = PBXGroup;
+			children = (
+				5617AB122C8F47C2003947C9 /* ProofRequestView.swift */,
+			);
+			path = ExternalRequests;
+			sourceTree = "<group>";
+		};
 		561C3C262BADA89000FBB3B9 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -698,6 +712,7 @@
 				CE8FEB592C1AF1BE0008381A /* DecentralizeAuthManager.swift */,
 				CE51E2E42C21790700043D9A /* CircuitDataManager.swift */,
 				CE5315C92C7769A20087D53D /* NotificationManager.swift */,
+				5617AB142C8F48BE003947C9 /* ExternalRequestsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -705,7 +720,7 @@
 		5655E4262BD2C3F500B86C5C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CE8FEB602C1B03A70008381A /* Circtuits */,
+				CE8FEB602C1B03A70008381A /* Circuits */,
 				567AEC9A2BBD9B8100A20E83 /* Passport.swift */,
 				5655E4272BD2C3FD00B86C5C /* Transaction.swift */,
 				567ADEC32C25CF32007070A7 /* JSONDocument.swift */,
@@ -720,6 +735,7 @@
 				CE7D8AAB2BFB52EE009AF212 /* OpenApiError.swift */,
 				CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */,
 				CE1FA5692C1708F100B2C191 /* Points.swift */,
+				5617AB0F2C8F4469003947C9 /* VerificatorApi.swift */,
 				CE8FEB572C1AE5740008381A /* AuthorizeService.swift */,
 				CE8FEB5E2C1AFF0A0008381A /* JWT.swift */,
 				CE3D41BF2C77974500D0AA65 /* PushNotificationsRaw.swift */,
@@ -1016,6 +1032,7 @@
 		CE778B7B2BA9D30100B26485 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5617AB112C8F47B1003947C9 /* ExternalRequests */,
 				CE32CF4E2BAC97A800E507B6 /* MainView.swift */,
 				560F0C2B2BD133A000067054 /* MainViewLayout.swift */,
 				5641CC422C872F77007B7A0D /* ExternalRequestsView.swift */,
@@ -1024,12 +1041,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		CE8FEB602C1B03A70008381A /* Circtuits */ = {
+		CE8FEB602C1B03A70008381A /* Circuits */ = {
 			isa = PBXGroup;
 			children = (
 				CE8FEB612C1B03C10008381A /* AuthCircuitInputs.swift */,
 			);
-			path = Circtuits;
+			path = Circuits;
 			sourceTree = "<group>";
 		};
 		CE9E82A92BA881F400AAF885 = {
@@ -1395,6 +1412,7 @@
 				568D45CA2C29AFCB0065D467 /* FeedbackMailView.swift in Sources */,
 				56E6AD4D2BD273BC00E4DDC1 /* ProfileRouteLayout.swift in Sources */,
 				56E2D91B2BCEA66A006E725D /* PassportCard.swift in Sources */,
+				5617AB132C8F47C2003947C9 /* ProofRequestView.swift in Sources */,
 				56E2D9192BCE94CA006E725D /* RarimeInfoView.swift in Sources */,
 				CE3E0D3B2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift in Sources */,
 				CEC562112BD926AA002D4954 /* ZKUtils.swift in Sources */,
@@ -1425,6 +1443,7 @@
 				CE3CD3AE2C6CCD0E008313B8 /* ImportFileView.swift in Sources */,
 				CE0DA0D92BDA927000696503 /* AirDropResponse.swift in Sources */,
 				56E2D92A2BCFFB6B006E725D /* Airdrop.swift in Sources */,
+				5617AB152C8F48BE003947C9 /* ExternalRequestsManager.swift in Sources */,
 				56DAA3072BB77550002CF710 /* IdentityStepLayoutView.swift in Sources */,
 				562241432C107E16000239FA /* AppDropdown.swift in Sources */,
 				CE68BE3D2BD9B23D00D92EBB /* ZkProof.swift in Sources */,
@@ -1445,6 +1464,7 @@
 				CE31E54A2C11FE150039CAA5 /* ImportIdentityView.swift in Sources */,
 				560F0C1F2BD027EA00067054 /* WalletReceiveView.swift in Sources */,
 				CED314672C0483BD00DF31D5 /* MailView.swift in Sources */,
+				5617AB102C8F4469003947C9 /* VerificatorApi.swift in Sources */,
 				567ADEC42C25CF32007070A7 /* JSONDocument.swift in Sources */,
 				5655E4302BD2CA5500B86C5C /* AppColorScheme.swift in Sources */,
 				CE3477622C78892F005E91FE /* View+Align.swift in Sources */,
