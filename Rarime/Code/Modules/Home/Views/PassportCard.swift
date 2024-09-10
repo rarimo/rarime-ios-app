@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct PassportCard: View {
+    @EnvironmentObject private var userManager: UserManager
+    @EnvironmentObject private var passportManager: PassportManager
+    
     let onZkp: () -> Void
     
     let passport: Passport
@@ -77,6 +80,23 @@ struct PassportCard: View {
                 )
                 .blur(radius: isInfoHidden ? 12 : 0)
                 Spacer()
+                Button(action: {
+                    passportManager.reset()
+                    userManager.reset()
+                    
+                    try? userManager.createNewUser()
+                    try? userManager.user?.save()
+                }) {
+                    ZStack {
+                        Circle()
+                            .foregroundStyle(PassportCardLook.black.backgroundColor)
+                        Image(systemName: "trash")
+                            .frame(width: 25, height: 25)
+                            .foregroundStyle(.white)
+                    }
+                }
+                .frame(width: 40, height: 40)
+                .padding(.horizontal)
                 Button(action: onZkp) {
                     ZStack {
                         Circle()
@@ -265,4 +285,6 @@ private struct PreviewView: View {
 
 #Preview {
     PreviewView()
+        .environmentObject(UserManager())
+        .environmentObject(PassportManager())
 }

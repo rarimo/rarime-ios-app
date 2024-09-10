@@ -657,6 +657,7 @@
       }
     },
     "Creating an incognito profile" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1766,6 +1767,9 @@
           }
         }
       }
+    },
+    "Processing passport data" : {
+
     },
     "Profile" : {
       "localizations" : {

@@ -129,7 +129,7 @@ private struct GeneralStatusView: View {
 
     private var text: LocalizedStringResource {
         switch status {
-        case .processing: "Creating an incognito profile"
+        case .processing: "Processing passport data"
         case .success: "Your passport proof is ready"
         case .failure: "Please try again later"
         }
