@@ -11,12 +11,10 @@ struct PassportProofView: View {
     let onClose: () -> Void
     let onError: () -> Void
 
-    @State private var downloadingMessage = ""
-
     private func register() async {
         do {
-            let zkProof = try await passportViewModel.register { message in
-                downloadingMessage = message
+            let zkProof = try await passportViewModel.register { progress in
+                passportViewModel.processingStatus = .downloading(progress)
             }
 
             if passportViewModel.processingStatus != .success { return }
@@ -53,11 +51,6 @@ struct PassportProofView: View {
             }
             .padding(.horizontal, 20)
             Spacer()
-            Text(downloadingMessage)
-                .body3()
-                .foregroundStyle(.textSecondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 20)
             footerView
         }
         .padding(.top, 80)
@@ -82,6 +75,12 @@ struct PassportProofView: View {
         let isSuccess = passportViewModel.processingStatus == .success ||
             passportViewModel.proofState.rawValue > item.rawValue
         if isSuccess { return .success }
+
+        if item == .downloadingData {
+            if case let .downloading(progress) = passportViewModel.processingStatus {
+                return .downloading(progress)
+            }
+        }
 
         return passportViewModel.processingStatus == .failure
             ? .failure
@@ -121,7 +120,7 @@ private struct GeneralStatusView: View {
 
     private var title: LocalizedStringResource {
         switch status {
-        case .processing: "Please Wait..."
+        case .downloading(_), .processing: "Please Wait..."
         case .success: "All Done!"
         case .failure: "Error"
         }
@@ -129,7 +128,7 @@ private struct GeneralStatusView: View {
 
     private var text: LocalizedStringResource {
         switch status {
-        case .processing: "Creating an incognito profile"
+        case .downloading(_), .processing: "Creating an incognito profile"
         case .success: "Your passport proof is ready"
         case .failure: "Please try again later"
         }

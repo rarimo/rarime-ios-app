@@ -23,6 +23,7 @@ enum Icons {
     static let chat = "Chat"
     static let check = "Check"
     static let close = "Close"
+    static let cloud = "Cloud"
     static let copySimple = "CopySimple"
     static let detective = "Detective"
     static let discord = "Discord"

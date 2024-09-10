@@ -19,8 +19,8 @@ struct GetStartedView: View {
                     action: onCreate
                 )
                 GetStartedButton(
-                    title: "Import from a private key",
-                    text: "Uses pregenerated keys",
+                    title: "Re-activate old profile",
+                    text: "Uses pregenerated keys or iClould",
                     icon: Icons.share1,
                     action: onImport
                 )

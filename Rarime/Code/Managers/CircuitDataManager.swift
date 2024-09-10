@@ -44,7 +44,7 @@ class CircuitDataManager: ObservableObject {
                 let currentDownloadedMb = String(format: "%.1f", Double(progress.completedUnitCount)/1000/1000)
                 let totalDownloadedMb = String(format: "%.1f", Double(progress.totalUnitCount)/1000/1000)
                 
-                downloadProgress("Downloading circuit data: \(currentDownloadedMb)/\(totalDownloadedMb) MB")
+                downloadProgress("\(currentDownloadedMb)/\(totalDownloadedMb) MB")
             }
             .serializingDownloadedFileURL()
             .result
@@ -53,11 +53,7 @@ class CircuitDataManager: ObservableObject {
         let archivePath = fileUrl.path()
         let unarchivePath = CircuitDataManager.saveDirectory.path()
         
-        downloadProgress("Unarchiving circuit data")
-        
         SSZipArchive.unzipFile(atPath: archivePath, toDestination: unarchivePath)
-        
-        downloadProgress("Circuit data unarchived")
         
         guard let circuitData = try retriveCircuitDataFromCache(circuitName.rawValue) else {
             throw "Failed to retrive circuit data from cache"
