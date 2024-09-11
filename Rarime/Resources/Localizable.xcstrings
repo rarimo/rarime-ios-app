@@ -862,7 +862,7 @@
         }
       }
     },
-    "Downloading Data" : {
+    "Downloading data" : {
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2107,16 +2107,6 @@
     },
     "Re-activate old profile" : {
 
-    },
-    "Reading Data" : {
-      "localizations" : {
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Зчитування даних"
-          }
-        }
-      }
     },
     "Reading Passport data" : {
       "localizations" : {

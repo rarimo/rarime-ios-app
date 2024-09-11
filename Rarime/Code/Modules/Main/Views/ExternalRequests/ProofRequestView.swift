@@ -129,7 +129,6 @@ struct ProofRequestView: View {
                     throw "Proof status is not verified"
                 }
 
-                print("Proof sent successfully: \(response)")
                 AlertManager.shared.emitSuccess("Proof generated successfully")
                 onSuccess()
             } catch {
