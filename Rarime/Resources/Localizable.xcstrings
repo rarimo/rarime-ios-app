@@ -1823,6 +1823,9 @@
         }
       }
     },
+    "Public signals" : {
+
+    },
     "Puerto Rico" : {
 
     },
@@ -1892,6 +1895,9 @@
           }
         }
       }
+    },
+    "Raw proof" : {
+
     },
     "Reading Data" : {
       "extractionState" : "stale",

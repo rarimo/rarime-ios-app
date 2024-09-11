@@ -42,14 +42,48 @@ struct ZkpView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 5)
                     .foregroundStyle(.baseBlack)
-                ScrollView {
-                    Text(visualizeProofJson(proof))
-                        .body4()
+                VStack {
+                    Text("Raw proof")
+                        .h5()
                         .foregroundStyle(.white)
+                        .padding()
+                        .align(.leading)
+                    ScrollView {
+                        Text(visualizeProofJson(proof))
+                            .body4()
+                            .foregroundStyle(.white)
+                    }
+                    .padding()
                 }
-                .padding()
             }
-            .frame(height: 500)
+            .frame(height: 250)
+            ZStack {
+                RoundedRectangle(cornerRadius: 5)
+                    .foregroundStyle(.baseBlack)
+                VStack {
+                    Text("Public signals")
+                        .h5()
+                        .foregroundStyle(.white)
+                        .padding()
+                        .align(.leading)
+                    ScrollView {
+                        ForEach(ZkpPubSignals(proof.pubSignals).getSignals(), id: \.name) { signal in
+                            HStack {
+                                Text(signal.name)
+                                    .body4()
+                                    .foregroundStyle(.white)
+                                Spacer()
+                                Text(signal.value)
+                                    .body4()
+                                    .foregroundStyle(.white)
+                                    .lineLimit(1)
+                            }
+                        }
+                    }
+                    .padding()
+                }
+            }
+            .frame(height: 350)
             Spacer()
             copyButton
         }
