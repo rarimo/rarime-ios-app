@@ -291,6 +291,7 @@ struct HomeView: View {
         else {
             AlertManager.shared.emitError(.unknown("Invalid QR code"))
             LoggerUtil.common.error("Invalid QR code: \(code, privacy: .public)")
+            path.removeLast()
             return
         }
 

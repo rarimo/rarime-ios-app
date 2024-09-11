@@ -183,6 +183,9 @@
     "Afghanistan" : {
 
     },
+    "Age" : {
+
+    },
     "Airdrop" : {
       "localizations" : {
         "uk" : {
@@ -1258,6 +1261,9 @@
 
     },
     "iCloud is not available" : {
+
+    },
+    "ID" : {
 
     },
     "Identifiers" : {
@@ -2718,6 +2724,9 @@
       }
     },
     "Unfortunately, these passports are not eligible for rewards. However, you can use your incognito ID for other upcoming mini apps." : {
+
+    },
+    "Uniqueness" : {
 
     },
     "United Arab Emirates" : {

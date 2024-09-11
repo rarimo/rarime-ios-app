@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct ProofRequestView: View {
+    @EnvironmentObject private var userManager: UserManager
+    @EnvironmentObject private var passportManager: PassportManager
+
     let proofParamsUrl: URL
     let onSuccess: () -> Void
     let onDismiss: () -> Void
@@ -37,25 +40,25 @@ struct ProofRequestView: View {
                 VStack(spacing: 32) {
                     VStack(spacing: 16) {
                         makeItemRow(
-                            title: "ID",
+                            title: String(localized: "ID"),
                             value: proofParamsResponse!.data.id
-                        )
-                        makeItemRow(
-                            title: "Uniqueness",
-                            value: hasUniqueness ? "Yes" : "No"
                         )
                         if minAge != nil {
                             makeItemRow(
-                                title: "Age",
+                                title: String(localized: "Age"),
                                 value: "\(minAge!)+"
                             )
                         }
                         if !citizenship.isEmpty {
                             makeItemRow(
-                                title: "Nationality",
+                                title: String(localized: "Nationality"),
                                 value: Country.fromISOCode(citizenship).flag
                             )
                         }
+                        makeItemRow(
+                            title: String(localized: "Uniqueness"),
+                            value: hasUniqueness ? "Yes" : "No"
+                        )
                     }
                     VStack(spacing: 4) {
                         AppButton(text: "Generate Proof", action: generateProof)
@@ -110,13 +113,28 @@ struct ProofRequestView: View {
             defer { isSubmitting = false }
 
             do {
-                // TODO: Generate proof
-                try await Task.sleep(nanoseconds: 3_000_000_000)
+                guard let passport = passportManager.passport else { throw "failed to get passport" }
+
+                let proof = try await userManager.generateQueryProof(
+                    passport: passport,
+                    params: proofParamsResponse!.data.attributes
+                )
+                let response = try await VerificatorApi.sendProof(
+                    url: URL(string: proofParamsResponse!.data.attributes.callbackURL)!,
+                    userId: proofParamsResponse!.data.id,
+                    proof: proof
+                )
+
+                if response.data.attributes.status != .verified {
+                    throw "Proof status is not verified"
+                }
+
+                print("Proof sent successfully: \(response)")
                 AlertManager.shared.emitSuccess("Proof generated successfully")
                 onSuccess()
             } catch {
                 AlertManager.shared.emitError(.unknown("Failed to generate proof"))
-                LoggerUtil.common.error("Failed to generate proof: \(error, privacy: .public)")
+                LoggerUtil.common.error("Failed to generate query proof: \(error, privacy: .public)")
             }
         }
     }
@@ -130,5 +148,6 @@ struct ProofRequestView: View {
                 onSuccess: {},
                 onDismiss: {}
             )
+            .environmentObject(UserManager())
         }
 }

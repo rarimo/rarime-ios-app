@@ -43,9 +43,9 @@ struct GetProofParamsResponseData: Codable {
 
 struct GetProofParamsResponseAttributes: Codable {
     let eventID, eventData, selector: String
-    let identityCounter: Int
+    let identityCounter: UInt64
     let timestampLowerBound, timestampUpperBound: String
-    let identityCounterLowerBound, identityCounterUpperBound: Int
+    let identityCounterLowerBound, identityCounterUpperBound: UInt64
     let expirationDateLowerBound, expirationDateUpperBound, birthDateLowerBound, birthDateUpperBound: String
     let citizenshipMask: String
     let callbackURL: String
