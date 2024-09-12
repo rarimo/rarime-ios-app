@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     " and " : {
       "localizations" : {
         "uk" : {
@@ -180,6 +183,9 @@
     "Afghanistan" : {
 
     },
+    "Age" : {
+
+    },
     "Airdrop" : {
       "localizations" : {
         "uk" : {
@@ -223,6 +229,9 @@
       }
     },
     "Amount must be greater than 0" : {
+
+    },
+    "An error has occured, please try again" : {
 
     },
     "Andorra" : {
@@ -853,7 +862,7 @@
         }
       }
     },
-    "Downloading Data" : {
+    "Downloading data" : {
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1113,6 +1122,9 @@
     "Gambia" : {
 
     },
+    "Generate Proof" : {
+
+    },
     "Generates new keys" : {
 
     },
@@ -1251,6 +1263,9 @@
     "iCloud is not available" : {
 
     },
+    "ID" : {
+
+    },
     "Identifiers" : {
 
     },
@@ -1291,7 +1306,7 @@
     "Invalid address" : {
 
     },
-    "Invalid HTTP status code: %d" : {
+    "Invalid HTTP status code: %lld" : {
 
     },
     "Invalid invitation code" : {
@@ -1747,9 +1762,6 @@
     "Notifications" : {
 
     },
-    "Ok" : {
-
-    },
     "Okay" : {
       "localizations" : {
         "uk" : {
@@ -1761,9 +1773,6 @@
       }
     },
     "Oman" : {
-
-    },
-    "One of our services is down, try again later" : {
 
     },
     "One of our services is down, try again later. RequestURL=%@" : {
@@ -1784,6 +1793,9 @@
           }
         }
       }
+    },
+    "Operation completed successfully" : {
+
     },
     "Other passport holders" : {
       "extractionState" : "stale",
@@ -1921,6 +1933,9 @@
         }
       }
     },
+    "Please wait" : {
+
+    },
     "Please Wait..." : {
       "localizations" : {
         "uk" : {
@@ -1980,6 +1995,9 @@
           }
         }
       }
+    },
+    "Proof Request" : {
+
     },
     "Proofs" : {
       "localizations" : {
@@ -2089,16 +2107,6 @@
     },
     "Re-activate old profile" : {
 
-    },
-    "Reading Data" : {
-      "localizations" : {
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Зчитування даних"
-          }
-        }
-      }
     },
     "Reading Passport data" : {
       "localizations" : {
@@ -2499,6 +2507,9 @@
         }
       }
     },
+    "Success" : {
+
+    },
     "Sudan" : {
 
     },
@@ -2703,6 +2714,9 @@
       }
     },
     "Unfortunately, these passports are not eligible for rewards. However, you can use your incognito ID for other upcoming mini apps." : {
+
+    },
+    "Uniqueness" : {
 
     },
     "United Arab Emirates" : {

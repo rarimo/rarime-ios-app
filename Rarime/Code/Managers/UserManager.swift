@@ -88,7 +88,7 @@ class UserManager: ObservableObject {
         
         let certPem = cert.certToPEM().data(using: .utf8) ?? Data()
         
-        let certificatesSMTAddress = try EthereumAddress(hex:  ConfigManager.shared.api.certificatesSmtContractAddress, eip55: false)
+        let certificatesSMTAddress = try EthereumAddress(hex: ConfigManager.shared.api.certificatesSmtContractAddress, eip55: false)
         
         let certificatesSMTContract = try PoseidonSMT(contractAddress: certificatesSMTAddress)
         
@@ -196,7 +196,7 @@ class UserManager: ObservableObject {
         let publicKeyPem = OpenSSLUtils.pubKeyToPEM(pubKey: publicKey)
         let publicKeyPemData = publicKeyPem.data(using: .utf8) ?? Data()
         
-        var publicKeySize: Int = 0
+        var publicKeySize = 0
         try IdentityX509Util().getRSASize(publicKeyPemData, ret0_: &publicKeySize)
         
         guard let cert = try OpenSSLUtils.getX509CertificatesFromPKCS7(pkcs7Der: Data(sod.pkcs7CertificateData)).first else {
@@ -205,7 +205,7 @@ class UserManager: ObservableObject {
         
         let certPem = cert.certToPEM().data(using: .utf8) ?? Data()
 
-        let certificatesSMTAddress = try EthereumAddress(hex:  ConfigManager.shared.api.certificatesSmtContractAddress, eip55: false)
+        let certificatesSMTAddress = try EthereumAddress(hex: ConfigManager.shared.api.certificatesSmtContractAddress, eip55: false)
         
         let certificatesSMTContract = try PoseidonSMT(contractAddress: certificatesSMTAddress)
          
@@ -290,6 +290,72 @@ class UserManager: ObservableObject {
         
         let wtns = try ZKUtils.calcWtnsQueryIdentity(queryProofInputs)
         
+        let (proofJson, pubSignalsJson) = try ZKUtils.groth16QueryIdentity(wtns)
+        
+        let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
+        let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
+        
+        return ZkProof(proof: proof, pubSignals: pubSignals)
+    }
+    
+    func generateQueryProof(
+        passport: Passport,
+        params: GetProofParamsResponseAttributes
+    ) async throws -> ZkProof {
+        guard let registerZkProof = self.registerZkProof else { throw "failed to get registerZkProof" }
+        guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
+        
+        let stateKeeperContract = try StateKeeperContract()
+        let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.api.registrationSmtContractAddress, eip55: false)
+        let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
+        
+        let passportInfoKey: String
+        if passport.dg15.isEmpty {
+            passportInfoKey = registerZkProof.pubSignals[1]
+        } else {
+            passportInfoKey = registerZkProof.pubSignals[0]
+        }
+        
+        var error: NSError? = nil
+        let proofIndex = IdentityCalculateProofIndex(
+            passportInfoKey,
+            registerZkProof.pubSignals[3],
+            &error
+        )
+        if let error { throw error }
+        guard let proofIndex else { throw "proof index is not initialized" }
+        
+        let smtProof = try await registrationSmtContract.getProof(proofIndex)
+        let smtProofJson = try JSONEncoder().encode(smtProof)
+        
+        let profileInitializer = IdentityProfile()
+        let profile = try profileInitializer.newProfile(secretKey)
+        
+        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
+        let queryProofInputs = try profile.buildQueryIdentityInputs(
+            passport.dg1,
+            smtProofJSON: smtProofJson,
+            selector: params.selector,
+            pkPassportHash: passportInfoKey,
+            issueTimestamp: identityInfo.issueTimestamp.description,
+            identityCounter: passportInfo.identityReissueCounter.description,
+            eventID: params.eventID,
+            eventData: params.eventData,
+            timestampLowerbound: params.timestampLowerBound,
+            timestampUpperbound: max(
+                UInt64(params.timestampUpperBound),
+                identityInfo.issueTimestamp + 1
+            ).description,
+            identityCounterLowerbound: params.identityCounterLowerBound.description,
+            identityCounterUpperbound: (passportInfo.identityReissueCounter + 1).description,
+            expirationDateLowerbound: params.expirationDateLowerBound,
+            expirationDateUpperbound: params.expirationDateUpperBound,
+            birthDateLowerbound: params.birthDateLowerBound,
+            birthDateUpperbound: params.birthDateUpperBound,
+            citizenshipMask: params.citizenshipMask
+        )
+        
+        let wtns = try ZKUtils.calcWtnsQueryIdentity(queryProofInputs)
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16QueryIdentity(wtns)
         
         let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
@@ -417,7 +483,7 @@ class UserManager: ObservableObject {
         return spendableBalances.balances.first?.amount ?? "0"
     }
     
-    func fetchPointsBalance(_ jwt: JWT) async throws -> PointsBalanceRaw {        
+    func fetchPointsBalance(_ jwt: JWT) async throws -> PointsBalanceRaw {
         let points = Points(ConfigManager.shared.api.pointsServiceURL)
         
         let balanceResponse = try await points.getPointsBalance(jwt, true, true)
@@ -504,7 +570,7 @@ class UserManager: ObservableObject {
         
         var error: NSError?
         let nullifier = user.profile.calculateEventNullifierHex(eventId, error: &error)
-        if let error { throw error}
+        if let error { throw error }
         
         return nullifier
     }

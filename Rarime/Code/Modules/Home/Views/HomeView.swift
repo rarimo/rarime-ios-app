@@ -1,7 +1,17 @@
 import SwiftUI
 
+private enum QrCodeType: String, Codable {
+    case queryProofGen = "QueryProofGen"
+}
+
+private struct QrCode: Codable {
+    let id: String
+    let type: QrCodeType
+    let dataUrl: URL
+}
+
 private enum HomeRoute: Hashable {
-    case scanPassport, reserveTokens, claimRewards, notifications
+    case scanPassport, reserveTokens, claimRewards, notifications, scanQr
 }
 
 struct HomeView: View {
@@ -11,6 +21,7 @@ struct HomeView: View {
     @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
+    @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
 
     @State private var path: [HomeRoute] = []
 
@@ -100,6 +111,12 @@ struct HomeView: View {
                     )
                     .environment(\.managedObjectContext, notificationManager.pushNotificationContainer.viewContext)
                     .navigationBarBackButtonHidden()
+                case .scanQr:
+                    ScanQRView(
+                        onBack: { path.removeLast() },
+                        onScan: processQrCode
+                    )
+                    .navigationBarBackButtonHidden()
                 }
             }
         }
@@ -169,7 +186,7 @@ struct HomeView: View {
     }
 
     private var header: some View {
-        HStack(alignment: .top) {
+        HStack(alignment: .top, spacing: 16) {
             VStack(alignment: .leading, spacing: 8) {
                 Button(action: {
                     mainViewModel.selectTab(isWalletBalanceDisplayed ? .wallet : .rewards)
@@ -202,6 +219,12 @@ struct HomeView: View {
                         .background(.errorMain, in: Circle())
                         .offset(x: 7, y: -8)
                 }
+            }
+            if userManager.registerZkProof != nil {
+                Image(Icons.qrCode)
+                    .iconMedium()
+                    .foregroundStyle(.baseBlack)
+                    .onTapGesture { path.append(.scanQr) }
             }
         }
         .padding(.top, 24)
@@ -262,6 +285,24 @@ struct HomeView: View {
         .onTapGesture { path.append(.claimRewards) }
     }
 
+    func processQrCode(_ code: String) {
+        let codeData = Data(code.utf8)
+        guard let qrCode = try? JSONDecoder().decode(QrCode.self, from: codeData)
+        else {
+            AlertManager.shared.emitError(.unknown("Invalid QR code"))
+            LoggerUtil.common.error("Invalid QR code: \(code, privacy: .public)")
+            path.removeLast()
+            return
+        }
+
+        switch qrCode.type {
+        case .queryProofGen:
+            externalRequestsManager.setRequest(.proofRequest(proofParamsUrl: qrCode.dataUrl))
+        }
+
+        path.removeLast()
+    }
+
     func fetchBalance() {
         isBalanceFetching = true
 
@@ -313,4 +354,5 @@ struct HomeView: View {
         .environmentObject(UserManager())
         .environmentObject(ConfigManager())
         .environmentObject(NotificationManager())
+        .environmentObject(ExternalRequestsManager())
 }
