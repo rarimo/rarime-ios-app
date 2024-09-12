@@ -58,8 +58,12 @@ struct PassportProofView: View {
         .onChange(of: passportViewModel.proofState) { _ in
             FeedbackGenerator.shared.impact(.light)
         }
-        .onChange(of: passportViewModel.processingStatus) { val in
-            FeedbackGenerator.shared.notify(val == .success ? .success : .error)
+        .onChange(of: passportViewModel.processingStatus) { status in
+            switch status {
+            case .success: FeedbackGenerator.shared.notify(.success)
+            case .failure: FeedbackGenerator.shared.notify(.error)
+            default: break
+            }
         }
         .onChange(of: passportViewModel.isAirdropClaimed) { isAirdropClaimed in
             self.walletManager.isClaimed = isAirdropClaimed
@@ -77,7 +81,7 @@ struct PassportProofView: View {
         if isSuccess { return .success }
 
         if item == .downloadingData {
-            if case let .downloading(progress) = passportViewModel.processingStatus {
+            if case .downloading(let progress) = passportViewModel.processingStatus {
                 return .downloading(progress)
             }
         }
