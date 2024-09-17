@@ -1,15 +1,5 @@
 import SwiftUI
 
-private enum QrCodeType: String, Codable {
-    case queryProofGen = "QueryProofGen"
-}
-
-private struct QrCode: Codable {
-    let id: String
-    let type: QrCodeType
-    let dataUrl: URL
-}
-
 private enum HomeRoute: Hashable {
     case scanPassport, reserveTokens, claimRewards, notifications, scanQr
 }
@@ -286,20 +276,13 @@ struct HomeView: View {
     }
 
     func processQrCode(_ code: String) {
-        let codeData = Data(code.utf8)
-        guard let qrCode = try? JSONDecoder().decode(QrCode.self, from: codeData)
-        else {
+        guard let qrCodeUrl = URL(string: code) else {
+            LoggerUtil.intro.error("Invalid QR code: \(code)")
             AlertManager.shared.emitError(.unknown("Invalid QR code"))
-            LoggerUtil.common.error("Invalid QR code: \(code, privacy: .public)")
-            path.removeLast()
             return
         }
 
-        switch qrCode.type {
-        case .queryProofGen:
-            externalRequestsManager.setRequest(.proofRequest(proofParamsUrl: qrCode.dataUrl))
-        }
-
+        externalRequestsManager.handleRarimeUrl(qrCodeUrl)
         path.removeLast()
     }
 
