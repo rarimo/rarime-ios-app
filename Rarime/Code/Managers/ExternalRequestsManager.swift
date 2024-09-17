@@ -1,17 +1,21 @@
 import Foundation
 
-enum ExternalRequestType: String, Codable {
+enum RarimeUrlHosts: String {
+    case external
+}
+
+enum ExternalRequestTypes: String, Codable {
     case proofRequest = "proof-request"
 }
 
-enum ExternalRequest: Equatable {
+enum ExternalRequests: Equatable {
     case proofRequest(proofParamsUrl: URL)
 }
 
 class ExternalRequestsManager: ObservableObject {
     static let shared = ExternalRequestsManager()
 
-    @Published private(set) var request: ExternalRequest? = nil
+    @Published private(set) var request: ExternalRequests? = nil
 
     func handleRarimeUrl(_ url: URL) {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
@@ -23,7 +27,7 @@ class ExternalRequestsManager: ObservableObject {
         }
 
         switch url.host {
-        case "external":
+        case RarimeUrlHosts.external.rawValue:
             handleExternalRequest(params: params)
         default:
             LoggerUtil.common.error("Invalid RariMe URL host: \(url.host ?? "nil")")
@@ -39,7 +43,7 @@ class ExternalRequestsManager: ObservableObject {
         }
 
         switch type {
-        case ExternalRequestType.proofRequest.rawValue:
+        case ExternalRequestTypes.proofRequest.rawValue:
             handleProofRequest(params: params)
         default:
             LoggerUtil.common.error("Invalid external request type: \(type)")
@@ -47,8 +51,8 @@ class ExternalRequestsManager: ObservableObject {
     }
 
     private func handleProofRequest(params: [URLQueryItem]) {
-        guard let rawDataUrl = params.first(where: { $0.name == "data_url" })?.value?.removingPercentEncoding,
-              let dataUrl = URL(string: rawDataUrl)
+        guard let rawProofParamsUrl = params.first(where: { $0.name == "proof_params_url" })?.value?.removingPercentEncoding,
+              let proofParamsUrl = URL(string: rawProofParamsUrl)
         else {
             LoggerUtil.common.error("Invalid proof request URL: \(params)")
             AlertManager.shared.emitError(.unknown("Invalid proof request URL"))
@@ -61,10 +65,10 @@ class ExternalRequestsManager: ObservableObject {
             return
         }
 
-        setRequest(.proofRequest(proofParamsUrl: dataUrl))
+        setRequest(.proofRequest(proofParamsUrl: proofParamsUrl))
     }
 
-    func setRequest(_ request: ExternalRequest) {
+    func setRequest(_ request: ExternalRequests) {
         self.request = request
     }
 

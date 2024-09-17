@@ -176,7 +176,7 @@ struct HomeView: View {
     }
 
     private var header: some View {
-        HStack(alignment: .top, spacing: 16) {
+        HStack(alignment: .top, spacing: 20) {
             VStack(alignment: .leading, spacing: 8) {
                 Button(action: {
                     mainViewModel.selectTab(isWalletBalanceDisplayed ? .wallet : .rewards)
