@@ -277,7 +277,7 @@ struct HomeView: View {
 
     func processQrCode(_ code: String) {
         guard let qrCodeUrl = URL(string: code) else {
-            LoggerUtil.intro.error("Invalid QR code: \(code)")
+            LoggerUtil.intro.error("Invalid QR code: \(code, privacy: .public)")
             AlertManager.shared.emitError(.unknown("Invalid QR code"))
             return
         }

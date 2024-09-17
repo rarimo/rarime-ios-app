@@ -21,7 +21,7 @@ class ExternalRequestsManager: ObservableObject {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
               let params = components.queryItems
         else {
-            LoggerUtil.common.error("Invalid RariMe app URL: \(url.absoluteString)")
+            LoggerUtil.common.error("Invalid RariMe app URL: \(url.absoluteString, privacy: .public)")
             AlertManager.shared.emitError(.unknown("Invalid RariMe app URL"))
             return
         }
@@ -30,14 +30,14 @@ class ExternalRequestsManager: ObservableObject {
         case RarimeUrlHosts.external.rawValue:
             handleExternalRequest(params: params)
         default:
-            LoggerUtil.common.error("Invalid RariMe URL host: \(url.host ?? "nil")")
+            LoggerUtil.common.error("Invalid RariMe URL host: \(url.host ?? "nil", privacy: .public)")
         }
     }
 
     private func handleExternalRequest(params: [URLQueryItem]) {
         guard let type = params.first(where: { $0.name == "type" })?.value
         else {
-            LoggerUtil.common.error("Invalid external request URL: \(params)")
+            LoggerUtil.common.error("Invalid external request URL: \(params, privacy: .public)")
             AlertManager.shared.emitError(.unknown("Invalid external request URL"))
             return
         }
@@ -46,7 +46,7 @@ class ExternalRequestsManager: ObservableObject {
         case ExternalRequestTypes.proofRequest.rawValue:
             handleProofRequest(params: params)
         default:
-            LoggerUtil.common.error("Invalid external request type: \(type)")
+            LoggerUtil.common.error("Invalid external request type: \(type, privacy: .public)")
         }
     }
 
@@ -54,7 +54,7 @@ class ExternalRequestsManager: ObservableObject {
         guard let rawProofParamsUrl = params.first(where: { $0.name == "proof_params_url" })?.value?.removingPercentEncoding,
               let proofParamsUrl = URL(string: rawProofParamsUrl)
         else {
-            LoggerUtil.common.error("Invalid proof request URL: \(params)")
+            LoggerUtil.common.error("Invalid proof request URL: \(params, privacy: .public)")
             AlertManager.shared.emitError(.unknown("Invalid proof request URL"))
             return
         }
