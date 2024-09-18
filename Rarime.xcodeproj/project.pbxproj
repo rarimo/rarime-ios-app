@@ -156,6 +156,7 @@
 		C75512902C86F4BC000258AD /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
 		C75512942C870AFD000258AD /* StepIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75512932C870AFD000258AD /* StepIndicator.swift */; };
 		C75512962C87617B000258AD /* RemoveCase.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C75512952C87617B000258AD /* RemoveCase.mp4 */; };
+		C78EA4FA2C9B2EF5001DA0B3 /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
 		C7CE31D52C8B1CBD00EE6D2E /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */; };
 		C7FFB52E2C99D7820037CBD4 /* NotificationSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FFB52D2C99D7820037CBD4 /* NotificationSheetView.swift */; };
 		C7FFB5302C9ACE900037CBD4 /* ClaimableNotificationContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FFB52F2C9ACE900037CBD4 /* ClaimableNotificationContent.swift */; };
@@ -1388,6 +1389,7 @@
 				CE3D41D72C779C9E00D0AA65 /* PushNotificationsRaw.swift in Sources */,
 				CE34775A2C788620005E91FE /* String+Error.swift in Sources */,
 				CE3477582C788602005E91FE /* LoggerUtil.swift in Sources */,
+				C78EA4FA2C9B2EF5001DA0B3 /* PushNotification.xcdatamodeld in Sources */,
 				CE3D41D62C779C8D00D0AA65 /* NotificationManager.swift in Sources */,
 				CE3D41C82C779BC400D0AA65 /* NotificationService.swift in Sources */,
 				CE3477592C78860C005E91FE /* ConfigManager.swift in Sources */,
