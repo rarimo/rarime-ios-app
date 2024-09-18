@@ -1,6 +1,7 @@
 import Combine
 import Identity
 import SwiftUI
+import Web3
 
 enum PassportProofState: Int, CaseIterable {
     case downloadingData, applyingZK, createProfile, finalizing
@@ -99,14 +100,22 @@ class PassportViewModel: ObservableObject {
             }
             
             let isUserRevoking = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
+            let isUserAlreadyRevoked = try await isUserAlreadyRevoked(
+                passportKey: passportInfoKey,
+                identityKey: BigUInt(passportInfo.activeIdentity).description
+            )
             
             if isUserRevoking {
-                LoggerUtil.common.info("Passport is registered, revoking")
+                if isUserAlreadyRevoked {
+                    LoggerUtil.common.info("Passport is already revoked")
+                } else {
+                    LoggerUtil.common.info("Passport is revoking")
+                }
             } else {
                 LoggerUtil.common.info("Passport is not registered")
             }
             
-            if isUserRevoking {
+            if isUserRevoking && !isUserAlreadyRevoked {
                 // takes last 8 bytes of activeIdentity as revocation challenge
                 revocationChallenge = passportInfo.activeIdentity[24 ..< 32]
                 
@@ -152,5 +161,23 @@ class PassportViewModel: ObservableObject {
             processingStatus = .failure
             throw error
         }
+    }
+    
+    func isUserAlreadyRevoked(
+        passportKey: String,
+        identityKey: String
+    ) async throws -> Bool {
+        let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.api.registrationSmtContractAddress, eip55: false)
+        
+        let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
+        
+        var error: NSError? = nil
+        let proofIndex = IdentityCalculateProofIndex(passportKey, identityKey, &error)
+        if let error { throw error }
+        guard let proofIndex else { throw "proof index is not initialized" }
+        
+        let node = try await registrationSmtContract.getNodeByKey(proofIndex)
+        
+        return node.value == PoseidonSMT.revokedValue
     }
 }
