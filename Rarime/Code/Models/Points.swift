@@ -286,7 +286,7 @@ class Points {
             )
         )
 
-        let response = try await AF.request(requestUrl, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default)
+        let response = try await AF.request(requestUrl, method: .patch, parameters: requestPayload, encoder: JSONParameterEncoder.default)
             .validate(OpenApiError.catchInstance)
             .serializingData()
             .result

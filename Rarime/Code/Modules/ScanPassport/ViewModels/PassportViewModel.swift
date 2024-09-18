@@ -137,11 +137,11 @@ class PassportViewModel: ObservableObject {
             PassportManager.shared.setPassport(passport)
             try UserManager.shared.saveRegisterZkProof(proof)
             
+            try await NotificationManager.shared.subscribe(toTopic: ConfigManager.shared.general.claimableNotificationTopic)
+            
             isUserRegistered = true
             
             LoggerUtil.common.info("Passport registration succeed")
-            
-            try await NotificationManager.shared.subscribe(toTopic: ConfigManager.shared.general.claimableNotificationTopic)
             
             try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
             proofState = .finalizing
