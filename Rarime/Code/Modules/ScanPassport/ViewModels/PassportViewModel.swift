@@ -141,6 +141,8 @@ class PassportViewModel: ObservableObject {
             
             LoggerUtil.common.info("Passport registration succeed")
             
+            try await NotificationManager.shared.subscribe(toTopic: ConfigManager.shared.general.claimableNotificationTopic)
+            
             try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
             proofState = .finalizing
             

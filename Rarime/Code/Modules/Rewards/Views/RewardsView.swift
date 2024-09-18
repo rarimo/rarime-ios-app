@@ -292,7 +292,10 @@ struct RewardsView: View {
 
                 let events = try await points.listEvents(
                     accessJwt,
-                    filterMetaStaticName: [.passportScan, .referralCommon]
+                    filterMetaStaticName: [
+                        EventNames.passportScan.rawValue,
+                        EventNames.referralCommon.rawValue
+                    ]
                 )
 
                 self.rewardsViewModel.events = events.data
