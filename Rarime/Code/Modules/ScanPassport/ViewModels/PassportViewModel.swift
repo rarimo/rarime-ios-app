@@ -100,10 +100,7 @@ class PassportViewModel: ObservableObject {
             }
             
             let isUserRevoking = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
-            let isUserAlreadyRevoked = try await isUserAlreadyRevoked(
-                passportKey: passportInfoKey,
-                identityKey: BigUInt(passportInfo.activeIdentity).description
-            )
+            let isUserAlreadyRevoked = passportInfo.activeIdentity == PoseidonSMT.revokedValue
             
             if isUserRevoking {
                 if isUserAlreadyRevoked {
@@ -161,23 +158,5 @@ class PassportViewModel: ObservableObject {
             processingStatus = .failure
             throw error
         }
-    }
-    
-    func isUserAlreadyRevoked(
-        passportKey: String,
-        identityKey: String
-    ) async throws -> Bool {
-        let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.api.registrationSmtContractAddress, eip55: false)
-        
-        let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
-        
-        var error: NSError? = nil
-        let proofIndex = IdentityCalculateProofIndex(passportKey, identityKey, &error)
-        if let error { throw error }
-        guard let proofIndex else { throw "proof index is not initialized" }
-        
-        let node = try await registrationSmtContract.getNodeByKey(proofIndex)
-        
-        return node.value == PoseidonSMT.revokedValue
     }
 }

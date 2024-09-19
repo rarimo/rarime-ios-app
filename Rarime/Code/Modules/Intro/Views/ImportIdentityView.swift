@@ -145,7 +145,7 @@ struct ImportIdentityView: View {
                 
                 onNext()
             } catch {
-                LoggerUtil.common.debug("Failed to restore from iCloud: \(error, privacy: .public)")
+                LoggerUtil.common.error("Failed to restore from iCloud: \(error, privacy: .public)")
             }
         }
     }
