@@ -17,9 +17,8 @@ struct AppView: View {
             if let isDeprecated = updateManager.isDeprecated {
                 if isDeprecated {
                     VersionUpdateView()
-                    //                } else if !internetConnectionManager.isInternetPresent {
-                    //                    InternetConnectionRequiredView()
-                    //                } else {
+                } else if !internetConnectionManager.isInternetPresent {
+                    InternetConnectionRequiredView()
                 } else {
                     if
                         securityManager.passcodeState != .unset,
