@@ -9,7 +9,7 @@ struct NotificationsView: View {
     @State private var chosenNotification: PushNotification? = nil
     @State private var isNotificationSheetPresented = false
 
-    @FetchRequest(sortDescriptors: []) var pushNotifications: FetchedResults<PushNotification>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \PushNotification.receivedAt, ascending: false)]) var pushNotifications: FetchedResults<PushNotification>
     
     var body: some View {
         VStack {

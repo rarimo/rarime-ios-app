@@ -36,6 +36,9 @@ struct NotificationSheetView: View {
             }
             .padding(.horizontal, 20)
             Spacer()
+            if isCheckingClaimable {
+                ProgressView()
+            }
             if !notificationEventId.isEmpty {
                 VStack(spacing: 24) {
                     HorizontalDivider()
@@ -46,6 +49,7 @@ struct NotificationSheetView: View {
             }
         }
         .padding(.top, 60)
+        .onAppear(perform: checkClaimable)
     }
     
     func claimRewards() {
