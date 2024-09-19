@@ -3,6 +3,7 @@ import OSLog
 import SwiftUI
 
 struct AppView: View {
+    @EnvironmentObject private var internetConnectionManager: InternetConnectionManager
     @EnvironmentObject private var circuitDataManager: CircuitDataManager
     @EnvironmentObject private var updateManager: UpdateManager
     @EnvironmentObject private var alertManager: AlertManager
@@ -16,6 +17,8 @@ struct AppView: View {
             if let isDeprecated = updateManager.isDeprecated {
                 if isDeprecated {
                     VersionUpdateView()
+                } else if !internetConnectionManager.isInternetPresent {
+                    InternetConnectionRequiredView()
                 } else {
                     if
                         securityManager.passcodeState != .unset,
@@ -62,4 +65,5 @@ struct AppView: View {
         .environmentObject(SecurityManager())
         .environmentObject(SettingsManager())
         .environmentObject(UpdateManager())
+        .environmentObject(InternetConnectionManager())
 }
