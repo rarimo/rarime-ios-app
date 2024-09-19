@@ -2074,7 +2074,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 1.12.5;
+				MARKETING_VERSION = 2.0.1;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2125,7 +2125,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 1.12.5;
+				MARKETING_VERSION = 2.0.1;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2242,7 +2242,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 1.12.5;
+				MARKETING_VERSION = 2.0.1;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2352,7 +2352,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 1.12.5;
+				MARKETING_VERSION = 2.0.1;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
