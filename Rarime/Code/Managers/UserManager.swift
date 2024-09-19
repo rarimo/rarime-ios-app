@@ -17,7 +17,6 @@ class UserManager: ObservableObject {
     @Published var masterCertProof: SMTProof?
     
     @Published var balance: Double
-    @Published var isPassportTokensReserved: Bool
     
     @Published var isRevoked: Bool
     
@@ -38,7 +37,6 @@ class UserManager: ObservableObject {
             
             self.user = try User.load()
             self.balance = 0
-            self.isPassportTokensReserved = false
             self.isRevoked = AppUserDefaults.shared.isUserRevoked
             
             if let registerZkProofJson = try AppKeychain.getValue(.registerZkProof) {
@@ -488,8 +486,6 @@ class UserManager: ObservableObject {
         
         let balanceResponse = try await points.getPointsBalance(jwt, true, true)
         
-        isPassportTokensReserved = isPassportTokensReserved || balanceResponse.data.attributes.isVerified
-        
         return balanceResponse.data.attributes
     }
     
@@ -539,10 +535,6 @@ class UserManager: ObservableObject {
         )
         
         LoggerUtil.common.info("Passport verified, token reserved")
-        
-        DispatchQueue.main.async {
-            self.isPassportTokensReserved = true
-        }
     }
     
     func reset() {
@@ -556,8 +548,6 @@ class UserManager: ObservableObject {
             
             self.user = nil
             self.balance = 0
-            self.isPassportTokensReserved = false
-            
             self.registerZkProof = nil
         } catch {
             fatalError("\(error.localizedDescription)")
