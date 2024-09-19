@@ -116,6 +116,8 @@ struct ScanPassportView: View {
                             AlertManager.shared.emitError(.connectionUnstable)
                             
                             onClose()
+                            
+                            return
                         }
                     }
                     
