@@ -1,4 +1,5 @@
 import SwiftUI
+import Alamofire
 
 private enum ScanPassportState {
     case importJson
@@ -107,7 +108,19 @@ struct ScanPassportView: View {
                     onComplete(passportViewModel.passport!)
                 },
                 onClose: onClose,
-                onError: { withAnimation { state = .waitlistPassport } }
+                onError: { error in
+                    if let afError = error as? AFError {
+                        if case .sessionTaskFailed(_) = afError {
+                            LoggerUtil.common.error("Network connection lost")
+                            
+                            AlertManager.shared.emitError(.connectionUnstable)
+                            
+                            onClose()
+                        }
+                    }
+                    
+                    withAnimation { state = .waitlistPassport }
+                }
             )
             .environmentObject(mrzViewModel)
             .environmentObject(passportViewModel)

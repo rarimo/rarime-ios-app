@@ -9,7 +9,7 @@ struct PassportProofView: View {
 
     let onFinish: (ZkProof) -> Void
     let onClose: () -> Void
-    let onError: () -> Void
+    let onError: (Error) -> Void
 
     private func register() async {
         do {
@@ -30,7 +30,7 @@ struct PassportProofView: View {
             }
 
             LoggerUtil.passport.error("error while registering passport: \(error.localizedDescription, privacy: .public)")
-            onError()
+            onError(error)
         }
     }
 
@@ -217,7 +217,7 @@ private struct RevocationNFCScan: View {
 #Preview {
     @StateObject var userManager = UserManager.shared
 
-    return PassportProofView(onFinish: { _ in }, onClose: {}, onError: {})
+    return PassportProofView(onFinish: { _ in }, onClose: {}, onError: { _ in })
         .environmentObject(WalletManager())
         .environmentObject(PassportViewModel())
         .environmentObject(MRZViewModel())
