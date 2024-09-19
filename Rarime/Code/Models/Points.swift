@@ -434,6 +434,7 @@ struct PointsBalanceRaw: Codable {
     let rank: Int?
     let referralCodes: [ReferalCode]?
     let level: Int
+    let isVerified: Bool
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -444,6 +445,7 @@ struct PointsBalanceRaw: Codable {
         case rank
         case referralCodes = "referral_codes"
         case level
+        case isVerified = "is_verified"
     }
 
     func toLeaderboardEntry() -> LeaderboardEntry {

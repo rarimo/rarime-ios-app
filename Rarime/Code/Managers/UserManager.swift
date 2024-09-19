@@ -38,7 +38,7 @@ class UserManager: ObservableObject {
             
             self.user = try User.load()
             self.balance = 0
-            self.isPassportTokensReserved = AppUserDefaults.shared.isPassportTokensReserved
+            self.isPassportTokensReserved = false
             self.isRevoked = AppUserDefaults.shared.isUserRevoked
             
             if let registerZkProofJson = try AppKeychain.getValue(.registerZkProof) {
@@ -488,6 +488,8 @@ class UserManager: ObservableObject {
         
         let balanceResponse = try await points.getPointsBalance(jwt, true, true)
         
+        isPassportTokensReserved = isPassportTokensReserved || balanceResponse.data.attributes.isVerified
+        
         return balanceResponse.data.attributes
     }
     
@@ -541,12 +543,9 @@ class UserManager: ObservableObject {
         DispatchQueue.main.async {
             self.isPassportTokensReserved = true
         }
-        
-        AppUserDefaults.shared.isPassportTokensReserved = true
     }
     
     func reset() {
-        AppUserDefaults.shared.isPassportTokensReserved = false
         AppUserDefaults.shared.isUserRevoked = false
         AppUserDefaults.shared.userRefarralCode = ""
         
@@ -557,7 +556,7 @@ class UserManager: ObservableObject {
             
             self.user = nil
             self.balance = 0
-            self.isPassportTokensReserved = AppUserDefaults.shared.isPassportTokensReserved
+            self.isPassportTokensReserved = false
             
             self.registerZkProof = nil
         } catch {

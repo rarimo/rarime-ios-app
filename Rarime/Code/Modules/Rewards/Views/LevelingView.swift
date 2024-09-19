@@ -199,7 +199,8 @@ private struct LevelRewards: View {
             updatedAt: 1,
             rank: 1,
             referralCodes: [],
-            level: 1
+            level: 1, 
+            isVerified: true
         )
     )
 }
