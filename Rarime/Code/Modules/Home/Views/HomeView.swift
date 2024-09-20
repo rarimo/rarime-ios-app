@@ -220,12 +220,10 @@ struct HomeView: View {
                         .offset(x: 7, y: -8)
                 }
             }
-            if userManager.registerZkProof != nil {
-                Image(Icons.qrCode)
-                    .iconMedium()
-                    .foregroundStyle(.textSecondary)
-                    .onTapGesture { path.append(.scanQr) }
-            }
+            Image(Icons.qrCode)
+                .iconMedium()
+                .foregroundStyle(.textSecondary)
+                .onTapGesture { path.append(.scanQr) }
         }
         .padding(.top, 24)
         .padding(.horizontal, 8)
