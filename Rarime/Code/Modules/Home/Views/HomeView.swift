@@ -20,7 +20,6 @@ struct HomeView: View {
 
     @State private var isCongratsShown = false
     @State private var isClaimed = false
-    @State private var isPassportTokensReserved = false
 
     @State private var isBalanceFetching = true
     @State private var pointsBalance: PointsBalanceRaw? = nil
@@ -34,7 +33,7 @@ struct HomeView: View {
     }
 
     var canReserveTokens: Bool {
-        !isPassportTokensReserved
+        !(pointsBalance?.isVerified ?? false)
             && !passportManager.isUnsupportedForRewards
             && userManager.registerZkProof != nil
             && userManager.user?.userReferalCode != nil
@@ -314,7 +313,6 @@ struct HomeView: View {
                 let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
 
                 self.pointsBalance = pointsBalance
-                self.isPassportTokensReserved = pointsBalance.isVerified
             } catch is CancellationError {
                 return
             } catch {
