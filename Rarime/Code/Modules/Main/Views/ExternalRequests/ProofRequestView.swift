@@ -61,9 +61,12 @@ struct ProofRequestView: View {
                         )
                     }
                     VStack(spacing: 4) {
-                        AppButton(text: "Generate Proof", action: generateProof)
-                            .disabled(isSubmitting)
-                            .controlSize(.large)
+                        AppButton(
+                            text: isSubmitting ? "Generating..." : "Generate Proof",
+                            action: generateProof
+                        )
+                        .disabled(isSubmitting)
+                        .controlSize(.large)
                         AppButton(
                             variant: .tertiary,
                             text: "Cancel",

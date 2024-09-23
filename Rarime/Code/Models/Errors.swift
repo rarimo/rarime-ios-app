@@ -8,6 +8,7 @@ enum Errors: Error {
     case serviceDown(URL?)
     case userCreationFailed
     case unknown(String?)
+    case connectionUnstable
 }
 
 extension Errors: LocalizedError {
@@ -28,6 +29,8 @@ extension Errors: LocalizedError {
             return String(localized: "User creation failed")
         case .unknown(let message):
             return message ?? String(localized: "Unknown")
+        case .connectionUnstable:
+            return String(localized: "Internet connection is unstable")
         }
     }
 }
