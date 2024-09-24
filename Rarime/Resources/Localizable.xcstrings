@@ -1303,6 +1303,9 @@
     "Insufficient balance" : {
 
     },
+    "Internet connection is unstable" : {
+
+    },
     "Invalid address" : {
 
     },
@@ -1732,6 +1735,9 @@
 
     },
     "No backup found in iCloud" : {
+
+    },
+    "No internet connection" : {
 
     },
     "No notifications" : {
@@ -2959,6 +2965,9 @@
 
     },
     "Your Address" : {
+
+    },
+    "Your internet connection is down" : {
 
     },
     "Your passport data will be saved on your device. You can share it with us to expedite the support of your passport." : {
