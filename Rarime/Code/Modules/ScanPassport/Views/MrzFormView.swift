@@ -89,7 +89,7 @@ struct MrzFormView: View {
     }
 
     private func validateDocumentId(documentId: String) -> Bool {
-        let documentIdPattern = "^[A-Z0-9]{9}$"
+        let documentIdPattern = "^[A-Z0-9]+$"
         let documentIdPredicate = NSPredicate(format: "SELF MATCHES %@", documentIdPattern)
         return documentIdPredicate.evaluate(with: documentId)
     }

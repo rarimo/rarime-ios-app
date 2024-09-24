@@ -2,7 +2,7 @@ import NFCPassportReader
 import SwiftUI
 
 struct ReadPassportNFCView: View {
-    @EnvironmentObject private var mrzViewModel: MRZViewModel
+    @EnvironmentObject private var passportViewModel: PassportViewModel
     @EnvironmentObject private var userManager: UserManager
 
     let onNext: (_ passport: Passport) -> Void
@@ -38,7 +38,7 @@ struct ReadPassportNFCView: View {
     
     func scanPassport() {
         NFCScanner.scanPassport(
-            mrzViewModel.mrzKey,
+            passportViewModel.mrzKey ?? "",
             userManager.userChallenge,
             useExtendedMode,
             onCompletion: { result in
@@ -81,8 +81,8 @@ struct ReadPassportNFCView: View {
         onResponseError: {},
         onClose: {}
     )
-    .environmentObject(MRZViewModel())
     .environmentObject(userManager)
+    .environmentObject(PassportViewModel())
     .onAppear {
         _ = try? userManager.createNewUser()
     }

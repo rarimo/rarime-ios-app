@@ -1,8 +1,7 @@
 import SwiftUI
 
 struct ScanPassportMRZView: View {
-    @EnvironmentObject var mrzViewModel: MRZViewModel
-    let onNext: () -> Void
+    let onNext: (String) -> Void
     let onClose: () -> Void
 
     @State private var isManualMrzSheetPresented = false
@@ -15,14 +14,13 @@ struct ScanPassportMRZView: View {
             onClose: onClose
         ) {
             ZStack {
-                CameraPermissionView(delay: 0.5, onCancel: onClose) {
-                    MRZScannerView().environmentObject(mrzViewModel)
-                    LottieView(animation: Animations.passport, contentMode: .scaleToFill)
-                        .frame(width: 350, height: 256)
-                        .padding(.bottom, 2)
-                }
+                MRZScanView(onMrzKey: onNext)
+                Image(Images.passportFrame)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 200)
             }
-            .frame(height: 300)
+            .frame(maxWidth: .infinity)
             Text("Move your passport page inside the border")
                 .body3()
                 .foregroundStyle(.textSecondary)
@@ -42,27 +40,18 @@ struct ScanPassportMRZView: View {
             .padding(.horizontal, 20)
             .dynamicSheet(isPresented: $isManualMrzSheetPresented, title: "Fill Manually") {
                 MrzFormView(onSubmitted: { mrzKey in
-                    mrzViewModel.setMrzKey(mrzKey)
                     LoggerUtil.passport.info("MRZ filled manually")
-                    onNext()
+                    
+                    onNext(mrzKey)
                 })
             }
-        }
-        .onAppear {
-            mrzViewModel.setOnScanned {
-                LoggerUtil.passport.info("MRZ scanned")
-
-                onNext()
-            }
-            mrzViewModel.startScanning()
         }
     }
 }
 
 #Preview {
     ScanPassportMRZView(
-        onNext: {},
+        onNext: { _ in },
         onClose: {}
     )
-    .environmentObject(MRZViewModel())
 }

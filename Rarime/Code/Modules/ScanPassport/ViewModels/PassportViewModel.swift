@@ -17,6 +17,7 @@ enum PassportProofState: Int, CaseIterable {
 }
 
 class PassportViewModel: ObservableObject {
+    @Published var mrzKey: String?
     @Published var passport: Passport?
     @Published var proofState: PassportProofState = .downloadingData
     @Published var processingStatus: ProcessingStatus = .processing
@@ -43,6 +44,10 @@ class PassportViewModel: ObservableObject {
     
     var isEligibleForReward: Bool {
         !UNSUPPORTED_REWARD_COUNTRIES.contains(passportCountry)
+    }
+    
+    func setMrzKey(_ value: String) {
+        self.mrzKey = value
     }
 
     func setPassport(_ passport: Passport) {
