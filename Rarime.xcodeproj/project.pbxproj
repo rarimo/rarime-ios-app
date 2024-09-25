@@ -192,6 +192,7 @@
 		CE5315CA2C7769A20087D53D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5315C92C7769A20087D53D /* NotificationManager.swift */; };
 		CE61E8832C24240000940129 /* Semaphore in Frameworks */ = {isa = PBXBuildFile; productRef = CE61E8822C24240000940129 /* Semaphore */; };
 		CE61E88D2C247B4700940129 /* HMACUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61E88C2C247B4700940129 /* HMACUtils.swift */; };
+		CE66B1462CA4148B002F658E /* ScanPassport.json in Resources */ = {isa = PBXBuildFile; fileRef = CE66B1452CA4148B002F658E /* ScanPassport.json */; };
 		CE68BE3D2BD9B23D00D92EBB /* ZkProof.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */; };
 		CE68BE3F2BD9B4B200D92EBB /* Relayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */; };
 		CE68BE422BD9B6A200D92EBB /* RegistrationContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE412BD9B6A200D92EBB /* RegistrationContract.swift */; };
@@ -241,7 +242,6 @@
 		CEDC57922CA2CA0F00F02132 /* MRZCameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC57912CA2CA0F00F02132 /* MRZCameraManager.swift */; };
 		CEDC57942CA2CA4100F02132 /* CMSampleBuffer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC57932CA2CA4100F02132 /* CMSampleBuffer+Extension.swift */; };
 		CEDC57962CA30A9D00F02132 /* CIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC57952CA30A9D00F02132 /* CIImage+Extension.swift */; };
-		CEDC57982CA30C6400F02132 /* ScanPassport.json in Resources */ = {isa = PBXBuildFile; fileRef = CEDC57972CA30C6400F02132 /* ScanPassport.json */; };
 		CEF251382BD6E17800050507 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251372BD6E17800050507 /* UserManager.swift */; };
 		CEF2513A2BD6E22700050507 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251392BD6E22700050507 /* User.swift */; };
 		CEF723142BF4BB9000E79198 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF723132BF4BB9000E79198 /* Errors.swift */; };
@@ -446,6 +446,7 @@
 		CE5315C22C77664C0087D53D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE5315C92C7769A20087D53D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		CE61E88C2C247B4700940129 /* HMACUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACUtils.swift; sourceTree = "<group>"; };
+		CE66B1452CA4148B002F658E /* ScanPassport.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ScanPassport.json; sourceTree = "<group>"; };
 		CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZkProof.swift; sourceTree = "<group>"; };
 		CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relayer.swift; sourceTree = "<group>"; };
 		CE68BE412BD9B6A200D92EBB /* RegistrationContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationContract.swift; sourceTree = "<group>"; };
@@ -498,7 +499,6 @@
 		CEDC57912CA2CA0F00F02132 /* MRZCameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRZCameraManager.swift; sourceTree = "<group>"; };
 		CEDC57932CA2CA4100F02132 /* CMSampleBuffer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMSampleBuffer+Extension.swift"; sourceTree = "<group>"; };
 		CEDC57952CA30A9D00F02132 /* CIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+Extension.swift"; sourceTree = "<group>"; };
-		CEDC57972CA30C6400F02132 /* ScanPassport.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ScanPassport.json; sourceTree = "<group>"; };
 		CEF251372BD6E17800050507 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		CEF251392BD6E22700050507 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CEF723132BF4BB9000E79198 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -836,8 +836,8 @@
 		56A6C7522BBC18F100992562 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				CE66B1452CA4148B002F658E /* ScanPassport.json */,
 				56A6C7532BBC192800992562 /* Passport.json */,
-				CEDC57972CA30C6400F02132 /* ScanPassport.json */,
 				5689C8322BE9008900A4B767 /* IntroWelcome.json */,
 				5689C8362BE900D400A4B767 /* IntroIncognito.json */,
 				5689C8382BE900FA00A4B767 /* IntroRewards.json */,
@@ -1393,6 +1393,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE66B1462CA4148B002F658E /* ScanPassport.json in Resources */,
 				C75512872C8603D3000258AD /* ReadNfc.mp4 in Resources */,
 				5689C83B2BE90AD200A4B767 /* IncognitoLight.json in Resources */,
 				CE9E82BA2BA881F500AAF885 /* Assets.xcassets in Resources */,
@@ -1403,7 +1404,6 @@
 				561C3C412BADF0AA00FBB3B9 /* Inter-Medium.ttf in Resources */,
 				568820FE2C18797E001B729F /* IncognitoDark.json in Resources */,
 				5689C8332BE9008900A4B767 /* IntroWelcome.json in Resources */,
-				CEDC57982CA30C6400F02132 /* ScanPassport.json in Resources */,
 				CE5315C32C77664C0087D53D /* GoogleService-Info.plist in Resources */,
 				561C3C3F2BADF0AA00FBB3B9 /* Inter-Bold.ttf in Resources */,
 				561C3C402BADF0AA00FBB3B9 /* Inter-SemiBold.ttf in Resources */,

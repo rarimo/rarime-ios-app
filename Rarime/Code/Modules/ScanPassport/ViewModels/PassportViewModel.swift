@@ -93,6 +93,10 @@ class PassportViewModel: ObservableObject {
             if passportInfo.activeIdentity == currentIdentityKey {
                 LoggerUtil.common.info("Passport is already registered")
                 
+                if passportInfo.identityReissueCounter > 0 {
+                    isUserRevoked = true
+                }
+                
                 PassportManager.shared.setPassport(passport)
                 try UserManager.shared.saveRegisterZkProof(proof)
                 
@@ -131,9 +135,9 @@ class PassportViewModel: ObservableObject {
                 }
                 
                 try await UserManager.shared.revoke(passportInfo, passport)
-                
-                isUserRevoked = true
             }
+            
+            if isUserRevoking { isUserRevoked = true }
             
             var certificatePubKeySize: Int
             switch registeredCircuitData {
