@@ -4,7 +4,6 @@ struct PassportProofView: View {
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
-    @EnvironmentObject var mrzViewModel: MRZViewModel
     @EnvironmentObject var passportViewModel: PassportViewModel
 
     let onFinish: (ZkProof) -> Void
@@ -169,7 +168,6 @@ private struct GeneralStatusView: View {
 }
 
 private struct RevocationNFCScan: View {
-    @EnvironmentObject var mrzViewModel: MRZViewModel
     @EnvironmentObject var passportViewModel: PassportViewModel
 
     var body: some View {
@@ -190,7 +188,7 @@ private struct RevocationNFCScan: View {
             Spacer()
             AppButton(text: "Scan passport") {
                 NFCScanner.scanPassport(
-                    mrzViewModel.mrzKey,
+                    passportViewModel.mrzKey ?? "",
                     passportViewModel.revocationChallenge,
                     false,
                     onCompletion: { result in
@@ -220,7 +218,6 @@ private struct RevocationNFCScan: View {
     return PassportProofView(onFinish: { _ in }, onClose: {}, onError: { _ in })
         .environmentObject(WalletManager())
         .environmentObject(PassportViewModel())
-        .environmentObject(MRZViewModel())
         .environmentObject(UserManager())
         .environmentObject(DecentralizedAuthManager())
         .onAppear {

@@ -1,6 +1,7 @@
 import Combine
 import Identity
 import SwiftUI
+import Web3
 
 enum PassportProofState: Int, CaseIterable {
     case downloadingData, applyingZK, createProfile, finalizing
@@ -16,6 +17,7 @@ enum PassportProofState: Int, CaseIterable {
 }
 
 class PassportViewModel: ObservableObject {
+    @Published var mrzKey: String?
     @Published var passport: Passport?
     @Published var proofState: PassportProofState = .downloadingData
     @Published var processingStatus: ProcessingStatus = .processing
@@ -42,6 +44,10 @@ class PassportViewModel: ObservableObject {
     
     var isEligibleForReward: Bool {
         !UNSUPPORTED_REWARD_COUNTRIES.contains(passportCountry)
+    }
+    
+    func setMrzKey(_ value: String) {
+        self.mrzKey = value
     }
 
     func setPassport(_ passport: Passport) {
@@ -99,14 +105,19 @@ class PassportViewModel: ObservableObject {
             }
             
             let isUserRevoking = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
+            let isUserAlreadyRevoked = passportInfo.activeIdentity == PoseidonSMT.revokedValue
             
             if isUserRevoking {
-                LoggerUtil.common.info("Passport is registered, revoking")
+                if isUserAlreadyRevoked {
+                    LoggerUtil.common.info("Passport is already revoked")
+                } else {
+                    LoggerUtil.common.info("Passport is revoking")
+                }
             } else {
                 LoggerUtil.common.info("Passport is not registered")
             }
             
-            if isUserRevoking {
+            if isUserRevoking && !isUserAlreadyRevoked {
                 // takes last 8 bytes of activeIdentity as revocation challenge
                 revocationChallenge = passportInfo.activeIdentity[24 ..< 32]
                 
