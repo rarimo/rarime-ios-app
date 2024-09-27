@@ -110,6 +110,8 @@
 	<string>${STATE_KEEPER_CONTRACT_ADDRESS}</string>
 	<key>TERMS_OF_USE_URL</key>
 	<string>${TERMS_OF_USE_URL}</string>
+	<key>CLAIMABLE_NOTIFICATION_TOPIC</key>
+	<string>${CLAIMABLE_NOTIFICATION_TOPIC}</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Inter-Bold.ttf</string>

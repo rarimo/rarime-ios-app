@@ -1,6 +1,7 @@
 // MARK: General
 SLASH=/
 GENERAL_NOTIFICATION_TOPIC="rarime"
+CLAIMABLE_NOTIFICATION_TOPIC = "rarime-rewardable"
 
 // MARK: Intro
 PRIVACY_POLICY_URL = "https:${SLASH}/rarime.com/privacy-notice.html"

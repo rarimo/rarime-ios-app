@@ -52,6 +52,28 @@ class NotificationManager: ObservableObject {
         }
     }
     
+    func subscribe(toTopic: String) async throws {
+        try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound])
+        
+        // Firebase recommends to run this on the main thread
+        DispatchQueue.main.async {
+            Messaging.messaging().subscribe(toTopic: toTopic) { error in
+                if let error { LoggerUtil.common.error("Error subscribing to topic: \(error, privacy: .public)") }
+            }
+        }
+    }
+    
+    func unsubscribe(fromTopic: String) async throws {
+        try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound])
+        
+        // Firebase recommends to run this on the main thread
+        DispatchQueue.main.async {
+            Messaging.messaging().unsubscribe(fromTopic: fromTopic) { error in
+                if let error { LoggerUtil.common.error("Error unsubscribing from topic: \(error, privacy: .public)") }
+            }
+        }
+    }
+    
     func isAuthorized() async -> Bool {
         let status = await UNUserNotificationCenter.current().notificationSettings()
         
@@ -72,6 +94,8 @@ class NotificationManager: ObservableObject {
         pushNotification.body = pushNotificationRaw.aps.alert.body
         pushNotification.receivedAt = Date()
         pushNotification.isRead = false
+        pushNotification.type = pushNotificationRaw.type
+        pushNotification.content = pushNotificationRaw.content
         
         unreadNotificationsCounter += 1
         
@@ -82,5 +106,19 @@ class NotificationManager: ObservableObject {
     
     func eraceUnreadNotificationsCounter() {
         unreadNotificationsCounter = 0
+    }
+    
+    func reset() {
+        let viewContext = pushNotificationContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = PushNotification.fetchRequest()
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try viewContext.execute(deleteRequest)
+            unreadNotificationsCounter = 0
+        } catch {
+            LoggerUtil.common.error("Error deleting all notifications: \(error, privacy: .public)")
+        }
     }
 }

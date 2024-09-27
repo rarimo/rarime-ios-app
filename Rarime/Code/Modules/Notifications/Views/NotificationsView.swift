@@ -6,7 +6,10 @@ struct NotificationsView: View {
     
     let onBack: () -> Void
     
-    @FetchRequest(sortDescriptors: []) var pushNotifications: FetchedResults<PushNotification>
+    @State private var chosenNotification: PushNotification? = nil
+    @State private var isNotificationSheetPresented = false
+
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \PushNotification.receivedAt, ascending: false)]) var pushNotifications: FetchedResults<PushNotification>
     
     var body: some View {
         VStack {
@@ -32,6 +35,10 @@ struct NotificationsView: View {
                     List {
                         ForEach(pushNotifications, id: \.id) { pushNotification in
                             NotificationView(notification: pushNotification)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    chosenNotification = pushNotification
+                                }
                                 .onDisappear {
                                     markAsRead(pushNotification)
                                 }
@@ -50,6 +57,14 @@ struct NotificationsView: View {
         .padding(.horizontal, 20)
         .onAppear {
             notificationsManager.eraceUnreadNotificationsCounter()
+        }
+        .onChange(of: chosenNotification) { notification in
+            isNotificationSheetPresented = notification != nil
+        }
+        .dynamicSheet(isPresented: $isNotificationSheetPresented, fullScreen: true) {
+            NotificationSheetView(notification: chosenNotification!) {
+                isNotificationSheetPresented = false
+            }
         }
     }
     

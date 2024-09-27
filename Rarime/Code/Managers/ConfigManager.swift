@@ -18,6 +18,7 @@ extension ConfigManager {
         let airdropTerms: URL
         let version: String
         let generalNotificationTopic: String
+        let claimableNotificationTopic: String
 
         init() {
             do {
@@ -26,6 +27,7 @@ extension ConfigManager {
                 self.airdropTerms = try readURLFromInfoPlist(key: "AIRDROP_TERMS_URL")
                 self.version = try readFromInfoPlist(key: "CFBundleShortVersionString")
                 self.generalNotificationTopic = try readFromInfoPlist(key: "GENERAL_NOTIFICATION_TOPIC")
+                self.claimableNotificationTopic = try readFromInfoPlist(key: "CLAIMABLE_NOTIFICATION_TOPIC")
             } catch {
                 fatalError("ConfigManager.General init error: \(error.localizedDescription)")
             }

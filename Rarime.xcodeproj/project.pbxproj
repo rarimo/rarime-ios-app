@@ -152,9 +152,12 @@
 		C75512902C86F4BC000258AD /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
 		C75512942C870AFD000258AD /* StepIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75512932C870AFD000258AD /* StepIndicator.swift */; };
 		C75512962C87617B000258AD /* RemoveCase.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C75512952C87617B000258AD /* RemoveCase.mp4 */; };
+		C78EA4FA2C9B2EF5001DA0B3 /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
 		C7CE31D52C8B1CBD00EE6D2E /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */; };
 		CE059B422C9C4608006046B3 /* InternetConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE059B412C9C4608006046B3 /* InternetConnectionManager.swift */; };
 		CE059B442C9C4702006046B3 /* InternetConnectionRequiredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE059B432C9C4702006046B3 /* InternetConnectionRequiredView.swift */; };
+		C7FFB52E2C99D7820037CBD4 /* NotificationSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FFB52D2C99D7820037CBD4 /* NotificationSheetView.swift */; };
+		C7FFB5302C9ACE900037CBD4 /* ClaimableNotificationContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FFB52F2C9ACE900037CBD4 /* ClaimableNotificationContent.swift */; };
 		CE0881A12BF773CC00B31735 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0881A02BF773CC00B31735 /* AlertManager.swift */; };
 		CE0DA0D72BDA6F1900696503 /* EvmTxResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */; };
 		CE0DA0D92BDA927000696503 /* AirDropResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D82BDA927000696503 /* AirDropResponse.swift */; };
@@ -416,6 +419,8 @@
 		C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		CE059B412C9C4608006046B3 /* InternetConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionManager.swift; sourceTree = "<group>"; };
 		CE059B432C9C4702006046B3 /* InternetConnectionRequiredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionRequiredView.swift; sourceTree = "<group>"; };
+		C7FFB52D2C99D7820037CBD4 /* NotificationSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSheetView.swift; sourceTree = "<group>"; };
+		C7FFB52F2C9ACE900037CBD4 /* ClaimableNotificationContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimableNotificationContent.swift; sourceTree = "<group>"; };
 		CE0881A02BF773CC00B31735 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmTxResponse.swift; sourceTree = "<group>"; };
 		CE0DA0D82BDA927000696503 /* AirDropResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirDropResponse.swift; sourceTree = "<group>"; };
@@ -751,6 +756,7 @@
 				CE8FEB572C1AE5740008381A /* AuthorizeService.swift */,
 				CE8FEB5E2C1AFF0A0008381A /* JWT.swift */,
 				CE3D41BF2C77974500D0AA65 /* PushNotificationsRaw.swift */,
+				C7FFB52F2C9ACE900037CBD4 /* ClaimableNotificationContent.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -952,6 +958,7 @@
 			children = (
 				CE34775B2C7888E1005E91FE /* NotificationsView.swift */,
 				CE34775C2C7888E1005E91FE /* NotificationView.swift */,
+				C7FFB52D2C99D7820037CBD4 /* NotificationSheetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1425,6 +1432,7 @@
 				CE3D41D72C779C9E00D0AA65 /* PushNotificationsRaw.swift in Sources */,
 				CE34775A2C788620005E91FE /* String+Error.swift in Sources */,
 				CE3477582C788602005E91FE /* LoggerUtil.swift in Sources */,
+				C78EA4FA2C9B2EF5001DA0B3 /* PushNotification.xcdatamodeld in Sources */,
 				CE3D41D62C779C8D00D0AA65 /* NotificationManager.swift in Sources */,
 				CE3D41C82C779BC400D0AA65 /* NotificationService.swift in Sources */,
 				CE3477592C78860C005E91FE /* ConfigManager.swift in Sources */,
@@ -1511,6 +1519,7 @@
 				561C3C2B2BADBF1000FBB3B9 /* View+Typography.swift in Sources */,
 				560F0C342BD175EB00067054 /* LoggerUtil.swift in Sources */,
 				568B4FCC2BB6C164001C9C74 /* IntroView.swift in Sources */,
+				C7FFB5302C9ACE900037CBD4 /* ClaimableNotificationContent.swift in Sources */,
 				CE31E54A2C11FE150039CAA5 /* ImportIdentityView.swift in Sources */,
 				560F0C1F2BD027EA00067054 /* WalletReceiveView.swift in Sources */,
 				CED314672C0483BD00DF31D5 /* MailView.swift in Sources */,
@@ -1598,6 +1607,7 @@
 				56933DF52BBAC42E0068C894 /* ReadPassportNFCView.swift in Sources */,
 				CEDC57922CA2CA0F00F02132 /* MRZCameraManager.swift in Sources */,
 				5641CC432C872F77007B7A0D /* ExternalRequestsView.swift in Sources */,
+				C7FFB52E2C99D7820037CBD4 /* NotificationSheetView.swift in Sources */,
 				CEA03F0A2C7C7A17002F218A /* View+IsLoading.swift in Sources */,
 				CE059B422C9C4608006046B3 /* InternetConnectionManager.swift in Sources */,
 				CE1FA56A2C1708F100B2C191 /* Points.swift in Sources */,

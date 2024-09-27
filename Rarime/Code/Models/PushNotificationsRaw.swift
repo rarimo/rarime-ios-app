@@ -3,6 +3,8 @@ import CoreData
 
 struct PushNotificationRaw: Codable {
     let aps: APS
+    let type: String?
+    let content: String?
     
     struct APS: Codable {
         let alert: Alert
@@ -27,6 +29,8 @@ public class PushNotification: NSManagedObject, Identifiable {
     @NSManaged public var body: String?
     @NSManaged public var receivedAt: Date?
     @NSManaged public var isRead: Bool
+    @NSManaged public var type: String?
+    @NSManaged public var content: String?
     
     @nonobjc public class func fetchRequest() -> NSFetchRequest<PushNotification> {
         return NSFetchRequest<PushNotification>(entityName: "PushNotification")
