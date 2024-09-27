@@ -154,7 +154,8 @@ private struct InviteCodeView: View {
             updatedAt: Int(Date().timeIntervalSince1970),
             rank: 12,
             referralCodes: [],
-            level: 2
+            level: 2,
+            isVerified: true
         ),
         onBack: {}
     )

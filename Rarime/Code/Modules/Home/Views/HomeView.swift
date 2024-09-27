@@ -33,7 +33,7 @@ struct HomeView: View {
     }
 
     var canReserveTokens: Bool {
-        !userManager.isPassportTokensReserved
+        !(pointsBalance?.isVerified ?? false)
             && !passportManager.isUnsupportedForRewards
             && userManager.registerZkProof != nil
             && userManager.user?.userReferalCode != nil
@@ -142,13 +142,14 @@ struct HomeView: View {
                                     set: { passportManager.setPassportIdentifiers($0) }
                                 )
                             )
-                            if canReserveTokens {
-                                reserveTokensCard
-                            }
                         } else {
                             rewardsCard
                         }
                         rarimeCard
+
+                        if canReserveTokens && !isBalanceFetching {
+                            reserveTokensCard
+                        }
                         Spacer().frame(height: 120)
                     }
                     .padding(.horizontal, 12)

@@ -55,9 +55,6 @@ public class AppUserDefaults: ObservableObject {
 
     @AppStorage("is_user_revoked")
     public var isUserRevoked = false
-
-    @AppStorage("is_passport_tokens_reserved")
-    public var isPassportTokensReserved = false
     
     @AppStorage("userStatus")
     public var userStatus = User.Status.unscanned.rawValue
