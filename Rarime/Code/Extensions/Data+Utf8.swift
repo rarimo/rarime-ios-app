@@ -5,9 +5,3 @@ extension Data {
         String(data: self, encoding: .utf8) ?? ""
     }
 }
-
-extension Data {
-    func toJSON() -> Data? {
-        return try? JSONEncoder().encode(self)
-    }
-}

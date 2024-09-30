@@ -129,10 +129,12 @@ struct LightVerificationView: View {
                     params: verificationParamsResponse!.data.attributes
                 )
                 
+                let pubSignalsJSON = try? JSONEncoder().encode(pubSignals)
+                
                 var error: NSError? = nil
                 let signedPubSignals = IdentitySignPubSignalsWithSecp256k1(
                     ConfigManager.shared.api.lightSignaturePrivateKey,
-                    pubSignals.toJSON(),
+                    pubSignalsJSON,
                     &error
                 )
                 
