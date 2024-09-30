@@ -9,6 +9,7 @@ struct ExternalRequestsView: View {
     private var sheetTitle: LocalizedStringResource {
         switch externalRequestsManager.request {
         case .proofRequest: "Proof Request"
+        case .lightVerification: "Light Verification"
         default: ""
         }
     }
@@ -20,6 +21,12 @@ struct ExternalRequestsView: View {
                 case let .proofRequest(proofParamsUrl):
                     ProofRequestView(
                         proofParamsUrl: proofParamsUrl,
+                        onSuccess: { isSheetPresented = false },
+                        onDismiss: { isSheetPresented = false }
+                    )
+                case let .lightVerification(verificationParamsUrl):
+                    LightVerificationView(
+                        verificationParamsUrl: verificationParamsUrl,
                         onSuccess: { isSheetPresented = false },
                         onDismiss: { isSheetPresented = false }
                     )

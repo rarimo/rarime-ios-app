@@ -6,10 +6,12 @@ enum RarimeUrlHosts: String {
 
 enum ExternalRequestTypes: String, Codable {
     case proofRequest = "proof-request"
+    case lightVerification = "light-verification"
 }
 
 enum ExternalRequests: Equatable {
     case proofRequest(proofParamsUrl: URL)
+    case lightVerification(verificationParamsUrl: URL)
 }
 
 class ExternalRequestsManager: ObservableObject {
@@ -45,6 +47,8 @@ class ExternalRequestsManager: ObservableObject {
         switch type {
         case ExternalRequestTypes.proofRequest.rawValue:
             handleProofRequest(params: params)
+        case ExternalRequestTypes.lightVerification.rawValue:
+            handleLightVerificationRequest(params: params)
         default:
             LoggerUtil.common.error("Invalid external request type: \(type, privacy: .public)")
         }
@@ -66,6 +70,18 @@ class ExternalRequestsManager: ObservableObject {
         }
 
         setRequest(.proofRequest(proofParamsUrl: proofParamsUrl))
+    }
+    
+    private func handleLightVerificationRequest(params: [URLQueryItem]) {
+        guard let rawProofParamsUrl = params.first(where: { $0.name == "proof_params_url" })?.value?.removingPercentEncoding,
+              let proofParamsUrl = URL(string: rawProofParamsUrl)
+        else {
+            LoggerUtil.common.error("Invalid light verification request URL: \(params, privacy: .public)")
+            AlertManager.shared.emitError(.unknown("Invalid light verification request URL"))
+            return
+        }
+        
+        setRequest(.lightVerification(verificationParamsUrl: proofParamsUrl))
     }
 
     func setRequest(_ request: ExternalRequests) {

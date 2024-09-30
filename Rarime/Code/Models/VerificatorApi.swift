@@ -2,7 +2,7 @@ import Alamofire
 import Foundation
 
 class VerificatorApi {
-    static func getProofParams(url: URL) async throws -> GetProofParamsResponse {
+    static func getExternalRequestParams(url: URL) async throws -> GetProofParamsResponse {
         let response = try await AF.request(url)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(GetProofParamsResponse.self)
@@ -24,6 +24,27 @@ class VerificatorApi {
         let response = try await AF.request(url, method: .post, parameters: request, encoder: JSONParameterEncoder.default)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(SendProofResponse.self)
+            .result
+            .get()
+
+        return response
+    }
+    
+    static func sendSignature(url: URL, userId: String, signature: String, pubSignals: PubSignals) async throws -> SendSignatureResponse {
+        let request = SendSignatureRequest(
+            data: SendSignatureRequestData(
+                id: userId,
+                type: "receive_signature",
+                attributes: SendSignatureRequestAttributes(
+                    signature: signature,
+                    pubSignals: pubSignals
+                )
+            )
+        )
+
+        let response = try await AF.request(url, method: .post, parameters: request, encoder: JSONParameterEncoder.default)
+            .validate(OpenApiError.catchInstance)
+            .serializingDecodable(SendSignatureResponse.self)
             .result
             .get()
 
@@ -82,8 +103,28 @@ struct SendProofRequestAttributes: Codable {
     let proof: ZkProof
 }
 
+// send data signature
+struct SendSignatureRequest: Codable {
+    let data: SendSignatureRequestData
+}
+
+struct SendSignatureRequestData: Codable {
+    let id, type: String
+    let attributes: SendSignatureRequestAttributes
+}
+
+struct SendSignatureRequestAttributes: Codable {
+    let signature: String
+    let pubSignals: [String]
+    
+    enum CodingKeys: String, CodingKey {
+        case signature
+        case pubSignals = "pub_signals"
+    }
+}
+
 // send proof response
-enum SendProofUserStatus: String, Codable {
+enum ReceivedUserStatus: String, Codable {
     case notVerified = "not_verified"
     case verified
     case failedVerification = "failed_verification"
@@ -100,5 +141,19 @@ struct SendProofResponseData: Codable {
 }
 
 struct SendProofResponseAttributes: Codable {
-    let status: SendProofUserStatus
+    let status: ReceivedUserStatus
+}
+
+// send signature response
+struct SendSignatureResponse: Codable {
+    let data: SendSignatureResponseData
+}
+
+struct SendSignatureResponseData: Codable {
+    let id, type: String
+    let attributes: SendSignatureResponseAttributes
+}
+
+struct SendSignatureResponseAttributes: Codable {
+    let status: ReceivedUserStatus
 }

@@ -112,6 +112,8 @@
 	<string>${TERMS_OF_USE_URL}</string>
 	<key>CLAIMABLE_NOTIFICATION_TOPIC</key>
 	<string>${CLAIMABLE_NOTIFICATION_TOPIC}</string>
+	<key>LIGHT_SIGNATURE_PRIVATE_KEY</key>
+	<string>${LIGHT_SIGNATURE_PRIVATE_KEY}</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Inter-Bold.ttf</string>

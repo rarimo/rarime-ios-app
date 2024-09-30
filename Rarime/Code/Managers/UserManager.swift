@@ -6,6 +6,7 @@ import Web3
 
 private let ENCAPSULATED_CONTENT_2688: Int = 2688
 private let ENCAPSULATED_CONTENT_2704: Int = 2704
+private let ZERO_IN_HEX: String = "0x303030303030"
 
 class UserManager: ObservableObject {
     static let shared = UserManager()
@@ -360,6 +361,40 @@ class UserManager: ObservableObject {
         let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
         
         return ZkProof(proof: proof, pubSignals: pubSignals)
+    }
+    
+    func collectPubSignals(
+        passport: Passport,
+        params: GetProofParamsResponseAttributes
+    ) throws -> PubSignals  {
+        let nullifier = try generateNullifierForEvent(params.eventID)
+        let currentTimestamp = String(format: "%.0f", Date().timeIntervalSince1970 * 1000)
+        
+        return [
+            nullifier.toBigUInt(),
+            ZERO_IN_HEX.toBigUInt(),
+            ZERO_IN_HEX.toBigUInt(),
+            "0",
+            "0",
+            "0",
+            passport.issuingAuthority.toBigUInt(toUTF8: true),
+            passport.gender.toBigUInt(toUTF8: true),
+            "0",
+            params.eventID.toBigUInt(),
+            params.eventData.toBigUInt(),
+            "0",
+            params.selector.toBigUInt(),
+            currentTimestamp.toBigUInt(),
+            params.timestampLowerBound.toBigUInt(),
+            params.timestampUpperBound.toBigUInt(),
+            params.identityCounterLowerBound.description.toBigUInt(),
+            params.identityCounterUpperBound.description.toBigUInt(),
+            params.birthDateLowerBound.toBigUInt(),
+            params.birthDateUpperBound.toBigUInt(),
+            params.expirationDateLowerBound.toBigUInt(),
+            params.expirationDateUpperBound.toBigUInt(),
+            params.citizenshipMask.toBigUInt()
+        ]
     }
     
     func generatePointsProof(_ registerZkProof: ZkProof, _ passport: Passport) async throws -> ZkProof {
