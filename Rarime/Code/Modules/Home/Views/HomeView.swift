@@ -33,7 +33,7 @@ struct HomeView: View {
     }
 
     var canReserveTokens: Bool {
-        !userManager.isPassportTokensReserved
+        !(pointsBalance?.isVerified ?? false)
             && !passportManager.isUnsupportedForRewards
             && userManager.registerZkProof != nil
             && userManager.user?.userReferalCode != nil
@@ -142,13 +142,14 @@ struct HomeView: View {
                                     set: { passportManager.setPassportIdentifiers($0) }
                                 )
                             )
-                            if canReserveTokens {
-                                reserveTokensCard
-                            }
                         } else {
                             rewardsCard
                         }
                         rarimeCard
+
+                        if canReserveTokens && !isBalanceFetching {
+                            reserveTokensCard
+                        }
                         Spacer().frame(height: 120)
                     }
                     .padding(.horizontal, 12)
@@ -199,7 +200,7 @@ struct HomeView: View {
             ZStack {
                 Image(Icons.bell)
                     .iconMedium()
-                    .foregroundStyle(.baseBlack)
+                    .foregroundStyle(.textSecondary)
                     .onTapGesture { path.append(.notifications) }
                 if notificationManager.unreadNotificationsCounter > 0 {
                     Text(verbatim: notificationManager.unreadNotificationsCounter.formatted())
@@ -210,12 +211,10 @@ struct HomeView: View {
                         .offset(x: 7, y: -8)
                 }
             }
-            if userManager.registerZkProof != nil {
-                Image(Icons.qrCode)
-                    .iconMedium()
-                    .foregroundStyle(.baseBlack)
-                    .onTapGesture { path.append(.scanQr) }
-            }
+            Image(Icons.qrCode)
+                .iconMedium()
+                .foregroundStyle(.textSecondary)
+                .onTapGesture { path.append(.scanQr) }
         }
         .padding(.top, 24)
         .padding(.horizontal, 8)

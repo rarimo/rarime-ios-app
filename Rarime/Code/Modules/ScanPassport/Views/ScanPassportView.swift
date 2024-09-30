@@ -25,7 +25,6 @@ struct ScanPassportView: View {
     @State private var isTutorialShown = AppUserDefaults.shared.isScanTutorialDisplayed
 
     @StateObject private var passportViewModel = PassportViewModel()
-    @StateObject private var mrzViewModel = MRZViewModel()
 
     var body: some View {
         switch state {
@@ -41,7 +40,11 @@ struct ScanPassportView: View {
         case .scanMRZ:
             VStack(spacing: 8) {
                 ScanPassportMRZView(
-                    onNext: { withAnimation { state = .readNFC } },
+                    onNext: { mrzKey in
+                        passportViewModel.setMrzKey(mrzKey)
+                        
+                        withAnimation { state = .readNFC }
+                    },
                     onClose: onClose
                 )
                 .dynamicSheet(isPresented: $isTutorialPresented, fullScreen: true) {
@@ -65,7 +68,6 @@ struct ScanPassportView: View {
             }
             .padding(.bottom, 20)
             .background(.backgroundPrimary)
-            .environmentObject(mrzViewModel)
             .transition(.backslide)
         case .readNFC:
             ReadPassportNFCView(
@@ -79,7 +81,7 @@ struct ScanPassportView: View {
                 onResponseError: { withAnimation { state = .chipError } },
                 onClose: onClose
             )
-            .environmentObject(mrzViewModel)
+            .environmentObject(passportViewModel)
             .transition(.backslide)
         case .chipError:
             PassportChipErrorView(onClose: onClose)
@@ -124,7 +126,6 @@ struct ScanPassportView: View {
                     withAnimation { state = .waitlistPassport }
                 }
             )
-            .environmentObject(mrzViewModel)
             .environmentObject(passportViewModel)
             .transition(.backslide)
         case .waitlistPassport:

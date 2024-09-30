@@ -105,9 +105,6 @@
 		56933E012BBBFDD90068C894 /* CirclesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E002BBBFDD90068C894 /* CirclesLoader.swift */; };
 		56933E032BBBFDFE0068C894 /* ProcessingChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E022BBBFDFE0068C894 /* ProcessingChipView.swift */; };
 		56933E052BBC00D60068C894 /* RewardChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E042BBC00D60068C894 /* RewardChipView.swift */; };
-		56933E082BBC09990068C894 /* QKMRZScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 56933E072BBC09990068C894 /* QKMRZScanner */; };
-		56933E0C2BBC09D20068C894 /* MRZViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E0B2BBC09D20068C894 /* MRZViewModel.swift */; };
-		56933E0E2BBC09F10068C894 /* MRZScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E0D2BBC09F10068C894 /* MRZScannerView.swift */; };
 		56A6C7542BBC192800992562 /* Passport.json in Resources */ = {isa = PBXBuildFile; fileRef = 56A6C7532BBC192800992562 /* Passport.json */; };
 		56A6C7562BBC194800992562 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C7552BBC194800992562 /* Animations.swift */; };
 		56A6C75C2BBC2CD500992562 /* PassportUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C75B2BBC2CD500992562 /* PassportUtils.swift */; };
@@ -115,7 +112,6 @@
 		56A6C7672BBC342A00992562 /* masterList.pem in Resources */ = {isa = PBXBuildFile; fileRef = 56A6C7662BBC342A00992562 /* masterList.pem */; };
 		56A6C76A2BBC57B700992562 /* PassportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C7692BBC57B700992562 /* PassportViewModel.swift */; };
 		56A6C76E2BBD474200992562 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C76D2BBD474200992562 /* DateUtil.swift */; };
-		56A88FCD2C04C78F00D3A64A /* ScanPassport.json in Resources */ = {isa = PBXBuildFile; fileRef = 56A88FCC2C04C78F00D3A64A /* ScanPassport.json */; };
 		56A88FCF2C062AB200D3A64A /* AirdropCheckboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A88FCE2C062AB200D3A64A /* AirdropCheckboxView.swift */; };
 		56AC03402BB06A2D00A34A00 /* Image+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */; };
 		56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3002BB723A1002CF710 /* NewIdentityView.swift */; };
@@ -158,12 +154,15 @@
 		C75512902C86F4BC000258AD /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
 		C75512942C870AFD000258AD /* StepIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75512932C870AFD000258AD /* StepIndicator.swift */; };
 		C75512962C87617B000258AD /* RemoveCase.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C75512952C87617B000258AD /* RemoveCase.mp4 */; };
+		C78EA4FA2C9B2EF5001DA0B3 /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
 		C789A2E82CA5978B00443900 /* LightVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C789A2E72CA5978B00443900 /* LightVerificationView.swift */; };
 		C789A2EA2CA59F5800443900 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C789A2E92CA59F5800443900 /* StringUtils.swift */; };
 		C7B9219C2CA6DA60001F172C /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7B9219B2CA6DA60001F172C /* Identity.xcframework */; };
 		C7CE31D52C8B1CBD00EE6D2E /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */; };
 		CE059B422C9C4608006046B3 /* InternetConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE059B412C9C4608006046B3 /* InternetConnectionManager.swift */; };
 		CE059B442C9C4702006046B3 /* InternetConnectionRequiredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE059B432C9C4702006046B3 /* InternetConnectionRequiredView.swift */; };
+		C7FFB52E2C99D7820037CBD4 /* NotificationSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FFB52D2C99D7820037CBD4 /* NotificationSheetView.swift */; };
+		C7FFB5302C9ACE900037CBD4 /* ClaimableNotificationContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FFB52F2C9ACE900037CBD4 /* ClaimableNotificationContent.swift */; };
 		CE0881A12BF773CC00B31735 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0881A02BF773CC00B31735 /* AlertManager.swift */; };
 		CE0DA0D72BDA6F1900696503 /* EvmTxResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */; };
 		CE0DA0D92BDA927000696503 /* AirDropResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D82BDA927000696503 /* AirDropResponse.swift */; };
@@ -200,6 +199,7 @@
 		CE5315CA2C7769A20087D53D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5315C92C7769A20087D53D /* NotificationManager.swift */; };
 		CE61E8832C24240000940129 /* Semaphore in Frameworks */ = {isa = PBXBuildFile; productRef = CE61E8822C24240000940129 /* Semaphore */; };
 		CE61E88D2C247B4700940129 /* HMACUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61E88C2C247B4700940129 /* HMACUtils.swift */; };
+		CE66B1462CA4148B002F658E /* ScanPassport.json in Resources */ = {isa = PBXBuildFile; fileRef = CE66B1452CA4148B002F658E /* ScanPassport.json */; };
 		CE68BE3D2BD9B23D00D92EBB /* ZkProof.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */; };
 		CE68BE3F2BD9B4B200D92EBB /* Relayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */; };
 		CE68BE422BD9B6A200D92EBB /* RegistrationContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE412BD9B6A200D92EBB /* RegistrationContract.swift */; };
@@ -244,6 +244,11 @@
 		CEDC4D7F2BE9267300459D4E /* PoseidonSMTContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC4D7E2BE9267300459D4E /* PoseidonSMTContract.swift */; };
 		CEDC4D812BE9475400459D4E /* Certificates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC4D802BE9475400459D4E /* Certificates.swift */; };
 		CEDC4D832BE949F300459D4E /* Ethereum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC4D822BE949F300459D4E /* Ethereum.swift */; };
+		CEDC578B2CA2C9A600F02132 /* MRZScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC578A2CA2C9A600F02132 /* MRZScanView.swift */; };
+		CEDC578F2CA2C9EB00F02132 /* MRZScanView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC578E2CA2C9EB00F02132 /* MRZScanView+ViewModel.swift */; };
+		CEDC57922CA2CA0F00F02132 /* MRZCameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC57912CA2CA0F00F02132 /* MRZCameraManager.swift */; };
+		CEDC57942CA2CA4100F02132 /* CMSampleBuffer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC57932CA2CA4100F02132 /* CMSampleBuffer+Extension.swift */; };
+		CEDC57962CA30A9D00F02132 /* CIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC57952CA30A9D00F02132 /* CIImage+Extension.swift */; };
 		CEF251382BD6E17800050507 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251372BD6E17800050507 /* UserManager.swift */; };
 		CEF2513A2BD6E22700050507 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251392BD6E22700050507 /* User.swift */; };
 		CEF723142BF4BB9000E79198 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF723132BF4BB9000E79198 /* Errors.swift */; };
@@ -369,8 +374,6 @@
 		56933E002BBBFDD90068C894 /* CirclesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclesLoader.swift; sourceTree = "<group>"; };
 		56933E022BBBFDFE0068C894 /* ProcessingChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingChipView.swift; sourceTree = "<group>"; };
 		56933E042BBC00D60068C894 /* RewardChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardChipView.swift; sourceTree = "<group>"; };
-		56933E0B2BBC09D20068C894 /* MRZViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRZViewModel.swift; sourceTree = "<group>"; };
-		56933E0D2BBC09F10068C894 /* MRZScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRZScannerView.swift; sourceTree = "<group>"; };
 		56A6C7532BBC192800992562 /* Passport.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Passport.json; sourceTree = "<group>"; };
 		56A6C7552BBC194800992562 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		56A6C75B2BBC2CD500992562 /* PassportUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportUtils.swift; sourceTree = "<group>"; };
@@ -379,7 +382,6 @@
 		56A6C7662BBC342A00992562 /* masterList.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = masterList.pem; sourceTree = "<group>"; };
 		56A6C7692BBC57B700992562 /* PassportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportViewModel.swift; sourceTree = "<group>"; };
 		56A6C76D2BBD474200992562 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
-		56A88FCC2C04C78F00D3A64A /* ScanPassport.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ScanPassport.json; sourceTree = "<group>"; };
 		56A88FCE2C062AB200D3A64A /* AirdropCheckboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirdropCheckboxView.swift; sourceTree = "<group>"; };
 		56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Icon.swift"; sourceTree = "<group>"; };
 		56DAA3002BB723A1002CF710 /* NewIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIdentityView.swift; sourceTree = "<group>"; };
@@ -426,6 +428,8 @@
 		C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		CE059B412C9C4608006046B3 /* InternetConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionManager.swift; sourceTree = "<group>"; };
 		CE059B432C9C4702006046B3 /* InternetConnectionRequiredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionRequiredView.swift; sourceTree = "<group>"; };
+		C7FFB52D2C99D7820037CBD4 /* NotificationSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSheetView.swift; sourceTree = "<group>"; };
+		C7FFB52F2C9ACE900037CBD4 /* ClaimableNotificationContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimableNotificationContent.swift; sourceTree = "<group>"; };
 		CE0881A02BF773CC00B31735 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmTxResponse.swift; sourceTree = "<group>"; };
 		CE0DA0D82BDA927000696503 /* AirDropResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirDropResponse.swift; sourceTree = "<group>"; };
@@ -455,6 +459,7 @@
 		CE5315C22C77664C0087D53D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE5315C92C7769A20087D53D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		CE61E88C2C247B4700940129 /* HMACUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACUtils.swift; sourceTree = "<group>"; };
+		CE66B1452CA4148B002F658E /* ScanPassport.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ScanPassport.json; sourceTree = "<group>"; };
 		CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZkProof.swift; sourceTree = "<group>"; };
 		CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relayer.swift; sourceTree = "<group>"; };
 		CE68BE412BD9B6A200D92EBB /* RegistrationContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationContract.swift; sourceTree = "<group>"; };
@@ -502,6 +507,11 @@
 		CEDC4D7E2BE9267300459D4E /* PoseidonSMTContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoseidonSMTContract.swift; sourceTree = "<group>"; };
 		CEDC4D802BE9475400459D4E /* Certificates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Certificates.swift; sourceTree = "<group>"; };
 		CEDC4D822BE949F300459D4E /* Ethereum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ethereum.swift; sourceTree = "<group>"; };
+		CEDC578A2CA2C9A600F02132 /* MRZScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRZScanView.swift; sourceTree = "<group>"; };
+		CEDC578E2CA2C9EB00F02132 /* MRZScanView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MRZScanView+ViewModel.swift"; sourceTree = "<group>"; };
+		CEDC57912CA2CA0F00F02132 /* MRZCameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRZCameraManager.swift; sourceTree = "<group>"; };
+		CEDC57932CA2CA4100F02132 /* CMSampleBuffer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMSampleBuffer+Extension.swift"; sourceTree = "<group>"; };
+		CEDC57952CA30A9D00F02132 /* CIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+Extension.swift"; sourceTree = "<group>"; };
 		CEF251372BD6E17800050507 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		CEF251392BD6E22700050507 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CEF723132BF4BB9000E79198 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -537,7 +547,6 @@
 				CEB8B27C2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA2048.a in Frameworks */,
 				CE61E8832C24240000940129 /* Semaphore in Frameworks */,
 				56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */,
-				56933E082BBC09990068C894 /* QKMRZScanner in Frameworks */,
 				CE8FEB5C2C1AFC3F0008381A /* libwitnesscalc_auth.a in Frameworks */,
 				CE68BE472BD9B6EA00D92EBB /* Web3ContractABI in Frameworks */,
 				CEC562032BD923B4002D4954 /* libfr.a in Frameworks */,
@@ -757,6 +766,7 @@
 				CE8FEB572C1AE5740008381A /* AuthorizeService.swift */,
 				CE8FEB5E2C1AFF0A0008381A /* JWT.swift */,
 				CE3D41BF2C77974500D0AA65 /* PushNotificationsRaw.swift */,
+				C7FFB52F2C9ACE900037CBD4 /* ClaimableNotificationContent.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -833,7 +843,6 @@
 				56062B9F2C120B3400C9BF9B /* WaitlistPassportView.swift */,
 				568820F92C172C75001B729F /* ReserveTokensView.swift */,
 				56933DF02BBAC1B10068C894 /* ScanPassportLayoutView.swift */,
-				56933E0D2BBC09F10068C894 /* MRZScannerView.swift */,
 				CE3CD3AD2C6CCD0E008313B8 /* ImportFileView.swift */,
 				C75512822C85F9D0000258AD /* PassportScanTutorialView.swift */,
 			);
@@ -843,8 +852,8 @@
 		56A6C7522BBC18F100992562 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				CE66B1452CA4148B002F658E /* ScanPassport.json */,
 				56A6C7532BBC192800992562 /* Passport.json */,
-				56A88FCC2C04C78F00D3A64A /* ScanPassport.json */,
 				5689C8322BE9008900A4B767 /* IntroWelcome.json */,
 				5689C8362BE900D400A4B767 /* IntroIncognito.json */,
 				5689C8382BE900FA00A4B767 /* IntroRewards.json */,
@@ -866,7 +875,6 @@
 		56A6C7682BBC57A600992562 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				56933E0B2BBC09D20068C894 /* MRZViewModel.swift */,
 				56A6C7692BBC57B700992562 /* PassportViewModel.swift */,
 			);
 			path = ViewModels;
@@ -960,6 +968,7 @@
 			children = (
 				CE34775B2C7888E1005E91FE /* NotificationsView.swift */,
 				CE34775C2C7888E1005E91FE /* NotificationView.swift */,
+				C7FFB52D2C99D7820037CBD4 /* NotificationSheetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1034,6 +1043,8 @@
 				CE3E0D3A2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift */,
 				CE3477612C78892F005E91FE /* View+Align.swift */,
 				CEA03F092C7C7A17002F218A /* View+IsLoading.swift */,
+				CEDC57932CA2CA4100F02132 /* CMSampleBuffer+Extension.swift */,
+				CEDC57952CA30A9D00F02132 /* CIImage+Extension.swift */,
 				C71161B22CAAE3DB00ED41EA /* String+BigUInt.swift */,
 				C71161B42CAAF26100ED41EA /* Array+JSON.swift */,
 			);
@@ -1143,6 +1154,7 @@
 		CE9E82C72BA8852700AAF885 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				CEDC57892CA2C99C00F02132 /* MRZScan */,
 				CE34775E2C7888E1005E91FE /* Notifications */,
 				CE9E82C82BA8853900AAF885 /* App */,
 				CE9E82D12BA888F300AAF885 /* Common */,
@@ -1240,6 +1252,40 @@
 			path = Frameworks;
 			sourceTree = "<group>";
 		};
+		CEDC57892CA2C99C00F02132 /* MRZScan */ = {
+			isa = PBXGroup;
+			children = (
+				CEDC57902CA2CA0800F02132 /* Models */,
+				CEDC578D2CA2C9D900F02132 /* Views */,
+				CEDC578C2CA2C9D300F02132 /* ViewModels */,
+			);
+			path = MRZScan;
+			sourceTree = "<group>";
+		};
+		CEDC578C2CA2C9D300F02132 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				CEDC578E2CA2C9EB00F02132 /* MRZScanView+ViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		CEDC578D2CA2C9D900F02132 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CEDC578A2CA2C9A600F02132 /* MRZScanView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CEDC57902CA2CA0800F02132 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CEDC57912CA2CA0F00F02132 /* MRZCameraManager.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1281,7 +1327,6 @@
 			name = Rarime;
 			packageProductDependencies = (
 				CE32CF512BAC981300E507B6 /* Lottie */,
-				56933E072BBC09990068C894 /* QKMRZScanner */,
 				56E2D9312BD01E71006E725D /* NFCPassportReader */,
 				560F0C1C2BD0234300067054 /* QRCode */,
 				560F0C292BD114EE00067054 /* CodeScanner */,
@@ -1332,7 +1377,6 @@
 			mainGroup = CE9E82A92BA881F400AAF885;
 			packageReferences = (
 				CE32CF502BAC981300E507B6 /* XCRemoteSwiftPackageReference "lottie-spm" */,
-				56933E062BBC09990068C894 /* XCRemoteSwiftPackageReference "QKMRZScanner" */,
 				56E2D92F2BD01C77006E725D /* XCRemoteSwiftPackageReference "qrcode" */,
 				56E2D9302BD01E71006E725D /* XCRemoteSwiftPackageReference "NFCPassportReader" */,
 				560F0C282BD114EE00067054 /* XCRemoteSwiftPackageReference "CodeScanner" */,
@@ -1368,6 +1412,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE66B1462CA4148B002F658E /* ScanPassport.json in Resources */,
 				C75512872C8603D3000258AD /* ReadNfc.mp4 in Resources */,
 				5689C83B2BE90AD200A4B767 /* IncognitoLight.json in Resources */,
 				CE9E82BA2BA881F500AAF885 /* Assets.xcassets in Resources */,
@@ -1385,7 +1430,6 @@
 				C75512882C8603D3000258AD /* ScanMrz.mp4 in Resources */,
 				C75512962C87617B000258AD /* RemoveCase.mp4 in Resources */,
 				56A6C7672BBC342A00992562 /* masterList.pem in Resources */,
-				56A88FCD2C04C78F00D3A64A /* ScanPassport.json in Resources */,
 				56A6C7542BBC192800992562 /* Passport.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1400,6 +1444,7 @@
 				CE3D41D72C779C9E00D0AA65 /* PushNotificationsRaw.swift in Sources */,
 				CE34775A2C788620005E91FE /* String+Error.swift in Sources */,
 				CE3477582C788602005E91FE /* LoggerUtil.swift in Sources */,
+				C78EA4FA2C9B2EF5001DA0B3 /* PushNotification.xcdatamodeld in Sources */,
 				CE3D41D62C779C8D00D0AA65 /* NotificationManager.swift in Sources */,
 				CE3D41C82C779BC400D0AA65 /* NotificationService.swift in Sources */,
 				CE3477592C78860C005E91FE /* ConfigManager.swift in Sources */,
@@ -1456,12 +1501,15 @@
 				563529E92BB072B80027C910 /* HomeView.swift in Sources */,
 				56722F202BCD62BB00300AD0 /* ProfileView.swift in Sources */,
 				CEF8C7F72BE0DE9700F8E1A4 /* CosmosTransferResponse.swift in Sources */,
+				CEDC578F2CA2C9EB00F02132 /* MRZScanView+ViewModel.swift in Sources */,
+				CEDC57962CA30A9D00F02132 /* CIImage+Extension.swift in Sources */,
 				CE9E82B62BA881F400AAF885 /* RarimeApp.swift in Sources */,
 				560F0C212BD027FB00067054 /* WalletRouteLayout.swift in Sources */,
 				56933E052BBC00D60068C894 /* RewardChipView.swift in Sources */,
 				561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */,
 				CED314692C04889D00DF31D5 /* UIDevice+modelName.swift in Sources */,
 				CE3CD3AE2C6CCD0E008313B8 /* ImportFileView.swift in Sources */,
+				CEDC57942CA2CA4100F02132 /* CMSampleBuffer+Extension.swift in Sources */,
 				CE0DA0D92BDA927000696503 /* AirDropResponse.swift in Sources */,
 				56E2D92A2BCFFB6B006E725D /* Airdrop.swift in Sources */,
 				5617AB152C8F48BE003947C9 /* ExternalRequestsManager.swift in Sources */,
@@ -1484,6 +1532,7 @@
 				561C3C2B2BADBF1000FBB3B9 /* View+Typography.swift in Sources */,
 				560F0C342BD175EB00067054 /* LoggerUtil.swift in Sources */,
 				568B4FCC2BB6C164001C9C74 /* IntroView.swift in Sources */,
+				C7FFB5302C9ACE900037CBD4 /* ClaimableNotificationContent.swift in Sources */,
 				CE31E54A2C11FE150039CAA5 /* ImportIdentityView.swift in Sources */,
 				560F0C1F2BD027EA00067054 /* WalletReceiveView.swift in Sources */,
 				CED314672C0483BD00DF31D5 /* MailView.swift in Sources */,
@@ -1549,6 +1598,7 @@
 				560F0C272BD1146C00067054 /* ScanQRView.swift in Sources */,
 				56933DFB2BBAFBD90068C894 /* AppToggle.swift in Sources */,
 				CEA03F0C2C7C9319002F218A /* CreateIdentityIntroView.swift in Sources */,
+				CEDC578B2CA2C9A600F02132 /* MRZScanView.swift in Sources */,
 				C71161B52CAAF26100ED41EA /* Array+JSON.swift in Sources */,
 				CE34775F2C7888E1005E91FE /* NotificationsView.swift in Sources */,
 				56E6AD4B2BD2732300E4DDC1 /* ThemeView.swift in Sources */,
@@ -1570,9 +1620,10 @@
 				CE0DC57B2C0DB33A00EFC0D7 /* UpdateManager.swift in Sources */,
 				56E7AD0E2BDAD70200D3A258 /* RefreshableScrollView.swift in Sources */,
 				56A6C76A2BBC57B700992562 /* PassportViewModel.swift in Sources */,
-				56933E0E2BBC09F10068C894 /* MRZScannerView.swift in Sources */,
 				56933DF52BBAC42E0068C894 /* ReadPassportNFCView.swift in Sources */,
+				CEDC57922CA2CA0F00F02132 /* MRZCameraManager.swift in Sources */,
 				5641CC432C872F77007B7A0D /* ExternalRequestsView.swift in Sources */,
+				C7FFB52E2C99D7820037CBD4 /* NotificationSheetView.swift in Sources */,
 				CEA03F0A2C7C7A17002F218A /* View+IsLoading.swift in Sources */,
 				CE059B422C9C4608006046B3 /* InternetConnectionManager.swift in Sources */,
 				CE1FA56A2C1708F100B2C191 /* Points.swift in Sources */,
@@ -1587,7 +1638,6 @@
 				560F0C252BD036F900067054 /* AppTextField.swift in Sources */,
 				CE3CD3B12C6CEBEF008313B8 /* JSONCodable.swift in Sources */,
 				C75512902C86F4BC000258AD /* PushNotification.xcdatamodeld in Sources */,
-				56933E0C2BBC09D20068C894 /* MRZViewModel.swift in Sources */,
 				563529E72BB072870027C910 /* WalletView.swift in Sources */,
 				5659151D2BE92AA90050795A /* AppIcon.swift in Sources */,
 				56062BA02C120B3400C9BF9B /* WaitlistPassportView.swift in Sources */,
@@ -2090,7 +2140,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.2;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2141,7 +2191,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.2;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2258,7 +2308,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.2;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2368,7 +2418,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.2;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2445,14 +2495,6 @@
 			requirement = {
 				kind = exactVersion;
 				version = 4.2.2;
-			};
-		};
-		56933E062BBC09990068C894 /* XCRemoteSwiftPackageReference "QKMRZScanner" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Mattijah/QKMRZScanner";
-			requirement = {
-				branch = "master-spm";
-				kind = branch;
 			};
 		};
 		56E2D92F2BD01C77006E725D /* XCRemoteSwiftPackageReference "qrcode" */ = {
@@ -2557,11 +2599,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5655E4382BD51F5100B86C5C /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
-		};
-		56933E072BBC09990068C894 /* QKMRZScanner */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 56933E062BBC09990068C894 /* XCRemoteSwiftPackageReference "QKMRZScanner" */;
-			productName = QKMRZScanner;
 		};
 		56E2D9312BD01E71006E725D /* NFCPassportReader */ = {
 			isa = XCSwiftPackageProductDependency;

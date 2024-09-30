@@ -207,7 +207,7 @@ class Points {
     func listEvents(
         _ jwt: JWT,
         filterStatus: [String]? = nil,
-        filterMetaStaticName: [EventNames]? = nil,
+        filterMetaStaticName: [String]? = nil,
         count: Bool? = nil,
         pageLimit: Int? = nil,
         pageNumber: Int? = nil,
@@ -230,7 +230,6 @@ class Points {
 
         if let filterMetaStaticName = filterMetaStaticName {
             let queryValue = filterMetaStaticName
-                .map { item in item.rawValue }
                 .joined(separator: ",")
             query.append(URLQueryItem(name: "filter[meta.static.name]", value: queryValue))
         }
@@ -277,19 +276,19 @@ class Points {
         return response
     }
 
-    func claimPointsForEvent(_ eventId: String) async throws -> ClaimPointsForEvent {
+    func claimPointsForEvent(_ eventId: String) async throws -> Data {
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/events/\(eventId)")
 
         let requestPayload = ClaimPointsForEventRequest(
             data: ClaimPointsForEventRequestData(
                 id: eventId,
-                type: "claim_points"
+                type: "claim_event"
             )
         )
 
-        let response = try await AF.request(requestUrl, method: .post, parameters: requestPayload, encoder: JSONParameterEncoder.default)
+        let response = try await AF.request(requestUrl, method: .patch, parameters: requestPayload, encoder: JSONParameterEncoder.default)
             .validate(OpenApiError.catchInstance)
-            .serializingDecodable(ClaimPointsForEvent.self)
+            .serializingData()
             .result
             .get()
 
@@ -434,6 +433,7 @@ struct PointsBalanceRaw: Codable {
     let rank: Int?
     let referralCodes: [ReferalCode]?
     let level: Int
+    let isVerified: Bool
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -444,6 +444,7 @@ struct PointsBalanceRaw: Codable {
         case rank
         case referralCodes = "referral_codes"
         case level
+        case isVerified = "is_verified"
     }
 
     func toLeaderboardEntry() -> LeaderboardEntry {
@@ -793,4 +794,10 @@ enum EventNames: String, Codable {
     case referralSpecific = "referral_specific"
     case beReferred = "be_referred"
     case freeWeekly = "free_weekly"
+}
+
+enum EventStatuses: String, Codable {
+    case open
+    case fulfilled
+    case claimed
 }
