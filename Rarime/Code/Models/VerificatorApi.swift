@@ -124,7 +124,7 @@ struct SendSignatureRequestAttributes: Codable {
 }
 
 // send proof response
-enum SendProofUserStatus: String, Codable {
+enum ReceivedUserStatus: String, Codable {
     case notVerified = "not_verified"
     case verified
     case failedVerification = "failed_verification"
@@ -141,19 +141,19 @@ struct SendProofResponseData: Codable {
 }
 
 struct SendProofResponseAttributes: Codable {
-    let status: SendProofUserStatus
+    let status: ReceivedUserStatus
 }
 
 // send signature response
 struct SendSignatureResponse: Codable {
-    let data: SendProofResponseData
+    let data: SendSignatureResponseData
 }
 
 struct SendSignatureResponseData: Codable {
     let id, type: String
-    let attributes: SendProofResponseAttributes
+    let attributes: SendSignatureResponseAttributes
 }
 
 struct SendSignatureResponseAttributes: Codable {
-    let status: SendProofUserStatus
+    let status: ReceivedUserStatus
 }

@@ -8,12 +8,6 @@ extension Data {
 
 extension Data {
     func toJSON() -> Data? {
-        do {
-            let jsonData = try JSONEncoder().encode(self)
-            return jsonData
-        } catch {
-            print("Error encoding array to JSON: \(error)")
-        }
-        return nil
+        return try? JSONEncoder().encode(self)
     }
 }
