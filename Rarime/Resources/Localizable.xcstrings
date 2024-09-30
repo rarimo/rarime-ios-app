@@ -1281,6 +1281,9 @@
     "If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards" : {
 
     },
+    "Import JSON" : {
+
+    },
     "INCOGNITO ID" : {
 
     },
@@ -1529,6 +1532,9 @@
           }
         }
       }
+    },
+    "Light Verification" : {
+
     },
     "Limited time events" : {
 
@@ -2399,6 +2405,12 @@
       }
     },
     "Sierra Leone" : {
+
+    },
+    "Sign" : {
+
+    },
+    "Signing..." : {
 
     },
     "Singapore" : {

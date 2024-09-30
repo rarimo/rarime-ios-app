@@ -1,12 +1,6 @@
 import Foundation
 
-extension Data {
-    var utf8: String {
-        String(data: self, encoding: .utf8) ?? ""
-    }
-}
-
-extension Data {
+extension Array where Element == String {
     func toJSON() -> Data? {
         do {
             let jsonData = try JSONEncoder().encode(self)

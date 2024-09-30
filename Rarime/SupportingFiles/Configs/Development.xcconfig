@@ -19,6 +19,7 @@ POINTS_SERVICE_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
 AUTHORIZE_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
 REFERRAL_URL = "https:${SLASH}/app.stage.rarime.com/r"
 JOIN_REWARDS_KEY = "15690e4461abffc8a0057282af199b7345fa492d28ec1ae60049459389752e3ee714947cc64edcde3c5b25c10081a003d15a88cf137bcc97049da465781eff3c"
+LIGHT_SIGNATURE_PRIVATE_KEY = ""
 
 // MARK: Cosmos
 CHAIN_ID = "rarimo_42-1"

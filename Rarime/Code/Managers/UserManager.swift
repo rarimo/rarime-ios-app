@@ -6,6 +6,8 @@ import Web3
 
 private let ENCAPSULATED_CONTENT_2688: Int = 2688
 private let ENCAPSULATED_CONTENT_2704: Int = 2704
+private let ZERO_IN_HEX: String = "0x303030303030"
+private let ZERO: String = "0"
 
 class UserManager: ObservableObject {
     static let shared = UserManager()
@@ -362,6 +364,41 @@ class UserManager: ObservableObject {
         let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
         
         return ZkProof(proof: proof, pubSignals: pubSignals)
+    }
+    
+    func collectPubSignals(
+        passport: Passport,
+        params: GetProofParamsResponseAttributes
+    ) throws -> PubSignals  {
+        var pubSignals: [String] = []
+        let nullifier = try generateNullifierForEvent(params.eventID)
+        let currentTimestamp = String(format: "%.0f", Date().timeIntervalSince1970 * 1000)
+        
+        pubSignals.append(nullifier.toBigUInt())
+        pubSignals.append(ZERO_IN_HEX.toBigUInt())
+        pubSignals.append(ZERO_IN_HEX.toBigUInt())
+        pubSignals.append(ZERO)
+        pubSignals.append(ZERO)
+        pubSignals.append(ZERO)
+        pubSignals.append(passport.issuingAuthority.toBigUInt(toUTF8: true))
+        pubSignals.append(passport.gender.toBigUInt(toUTF8: true))
+        pubSignals.append(ZERO)
+        pubSignals.append(params.eventID.toBigUInt())
+        pubSignals.append(params.eventData.toBigUInt())
+        pubSignals.append(ZERO)
+        pubSignals.append(params.selector.toBigUInt())
+        pubSignals.append(currentTimestamp.toBigUInt())
+        pubSignals.append(params.timestampLowerBound.toBigUInt())
+        pubSignals.append(params.timestampUpperBound.toBigUInt())
+        pubSignals.append(params.identityCounterLowerBound.description.toBigUInt())
+        pubSignals.append(params.identityCounterUpperBound.description.toBigUInt())
+        pubSignals.append(params.birthDateLowerBound.toBigUInt())
+        pubSignals.append(params.birthDateUpperBound.toBigUInt())
+        pubSignals.append(params.expirationDateLowerBound.toBigUInt())
+        pubSignals.append(params.expirationDateUpperBound.toBigUInt())
+        pubSignals.append(params.citizenshipMask.toBigUInt())
+        
+        return pubSignals
     }
     
     func generatePointsProof(_ registerZkProof: ZkProof, _ passport: Passport) async throws -> ZkProof {

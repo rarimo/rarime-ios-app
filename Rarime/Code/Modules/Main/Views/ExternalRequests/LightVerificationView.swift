@@ -1,27 +1,25 @@
 import SwiftUI
+import Identity
 
-struct ProofRequestView: View {
+struct LightVerificationView: View {
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var passportManager: PassportManager
+    @EnvironmentObject private var decenralizedAuthManager: DecentralizedAuthManager
 
-    let proofParamsUrl: URL
+    let verificationParamsUrl: URL
     let onSuccess: () -> Void
     let onDismiss: () -> Void
 
-    @State private var proofParamsResponse: GetProofParamsResponse? = nil
+    @State private var verificationParamsResponse: GetProofParamsResponse? = nil
     @State private var isSubmitting = false
 
-    private var hasUniqueness: Bool {
-        Int(proofParamsResponse?.data.attributes.timestampUpperBound ?? "") != 0 && proofParamsResponse?.data.attributes.identityCounterUpperBound != 0
-    }
-
     private var citizenship: String {
-        guard let mask = proofParamsResponse?.data.attributes.citizenshipMask else { return "" }
+        guard let mask = verificationParamsResponse?.data.attributes.citizenshipMask else { return "" }
         return String(data: Data(hex: mask), encoding: .utf8) ?? ""
     }
 
     private var birthDate: Date? {
-        guard let birthDateUpperBound = proofParamsResponse?.data.attributes.birthDateUpperBound else { return nil }
+        guard let birthDateUpperBound = verificationParamsResponse?.data.attributes.birthDateUpperBound else { return nil }
         let birthDateString = String(data: Data(hex: birthDateUpperBound), encoding: .utf8) ?? ""
         return DateUtil.passportDateFormatter.date(from: birthDateString)
     }
@@ -30,10 +28,10 @@ struct ProofRequestView: View {
         guard let birthDate else { return nil }
         return Calendar.current.dateComponents([.year], from: birthDate, to: Date()).year
     }
-
+    
     var body: some View {
         ZStack {
-            if proofParamsResponse == nil {
+            if verificationParamsResponse == nil {
                 ProgressView()
                     .padding(.vertical, 100)
             } else {
@@ -41,7 +39,7 @@ struct ProofRequestView: View {
                     VStack(spacing: 16) {
                         makeItemRow(
                             title: String(localized: "ID"),
-                            value: StringUtils.cropString(proofParamsResponse!.data.id)
+                            value: StringUtils.cropString(verificationParamsResponse!.data.id)
                         )
                         if minAge != nil {
                             makeItemRow(
@@ -55,15 +53,11 @@ struct ProofRequestView: View {
                                 value: Country.fromISOCode(citizenship).flag
                             )
                         }
-                        makeItemRow(
-                            title: String(localized: "Uniqueness"),
-                            value: hasUniqueness ? "Yes" : "No"
-                        )
                     }
                     VStack(spacing: 4) {
                         AppButton(
-                            text: isSubmitting ? "Generating..." : "Generate Proof",
-                            action: generateProof
+                            text: isSubmitting ? "Signing..." : "Sign",
+                            action: createSignature
                         )
                         .disabled(isSubmitting)
                         .controlSize(.large)
@@ -83,7 +77,7 @@ struct ProofRequestView: View {
         .padding(.bottom, 8)
         .onAppear {
             Task { @MainActor in
-                await loadProofParams()
+                await loadVerificationParams()
             }
         }
     }
@@ -100,43 +94,62 @@ struct ProofRequestView: View {
         .foregroundStyle(.textPrimary)
     }
 
-    private func loadProofParams() async {
+    private func loadVerificationParams() async {
         do {
-            proofParamsResponse = try await VerificatorApi.getExternalRequestParams(url: proofParamsUrl)
+            verificationParamsResponse = try await VerificatorApi.getExternalRequestParams(url: verificationParamsUrl)
         } catch {
-            AlertManager.shared.emitError(.unknown("Failed to load proof params"))
-            LoggerUtil.common.error("Failed to load proof params: \(error, privacy: .public)")
+            AlertManager.shared.emitError(.unknown("Failed to load verification params"))
+            LoggerUtil.common.error("Failed to load verification params: \(error, privacy: .public)")
             onDismiss()
         }
     }
-
-    private func generateProof() {
+    
+    private func createSignature() {
         Task { @MainActor in
             isSubmitting = true
             defer { isSubmitting = false }
-
+            
             do {
                 guard let passport = passportManager.passport else { throw "failed to get passport" }
-
-                let proof = try await userManager.generateQueryProof(
+                
+                if Int(passport.ageString)! < minAge ?? 0 {
+                    throw "age is not valid"
+                }
+                
+                if citizenship.isEmpty || passport.nationality != citizenship {
+                    throw "citizenship is not valid"
+                }
+                                
+                let pubSignals = try userManager.collectPubSignals(
                     passport: passport,
-                    params: proofParamsResponse!.data.attributes
+                    params: verificationParamsResponse!.data.attributes
                 )
-                let response = try await VerificatorApi.sendProof(
-                    url: URL(string: proofParamsResponse!.data.attributes.callbackURL)!,
-                    userId: proofParamsResponse!.data.id,
-                    proof: proof
+                
+                var error: NSError? = nil
+                let signedPubSignals = IdentitySignPubSignalsWithSecp256k1(
+                    ConfigManager.shared.api.lightSignaturePrivateKey,
+                    pubSignals.toJSON(),
+                    &error
                 )
-
+                
+                if let error { throw error.localizedDescription }
+                
+                let response = try await VerificatorApi.sendSignature(
+                    url: URL(string: verificationParamsResponse!.data.attributes.callbackURL)!,
+                    userId: verificationParamsResponse!.data.id,
+                    signature: signedPubSignals,
+                    pubSignals: pubSignals
+                )
+                
                 if response.data.attributes.status != .verified {
                     throw "Proof status is not verified"
                 }
-
-                AlertManager.shared.emitSuccess("Proof generated successfully")
+                
+                AlertManager.shared.emitSuccess("Light verification successfully")
                 onSuccess()
             } catch {
-                AlertManager.shared.emitError(.unknown("Failed to generate proof"))
-                LoggerUtil.common.error("Failed to generate query proof: \(error, privacy: .public)")
+                AlertManager.shared.emitError(.unknown("Failed to create signature"))
+                LoggerUtil.common.error("Failed to create signature: \(error, privacy: .public)")
                 onDismiss()
             }
         }
@@ -145,12 +158,13 @@ struct ProofRequestView: View {
 
 #Preview {
     ZStack {}
-        .dynamicSheet(isPresented: .constant(true), title: "Proof Request") {
-            ProofRequestView(
-                proofParamsUrl: URL(string: "https://api.orgs.app.stage.rarime.com/integrations/verificator-svc/public/proof-params/0x19e8958c2c9cf59d1bab2933754513f5ac20f546c691f51b5b63c07e732dee06")!,
+        .dynamicSheet(isPresented: .constant(true), title: "Light Verification") {
+            LightVerificationView(
+                verificationParamsUrl: URL(string: "https://api.orgs.app.stage.rarime.com/integrations/verificator-svc/light/public/proof-params/0x01aca1d0b12a7518606202543cef19c5ecad88f9187bc9365eca51e76f465388")!,
                 onSuccess: {},
                 onDismiss: {}
             )
             .environmentObject(UserManager())
+            .environmentObject(DecentralizedAuthManager())
         }
 }
