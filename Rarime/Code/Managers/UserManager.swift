@@ -7,7 +7,6 @@ import Web3
 private let ENCAPSULATED_CONTENT_2688: Int = 2688
 private let ENCAPSULATED_CONTENT_2704: Int = 2704
 private let ZERO_IN_HEX: String = "0x303030303030"
-private let ZERO: String = "0"
 
 class UserManager: ObservableObject {
     static let shared = UserManager()
@@ -375,15 +374,15 @@ class UserManager: ObservableObject {
             nullifier.toBigUInt(),
             ZERO_IN_HEX.toBigUInt(),
             ZERO_IN_HEX.toBigUInt(),
-            ZERO,
-            ZERO,
-            ZERO,
+            "0",
+            "0",
+            "0",
             passport.issuingAuthority.toBigUInt(toUTF8: true),
             passport.gender.toBigUInt(toUTF8: true),
-            ZERO,
+            "0",
             params.eventID.toBigUInt(),
             params.eventData.toBigUInt(),
-            ZERO,
+            "0",
             params.selector.toBigUInt(),
             currentTimestamp.toBigUInt(),
             params.timestampLowerBound.toBigUInt(),

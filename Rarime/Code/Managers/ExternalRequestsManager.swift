@@ -64,8 +64,8 @@ class ExternalRequestsManager: ObservableObject {
         }
 
         if UserManager.shared.registerZkProof == nil {
-            LoggerUtil.common.error("Proof request are not available, passport is not registered")
-            AlertManager.shared.emitError(.unknown("Proof request are not available. Please create your identity first."))
+            LoggerUtil.common.error("Proof requests are not available, passport is not registered")
+            AlertManager.shared.emitError(.unknown("Proof requests are not available. Please create your identity first."))
             return
         }
 

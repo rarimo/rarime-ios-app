@@ -2,7 +2,7 @@ import Foundation
 import BigInt
 
 class StringUtils {
-    static func cropString(_ input: String, lenght: Int = 10) -> String {
-        return input.count > lenght * 2 ? "\(input.prefix(lenght))......\(input.suffix(lenght))" : input
+    static func cropMiddle(_ input: String, partLength: Int = 8) -> String {
+        return input.count > partLength * 2 ? "\(input.prefix(partLength))...\(input.suffix(partLength))" : input
     }
 }

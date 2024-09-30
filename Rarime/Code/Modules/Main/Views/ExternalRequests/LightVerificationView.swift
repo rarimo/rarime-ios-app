@@ -39,7 +39,7 @@ struct LightVerificationView: View {
                     VStack(spacing: 16) {
                         makeItemRow(
                             title: String(localized: "ID"),
-                            value: StringUtils.cropString(verificationParamsResponse!.data.id)
+                            value: StringUtils.cropMiddle(verificationParamsResponse!.data.id)
                         )
                         if minAge != nil {
                             makeItemRow(
@@ -56,7 +56,7 @@ struct LightVerificationView: View {
                     }
                     VStack(spacing: 4) {
                         AppButton(
-                            text: isSubmitting ? "Signing..." : "Sign",
+                            text: isSubmitting ? "Verification..." : "Verify",
                             action: createSignature
                         )
                         .disabled(isSubmitting)
@@ -113,11 +113,15 @@ struct LightVerificationView: View {
                 guard let passport = passportManager.passport else { throw "failed to get passport" }
                 
                 if Int(passport.ageString)! < minAge ?? 0 {
-                    throw "age is not valid"
+                    AlertManager.shared.emitError(.unknown("Your age does not meet the requirements"))
+                    onDismiss()
+                    return
                 }
                 
                 if citizenship.isEmpty || passport.nationality != citizenship {
-                    throw "citizenship is not valid"
+                    AlertManager.shared.emitError(.unknown("Your citizenship does not meet the requirements"))
+                    onDismiss()
+                    return
                 }
                                 
                 let pubSignals = try userManager.collectPubSignals(
@@ -145,11 +149,11 @@ struct LightVerificationView: View {
                     throw "Proof status is not verified"
                 }
                 
-                AlertManager.shared.emitSuccess("Light verification successfully")
+                AlertManager.shared.emitSuccess("The verification is successful")
                 onSuccess()
             } catch {
-                AlertManager.shared.emitError(.unknown("Failed to create signature"))
-                LoggerUtil.common.error("Failed to create signature: \(error, privacy: .public)")
+                AlertManager.shared.emitError(.unknown("Failed to submit verification"))
+                LoggerUtil.common.error("Failed to submit verification: \(error, privacy: .public)")
                 onDismiss()
             }
         }

@@ -41,7 +41,7 @@ struct ProofRequestView: View {
                     VStack(spacing: 16) {
                         makeItemRow(
                             title: String(localized: "ID"),
-                            value: StringUtils.cropString(proofParamsResponse!.data.id)
+                            value: StringUtils.cropMiddle(proofParamsResponse!.data.id)
                         )
                         if minAge != nil {
                             makeItemRow(
