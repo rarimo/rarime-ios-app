@@ -200,7 +200,7 @@ struct HomeView: View {
             ZStack {
                 Image(Icons.bell)
                     .iconMedium()
-                    .foregroundStyle(.textSecondary)
+                    .foregroundStyle(.textPrimary)
                     .onTapGesture { path.append(.notifications) }
                 if notificationManager.unreadNotificationsCounter > 0 {
                     Text(verbatim: notificationManager.unreadNotificationsCounter.formatted())
@@ -213,7 +213,7 @@ struct HomeView: View {
             }
             Image(Icons.qrCode)
                 .iconMedium()
-                .foregroundStyle(.textSecondary)
+                .foregroundStyle(.textPrimary)
                 .onTapGesture { path.append(.scanQr) }
         }
         .padding(.top, 24)
