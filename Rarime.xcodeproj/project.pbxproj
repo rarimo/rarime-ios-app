@@ -2474,7 +2474,7 @@
 			repositoryURL = "git@github.com:gonzalezreal/swift-markdown-ui.git";
 			requirement = {
 				kind = exactVersion;
-				version = 2.3.0;
+				version = 2.4.0;
 			};
 		};
 		560F0C282BD114EE00067054 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
