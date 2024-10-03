@@ -122,7 +122,15 @@ struct HomeView: View {
                     try await Task.sleep(nanoseconds: 1_200_000_000)
                 }
             ) { _ in
-                VStack(spacing: 24) {
+                VStack(spacing: 0) {
+#if DEVELOPMENT
+                    Text(verbatim: "Development")
+                        .body3()
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 4)
+                        .background(.warningLighter)
+                        .foregroundStyle(.warningDark)
+#endif
                     VStack(alignment: .leading, spacing: 12) {
                         header
                         if let passport = passportManager.passport {
