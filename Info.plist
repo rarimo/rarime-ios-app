@@ -62,7 +62,7 @@
 	<string>${CHAIN_ID}</string>
 	<key>CIRCUIT_DATA_URLS</key>
 	<dict>
-		<key>registerIdentityUniversalRSA2048</key>
+		<key>registerIdentityRSA2048</key>
 		<string>${CIRCUIT_DATA_URL_0}</string>
 		<key>registerIdentityUniversalRSA4096</key>
 		<string>${CIRCUIT_DATA_URL_1}</string>

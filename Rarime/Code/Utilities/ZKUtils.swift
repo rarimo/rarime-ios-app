@@ -31,7 +31,7 @@ class ZKUtils {
 #endif
     }
     
-    static public func calcWtnsRegisterIdentityUniversalRSA2048(
+    static public func calcWtnsRegisterIdentityRSA2048(
         _ descriptionFileData: Data,
         _ privateInputsJson: Data
     ) throws -> Data {
@@ -43,7 +43,7 @@ class ZKUtils {
         let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
         let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
         
-        let result = witnesscalc_registerIdentityUniversalRSA2048(
+        let result = witnesscalc_registerIdentityRSA2048(
             (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
             (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
             wtnsBuffer, wtnsSize,

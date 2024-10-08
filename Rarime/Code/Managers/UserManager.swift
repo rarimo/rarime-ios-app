@@ -126,11 +126,13 @@ class UserManager: ObservableObject {
     func generateRegisterIdentityProof(_ passport: Passport, _ circuitData: CircuitData, _ registeredCircuitData: RegisteredCircuitData) async throws -> ZkProof? {
         let inputs = try await buildRegistrationCircuits(passport)
         
+        LoggerUtil.common.debug("inputs: \(inputs.utf8)")
+        
         var wtns: Data
         
         switch registeredCircuitData {
-        case .registerIdentityUniversalRSA2048:
-            wtns = try ZKUtils.calcWtnsRegisterIdentityUniversalRSA2048(circuitData.circutDat, inputs)
+        case .registerIdentityRSA2048:
+            wtns = try ZKUtils.calcWtnsRegisterIdentityRSA2048(circuitData.circutDat, inputs)
         case .registerIdentityUniversalRSA4096:
             wtns = try ZKUtils.calcWtnsRegisterIdentityUniversalRSA4096(circuitData.circutDat, inputs)
         }
@@ -148,6 +150,8 @@ class UserManager: ObservableObject {
         
         let proofJson = try JSONEncoder().encode(registerZkProof)
         
+        LoggerUtil.common.debug("proofJson: \(proofJson.utf8)")
+        
         let calldataBuilder = IdentityCallDataBuilder()
         let calldata = try calldataBuilder.buildRegisterCalldata(
             proofJson,
@@ -157,6 +161,8 @@ class UserManager: ObservableObject {
             certificatePubKeySize: certificatePubKeySize,
             isRevoced: isRevoked
         )
+        
+        LoggerUtil.common.debug("calldata: \(calldata.fullHex)")
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
         let response = try await relayer.register(calldata, ConfigManager.shared.api.registerContractAddress)
@@ -217,7 +223,7 @@ class UserManager: ObservableObject {
         if proof.existence {
             LoggerUtil.common.info("Passport certificate is already registered")
             
-            return publicKeySize == 4096 ? .registerIdentityUniversalRSA4096 : .registerIdentityUniversalRSA2048
+            return publicKeySize == 4096 ? .registerIdentityUniversalRSA4096 : .registerIdentityRSA2048
         }
         
         let calldataBuilder = IdentityCallDataBuilder()
@@ -236,7 +242,7 @@ class UserManager: ObservableObject {
         let eth = Ethereum()
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
         
-        return publicKeySize == 4096 ? .registerIdentityUniversalRSA4096 : .registerIdentityUniversalRSA2048
+        return publicKeySize == 4096 ? .registerIdentityUniversalRSA4096 : .registerIdentityRSA2048
     }
     
     func generateAirdropQueryProof(_ registerZkProof: ZkProof, _ passport: Passport) async throws -> ZkProof {

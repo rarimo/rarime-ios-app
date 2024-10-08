@@ -47,7 +47,7 @@ class PassportViewModel: ObservableObject {
     }
     
     func setMrzKey(_ value: String) {
-        self.mrzKey = value
+        mrzKey = value
     }
 
     func setPassport(_ passport: Passport) {
@@ -141,7 +141,7 @@ class PassportViewModel: ObservableObject {
             
             var certificatePubKeySize: Int
             switch registeredCircuitData {
-            case .registerIdentityUniversalRSA2048:
+            case .registerIdentityRSA2048:
                 certificatePubKeySize = 2048
             case .registerIdentityUniversalRSA4096:
                 certificatePubKeySize = 4096

@@ -6,7 +6,7 @@ import ZipArchive
 import CoreData
 
 enum RegisteredCircuitData: String {
-    case registerIdentityUniversalRSA2048 = "registerIdentityUniversalRSA2048"
+    case registerIdentityRSA2048 = "registerIdentityRSA2048"
     case registerIdentityUniversalRSA4096 = "registerIdentityUniversalRSA4096"
 }
 
