@@ -1,4 +1,5 @@
 import Foundation
+import NFCPassportReader
 
 struct RegisterIdentityCircuitType {
     let signatureType: CircuitSignatureType
@@ -39,7 +40,7 @@ extension RegisterIdentityCircuitType {
         let exponent: CircuitSignatureExponentType?
         let salt: CircuitSignatureSaltType?
         let curve: CircuitSignatureCurveType?
-        let hashAlgorithm: CircuitSignatureHashAlgorithmType?
+        let hashAlgorithm: CircuitSignatureHashAlgorithmType
 
         func getId() -> String? {
             return SupportRegisterIdentityCircuitSignatureType.getSupportedSignatureTypeId(self).map { $0.description }
@@ -88,5 +89,81 @@ extension RegisterIdentityCircuitType.CircuitSignatureType {
 
     enum CircuitSignatureHashAlgorithmType {
         case HA256, HA384, HA160
+    }
+}
+
+extension Passport {
+    func getRegisterIdentityCircuitType() throws -> RegisterIdentityCircuitType? {
+        var sod = try SOD([UInt8](sod))
+
+        let sodSignatureAlgorithmName = try sod.getSignatureAlgorithm()
+        guard let sodSignatureAlgorithm = SODSignatureAlgorithm(rawValue: sodSignatureAlgorithmName) else {
+            return nil
+        }
+
+        let sodPublicKey = try sod.getPublicKey()
+        guard let publicKeySize = getSodPublicKeySupportedSize(CryptoUtils.getPublicKeySize(sodPublicKey)) else {
+            return nil
+        }
+
+        let signatureType = RegisterIdentityCircuitType.CircuitSignatureType(
+            staticId: 0,
+            algorithm: sodSignatureAlgorithm.getCircuitSignatureAlgorithm(),
+            keySize: publicKeySize,
+            exponent: getSodPublicKeyExponent(sodPublicKey),
+            // TODO: Handle RSAPSS
+            salt: nil,
+            curve: getSodPublicKeyCurve(sodPublicKey),
+            hashAlgorithm: sodSignatureAlgorithm.getCircuitSignatureHashAlgorithm()
+        )
+
+        return nil
+    }
+
+    private func getSodPublicKeySupportedSize(_ size: Int) -> RegisterIdentityCircuitType.CircuitSignatureType.CircuitSignatureKeySizeType? {
+        switch size {
+        case 2048:
+            return .B2048
+        case 4096:
+            return .B4096
+        case 256:
+            return .B256
+        case 320:
+            return .B320
+        case 192:
+            return .B192
+        default:
+            return nil
+        }
+    }
+
+    private func getSodPublicKeyExponent(_ publicKey: OpaquePointer?) -> RegisterIdentityCircuitType.CircuitSignatureType.CircuitSignatureExponentType? {
+        guard let exponent = CryptoUtils.getExponentFromPublicKey(publicKey) else { return nil }
+
+        switch exponent.toUInt() {
+        case 3:
+            return .E3
+        case 65537:
+            return .E65537
+        default:
+            return nil
+        }
+    }
+
+    private func getSodPublicKeyCurve(_ publicKey: OpaquePointer?) -> RegisterIdentityCircuitType.CircuitSignatureType.CircuitSignatureCurveType? {
+        guard let curve = CryptoUtils.getCurveFromECDSAPublicKey(publicKey) else { return nil }
+
+        switch curve {
+        case "secp256r1":
+            return .SECP256R1
+        case "brainpoolP256r1":
+            return .BRAINPOOLP256
+        case "brainpoolP320r1":
+            return .BRAINPOOLP256
+        case "secp192r1":
+            return .SECP192R1
+        default:
+            return nil
+        }
     }
 }
