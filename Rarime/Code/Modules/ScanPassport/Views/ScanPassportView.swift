@@ -33,22 +33,32 @@ struct ScanPassportView: View {
                 onFinish: { passport in
                     passportViewModel.setPassport(passport)
 
-                    do {
-                        guard let circuitType = try passport.getRegisterIdentityCircuitType() else {
-                            LoggerUtil.common.error("Unable to get circuit type")
+                    Task {
+                        do {
+                            guard let circuitType = try passport.getRegisterIdentityCircuitType() else {
+                                LoggerUtil.common.error("Unable to get circuit type")
 
-                            return
+                                return
+                            }
+
+                            guard let circuitName = circuitType.buildName() else {
+                                LoggerUtil.common.error("Unable to get circuit name")
+
+                                return
+                            }
+
+                            LoggerUtil.common.debug("circuitName: \(circuitName)")
+
+                            let inputs = try await CircuitBuilderManager.shared.registerIdentityCircuit.buildInputs(
+                                userManager.user!.secretKey,
+                                passport,
+                                circuitType
+                            )
+
+                            LoggerUtil.common.debug("inputs: \(inputs.json.utf8)")
+                        } catch {
+                            LoggerUtil.common.debug("error: \(error)")
                         }
-
-                        guard let circuitName = circuitType.buildName() else {
-                            LoggerUtil.common.error("Unable to get circuit name")
-
-                            return
-                        }
-
-                        LoggerUtil.common.debug("circuitName: \(circuitName)")
-                    } catch {
-                        LoggerUtil.common.debug("error: \(error)")
                     }
 
                     withAnimation { state = .selectData }

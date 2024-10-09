@@ -258,6 +258,10 @@
 		CEFE5F3B2CB5718100498F39 /* SODAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F3A2CB5718100498F39 /* SODAlgorithm.swift */; };
 		CEFF68B72CB685C5008769EA /* Data+FindSubarrayIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF68B62CB685C5008769EA /* Data+FindSubarrayIndex.swift */; };
 		CEFF68B92CB692A7008769EA /* BN.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF68B82CB692A7008769EA /* BN.swift */; };
+		CEFF68BB2CB69EB3008769EA /* CircuitUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF68BA2CB69EB3008769EA /* CircuitUtils.swift */; };
+		CEFF68BD2CB6A1C2008769EA /* RegisterIdentityInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF68BC2CB6A1C2008769EA /* RegisterIdentityInputs.swift */; };
+		CEFF68BF2CB6A3E7008769EA /* CircuitBuilderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF68BE2CB6A3E7008769EA /* CircuitBuilderManager.swift */; };
+		CEFF68C12CB6AF46008769EA /* Encodable+json.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF68C02CB6AF46008769EA /* Encodable+json.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -526,6 +530,10 @@
 		CEFE5F3A2CB5718100498F39 /* SODAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SODAlgorithm.swift; sourceTree = "<group>"; };
 		CEFF68B62CB685C5008769EA /* Data+FindSubarrayIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+FindSubarrayIndex.swift"; sourceTree = "<group>"; };
 		CEFF68B82CB692A7008769EA /* BN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BN.swift; sourceTree = "<group>"; };
+		CEFF68BA2CB69EB3008769EA /* CircuitUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircuitUtils.swift; sourceTree = "<group>"; };
+		CEFF68BC2CB6A1C2008769EA /* RegisterIdentityInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterIdentityInputs.swift; sourceTree = "<group>"; };
+		CEFF68BE2CB6A3E7008769EA /* CircuitBuilderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircuitBuilderManager.swift; sourceTree = "<group>"; };
+		CEFF68C02CB6AF46008769EA /* Encodable+json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+json.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -730,6 +738,7 @@
 				C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */,
 				C789A2E92CA59F5800443900 /* StringUtils.swift */,
 				CEFE5F382CB56C8700498F39 /* CryptoUtils.swift */,
+				CEFF68BA2CB69EB3008769EA /* CircuitUtils.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -751,6 +760,7 @@
 				CE5315C92C7769A20087D53D /* NotificationManager.swift */,
 				5617AB142C8F48BE003947C9 /* ExternalRequestsManager.swift */,
 				CE059B412C9C4608006046B3 /* InternetConnectionManager.swift */,
+				CEFF68BE2CB6A3E7008769EA /* CircuitBuilderManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1059,6 +1069,7 @@
 				CEDC57952CA30A9D00F02132 /* CIImage+Extension.swift */,
 				C71161B22CAAE3DB00ED41EA /* String+BigUInt.swift */,
 				CEFF68B62CB685C5008769EA /* Data+FindSubarrayIndex.swift */,
+				CEFF68C02CB6AF46008769EA /* Encodable+json.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1091,6 +1102,7 @@
 				CEFE5F342CB522A700498F39 /* RegisterIdentityCircuitType.swift */,
 				CEFE5F362CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift */,
 				CEFE5F3A2CB5718100498F39 /* SODAlgorithm.swift */,
+				CEFF68BC2CB6A1C2008769EA /* RegisterIdentityInputs.swift */,
 			);
 			path = Circuits;
 			sourceTree = "<group>";
@@ -1478,6 +1490,7 @@
 				56AC03402BB06A2D00A34A00 /* Image+Icon.swift in Sources */,
 				56A6C75F2BBC309A00992562 /* NFCScanner.swift in Sources */,
 				CE9E82B82BA881F400AAF885 /* AppView.swift in Sources */,
+				CEFF68BB2CB69EB3008769EA /* CircuitUtils.swift in Sources */,
 				CE8FEB5A2C1AF1BE0008381A /* DecentralizeAuthManager.swift in Sources */,
 				5609B6D92C1A15F800CB6A1F /* RewardsViewModel.swift in Sources */,
 				561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */,
@@ -1510,6 +1523,7 @@
 				56DAA3152BB8CC95002CF710 /* PasscodeFieldView.swift in Sources */,
 				568350AC2BEA304B00B70E3D /* PassportIdentifier.swift in Sources */,
 				5655E4322BD2CF6900B86C5C /* SecurityManager.swift in Sources */,
+				CEFF68C12CB6AF46008769EA /* Encodable+json.swift in Sources */,
 				560F0C2C2BD133A000067054 /* MainViewLayout.swift in Sources */,
 				5655E4372BD51E8E00B86C5C /* AppKeychain.swift in Sources */,
 				568B4FE52BB70CAA001C9C74 /* IntroStep.swift in Sources */,
@@ -1523,6 +1537,7 @@
 				560F0C212BD027FB00067054 /* WalletRouteLayout.swift in Sources */,
 				56933E052BBC00D60068C894 /* RewardChipView.swift in Sources */,
 				561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */,
+				CEFF68BF2CB6A3E7008769EA /* CircuitBuilderManager.swift in Sources */,
 				CED314692C04889D00DF31D5 /* UIDevice+modelName.swift in Sources */,
 				CE3CD3AE2C6CCD0E008313B8 /* ImportFileView.swift in Sources */,
 				CEDC57942CA2CA4100F02132 /* CMSampleBuffer+Extension.swift in Sources */,
@@ -1572,6 +1587,7 @@
 				CEC5620F2BD925D6002D4954 /* Circuits.swift in Sources */,
 				CED909E02BDC1E0F0065E949 /* Rarimo.swift in Sources */,
 				563529EB2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift in Sources */,
+				CEFF68BD2CB6A1C2008769EA /* RegisterIdentityInputs.swift in Sources */,
 				56DAA3132BB8CA4F002CF710 /* EnableFaceIdView.swift in Sources */,
 				CE0DA0D72BDA6F1900696503 /* EvmTxResponse.swift in Sources */,
 				56062B9A2C12007A00C9BF9B /* Country.swift in Sources */,

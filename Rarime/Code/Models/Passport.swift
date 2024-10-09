@@ -1,6 +1,8 @@
 import Foundation
+import Identity
 import NFCPassportReader
 import UIKit
+import Web3
 
 struct Passport: Codable {
     var firstName: String
@@ -125,6 +127,30 @@ struct Passport: Codable {
         default:
             return ""
         }
+    }
+    
+    func getSlaveSodCertificatePem() throws -> Data {
+        let sod = try SOD([UInt8](sod))
+        
+        guard let cert = try OpenSSLUtils.getX509CertificatesFromPKCS7(pkcs7Der: Data(sod.pkcs7CertificateData)).first else {
+            throw "Slave certificate in sod is missing"
+        }
+        
+        return cert.certToPEM().data(using: .utf8) ?? Data()
+    }
+    
+    func getCertificateSmtProof(_ slaveCertPem: Data) async throws -> SMTProof {
+        let certificatesSMTAddress = try EthereumAddress(hex: ConfigManager.shared.api.certificatesSmtContractAddress, eip55: false)
+        let certificatesSMTContract = try PoseidonSMT(contractAddress: certificatesSMTAddress)
+        
+        let x509Utils = IdentityX509Util()
+        let slaveCertificateIndex = try x509Utils.getSlaveCertificateIndex(slaveCertPem, mastersPem: Certificates.ICAO)
+
+        return try await certificatesSMTContract.getProof(slaveCertificateIndex)
+    }
+    
+    func getSod() throws -> SOD {
+        return try SOD([UInt8](sod))
     }
     
     func serialize() throws -> Data {

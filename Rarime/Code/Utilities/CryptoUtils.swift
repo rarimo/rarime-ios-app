@@ -10,6 +10,17 @@ class CryptoUtils {
         return Data(data)
     }
     
+    static func getDataFromPublicKey(_ publicKey: OpaquePointer?) -> Data? {
+        switch EVP_PKEY_id(publicKey) {
+        case EVP_PKEY_RSA:
+            return getModulusFromRSAPublicKey(publicKey)
+        case EVP_PKEY_EC:
+            return getXYFromECDSAPublicKey(publicKey)
+        default:
+            return nil
+        }
+    }
+    
     static func getModulusFromRSAPublicKey(_ publicKey: OpaquePointer?) -> Data? {
         let rsaPublicKey = EVP_PKEY_get0_RSA(publicKey)
         guard let rsaPublicKey else { return nil }
