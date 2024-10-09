@@ -255,8 +255,9 @@
 		CEFE5F352CB522A700498F39 /* RegisterIdentityCircuitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F342CB522A700498F39 /* RegisterIdentityCircuitType.swift */; };
 		CEFE5F372CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F362CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift */; };
 		CEFE5F392CB56C8700498F39 /* CryptoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F382CB56C8700498F39 /* CryptoUtils.swift */; };
-		CEFE5F3B2CB5718100498F39 /* SODSignatureAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F3A2CB5718100498F39 /* SODSignatureAlgorithm.swift */; };
-		CEFE5F3D2CB588CF00498F39 /* Data+ToUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F3C2CB588CF00498F39 /* Data+ToUInt.swift */; };
+		CEFE5F3B2CB5718100498F39 /* SODAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F3A2CB5718100498F39 /* SODAlgorithm.swift */; };
+		CEFF68B72CB685C5008769EA /* Data+FindSubarrayIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF68B62CB685C5008769EA /* Data+FindSubarrayIndex.swift */; };
+		CEFF68B92CB692A7008769EA /* BN.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF68B82CB692A7008769EA /* BN.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -522,8 +523,9 @@
 		CEFE5F342CB522A700498F39 /* RegisterIdentityCircuitType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterIdentityCircuitType.swift; sourceTree = "<group>"; };
 		CEFE5F362CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportRegisterIdentityCircuitSignatureType.swift; sourceTree = "<group>"; };
 		CEFE5F382CB56C8700498F39 /* CryptoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUtils.swift; sourceTree = "<group>"; };
-		CEFE5F3A2CB5718100498F39 /* SODSignatureAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SODSignatureAlgorithm.swift; sourceTree = "<group>"; };
-		CEFE5F3C2CB588CF00498F39 /* Data+ToUInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+ToUInt.swift"; sourceTree = "<group>"; };
+		CEFE5F3A2CB5718100498F39 /* SODAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SODAlgorithm.swift; sourceTree = "<group>"; };
+		CEFF68B62CB685C5008769EA /* Data+FindSubarrayIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+FindSubarrayIndex.swift"; sourceTree = "<group>"; };
+		CEFF68B82CB692A7008769EA /* BN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BN.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -776,6 +778,7 @@
 				CE8FEB5E2C1AFF0A0008381A /* JWT.swift */,
 				CE3D41BF2C77974500D0AA65 /* PushNotificationsRaw.swift */,
 				C7FFB52F2C9ACE900037CBD4 /* ClaimableNotificationContent.swift */,
+				CEFF68B82CB692A7008769EA /* BN.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1055,7 +1058,7 @@
 				CEDC57932CA2CA4100F02132 /* CMSampleBuffer+Extension.swift */,
 				CEDC57952CA30A9D00F02132 /* CIImage+Extension.swift */,
 				C71161B22CAAE3DB00ED41EA /* String+BigUInt.swift */,
-				CEFE5F3C2CB588CF00498F39 /* Data+ToUInt.swift */,
+				CEFF68B62CB685C5008769EA /* Data+FindSubarrayIndex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1087,7 +1090,7 @@
 				CE8FEB612C1B03C10008381A /* AuthCircuitInputs.swift */,
 				CEFE5F342CB522A700498F39 /* RegisterIdentityCircuitType.swift */,
 				CEFE5F362CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift */,
-				CEFE5F3A2CB5718100498F39 /* SODSignatureAlgorithm.swift */,
+				CEFE5F3A2CB5718100498F39 /* SODAlgorithm.swift */,
 			);
 			path = Circuits;
 			sourceTree = "<group>";
@@ -1526,6 +1529,7 @@
 				CE0DA0D92BDA927000696503 /* AirDropResponse.swift in Sources */,
 				56E2D92A2BCFFB6B006E725D /* Airdrop.swift in Sources */,
 				5617AB152C8F48BE003947C9 /* ExternalRequestsManager.swift in Sources */,
+				CEFF68B92CB692A7008769EA /* BN.swift in Sources */,
 				56DAA3072BB77550002CF710 /* IdentityStepLayoutView.swift in Sources */,
 				562241432C107E16000239FA /* AppDropdown.swift in Sources */,
 				CE68BE3D2BD9B23D00D92EBB /* ZkProof.swift in Sources */,
@@ -1593,6 +1597,7 @@
 				CE0DC57D2C0DB9B200EFC0D7 /* VersionUpdateView.swift in Sources */,
 				CE8FEB5F2C1AFF0A0008381A /* JWT.swift in Sources */,
 				CE8FEB582C1AE5740008381A /* AuthorizeService.swift in Sources */,
+				CEFF68B72CB685C5008769EA /* Data+FindSubarrayIndex.swift in Sources */,
 				CE8FEB622C1B03C10008381A /* AuthCircuitInputs.swift in Sources */,
 				5655E42E2BD2C94F00B86C5C /* AppUserDefaults.swift in Sources */,
 				CEFE5F372CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift in Sources */,
@@ -1616,7 +1621,7 @@
 				CEDC578B2CA2C9A600F02132 /* MRZScanView.swift in Sources */,
 				CE34775F2C7888E1005E91FE /* NotificationsView.swift in Sources */,
 				56E6AD4B2BD2732300E4DDC1 /* ThemeView.swift in Sources */,
-				CEFE5F3B2CB5718100498F39 /* SODSignatureAlgorithm.swift in Sources */,
+				CEFE5F3B2CB5718100498F39 /* SODAlgorithm.swift in Sources */,
 				56E2D9152BCE7FC4006E725D /* HomeIntroLayout.swift in Sources */,
 				CE19CB492BE3AD4200B26DF7 /* LockScreenView.swift in Sources */,
 				CEDC4D832BE949F300459D4E /* Ethereum.swift in Sources */,
@@ -1650,7 +1655,6 @@
 				56A6C75C2BBC2CD500992562 /* PassportUtils.swift in Sources */,
 				563529F62BB077AB0027C910 /* CardContainer.swift in Sources */,
 				5609B6CA2C18950700CB6A1F /* ClaimRewardsView.swift in Sources */,
-				CEFE5F3D2CB588CF00498F39 /* Data+ToUInt.swift in Sources */,
 				560F0C252BD036F900067054 /* AppTextField.swift in Sources */,
 				CE3CD3B12C6CEBEF008313B8 /* JSONCodable.swift in Sources */,
 				C75512902C86F4BC000258AD /* PushNotification.xcdatamodeld in Sources */,

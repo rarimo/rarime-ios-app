@@ -1,6 +1,6 @@
 import Foundation
 
-enum SODSignatureAlgorithm: String {
+enum SODAlgorithm: String {
     case sha256WithRSAEncryption
     case rsassaPss
     case ecdsa_with_SHA1

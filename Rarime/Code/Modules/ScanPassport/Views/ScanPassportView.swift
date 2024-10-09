@@ -1,5 +1,5 @@
-import SwiftUI
 import Alamofire
+import SwiftUI
 
 private enum ScanPassportState {
     case importJson
@@ -32,6 +32,25 @@ struct ScanPassportView: View {
             ImportFileView(
                 onFinish: { passport in
                     passportViewModel.setPassport(passport)
+
+                    do {
+                        guard let circuitType = try passport.getRegisterIdentityCircuitType() else {
+                            LoggerUtil.common.error("Unable to get circuit type")
+
+                            return
+                        }
+
+                        guard let circuitName = circuitType.buildName() else {
+                            LoggerUtil.common.error("Unable to get circuit name")
+
+                            return
+                        }
+
+                        LoggerUtil.common.debug("circuitName: \(circuitName)")
+                    } catch {
+                        LoggerUtil.common.debug("error: \(error)")
+                    }
+
                     withAnimation { state = .selectData }
                 },
                 onClose: onClose
@@ -42,7 +61,7 @@ struct ScanPassportView: View {
                 ScanPassportMRZView(
                     onNext: { mrzKey in
                         passportViewModel.setMrzKey(mrzKey)
-                        
+
                         withAnimation { state = .readNFC }
                     },
                     onClose: onClose
@@ -55,7 +74,7 @@ struct ScanPassportView: View {
                         presentScanTutorialIfNeeded()
                     }
                 }
-                
+
 #if DEVELOPMENT
                 AppButton(
                     text: "Import JSON",
@@ -74,6 +93,24 @@ struct ScanPassportView: View {
                 onNext: { passport in
                     passportViewModel.setPassport(passport)
                     withAnimation { state = .selectData }
+
+                    do {
+                        guard let circuitType = try passport.getRegisterIdentityCircuitType() else {
+                            LoggerUtil.common.error("Unable to get circuit type")
+
+                            return
+                        }
+
+                        guard let circuitName = circuitType.buildName() else {
+                            LoggerUtil.common.error("Unable to get circuit name")
+
+                            return
+                        }
+
+                        LoggerUtil.common.debug("circuitName: \(circuitName)")
+                    } catch {
+                        LoggerUtil.common.debug("error: \(error)")
+                    }
 
                     LoggerUtil.passport.info("Passport read successfully: \(passport.fullName, privacy: .public)")
                 },
@@ -112,17 +149,17 @@ struct ScanPassportView: View {
                 onClose: onClose,
                 onError: { error in
                     if let afError = error as? AFError {
-                        if case .sessionTaskFailed(_) = afError {
+                        if case .sessionTaskFailed = afError {
                             LoggerUtil.common.error("Network connection lost")
-                            
+
                             AlertManager.shared.emitError(.connectionUnstable)
-                            
+
                             onClose()
-                            
+
                             return
                         }
                     }
-                    
+
                     withAnimation { state = .waitlistPassport }
                 }
             )
@@ -139,7 +176,7 @@ struct ScanPassportView: View {
             .transition(.backslide)
         }
     }
-    
+
     private func presentScanTutorialIfNeeded() {
         if !AppUserDefaults.shared.isScanTutorialDisplayed {
             isTutorialPresented = !isTutorialShown

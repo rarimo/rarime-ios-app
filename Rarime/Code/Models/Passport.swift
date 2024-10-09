@@ -112,6 +112,21 @@ struct Passport: Codable {
         )
     }
     
+    func getStardartalizedDocumentType() -> String {
+        guard let dg1 = try? DataGroup1([UInt8](dg1)) else { return "" }
+        
+        guard let documentType = dg1.elements["5F03"] else { return "" }
+        
+        switch documentType.replacingOccurrences(of: "<", with: "") {
+        case "ID":
+            return "TD1"
+        case "P":
+            return "TD3"
+        default:
+            return ""
+        }
+    }
+    
     func serialize() throws -> Data {
         let encoder = JSONEncoder()
         return try encoder.encode(self)
