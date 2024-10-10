@@ -106,7 +106,7 @@ class UserManager: ObservableObject {
         return ZkProof(proof: proof, pubSignals: pubSignals)
     }
     
-    func register(_ registerZkProof: ZkProof, _ passport: Passport, _ certificatePubKeySize: Int, _ isRevoked: Bool) async throws {
+    func register(_ registerZkProof: ZkProof, _ passport: Passport, _ isRevoked: Bool, _ registerIdentityCircuitName: String) async throws {
         guard let masterCertProof = self.masterCertProof else { throw "Master certificate proof is missing" }
         
         let proofJson = try JSONEncoder().encode(registerZkProof)
@@ -117,8 +117,8 @@ class UserManager: ObservableObject {
             signature: passport.signature,
             pubKeyPem: passport.getDG15PublicKeyPEM(),
             certificatesRootRaw: masterCertProof.root,
-            certificatePubKeySize: certificatePubKeySize,
-            isRevoced: isRevoked
+            isRevoked: isRevoked,
+            circuitName: registerIdentityCircuitName
         )
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)

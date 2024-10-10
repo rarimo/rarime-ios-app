@@ -156,7 +156,6 @@
 		C789A2E82CA5978B00443900 /* LightVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C789A2E72CA5978B00443900 /* LightVerificationView.swift */; };
 		C789A2EA2CA59F5800443900 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C789A2E92CA59F5800443900 /* StringUtils.swift */; };
 		C78EA4FA2C9B2EF5001DA0B3 /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
-		C7B9219C2CA6DA60001F172C /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7B9219B2CA6DA60001F172C /* Identity.xcframework */; };
 		C7CE31D52C8B1CBD00EE6D2E /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */; };
 		C7FFB52E2C99D7820037CBD4 /* NotificationSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FFB52D2C99D7820037CBD4 /* NotificationSheetView.swift */; };
 		C7FFB5302C9ACE900037CBD4 /* ClaimableNotificationContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FFB52F2C9ACE900037CBD4 /* ClaimableNotificationContent.swift */; };
@@ -234,6 +233,7 @@
 		CEC562192BD92B3E002D4954 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC562132BD9281A002D4954 /* libresolv.9.tbd */; };
 		CEC8C3692CB803F50006352C /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC8C3682CB803F50006352C /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a */; };
 		CEC8C36C2CB8134F0006352C /* SupportRegisterIdentityCircuitAAType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC8C36B2CB8134F0006352C /* SupportRegisterIdentityCircuitAAType.swift */; };
+		CEC8C36E2CB81F7C0006352C /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC8C36D2CB81F7C0006352C /* Identity.xcframework */; };
 		CEC9D8E72BFF41A800EACD0F /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */; };
 		CED314672C0483BD00DF31D5 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED314662C0483BD00DF31D5 /* MailView.swift */; };
 		CED314692C04889D00DF31D5 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED314682C04889D00DF31D5 /* UIDevice+modelName.swift */; };
@@ -433,7 +433,6 @@
 		C75512952C87617B000258AD /* RemoveCase.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = RemoveCase.mp4; sourceTree = "<group>"; };
 		C789A2E72CA5978B00443900 /* LightVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightVerificationView.swift; sourceTree = "<group>"; };
 		C789A2E92CA59F5800443900 /* StringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
-		C7B9219B2CA6DA60001F172C /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		C7FFB52D2C99D7820037CBD4 /* NotificationSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSheetView.swift; sourceTree = "<group>"; };
 		C7FFB52F2C9ACE900037CBD4 /* ClaimableNotificationContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimableNotificationContent.swift; sourceTree = "<group>"; };
@@ -506,6 +505,7 @@
 		CEC8C3682CB803F50006352C /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a; sourceTree = "<group>"; };
 		CEC8C36A2CB8041E0006352C /* witnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.h; sourceTree = "<group>"; };
 		CEC8C36B2CB8134F0006352C /* SupportRegisterIdentityCircuitAAType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportRegisterIdentityCircuitAAType.swift; sourceTree = "<group>"; };
+		CEC8C36D2CB81F7C0006352C /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		CED314662C0483BD00DF31D5 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		CED314682C04889D00DF31D5 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
@@ -565,6 +565,7 @@
 				CE68BE452BD9B6EA00D92EBB /* Web3 in Frameworks */,
 				CE72102E2BD7F6780043DB7F /* Alamofire in Frameworks */,
 				CE61E8832C24240000940129 /* Semaphore in Frameworks */,
+				CEC8C36E2CB81F7C0006352C /* Identity.xcframework in Frameworks */,
 				56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */,
 				CE8FEB5C2C1AFC3F0008381A /* libwitnesscalc_auth.a in Frameworks */,
 				CE68BE472BD9B6EA00D92EBB /* Web3ContractABI in Frameworks */,
@@ -576,7 +577,6 @@
 				CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */,
 				CEE3259D2CB7CA5300468BE4 /* libwitnesscalc_registerIdentity_1_256_3_5_576_248_NA.a in Frameworks */,
 				CEC8C3692CB803F50006352C /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a in Frameworks */,
-				C7B9219C2CA6DA60001F172C /* Identity.xcframework in Frameworks */,
 				CEDB9DCC2BFDF60900BCF074 /* libwitnesscalc_queryIdentity.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1261,10 +1261,10 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEC8C36D2CB81F7C0006352C /* Identity.xcframework */,
 				CEC8C36A2CB8041E0006352C /* witnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.h */,
 				CEC8C3682CB803F50006352C /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a */,
 				CEE3259C2CB7CA5300468BE4 /* libwitnesscalc_registerIdentity_1_256_3_5_576_248_NA.a */,
-				C7B9219B2CA6DA60001F172C /* Identity.xcframework */,
 				CE8FEB5B2C1AFC3F0008381A /* libwitnesscalc_auth.a */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562022BD923B4002D4954 /* libfq.a */,

@@ -71,7 +71,7 @@ class PassportViewModel: ObservableObject {
                 throw "failed to get register identity circuit name"
             }
             
-            LoggerUtil.common.debug("registerIdentityCircuitName: \(registerIdentityCircuitName)")
+            LoggerUtil.common.info("Registering passport with circuit: \(registerIdentityCircuitName)")
             
             guard let registeredCircuitData = RegisteredCircuitData(rawValue: registerIdentityCircuitName) else {
                 throw "failed to get registered circuit data"
@@ -158,9 +158,7 @@ class PassportViewModel: ObservableObject {
             
             if isUserRevoking { isUserRevoked = true }
             
-            fatalError()
-            
-            try await UserManager.shared.register(proof, passport, 2048, isUserRevoking)
+            try await UserManager.shared.register(proof, passport, isUserRevoking, registerIdentityCircuitName)
             
             PassportManager.shared.setPassport(passport)
             try UserManager.shared.saveRegisterZkProof(proof)
