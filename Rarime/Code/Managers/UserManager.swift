@@ -90,10 +90,16 @@ class UserManager: ObservableObject {
             registerIdentityCircuitType
         )
         
+        LoggerUtil.common.debug("inputs: \(inputs.json.utf8)")
+        
+        fatalError()
+        
         var wtns: Data
         switch registeredCircuitData {
         case .registerIdentity_1_256_3_5_576_248_NA:
             wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_5_576_248_NA(circuitData.circutDat, inputs.json)
+        case .registerIdentity_2_256_3_6_336_264_21_2448_6_2008:
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_2_256_3_6_336_264_21_2448_6_2008(circuitData.circutDat, inputs.json)
         }
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16Prover(circuitData.circuitZkey, wtns)

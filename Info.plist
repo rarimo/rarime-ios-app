@@ -64,6 +64,8 @@
 	<dict>
 		<key>registerIdentity_1_256_3_5_576_248_NA</key>
 		<string>${CIRCUIT_DATA_URL_0}</string>
+		<key>registerIdentity_2_256_3_6_336_264_21_2448_6_2008</key>
+		<string>${CIRCUIT_DATA_URL_1}</string>
 	</dict>
 	<key>COSMOS_RPC_URL</key>
 	<string>${COSMOS_RPC_URL}</string>

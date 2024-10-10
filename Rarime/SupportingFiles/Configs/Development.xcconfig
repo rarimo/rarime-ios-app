@@ -37,3 +37,4 @@ FEEDBACK_EMAIL = "info@rarilabs.com"
 
 // MARK: CircuitsData
 CIRCUIT_DATA_URL_0 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/registerIdentity_1_256_3_5_576_248_NA-download.zip"
+CIRCUIT_DATA_URL_1 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/registerIdentity_2_256_3_6_336_264_21_2448_6_2008-download.zip"

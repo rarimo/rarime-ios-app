@@ -7,6 +7,7 @@ import ZipArchive
 
 enum RegisteredCircuitData: String {
     case registerIdentity_1_256_3_5_576_248_NA
+    case registerIdentity_2_256_3_6_336_264_21_2448_6_2008
 }
 
 class CircuitDataManager: ObservableObject {

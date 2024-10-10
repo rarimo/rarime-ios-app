@@ -34,18 +34,24 @@ extension CircuitBuilderManager {
             
             let smartChunkingNumber = CircuitUtils.calculateSmartChunkingNumber(pubkeyData.count * 8)
             
+            let smartChunkingToBlockSize = UInt64(circuitType.passportHashType.getChunkSize())
+            
             var dg15: [Int64] = []
             if !passport.dg15.isEmpty {
-                dg15 = CircuitUtils.smartChunking2(passport.dg15, UInt64(circuitType.aaType!.dg15ChunkNumber))
+                dg15 = CircuitUtils.smartChunking2(
+                    passport.dg15,
+                    UInt64(circuitType.aaType!.dg15ChunkNumber),
+                    smartChunkingToBlockSize
+                )
             }
             
             return RegisterIdentityInputs(
                 skIdentity: privateKey.fullHex,
-                encapsulatedContent: CircuitUtils.smartChunking2(encapsulatedContent, UInt64(circuitType.ecChunkNumber)),
-                signedAttributes: CircuitUtils.smartChunking2(signedAttributes, 2),
+                encapsulatedContent: CircuitUtils.smartChunking2(encapsulatedContent, UInt64(circuitType.ecChunkNumber), smartChunkingToBlockSize),
+                signedAttributes: CircuitUtils.smartChunking2(signedAttributes, 2, smartChunkingToBlockSize),
                 pubkey: CircuitUtils.smartChunking(BN(pubkeyData), chunksNumber: smartChunkingNumber),
                 signature: CircuitUtils.smartChunking(BN(signature), chunksNumber: smartChunkingNumber),
-                dg1: CircuitUtils.smartChunking2(passport.dg1, 2),
+                dg1: CircuitUtils.smartChunking2(passport.dg1, 2, smartChunkingToBlockSize),
                 dg15: dg15,
                 slaveMerkleRoot: certProof.root.fullHex,
                 slaveMerkleInclusionBranches: certProof.siblings.map { $0.fullHex }

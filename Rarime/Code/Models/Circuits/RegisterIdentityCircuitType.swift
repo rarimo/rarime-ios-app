@@ -274,7 +274,7 @@ extension Passport {
     }
 
     private func getChunkNumber(_ data: Data, _ chunkSize: UInt) -> UInt {
-        let length = UInt(data.count) * 8
+        let length = UInt(data.count) * 8 + 1 + 64
 
         return length / chunkSize + (length % chunkSize == 0 ? 0 : 1)
     }

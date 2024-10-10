@@ -2,8 +2,6 @@ import BigInt
 import Foundation
 
 class CircuitUtils {
-    static let smartChunking2BlockSize: UInt64 = 512
-    
     static func byteArrayToBits(_ bytes: Data) -> [Int64] {
         var bits = [Int64]()
         for byte in bytes {
@@ -32,7 +30,7 @@ class CircuitUtils {
         return result
     }
     
-    static func smartChunking2(_ bytes: Data, _ blockNumber: UInt64) -> [Int64] {
+    static func smartChunking2(_ bytes: Data, _ blockNumber: UInt64, _ smartChunking2BlockSize: UInt64) -> [Int64] {
         let bits = byteArrayToBits(bytes)
             
         let dataBitsNumber = UInt64(bits.count + 1 + 64)

@@ -71,6 +71,8 @@ class PassportViewModel: ObservableObject {
                 throw "failed to get register identity circuit name"
             }
             
+            LoggerUtil.common.debug("registerIdentityCircuitName: \(registerIdentityCircuitName)")
+            
             guard let registeredCircuitData = RegisteredCircuitData(rawValue: registerIdentityCircuitName) else {
                 throw "failed to get registered circuit data"
             }
@@ -78,7 +80,12 @@ class PassportViewModel: ObservableObject {
             let circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData, downloadProgress)
             proofState = .applyingZK
             
-            guard let proof = try await UserManager.shared.generateRegisterIdentityProof(passport, circuitData, registeredCircuitData) else {
+            guard let proof = try await UserManager.shared.generateRegisterIdentityProof(
+                passport,
+                circuitData,
+                registeredCircuitData,
+                registerIdentityCircuitType
+            ) else {
                 throw "failed to generate proof, invalid circuit type"
             }
             
