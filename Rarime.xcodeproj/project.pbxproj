@@ -233,6 +233,7 @@
 		CEC562112BD926AA002D4954 /* ZKUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC562102BD926AA002D4954 /* ZKUtils.swift */; };
 		CEC562192BD92B3E002D4954 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC562132BD9281A002D4954 /* libresolv.9.tbd */; };
 		CEC8C3692CB803F50006352C /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC8C3682CB803F50006352C /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a */; };
+		CEC8C36C2CB8134F0006352C /* SupportRegisterIdentityCircuitAAType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC8C36B2CB8134F0006352C /* SupportRegisterIdentityCircuitAAType.swift */; };
 		CEC9D8E72BFF41A800EACD0F /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */; };
 		CED314672C0483BD00DF31D5 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED314662C0483BD00DF31D5 /* MailView.swift */; };
 		CED314692C04889D00DF31D5 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED314682C04889D00DF31D5 /* UIDevice+modelName.swift */; };
@@ -504,6 +505,7 @@
 		CEC562142BD9281A002D4954 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		CEC8C3682CB803F50006352C /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a; sourceTree = "<group>"; };
 		CEC8C36A2CB8041E0006352C /* witnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.h; sourceTree = "<group>"; };
+		CEC8C36B2CB8134F0006352C /* SupportRegisterIdentityCircuitAAType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportRegisterIdentityCircuitAAType.swift; sourceTree = "<group>"; };
 		CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		CED314662C0483BD00DF31D5 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		CED314682C04889D00DF31D5 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
@@ -1103,6 +1105,7 @@
 				CEFE5F362CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift */,
 				CEFE5F3A2CB5718100498F39 /* SODAlgorithm.swift */,
 				CEFF68BC2CB6A1C2008769EA /* RegisterIdentityInputs.swift */,
+				CEC8C36B2CB8134F0006352C /* SupportRegisterIdentityCircuitAAType.swift */,
 			);
 			path = Circuits;
 			sourceTree = "<group>";
@@ -1625,6 +1628,7 @@
 				CE059B442C9C4702006046B3 /* InternetConnectionRequiredView.swift in Sources */,
 				56474AD62BB9860E0017AA25 /* FaceIdAuth.swift in Sources */,
 				5609B6D42C19F23800CB6A1F /* InviteFriendsView.swift in Sources */,
+				CEC8C36C2CB8134F0006352C /* SupportRegisterIdentityCircuitAAType.swift in Sources */,
 				CEDC4D7F2BE9267300459D4E /* PoseidonSMTContract.swift in Sources */,
 				CEF2513A2BD6E22700050507 /* User.swift in Sources */,
 				CE0881A12BF773CC00B31735 /* AlertManager.swift in Sources */,

@@ -90,10 +90,6 @@ class UserManager: ObservableObject {
             registerIdentityCircuitType
         )
         
-        LoggerUtil.common.debug("inputs: \(inputs.json.utf8)")
-        
-        fatalError()
-        
         var wtns: Data
         switch registeredCircuitData {
         case .registerIdentity_1_256_3_5_576_248_NA:

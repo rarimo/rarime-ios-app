@@ -24,6 +24,11 @@ struct RegisterIdentityCircuitType {
         name += "_\(dg1DigestPositionShift)"
 
         if let aaType = aaType {
+            guard let aaTypeId = aaType.aaAlgorithm.getId() else {
+                return nil
+            }
+
+            name += "_\(aaTypeId)"
             name += "_\(aaType.dg15DigestPositionShift)"
             name += "_\(aaType.dg15ChunkNumber)"
             name += "_\(aaType.aaKeyPositionShift)"
@@ -38,12 +43,12 @@ struct RegisterIdentityCircuitType {
 extension RegisterIdentityCircuitType {
     struct CircuitSignatureType {
         var staticId: UInt
-        let algorithm: CircuitSignatureAlgorithmType
-        let keySize: CircuitSignatureKeySizeType
-        let exponent: CircuitSignatureExponentType?
-        let salt: CircuitSignatureSaltType?
-        let curve: CircuitSignatureCurveType?
-        let hashAlgorithm: CircuitSignatureHashAlgorithmType
+        let algorithm: CircuitAlgorithmType
+        let keySize: CircuitKeySizeType
+        let exponent: CircuitExponentType?
+        let salt: CircuitSaltType?
+        let curve: CircuitCurveType?
+        let hashAlgorithm: CircuitHashAlgorithmType
 
         func getId() -> String? {
             return SupportRegisterIdentityCircuitSignatureType.getSupportedSignatureTypeId(self).map { $0.description }
@@ -98,34 +103,51 @@ extension RegisterIdentityCircuitType {
     }
 
     struct CircuitAAType {
+        let aaAlgorithm: CircuitAAAlgorithm
         let dg15DigestPositionShift: UInt
         let dg15ChunkNumber: UInt
         let aaKeyPositionShift: UInt
     }
 }
 
-extension RegisterIdentityCircuitType.CircuitSignatureType {
-    enum CircuitSignatureAlgorithmType {
+extension RegisterIdentityCircuitType.CircuitAAType {
+    struct CircuitAAAlgorithm {
+        var staticId: UInt
+        let algorithm: RegisterIdentityCircuitType.CircuitAlgorithmType
+        let keySize: RegisterIdentityCircuitType.CircuitKeySizeType?
+        let exponent: RegisterIdentityCircuitType.CircuitExponentType?
+        let salt: RegisterIdentityCircuitType.CircuitSaltType?
+        let curve: RegisterIdentityCircuitType.CircuitCurveType?
+        let hashAlgorithm: RegisterIdentityCircuitType.CircuitHashAlgorithmType
+
+        func getId() -> String? {
+            return SupportRegisterIdentityCircuitAAType.getSupportedSignatureTypeId(self).map { $0.description }
+        }
+    }
+}
+
+extension RegisterIdentityCircuitType {
+    enum CircuitAlgorithmType {
         case RSA, RSAPSS, ECDSA
     }
 
-    enum CircuitSignatureKeySizeType {
-        case B2048, B4096, B256, B320, B192
+    enum CircuitKeySizeType {
+        case B1024, B2048, B4096, B256, B320, B192
     }
 
-    enum CircuitSignatureExponentType {
+    enum CircuitExponentType {
         case E3, E65537
     }
 
-    enum CircuitSignatureSaltType {
+    enum CircuitSaltType {
         case S32, S64, S48
     }
 
-    enum CircuitSignatureCurveType {
+    enum CircuitCurveType {
         case SECP256R1, BRAINPOOLP256, BRAINPOOL320R1, SECP192R1
     }
 
-    enum CircuitSignatureHashAlgorithmType {
+    enum CircuitHashAlgorithmType {
         case HA256, HA384, HA160
     }
 }
@@ -141,7 +163,7 @@ extension Passport {
         }
 
         let sodPublicKey = try sod.getPublicKey()
-        guard let publicKeySize = getSodPublicKeySupportedSize(CryptoUtils.getPublicKeySize(sodPublicKey)) else {
+        guard let publicKeySize = getPublicKeySupportedSize(CryptoUtils.getPublicKeySize(sodPublicKey)) else {
             return nil
         }
 
@@ -149,10 +171,10 @@ extension Passport {
             staticId: 0,
             algorithm: sodSignatureAlgorithm.getCircuitSignatureAlgorithm(),
             keySize: publicKeySize,
-            exponent: getSodPublicKeyExponent(sodPublicKey),
+            exponent: getPublicKeyExponent(sodPublicKey),
             // TODO: Handle RSAPSS
             salt: nil,
-            curve: getSodPublicKeyCurve(sodPublicKey),
+            curve: getPublicKeyCurve(sodPublicKey),
             hashAlgorithm: sodSignatureAlgorithm.getCircuitSignatureHashAlgorithm()
         )
 
@@ -203,10 +225,21 @@ extension Passport {
             let dg15ChunkNumber = getChunkNumber(dg15, passportHashType.getChunkSize())
 
             var pubkeyData: Data
+            var aaAlgorithm: RegisterIdentityCircuitType.CircuitAlgorithmType
+            var aaKeySize: RegisterIdentityCircuitType.CircuitKeySizeType?
+            var aaExponent: RegisterIdentityCircuitType.CircuitExponentType?
+            var aaCurve: RegisterIdentityCircuitType.CircuitCurveType?
             if let rsaPublicKey = dg15Wrapper.rsaPublicKey {
                 pubkeyData = CryptoUtils.getModulusFromRSAPublicKey(rsaPublicKey) ?? Data()
-            } else if let ecdsa = dg15Wrapper.ecdsaPublicKey {
-                pubkeyData = CryptoUtils.getXYFromECDSAPublicKey(ecdsa) ?? Data()
+                aaAlgorithm = .RSA
+
+                aaKeySize = getPublicKeySupportedSize(CryptoUtils.getPublicKeySize(rsaPublicKey))
+                aaExponent = getPublicKeyExponent(rsaPublicKey)
+            } else if let ecdsaPublicKey = dg15Wrapper.ecdsaPublicKey {
+                pubkeyData = CryptoUtils.getXYFromECDSAPublicKey(ecdsaPublicKey) ?? Data()
+                aaAlgorithm = .ECDSA
+
+                aaCurve = getPublicKeyCurve(ecdsaPublicKey)
             } else {
                 throw "Unable to find public key"
             }
@@ -216,6 +249,15 @@ extension Passport {
             }
 
             circuitType.aaType = RegisterIdentityCircuitType.CircuitAAType(
+                aaAlgorithm: RegisterIdentityCircuitType.CircuitAAType.CircuitAAAlgorithm(
+                    staticId: 0,
+                    algorithm: aaAlgorithm,
+                    keySize: aaKeySize,
+                    exponent: aaExponent,
+                    salt: nil,
+                    curve: aaCurve,
+                    hashAlgorithm: .HA160
+                ),
                 dg15DigestPositionShift: dg15DigestPositionShift * 8,
                 dg15ChunkNumber: dg15ChunkNumber,
                 aaKeyPositionShift: aaKeyPositionShift * 8
@@ -225,8 +267,10 @@ extension Passport {
         return circuitType
     }
 
-    private func getSodPublicKeySupportedSize(_ size: Int) -> RegisterIdentityCircuitType.CircuitSignatureType.CircuitSignatureKeySizeType? {
+    private func getPublicKeySupportedSize(_ size: Int) -> RegisterIdentityCircuitType.CircuitKeySizeType? {
         switch size {
+        case 1024:
+            return .B1024
         case 2048:
             return .B2048
         case 4096:
@@ -242,7 +286,7 @@ extension Passport {
         }
     }
 
-    private func getSodPublicKeyExponent(_ publicKey: OpaquePointer?) -> RegisterIdentityCircuitType.CircuitSignatureType.CircuitSignatureExponentType? {
+    private func getPublicKeyExponent(_ publicKey: OpaquePointer?) -> RegisterIdentityCircuitType.CircuitExponentType? {
         guard let exponent = CryptoUtils.getExponentFromPublicKey(publicKey) else { return nil }
 
         let exponentBN = BN(exponent)
@@ -256,7 +300,7 @@ extension Passport {
         }
     }
 
-    private func getSodPublicKeyCurve(_ publicKey: OpaquePointer?) -> RegisterIdentityCircuitType.CircuitSignatureType.CircuitSignatureCurveType? {
+    private func getPublicKeyCurve(_ publicKey: OpaquePointer?) -> RegisterIdentityCircuitType.CircuitCurveType? {
         guard let curve = CryptoUtils.getCurveFromECDSAPublicKey(publicKey) else { return nil }
 
         switch curve {
