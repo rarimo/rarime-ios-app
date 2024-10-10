@@ -62,9 +62,9 @@
 	<string>${CHAIN_ID}</string>
 	<key>CIRCUIT_DATA_URLS</key>
 	<dict>
-		<key>registerIdentityUniversalRSA2048</key>
+		<key>registerIdentity_1_256_3_5_576_248_NA</key>
 		<string>${CIRCUIT_DATA_URL_0}</string>
-		<key>registerIdentityUniversalRSA4096</key>
+		<key>registerIdentity_2_256_3_6_336_264_21_2448_6_2008</key>
 		<string>${CIRCUIT_DATA_URL_1}</string>
 	</dict>
 	<key>COSMOS_RPC_URL</key>
