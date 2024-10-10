@@ -1,13 +1,12 @@
 import Foundation
 
 import Alamofire
+import CoreData
 import Foundation
 import ZipArchive
-import CoreData
 
 enum RegisteredCircuitData: String {
-    case registerIdentityUniversalRSA2048 = "registerIdentityUniversalRSA2048"
-    case registerIdentityUniversalRSA4096 = "registerIdentityUniversalRSA4096"
+    case registerIdentity_1_256_3_5_576_248_NA
 }
 
 class CircuitDataManager: ObservableObject {

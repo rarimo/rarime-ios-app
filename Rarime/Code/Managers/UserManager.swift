@@ -76,63 +76,22 @@ class UserManager: ObservableObject {
         (try? self.user?.profile.getRegistrationChallenge()) ?? Data()
     }
     
-    func buildRegistrationCircuits(_ passport: Passport) async throws -> Data {
-        guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
-
-        let sod = try SOD([UInt8](passport.sod))
-        
-        guard let cert = try OpenSSLUtils.getX509CertificatesFromPKCS7(pkcs7Der: Data(sod.pkcs7CertificateData)).first else {
-            throw "Slave certificate in sod is missing"
+    func generateRegisterIdentityProof(
+        _ passport: Passport,
+        _ circuitData: CircuitData,
+        _ registeredCircuitData: RegisteredCircuitData,
+        _ registerIdentityCircuitType: RegisterIdentityCircuitType
+    ) async throws -> ZkProof? {
+        guard let user else {
+            throw "User is not initialized"
         }
         
-        let certPem = cert.certToPEM().data(using: .utf8) ?? Data()
-        
-        let certificatesSMTAddress = try EthereumAddress(hex: ConfigManager.shared.api.certificatesSmtContractAddress, eip55: false)
-        
-        let certificatesSMTContract = try PoseidonSMT(contractAddress: certificatesSMTAddress)
-        
-        let x509Utils = IdentityX509Util()
-        
-        let slaveCertificateIndex = try x509Utils.getSlaveCertificateIndex(certPem, mastersPem: Certificates.ICAO)
-        
-        let certificateProof = try await certificatesSMTContract.getProof(slaveCertificateIndex)
-        
-        let encapsulatedContent = try sod.getEncapsulatedContent()
-        let signedAttributes = try sod.getSignedAttributes()
-        
-        let publicKey = try sod.getPublicKey()
-        let publicKeyPem = OpenSSLUtils.pubKeyToPEM(pubKey: publicKey)
-        
-        let signature = try sod.getSignature()
-        
-        let profileInitializer = IdentityProfile()
-        let profile = try profileInitializer.newProfile(secretKey)
-        
-        let inputs = try profile.buildRegisterIdentityInputs(
-            encapsulatedContent,
-            signedAttributes: signedAttributes,
-            dg1: passport.dg1,
-            dg15: passport.dg15,
-            pubKeyPem: publicKeyPem.data(using: .utf8) ?? Data(),
-            signature: signature,
-            certificatesSMTProofJSON: JSONEncoder().encode(certificateProof)
-        )
-        
-        DispatchQueue.main.async { self.masterCertProof = certificateProof }
-        
-        return inputs
-    }
-    
-    func generateRegisterIdentityProof(_ passport: Passport, _ circuitData: CircuitData, _ registeredCircuitData: RegisteredCircuitData) async throws -> ZkProof? {
-        let inputs = try await buildRegistrationCircuits(passport)
+        let inputs = try await CircuitBuilderManager.shared.registerIdentityCircuit.buildInputs(user.secretKey, passport, registerIdentityCircuitType)
         
         var wtns: Data
-        
         switch registeredCircuitData {
-        case .registerIdentityUniversalRSA2048:
-            wtns = try ZKUtils.calcWtnsRegisterIdentityUniversalRSA2048(circuitData.circutDat, inputs)
-        case .registerIdentityUniversalRSA4096:
-            wtns = try ZKUtils.calcWtnsRegisterIdentityUniversalRSA4096(circuitData.circutDat, inputs)
+        case .registerIdentity_1_256_3_5_576_248_NA:
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_5_576_248_NA(circuitData.circutDat, inputs.json)
         }
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16Prover(circuitData.circuitZkey, wtns)
@@ -188,7 +147,7 @@ class UserManager: ObservableObject {
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
     }
     
-    func registerCertificate(_ passport: Passport) async throws -> RegisteredCircuitData {
+    func registerCertificate(_ passport: Passport) async throws {
         let sod = try SOD([UInt8](passport.sod))
         
         let publicKey = try sod.getPublicKey()
@@ -217,7 +176,7 @@ class UserManager: ObservableObject {
         if proof.existence {
             LoggerUtil.common.info("Passport certificate is already registered")
             
-            return publicKeySize == 4096 ? .registerIdentityUniversalRSA4096 : .registerIdentityUniversalRSA2048
+            return
         }
         
         let calldataBuilder = IdentityCallDataBuilder()
@@ -235,8 +194,6 @@ class UserManager: ObservableObject {
         
         let eth = Ethereum()
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
-        
-        return publicKeySize == 4096 ? .registerIdentityUniversalRSA4096 : .registerIdentityUniversalRSA2048
     }
     
     func generateAirdropQueryProof(_ registerZkProof: ZkProof, _ passport: Passport) async throws -> ZkProof {

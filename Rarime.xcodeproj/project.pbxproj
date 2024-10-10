@@ -224,8 +224,6 @@
 		CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82D62BA8917100AAF885 /* LottieView.swift */; };
 		CEA03F0A2C7C7A17002F218A /* View+IsLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA03F092C7C7A17002F218A /* View+IsLoading.swift */; };
 		CEA03F0C2C7C9319002F218A /* CreateIdentityIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA03F0B2C7C9319002F218A /* CreateIdentityIntroView.swift */; };
-		CEB8B27C2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA2048.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB8B27A2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA2048.a */; };
-		CEB8B27D2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA4096.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB8B27B2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA4096.a */; };
 		CEB91BBE2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB91BBD2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift */; };
 		CEC562032BD923B4002D4954 /* libfr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC561FB2BD923B3002D4954 /* libfr.a */; };
 		CEC562042BD923B4002D4954 /* librapidsnark.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC561FC2BD923B3002D4954 /* librapidsnark.a */; };
@@ -248,6 +246,7 @@
 		CEDC57922CA2CA0F00F02132 /* MRZCameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC57912CA2CA0F00F02132 /* MRZCameraManager.swift */; };
 		CEDC57942CA2CA4100F02132 /* CMSampleBuffer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC57932CA2CA4100F02132 /* CMSampleBuffer+Extension.swift */; };
 		CEDC57962CA30A9D00F02132 /* CIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC57952CA30A9D00F02132 /* CIImage+Extension.swift */; };
+		CEE3259D2CB7CA5300468BE4 /* libwitnesscalc_registerIdentity_1_256_3_5_576_248_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE3259C2CB7CA5300468BE4 /* libwitnesscalc_registerIdentity_1_256_3_5_576_248_NA.a */; };
 		CEF251382BD6E17800050507 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251372BD6E17800050507 /* UserManager.swift */; };
 		CEF2513A2BD6E22700050507 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251392BD6E22700050507 /* User.swift */; };
 		CEF723142BF4BB9000E79198 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF723132BF4BB9000E79198 /* Errors.swift */; };
@@ -461,8 +460,6 @@
 		CE3D41D32C779BE200D0AA65 /* NotificationBackgroundProcessor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationBackgroundProcessor.entitlements; sourceTree = "<group>"; };
 		CE3E0D3A2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AFError+RetriveOpenApiHttpCode.swift"; sourceTree = "<group>"; };
 		CE51E2E42C21790700043D9A /* CircuitDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircuitDataManager.swift; sourceTree = "<group>"; };
-		CE51E2EC2C21A58200043D9A /* witnesscalc_registerIdentityUniversalRSA4096.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentityUniversalRSA4096.h; sourceTree = "<group>"; };
-		CE51E2ED2C21A58200043D9A /* witnesscalc_registerIdentityUniversalRSA2048.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentityUniversalRSA2048.h; sourceTree = "<group>"; };
 		CE51E2FA2C21CA0B00043D9A /* StateKeeperContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateKeeperContract.swift; sourceTree = "<group>"; };
 		CE5315C22C77664C0087D53D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE5315C92C7769A20087D53D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -492,8 +489,6 @@
 		CE9E82E62BA89CE300AAF885 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		CEA03F092C7C7A17002F218A /* View+IsLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+IsLoading.swift"; sourceTree = "<group>"; };
 		CEA03F0B2C7C9319002F218A /* CreateIdentityIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityIntroView.swift; sourceTree = "<group>"; };
-		CEB8B27A2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA2048.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentityUniversalRSA2048.a; sourceTree = "<group>"; };
-		CEB8B27B2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA4096.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentityUniversalRSA4096.a; sourceTree = "<group>"; };
 		CEB91BBD2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NFCPassportModel+getDataGroupsRead.swift"; sourceTree = "<group>"; };
 		CEC561FB2BD923B3002D4954 /* libfr.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfr.a; sourceTree = "<group>"; };
 		CEC561FC2BD923B3002D4954 /* librapidsnark.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librapidsnark.a; sourceTree = "<group>"; };
@@ -520,6 +515,8 @@
 		CEDC57912CA2CA0F00F02132 /* MRZCameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRZCameraManager.swift; sourceTree = "<group>"; };
 		CEDC57932CA2CA4100F02132 /* CMSampleBuffer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMSampleBuffer+Extension.swift"; sourceTree = "<group>"; };
 		CEDC57952CA30A9D00F02132 /* CIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+Extension.swift"; sourceTree = "<group>"; };
+		CEE3259C2CB7CA5300468BE4 /* libwitnesscalc_registerIdentity_1_256_3_5_576_248_NA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_1_256_3_5_576_248_NA.a; sourceTree = "<group>"; };
+		CEE3259E2CB7CA6E00468BE4 /* witnesscalc_registerIdentity_1_256_3_5_576_248_NA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_1_256_3_5_576_248_NA.h; sourceTree = "<group>"; };
 		CEF251372BD6E17800050507 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		CEF251392BD6E22700050507 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CEF723132BF4BB9000E79198 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -562,7 +559,6 @@
 				5655E43A2BD51F5100B86C5C /* KeychainAccess in Frameworks */,
 				CE68BE452BD9B6EA00D92EBB /* Web3 in Frameworks */,
 				CE72102E2BD7F6780043DB7F /* Alamofire in Frameworks */,
-				CEB8B27C2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA2048.a in Frameworks */,
 				CE61E8832C24240000940129 /* Semaphore in Frameworks */,
 				56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */,
 				CE8FEB5C2C1AFC3F0008381A /* libwitnesscalc_auth.a in Frameworks */,
@@ -573,9 +569,9 @@
 				CE7210312BD807140043DB7F /* ZipArchive in Frameworks */,
 				560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */,
 				CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */,
+				CEE3259D2CB7CA5300468BE4 /* libwitnesscalc_registerIdentity_1_256_3_5_576_248_NA.a in Frameworks */,
 				C7B9219C2CA6DA60001F172C /* Identity.xcframework in Frameworks */,
 				CEDB9DCC2BFDF60900BCF074 /* libwitnesscalc_queryIdentity.a in Frameworks */,
-				CEB8B27D2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA4096.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1258,15 +1254,13 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEE3259C2CB7CA5300468BE4 /* libwitnesscalc_registerIdentity_1_256_3_5_576_248_NA.a */,
 				C7B9219B2CA6DA60001F172C /* Identity.xcframework */,
 				CE8FEB5B2C1AFC3F0008381A /* libwitnesscalc_auth.a */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562022BD923B4002D4954 /* libfq.a */,
+				CEE3259E2CB7CA6E00468BE4 /* witnesscalc_registerIdentity_1_256_3_5_576_248_NA.h */,
 				CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */,
-				CE51E2ED2C21A58200043D9A /* witnesscalc_registerIdentityUniversalRSA2048.h */,
-				CE51E2EC2C21A58200043D9A /* witnesscalc_registerIdentityUniversalRSA4096.h */,
-				CEB8B27A2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA2048.a */,
-				CEB8B27B2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA4096.a */,
 				CEC561FB2BD923B3002D4954 /* libfr.a */,
 				CEDB9DCB2BFDF60900BCF074 /* libwitnesscalc_queryIdentity.a */,
 				CEC562012BD923B4002D4954 /* libgmp.a */,
