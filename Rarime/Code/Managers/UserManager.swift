@@ -82,11 +82,13 @@ class UserManager: ObservableObject {
         _ registeredCircuitData: RegisteredCircuitData,
         _ registerIdentityCircuitType: RegisterIdentityCircuitType
     ) async throws -> ZkProof? {
-        guard let user else {
-            throw "User is not initialized"
-        }
+        guard let user else { throw "User is not initialized" }
         
-        let inputs = try await CircuitBuilderManager.shared.registerIdentityCircuit.buildInputs(user.secretKey, passport, registerIdentityCircuitType)
+        let inputs = try await CircuitBuilderManager.shared.registerIdentityCircuit.buildInputs(
+            user.secretKey,
+            passport,
+            registerIdentityCircuitType
+        )
         
         var wtns: Data
         switch registeredCircuitData {
