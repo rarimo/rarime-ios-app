@@ -94,8 +94,12 @@ class UserManager: ObservableObject {
         switch registeredCircuitData {
         case .registerIdentity_1_256_3_5_576_248_NA:
             wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_5_576_248_NA(circuitData.circutDat, inputs.json)
+        case .registerIdentity_1_256_3_6_576_248_1_2432_5_296:
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_6_576_248_1_2432_5_296(circuitData.circutDat, inputs.json)
         case .registerIdentity_2_256_3_6_336_264_21_2448_6_2008:
             wtns = try ZKUtils.calcWtnsRegisterIdentity_2_256_3_6_336_264_21_2448_6_2008(circuitData.circutDat, inputs.json)
+        case .registerIdentity_21_256_3_7_336_264_21_3072_6_2008:
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_21_256_3_7_336_264_21_3072_6_2008(circuitData.circutDat, inputs.json)
         }
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16Prover(circuitData.circuitZkey, wtns)

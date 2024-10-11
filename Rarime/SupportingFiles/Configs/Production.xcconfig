@@ -36,5 +36,7 @@ ICAO_COSMOS_RPC = "core-api.mainnet.rarimo.com:443"
 FEEDBACK_EMAIL = "info@rarilabs.com"
 
 // MARK: CircuitsData
-CIRCUIT_DATA_URL_0 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/registerIdentity_1_256_3_5_576_248_NA-download.zip"
-CIRCUIT_DATA_URL_1 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/registerIdentity_2_256_3_6_336_264_21_2448_6_2008-download.zip"
+CIRCUIT_DATA_URL_0 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.0/registerIdentity_1_256_3_5_576_248_NA-download.zip"
+CIRCUIT_DATA_URL_1 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.0/registerIdentity_1_256_3_6_576_248_1_2432_5_296-download.zip"
+CIRCUIT_DATA_URL_2 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.0/registerIdentity_2_256_3_6_336_264_21_2448_6_2008-download.zip"
+CIRCUIT_DATA_URL_3 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.0/registerIdentity_21_256_3_7_336_264_21_3072_6_2008-download.zip"
