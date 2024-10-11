@@ -366,7 +366,7 @@ class UserManager: ObservableObject {
     func collectPubSignals(
         passport: Passport,
         params: GetProofParamsResponseAttributes
-    ) throws -> PubSignals  {
+    ) throws -> PubSignals {
         let nullifier = try generateNullifierForEvent(params.eventID)
         let currentTimestamp = String(format: "%.0f", Date().timeIntervalSince1970 * 1000)
         
@@ -574,7 +574,8 @@ class UserManager: ObservableObject {
     
     func reset() {
         AppUserDefaults.shared.isUserRevoked = false
-        AppUserDefaults.shared.userRefarralCode = ""
+        AppUserDefaults.shared.userReferralCode = ""
+        AppUserDefaults.shared.deferredReferralCode = ""
         
         do {
             try AppKeychain.removeValue(.privateKey)

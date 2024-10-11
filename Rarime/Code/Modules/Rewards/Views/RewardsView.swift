@@ -81,14 +81,7 @@ struct RewardsView: View {
 
     var content: some View {
         MainViewLayout {
-            if !isCodeVerified {
-                RewardsIntroView() {
-                    isCodeVerified = true
-                }
-                .onAppear {
-                    isCodeVerified = userManager.user?.userReferalCode != nil
-                }
-            } else {
+            if isCodeVerified {
                 ScrollView {
                     VStack(spacing: 24) {
                         HStack {
@@ -161,6 +154,13 @@ struct RewardsView: View {
                 .isLoading(!isRewardsLoaded)
                 .onAppear(perform: fetchEvents)
                 .onAppear(perform: fetchLeaderboard)
+            } else {
+                RewardsIntroView {
+                    isCodeVerified = true
+                }
+                .onAppear {
+                    isCodeVerified = userManager.user?.userReferralCode != nil
+                }
             }
         }
     }
@@ -271,22 +271,22 @@ struct RewardsView: View {
             }
         }
     }
-    
+        
     func fetchEvents() {
         Task { @MainActor in
             do {
                 guard let user = userManager.user else { throw "user is not initalized" }
-                
-                if user.userReferalCode == nil {
+                    
+                if user.userReferralCode == nil {
                     return
                 }
-                                
+                                    
                 let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-                
+                    
                 let points = Points(ConfigManager.shared.api.pointsServiceURL)
-                
+                    
                 let balanceResponse = try await points.getPointsBalance(accessJwt, true, true)
-                
+                    
                 self.rewardsViewModel.pointsBalanceRaw = balanceResponse.data.attributes
                 isRewardsLoaded = true
 
@@ -303,28 +303,28 @@ struct RewardsView: View {
                 self.isEventsLoaded = true
             } catch {
                 LoggerUtil.common.error("failed to fetch events: \(error, privacy: .public)")
-                
+                    
                 AlertManager.shared.emitError(.unknown("Unable to fetch events, try again later"))
             }
         }
     }
-    
+        
     func fetchLeaderboard() {
         Task { @MainActor in
             do {
                 let points = Points(ConfigManager.shared.api.pointsServiceURL)
-                
+                    
                 let leaderboard = try await points.getLeaderboard(50, 0)
-                
+                    
                 self.rewardsViewModel.leaderboard = leaderboard.data.map { entry in
                     entry.attributes
                 }
                 self.rewardsViewModel.totalParticipants = leaderboard.meta.eventsCount
-                
+                    
                 self.isLeaderboardLoaded = true
             } catch {
                 LoggerUtil.common.error("failed to fetch leaderboard: \(error, privacy: .public)")
-                
+                    
                 AlertManager.shared.emitError(.unknown("Unable to fetch leaderboard, try again later"))
             }
         }
@@ -336,9 +336,9 @@ private struct LimitedEventItem: View {
 
     private var daysRemaining: Int {
         let SECONDS_IN_DAY = 24 * 60 * 60
-        
+            
         let interval = event.attributes.meta.metaStatic.expiresAt!.timeIntervalSince(Date())
-        
+            
         return Int(interval) / SECONDS_IN_DAY
     }
 
@@ -417,7 +417,7 @@ private struct ActiveEventItem: View {
 
 #Preview {
     let userManager = UserManager()
-    
+        
     return RewardsView()
         .environmentObject(DecentralizedAuthManager())
         .environmentObject(MainView.ViewModel())

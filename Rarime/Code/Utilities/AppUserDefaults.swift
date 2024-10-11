@@ -55,16 +55,19 @@ public class AppUserDefaults: ObservableObject {
 
     @AppStorage("is_user_revoked")
     public var isUserRevoked = false
-    
+
     @AppStorage("userStatus")
     public var userStatus = User.Status.unscanned.rawValue
-    
+
     @AppStorage("userRefarralCode")
-    public var userRefarralCode = ""
-    
+    public var userReferralCode = ""
+
+    @AppStorage("deferredReferralCode")
+    public var deferredReferralCode = ""
+
     @AppStorage("is_circuits_storage_cleared")
     public var isCircuitsStorageCleared = false
-    
+
     @AppStorage("isScanTutorialDisplayed")
     public var isScanTutorialDisplayed = false
 }
