@@ -9,6 +9,7 @@ class ConfigManager: ObservableObject {
     let certificatesStorage = CertificatesStorage()
     let feedback = Feedback()
     let circuitData = CircuitData()
+    let appsFlyer = AppsFlyer()
 }
 
 extension ConfigManager {
@@ -135,11 +136,27 @@ extension ConfigManager {
     }
 }
 
-fileprivate func readFromInfoPlist<T>(key: String) throws -> T {
+extension ConfigManager {
+    class AppsFlyer {
+        let appId: String
+        let devKey: String
+
+        init() {
+            do {
+                self.appId = try readFromInfoPlist(key: "APPSFLYER_APP_ID")
+                self.devKey = try readFromInfoPlist(key: "APPSFLYER_DEV_KEY")
+            } catch {
+                fatalError("ConfigManager.AppsFlyer init error: \(error.localizedDescription)")
+            }
+        }
+    }
+}
+
+private func readFromInfoPlist<T>(key: String) throws -> T {
     guard let value = Bundle.main.object(forInfoDictionaryKey: key) as? T else {
         throw "Couldn't find \(key) in Info.plist"
     }
-    
+
     if let value = value as? String {
         return normalizeInfoPlistString(value) as! T
     }
@@ -147,7 +164,7 @@ fileprivate func readFromInfoPlist<T>(key: String) throws -> T {
     return value
 }
 
-fileprivate func readURLFromInfoPlist(key: String) throws -> URL {
+private func readURLFromInfoPlist(key: String) throws -> URL {
     let value: String = try readFromInfoPlist(key: key)
 
     guard let url = URL(string: value) else { throw "\(key) isn't URL" }
@@ -155,20 +172,20 @@ fileprivate func readURLFromInfoPlist(key: String) throws -> URL {
     return url
 }
 
-fileprivate func readURLDictionaryFromInfoPlist(key: String) throws -> [String: URL] {
+private func readURLDictionaryFromInfoPlist(key: String) throws -> [String: URL] {
     let value: [String: String] = try readFromInfoPlist(key: key)
-    
+
     var result: [String: URL] = [:]
     for item in value {
         guard let url = URL(string: normalizeInfoPlistString(item.value)) else { throw "\(key) isn't URL" }
-        
+
         result[item.key] = url
     }
 
     return result
 }
 
-fileprivate func normalizeInfoPlistString(_ value: String) -> String {
+private func normalizeInfoPlistString(_ value: String) -> String {
     return value.starts(with: "\"")
         ? String(value.dropFirst().dropLast())
         : value

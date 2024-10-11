@@ -38,3 +38,7 @@ FEEDBACK_EMAIL = "info@rarilabs.com"
 // MARK: CircuitsData
 CIRCUIT_DATA_URL_0 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.1.0-alpha/registerIdentityUniversalRSA2048-download.zip"
 CIRCUIT_DATA_URL_1 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.1.0-alpha/registerIdentityUniversalRSA4096-download.zip"
+
+// MARK: AppsFlyer
+APPSFLYER_DEV_KEY = ""
+APPSFLYER_APP_ID = ""

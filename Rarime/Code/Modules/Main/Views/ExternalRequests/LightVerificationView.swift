@@ -1,5 +1,5 @@
-import SwiftUI
 import Identity
+import SwiftUI
 
 struct LightVerificationView: View {
     @EnvironmentObject private var userManager: UserManager
@@ -118,7 +118,7 @@ struct LightVerificationView: View {
                     return
                 }
                 
-                if citizenship.isEmpty || passport.nationality != citizenship {
+                if !citizenship.isEmpty && passport.nationality != citizenship {
                     AlertManager.shared.emitError(.unknown("Your citizenship does not meet the requirements"))
                     onDismiss()
                     return

@@ -36,7 +36,7 @@ struct HomeView: View {
         !(pointsBalance?.isVerified ?? false)
             && !passportManager.isUnsupportedForRewards
             && userManager.registerZkProof != nil
-            && userManager.user?.userReferalCode != nil
+            && userManager.user?.userReferralCode != nil
     }
 
     var isWalletBalanceDisplayed: Bool {
@@ -301,7 +301,7 @@ struct HomeView: View {
                 self.isBalanceFetching = false
             }
 
-            if userManager.user?.userReferalCode == nil {
+            if userManager.user?.userReferralCode == nil {
                 return
             }
 
