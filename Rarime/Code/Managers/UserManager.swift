@@ -111,7 +111,9 @@ class UserManager: ObservableObject {
     }
     
     func register(_ registerZkProof: ZkProof, _ passport: Passport, _ isRevoked: Bool, _ registerIdentityCircuitName: String) async throws {
-        guard let masterCertProof = self.masterCertProof else { throw "Master certificate proof is missing" }
+        let slaveCertPem = try passport.getSlaveSodCertificatePem()
+        
+        let masterCertProof = try await passport.getCertificateSmtProof(slaveCertPem)
         
         let proofJson = try JSONEncoder().encode(registerZkProof)
         
