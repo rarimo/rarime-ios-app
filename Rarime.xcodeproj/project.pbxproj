@@ -173,6 +173,7 @@
 		CE31E54A2C11FE150039CAA5 /* ImportIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31E5492C11FE150039CAA5 /* ImportIdentityView.swift */; };
 		CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32CF4E2BAC97A800E507B6 /* MainView.swift */; };
 		CE32CF522BAC981300E507B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE32CF512BAC981300E507B6 /* Lottie */; };
+		CE335BE32CBE5B4E00301509 /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE335BE22CBE5B4E00301509 /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a */; };
 		CE3477512C7885DA005E91FE /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CE3477502C7885DA005E91FE /* FirebaseAnalytics */; };
 		CE3477532C7885DA005E91FE /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = CE3477522C7885DA005E91FE /* FirebaseMessaging */; };
 		CE3477552C7885EC005E91FE /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CE3477542C7885EC005E91FE /* FirebaseAnalytics */; };
@@ -191,7 +192,6 @@
 		CE3D41D62C779C8D00D0AA65 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5315C92C7769A20087D53D /* NotificationManager.swift */; };
 		CE3D41D72C779C9E00D0AA65 /* PushNotificationsRaw.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D41BF2C77974500D0AA65 /* PushNotificationsRaw.swift */; };
 		CE3D5BE22CBD4027007E6E7F /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3D5BE12CBD4027007E6E7F /* Identity.xcframework */; };
-		CE3D5BE42CBD50C4007E6E7F /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3D5BE32CBD50C4007E6E7F /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a */; };
 		CE3E0D3B2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E0D3A2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift */; };
 		CE51E2E52C21790700043D9A /* CircuitDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51E2E42C21790700043D9A /* CircuitDataManager.swift */; };
 		CE51E2FB2C21CA0B00043D9A /* StateKeeperContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51E2FA2C21CA0B00043D9A /* StateKeeperContract.swift */; };
@@ -451,6 +451,7 @@
 		CE31E5452C11F4180039CAA5 /* GetStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedView.swift; sourceTree = "<group>"; };
 		CE31E5492C11FE150039CAA5 /* ImportIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportIdentityView.swift; sourceTree = "<group>"; };
 		CE32CF4E2BAC97A800E507B6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		CE335BE22CBE5B4E00301509 /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a; sourceTree = "<group>"; };
 		CE34775B2C7888E1005E91FE /* NotificationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		CE34775C2C7888E1005E91FE /* NotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		CE3477612C78892F005E91FE /* View+Align.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Align.swift"; sourceTree = "<group>"; };
@@ -462,7 +463,6 @@
 		CE3D41C92C779BC400D0AA65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE3D41D32C779BE200D0AA65 /* NotificationBackgroundProcessor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationBackgroundProcessor.entitlements; sourceTree = "<group>"; };
 		CE3D5BE12CBD4027007E6E7F /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
-		CE3D5BE32CBD50C4007E6E7F /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a; sourceTree = "<group>"; };
 		CE3E0D3A2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AFError+RetriveOpenApiHttpCode.swift"; sourceTree = "<group>"; };
 		CE51E2E42C21790700043D9A /* CircuitDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircuitDataManager.swift; sourceTree = "<group>"; };
 		CE51E2FA2C21CA0B00043D9A /* StateKeeperContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateKeeperContract.swift; sourceTree = "<group>"; };
@@ -575,7 +575,7 @@
 				CE72102E2BD7F6780043DB7F /* Alamofire in Frameworks */,
 				CE61E8832C24240000940129 /* Semaphore in Frameworks */,
 				56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */,
-				CE3D5BE42CBD50C4007E6E7F /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a in Frameworks */,
+				CE335BE32CBE5B4E00301509 /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a in Frameworks */,
 				CE8FEB5C2C1AFC3F0008381A /* libwitnesscalc_auth.a in Frameworks */,
 				CE68BE472BD9B6EA00D92EBB /* Web3ContractABI in Frameworks */,
 				CEC562032BD923B4002D4954 /* libfr.a in Frameworks */,
@@ -1286,7 +1286,7 @@
 				CEDB9DCB2BFDF60900BCF074 /* libwitnesscalc_queryIdentity.a */,
 				CED39E252CB949AB001D0400 /* libwitnesscalc_registerIdentity_1_256_3_5_576_248_NA.a */,
 				CED39E222CB949AA001D0400 /* libwitnesscalc_registerIdentity_1_256_3_6_576_248_1_2432_5_296.a */,
-				CE3D5BE32CBD50C4007E6E7F /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a */,
+				CE335BE22CBE5B4E00301509 /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a */,
 				CED39E242CB949AB001D0400 /* libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a */,
 				CEC562132BD9281A002D4954 /* libresolv.9.tbd */,
 				CEC562142BD9281A002D4954 /* libresolv.tbd */,
