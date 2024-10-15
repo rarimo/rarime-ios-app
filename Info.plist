@@ -70,6 +70,12 @@
 		<string>${CIRCUIT_DATA_URL_2}</string>
 		<key>registerIdentity_21_256_3_7_336_264_21_3072_6_2008</key>
 		<string>${CIRCUIT_DATA_URL_3}</string>
+		<key>registerIdentity_1_256_3_6_576_264_1_2448_3_256</key>
+		<string>${CIRCUIT_DATA_URL_4}</string>
+		<key>registerIdentity_2_256_3_6_336_248_1_2432_3_256</key>
+		<string>${CIRCUIT_DATA_URL_5}</string>
+		<key>registerIdentity_2_256_3_6_576_248_1_2432_3_256</key>
+		<string>${CIRCUIT_DATA_URL_6}</string>
 	</dict>
 	<key>COSMOS_RPC_URL</key>
 	<string>${COSMOS_RPC_URL}</string>
