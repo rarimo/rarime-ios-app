@@ -77,35 +77,26 @@ class UserManager: ObservableObject {
     }
     
     func generateRegisterIdentityProof(
-        _ passport: Passport,
+        _ inputs: Data,
         _ circuitData: CircuitData,
-        _ registeredCircuitData: RegisteredCircuitData,
-        _ registerIdentityCircuitType: RegisterIdentityCircuitType
-    ) async throws -> ZkProof? {
-        guard let user else { throw "User is not initialized" }
-        
-        let inputs = try await CircuitBuilderManager.shared.registerIdentityCircuit.buildInputs(
-            user.secretKey,
-            passport,
-            registerIdentityCircuitType
-        )
-        
+        _ registeredCircuitData: RegisteredCircuitData
+    ) throws -> ZkProof? {
         var wtns: Data
         switch registeredCircuitData {
         case .registerIdentity_1_256_3_5_576_248_NA:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_5_576_248_NA(circuitData.circutDat, inputs.json)
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_5_576_248_NA(circuitData.circutDat, inputs)
         case .registerIdentity_1_256_3_6_576_248_1_2432_5_296:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_6_576_248_1_2432_5_296(circuitData.circutDat, inputs.json)
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_6_576_248_1_2432_5_296(circuitData.circutDat, inputs)
         case .registerIdentity_2_256_3_6_336_264_21_2448_6_2008:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_2_256_3_6_336_264_21_2448_6_2008(circuitData.circutDat, inputs.json)
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_2_256_3_6_336_264_21_2448_6_2008(circuitData.circutDat, inputs)
         case .registerIdentity_21_256_3_7_336_264_21_3072_6_2008:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_21_256_3_7_336_264_21_3072_6_2008(circuitData.circutDat, inputs.json)
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_21_256_3_7_336_264_21_3072_6_2008(circuitData.circutDat, inputs)
         case .registerIdentity_1_256_3_6_576_264_1_2448_3_256:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_6_576_264_1_2448_3_256(circuitData.circutDat, inputs.json)
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_6_576_264_1_2448_3_256(circuitData.circutDat, inputs)
         case .registerIdentity_2_256_3_6_336_248_1_2432_3_256:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_2_256_3_6_336_248_1_2432_3_256(circuitData.circutDat, inputs.json)
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_2_256_3_6_336_248_1_2432_3_256(circuitData.circutDat, inputs)
         case .registerIdentity_2_256_3_6_576_248_1_2432_3_256:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_2_256_3_6_576_248_1_2432_3_256(circuitData.circutDat, inputs.json)
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_2_256_3_6_576_248_1_2432_3_256(circuitData.circutDat, inputs)
         }
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16Prover(circuitData.circuitZkey, wtns)

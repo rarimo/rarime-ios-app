@@ -60,6 +60,7 @@ class PassportViewModel: ObservableObject {
     ) async throws -> ZkProof {
         do {
             guard let passport else { throw "failed to get passport" }
+            guard let user = UserManager.shared.user else { throw "failed to get user" }
             
             try await UserManager.shared.registerCertificate(passport)
             
@@ -80,11 +81,16 @@ class PassportViewModel: ObservableObject {
             let circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData, downloadProgress)
             proofState = .applyingZK
             
-            guard let proof = try await UserManager.shared.generateRegisterIdentityProof(
+            let registerIdentityInputs = try await CircuitBuilderManager.shared.registerIdentityCircuit.buildInputs(
+                user.secretKey,
                 passport,
-                circuitData,
-                registeredCircuitData,
                 registerIdentityCircuitType
+            )
+            
+            guard let proof = try UserManager.shared.generateRegisterIdentityProof(
+                registerIdentityInputs.json,
+                circuitData,
+                registeredCircuitData
             ) else {
                 throw "failed to generate proof, invalid circuit type"
             }
