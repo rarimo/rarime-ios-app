@@ -9,6 +9,8 @@ struct AppView: View {
     @EnvironmentObject private var alertManager: AlertManager
     @EnvironmentObject private var securityManager: SecurityManager
     @EnvironmentObject private var settingsManager: SettingsManager
+    @Environment(\.colorScheme) private var colorScheme
+
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
@@ -46,7 +48,7 @@ struct AppView: View {
             }
             AlertManagerView()
         }
-        .preferredColorScheme(settingsManager.colorScheme.rawScheme)
+        .colorScheme(settingsManager.colorScheme.rawScheme ?? colorScheme)
         .onAppear {
             Task { @MainActor in
                 await updateManager.checkForUpdate()
