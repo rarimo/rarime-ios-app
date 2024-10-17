@@ -181,6 +181,106 @@ class ZKUtils {
 #endif
     }
     
+    public static func calcWtnsRegisterIdentity_11_256_3_3_576_248_1_1184_5_264(
+        _ descriptionFileData: Data,
+        _ privateInputsJson: Data
+    ) throws -> Data {
+#if targetEnvironment(simulator)
+        return Data()
+#else
+        let wtnsSize = UnsafeMutablePointer<UInt>.allocate(capacity: Int(1))
+        wtnsSize.initialize(to: WITNESS_SIZE)
+        let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
+        let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
+        
+        let result = witnesscalc_registerIdentity_1_256_3_5_576_248_NA(
+            (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
+            (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
+            wtnsBuffer, wtnsSize,
+            errorBuffer, ERROR_SIZE
+        )
+        
+        try handleWitnessError(result, errorBuffer, wtnsSize)
+        
+        return Data(bytes: wtnsBuffer, count: Int(wtnsSize.pointee))
+#endif
+    }
+    
+    public static func calcWtnsRegisterIdentity_12_256_3_3_336_232_NA(
+        _ descriptionFileData: Data,
+        _ privateInputsJson: Data
+    ) throws -> Data {
+#if targetEnvironment(simulator)
+        return Data()
+#else
+        let wtnsSize = UnsafeMutablePointer<UInt>.allocate(capacity: Int(1))
+        wtnsSize.initialize(to: WITNESS_SIZE)
+        let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
+        let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
+        
+        let result = witnesscalc_registerIdentity_1_256_3_5_576_248_NA(
+            (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
+            (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
+            wtnsBuffer, wtnsSize,
+            errorBuffer, ERROR_SIZE
+        )
+        
+        try handleWitnessError(result, errorBuffer, wtnsSize)
+        
+        return Data(bytes: wtnsBuffer, count: Int(wtnsSize.pointee))
+#endif
+    }
+    
+    public static func calcWtnsRegisterIdentity_1_256_3_4_336_232_1_1480_5_296(
+        _ descriptionFileData: Data,
+        _ privateInputsJson: Data
+    ) throws -> Data {
+#if targetEnvironment(simulator)
+        return Data()
+#else
+        let wtnsSize = UnsafeMutablePointer<UInt>.allocate(capacity: Int(1))
+        wtnsSize.initialize(to: WITNESS_SIZE)
+        let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
+        let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
+        
+        let result = witnesscalc_registerIdentity_1_256_3_5_576_248_NA(
+            (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
+            (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
+            wtnsBuffer, wtnsSize,
+            errorBuffer, ERROR_SIZE
+        )
+        
+        try handleWitnessError(result, errorBuffer, wtnsSize)
+        
+        return Data(bytes: wtnsBuffer, count: Int(wtnsSize.pointee))
+#endif
+    }
+    
+    public static func calcWtnsRegisterIdentity_1_256_3_4_600_248_1_1496_3_256(
+        _ descriptionFileData: Data,
+        _ privateInputsJson: Data
+    ) throws -> Data {
+#if targetEnvironment(simulator)
+        return Data()
+#else
+        let wtnsSize = UnsafeMutablePointer<UInt>.allocate(capacity: Int(1))
+        wtnsSize.initialize(to: WITNESS_SIZE)
+        let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
+        let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
+        
+        let result = witnesscalc_registerIdentity_1_256_3_5_576_248_NA(
+            (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
+            (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
+            wtnsBuffer, wtnsSize,
+            errorBuffer, ERROR_SIZE
+        )
+        
+        try handleWitnessError(result, errorBuffer, wtnsSize)
+        
+        return Data(bytes: wtnsBuffer, count: Int(wtnsSize.pointee))
+#endif
+    }
+    
     public static func calcWtnsQueryIdentity(_ privateInputsJson: Data) throws -> Data {
         return try _calcWtnsQueryIdentity(Circuits.queryIdentityDat, privateInputsJson)
     }
