@@ -53,27 +53,29 @@ struct RewardsView: View {
     var body: some View {
         ZStack {
             NavigationStack(path: $path) {
-                content.navigationDestination(for: RewardsRoute.self) { route in
-                    switch route {
-                    case .taskEvent:
-                        TaskEventView(onBack: { path.removeLast() })
-                            .environmentObject(rewardsViewModel)
-                    case .inviteFriends:
-                        ZStack {
-                            if let myBalance = rewardsViewModel.pointsBalanceRaw {
-                                InviteFriendsView(
-                                    balance: myBalance,
-                                    onBack: { path.removeLast() }
-                                )
+                content
+                    .navigationDestination(for: RewardsRoute.self) { route in
+                        switch route {
+                        case .taskEvent:
+                            TaskEventView(onBack: { path.removeLast() })
+                                .environmentObject(rewardsViewModel)
+                        case .inviteFriends:
+                            ZStack {
+                                if let myBalance = rewardsViewModel.pointsBalanceRaw {
+                                    InviteFriendsView(
+                                        balance: myBalance,
+                                        onBack: { path.removeLast() }
+                                    )
+                                }
                             }
+                        case .claimRewards:
+                            ClaimRewardsView(
+                                balance: myBalance,
+                                onBack: { path.removeLast() }
+                            )
                         }
-                    case .claimRewards:
-                        ClaimRewardsView(
-                            balance: myBalance,
-                            onBack: { path.removeLast() }
-                        )
                     }
-                }
+                    .navigationBarBackButtonHidden()
             }
         }
         .environmentObject(rewardsViewModel)

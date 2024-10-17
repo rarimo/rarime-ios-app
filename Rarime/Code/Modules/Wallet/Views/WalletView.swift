@@ -36,21 +36,23 @@ struct WalletView: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            content.navigationDestination(for: WalletRoute.self) { route in
-                switch route {
-                case .receive:
-                    WalletReceiveView(
-                        address: userManager.userAddress,
-                        token: token,
-                        onBack: { path.removeLast() }
-                    )
-                case .send:
-                    WalletSendView(
-                        token: token,
-                        onBack: { path.removeLast() }
-                    )
+            content
+                .navigationDestination(for: WalletRoute.self) { route in
+                    switch route {
+                    case .receive:
+                        WalletReceiveView(
+                            address: userManager.userAddress,
+                            token: token,
+                            onBack: { path.removeLast() }
+                        )
+                    case .send:
+                        WalletSendView(
+                            token: token,
+                            onBack: { path.removeLast() }
+                        )
+                    }
                 }
-            }
+                .navigationBarBackButtonHidden()
         }
     }
 

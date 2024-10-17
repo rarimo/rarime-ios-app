@@ -32,6 +32,7 @@ struct IntroView: View {
                         )
                     }
                 }
+                .navigationBarBackButtonHidden()
                 .background(.backgroundPure)
         }
     }

@@ -51,64 +51,61 @@ struct HomeView: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            content.navigationDestination(for: HomeRoute.self) { route in
-                switch route {
-                case .scanPassport:
-                    ScanPassportView(
-                        onComplete: { passport in
-                            userManager.user?.status = .passportScanned
+            content
+                .navigationDestination(for: HomeRoute.self) { route in
+                    switch route {
+                    case .scanPassport:
+                        ScanPassportView(
+                            onComplete: { passport in
+                                userManager.user?.status = .passportScanned
 
-                            passportManager.setPassport(passport)
-                            isCongratsShown = true
-                            path.removeLast()
-                        },
-                        onClose: { path.removeLast() }
-                    )
-                    .navigationBarBackButtonHidden()
-                case .reserveTokens:
-                    ReserveTokensView(
-                        showTerms: true,
+                                passportManager.setPassport(passport)
+                                isCongratsShown = true
+                                path.removeLast()
+                            },
+                            onClose: { path.removeLast() }
+                        )
+                    case .reserveTokens:
+                        ReserveTokensView(
+                            showTerms: true,
 
-                        passport: passportManager.passport,
-                        onFinish: { isClaimed in
-                            if isClaimed {
-                                self.isClaimed = isClaimed
-                                self.isCongratsShown = true
+                            passport: passportManager.passport,
+                            onFinish: { isClaimed in
+                                if isClaimed {
+                                    self.isClaimed = isClaimed
+                                    self.isCongratsShown = true
+                                }
+
+                                path.removeLast()
+                            },
+                            onClose: { path.removeLast() }
+                        )
+                    case .claimRewards:
+                        ClaimTokensView(
+                            showTerms: true,
+                            passport: passportManager.passport,
+                            onFinish: { _ in
+                                isClaimed = true
+                                isCongratsShown = true
+                                path.removeLast()
+                            },
+                            onClose: { path.removeLast() }
+                        )
+                    case .notifications:
+                        NotificationsView(
+                            onBack: {
+                                path.removeLast()
                             }
-
-                            path.removeLast()
-                        },
-                        onClose: { path.removeLast() }
-                    )
-                    .navigationBarBackButtonHidden()
-                case .claimRewards:
-                    ClaimTokensView(
-                        showTerms: true,
-                        passport: passportManager.passport,
-                        onFinish: { _ in
-                            isClaimed = true
-                            isCongratsShown = true
-                            path.removeLast()
-                        },
-                        onClose: { path.removeLast() }
-                    )
-                    .navigationBarBackButtonHidden()
-                case .notifications:
-                    NotificationsView(
-                        onBack: {
-                            path.removeLast()
-                        }
-                    )
-                    .environment(\.managedObjectContext, notificationManager.pushNotificationContainer.viewContext)
-                    .navigationBarBackButtonHidden()
-                case .scanQr:
-                    ScanQRView(
-                        onBack: { path.removeLast() },
-                        onScan: processQrCode
-                    )
-                    .navigationBarBackButtonHidden()
+                        )
+                        .environment(\.managedObjectContext, notificationManager.pushNotificationContainer.viewContext)
+                    case .scanQr:
+                        ScanQRView(
+                            onBack: { path.removeLast() },
+                            onScan: processQrCode
+                        )
+                    }
                 }
-            }
+                .navigationBarBackButtonHidden()
         }
         .onAppear(perform: fetchBalance)
         .onDisappear(perform: cleanup)

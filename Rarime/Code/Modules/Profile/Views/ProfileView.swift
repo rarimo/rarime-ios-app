@@ -26,20 +26,22 @@ struct ProfileView: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            content.navigationDestination(for: ProfileRoute.self) { route in
-                switch route {
-                case .authMethod:
-                    AuthMethodView(onBack: { path.removeLast() })
-                case .exportKeys:
-                    ExportKeysView(onBack: { path.removeLast() })
-                case .language:
-                    LanguageView(onBack: { path.removeLast() })
-                case .theme:
-                    ThemeView(onBack: { path.removeLast() })
-                case .appIcon:
-                    AppIconView(onBack: { path.removeLast() })
+            content
+                .navigationDestination(for: ProfileRoute.self) { route in
+                    switch route {
+                    case .authMethod:
+                        AuthMethodView(onBack: { path.removeLast() })
+                    case .exportKeys:
+                        ExportKeysView(onBack: { path.removeLast() })
+                    case .language:
+                        LanguageView(onBack: { path.removeLast() })
+                    case .theme:
+                        ThemeView(onBack: { path.removeLast() })
+                    case .appIcon:
+                        AppIconView(onBack: { path.removeLast() })
+                    }
                 }
-            }
+                .navigationBarBackButtonHidden()
         }
     }
 
@@ -177,7 +179,7 @@ struct ProfileView: View {
                         walletManager.reset()
                         decentralizedAuthManager.reset()
                         notificationManager.reset()
-                        
+
                         Task {
                             try? await notificationManager.unsubscribe(fromTopic: ConfigManager.shared.general.claimableNotificationTopic)
                         }

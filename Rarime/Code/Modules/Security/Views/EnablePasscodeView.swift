@@ -58,6 +58,7 @@ struct EnablePasscodeView: View {
                     )
                 }
             }
+            .navigationBarBackButtonHidden()
         }
     }
 }
@@ -68,7 +69,7 @@ struct PasscodeView: View {
     let title: LocalizedStringResource
     let onFill: () -> Void
     let onClose: () -> Void
-    
+
     let isClosable: Bool
 
     init(
@@ -115,7 +116,6 @@ struct PasscodeView: View {
             .padding(.horizontal, 8)
         }
         .background(.backgroundPure)
-        .navigationBarBackButtonHidden()
     }
 }
 
