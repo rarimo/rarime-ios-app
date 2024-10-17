@@ -204,6 +204,11 @@ struct WalletSendView: View {
             amountErrorMessage = String(localized: "Amount must be greater than 0")
         }
         
+        let decimals = amount.components(separatedBy: ".").last?.count ?? 0
+        if decimals > Rarimo.rarimoDecimals {
+            amountErrorMessage = String(localized: "Amount must have at most \(Rarimo.rarimoDecimals) decimals")
+        }
+        
         return addressErrorMessage.isEmpty && amountErrorMessage.isEmpty
     }
     

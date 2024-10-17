@@ -231,6 +231,9 @@
     "Amount must be greater than 0" : {
 
     },
+    "Amount must have at most %lld decimals" : {
+
+    },
     "An error has occured, please try again" : {
 
     },
