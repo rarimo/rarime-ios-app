@@ -93,14 +93,11 @@ struct NewIdentityView: View {
             .padding(.top, 20)
             .padding(.leading, 20)
             VStack(alignment: .center, spacing: 32) {
-                VStack {
-                    Image(Icons.cloud)
-                        .square(72)
-                        .foregroundStyle(.primaryDarker)
-                }
-                .padding(40)
-                .background(.primaryLighter)
-                .clipShape(Circle())
+                Image(Icons.cloud)
+                    .square(48)
+                    .foregroundStyle(.baseBlack)
+                    .padding(24)
+                    .background(.primaryMain, in: Circle())
                 VStack(spacing: 12) {
                     Text("Back up your account")
                         .h4()
@@ -111,26 +108,24 @@ struct NewIdentityView: View {
                 }
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
+                .frame(maxWidth: 300)
                 Spacer()
-                VStack(spacing: 16) {
-                    HorizontalDivider()
-                    VStack(spacing: 8) {
-                        AppButton(
-                            text: "Back up with iCloud",
-                            action: backUpUserSecretKey
-                        )
-                        .controlSize(.large)
-                        .disabled(isSubmitting)
-                        AppButton(
-                            variant: .tertiary,
-                            text: "Back up manually",
-                            action: { isManualBackup = true }
-                        )
-                        .controlSize(.large)
-                        .disabled(isSubmitting)
-                    }
-                    .padding(.horizontal, 20)
+                VStack(spacing: 8) {
+                    AppButton(
+                        text: "Back up with iCloud",
+                        action: backUpUserSecretKey
+                    )
+                    .controlSize(.large)
+                    .disabled(isSubmitting)
+                    AppButton(
+                        variant: .tertiary,
+                        text: "Back up manually",
+                        action: { isManualBackup = true }
+                    )
+                    .controlSize(.large)
+                    .disabled(isSubmitting)
                 }
+                .padding(.horizontal, 20)
             }
             .frame(maxWidth: .infinity)
             .padding(.top, 80)
