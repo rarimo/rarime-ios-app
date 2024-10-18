@@ -193,7 +193,7 @@ class ZKUtils {
         let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
         let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
         
-        let result = witnesscalc_registerIdentity_1_256_3_5_576_248_NA(
+        let result = witnesscalc_registerIdentity_11_256_3_3_576_248_1_1184_5_264(
             (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
             (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
             wtnsBuffer, wtnsSize,
@@ -218,7 +218,7 @@ class ZKUtils {
         let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
         let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
         
-        let result = witnesscalc_registerIdentity_1_256_3_5_576_248_NA(
+        let result = witnesscalc_registerIdentity_12_256_3_3_336_232_NA(
             (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
             (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
             wtnsBuffer, wtnsSize,
@@ -243,7 +243,7 @@ class ZKUtils {
         let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
         let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
         
-        let result = witnesscalc_registerIdentity_1_256_3_5_576_248_NA(
+        let result = witnesscalc_registerIdentity_1_256_3_4_336_232_1_1480_5_296(
             (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
             (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
             wtnsBuffer, wtnsSize,
@@ -268,7 +268,7 @@ class ZKUtils {
         let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
         let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
         
-        let result = witnesscalc_registerIdentity_1_256_3_5_576_248_NA(
+        let result = witnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256(
             (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
             (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
             wtnsBuffer, wtnsSize,

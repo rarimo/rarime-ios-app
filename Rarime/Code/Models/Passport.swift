@@ -119,7 +119,11 @@ struct Passport: Codable {
         
         guard let documentType = dg1.elements["5F03"] else { return "" }
         
-        switch documentType.replacingOccurrences(of: "<", with: "") {
+        var normalizedDocumentType = documentType
+            .replacingOccurrences(of: "<", with: "")
+            .replacingOccurrences(of: "O", with: "")
+        
+        switch normalizedDocumentType {
         case "ID":
             return "TD1"
         case "P":
