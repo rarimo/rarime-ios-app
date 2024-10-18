@@ -10,7 +10,9 @@ struct AppView: View {
     @EnvironmentObject private var securityManager: SecurityManager
     @EnvironmentObject private var settingsManager: SettingsManager
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.scenePhase) var scenePhase
 
+    @State var blurRadius: CGFloat = 0
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
@@ -22,6 +24,7 @@ struct AppView: View {
                 } else if !internetConnectionManager.isInternetPresent {
                     InternetConnectionRequiredView()
                 } else {
+                    
                     if
                         securityManager.passcodeState != .unset,
                         securityManager.faceIdState != .unset,
@@ -49,6 +52,16 @@ struct AppView: View {
             AlertManagerView()
         }
         .colorScheme(settingsManager.colorScheme.rawScheme ?? colorScheme)
+        .blur(radius: blurRadius)
+        .animation(.easeOut(duration: 0.1), value: blurRadius)
+        .onChange(of: scenePhase, perform: { value in
+            switch value {
+            case .active: withAnimation { blurRadius = 0 }
+            case .inactive: withAnimation { blurRadius = 15 }
+            case .background: blurRadius = 20
+            @unknown default: LoggerUtil.common.error("Unknown scene phase")
+            }
+        })
         .onAppear {
             Task { @MainActor in
                 await updateManager.checkForUpdate()
