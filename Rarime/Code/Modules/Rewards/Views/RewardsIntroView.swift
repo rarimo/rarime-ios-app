@@ -17,64 +17,8 @@ struct RewardsIntroView: View {
     @State private var codeErrorMessage = ""
     @State private var isVerifyingCode = false
     @State private var viewState: ViewState = .intro
-
-    private func verifyCode() {
-        isVerifyingCode = true
-        
-        Task { @MainActor in
-            defer {
-                self.isVerifyingCode = false
-            }
-            
-            let isValidCode = isValidReferalCodeFormat(code)
-            
-            if !isValidCode {
-                self.codeErrorMessage = String(localized: "Invalid invitation code")
-            }
-            
-            do {
-                guard let user = userManager.user else { throw "user is not initalized" }
-                
-                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-                
-                let pointsSvc = Points(ConfigManager.shared.api.pointsServiceURL)
-                let result = try await pointsSvc.createPointsBalance(
-                    accessJwt,
-                    code
-                )
-                
-                if !result.data.attributes.isDisabled {
-                    self.userManager.user?.userReferalCode = code
-                    
-                    LoggerUtil.common.info("User verified code: \(code, privacy: .public)")
-                    
-                    onVerify()
-                    
-                    return
-                }
-                
-                self.codeErrorMessage = String(localized: "Something went wrong")
-            } catch {
-                do {
-                    guard let error = error as? AFError else { throw error }
-                    
-                    let openApiHttpCode = try error.retriveOpenApiHttpCode()
-                    
-                    if openApiHttpCode == HTTPStatusCode.notFound.rawValue {
-                        self.codeErrorMessage = String(localized: "Invalid invitation code")
-                        return
-                    }
-                    
-                    throw error
-                } catch {
-                    self.codeErrorMessage = String(localized: "Failed to verify code, try again later")
-                    LoggerUtil.common.error("Failed to verify code: \(error, privacy: .public)")
-                    
-                    AlertManager.shared.emitError(Errors.unknown("Failed to verify code, one of services is down"))
-                }
-            }
-        }
-    }
+    
+    @State private var isLoading = false
 
     private var screenWidth: CGFloat {
         UIScreen.main.bounds.width
@@ -82,10 +26,22 @@ struct RewardsIntroView: View {
 
     var body: some View {
         ZStack {
-            introView.offset(x: viewState == .intro ? 0 : -screenWidth)
-            aboutView.offset(x: viewState == .about ? 0 : screenWidth)
+            if isLoading {
+                ProgressView()
+                    .controlSize(.large)
+            } else {
+                ZStack {
+                    introView.offset(x: viewState == .intro ? 0 : -screenWidth)
+                    aboutView.offset(x: viewState == .about ? 0 : screenWidth)
+                }
+                .animation(.easeInOut, value: viewState)
+            }
         }
-        .animation(.easeInOut, value: viewState)
+        .onAppear {
+            Task { @MainActor in
+                await checkDeferredReferralCode()
+            }
+        }
     }
 
     var introView: some View {
@@ -100,7 +56,11 @@ struct RewardsIntroView: View {
                         errorMessage: $codeErrorMessage,
                         placeholder: "Enter invitation code",
                         action: {
-                            Button(action: verifyCode) {
+                            Button(action: {
+                                Task { @MainActor in
+                                    await verifyCode(code)
+                                }
+                            }) {
                                 Image(Icons.arrowRight)
                                     .iconMedium()
                                     .padding(.vertical, 6)
@@ -180,6 +140,65 @@ struct RewardsIntroView: View {
         .padding(20)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
+    
+    private func checkDeferredReferralCode() async {
+        isLoading = true
+        defer { isLoading = false }
+        
+        guard let deferredReferralCode = userManager.user?.deferredReferralCode else { return }
+        if deferredReferralCode.isEmpty { return }
+
+        await verifyCode(deferredReferralCode)
+    }
+    
+    private func verifyCode(_ code: String) async {
+        isVerifyingCode = true
+        defer { isVerifyingCode = false }
+            
+        let isValidCode = isValidReferalCodeFormat(code)
+        if !isValidCode {
+            codeErrorMessage = String(localized: "Invalid invitation code")
+            return
+        }
+            
+        do {
+            guard let user = userManager.user else { throw "user is not initalized" }
+            let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+                
+            let pointsSvc = Points(ConfigManager.shared.api.pointsServiceURL)
+            let result = try await pointsSvc.createPointsBalance(
+                accessJwt,
+                code
+            )
+                
+            if !result.data.attributes.isDisabled {
+                userManager.user?.userReferralCode = code
+                LoggerUtil.common.info("User verified code: \(code, privacy: .public)")
+                    
+                onVerify()
+                return
+            }
+                
+            codeErrorMessage = String(localized: "Something went wrong")
+        } catch {
+            do {
+                guard let error = error as? AFError else { throw error }
+                    
+                let openApiHttpCode = try error.retriveOpenApiHttpCode()
+                if openApiHttpCode == HTTPStatusCode.notFound.rawValue {
+                    codeErrorMessage = String(localized: "Invalid invitation code")
+                    return
+                }
+                    
+                throw error
+            } catch {
+                codeErrorMessage = String(localized: "Failed to verify code, try again later")
+                LoggerUtil.common.error("Failed to verify code: \(error, privacy: .public)")
+                    
+                AlertManager.shared.emitError(Errors.unknown("Failed to verify code, one of services is down"))
+            }
+        }
+    }
 }
 
 private struct SocialCard: View {
@@ -212,7 +231,7 @@ private func isValidReferalCodeFormat(_ string: String) -> Bool {
 #Preview {
     let userManager = UserManager.shared
     
-    return RewardsIntroView() {}
+    return RewardsIntroView {}
         .environmentObject(ConfigManager())
         .environmentObject(DecentralizedAuthManager())
         .environmentObject(userManager)

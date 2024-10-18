@@ -1,6 +1,6 @@
-import Identity
-import Foundation
 import CloudKit
+import Foundation
+import Identity
 
 class User {
     static let userCloudRecordType = "User"
@@ -15,23 +15,31 @@ class User {
         }
     }
     
-    var userReferalCode: String? {
+    var userReferralCode: String? {
         didSet {
-            AppUserDefaults.shared.userRefarralCode = userReferalCode ?? ""
+            AppUserDefaults.shared.userReferralCode = userReferralCode ?? ""
         }
     }
     
-    required init(secretKey: Data, _ status: Status =  .unscanned) throws {
+    var deferredReferralCode: String? {
+        didSet {
+            AppUserDefaults.shared.deferredReferralCode = deferredReferralCode ?? ""
+        }
+    }
+    
+    required init(secretKey: Data, _ status: Status = .unscanned) throws {
         self.secretKey = secretKey
         
         self.profile = try IdentityProfile().newProfile(secretKey)
         
         self.status = status
         
-        let userReferalCode = AppUserDefaults.shared.userRefarralCode
-        if !userReferalCode.isEmpty {
-            self.userReferalCode = userReferalCode
+        let userReferralCode = AppUserDefaults.shared.userReferralCode
+        if !userReferralCode.isEmpty {
+            self.userReferralCode = userReferralCode
         }
+        
+        self.deferredReferralCode = AppUserDefaults.shared.deferredReferralCode
     }
     
     static func load() throws -> Self? {

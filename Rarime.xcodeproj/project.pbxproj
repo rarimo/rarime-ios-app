@@ -59,6 +59,7 @@
 		56474AD62BB9860E0017AA25 /* FaceIdAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */; };
 		56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */; };
 		56474ADA2BB9ED6E0017AA25 /* AnyTransition+Backslide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */; };
+		5651D07A2CB94C4400C6A704 /* AppsFlyerLib-Static in Frameworks */ = {isa = PBXBuildFile; productRef = 5651D0792CB94C4400C6A704 /* AppsFlyerLib-Static */; };
 		5655E41F2BD2C39B00B86C5C /* WalletManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E41E2BD2C39B00B86C5C /* WalletManager.swift */; };
 		5655E4232BD2C3AC00B86C5C /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E4222BD2C3AC00B86C5C /* SettingsManager.swift */; };
 		5655E4252BD2C3B500B86C5C /* PassportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E4242BD2C3B500B86C5C /* PassportManager.swift */; };
@@ -584,6 +585,7 @@
 				CEC562062BD923B4002D4954 /* libgmp.a in Frameworks */,
 				56E7AD112BDBA81000D3A258 /* PullToRefreshSwiftUI in Frameworks */,
 				560F0C1D2BD0234300067054 /* QRCode in Frameworks */,
+				5651D07A2CB94C4400C6A704 /* AppsFlyerLib-Static in Frameworks */,
 				CE3477512C7885DA005E91FE /* FirebaseAnalytics in Frameworks */,
 				CEC562072BD923B4002D4954 /* libfq.a in Frameworks */,
 				CE9347732C205B340034885C /* CachedAsyncImage in Frameworks */,
@@ -1426,6 +1428,7 @@
 				CE61E8822C24240000940129 /* Semaphore */,
 				CE3477502C7885DA005E91FE /* FirebaseAnalytics */,
 				CE3477522C7885DA005E91FE /* FirebaseMessaging */,
+				5651D0792CB94C4400C6A704 /* AppsFlyerLib-Static */,
 			);
 			productName = Rarime;
 			productReference = CE9E82B22BA881F400AAF885 /* Rarime.app */;
@@ -1473,6 +1476,7 @@
 				CE9347712C205B340034885C /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 				CE61E8812C24240000940129 /* XCRemoteSwiftPackageReference "Semaphore" */,
 				CE34774F2C7885DA005E91FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				568EEE992CB9445E00F0950A /* XCRemoteSwiftPackageReference "AppsFlyerFramework-Static" */,
 			);
 			productRefGroup = CE9E82B32BA881F400AAF885 /* Products */;
 			projectDirPath = "";
@@ -2591,6 +2595,14 @@
 				version = 4.2.2;
 			};
 		};
+		568EEE992CB9445E00F0950A /* XCRemoteSwiftPackageReference "AppsFlyerFramework-Static" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Static";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.15.3;
+			};
+		};
 		56E2D92F2BD01C77006E725D /* XCRemoteSwiftPackageReference "qrcode" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dagronf/qrcode.git";
@@ -2688,6 +2700,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 560F0C282BD114EE00067054 /* XCRemoteSwiftPackageReference "CodeScanner" */;
 			productName = CodeScanner;
+		};
+		5651D0792CB94C4400C6A704 /* AppsFlyerLib-Static */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 568EEE992CB9445E00F0950A /* XCRemoteSwiftPackageReference "AppsFlyerFramework-Static" */;
+			productName = "AppsFlyerLib-Static";
 		};
 		5655E4392BD51F5100B86C5C /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -4,6 +4,10 @@
 <dict>
 	<key>AIRDROP_TERMS_URL</key>
 	<string>${AIRDROP_TERMS_URL}</string>
+	<key>APPSFLYER_DEV_KEY</key>
+	<string>${APPSFLYER_DEV_KEY}</string>
+	<key>APPSFLYER_APP_ID</key>
+	<string>${APPSFLYER_APP_ID}</string>
 	<key>AUTHORIZE_URL</key>
 	<string>${AUTHORIZE_URL}</string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>

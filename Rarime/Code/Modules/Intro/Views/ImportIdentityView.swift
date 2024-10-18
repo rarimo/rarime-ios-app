@@ -194,7 +194,7 @@ struct ImportIdentityView: View {
             
             LoggerUtil.common.info("User has points balance, setting referral code")
             
-            userManager.user?.userReferalCode = "placeholder"
+            userManager.user?.userReferralCode = "placeholder"
         } catch {
             guard let error = error as? AFError else { throw error }
             
