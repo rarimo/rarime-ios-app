@@ -66,10 +66,28 @@
 	<string>${CHAIN_ID}</string>
 	<key>CIRCUIT_DATA_URLS</key>
 	<dict>
-		<key>registerIdentityUniversalRSA2048</key>
+		<key>registerIdentity_1_256_3_5_576_248_NA</key>
 		<string>${CIRCUIT_DATA_URL_0}</string>
-		<key>registerIdentityUniversalRSA4096</key>
+		<key>registerIdentity_1_256_3_6_576_248_1_2432_5_296</key>
 		<string>${CIRCUIT_DATA_URL_1}</string>
+		<key>registerIdentity_2_256_3_6_336_264_21_2448_6_2008</key>
+		<string>${CIRCUIT_DATA_URL_2}</string>
+		<key>registerIdentity_21_256_3_7_336_264_21_3072_6_2008</key>
+		<string>${CIRCUIT_DATA_URL_3}</string>
+		<key>registerIdentity_1_256_3_6_576_264_1_2448_3_256</key>
+		<string>${CIRCUIT_DATA_URL_4}</string>
+		<key>registerIdentity_2_256_3_6_336_248_1_2432_3_256</key>
+		<string>${CIRCUIT_DATA_URL_5}</string>
+		<key>registerIdentity_2_256_3_6_576_248_1_2432_3_256</key>
+		<string>${CIRCUIT_DATA_URL_6}</string>
+		<key>registerIdentity_11_256_3_3_576_248_1_1184_5_264</key>
+		<string>${CIRCUIT_DATA_URL_7}</string>
+		<key>registerIdentity_12_256_3_3_336_232_NA</key>
+		<string>${CIRCUIT_DATA_URL_8}</string>
+		<key>registerIdentity_1_256_3_4_336_232_1_1480_5_296</key>
+		<string>${CIRCUIT_DATA_URL_9}</string>
+		<key>registerIdentity_1_256_3_4_600_248_1_1496_3_256</key>
+		<string>${CIRCUIT_DATA_URL_10}</string>
 	</dict>
 	<key>COSMOS_RPC_URL</key>
 	<string>${COSMOS_RPC_URL}</string>

@@ -46,11 +46,17 @@ class NFCScanner {
         onCompletion: @escaping (Result<Passport, Error>) -> Void
     ) {
         Task { @MainActor in
+            var tags: [DataGroupId] = [.DG1, .DG15, .SOD]
+            
+            #if PRODUCTION
+                tags.append(.DG2)
+            #endif
+            
             do {
                 let nfcPassport = try await PassportReader()
                     .readPassport(
                         mrzKey: mrzKey,
-                        tags: [.DG1, .DG2, .DG15, .SOD],
+                        tags: tags,
                         useExtendedMode: useExtendedMode,
                         customDisplayMessage: customDisplayMessage,
                         activeAuthenticationChallenge: [UInt8](challenge)
