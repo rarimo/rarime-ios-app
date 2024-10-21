@@ -157,7 +157,10 @@ extension Passport {
         let dg1 = try DataGroup1([UInt8](dg1))
         let sod = try SOD([UInt8](sod))
 
+        let sodCertificatePem = try getSlaveSodCertificatePem()
+
         let sodSignatureAlgorithmName = try sod.getSignatureAlgorithm()
+
         guard let sodSignatureAlgorithm = SODAlgorithm(rawValue: sodSignatureAlgorithmName) else {
             return nil
         }
@@ -167,13 +170,14 @@ extension Passport {
             return nil
         }
 
+        let pubKeyPem = OpenSSLUtils.pubKeyToPEM(pubKey: sodPublicKey)
+
         let signatureType = RegisterIdentityCircuitType.CircuitSignatureType(
             staticId: 0,
             algorithm: sodSignatureAlgorithm.getCircuitSignatureAlgorithm(),
             keySize: publicKeySize,
             exponent: getPublicKeyExponent(sodPublicKey),
-            // TODO: Handle RSAPSS
-            salt: nil,
+            salt: getPublicKeyRSAPSSSaltLength(sod),
             curve: getPublicKeyCurve(sodPublicKey),
             hashAlgorithm: sodSignatureAlgorithm.getCircuitSignatureHashAlgorithm()
         )
@@ -287,7 +291,7 @@ extension Passport {
     }
 
     private func getPublicKeyExponent(_ publicKey: OpaquePointer?) -> RegisterIdentityCircuitType.CircuitExponentType? {
-        guard let exponent = CryptoUtils.getExponentFromPublicKey(publicKey) else { return nil }
+        guard let exponent = CryptoUtils.getExponentFromRSAPublicKey(publicKey) else { return nil }
 
         let exponentBN = BN(exponent)
 
@@ -296,6 +300,44 @@ extension Passport {
         } else if exponentBN.cmp(BN(65537)) == 0 {
             return .E65537
         } else {
+            return nil
+        }
+    }
+
+    private func getPublicKeyRSAPSSSaltLength(_ sod: SOD) -> RegisterIdentityCircuitType.CircuitSaltType? {
+        guard
+            let signedData = sod.asn1.getChild(1)?.getChild(0),
+            let signerInfo = signedData.getChild(4),
+            let signatureAlgoParams = signerInfo.getChild(0)?.getChild(4)?.getChild(1),
+            let saltLengthASN1 = signatureAlgoParams.getChild(2)?.getChild(0)
+        else {
+            return nil
+        }
+
+        let saltLengthHex = saltLengthASN1.value
+        if saltLengthHex.isEmpty {
+            return nil
+        }
+
+        guard let saltLengthData = Data(hex: saltLengthHex) else {
+            return nil
+        }
+
+        var saltLength = UInt64(0)
+        _ = withUnsafeMutableBytes(of: &saltLength) {
+            saltLengthData.copyBytes(to: $0)
+        }
+
+        LoggerUtil.common.debug("saltLength: \(saltLength)")
+
+        switch saltLength {
+        case 32:
+            return .S32
+        case 48:
+            return .S48
+        case 64:
+            return .S64
+        default:
             return nil
         }
     }

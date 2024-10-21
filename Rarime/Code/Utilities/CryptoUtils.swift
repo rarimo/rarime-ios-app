@@ -31,7 +31,7 @@ class CryptoUtils {
         return getDataFromOpaquePointer(modulus)
     }
     
-    static func getExponentFromPublicKey(_ publicKey: OpaquePointer?) -> Data? {
+    static func getExponentFromRSAPublicKey(_ publicKey: OpaquePointer?) -> Data? {
         let rsaPublicKey = EVP_PKEY_get0_RSA(publicKey)
         guard let rsaPublicKey else { return nil }
         
@@ -40,7 +40,7 @@ class CryptoUtils {
         
         return getDataFromOpaquePointer(exponent)
     }
-    
+        
     static func getPublicKeySize(_ publicKey: OpaquePointer?) -> Int {
         Int(EVP_PKEY_bits(publicKey))
     }
