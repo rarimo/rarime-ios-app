@@ -328,8 +328,6 @@ extension Passport {
             saltLengthData.copyBytes(to: $0)
         }
 
-        LoggerUtil.common.debug("saltLength: \(saltLength)")
-
         switch saltLength {
         case 32:
             return .S32
