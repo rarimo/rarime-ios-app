@@ -157,8 +157,6 @@ extension Passport {
         let dg1 = try DataGroup1([UInt8](dg1))
         let sod = try SOD([UInt8](sod))
 
-        let sodCertificatePem = try getSlaveSodCertificatePem()
-
         let sodSignatureAlgorithmName = try sod.getSignatureAlgorithm()
 
         guard let sodSignatureAlgorithm = SODAlgorithm(rawValue: sodSignatureAlgorithmName) else {
@@ -169,8 +167,6 @@ extension Passport {
         guard let publicKeySize = getPublicKeySupportedSize(CryptoUtils.getPublicKeySize(sodPublicKey)) else {
             return nil
         }
-
-        let pubKeyPem = OpenSSLUtils.pubKeyToPEM(pubKey: sodPublicKey)
 
         let signatureType = RegisterIdentityCircuitType.CircuitSignatureType(
             staticId: 0,
