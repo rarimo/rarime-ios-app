@@ -178,9 +178,7 @@ extension Passport {
             hashAlgorithm: sodSignatureAlgorithm.getCircuitSignatureHashAlgorithm()
         )
 
-        let encapsulatedContentDigestAlgorithm = try sod.getEncapsulatedContentDigestAlgorithm()
-
-        guard let passportHashType = RegisterIdentityCircuitType.CircuitPasssportHashType(rawValue: encapsulatedContentDigestAlgorithm) else {
+        guard let passportHashType = try getEncapsulatedContentDigestAlgorithm(sod) else {
             return nil
         }
 
@@ -334,6 +332,23 @@ extension Passport {
         default:
             return nil
         }
+    }
+
+    private func getEncapsulatedContentDigestAlgorithm(_ sod: SOD) throws -> RegisterIdentityCircuitType.CircuitPasssportHashType? {
+        guard
+            let signedData = sod.asn1.getChild(1)?.getChild(0),
+            let privateKeyInfoAsn1 = signedData.getChild(2)?.getChild(1)?.getChild(0)
+        else {
+            throw OpenSSLError.UnableToExtractSignedDataFromPKCS7("Data in invalid format")
+        }
+
+        let privateKeyInfo = try SimpleASN1DumpParser().parse(data: Data(hex: privateKeyInfoAsn1.value))
+
+        guard let privateKeyDigestAlgorithm = privateKeyInfo.getChild(1)?.getChild(0) else {
+            throw OpenSSLError.UnableToExtractSignedDataFromPKCS7("Data in invalid format")
+        }
+
+        return RegisterIdentityCircuitType.CircuitPasssportHashType(rawValue: privateKeyDigestAlgorithm.value)
     }
 
     private func getPublicKeyCurve(_ publicKey: OpaquePointer?) -> RegisterIdentityCircuitType.CircuitCurveType? {
