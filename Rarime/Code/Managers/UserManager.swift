@@ -163,28 +163,17 @@ class UserManager: ObservableObject {
     }
     
     func registerCertificate(_ passport: Passport) async throws {
+        let certificatesSMTAddress = try EthereumAddress(hex: ConfigManager.shared.api.certificatesSmtContractAddress, eip55: false)
+        let certificatesSMTContract = try PoseidonSMT(contractAddress: certificatesSMTAddress)
+        
         let sod = try SOD([UInt8](passport.sod))
-        
-        let publicKey = try sod.getPublicKey()
-        let publicKeyPem = OpenSSLUtils.pubKeyToPEM(pubKey: publicKey)
-        let publicKeyPemData = publicKeyPem.data(using: .utf8) ?? Data()
-        
-        var publicKeySize = 0
-        try IdentityX509Util().getRSASize(publicKeyPemData, ret0_: &publicKeySize)
         
         guard let cert = try OpenSSLUtils.getX509CertificatesFromPKCS7(pkcs7Der: Data(sod.pkcs7CertificateData)).first else {
             throw "Slave certificate in sod is missing"
         }
         
         let certPem = cert.certToPEM().data(using: .utf8) ?? Data()
-
-        let certificatesSMTAddress = try EthereumAddress(hex: ConfigManager.shared.api.certificatesSmtContractAddress, eip55: false)
-        
-        let certificatesSMTContract = try PoseidonSMT(contractAddress: certificatesSMTAddress)
-         
-        let x509Utils = IdentityX509Util()
-        
-        let slaveCertificateIndex = try x509Utils.getSlaveCertificateIndex(certPem, mastersPem: Certificates.ICAO)
+        let slaveCertificateIndex = try IdentityX509Util().getSlaveCertificateIndex(certPem, mastersPem: Certificates.ICAO)
         
         let proof = try await certificatesSMTContract.getProof(slaveCertificateIndex)
         
@@ -196,8 +185,7 @@ class UserManager: ObservableObject {
         
         LoggerUtil.common.info("Passport certificate is not registered, registering...")
         
-        let calldataBuilder = IdentityCallDataBuilder()
-        let calldata = try calldataBuilder.buildRegisterCertificateCalldata(
+        let calldata = try IdentityCallDataBuilder().buildRegisterCertificateCalldata(
             ConfigManager.shared.certificatesStorage.icaoCosmosRpc,
             slavePem: certPem,
             masterCertificatesBucketname: ConfigManager.shared.certificatesStorage.masterCertificatesBucketname,
