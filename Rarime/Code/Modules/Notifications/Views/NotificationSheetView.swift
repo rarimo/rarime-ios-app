@@ -42,7 +42,7 @@ struct NotificationSheetView: View {
             if !notificationEventId.isEmpty {
                 VStack(spacing: 24) {
                     HorizontalDivider()
-                    AppButton(text: "Claim", action: claimRewards)
+                    AppButton(text: "Reserve", action: claimRewards)
                         .disabled(isClaiming)
                 }
                 .padding(.horizontal, 24)
@@ -82,7 +82,7 @@ struct NotificationSheetView: View {
             
             guard let user = userManager.user else { return }
 
-            do { 
+            do {
                 let claimableNotificationContent = try JSONDecoder().decode(ClaimableNotificationContent.self, from: content.data(using: .utf8) ?? Data())
                 
                 let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
