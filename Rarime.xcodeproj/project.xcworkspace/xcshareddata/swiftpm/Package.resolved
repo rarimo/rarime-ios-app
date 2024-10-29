@@ -1,5 +1,5 @@
 {
-  "originHash" : "5f0a7afad2f4414565d47329c3b37f0bbcf2e33d0b960120d788f806d7394a59",
+  "originHash" : "e6db2e3c6312501bf0b86c4de56241ab2551a85e6a90101ec22747746af5ef66",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -177,16 +177,16 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:rarimo/NFCPassportReader.git",
       "state" : {
-        "revision" : "deb4669a53d6351dc00787491b2b93f553ca4141"
+        "revision" : "4c463a687f59eb6cc5c7955af854c7d41295d54f"
       }
     },
     {
       "identity" : "openssl",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/rarimo/OpenSSL.git",
+      "location" : "https://github.com/krzyzanowskim/OpenSSL.git",
       "state" : {
-        "revision" : "51d2f5eac18da1d52d7ad61184aa6906c9013705",
-        "version" : "1.1.2200"
+        "revision" : "8cb1d641ab5ebce2cd7cf31c93baef07bed672d4",
+        "version" : "1.1.2301"
       }
     },
     {

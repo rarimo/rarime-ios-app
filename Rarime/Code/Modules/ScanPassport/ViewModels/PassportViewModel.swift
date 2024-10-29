@@ -47,7 +47,7 @@ class PassportViewModel: ObservableObject {
     }
     
     func setMrzKey(_ value: String) {
-        self.mrzKey = value
+        mrzKey = value
     }
 
     func setPassport(_ passport: Passport) {
@@ -60,13 +60,38 @@ class PassportViewModel: ObservableObject {
     ) async throws -> ZkProof {
         do {
             guard let passport else { throw "failed to get passport" }
+            guard let user = UserManager.shared.user else { throw "failed to get user" }
             
-            let registeredCircuitData = try await UserManager.shared.registerCertificate(passport)
+            try await UserManager.shared.registerCertificate(passport)
+            
+            guard let registerIdentityCircuitType = try passport.getRegisterIdentityCircuitType() else {
+                throw "failed to get register identity circuit"
+            }
+            
+            guard let registerIdentityCircuitName = registerIdentityCircuitType.buildName() else {
+                throw "failed to get register identity circuit name"
+            }
+            
+            LoggerUtil.common.info("Registering passport with circuit: \(registerIdentityCircuitName)")
+            
+            guard let registeredCircuitData = RegisteredCircuitData(rawValue: registerIdentityCircuitName) else {
+                throw "failed to get registered circuit data"
+            }
             
             let circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData, downloadProgress)
             proofState = .applyingZK
             
-            guard let proof = try await UserManager.shared.generateRegisterIdentityProof(passport, circuitData, registeredCircuitData) else {
+            let registerIdentityInputs = try await CircuitBuilderManager.shared.registerIdentityCircuit.buildInputs(
+                user.secretKey,
+                passport,
+                registerIdentityCircuitType
+            )
+            
+            guard let proof = try UserManager.shared.generateRegisterIdentityProof(
+                registerIdentityInputs.json,
+                circuitData,
+                registeredCircuitData
+            ) else {
                 throw "failed to generate proof, invalid circuit type"
             }
             
@@ -139,15 +164,7 @@ class PassportViewModel: ObservableObject {
             
             if isUserRevoking { isUserRevoked = true }
             
-            var certificatePubKeySize: Int
-            switch registeredCircuitData {
-            case .registerIdentityUniversalRSA2048:
-                certificatePubKeySize = 2048
-            case .registerIdentityUniversalRSA4096:
-                certificatePubKeySize = 4096
-            }
-            
-            try await UserManager.shared.register(proof, passport, certificatePubKeySize, isUserRevoking)
+            try await UserManager.shared.register(proof, passport, isUserRevoking, registerIdentityCircuitName)
             
             PassportManager.shared.setPassport(passport)
             try UserManager.shared.saveRegisterZkProof(proof)
