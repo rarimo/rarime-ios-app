@@ -231,7 +231,6 @@
 		CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82D62BA8917100AAF885 /* LottieView.swift */; };
 		CEA03F0A2C7C7A17002F218A /* View+IsLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA03F092C7C7A17002F218A /* View+IsLoading.swift */; };
 		CEA03F0C2C7C9319002F218A /* CreateIdentityIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA03F0B2C7C9319002F218A /* CreateIdentityIntroView.swift */; };
-		CEAAF5C52CD2942200C89A23 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEAAF5C42CD2942200C89A23 /* Identity.xcframework */; };
 		CEB355892CC15FAB001EB4F6 /* libwitnesscalc_registerIdentity_12_256_3_3_336_232_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB355882CC15FAB001EB4F6 /* libwitnesscalc_registerIdentity_12_256_3_3_336_232_NA.a */; };
 		CEB3558A2CC15FAB001EB4F6 /* libwitnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB355862CC15FAB001EB4F6 /* libwitnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256.a */; };
 		CEB3558B2CC15FAB001EB4F6 /* libwitnesscalc_registerIdentity_1_256_3_4_336_232_1_1480_5_296.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB355852CC15FAB001EB4F6 /* libwitnesscalc_registerIdentity_1_256_3_4_336_232_1_1480_5_296.a */; };
@@ -259,6 +258,7 @@
 		CEDC57922CA2CA0F00F02132 /* MRZCameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC57912CA2CA0F00F02132 /* MRZCameraManager.swift */; };
 		CEDC57942CA2CA4100F02132 /* CMSampleBuffer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC57932CA2CA4100F02132 /* CMSampleBuffer+Extension.swift */; };
 		CEDC57962CA30A9D00F02132 /* CIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC57952CA30A9D00F02132 /* CIImage+Extension.swift */; };
+		CEEBF3142CD4D6E900636924 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEBF3132CD4D6E800636924 /* Identity.xcframework */; };
 		CEF251382BD6E17800050507 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251372BD6E17800050507 /* UserManager.swift */; };
 		CEF2513A2BD6E22700050507 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251392BD6E22700050507 /* User.swift */; };
 		CEF723142BF4BB9000E79198 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF723132BF4BB9000E79198 /* Errors.swift */; };
@@ -510,7 +510,6 @@
 		CE9E82E62BA89CE300AAF885 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		CEA03F092C7C7A17002F218A /* View+IsLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+IsLoading.swift"; sourceTree = "<group>"; };
 		CEA03F0B2C7C9319002F218A /* CreateIdentityIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityIntroView.swift; sourceTree = "<group>"; };
-		CEAAF5C42CD2942200C89A23 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CEB355852CC15FAB001EB4F6 /* libwitnesscalc_registerIdentity_1_256_3_4_336_232_1_1480_5_296.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_1_256_3_4_336_232_1_1480_5_296.a; sourceTree = "<group>"; };
 		CEB355862CC15FAB001EB4F6 /* libwitnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256.a; sourceTree = "<group>"; };
 		CEB355872CC15FAB001EB4F6 /* libwitnesscalc_registerIdentity_11_256_3_3_576_248_1_1184_5_264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_11_256_3_3_576_248_1_1184_5_264.a; sourceTree = "<group>"; };
@@ -550,6 +549,7 @@
 		CEDC57932CA2CA4100F02132 /* CMSampleBuffer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMSampleBuffer+Extension.swift"; sourceTree = "<group>"; };
 		CEDC57952CA30A9D00F02132 /* CIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+Extension.swift"; sourceTree = "<group>"; };
 		CEE3259E2CB7CA6E00468BE4 /* witnesscalc_registerIdentity_1_256_3_5_576_248_NA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_1_256_3_5_576_248_NA.h; sourceTree = "<group>"; };
+		CEEBF3132CD4D6E800636924 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CEF251372BD6E17800050507 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		CEF251392BD6E22700050507 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CEF723132BF4BB9000E79198 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -613,7 +613,7 @@
 				CE6BC17D2CBEA96800880287 /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a in Frameworks */,
 				CE7210312BD807140043DB7F /* ZipArchive in Frameworks */,
 				560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */,
-				CEAAF5C52CD2942200C89A23 /* Identity.xcframework in Frameworks */,
+				CEEBF3142CD4D6E900636924 /* Identity.xcframework in Frameworks */,
 				CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */,
 				CEDB9DCC2BFDF60900BCF074 /* libwitnesscalc_queryIdentity.a in Frameworks */,
 			);
@@ -1299,7 +1299,7 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CEAAF5C42CD2942200C89A23 /* Identity.xcframework */,
+				CEEBF3132CD4D6E800636924 /* Identity.xcframework */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562002BD923B3002D4954 /* prover.h */,
 				CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */,

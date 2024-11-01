@@ -185,12 +185,7 @@ class UserManager: ObservableObject {
         
         LoggerUtil.common.info("Passport certificate is not registered, registering...")
         
-        let calldata = try IdentityCallDataBuilder().buildRegisterCertificateCalldata(
-            Certificates.ICAO,
-            slavePem: certPem,
-            masterCertificatesBucketname: ConfigManager.shared.certificatesStorage.masterCertificatesBucketname,
-            masterCertificatesFilename: ConfigManager.shared.certificatesStorage.masterCertificatesFilename
-        )
+        let calldata = try IdentityCallDataBuilder().buildRegisterCertificateCalldata(Certificates.ICAO, slavePem: certPem)
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
         let response = try await relayer.register(calldata, ConfigManager.shared.api.registerContractAddress)
