@@ -325,6 +325,69 @@ class UserManager: ObservableObject {
         return ZkProof(proof: proof, pubSignals: pubSignals)
     }
     
+    func generateCrossAppQueryProof(
+        passport: Passport,
+        eventData: String
+    ) async throws -> ZkProof {
+        guard let registerZkProof = self.registerZkProof else { throw "failed to get registerZkProof" }
+        guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
+        
+        let stateKeeperContract = try StateKeeperContract()
+        let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.api.registrationSmtContractAddress, eip55: false)
+        let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
+        
+        let passportInfoKey: String
+        if passport.dg15.isEmpty {
+            passportInfoKey = registerZkProof.pubSignals[1]
+        } else {
+            passportInfoKey = registerZkProof.pubSignals[0]
+        }
+        
+        var error: NSError? = nil
+        let proofIndex = IdentityCalculateProofIndex(
+            passportInfoKey,
+            registerZkProof.pubSignals[3],
+            &error
+        )
+        if let error { throw error }
+        guard let proofIndex else { throw "proof index is not initialized" }
+        
+        let smtProof = try await registrationSmtContract.getProof(proofIndex)
+        let smtProofJson = try JSONEncoder().encode(smtProof)
+        
+        let profileInitializer = IdentityProfile()
+        let profile = try profileInitializer.newProfile(secretKey)
+        
+        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
+        let queryProofInputs = try profile.buildQueryIdentityInputs(
+            passport.dg1,
+            smtProofJSON: smtProofJson,
+            selector: "0x1",
+            pkPassportHash: passportInfoKey,
+            issueTimestamp: identityInfo.issueTimestamp.description,
+            identityCounter: passportInfo.identityReissueCounter.description,
+            eventID: Points.PointsEventId,
+            eventData: eventData,
+            timestampLowerbound: "0",
+            timestampUpperbound: "\(identityInfo.issueTimestamp + 1)",
+            identityCounterLowerbound: "0",
+            identityCounterUpperbound: (passportInfo.identityReissueCounter + 1).description,
+            expirationDateLowerbound: "0x303030303030",
+            expirationDateUpperbound: "0x303030303030",
+            birthDateLowerbound: "0x303030303030",
+            birthDateUpperbound: "0x303030303030",
+            citizenshipMask: "0x0"
+        )
+        
+        let wtns = try ZKUtils.calcWtnsQueryIdentity(queryProofInputs)
+        let (proofJson, pubSignalsJson) = try ZKUtils.groth16QueryIdentity(wtns)
+        
+        let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
+        let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
+        
+        return ZkProof(proof: proof, pubSignals: pubSignals)
+    }
+    
     func collectPubSignals(
         passport: Passport,
         params: GetProofParamsResponseAttributes

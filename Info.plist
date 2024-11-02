@@ -4,10 +4,10 @@
 <dict>
 	<key>AIRDROP_TERMS_URL</key>
 	<string>${AIRDROP_TERMS_URL}</string>
-	<key>APPSFLYER_DEV_KEY</key>
-	<string>${APPSFLYER_DEV_KEY}</string>
 	<key>APPSFLYER_APP_ID</key>
 	<string>${APPSFLYER_APP_ID}</string>
+	<key>APPSFLYER_DEV_KEY</key>
+	<string>${APPSFLYER_DEV_KEY}</string>
 	<key>AUTHORIZE_URL</key>
 	<string>${AUTHORIZE_URL}</string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
@@ -61,25 +61,19 @@
 				<string>rarime</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string></string>
+			<key>CFBundleURLSchemes</key>
+			<array/>
+		</dict>
 	</array>
 	<key>CHAIN_ID</key>
 	<string>${CHAIN_ID}</string>
 	<key>CIRCUIT_DATA_URLS</key>
 	<dict>
-		<key>registerIdentity_1_256_3_5_576_248_NA</key>
-		<string>${CIRCUIT_DATA_URL_0}</string>
-		<key>registerIdentity_1_256_3_6_576_248_1_2432_5_296</key>
-		<string>${CIRCUIT_DATA_URL_1}</string>
-		<key>registerIdentity_2_256_3_6_336_264_21_2448_6_2008</key>
-		<string>${CIRCUIT_DATA_URL_2}</string>
-		<key>registerIdentity_21_256_3_7_336_264_21_3072_6_2008</key>
-		<string>${CIRCUIT_DATA_URL_3}</string>
-		<key>registerIdentity_1_256_3_6_576_264_1_2448_3_256</key>
-		<string>${CIRCUIT_DATA_URL_4}</string>
-		<key>registerIdentity_2_256_3_6_336_248_1_2432_3_256</key>
-		<string>${CIRCUIT_DATA_URL_5}</string>
-		<key>registerIdentity_2_256_3_6_576_248_1_2432_3_256</key>
-		<string>${CIRCUIT_DATA_URL_6}</string>
 		<key>registerIdentity_11_256_3_3_576_248_1_1184_5_264</key>
 		<string>${CIRCUIT_DATA_URL_7}</string>
 		<key>registerIdentity_12_256_3_3_336_232_NA</key>
@@ -88,7 +82,23 @@
 		<string>${CIRCUIT_DATA_URL_9}</string>
 		<key>registerIdentity_1_256_3_4_600_248_1_1496_3_256</key>
 		<string>${CIRCUIT_DATA_URL_10}</string>
+		<key>registerIdentity_1_256_3_5_576_248_NA</key>
+		<string>${CIRCUIT_DATA_URL_0}</string>
+		<key>registerIdentity_1_256_3_6_576_248_1_2432_5_296</key>
+		<string>${CIRCUIT_DATA_URL_1}</string>
+		<key>registerIdentity_1_256_3_6_576_264_1_2448_3_256</key>
+		<string>${CIRCUIT_DATA_URL_4}</string>
+		<key>registerIdentity_21_256_3_7_336_264_21_3072_6_2008</key>
+		<string>${CIRCUIT_DATA_URL_3}</string>
+		<key>registerIdentity_2_256_3_6_336_248_1_2432_3_256</key>
+		<string>${CIRCUIT_DATA_URL_5}</string>
+		<key>registerIdentity_2_256_3_6_336_264_21_2448_6_2008</key>
+		<string>${CIRCUIT_DATA_URL_2}</string>
+		<key>registerIdentity_2_256_3_6_576_248_1_2432_3_256</key>
+		<string>${CIRCUIT_DATA_URL_6}</string>
 	</dict>
+	<key>CLAIMABLE_NOTIFICATION_TOPIC</key>
+	<string>${CLAIMABLE_NOTIFICATION_TOPIC}</string>
 	<key>COSMOS_RPC_URL</key>
 	<string>${COSMOS_RPC_URL}</string>
 	<key>DENOM</key>
@@ -105,6 +115,8 @@
 	<string>${ICAO_COSMOS_RPC}</string>
 	<key>JOIN_REWARDS_KEY</key>
 	<string>${JOIN_REWARDS_KEY}</string>
+	<key>LIGHT_SIGNATURE_PRIVATE_KEY</key>
+	<string>${LIGHT_SIGNATURE_PRIVATE_KEY}</string>
 	<key>MASTER_CERTIFICATES_BUCKETNAME</key>
 	<string>${MASTER_CERTIFICATES_BUCKETNAME}</string>
 	<key>MASTER_CERTIFICATES_FILENAME</key>
@@ -132,10 +144,6 @@
 	<string>${STATE_KEEPER_CONTRACT_ADDRESS}</string>
 	<key>TERMS_OF_USE_URL</key>
 	<string>${TERMS_OF_USE_URL}</string>
-	<key>CLAIMABLE_NOTIFICATION_TOPIC</key>
-	<string>${CLAIMABLE_NOTIFICATION_TOPIC}</string>
-	<key>LIGHT_SIGNATURE_PRIVATE_KEY</key>
-	<string>${LIGHT_SIGNATURE_PRIVATE_KEY}</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Inter-Bold.ttf</string>
