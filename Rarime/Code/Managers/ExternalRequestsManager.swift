@@ -41,6 +41,8 @@ class ExternalRequestsManager: ObservableObject {
     }
 
     private func handleCrossAppsRequest(params: [URLQueryItem]) {
+        AlertManager.shared.emitProcessing("Processing crossapps request...")
+
         Task { @MainActor in
             do {
                 try await _handleCrossAppsRequest(params)
