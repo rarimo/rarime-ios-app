@@ -157,6 +157,25 @@ struct Passport: Codable {
         return try SOD([UInt8](sod))
     }
     
+    func getDG2Hash() throws -> Data {
+        let sod = try getSod()
+        
+        guard let signedData = sod.asn1.getChild(1)?.getChild(0),
+              let encContent = signedData.getChild(2)?.getChild(1),
+              let content = encContent.getChild(0)
+        else {
+            throw OpenSSLError.UnableToExtractSignedDataFromPKCS7("Data in invalid format")
+        }
+        
+        let encapsulatedContent = try SimpleASN1DumpParser().parse(data: Data(hex: content.value))
+        
+        guard let dg2HashAsn1 = encapsulatedContent.getChild(2)?.getChild(1)?.getChild(1) else {
+            throw "failed to extract dg2Hash from ec"
+        }
+        
+        return Data(hex: dg2HashAsn1.value)!
+    }
+    
     func serialize() throws -> Data {
         let encoder = JSONEncoder()
         return try encoder.encode(self)

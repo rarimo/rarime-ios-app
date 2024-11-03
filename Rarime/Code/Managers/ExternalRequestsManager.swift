@@ -4,6 +4,7 @@ import SwiftUI
 enum RarimeUrlHosts: String {
     case external
     case crossapps
+    case photo
 }
 
 enum ExternalRequestTypes: String, Codable {
@@ -35,9 +36,38 @@ class ExternalRequestsManager: ObservableObject {
             handleExternalRequest(params: params)
         case RarimeUrlHosts.crossapps.rawValue:
             handleCrossAppsRequest(params: params)
+        case RarimeUrlHosts.photo.rawValue:
+            handlePhotoRequest(params: params)
         default:
             LoggerUtil.common.error("Invalid RariMe URL host: \(url.host ?? "nil", privacy: .public)")
         }
+    }
+
+    private func handlePhotoRequest(params: [URLQueryItem]) {
+        AlertManager.shared.emitProcessing("Processing photo request...")
+
+        Task { @MainActor in
+            do {
+                try await _handlePhotoRequest(params)
+            } catch {
+                LoggerUtil.common.debug("Failed to handle photo request: \(error, privacy: .public)")
+            }
+        }
+    }
+
+    private func _handlePhotoRequest(_ params: [URLQueryItem]) async throws {
+        guard var responseUrl = params.first(where: { $0.name == "response_url" })?.value else {
+            throw "invalid response url"
+        }
+
+        let (proof, image) = try await UserManager.shared.generatePhotoProof()
+
+        UIPasteboard.general.string = image
+
+        responseUrl = responseUrl + "?proof=\(proof.json.fullHex)"
+
+        let url = URL(string: responseUrl)!
+        await UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 
     private func handleCrossAppsRequest(params: [URLQueryItem]) {

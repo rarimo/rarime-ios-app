@@ -48,9 +48,7 @@ class NFCScanner {
         Task { @MainActor in
             var tags: [DataGroupId] = [.DG1, .DG15, .SOD]
             
-            #if PRODUCTION
-                tags.append(.DG2)
-            #endif
+            tags.append(.DG2)
             
             do {
                 let nfcPassport = try await PassportReader()

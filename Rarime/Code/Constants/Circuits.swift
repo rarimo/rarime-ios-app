@@ -6,4 +6,7 @@ class Circuits {
 
     static let authDat = NSDataAsset(name: "authDat")?.data ?? Data()
     static let authZkey = NSDataAsset(name: "authZkey")?.data ?? Data()
+
+    static let photoProofDat = NSDataAsset(name: "photoProofDat")?.data ?? Data()
+    static let photoProofZkey = NSDataAsset(name: "photoProofZkey")?.data ?? Data()
 }

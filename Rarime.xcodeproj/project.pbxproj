@@ -196,6 +196,7 @@
 		CE51E2FB2C21CA0B00043D9A /* StateKeeperContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51E2FA2C21CA0B00043D9A /* StateKeeperContract.swift */; };
 		CE5315C32C77664C0087D53D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE5315C22C77664C0087D53D /* GoogleService-Info.plist */; };
 		CE5315CA2C7769A20087D53D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5315C92C7769A20087D53D /* NotificationManager.swift */; };
+		CE60F5AD2CD7B48D00317982 /* libwitnesscalc_photoProof.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE60F5AC2CD7B48D00317982 /* libwitnesscalc_photoProof.a */; };
 		CE61E8832C24240000940129 /* Semaphore in Frameworks */ = {isa = PBXBuildFile; productRef = CE61E8822C24240000940129 /* Semaphore */; };
 		CE61E88D2C247B4700940129 /* HMACUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61E88C2C247B4700940129 /* HMACUtils.swift */; };
 		CE66B1462CA4148B002F658E /* ScanPassport.json in Resources */ = {isa = PBXBuildFile; fileRef = CE66B1452CA4148B002F658E /* ScanPassport.json */; };
@@ -474,6 +475,8 @@
 		CE51E2FA2C21CA0B00043D9A /* StateKeeperContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateKeeperContract.swift; sourceTree = "<group>"; };
 		CE5315C22C77664C0087D53D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE5315C92C7769A20087D53D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		CE60F5AC2CD7B48D00317982 /* libwitnesscalc_photoProof.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_photoProof.a; sourceTree = "<group>"; };
+		CE60F5AE2CD7B4B600317982 /* witnesscalc_photoProof.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_photoProof.h; sourceTree = "<group>"; };
 		CE61E88C2C247B4700940129 /* HMACUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACUtils.swift; sourceTree = "<group>"; };
 		CE66B1452CA4148B002F658E /* ScanPassport.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ScanPassport.json; sourceTree = "<group>"; };
 		CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZkProof.swift; sourceTree = "<group>"; };
@@ -599,6 +602,7 @@
 				CE72102E2BD7F6780043DB7F /* Alamofire in Frameworks */,
 				CE61E8832C24240000940129 /* Semaphore in Frameworks */,
 				56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */,
+				CE60F5AD2CD7B48D00317982 /* libwitnesscalc_photoProof.a in Frameworks */,
 				CE8FEB5C2C1AFC3F0008381A /* libwitnesscalc_auth.a in Frameworks */,
 				CE68BE472BD9B6EA00D92EBB /* Web3ContractABI in Frameworks */,
 				CEC562032BD923B4002D4954 /* libfr.a in Frameworks */,
@@ -1302,6 +1306,7 @@
 				CEB5A2CF2CD0E367000862E3 /* Identity.xcframework */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562002BD923B3002D4954 /* prover.h */,
+				CE60F5AE2CD7B4B600317982 /* witnesscalc_photoProof.h */,
 				CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */,
 				CEC561FD2BD923B3002D4954 /* witnesscalc_queryIdentity.h */,
 				CEE3259E2CB7CA6E00468BE4 /* witnesscalc_registerIdentity_1_256_3_5_576_248_NA.h */,
@@ -1315,6 +1320,7 @@
 				CEB3558E2CC160FA001EB4F6 /* witnesscalc_registerIdentity_12_256_3_3_336_232_NA.h */,
 				CEB3558F2CC16108001EB4F6 /* witnesscalc_registerIdentity_1_256_3_4_336_232_1_1480_5_296.h */,
 				CEB355902CC16117001EB4F6 /* witnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256.h */,
+				CE60F5AC2CD7B48D00317982 /* libwitnesscalc_photoProof.a */,
 				CEC561FB2BD923B3002D4954 /* libfr.a */,
 				CEC562022BD923B4002D4954 /* libfq.a */,
 				CEC562012BD923B4002D4954 /* libgmp.a */,

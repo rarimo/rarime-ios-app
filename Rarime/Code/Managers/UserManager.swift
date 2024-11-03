@@ -388,6 +388,21 @@ class UserManager: ObservableObject {
         return ZkProof(proof: proof, pubSignals: pubSignals)
     }
     
+    func generatePhotoProof() async throws -> (ZkProof, String) {
+        var image = PassportManager.shared.passport!.passportImageRaw ?? ""
+        
+        let inputs = try await CircuitBuilderManager.shared.registerContestantCircuit.buildInputs()
+        
+        let wtns = try ZKUtils.calcWtnsPhotoProof(inputs.json)
+        
+        let (proofJson, pubSignalsJson) = try ZKUtils.groth16PhotoProof(wtns)
+        
+        let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
+        let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
+        
+        return (ZkProof(proof: proof, pubSignals: pubSignals), image)
+    }
+    
     func collectPubSignals(
         passport: Passport,
         params: GetProofParamsResponseAttributes
