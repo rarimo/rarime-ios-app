@@ -122,11 +122,15 @@ class UserManager: ObservableObject {
         
         let proofJson = try JSONEncoder().encode(registerZkProof)
         
+        let sod = try passport.getSod()
+        let ec = try sod.getEncapsulatedContent()
+        
         let calldataBuilder = IdentityCallDataBuilder()
         let calldata = try calldataBuilder.buildRegisterCalldata(
             proofJson,
-            signature: passport.signature,
-            pubKeyPem: passport.getDG15PublicKeyPEM(),
+            aaSignature: passport.signature,
+            aaPubKeyPem: passport.getDG15PublicKeyPEM(),
+            ecSizeInBits: ec.count * 8,
             certificatesRootRaw: masterCertProof.root,
             isRevoked: isRevoked,
             circuitName: registerIdentityCircuitName
@@ -146,11 +150,16 @@ class UserManager: ObservableObject {
         
         let signature = passport.signature
         
+        var sod = try passport.getSod()
+        
+        var ec = try sod.getEncapsulatedContent()
+        
         let calldataBuilder = IdentityCallDataBuilder()
         let calldata = try calldataBuilder.buildRevoceCalldata(
             identityKey,
-            signature: signature,
-            pubKeyPem: passport.getDG15PublicKeyPEM()
+            aaSignature: signature,
+            aaPubKeyPem: passport.getDG15PublicKeyPEM(),
+            ecSizeInBits: ec.count * 8
         )
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
