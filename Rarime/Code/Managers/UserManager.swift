@@ -122,11 +122,15 @@ class UserManager: ObservableObject {
         
         let proofJson = try JSONEncoder().encode(registerZkProof)
         
+        let sod = try passport.getSod()
+        let ec = try sod.getEncapsulatedContent()
+        
         let calldataBuilder = IdentityCallDataBuilder()
         let calldata = try calldataBuilder.buildRegisterCalldata(
             proofJson,
-            signature: passport.signature,
-            pubKeyPem: passport.getDG15PublicKeyPEM(),
+            aaSignature: passport.signature,
+            aaPubKeyPem: passport.getDG15PublicKeyPEM(),
+            ecSizeInBits: ec.count * 8,
             certificatesRootRaw: masterCertProof.root,
             isRevoked: isRevoked,
             circuitName: registerIdentityCircuitName
@@ -146,11 +150,16 @@ class UserManager: ObservableObject {
         
         let signature = passport.signature
         
+        var sod = try passport.getSod()
+        
+        var ec = try sod.getEncapsulatedContent()
+        
         let calldataBuilder = IdentityCallDataBuilder()
         let calldata = try calldataBuilder.buildRevoceCalldata(
             identityKey,
-            signature: signature,
-            pubKeyPem: passport.getDG15PublicKeyPEM()
+            aaSignature: signature,
+            aaPubKeyPem: passport.getDG15PublicKeyPEM(),
+            ecSizeInBits: ec.count * 8
         )
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
@@ -185,12 +194,7 @@ class UserManager: ObservableObject {
         
         LoggerUtil.common.info("Passport certificate is not registered, registering...")
         
-        let calldata = try IdentityCallDataBuilder().buildRegisterCertificateCalldata(
-            ConfigManager.shared.certificatesStorage.icaoCosmosRpc,
-            slavePem: certPem,
-            masterCertificatesBucketname: ConfigManager.shared.certificatesStorage.masterCertificatesBucketname,
-            masterCertificatesFilename: ConfigManager.shared.certificatesStorage.masterCertificatesFilename
-        )
+        let calldata = try IdentityCallDataBuilder().buildRegisterCertificateCalldata(Certificates.ICAO, slavePem: certPem)
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
         let response = try await relayer.register(calldata, ConfigManager.shared.api.registerContractAddress)
