@@ -19,26 +19,24 @@ struct AppView: View {
                     VersionUpdateView()
                 } else if !internetConnectionManager.isInternetPresent {
                     InternetConnectionRequiredView()
+                } else if
+                    securityManager.passcodeState != .unset,
+                    securityManager.faceIdState != .unset,
+                    securityManager.isPasscodeCorrect
+                {
+                    MainView().transition(.backslide)
+                } else if
+                    securityManager.passcodeState != .unset,
+                    securityManager.faceIdState != .unset
+                {
+                    LockScreenView()
+                } else if securityManager.passcodeState != .unset {
+                    EnableFaceIdView().transition(.backslide)
+                } else if viewModel.isIntroFinished {
+                    EnablePasscodeView().transition(.backslide)
                 } else {
-                    if
-                        securityManager.passcodeState != .unset,
-                        securityManager.faceIdState != .unset,
-                        securityManager.isPasscodeCorrect
-                    {
-                        MainView().transition(.backslide)
-                    } else if
-                        securityManager.passcodeState != .unset,
-                        securityManager.faceIdState != .unset
-                    {
-                        LockScreenView()
-                    } else if securityManager.passcodeState != .unset {
-                        EnableFaceIdView().transition(.backslide)
-                    } else if viewModel.isIntroFinished {
-                        EnablePasscodeView().transition(.backslide)
-                    } else {
-                        IntroView(onFinish: { viewModel.finishIntro() })
-                            .transition(.backslide)
-                    }
+                    IntroView(onFinish: { viewModel.finishIntro() })
+                        .transition(.backslide)
                 }
             } else {
                 ProgressView()

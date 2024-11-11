@@ -74,21 +74,30 @@ class CircuitDataManager: ObservableObject {
     func retriveCircuitDataFromCache(_ circuitName: String) throws -> CircuitData? {
         let circuitDatPath = CircuitDataManager.saveDirectory.appending(path: "\(circuitName)-download/\(circuitName).dat")
         let circuitZkeyPath = CircuitDataManager.saveDirectory.appending(path: "\(circuitName)-download/circuit_final.zkey")
-        
-        let fm = FileManager.default
-        
-        guard
-            let circuitDat = fm.contents(atPath: circuitDatPath.path()),
-            let circuitZkey = fm.contents(atPath: circuitZkeyPath.path())
-        else {
+                
+        if
+            !FileManager.default.fileExists(atPath: circuitDatPath.path()) ||
+            !FileManager.default.fileExists(atPath: circuitZkeyPath.path())
+        {
             return nil
         }
         
-        return CircuitData(circutDat: circuitDat, circuitZkey: circuitZkey)
+        return CircuitData(
+            circutDatPath: circuitDatPath.path(),
+            circuitZkeyPath: circuitZkeyPath.path()
+        )
     }
 }
 
 struct CircuitData {
-    let circutDat: Data
-    let circuitZkey: Data
+    let circutDatPath: String
+    let circuitZkeyPath: String
+    
+    var circuitDat: Data {
+        FileManager.default.contents(atPath: circutDatPath) ?? Data()
+    }
+    
+    var circuitZkey: Data {
+        FileManager.default.contents(atPath: circuitZkeyPath) ?? Data()
+    }
 }
