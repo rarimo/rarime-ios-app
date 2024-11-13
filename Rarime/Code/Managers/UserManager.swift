@@ -150,9 +150,9 @@ class UserManager: ObservableObject {
         
         let signature = passport.signature
         
-        var sod = try passport.getSod()
+        let sod = try passport.getSod()
         
-        var ec = try sod.getEncapsulatedContent()
+        let ec = try sod.getEncapsulatedContent()
         
         let calldataBuilder = IdentityCallDataBuilder()
         let calldata = try calldataBuilder.buildRevoceCalldata(
