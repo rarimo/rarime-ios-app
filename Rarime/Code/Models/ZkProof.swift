@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 typealias PubSignals = [String]
 
@@ -24,4 +25,8 @@ struct ZkProof: Codable {
         case proof
         case pubSignals = "pub_signals"
     }
+}
+
+extension ZkProof {
+    static let template = NSDataAsset(name: "ProofJson")!.data
 }

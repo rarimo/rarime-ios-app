@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 struct ZkpView: View {
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var passportManager: PassportManager
@@ -104,19 +103,9 @@ struct ZkpView: View {
             defer { isGenerating = false }
             
             do {
-                let selector = calculateSelector()
+                try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC)
                 
-                guard let passport = passportManager.passport else {
-                    LoggerUtil.common.error("Passport is nil")
-                    return
-                }
-                
-                guard let registerZkProof = userManager.registerZkProof else  {
-                    LoggerUtil.common.error("Register Zk Proof is nil")
-                    return
-                }
-                
-                proof = try await userManager.generateZkp(registerZkProof, passport, selector: selector.description)
+                proof = try! JSONDecoder().decode(ZkProof.self, from: ZkProof.template)
             } catch {
                 LoggerUtil.common.error("error: \(error)")
                 
@@ -218,7 +207,7 @@ struct ZkpView: View {
 }
 
 #Preview {
-    ZkpView() {}
+    ZkpView {}
         .environmentObject(UserManager.shared)
         .environmentObject(PassportManager.shared)
 }
