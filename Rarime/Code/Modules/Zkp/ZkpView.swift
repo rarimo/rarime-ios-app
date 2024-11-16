@@ -66,13 +66,13 @@ struct ZkpView: View {
                         .padding()
                         .align(.leading)
                     ScrollView {
-                        ForEach(ZkpPubSignals(proof.pubSignals).getSignals(), id: \.name) { signal in
+                        ForEach(zkpVariants, id: \.title) { signal in
                             HStack {
-                                Text(signal.name)
+                                Text(signal.title)
                                     .body4()
                                     .foregroundStyle(.white)
                                 Spacer()
-                                Text(signal.value)
+                                Text(signal.template)
                                     .body4()
                                     .foregroundStyle(.white)
                                     .lineLimit(1)

@@ -45,9 +45,9 @@ extension ZkpVariants {
             "4f6c6578616e646572"
         case .nationality:
             "554b52"
-        case .citizenship
-             "554b52"
-             case .sex:
+        case .citizenship:
+            "554b52"
+        case .sex:
             "4d"
         case .documentNumber:
             "444e343332343235"
