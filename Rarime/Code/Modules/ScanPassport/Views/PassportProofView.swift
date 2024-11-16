@@ -7,7 +7,7 @@ struct PassportProofView: View {
     @EnvironmentObject var mrzViewModel: MRZViewModel
     @EnvironmentObject var passportViewModel: PassportViewModel
 
-    let onFinish: (ZkProof) -> Void
+    let onFinish: () -> Void
     let onClose: () -> Void
     let onError: () -> Void
 
@@ -15,7 +15,7 @@ struct PassportProofView: View {
 
     private func register() async {
         do {
-            let zkProof = try await passportViewModel.register { message in
+            try await passportViewModel.register { message in
                 downloadingMessage = message
             }
 
@@ -23,7 +23,7 @@ struct PassportProofView: View {
 
             try await Task.sleep(nanoseconds: NSEC_PER_SEC)
 
-            onFinish(zkProof)
+            onFinish()
         } catch {
             if passportViewModel.isUserRegistered {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -214,7 +214,7 @@ private struct RevocationNFCScan: View {
 #Preview {
     @StateObject var userManager = UserManager.shared
 
-    return PassportProofView(onFinish: { _ in }, onClose: {}, onError: {})
+    return PassportProofView(onFinish: {}, onClose: {}, onError: {})
         .environmentObject(WalletManager())
         .environmentObject(PassportViewModel())
         .environmentObject(MRZViewModel())

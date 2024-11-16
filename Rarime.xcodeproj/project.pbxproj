@@ -11,7 +11,6 @@
 		56062B9C2C12032700C9BF9B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9B2C12032700C9BF9B /* Constants.swift */; };
 		56062B9E2C12096E00C9BF9B /* UnsupportedCountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9D2C12096E00C9BF9B /* UnsupportedCountryView.swift */; };
 		56062BA02C120B3400C9BF9B /* WaitlistPassportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9F2C120B3400C9BF9B /* WaitlistPassportView.swift */; };
-		5609B6C82C188C7500CB6A1F /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5609B6C72C188C7500CB6A1F /* MarkdownUI */; };
 		5609B6CC2C19922400CB6A1F /* LinearProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609B6CB2C19922400CB6A1F /* LinearProgressView.swift */; };
 		560F0C1D2BD0234300067054 /* QRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 560F0C1C2BD0234300067054 /* QRCode */; };
 		560F0C252BD036F900067054 /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C242BD036F900067054 /* AppTextField.swift */; };
@@ -135,7 +134,6 @@
 		C75512902C86F4BC000258AD /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
 		C75512942C870AFD000258AD /* StepIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75512932C870AFD000258AD /* StepIndicator.swift */; };
 		C75512962C87617B000258AD /* RemoveCase.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C75512952C87617B000258AD /* RemoveCase.mp4 */; };
-		C7D585092C8208F3002F6407 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D585082C8208F3002F6407 /* Identity.xcframework */; };
 		CE0881A12BF773CC00B31735 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0881A02BF773CC00B31735 /* AlertManager.swift */; };
 		CE0881A62BF77F4D00B31735 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0881A52BF77F4D00B31735 /* ErrorAlert.swift */; };
 		CE0DA0D72BDA6F1900696503 /* EvmTxResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */; };
@@ -167,6 +165,7 @@
 		CE68BE472BD9B6EA00D92EBB /* Web3ContractABI in Frameworks */ = {isa = PBXBuildFile; productRef = CE68BE462BD9B6EA00D92EBB /* Web3ContractABI */; };
 		CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE68BE482BD9B6EA00D92EBB /* Web3PromiseKit */; };
 		CE68BE4B2BD9B75100D92EBB /* ContractABI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE4A2BD9B75100D92EBB /* ContractABI.swift */; };
+		CE6B54522CE890C500BCF86D /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6B54512CE890C500BCF86D /* Identity.xcframework */; };
 		CE72101E2BD7BD9D0043DB7F /* Data+Utf8.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72101D2BD7BD9D0043DB7F /* Data+Utf8.swift */; };
 		CE7210292BD7D0D10043DB7F /* String+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7210282BD7D0D10043DB7F /* String+Hex.swift */; };
 		CE72102E2BD7F6780043DB7F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE72102D2BD7F6780043DB7F /* Alamofire */; };
@@ -347,7 +346,6 @@
 		C755128F2C86F4BC000258AD /* PushNotification.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PushNotification.xcdatamodel; sourceTree = "<group>"; };
 		C75512932C870AFD000258AD /* StepIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepIndicator.swift; sourceTree = "<group>"; };
 		C75512952C87617B000258AD /* RemoveCase.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = RemoveCase.mp4; sourceTree = "<group>"; };
-		C7D585082C8208F3002F6407 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE0881A02BF773CC00B31735 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		CE0881A52BF77F4D00B31735 /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmTxResponse.swift; sourceTree = "<group>"; };
@@ -376,6 +374,7 @@
 		CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relayer.swift; sourceTree = "<group>"; };
 		CE68BE412BD9B6A200D92EBB /* RegistrationContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationContract.swift; sourceTree = "<group>"; };
 		CE68BE4A2BD9B75100D92EBB /* ContractABI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractABI.swift; sourceTree = "<group>"; };
+		CE6B54512CE890C500BCF86D /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE72101D2BD7BD9D0043DB7F /* Data+Utf8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Utf8.swift"; sourceTree = "<group>"; };
 		CE7210282BD7D0D10043DB7F /* String+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Hex.swift"; sourceTree = "<group>"; };
 		CE7210322BD818020043DB7F /* Double+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Rounded.swift"; sourceTree = "<group>"; };
@@ -449,11 +448,10 @@
 				CE68BE472BD9B6EA00D92EBB /* Web3ContractABI in Frameworks */,
 				CEC562032BD923B4002D4954 /* libfr.a in Frameworks */,
 				CEC562042BD923B4002D4954 /* librapidsnark.a in Frameworks */,
-				5609B6C82C188C7500CB6A1F /* MarkdownUI in Frameworks */,
 				CE7210312BD807140043DB7F /* ZipArchive in Frameworks */,
 				560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */,
 				CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */,
-				C7D585092C8208F3002F6407 /* Identity.xcframework in Frameworks */,
+				CE6B54522CE890C500BCF86D /* Identity.xcframework in Frameworks */,
 				CEDB9DCC2BFDF60900BCF074 /* libwitnesscalc_queryIdentity.a in Frameworks */,
 				CEB8B27D2C6A35C30029DD80 /* libwitnesscalc_registerIdentityUniversalRSA4096.a in Frameworks */,
 			);
@@ -1046,7 +1044,7 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C7D585082C8208F3002F6407 /* Identity.xcframework */,
+				CE6B54512CE890C500BCF86D /* Identity.xcframework */,
 				CE8FEB5B2C1AFC3F0008381A /* libwitnesscalc_auth.a */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562022BD923B4002D4954 /* libfq.a */,
@@ -1097,7 +1095,6 @@
 				CE68BE462BD9B6EA00D92EBB /* Web3ContractABI */,
 				CE68BE482BD9B6EA00D92EBB /* Web3PromiseKit */,
 				56E7AD102BDBA81000D3A258 /* PullToRefreshSwiftUI */,
-				5609B6C72C188C7500CB6A1F /* MarkdownUI */,
 				CE9347722C205B340034885C /* CachedAsyncImage */,
 				CE61E8822C24240000940129 /* Semaphore */,
 			);
@@ -1141,7 +1138,6 @@
 				CE72102F2BD807140043DB7F /* XCRemoteSwiftPackageReference "ZipArchive" */,
 				CE68BE432BD9B6EA00D92EBB /* XCRemoteSwiftPackageReference "Web3.swift" */,
 				56E7AD0F2BDBA81000D3A258 /* XCRemoteSwiftPackageReference "PullToRefreshSwiftUI" */,
-				5609B6C62C188C7500CB6A1F /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				CE9347712C205B340034885C /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 				CE61E8812C24240000940129 /* XCRemoteSwiftPackageReference "Semaphore" */,
 			);
@@ -1832,14 +1828,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5609B6C62C188C7500CB6A1F /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:gonzalezreal/swift-markdown-ui.git";
-			requirement = {
-				kind = exactVersion;
-				version = 2.3.0;
-			};
-		};
 		560F0C282BD114EE00067054 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/twostraws/CodeScanner";
@@ -1939,11 +1927,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5609B6C72C188C7500CB6A1F /* MarkdownUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5609B6C62C188C7500CB6A1F /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
-			productName = MarkdownUI;
-		};
 		560F0C1C2BD0234300067054 /* QRCode */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 56E2D92F2BD01C77006E725D /* XCRemoteSwiftPackageReference "qrcode" */;

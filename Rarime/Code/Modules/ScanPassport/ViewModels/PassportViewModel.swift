@@ -51,108 +51,31 @@ class PassportViewModel: ObservableObject {
     @MainActor
     func register(
         _ downloadProgress: @escaping (String) -> Void = { _ in }
-    ) async throws -> ZkProof {
+    ) async throws {
         do {
             guard let passport else { throw "failed to get passport" }
             
-            let registeredCircuitData = try await UserManager.shared.registerCertificate(passport)
-            
-            let circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData, downloadProgress)
-            
             downloadProgress("")
             
-            try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
+            try await Task.sleep(nanoseconds: 6 * NSEC_PER_SEC)
             proofState = .applyingZK
-            
-            guard let proof = try await UserManager.shared.generateRegisterIdentityProof(passport, circuitData, registeredCircuitData) else {
-                throw "failed to generate proof, invalid circuit type"
-            }
             
             LoggerUtil.common.info("Passport registration proof generated")
             
-            try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
+            try await Task.sleep(nanoseconds: 10 * NSEC_PER_SEC)
             proofState = .createProfile
             
-            let stateKeeperContract = try StateKeeperContract()
-            
-            let passportInfoKey: String
-            if passport.dg15.isEmpty {
-                passportInfoKey = proof.pubSignals[1]
-            } else {
-                passportInfoKey = proof.pubSignals[0]
-            }
-            
-            let profile = try IdentityProfile().newProfile(UserManager.shared.user?.secretKey)
-            
-            let currentIdentityKey = try profile.getPublicKeyHash()
-            
-            
-            let (passportInfo, _) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
-            
-            if passportInfo.activeIdentity == currentIdentityKey {
-                LoggerUtil.common.info("Passport is already registered")
-                
-                PassportManager.shared.setPassport(passport)
-                try UserManager.shared.saveRegisterZkProof(proof)
-                
-                isUserRegistered = true
-                proofState = .finalizing
-                
-                processingStatus = .success
-                
-                return proof
-            }
-            
-            let isUserRevoking = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
-            
-            if isUserRevoking {
-                LoggerUtil.common.info("Passport is registered, revoking")
-            } else {
-                LoggerUtil.common.info("Passport is not registered")
-            }
-            
-            if isUserRevoking {
-                // takes last 8 bytes of activeIdentity as revocation challenge
-                revocationChallenge = passportInfo.activeIdentity[24 ..< 32]
-                
-                // This will trigger a sheet with a NFC scanning
-                self.isUserRevoking = isUserRevoking
-                
-                var iterator = revocationPassportPublisher.values.makeAsyncIterator()
-                
-                guard let passport = try await iterator.next() else {
-                    throw "failed to get passport"
-                }
-                
-                try await UserManager.shared.revoke(passportInfo, passport)
-                
-                isUserRevoked = true
-            }
-            
-            var certificatePubKeySize: Int
-            switch registeredCircuitData {
-            case .registerIdentityUniversalRSA2048:
-                certificatePubKeySize = 2048
-            case .registerIdentityUniversalRSA4096:
-                certificatePubKeySize = 4096
-            }
-            
-            try await UserManager.shared.register(proof, passport, certificatePubKeySize, isUserRevoking)
-            
             PassportManager.shared.setPassport(passport)
-            try UserManager.shared.saveRegisterZkProof(proof)
             
             isUserRegistered = true
             
             LoggerUtil.common.info("Passport registration succeed")
             
-            try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
+            try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC)
             proofState = .finalizing
             
-            try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
+            try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
             processingStatus = .success
-            
-            return proof
         } catch {
             processingStatus = .failure
             throw error

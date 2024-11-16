@@ -84,8 +84,7 @@ struct ScanPassportView: View {
             .transition(.backslide)
         case .generateProof:
             PassportProofView(
-                onFinish: { registerZKProof in
-                    userManager.registerZkProof = registerZKProof
+                onFinish: {
                     onComplete(passportViewModel.passport!)
                 },
                 onClose: onClose,
@@ -105,7 +104,7 @@ struct ScanPassportView: View {
             .transition(.backslide)
         }
     }
-    
+
     private func presentScanTutorialIfNeeded() {
         if !AppUserDefaults.shared.isScanTutorialDisplayed {
             isTutorialPresented = !isTutorialShown
