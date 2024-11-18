@@ -1,9 +1,9 @@
-import Foundation
 import CoreData
+import Foundation
 
 struct PushNotificationRaw: Codable {
     let aps: APS
-    let type: String?
+    let type: PushNotificationType?
     let content: String?
     
     struct APS: Codable {
@@ -15,10 +15,17 @@ struct PushNotificationRaw: Codable {
         }
     }
     
-    init(_ userInfo: [AnyHashable : Any]) throws {
+    init(_ userInfo: [AnyHashable: Any]) throws {
         let data = try JSONSerialization.data(withJSONObject: userInfo, options: .prettyPrinted)
         
         self = try JSONDecoder().decode(PushNotificationRaw.self, from: data)
+    }
+}
+
+extension PushNotificationRaw {
+    enum PushNotificationType: String, Codable {
+        case reward
+        case universal
     }
 }
 

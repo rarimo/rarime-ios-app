@@ -1,9 +1,9 @@
+import CoreData
+import FirebaseCore
+import FirebaseMessaging
+import Foundation
 import SwiftUI
 import UserNotifications
-import FirebaseCore
-import Foundation
-import FirebaseMessaging
-import CoreData
 
 class NotificationManager: ObservableObject {
     static let userDefaults = UserDefaults(suiteName: "group.rarilabs.rarime")!
@@ -30,7 +30,7 @@ class NotificationManager: ObservableObject {
             NSPersistentStoreDescription(url: url)
         ]
         
-        pushNotificationContainer.loadPersistentStores { description, error in
+        pushNotificationContainer.loadPersistentStores { _, error in
             if let error {
                 LoggerUtil.common.error("Error loading Core Data: \(error, privacy: .public)")
             }
@@ -94,7 +94,7 @@ class NotificationManager: ObservableObject {
         pushNotification.body = pushNotificationRaw.aps.alert.body
         pushNotification.receivedAt = Date()
         pushNotification.isRead = false
-        pushNotification.type = pushNotificationRaw.type
+        pushNotification.type = pushNotificationRaw.type?.rawValue
         pushNotification.content = pushNotificationRaw.content
         
         unreadNotificationsCounter += 1
