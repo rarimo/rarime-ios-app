@@ -16,7 +16,6 @@ class JWT: Codable {
         let headerBase64 = parts[0]
         var payloadBase64 = parts[1]
         
-        
         // Adds "=" characters to payloadBase64 to make it a multiple of 4
         let payloadRemainder = payloadBase64.count % 4
         if payloadRemainder > 0 {
@@ -60,6 +59,6 @@ struct JWTPayload: Codable {
 }
 
 enum JWTTokenType: String, Codable {
-    case access = "access"
-    case refresh = "refresh"
+    case access
+    case refresh
 }
