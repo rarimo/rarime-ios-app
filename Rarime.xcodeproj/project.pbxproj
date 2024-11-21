@@ -167,6 +167,12 @@
 		CE0DA0D92BDA927000696503 /* AirDropResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D82BDA927000696503 /* AirDropResponse.swift */; };
 		CE0DC57B2C0DB33A00EFC0D7 /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DC57A2C0DB33A00EFC0D7 /* UpdateManager.swift */; };
 		CE0DC57D2C0DB9B200EFC0D7 /* VersionUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DC57C2C0DB9B200EFC0D7 /* VersionUpdateView.swift */; };
+		CE0E77F22CEF36600095F17F /* SupportRegisterIdentityCircuitAAType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC8C36B2CB8134F0006352C /* SupportRegisterIdentityCircuitAAType.swift */; };
+		CE0E77F32CEF36660095F17F /* Data+FindSubarrayIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF68B62CB685C5008769EA /* Data+FindSubarrayIndex.swift */; };
+		CE0E77F42CEF366B0095F17F /* CryptoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F382CB56C8700498F39 /* CryptoUtils.swift */; };
+		CE0E77F52CEF36720095F17F /* BN.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF68B82CB692A7008769EA /* BN.swift */; };
+		CE0E77F62CEF367F0095F17F /* SupportRegisterIdentityCircuitSignatureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F362CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift */; };
+		CE0E77F72CEF36A20095F17F /* SODAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F3A2CB5718100498F39 /* SODAlgorithm.swift */; };
 		CE19CB472BE39DA400B26DF7 /* RarimoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB462BE39DA400B26DF7 /* RarimoUtils.swift */; };
 		CE19CB492BE3AD4200B26DF7 /* LockScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB482BE3AD4200B26DF7 /* LockScreenView.swift */; };
 		CE1FA56A2C1708F100B2C191 /* Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1FA5692C1708F100B2C191 /* Points.swift */; };
@@ -1614,20 +1620,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE7E95892CE778D100D86A4F /* Country.swift in Sources */,
+				CE0E77F32CEF36660095F17F /* Data+FindSubarrayIndex.swift in Sources */,
 				CE7E957E2CE757B400D86A4F /* UniversalNotificationContent.swift in Sources */,
+				CE0E77F52CEF36720095F17F /* BN.swift in Sources */,
 				CE2797512CEB429D008649B0 /* String+Hex.swift in Sources */,
 				CE2797482CEB421B008649B0 /* Data+Utf8.swift in Sources */,
 				CE2797492CEB4229008649B0 /* Images.swift in Sources */,
 				CE7E95832CE7788200D86A4F /* Passport.swift in Sources */,
 				CE3D41D72C779C9E00D0AA65 /* PushNotificationsRaw.swift in Sources */,
+				CE0E77F72CEF36A20095F17F /* SODAlgorithm.swift in Sources */,
 				CE34775A2C788620005E91FE /* String+Error.swift in Sources */,
+				CE0E77F22CEF36600095F17F /* SupportRegisterIdentityCircuitAAType.swift in Sources */,
 				CE27974E2CEB4281008649B0 /* PoseidonSMTContract.swift in Sources */,
 				CE27974C2CEB426A008649B0 /* ContractABI.swift in Sources */,
+				CE0E77F42CEF366B0095F17F /* CryptoUtils.swift in Sources */,
 				CE7E95872CE778BC00D86A4F /* PassportCardLook.swift in Sources */,
 				CE3477582C788602005E91FE /* LoggerUtil.swift in Sources */,
 				CE2797432CEB41DF008649B0 /* Constants.swift in Sources */,
 				CE27974D2CEB4271008649B0 /* CloudStorage.swift in Sources */,
 				CE2797472CEB420A008649B0 /* User.swift in Sources */,
+				CE0E77F62CEF367F0095F17F /* SupportRegisterIdentityCircuitSignatureType.swift in Sources */,
 				C78EA4FA2C9B2EF5001DA0B3 /* PushNotification.xcdatamodeld in Sources */,
 				CE7E95822CE7786F00D86A4F /* PassportManager.swift in Sources */,
 				CE3D41D62C779C8D00D0AA65 /* NotificationManager.swift in Sources */,
@@ -2347,7 +2359,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.10;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2398,7 +2410,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.10;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2515,7 +2527,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.10;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2625,7 +2637,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.10;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";

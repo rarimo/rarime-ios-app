@@ -115,56 +115,7 @@ class PassportViewModel: ObservableObject {
             
             let (passportInfo, _) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
             
-            if passportInfo.activeIdentity == currentIdentityKey {
-                LoggerUtil.common.info("Passport is already registered")
-                
-                if passportInfo.identityReissueCounter > 0 {
-                    isUserRevoked = true
-                }
-                
-                PassportManager.shared.setPassport(passport)
-                try UserManager.shared.saveRegisterZkProof(proof)
-                
-                isUserRegistered = true
-                proofState = .finalizing
-                
-                processingStatus = .success
-                
-                return proof
-            }
-            
-            let isUserRevoking = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
-            let isUserAlreadyRevoked = passportInfo.activeIdentity == PoseidonSMT.revokedValue
-            
-            if isUserRevoking {
-                if isUserAlreadyRevoked {
-                    LoggerUtil.common.info("Passport is already revoked")
-                } else {
-                    LoggerUtil.common.info("Passport is revoking")
-                }
-            } else {
-                LoggerUtil.common.info("Passport is not registered")
-            }
-            
-            if isUserRevoking && !isUserAlreadyRevoked {
-                // takes last 8 bytes of activeIdentity as revocation challenge
-                revocationChallenge = passportInfo.activeIdentity[24 ..< 32]
-                
-                // This will trigger a sheet with a NFC scanning
-                self.isUserRevoking = isUserRevoking
-                
-                var iterator = revocationPassportPublisher.values.makeAsyncIterator()
-                
-                guard let passport = try await iterator.next() else {
-                    throw "failed to get passport"
-                }
-                
-                try await UserManager.shared.revoke(passportInfo, passport)
-            }
-            
-            if isUserRevoking { isUserRevoked = true }
-            
-            try await UserManager.shared.register(proof, passport, isUserRevoking, registerIdentityCircuitName)
+            try await UserManager.shared.register(proof, passport, false, registerIdentityCircuitName)
             
             PassportManager.shared.setPassport(passport)
             try UserManager.shared.saveRegisterZkProof(proof)
