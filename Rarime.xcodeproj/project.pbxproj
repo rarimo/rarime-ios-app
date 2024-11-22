@@ -271,6 +271,12 @@
 		CEA03F0A2C7C7A17002F218A /* View+IsLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA03F092C7C7A17002F218A /* View+IsLoading.swift */; };
 		CEA03F0C2C7C9319002F218A /* CreateIdentityIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA03F0B2C7C9319002F218A /* CreateIdentityIntroView.swift */; };
 		CEB91BBE2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB91BBD2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift */; };
+		CEBA50042CF0E6EB0069151C /* SupportRegisterIdentityCircuitSignatureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F362CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift */; };
+		CEBA50052CF0E6F30069151C /* SupportRegisterIdentityCircuitAAType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC8C36B2CB8134F0006352C /* SupportRegisterIdentityCircuitAAType.swift */; };
+		CEBA50062CF0E6F90069151C /* SODAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F3A2CB5718100498F39 /* SODAlgorithm.swift */; };
+		CEBA50072CF0E7010069151C /* CryptoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F382CB56C8700498F39 /* CryptoUtils.swift */; };
+		CEBA50082CF0E7080069151C /* Data+FindSubarrayIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF68B62CB685C5008769EA /* Data+FindSubarrayIndex.swift */; };
+		CEBA50092CF0E7130069151C /* BN.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF68B82CB692A7008769EA /* BN.swift */; };
 		CEC562032BD923B4002D4954 /* libfr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC561FB2BD923B3002D4954 /* libfr.a */; };
 		CEC562042BD923B4002D4954 /* librapidsnark.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC561FC2BD923B3002D4954 /* librapidsnark.a */; };
 		CEC562062BD923B4002D4954 /* libgmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC562012BD923B4002D4954 /* libgmp.a */; };
@@ -1615,6 +1621,7 @@
 			files = (
 				CE7E95892CE778D100D86A4F /* Country.swift in Sources */,
 				CE7E957E2CE757B400D86A4F /* UniversalNotificationContent.swift in Sources */,
+				CEBA50092CF0E7130069151C /* BN.swift in Sources */,
 				CE2797512CEB429D008649B0 /* String+Hex.swift in Sources */,
 				CE2797482CEB421B008649B0 /* Data+Utf8.swift in Sources */,
 				CE2797492CEB4229008649B0 /* Images.swift in Sources */,
@@ -1629,7 +1636,9 @@
 				CE27974D2CEB4271008649B0 /* CloudStorage.swift in Sources */,
 				CE2797472CEB420A008649B0 /* User.swift in Sources */,
 				C78EA4FA2C9B2EF5001DA0B3 /* PushNotification.xcdatamodeld in Sources */,
+				CEBA50062CF0E6F90069151C /* SODAlgorithm.swift in Sources */,
 				CE7E95822CE7786F00D86A4F /* PassportManager.swift in Sources */,
+				CEBA50072CF0E7010069151C /* CryptoUtils.swift in Sources */,
 				CE3D41D62C779C8D00D0AA65 /* NotificationManager.swift in Sources */,
 				CE7E95882CE778C900D86A4F /* PassportIdentifier.swift in Sources */,
 				CE3D41C82C779BC400D0AA65 /* NotificationService.swift in Sources */,
@@ -1639,11 +1648,14 @@
 				CE2797422CEB41D3008649B0 /* AppUserDefaults.swift in Sources */,
 				CE27974A2CEB4246008649B0 /* RegistrationContract.swift in Sources */,
 				CE7E95812CE774DC00D86A4F /* AppKeychain.swift in Sources */,
+				CEBA50052CF0E6F30069151C /* SupportRegisterIdentityCircuitAAType.swift in Sources */,
 				CE27974F2CEB4287008649B0 /* PassportUtils.swift in Sources */,
 				CE2797462CEB4200008649B0 /* AppLanguage.swift in Sources */,
 				CE27974B2CEB4258008649B0 /* DateUtil.swift in Sources */,
 				CE2797452CEB41F7008649B0 /* AppColorScheme.swift in Sources */,
 				CE2797442CEB41F0008649B0 /* SecurityManager.swift in Sources */,
+				CEBA50082CF0E7080069151C /* Data+FindSubarrayIndex.swift in Sources */,
+				CEBA50042CF0E6EB0069151C /* SupportRegisterIdentityCircuitSignatureType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
