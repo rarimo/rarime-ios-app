@@ -301,6 +301,9 @@
 		CEDC57962CA30A9D00F02132 /* CIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC57952CA30A9D00F02132 /* CIImage+Extension.swift */; };
 		CEF251382BD6E17800050507 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251372BD6E17800050507 /* UserManager.swift */; };
 		CEF2513A2BD6E22700050507 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251392BD6E22700050507 /* User.swift */; };
+		CEF56DE12CF5D96400F4A477 /* libwitnesscalc_registerIdentity_1_160_3_4_576_200_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF56DE02CF5D96400F4A477 /* libwitnesscalc_registerIdentity_1_160_3_4_576_200_NA.a */; };
+		CEF56DE32CF5D97D00F4A477 /* libwitnesscalc_registerIdentity_21_256_3_3_336_232_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF56DE22CF5D97D00F4A477 /* libwitnesscalc_registerIdentity_21_256_3_3_336_232_NA.a */; };
+		CEF56DE52CF5D98400F4A477 /* libwitnesscalc_registerIdentity_24_256_3_4_336_232_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF56DE42CF5D98400F4A477 /* libwitnesscalc_registerIdentity_24_256_3_4_336_232_NA.a */; };
 		CEF723142BF4BB9000E79198 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF723132BF4BB9000E79198 /* Errors.swift */; };
 		CEF8C7F72BE0DE9700F8E1A4 /* CosmosTransferResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF8C7F62BE0DE9700F8E1A4 /* CosmosTransferResponse.swift */; };
 		CEFE5F352CB522A700498F39 /* RegisterIdentityCircuitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F342CB522A700498F39 /* RegisterIdentityCircuitType.swift */; };
@@ -593,6 +596,12 @@
 		CEE3259E2CB7CA6E00468BE4 /* witnesscalc_registerIdentity_1_256_3_5_576_248_NA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_1_256_3_5_576_248_NA.h; sourceTree = "<group>"; };
 		CEF251372BD6E17800050507 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		CEF251392BD6E22700050507 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CEF56DE02CF5D96400F4A477 /* libwitnesscalc_registerIdentity_1_160_3_4_576_200_NA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_1_160_3_4_576_200_NA.a; sourceTree = "<group>"; };
+		CEF56DE22CF5D97D00F4A477 /* libwitnesscalc_registerIdentity_21_256_3_3_336_232_NA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_21_256_3_3_336_232_NA.a; sourceTree = "<group>"; };
+		CEF56DE42CF5D98400F4A477 /* libwitnesscalc_registerIdentity_24_256_3_4_336_232_NA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_24_256_3_4_336_232_NA.a; sourceTree = "<group>"; };
+		CEF56DE62CF5D9AF00F4A477 /* witnesscalc_registerIdentity_1_160_3_4_576_200_NA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_1_160_3_4_576_200_NA.h; sourceTree = "<group>"; };
+		CEF56DE72CF5D9CF00F4A477 /* witnesscalc_registerIdentity_21_256_3_3_336_232_NA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_21_256_3_3_336_232_NA.h; sourceTree = "<group>"; };
+		CEF56DE82CF5D9D600F4A477 /* witnesscalc_registerIdentity_24_256_3_4_336_232_NA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_24_256_3_4_336_232_NA.h; sourceTree = "<group>"; };
 		CEF723132BF4BB9000E79198 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		CEF8C7F62BE0DE9700F8E1A4 /* CosmosTransferResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosTransferResponse.swift; sourceTree = "<group>"; };
 		CEFE5F342CB522A700498F39 /* RegisterIdentityCircuitType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterIdentityCircuitType.swift; sourceTree = "<group>"; };
@@ -639,9 +648,11 @@
 				CE30095A2CE611B80084E07E /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a in Frameworks */,
 				CE30095B2CE611B80084E07E /* libwitnesscalc_registerIdentity_2_256_3_6_576_248_1_2432_3_256.a in Frameworks */,
 				CE30095C2CE611B80084E07E /* libwitnesscalc_registerIdentity_11_256_3_3_576_248_1_1184_5_264.a in Frameworks */,
+				CEF56DE12CF5D96400F4A477 /* libwitnesscalc_registerIdentity_1_160_3_4_576_200_NA.a in Frameworks */,
 				CE30095D2CE611B80084E07E /* libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a in Frameworks */,
 				CE30095E2CE611B80084E07E /* libwitnesscalc_registerIdentity_1_256_3_4_336_232_1_1480_5_296.a in Frameworks */,
 				CE30095F2CE611B80084E07E /* libwitnesscalc_registerIdentity_12_256_3_3_336_232_NA.a in Frameworks */,
+				CEF56DE52CF5D98400F4A477 /* libwitnesscalc_registerIdentity_24_256_3_4_336_232_NA.a in Frameworks */,
 				CE3009602CE611B80084E07E /* libwitnesscalc_registerIdentity_1_256_3_5_576_248_NA.a in Frameworks */,
 				CE3009612CE611B80084E07E /* libwitnesscalc_registerIdentity_1_256_3_6_576_248_1_2432_5_296.a in Frameworks */,
 				CE3009622CE611B80084E07E /* libwitnesscalc_registerIdentity_2_256_3_6_336_248_1_2432_3_256.a in Frameworks */,
@@ -654,6 +665,7 @@
 				CE68BE452BD9B6EA00D92EBB /* Web3 in Frameworks */,
 				CE72102E2BD7F6780043DB7F /* Alamofire in Frameworks */,
 				CE61E8832C24240000940129 /* Semaphore in Frameworks */,
+				CEF56DE32CF5D97D00F4A477 /* libwitnesscalc_registerIdentity_21_256_3_3_336_232_NA.a in Frameworks */,
 				56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */,
 				CE8FEB5C2C1AFC3F0008381A /* libwitnesscalc_auth.a in Frameworks */,
 				CE68BE472BD9B6EA00D92EBB /* Web3ContractABI in Frameworks */,
@@ -1386,6 +1398,7 @@
 				CEC562002BD923B3002D4954 /* prover.h */,
 				CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */,
 				CEC561FD2BD923B3002D4954 /* witnesscalc_queryIdentity.h */,
+				CEF56DE62CF5D9AF00F4A477 /* witnesscalc_registerIdentity_1_160_3_4_576_200_NA.h */,
 				CEE3259E2CB7CA6E00468BE4 /* witnesscalc_registerIdentity_1_256_3_5_576_248_NA.h */,
 				CED39E2A2CB949D8001D0400 /* witnesscalc_registerIdentity_1_256_3_6_576_248_1_2432_5_296.h */,
 				CE6BC17E2CBEA9AC00880287 /* witnesscalc_registerIdentity_1_256_3_6_576_264_1_2448_3_256.h */,
@@ -1397,12 +1410,15 @@
 				CEB3558E2CC160FA001EB4F6 /* witnesscalc_registerIdentity_12_256_3_3_336_232_NA.h */,
 				CEB3558F2CC16108001EB4F6 /* witnesscalc_registerIdentity_1_256_3_4_336_232_1_1480_5_296.h */,
 				CEB355902CC16117001EB4F6 /* witnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256.h */,
+				CEF56DE72CF5D9CF00F4A477 /* witnesscalc_registerIdentity_21_256_3_3_336_232_NA.h */,
+				CEF56DE82CF5D9D600F4A477 /* witnesscalc_registerIdentity_24_256_3_4_336_232_NA.h */,
 				CEC561FB2BD923B3002D4954 /* libfr.a */,
 				CEC562022BD923B4002D4954 /* libfq.a */,
 				CEC562012BD923B4002D4954 /* libgmp.a */,
 				CEC561FC2BD923B3002D4954 /* librapidsnark.a */,
 				CE8FEB5B2C1AFC3F0008381A /* libwitnesscalc_auth.a */,
 				CEDB9DCB2BFDF60900BCF074 /* libwitnesscalc_queryIdentity.a */,
+				CEF56DE02CF5D96400F4A477 /* libwitnesscalc_registerIdentity_1_160_3_4_576_200_NA.a */,
 				CE30094D2CE611B80084E07E /* libwitnesscalc_registerIdentity_1_256_3_4_336_232_1_1480_5_296.a */,
 				CE30094E2CE611B80084E07E /* libwitnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256.a */,
 				CE30094F2CE611B80084E07E /* libwitnesscalc_registerIdentity_1_256_3_5_576_248_NA.a */,
@@ -1414,6 +1430,8 @@
 				CE3009552CE611B80084E07E /* libwitnesscalc_registerIdentity_11_256_3_3_576_248_1_1184_5_264.a */,
 				CE3009562CE611B80084E07E /* libwitnesscalc_registerIdentity_12_256_3_3_336_232_NA.a */,
 				CE3009572CE611B80084E07E /* libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a */,
+				CEF56DE22CF5D97D00F4A477 /* libwitnesscalc_registerIdentity_21_256_3_3_336_232_NA.a */,
+				CEF56DE42CF5D98400F4A477 /* libwitnesscalc_registerIdentity_24_256_3_4_336_232_NA.a */,
 				CEC562132BD9281A002D4954 /* libresolv.9.tbd */,
 				CEC562142BD9281A002D4954 /* libresolv.tbd */,
 			);

@@ -15,6 +15,9 @@ enum RegisteredCircuitData: String {
     case registerIdentity_12_256_3_3_336_232_NA
     case registerIdentity_1_256_3_4_336_232_1_1480_5_296
     case registerIdentity_1_256_3_4_600_248_1_1496_3_256
+    case registerIdentity_1_160_3_4_576_200_NA
+    case registerIdentity_21_256_3_3_336_232_NA
+    case registerIdentity_24_256_3_4_336_232_NA
 }
 
 class CircuitDataManager: ObservableObject {

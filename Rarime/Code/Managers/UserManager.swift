@@ -105,6 +105,12 @@ class UserManager: ObservableObject {
             wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_4_336_232_1_1480_5_296(circuitData.circuitDat, inputs)
         case .registerIdentity_1_256_3_4_600_248_1_1496_3_256:
             wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_4_600_248_1_1496_3_256(circuitData.circuitDat, inputs)
+        case .registerIdentity_1_160_3_4_576_200_NA:
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_160_3_4_576_200_NA(circuitData.circuitDat, inputs)
+        case .registerIdentity_21_256_3_3_336_232_NA:
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_21_256_3_3_336_232_NA(circuitData.circuitDat, inputs)
+        case .registerIdentity_24_256_3_4_336_232_NA:
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_24_256_3_4_336_232_NA(circuitData.circuitDat, inputs)
         }
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16Prover(circuitData.circuitZkey, wtns)
