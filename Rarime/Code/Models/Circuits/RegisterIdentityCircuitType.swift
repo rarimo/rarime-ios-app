@@ -369,18 +369,14 @@ extension Passport {
         }
 
         switch curveName {
-        case "secp256r1":
+        case "secp256r1", "prime256v1":
             return .SECP256R1
-        case "prime256v1":
-            return .SECP256R1
+        case "secp192r1", "prime192v1":
+            return .SECP192R1
         case "brainpoolP256r1":
             return .BRAINPOOLP256
         case "brainpoolP320r1":
             return .BRAINPOOLP256
-        case "secp192r1":
-            return .SECP192R1
-        case "prime192v1":
-            return .SECP192R1
         default:
             return nil
         }
