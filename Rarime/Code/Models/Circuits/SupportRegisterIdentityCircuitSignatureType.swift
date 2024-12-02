@@ -14,9 +14,9 @@ class SupportRegisterIdentityCircuitSignatureType {
 
         // ECDSA
         .init(staticId: 20, algorithm: .ECDSA, keySize: .B256, exponent: nil, salt: nil, curve: .SECP256R1, hashAlgorithm: .HA256),
-        .init(staticId: 21, algorithm: .ECDSA, keySize: .B256, exponent: nil, salt: nil, curve: .BRAINPOOLP256, hashAlgorithm: .HA256),
-        .init(staticId: 22, algorithm: .ECDSA, keySize: .B320, exponent: nil, salt: nil, curve: .BRAINPOOL320R1, hashAlgorithm: .HA256),
-        .init(staticId: 22, algorithm: .ECDSA, keySize: .B192, exponent: nil, salt: nil, curve: .SECP192R1, hashAlgorithm: .HA160),
+        .init(staticId: 21, algorithm: .ECDSA, keySize: .B256, exponent: nil, salt: nil, curve: .BRAINPOOLP256R1, hashAlgorithm: .HA256),
+        .init(staticId: 22, algorithm: .ECDSA, keySize: .B320, exponent: nil, salt: nil, curve: .BRAINPOOLP320R1, hashAlgorithm: .HA256),
+        .init(staticId: 23, algorithm: .ECDSA, keySize: .B192, exponent: nil, salt: nil, curve: .SECP192R1, hashAlgorithm: .HA160),
     ]
 
     static func getSupportedSignatureTypeId(_ type: RegisterIdentityCircuitType.CircuitSignatureType) -> UInt? {

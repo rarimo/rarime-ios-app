@@ -145,7 +145,7 @@ extension RegisterIdentityCircuitType {
     }
 
     enum CircuitCurveType {
-        case SECP256R1, BRAINPOOLP256, BRAINPOOL320R1, SECP192R1
+        case SECP256R1, BRAINPOOLP256R1, BRAINPOOLP320R1, SECP192R1
     }
 
     enum CircuitHashAlgorithmType {
@@ -374,9 +374,9 @@ extension Passport {
         case "secp192r1", "prime192v1":
             return .SECP192R1
         case "brainpoolP256r1":
-            return .BRAINPOOLP256
+            return .BRAINPOOLP256R1
         case "brainpoolP320r1":
-            return .BRAINPOOLP256
+            return .BRAINPOOLP256R1
         default:
             return nil
         }
