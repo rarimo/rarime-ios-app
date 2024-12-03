@@ -21,6 +21,8 @@ class UserManager: ObservableObject {
     
     @Published var isRevoked: Bool
     
+    private var recentZKProofResult: Result<ZkProof, Error>?
+    
     init() {
         do {
             // Data stored in Keychain cannot be deleted after uninstalling the app,
@@ -80,7 +82,44 @@ class UserManager: ObservableObject {
         _ inputs: Data,
         _ circuitData: CircuitData,
         _ registeredCircuitData: RegisteredCircuitData
-    ) throws -> ZkProof? {
+    ) throws -> ZkProof {
+        defer { self.recentZKProofResult = nil }
+        
+        let thread = Thread {
+            do {
+                let proof = try self._generateRegisterIdentityProof(inputs, circuitData, registeredCircuitData)
+                
+                self.recentZKProofResult = .success(proof)
+            } catch {
+                self.recentZKProofResult = .failure(error)
+            }
+            
+            Thread.current.cancel()
+        }
+        
+        thread.stackSize = 16 * 1024 * 1024
+        
+        thread.start()
+        
+        while self.recentZKProofResult == nil {
+            Thread.sleep(forTimeInterval: 1)
+        }
+        
+        switch self.recentZKProofResult {
+        case .success(let proof):
+            return proof
+        case .failure(let error):
+            throw error
+        case .none:
+            throw "failed to get proof"
+        }
+    }
+    
+    func _generateRegisterIdentityProof(
+        _ inputs: Data,
+        _ circuitData: CircuitData,
+        _ registeredCircuitData: RegisteredCircuitData
+    ) throws -> ZkProof {
         var wtns: Data
         switch registeredCircuitData {
         case .registerIdentity_1_256_3_5_576_248_NA:

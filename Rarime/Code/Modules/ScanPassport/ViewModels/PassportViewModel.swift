@@ -87,13 +87,7 @@ class PassportViewModel: ObservableObject {
                 registerIdentityCircuitType
             )
             
-            guard let proof = try UserManager.shared.generateRegisterIdentityProof(
-                registerIdentityInputs.json,
-                circuitData,
-                registeredCircuitData
-            ) else {
-                throw "failed to generate proof, invalid circuit type"
-            }
+            let proof = try UserManager.shared.generateRegisterIdentityProof(registerIdentityInputs.json, circuitData, registeredCircuitData)
             
             LoggerUtil.common.info("Passport registration proof generated")
             
