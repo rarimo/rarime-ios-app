@@ -262,7 +262,7 @@
 		CE8FEB5F2C1AFF0A0008381A /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB5E2C1AFF0A0008381A /* JWT.swift */; };
 		CE8FEB622C1B03C10008381A /* AuthCircuitInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB612C1B03C10008381A /* AuthCircuitInputs.swift */; };
 		CE9347732C205B340034885C /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = CE9347722C205B340034885C /* CachedAsyncImage */; };
-		CE9B93372CFF421B009B07C6 /* libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9B93362CFF421B009B07C6 /* libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a */; };
+		CE9B93392CFF63FE009B07C6 /* libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9B93382CFF63FE009B07C6 /* libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a */; };
 		CE9E82B62BA881F400AAF885 /* RarimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82B52BA881F400AAF885 /* RarimeApp.swift */; };
 		CE9E82B82BA881F400AAF885 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82B72BA881F400AAF885 /* AppView.swift */; };
 		CE9E82BA2BA881F500AAF885 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9E82B92BA881F500AAF885 /* Assets.xcassets */; };
@@ -549,7 +549,7 @@
 		CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_auth.h; sourceTree = "<group>"; };
 		CE8FEB5E2C1AFF0A0008381A /* JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
 		CE8FEB612C1B03C10008381A /* AuthCircuitInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCircuitInputs.swift; sourceTree = "<group>"; };
-		CE9B93362CFF421B009B07C6 /* libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a; sourceTree = "<group>"; };
+		CE9B93382CFF63FE009B07C6 /* libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a; sourceTree = "<group>"; };
 		CE9E82B22BA881F400AAF885 /* Rarime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rarime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE9E82B52BA881F400AAF885 /* RarimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarimeApp.swift; sourceTree = "<group>"; };
 		CE9E82B72BA881F400AAF885 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
@@ -677,7 +677,7 @@
 				56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */,
 				CE8FEB5C2C1AFC3F0008381A /* libwitnesscalc_auth.a in Frameworks */,
 				CE68BE472BD9B6EA00D92EBB /* Web3ContractABI in Frameworks */,
-				CE9B93372CFF421B009B07C6 /* libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a in Frameworks */,
+				CE9B93392CFF63FE009B07C6 /* libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a in Frameworks */,
 				CEC562042BD923B4002D4954 /* librapidsnark.a in Frameworks */,
 				5609B6C82C188C7500CB6A1F /* MarkdownUI in Frameworks */,
 				CE7210312BD807140043DB7F /* ZipArchive in Frameworks */,
@@ -1443,7 +1443,7 @@
 				CEF56DE42CF5D98400F4A477 /* libwitnesscalc_registerIdentity_24_256_3_4_336_232_NA.a */,
 				CEBCDC682CFDE01600CBBF0B /* libwitnesscalc_registerIdentity_1_160_3_3_576_200_NA.a */,
 				CEBCDC692CFDE01600CBBF0B /* libwitnesscalc_registerIdentity_1_256_3_3_576_248_NA.a */,
-				CE9B93362CFF421B009B07C6 /* libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a */,
+				CE9B93382CFF63FE009B07C6 /* libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a */,
 				CEC562132BD9281A002D4954 /* libresolv.9.tbd */,
 				CEC562142BD9281A002D4954 /* libresolv.tbd */,
 			);
