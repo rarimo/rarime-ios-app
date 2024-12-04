@@ -6,6 +6,8 @@ enum SODAlgorithm: String {
     case rsassaPss
     case ecdsa_with_SHA1
     case ecdsa_with_SHA256
+    case ecdsa_with_SHA1_2 = "ecdsa-with-SHA1"
+    case ecdsa_with_SHA256_2 = "ecdsa-with-SHA256"
 
     func getCircuitSignatureAlgorithm() -> RegisterIdentityCircuitType.CircuitAlgorithmType {
         switch self {
@@ -18,6 +20,10 @@ enum SODAlgorithm: String {
         case .ecdsa_with_SHA1:
             return .ECDSA
         case .ecdsa_with_SHA256:
+            return .ECDSA
+        case .ecdsa_with_SHA1_2:
+            return .ECDSA
+        case .ecdsa_with_SHA256_2:
             return .ECDSA
         }
     }
@@ -33,6 +39,10 @@ enum SODAlgorithm: String {
         case .ecdsa_with_SHA1:
             return .HA160
         case .ecdsa_with_SHA256:
+            return .HA256
+        case .ecdsa_with_SHA1_2:
+            return .HA160
+        case .ecdsa_with_SHA256_2:
             return .HA256
         }
     }

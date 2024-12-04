@@ -1,4 +1,5 @@
 import Foundation
+import NFCPassportReader
 import OpenSSL
 
 class CryptoUtils {
@@ -77,5 +78,17 @@ class CryptoUtils {
         let nid = EC_GROUP_get_curve_name(group)
         
         return String(validatingUTF8: OBJ_nid2sn(nid))
+    }
+    
+    static func decodeECDSASignatureFromASN1(_ asn1Signature: Data) throws -> Data {
+        let asn1 = try SimpleASN1DumpParser().parse(data: asn1Signature)
+        
+        guard let xObject = asn1.getChild(0) else { throw "asn1Signature does not have X" }
+        guard let yObject = asn1.getChild(1) else { throw "asn1Signature does not have Y" }
+        
+        let xData = Data(hex: xObject.value) ?? Data()
+        let yData = Data(hex: yObject.value) ?? Data()
+        
+        return xData + yData
     }
 }

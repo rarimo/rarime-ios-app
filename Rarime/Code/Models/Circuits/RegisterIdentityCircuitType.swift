@@ -1,4 +1,5 @@
 import Foundation
+import Identity
 import NFCPassportReader
 
 struct RegisterIdentityCircuitType {
@@ -144,7 +145,7 @@ extension RegisterIdentityCircuitType {
     }
 
     enum CircuitCurveType {
-        case SECP256R1, BRAINPOOLP256, BRAINPOOL320R1, SECP192R1
+        case SECP256R1, BRAINPOOLP256R1, BRAINPOOLP320R1, SECP192R1
     }
 
     enum CircuitHashAlgorithmType {
@@ -160,12 +161,12 @@ extension Passport {
         let sodSignatureAlgorithmName = try sod.getSignatureAlgorithm()
 
         guard let sodSignatureAlgorithm = SODAlgorithm(rawValue: sodSignatureAlgorithmName) else {
-            return nil
+            throw "Invalid SOD signature algorithm"
         }
 
         let sodPublicKey = try sod.getPublicKey()
         guard let publicKeySize = getPublicKeySupportedSize(CryptoUtils.getPublicKeySize(sodPublicKey)) else {
-            return nil
+            throw "Invalid public key size"
         }
 
         let signatureType = RegisterIdentityCircuitType.CircuitSignatureType(
@@ -179,11 +180,11 @@ extension Passport {
         )
 
         guard let passportHashType = try getEncapsulatedContentDigestAlgorithm(sod) else {
-            return nil
+            throw "Invalid passport hash type"
         }
 
         guard let documentType = RegisterIdentityCircuitType.CircuitDocumentType(rawValue: getStardartalizedDocumentType()) else {
-            return nil
+            throw "Invalid document type"
         }
 
         let encapsulatedContent = try sod.getEncapsulatedContent()
@@ -352,17 +353,30 @@ extension Passport {
     }
 
     private func getPublicKeyCurve(_ publicKey: OpaquePointer?) -> RegisterIdentityCircuitType.CircuitCurveType? {
-        guard let curve = CryptoUtils.getCurveFromECDSAPublicKey(publicKey) else { return nil }
+        let pubKeyPem = OpenSSLUtils.pubKeyToPEM(pubKey: publicKey!).data(using: .utf8) ?? Data()
 
-        switch curve {
-        case "secp256r1":
+        var curveName: String
+        if IdentityIsBrainpoolPublicKey(pubKeyPem) {
+            var err: NSError?
+            curveName = IdentityGetCurveNameFromECDSAPublicKeyPEM(pubKeyPem, &err)
+            if err != nil {
+                return nil
+            }
+        } else {
+            guard let curveNameTemp = CryptoUtils.getCurveFromECDSAPublicKey(publicKey) else { return nil }
+
+            curveName = curveNameTemp
+        }
+
+        switch curveName {
+        case "secp256r1", "prime256v1":
             return .SECP256R1
-        case "brainpoolP256r1":
-            return .BRAINPOOLP256
-        case "brainpoolP320r1":
-            return .BRAINPOOLP256
-        case "secp192r1":
+        case "secp192r1", "prime192v1":
             return .SECP192R1
+        case "brainpoolP256r1":
+            return .BRAINPOOLP256R1
+        case "brainpoolP320r1":
+            return .BRAINPOOLP256R1
         default:
             return nil
         }

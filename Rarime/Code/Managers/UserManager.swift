@@ -21,6 +21,8 @@ class UserManager: ObservableObject {
     
     @Published var isRevoked: Bool
     
+    private var recentZKProofResult: Result<ZkProof, Error>?
+    
     init() {
         do {
             // Data stored in Keychain cannot be deleted after uninstalling the app,
@@ -80,7 +82,44 @@ class UserManager: ObservableObject {
         _ inputs: Data,
         _ circuitData: CircuitData,
         _ registeredCircuitData: RegisteredCircuitData
-    ) throws -> ZkProof? {
+    ) throws -> ZkProof {
+        defer { self.recentZKProofResult = nil }
+        
+        let thread = Thread {
+            do {
+                let proof = try self._generateRegisterIdentityProof(inputs, circuitData, registeredCircuitData)
+                
+                self.recentZKProofResult = .success(proof)
+            } catch {
+                self.recentZKProofResult = .failure(error)
+            }
+            
+            Thread.current.cancel()
+        }
+        
+        thread.stackSize = 16 * 1024 * 1024
+        
+        thread.start()
+        
+        while self.recentZKProofResult == nil {
+            Thread.sleep(forTimeInterval: 1)
+        }
+        
+        switch self.recentZKProofResult {
+        case .success(let proof):
+            return proof
+        case .failure(let error):
+            throw error
+        case .none:
+            throw "failed to get proof"
+        }
+    }
+    
+    func _generateRegisterIdentityProof(
+        _ inputs: Data,
+        _ circuitData: CircuitData,
+        _ registeredCircuitData: RegisteredCircuitData
+    ) throws -> ZkProof {
         var wtns: Data
         switch registeredCircuitData {
         case .registerIdentity_1_256_3_5_576_248_NA:
@@ -105,6 +144,16 @@ class UserManager: ObservableObject {
             wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_4_336_232_1_1480_5_296(circuitData.circuitDat, inputs)
         case .registerIdentity_1_256_3_4_600_248_1_1496_3_256:
             wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_4_600_248_1_1496_3_256(circuitData.circuitDat, inputs)
+        case .registerIdentity_1_160_3_3_576_200_NA:
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_160_3_3_576_200_NA(circuitData.circuitDat, inputs)
+        case .registerIdentity_21_256_3_3_336_232_NA:
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_21_256_3_3_336_232_NA(circuitData.circuitDat, inputs)
+        case .registerIdentity_24_256_3_4_336_232_NA:
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_24_256_3_4_336_232_NA(circuitData.circuitDat, inputs)
+        case .registerIdentity_1_256_3_3_576_248_NA:
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_3_576_248_NA(circuitData.circuitDat, inputs)
+        case .registerIdentity_20_256_3_3_336_224_NA:
+            wtns = try ZKUtils.calcWtnsRegisterIdentity_20_256_3_3_336_224_NA(circuitData.circuitDat, inputs)
         }
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16Prover(circuitData.circuitZkey, wtns)
