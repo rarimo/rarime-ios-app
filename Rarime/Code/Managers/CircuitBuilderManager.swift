@@ -46,20 +46,16 @@ extension CircuitBuilderManager {
             }
             
             var pubKeyInput: [BN]
-            switch circuitType.signatureType.algorithm {
-            case .RSA, .RSAPSS:
-                pubKeyInput = CircuitUtils.smartChunking(BN(pubkeyData), chunksNumber: smartChunkingNumber)
-            case .ECDSA:
-                pubKeyInput = CircuitUtils.byteArrayToBits(pubkeyData).map { BN(UInt($0)) }
-            }
-            
             var signatureInput: [BN]
             switch circuitType.signatureType.algorithm {
             case .RSA, .RSAPSS:
+                pubKeyInput = CircuitUtils.smartChunking(BN(pubkeyData), chunksNumber: smartChunkingNumber)
+                
                 signatureInput = CircuitUtils.smartChunking(BN(signature), chunksNumber: smartChunkingNumber)
             case .ECDSA:
-                let signatureData = try CryptoUtils.decodeECDSASignatureFromASN1(signature)
+                pubKeyInput = CircuitUtils.byteArrayToBits(pubkeyData).map { BN(UInt($0)) }
                 
+                let signatureData = try CryptoUtils.decodeECDSASignatureFromASN1(signature)
                 signatureInput = CircuitUtils.byteArrayToBits(signatureData).map { BN(UInt($0)) }
             }
             
