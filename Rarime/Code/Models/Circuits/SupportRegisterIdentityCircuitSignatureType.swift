@@ -5,6 +5,7 @@ class SupportRegisterIdentityCircuitSignatureType {
         // RSA
         .init(staticId: 1, algorithm: .RSA, keySize: .B2048, exponent: .E65537, salt: nil, curve: nil, hashAlgorithm: .HA256),
         .init(staticId: 2, algorithm: .RSA, keySize: .B4096, exponent: .E65537, salt: nil, curve: nil, hashAlgorithm: .HA256),
+        .init(staticId: 3, algorithm: .RSA, keySize: .B2048, exponent: .E65537, salt: nil, curve: nil, hashAlgorithm: .HA160),
 
         // RSAPSS
         .init(staticId: 10, algorithm: .RSAPSS, keySize: .B2048, exponent: .E3, salt: .S32, curve: nil, hashAlgorithm: .HA256),

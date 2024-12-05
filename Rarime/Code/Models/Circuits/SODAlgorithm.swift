@@ -2,6 +2,7 @@ import Foundation
 
 enum SODAlgorithm: String {
     case rsaEncryption
+    case sha1WithRSAEncryption
     case sha256WithRSAEncryption
     case rsassaPss
     case ecdsa_with_SHA1
@@ -12,6 +13,8 @@ enum SODAlgorithm: String {
     func getCircuitSignatureAlgorithm() -> RegisterIdentityCircuitType.CircuitAlgorithmType {
         switch self {
         case .rsaEncryption:
+            return .RSA
+        case .sha1WithRSAEncryption:
             return .RSA
         case .sha256WithRSAEncryption:
             return .RSA
@@ -32,6 +35,8 @@ enum SODAlgorithm: String {
         switch self {
         case .rsaEncryption:
             return .HA256
+        case .sha1WithRSAEncryption:
+            return .HA160
         case .sha256WithRSAEncryption:
             return .HA256
         case .rsassaPss:
