@@ -229,6 +229,8 @@
 		CE51E2FB2C21CA0B00043D9A /* StateKeeperContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51E2FA2C21CA0B00043D9A /* StateKeeperContract.swift */; };
 		CE5315C32C77664C0087D53D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE5315C22C77664C0087D53D /* GoogleService-Info.plist */; };
 		CE5315CA2C7769A20087D53D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5315C92C7769A20087D53D /* NotificationManager.swift */; };
+		CE5980DC2D07B288000B6261 /* RegisterIdentityLightInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5980DB2D07B279000B6261 /* RegisterIdentityLightInputs.swift */; };
+		CE5980DD2D07B288000B6261 /* RegisterIdentityLightInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5980DB2D07B279000B6261 /* RegisterIdentityLightInputs.swift */; };
 		CE61E8832C24240000940129 /* Semaphore in Frameworks */ = {isa = PBXBuildFile; productRef = CE61E8822C24240000940129 /* Semaphore */; };
 		CE61E88D2C247B4700940129 /* HMACUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61E88C2C247B4700940129 /* HMACUtils.swift */; };
 		CE66B1462CA4148B002F658E /* ScanPassport.json in Resources */ = {isa = PBXBuildFile; fileRef = CE66B1452CA4148B002F658E /* ScanPassport.json */; };
@@ -536,6 +538,7 @@
 		CE51E2FA2C21CA0B00043D9A /* StateKeeperContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateKeeperContract.swift; sourceTree = "<group>"; };
 		CE5315C22C77664C0087D53D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE5315C92C7769A20087D53D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		CE5980DB2D07B279000B6261 /* RegisterIdentityLightInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterIdentityLightInputs.swift; sourceTree = "<group>"; };
 		CE61E88C2C247B4700940129 /* HMACUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACUtils.swift; sourceTree = "<group>"; };
 		CE66B1452CA4148B002F658E /* ScanPassport.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ScanPassport.json; sourceTree = "<group>"; };
 		CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZkProof.swift; sourceTree = "<group>"; };
@@ -1272,6 +1275,7 @@
 		CE8FEB602C1B03A70008381A /* Circuits */ = {
 			isa = PBXGroup;
 			children = (
+				CE5980DB2D07B279000B6261 /* RegisterIdentityLightInputs.swift */,
 				CE8FEB612C1B03C10008381A /* AuthCircuitInputs.swift */,
 				CEFE5F342CB522A700498F39 /* RegisterIdentityCircuitType.swift */,
 				CEFE5F362CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift */,
@@ -1713,6 +1717,7 @@
 				CE2797432CEB41DF008649B0 /* Constants.swift in Sources */,
 				CE27974D2CEB4271008649B0 /* CloudStorage.swift in Sources */,
 				CE2797472CEB420A008649B0 /* User.swift in Sources */,
+				CE5980DD2D07B288000B6261 /* RegisterIdentityLightInputs.swift in Sources */,
 				C78EA4FA2C9B2EF5001DA0B3 /* PushNotification.xcdatamodeld in Sources */,
 				CEBA50062CF0E6F90069151C /* SODAlgorithm.swift in Sources */,
 				CE7E95822CE7786F00D86A4F /* PassportManager.swift in Sources */,
@@ -1844,6 +1849,7 @@
 				56E2D9242BCFDD42006E725D /* ClaimTokensView.swift in Sources */,
 				56E6AD492BD2731100E4DDC1 /* LanguageView.swift in Sources */,
 				CE7210332BD818020043DB7F /* Double+Rounded.swift in Sources */,
+				CE5980DC2D07B288000B6261 /* RegisterIdentityLightInputs.swift in Sources */,
 				CEC5620F2BD925D6002D4954 /* Circuits.swift in Sources */,
 				CED909E02BDC1E0F0065E949 /* Rarimo.swift in Sources */,
 				563529EB2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift in Sources */,
