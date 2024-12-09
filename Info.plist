@@ -104,6 +104,16 @@
 		<string>${CIRCUIT_DATA_URL_17}</string>
 		<key>registerIdentity_21_256_3_3_576_232_NA</key>
 		<string>${CIRCUIT_DATA_URL_18}</string>
+		<key>registerIdentityLight160</key>
+		<string>${CIRCUIT_DATA_URL_19}</string>
+		<key>registerIdentityLight224</key>
+		<string>${CIRCUIT_DATA_URL_20}</string>
+		<key>registerIdentityLight256</key>
+		<string>${CIRCUIT_DATA_URL_21}</string>
+		<key>registerIdentityLight384</key>
+		<string>${CIRCUIT_DATA_URL_22}</string>
+		<key>registerIdentityLight512</key>
+		<string>${CIRCUIT_DATA_URL_23}</string>
 	</dict>
 	<key>COSMOS_RPC_URL</key>
 	<string>${COSMOS_RPC_URL}</string>
