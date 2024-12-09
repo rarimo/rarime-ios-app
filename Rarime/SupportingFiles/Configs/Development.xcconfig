@@ -55,6 +55,11 @@ CIRCUIT_DATA_URL_15 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passpo
 CIRCUIT_DATA_URL_16 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.5/registerIdentity_10_256_3_3_576_248_1_1184_5_264-download.zip"
 CIRCUIT_DATA_URL_17 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.5/registerIdentity_11_256_3_5_576_248_1_1808_4_256-download.zip"
 CIRCUIT_DATA_URL_18 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.5/registerIdentity_21_256_3_3_576_232_NA-download.zip"
+CIRCUIT_DATA_URL_19 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.6-light/registerIdentityLight160-download.zip"
+CIRCUIT_DATA_URL_20 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.6-light/registerIdentityLight224-download.zip"
+CIRCUIT_DATA_URL_21 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.6-light/registerIdentityLight256-download.zip"
+CIRCUIT_DATA_URL_22 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.6-light/registerIdentityLight384-download.zip"
+CIRCUIT_DATA_URL_23 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.6-light/registerIdentityLight512-download.zip"
 
 // MARK: AppsFlyer
 APPSFLYER_DEV_KEY = ""
