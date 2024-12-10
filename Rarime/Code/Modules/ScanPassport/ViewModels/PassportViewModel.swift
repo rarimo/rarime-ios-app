@@ -210,6 +210,11 @@ class PassportViewModel: ObservableObject {
                 registeredCircuitData
             )
             
+            let lightRegistrationService = LightRegistrationService(ConfigManager.shared.api.relayerURL)
+            let registerResponse = try await lightRegistrationService.register(passport, zkProof)
+            
+            LoggerUtil.common.debug("registerResponse: \(registerResponse.json.utf8)")
+            
             PassportManager.shared.setPassport(passport)
             try UserManager.shared.saveRegisterZkProof(zkProof)
             

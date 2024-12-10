@@ -8,7 +8,7 @@ class LightRegistrationService {
         self.url = url
     }
 
-    func verifySod(_ passport: Passport, _ zkProof: ZkProof) async throws -> VerifySodResponseAttributes {
+    func register(_ passport: Passport, _ zkProof: ZkProof) async throws -> VerifySodResponseAttributes {
         var requestURL = url
         requestURL.append(path: "intergrations/incognito-light-registrator/v1/register")
 
