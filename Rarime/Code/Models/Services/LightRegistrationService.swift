@@ -8,7 +8,7 @@ class LightRegistrationService {
         self.url = url
     }
 
-    func verifySod(_ passport: Passport) async throws -> VerifySodResponseAttributes {
+    func verifySod(_ passport: Passport, _ zkProof: ZkProof) async throws -> VerifySodResponseAttributes {
         var requestURL = url
         requestURL.append(path: "intergrations/incognito-light-registrator/v1/register")
 
@@ -42,13 +42,17 @@ class LightRegistrationService {
                 id: "",
                 type: "document-sod",
                 attributes: VerifySodRequestAttributes(
-                    hashAlgorithm: encapsulatedContentDigestAlgorithm.rawValue.uppercased(),
-                    signatureAlgorithm: signatureAlgorithm,
-                    signedAttributes: signedAttributes.fullHex,
-                    signature: signature.fullHex,
-                    encapsulatedContent: encapsulatedContent.fullHex,
-                    pemFile: certPem.utf8,
-                    dg15: passport.dg15.fullHex
+                    zkProof: zkProof,
+                    documentSod: VerifySodRequestDocumentSod(
+                        hashAlgorithm: encapsulatedContentDigestAlgorithm.rawValue.uppercased(),
+                        signatureAlgorithm: signatureAlgorithm,
+                        signedAttributes: signedAttributes.fullHex,
+                        signature: signature.fullHex,
+                        aaSignature: passport.signature.fullHex encapsulatedContent: encapsulatedContent.fullHex,
+
+                        pemFile: certPem.utf8,
+                        dg15: passport.dg15.fullHex,
+                    )
                 )
             )
         )
@@ -78,14 +82,25 @@ struct VerifySodRequestData: Codable {
 }
 
 struct VerifySodRequestAttributes: Codable {
+    let zkProof: ZkProof
+    let documentSod: VerifySodRequestDocumentSod
+
+    enum CodingKeys: String, CodingKey {
+        case zkProof = "zk_proof"
+        case documentSod = "document_sod"
+    }
+}
+
+struct VerifySodRequestDocumentSod: Codable {
     let hashAlgorithm, signatureAlgorithm, signedAttributes, signature: String
-    let encapsulatedContent, pemFile, dg15: String
+    let aaSignature, encapsulatedContent, pemFile, dg15: String
 
     enum CodingKeys: String, CodingKey {
         case hashAlgorithm = "hash_algorithm"
         case signatureAlgorithm = "signature_algorithm"
         case signedAttributes = "signed_attributes"
         case signature
+        case aaSignature = "aa_signature"
         case encapsulatedContent = "encapsulated_content"
         case pemFile = "pem_file"
         case dg15
