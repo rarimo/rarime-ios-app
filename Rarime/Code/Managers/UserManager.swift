@@ -269,17 +269,18 @@ class UserManager: ObservableObject {
         
         let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
         
-        let passportInfoKey: String
-        if passport.dg15.isEmpty {
-            passportInfoKey = registerZkProof.pubSignals[1]
-        } else {
-            passportInfoKey = registerZkProof.pubSignals[0]
+        guard let passportKey = getPassportKey(passport) else {
+            throw "failed to get passport key"
+        }
+        
+        guard let identityKey = getIdentityKey(passport) else {
+            throw "failed to get identity key"
         }
         
         var error: NSError? = nil
         let proofIndex = IdentityCalculateProofIndex(
-            passportInfoKey,
-            registerZkProof.pubSignals[3],
+            passportKey,
+            identityKey,
             &error
         )
         if let error { throw error }
@@ -292,7 +293,7 @@ class UserManager: ObservableObject {
         let profileInitializer = IdentityProfile()
         let profile = try profileInitializer.newProfile(secretKey)
         
-        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
+        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportKey)
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
         let aidropParams = try await relayer.getAirdropParams()
@@ -301,7 +302,7 @@ class UserManager: ObservableObject {
             passport.dg1,
             smtProofJSON: smtProofJson,
             selector: aidropParams.data.attributes.querySelector,
-            pkPassportHash: passportInfoKey,
+            pkPassportHash: passportKey,
             issueTimestamp: identityInfo.issueTimestamp.description,
             identityCounter: passportInfo.identityReissueCounter.description,
             eventID: aidropParams.data.attributes.eventID,
@@ -329,17 +330,18 @@ class UserManager: ObservableObject {
         let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.api.registrationSmtContractAddress, eip55: false)
         let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
         
-        let passportInfoKey: String
-        if passport.dg15.isEmpty {
-            passportInfoKey = registerZkProof.pubSignals[1]
-        } else {
-            passportInfoKey = registerZkProof.pubSignals[0]
+        guard let passportKey = getPassportKey(passport) else {
+            throw "failed to get passport key"
+        }
+        
+        guard let identityKey = getIdentityKey(passport) else {
+            throw "failed to get identity key"
         }
         
         var error: NSError? = nil
         let proofIndex = IdentityCalculateProofIndex(
-            passportInfoKey,
-            registerZkProof.pubSignals[3],
+            passportKey,
+            identityKey,
             &error
         )
         if let error { throw error }
@@ -351,12 +353,12 @@ class UserManager: ObservableObject {
         let profileInitializer = IdentityProfile()
         let profile = try profileInitializer.newProfile(secretKey)
         
-        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
+        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportKey)
         let queryProofInputs = try profile.buildQueryIdentityInputs(
             passport.dg1,
             smtProofJSON: smtProofJson,
             selector: params.selector,
-            pkPassportHash: passportInfoKey,
+            pkPassportHash: passportKey,
             issueTimestamp: identityInfo.issueTimestamp.description,
             identityCounter: passportInfo.identityReissueCounter.description,
             eventID: params.eventID,
@@ -427,17 +429,18 @@ class UserManager: ObservableObject {
         
         let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
         
-        let passportInfoKey: String
-        if passport.dg15.isEmpty {
-            passportInfoKey = registerZkProof.pubSignals[1]
-        } else {
-            passportInfoKey = registerZkProof.pubSignals[0]
+        guard let passportKey = getPassportKey(passport) else {
+            throw "failed to get passport key"
+        }
+        
+        guard let identityKey = getIdentityKey(passport) else {
+            throw "failed to get identity key"
         }
         
         var error: NSError? = nil
         let proofIndex = IdentityCalculateProofIndex(
-            passportInfoKey,
-            registerZkProof.pubSignals[3],
+            passportKey,
+            identityKey,
             &error
         )
         if let error { throw error }
@@ -450,13 +453,13 @@ class UserManager: ObservableObject {
         let profileInitializer = IdentityProfile()
         let profile = try profileInitializer.newProfile(secretKey)
         
-        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
+        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportKey)
         
         let queryProofInputs = try profile.buildAirdropQueryIdentityInputs(
             passport.dg1,
             smtProofJSON: smtProofJson,
             selector: "23073",
-            pkPassportHash: passportInfoKey,
+            pkPassportHash: passportKey,
             issueTimestamp: identityInfo.issueTimestamp.description,
             identityCounter: passportInfo.identityReissueCounter.description,
             eventID: Points.PointsEventId,
@@ -619,5 +622,49 @@ class UserManager: ObservableObject {
         if let error { throw error }
         
         return nullifier
+    }
+    
+    func getPassportKey(_ passport: Passport) -> String? {
+        guard let registerZkProof else { return nil }
+        
+        var passportKey: String
+        switch registerZkProof.pubSignals.count {
+        case RegisterIdentityPubSignals.SignalKey.allCases.count:
+            let pubSignals = RegisterIdentityPubSignals(registerZkProof.pubSignals)
+            
+            if passport.dg15.isEmpty {
+                passportKey = pubSignals.getSignalRaw(.passportHash)
+            } else {
+                passportKey = pubSignals.getSignalRaw(.passportKey)
+            }
+        case RegisterIdentityLightPubSignals.SignalKey.allCases.count:
+            let pubSignals = RegisterIdentityLightPubSignals(registerZkProof.pubSignals)
+            
+            passportKey = pubSignals.getSignalRaw(.passportHash)
+        default:
+            return nil
+        }
+        
+        return passportKey
+    }
+    
+    func getIdentityKey(_ passport: Passport) -> String? {
+        guard let registerZkProof else { return nil }
+        
+        var identityKey: String
+        switch registerZkProof.pubSignals.count {
+        case RegisterIdentityPubSignals.SignalKey.allCases.count:
+            let pubSignals = RegisterIdentityPubSignals(registerZkProof.pubSignals)
+            
+            identityKey = pubSignals.getSignalRaw(.identityKey)
+        case RegisterIdentityLightPubSignals.SignalKey.allCases.count:
+            let pubSignals = RegisterIdentityLightPubSignals(registerZkProof.pubSignals)
+            
+            identityKey = pubSignals.getSignalRaw(.identityKey)
+        default:
+            return nil
+        }
+        
+        return identityKey
     }
 }

@@ -162,6 +162,8 @@
 		C7FFB5302C9ACE900037CBD4 /* ClaimableNotificationContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FFB52F2C9ACE900037CBD4 /* ClaimableNotificationContent.swift */; };
 		CE059B422C9C4608006046B3 /* InternetConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE059B412C9C4608006046B3 /* InternetConnectionManager.swift */; };
 		CE059B442C9C4702006046B3 /* InternetConnectionRequiredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE059B432C9C4702006046B3 /* InternetConnectionRequiredView.swift */; };
+		CE06BF312D083CCB00F6C721 /* PubSignals.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE06BF302D083CC900F6C721 /* PubSignals.swift */; };
+		CE06BF322D083CCB00F6C721 /* PubSignals.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE06BF302D083CC900F6C721 /* PubSignals.swift */; };
 		CE0881A12BF773CC00B31735 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0881A02BF773CC00B31735 /* AlertManager.swift */; };
 		CE0DA0D72BDA6F1900696503 /* EvmTxResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */; };
 		CE0DA0D92BDA927000696503 /* AirDropResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D82BDA927000696503 /* AirDropResponse.swift */; };
@@ -503,6 +505,7 @@
 		C7FFB52F2C9ACE900037CBD4 /* ClaimableNotificationContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimableNotificationContent.swift; sourceTree = "<group>"; };
 		CE059B412C9C4608006046B3 /* InternetConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionManager.swift; sourceTree = "<group>"; };
 		CE059B432C9C4702006046B3 /* InternetConnectionRequiredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionRequiredView.swift; sourceTree = "<group>"; };
+		CE06BF302D083CC900F6C721 /* PubSignals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubSignals.swift; sourceTree = "<group>"; };
 		CE0881A02BF773CC00B31735 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmTxResponse.swift; sourceTree = "<group>"; };
 		CE0DA0D82BDA927000696503 /* AirDropResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirDropResponse.swift; sourceTree = "<group>"; };
@@ -1275,6 +1278,7 @@
 		CE8FEB602C1B03A70008381A /* Circuits */ = {
 			isa = PBXGroup;
 			children = (
+				CE06BF302D083CC900F6C721 /* PubSignals.swift */,
 				CE5980DB2D07B279000B6261 /* RegisterIdentityLightInputs.swift */,
 				CE8FEB612C1B03C10008381A /* AuthCircuitInputs.swift */,
 				CEFE5F342CB522A700498F39 /* RegisterIdentityCircuitType.swift */,
@@ -1728,6 +1732,7 @@
 				CE2797502CEB428D008649B0 /* Certificates.swift in Sources */,
 				CE2797532CEB4605008649B0 /* RegisterIdentityCircuitType.swift in Sources */,
 				CE3477592C78860C005E91FE /* ConfigManager.swift in Sources */,
+				CE06BF312D083CCB00F6C721 /* PubSignals.swift in Sources */,
 				CE2797422CEB41D3008649B0 /* AppUserDefaults.swift in Sources */,
 				CE27974A2CEB4246008649B0 /* RegistrationContract.swift in Sources */,
 				CE7E95812CE774DC00D86A4F /* AppKeychain.swift in Sources */,
@@ -1761,6 +1766,7 @@
 				561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */,
 				CE51E2FB2C21CA0B00043D9A /* StateKeeperContract.swift in Sources */,
 				56DAA30B2BB8B977002CF710 /* View+DynamicSheet.swift in Sources */,
+				CE06BF322D083CCB00F6C721 /* PubSignals.swift in Sources */,
 				CEB91BBE2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift in Sources */,
 				5609B6CC2C19922400CB6A1F /* LinearProgressView.swift in Sources */,
 				564169602BE273260057AC03 /* PassportCardLook.swift in Sources */,
