@@ -40,7 +40,7 @@ class LightRegistrationService {
         let request = VerifySodRequest(
             data: VerifySodRequestData(
                 id: "",
-                type: "document-sod",
+                type: "register",
                 attributes: VerifySodRequestAttributes(
                     zkProof: zkProof,
                     documentSod: VerifySodRequestDocumentSod(
