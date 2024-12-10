@@ -78,6 +78,35 @@ class UserManager: ObservableObject {
         (try? self.user?.profile.getRegistrationChallenge()) ?? Data()
     }
     
+    func generateRegisterIdentityLightProof(
+        _ inputs: Data,
+        _ circuitData: CircuitData,
+        _ registeredCircuitData: RegisteredCircuitData
+    ) throws -> ZkProof {
+        var wtns: Data
+        switch registeredCircuitData {
+        case .registerIdentityLight160:
+            wtns = try ZKUtils.calcWtnsRegisterIdentityLight160(circuitData.circuitDat, inputs)
+        case .registerIdentityLight224:
+            wtns = try ZKUtils.calcWtnsRegisterIdentityLight224(circuitData.circuitDat, inputs)
+        case .registerIdentityLight256:
+            wtns = try ZKUtils.calcWtnsRegisterIdentityLight256(circuitData.circuitDat, inputs)
+        case .registerIdentityLight384:
+            wtns = try ZKUtils.calcWtnsRegisterIdentityLight384(circuitData.circuitDat, inputs)
+        case .registerIdentityLight512:
+            wtns = try ZKUtils.calcWtnsRegisterIdentityLight512(circuitData.circuitDat, inputs)
+        default:
+            throw "invalid register identity light circuit"
+        }
+        
+        let (proofJson, pubSignalsJson) = try ZKUtils.groth16Prover(circuitData.circuitZkey, wtns)
+        
+        let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
+        let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
+        
+        return ZkProof(proof: proof, pubSignals: pubSignals)
+    }
+    
     func generateRegisterIdentityProof(
         _ inputs: Data,
         _ circuitData: CircuitData,
@@ -160,6 +189,8 @@ class UserManager: ObservableObject {
             wtns = try ZKUtils.calcWtnsRegisterIdentity_11_256_3_5_576_248_1_1808_4_256(circuitData.circuitDat, inputs)
         case .registerIdentity_10_256_3_3_576_248_1_1184_5_264:
             wtns = try ZKUtils.calcWtnsRegisterIdentity_10_256_3_3_576_248_1_1184_5_264(circuitData.circuitDat, inputs)
+        default:
+            throw "invalid register identity circuit"
         }
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16Prover(circuitData.circuitZkey, wtns)

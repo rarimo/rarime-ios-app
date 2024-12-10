@@ -9,6 +9,7 @@ class CircuitBuilderManager {
     static let shared = CircuitBuilderManager()
     
     let registerIdentityCircuit = RegisterIdentityCircuit()
+    let registerIdentityLightCircuit = RegisterIdentityLightCircuit()
 }
 
 extension CircuitBuilderManager {

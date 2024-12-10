@@ -1,6 +1,6 @@
 import Foundation
 
-struct RegisterIdentityLightInputs {
+struct RegisterIdentityLightInputs: Codable {
     let skIdentity: String
     let dg1: [Int64]
 }

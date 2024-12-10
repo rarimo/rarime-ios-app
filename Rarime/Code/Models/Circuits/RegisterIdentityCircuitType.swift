@@ -393,3 +393,19 @@ extension Passport {
         return length / chunkSize + (length % chunkSize == 0 ? 0 : 1)
     }
 }
+
+extension Passport {
+    func getRegisterIdentityLightCircuitName() throws -> String {
+        var circuitName = "registerIdentityLight"
+
+        let sod = try getSod()
+
+        guard let ecDigestAlgorithm = try getEncapsulatedContentDigestAlgorithm(sod) else {
+            throw "Invalid passport hash type"
+        }
+
+        circuitName += "\(ecDigestAlgorithm.getId())"
+
+        return circuitName
+    }
+}

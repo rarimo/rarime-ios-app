@@ -177,6 +177,42 @@ class PassportViewModel: ObservableObject {
             
             return proof
         } catch {
+            do {
+                return try await lightRegister()
+            } catch {
+                processingStatus = .failure
+                throw error
+            }
+        }
+    }
+    
+    func lightRegister() async throws -> ZkProof {
+        do {
+            guard let user = UserManager.shared.user else { throw "failed to get user" }
+            guard let passport else { throw "failed to get passport" }
+
+            let registerIdentityLightCircuitName = try passport.getRegisterIdentityLightCircuitName()
+            
+            LoggerUtil.common.info("Registering passport with light circuit: \(registerIdentityLightCircuitName)")
+            
+            guard let registeredCircuitData = RegisteredCircuitData(rawValue: registerIdentityLightCircuitName) else {
+                throw "failed to get registered circuit data, circuit does not exist"
+            }
+            
+            let circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData)
+            
+            let registerIdentityLightInputs = try CircuitBuilderManager.shared.registerIdentityLightCircuit.buildInputs(user.secretKey, passport)
+            
+            let zkProof = try UserManager.shared.generateRegisterIdentityLightProof(
+                registerIdentityLightInputs.json,
+                circuitData,
+                registeredCircuitData
+            )
+            
+            proofState = .finalizing
+            
+            return zkProof
+        } catch {
             processingStatus = .failure
             throw error
         }
