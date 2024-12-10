@@ -48,10 +48,10 @@ class LightRegistrationService {
                         signatureAlgorithm: signatureAlgorithm,
                         signedAttributes: signedAttributes.fullHex,
                         signature: signature.fullHex,
-                        aaSignature: passport.signature.fullHex encapsulatedContent: encapsulatedContent.fullHex,
-
+                        aaSignature: passport.signature.fullHex,
+                        encapsulatedContent: encapsulatedContent.fullHex
                         pemFile: certPem.utf8,
-                        dg15: passport.dg15.fullHex,
+                        dg15: passport.dg15.fullHex
                     )
                 )
             )
