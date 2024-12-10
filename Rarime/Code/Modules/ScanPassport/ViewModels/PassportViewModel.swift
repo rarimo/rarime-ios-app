@@ -186,6 +186,7 @@ class PassportViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     func lightRegister() async throws -> ZkProof {
         do {
             guard let user = UserManager.shared.user else { throw "failed to get user" }
@@ -209,7 +210,20 @@ class PassportViewModel: ObservableObject {
                 registeredCircuitData
             )
             
+            PassportManager.shared.setPassport(passport)
+            try UserManager.shared.saveRegisterZkProof(zkProof)
+            
+            try await NotificationManager.shared.subscribe(toTopic: ConfigManager.shared.general.claimableNotificationTopic)
+            
+            isUserRegistered = true
+            
+            LoggerUtil.common.info("Passport light registration succeed")
+            
+            try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
             proofState = .finalizing
+            
+            try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
+            processingStatus = .success
             
             return zkProof
         } catch {

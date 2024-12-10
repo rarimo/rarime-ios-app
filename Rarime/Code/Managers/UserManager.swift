@@ -354,7 +354,6 @@ class UserManager: ObservableObject {
         passport: Passport,
         params: GetProofParamsResponseAttributes
     ) async throws -> ZkProof {
-        guard let registerZkProof = self.registerZkProof else { throw "failed to get registerZkProof" }
         guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
         
         let stateKeeperContract = try StateKeeperContract()
