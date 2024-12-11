@@ -156,9 +156,13 @@ class PassportViewModel: ObservableObject {
                 
                 var iterator = revocationPassportPublisher.values.makeAsyncIterator()
                 
+                isCriticalRegistrationProcessInProgress = false
+                
                 guard let passport = try await iterator.next() else {
                     throw "failed to get passport"
                 }
+                
+                isCriticalRegistrationProcessInProgress = true
                 
                 try await UserManager.shared.revoke(passportInfo, passport)
             }
