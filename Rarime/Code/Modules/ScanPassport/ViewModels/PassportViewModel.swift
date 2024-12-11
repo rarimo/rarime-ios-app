@@ -58,6 +58,8 @@ class PassportViewModel: ObservableObject {
     func register(
         _ downloadProgress: @escaping (String) -> Void = { _ in }
     ) async throws -> ZkProof {
+        var isCriticalRegistrationProcessInProgress = true
+        
         do {
             guard let passport else { throw "failed to get passport" }
             guard let user = UserManager.shared.user else { throw "failed to get user" }
@@ -78,7 +80,12 @@ class PassportViewModel: ObservableObject {
                 throw "failed to get registered circuit data, circuit does not exist"
             }
             
+            isCriticalRegistrationProcessInProgress = false
+            
             let circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData, downloadProgress)
+            
+            isCriticalRegistrationProcessInProgress = true
+            
             proofState = .applyingZK
             
             let registerIdentityInputs = try await CircuitBuilderManager.shared.registerIdentityCircuit.buildInputs(
@@ -177,10 +184,17 @@ class PassportViewModel: ObservableObject {
             
             return proof
         } catch {
+            if !isCriticalRegistrationProcessInProgress {
+                processingStatus = .failure
+                
+                throw error
+            }
+            
             do {
                 return try await lightRegister()
             } catch {
                 processingStatus = .failure
+                
                 throw error
             }
         }
