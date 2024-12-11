@@ -122,6 +122,7 @@ struct ProofRequestView: View {
                     passport: passport,
                     params: proofParamsResponse!.data.attributes
                 )
+                
                 let response = try await VerificatorApi.sendProof(
                     url: URL(string: proofParamsResponse!.data.attributes.callbackURL)!,
                     userId: proofParamsResponse!.data.id,

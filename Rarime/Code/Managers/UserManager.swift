@@ -351,6 +351,8 @@ class UserManager: ObservableObject {
         let profileInitializer = IdentityProfile()
         let profile = try profileInitializer.newProfile(secretKey)
         
+        let timestampUpperBound = try UInt64(hexString: BN(dec: params.timestampUpperBound).hex()) ?? 0
+        
         let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
         let queryProofInputs = try profile.buildQueryIdentityInputs(
             passport.dg1,
@@ -363,7 +365,7 @@ class UserManager: ObservableObject {
             eventData: params.eventData,
             timestampLowerbound: params.timestampLowerBound,
             timestampUpperbound: max(
-                UInt64(params.timestampUpperBound),
+                timestampUpperBound,
                 identityInfo.issueTimestamp + 1
             ).description,
             identityCounterLowerbound: params.identityCounterLowerBound.description,
