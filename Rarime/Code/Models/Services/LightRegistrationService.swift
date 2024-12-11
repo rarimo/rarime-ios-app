@@ -8,15 +8,15 @@ class LightRegistrationService {
         self.url = url
     }
 
-    func register(_ passport: Passport, _ zkProof: ZkProof) async throws -> VerifySodResponseAttributes {
+    func register(_ passport: Passport, _ zkProof: ZkProof) async throws -> VerifySodResponse {
         var requestURL = url
-        requestURL.append(path: "intergrations/incognito-light-registrator/v1/register")
+        requestURL.append(path: "integrations/incognito-light-registrator/v1/register")
 
         let sod = try passport.getSod()
 
         let signedAttributes = try sod.getSignedAttributes()
         let encapsulatedContent = try sod.getEncapsulatedContent()
-        let signature = try sod.getSignature()
+        var signature = try sod.getSignature()
 
         let certPem = try passport.getSlaveSodCertificatePem()
 
@@ -31,6 +31,8 @@ class LightRegistrationService {
             signatureAlgorithm = "RSA-PSS"
         } else if sodSignatureAlgorithmName.contains("ecdsa") {
             signatureAlgorithm = "ECDSA"
+
+            signature = try CryptoUtils.decodeECDSASignatureFromASN1(signature)
         } else if sodSignatureAlgorithmName.contains("rsa") {
             signatureAlgorithm = "RSA"
         } else {
@@ -64,7 +66,7 @@ class LightRegistrationService {
             encoder: JSONParameterEncoder.default
         )
         .validate(OpenApiError.catchInstance)
-        .serializingDecodable(VerifySodResponseAttributes.self)
+        .serializingDecodable(VerifySodResponse.self)
         .result
         .get()
 

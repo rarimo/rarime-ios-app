@@ -1,5 +1,5 @@
-import Foundation
 import Alamofire
+import Foundation
 
 struct OpenApiErrorMeta: Codable {
     let error: String
@@ -26,7 +26,7 @@ extension OpenApiErrors {
                 if let meta = error.meta {
                     errorMessage += ": \(meta.field): \(meta.error)"
                 }
-                
+
                 return errorMessage
             }
         ).joined(separator: ", ")
@@ -38,7 +38,11 @@ extension OpenApiError {
         _ request: URLRequest?,
         _ response: HTTPURLResponse,
         _ data: Data?
-    ) -> Result<Void, Error> {        
+    ) -> Result<Void, Error> {
+        if let data {
+            LoggerUtil.common.debug("data: \(data.utf8)")
+        }
+        
         switch response.statusCode {
         case 200...299:
             return .success(())
