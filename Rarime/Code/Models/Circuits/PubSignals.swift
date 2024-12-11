@@ -12,26 +12,25 @@ struct QueryIdentityPubSignals {
         case birthDate = 1
         case expirationDate = 2
         case name = 3
-        case nationality = 4
-        case citizenship = 5
-        case sex = 6
-        case documentNumberHash = 7
-        case personalNumberHash = 8
-        case documentType = 9
-        case eventID = 10
-        case eventData = 11
-        case idStateRoot = 12
-        case selector = 13
-        case currentDate = 14
-        case timestampLowerbound = 15
-        case timestampUpperbound = 16
-        case identityCounterLowerbound = 17
-        case identityCounterUpperbound = 18
-        case birthDateLowerbound = 19
-        case birthDateUpperbound = 20
-        case expirationDateLowerbound = 21
-        case expirationDateUpperbound = 22
-        case citizenshipMask = 23
+        case nameResidual = 4
+        case nationality = 5
+        case citizenship = 6
+        case sex = 7
+        case documentNumber = 8
+        case eventID = 9
+        case eventData = 10
+        case idStateRoot = 11
+        case selector = 12
+        case currentDate = 13
+        case timestampLowerbound = 14
+        case timestampUpperbound = 15
+        case identityCounterLowerbound = 16
+        case identityCounterUpperbound = 17
+        case birthDateLowerbound = 18
+        case birthDateUpperbound = 19
+        case expirationDateLowerbound = 20
+        case expirationDateUpperbound = 21
+        case citizenshipMask = 22
     }
     
     func getSignal(_ key: SignalKey) throws -> BN {
