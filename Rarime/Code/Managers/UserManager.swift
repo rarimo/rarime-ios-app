@@ -231,6 +231,27 @@ class UserManager: ObservableObject {
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
     }
     
+    func lightRegister(_ registerZKProof: ZkProof) async throws {
+        let calldataBuilder = IdentityCallDataBuilder()
+        let calldata = try calldataBuilder.buildRegisterSimpleCalldata(
+            registerZKProof.json,
+            dgCommit: Data(),
+            signature: Data(),
+            passportHash: Data(),
+            dg1Hash: Data(),
+            publicKey: Data(),
+            verifierAddress: ""
+        )
+        
+        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
+        let response = try await relayer.register(calldata, ConfigManager.shared.api.registrationSimpleContractAddress)
+        
+        LoggerUtil.common.info("Passport light register EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
+        
+        let eth = Ethereum()
+        try await eth.waitForTxSuccess(response.data.attributes.txHash)
+    }
+    
     func revoke(_ passportInfo: PassportInfo, _ passport: Passport) async throws {
         let identityKey = passportInfo.activeIdentity
         

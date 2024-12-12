@@ -233,6 +233,8 @@ class PassportViewModel: ObservableObject {
             
             LoggerUtil.common.debug("registerResponse: \(registerResponse.json.utf8)")
             
+            try await UserManager.shared.lightRegister(zkProof)
+            
             PassportManager.shared.setPassport(passport)
             try UserManager.shared.saveRegisterZkProof(zkProof)
             
