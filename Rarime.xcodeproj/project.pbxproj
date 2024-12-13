@@ -103,7 +103,6 @@
 		56933DFB2BBAFBD90068C894 /* AppToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DFA2BBAFBD90068C894 /* AppToggle.swift */; };
 		56933DFD2BBAFDD00068C894 /* PassportProofView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DFC2BBAFDD00068C894 /* PassportProofView.swift */; };
 		56933DFF2BBBFDA30068C894 /* ProcessingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DFE2BBBFDA30068C894 /* ProcessingStatus.swift */; };
-		56933E012BBBFDD90068C894 /* CirclesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E002BBBFDD90068C894 /* CirclesLoader.swift */; };
 		56933E032BBBFDFE0068C894 /* ProcessingChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E022BBBFDFE0068C894 /* ProcessingChipView.swift */; };
 		56933E052BBC00D60068C894 /* RewardChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E042BBC00D60068C894 /* RewardChipView.swift */; };
 		56A6C7542BBC192800992562 /* Passport.json in Resources */ = {isa = PBXBuildFile; fileRef = 56A6C7532BBC192800992562 /* Passport.json */; };
@@ -274,6 +273,7 @@
 		CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82D62BA8917100AAF885 /* LottieView.swift */; };
 		CEA03F0A2C7C7A17002F218A /* View+IsLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA03F092C7C7A17002F218A /* View+IsLoading.swift */; };
 		CEA03F0C2C7C9319002F218A /* CreateIdentityIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA03F0B2C7C9319002F218A /* CreateIdentityIntroView.swift */; };
+		CEA90C5F2D0C63A800622F81 /* Processing.json in Resources */ = {isa = PBXBuildFile; fileRef = CEA90C5E2D0C63A800622F81 /* Processing.json */; };
 		CEAC71152D0326BE0090DCC0 /* libwitnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_4_256.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEAC71132D0326BE0090DCC0 /* libwitnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_4_256.a */; };
 		CEAC71162D0326BE0090DCC0 /* libwitnesscalc_registerIdentity_10_256_3_3_576_248_1_1184_5_264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEAC71122D0326BE0090DCC0 /* libwitnesscalc_registerIdentity_10_256_3_3_576_248_1_1184_5_264.a */; };
 		CEAC71172D0326BE0090DCC0 /* libwitnesscalc_registerIdentity_21_256_3_3_576_232_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEAC71142D0326BE0090DCC0 /* libwitnesscalc_registerIdentity_21_256_3_3_576_232_NA.a */; };
@@ -449,7 +449,6 @@
 		56933DFA2BBAFBD90068C894 /* AppToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppToggle.swift; sourceTree = "<group>"; };
 		56933DFC2BBAFDD00068C894 /* PassportProofView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportProofView.swift; sourceTree = "<group>"; };
 		56933DFE2BBBFDA30068C894 /* ProcessingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingStatus.swift; sourceTree = "<group>"; };
-		56933E002BBBFDD90068C894 /* CirclesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclesLoader.swift; sourceTree = "<group>"; };
 		56933E022BBBFDFE0068C894 /* ProcessingChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingChipView.swift; sourceTree = "<group>"; };
 		56933E042BBC00D60068C894 /* RewardChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardChipView.swift; sourceTree = "<group>"; };
 		56A6C7532BBC192800992562 /* Passport.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Passport.json; sourceTree = "<group>"; };
@@ -576,6 +575,7 @@
 		CE9E82E62BA89CE300AAF885 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		CEA03F092C7C7A17002F218A /* View+IsLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+IsLoading.swift"; sourceTree = "<group>"; };
 		CEA03F0B2C7C9319002F218A /* CreateIdentityIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityIntroView.swift; sourceTree = "<group>"; };
+		CEA90C5E2D0C63A800622F81 /* Processing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Processing.json; sourceTree = "<group>"; };
 		CEAC71122D0326BE0090DCC0 /* libwitnesscalc_registerIdentity_10_256_3_3_576_248_1_1184_5_264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_10_256_3_3_576_248_1_1184_5_264.a; sourceTree = "<group>"; };
 		CEAC71132D0326BE0090DCC0 /* libwitnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_4_256.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_4_256.a; sourceTree = "<group>"; };
 		CEAC71142D0326BE0090DCC0 /* libwitnesscalc_registerIdentity_21_256_3_3_576_232_NA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_21_256_3_3_576_232_NA.a; sourceTree = "<group>"; };
@@ -1019,6 +1019,7 @@
 				5689C8342BE900B300A4B767 /* IntroProofs.json */,
 				5689C83A2BE90AD200A4B767 /* IncognitoLight.json */,
 				568820FD2C18797E001B729F /* IncognitoDark.json */,
+				CEA90C5E2D0C63A800622F81 /* Processing.json */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -1095,7 +1096,6 @@
 				56E2D91F2BCED460006E725D /* AppCheckbox.swift */,
 				5613F4312BD18409008E6CBE /* AppSkeleton.swift */,
 				563529F52BB077AB0027C910 /* CardContainer.swift */,
-				56933E002BBBFDD90068C894 /* CirclesLoader.swift */,
 				568B4FD02BB6D88F001C9C74 /* Divider.swift */,
 				56DAA3042BB72E35002CF710 /* InfoAlert.swift */,
 				5609B6CB2C19922400CB6A1F /* LinearProgressView.swift */,
@@ -1683,6 +1683,7 @@
 				C75512872C8603D3000258AD /* ReadNfc.mp4 in Resources */,
 				5689C83B2BE90AD200A4B767 /* IncognitoLight.json in Resources */,
 				CE9E82BA2BA881F500AAF885 /* Assets.xcassets in Resources */,
+				CEA90C5F2D0C63A800622F81 /* Processing.json in Resources */,
 				5689C8392BE900FA00A4B767 /* IntroRewards.json in Resources */,
 				5689C8372BE900D400A4B767 /* IntroIncognito.json in Resources */,
 				561C3C3E2BADF0AA00FBB3B9 /* Inter-Regular.ttf in Resources */,
@@ -1831,7 +1832,6 @@
 				CE19CB472BE39DA400B26DF7 /* RarimoUtils.swift in Sources */,
 				5609B6D22C19D8DF00CB6A1F /* LeaderboardView.swift in Sources */,
 				CE68BE422BD9B6A200D92EBB /* RegistrationContract.swift in Sources */,
-				56933E012BBBFDD90068C894 /* CirclesLoader.swift in Sources */,
 				CE3D41C02C77974500D0AA65 /* PushNotificationsRaw.swift in Sources */,
 				CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */,
 				561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */,
