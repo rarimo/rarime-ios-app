@@ -119,10 +119,11 @@ struct VerifySodResponseData: Codable {
 }
 
 struct VerifySodResponseAttributes: Codable {
-    let signature, documentHash: String
+    let passportHash, publicKey, signature, verifier: String
 
     enum CodingKeys: String, CodingKey {
-        case signature
-        case documentHash = "document_hash"
+        case passportHash = "passport_hash"
+        case publicKey = "public_key"
+        case signature, verifier
     }
 }

@@ -60,7 +60,7 @@ class PassportViewModel: ObservableObject {
     ) async throws -> ZkProof {
         var isCriticalRegistrationProcessInProgress = true
         
-        do {            
+        do {
             guard let passport else { throw "failed to get passport" }
             guard let user = UserManager.shared.user else { throw "failed to get user" }
             
@@ -231,9 +231,9 @@ class PassportViewModel: ObservableObject {
             let lightRegistrationService = LightRegistrationService(ConfigManager.shared.api.relayerURL)
             let registerResponse = try await lightRegistrationService.register(passport, zkProof)
             
-            LoggerUtil.common.debug("registerResponse: \(registerResponse.json.utf8)")
+            LoggerUtil.common.info("Passport light registration signature received")
             
-            try await UserManager.shared.lightRegister(zkProof)
+            try await UserManager.shared.lightRegister(zkProof, registerResponse)
             
             PassportManager.shared.setPassport(passport)
             try UserManager.shared.saveRegisterZkProof(zkProof)

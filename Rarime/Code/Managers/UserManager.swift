@@ -231,16 +231,26 @@ class UserManager: ObservableObject {
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
     }
     
-    func lightRegister(_ registerZKProof: ZkProof) async throws {
+    func lightRegister(_ registerZKProof: ZkProof, _ verifySodResponse: VerifySodResponse) async throws {
+        guard let signature = Data(hex: verifySodResponse.data.attributes.signature) else {
+            throw "Invalid signature"
+        }
+        
+        guard let passportHash = Data(hex: verifySodResponse.data.attributes.passportHash) else {
+            throw "Invalid passport hash"
+        }
+        
+        guard let publicKey = Data(hex: verifySodResponse.data.attributes.publicKey) else {
+            throw "Invalid public key"
+        }
+        
         let calldataBuilder = IdentityCallDataBuilder()
         let calldata = try calldataBuilder.buildRegisterSimpleCalldata(
             registerZKProof.json,
-            dgCommit: Data(),
-            signature: Data(),
-            passportHash: Data(),
-            dg1Hash: Data(),
-            publicKey: Data(),
-            verifierAddress: ""
+            signature: signature,
+            passportHash: passportHash,
+            publicKey: publicKey,
+            verifierAddress: verifySodResponse.data.attributes.verifier
         )
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
