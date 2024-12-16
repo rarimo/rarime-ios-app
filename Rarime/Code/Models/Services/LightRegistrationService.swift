@@ -53,7 +53,8 @@ class LightRegistrationService {
                         aaSignature: passport.signature.fullHex,
                         encapsulatedContent: encapsulatedContent.fullHex,
                         pemFile: certPem.utf8,
-                        dg15: passport.dg15.fullHex
+                        dg15: passport.dg15.fullHex,
+                        sod: passport.sod.fullHex
                     )
                 )
             )
@@ -95,7 +96,7 @@ struct VerifySodRequestAttributes: Codable {
 
 struct VerifySodRequestDocumentSod: Codable {
     let hashAlgorithm, signatureAlgorithm, signedAttributes, signature: String
-    let aaSignature, encapsulatedContent, pemFile, dg15: String
+    let aaSignature, encapsulatedContent, pemFile, dg15, sod: String
 
     enum CodingKeys: String, CodingKey {
         case hashAlgorithm = "hash_algorithm"
@@ -106,6 +107,7 @@ struct VerifySodRequestDocumentSod: Codable {
         case encapsulatedContent = "encapsulated_content"
         case pemFile = "pem_file"
         case dg15
+        case sod
     }
 }
 
