@@ -60,7 +60,7 @@ class PassportViewModel: ObservableObject {
     ) async throws -> ZkProof {
         var isCriticalRegistrationProcessInProgress = true
         
-        do {
+        do {            
             guard let passport else { throw "failed to get passport" }
             guard let user = UserManager.shared.user else { throw "failed to get user" }
             
