@@ -18,16 +18,24 @@ struct ExternalRequestsView: View {
         ZStack {}
             .dynamicSheet(isPresented: $isSheetPresented, title: sheetTitle) {
                 switch externalRequestsManager.request {
-                case let .proofRequest(proofParamsUrl):
+                case let .proofRequest(proofParamsUrl, urlQueryParams):
                     ProofRequestView(
                         proofParamsUrl: proofParamsUrl,
-                        onSuccess: { isSheetPresented = false },
+                        onSuccess: {
+                            isSheetPresented = false
+
+                            handleRedirect(urlQueryParams)
+                        },
                         onDismiss: { isSheetPresented = false }
                     )
-                case let .lightVerification(verificationParamsUrl):
+                case let .lightVerification(verificationParamsUrl, urlQueryParams):
                     LightVerificationView(
                         verificationParamsUrl: verificationParamsUrl,
-                        onSuccess: { isSheetPresented = false },
+                        onSuccess: {
+                            isSheetPresented = false
+
+                            handleRedirect(urlQueryParams)
+                        },
                         onDismiss: { isSheetPresented = false }
                     )
                 default:
@@ -47,5 +55,17 @@ struct ExternalRequestsView: View {
             .onOpenURL { url in
                 externalRequestsManager.handleRarimeUrl(url)
             }
+    }
+
+    func handleRedirect(_ urlQueryParams: [URLQueryItem]) {
+        guard let redirectUri = urlQueryParams.first(where: { $0.name == "redirect_uri" })?.value else {
+            return
+        }
+
+        guard let url = URL(string: redirectUri) else {
+            return
+        }
+
+        UIApplication.shared.open(url)
     }
 }

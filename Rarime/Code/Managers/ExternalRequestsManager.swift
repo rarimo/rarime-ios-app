@@ -10,8 +10,8 @@ enum ExternalRequestTypes: String, Codable {
 }
 
 enum ExternalRequests: Equatable {
-    case proofRequest(proofParamsUrl: URL)
-    case lightVerification(verificationParamsUrl: URL)
+    case proofRequest(proofParamsUrl: URL, urlQueryParams: [URLQueryItem])
+    case lightVerification(verificationParamsUrl: URL, urlQueryParams: [URLQueryItem])
 }
 
 class ExternalRequestsManager: ObservableObject {
@@ -69,9 +69,9 @@ class ExternalRequestsManager: ObservableObject {
             return
         }
 
-        setRequest(.proofRequest(proofParamsUrl: proofParamsUrl))
+        setRequest(.proofRequest(proofParamsUrl: proofParamsUrl, urlQueryParams: params))
     }
-    
+
     private func handleLightVerificationRequest(params: [URLQueryItem]) {
         guard let rawProofParamsUrl = params.first(where: { $0.name == "proof_params_url" })?.value?.removingPercentEncoding,
               let proofParamsUrl = URL(string: rawProofParamsUrl)
@@ -80,8 +80,8 @@ class ExternalRequestsManager: ObservableObject {
             AlertManager.shared.emitError(.unknown("Invalid light verification request URL"))
             return
         }
-        
-        setRequest(.lightVerification(verificationParamsUrl: proofParamsUrl))
+
+        setRequest(.lightVerification(verificationParamsUrl: proofParamsUrl, urlQueryParams: params))
     }
 
     func setRequest(_ request: ExternalRequests) {

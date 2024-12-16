@@ -122,12 +122,20 @@ struct ProofRequestView: View {
                     passport: passport,
                     params: proofParamsResponse!.data.attributes
                 )
-                
+
                 let response = try await VerificatorApi.sendProof(
                     url: URL(string: proofParamsResponse!.data.attributes.callbackURL)!,
                     userId: proofParamsResponse!.data.id,
                     proof: proof
                 )
+
+                if response.data.attributes.status == .uniquenessCheckFailed {
+                    AlertManager.shared.emitError(.unknown("Uniqueness check failed"))
+
+                    onDismiss()
+
+                    return
+                }
 
                 if response.data.attributes.status != .verified {
                     throw "Proof status is not verified"
