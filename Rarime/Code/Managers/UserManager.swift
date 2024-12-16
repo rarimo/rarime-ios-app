@@ -15,6 +15,8 @@ class UserManager: ObservableObject {
     
     @Published var registerZkProof: ZkProof?
     
+    @Published var lightRegistrationData: LightRegistrationData?
+    
     @Published var masterCertProof: SMTProof?
     
     @Published var balance: Double
@@ -33,6 +35,7 @@ class UserManager: ObservableObject {
                     try AppKeychain.removeValue(.privateKey)
                     try AppKeychain.removeValue(.registerZkProof)
                     try AppKeychain.removeValue(.passport)
+                    try AppKeychain.removeValue(.lightRegistrationData)
                 }
                 
                 AppUserDefaults.shared.isFirstLaunch = false
@@ -46,6 +49,12 @@ class UserManager: ObservableObject {
                 let registerZkProof = try JSONDecoder().decode(ZkProof.self, from: registerZkProofJson)
                 
                 self.registerZkProof = registerZkProof
+            }
+            
+            if let lightRegistrationData = try AppKeychain.getValue(.lightRegistrationData) {
+                let lightRegistrationData = try JSONDecoder().decode(LightRegistrationData.self, from: lightRegistrationData)
+                
+                self.lightRegistrationData = lightRegistrationData
             }
         } catch {
             fatalError("\(error.localizedDescription)")
@@ -68,6 +77,14 @@ class UserManager: ObservableObject {
         try AppKeychain.setValue(.registerZkProof, zkProofJson)
         
         self.registerZkProof = zkProof
+    }
+    
+    func saveLightRegistrationData(_ lightRegistrationData: LightRegistrationData) throws {
+        let lightRegistrationDataJson = try JSONEncoder().encode(lightRegistrationData)
+        
+        try AppKeychain.setValue(.lightRegistrationData, lightRegistrationDataJson)
+        
+        self.lightRegistrationData = lightRegistrationData
     }
     
     var userAddress: String {
@@ -669,6 +686,7 @@ class UserManager: ObservableObject {
             try AppKeychain.removeValue(.privateKey)
             try AppKeychain.removeValue(.registerZkProof)
             try AppKeychain.removeValue(.passport)
+            try AppKeychain.removeValue(.lightRegistrationData)
             
             self.user = nil
             self.balance = 0
@@ -702,9 +720,15 @@ class UserManager: ObservableObject {
                 passportKey = pubSignals.getSignalRaw(.passportKey)
             }
         case RegisterIdentityLightPubSignals.SignalKey.allCases.count:
-            let pubSignals = RegisterIdentityLightPubSignals(registerZkProof.pubSignals)
+            guard let lightRegistrationData else {
+                return nil
+            }
             
-            passportKey = pubSignals.getSignalRaw(.passportHash)
+            if passport.dg15.isEmpty {
+                return try? BN(hex: lightRegistrationData.passportHash).dec()
+            } else {
+                return try? BN(hex: lightRegistrationData.publicKey).dec()
+            }
         default:
             return nil
         }

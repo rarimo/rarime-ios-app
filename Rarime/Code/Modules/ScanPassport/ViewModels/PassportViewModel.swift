@@ -60,7 +60,7 @@ class PassportViewModel: ObservableObject {
     ) async throws -> ZkProof {
         var isCriticalRegistrationProcessInProgress = true
         
-        do {            
+        do {
             guard let passport else { throw "failed to get passport" }
             guard let user = UserManager.shared.user else { throw "failed to get user" }
             
@@ -237,6 +237,7 @@ class PassportViewModel: ObservableObject {
             
             PassportManager.shared.setPassport(passport)
             try UserManager.shared.saveRegisterZkProof(zkProof)
+            try UserManager.shared.saveLightRegistrationData(registerResponse.data.attributes)
             
             try await NotificationManager.shared.subscribe(toTopic: ConfigManager.shared.general.claimableNotificationTopic)
             

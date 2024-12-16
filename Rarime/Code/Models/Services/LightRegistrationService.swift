@@ -117,10 +117,10 @@ struct VerifySodResponse: Codable {
 
 struct VerifySodResponseData: Codable {
     let id, type: String
-    let attributes: VerifySodResponseAttributes
+    let attributes: LightRegistrationData
 }
 
-struct VerifySodResponseAttributes: Codable {
+struct LightRegistrationData: Codable {
     let passportHash, publicKey, signature, verifier: String
 
     enum CodingKeys: String, CodingKey {
