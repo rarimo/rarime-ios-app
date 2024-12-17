@@ -8,8 +8,6 @@ class ZKFaceManager {
     func extractFaceFromImage(_ image: UIImage) throws -> Data {
         let detectFaceRequest = VNDetectFaceCaptureQualityRequest()
 
-        LoggerUtil.common.debug("image: \(image.pngData()!.base64EncodedString())")
-
         guard let cgImage = image.cgImage else {
             throw "Invalid image data"
         }
@@ -26,24 +24,20 @@ class ZKFaceManager {
             throw "No face detected"
         }
 
-        LoggerUtil.common.debug("results len: \(results.count)")
+        let faceObservation = results[0]
+        let boundingBox = faceObservation.boundingBox
+        let size = CGSize(width: boundingBox.width * CGFloat(cgImage.width), height: boundingBox.height * CGFloat(cgImage.height))
+        let origin = CGPoint(x: boundingBox.minX * CGFloat(cgImage.width), y: (1 - boundingBox.maxY) * CGFloat(cgImage.height))
+        let rect = CGRect(origin: origin, size: size)
 
-        guard let faceImage = cgImage.cropImage(results[0]) else {
-            throw "failed to crope face"
+        guard let faceCgImage = cgImage.cropping(to: rect) else {
+            throw "Failed to crop face"
         }
 
-        LoggerUtil.common.debug("results[0] x: \(results[0].boundingBox.width), y: \(results[0].boundingBox.height)")
-
-        guard let faceData = UIImage(cgImage: faceImage).pngData() else {
+        guard let faceData = UIImage(cgImage: faceCgImage).pngData() else {
             throw "Failed to convert face to data"
         }
 
         return faceData
-    }
-}
-
-extension CGImage {
-    func cropImage(_ face: VNFaceObservation) -> CGImage? {
-        self.cropping(to: face.boundingBox)
     }
 }
