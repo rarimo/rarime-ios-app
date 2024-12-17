@@ -52,6 +52,19 @@ struct AppView: View {
 
             UIApplication.shared.isIdleTimerDisabled = true
         }
+        .onAppear {
+            Task {
+                do {
+                    let testImage = UIImage(named: "TestImage")!
+
+                    let extractedImage = try ZKFaceManager.shared.extractFaceFromImage(testImage)
+
+                    LoggerUtil.common.debug("extractedImage: \(extractedImage.base64EncodedString())")
+                } catch {
+                    LoggerUtil.common.debug("error: \(error)")
+                }
+            }
+        }
         .environmentObject(viewModel)
     }
 }
