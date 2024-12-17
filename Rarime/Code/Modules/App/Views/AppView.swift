@@ -57,7 +57,9 @@ struct AppView: View {
                 do {
                     let testImage = UIImage(named: "TestImage")!
 
-                    let extractedImage = try ZKFaceManager.shared.extractFaceFromImage(testImage)
+                    guard let extractedImage = try ZKFaceManager.shared.extractFaceFromImage(testImage).pngData() else {
+                        throw "failed to extract image"
+                    }
 
                     UIPasteboard.general.string = extractedImage.base64EncodedString()
 

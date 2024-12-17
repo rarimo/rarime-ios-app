@@ -5,7 +5,10 @@ import Vision
 class ZKFaceManager {
     static let shared = ZKFaceManager()
 
-    func extractFaceFromImage(_ image: UIImage) throws -> Data {
+    static let grayscaleWidthInPixels: Int = 92
+    static let grayscaleHeightInPixels: Int = 112
+
+    func extractFaceFromImage(_ image: UIImage) throws -> UIImage {
         let detectFaceRequest = VNDetectFaceCaptureQualityRequest()
 
         guard let cgImage = image.cgImage else {
@@ -34,10 +37,33 @@ class ZKFaceManager {
             throw "Failed to crop face"
         }
 
-        guard let faceData = UIImage(cgImage: faceCgImage).pngData() else {
-            throw "Failed to convert face to data"
+        return UIImage(cgImage: faceCgImage)
+    }
+
+    func convertFaceToGrayscale(_ image: UIImage) throws -> UIImage {
+        guard let cgImage = image.cgImage else {
+            throw "Invalid image data"
         }
 
-        return faceData
+        let width = cgImage.width
+        let height = cgImage.height
+
+        let context = CGContext(
+            data: nil,
+            width: width,
+            height: height,
+            bitsPerComponent: 8,
+            bytesPerRow: width,
+            space: CGColorSpaceCreateDeviceGray(),
+            bitmapInfo: CGImageAlphaInfo.none.rawValue
+        )
+
+        context?.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+
+        guard let grayscaleCgImage = context?.makeImage() else {
+            throw "Failed to convert image to grayscale"
+        }
+
+        return UIImage(cgImage: grayscaleCgImage)
     }
 }
