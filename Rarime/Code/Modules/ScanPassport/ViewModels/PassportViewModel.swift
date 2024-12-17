@@ -233,6 +233,36 @@ class PassportViewModel: ObservableObject {
             
             LoggerUtil.common.info("Passport light registration signature received")
             
+            let stateKeeperContract = try StateKeeperContract()
+            
+            let passportInfoKey: String
+            if passport.dg15.isEmpty {
+                passportInfoKey = try BN(hex: registerResponse.data.attributes.passportHash).dec()
+            } else {
+                passportInfoKey = try BN(hex: registerResponse.data.attributes.publicKey).dec()
+            }
+            
+            let profile = try IdentityProfile().newProfile(UserManager.shared.user?.secretKey)
+            
+            let currentIdentityKey = try profile.getPublicKeyHash()
+            
+            let (passportInfo, _) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
+            
+            if passportInfo.activeIdentity == currentIdentityKey {
+                LoggerUtil.common.info("Passport is already registered")
+                
+                PassportManager.shared.setPassport(passport)
+                try UserManager.shared.saveRegisterZkProof(zkProof)
+                try UserManager.shared.saveLightRegistrationData(registerResponse.data.attributes)
+                
+                isUserRegistered = true
+                proofState = .finalizing
+                
+                processingStatus = .success
+                
+                return zkProof
+            }
+            
             try await UserManager.shared.lightRegister(zkProof, registerResponse)
             
             PassportManager.shared.setPassport(passport)
