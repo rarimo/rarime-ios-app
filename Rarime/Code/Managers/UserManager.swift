@@ -474,6 +474,16 @@ class UserManager: ObservableObject {
         let nullifier = try generateNullifierForEvent(params.eventID)
         let currentTimestamp = String(format: "%.0f", Date().timeIntervalSince1970 * 1000)
         
+        var calculateAnonymousIDError: NSError?
+        let anonymousID = IdentityCalculateAnonymousID(passport.dg1, Points.PointsEventId, &calculateAnonymousIDError)
+        if let calculateAnonymousIDError {
+            throw calculateAnonymousIDError
+        }
+        
+        guard let anonymousID else {
+            throw "failed to calculate anonymousID"
+        }
+        
         return [
             nullifier.toBigUInt(),
             ZERO_IN_HEX.toBigUInt(),
@@ -486,7 +496,7 @@ class UserManager: ObservableObject {
             "0",
             params.eventID.toBigUInt(),
             params.eventData.toBigUInt(),
-            "0",
+            BN(anonymousID).dec(),
             params.selector.toBigUInt(),
             currentTimestamp.toBigUInt(),
             params.timestampLowerBound.toBigUInt(),
