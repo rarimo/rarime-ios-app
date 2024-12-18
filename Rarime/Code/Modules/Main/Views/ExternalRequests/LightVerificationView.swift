@@ -129,7 +129,7 @@ struct LightVerificationView: View {
                     params: verificationParamsResponse!.data.attributes
                 )
                 
-                let pubSignalsJSON = try? JSONEncoder().encode(pubSignals)
+                let pubSignalsJSON = try JSONEncoder().encode(pubSignals)
                 
                 var error: NSError? = nil
                 let signedPubSignals = IdentitySignPubSignalsWithSecp256k1(
@@ -146,6 +146,14 @@ struct LightVerificationView: View {
                     signature: signedPubSignals,
                     pubSignals: pubSignals
                 )
+                
+                if response.data.attributes.status == .uniquenessCheckFailed {
+                    AlertManager.shared.emitError(.unknown("Uniqueness check failed"))
+
+                    onDismiss()
+
+                    return
+                }
                 
                 if response.data.attributes.status != .verified {
                     throw "Proof status is not verified"
