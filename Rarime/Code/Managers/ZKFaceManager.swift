@@ -40,7 +40,7 @@ class ZKFaceManager {
         return UIImage(cgImage: faceCgImage)
     }
 
-    func convertFaceToGrayscale(_ image: UIImage) throws -> UIImage {
+    func convertFaceToGrayscale(_ image: UIImage) throws -> (UIImage, Data) {
         let preProcessedImage = try image.resize(ZKFaceManager.grayscaleWidthInPixels, ZKFaceManager.grayscaleHeightInPixels)
 
         guard let cgImage = preProcessedImage.cgImage else {
@@ -50,8 +50,10 @@ class ZKFaceManager {
         let width = cgImage.width
         let height = cgImage.height
 
+        let dataSize = width * height
+        var pixelsData = [UInt8](repeating: 0, count: Int(dataSize))
         let context = CGContext(
-            data: nil,
+            data: &pixelsData,
             width: width,
             height: height,
             bitsPerComponent: 8,
@@ -66,6 +68,6 @@ class ZKFaceManager {
             throw "Failed to convert image to grayscale"
         }
 
-        return UIImage(cgImage: grayscaleCgImage)
+        return (UIImage(cgImage: grayscaleCgImage), Data(pixelsData))
     }
 }

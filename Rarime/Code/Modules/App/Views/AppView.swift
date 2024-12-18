@@ -59,9 +59,9 @@ struct AppView: View {
 
                     let extractedImage = try ZKFaceManager.shared.extractFaceFromImage(testImage)
 
-                    let grayscaleImage = try ZKFaceManager.shared.convertFaceToGrayscale(extractedImage)
+                    let (grayscaleImage, grayscalePixelsData) = try ZKFaceManager.shared.convertFaceToGrayscale(extractedImage)
 
-                    UIPasteboard.general.string = grayscaleImage.pngData()?.base64EncodedString() ?? ""
+                    UIPasteboard.general.string = grayscalePixelsData.base64EncodedString()
 
                     LoggerUtil.common.debug("Image processing finished")
                 } catch {
