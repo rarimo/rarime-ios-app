@@ -70,4 +70,30 @@ class ZKFaceManager {
 
         return (UIImage(cgImage: grayscaleCgImage), Data(pixelsData))
     }
+
+    func convertGrayscaleDataToComputableSignals(_ grayscaleData: Data) -> [Int] {
+        let pixelsData = grayscaleData.map { Int((Double($0) / 255.0) * pow(2, 50)) }
+
+        return pixelsData
+    }
+
+    func convertGrayscaleDataToComputableModel(_ grayscaleData: Data) -> [Double] {
+        return grayscaleData.map { Double($0) / 255.0 }
+    }
+
+    func extractFeaturesFromComputableModel(_ model: [Double]) -> [Double] {
+        var subImage = [Double](repeating: 0, count: model.count)
+        for pixelIndex in 0 ..< subImage.count {
+            subImage[pixelIndex] = model[pixelIndex] - ZKFaceModel.mean[pixelIndex]
+        }
+
+        var features = [Double](repeating: 0, count: ZKFaceModel.matrix.count)
+        for featureIndex in 0 ..< features.count {
+            for weightIndex in 0 ..< ZKFaceModel.matrix[featureIndex].count {
+                features[featureIndex] += ZKFaceModel.matrix[featureIndex][weightIndex] * subImage[weightIndex]
+            }
+        }
+
+        return features
+    }
 }

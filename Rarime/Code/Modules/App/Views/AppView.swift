@@ -59,11 +59,13 @@ struct AppView: View {
 
                     let extractedImage = try ZKFaceManager.shared.extractFaceFromImage(testImage)
 
-                    let (grayscaleImage, grayscalePixelsData) = try ZKFaceManager.shared.convertFaceToGrayscale(extractedImage)
+                    let (_, grayscalePixelsData) = try ZKFaceManager.shared.convertFaceToGrayscale(extractedImage)
 
-                    UIPasteboard.general.string = grayscalePixelsData.base64EncodedString()
+                    let computableModel = ZKFaceManager.shared.convertGrayscaleDataToComputableModel(grayscalePixelsData)
 
-                    LoggerUtil.common.debug("Image processing finished")
+                    let features = ZKFaceManager.shared.extractFeaturesFromComputableModel(computableModel)
+
+                    LoggerUtil.common.debug("Image processing finished: \(features.json.utf8)")
                 } catch {
                     LoggerUtil.common.debug("error: \(error)")
                 }
