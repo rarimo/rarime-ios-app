@@ -17,6 +17,12 @@ extension Data {
 
 extension Data {
     init?(hex: String) {
+        var hex = hex
+        
+        if hex.starts(with: "0x") {
+            hex = String(hex.dropFirst(2))
+        }
+        
         let len = hex.count / 2
         var data = Data(capacity: len)
         var i = hex.startIndex

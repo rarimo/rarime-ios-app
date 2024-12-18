@@ -1,11 +1,12 @@
-import SwiftUI
 import KeychainAccess
+import SwiftUI
 
 enum AppKeychainItemKey: String {
     case passcode
     case privateKey
     case passport
     case registerZkProof
+    case lightRegistrationData
 }
 
 class AppKeychain {
@@ -18,7 +19,7 @@ class AppKeychain {
     static func setValue(_ key: AppKeychainItemKey, _ value: Data) throws {
         try keychain.set(value, key: key.rawValue)
     }
-    
+
     static func containsValue(_ key: AppKeychainItemKey) throws -> Bool {
         try keychain.contains(key.rawValue)
     }

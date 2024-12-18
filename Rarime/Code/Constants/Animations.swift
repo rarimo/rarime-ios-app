@@ -21,4 +21,5 @@ enum Animations {
     static let introRewards = ThemedAnimation("IntroRewards")
     static let incognito = ThemedAnimation(light: "IncognitoLight", dark: "IncognitoDark")
     static let scanPassport = ThemedAnimation("ScanPassport")
+    static let processing = ThemedAnimation("Processing")
 }
