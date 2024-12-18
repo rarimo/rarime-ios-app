@@ -41,7 +41,9 @@ class ZKFaceManager {
     }
 
     func convertFaceToGrayscale(_ image: UIImage) throws -> UIImage {
-        guard let cgImage = image.cgImage else {
+        let preProcessedImage = try image.resize(ZKFaceManager.grayscaleWidthInPixels, ZKFaceManager.grayscaleHeightInPixels)
+
+        guard let cgImage = preProcessedImage.cgImage else {
             throw "Invalid image data"
         }
 

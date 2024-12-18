@@ -57,13 +57,13 @@ struct AppView: View {
                 do {
                     let testImage = UIImage(named: "TestImage")!
 
-                    guard let extractedImage = try ZKFaceManager.shared.extractFaceFromImage(testImage).pngData() else {
-                        throw "failed to extract image"
-                    }
+                    let extractedImage = try ZKFaceManager.shared.extractFaceFromImage(testImage)
 
-                    UIPasteboard.general.string = extractedImage.base64EncodedString()
+                    let grayscaleImage = try ZKFaceManager.shared.convertFaceToGrayscale(extractedImage)
 
-                    LoggerUtil.common.debug("extractedImage: \(extractedImage.base64EncodedString())")
+                    UIPasteboard.general.string = grayscaleImage.pngData()?.base64EncodedString() ?? ""
+
+                    LoggerUtil.common.debug("Image processing finished")
                 } catch {
                     LoggerUtil.common.debug("error: \(error)")
                 }
