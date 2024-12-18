@@ -71,12 +71,6 @@ class ZKFaceManager {
         return (UIImage(cgImage: grayscaleCgImage), Data(pixelsData))
     }
 
-    func convertGrayscaleDataToComputableSignals(_ grayscaleData: Data) -> [Int] {
-        let pixelsData = grayscaleData.map { Int((Double($0) / 255.0) * pow(2, 50)) }
-
-        return pixelsData
-    }
-
     func convertGrayscaleDataToComputableModel(_ grayscaleData: Data) -> [Double] {
         return grayscaleData.map { Double($0) / 255.0 }
     }
