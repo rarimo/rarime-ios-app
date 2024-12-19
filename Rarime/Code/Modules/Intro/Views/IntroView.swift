@@ -1,7 +1,7 @@
 import SwiftUI
 
 private enum IdentityRoute: Hashable {
-    case newIdentity, importIdentity
+    case newIdentity, importIdentity, recoveryByBiometry
 }
 
 struct IntroView: View {
@@ -25,11 +25,19 @@ struct IntroView: View {
                             onBack: { path.removeLast() },
                             onNext: { withAnimation { onFinish() } }
                         )
+                        .navigationBarBackButtonHidden(true)
                     case .importIdentity:
                         ImportIdentityView(
                             onNext: { withAnimation { onFinish() } },
                             onBack: { path.removeLast() }
                         )
+                        .navigationBarBackButtonHidden(true)
+                    case .recoveryByBiometry:
+                        BiometryRecoveryView(
+                            onNext: { withAnimation { onFinish() } },
+                            onBack: { path.removeLast() }
+                        )
+                        .navigationBarBackButtonHidden(true)
                     }
                 }
                 .background(.backgroundPure)
@@ -95,6 +103,10 @@ struct IntroView: View {
                 onImport: {
                     showSheet.toggle()
                     path.append(.importIdentity)
+                },
+                onRecoveryByBiometry: {
+                    showSheet.toggle()
+                    path.append(.recoveryByBiometry)
                 }
             )
             .padding(.bottom, 24)

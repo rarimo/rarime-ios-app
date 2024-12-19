@@ -4,6 +4,7 @@ import SwiftUI
 struct GetStartedView: View {
     let onCreate: () -> Void
     let onImport: () -> Void
+    let onRecoveryByBiometry: () -> Void
 
     var body: some View {
         VStack(spacing: 32) {
@@ -23,6 +24,12 @@ struct GetStartedView: View {
                     text: "Uses pregenerated keys or iClould",
                     icon: Icons.share1,
                     action: onImport
+                )
+                GetStartedButton(
+                    title: "Recovery by biometry",
+                    text: "Uses ZKML to prove ownership",
+                    icon: Icons.userFocus,
+                    action: onRecoveryByBiometry
                 )
             }
         }
@@ -65,6 +72,7 @@ private struct GetStartedButton: View {
 #Preview {
     GetStartedView(
         onCreate: {},
-        onImport: {}
+        onImport: {},
+        onRecoveryByBiometry: {}
     )
 }

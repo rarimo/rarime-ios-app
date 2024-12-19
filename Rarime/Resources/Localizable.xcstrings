@@ -1542,6 +1542,9 @@
     "Lithuania" : {
 
     },
+    "Look straight into the screen with good lighting conditions" : {
+
+    },
     "Luxembourg" : {
 
     },
@@ -2188,6 +2191,9 @@
         }
       }
     },
+    "Recovery by biometry" : {
+
+    },
     "Remove Case" : {
 
     },
@@ -2322,6 +2328,9 @@
           }
         }
       }
+    },
+    "Scan your face" : {
+
     },
     "Scan your passport" : {
 
@@ -2779,6 +2788,9 @@
 
     },
     "Uses pregenerated keys or iClould" : {
+
+    },
+    "Uses ZKML to prove ownership" : {
 
     },
     "Uzbekistan" : {
