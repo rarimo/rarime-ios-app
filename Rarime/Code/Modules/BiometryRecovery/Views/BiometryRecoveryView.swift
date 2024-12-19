@@ -17,15 +17,11 @@ struct BiometryRecoveryView: View {
                 Spacer()
             }
             .padding()
-            if let image = viewModel.faceImage {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFill()
-                    .clipped()
-                    .frame(maxWidth: 300, maxHeight: 300)
-            } else {
-                BiometryRecoveryFaceView()
-            }
+//            if let image = viewModel.faceImage {
+//                BiometryRecoveryProcessingView(image: image)
+//            } else {
+            BiometryRecoveryFaceView()
+//            }
         }
         .background(.backgroundPure)
         .environmentObject(viewModel)

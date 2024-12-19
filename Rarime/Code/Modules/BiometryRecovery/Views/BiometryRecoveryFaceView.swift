@@ -5,6 +5,8 @@ struct BiometryRecoveryFaceView: View {
 
     @State private var isScanning = false
 
+    @State private var loadingCircleSize: CGFloat?
+
     var body: some View {
         VStack {
             Spacer()
@@ -31,9 +33,25 @@ struct BiometryRecoveryFaceView: View {
             )
             .padding(.horizontal)
             .opacity(isScanning ? 0 : 1)
+            .disabled(isScanning)
         }
         .onDisappear {
             viewModel.stopScanning()
+        }
+        .onChange(of: viewModel.faceImage) { image in
+            if image == nil {
+                return
+            }
+
+            viewModel.stopScanning()
+
+            Task { @MainActor in
+                for newLoadingCircleSize in 6 ... 150 {
+                    loadingCircleSize = CGFloat(newLoadingCircleSize)
+
+                    try await Task.sleep(nanoseconds: 10_000_000)
+                }
+            }
         }
     }
 
@@ -51,11 +69,16 @@ struct BiometryRecoveryFaceView: View {
                     .clipped()
                     .scaleEffect(x: -1, y: 1)
                     .frame(maxWidth: 290, maxHeight: 290)
-                Circle()
-                    .trim(from: 0.0, to: viewModel.loadingProgress)
-                    .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
-                    .foregroundStyle(.primaryMain)
-                    .rotationEffect(.degrees(-90))
+                if let loadingCircleSize {
+                    Circle()
+                        .strokeBorder(.primaryMain, lineWidth: loadingCircleSize)
+                } else {
+                    Circle()
+                        .trim(from: 0.0, to: viewModel.loadingProgress)
+                        .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
+                        .foregroundStyle(.primaryMain)
+                        .rotationEffect(.degrees(-90))
+                }
             } else {
                 Image(Icons.userFocus)
                     .resizable()
@@ -69,6 +92,6 @@ struct BiometryRecoveryFaceView: View {
 }
 
 #Preview {
-    BiometryRecoveryHintView()
+    BiometryRecoveryFaceView()
         .environmentObject(BiometryRecoveryView.ViewModel())
 }
