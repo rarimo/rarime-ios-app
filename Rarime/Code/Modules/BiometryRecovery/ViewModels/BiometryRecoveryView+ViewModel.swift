@@ -38,6 +38,10 @@ extension BiometryRecoveryView {
         func handleFaceImage(_ image: CGImage) {
             Task { @MainActor in
                 do {
+                    if faceImage != nil {
+                        return
+                    }
+                    
                     let faceImage = try ZKFaceManager.shared.extractFaceFromImage(UIImage(cgImage: image))
                     guard let faceImage = faceImage else {
                         if loadingProgress > 0 {
@@ -47,8 +51,10 @@ extension BiometryRecoveryView {
                         return
                     }
                     
-                    if loadingProgress == 1 {
+                    if loadingProgress >= 1 {
                         self.faceImage = faceImage
+                        
+                        return
                     }
                     
                     loadingProgress += 0.01

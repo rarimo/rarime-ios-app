@@ -27,7 +27,7 @@ struct BiometryRecoveryView: View {
                 BiometryRecoveryHintView()
             }
         }
-        .background(.backgroundPrimary)
+        .background(.backgroundPure)
         .environmentObject(viewModel)
     }
 }
