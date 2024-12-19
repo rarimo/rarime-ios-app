@@ -24,7 +24,7 @@ struct BiometryRecoveryView: View {
                     .clipped()
                     .frame(maxWidth: 300, maxHeight: 300)
             } else {
-                BiometryRecoveryHintView()
+                BiometryRecoveryFaceView()
             }
         }
         .background(.backgroundPure)

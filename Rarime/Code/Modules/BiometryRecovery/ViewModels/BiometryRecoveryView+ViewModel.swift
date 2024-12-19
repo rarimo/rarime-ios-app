@@ -59,7 +59,46 @@ extension BiometryRecoveryView {
                     
                     loadingProgress += 0.01
                 } catch {
-                    LoggerUtil.common.info("Error extracting face: \(error)")
+                    LoggerUtil.common.error("Error extracting face: \(error)")
+                }
+            }
+        }
+        
+        func recoverByBiometry(_ image: UIImage) {
+            Task { @MainActor in
+                do {
+                    let (_, grayscalePixelsData) = try ZKFaceManager.shared.convertFaceToGrayscale(image)
+
+                    let computableModel = ZKFaceManager.shared.convertGrayscaleDataToComputableModel(grayscalePixelsData)
+
+                    let features = ZKFaceManager.shared.extractFeaturesFromComputableModel(computableModel)
+
+                    LoggerUtil.common.debug("Image processing finished: \(features.json.utf8)")
+
+                    let inputs = CircuitBuilderManager.shared.fisherFaceCircuit.buildInputs(computableModel, features)
+
+                    let thread = Thread {
+                        do {
+                            let wtns = try ZKUtils.calcWtnsFisherface(inputs.json)
+
+                            let (proofJson, pubSignalsJson) = try ZKUtils.groth16Fisherface(wtns)
+
+                            let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
+                            let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
+
+                            let zkProof = ZkProof(proof: proof, pubSignals: pubSignals)
+
+                            LoggerUtil.common.debug("zkProof: \(zkProof.json.utf8)")
+                        } catch {
+                            LoggerUtil.common.debug("error: \(error)")
+                        }
+                    }
+
+                    thread.stackSize = 100 * 1024 * 1024
+
+                    thread.start()
+                } catch {
+                    LoggerUtil.common.error("failed to recover by biometry: \(error)")
                 }
             }
         }

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct BiometryRecoveryHintView: View {
+struct BiometryRecoveryFaceView: View {
     @EnvironmentObject private var viewModel: BiometryRecoveryView.ViewModel
 
     @State private var isScanning = false
