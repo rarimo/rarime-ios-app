@@ -3,8 +3,6 @@ import SwiftUI
 struct BiometryRecoveryHintView: View {
     @EnvironmentObject private var viewModel: BiometryRecoveryView.ViewModel
 
-    let onImage: (UIImage) -> Void
-
     @State private var isScanning = false
 
     var body: some View {
@@ -44,7 +42,6 @@ struct BiometryRecoveryHintView: View {
             Circle()
                 .strokeBorder(.primaryDark, lineWidth: 5)
                 .background(Circle().foregroundStyle(.primaryMain))
-                .foregroundStyle(.primaryDark)
                 .opacity(0.25)
             if let image = viewModel.currentFrame {
                 Image(decorative: image, scale: 1)
@@ -54,6 +51,11 @@ struct BiometryRecoveryHintView: View {
                     .clipped()
                     .scaleEffect(x: -1, y: 1)
                     .frame(maxWidth: 290, maxHeight: 290)
+                Circle()
+                    .trim(from: 0.0, to: viewModel.loadingProgress)
+                    .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
+                    .foregroundStyle(.primaryMain)
+                    .rotationEffect(.degrees(-90))
             } else {
                 Image(Icons.userFocus)
                     .resizable()
@@ -67,6 +69,6 @@ struct BiometryRecoveryHintView: View {
 }
 
 #Preview {
-    BiometryRecoveryHintView(onImage: { _ in })
+    BiometryRecoveryHintView()
         .environmentObject(BiometryRecoveryView.ViewModel())
 }

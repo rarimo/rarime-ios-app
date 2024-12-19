@@ -17,10 +17,18 @@ struct BiometryRecoveryView: View {
                 Spacer()
             }
             .padding()
-            BiometryRecoveryHintView { _ in }
-                .environmentObject(viewModel)
+            if let image = viewModel.faceImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .clipped()
+                    .frame(maxWidth: 300, maxHeight: 300)
+            } else {
+                BiometryRecoveryHintView()
+            }
         }
         .background(.backgroundPrimary)
+        .environmentObject(viewModel)
     }
 }
 

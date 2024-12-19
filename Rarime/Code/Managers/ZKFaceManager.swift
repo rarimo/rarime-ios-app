@@ -8,7 +8,7 @@ class ZKFaceManager {
     static let grayscaleWidthInPixels: Int = 92
     static let grayscaleHeightInPixels: Int = 112
 
-    func extractFaceFromImage(_ image: UIImage) throws -> UIImage {
+    func extractFaceFromImage(_ image: UIImage) throws -> UIImage? {
         let detectFaceRequest = VNDetectFaceCaptureQualityRequest()
 
         guard let cgImage = image.cgImage else {
@@ -24,7 +24,7 @@ class ZKFaceManager {
         }
 
         if results.isEmpty {
-            throw "No face detected"
+            return nil
         }
 
         let faceObservation = results[0]
