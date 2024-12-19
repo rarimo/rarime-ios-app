@@ -510,6 +510,35 @@ class ZKUtils {
 #endif
     }
     
+    public static func calcWtnsFisherface(_ privateInputsJson: Data) throws -> Data {
+        return try _calcWtnsFisherface(Circuits.fisherfaceDat, privateInputsJson)
+    }
+    
+    private static func _calcWtnsFisherface(
+        _ descriptionFileData: Data,
+        _ privateInputsJson: Data
+    ) throws -> Data {
+#if targetEnvironment(simulator)
+        return Data()
+#else
+        let wtnsSize = UnsafeMutablePointer<UInt>.allocate(capacity: Int(1))
+        wtnsSize.initialize(to: WITNESS_SIZE)
+        let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
+        let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
+        
+        let result = witnesscalc_fisherface(
+            (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
+            (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
+            wtnsBuffer, wtnsSize,
+            errorBuffer, ERROR_SIZE
+        )
+        
+        try handleWitnessError(result, errorBuffer, wtnsSize)
+        
+        return Data(bytes: wtnsBuffer, count: Int(wtnsSize.pointee))
+#endif
+    }
+    
     public static func calcWtnsAuth(_ privateInputsJson: Data) throws -> Data {
         return try _calcWtnsAuth(Circuits.authDat, privateInputsJson)
     }
@@ -545,6 +574,10 @@ class ZKUtils {
     
     public static func groth16Auth(_ wtns: Data) throws -> (proof: Data, pubSignals: Data) {
         return try groth16Prover(Circuits.authZkey, wtns)
+    }
+    
+    public static func groth16Fisherface(_ wtns: Data) throws -> (proof: Data, pubSignals: Data) {
+        return try groth16Prover(Circuits.fisherfaceZkey, wtns)
     }
     
     public static func groth16Prover(_ zkey: Data, _ wtns: Data) throws -> (proof: Data, pubSignals: Data) {

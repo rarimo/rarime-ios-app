@@ -316,6 +316,7 @@
 		CEF8C7F72BE0DE9700F8E1A4 /* CosmosTransferResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF8C7F62BE0DE9700F8E1A4 /* CosmosTransferResponse.swift */; };
 		CEFD130B2D131E8800164DA6 /* FisherFaceInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD130A2D131E8300164DA6 /* FisherFaceInputs.swift */; };
 		CEFD130C2D131E8800164DA6 /* FisherFaceInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD130A2D131E8300164DA6 /* FisherFaceInputs.swift */; };
+		CEFD13112D13249100164DA6 /* libwitnesscalc_fisherface.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEFD13102D13249100164DA6 /* libwitnesscalc_fisherface.a */; };
 		CEFE5F352CB522A700498F39 /* RegisterIdentityCircuitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F342CB522A700498F39 /* RegisterIdentityCircuitType.swift */; };
 		CEFE5F372CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F362CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift */; };
 		CEFE5F392CB56C8700498F39 /* CryptoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F382CB56C8700498F39 /* CryptoUtils.swift */; };
@@ -628,6 +629,8 @@
 		CEF723132BF4BB9000E79198 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		CEF8C7F62BE0DE9700F8E1A4 /* CosmosTransferResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosTransferResponse.swift; sourceTree = "<group>"; };
 		CEFD130A2D131E8300164DA6 /* FisherFaceInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FisherFaceInputs.swift; sourceTree = "<group>"; };
+		CEFD130D2D1322B300164DA6 /* witnesscalc_fisherface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_fisherface.h; sourceTree = "<group>"; };
+		CEFD13102D13249100164DA6 /* libwitnesscalc_fisherface.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_fisherface.a; sourceTree = "<group>"; };
 		CEFE5F342CB522A700498F39 /* RegisterIdentityCircuitType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterIdentityCircuitType.swift; sourceTree = "<group>"; };
 		CEFE5F362CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportRegisterIdentityCircuitSignatureType.swift; sourceTree = "<group>"; };
 		CEFE5F382CB56C8700498F39 /* CryptoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUtils.swift; sourceTree = "<group>"; };
@@ -693,6 +696,7 @@
 				CE68BE452BD9B6EA00D92EBB /* Web3 in Frameworks */,
 				CE72102E2BD7F6780043DB7F /* Alamofire in Frameworks */,
 				CE61E8832C24240000940129 /* Semaphore in Frameworks */,
+				CEFD13112D13249100164DA6 /* libwitnesscalc_fisherface.a in Frameworks */,
 				CEF56DE32CF5D97D00F4A477 /* libwitnesscalc_registerIdentity_21_256_3_3_336_232_NA.a in Frameworks */,
 				56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */,
 				CE8D4A592D01E8E3001EA260 /* Identity.xcframework in Frameworks */,
@@ -1430,6 +1434,7 @@
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562002BD923B3002D4954 /* prover.h */,
 				CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */,
+				CEFD130D2D1322B300164DA6 /* witnesscalc_fisherface.h */,
 				CEC561FD2BD923B3002D4954 /* witnesscalc_queryIdentity.h */,
 				CEF56DE62CF5D9AF00F4A477 /* witnesscalc_registerIdentity_1_160_3_3_576_200_NA.h */,
 				CEE3259E2CB7CA6E00468BE4 /* witnesscalc_registerIdentity_1_256_3_5_576_248_NA.h */,
@@ -1455,6 +1460,7 @@
 				CEE4FEAA2CFDBA80007C31F3 /* libgmp.a */,
 				CEC561FC2BD923B3002D4954 /* librapidsnark.a */,
 				CE8FEB5B2C1AFC3F0008381A /* libwitnesscalc_auth.a */,
+				CEFD13102D13249100164DA6 /* libwitnesscalc_fisherface.a */,
 				CEDB9DCB2BFDF60900BCF074 /* libwitnesscalc_queryIdentity.a */,
 				CEE4FEA22CFDB1A2007C31F3 /* libwitnesscalc_registerIdentity_1_256_3_5_576_248_NA.a */,
 				CE30094D2CE611B80084E07E /* libwitnesscalc_registerIdentity_1_256_3_4_336_232_1_1480_5_296.a */,

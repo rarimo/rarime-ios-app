@@ -6,4 +6,7 @@ class Circuits {
 
     static let authDat = NSDataAsset(name: "authDat")?.data ?? Data()
     static let authZkey = NSDataAsset(name: "authZkey")?.data ?? Data()
+
+    static let fisherfaceDat = NSDataAsset(name: "fisherfaceDat")?.data ?? Data()
+    static let fisherfaceZkey = NSDataAsset(name: "fisherfaceZkey")?.data ?? Data()
 }
