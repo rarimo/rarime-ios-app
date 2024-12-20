@@ -17,11 +17,7 @@ struct BiometryRecoveryView: View {
                 Spacer()
             }
             .padding()
-//            if let image = viewModel.faceImage {
-//                BiometryRecoveryProcessingView(image: image)
-//            } else {
             BiometryRecoveryFaceView()
-//            }
         }
         .background(.backgroundPure)
         .environmentObject(viewModel)

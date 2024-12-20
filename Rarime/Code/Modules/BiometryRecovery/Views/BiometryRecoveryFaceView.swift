@@ -40,21 +40,6 @@ struct BiometryRecoveryFaceView: View {
         .onDisappear {
             viewModel.stopScanning()
         }
-        .onChange(of: viewModel.faceImage) { image in
-            if image == nil {
-                return
-            }
-
-            viewModel.stopScanning()
-
-            Task { @MainActor in
-                for newLoadingCircleSize in 6 ... 150 {
-                    loadingCircleSize = CGFloat(newLoadingCircleSize)
-
-                    try await Task.sleep(nanoseconds: 10_000_000)
-                }
-            }
-        }
     }
 
     var faceCircle: some View {
@@ -76,15 +61,6 @@ struct BiometryRecoveryFaceView: View {
                         .strokeBorder(.primaryMain, lineWidth: loadingCircleSize)
                     if loadingCircleSize == 150 {
                         BiometryRecoverySuccessView()
-                            .onAppear {
-                                Task { @MainActor in
-                                    for newCornerRadius in (25 ... 149).reversed() {
-                                        loadingCircleCornerRadius = CGFloat(newCornerRadius)
-
-                                        try await Task.sleep(nanoseconds: 5_000_000)
-                                    }
-                                }
-                            }
                     }
                 } else {
                     Circle()
@@ -99,6 +75,27 @@ struct BiometryRecoveryFaceView: View {
                     .renderingMode(.template)
                     .foregroundStyle(.primaryDark)
                     .frame(width: 75, height: 75)
+            }
+        }
+        .onChange(of: viewModel.faceImage) { image in
+            if image == nil {
+                return
+            }
+
+            viewModel.stopScanning()
+
+            Task { @MainActor in
+                for newLoadingCircleSize in 6 ... 150 {
+                    loadingCircleSize = CGFloat(newLoadingCircleSize)
+
+                    try await Task.sleep(nanoseconds: 10_000_000)
+                }
+
+                for newCornerRadius in (25 ... 149).reversed() {
+                    loadingCircleCornerRadius = CGFloat(newCornerRadius)
+
+                    try await Task.sleep(nanoseconds: 20_000_000)
+                }
             }
         }
         .frame(width: 300, height: 300)

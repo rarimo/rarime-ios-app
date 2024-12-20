@@ -194,7 +194,6 @@
 		CE2797512CEB429D008649B0 /* String+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7210282BD7D0D10043DB7F /* String+Hex.swift */; };
 		CE2797522CEB42C2008649B0 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC562132BD9281A002D4954 /* libresolv.9.tbd */; };
 		CE2797532CEB4605008649B0 /* RegisterIdentityCircuitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F342CB522A700498F39 /* RegisterIdentityCircuitType.swift */; };
-		CE2F2D9C2D1481C000A0B31D /* BiometryRecoveryProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F2D9B2D1481AB00A0B31D /* BiometryRecoveryProcessingView.swift */; };
 		CE2F2D9E2D15827E00A0B31D /* BiometryRecoverySuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F2D9D2D15826B00A0B31D /* BiometryRecoverySuccessView.swift */; };
 		CE3009582CE611B80084E07E /* libwitnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE30094E2CE611B80084E07E /* libwitnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256.a */; };
 		CE3009592CE611B80084E07E /* libwitnesscalc_registerIdentity_1_256_3_6_576_264_1_2448_3_256.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3009512CE611B80084E07E /* libwitnesscalc_registerIdentity_1_256_3_6_576_264_1_2448_3_256.a */; };
@@ -516,7 +515,6 @@
 		CE19CB462BE39DA400B26DF7 /* RarimoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarimoUtils.swift; sourceTree = "<group>"; };
 		CE19CB482BE3AD4200B26DF7 /* LockScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenView.swift; sourceTree = "<group>"; };
 		CE1FA5692C1708F100B2C191 /* Points.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Points.swift; sourceTree = "<group>"; };
-		CE2F2D9B2D1481AB00A0B31D /* BiometryRecoveryProcessingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometryRecoveryProcessingView.swift; sourceTree = "<group>"; };
 		CE2F2D9D2D15826B00A0B31D /* BiometryRecoverySuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometryRecoverySuccessView.swift; sourceTree = "<group>"; };
 		CE30094D2CE611B80084E07E /* libwitnesscalc_registerIdentity_1_256_3_4_336_232_1_1480_5_296.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_1_256_3_4_336_232_1_1480_5_296.a; sourceTree = "<group>"; };
 		CE30094E2CE611B80084E07E /* libwitnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256.a; sourceTree = "<group>"; };
@@ -1454,7 +1452,6 @@
 			isa = PBXGroup;
 			children = (
 				CE2F2D9D2D15826B00A0B31D /* BiometryRecoverySuccessView.swift */,
-				CE2F2D9B2D1481AB00A0B31D /* BiometryRecoveryProcessingView.swift */,
 				CEBC9FF42D142CE500ED216F /* BiometryRecoveryFaceView.swift */,
 				CEBC9FF22D142C1600ED216F /* BiometryRecoveryView.swift */,
 			);
@@ -1881,7 +1878,6 @@
 				5641CC452C874E2B007B7A0D /* AppAlert.swift in Sources */,
 				C71161B32CAAE3DB00ED41EA /* String+BigUInt.swift in Sources */,
 				563706792C5CF374002F3AF4 /* MrzFormView.swift in Sources */,
-				CE2F2D9C2D1481C000A0B31D /* BiometryRecoveryProcessingView.swift in Sources */,
 				CED909D02BDBA9FC0065E949 /* Cosmos.swift in Sources */,
 				56A88FCF2C062AB200D3A64A /* AirdropCheckboxView.swift in Sources */,
 				56A6C76E2BBD474200992562 /* DateUtil.swift in Sources */,
