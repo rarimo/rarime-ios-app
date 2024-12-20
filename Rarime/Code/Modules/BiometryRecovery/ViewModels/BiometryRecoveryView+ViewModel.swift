@@ -1,5 +1,12 @@
 import SwiftUI
 
+enum BiometryRecoveryProgress: String {
+    case downloadingCircuitData = "Downloading circuit data"
+    case extractionImageFeatures = "Extracting image features"
+    case runningZKMK = "Running ZKMK"
+    case overridingAccess = "Overriding access"
+}
+
 extension BiometryRecoveryView {
     class ViewModel: ObservableObject {
         @Published var currentFrame: CGImage?
