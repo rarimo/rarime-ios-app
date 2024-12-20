@@ -72,6 +72,9 @@ struct BiometryRecoveryFaceView: View {
                 if let loadingCircleSize {
                     Circle()
                         .strokeBorder(.primaryMain, lineWidth: loadingCircleSize)
+                    if loadingCircleSize >= 150 {
+                        BiometryRecoverySuccessView()
+                    }
                 } else {
                     Circle()
                         .trim(from: 0.0, to: viewModel.loadingProgress)
