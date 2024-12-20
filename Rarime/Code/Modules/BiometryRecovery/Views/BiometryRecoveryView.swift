@@ -17,10 +17,17 @@ struct BiometryRecoveryView: View {
                 Spacer()
             }
             .padding()
-            BiometryRecoveryFaceView()
+            BiometryRecoveryFaceView {
+                onNext()
+
+                AlertManager.shared.emitSuccess("Access restored successfully")
+            }
         }
         .background(.backgroundPure)
         .environmentObject(viewModel)
+        .onDisappear {
+            viewModel.recoveryTask?.cancel()
+        }
     }
 }
 

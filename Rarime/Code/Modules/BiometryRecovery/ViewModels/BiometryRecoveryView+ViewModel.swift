@@ -1,6 +1,6 @@
 import SwiftUI
 
-enum BiometryRecoveryProgress: Int {
+enum BiometryRecoveryProgress: Int, CaseIterable {
     case downloadingCircuitData = 0
     case extractionImageFeatures = 1
     case runningZKMK = 2
@@ -12,6 +12,15 @@ enum BiometryRecoveryProgress: Int {
         case .extractionImageFeatures: return "Extracting image features"
         case .runningZKMK: return "Running ZKMK"
         case .overridingAccess: return "Overriding access"
+        }
+    }
+    
+    var progressTime: Int {
+        switch self {
+        case .downloadingCircuitData: return 15
+        case .extractionImageFeatures: return 5
+        case .runningZKMK: return 10
+        case .overridingAccess: return 7
         }
     }
 }
@@ -27,16 +36,13 @@ extension BiometryRecoveryView {
         
         @Published var loadingProgress = 0.0
         
-        @Published var recoveryProgress: [BiometryRecoveryProgress] = []
+        @Published var recoveryProgress: BiometryRecoveryProgress? = nil
         
+        @Published var recoveryTask: Task<Void, Never>? = nil
+        
+        @MainActor
         func markRecoveryProgress(_ progress: BiometryRecoveryProgress) {
-            if recoveryProgress.count < progress.rawValue {
-                for _ in recoveryProgress.count..<progress.rawValue {
-                    recoveryProgress.append(progress)
-                }
-            }
-            
-            recoveryProgress.append(progress)
+            recoveryProgress = progress
         }
         
         func startScanning() {
@@ -92,16 +98,14 @@ extension BiometryRecoveryView {
             }
         }
         
-        func recoverByBiometry(_ image: UIImage) {
-            Task { @MainActor in
+        func recoverByBiometry(_ image: UIImage, _ onSuccess: @escaping () -> Void) {
+            recoveryTask = Task { @MainActor in
                 do {
                     let (_, grayscalePixelsData) = try ZKFaceManager.shared.convertFaceToGrayscale(image)
 
                     let computableModel = ZKFaceManager.shared.convertGrayscaleDataToComputableModel(grayscalePixelsData)
 
                     let features = ZKFaceManager.shared.extractFeaturesFromComputableModel(computableModel)
-
-                    LoggerUtil.common.debug("Image processing finished: \(features.json.utf8)")
 
                     let inputs = CircuitBuilderManager.shared.fisherFaceCircuit.buildInputs(computableModel, features)
 
@@ -114,11 +118,15 @@ extension BiometryRecoveryView {
                             let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
                             let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
 
-                            let zkProof = ZkProof(proof: proof, pubSignals: pubSignals)
-
-                            LoggerUtil.common.debug("zkProof: \(zkProof.json.utf8)")
+                            let _ = ZkProof(proof: proof, pubSignals: pubSignals)
+                            
+                            try UserManager.shared.createNewUser()
+                            
+                            LoggerUtil.common.info("Biometry recovery successful")
+                            
+                            onSuccess()
                         } catch {
-                            LoggerUtil.common.debug("error: \(error)")
+                            LoggerUtil.common.error("error: \(error)")
                         }
                     }
 

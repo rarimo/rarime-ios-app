@@ -13,6 +13,10 @@ struct BiometryRecoveryFaceView: View {
 
     @State private var restoringTextDots: String = ""
 
+    @State private var recoveryTask: Task<Void, Never>? = nil
+
+    let onRecovered: () -> Void
+
     var body: some View {
         VStack {
             Spacer()
@@ -44,6 +48,8 @@ struct BiometryRecoveryFaceView: View {
             .disabled(isScanning)
         }
         .onDisappear {
+            recoveryTask = nil
+
             viewModel.stopScanning()
         }
     }
@@ -67,6 +73,9 @@ struct BiometryRecoveryFaceView: View {
                         RoundedRectangle(cornerRadius: loadingCircleCornerRadius)
                             .foregroundStyle(.primaryMain)
                         BiometryRecoverySuccessView()
+                        if isScanned {
+                            recoveryProcess
+                        }
                     } else {
                         Circle()
                             .strokeBorder(.primaryMain, lineWidth: loadingCircleSize)
@@ -107,7 +116,11 @@ struct BiometryRecoveryFaceView: View {
                     try await Task.sleep(nanoseconds: 20_000_000)
                 }
 
-                isScanned = true
+                withAnimation {
+                    isScanned = true
+                }
+
+                runRecoveryProcess()
 
                 while true {
                     try await Task.sleep(nanoseconds: 100_000_000)
@@ -122,9 +135,83 @@ struct BiometryRecoveryFaceView: View {
         }
         .frame(width: 300, height: 300)
     }
+
+    var recoveryProcess: some View {
+        VStack(spacing: 35) {
+            ForEach(BiometryRecoveryProgress.allCases, id: \.rawValue) { progress in
+                VStack {
+                    Text(progress.description)
+                        .body2()
+                        .align()
+                        .foregroundStyle(.baseBlack)
+                    RecoveryProcessLoader(biometryRecoveryProgress: progress)
+                }
+                .padding(.horizontal)
+            }
+        }
+        .transition(.slide)
+    }
+
+    func runRecoveryProcess() {
+        recoveryTask = Task { @MainActor in
+            do {
+                guard let image = viewModel.faceImage else {
+                    return
+                }
+
+                var isRecovered = false
+                viewModel.recoverByBiometry(image) {
+                    isRecovered = true
+                }
+
+                for progress in BiometryRecoveryProgress.allCases {
+                    viewModel.markRecoveryProgress(progress)
+
+                    try await Task.sleep(nanoseconds: UInt64(progress.progressTime) * NSEC_PER_SEC)
+                }
+
+                while !isRecovered {
+                    try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
+                }
+
+                try UserManager.shared.user?.save()
+
+                onRecovered()
+            } catch {
+                LoggerUtil.common.error("Error recovering by biometry: \(error)")
+            }
+        }
+    }
+}
+
+struct RecoveryProcessLoader: View {
+    @EnvironmentObject var viewModel: BiometryRecoveryView.ViewModel
+
+    var biometryRecoveryProgress: BiometryRecoveryProgress
+
+    @State private var progress: Double = 0
+
+    var body: some View {
+        VStack {
+            ProgressView(value: progress)
+                .progressViewStyle(.linear)
+            if biometryRecoveryProgress.rawValue <= viewModel.recoveryProgress?.rawValue ?? -1 {
+                VStack {}
+                    .onAppear {
+                        Task { @MainActor in
+                            while progress < 1 {
+                                progress += 0.01
+
+                                try await Task.sleep(nanoseconds: UInt64(biometryRecoveryProgress.progressTime) * NSEC_PER_SEC / 100)
+                            }
+                        }
+                    }
+            }
+        }
+    }
 }
 
 #Preview {
-    BiometryRecoveryFaceView()
+    BiometryRecoveryFaceView {}
         .environmentObject(BiometryRecoveryView.ViewModel())
 }
