@@ -1,10 +1,19 @@
 import SwiftUI
 
-enum BiometryRecoveryProgress: String {
-    case downloadingCircuitData = "Downloading circuit data"
-    case extractionImageFeatures = "Extracting image features"
-    case runningZKMK = "Running ZKMK"
-    case overridingAccess = "Overriding access"
+enum BiometryRecoveryProgress: Int {
+    case downloadingCircuitData = 0
+    case extractionImageFeatures = 1
+    case runningZKMK = 2
+    case overridingAccess = 3
+    
+    var description: String {
+        switch self {
+        case .downloadingCircuitData: return "Downloading circuit data"
+        case .extractionImageFeatures: return "Extracting image features"
+        case .runningZKMK: return "Running ZKMK"
+        case .overridingAccess: return "Overriding access"
+        }
+    }
 }
 
 extension BiometryRecoveryView {
@@ -17,6 +26,18 @@ extension BiometryRecoveryView {
         @Published var cameraTask: Task<Void, Never>? = nil
         
         @Published var loadingProgress = 0.0
+        
+        @Published var recoveryProgress: [BiometryRecoveryProgress] = []
+        
+        func markRecoveryProgress(_ progress: BiometryRecoveryProgress) {
+            if recoveryProgress.count < progress.rawValue {
+                for _ in recoveryProgress.count..<progress.rawValue {
+                    recoveryProgress.append(progress)
+                }
+            }
+            
+            recoveryProgress.append(progress)
+        }
         
         func startScanning() {
             cameraTask = Task {
