@@ -5,6 +5,8 @@ struct BiometryRecoveryFaceView: View {
 
     @State private var isScanning = false
 
+    @State private var isScanned = false
+
     @State private var loadingCircleSize: CGFloat?
 
     @State private var loadingCircleCornerRadius: CGFloat = 150
@@ -12,7 +14,7 @@ struct BiometryRecoveryFaceView: View {
     var body: some View {
         VStack {
             Spacer()
-            Text("Scan your face")
+            Text(isScanned ? "Restoring access" : "Scan your face")
                 .h4()
                 .padding(.bottom, 50)
                 .padding(.horizontal)
@@ -23,6 +25,7 @@ struct BiometryRecoveryFaceView: View {
                 .foregroundStyle(.textSecondary)
                 .padding(.top, 40)
                 .padding(.horizontal)
+                .opacity(isScanned ? 0 : 1)
             Spacer()
             AppButton(
                 text: "Continue",
@@ -100,6 +103,8 @@ struct BiometryRecoveryFaceView: View {
 
                     try await Task.sleep(nanoseconds: 20_000_000)
                 }
+
+                isScanned = true
             }
         }
         .frame(width: 300, height: 300)
