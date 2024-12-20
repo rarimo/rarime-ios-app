@@ -7,6 +7,8 @@ struct BiometryRecoveryFaceView: View {
 
     @State private var loadingCircleSize: CGFloat?
 
+    @State private var loadingCircleCornerRadius: CGFloat = 150
+
     var body: some View {
         VStack {
             Spacer()
@@ -70,10 +72,19 @@ struct BiometryRecoveryFaceView: View {
                     .scaleEffect(x: -1, y: 1)
                     .frame(maxWidth: 290, maxHeight: 290)
                 if let loadingCircleSize {
-                    Circle()
+                    RoundedRectangle(cornerRadius: loadingCircleCornerRadius)
                         .strokeBorder(.primaryMain, lineWidth: loadingCircleSize)
-                    if loadingCircleSize >= 150 {
+                    if loadingCircleSize == 150 {
                         BiometryRecoverySuccessView()
+                            .onAppear {
+                                Task { @MainActor in
+                                    for newCornerRadius in (25 ... 149).reversed() {
+                                        loadingCircleCornerRadius = CGFloat(newCornerRadius)
+
+                                        try await Task.sleep(nanoseconds: 5_000_000)
+                                    }
+                                }
+                            }
                     }
                 } else {
                     Circle()

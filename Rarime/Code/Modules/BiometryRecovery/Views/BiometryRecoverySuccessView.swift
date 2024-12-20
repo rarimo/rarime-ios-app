@@ -9,13 +9,21 @@ struct BiometryRecoverySuccessView: View {
                 Image(systemName: "checkmark")
                     .resizable()
                     .animation(.smooth)
-                    .foregroundStyle(.baseBlack)
+                    .foregroundStyle(.backgroundPure)
                     .frame(width: 125, height: 125)
             }
         }
         .onAppear {
             withAnimation {
                 isAnimating = true
+            }
+
+            Task { @MainActor in
+                try? await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
+
+                withAnimation {
+                    isAnimating = false
+                }
             }
         }
     }
