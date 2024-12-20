@@ -11,12 +11,15 @@ struct BiometryRecoveryFaceView: View {
 
     @State private var loadingCircleCornerRadius: CGFloat = 150
 
+    @State private var restoringTextDots: String = ""
+
     var body: some View {
         VStack {
             Spacer()
-            Text(isScanned ? "Restoring access" : "Scan your face")
+            Text(isScanned ? "Restoring access\n" + restoringTextDots : "Scan your face")
                 .h4()
-                .padding(.bottom, 50)
+                .multilineTextAlignment(.center)
+                .padding(.bottom, isScanned ? 10 : 50)
                 .padding(.horizontal)
             faceCircle
             Text("Look straight into the screen with good lighting conditions")
@@ -105,6 +108,16 @@ struct BiometryRecoveryFaceView: View {
                 }
 
                 isScanned = true
+
+                while true {
+                    try await Task.sleep(nanoseconds: 100_000_000)
+
+                    if restoringTextDots.count == 30 {
+                        restoringTextDots = ""
+                    } else {
+                        restoringTextDots += "."
+                    }
+                }
             }
         }
         .frame(width: 300, height: 300)
