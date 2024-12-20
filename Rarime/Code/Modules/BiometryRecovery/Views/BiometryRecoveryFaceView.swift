@@ -57,11 +57,15 @@ struct BiometryRecoveryFaceView: View {
                     .scaleEffect(x: -1, y: 1)
                     .frame(maxWidth: 290, maxHeight: 290)
                 if let loadingCircleSize {
-                    RoundedRectangle(cornerRadius: loadingCircleCornerRadius)
-                        .strokeBorder(.primaryMain, lineWidth: loadingCircleSize)
                     if loadingCircleSize == 150 {
+                        RoundedRectangle(cornerRadius: loadingCircleCornerRadius)
+                            .foregroundStyle(.primaryMain)
                         BiometryRecoverySuccessView()
+                    } else {
+                        Circle()
+                            .strokeBorder(.primaryMain, lineWidth: loadingCircleSize)
                     }
+
                 } else {
                     Circle()
                         .trim(from: 0.0, to: viewModel.loadingProgress)
