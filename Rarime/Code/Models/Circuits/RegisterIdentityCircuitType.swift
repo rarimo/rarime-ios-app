@@ -58,6 +58,7 @@ extension RegisterIdentityCircuitType {
 
     enum CircuitPasssportHashType: String {
         case sha1
+        case sha224
         case sha256
         case sha384
         case sha512
@@ -66,6 +67,8 @@ extension RegisterIdentityCircuitType {
             switch self {
             case .sha1:
                 return 160
+            case .sha224:
+                return 224
             case .sha256:
                 return 256
             case .sha384:
@@ -78,6 +81,8 @@ extension RegisterIdentityCircuitType {
         func getChunkSize() -> UInt {
             switch self {
             case .sha1:
+                return 512
+            case .sha224:
                 return 512
             case .sha256:
                 return 512
@@ -335,7 +340,7 @@ extension Passport {
         }
     }
 
-    private func getEncapsulatedContentDigestAlgorithm(_ sod: SOD) throws -> RegisterIdentityCircuitType.CircuitPasssportHashType? {
+    public func getEncapsulatedContentDigestAlgorithm(_ sod: SOD) throws -> RegisterIdentityCircuitType.CircuitPasssportHashType? {
         guard
             let signedData = sod.asn1.getChild(1)?.getChild(0),
             let privateKeyInfoAsn1 = signedData.getChild(2)?.getChild(1)?.getChild(0)
@@ -386,5 +391,21 @@ extension Passport {
         let length = UInt(data.count) * 8 + 1 + 64
 
         return length / chunkSize + (length % chunkSize == 0 ? 0 : 1)
+    }
+}
+
+extension Passport {
+    func getRegisterIdentityLightCircuitName() throws -> String {
+        var circuitName = "registerIdentityLight"
+
+        let sod = try getSod()
+
+        guard let ecDigestAlgorithm = try getEncapsulatedContentDigestAlgorithm(sod) else {
+            throw "Invalid passport hash type"
+        }
+
+        circuitName += "\(ecDigestAlgorithm.getId())"
+
+        return circuitName
     }
 }

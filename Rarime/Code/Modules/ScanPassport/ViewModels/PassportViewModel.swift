@@ -58,6 +58,8 @@ class PassportViewModel: ObservableObject {
     func register(
         _ downloadProgress: @escaping (String) -> Void = { _ in }
     ) async throws -> ZkProof {
+        var isCriticalRegistrationProcessInProgress = true
+        
         do {
             guard let passport else { throw "failed to get passport" }
             guard let user = UserManager.shared.user else { throw "failed to get user" }
@@ -78,7 +80,12 @@ class PassportViewModel: ObservableObject {
                 throw "failed to get registered circuit data, circuit does not exist"
             }
             
+            isCriticalRegistrationProcessInProgress = false
+            
             let circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData, downloadProgress)
+            
+            isCriticalRegistrationProcessInProgress = true
+            
             proofState = .applyingZK
             
             let registerIdentityInputs = try await CircuitBuilderManager.shared.registerIdentityCircuit.buildInputs(
@@ -149,9 +156,13 @@ class PassportViewModel: ObservableObject {
                 
                 var iterator = revocationPassportPublisher.values.makeAsyncIterator()
                 
+                isCriticalRegistrationProcessInProgress = false
+                
                 guard let passport = try await iterator.next() else {
                     throw "failed to get passport"
                 }
+                
+                isCriticalRegistrationProcessInProgress = true
                 
                 try await UserManager.shared.revoke(passportInfo, passport)
             }
@@ -176,6 +187,101 @@ class PassportViewModel: ObservableObject {
             processingStatus = .success
             
             return proof
+        } catch {
+            if !isCriticalRegistrationProcessInProgress {
+                processingStatus = .failure
+                
+                throw error
+            }
+            
+            do {
+                return try await lightRegister()
+            } catch {
+                processingStatus = .failure
+                
+                throw error
+            }
+        }
+    }
+    
+    @MainActor
+    func lightRegister() async throws -> ZkProof {
+        do {
+            guard let user = UserManager.shared.user else { throw "failed to get user" }
+            guard let passport else { throw "failed to get passport" }
+
+            let registerIdentityLightCircuitName = try passport.getRegisterIdentityLightCircuitName()
+            
+            LoggerUtil.common.info("Registering passport with light circuit: \(registerIdentityLightCircuitName)")
+            
+            guard let registeredCircuitData = RegisteredCircuitData(rawValue: registerIdentityLightCircuitName) else {
+                throw "failed to get registered circuit data, circuit does not exist"
+            }
+            
+            let circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData)
+            
+            let registerIdentityLightInputs = try CircuitBuilderManager.shared.registerIdentityLightCircuit.buildInputs(user.secretKey, passport)
+            
+            let zkProof = try UserManager.shared.generateRegisterIdentityLightProof(
+                registerIdentityLightInputs.json,
+                circuitData,
+                registeredCircuitData
+            )
+            
+            let lightRegistrationService = LightRegistrationService(ConfigManager.shared.api.relayerURL)
+            let registerResponse = try await lightRegistrationService.register(passport, zkProof)
+            
+            LoggerUtil.common.info("Passport light registration signature received")
+            
+            let stateKeeperContract = try StateKeeperContract()
+            
+            let passportInfoKey: String
+            if passport.dg15.isEmpty {
+                passportInfoKey = try BN(hex: registerResponse.data.attributes.passportHash).dec()
+            } else {
+                passportInfoKey = try BN(hex: registerResponse.data.attributes.publicKey).dec()
+            }
+            
+            let profile = try IdentityProfile().newProfile(UserManager.shared.user?.secretKey)
+            
+            let currentIdentityKey = try profile.getPublicKeyHash()
+            
+            let (passportInfo, _) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
+            
+            if passportInfo.activeIdentity == currentIdentityKey {
+                LoggerUtil.common.info("Passport is already registered")
+                
+                PassportManager.shared.setPassport(passport)
+                try UserManager.shared.saveRegisterZkProof(zkProof)
+                try UserManager.shared.saveLightRegistrationData(registerResponse.data.attributes)
+                
+                isUserRegistered = true
+                proofState = .finalizing
+                
+                processingStatus = .success
+                
+                return zkProof
+            }
+            
+            try await UserManager.shared.lightRegister(zkProof, registerResponse)
+            
+            PassportManager.shared.setPassport(passport)
+            try UserManager.shared.saveRegisterZkProof(zkProof)
+            try UserManager.shared.saveLightRegistrationData(registerResponse.data.attributes)
+            
+            try await NotificationManager.shared.subscribe(toTopic: ConfigManager.shared.general.claimableNotificationTopic)
+            
+            isUserRegistered = true
+            
+            LoggerUtil.common.info("Passport light registration succeed")
+            
+            try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
+            proofState = .finalizing
+            
+            try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
+            processingStatus = .success
+            
+            return zkProof
         } catch {
             processingStatus = .failure
             throw error
