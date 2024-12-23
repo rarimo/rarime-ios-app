@@ -149,7 +149,7 @@ struct BiometryRecoveryFaceView: View {
                 .padding(.horizontal)
             }
         }
-        .transition(.slide)
+        .transition(.opacity)
     }
 
     func runRecoveryProcess() {
@@ -195,6 +195,7 @@ struct RecoveryProcessLoader: View {
         VStack {
             ProgressView(value: progress)
                 .progressViewStyle(.linear)
+                .tint(.baseBlack)
             if biometryRecoveryProgress.rawValue <= viewModel.recoveryProgress?.rawValue ?? -1 {
                 VStack {}
                     .onAppear {
