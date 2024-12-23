@@ -141,9 +141,10 @@ private struct GeneralStatusView: View {
         VStack(spacing: 32) {
             ZStack {
                 ZStack {
-                    if status == .processing {
-                        CirclesLoader()
-                    } else {
+                    switch status {
+                    case .downloading(_), .processing:
+                        LottieView(animation: Animations.processing)
+                    default:
                         Image(status.icon ?? Icons.dotsThreeOutline)
                             .square(24)
                             .foregroundStyle(status.foregroundColor)

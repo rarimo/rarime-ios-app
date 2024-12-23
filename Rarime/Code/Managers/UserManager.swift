@@ -15,6 +15,8 @@ class UserManager: ObservableObject {
     
     @Published var registerZkProof: ZkProof?
     
+    @Published var lightRegistrationData: LightRegistrationData?
+    
     @Published var masterCertProof: SMTProof?
     
     @Published var balance: Double
@@ -33,6 +35,7 @@ class UserManager: ObservableObject {
                     try AppKeychain.removeValue(.privateKey)
                     try AppKeychain.removeValue(.registerZkProof)
                     try AppKeychain.removeValue(.passport)
+                    try AppKeychain.removeValue(.lightRegistrationData)
                 }
                 
                 AppUserDefaults.shared.isFirstLaunch = false
@@ -46,6 +49,12 @@ class UserManager: ObservableObject {
                 let registerZkProof = try JSONDecoder().decode(ZkProof.self, from: registerZkProofJson)
                 
                 self.registerZkProof = registerZkProof
+            }
+            
+            if let lightRegistrationData = try AppKeychain.getValue(.lightRegistrationData) {
+                let lightRegistrationData = try JSONDecoder().decode(LightRegistrationData.self, from: lightRegistrationData)
+                
+                self.lightRegistrationData = lightRegistrationData
             }
         } catch {
             fatalError("\(error.localizedDescription)")
@@ -70,12 +79,49 @@ class UserManager: ObservableObject {
         self.registerZkProof = zkProof
     }
     
+    func saveLightRegistrationData(_ lightRegistrationData: LightRegistrationData) throws {
+        let lightRegistrationDataJson = try JSONEncoder().encode(lightRegistrationData)
+        
+        try AppKeychain.setValue(.lightRegistrationData, lightRegistrationDataJson)
+        
+        self.lightRegistrationData = lightRegistrationData
+    }
+    
     var userAddress: String {
         self.user?.profile.getRarimoAddress() ?? "undefined"
     }
     
     var userChallenge: Data {
         (try? self.user?.profile.getRegistrationChallenge()) ?? Data()
+    }
+    
+    func generateRegisterIdentityLightProof(
+        _ inputs: Data,
+        _ circuitData: CircuitData,
+        _ registeredCircuitData: RegisteredCircuitData
+    ) throws -> ZkProof {
+        var wtns: Data
+        switch registeredCircuitData {
+        case .registerIdentityLight160:
+            wtns = try ZKUtils.calcWtnsRegisterIdentityLight160(circuitData.circuitDat, inputs)
+        case .registerIdentityLight224:
+            wtns = try ZKUtils.calcWtnsRegisterIdentityLight224(circuitData.circuitDat, inputs)
+        case .registerIdentityLight256:
+            wtns = try ZKUtils.calcWtnsRegisterIdentityLight256(circuitData.circuitDat, inputs)
+        case .registerIdentityLight384:
+            wtns = try ZKUtils.calcWtnsRegisterIdentityLight384(circuitData.circuitDat, inputs)
+        case .registerIdentityLight512:
+            wtns = try ZKUtils.calcWtnsRegisterIdentityLight512(circuitData.circuitDat, inputs)
+        default:
+            throw "invalid register identity light circuit"
+        }
+        
+        let (proofJson, pubSignalsJson) = try ZKUtils.groth16Prover(circuitData.circuitZkey, wtns)
+        
+        let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
+        let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
+        
+        return ZkProof(proof: proof, pubSignals: pubSignals)
     }
     
     func generateRegisterIdentityProof(
@@ -166,6 +212,8 @@ class UserManager: ObservableObject {
             wtns = try ZKUtils.calcWtnsRegisterIdentity_3_160_3_3_336_200_NA(circuitData.circuitDat, inputs)
         case .registerIdentity_3_160_3_4_576_216_1_1512_3_256:
             wtns = try ZKUtils.calcWtnsRegisterIdentity_3_160_3_4_576_216_1_1512_3_256(circuitData.circuitDat, inputs)
+        default:
+            throw "invalid register identity circuit"
         }
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16Prover(circuitData.circuitZkey, wtns)
@@ -201,6 +249,37 @@ class UserManager: ObservableObject {
         let response = try await relayer.register(calldata, ConfigManager.shared.api.registerContractAddress)
         
         LoggerUtil.common.info("Passport register EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
+        
+        let eth = Ethereum()
+        try await eth.waitForTxSuccess(response.data.attributes.txHash)
+    }
+    
+    func lightRegister(_ registerZKProof: ZkProof, _ verifySodResponse: VerifySodResponse) async throws {
+        guard let signature = Data(hex: verifySodResponse.data.attributes.signature) else {
+            throw "Invalid signature"
+        }
+        
+        guard let passportHash = Data(hex: verifySodResponse.data.attributes.passportHash) else {
+            throw "Invalid passport hash"
+        }
+        
+        guard let publicKey = Data(hex: verifySodResponse.data.attributes.publicKey) else {
+            throw "Invalid public key"
+        }
+        
+        let calldataBuilder = IdentityCallDataBuilder()
+        let calldata = try calldataBuilder.buildRegisterSimpleCalldata(
+            registerZKProof.json,
+            signature: signature,
+            passportHash: passportHash,
+            publicKey: publicKey,
+            verifierAddress: verifySodResponse.data.attributes.verifier
+        )
+        
+        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
+        let response = try await relayer.register(calldata, ConfigManager.shared.api.registrationSimpleContractAddress, false)
+        
+        LoggerUtil.common.info("Passport light register EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
         
         let eth = Ethereum()
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
@@ -275,17 +354,18 @@ class UserManager: ObservableObject {
         
         let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
         
-        let passportInfoKey: String
-        if passport.dg15.isEmpty {
-            passportInfoKey = registerZkProof.pubSignals[1]
-        } else {
-            passportInfoKey = registerZkProof.pubSignals[0]
+        guard let passportKey = getPassportKey(passport) else {
+            throw "failed to get passport key"
+        }
+        
+        guard let identityKey = getIdentityKey(passport) else {
+            throw "failed to get identity key"
         }
         
         var error: NSError? = nil
         let proofIndex = IdentityCalculateProofIndex(
-            passportInfoKey,
-            registerZkProof.pubSignals[3],
+            passportKey,
+            identityKey,
             &error
         )
         if let error { throw error }
@@ -298,7 +378,7 @@ class UserManager: ObservableObject {
         let profileInitializer = IdentityProfile()
         let profile = try profileInitializer.newProfile(secretKey)
         
-        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
+        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportKey)
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
         let aidropParams = try await relayer.getAirdropParams()
@@ -307,7 +387,7 @@ class UserManager: ObservableObject {
             passport.dg1,
             smtProofJSON: smtProofJson,
             selector: aidropParams.data.attributes.querySelector,
-            pkPassportHash: passportInfoKey,
+            pkPassportHash: passportKey,
             issueTimestamp: identityInfo.issueTimestamp.description,
             identityCounter: passportInfo.identityReissueCounter.description,
             eventID: aidropParams.data.attributes.eventID,
@@ -328,24 +408,24 @@ class UserManager: ObservableObject {
         passport: Passport,
         params: GetProofParamsResponseAttributes
     ) async throws -> ZkProof {
-        guard let registerZkProof = self.registerZkProof else { throw "failed to get registerZkProof" }
         guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
         
         let stateKeeperContract = try StateKeeperContract()
         let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.api.registrationSmtContractAddress, eip55: false)
         let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
         
-        let passportInfoKey: String
-        if passport.dg15.isEmpty {
-            passportInfoKey = registerZkProof.pubSignals[1]
-        } else {
-            passportInfoKey = registerZkProof.pubSignals[0]
+        guard let passportKey = getPassportKey(passport) else {
+            throw "failed to get passport key"
+        }
+        
+        guard let identityKey = getIdentityKey(passport) else {
+            throw "failed to get identity key"
         }
         
         var error: NSError? = nil
         let proofIndex = IdentityCalculateProofIndex(
-            passportInfoKey,
-            registerZkProof.pubSignals[3],
+            passportKey,
+            identityKey,
             &error
         )
         if let error { throw error }
@@ -357,14 +437,15 @@ class UserManager: ObservableObject {
         let profileInitializer = IdentityProfile()
         let profile = try profileInitializer.newProfile(secretKey)
         
+        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportKey)
+
         let timestampUpperBound = try UInt64(hexString: BN(dec: params.timestampUpperBound).hex()) ?? 0
         
-        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
         let queryProofInputs = try profile.buildQueryIdentityInputs(
             passport.dg1,
             smtProofJSON: smtProofJson,
             selector: params.selector,
-            pkPassportHash: passportInfoKey,
+            pkPassportHash: passportKey,
             issueTimestamp: identityInfo.issueTimestamp.description,
             identityCounter: passportInfo.identityReissueCounter.description,
             eventID: params.eventID,
@@ -445,17 +526,18 @@ class UserManager: ObservableObject {
         
         let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
         
-        let passportInfoKey: String
-        if passport.dg15.isEmpty {
-            passportInfoKey = registerZkProof.pubSignals[1]
-        } else {
-            passportInfoKey = registerZkProof.pubSignals[0]
+        guard let passportKey = getPassportKey(passport) else {
+            throw "failed to get passport key"
+        }
+        
+        guard let identityKey = getIdentityKey(passport) else {
+            throw "failed to get identity key"
         }
         
         var error: NSError? = nil
         let proofIndex = IdentityCalculateProofIndex(
-            passportInfoKey,
-            registerZkProof.pubSignals[3],
+            passportKey,
+            identityKey,
             &error
         )
         if let error { throw error }
@@ -468,13 +550,13 @@ class UserManager: ObservableObject {
         let profileInitializer = IdentityProfile()
         let profile = try profileInitializer.newProfile(secretKey)
         
-        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
+        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportKey)
         
         let queryProofInputs = try profile.buildAirdropQueryIdentityInputs(
             passport.dg1,
             smtProofJSON: smtProofJson,
             selector: "23073",
-            pkPassportHash: passportInfoKey,
+            pkPassportHash: passportKey,
             issueTimestamp: identityInfo.issueTimestamp.description,
             identityCounter: passportInfo.identityReissueCounter.description,
             eventID: Points.PointsEventId,
@@ -620,6 +702,7 @@ class UserManager: ObservableObject {
             try AppKeychain.removeValue(.privateKey)
             try AppKeychain.removeValue(.registerZkProof)
             try AppKeychain.removeValue(.passport)
+            try AppKeychain.removeValue(.lightRegistrationData)
             
             self.user = nil
             self.balance = 0
@@ -637,5 +720,55 @@ class UserManager: ObservableObject {
         if let error { throw error }
         
         return nullifier
+    }
+    
+    func getPassportKey(_ passport: Passport) -> String? {
+        guard let registerZkProof else { return nil }
+        
+        var passportKey: String
+        switch registerZkProof.pubSignals.count {
+        case RegisterIdentityPubSignals.SignalKey.allCases.count:
+            let pubSignals = RegisterIdentityPubSignals(registerZkProof.pubSignals)
+            
+            if passport.dg15.isEmpty {
+                passportKey = pubSignals.getSignalRaw(.passportHash)
+            } else {
+                passportKey = pubSignals.getSignalRaw(.passportKey)
+            }
+        case RegisterIdentityLightPubSignals.SignalKey.allCases.count:
+            guard let lightRegistrationData else {
+                return nil
+            }
+            
+            if passport.dg15.isEmpty {
+                return try? BN(hex: lightRegistrationData.passportHash).dec()
+            } else {
+                return try? BN(hex: lightRegistrationData.publicKey).dec()
+            }
+        default:
+            return nil
+        }
+        
+        return passportKey
+    }
+    
+    func getIdentityKey(_ passport: Passport) -> String? {
+        guard let registerZkProof else { return nil }
+        
+        var identityKey: String
+        switch registerZkProof.pubSignals.count {
+        case RegisterIdentityPubSignals.SignalKey.allCases.count:
+            let pubSignals = RegisterIdentityPubSignals(registerZkProof.pubSignals)
+            
+            identityKey = pubSignals.getSignalRaw(.identityKey)
+        case RegisterIdentityLightPubSignals.SignalKey.allCases.count:
+            let pubSignals = RegisterIdentityLightPubSignals(registerZkProof.pubSignals)
+            
+            identityKey = pubSignals.getSignalRaw(.identityKey)
+        default:
+            return nil
+        }
+        
+        return identityKey
     }
 }

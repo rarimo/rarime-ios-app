@@ -3,22 +3,23 @@ import Foundation
 
 class Relayer {
     let url: URL
-    
+
     init(_ url: URL) {
         self.url = url
     }
-    
-    func register(_ calldata: Data, _ destination: String? = nil) async throws -> EvmTxResponse {
+
+    func register(_ calldata: Data, _ destination: String? = nil, _ noSend: Bool = false) async throws -> EvmTxResponse {
         var requestURL = url
         requestURL.append(path: "/integrations/registration-relayer/v1/register")
-        
+
         let payload = RegisterRequest(
             data: RegisterRequestData(
                 txData: "0x" + calldata.hex,
-                destination: destination
+                destination: destination,
+                noSend: noSend
             )
         )
-        
+
         return try await AF.request(
             requestURL,
             method: .post,
@@ -30,11 +31,11 @@ class Relayer {
         .result
         .get()
     }
-    
+
     func airdrop(_ queryZkProof: ZkProof, to destionation: String) async throws -> AirdropResponse {
         var requestURL = url
         requestURL.append(path: "/integrations/airdrop-svc/airdrops")
-        
+
         let payload = AirdropRequest(
             data: AirdropRequestData(
                 type: "create_airdrop",
@@ -45,7 +46,7 @@ class Relayer {
                 )
             )
         )
-        
+
         return try await AF.request(
             requestURL,
             method: .post,
@@ -57,22 +58,22 @@ class Relayer {
         .result
         .get()
     }
-    
+
     func getAirdropInfo(_ nullifier: String) async throws -> GetAirdropResponse {
         var requestURL = url
         requestURL.append(path: "/integrations/airdrop-svc/airdrops/\(nullifier)")
-        
+
         return try await AF.request(requestURL)
-        .validate(OpenApiError.catchInstance)
-        .serializingDecodable(GetAirdropResponse.self)
-        .result
-        .get()
+            .validate(OpenApiError.catchInstance)
+            .serializingDecodable(GetAirdropResponse.self)
+            .result
+            .get()
     }
-    
+
     func getAirdropParams() async throws -> GetAirdropParamsResponse {
         var requestURL = url
         requestURL.append(path: "/integrations/airdrop-svc/airdrops/params")
-        
+
         return try await AF.request(requestURL)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(GetAirdropParamsResponse.self)
@@ -84,19 +85,23 @@ class Relayer {
 struct RegisterRequest: JSONCodable {
     let data: RegisterRequestData
 }
+
 struct RegisterRequestData: Codable {
     let txData: String
     let destination: String?
+    let noSend: Bool?
 
     enum CodingKeys: String, CodingKey {
         case txData = "tx_data"
         case destination
+        case noSend = "no_send"
     }
 }
 
 struct AirdropRequest: Codable {
     let data: AirdropRequestData
 }
+
 struct AirdropRequestData: Codable {
     let type: String
     let attributes: AirdropRequestAttributes
@@ -154,4 +159,3 @@ struct GetAirdropParamsResponseAttributes: Codable {
         case startedAt = "started_at"
     }
 }
-

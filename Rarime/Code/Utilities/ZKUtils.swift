@@ -481,6 +481,131 @@ class ZKUtils {
 #endif
     }
     
+    public static func calcWtnsRegisterIdentityLight160(
+        _ descriptionFileData: Data,
+        _ privateInputsJson: Data
+    ) throws -> Data {
+#if targetEnvironment(simulator)
+        return Data()
+#else
+        let wtnsSize = UnsafeMutablePointer<UInt>.allocate(capacity: Int(1))
+        wtnsSize.initialize(to: WITNESS_SIZE)
+        let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
+        let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
+        
+        let result = witnesscalc_registerIdentityLight160(
+            (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
+            (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
+            wtnsBuffer, wtnsSize,
+            errorBuffer, ERROR_SIZE
+        )
+        
+        try handleWitnessError(result, errorBuffer, wtnsSize)
+        
+        return Data(bytes: wtnsBuffer, count: Int(wtnsSize.pointee))
+#endif
+    }
+    
+    public static func calcWtnsRegisterIdentityLight224(
+        _ descriptionFileData: Data,
+        _ privateInputsJson: Data
+    ) throws -> Data {
+#if targetEnvironment(simulator)
+        return Data()
+#else
+        let wtnsSize = UnsafeMutablePointer<UInt>.allocate(capacity: Int(1))
+        wtnsSize.initialize(to: WITNESS_SIZE)
+        let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
+        let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
+        
+        let result = witnesscalc_registerIdentityLight224(
+            (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
+            (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
+            wtnsBuffer, wtnsSize,
+            errorBuffer, ERROR_SIZE
+        )
+        
+        try handleWitnessError(result, errorBuffer, wtnsSize)
+        
+        return Data(bytes: wtnsBuffer, count: Int(wtnsSize.pointee))
+#endif
+    }
+    
+    public static func calcWtnsRegisterIdentityLight256(
+        _ descriptionFileData: Data,
+        _ privateInputsJson: Data
+    ) throws -> Data {
+#if targetEnvironment(simulator)
+        return Data()
+#else
+        let wtnsSize = UnsafeMutablePointer<UInt>.allocate(capacity: Int(1))
+        wtnsSize.initialize(to: WITNESS_SIZE)
+        let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
+        let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
+        
+        let result = witnesscalc_registerIdentityLight256(
+            (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
+            (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
+            wtnsBuffer, wtnsSize,
+            errorBuffer, ERROR_SIZE
+        )
+        
+        try handleWitnessError(result, errorBuffer, wtnsSize)
+        
+        return Data(bytes: wtnsBuffer, count: Int(wtnsSize.pointee))
+#endif
+    }
+    
+    public static func calcWtnsRegisterIdentityLight384(
+        _ descriptionFileData: Data,
+        _ privateInputsJson: Data
+    ) throws -> Data {
+#if targetEnvironment(simulator)
+        return Data()
+#else
+        let wtnsSize = UnsafeMutablePointer<UInt>.allocate(capacity: Int(1))
+        wtnsSize.initialize(to: WITNESS_SIZE)
+        let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
+        let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
+        
+        let result = witnesscalc_registerIdentityLight384(
+            (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
+            (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
+            wtnsBuffer, wtnsSize,
+            errorBuffer, ERROR_SIZE
+        )
+        
+        try handleWitnessError(result, errorBuffer, wtnsSize)
+        
+        return Data(bytes: wtnsBuffer, count: Int(wtnsSize.pointee))
+#endif
+    }
+    
+    public static func calcWtnsRegisterIdentityLight512(
+        _ descriptionFileData: Data,
+        _ privateInputsJson: Data
+    ) throws -> Data {
+#if targetEnvironment(simulator)
+        return Data()
+#else
+        let wtnsSize = UnsafeMutablePointer<UInt>.allocate(capacity: Int(1))
+        wtnsSize.initialize(to: WITNESS_SIZE)
+        let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
+        let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
+        
+        let result = witnesscalc_registerIdentityLight512(
+            (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
+            (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
+            wtnsBuffer, wtnsSize,
+            errorBuffer, ERROR_SIZE
+        )
+        
+        try handleWitnessError(result, errorBuffer, wtnsSize)
+        
+        return Data(bytes: wtnsBuffer, count: Int(wtnsSize.pointee))
+#endif
+    }
+    
     public static func calcWtnsRegisterIdentity_2_256_3_6_336_264_1_2448_3_256(
         _ descriptionFileData: Data,
         _ privateInputsJson: Data
@@ -492,20 +617,20 @@ class ZKUtils {
         wtnsSize.initialize(to: WITNESS_SIZE)
         let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
         let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
-        
+            
         let result = witnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256(
             (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
             (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
             wtnsBuffer, wtnsSize,
             errorBuffer, ERROR_SIZE
         )
-        
+            
         try handleWitnessError(result, errorBuffer, wtnsSize)
-        
+            
         return Data(bytes: wtnsBuffer, count: Int(wtnsSize.pointee))
 #endif
     }
-    
+        
     public static func calcWtnsRegisterIdentity_3_160_3_3_336_200_NA(
         _ descriptionFileData: Data,
         _ privateInputsJson: Data
@@ -517,20 +642,20 @@ class ZKUtils {
         wtnsSize.initialize(to: WITNESS_SIZE)
         let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
         let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
-        
+            
         let result = witnesscalc_registerIdentity_3_160_3_3_336_200_NA(
             (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
             (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
             wtnsBuffer, wtnsSize,
             errorBuffer, ERROR_SIZE
         )
-        
+            
         try handleWitnessError(result, errorBuffer, wtnsSize)
-        
+            
         return Data(bytes: wtnsBuffer, count: Int(wtnsSize.pointee))
 #endif
     }
-    
+        
     public static func calcWtnsRegisterIdentity_3_160_3_4_576_216_1_1512_3_256(
         _ descriptionFileData: Data,
         _ privateInputsJson: Data
@@ -542,16 +667,16 @@ class ZKUtils {
         wtnsSize.initialize(to: WITNESS_SIZE)
         let wtnsBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(WITNESS_SIZE))
         let errorBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(ERROR_SIZE))
-        
+            
         let result = witnesscalc_registerIdentity_3_160_3_4_576_216_1_1512_3_256(
             (descriptionFileData as NSData).bytes, UInt(descriptionFileData.count),
             (privateInputsJson as NSData).bytes, UInt(privateInputsJson.count),
             wtnsBuffer, wtnsSize,
             errorBuffer, ERROR_SIZE
         )
-        
+            
         try handleWitnessError(result, errorBuffer, wtnsSize)
-        
+            
         return Data(bytes: wtnsBuffer, count: Int(wtnsSize.pointee))
 #endif
     }

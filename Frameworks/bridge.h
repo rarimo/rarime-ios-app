@@ -26,5 +26,10 @@
 #include "witnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.h"
 #include "witnesscalc_registerIdentity_3_160_3_3_336_200_NA.h"
 #include "witnesscalc_registerIdentity_3_160_3_4_576_216_1_1512_3_256.h"
+#include "witnesscalc_registerIdentityLight160.h"
+#include "witnesscalc_registerIdentityLight224.h"
+#include "witnesscalc_registerIdentityLight256.h"
+#include "witnesscalc_registerIdentityLight384.h"
+#include "witnesscalc_registerIdentityLight512.h"
 
 #endif /* bridge_h */
