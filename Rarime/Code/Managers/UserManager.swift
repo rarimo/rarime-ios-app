@@ -271,7 +271,7 @@ class UserManager: ObservableObject {
         )
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.register(calldata, ConfigManager.shared.api.registrationSimpleContractAddress)
+        let response = try await relayer.register(calldata, ConfigManager.shared.api.registrationSimpleContractAddress, false)
         
         LoggerUtil.common.info("Passport light register EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
         
