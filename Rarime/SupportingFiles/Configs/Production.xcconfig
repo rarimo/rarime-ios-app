@@ -21,7 +21,7 @@ POINTS_SERVICE_URL = "https:${SLASH}/api.app.rarime.com"
 AUTHORIZE_URL = "https:${SLASH}/api.app.rarime.com"
 REFERRAL_URL = "https:${SLASH}/app.rarime.com/r"
 JOIN_REWARDS_KEY = "2eae8270526533789548dc738237100a5966acdb8b82012341463257d790e90e07ef79fcb157485cded2291fb36bdd2bc140a0af894b5defe505a938acc49e0f"
-LIGHT_SIGNATURE_PRIVATE_KEY = ""
+LIGHT_SIGNATURE_PRIVATE_KEY = "0ac7cbb4f162da4a1efcf5571bfedaefc5679c7780059e14658df8569c12b217"
 
 // MARK: Cosmos
 CHAIN_ID = "rarimo_201411-1"
@@ -63,5 +63,5 @@ CIRCUIT_DATA_URL_22 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passpo
 CIRCUIT_DATA_URL_23 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.6-light/registerIdentityLight512-download.zip"
 
 // MARK: AppsFlyer
-APPSFLYER_DEV_KEY = ""
-APPSFLYER_APP_ID = ""
+APPSFLYER_DEV_KEY = "FsxpXXrjsFBLiF6jMe7jZY"
+APPSFLYER_APP_ID = "id6503300598"
