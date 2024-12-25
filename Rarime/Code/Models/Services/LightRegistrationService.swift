@@ -60,6 +60,8 @@ class LightRegistrationService {
             )
         )
 
+        LoggerUtil.common.debug("request: \(request.json.utf8)")
+
         let response = try await AF.request(
             requestURL,
             method: .post,
