@@ -21,7 +21,7 @@ POINTS_SERVICE_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
 AUTHORIZE_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
 REFERRAL_URL = "https:${SLASH}/app.stage.rarime.com/r"
 JOIN_REWARDS_KEY = "15690e4461abffc8a0057282af199b7345fa492d28ec1ae60049459389752e3ee714947cc64edcde3c5b25c10081a003d15a88cf137bcc97049da465781eff3c"
-LIGHT_SIGNATURE_PRIVATE_KEY = ""
+LIGHT_SIGNATURE_PRIVATE_KEY = "86494b0b827f6c096e1b65cc1e738a0c6f0c492250db7257fc19c35b74b4f568"
 
 // MARK: Cosmos
 CHAIN_ID = "rarimo_42-1"
@@ -66,5 +66,5 @@ CIRCUIT_DATA_URL_25 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passpo
 CIRCUIT_DATA_URL_26 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.7/registerIdentity_3_160_3_4_576_216_1_1512_3_256-download.zip"
 
 // MARK: AppsFlyer
-APPSFLYER_DEV_KEY = ""
-APPSFLYER_APP_ID = ""
+APPSFLYER_DEV_KEY = "FsxpXXrjsFBLiF6jMe7jZY"
+APPSFLYER_APP_ID = "id6503300598"

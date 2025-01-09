@@ -78,17 +78,9 @@ extension CircuitBuilderManager {
 extension CircuitBuilderManager {
     class RegisterIdentityLightCircuit {
         func buildInputs(_ privateKey: Data, _ passport: Passport) throws -> RegisterIdentityLightInputs {
-            let sod = try passport.getSod()
-            
-            guard let ecDigestAlgoritm = try passport.getEncapsulatedContentDigestAlgorithm(sod) else {
-                throw "unknown encapsulated content digest algorithm"
-            }
-            
-            let smartChunkingToBlockSize = UInt64(ecDigestAlgoritm.getChunkSize())
-            
             return RegisterIdentityLightInputs(
                 skIdentity: privateKey.fullHex,
-                dg1: CircuitUtils.smartChunking2(passport.dg1, 2, smartChunkingToBlockSize)
+                dg1: CircuitUtils.smartChunking2(passport.dg1, 2, 512)
             )
         }
     }
