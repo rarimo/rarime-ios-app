@@ -60,8 +60,8 @@ class PassportViewModel: ObservableObject {
     ) async throws -> ZkProof {
         var isCriticalRegistrationProcessInProgress = true
         
-        do {            
-            guard let passport else { throw "failed to get passport" }
+        do {
+            guard var passport else { throw "failed to get passport" }
             guard let user = UserManager.shared.user else { throw "failed to get user" }
             
             try await UserManager.shared.registerCertificate(passport)
@@ -82,7 +82,12 @@ class PassportViewModel: ObservableObject {
             
             isCriticalRegistrationProcessInProgress = false
             
-            let circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData, downloadProgress)
+            let circuitData: CircuitData
+            do {
+                circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData, downloadProgress)
+            } catch {
+                throw Errors.unknown("Failed to download data, internet connection is unstable")
+            }
             
             isCriticalRegistrationProcessInProgress = true
             
@@ -148,6 +153,14 @@ class PassportViewModel: ObservableObject {
             }
             
             if isUserRevoking && !isUserAlreadyRevoked {
+                isCriticalRegistrationProcessInProgress = false
+                
+                if passport.dg15.isEmpty {
+                    throw Errors.unknown("You can't gain access to already registed passport")
+                }
+                
+                isCriticalRegistrationProcessInProgress = true
+                
                 // takes last 8 bytes of activeIdentity as revocation challenge
                 revocationChallenge = passportInfo.activeIdentity[24 ..< 32]
                 
@@ -158,8 +171,14 @@ class PassportViewModel: ObservableObject {
                 
                 isCriticalRegistrationProcessInProgress = false
                 
-                guard let passport = try await iterator.next() else {
-                    throw "failed to get passport"
+                do {
+                    guard let newPassport = try await iterator.next() else {
+                        throw "failed to get passport"
+                    }
+                    
+                    passport = newPassport
+                } catch {
+                    throw Errors.unknown("Failed to read document, try again")
                 }
                 
                 isCriticalRegistrationProcessInProgress = true

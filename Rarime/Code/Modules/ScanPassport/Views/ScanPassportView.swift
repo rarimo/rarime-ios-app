@@ -122,6 +122,12 @@ struct ScanPassportView: View {
 
                             return
                         }
+                    } else if let error = error as? Errors {
+                        AlertManager.shared.emitError(error)
+
+                        onClose()
+
+                        return
                     }
 
                     withAnimation { state = .waitlistPassport }
