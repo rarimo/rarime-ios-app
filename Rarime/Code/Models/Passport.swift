@@ -31,6 +31,14 @@ struct Passport: Codable {
             return true
         }
     }
+    
+    var isOver18: Bool {
+        if let dob = try? DateUtil.parsePassportDate(dateOfBirth) {
+            return Calendar.current.dateComponents([.year], from: dob, to: Date()).year! >= 18
+        } else {
+            return false
+        }
+    }
 
     var passportImage: UIImage? {
         guard let passportImageRaw = passportImageRaw else {
@@ -101,7 +109,7 @@ struct Passport: Codable {
             passportImageRaw: model.passportImage?
                 .pngData()?
                 .base64EncodedString(options: .endLineWithLineFeed),
-            documentType: "P",
+            documentType: model.documentType.replacingOccurrences(of: "<", with: ""),
             issuingAuthority: PassportUtils.normalizeNationality(model.issuingAuthority),
             documentNumber: model.documentNumber,
             documentExpiryDate: model.documentExpiryDate,

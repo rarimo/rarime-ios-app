@@ -284,7 +284,7 @@ struct HomeView: View {
 
     func processQrCode(_ code: String) {
         guard let qrCodeUrl = URL(string: code) else {
-            LoggerUtil.intro.error("Invalid QR code: \(code, privacy: .public)")
+            LoggerUtil.common.error("Invalid QR code: \(code, privacy: .public)")
             AlertManager.shared.emitError(.unknown("Invalid QR code"))
             return
         }
@@ -322,7 +322,7 @@ struct HomeView: View {
             } catch is CancellationError {
                 return
             } catch {
-                LoggerUtil.intro.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
+                LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
             }
         }
 

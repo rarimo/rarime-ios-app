@@ -159,7 +159,7 @@ struct WalletView: View {
             } catch is CancellationError {
                 return
             } catch {
-                LoggerUtil.intro.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
+                LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
             }
         }
 

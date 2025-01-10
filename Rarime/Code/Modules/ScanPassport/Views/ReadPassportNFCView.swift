@@ -9,7 +9,7 @@ struct ReadPassportNFCView: View {
     let onBack: () -> Void
     let onResponseError: () -> Void
     let onClose: () -> Void
-    
+
     @State private var useExtendedMode = false
 
     var body: some View {
@@ -28,14 +28,14 @@ struct ReadPassportNFCView: View {
                 .frame(width: 250)
             Spacer()
             AppButton(text: "Scan", action: scanPassport)
-            .controlSize(.large)
-            .padding(.top, 12)
-            .padding(.bottom, 20)
-            .padding(.horizontal, 20)
-            .background(.backgroundPure)
+                .controlSize(.large)
+                .padding(.top, 12)
+                .padding(.bottom, 20)
+                .padding(.horizontal, 20)
+                .background(.backgroundPure)
         }
     }
-    
+
     func scanPassport() {
         NFCScanner.scanPassport(
             passportViewModel.mrzKey ?? "",
@@ -44,21 +44,45 @@ struct ReadPassportNFCView: View {
             onCompletion: { result in
                 switch result {
                 case .success(let passport):
+                    if passport.isExpired {
+                        LoggerUtil.common.info("Passport is expired")
+
+                        AlertManager.shared.emitError(.unknown("Passport is expired"))
+
+                        onBack()
+                    }
+
+                    if !passport.isOver18 {
+                        LoggerUtil.common.info("User is underage")
+
+                        AlertManager.shared.emitError(.unknown("You are under 18"))
+
+                        onBack()
+                    }
+
+                    if passport.documentType != DocumentType.passport.rawValue {
+                        LoggerUtil.common.info("Document is not ePassport")
+
+                        AlertManager.shared.emitError(.unknown("Document is not ePassport"))
+
+                        onBack()
+                    }
+
                     self.onNext(passport)
                 case .failure(let error):
-                    LoggerUtil.passport.error("failed to read passport data: \(error.localizedDescription, privacy: .public)")
+                    LoggerUtil.common.error("failed to read passport data: \(error.localizedDescription, privacy: .public)")
                     switch error {
-                    case NFCPassportReaderError.Unknown(_):
+                    case NFCPassportReaderError.Unknown:
                         if useExtendedMode {
                             onBack()
-                            
+
                             return
                         }
-                        
+
                         useExtendedMode = true
-                        
+
                         AlertManager.shared.emitError(.unknown("A scanning error occurred. Attempting to use extended mode. Please try again."))
-                        
+
                         scanPassport()
                     case NFCPassportReaderError.ResponseError(let reason, _, _)
                         where reason == "Referenced data not found":
