@@ -171,6 +171,7 @@ class PassportViewModel: ObservableObject {
                 
                 isCriticalRegistrationProcessInProgress = false
                 
+                let passport: Passport
                 do {
                     guard let newPassport = try await iterator.next() else {
                         throw "failed to get passport"
@@ -212,6 +213,8 @@ class PassportViewModel: ObservableObject {
                 
                 throw error
             }
+            
+            LoggerUtil.common.error("Trying light registration because of: \(error.localizedDescription)")
             
             do {
                 return try await lightRegister()
