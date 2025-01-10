@@ -50,6 +50,8 @@ struct ReadPassportNFCView: View {
                         AlertManager.shared.emitError(.unknown("Passport is expired"))
 
                         onBack()
+
+                        return
                     }
 
                     if !passport.isOver18 {
@@ -58,6 +60,8 @@ struct ReadPassportNFCView: View {
                         AlertManager.shared.emitError(.unknown("You are under 18"))
 
                         onBack()
+
+                        return
                     }
 
                     if passport.documentType != DocumentType.passport.rawValue {
@@ -66,6 +70,8 @@ struct ReadPassportNFCView: View {
                         AlertManager.shared.emitError(.unknown("Document is not ePassport"))
 
                         onBack()
+
+                        return
                     }
 
                     self.onNext(passport)
