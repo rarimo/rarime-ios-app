@@ -40,7 +40,7 @@ struct ScanPassportMRZView: View {
             .padding(.horizontal, 20)
             .dynamicSheet(isPresented: $isManualMrzSheetPresented, title: "Fill Manually") {
                 MrzFormView(onSubmitted: { mrzKey in
-                    LoggerUtil.passport.info("MRZ filled manually")
+                    LoggerUtil.common.info("MRZ filled manually")
                     
                     onNext(mrzKey)
                 })

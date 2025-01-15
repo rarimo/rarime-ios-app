@@ -1,5 +1,5 @@
-import SwiftUI
 import Alamofire
+import SwiftUI
 
 struct ReserveTokensView: View {
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
@@ -65,7 +65,7 @@ struct ReserveTokensView: View {
                 
                 if
                     openApiHttpCode == HTTPStatusCode.conflict.rawValue
-                        || openApiHttpCode == HTTPStatusCode.tooManyRequests.rawValue
+                    || openApiHttpCode == HTTPStatusCode.tooManyRequests.rawValue
                 {
                     isAlreadyReserved = true
                     isReserving = false
@@ -75,7 +75,7 @@ struct ReserveTokensView: View {
                 
                 throw error
             } catch {
-                LoggerUtil.passport.error("Error while reserving tokens: \(error.localizedDescription, privacy: .public)")
+                LoggerUtil.common.error("Error while reserving tokens: \(error.localizedDescription, privacy: .public)")
                 FeedbackGenerator.shared.notify(.error)
                 onFinish(false)
                 AlertManager.shared.emitError(.serviceDown(nil))
