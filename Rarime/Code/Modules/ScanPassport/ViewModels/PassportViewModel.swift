@@ -61,7 +61,7 @@ class PassportViewModel: ObservableObject {
         var isCriticalRegistrationProcessInProgress = true
         
         do {
-            guard var passport else { throw "failed to get passport" }
+            guard let passport else { throw "failed to get passport" }
             guard let user = UserManager.shared.user else { throw "failed to get user" }
             
             try await UserManager.shared.registerCertificate(passport)
