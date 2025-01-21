@@ -76,7 +76,7 @@ struct ScanPassportView: View {
                     passportViewModel.setPassport(passport)
                     withAnimation { state = .selectData }
 
-                    LoggerUtil.passport.info("Passport read successfully: \(passport.fullName, privacy: .public)")
+                    LoggerUtil.common.info("Passport read successfully: \(passport.fullName, privacy: .public)")
                 },
                 onBack: { withAnimation { state = .scanMRZ } },
                 onResponseError: { withAnimation { state = .chipError } },
@@ -122,6 +122,12 @@ struct ScanPassportView: View {
 
                             return
                         }
+                    } else if let error = error as? Errors {
+                        AlertManager.shared.emitError(error)
+
+                        onClose()
+
+                        return
                     }
 
                     withAnimation { state = .waitlistPassport }

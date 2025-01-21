@@ -228,7 +228,7 @@ struct WalletSendView: View {
             } catch is CancellationError {
                 return
             } catch {
-                LoggerUtil.intro.error("failed to send tokens: \(error.localizedDescription, privacy: .public)")
+                LoggerUtil.common.error("failed to send tokens: \(error.localizedDescription, privacy: .public)")
             }
         }
         
