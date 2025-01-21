@@ -156,7 +156,7 @@ class PassportViewModel: ObservableObject {
                 isCriticalRegistrationProcessInProgress = false
                 
                 if passport.dg15.isEmpty {
-                    throw Errors.unknown("You can't gain access to already registed passport")
+                    throw Errors.unknown("You can't register with already used passport")
                 }
                 
                 isCriticalRegistrationProcessInProgress = true
