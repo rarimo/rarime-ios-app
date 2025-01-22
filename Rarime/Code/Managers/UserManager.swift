@@ -103,15 +103,15 @@ class UserManager: ObservableObject {
         var wtns: Data
         switch registeredCircuitData {
         case .registerIdentityLight160:
-            wtns = try ZKUtils.calcWtnsRegisterIdentityLight160(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentityLight160(circuitData.circuitDat, inputs)
         case .registerIdentityLight224:
-            wtns = try ZKUtils.calcWtnsRegisterIdentityLight224(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentityLight224(circuitData.circuitDat, inputs)
         case .registerIdentityLight256:
-            wtns = try ZKUtils.calcWtnsRegisterIdentityLight256(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentityLight256(circuitData.circuitDat, inputs)
         case .registerIdentityLight384:
-            wtns = try ZKUtils.calcWtnsRegisterIdentityLight384(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentityLight384(circuitData.circuitDat, inputs)
         case .registerIdentityLight512:
-            wtns = try ZKUtils.calcWtnsRegisterIdentityLight512(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentityLight512(circuitData.circuitDat, inputs)
         default:
             throw "invalid register identity light circuit"
         }
@@ -169,49 +169,49 @@ class UserManager: ObservableObject {
         var wtns: Data
         switch registeredCircuitData {
         case .registerIdentity_1_256_3_5_576_248_NA:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_5_576_248_NA(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_1_256_3_5_576_248_NA(circuitData.circuitDat, inputs)
         case .registerIdentity_1_256_3_6_576_248_1_2432_5_296:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_6_576_248_1_2432_5_296(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_1_256_3_6_576_248_1_2432_5_296(circuitData.circuitDat, inputs)
         case .registerIdentity_2_256_3_6_336_264_21_2448_6_2008:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_2_256_3_6_336_264_21_2448_6_2008(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_2_256_3_6_336_264_21_2448_6_2008(circuitData.circuitDat, inputs)
         case .registerIdentity_21_256_3_7_336_264_21_3072_6_2008:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_21_256_3_7_336_264_21_3072_6_2008(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_21_256_3_7_336_264_21_3072_6_2008(circuitData.circuitDat, inputs)
         case .registerIdentity_1_256_3_6_576_264_1_2448_3_256:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_6_576_264_1_2448_3_256(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_1_256_3_6_576_264_1_2448_3_256(circuitData.circuitDat, inputs)
         case .registerIdentity_2_256_3_6_336_248_1_2432_3_256:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_2_256_3_6_336_248_1_2432_3_256(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_2_256_3_6_336_248_1_2432_3_256(circuitData.circuitDat, inputs)
         case .registerIdentity_2_256_3_6_576_248_1_2432_3_256:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_2_256_3_6_576_248_1_2432_3_256(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_2_256_3_6_576_248_1_2432_3_256(circuitData.circuitDat, inputs)
         case .registerIdentity_11_256_3_3_576_248_1_1184_5_264:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_11_256_3_3_576_248_1_1184_5_264(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_11_256_3_3_576_248_1_1184_5_264(circuitData.circuitDat, inputs)
         case .registerIdentity_12_256_3_3_336_232_NA:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_12_256_3_3_336_232_NA(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_12_256_3_3_336_232_NA(circuitData.circuitDat, inputs)
         case .registerIdentity_1_256_3_4_336_232_1_1480_5_296:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_4_336_232_1_1480_5_296(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_1_256_3_4_336_232_1_1480_5_296(circuitData.circuitDat, inputs)
         case .registerIdentity_1_256_3_4_600_248_1_1496_3_256:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_4_600_248_1_1496_3_256(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_1_256_3_4_600_248_1_1496_3_256(circuitData.circuitDat, inputs)
         case .registerIdentity_1_160_3_3_576_200_NA:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_160_3_3_576_200_NA(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_1_160_3_3_576_200_NA(circuitData.circuitDat, inputs)
         case .registerIdentity_21_256_3_3_336_232_NA:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_21_256_3_3_336_232_NA(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_21_256_3_3_336_232_NA(circuitData.circuitDat, inputs)
         case .registerIdentity_24_256_3_4_336_232_NA:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_24_256_3_4_336_232_NA(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_24_256_3_4_336_232_NA(circuitData.circuitDat, inputs)
         case .registerIdentity_1_256_3_3_576_248_NA:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_1_256_3_3_576_248_NA(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_1_256_3_3_576_248_NA(circuitData.circuitDat, inputs)
         case .registerIdentity_20_256_3_3_336_224_NA:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_20_256_3_3_336_224_NA(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_20_256_3_3_336_224_NA(circuitData.circuitDat, inputs)
         case .registerIdentity_21_256_3_3_576_232_NA:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_21_256_3_3_576_232_NA(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_21_256_3_3_576_232_NA(circuitData.circuitDat, inputs)
         case .registerIdentity_11_256_3_5_576_248_1_1808_4_256:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_11_256_3_5_576_248_1_1808_4_256(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_11_256_3_5_576_248_1_1808_4_256(circuitData.circuitDat, inputs)
         case .registerIdentity_10_256_3_3_576_248_1_1184_5_264:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_10_256_3_3_576_248_1_1184_5_264(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_10_256_3_3_576_248_1_1184_5_264(circuitData.circuitDat, inputs)
         case .registerIdentity_2_256_3_6_336_264_1_2448_3_256:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_2_256_3_6_336_264_1_2448_3_256(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_2_256_3_6_336_264_1_2448_3_256(circuitData.circuitDat, inputs)
         case .registerIdentity_3_160_3_3_336_200_NA:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_3_160_3_3_336_200_NA(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_3_160_3_3_336_200_NA(circuitData.circuitDat, inputs)
         case .registerIdentity_3_160_3_4_576_216_1_1512_3_256:
-            wtns = try ZKUtils.calcWtnsRegisterIdentity_3_160_3_4_576_216_1_1512_3_256(circuitData.circuitDat, inputs)
+            wtns = try ZKUtils.calcWtns_registerIdentity_3_160_3_4_576_216_1_1512_3_256(circuitData.circuitDat, inputs)
         default:
             throw "invalid register identity circuit"
         }
@@ -394,7 +394,7 @@ class UserManager: ObservableObject {
             startedAt: Int64(aidropParams.data.attributes.startedAt)
         )
         
-        let wtns = try ZKUtils.calcWtnsQueryIdentity(queryProofInputs)
+        let wtns = try ZKUtils.calcWtns_queryIdentity(Circuits.queryIdentityDat, queryProofInputs)
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16QueryIdentity(wtns)
         
@@ -464,7 +464,7 @@ class UserManager: ObservableObject {
             citizenshipMask: params.citizenshipMask
         )
         
-        let wtns = try ZKUtils.calcWtnsQueryIdentity(queryProofInputs)
+        let wtns = try ZKUtils.calcWtns_queryIdentity(Circuits.queryIdentityDat, queryProofInputs)
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16QueryIdentity(wtns)
         
         let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
@@ -563,8 +563,7 @@ class UserManager: ObservableObject {
             startedAt: 1715688000
         )
         
-        let wtns = try ZKUtils.calcWtnsQueryIdentity(queryProofInputs)
-        
+        let wtns = try ZKUtils.calcWtns_queryIdentity(Circuits.queryIdentityDat, queryProofInputs)
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16QueryIdentity(wtns)
         
         let proof = try JSONDecoder().decode(Proof.self, from: proofJson)

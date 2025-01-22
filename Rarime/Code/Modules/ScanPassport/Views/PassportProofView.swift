@@ -214,7 +214,7 @@ private struct RevocationNFCScan: View {
 }
 
 #Preview {
-    @StateObject var userManager = UserManager.shared
+    let userManager = UserManager.shared
 
     return PassportProofView(onFinish: { _ in }, onClose: {}, onError: { _ in })
         .environmentObject(WalletManager())

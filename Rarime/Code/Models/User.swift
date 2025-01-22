@@ -75,6 +75,9 @@ class User {
         let query = CKQuery(recordType: User.userCloudRecordType, predicate: NSPredicate(value: true))
         
         let records = try await CloudStorage.shared.fetchRecords(query)
+        if !records.isEmpty {
+            return false
+        }
         
         let record = CKRecord(recordType: User.userCloudRecordType)
         record.setValue(secretKey, forKey: User.userCloudPrivateKeyKey)

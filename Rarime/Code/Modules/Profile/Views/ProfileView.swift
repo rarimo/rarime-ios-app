@@ -177,7 +177,7 @@ struct ProfileView: View {
                         walletManager.reset()
                         decentralizedAuthManager.reset()
                         notificationManager.reset()
-                        
+
                         Task {
                             try? await notificationManager.unsubscribe(fromTopic: ConfigManager.shared.general.claimableNotificationTopic)
                         }
@@ -223,7 +223,7 @@ private struct ProfileRow: View {
 }
 
 #Preview {
-    @StateObject var userManager = UserManager.shared
+    let userManager = UserManager.shared
 
     return ProfileView()
         .environmentObject(AppView.ViewModel())
