@@ -231,7 +231,7 @@
       "location" : "git@github.com:rarimo/RarimeIOSUtils.git",
       "state" : {
         "branch" : "main",
-        "revision" : "da7a5adc697e48c003b729ebccbd03fdba9ea00e"
+        "revision" : "108d33e917764f9a6fa646602542787bbb1544fe"
       }
     },
     {
@@ -356,8 +356,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swiftlang/swift-syntax.git",
       "state" : {
-        "revision" : "0687f71944021d616d34d922343dcef086855920",
-        "version" : "600.0.1"
+        "revision" : "2bc86522d115234d1f588efe2bcb4ce4be8f8b82",
+        "version" : "510.0.3"
       }
     },
     {

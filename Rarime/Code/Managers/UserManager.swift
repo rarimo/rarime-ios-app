@@ -212,6 +212,10 @@ class UserManager: ObservableObject {
             wtns = try ZKUtils.calcWtns_registerIdentity_3_160_3_3_336_200_NA(circuitData.circuitDat, inputs)
         case .registerIdentity_3_160_3_4_576_216_1_1512_3_256:
             wtns = try ZKUtils.calcWtns_registerIdentity_3_160_3_4_576_216_1_1512_3_256(circuitData.circuitDat, inputs)
+        case .registerIdentity_11_256_3_3_576_240_1_864_5_264:
+            wtns = try ZKUtils.calcWtns_registerIdentity_11_256_3_3_576_240_1_864_5_264(circuitData.circuitDat, inputs)
+        case .registerIdentity_21_256_3_4_576_232_NA:
+            wtns = try ZKUtils.calcWtns_registerIdentity_21_256_3_4_576_232_NA(circuitData.circuitDat, inputs)
         default:
             throw "invalid register identity circuit"
         }

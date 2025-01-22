@@ -37,6 +37,8 @@ class ZKUtils {
     #registerCircuitWitness("registerIdentity_2_256_3_6_336_264_1_2448_3_256")
     #registerCircuitWitness("registerIdentity_3_160_3_3_336_200_NA")
     #registerCircuitWitness("registerIdentity_3_160_3_4_576_216_1_1512_3_256")
+    #registerCircuitWitness("registerIdentity_11_256_3_3_576_240_1_864_5_264")
+    #registerCircuitWitness("registerIdentity_21_256_3_4_576_232_NA")
     
     public static func groth16QueryIdentity(_ wtns: Data) throws -> (proof: Data, pubSignals: Data) {
         return try groth16Prover(Circuits.queryIdentityZkey, wtns)
