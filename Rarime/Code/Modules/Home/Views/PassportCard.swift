@@ -21,7 +21,7 @@ struct PassportCard: View {
     }
 
     var isBadgeShown: Bool {
-        isWaitlist || isUnsupported
+        isWaitlist
     }
 
     var body: some View {
