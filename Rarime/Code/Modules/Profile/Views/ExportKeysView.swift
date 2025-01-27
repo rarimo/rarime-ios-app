@@ -56,7 +56,7 @@ struct ExportKeysView: View {
 }
 
 #Preview {
-    @StateObject var userManager = UserManager.shared
+    let userManager = UserManager.shared
 
     return ExportKeysView(onBack: {})
         .environmentObject(userManager)

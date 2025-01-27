@@ -39,7 +39,7 @@ class DecentralizedAuthManager: ObservableObject {
         
         let privateInputsJson = try JSONEncoder().encode(authCircuitInputs)
         
-        let wtns = try ZKUtils.calcWtnsAuth(privateInputsJson)
+        let wtns = try ZKUtils.calcWtns_auth(Circuits.authDat, privateInputsJson)
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16Auth(wtns)
         
@@ -62,8 +62,8 @@ class DecentralizedAuthManager: ObservableObject {
         guard let accessJwt = accessJwt else { return }
         
         if accessJwt.isExpired && refreshJwt.isExpired {
-            reset()
-            try await initializeJWT(secretKey)
+            self.reset()
+            try await self.initializeJWT(secretKey)
             
             return
         }
@@ -82,7 +82,7 @@ class DecentralizedAuthManager: ObservableObject {
     }
     
     func getAccessJwt(_ user: User) async throws -> JWT {
-        await semaphore.wait()
+        await self.semaphore.wait()
         defer { semaphore.signal() }
         
         if self.accessJwt == nil && self.refreshJwt == nil {
