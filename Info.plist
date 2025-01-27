@@ -124,6 +124,8 @@
 		<string>${CIRCUIT_DATA_URL_27}</string>
 		<key>registerIdentity_21_256_3_4_576_232_NA</key>
 		<string>${CIRCUIT_DATA_URL_28}</string>
+		<key>registerIdentity_11_256_3_5_576_248_1_1808_5_296</key>
+		<string>${CIRCUIT_DATA_URL_29}</string>
 	</dict>
 	<key>COSMOS_RPC_URL</key>
 	<string>${COSMOS_RPC_URL}</string>
