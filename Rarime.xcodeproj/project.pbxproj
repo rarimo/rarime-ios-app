@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		56062B9A2C12007A00C9BF9B /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B992C12007A00C9BF9B /* Country.swift */; };
 		56062B9C2C12032700C9BF9B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9B2C12032700C9BF9B /* Constants.swift */; };
-		56062B9E2C12096E00C9BF9B /* UnsupportedCountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9D2C12096E00C9BF9B /* UnsupportedCountryView.swift */; };
 		56062BA02C120B3400C9BF9B /* WaitlistPassportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9F2C120B3400C9BF9B /* WaitlistPassportView.swift */; };
 		5609B6C82C188C7500CB6A1F /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5609B6C72C188C7500CB6A1F /* MarkdownUI */; };
 		5609B6CA2C18950700CB6A1F /* ClaimRewardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609B6C92C18950700CB6A1F /* ClaimRewardsView.swift */; };
@@ -368,7 +367,6 @@
 /* Begin PBXFileReference section */
 		56062B992C12007A00C9BF9B /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		56062B9B2C12032700C9BF9B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		56062B9D2C12096E00C9BF9B /* UnsupportedCountryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsupportedCountryView.swift; sourceTree = "<group>"; };
 		56062B9F2C120B3400C9BF9B /* WaitlistPassportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitlistPassportView.swift; sourceTree = "<group>"; };
 		5609B6C92C18950700CB6A1F /* ClaimRewardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimRewardsView.swift; sourceTree = "<group>"; };
 		5609B6CB2C19922400CB6A1F /* LinearProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressView.swift; sourceTree = "<group>"; };
@@ -1017,7 +1015,6 @@
 			isa = PBXGroup;
 			children = (
 				56933DEE2BBABD100068C894 /* ScanPassportView.swift */,
-				56062B9D2C12096E00C9BF9B /* UnsupportedCountryView.swift */,
 				56933DF22BBAC2940068C894 /* ScanPassportMRZView.swift */,
 				563706782C5CF374002F3AF4 /* MrzFormView.swift */,
 				56933DF42BBAC42E0068C894 /* ReadPassportNFCView.swift */,
@@ -1826,7 +1823,6 @@
 				CE3E0D3B2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift in Sources */,
 				CEC562112BD926AA002D4954 /* ZKUtils.swift in Sources */,
 				560F0C232BD02DFD00067054 /* WalletSendView.swift in Sources */,
-				56062B9E2C12096E00C9BF9B /* UnsupportedCountryView.swift in Sources */,
 				56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */,
 				C755128A2C860414000258AD /* Videos.swift in Sources */,
 				56E2D9222BCFBA0B006E725D /* PassportImageView.swift in Sources */,
@@ -2494,7 +2490,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.3;
+				MARKETING_VERSION = 2.1.5;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
@@ -2547,7 +2543,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.3;
+				MARKETING_VERSION = 2.1.5;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
@@ -2666,7 +2662,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.3;
+				MARKETING_VERSION = 2.1.5;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
@@ -2778,7 +2774,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.3;
+				MARKETING_VERSION = 2.1.5;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;

@@ -7,7 +7,6 @@ private enum ScanPassportState {
     case readNFC
     case chipError
     case selectData
-    case unsupportedCountry
     case generateProof
     case waitlistPassport
 }
@@ -90,17 +89,9 @@ struct ScanPassportView: View {
         case .selectData:
             SelectPassportDataView(
                 onNext: {
-                    let isSupportedCountry = !UNSUPPORTED_REWARD_COUNTRIES.contains(passportViewModel.passportCountry)
-                    withAnimation { state = isSupportedCountry ? .generateProof : .unsupportedCountry }
+                    withAnimation { state = .generateProof }
                 },
                 onClose: onClose
-            )
-            .environmentObject(passportViewModel)
-            .transition(.backslide)
-        case .unsupportedCountry:
-            UnsupportedCountryView(
-                onCreate: { withAnimation { state = .generateProof } },
-                onCancel: onClose
             )
             .environmentObject(passportViewModel)
             .transition(.backslide)
