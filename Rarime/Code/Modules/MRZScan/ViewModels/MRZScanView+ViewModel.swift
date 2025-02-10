@@ -14,6 +14,7 @@ extension MRZScanView {
         private let semaphore = AsyncSemaphore(value: 1)
         
         var onMRZKey: (String) -> Void = { _ in }
+        var onUSA: () -> Void = {}
         
         @Published var cameraTask: Task<Void, Never>? = nil
         
@@ -125,7 +126,7 @@ extension MRZScanView {
             let birthday = String(text[birthdayStartIndex...birthdayEndIndex])
             let expiration = String(text[expirationStartIndex...expirationEndIndex])
                 
-            readMrzFromDocument(documentNumber, birthday, expiration)
+            readMrzFromDocument(text, documentNumber, birthday, expiration)
         }
         
         func readMRZFromIDCard(_ text: String, _ documentNumber: String) {
@@ -138,10 +139,11 @@ extension MRZScanView {
             let birthday = String(text[birthdayStartIndex...birthdayEndIndex])
             let expiration = String(text[expirationStartIndex...expirationEndIndex])
             
-            readMrzFromDocument(documentNumber, birthday, expiration)
+            readMrzFromDocument(text, documentNumber, birthday, expiration)
         }
         
         func readMrzFromDocument(
+            _ text: String,
             _ documentNumber: String,
             _ birthday: String,
             _ expiration: String
@@ -155,10 +157,25 @@ extension MRZScanView {
             )
             
             if mrzKey == checkMrzKey {
+                if isUSA(text) {
+                    onUSA()
+                }
+                
                 onMRZKey(mrzKey)
                 
                 stopScanning()
             }
+        }
+        
+        func isUSA(_ text: String) -> Bool {
+            let nationalityStartIndex = text.index(text.startIndex, offsetBy: 2)
+            let nationalityEndIndex = text.index(text.startIndex, offsetBy: 5)
+            
+            let nationality = String(text[nationalityStartIndex...nationalityEndIndex])
+            
+            LoggerUtil.common.debug("nationality: \(nationality)")
+            
+            return nationality.uppercased() == "USA"
         }
     }
 }
