@@ -22,8 +22,8 @@ enum PassportTutorialStep: Int, CaseIterable {
     func video(_ isUSA: Bool = false) -> URL {
         switch self {
         case .removeCase: return Videos.removeCase
-        case .scanMrz: return Videos.scanMrz
-        case .readNfc: return Videos.readNfc
+        case .scanMrz: return isUSA ? Videos.scanMrzUsa : Videos.scanMrz
+        case .readNfc: return isUSA ? Videos.readNfcUsa : Videos.readNfc
         }
     }
 
