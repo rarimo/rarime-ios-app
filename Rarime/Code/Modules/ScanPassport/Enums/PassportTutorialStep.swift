@@ -2,7 +2,7 @@ import Foundation
 
 enum PassportTutorialStep: Int, CaseIterable {
     case removeCase, scanMrz, readNfc
-    
+
     var title: LocalizedStringResource {
         switch self {
         case .removeCase: return "Remove Case"
@@ -19,14 +19,14 @@ enum PassportTutorialStep: Int, CaseIterable {
         }
     }
 
-    var video: URL {
+    func video(_ isUSA: Bool = false) -> URL {
         switch self {
         case .removeCase: return Videos.removeCase
-        case .scanMrz: return Videos.scanMrz
-        case .readNfc: return Videos.readNfc
+        case .scanMrz: return isUSA ? Videos.scanMrzUsa : Videos.scanMrz
+        case .readNfc: return isUSA ? Videos.readNfcUsa : Videos.readNfc
         }
     }
-    
+
     var buttonText: LocalizedStringResource {
         switch self {
         case .removeCase, .scanMrz: return "Next"

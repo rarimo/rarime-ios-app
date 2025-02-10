@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct MRZScanView: View {
+    @EnvironmentObject private var passportViewModel: PassportViewModel
     @StateObject var viewModel = ViewModel()
 
     var onMrzKey: (String) -> Void
@@ -19,6 +20,7 @@ struct MRZScanView: View {
         .frame(maxWidth: .infinity, maxHeight: 300)
         .background(.black)
         .onAppear {
+            viewModel.onUSA = { self.passportViewModel.isUSA = true }
             viewModel.onMRZKey = onMrzKey
             viewModel.startScanning()
         }
@@ -31,4 +33,5 @@ struct MRZScanView: View {
 #Preview {
     MRZScanView { _ in }
         .frame(height: 300)
+        .environmentObject(PassportViewModel())
 }

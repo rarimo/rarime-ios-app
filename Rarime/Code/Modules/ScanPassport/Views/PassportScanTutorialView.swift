@@ -1,5 +1,5 @@
-import SwiftUI
 import AVKit
+import SwiftUI
 
 struct PassportScanTutorialButton: View {
     @State private var isTutorialPresented = false
@@ -39,6 +39,8 @@ struct PassportScanTutorialButton: View {
 }
 
 struct PassportScanTutorialView: View {
+    @EnvironmentObject private var passportViewModel: PassportViewModel
+    
     let onStart: () -> Void
     
     @State private var currentStep = PassportTutorialStep.removeCase.rawValue
@@ -49,6 +51,7 @@ struct PassportScanTutorialView: View {
                 PassportScanTutorialStep(
                     step: step,
                     action: onStart,
+                    isUSA: passportViewModel.isUSA,
                     currentStep: $currentStep
                 )
                 .tag(step.rawValue)
@@ -68,11 +71,12 @@ private struct PassportScanTutorialStep: View {
     init(
         step: PassportTutorialStep,
         action: @escaping () -> Void,
+        isUSA: Bool = false,
         currentStep: Binding<Int>
     ) {
         self.step = step
         self.action = action
-        self.player = AVPlayer(url: step.video)
+        self.player = AVPlayer(url: step.video(isUSA))
         self._currentStep = currentStep
     }
     
@@ -142,4 +146,5 @@ private struct PassportScanTutorialStep: View {
 
 #Preview {
     PassportScanTutorialButton()
+        .environmentObject(PassportViewModel())
 }
