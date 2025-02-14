@@ -24,6 +24,9 @@
         }
       }
     },
+    "* Nothing leaves this device" : {
+
+    },
     "/%@" : {
 
     },
@@ -133,6 +136,9 @@
 
     },
     "3. When we support your country, you will be notified in the app" : {
+
+    },
+    "14925-1592" : {
 
     },
     "About the reward program" : {
@@ -668,6 +674,9 @@
           }
         }
       }
+    },
+    "Copy & Send this invite code" : {
+
     },
     "Copy to clipboard" : {
       "localizations" : {
@@ -1222,6 +1231,9 @@
     "Heard Island and McDonald Islands" : {
 
     },
+    "Hi" : {
+
+    },
     "Hold your iPhone near an NFC enabled passport." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1398,6 +1410,9 @@
           }
         }
       }
+    },
+    "Join early waitlist" : {
+
     },
     "Join RariMe with my invite code: %@\n\n%@" : {
       "localizations" : {
@@ -2320,6 +2335,9 @@
         }
       }
     },
+    "Scan QR code" : {
+
+    },
     "Scan your passport" : {
 
     },
@@ -2770,6 +2788,9 @@
 
     },
     "Used" : {
+
+    },
+    "User" : {
 
     },
     "User creation failed" : {

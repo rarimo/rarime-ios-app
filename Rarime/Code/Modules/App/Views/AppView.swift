@@ -24,7 +24,7 @@ struct AppView: View {
                     securityManager.faceIdState != .unset,
                     securityManager.isPasscodeCorrect
                 {
-                    MainView().transition(.backslide)
+                    V2MainView().transition(.backslide)
                 } else if
                     securityManager.passcodeState != .unset,
                     securityManager.faceIdState != .unset
