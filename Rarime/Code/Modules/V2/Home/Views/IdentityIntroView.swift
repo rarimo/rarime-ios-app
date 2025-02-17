@@ -59,7 +59,6 @@ struct IdentityIntroView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 8)
         }
-        .frame(maxHeight: .infinity)
         .background(Gradients.greenFirst)
     }
 }
