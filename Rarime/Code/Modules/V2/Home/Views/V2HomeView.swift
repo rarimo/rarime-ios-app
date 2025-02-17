@@ -23,9 +23,7 @@ struct V2HomeView: View {
                 switch route {
                 case .notifications:
                     NotificationsView(
-                        onBack: {
-                            path.removeLast()
-                        }
+                        onBack: { path.removeLast() }
                     )
                     .environment(\.managedObjectContext, notificationManager.pushNotificationContainer.viewContext)
                     .navigationBarBackButtonHidden()
@@ -244,7 +242,6 @@ struct V2HomeView: View {
                         .padding(.horizontal, 22)
                     }
                 }
-                
                 V2StepIndicator(steps: 5, currentStep: 2)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.trailing, 8)

@@ -33,9 +33,7 @@ struct V2ClaimTokensView: View {
                         .foregroundStyle(.textSecondary)
                 }
                 .padding(.top, 20)
-                
                 Spacer()
-                
                 Image(Icons.close)
                     .square(20)
                     .foregroundStyle(.baseBlack)
@@ -46,22 +44,16 @@ struct V2ClaimTokensView: View {
             }
             .padding(.top, 20)
             .padding(.horizontal, 20)
-            
             Spacer()
-            
             Image(Images.rarimoTokens)
                 .resizable()
                 .scaledToFit()
-            
             Spacer()
-            
             Text("Start building your incognito profile and earn rewards as an early community member.")
                 .body1()
                 .foregroundStyle(.baseBlack.opacity(0.6))
                 .padding(.horizontal, 20)
                 .padding(.bottom, 40)
-            
-            
             VStack(spacing: 8) {
                 // TODO: sync with design system
                 Button(action: onClaim) {
@@ -73,7 +65,6 @@ struct V2ClaimTokensView: View {
                 .foregroundColor(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
                 .padding(.bottom, 8)
-                
                 (
                     Text("By continue, you are agreeing to ") +
                         Text(.init("[\(String(localized: "RariMe General Terms & Conditions"))](\(termsURL))")).underline() +

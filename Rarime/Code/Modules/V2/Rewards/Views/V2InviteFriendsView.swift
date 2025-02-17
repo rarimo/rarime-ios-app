@@ -19,9 +19,7 @@ struct V2InviteFriendsView: View {
                             .foregroundStyle(.textSecondary)
                     }
                     .padding(.top, 20)
-                    
                     Spacer()
-                    
                     Image(Icons.close)
                         .square(20)
                         .foregroundStyle(.baseBlack)
@@ -32,7 +30,6 @@ struct V2InviteFriendsView: View {
                 }
                 .padding(.top, 20)
                 .padding(.horizontal, 20)
-                
                 Image(Images.claimTokensArrow)
                     .resizable()
                     .scaledToFit()
@@ -40,12 +37,10 @@ struct V2InviteFriendsView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                     .offset(x: 25, y: 80)
             }
-            
             Image(Images.peopleEmojis)
                 .resizable()
                 .scaledToFit()
                 .frame(maxHeight: .infinity, alignment: .center)
-            
             if let codes = balance.referralCodes {
                 VStack(alignment: .leading, spacing: 20) {
                     Text("Invited \(codes.filter { $0.status != .active }.count)/\(codes.count)")
