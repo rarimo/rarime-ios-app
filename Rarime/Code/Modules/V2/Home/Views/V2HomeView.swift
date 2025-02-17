@@ -83,7 +83,6 @@ struct V2HomeView: View {
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack(spacing: 44) {
                             HomeCard(
-                                onCardClick: { path.append(.identity) },
                                 backgroundGradient: Gradients.greenFirst,
                                 title: "Your Device",
                                 subtitle: "Your Identity",
@@ -103,6 +102,9 @@ struct V2HomeView: View {
                                         .padding(.bottom, 32)
                                 }
                             )
+                            .onTapGesture {
+                                path.append(.identity)
+                            }
                             HomeCard(
                                 backgroundGradient: Gradients.blueFirst,
                                 title: "Invite",

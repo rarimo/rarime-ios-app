@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct HomeCard<Content: View, BottomActions: View>: View {
-    let onCardClick: (() -> Void)?
     let backgroundGradient: LinearGradient
     let title: String
     let subtitle: String
@@ -10,7 +9,6 @@ struct HomeCard<Content: View, BottomActions: View>: View {
     let bottomActions: () -> BottomActions
     
     init(
-        onCardClick: (() -> Void)? = nil,
         backgroundGradient: LinearGradient,
         title: String,
         subtitle: String,
@@ -18,7 +16,6 @@ struct HomeCard<Content: View, BottomActions: View>: View {
         @ViewBuilder imageContent: @escaping () -> Content,
         @ViewBuilder bottomActions: @escaping () -> BottomActions
     ) {
-        self.onCardClick = onCardClick
         self.backgroundGradient = backgroundGradient
         self.title = title
         self.subtitle = subtitle
@@ -62,9 +59,6 @@ struct HomeCard<Content: View, BottomActions: View>: View {
         .frame(maxWidth: .infinity)
         .background(backgroundGradient)
         .clipShape(RoundedRectangle(cornerRadius: 32))
-        .onTapGesture {
-            onCardClick?()
-        }
     }
 }
 
