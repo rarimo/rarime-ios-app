@@ -5,7 +5,7 @@ struct IdentityIntroView: View {
     let onStart: () -> Void
     
     var body: some View {
-        VStack() {
+        VStack {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("Your Device")
@@ -18,7 +18,6 @@ struct IdentityIntroView: View {
                         .foregroundStyle(.textSecondary)
                 }
                 .padding(.top, 20)
-                .fixedSize(horizontal: true, vertical: false)
                 
                 Spacer()
                 
@@ -28,7 +27,6 @@ struct IdentityIntroView: View {
                     .padding(10)
                     .background(.baseBlack.opacity(0.03))
                     .cornerRadius(100)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
                     .onTapGesture { onClose() }
             }
             .padding(.top, 20)
