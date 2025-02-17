@@ -1507,6 +1507,9 @@
     "Let's Scan" : {
 
     },
+    "Let's start" : {
+
+    },
     "Let's Start" : {
 
     },
@@ -2995,6 +2998,12 @@
 
     },
     "Your Address" : {
+
+    },
+    "Your Device" : {
+
+    },
+    "Your Identity" : {
 
     },
     "Your internet connection is down" : {
