@@ -3,6 +3,7 @@ import Foundation
 
 class UpdateManager: ObservableObject {
     @Published var isDeprecated: Optional<Bool> = nil
+    @Published var isMaintenance: Bool = false
     
     static let shared = UpdateManager()
     
@@ -29,6 +30,19 @@ class UpdateManager: ObservableObject {
         }
         
         return firstResult.version.compare(currentVersion, options: .numeric) == .orderedDescending
+    }
+    
+    func checkMaintenanceMode() async {
+        do {
+            let points = Points(ConfigManager.shared.api.pointsServiceURL)
+            let maintenanceResponse = try await points.getMaintenanceMode()
+            
+            DispatchQueue.main.async {
+                self.isMaintenance = maintenanceResponse.data.attributes.maintenance
+            }
+        } catch {
+            LoggerUtil.common.error("Failed to check for maintenance: \(error, privacy: .public)")
+        }
     }
     
     func checkForUpdate() async {

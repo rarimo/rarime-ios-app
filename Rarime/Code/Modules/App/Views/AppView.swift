@@ -19,6 +19,8 @@ struct AppView: View {
                     VersionUpdateView()
                 } else if !internetConnectionManager.isInternetPresent {
                     InternetConnectionRequiredView()
+                } else if updateManager.isMaintenance {
+                    MaintenanceView()
                 } else if
                     securityManager.passcodeState != .unset,
                     securityManager.faceIdState != .unset,
@@ -47,6 +49,7 @@ struct AppView: View {
         .preferredColorScheme(settingsManager.colorScheme.rawScheme)
         .onAppear {
             Task { @MainActor in
+                await updateManager.checkMaintenanceMode()
                 await updateManager.checkForUpdate()
             }
 
