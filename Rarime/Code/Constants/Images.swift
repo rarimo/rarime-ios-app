@@ -21,6 +21,8 @@ enum Images {
     static let rarimoTokens = "RarimoTokens"
     static let seedPhraseShred = "SeedPhraseShred"
     static let dotCountry = "DotCountry"
+    
+    static let claimTokensArrow = "ClaimTokensArrow"
 
     // TODO: remove when actual images are used
     static let rewardsTest1 = "RewardsTest1"

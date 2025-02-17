@@ -7,7 +7,6 @@ struct V2MainViewLayout<Content: View>: View {
     var body: some View {
         content
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-        
         V2NavBarView(selectedTab: $mainViewModel.selectedTab)
     }
 }

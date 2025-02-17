@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct HomeCarouselStepIndicator: View {
+struct V2StepIndicator: View {
     let steps: Int
     let currentStep: Int
     
@@ -16,5 +16,5 @@ struct HomeCarouselStepIndicator: View {
 }
 
 #Preview() {
-    HomeCarouselStepIndicator(steps: 4, currentStep: 1)
+    V2StepIndicator(steps: 4, currentStep: 1)
 }

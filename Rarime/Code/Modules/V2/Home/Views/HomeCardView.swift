@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct HomeCard<Content: View, BottomActions: View>: View {
+struct HomeCardView<Content: View, BottomActions: View>: View {
     let backgroundGradient: LinearGradient
     let title: String
     let subtitle: String
@@ -28,7 +28,6 @@ struct HomeCard<Content: View, BottomActions: View>: View {
         ZStack(alignment: .topLeading) {
             imageContent()
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                
             VStack(alignment: .leading, spacing: 0) {
                 Text(title)
                     .h4()
@@ -41,7 +40,6 @@ struct HomeCard<Content: View, BottomActions: View>: View {
             }
             .padding(.leading, 24)
             .padding(.top, 32)
-            
             Image(icon)
                 .iconLarge()
                 .foregroundStyle(Color.baseBlack.opacity(0.2))
@@ -51,7 +49,6 @@ struct HomeCard<Content: View, BottomActions: View>: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.trailing, 12)
                 .padding(.top, 12)
-            
             bottomActions()
                 .frame(maxHeight: .infinity, alignment: .bottomLeading)
         }
@@ -63,7 +60,7 @@ struct HomeCard<Content: View, BottomActions: View>: View {
 }
 
 #Preview {
-    HomeCard(
+    HomeCardView(
         backgroundGradient: Gradients.greenFirst,
         title: "Your Device",
         subtitle: "Your Identity",

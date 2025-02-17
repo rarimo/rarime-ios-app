@@ -18,9 +18,7 @@ struct IdentityIntroView: View {
                         .foregroundStyle(.textSecondary)
                 }
                 .padding(.top, 20)
-                
                 Spacer()
-                
                 Image(Icons.close)
                     .square(20)
                     .foregroundStyle(.baseBlack)
@@ -31,22 +29,17 @@ struct IdentityIntroView: View {
             }
             .padding(.top, 20)
             .padding(.horizontal, 20)
-            
             Spacer()
-            
             Image(Images.handWithPhone)
                 .resizable()
                 .scaledToFit()
                 .scaleEffect(0.9, anchor: .trailing)
-            
             Spacer()
-            
             Text("This app is where you privately store your digital identities, enabling you to go incognito across the web.")
                 .body1()
                 .foregroundStyle(.baseBlack.opacity(0.6))
                 .padding(.horizontal, 20)
                 .padding(.bottom, 40)
-            
             // TODO: sync with design system
             Button(action: onStart) {
                 Text("Let's start").buttonLarge().fontWeight(.medium)
@@ -59,7 +52,6 @@ struct IdentityIntroView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 8)
         }
-        .frame(maxHeight: .infinity)
         .background(Gradients.greenFirst)
     }
 }

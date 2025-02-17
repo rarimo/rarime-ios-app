@@ -21,28 +21,12 @@ struct V2NavBarTabItem: View {
     let tab: V2MainTabs
     let isActive: Bool
     
-    private var backgroundColor: Color {
-        tab == .scanQr ? .baseBlack : .clear
-    }
-        
-    private var activeBackgroundColor: Color {
-        tab == .scanQr ? .baseBlack : .baseBlack.opacity(0.03)
-    }
-
-    private var foregroundColor: Color {
-        tab == .scanQr ? .baseWhite : .baseBlack.opacity(0.3)
-    }
-    
-    private var activeForegroundColor: Color {
-        tab == .scanQr ? .baseWhite : .baseBlack
-    }
-    
     var body: some View {
         Image(isActive ? tab.activeIconName : tab.iconName)
             .square(24)
             .frame(width: 48, height: 40)
-            .background(isActive ? activeBackgroundColor : backgroundColor)
-            .foregroundStyle(isActive ? activeForegroundColor : foregroundColor)
+            .background(isActive ? .baseBlack.opacity(0.03) : .clear)
+            .foregroundStyle(isActive ? .baseBlack : .baseBlack.opacity(0.3))
             .cornerRadius(12)
     }
 }
