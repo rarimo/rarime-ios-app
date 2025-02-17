@@ -326,9 +326,7 @@ class Points {
     }
     
     func getMaintenanceMode() async throws -> GetMaintenanceModeResponse {
-        // TODO: change endpoint
-        let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/maintanance")
-
+        let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/maintenance")
         let response = try await AF.request(requestUrl)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(GetMaintenanceModeResponse.self)
@@ -820,7 +818,7 @@ struct GetMaintenanceModeResponse: Codable {
 }
 
 struct GetMaintenanceModeResponseData: Codable {
-    let id, type: String
+    let type: String
     var attributes: GetMaintenanceModeResponseDataAttributes
 }
 
