@@ -1,7 +1,7 @@
 import SwiftUI
 
 private enum V2HomeRoute: Hashable {
-    case notifications
+    case notifications, identity
 }
 
 struct V2HomeView: View {
@@ -28,6 +28,13 @@ struct V2HomeView: View {
                         }
                     )
                     .environment(\.managedObjectContext, notificationManager.pushNotificationContainer.viewContext)
+                    .navigationBarBackButtonHidden()
+                case .identity:
+                    IdentityIntroView(
+                        onClose: { path.removeLast() },
+                        // TODO: change after design impl
+                        onStart: { path.removeLast() }
+                    )
                     .navigationBarBackButtonHidden()
                 }
             }
@@ -84,11 +91,8 @@ struct V2HomeView: View {
                                     Image(Images.handWithPhone)
                                         .resizable()
                                         .scaledToFit()
-                                        .frame(maxWidth: .infinity,
-                                               maxHeight: .infinity,
-                                               alignment: .center)
-                                        .scaleEffect(0.9)
-                                        .offset(x: 30, y: 20)
+                                        .scaleEffect(0.9, anchor: .trailing)
+                                        .offset(y: 30)
                                 },
                                 bottomActions: {
                                     Text("* Nothing leaves this device")
@@ -98,6 +102,9 @@ struct V2HomeView: View {
                                         .padding(.bottom, 32)
                                 }
                             )
+                            .onTapGesture {
+                                path.append(.identity)
+                            }
                             HomeCard(
                                 backgroundGradient: Gradients.blueFirst,
                                 title: "Invite",
