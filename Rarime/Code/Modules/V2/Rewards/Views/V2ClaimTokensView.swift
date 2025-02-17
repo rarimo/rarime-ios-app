@@ -80,7 +80,7 @@ struct V2ClaimTokensView: View {
             }
             .padding(.horizontal, 20)
         }
-        .background(Gradients.greenSecond)
+        .background(Gradients.sandFirst)
     }
 }
 
