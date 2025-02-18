@@ -13,7 +13,9 @@ struct V2NavBarView: View {
                     }
             }
         }
-        .padding(.vertical, 8)
+        .padding(.vertical, 12)
+        .frame(maxWidth: .infinity)
+        .background(.baseWhite)
     }
 }
 

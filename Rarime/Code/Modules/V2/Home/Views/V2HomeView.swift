@@ -4,6 +4,16 @@ private enum V2HomeRoute: Hashable {
     case notifications, identity, inviteFriends, claimTokens
 }
 
+struct HomeCardModel: Identifiable {
+    let id = UUID()
+    let backgroundGradient: LinearGradient
+    let title: String
+    let subtitle: String
+    let icon: String
+    let imageContent: AnyView
+    let bottomActions: AnyView
+}
+
 struct V2HomeView: View {
     @EnvironmentObject private var notificationManager: NotificationManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
@@ -14,8 +24,8 @@ struct V2HomeView: View {
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
 
     @State private var path: [V2HomeRoute] = []
-    
     @State private var isCopied = false
+    @State private var currentIndex = 0
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -101,151 +111,151 @@ struct V2HomeView: View {
         .padding(.top, 20)
         .padding(.bottom, 16)
         .padding(.horizontal, 20)
+        .background(.baseWhite)
+        .zIndex(1)
     }
 
     private var content: some View {
         V2MainViewLayout {
-            ZStack {
-                VStack(alignment: .leading, spacing: 12) {
-                    header
-                    ScrollView(.vertical, showsIndicators: false) {
-                        VStack(spacing: 44) {
-                            HomeCardView(
-                                backgroundGradient: Gradients.greenFirst,
-                                title: "Your Device",
-                                subtitle: "Your Identity",
-                                icon: Icons.rarime,
-                                imageContent: {
-                                    Image(Images.handWithPhone)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .scaleEffect(0.9, anchor: .trailing)
-                                        .offset(y: 30)
-                                },
-                                bottomActions: {
-                                    Text("* Nothing leaves this device")
-                                        .body3()
-                                        .foregroundStyle(.textPrimary)
-                                        .padding(.leading, 24)
-                                        .padding(.bottom, 32)
-                                }
-                            )
-                            .onTapGesture {
-                                path.append(.identity)
-                            }
-                            HomeCardView(
-                                backgroundGradient: Gradients.blueFirst,
-                                title: "Invite",
-                                subtitle: "Others",
-                                icon: Icons.rarimo,
-                                imageContent: {
-                                    ZStack(alignment: .leading) {
-                                        Image(Images.peopleEmojis)
-                                            .resizable()
-                                            .scaledToFit()
-                                        
-                                        Image(Images.claimTokensArrow)
-                                            .resizable()
-                                            .scaledToFit()
-                                            .scaleEffect(0.35)
-                                            .frame(maxWidth: .infinity, alignment: .center)
-                                            .offset(x: 70, y: -140)
-                                    }
-                                },
-                                bottomActions: {
-                                    VStack(alignment: .leading, spacing: 20) {
-                                        copyButton
-                                        Text("Copy & Send this invite code")
-                                            .body3()
-                                            .foregroundStyle(.textPrimary)
-                                    }
+            VStack(spacing: 0) {
+                header
+                ZStack(alignment: .trailing) {
+                    SnapCarouselView(index: $currentIndex) {
+                        HomeCardView(
+                            backgroundGradient: Gradients.greenFirst,
+                            title: "Your Device",
+                            subtitle: "Your Identity",
+                            icon: Icons.rarime,
+                            imageContent: {
+                                Image(Images.handWithPhone)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .scaleEffect(0.9, anchor: .trailing)
+                                    .offset(y: 30)
+                            },
+                            bottomActions: {
+                                Text("* Nothing leaves this device")
+                                    .body3()
+                                    .foregroundStyle(.textPrimary)
                                     .padding(.leading, 24)
                                     .padding(.bottom, 32)
-                                }
-                            )
-                            .onTapGesture {
-                                path.append(.inviteFriends)
                             }
-                            HomeCardView(
-                                backgroundGradient: Gradients.greenFirst,
-                                title: "Claim",
-                                subtitle: "10 RMO",
-                                icon: Icons.rarimo,
-                                imageContent: {
-                                    Image(Images.rarimoTokens)
-                                        .resizable()
-                                        .scaledToFit()
-                                },
-                                bottomActions: {
-                                    Button(action: { path.append(.claimTokens) }) {
-                                        Text("Claim").buttonMedium().fontWeight(.medium)
-                                            .frame(height: 48)
-                                            .frame(maxWidth: .infinity)
-                                            .padding(.horizontal, 12)
-                                    }
-                                    .background(.componentPrimary)
-                                    .foregroundColor(.textPrimary)
-                                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                                    .padding(.horizontal, 24)
-                                    .padding(.bottom, 24)
-                                }
-                            )
-                            HomeCardView(
-                                backgroundGradient: Gradients.greenSecond,
-                                title: "An Unforgettable",
-                                subtitle: "Wallet",
-                                icon: Icons.rarime,
-                                imageContent: {
-                                    Image(Images.seedPhraseShred)
-                                        .resizable()
-                                        .scaledToFit()
-                                },
-                                bottomActions: {
-                                    Button(action: {}) {
-                                        Text("Join early waitlist").buttonMedium().fontWeight(.medium)
-                                            .frame(height: 48)
-                                            .frame(maxWidth: .infinity)
-                                            .padding(.horizontal, 12)
-                                    }
-                                    .background(.componentPrimary)
-                                    .foregroundColor(.textPrimary)
-                                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                                    .padding(.horizontal, 24)
-                                    .padding(.bottom, 24)
-                                }
-                            )
-                            HomeCardView(
-                                backgroundGradient: Gradients.greenThird,
-                                title: "Freedomtool",
-                                subtitle: "Voting",
-                                icon: Icons.rarime,
-                                imageContent: {
-                                    Image(Images.dotCountry)
-                                        .resizable()
-                                        .scaledToFit()
-                                },
-                                bottomActions: {
-                                    Button(action: {}) {
-                                        Text("Scan QR code").buttonMedium().fontWeight(.medium)
-                                            .frame(height: 48)
-                                            .frame(maxWidth: .infinity)
-                                            .padding(.horizontal, 12)
-                                    }
-                                    .background(.componentPrimary)
-                                    .foregroundColor(.textPrimary)
-                                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                                    .padding(.horizontal, 24)
-                                    .padding(.bottom, 24)
-                                }
-                            )
+                        )
+                        .onTapGesture {
+                            path.append(.identity)
                         }
-                        .padding(.horizontal, 22)
+                        HomeCardView(
+                            backgroundGradient: Gradients.blueFirst,
+                            title: "Invite",
+                            subtitle: "Others",
+                            icon: Icons.rarimo,
+                            imageContent: {
+                                ZStack(alignment: .leading) {
+                                    Image(Images.peopleEmojis)
+                                        .resizable()
+                                        .scaledToFit()
+                                    
+                                    Image(Images.claimTokensArrow)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .scaleEffect(0.35)
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                        .offset(x: 70, y: -140)
+                                }
+                            },
+                            bottomActions: {
+                                VStack(alignment: .leading, spacing: 20) {
+                                    copyButton
+                                    Text("Copy & Send this invite code")
+                                        .body3()
+                                        .foregroundStyle(.textPrimary)
+                                }
+                                .padding(.leading, 24)
+                                .padding(.bottom, 32)
+                            }
+                        )
+                        .onTapGesture {
+                            path.append(.inviteFriends)
+                        }
+                        HomeCardView(
+                            backgroundGradient: Gradients.greenFirst,
+                            title: "Claim",
+                            subtitle: "10 RMO",
+                            icon: Icons.rarimo,
+                            imageContent: {
+                                Image(Images.rarimoTokens)
+                                    .resizable()
+                                    .scaledToFit()
+                            },
+                            bottomActions: {
+                                Button(action: { path.append(.claimTokens) }) {
+                                    Text("Claim").buttonMedium().fontWeight(.medium)
+                                        .frame(height: 48)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.horizontal, 12)
+                                }
+                                .background(.componentPrimary)
+                                .foregroundColor(.textPrimary)
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                                .padding(.horizontal, 24)
+                                .padding(.bottom, 24)
+                            }
+                        )
+                        HomeCardView(
+                            backgroundGradient: Gradients.greenSecond,
+                            title: "An Unforgettable",
+                            subtitle: "Wallet",
+                            icon: Icons.rarime,
+                            imageContent: {
+                                Image(Images.seedPhraseShred)
+                                    .resizable()
+                                    .scaledToFit()
+                            },
+                            bottomActions: {
+                                Button(action: {}) {
+                                    Text("Join early waitlist").buttonMedium().fontWeight(.medium)
+                                        .frame(height: 48)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.horizontal, 12)
+                                }
+                                .background(.componentPrimary)
+                                .foregroundColor(.textPrimary)
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                                .padding(.horizontal, 24)
+                                .padding(.bottom, 24)
+                            }
+                        )
+                        HomeCardView(
+                            backgroundGradient: Gradients.greenThird,
+                            title: "Freedomtool",
+                            subtitle: "Voting",
+                            icon: Icons.rarime,
+                            imageContent: {
+                                Image(Images.dotCountry)
+                                    .resizable()
+                                    .scaledToFit()
+                            },
+                            bottomActions: {
+                                Button(action: {}) {
+                                    Text("Scan QR code").buttonMedium().fontWeight(.medium)
+                                        .frame(height: 48)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.horizontal, 12)
+                                }
+                                .background(.componentPrimary)
+                                .foregroundColor(.textPrimary)
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                                .padding(.horizontal, 24)
+                                .padding(.bottom, 24)
+                            }
+                        )
                     }
+                    .padding(.horizontal, 22)
+                    V2StepIndicator(steps: 5, currentStep: currentIndex)
+                        .padding(.trailing, 8)
                 }
-                V2StepIndicator(steps: 5, currentStep: 2)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding(.trailing, 8)
             }
+            .background(.baseWhite)
         }
     }
     
