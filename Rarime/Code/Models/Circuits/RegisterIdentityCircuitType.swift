@@ -138,11 +138,11 @@ extension RegisterIdentityCircuitType {
     }
 
     enum CircuitKeySizeType {
-        case B1024, B2048, B4096, B256, B320, B192
+        case B1024, B2048, B3072, B4096, B160, B192, B224, B256, B320, B384, B512
     }
 
     enum CircuitExponentType {
-        case E3, E65537
+        case E3, E65537, E37187
     }
 
     enum CircuitSaltType {
@@ -150,11 +150,12 @@ extension RegisterIdentityCircuitType {
     }
 
     enum CircuitCurveType {
-        case SECP256R1, BRAINPOOLP256R1, BRAINPOOLP320R1, SECP192R1
+        case SECP160R1, SECP192R1, SECP224R1, SECP256R1, SECP384R1, SECP512R1
+        case BRAINPOOLP160R1, BRAINPOOLP192R1, BRAINPOOLP224R1, BRAINPOOLP256R1, BRAINPOOLP320R1, BRAINPOOLP384R1, BRAINPOOLP512R1
     }
 
     enum CircuitHashAlgorithmType {
-        case HA256, HA384, HA160
+        case HA160, HA192, HA224, HA256, HA384, HA512
     }
 }
 
@@ -277,14 +278,24 @@ extension Passport {
             return .B1024
         case 2048:
             return .B2048
+        case 3072:
+            return .B3072
         case 4096:
             return .B4096
+        case 160:
+            return .B160
+        case 192:
+            return .B192
+        case 224:
+            return .B224
         case 256:
             return .B256
         case 320:
             return .B320
-        case 192:
-            return .B192
+        case 384:
+            return .B384
+        case 512:
+            return .B512
         default:
             return nil
         }
@@ -297,6 +308,8 @@ extension Passport {
 
         if exponentBN.cmp(BN(3)) == 0 {
             return .E3
+        } else if exponentBN.cmp(BN(37187)) == 0 {
+            return .E37187
         } else if exponentBN.cmp(BN(65537)) == 0 {
             return .E65537
         } else {
@@ -374,14 +387,32 @@ extension Passport {
         }
 
         switch curveName {
-        case "secp256r1", "prime256v1":
-            return .SECP256R1
-        case "secp192r1", "prime192v1":
+        case "secp160r1", "prime160r1", "P-160":
+            return .SECP160R1
+        case "secp192r1", "prime192v1", "P-192":
             return .SECP192R1
+        case "secp224r1", "prime224v1", "P-224":
+            return .SECP224R1
+        case "secp256r1", "prime256v1", "P-256":
+            return .SECP256R1
+        case "secp384r1", "prime384v1", "P-384":
+            return .SECP384R1
+        case "secp521r1", "prime521v1", "P-521":
+            return .SECP512R1
+        case "brainpoolP160r1":
+            return .BRAINPOOLP160R1
+        case "brainpoolP192r1":
+            return .BRAINPOOLP192R1
+        case "brainpoolP224r1":
+            return .BRAINPOOLP224R1
         case "brainpoolP256r1":
             return .BRAINPOOLP256R1
         case "brainpoolP320r1":
             return .BRAINPOOLP256R1
+        case "brainpoolP384r1":
+            return .BRAINPOOLP384R1
+        case "brainpoolP512r1":
+            return .BRAINPOOLP512R1
         default:
             return nil
         }

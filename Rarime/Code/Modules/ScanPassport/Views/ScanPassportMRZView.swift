@@ -41,7 +41,7 @@ struct ScanPassportMRZView: View {
             .dynamicSheet(isPresented: $isManualMrzSheetPresented, title: "Fill Manually") {
                 MrzFormView(onSubmitted: { mrzKey in
                     LoggerUtil.common.info("MRZ filled manually")
-                    
+
                     onNext(mrzKey)
                 })
             }
@@ -54,4 +54,5 @@ struct ScanPassportMRZView: View {
         onNext: { _ in },
         onClose: {}
     )
+    .environmentObject(PassportViewModel())
 }

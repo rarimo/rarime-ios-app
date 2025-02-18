@@ -14,6 +14,7 @@ extension MRZScanView {
         private let semaphore = AsyncSemaphore(value: 1)
         
         var onMRZKey: (String) -> Void = { _ in }
+        var onUSA: () -> Void = {}
         
         @Published var cameraTask: Task<Void, Never>? = nil
         
@@ -75,6 +76,7 @@ extension MRZScanView {
             try requestHandler.perform([request])
             
             if !recognizedTexts.isEmpty {
+                var nationality = ""
                 var documentType: DocumentType? = nil
                 var documentNumber = ""
                 for text in recognizedTexts {
@@ -85,15 +87,17 @@ extension MRZScanView {
                     if let documentType {
                         switch documentType {
                         case .idCard:
-                            readMRZFromIDCard(text, documentNumber)
+                            readMRZFromIDCard(text, documentNumber, nationality)
                         case .passport:
-                            readMRZFromPassport(text)
+                            readMRZFromPassport(text, nationality)
                         }
                         
                         return
                     } else {
                         if text.starts(with: "P<") {
                             documentType = .passport
+                            
+                            nationality = getNationality(text)
                             
                             continue
                         } else if text.starts(with: "ID") {
@@ -104,6 +108,8 @@ extension MRZScanView {
                             
                             documentNumber = String(text[documentNumberStartIndex...documentNumberEndIndex])
                             
+                            nationality = getNationality(text)
+                            
                             continue
                         }
                     }
@@ -111,7 +117,7 @@ extension MRZScanView {
             }
         }
         
-        func readMRZFromPassport(_ text: String) {
+        func readMRZFromPassport(_ text: String, _ nationality: String) {
             let documentNumberStartIndex = text.index(text.startIndex, offsetBy: 0)
             let documentNumberEndIndex = text.index(text.startIndex, offsetBy: 9)
             
@@ -125,10 +131,10 @@ extension MRZScanView {
             let birthday = String(text[birthdayStartIndex...birthdayEndIndex])
             let expiration = String(text[expirationStartIndex...expirationEndIndex])
                 
-            readMrzFromDocument(documentNumber, birthday, expiration)
+            readMrzFromDocument(documentNumber, birthday, expiration, nationality)
         }
         
-        func readMRZFromIDCard(_ text: String, _ documentNumber: String) {
+        func readMRZFromIDCard(_ text: String, _ documentNumber: String, _ nationality: String) {
             let birthdayStartIndex = text.index(text.startIndex, offsetBy: 0)
             let birthdayEndIndex = text.index(text.startIndex, offsetBy: 6)
             
@@ -138,13 +144,14 @@ extension MRZScanView {
             let birthday = String(text[birthdayStartIndex...birthdayEndIndex])
             let expiration = String(text[expirationStartIndex...expirationEndIndex])
             
-            readMrzFromDocument(documentNumber, birthday, expiration)
+            readMrzFromDocument(documentNumber, birthday, expiration, nationality)
         }
         
         func readMrzFromDocument(
             _ documentNumber: String,
             _ birthday: String,
-            _ expiration: String
+            _ expiration: String,
+            _ nationality: String
         ) {
             let mrzKey = "\(documentNumber+birthday+expiration)"
             
@@ -155,10 +162,21 @@ extension MRZScanView {
             )
             
             if mrzKey == checkMrzKey {
+                if nationality == "USA" {
+                    onUSA()
+                }
+                
                 onMRZKey(mrzKey)
                 
                 stopScanning()
             }
+        }
+        
+        func getNationality(_ text: String) -> String {
+            let nationalityStartIndex = text.index(text.startIndex, offsetBy: 2)
+            let nationalityEndIndex = text.index(text.startIndex, offsetBy: 4)
+            
+            return String(text[nationalityStartIndex...nationalityEndIndex]).uppercased()
         }
     }
 }

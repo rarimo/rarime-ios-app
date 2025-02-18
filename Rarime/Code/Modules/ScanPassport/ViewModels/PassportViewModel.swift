@@ -35,6 +35,8 @@ class PassportViewModel: ObservableObject {
     
     @Published var isUserRegistered = false
     
+    @Published var isUSA = false
+    
     var revocationPassportPublisher = PassthroughSubject<Passport, Error>()
     
     var passportCountry: Country {
