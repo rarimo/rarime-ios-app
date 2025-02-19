@@ -68,34 +68,30 @@ struct HomeCardView<Content: View, BottomActions: View>: View {
     }
 }
 
-struct HomeCardView_Previews: PreviewProvider {
-    @Namespace static var animation
-    
-    static var previews: some View {
-        HomeCardView(
-            backgroundGradient: Gradients.greenFirst,
-            title: "Your Device",
-            subtitle: "Your Identity",
-            icon: Icons.rarime,
-            imageContent: {
-                Image(Images.handWithPhone)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: .infinity,
-                           maxHeight: .infinity,
-                           alignment: .center)
-                    .scaleEffect(0.9)
-                    .offset(x: 30, y: 20)
-            },
-            bottomActions: {
-                Text("* Nothing leaves this device")
-                    .body3()
-                    .foregroundStyle(.textPrimary)
-                    .padding(.leading, 24)
-                    .padding(.bottom, 32)
-            },
-            animation: animation
-        )
-        .padding(.horizontal, 22)
-    }
+#Preview {
+    HomeCardView(
+        backgroundGradient: Gradients.greenFirst,
+        title: "Your Device",
+        subtitle: "Your Identity",
+        icon: Icons.rarime,
+        imageContent: {
+            Image(Images.handWithPhone)
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: .infinity,
+                       maxHeight: .infinity,
+                       alignment: .center)
+                .scaleEffect(0.9)
+                .offset(x: 30, y: 20)
+        },
+        bottomActions: {
+            Text("* Nothing leaves this device")
+                .body3()
+                .foregroundStyle(.textPrimary)
+                .padding(.leading, 24)
+                .padding(.bottom, 32)
+        },
+        animation: Namespace().wrappedValue
+    )
+    .padding(.horizontal, 22)
 }
