@@ -1,21 +1,8 @@
 import SwiftUI
 
-enum WalletWaitlistStep: Int, CaseIterable {
-    case seedPhrases, selfRecovery
-
-    var title: LocalizedStringResource {
-        switch self {
-        case .seedPhrases: return "No more seed phrases"
-        case .selfRecovery: return "ZK Face for self-recovery"
-        }
-    }
-}
-
 struct WalletWaitlistView: View {
     let onClose: () -> Void
     let onJoin: () -> Void
-    
-    @State private var currentStep = WalletWaitlistStep.seedPhrases
     
     var body: some View {
         VStack {
@@ -42,26 +29,16 @@ struct WalletWaitlistView: View {
             }
             .padding(.top, 20)
             .padding(.horizontal, 20)
+            Spacer()
             VStack(spacing: 60) {
                 Image(Images.seedPhraseShred)
                     .resizable()
                     .scaledToFit()
-                TabView(selection: $currentStep) {
-                    ForEach(WalletWaitlistStep.allCases, id: \.self) { item in
-                        Text(item.title)
-                            .h6()
-                            .foregroundStyle(.baseBlack)
-                    }
-                }
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                .animation(.easeInOut, value: currentStep)
-                .frame(maxHeight: .infinity, alignment: .center)
-                V2StepIndicator(
-                    steps: WalletWaitlistStep.allCases.count,
-                    currentStep: currentStep.rawValue
-                )
+                Text("No more seed phrases")
+                    .subtitle1()
+                    .foregroundStyle(.textPrimary)
             }
-            .padding(.bottom, 48)
+            Spacer()
             // TODO: sync with design system
             Button(action: onJoin) {
                 Text("Join early waitlist").buttonLarge().fontWeight(.medium)
