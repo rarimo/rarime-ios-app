@@ -358,10 +358,18 @@ class UserManager: ObservableObject {
         
         LoggerUtil.common.info("Passport certificate is not registered, registering...")
         
-        let calldata = try IdentityCallDataBuilder().buildRegisterCertificateCalldata(Certificates.ICAO, slavePem: certPem)
+        let buildCalldataResponse = try IdentityCallDataBuilder().buildRegisterCertificateCalldata(Certificates.ICAO, slavePem: certPem)
+        
+        guard let calldata = buildCalldataResponse.calldata else {
+            throw "calldata build response does not contain calldata"
+        }
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.register(calldata, ConfigManager.shared.api.registerContractAddress)
+        let response = try await relayer.register(
+            calldata,
+            ConfigManager.shared.api.registerContractAddress,
+            meta: ["dispatcherName": buildCalldataResponse.dispatcherName]
+        )
         
         LoggerUtil.common.info("Register certificate EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
         
