@@ -3,6 +3,7 @@ import SwiftUI
 struct V2MainView: View {
     @EnvironmentObject private var notificationManager: NotificationManager
     @EnvironmentObject private var userManager: UserManager
+    @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
     
     @StateObject private var viewModel = ViewModel()
     
@@ -10,10 +11,14 @@ struct V2MainView: View {
         ZStack {
             switch viewModel.selectedTab {
                 case .home: V2HomeView()
-                case .passport: WalletView()
-                case .scanQr: WalletView()
+                case .passport: HomeView()
+                case .scanQr: ScanQRView(
+                    // TODO: change routign after design impl
+                    onBack: { viewModel.selectedTab = .home },
+                    onScan: processQrCode
+                )
                 case .wallet: WalletView()
-                case .profile: WalletView()
+                case .profile: ProfileView()
             }
             ExternalRequestsView()
         }
@@ -27,6 +32,17 @@ struct V2MainView: View {
                 try? await notificationManager.request()
             }
         }
+    }
+    
+    func processQrCode(_ code: String) {
+        guard let qrCodeUrl = URL(string: code) else {
+            LoggerUtil.common.error("Invalid QR code: \(code, privacy: .public)")
+            AlertManager.shared.emitError(.unknown("Invalid QR code"))
+            return
+        }
+
+        externalRequestsManager.handleRarimeUrl(qrCodeUrl)
+        viewModel.selectedTab = .home
     }
 }
 
