@@ -144,6 +144,7 @@
 		56E7AD112BDBA81000D3A258 /* PullToRefreshSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 56E7AD102BDBA81000D3A258 /* PullToRefreshSwiftUI */; };
 		56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F48BBD2BC02E82001F3AA4 /* AppButton.swift */; };
 		C71161B32CAAE3DB00ED41EA /* String+BigUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71161B22CAAE3DB00ED41EA /* String+BigUInt.swift */; };
+		C726E8B42D6389F7000C9CA6 /* WalletWaitlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C726E8B32D638953000C9CA6 /* WalletWaitlistView.swift */; };
 		C726E8D22D647FED000C9CA6 /* SnapCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C726E8D12D647FE9000C9CA6 /* SnapCarouselView.swift */; };
 		C75512832C85F9D0000258AD /* PassportScanTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75512822C85F9D0000258AD /* PassportScanTutorialView.swift */; };
 		C75512872C8603D3000258AD /* ReadNfc.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C75512852C8603D2000258AD /* ReadNfc.mp4 */; };
@@ -515,6 +516,7 @@
 		56E7AD0D2BDAD70200D3A258 /* RefreshableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableScrollView.swift; sourceTree = "<group>"; };
 		56F48BBD2BC02E82001F3AA4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		C71161B22CAAE3DB00ED41EA /* String+BigUInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+BigUInt.swift"; sourceTree = "<group>"; };
+		C726E8B32D638953000C9CA6 /* WalletWaitlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletWaitlistView.swift; sourceTree = "<group>"; };
 		C726E8D12D647FE9000C9CA6 /* SnapCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarouselView.swift; sourceTree = "<group>"; };
 		C75512822C85F9D0000258AD /* PassportScanTutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportScanTutorialView.swift; sourceTree = "<group>"; };
 		C75512852C8603D2000258AD /* ReadNfc.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ReadNfc.mp4; sourceTree = "<group>"; };
@@ -1171,6 +1173,22 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		C726E8B12D63894A000C9CA6 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				C726E8B22D63894F000C9CA6 /* Views */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		C726E8B22D63894F000C9CA6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C726E8B32D638953000C9CA6 /* WalletWaitlistView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		C75512842C860396000258AD /* Videos */ = {
 			isa = PBXGroup;
 			children = (
@@ -1266,6 +1284,7 @@
 		C7DF8BE92D5F686200C8E2D2 /* V2 */ = {
 			isa = PBXGroup;
 			children = (
+				C726E8B12D63894A000C9CA6 /* Wallet */,
 				C7780C922D634D770050B5BB /* Rewards */,
 				C7DF8BE12D5F686200C8E2D2 /* Home */,
 				C7DF8BE82D5F686200C8E2D2 /* Main */,
@@ -2091,6 +2110,7 @@
 				CE34775F2C7888E1005E91FE /* NotificationsView.swift in Sources */,
 				56E6AD4B2BD2732300E4DDC1 /* ThemeView.swift in Sources */,
 				CEFE5F3B2CB5718100498F39 /* SODAlgorithm.swift in Sources */,
+				C726E8B42D6389F7000C9CA6 /* WalletWaitlistView.swift in Sources */,
 				56E2D9152BCE7FC4006E725D /* HomeIntroLayout.swift in Sources */,
 				CE19CB492BE3AD4200B26DF7 /* LockScreenView.swift in Sources */,
 				CEDC4D832BE949F300459D4E /* Ethereum.swift in Sources */,

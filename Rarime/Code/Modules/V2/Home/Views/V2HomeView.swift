@@ -1,17 +1,7 @@
 import SwiftUI
 
 enum V2HomeRoute: Hashable {
-    case notifications, identity, inviteFriends, claimTokens
-}
-
-struct HomeCardModel: Identifiable {
-    let id = UUID()
-    let backgroundGradient: LinearGradient
-    let title: String
-    let subtitle: String
-    let icon: String
-    let imageContent: AnyView
-    let bottomActions: AnyView
+    case notifications, identity, inviteFriends, claimTokens, wallet
 }
 
 struct V2HomeView: View {
@@ -82,6 +72,13 @@ struct V2HomeView: View {
                     // TODO: change after design impl
                     onClaim: { path = nil },
                     animation: claimTokensAnimation
+                )
+			case .wallet:
+                WalletWaitlistView(
+                    onClose: { path = nil },
+                    // TODO: change after design impl
+                    onJoin: { path = nil },
+                    animation: walletAnimation
                 )
             default: content
             }
@@ -226,7 +223,7 @@ struct V2HomeView: View {
                                     .scaledToFit()
                             },
                             bottomActions: {
-                                Button(action: {}) {
+                                Button(action: { path = .wallet }) {
                                     Text("Join early waitlist").buttonMedium().fontWeight(.medium)
                                         .frame(height: 48)
                                         .frame(maxWidth: .infinity)
