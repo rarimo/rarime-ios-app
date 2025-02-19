@@ -4,6 +4,8 @@ struct V2InviteFriendsView: View {
     let balance: PointsBalanceRaw
     let onClose: () -> Void
     
+    var animation: Namespace.ID
+    
     var body: some View {
         VStack {
             ZStack {
@@ -13,10 +15,12 @@ struct V2InviteFriendsView: View {
                             .h4()
                             .fontWeight(.medium)
                             .foregroundStyle(.textPrimary)
+                            .matchedGeometryEffect(id: AnimationNamespaceIds.title, in: animation)
                         Text("Others")
                             .h3()
                             .fontWeight(.semibold)
                             .foregroundStyle(.textSecondary)
+                            .matchedGeometryEffect(id: AnimationNamespaceIds.subtitle, in: animation)
                     }
                     .padding(.top, 20)
                     Spacer()
@@ -36,10 +40,12 @@ struct V2InviteFriendsView: View {
                     .scaleEffect(0.35)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .offset(x: 25, y: 80)
+                    .matchedGeometryEffect(id: AnimationNamespaceIds.additionalImage, in: animation)
             }
             Image(Images.peopleEmojis)
                 .resizable()
                 .scaledToFit()
+                .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
                 .frame(maxHeight: .infinity, alignment: .center)
             if let codes = balance.referralCodes {
                 VStack(alignment: .leading, spacing: 20) {
@@ -58,7 +64,11 @@ struct V2InviteFriendsView: View {
                 .padding(.horizontal, 24)
             }
         }
-        .background(Gradients.blueFirst)
+        .background(
+            Gradients.blueFirst
+                .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
+                .ignoresSafeArea()
+        )
     }
 }
 
@@ -139,25 +149,30 @@ private struct InviteCodeView: View {
     }
 }
 
-#Preview {
-    V2InviteFriendsView(
-        balance: PointsBalanceRaw(
-            amount: 12,
-            isDisabled: false,
-            createdAt: Int(Date().timeIntervalSince1970),
-            updatedAt: Int(Date().timeIntervalSince1970),
-            rank: 12,
-            referralCodes: [
-                ReferalCode(id: "title 1", status: .active),
-                ReferalCode(id: "title 2", status: .awaiting),
-                ReferalCode(id: "title 3", status: .banned),
-                ReferalCode(id: "title 4", status: .consumed),
-                ReferalCode(id: "title 5", status: .limited),
-                ReferalCode(id: "title 6", status: .rewarded)
-            ],
-            level: 2,
-            isVerified: true
-        ),
-        onClose: {}
-    )
+struct V2InviteFriendsView_Previews: PreviewProvider {
+    @Namespace static var animation
+
+    static var previews: some View {
+        V2InviteFriendsView(
+            balance: PointsBalanceRaw(
+                amount: 12,
+                isDisabled: false,
+                createdAt: Int(Date().timeIntervalSince1970),
+                updatedAt: Int(Date().timeIntervalSince1970),
+                rank: 12,
+                referralCodes: [
+                    ReferalCode(id: "title 1", status: .active),
+                    ReferalCode(id: "title 2", status: .awaiting),
+                    ReferalCode(id: "title 3", status: .banned),
+                    ReferalCode(id: "title 4", status: .consumed),
+                    ReferalCode(id: "title 5", status: .limited),
+                    ReferalCode(id: "title 6", status: .rewarded)
+                ],
+                level: 2,
+                isVerified: true
+            ),
+            onClose: {},
+            animation: animation
+        )
+    }
 }

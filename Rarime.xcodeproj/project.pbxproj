@@ -161,6 +161,8 @@
 		C789A2E82CA5978B00443900 /* LightVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C789A2E72CA5978B00443900 /* LightVerificationView.swift */; };
 		C789A2EA2CA59F5800443900 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C789A2E92CA59F5800443900 /* StringUtils.swift */; };
 		C78EA4FA2C9B2EF5001DA0B3 /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
+		C7B57B642D650FB1001E86C4 /* AnimationNamespaceIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B57B632D650FA5001E86C4 /* AnimationNamespaceIds.swift */; };
+		C7B57B6B2D65D58C001E86C4 /* V2HomeView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B57B6A2D65D585001E86C4 /* V2HomeView+ViewModel.swift */; };
 		C7CE31D52C8B1CBD00EE6D2E /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */; };
 		C7DF8BEA2D5F686200C8E2D2 /* V2HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF8BDF2D5F686200C8E2D2 /* V2HomeView.swift */; };
 		C7DF8BEB2D5F686200C8E2D2 /* V2NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF8BE62D5F686200C8E2D2 /* V2NavBarView.swift */; };
@@ -529,6 +531,8 @@
 		C7780C992D6357370050B5BB /* Rewards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rewards.swift; sourceTree = "<group>"; };
 		C789A2E72CA5978B00443900 /* LightVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightVerificationView.swift; sourceTree = "<group>"; };
 		C789A2E92CA59F5800443900 /* StringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
+		C7B57B632D650FA5001E86C4 /* AnimationNamespaceIds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationNamespaceIds.swift; sourceTree = "<group>"; };
+		C7B57B6A2D65D585001E86C4 /* V2HomeView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "V2HomeView+ViewModel.swift"; sourceTree = "<group>"; };
 		C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		C7DF8BDE2D5F686200C8E2D2 /* HomeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardView.swift; sourceTree = "<group>"; };
 		C7DF8BDF2D5F686200C8E2D2 /* V2HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2HomeView.swift; sourceTree = "<group>"; };
@@ -826,6 +830,7 @@
 				5641695F2BE273260057AC03 /* PassportCardLook.swift */,
 				568350AB2BEA304B00B70E3D /* PassportIdentifier.swift */,
 				56062B992C12007A00C9BF9B /* Country.swift */,
+				C7B57B632D650FA5001E86C4 /* AnimationNamespaceIds.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1203,6 +1208,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		C7B57B672D65D56C001E86C4 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C7B57B6A2D65D585001E86C4 /* V2HomeView+ViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		C7DF8BE02D5F686200C8E2D2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1217,6 +1230,7 @@
 		C7DF8BE12D5F686200C8E2D2 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C7B57B672D65D56C001E86C4 /* ViewModels */,
 				C7DF8BE02D5F686200C8E2D2 /* Views */,
 			);
 			path = Home;
@@ -2019,6 +2033,7 @@
 				CE7210332BD818020043DB7F /* Double+Rounded.swift in Sources */,
 				CE5980DC2D07B288000B6261 /* RegisterIdentityLightInputs.swift in Sources */,
 				CEC5620F2BD925D6002D4954 /* Circuits.swift in Sources */,
+				C7B57B6B2D65D58C001E86C4 /* V2HomeView+ViewModel.swift in Sources */,
 				CED909E02BDC1E0F0065E949 /* Rarimo.swift in Sources */,
 				563529EB2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift in Sources */,
 				CE06BF342D08567500F6C721 /* LightRegistrationService.swift in Sources */,
@@ -2110,6 +2125,7 @@
 				CE059B422C9C4608006046B3 /* InternetConnectionManager.swift in Sources */,
 				CE1FA56A2C1708F100B2C191 /* Points.swift in Sources */,
 				CE51E2E52C21790700043D9A /* CircuitDataManager.swift in Sources */,
+				C7B57B642D650FB1001E86C4 /* AnimationNamespaceIds.swift in Sources */,
 				560F0C2F2BD135D400067054 /* MainView+ViewModel.swift in Sources */,
 				56E2D9282BCFF5DE006E725D /* Images.swift in Sources */,
 				CE7210292BD7D0D10043DB7F /* String+Hex.swift in Sources */,

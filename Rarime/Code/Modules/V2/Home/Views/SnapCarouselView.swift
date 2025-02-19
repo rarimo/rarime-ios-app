@@ -60,7 +60,7 @@ struct SnapCarouselView: View {
             )
         }
         .padding(.top, 42)
-        .animation(.bouncy(duration: 0.4, extraBounce: 0.08), value: offset == 0)
+        .animation(.interpolatingSpring(mass: 1, stiffness: 100, damping: 15), value: offset == 0)
     }
 }
 

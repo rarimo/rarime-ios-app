@@ -4,6 +4,8 @@ struct IdentityIntroView: View {
     let onClose: () -> Void
     let onStart: () -> Void
     
+    var animation: Namespace.ID
+    
     var body: some View {
         VStack {
             HStack(alignment: .top) {
@@ -12,10 +14,12 @@ struct IdentityIntroView: View {
                         .h4()
                         .fontWeight(.medium)
                         .foregroundStyle(.textPrimary)
+                        .matchedGeometryEffect(id: AnimationNamespaceIds.title, in: animation)
                     Text("Your Identity")
                         .h3()
                         .fontWeight(.semibold)
                         .foregroundStyle(.textSecondary)
+                        .matchedGeometryEffect(id: AnimationNamespaceIds.subtitle, in: animation)
                 }
                 .padding(.top, 20)
                 Spacer()
@@ -34,6 +38,7 @@ struct IdentityIntroView: View {
                 .resizable()
                 .scaledToFit()
                 .scaleEffect(0.9, anchor: .trailing)
+                .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
             Spacer()
             Text("This app is where you privately store your digital identities, enabling you to go incognito across the web.")
                 .body1()
@@ -52,10 +57,18 @@ struct IdentityIntroView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 8)
         }
-        .background(Gradients.greenFirst)
+        .background(
+            Gradients.greenFirst
+                .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
+                .ignoresSafeArea()
+        )
     }
 }
 
-#Preview {
-    IdentityIntroView(onClose: {}, onStart: {})
+struct IdentityIntroView_Previews: PreviewProvider {
+    @Namespace static var animation
+
+    static var previews: some View {
+        IdentityIntroView(onClose: {}, onStart: {}, animation: animation)
+    }
 }

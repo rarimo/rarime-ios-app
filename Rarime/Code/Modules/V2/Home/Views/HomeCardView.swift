@@ -7,6 +7,7 @@ struct HomeCardView<Content: View, BottomActions: View>: View {
     let icon: String
     let imageContent: () -> Content
     let bottomActions: () -> BottomActions
+    var animation: Namespace.ID
     
     init(
         backgroundGradient: LinearGradient,
@@ -14,7 +15,8 @@ struct HomeCardView<Content: View, BottomActions: View>: View {
         subtitle: String,
         icon: String,
         @ViewBuilder imageContent: @escaping () -> Content,
-        @ViewBuilder bottomActions: @escaping () -> BottomActions
+        @ViewBuilder bottomActions: @escaping () -> BottomActions,
+        animation: Namespace.ID
     ) {
         self.backgroundGradient = backgroundGradient
         self.title = title
@@ -22,21 +24,25 @@ struct HomeCardView<Content: View, BottomActions: View>: View {
         self.icon = icon
         self.imageContent = imageContent
         self.bottomActions = bottomActions
+        self.animation = animation
     }
     
     var body: some View {
         ZStack(alignment: .topLeading) {
             imageContent()
+                .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             VStack(alignment: .leading, spacing: 0) {
                 Text(title)
                     .h4()
                     .fontWeight(.medium)
                     .foregroundStyle(.textPrimary)
+                    .matchedGeometryEffect(id: AnimationNamespaceIds.title, in: animation)
                 Text(subtitle)
                     .h3()
                     .fontWeight(.semibold)
                     .foregroundStyle(.textSecondary)
+                    .matchedGeometryEffect(id: AnimationNamespaceIds.subtitle, in: animation)
             }
             .padding(.leading, 24)
             .padding(.top, 32)
@@ -54,34 +60,42 @@ struct HomeCardView<Content: View, BottomActions: View>: View {
         }
         .frame(height: 500)
         .frame(maxWidth: .infinity)
-        .background(backgroundGradient)
-        .clipShape(RoundedRectangle(cornerRadius: 32))
+        .background(
+            RoundedRectangle(cornerRadius: 32)
+                .fill(backgroundGradient)
+                .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
+        )
     }
 }
 
-#Preview {
-    HomeCardView(
-        backgroundGradient: Gradients.greenFirst,
-        title: "Your Device",
-        subtitle: "Your Identity",
-        icon: Icons.rarime,
-        imageContent: {
-            Image(Images.handWithPhone)
-                .resizable()
-                .scaledToFit()
-                .frame(maxWidth: .infinity,
-                       maxHeight: .infinity,
-                       alignment: .center)
-                .scaleEffect(0.9)
-                .offset(x: 30, y: 20)
-        },
-        bottomActions: {
-            Text("* Nothing leaves this device")
-                .body3()
-                .foregroundStyle(.textPrimary)
-                .padding(.leading, 24)
-                .padding(.bottom, 32)
-        }
-    )
-    .padding(.horizontal, 22)
+struct HomeCardView_Previews: PreviewProvider {
+    @Namespace static var animation
+    
+    static var previews: some View {
+        HomeCardView(
+            backgroundGradient: Gradients.greenFirst,
+            title: "Your Device",
+            subtitle: "Your Identity",
+            icon: Icons.rarime,
+            imageContent: {
+                Image(Images.handWithPhone)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity,
+                           maxHeight: .infinity,
+                           alignment: .center)
+                    .scaleEffect(0.9)
+                    .offset(x: 30, y: 20)
+            },
+            bottomActions: {
+                Text("* Nothing leaves this device")
+                    .body3()
+                    .foregroundStyle(.textPrimary)
+                    .padding(.leading, 24)
+                    .padding(.bottom, 32)
+            },
+            animation: animation
+        )
+        .padding(.horizontal, 22)
+    }
 }
