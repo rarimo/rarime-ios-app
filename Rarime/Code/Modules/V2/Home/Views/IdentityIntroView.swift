@@ -65,10 +65,6 @@ struct IdentityIntroView: View {
     }
 }
 
-struct IdentityIntroView_Previews: PreviewProvider {
-    @Namespace static var animation
-
-    static var previews: some View {
-        IdentityIntroView(onClose: {}, onStart: {}, animation: animation)
-    }
+#Preview {
+    IdentityIntroView(onClose: {}, onStart: {}, animation: Namespace().wrappedValue)
 }

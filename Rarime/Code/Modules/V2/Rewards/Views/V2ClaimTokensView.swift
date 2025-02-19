@@ -93,11 +93,6 @@ struct V2ClaimTokensView: View {
     }
 }
 
-struct V2ClaimTokensView_Previews: PreviewProvider {
-    @Namespace static var animation
-
-    static var previews: some View {
-        V2ClaimTokensView(onClose: {}, onClaim: {}, animation: animation)
-            .environmentObject(ConfigManager())
-    }
+#Preview {
+    V2ClaimTokensView(onClose: {}, onClaim: {}, animation: Namespace().wrappedValue)
 }

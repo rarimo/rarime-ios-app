@@ -149,30 +149,26 @@ private struct InviteCodeView: View {
     }
 }
 
-struct V2InviteFriendsView_Previews: PreviewProvider {
-    @Namespace static var animation
-
-    static var previews: some View {
-        V2InviteFriendsView(
-            balance: PointsBalanceRaw(
-                amount: 12,
-                isDisabled: false,
-                createdAt: Int(Date().timeIntervalSince1970),
-                updatedAt: Int(Date().timeIntervalSince1970),
-                rank: 12,
-                referralCodes: [
-                    ReferalCode(id: "title 1", status: .active),
-                    ReferalCode(id: "title 2", status: .awaiting),
-                    ReferalCode(id: "title 3", status: .banned),
-                    ReferalCode(id: "title 4", status: .consumed),
-                    ReferalCode(id: "title 5", status: .limited),
-                    ReferalCode(id: "title 6", status: .rewarded)
-                ],
-                level: 2,
-                isVerified: true
-            ),
-            onClose: {},
-            animation: animation
-        )
-    }
+#Preview {
+    V2InviteFriendsView(
+        balance: PointsBalanceRaw(
+            amount: 12,
+            isDisabled: false,
+            createdAt: Int(Date().timeIntervalSince1970),
+            updatedAt: Int(Date().timeIntervalSince1970),
+            rank: 12,
+            referralCodes: [
+                ReferalCode(id: "title 1", status: .active),
+                ReferalCode(id: "title 2", status: .awaiting),
+                ReferalCode(id: "title 3", status: .banned),
+                ReferalCode(id: "title 4", status: .consumed),
+                ReferalCode(id: "title 5", status: .limited),
+                ReferalCode(id: "title 6", status: .rewarded)
+            ],
+            level: 2,
+            isVerified: true
+        ),
+        onClose: {},
+        animation: Namespace().wrappedValue
+    )
 }

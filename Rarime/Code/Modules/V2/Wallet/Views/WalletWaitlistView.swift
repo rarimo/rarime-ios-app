@@ -64,10 +64,6 @@ struct WalletWaitlistView: View {
     }
 }
 
-struct WalletWaitlistView_Previews: PreviewProvider {
-    @Namespace static var animation
-
-    static var previews: some View {
-        WalletWaitlistView(onClose: {}, onJoin: {}, animation: animation)
-    }
+#Preview {
+    WalletWaitlistView(onClose: {}, onJoin: {}, animation: Namespace().wrappedValue)
 }
