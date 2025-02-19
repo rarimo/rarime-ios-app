@@ -44,13 +44,13 @@ struct ProfileView: View {
     }
 
     var content: some View {
-        MainViewLayout {
+        V2MainViewLayout {
             VStack(alignment: .leading, spacing: 20) {
                 Text("Profile")
                     .subtitle2()
                     .padding(.horizontal, 8)
                 VStack(spacing: 12) {
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         CardContainer {
                             HStack {
                                 VStack(alignment: .leading, spacing: 8) {
@@ -148,18 +148,14 @@ struct ProfileView: View {
                             .buttonStyle(.plain)
                             .foregroundStyle(.errorMain)
                         }
-                    }
-                    VStack {
                         Text("App version: \(configManager.general.version)")
                             .body4()
                             .foregroundStyle(.textDisabled)
-                        Spacer()
+                            .padding(.bottom, 20)
                     }
-                    .frame(height: 100)
                 }
-                Spacer()
             }
-            .padding(.vertical, 20)
+            .padding(.top, 20)
             .padding(.horizontal, 12)
             .background(.backgroundPrimary)
             .alert(

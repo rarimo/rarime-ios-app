@@ -55,7 +55,7 @@ struct WalletView: View {
     }
 
     private var content: some View {
-        MainViewLayout {
+        V2MainViewLayout {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     header

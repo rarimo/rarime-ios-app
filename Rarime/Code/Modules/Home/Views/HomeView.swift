@@ -115,7 +115,7 @@ struct HomeView: View {
     }
 
     private var content: some View {
-        MainViewLayout {
+        V2MainViewLayout {
             RefreshableScrollView(
                 onRefresh: {
                     fetchBalance()
