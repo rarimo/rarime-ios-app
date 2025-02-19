@@ -10,6 +10,7 @@ struct V2StepIndicator: View {
                 RoundedRectangle(cornerRadius: 1000)
                     .fill(index == currentStep ? .baseBlack : .baseBlack.opacity(0.1))
                     .frame(width: 6, height: index == currentStep ? 16 : 6)
+                    .animation(.easeInOut(duration: 0.4), value: index == currentStep)
             }
         }
     }
