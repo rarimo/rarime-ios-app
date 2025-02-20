@@ -4,6 +4,8 @@ struct WalletWaitlistView: View {
     let onClose: () -> Void
     let onJoin: () -> Void
     
+    var animation: Namespace.ID
+    
     var body: some View {
         VStack {
             HStack(alignment: .top) {
@@ -12,10 +14,12 @@ struct WalletWaitlistView: View {
                         .h4()
                         .fontWeight(.medium)
                         .foregroundStyle(.textPrimary)
+                        .matchedGeometryEffect(id: AnimationNamespaceIds.title, in: animation)
                     Text("Wallet")
                         .h3()
                         .fontWeight(.semibold)
                         .foregroundStyle(.textSecondary)
+                        .matchedGeometryEffect(id: AnimationNamespaceIds.subtitle, in: animation)
                 }
                 .padding(.top, 20)
                 Spacer()
@@ -34,6 +38,7 @@ struct WalletWaitlistView: View {
                 Image(Images.seedPhraseShred)
                     .resizable()
                     .scaledToFit()
+                    .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
                 Text("No more seed phrases")
                     .subtitle1()
                     .foregroundStyle(.textPrimary)
@@ -51,10 +56,14 @@ struct WalletWaitlistView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 8)
         }
-        .background(Gradients.gradientFourth)
+        .background(
+            Gradients.gradientFourth
+                .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
+                .ignoresSafeArea()
+        )
     }
 }
 
 #Preview {
-    WalletWaitlistView(onClose: {}, onJoin: {})
+    WalletWaitlistView(onClose: {}, onJoin: {}, animation: Namespace().wrappedValue)
 }

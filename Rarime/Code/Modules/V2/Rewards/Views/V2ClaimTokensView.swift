@@ -7,6 +7,8 @@ struct V2ClaimTokensView: View {
     let onClose: () -> Void
     let onClaim: () -> Void
     
+    var animation: Namespace.ID
+    
     private var termsURL: String {
         configManager.general.termsOfUseURL.absoluteString
     }
@@ -27,10 +29,12 @@ struct V2ClaimTokensView: View {
                         .h4()
                         .fontWeight(.medium)
                         .foregroundStyle(.textPrimary)
+                        .matchedGeometryEffect(id: AnimationNamespaceIds.title, in: animation)
                     Text("10 RMO")
                         .h3()
                         .fontWeight(.semibold)
                         .foregroundStyle(.textSecondary)
+                        .matchedGeometryEffect(id: AnimationNamespaceIds.subtitle, in: animation)
                 }
                 .padding(.top, 20)
                 Spacer()
@@ -48,6 +52,7 @@ struct V2ClaimTokensView: View {
             Image(Images.rarimoTokens)
                 .resizable()
                 .scaledToFit()
+                .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
             Spacer()
             Text("Start building your incognito profile and earn rewards as an early community member.")
                 .body1()
@@ -80,11 +85,14 @@ struct V2ClaimTokensView: View {
             }
             .padding(.horizontal, 20)
         }
-        .background(Gradients.gradientThird)
+        .background(
+            Gradients.gradientThird
+                .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
+                .ignoresSafeArea()
+        )
     }
 }
 
 #Preview {
-    V2ClaimTokensView(onClose: {}, onClaim: {})
-        .environmentObject(ConfigManager())
+    V2ClaimTokensView(onClose: {}, onClaim: {}, animation: Namespace().wrappedValue)
 }

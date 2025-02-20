@@ -7,6 +7,7 @@ struct HomeCardView<Content: View, BottomActions: View>: View {
     let icon: String
     let imageContent: () -> Content
     let bottomActions: () -> BottomActions
+    var animation: Namespace.ID
     
     init(
         backgroundGradient: LinearGradient,
@@ -14,7 +15,8 @@ struct HomeCardView<Content: View, BottomActions: View>: View {
         subtitle: String,
         icon: String,
         @ViewBuilder imageContent: @escaping () -> Content,
-        @ViewBuilder bottomActions: @escaping () -> BottomActions
+        @ViewBuilder bottomActions: @escaping () -> BottomActions,
+        animation: Namespace.ID
     ) {
         self.backgroundGradient = backgroundGradient
         self.title = title
@@ -22,21 +24,25 @@ struct HomeCardView<Content: View, BottomActions: View>: View {
         self.icon = icon
         self.imageContent = imageContent
         self.bottomActions = bottomActions
+        self.animation = animation
     }
     
     var body: some View {
         ZStack(alignment: .topLeading) {
             imageContent()
+                .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             VStack(alignment: .leading, spacing: 0) {
                 Text(title)
                     .h4()
                     .fontWeight(.medium)
                     .foregroundStyle(.textPrimary)
+                    .matchedGeometryEffect(id: AnimationNamespaceIds.title, in: animation)
                 Text(subtitle)
                     .h3()
                     .fontWeight(.semibold)
                     .foregroundStyle(.textSecondary)
+                    .matchedGeometryEffect(id: AnimationNamespaceIds.subtitle, in: animation)
             }
             .padding(.leading, 24)
             .padding(.top, 32)
@@ -54,8 +60,11 @@ struct HomeCardView<Content: View, BottomActions: View>: View {
         }
         .frame(height: 500)
         .frame(maxWidth: .infinity)
-        .background(backgroundGradient)
-        .clipShape(RoundedRectangle(cornerRadius: 32))
+        .background(
+            RoundedRectangle(cornerRadius: 32)
+                .fill(backgroundGradient)
+                .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
+        )
     }
 }
 
@@ -81,7 +90,8 @@ struct HomeCardView<Content: View, BottomActions: View>: View {
                 .foregroundStyle(.textPrimary)
                 .padding(.leading, 24)
                 .padding(.bottom, 32)
-        }
+        },
+        animation: Namespace().wrappedValue
     )
     .padding(.horizontal, 22)
 }

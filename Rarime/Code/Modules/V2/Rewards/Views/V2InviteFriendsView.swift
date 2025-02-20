@@ -4,6 +4,8 @@ struct V2InviteFriendsView: View {
     let balance: PointsBalanceRaw
     let onClose: () -> Void
     
+    var animation: Namespace.ID
+    
     var body: some View {
         VStack {
             ZStack {
@@ -13,10 +15,12 @@ struct V2InviteFriendsView: View {
                             .h4()
                             .fontWeight(.medium)
                             .foregroundStyle(.textPrimary)
+                            .matchedGeometryEffect(id: AnimationNamespaceIds.title, in: animation)
                         Text("Others")
                             .h3()
                             .fontWeight(.semibold)
                             .foregroundStyle(.textSecondary)
+                            .matchedGeometryEffect(id: AnimationNamespaceIds.subtitle, in: animation)
                     }
                     .padding(.top, 20)
                     Spacer()
@@ -36,10 +40,12 @@ struct V2InviteFriendsView: View {
                     .scaleEffect(0.35)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .offset(x: 25, y: 80)
+                    .matchedGeometryEffect(id: AnimationNamespaceIds.additionalImage, in: animation)
             }
             Image(Images.peopleEmojis)
                 .resizable()
                 .scaledToFit()
+                .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
                 .frame(maxHeight: .infinity, alignment: .center)
             if let codes = balance.referralCodes {
                 VStack(alignment: .leading, spacing: 20) {
@@ -58,7 +64,11 @@ struct V2InviteFriendsView: View {
                 .padding(.horizontal, 24)
             }
         }
-        .background(Gradients.gradientSecond)
+        .background(
+            Gradients.gradientSecond
+                .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
+                .ignoresSafeArea()
+        )
     }
 }
 
@@ -158,6 +168,7 @@ private struct InviteCodeView: View {
             level: 2,
             isVerified: true
         ),
-        onClose: {}
+        onClose: {},
+        animation: Namespace().wrappedValue
     )
 }
