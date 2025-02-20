@@ -58,7 +58,7 @@ struct V2InviteFriendsView: View {
                 .padding(.horizontal, 24)
             }
         }
-        .background(Gradients.blueFirst)
+        .background(Gradients.gradientSecond)
     }
 }
 

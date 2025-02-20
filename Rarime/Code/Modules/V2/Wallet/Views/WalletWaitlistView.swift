@@ -51,7 +51,7 @@ struct WalletWaitlistView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 8)
         }
-        .background(Gradients.greenSecond)
+        .background(Gradients.gradientFourth)
     }
 }
 

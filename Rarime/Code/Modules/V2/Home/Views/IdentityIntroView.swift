@@ -52,7 +52,7 @@ struct IdentityIntroView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 8)
         }
-        .background(Gradients.greenFirst)
+        .background(Gradients.gradientFirst)
     }
 }
 
