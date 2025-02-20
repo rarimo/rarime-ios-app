@@ -43,8 +43,5 @@
 #include "witnesscalc_registerIdentity_20_160_3_3_736_200_NA.h"
 #include "witnesscalc_registerIdentity_20_256_3_5_336_72_NA.h"
 #include "witnesscalc_registerIdentity_21_256_3_5_576_232_NA.h"
-#include "witnesscalc_registerIdentity_11_256_3_2_336_216_NA.h"
-#include "witnesscalc_registerIdentity_2_256_3_5_336_248_22_1808_7_2400.h"
-#include "witnesscalc_registerIdentity_2_256_3_4_336_232_3_1480_4_256.h"
 
 #endif /* bridge_h */
