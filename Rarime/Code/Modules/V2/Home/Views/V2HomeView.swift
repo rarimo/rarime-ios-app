@@ -129,7 +129,7 @@ struct V2HomeView: View {
                 ZStack(alignment: .trailing) {
                     SnapCarouselView(index: $viewModel.currentIndex) {
                         HomeCardView(
-                            backgroundGradient: Gradients.greenFirst,
+                            backgroundGradient: Gradients.gradientFirst,
                             title: "Your Device",
                             subtitle: "Your Identity",
                             icon: Icons.rarime,
@@ -153,7 +153,7 @@ struct V2HomeView: View {
                             path = .identity
                         }
                         HomeCardView(
-                            backgroundGradient: Gradients.blueFirst,
+                            backgroundGradient: Gradients.gradientSecond,
                             title: "Invite",
                             subtitle: "Others",
                             icon: Icons.rarimo,
@@ -188,7 +188,7 @@ struct V2HomeView: View {
                             path = .inviteFriends
                         }
                         HomeCardView(
-                            backgroundGradient: Gradients.greenFirst,
+                            backgroundGradient: Gradients.gradientThird,
                             title: "Claim",
                             subtitle: "10 RMO",
                             icon: Icons.rarimo,
@@ -213,7 +213,7 @@ struct V2HomeView: View {
                             animation: claimTokensAnimation
                         )
                         HomeCardView(
-                            backgroundGradient: Gradients.greenSecond,
+                            backgroundGradient: Gradients.gradientFourth,
                             title: "An Unforgettable",
                             subtitle: "Wallet",
                             icon: Icons.rarime,
@@ -238,7 +238,7 @@ struct V2HomeView: View {
                             animation: walletAnimation
                         )
                         HomeCardView(
-                            backgroundGradient: Gradients.greenThird,
+                            backgroundGradient: Gradients.gradientFifth,
                             title: "Freedomtool",
                             subtitle: "Voting",
                             icon: Icons.rarime,

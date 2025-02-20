@@ -86,7 +86,7 @@ struct V2ClaimTokensView: View {
             .padding(.horizontal, 20)
         }
         .background(
-            Gradients.greenSecond
+            Gradients.gradientThird
                 .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
                 .ignoresSafeArea()
         )

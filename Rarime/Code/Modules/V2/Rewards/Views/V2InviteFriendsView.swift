@@ -65,7 +65,7 @@ struct V2InviteFriendsView: View {
             }
         }
         .background(
-            Gradients.blueFirst
+            Gradients.gradientSecond
                 .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
                 .ignoresSafeArea()
         )

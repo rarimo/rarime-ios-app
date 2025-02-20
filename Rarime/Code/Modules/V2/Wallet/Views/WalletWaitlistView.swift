@@ -57,7 +57,7 @@ struct WalletWaitlistView: View {
             .padding(.bottom, 8)
         }
         .background(
-            Gradients.greenSecond
+            Gradients.gradientFourth
                 .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
                 .ignoresSafeArea()
         )

@@ -58,7 +58,7 @@ struct IdentityIntroView: View {
             .padding(.bottom, 8)
         }
         .background(
-            Gradients.greenFirst
+            Gradients.gradientFirst
                 .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
                 .ignoresSafeArea()
         )
