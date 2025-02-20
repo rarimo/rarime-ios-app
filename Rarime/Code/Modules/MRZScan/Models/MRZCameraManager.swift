@@ -76,6 +76,10 @@ class MRZCameraManager: NSObject {
         
         captureSession.startRunning()
     }
+    
+    func stopSession() {
+        captureSession.stopRunning()
+    }
 }
 
 extension MRZCameraManager: AVCaptureVideoDataOutputSampleBufferDelegate {
