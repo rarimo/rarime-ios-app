@@ -24,6 +24,8 @@ extension MRZScanView {
         
         func stopScanning() {
             cameraTask?.cancel()
+            
+            cameraManager.stopSession()
         }
         
         func handleCameraPreviews() async {
