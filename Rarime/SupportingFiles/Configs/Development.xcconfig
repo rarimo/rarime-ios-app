@@ -87,6 +87,10 @@ CIRCUIT_DATA_URL_36 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passpo
 CIRCUIT_DATA_URL_37 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.12/registerIdentity_15_512_3_3_336_248_NA-download.zip"
 CIRCUIT_DATA_URL_38 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.12/registerIdentity_20_160_3_3_736_200_NA-download.zip"
 
+CIRCUIT_DATA_URL_39 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.13/registerIdentity_11_256_3_2_336_216_NA-download.zip"
+CIRCUIT_DATA_URL_40 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.13/registerIdentity_2_256_3_4_336_232_3_1480_4_256-download.zip"
+CIRCUIT_DATA_URL_41 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.13/registerIdentity_2_256_3_5_336_248_22_1808_7_2400-download.zip"
+
 // MARK: AppsFlyer
 APPSFLYER_DEV_KEY = "FsxpXXrjsFBLiF6jMe7jZY"
 APPSFLYER_APP_ID = "id6503300598"
