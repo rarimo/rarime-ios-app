@@ -1,32 +1,37 @@
 import SwiftUI
 
 enum Gradients {
-    static let greenFirst = LinearGradient(
-        gradient: Gradient(colors: [.additionalFirstStart, .additionalFirstEnd]),
+    static let gradientFirst = LinearGradient(
+        gradient: Gradient(colors: [.additionalGradientFirstStart, .additionalGradientFirstEnd]),
         startPoint: .top,
         endPoint: .bottom
     )
     
-    static let greenSecond = LinearGradient(
-        gradient: Gradient(colors: [.additionalFourthStart, .additionalFourthEnd]),
+    static let gradientSecond = LinearGradient(
+        gradient: Gradient(colors: [.additionalGradientSecondStart, .additionalGradientSecondEnd]),
         startPoint: .top,
         endPoint: .bottom
     )
     
-    static let greenThird = LinearGradient(
-        gradient: Gradient(colors: [.additionalFifthStart, .additionalFifthEnd]),
+    static let gradientThird = LinearGradient(
+        gradient: Gradient(colors: [.additionalGradientThirdStart, .additionalGradientThirdEnd]),
         startPoint: .top,
         endPoint: .bottom
     )
     
-    static let blueFirst = LinearGradient(
-        gradient: Gradient(colors: [.additionalSecondStart, .additionalSecondEnd]),
+    static let gradientFourth = LinearGradient(
+        gradient: Gradient(colors: [.additionalGradientFourthStart, .additionalGradientFourthEnd]),
         startPoint: .top,
         endPoint: .bottom
     )
     
-    static let sandFirst = LinearGradient(
-        gradient: Gradient(colors: [.additionalThirdStart, .additionalThirdEnd]),
+    static let gradientFifth = LinearGradient(
+        gradient: Gradient(colors: [.additionalGradientFifthStart, .additionalGradientFifthEnd]),
+        startPoint: .top,
+        endPoint: .bottom
+    )
+    static let gradientSixth = LinearGradient(
+        gradient: Gradient(colors: [.additionalGradientSixthStart, .additionalGradientSixthEnd]),
         startPoint: .top,
         endPoint: .bottom
     )

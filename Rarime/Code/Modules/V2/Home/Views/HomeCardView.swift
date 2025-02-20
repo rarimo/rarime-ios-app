@@ -61,7 +61,7 @@ struct HomeCardView<Content: View, BottomActions: View>: View {
 
 #Preview {
     HomeCardView(
-        backgroundGradient: Gradients.greenFirst,
+        backgroundGradient: Gradients.gradientFirst,
         title: "Your Device",
         subtitle: "Your Identity",
         icon: Icons.rarime,

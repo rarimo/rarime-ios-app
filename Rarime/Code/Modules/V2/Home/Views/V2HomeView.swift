@@ -118,7 +118,7 @@ struct V2HomeView: View {
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack(spacing: 44) {
                             HomeCardView(
-                                backgroundGradient: Gradients.greenFirst,
+                                backgroundGradient: Gradients.gradientFirst,
                                 title: "Your Device",
                                 subtitle: "Your Identity",
                                 icon: Icons.rarime,
@@ -141,7 +141,7 @@ struct V2HomeView: View {
                                 path.append(.identity)
                             }
                             HomeCardView(
-                                backgroundGradient: Gradients.blueFirst,
+                                backgroundGradient: Gradients.gradientSecond,
                                 title: "Invite",
                                 subtitle: "Others",
                                 icon: Icons.rarimo,
@@ -174,7 +174,7 @@ struct V2HomeView: View {
                                 path.append(.inviteFriends)
                             }
                             HomeCardView(
-                                backgroundGradient: Gradients.greenFirst,
+                                backgroundGradient: Gradients.gradientThird,
                                 title: "Claim",
                                 subtitle: "10 RMO",
                                 icon: Icons.rarimo,
@@ -198,7 +198,7 @@ struct V2HomeView: View {
                                 }
                             )
                             HomeCardView(
-                                backgroundGradient: Gradients.greenSecond,
+                                backgroundGradient: Gradients.gradientFourth,
                                 title: "An Unforgettable",
                                 subtitle: "Wallet",
                                 icon: Icons.rarime,
@@ -222,7 +222,7 @@ struct V2HomeView: View {
                                 }
                             )
                             HomeCardView(
-                                backgroundGradient: Gradients.greenThird,
+                                backgroundGradient: Gradients.gradientFifth,
                                 title: "Freedomtool",
                                 subtitle: "Voting",
                                 icon: Icons.rarime,
