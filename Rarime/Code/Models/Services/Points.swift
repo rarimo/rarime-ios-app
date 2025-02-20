@@ -324,6 +324,17 @@ class Points {
 
         return response
     }
+    
+    func getMaintenanceMode() async throws -> GetMaintenanceModeResponse {
+        let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/maintenance")
+        let response = try await AF.request(requestUrl)
+            .validate(OpenApiError.catchInstance)
+            .serializingDecodable(GetMaintenanceModeResponse.self)
+            .result
+            .get()
+
+        return response
+    }
 }
 
 struct CreatePointBalanceRequest: Codable {
@@ -800,4 +811,17 @@ enum EventStatuses: String, Codable {
     case open
     case fulfilled
     case claimed
+}
+
+struct GetMaintenanceModeResponse: Codable {
+    var data: GetMaintenanceModeResponseData
+}
+
+struct GetMaintenanceModeResponseData: Codable {
+    let type: String
+    var attributes: GetMaintenanceModeResponseDataAttributes
+}
+
+struct GetMaintenanceModeResponseDataAttributes: Codable {
+    let maintenance: Bool
 }

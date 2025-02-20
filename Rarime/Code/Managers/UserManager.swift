@@ -218,6 +218,24 @@ class UserManager: ObservableObject {
             wtns = try ZKUtils.calcWtns_registerIdentity_21_256_3_4_576_232_NA(circuitData.circuitDat, inputs)
         case .registerIdentity_11_256_3_5_576_248_1_1808_5_296:
             wtns = try ZKUtils.calcWtns_registerIdentity_11_256_3_5_576_248_1_1808_5_296(circuitData.circuitDat, inputs)
+        case .registerIdentity_11_256_3_3_336_248_NA:
+            wtns = try ZKUtils.calcWtns_registerIdentity_11_256_3_3_336_248_NA(circuitData.circuitDat, inputs)
+        case .registerIdentity_14_256_3_4_336_64_1_1480_5_296:
+            wtns = try ZKUtils.calcWtns_registerIdentity_14_256_3_4_336_64_1_1480_5_296(circuitData.circuitDat, inputs)
+        case .registerIdentity_21_256_3_5_576_232_NA:
+            wtns = try ZKUtils.calcWtns_registerIdentity_21_256_3_5_576_232_NA(circuitData.circuitDat, inputs)
+        case .registerIdentity_1_256_3_6_336_560_1_2744_4_256:
+            wtns = try ZKUtils.calcWtns_registerIdentity_1_256_3_6_336_560_1_2744_4_256(circuitData.circuitDat, inputs)
+        case .registerIdentity_1_256_3_6_336_248_1_2744_4_256:
+            wtns = try ZKUtils.calcWtns_registerIdentity_1_256_3_6_336_248_1_2744_4_256(circuitData.circuitDat, inputs)
+        case .registerIdentity_20_256_3_5_336_72_NA:
+            wtns = try ZKUtils.calcWtns_registerIdentity_20_256_3_5_336_72_NA(circuitData.circuitDat, inputs)
+        case .registerIdentity_4_160_3_3_336_216_1_1296_3_256:
+            wtns = try ZKUtils.calcWtns_registerIdentity_4_160_3_3_336_216_1_1296_3_256(circuitData.circuitDat, inputs)
+        case .registerIdentity_15_512_3_3_336_248_NA:
+            wtns = try ZKUtils.calcWtns_registerIdentity_15_512_3_3_336_248_NA(circuitData.circuitDat, inputs)
+        case .registerIdentity_20_160_3_3_736_200_NA:
+            wtns = try ZKUtils.calcWtns_registerIdentity_20_160_3_3_736_200_NA(circuitData.circuitDat, inputs)
         default:
             throw "invalid register identity circuit"
         }
@@ -340,10 +358,18 @@ class UserManager: ObservableObject {
         
         LoggerUtil.common.info("Passport certificate is not registered, registering...")
         
-        let calldata = try IdentityCallDataBuilder().buildRegisterCertificateCalldata(Certificates.ICAO, slavePem: certPem)
+        let buildCalldataResponse = try IdentityCallDataBuilder().buildRegisterCertificateCalldata(Certificates.ICAO, slavePem: certPem)
+        
+        guard let calldata = buildCalldataResponse.calldata else {
+            throw "calldata build response does not contain calldata"
+        }
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.register(calldata, ConfigManager.shared.api.registerContractAddress)
+        let response = try await relayer.register(
+            calldata,
+            ConfigManager.shared.api.registerContractAddress,
+            meta: ["dispatcherName": buildCalldataResponse.dispatcherName]
+        )
         
         LoggerUtil.common.info("Register certificate EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
         

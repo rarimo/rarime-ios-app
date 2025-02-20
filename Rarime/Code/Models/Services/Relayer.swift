@@ -8,7 +8,12 @@ class Relayer {
         self.url = url
     }
 
-    func register(_ calldata: Data, _ destination: String? = nil, _ noSend: Bool = false) async throws -> EvmTxResponse {
+    func register(
+        _ calldata: Data,
+        _ destination: String? = nil,
+        _ noSend: Bool = false,
+        meta: [String: String]? = nil
+    ) async throws -> EvmTxResponse {
         var requestURL = url
         requestURL.append(path: "/integrations/registration-relayer/v1/register")
 
@@ -16,7 +21,8 @@ class Relayer {
             data: RegisterRequestData(
                 txData: "0x" + calldata.hex,
                 destination: destination,
-                noSend: noSend
+                noSend: noSend,
+                meta: meta
             )
         )
 
@@ -82,14 +88,15 @@ class Relayer {
     }
 }
 
-struct RegisterRequest: JSONCodable {
+struct RegisterRequest: Encodable {
     let data: RegisterRequestData
 }
 
-struct RegisterRequestData: Codable {
+struct RegisterRequestData: Encodable {
     let txData: String
     let destination: String?
     let noSend: Bool?
+    let meta: [String: String]?
 
     enum CodingKeys: String, CodingKey {
         case txData = "tx_data"

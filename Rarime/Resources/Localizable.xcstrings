@@ -1578,6 +1578,9 @@
     "Madagascar" : {
 
     },
+    "Maintenance in progress" : {
+
+    },
     "Make sure you remove the case from the device" : {
 
     },
@@ -2873,6 +2876,9 @@
           }
         }
       }
+    },
+    "We're upgrading for a better experience. Back soon!" : {
+
     },
     "We’re working on a fix" : {
 

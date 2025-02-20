@@ -36,6 +36,7 @@ struct HomeView: View {
         !(pointsBalance?.isVerified ?? false)
             && !passportManager.isUnsupportedForRewards
             && userManager.registerZkProof != nil
+            && !userManager.isRevoked
             && userManager.user?.userReferralCode != nil
     }
 
