@@ -164,7 +164,7 @@ struct HomeView: View {
                     .padding(.horizontal, 12)
                 }
             }
-            .background(.backgroundPrimary)
+            .background(.bgComponentPrimary)
         }
         .blur(radius: isCongratsShown ? 12 : 0)
         .overlay(

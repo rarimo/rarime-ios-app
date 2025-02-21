@@ -9,12 +9,12 @@ struct AppToggle: View {
     var body: some View {
         ZStack {
             if isEnabled {
-                RoundedRectangle(cornerRadius: 16).fill(isOn ? .primaryDark : .componentPrimary)
+                RoundedRectangle(cornerRadius: 16).fill(isOn ? .primaryDark : .bgComponentPrimary)
             } else {
-                RoundedRectangle(cornerRadius: 16).stroke(.componentDisabled, lineWidth: 1)
+                RoundedRectangle(cornerRadius: 16).stroke(.bgComponentDisabled, lineWidth: 1)
             }
             Circle()
-                .fill(isEnabled ? .baseWhite : .componentDisabled)
+                .fill(isEnabled ? .baseWhite : .bgComponentDisabled)
                 .shadow(color: isOn ? .clear : .baseBlack.opacity(0.12), radius: 1, x: 1, y: 1)
                 .padding(2)
                 .offset(x: isOn ? 8 : -8)

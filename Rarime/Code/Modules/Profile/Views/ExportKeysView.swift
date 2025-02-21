@@ -20,7 +20,7 @@ struct ExportKeysView: View {
                             .multilineTextAlignment(.leading)
                             .padding(.horizontal, 16)
                             .padding(.vertical, 14)
-                            .background(.componentPrimary)
+                            .background(.bgComponentPrimary)
                             .cornerRadius(8)
                     }
                     copyButton

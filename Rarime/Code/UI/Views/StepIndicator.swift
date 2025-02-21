@@ -8,7 +8,7 @@ struct StepIndicator: View {
         HStack(spacing: 8) {
             ForEach(0 ..< steps, id: \.self) { index in
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(index == currentStep ? .primaryMain : .componentPrimary)
+                    .fill(index == currentStep ? .primaryMain : .bgComponentPrimary)
                     .frame(width: index == currentStep ? 16 : 8, height: 8)
             }
         }

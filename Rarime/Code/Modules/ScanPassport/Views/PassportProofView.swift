@@ -46,7 +46,7 @@ struct PassportProofView: View {
                     }
                 }
                 .padding(20)
-                .background(.backgroundOpacity, in: RoundedRectangle(cornerRadius: 24))
+                .background(.bgContainer, in: RoundedRectangle(cornerRadius: 24))
             }
             .padding(.horizontal, 20)
             Spacer()
@@ -71,7 +71,7 @@ struct PassportProofView: View {
             RevocationNFCScan()
                 .interactiveDismissDisabled()
         }
-        .background(.backgroundPrimary)
+        .background(.bgPrimary)
     }
 
     private func getItemStatus(_ item: PassportProofState) -> ProcessingStatus {

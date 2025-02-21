@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct HorizontalDivider: View {
-    var color: Color = .componentPrimary
+    var color: Color = .bgComponentPrimary
     var height: CGFloat = 1
 
     var body: some View {
@@ -10,7 +10,7 @@ struct HorizontalDivider: View {
 }
 
 struct VerticalDivider: View {
-    var color: Color = .componentPrimary
+    var color: Color = .bgComponentPrimary
     var width: CGFloat = 1
 
     var body: some View {

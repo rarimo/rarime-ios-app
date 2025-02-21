@@ -15,7 +15,7 @@ struct V2NavBarView: View {
         }
         .padding(.top, 12)
         .frame(maxWidth: .infinity, alignment: .bottom)
-        .background(.backgroundBlur)
+        .background(.bgBlur)
     }
 }
 
@@ -27,8 +27,8 @@ struct V2NavBarTabItem: View {
         Image(isActive ? tab.activeIconName : tab.iconName)
             .square(24)
             .frame(width: 48, height: 40)
-            .background(isActive ? .componentPrimary : .clear)
-            .foregroundStyle(isActive ? .textPrimary : .textSecondary)
+            .background(isActive ? .bgComponentPrimary : .clear)
+            .foregroundStyle(isActive ? .textPrimary : .textPlaceholder)
             .cornerRadius(12)
     }
 }

@@ -45,7 +45,7 @@ struct CongratsView: View {
                             } else {
                                 Image(Icons.check)
                                     .square(24)
-                                    .foregroundStyle(.backgroundPure)
+                                    .foregroundStyle(.bgPure)
                                     .padding(28)
                                     .background(.successMain)
                                     .clipShape(Circle())
@@ -75,7 +75,7 @@ struct CongratsView: View {
                                             Text("Share Achievements").buttonLarge()
                                         }
                                         .frame(maxWidth: .infinity, maxHeight: 48.0)
-                                        .background(.componentPrimary, in: RoundedRectangle(cornerRadius: 1000.0))
+                                        .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 1000.0))
                                         .foregroundStyle(.textPrimary)
                                     }
                                 }
@@ -83,7 +83,7 @@ struct CongratsView: View {
                         }
                     }
                     .padding(20)
-                    .background(.backgroundPure, in: RoundedRectangle(cornerRadius: 24))
+                    .background(.bgPure, in: RoundedRectangle(cornerRadius: 24))
                 }
                 .padding(24)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

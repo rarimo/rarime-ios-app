@@ -19,7 +19,7 @@ struct MaintenanceView: View {
             .frame(width: 300)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.backgroundPure)
+        .background(.bgPure)
     }
 }
 

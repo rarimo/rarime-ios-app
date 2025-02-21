@@ -111,7 +111,7 @@ struct V2HomeView: View {
         .padding(.top, 20)
         .padding(.bottom, 16)
         .padding(.horizontal, 20)
-        .background(.backgroundBlur)
+        .background(.bgBlur)
         .zIndex(1)
     }
 
@@ -258,7 +258,7 @@ struct V2HomeView: View {
                         .padding(.trailing, 8)
                 }
             }
-            .background(.backgroundPrimary)
+            .background(.bgPrimary)
         }
     }
 }

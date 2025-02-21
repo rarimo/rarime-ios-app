@@ -36,7 +36,7 @@ private struct AppIconItem: View {
                     .square(40)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
-                            .strokeBorder(.componentPrimary, lineWidth: 1)
+                            .strokeBorder(.bgComponentPrimary, lineWidth: 1)
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 Text(icon.title)

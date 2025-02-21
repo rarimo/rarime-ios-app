@@ -65,7 +65,7 @@ struct PassportCard: View {
         .padding(.top, 12)
         .padding(.bottom, 60)
         .padding(.horizontal, 20)
-        .background(.componentPrimary, in: RoundedRectangle(cornerRadius: 24))
+        .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 24))
     }
 
     private var cardContent: some View {
@@ -183,7 +183,7 @@ private struct PassportLookOption: View {
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(.componentPrimary, lineWidth: 1)
+                    .stroke(.bgComponentPrimary, lineWidth: 1)
             )
             Text(look.name)
                 .buttonMedium()
@@ -192,11 +192,11 @@ private struct PassportLookOption: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 16)
         .padding(.horizontal, 24)
-        .background(isActive ? .componentPrimary : .clear)
+        .background(isActive ? .bgComponentPrimary : .clear)
         .cornerRadius(8)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(.componentPrimary, lineWidth: 1)
+                .stroke(.bgComponentPrimary, lineWidth: 1)
         )
         .onTapGesture {
             onLookChange(look)

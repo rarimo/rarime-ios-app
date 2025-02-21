@@ -32,7 +32,7 @@ struct IntroView: View {
                         )
                     }
                 }
-                .background(.backgroundPure)
+                .background(.bgPure)
         }
     }
 

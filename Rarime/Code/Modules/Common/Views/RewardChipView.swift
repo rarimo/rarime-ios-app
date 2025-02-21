@@ -17,7 +17,7 @@ struct RewardChipView: View {
         .padding(.vertical, 2)
         .padding(.horizontal, 6)
         .foregroundStyle(isActive ? .textPrimary : .textSecondary)
-        .background(isActive ? .warningLight : .componentPrimary)
+        .background(isActive ? .warningLight : .bgComponentPrimary)
         .clipShape(Capsule())
         .animation(.easeInOut(duration: 0.2), value: isActive)
     }

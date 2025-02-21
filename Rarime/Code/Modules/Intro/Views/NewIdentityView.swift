@@ -69,7 +69,7 @@ struct NewIdentityView: View {
                         }
                         .padding(.horizontal, 16)
                         .padding(.vertical, 14)
-                        .background(.componentPrimary)
+                        .background(.bgComponentPrimary)
                         .cornerRadius(8)
                         copyButton
                     } else {
@@ -136,7 +136,7 @@ struct NewIdentityView: View {
             .padding(.top, 80)
             .padding(.bottom, 16)
         }
-        .background(.backgroundPure)
+        .background(.bgPure)
     }
     
     var copyButton: some View {

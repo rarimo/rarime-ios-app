@@ -37,9 +37,9 @@ struct IdentityStepLayoutView<Content: View, NextButton: View>: View {
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 16)
-            .background(.backgroundPure)
+            .background(.bgPure)
         }
-        .background(.backgroundPrimary)
+        .background(.bgPrimary)
     }
 }
 

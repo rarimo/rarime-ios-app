@@ -91,15 +91,15 @@ struct ReserveTokensView: View {
                         Image(Icons.rarimo)
                             .iconLarge()
                             .padding(20)
-                            .background(.backgroundPure)
+                            .background(.bgPure)
                             .clipShape(Circle())
-                            .overlay(Circle().stroke(.backgroundPrimary, lineWidth: 2))
+                            .overlay(Circle().stroke(.bgPrimary, lineWidth: 2))
                         Text(passportCountry.flag)
                             .h4()
                             .frame(width: 72, height: 72)
-                            .background(.backgroundPure)
+                            .background(.bgPure)
                             .clipShape(Circle())
-                            .overlay(Circle().stroke(.backgroundPrimary, lineWidth: 2))
+                            .overlay(Circle().stroke(.bgPrimary, lineWidth: 2))
                     }
                     VStack(spacing: 12) {
                         Text("Reserve \(PASSPORT_RESERVE_TOKENS.formatted()) RMO tokens")
@@ -116,7 +116,7 @@ struct ReserveTokensView: View {
                 footerView
             }
             .padding(.top, 80)
-            .background(.backgroundPrimary)
+            .background(.bgPrimary)
             if !isReserving {
                 Button(action: onClose) {
                     Image(Icons.close)
@@ -158,7 +158,7 @@ struct ReserveTokensView: View {
         .padding(.horizontal, 20)
         .padding(.top, 12)
         .padding(.bottom, 20)
-        .background(.backgroundPure)
+        .background(.bgPure)
     }
 }
 

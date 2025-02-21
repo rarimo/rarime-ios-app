@@ -19,7 +19,7 @@ struct V2InviteFriendsView: View {
             ReferralBottomSheet {
                 VStack(alignment: .leading, spacing: 24) {
                     Capsule()
-                        .fill(.componentHovered)
+                        .fill(.bgComponentBaseHovered)
                         .frame(width: 36, height: 5)
                         .frame(maxWidth: .infinity, alignment: .center)
                     HStack(alignment: .top, spacing: 64) {
@@ -150,10 +150,10 @@ private struct InviteCodeView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(code)
                             .h5()
-                            .foregroundStyle(.textPrimary)
+                            .foregroundStyle(.baseBlack)
                         Text(invitationLink.dropFirst(8))
                             .body4()
-                            .foregroundStyle(.textSecondary)
+                            .foregroundStyle(.baseBlack.opacity(0.5))
                         Text("Active")
                             .subtitle7()
                             .foregroundStyle(.successDarker)
@@ -164,7 +164,7 @@ private struct InviteCodeView: View {
                         subject: Text("Invite to RariMe"),
                         message: Text("Join RariMe with my invite code: \(code)\n\n\(invitationLink)")
                     ) {
-                        Image(Icons.shareLine).iconMedium()
+                        Image(Icons.shareLine).iconMedium().foregroundStyle(.baseBlack)
                     }
                 }
             } else {
@@ -175,7 +175,7 @@ private struct InviteCodeView: View {
                         HStack(spacing: 4) {
                             Text("Used").body5()
                             Circle()
-                                .fill(.componentHovered)
+                                .fill(.bgComponentHovered)
                                 .frame(width: 4)
                             Text(usedStatusText)
                                 .body5()
@@ -198,11 +198,11 @@ private struct InviteCodeView: View {
         .padding(.horizontal, 16)
         .background {
             RoundedRectangle(cornerRadius: 12)
-                .fill(status == .active ? .componentPrimary : .clear)
+                .fill(status == .active ? .bgComponentBasePrimary : .clear)
                 .overlay {
                     if status != .active {
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(.componentPrimary, lineWidth: 1)
+                            .stroke(.bgComponentBasePrimary, lineWidth: 1)
                     }
                 }
         }

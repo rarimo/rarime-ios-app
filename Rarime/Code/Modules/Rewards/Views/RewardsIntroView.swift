@@ -216,7 +216,7 @@ private struct SocialCard: View {
             }
             .frame(maxWidth: .infinity)
             .padding(16)
-            .background(.componentPrimary, in: RoundedRectangle(cornerRadius: 8))
+            .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 8))
         }
     }
 }

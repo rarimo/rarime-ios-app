@@ -41,10 +41,10 @@ struct ActionCard<Icon: View>: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(20)
-        .background(transparent ? .clear : .backgroundOpacity, in: RoundedRectangle(cornerRadius: 24))
+        .background(transparent ? .clear : .bgPrimary, in: RoundedRectangle(cornerRadius: 24))
         .overlay(
             RoundedRectangle(cornerRadius: 24)
-                .stroke(.componentPrimary, lineWidth: transparent ? 1 : 0)
+                .stroke(.bgComponentPrimary, lineWidth: transparent ? 1 : 0)
         )
     }
 }
@@ -68,5 +68,5 @@ struct ActionCard<Icon: View>: View {
     }
     .padding(12)
     .frame(maxHeight: .infinity)
-    .background(.backgroundPrimary)
+    .background(.bgPrimary)
 }

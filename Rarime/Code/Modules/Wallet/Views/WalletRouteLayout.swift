@@ -28,7 +28,7 @@ struct WalletRouteLayout<Content: View>: View {
             content()
         }
         .padding(.top, 20)
-        .background(.backgroundPrimary)
+        .background(.bgPrimary)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

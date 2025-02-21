@@ -12,9 +12,9 @@ struct AppCheckbox: View {
                 .opacity(checked ? 1 : 0)
         }
         .frame(width: 20, height: 20)
-        .background(checked ? .primaryMain : .componentPrimary)
+        .background(checked ? .primaryMain : .bgComponentPrimary)
         .clipShape(RoundedRectangle(cornerRadius: 4))
-        .overlay(RoundedRectangle(cornerRadius: 4).stroke(.componentPrimary, lineWidth: 1))
+        .overlay(RoundedRectangle(cornerRadius: 4).stroke(.bgComponentPrimary, lineWidth: 1))
         .animation(.easeInOut(duration: 0.2), value: checked)
         .onTapGesture {
             checked.toggle()

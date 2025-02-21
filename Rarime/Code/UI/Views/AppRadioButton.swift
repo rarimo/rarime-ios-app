@@ -11,7 +11,7 @@ struct AppRadioButton<Label: View>: View {
                 label()
                 Spacer()
                 Circle()
-                    .stroke(.componentHovered, lineWidth: 2)
+                    .stroke(.bgComponentHovered, lineWidth: 2)
                     .frame(width: 16)
                     .overlay(
                         Circle()
@@ -20,7 +20,7 @@ struct AppRadioButton<Label: View>: View {
                     )
             }
             .padding(16)
-            .background(.backgroundOpacity, in: RoundedRectangle(cornerRadius: 12))
+            .background(.bgContainer, in: RoundedRectangle(cornerRadius: 12))
         }
     }
 }
@@ -35,5 +35,5 @@ struct AppRadioButton<Label: View>: View {
         }
     }
     .padding()
-    .background(.backgroundPrimary)
+    .background(.bgPrimary)
 }

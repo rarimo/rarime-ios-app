@@ -14,25 +14,25 @@ private struct IconButtonColors {
 }
 
 private let primaryColors = IconButtonColors(
-    background: .componentPrimary,
-    backgroundPressed: .componentPressed,
-    backgroundDisabled: .componentDisabled,
+    background: .bgComponentPrimary,
+    backgroundPressed: .bgComponentPressed,
+    backgroundDisabled: .bgComponentDisabled,
     foreground: .textPrimary,
     foregroundDisabled: .textDisabled
 )
 
 private let secondaryColors = IconButtonColors(
-    background: .componentPrimary,
-    backgroundPressed: .componentPressed,
-    backgroundDisabled: .componentDisabled,
+    background: .bgComponentPrimary,
+    backgroundPressed: .bgComponentPressed,
+    backgroundDisabled: .bgComponentDisabled,
     foreground: .baseBlack,
     foregroundDisabled: .baseBlack.opacity(0.28)
 )
 
 private let tertiaryColors = IconButtonColors(
     background: .clear,
-    backgroundPressed: .componentPressed,
-    backgroundDisabled: .componentDisabled,
+    backgroundPressed: .bgComponentPressed,
+    backgroundDisabled: .bgComponentDisabled,
     foreground: .textPrimary,
     foregroundDisabled: .textDisabled
 )

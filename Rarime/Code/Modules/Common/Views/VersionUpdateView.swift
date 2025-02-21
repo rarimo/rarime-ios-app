@@ -29,7 +29,7 @@ struct VersionUpdateView: View {
             .controlSize(.large)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.backgroundPure)
+        .background(.bgPure)
     }
 }
 

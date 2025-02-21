@@ -40,7 +40,7 @@ extension View {
     ) -> some View where Content: View {
         return sheet(isPresented: isPresented) {
             ZStack(alignment: .topTrailing) {
-                Color.backgroundPure.ignoresSafeArea(.container)
+                Color.bgPure.ignoresSafeArea(.container)
                 VStack(spacing: 0) {
                     if let title {
                         VStack(alignment: .leading, spacing: 20) {

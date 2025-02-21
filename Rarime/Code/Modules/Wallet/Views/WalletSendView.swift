@@ -151,7 +151,7 @@ struct WalletSendView: View {
         .padding(.bottom, 20)
         .padding(.horizontal, 24)
         .frame(maxWidth: .infinity)
-        .background(.backgroundPure)
+        .background(.bgPure)
     }
     
     var confirmationView: some View {
