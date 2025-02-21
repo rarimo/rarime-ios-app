@@ -5,7 +5,7 @@ enum MainTabs: Int, CaseIterable {
 
     var iconName: String {
         switch self {
-        case .home: return Icons.houseSimple
+        case .home: return Icons.homeLine
         case .wallet: return Icons.wallet
         case .rewards: return Icons.airdrop
         case .profile: return Icons.user
@@ -14,7 +14,7 @@ enum MainTabs: Int, CaseIterable {
 
     var activeIconName: String {
         switch self {
-        case .home: return Icons.houseSimpleFill
+        case .home: return Icons.homeFill
         case .wallet: return Icons.walletFilled
         case .rewards: return Icons.airdrop
         case .profile: return Icons.user

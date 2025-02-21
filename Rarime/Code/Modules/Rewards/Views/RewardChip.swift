@@ -13,7 +13,7 @@ struct RewardChip: View {
         .padding(.horizontal, 6)
         .foregroundStyle(active ? .successMain : .textSecondary)
         .background(active ? .successLighter : .clear, in: RoundedRectangle(cornerRadius: 100))
-        .overlay(active ? nil : RoundedRectangle(cornerRadius: 100).stroke(.componentPrimary))
+        .overlay(active ? nil : RoundedRectangle(cornerRadius: 100).stroke(.bgComponentPrimary))
     }
 }
 

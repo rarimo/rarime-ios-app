@@ -7,56 +7,57 @@ struct V2InviteFriendsView: View {
     var animation: Namespace.ID
     
     var body: some View {
-        VStack {
-            ZStack {
-                HStack(alignment: .top) {
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text("Invite")
-                            .h4()
-                            .fontWeight(.medium)
-                            .foregroundStyle(.textPrimary)
-                            .matchedGeometryEffect(id: AnimationNamespaceIds.title, in: animation)
-                        Text("Others")
-                            .h3()
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.textSecondary)
-                            .matchedGeometryEffect(id: AnimationNamespaceIds.subtitle, in: animation)
-                    }
-                    .padding(.top, 20)
-                    Spacer()
-                    Image(Icons.close)
-                        .square(20)
-                        .foregroundStyle(.baseBlack)
-                        .padding(10)
-                        .background(.baseBlack.opacity(0.03))
-                        .cornerRadius(100)
-                        .onTapGesture { onClose() }
-                }
-                .padding(.top, 20)
-                .padding(.horizontal, 20)
-                Image(Images.claimTokensArrow)
-                    .resizable()
-                    .scaledToFit()
-                    .scaleEffect(0.35)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .offset(x: 25, y: 80)
-                    .matchedGeometryEffect(id: AnimationNamespaceIds.additionalImage, in: animation)
-            }
+        VStack(spacing: 0) {
+            AppIconButton(icon: Icons.closeFill, action: onClose)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding([.top, .trailing], 20)
             Image(Images.peopleEmojis)
                 .resizable()
                 .scaledToFit()
+                .padding(.top, 77)
                 .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
-                .frame(maxHeight: .infinity, alignment: .center)
-            if let codes = balance.referralCodes {
-                VStack(alignment: .leading, spacing: 20) {
-                    Text("Invited \(codes.filter { $0.status != .active }.count)/\(codes.count)")
-                        .subtitle3()
-                        .foregroundStyle(.textPrimary)
-                    
-                    ScrollView(.vertical, showsIndicators: false) {
-                        VStack(spacing: 4) {
-                            ForEach(codes, id: \.id) { code in
-                                InviteCodeView(code: code.id, status: code.status)
+            ReferralBottomSheet {
+                VStack(alignment: .leading, spacing: 24) {
+                    Capsule()
+                        .fill(.bgComponentBaseHovered)
+                        .frame(width: 36, height: 5)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    HStack(alignment: .top, spacing: 64) {
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text("Invite")
+                                .h1()
+                                .foregroundStyle(.baseBlack)
+                                .matchedGeometryEffect(
+                                    id: AnimationNamespaceIds.title,
+                                    in: animation,
+                                    properties: .position
+                                )
+                            Text("Others")
+                                .additional1()
+                                .foregroundStyle(.baseBlack.opacity(0.4))
+                                .matchedGeometryEffect(
+                                    id: AnimationNamespaceIds.subtitle,
+                                    in: animation,
+                                    properties: .position
+                                )
+                        }
+                        Image(Icons.getTokensArrow)
+                            .foregroundStyle(.informationalDark)
+                            .padding(.top, 20)
+                            .matchedGeometryEffect(
+                                id: AnimationNamespaceIds.additionalImage,
+                                in: animation
+                            )
+                    }
+                    Text("Share your referral link and get bonuses when your friends join and make a purchase!")
+                        .body3()
+                        .foregroundStyle(.baseBlack.opacity(0.5))
+                    if let codes = balance.referralCodes {
+                        ScrollView(showsIndicators: false) {
+                            VStack(spacing: 8) {
+                                ForEach(codes, id: \.id) { code in
+                                    InviteCodeView(code: code.id, status: code.status)
+                                }
                             }
                         }
                     }
@@ -71,6 +72,58 @@ struct V2InviteFriendsView: View {
         )
     }
 }
+
+private struct ReferralBottomSheet<Content: View>: View {
+    let content: Content
+    
+    var minHeight: CGFloat
+    var maxHeight: CGFloat
+    var sensitivity: CGFloat
+   
+    @State private var currentHeight: CGFloat
+    @GestureState private var dragOffset: CGFloat = 0
+
+    init(
+        @ViewBuilder content: () -> Content,
+        minHeight: CGFloat = 360,
+        maxHeight: CGFloat = 670,
+        sensitivity: CGFloat = 2.4
+    ) {
+        self.content = content()
+        self.minHeight = minHeight
+        self.maxHeight = maxHeight
+        self.sensitivity = sensitivity
+        _currentHeight = State(initialValue: minHeight)
+    }
+    
+    var body: some View {
+        GeometryReader { proxy in
+            ZStack {
+                content.blurBackground(style: .light)
+            }
+            .frame(width: proxy.size.width, height: currentHeight, alignment: .top)
+            .offset(y: proxy.size.height - currentHeight + dragOffset)
+            .animation(.spring(duration: 1, bounce: 0.1), value: dragOffset)
+            .gesture(
+               DragGesture()
+                   .updating($dragOffset) { value, state, _ in
+                       state = value.translation.height * sensitivity
+                   }
+                   .onEnded { value in
+                       let proposedHeight = currentHeight - (value.translation.height * sensitivity)
+                       let midpoint = (minHeight + maxHeight) / 2
+                       if proposedHeight > midpoint {
+                           currentHeight = maxHeight
+                       } else {
+                           currentHeight = minHeight
+                       }
+                   }
+           )
+        }
+        .ignoresSafeArea(edges: .bottom)
+    }
+}
+
 
 private struct InviteCodeView: View {
     let code: String
@@ -96,14 +149,14 @@ private struct InviteCodeView: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(code)
-                            .subtitle4()
-                            .foregroundStyle(.textPrimary)
+                            .h5()
+                            .foregroundStyle(.baseBlack)
                         Text(invitationLink.dropFirst(8))
-                            .body3()
-                            .foregroundStyle(.textSecondary)
-                        Text("Active")
                             .body4()
-                            .foregroundStyle(.successDark)
+                            .foregroundStyle(.baseBlack.opacity(0.5))
+                        Text("Active")
+                            .subtitle7()
+                            .foregroundStyle(.successDarker)
                     }
                     Spacer()
                     ShareLink(
@@ -111,28 +164,33 @@ private struct InviteCodeView: View {
                         subject: Text("Invite to RariMe"),
                         message: Text("Join RariMe with my invite code: \(code)\n\n\(invitationLink)")
                     ) {
-                        Image(Icons.share).iconMedium()
+                        Image(Icons.shareLine).iconMedium().foregroundStyle(.baseBlack)
                     }
                 }
             } else {
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(code)
-                            .strikethrough()
-                            .subtitle4()
-                            .foregroundStyle(.textSecondary)
+                            .subtitle6()
                         HStack(spacing: 4) {
-                            Text("Used").body4()
+                            Text("Used").body5()
                             Circle()
-                                .fill(.componentHovered)
+                                .fill(.bgComponentHovered)
                                 .frame(width: 4)
                             Text(usedStatusText)
-                                .body4()
+                                .body5()
                         }
-                        .foregroundStyle(.textSecondary)
                     }
+                    .foregroundStyle(.baseBlack.opacity(0.5))
                     Spacer()
-                    RewardChip(reward: Rewards.invite, active: status == .rewarded)
+                    // TODO: sync with RewardChip
+                    HStack(spacing: 4) {
+                        Text(String("+\(Rewards.invite.formatted())")).subtitle7()
+                        Image(Icons.rarimo).iconSmall()
+                    }
+                    .padding(.vertical, 2)
+                    .padding(.horizontal, 6)
+                    .foregroundStyle(status == .rewarded ? .successDarker : .baseBlack.opacity(0.4))
                 }
             }
         }
@@ -140,11 +198,13 @@ private struct InviteCodeView: View {
         .padding(.horizontal, 16)
         .background {
             RoundedRectangle(cornerRadius: 12)
-                .fill(status == .active ? .componentPrimary : .clear)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(.componentPrimary, lineWidth: 1)
-                )
+                .fill(status == .active ? .bgComponentBasePrimary : .clear)
+                .overlay {
+                    if status != .active {
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(.bgComponentBasePrimary, lineWidth: 1)
+                    }
+                }
         }
     }
 }

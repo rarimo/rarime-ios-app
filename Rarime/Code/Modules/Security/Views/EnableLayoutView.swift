@@ -46,7 +46,7 @@ struct EnableLayoutView: View {
         }
         .padding(.top, 72)
         .padding(.bottom, 16)
-        .background(.backgroundPure)
+        .background(.bgPure)
     }
 }
 

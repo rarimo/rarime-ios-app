@@ -35,7 +35,7 @@ struct SelectPassportDataView: View {
                 .padding(.top, 12)
                 .padding(.bottom, 20)
                 .padding(.horizontal, 20)
-                .background(.backgroundPure)
+                .background(.bgPure)
         }
     }
 

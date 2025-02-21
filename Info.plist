@@ -189,10 +189,11 @@
 	<string>${LIGHT_SIGNATURE_PRIVATE_KEY}</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Gilroy-Bold.ttf</string>
-		<string>Gilroy-Medium.ttf</string>
-		<string>Gilroy-Regular.ttf</string>
-		<string>Gilroy-SemiBold.ttf</string>
+		<string>Playfair-Bold.ttf</string>
+		<string>Inter-Bold.ttf</string>
+		<string>Inter-Medium.ttf</string>
+		<string>Inter-Regular.ttf</string>
+		<string>Inter-SemiBold.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

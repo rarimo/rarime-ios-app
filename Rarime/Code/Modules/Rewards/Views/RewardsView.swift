@@ -123,7 +123,7 @@ struct RewardsView: View {
                                 Text(passportManager.passportCountry.flag)
                                     .h4()
                                     .frame(width: 72, height: 72)
-                                    .background(.componentPrimary, in: Circle())
+                                    .background(.bgComponentPrimary, in: Circle())
                                     .foregroundStyle(.textPrimary)
                                 Text("Unsupported country")
                                     .h5()
@@ -149,7 +149,7 @@ struct RewardsView: View {
                     }
                     .padding(.bottom, 124)
                 }
-                .background(.backgroundPrimary)
+                .background(.bgPrimary)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .isLoading(!isRewardsLoaded)
                 .onAppear(perform: fetchEvents)
@@ -353,7 +353,7 @@ private struct LimitedEventItem: View {
                             .scaledToFill()
                     } else {
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(.additionalPureDark)
+                            .fill(.bgPure)
                     }
                 }
             )
@@ -389,12 +389,12 @@ private struct ActiveEventItem: View {
                             .scaledToFill()
                     } else {
                         Circle()
-                            .fill(.additionalPureDark)
+                            .fill(.bgPure)
                     }
                 }
             )
             .frame(width: 40, height: 40)
-            .background(.additionalPureDark, in: Circle())
+            .background(.bgPure, in: Circle())
             .foregroundStyle(.baseWhite)
             .clipShape(Circle())
             VStack(alignment: .leading, spacing: 4) {

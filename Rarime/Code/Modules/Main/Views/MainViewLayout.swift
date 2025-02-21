@@ -16,7 +16,7 @@ struct MainViewLayout<Content: View>: View {
 
 #Preview {
     MainViewLayout {
-        Rectangle().fill(.backgroundPrimary)
+        Rectangle().fill(.bgPrimary)
     }
     .environmentObject(MainView.ViewModel())
 }

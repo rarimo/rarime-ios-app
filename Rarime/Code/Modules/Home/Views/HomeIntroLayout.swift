@@ -55,7 +55,7 @@ struct HomeIntroLayout<Icon: View, Subheader: View, Content: View>: View {
         icon: Image(Icons.bell).iconLarge()
     ) {
         Rectangle()
-            .fill(.backgroundPrimary)
+            .fill(.bgPrimary)
             .frame(width: .infinity, height: 200)
     }
 }

@@ -26,7 +26,7 @@ struct LevelingView: View {
             LevelRewards(rewards: selectedLevel.rewards)
         }
         .padding(.top, 24)
-        .background(.backgroundPrimary)
+        .background(.bgPrimary)
     }
 }
 
@@ -89,7 +89,7 @@ private struct LevelsSlider: View {
             HStack(spacing: 8) {
                 ForEach(0 ..< pointsLevels.count, id: \.self) { index in
                     RoundedRectangle(cornerRadius: 4)
-                        .fill(index == selectedIndex ? .primaryMain : .componentPrimary)
+                        .fill(index == selectedIndex ? .primaryMain : .bgComponentPrimary)
                         .frame(width: index == selectedIndex ? 16 : 8, height: 8)
                         .onTapGesture { selectedIndex = index }
                         .animation(.easeInOut, value: selectedIndex)
@@ -138,7 +138,7 @@ private struct LevelItem: View {
         }
         .padding(20)
         .frame(maxWidth: .infinity)
-        .background(.backgroundPure, in: RoundedRectangle(cornerRadius: 24))
+        .background(.bgPure, in: RoundedRectangle(cornerRadius: 24))
         .padding(.horizontal, 12)
     }
 }
@@ -157,7 +157,7 @@ private struct LevelRewards: View {
                         Image(reward.icon)
                             .iconMedium()
                             .padding(10)
-                            .background(.componentPrimary, in: Circle())
+                            .background(.bgComponentPrimary, in: Circle())
                             .foregroundStyle(.textPrimary)
                         VStack(alignment: .leading, spacing: 4) {
                             Text(reward.title)
@@ -170,7 +170,7 @@ private struct LevelRewards: View {
                         Spacer()
                     }
                     .padding(12)
-                    .background(.componentPrimary, in: RoundedRectangle(cornerRadius: 12))
+                    .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 12))
                     .frame(maxWidth: .infinity)
                 }
 
@@ -185,7 +185,7 @@ private struct LevelRewards: View {
         .padding(.horizontal, 20)
         .padding(.vertical, 24)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.backgroundPure, in: RoundedRectangle(cornerRadius: 24))
+        .background(.bgPure, in: RoundedRectangle(cornerRadius: 24))
         .ignoresSafeArea()
     }
 }

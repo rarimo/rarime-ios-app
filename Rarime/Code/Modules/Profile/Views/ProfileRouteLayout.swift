@@ -23,7 +23,7 @@ struct ProfileRouteLayout<Content: View>: View {
             Spacer()
         }
         .padding(20)
-        .background(.backgroundPrimary)
+        .background(.bgPrimary)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

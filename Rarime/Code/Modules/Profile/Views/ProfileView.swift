@@ -157,7 +157,7 @@ struct ProfileView: View {
             }
             .padding(.top, 20)
             .padding(.horizontal, 12)
-            .background(.backgroundPrimary)
+            .background(.bgPrimary)
             .alert(
                 "Delete your account?",
                 isPresented: $isAccountDeleting,
@@ -199,7 +199,7 @@ private struct ProfileRow: View {
                 Image(icon)
                     .iconMedium()
                     .padding(6)
-                    .background(.componentPrimary, in: Circle())
+                    .background(.bgComponentPrimary, in: Circle())
                     .foregroundStyle(.textPrimary)
                 Text(title)
                     .subtitle4()

@@ -7,53 +7,47 @@ struct WalletWaitlistView: View {
     var animation: Namespace.ID
     
     var body: some View {
-        VStack {
-            HStack(alignment: .top) {
+        VStack(spacing: 0) {
+            AppIconButton(icon: Icons.closeFill, action: onClose)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding([.top, .trailing], 20)
+            Image(Images.seedPhraseShred)
+                .resizable()
+                .scaledToFit()
+                .padding(.top, 24)
+                .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
+            VStack(alignment: .leading, spacing: 24) {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("An Unforgettable")
-                        .h4()
-                        .fontWeight(.medium)
-                        .foregroundStyle(.textPrimary)
-                        .matchedGeometryEffect(id: AnimationNamespaceIds.title, in: animation)
+                        .h1()
+                        .foregroundStyle(.baseBlack)
+                        .matchedGeometryEffect(
+                            id: AnimationNamespaceIds.title,
+                            in: animation,
+                            properties: .position
+                        )
                     Text("Wallet")
-                        .h3()
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.textSecondary)
-                        .matchedGeometryEffect(id: AnimationNamespaceIds.subtitle, in: animation)
+                        .additional1()
+                        .foregroundStyle(.baseBlack.opacity(0.4))
+                        .matchedGeometryEffect(
+                            id: AnimationNamespaceIds.subtitle,
+                            in: animation,
+                            properties: .position
+                        )
                 }
-                .padding(.top, 20)
-                Spacer()
-                Image(Icons.close)
-                    .square(20)
-                    .foregroundStyle(.baseBlack)
-                    .padding(10)
-                    .background(.baseBlack.opacity(0.03))
-                    .cornerRadius(100)
-                    .onTapGesture { onClose() }
+                Text("Say goodbye to seed phrases! ZK Face Wallet leverages cutting-edge zero-knowledge (ZK) cryptography and biometric authentication to give you a seamless, secure, and self-sovereign crypto experience.")
+                    .body3()
+                    .foregroundStyle(.baseBlack.opacity(0.5))
+                VStack(alignment: .center, spacing: 16) {
+                    AppButton(variant: .secondary, text: "Join Waitlist", action: onJoin)
+                        .controlSize(.large)
+                    Text("49,421 other already joined")
+                        .body5()
+                        .foregroundStyle(.baseBlack.opacity(0.5))
+                }
             }
-            .padding(.top, 20)
-            .padding(.horizontal, 20)
-            Spacer()
-            VStack(spacing: 60) {
-                Image(Images.seedPhraseShred)
-                    .resizable()
-                    .scaledToFit()
-                    .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
-                Text("No more seed phrases")
-                    .subtitle1()
-                    .foregroundStyle(.textPrimary)
-            }
-            Spacer()
-            // TODO: sync with design system
-            Button(action: onJoin) {
-                Text("Join early waitlist").buttonLarge().fontWeight(.medium)
-                    .frame(height: 56)
-                    .frame(maxWidth: .infinity)
-            }
-            .background(.baseBlack)
-            .foregroundColor(.white)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            .padding(.horizontal, 20)
+            .frame(maxHeight: .infinity, alignment: .bottom)
+            .padding([.top, .horizontal], 24)
             .padding(.bottom, 8)
         }
         .background(

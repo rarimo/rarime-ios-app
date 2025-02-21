@@ -40,7 +40,7 @@ struct LockScreenView: View {
                 .padding(.top, 48)
                 .padding(.bottom, 48)
                 .padding(.horizontal, 8)
-                .background(.backgroundPure)
+                .background(.bgPure)
                 .clipShape(
                     .rect(
                         topLeadingRadius: 24,
@@ -54,14 +54,14 @@ struct LockScreenView: View {
                     .padding(24)
                     .background(banTimeEnd == nil ? .primaryMain : .secondaryMain, in: Circle())
                     .foregroundStyle(banTimeEnd == nil ? .baseBlack : .baseWhite)
-                    .overlay(Circle().stroke(.backgroundPure, lineWidth: 10))
+                    .overlay(Circle().stroke(.bgPure, lineWidth: 10))
                     .padding(.top, -36)
             }
             .padding(.top, 190)
         }
         .ignoresSafeArea()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.backgroundPrimary)
+        .background(.bgPrimary)
         .onAppear(perform: authByFaceID)
         .onAppear(perform: handleBanTime)
     }

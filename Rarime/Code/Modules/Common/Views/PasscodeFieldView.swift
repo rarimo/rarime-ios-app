@@ -50,7 +50,7 @@ struct PasscodeFieldView: View {
                     ZStack {
                         Circle()
                             .frame(height: 16)
-                            .foregroundColor(index < passcode.count ? errorMessage.isEmpty ? .primaryMain : .errorMain : .componentPrimary)
+                            .foregroundColor(index < passcode.count ? errorMessage.isEmpty ? .primaryMain : .errorMain : .bgComponentPrimary)
                     }
                     .padding(16)
                 }

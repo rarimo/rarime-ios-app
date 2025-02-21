@@ -52,7 +52,7 @@ struct TaskEventView: View {
                                 .scaledToFill()
                         } else {
                             RoundedRectangle(cornerRadius: 8)
-                                .fill(.componentPrimary)
+                                .fill(.bgComponentPrimary)
                         }
                     }
                     .frame(width: 64, height: 64)

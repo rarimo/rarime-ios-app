@@ -50,7 +50,7 @@ struct PassportChipErrorView: View {
         }
         .padding(.horizontal, 24)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.backgroundPure)
+        .background(.bgPure)
         .dynamicSheet(isPresented: $isSending, fullScreen: true) {
             FeedbackMailView(isShowing: $isSending)
         }

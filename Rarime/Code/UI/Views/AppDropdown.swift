@@ -52,7 +52,7 @@ struct AppDropdown<T: Hashable>: View {
                                 }
                             }
                         }
-                        .background(.backgroundOpacity, in: RoundedRectangle(cornerRadius: 12))
+                        .background(.bgContainer, in: RoundedRectangle(cornerRadius: 12))
                         .frame(width: 150)
                         .offset(y: 24)
                     }
@@ -76,5 +76,5 @@ struct AppDropdown<T: Hashable>: View {
         }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .background(.backgroundPrimary)
+    .background(.bgPrimary)
 }

@@ -141,6 +141,9 @@
     "10 RMO" : {
 
     },
+    "49,421 other already joined" : {
+
+    },
     "14925-1592" : {
 
     },
@@ -683,9 +686,6 @@
           }
         }
       }
-    },
-    "Copy & Send this invite code" : {
-
     },
     "Copy to clipboard" : {
       "localizations" : {
@@ -1423,9 +1423,6 @@
         }
       }
     },
-    "Join early waitlist" : {
-
-    },
     "Join RariMe with my invite code: %@\n\n%@" : {
       "localizations" : {
         "en" : {
@@ -1452,6 +1449,9 @@
           }
         }
       }
+    },
+    "Join Waitlist" : {
+
     },
     "Jordan" : {
 
@@ -1517,9 +1517,6 @@
 
     },
     "Let's Scan" : {
-
-    },
-    "Let's start" : {
 
     },
     "Let's Start" : {
@@ -1774,9 +1771,6 @@
 
     },
     "No internet connection" : {
-
-    },
-    "No more seed phrases" : {
 
     },
     "No notifications" : {
@@ -2336,6 +2330,9 @@
     "Save your passport data" : {
 
     },
+    "Say goodbye to seed phrases! ZK Face Wallet leverages cutting-edge zero-knowledge (ZK) cryptography and biometric authentication to give you a seamless, secure, and self-sovereign crypto experience." : {
+
+    },
     "Scan" : {
       "localizations" : {
         "uk" : {
@@ -2358,9 +2355,6 @@
           }
         }
       }
-    },
-    "Scan QR code" : {
-
     },
     "Scan your passport" : {
 
@@ -2431,6 +2425,9 @@
 
     },
     "Share Achievements" : {
+
+    },
+    "Share your referral link and get bonuses when your friends join and make a purchase!" : {
 
     },
     "Shows two identifiers on the card" : {

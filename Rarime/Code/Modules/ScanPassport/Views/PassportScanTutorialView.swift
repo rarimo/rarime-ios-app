@@ -30,7 +30,7 @@ struct PassportScanTutorialButton: View {
                 Spacer()
             }
             .padding(12)
-            .background(.componentPrimary, in: RoundedRectangle(cornerRadius: 16))
+            .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 16))
         }
         .dynamicSheet(isPresented: $isTutorialPresented, fullScreen: true) {
             PassportScanTutorialView(onStart: { isTutorialPresented = false })

@@ -42,7 +42,7 @@ private struct AuthMethodItem: View {
             Image(icon)
                 .iconMedium()
                 .padding(6)
-                .background(.componentPrimary, in: Circle())
+                .background(.bgComponentPrimary, in: Circle())
                 .foregroundStyle(.textPrimary)
             Text(label)
                 .subtitle4()
@@ -51,7 +51,7 @@ private struct AuthMethodItem: View {
             AppToggle(isOn: $isOn)
         }
         .padding(16)
-        .background(.backgroundOpacity, in: RoundedRectangle(cornerRadius: 12))
+        .background(.bgPure, in: RoundedRectangle(cornerRadius: 12))
     }
 }
 

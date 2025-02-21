@@ -44,7 +44,7 @@ private struct GetStartedButton: View {
                     Image(icon).iconMedium().foregroundStyle(.textPrimary)
                 }
                 .padding(10)
-                .background(.backgroundOpacity)
+                .background(.bgContainer)
                 .clipShape(Circle())
 
                 VStack(alignment: .leading, spacing: 4) {
@@ -56,7 +56,7 @@ private struct GetStartedButton: View {
             .frame(maxWidth: .infinity)
             .padding(.vertical, 20)
             .padding(.horizontal, 16)
-            .background(.componentPrimary)
+            .background(.bgComponentPrimary)
             .clipShape(RoundedRectangle(cornerRadius: 16))
         }
     }

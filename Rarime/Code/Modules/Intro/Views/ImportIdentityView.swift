@@ -110,7 +110,7 @@ struct ImportIdentityView: View {
             .padding(.top, 80)
             .padding(.bottom, 16)
         }
-        .background(.backgroundPure)
+        .background(.bgPure)
     }
     
     func restoreFromICloud() {

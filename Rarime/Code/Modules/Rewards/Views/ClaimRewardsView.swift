@@ -40,10 +40,10 @@ struct ClaimRewardsView: View {
             }
             .padding(.vertical, 12)
             .padding(.horizontal, 24)
-            .background(.backgroundPure)
+            .background(.bgPure)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.backgroundPrimary)
+        .background(.bgPrimary)
     }
 
     private var claimCard: some View {
@@ -63,7 +63,7 @@ struct ClaimRewardsView: View {
                     )
                 }
                 .padding(16)
-                .background(.componentPrimary, in: RoundedRectangle(cornerRadius: 8))
+                .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 8))
                 AppTextField(
                     text: $amount,
                     errorMessage: $amountErrorMessage,

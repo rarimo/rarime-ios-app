@@ -15,24 +15,24 @@ private struct ButtonColors {
 
 private let primaryColors = ButtonColors(
     background: .textPrimary,
-    backgroundPressed: .textPrimary.opacity(0.7),
-    backgroundDisabled: .componentDisabled,
+    backgroundPressed: .textSecondary,
+    backgroundDisabled: .bgComponentDisabled,
     foreground: .invertedLight,
     foregroundDisabled: .textDisabled
 )
 
 private let secondaryColors = ButtonColors(
-    background: .componentPrimary,
-    backgroundPressed: .componentPressed,
-    backgroundDisabled: .componentDisabled,
+    background: .bgComponentBasePrimary,
+    backgroundPressed: .bgComponentBasePressed,
+    backgroundDisabled: .bgComponentBaseDisabled,
     foreground: .baseBlack,
     foregroundDisabled: .baseBlack.opacity(0.28)
 )
 
 private let tertiaryColors = ButtonColors(
     background: .clear,
-    backgroundPressed: .componentPressed,
-    backgroundDisabled: .componentDisabled,
+    backgroundPressed: .bgComponentPressed,
+    backgroundDisabled: .bgComponentDisabled,
     foreground: .textPrimary,
     foregroundDisabled: .textDisabled
 )

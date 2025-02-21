@@ -114,7 +114,7 @@ struct PasscodeView: View {
             .padding(.bottom, 16)
             .padding(.horizontal, 8)
         }
-        .background(.backgroundPure)
+        .background(.bgPure)
         .navigationBarBackButtonHidden()
     }
 }

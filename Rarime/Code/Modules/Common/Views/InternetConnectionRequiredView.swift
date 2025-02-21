@@ -20,7 +20,7 @@ struct InternetConnectionRequiredView: View {
         }
         .padding(.horizontal, 24)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.backgroundPrimary)
+        .background(.bgPrimary)
     }
 }
 

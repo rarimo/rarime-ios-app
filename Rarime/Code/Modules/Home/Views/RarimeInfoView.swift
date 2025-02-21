@@ -10,7 +10,7 @@ struct RarimeInfoView: View {
                 icon: Image(Icons.rarime)
                     .iconLarge()
                     .frame(width: 72, height: 72)
-                    .background(.componentPrimary, in: Circle())
+                    .background(.bgComponentPrimary, in: Circle())
                     .foregroundStyle(.textPrimary)
             ) {
                 VStack(alignment: .leading, spacing: 16) {

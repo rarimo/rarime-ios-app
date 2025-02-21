@@ -41,9 +41,9 @@ struct AppTextField<Hint: View, Action: View>: View {
     }
 
     var borderColor: Color {
-        if !isEnabled { return .componentDisabled }
+        if !isEnabled { return .bgComponentDisabled }
         if isError { return .errorMain }
-        return isFocused ? .componentPressed : .componentPrimary
+        return isFocused ? .bgComponentPressed : .bgComponentPrimary
     }
 
     var body: some View {
@@ -71,7 +71,7 @@ struct AppTextField<Hint: View, Action: View>: View {
                 action()
             }
             .padding(.horizontal, 16)
-            .background(isEnabled ? .clear : .componentDisabled)
+            .background(isEnabled ? .clear : .bgComponentDisabled)
             .clipShape(RoundedRectangle(cornerRadius: 8))
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
@@ -131,7 +131,7 @@ private struct PreviewView: View {
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.backgroundPure)
+        .background(.bgPure)
     }
 }
 

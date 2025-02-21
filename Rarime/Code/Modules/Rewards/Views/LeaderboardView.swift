@@ -34,7 +34,7 @@ struct LeaderboardView: View {
             BalancesTable(balances: balances, myBalance: myBalance)
         }
         .padding(.top, 24)
-        .background(.backgroundPrimary)
+        .background(.bgPrimary)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
@@ -61,7 +61,7 @@ private struct TopLeaderView: View {
                         .foregroundStyle(.textSecondary)
                         .padding(.vertical, 2)
                         .padding(.horizontal, 6)
-                        .background(.componentHovered, in: RoundedRectangle(cornerRadius: 100))
+                        .background(.bgComponentHovered, in: RoundedRectangle(cornerRadius: 100))
                 } else {
                     Text(formatBalanceId(balance.id ?? ""))
                         .caption3()
@@ -77,7 +77,7 @@ private struct TopLeaderView: View {
             }
             .padding(.vertical, 16)
             .frame(maxWidth: .infinity, maxHeight: height)
-            .background(balance.rank == 1 ? .primaryMain : .componentPrimary)
+            .background(balance.rank == 1 ? .primaryMain : .bgComponentPrimary)
             .clipShape(
                 .rect(
                     topLeadingRadius: 12,
@@ -89,7 +89,7 @@ private struct TopLeaderView: View {
             Text("\(balance.rank)")
                 .subtitle4()
                 .frame(width: 32, height: 32)
-                .background(.backgroundPure, in: Circle())
+                .background(.bgPure, in: Circle())
                 .foregroundStyle(.textPrimary)
                 .shadow(color: .black.opacity(0.04), radius: 3, x: 0, y: 1)
                 .offset(y: -16)
@@ -171,7 +171,7 @@ private struct BalancesTable: View {
         }
         .padding(.vertical, 20)
         .padding(.horizontal, 4)
-        .background(.backgroundPure, in: RoundedRectangle(cornerRadius: 24))
+        .background(.bgPure, in: RoundedRectangle(cornerRadius: 24))
         .ignoresSafeArea()
     }
 }
@@ -193,7 +193,7 @@ private struct BalanceItem: View {
                 .subtitle4()
                 .foregroundStyle(.textPrimary)
                 .frame(width: 32, height: 32)
-                .overlay(Circle().stroke(.componentPrimary, lineWidth: 1))
+                .overlay(Circle().stroke(.bgComponentPrimary, lineWidth: 1))
             HStack(spacing: 16) {
                 Text(formatBalanceId(balance.id ?? ""))
                     .subtitle4()
@@ -204,7 +204,7 @@ private struct BalanceItem: View {
                         .foregroundStyle(.textSecondary)
                         .padding(.vertical, 2)
                         .padding(.horizontal, 6)
-                        .background(.componentHovered, in: RoundedRectangle(cornerRadius: 100))
+                        .background(.bgComponentHovered, in: RoundedRectangle(cornerRadius: 100))
                 }
             }
             Spacer()
@@ -215,10 +215,10 @@ private struct BalanceItem: View {
             .foregroundStyle(.textPrimary)
             .padding(.vertical, 2)
             .frame(width: 72)
-            .background(.componentPrimary, in: RoundedRectangle(cornerRadius: 48))
+            .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 48))
         }
         .padding(16)
-        .background(highlighted ? .backgroundPrimary : .clear, in: RoundedRectangle(cornerRadius: 16))
+        .background(highlighted ? .bgPrimary : .clear, in: RoundedRectangle(cornerRadius: 16))
     }
 }
 

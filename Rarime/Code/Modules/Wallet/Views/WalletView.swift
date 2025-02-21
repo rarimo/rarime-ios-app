@@ -67,7 +67,7 @@ struct WalletView: View {
                 .padding(.bottom, 120)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.backgroundPrimary)
+            .background(.bgPrimary)
         }
         .onAppear(perform: fetchBalance)
         .onDisappear(perform: cleanup)
@@ -185,7 +185,7 @@ private struct WalletButton: View {
                     .iconMedium()
                     .foregroundStyle(.textPrimary)
                     .padding(14)
-                    .background(.componentPrimary, in: Circle())
+                    .background(.bgComponentPrimary, in: Circle())
                 Text(text)
                     .buttonSmall()
                     .foregroundStyle(.textSecondary)
@@ -207,7 +207,7 @@ private struct TransactionItem: View {
             Image(tx.icon)
                 .iconMedium()
                 .padding(10)
-                .background(.componentPrimary)
+                .background(.bgComponentPrimary)
                 .foregroundStyle(.textSecondary)
                 .clipShape(Circle())
             VStack(alignment: .leading, spacing: 4) {

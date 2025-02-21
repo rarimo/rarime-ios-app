@@ -30,7 +30,7 @@ struct InviteFriendsView: View {
                 invitedCard
             }
         }
-        .background(.backgroundPrimary)
+        .background(.bgPrimary)
     }
 
     private var invitedCard: some View {
@@ -57,7 +57,7 @@ struct InviteFriendsView: View {
         }
         .padding(.vertical, 24)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.backgroundPure)
+        .background(.bgPure)
         .clipShape(
             .rect(
                 topLeadingRadius: 24,
@@ -114,7 +114,7 @@ private struct InviteCodeView: View {
             }
             .padding(.vertical, 12)
             .padding(.horizontal, 16)
-            .background(.componentPrimary, in: RoundedRectangle(cornerRadius: 12))
+            .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 12))
         } else {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
@@ -125,7 +125,7 @@ private struct InviteCodeView: View {
                     HStack(spacing: 4) {
                         Text("Used").body4()
                         Circle()
-                            .fill(.componentHovered)
+                            .fill(.bgComponentHovered)
                             .frame(width: 4)
                         Text(usedStatusText)
                             .body4()
@@ -139,7 +139,7 @@ private struct InviteCodeView: View {
             .padding(.horizontal, 16)
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke(.componentPrimary, lineWidth: 1)
+                    .stroke(.bgComponentPrimary, lineWidth: 1)
             )
         }
     }

@@ -30,7 +30,7 @@ struct WaitlistPassportView: View {
             icon: Text(country.flag)
                 .h4()
                 .frame(width: 72, height: 72)
-                .background(.componentPrimary, in: Circle())
+                .background(.bgComponentPrimary, in: Circle())
                 .foregroundStyle(.textPrimary)
         ) {
             VStack(alignment: .leading, spacing: 24) {
@@ -145,7 +145,7 @@ struct WaitlistPassportView: View {
                 Image(Icons.identificationCard)
                     .iconLarge()
                     .frame(width: 72, height: 72)
-                    .background(.componentPrimary, in: Circle())
+                    .background(.bgComponentPrimary, in: Circle())
                     .foregroundStyle(.textPrimary)
                 Text("Save your passport data")
                     .h6()
@@ -186,7 +186,7 @@ struct WaitlistPassportView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 14)
-                    .background(.componentPrimary)
+                    .background(.bgComponentPrimary)
                     .foregroundStyle(.textPrimary)
                     .cornerRadius(8)
                     Text("3. When we support your country, you will be notified in the app")
