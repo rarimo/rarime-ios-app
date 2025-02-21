@@ -5,21 +5,21 @@ enum V2MainTabs: Int, CaseIterable {
 
     var iconName: String {
         switch self {
-        case .home: return Icons.houseSimple
+        case .home: return Icons.homeLine
         case .passport: return Icons.passportLine
         case .scanQr: return Icons.qrScan2Line
         case .wallet: return Icons.walletLine
-        case .profile: return Icons.accountCircleLine
+        case .profile: return Icons.userLine
         }
     }
 
     var activeIconName: String {
         switch self {
-        case .home: return Icons.houseSimpleFill
+        case .home: return Icons.homeFill
         case .passport: return Icons.passportFill
         case .scanQr: return Icons.qrScan2Line
         case .wallet: return Icons.walletFill
-        case .profile: return Icons.accountCircleFill
+        case .profile: return Icons.userFill
         }
     }
 }

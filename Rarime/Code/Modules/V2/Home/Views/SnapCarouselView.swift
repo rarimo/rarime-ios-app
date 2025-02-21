@@ -36,7 +36,7 @@ struct SnapCarouselView: View {
             VStack(spacing: spacing) {
                 ForEach(views.indices, id: \.self) { idx in
                     let distance = abs(CGFloat(idx) - effectiveIndex)
-                    let scale = 1 - (0.2 * min(distance, 1))
+                    let scale = 1 - (0.1 * min(distance, 1))
                     views[idx]
                         .frame(height: proxy.size.height - trailingSpace)
                         .scaleEffect(scale, anchor: .top)

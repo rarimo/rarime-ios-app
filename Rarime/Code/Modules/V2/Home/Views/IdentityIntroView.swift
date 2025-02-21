@@ -7,54 +7,43 @@ struct IdentityIntroView: View {
     var animation: Namespace.ID
     
     var body: some View {
-        VStack {
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("Your Device")
-                        .h4()
-                        .fontWeight(.medium)
-                        .foregroundStyle(.textPrimary)
-                        .matchedGeometryEffect(id: AnimationNamespaceIds.title, in: animation)
-                    Text("Your Identity")
-                        .h3()
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.textSecondary)
-                        .matchedGeometryEffect(id: AnimationNamespaceIds.subtitle, in: animation)
-                }
-                .padding(.top, 20)
-                Spacer()
-                Image(Icons.close)
-                    .square(20)
-                    .foregroundStyle(.baseBlack)
-                    .padding(10)
-                    .background(.baseBlack.opacity(0.03))
-                    .cornerRadius(100)
-                    .onTapGesture { onClose() }
-            }
-            .padding(.top, 20)
-            .padding(.horizontal, 20)
-            Spacer()
+        VStack(spacing: 0) {
+            AppIconButton(icon: Icons.closeFill, action: onClose)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding([.top, .trailing], 20)
             Image(Images.handWithPhone)
                 .resizable()
                 .scaledToFit()
                 .scaleEffect(0.9, anchor: .trailing)
+                .frame(maxWidth: .infinity, alignment: .trailing)
                 .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
-            Spacer()
-            Text("This app is where you privately store your digital identities, enabling you to go incognito across the web.")
-                .body1()
-                .foregroundStyle(.baseBlack.opacity(0.6))
-                .padding(.horizontal, 20)
-                .padding(.bottom, 40)
-            // TODO: sync with design system
-            Button(action: onStart) {
-                Text("Let's start").buttonLarge().fontWeight(.medium)
-                    .frame(height: 56)
-                    .frame(maxWidth: .infinity)
+            VStack(alignment: .leading, spacing: 24) {
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Your Device")
+                        .h1()
+                        .foregroundStyle(.baseBlack)
+                        .matchedGeometryEffect(
+                            id: AnimationNamespaceIds.title,
+                            in: animation,
+                            properties: .position
+                        )
+                    Text("Your Identity")
+                        .additional1()
+                        .foregroundStyle(.baseBlack.opacity(0.4))
+                        .matchedGeometryEffect(
+                            id: AnimationNamespaceIds.subtitle,
+                            in: animation,
+                            properties: .position
+                        )
+                }
+                Text("This app is where you privately store your digital identities, enabling you to go incognito across the web.")
+                    .body3()
+                    .foregroundStyle(.baseBlack.opacity(0.5))
+                AppButton(variant: .secondary, text: "Let’s Start", action: onStart)
+                    .controlSize(.large)
             }
-            .background(.baseBlack)
-            .foregroundColor(.white)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            .padding(.horizontal, 20)
+            .frame(maxHeight: .infinity, alignment: .bottom)
+            .padding([.top, .horizontal], 24)
             .padding(.bottom, 8)
         }
         .background(

@@ -4,7 +4,7 @@ struct V2NavBarView: View {
     @Binding var selectedTab: V2MainTabs
 
     var body: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: 8) {
             ForEach(V2MainTabs.allCases, id: \.self) { item in
                 V2NavBarTabItem(tab: item, isActive: selectedTab == item)
                     .onTapGesture {
@@ -13,9 +13,9 @@ struct V2NavBarView: View {
                     }
             }
         }
-        .padding(.vertical, 12)
-        .frame(maxWidth: .infinity)
-        .background(.baseWhite)
+        .padding(.top, 12)
+        .frame(maxWidth: .infinity, alignment: .bottom)
+        .background(.backgroundBlur)
     }
 }
 
@@ -27,8 +27,8 @@ struct V2NavBarTabItem: View {
         Image(isActive ? tab.activeIconName : tab.iconName)
             .square(24)
             .frame(width: 48, height: 40)
-            .background(isActive ? .baseBlack.opacity(0.03) : .clear)
-            .foregroundStyle(isActive ? .baseBlack : .baseBlack.opacity(0.3))
+            .background(isActive ? .componentPrimary : .clear)
+            .foregroundStyle(isActive ? .textPrimary : .textSecondary)
             .cornerRadius(12)
     }
 }

@@ -14,9 +14,10 @@ private func getFontFamily(weight: UIFont.Weight) -> String {
 }
 
 extension View {
-    func applyFont(fontSize: CGFloat, lineHeight: CGFloat, fontWeight: UIFont.Weight = .regular) -> some View {
+    func applyFont(fontFamily: String? = nil, fontSize: CGFloat, lineHeight: CGFloat, fontWeight: UIFont.Weight = .regular) -> some View {
+        let fontName = fontFamily ?? getFontFamily(weight: fontWeight)
         let font = UIFont(
-            name: getFontFamily(weight: fontWeight),
+            name: fontName,
             size: fontSize
         ) ?? UIFont.systemFont(ofSize: fontSize, weight: fontWeight)
         
@@ -26,6 +27,15 @@ extension View {
             .font(Font(font))
             .lineSpacing(lineSpacing)
             .padding(.vertical, lineSpacing / 2)
+    }
+    
+    // additional
+    func additional1() -> some View {
+        self.applyFont(fontFamily: Fonts.playfairBold, fontSize: 48, lineHeight: 56, fontWeight: .bold)
+    }
+    
+    func additional2() -> some View {
+        self.applyFont(fontFamily: Fonts.playfairBold, fontSize: 40, lineHeight: 36, fontWeight: .bold)
     }
     
     // headline
