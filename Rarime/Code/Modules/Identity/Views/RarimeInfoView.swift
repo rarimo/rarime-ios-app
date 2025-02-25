@@ -33,7 +33,7 @@ struct RarimeInfoView: View {
                 .frame(width: 6, height: 6)
                 .padding(.top, 8)
             text
-                .body2()
+                .body3()
                 .foregroundStyle(.textSecondary)
         }
     }

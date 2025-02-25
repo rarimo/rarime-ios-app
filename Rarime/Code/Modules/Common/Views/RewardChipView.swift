@@ -11,7 +11,7 @@ struct RewardChipView: View {
 
     var body: some View {
         HStack(spacing: 4) {
-            Text(String("+\(reward)")).subtitle5()
+            Text(String("+\(reward)")).subtitle7()
             Image(Icons.rarimo).iconSmall()
         }
         .padding(.vertical, 2)

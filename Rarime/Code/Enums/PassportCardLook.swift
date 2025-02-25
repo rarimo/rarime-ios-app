@@ -14,7 +14,7 @@ enum PassportCardLook: Int, CaseIterable {
 
     var backgroundColor: Color {
         switch self {
-        case .green: return .primaryMain
+        case .green: return .secondaryMain
         case .black: return .baseBlack
         case .white: return .baseWhite
         }

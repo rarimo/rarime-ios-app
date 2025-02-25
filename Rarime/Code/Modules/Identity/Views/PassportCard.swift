@@ -51,11 +51,11 @@ struct PassportCard: View {
             }
             VStack(alignment: .leading, spacing: 0) {
                 Text(isWaitlist ? "Waitlist country" : "Unsupported for rewards")
-                    .subtitle5()
+                    .subtitle7()
                     .foregroundStyle(.textPrimary)
                 if isWaitlist {
                     Text("You will be notified once added")
-                        .body4()
+                        .body5()
                         .foregroundStyle(.textSecondary)
                 }
             }
@@ -96,8 +96,8 @@ struct PassportCard: View {
                 }
             }
             VStack(alignment: .leading, spacing: 8) {
-                Text(fullNameValue).h6()
-                Text(ageValue).body2().opacity(0.56)
+                Text(fullNameValue).h4()
+                Text(ageValue).body3().opacity(0.56)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             HorizontalDivider(color: look.foregroundColor.opacity(0.05))
@@ -131,9 +131,9 @@ struct PassportCard: View {
 
     private func makePassportInfoRow(title: String, value: String) -> some View {
         HStack {
-            Text(title).body3().opacity(0.56)
+            Text(title).body4().opacity(0.56)
             Spacer()
-            Text(value).subtitle4()
+            Text(value).subtitle6()
         }
     }
 
@@ -186,7 +186,7 @@ private struct PassportLookOption: View {
                     .stroke(.bgComponentPrimary, lineWidth: 1)
             )
             Text(look.name)
-                .buttonMedium()
+                .subtitle6()
                 .foregroundStyle(.textPrimary)
         }
         .frame(maxWidth: .infinity)
@@ -212,15 +212,15 @@ private struct PassportIdentifiersPicker: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             VStack(alignment: .leading, spacing: 8) {
-                Text("Data").overline3()
-                Text("Shows two identifiers on the card").body4()
+                Text("Data").overline2()
+                Text("Shows two identifiers on the card").body5()
             }
             .foregroundStyle(.textSecondary)
             ForEach(PassportIdentifier.allCases, id: \.self) { identifier in
                 let isSelected = identifiers.contains(identifier)
                 HStack {
                     Text(identifier.title)
-                        .subtitle4()
+                        .subtitle6()
                         .foregroundStyle(.textPrimary)
                     Spacer()
                     AppToggle(

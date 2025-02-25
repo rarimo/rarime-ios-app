@@ -84,7 +84,7 @@ struct WalletView: View {
                 Text("Total Balance")
                     .body4()
                     .foregroundStyle(.textSecondary)
-                HStack(spacing: 8) {
+                HStack(alignment: .center, spacing: 8) {
                     if isBalanceFetching {
                         ProgressView()
                     } else {
@@ -92,10 +92,9 @@ struct WalletView: View {
                             .h4()
                             .foregroundStyle(.textPrimary)
                     }
-                    AppDropdown(value: $token, options: [
-                        DropdownOption(label: WalletToken.rmo.rawValue, value: WalletToken.rmo),
-                    ])
-                    .padding(.top, 8)
+                    Text(WalletToken.rmo.rawValue)
+                        .overline2()
+                        .foregroundStyle(.textPrimary)
                 }
                 .frame(height: 40)
                 .zIndex(1)

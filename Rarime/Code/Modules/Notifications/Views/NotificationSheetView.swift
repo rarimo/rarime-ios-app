@@ -18,7 +18,7 @@ struct NotificationSheetView: View {
                 VStack(spacing: 8) {
                     Group {
                         Text(notification.title ?? "")
-                            .h6()
+                            .h4()
                             .foregroundStyle(.textPrimary)
                         Text(notification.receivedAt?.formatted(date: .abbreviated, time: .omitted) ?? "")
                             .caption2()
@@ -29,7 +29,7 @@ struct NotificationSheetView: View {
                 }
                 ScrollView {
                     Text(notification.body ?? "")
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textSecondary)
                         .align()
                 }

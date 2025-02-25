@@ -26,7 +26,7 @@ struct ScanQRView: View {
                     .mask(MaskShape(size: 235).fill(style: FillStyle(eoFill: true)))
                 Image(Images.qrFrame).square(240)
                 Text("Place QR code within the frame to scan")
-                    .body3()
+                    .body4()
                     .foregroundStyle(.baseWhite)
                     .multilineTextAlignment(.center)
                     .frame(width: 200)
@@ -40,7 +40,7 @@ struct ScanQRView: View {
                         Image(Icons.caretLeft).iconMedium()
                     }
                     Spacer()
-                    Text("Scan QR").subtitle4()
+                    Text("Scan QR").subtitle6()
                     Spacer()
                     Rectangle().frame(width: 20, height: 0)
                 }

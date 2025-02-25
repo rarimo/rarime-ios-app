@@ -11,7 +11,7 @@ struct V2MainView: View {
         ZStack {
             switch viewModel.selectedTab {
                 case .home: V2HomeView()
-                case .passport: HomeView()
+                case .identity: IdentityView()
                 case .scanQr: ScanQRView(
                     // TODO: change routign after design impl
                     onBack: { viewModel.selectedTab = .home },

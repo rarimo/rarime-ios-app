@@ -16,7 +16,7 @@ struct LevelingView: View {
     var body: some View {
         VStack(spacing: 32) {
             Text("Leveling")
-                .subtitle4()
+                .subtitle6()
                 .foregroundStyle(.textPrimary)
             CurrentLevelStatus(userLevel: balance.level)
             LevelsSlider(
@@ -38,14 +38,14 @@ private struct CurrentLevelStatus: View {
             ForEach(pointsLevels, id: \.level) { pointsLevel in
                 if pointsLevel.level == userLevel {
                     Text(pointsLevel.level.formatted())
-                        .body3()
+                        .body4()
                         .foregroundStyle(.baseBlack)
                         .frame(width: 20, height: 20)
                         .padding(6)
                         .background(.primaryMain, in: Circle())
                 } else {
                     Text(pointsLevel.level.formatted())
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textSecondary)
                         .frame(width: 20, height: 20)
                 }
@@ -115,10 +115,10 @@ private struct LevelItem: View {
             HStack(spacing: 16) {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Level \(level.level)")
-                        .h5()
+                        .h3()
                         .foregroundStyle(.textPrimary)
                     Text(level.description)
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textSecondary)
                 }
                 Spacer()
@@ -127,10 +127,10 @@ private struct LevelItem: View {
             VStack(alignment: .leading, spacing: 8) {
                 HStack(spacing: 0) {
                     Text(userBalance.formatted())
-                        .subtitle3()
+                        .subtitle5()
                         .foregroundStyle(.textPrimary)
                     Text("/\(level.maxBalance.formatted())")
-                        .body4()
+                        .body5()
                         .foregroundStyle(.textSecondary)
                 }
                 LinearProgressView(progress: userBalance / Double(level.maxBalance))
@@ -149,7 +149,7 @@ private struct LevelRewards: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             Text("Rewards")
-                .subtitle3()
+                .subtitle5()
                 .foregroundStyle(.textPrimary)
             VStack(alignment: .leading, spacing: 12) {
                 ForEach(rewards, id: \.title) { reward in
@@ -161,10 +161,10 @@ private struct LevelRewards: View {
                             .foregroundStyle(.textPrimary)
                         VStack(alignment: .leading, spacing: 4) {
                             Text(reward.title)
-                                .subtitle4()
+                                .subtitle6()
                                 .foregroundStyle(.textPrimary)
                             Text(reward.description)
-                                .body4()
+                                .body5()
                                 .foregroundStyle(.textSecondary)
                         }
                         Spacer()
@@ -176,7 +176,7 @@ private struct LevelRewards: View {
 
                 if rewards.isEmpty {
                     Text("Start journey to unlock rewards")
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textSecondary)
                 }
             }
@@ -199,7 +199,7 @@ private struct LevelRewards: View {
             updatedAt: 1,
             rank: 1,
             referralCodes: [],
-            level: 1, 
+            level: 1,
             isVerified: true
         )
     )

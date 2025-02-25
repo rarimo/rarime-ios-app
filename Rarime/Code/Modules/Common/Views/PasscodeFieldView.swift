@@ -57,7 +57,7 @@ struct PasscodeFieldView: View {
             }
 
             Text(errorMessage)
-                .subtitle4()
+                .subtitle6()
                 .foregroundColor(.errorMain)
                 .frame(minWidth: 260, minHeight: 40)
                 .background(.errorLighter, in: RoundedRectangle(cornerRadius: 100))
@@ -76,7 +76,7 @@ struct PasscodeFieldView: View {
                     ForEach(1 ..< 4) { column in
                         let value = String(row * 3 + column)
                         InputButton(action: { handleInput(value) }) {
-                            Text(value).subtitle2()
+                            Text(value).subtitle4()
                         }
                         .disabled(!isEnabled)
                     }
@@ -92,7 +92,7 @@ struct PasscodeFieldView: View {
                     Spacer().frame(maxWidth: .infinity)
                 }
                 InputButton(action: { handleInput("0") }) {
-                    Text(String("0")).subtitle2()
+                    Text(String("0")).subtitle4()
                 }
                 .disabled(!isEnabled)
                 InputButton(action: {

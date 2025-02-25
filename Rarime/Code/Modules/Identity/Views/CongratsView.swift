@@ -2,20 +2,20 @@ import SwiftUI
 
 struct CongratsView: View {
     @EnvironmentObject private var userManager: UserManager
-    
+
     var open: Bool
     var isClaimed: Bool
     var onClose: () -> Void
-    
+
     private var title: String {
         if isClaimed {
             return String(localized: "Congrats!")
         }
-        
+
         if userManager.registerZkProof != nil {
             return String(localized: "Congrats!")
         }
-        
+
         return String(localized: "You’ve joined the waitlist")
     }
 
@@ -23,7 +23,7 @@ struct CongratsView: View {
         if isClaimed {
             return String(localized: "You’ve reserved \(PASSPORT_RESERVE_TOKENS.formatted()) RMO tokens")
         }
-        
+
         if userManager.registerZkProof != nil {
             return String(localized: "You successfully registered your identity!")
         }
@@ -52,15 +52,15 @@ struct CongratsView: View {
                             }
                             VStack(spacing: 8) {
                                 Text(title)
-                                    .h6()
+                                    .h4()
                                     .foregroundStyle(.textPrimary)
                                 Text(description)
-                                    .body2()
+                                    .body3()
                                     .multilineTextAlignment(.center)
                                     .foregroundStyle(.textSecondary)
                             }
                             HorizontalDivider()
-                            VStack(spacing: 4) {
+                            VStack(spacing: 8) {
                                 AppButton(variant: .primary, text: isClaimed ? "Thanks!" : "Okay", action: onClose)
                                     .controlSize(.large)
                                 if isClaimed {
@@ -74,8 +74,8 @@ struct CongratsView: View {
                                             Image(Icons.share).iconMedium()
                                             Text("Share Achievements").buttonLarge()
                                         }
-                                        .frame(maxWidth: .infinity, maxHeight: 48.0)
-                                        .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 1000.0))
+                                        .frame(maxWidth: .infinity, maxHeight: 56)
+                                        .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 20))
                                         .foregroundStyle(.textPrimary)
                                     }
                                 }
@@ -97,7 +97,7 @@ struct CongratsView: View {
 #Preview {
     CongratsView(
         open: true,
-        isClaimed: false,
+        isClaimed: true,
         onClose: {}
     )
     .environmentObject(UserManager())

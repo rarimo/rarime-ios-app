@@ -20,10 +20,10 @@ struct LockScreenView: View {
                 VStack(spacing: 0) {
                     VStack(spacing: 12) {
                         Text(banTimeEnd == nil ? "Enter Passcode" : "Account Locked")
-                            .h4()
+                            .h2()
                             .foregroundStyle(.textPrimary)
                         Text(lockedMessage)
-                            .body3()
+                            .body4()
                             .foregroundStyle(.textSecondary)
                             .multilineTextAlignment(.center)
                             .frame(minHeight: 40)

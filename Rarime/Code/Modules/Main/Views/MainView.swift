@@ -9,7 +9,7 @@ struct MainView: View {
     var body: some View {
         ZStack {
             switch viewModel.selectedTab {
-                case .home: HomeView()
+                case .home: IdentityView()
                 case .wallet: WalletView()
                 case .rewards: RewardsView()
                 case .profile: ProfileView()

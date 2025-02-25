@@ -44,10 +44,10 @@ struct SelectPassportDataView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(passport.fullName)
-                        .subtitle3()
+                        .subtitle5()
                         .foregroundStyle(.textPrimary)
                     Text("\(gender), Age: \(passport.ageString)")
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textSecondary)
                 }
                 Spacer()
@@ -61,7 +61,7 @@ struct SelectPassportDataView: View {
             VStack(spacing: 20) {
                 HStack {
                     Text("Identifiers")
-                        .subtitle3()
+                        .subtitle5()
                         .foregroundStyle(.textPrimary)
                     Spacer()
                     RewardChipView(
@@ -81,9 +81,9 @@ struct SelectPassportDataView: View {
 
     private func makeDocumentRow(label: LocalizedStringResource, value: String) -> some View {
         HStack(spacing: 8) {
-            Text(label).body3()
+            Text(label).body4()
             Spacer()
-            Text(value).subtitle4()
+            Text(value).subtitle6()
         }
         .foregroundStyle(.textPrimary)
     }

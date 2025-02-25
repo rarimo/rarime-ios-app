@@ -12,28 +12,28 @@ struct V2HomeView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
-    
+
     @StateObject var viewModel = ViewModel()
 
     @State private var path: V2HomeRoute? = nil
     @State private var isCopied = false
-    
+
     @Namespace var identityAnimation
     @Namespace var inviteFriendsAnimation
     @Namespace var claimTokensAnimation
     @Namespace var walletAnimation
     @Namespace var votingAnimation
-    
+
     var body: some View {
         ZStack {
-            switch(path) {
+            switch path {
             case .notifications:
                 NotificationsView(
                     onBack: { path = nil }
                 )
                 .environment(
                     \.managedObjectContext,
-                     notificationManager.pushNotificationContainer.viewContext
+                    notificationManager.pushNotificationContainer.viewContext
                 )
             case .identity:
                 IdentityIntroView(
@@ -72,7 +72,7 @@ struct V2HomeView: View {
                     onClaim: { path = nil },
                     animation: claimTokensAnimation
                 )
-			case .wallet:
+            case .wallet:
                 WalletWaitlistView(
                     onClose: { path = nil },
                     // TODO: change after design impl
@@ -84,9 +84,9 @@ struct V2HomeView: View {
         }
         .animation(.interpolatingSpring(mass: 1, stiffness: 100, damping: 15), value: path)
     }
-        
+
     private var header: some View {
-        HStack {
+        HStack(alignment: .center, spacing: 8) {
             HStack(alignment: .center, spacing: 10) {
                 Text("Hi")
                     .subtitle4()
@@ -95,6 +95,14 @@ struct V2HomeView: View {
                     .subtitle4()
                     .foregroundStyle(.textPrimary)
             }
+            #if DEVELOPMENT
+                Text(verbatim: "Development")
+                    .caption2()
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 4)
+                    .background(.warningLighter, in: Capsule())
+                    .foregroundStyle(.warningDark)
+            #endif
             Spacer()
             ZStack {
                 AppIconButton(icon: Icons.notification2Line, action: { path = .notifications })
@@ -156,7 +164,7 @@ struct V2HomeView: View {
                                         .resizable()
                                         .scaledToFit()
                                         .padding(.top, 84)
-                                    
+
                                     Image(Icons.getTokensArrow)
                                         .foregroundStyle(.informationalDark)
                                         .offset(x: -44, y: 88)
@@ -187,7 +195,7 @@ struct V2HomeView: View {
                                 .padding(.top, 24)
                                 .onTapGesture {
                                     if isCopied { return }
-                                    
+
                                     isCopied = true
                                     FeedbackGenerator.shared.impact(.medium)
 

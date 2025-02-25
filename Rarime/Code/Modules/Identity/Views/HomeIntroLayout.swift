@@ -27,11 +27,11 @@ struct HomeIntroLayout<Icon: View, Subheader: View, Content: View>: View {
             VStack(spacing: 16) {
                 icon
                 Text(title)
-                    .h6()
+                    .h4()
                     .foregroundStyle(.textPrimary)
                 if let description {
                     Text(description)
-                        .body3()
+                        .body4()
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                         .frame(maxWidth: 300)

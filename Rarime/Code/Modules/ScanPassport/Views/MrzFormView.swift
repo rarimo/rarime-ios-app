@@ -19,7 +19,7 @@ struct MrzFormView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             Text("Please fill these fields")
-                .subtitle4()
+                .subtitle6()
                 .foregroundStyle(.textSecondary)
             VStack(spacing: 16) {
                 AppTextField(
