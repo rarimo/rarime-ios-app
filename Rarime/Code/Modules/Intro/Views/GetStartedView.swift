@@ -8,8 +8,8 @@ struct GetStartedView: View {
     var body: some View {
         VStack(spacing: 32) {
             VStack(spacing: 12) {
-                Text("Get Started").h5().foregroundStyle(.textPrimary)
-                Text("Select an authorization method").body2().foregroundStyle(.textSecondary)
+                Text("Get Started").h3().foregroundStyle(.textPrimary)
+                Text("Select an authorization method").body3().foregroundStyle(.textSecondary)
             }
             VStack(spacing: 16) {
                 GetStartedButton(
@@ -49,7 +49,7 @@ private struct GetStartedButton: View {
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(title).buttonMedium().foregroundStyle(.textPrimary)
-                    Text(text).body4().foregroundStyle(.textSecondary)
+                    Text(text).body5().foregroundStyle(.textSecondary)
                 }
                 Spacer()
             }
