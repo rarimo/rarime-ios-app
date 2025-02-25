@@ -45,7 +45,7 @@ extension View {
                     if let title {
                         VStack(alignment: .leading, spacing: 20) {
                             Text(title)
-                                .h6()
+                                .h4()
                                 .foregroundStyle(.textPrimary)
                                 .padding(.horizontal, 20)
                             HorizontalDivider()

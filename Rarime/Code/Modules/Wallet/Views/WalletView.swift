@@ -44,11 +44,13 @@ struct WalletView: View {
                         token: token,
                         onBack: { path.removeLast() }
                     )
+                    .navigationBarBackButtonHidden()
                 case .send:
                     WalletSendView(
                         token: token,
                         onBack: { path.removeLast() }
                     )
+                    .navigationBarBackButtonHidden()
                 }
             }
         }
@@ -76,11 +78,11 @@ struct WalletView: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: 40) {
             Text("Wallet")
-                .subtitle2()
+                .subtitle4()
                 .foregroundStyle(.textPrimary)
             VStack(spacing: 8) {
                 Text("Total Balance")
-                    .body3()
+                    .body4()
                     .foregroundStyle(.textSecondary)
                 HStack(spacing: 8) {
                     if isBalanceFetching {
@@ -127,14 +129,14 @@ struct WalletView: View {
         CardContainer {
             VStack(alignment: .leading, spacing: 20) {
                 Text("Transactions")
-                    .subtitle3()
+                    .subtitle5()
                     .foregroundStyle(.textPrimary)
                 ForEach(walletManager.transactions) { tx in
                     TransactionItem(tx: tx, token: token)
                 }
                 if walletManager.transactions.isEmpty {
                     Text("No transactions yet")
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textSecondary)
                 }
             }
@@ -212,15 +214,15 @@ private struct TransactionItem: View {
                 .clipShape(Circle())
             VStack(alignment: .leading, spacing: 4) {
                 Text(tx.title)
-                    .subtitle4()
+                    .subtitle6()
                     .foregroundStyle(.textPrimary)
                 Text(DateUtil.richDateFormatter.string(from: tx.date))
-                    .body4()
+                    .body5()
                     .foregroundStyle(.textSecondary)
             }
             Spacer()
             Text("\(balanceModifier)\(tx.amount.formatted()) \(token.rawValue)")
-                .subtitle5()
+                .subtitle7()
                 .foregroundStyle(tx.type == .sent ? .errorMain : .successMain)
         }
     }
@@ -228,7 +230,7 @@ private struct TransactionItem: View {
 
 #Preview {
     WalletView()
-        .environmentObject(MainView.ViewModel())
+        .environmentObject(V2MainView.ViewModel())
         .environmentObject(WalletManager())
         .environmentObject(UserManager())
 }

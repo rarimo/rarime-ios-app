@@ -50,7 +50,7 @@ struct AppTextField<Hint: View, Action: View>: View {
         VStack(alignment: .leading, spacing: 8) {
             if let label {
                 Text(label)
-                    .subtitle4()
+                    .subtitle6()
                     .foregroundStyle(isEnabled ? .textPrimary : .textDisabled)
             }
             HStack(spacing: 8) {
@@ -61,7 +61,7 @@ struct AppTextField<Hint: View, Action: View>: View {
                 .keyboardType(keyboardType)
                 .focused($isFocused)
                 .disabled(!isEnabled)
-                .body3()
+                .body4()
                 .frame(height: 20)
                 .padding(.vertical, controlSize == .large ? 18 : 14)
                 .onTapGesture { isFocused = true }
