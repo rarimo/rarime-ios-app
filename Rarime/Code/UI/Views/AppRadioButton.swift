@@ -20,7 +20,7 @@ struct AppRadioButton<Label: View>: View {
                     )
             }
             .padding(16)
-            .background(.bgContainer, in: RoundedRectangle(cornerRadius: 12))
+            .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 12))
         }
     }
 }
