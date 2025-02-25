@@ -597,16 +597,6 @@
         }
       }
     },
-    "Claim %lld RMO tokens" : {
-      "localizations" : {
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Отримати %lld токени RMO"
-          }
-        }
-      }
-    },
     "Claim amount" : {
 
     },
@@ -615,16 +605,6 @@
     },
     "Claiming tokens results in a downgrade on the leaderboard" : {
 
-    },
-    "Claiming..." : {
-      "localizations" : {
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Отримання..."
-          }
-        }
-      }
     },
     "Close" : {
       "localizations" : {
@@ -2450,6 +2430,7 @@
 
     },
     "Skip" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2624,17 +2605,6 @@
     "The app’s rewards program is invite-only. Get invited by an authorized user or ask a community member for an invite code." : {
 
     },
-    "The beta launch is focused on distributing tokens to Ukrainian citizens" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Мета бета-запуску – роздача токенів громадянам України"
-          }
-        }
-      }
-    },
     "The passport is in the allowlist" : {
 
     },
@@ -2661,27 +2631,6 @@
     },
     "This action is irreversible and will delete all your data." : {
 
-    },
-    "This airdrop is part of a humanitarian effort to help direct funds towards Ukraine." : {
-      "localizations" : {
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Цей Airdrop є частиною гуманітарної допомоги для спрямування коштів до України."
-          }
-        }
-      }
-    },
-    "This airdrop is part of a humanitarian effort to help direct funds towards Ukraine.\n\nIt showcases Rarimo’s identity infrastructure and how it can be used by projects and organizations to directly reach civilians." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Цей Airdrop є частиною гуманітарної допомоги для спрямування коштів до України.\n\nВін демонструє інфраструктуру ідентифікації Rarimo і те, як вона може бути використана проектами та організаціями для безпосереднього залучення громадян."
-          }
-        }
-      }
     },
     "This app is where you privately store your digital identities, enabling you to go incognito across the web." : {
       "localizations" : {
@@ -2986,9 +2935,6 @@
 
     },
     "You’re entitled for %@ RMO" : {
-
-    },
-    "You’ve earned %lld RMO" : {
 
     },
     "You’ve joined the waitlist" : {

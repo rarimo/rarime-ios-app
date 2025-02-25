@@ -46,7 +46,7 @@ struct PassportProofView: View {
                     }
                 }
                 .padding(20)
-                .background(.bgContainer, in: RoundedRectangle(cornerRadius: 24))
+                .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 24))
             }
             .padding(.horizontal, 20)
             Spacer()
@@ -110,7 +110,7 @@ private struct ProcessingItemView: View {
     var body: some View {
         HStack(spacing: 4) {
             Text(item.title)
-                .body3()
+                .body4()
                 .foregroundStyle(.textPrimary)
             Spacer()
             ProcessingChipView(status: status)
@@ -157,10 +157,10 @@ private struct GeneralStatusView: View {
             .clipShape(Circle())
             VStack {
                 Text(title)
-                    .h6()
+                    .h4()
                     .foregroundStyle(.textPrimary)
                 Text(text)
-                    .body3()
+                    .body4()
                     .foregroundStyle(.textSecondary)
                     .multilineTextAlignment(.center)
             }
@@ -180,10 +180,10 @@ private struct RevocationNFCScan: View {
                 .background(.warningLighter, in: Circle())
                 .foregroundStyle(.warningMain)
             Text("Passport is already registered")
-                .h6()
+                .h4()
                 .foregroundStyle(.textPrimary)
             Text("Please, scan your passport one more time to revoke your previous registration")
-                .body3()
+                .body4()
                 .foregroundStyle(.textSecondary)
                 .multilineTextAlignment(.center)
             Spacer()

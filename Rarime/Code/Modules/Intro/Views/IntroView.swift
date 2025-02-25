@@ -25,11 +25,13 @@ struct IntroView: View {
                             onBack: { path.removeLast() },
                             onNext: { withAnimation { onFinish() } }
                         )
+                        .navigationBarBackButtonHidden()
                     case .importIdentity:
                         ImportIdentityView(
                             onNext: { withAnimation { onFinish() } },
                             onBack: { path.removeLast() }
                         )
+                        .navigationBarBackButtonHidden()
                     }
                 }
                 .background(.bgPure)
@@ -38,18 +40,9 @@ struct IntroView: View {
 
     var introContent: some View {
         VStack(alignment: .leading) {
-            introHeader
-            TabView(selection: $currentStep) {
-                ForEach(IntroStep.allCases, id: \.self) { item in
-                    IntroStepView(step: item)
-                        .tag(item.rawValue)
-                }
-            }
-            .tabViewStyle(.page(indexDisplayMode: .never))
-            .animation(.easeInOut, value: currentStep)
+            IntroStepView(step: .welcome)
             Spacer()
             VStack(spacing: 24) {
-                HorizontalDivider()
                 introActions
             }
             .padding(.top, 24)
@@ -58,34 +51,11 @@ struct IntroView: View {
         }
     }
 
-    var introHeader: some View {
-        HStack {
-            Spacer()
-            Button(action: { currentStep = IntroStep.allCases.count - 1 }) {
-                Text("Skip")
-                    .buttonMedium()
-                    .foregroundStyle(.textSecondary)
-            }
-            .opacity(isLastStep ? 0 : 1)
-        }
-        .padding(.top, 20)
-        .padding(.trailing, 24)
-    }
-
     var introActions: some View {
-        HStack {
-            if isLastStep {
-                AppButton(text: "Create Account") {
-                    showSheet = true
-                }
-            } else {
-                StepIndicator(steps: IntroStep.allCases.count, currentStep: currentStep)
-                Spacer()
-                AppButton(text: "Next", rightIcon: Icons.arrowRight, width: nil) {
-                    currentStep += 1
-                }
-            }
+        AppButton(text: "Create Account") {
+            showSheet = true
         }
+        .controlSize(.large)
         .dynamicSheet(isPresented: $showSheet) {
             GetStartedView(
                 onCreate: {

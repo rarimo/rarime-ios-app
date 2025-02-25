@@ -80,7 +80,7 @@ struct RewardsIntroView: View {
                         .overline2()
                         .foregroundStyle(.textSecondary)
                     Text("You must be invited or receive a code from social channels")
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textPrimary)
                 }
                 HStack(spacing: 16) {
@@ -121,17 +121,17 @@ struct RewardsIntroView: View {
             }
             VStack(spacing: 32) {
                 Text("About the reward program")
-                    .subtitle4()
+                    .subtitle6()
                     .foregroundStyle(.textPrimary)
                 Text("RMO tokens will be exclusively distributed via the RariMe app. To claim tokens, create an incognito profile using your biometric passport. Depending on which country issued the passport, you’ll either be able to claim a token right away or be put on a waitlist.\n\nIf you are added to the waitlist it means that you are eligible to claim tokens in the next wave of airdrops. The app will notify you when you are added.\n\nCertain jurisdictions are excluded from the reward program: \(excludedCountriesString)")
-                    .body3()
+                    .body4()
                     .foregroundStyle(.textPrimary)
                 VStack(alignment: .leading, spacing: 12) {
                     Text("HOW CAN I GET THE INVITE CODE?")
                         .overline2()
                         .foregroundStyle(.textSecondary)
                     Text("The app’s rewards program is invite-only. Get invited by an authorized user or ask a community member for an invite code.")
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textPrimary)
                 }
                 Spacer()

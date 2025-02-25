@@ -22,7 +22,7 @@ struct ScanPassportMRZView: View {
             }
             .frame(maxWidth: .infinity)
             Text("Move your passport page inside the border")
-                .body3()
+                .body4()
                 .foregroundStyle(.textSecondary)
                 .multilineTextAlignment(.center)
                 .padding(.top, 24)

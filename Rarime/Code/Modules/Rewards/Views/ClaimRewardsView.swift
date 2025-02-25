@@ -19,10 +19,10 @@ struct ClaimRewardsView: View {
                 }
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Claim RMO")
-                        .subtitle2()
+                        .subtitle4()
                         .foregroundStyle(.textPrimary)
                     Text("From a reserved pool to a wallet")
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textSecondary)
                 }
                 claimCard
@@ -31,7 +31,7 @@ struct ClaimRewardsView: View {
             Spacer()
             VStack(spacing: 8) {
                 Text("Claiming tokens results in a downgrade on the leaderboard")
-                    .body4()
+                    .body5()
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.textSecondary)
                     .frame(maxWidth: 220)
@@ -100,11 +100,11 @@ private struct BalanceRow: View {
                 .frame(width: 40, alignment: .leading)
             VerticalDivider().frame(height: 20)
             Text(label)
-                .body3()
+                .body4()
                 .foregroundStyle(.textPrimary)
             Spacer()
             Text("\(balance.formatted()) RMO")
-                .subtitle5()
+                .subtitle7()
                 .foregroundStyle(.textPrimary)
         }
     }

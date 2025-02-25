@@ -22,7 +22,7 @@ struct ReadPassportNFCView: View {
             LottieView(animation: Animations.scanPassport)
                 .frame(width: .infinity, height: 300)
             Text("Place your passport cover to the back of your phone")
-                .body3()
+                .body4()
                 .foregroundStyle(.textSecondary)
                 .multilineTextAlignment(.center)
                 .frame(width: 250)

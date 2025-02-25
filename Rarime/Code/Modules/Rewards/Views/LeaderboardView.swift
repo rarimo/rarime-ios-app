@@ -15,7 +15,7 @@ struct LeaderboardView: View {
     var body: some View {
         VStack(spacing: 0) {
             Text("Leaderboard")
-                .subtitle4()
+                .subtitle6()
                 .foregroundStyle(.textPrimary)
             Text("\(totalParticipants.formatted()) participants")
                 .caption3()
@@ -69,7 +69,7 @@ private struct TopLeaderView: View {
                 }
                 HStack(spacing: 4) {
                     Text(balance.amount.formatted())
-                        .subtitle5()
+                        .subtitle7()
                     Image(Icons.rarimo)
                         .iconSmall()
                 }
@@ -87,7 +87,7 @@ private struct TopLeaderView: View {
                 )
             )
             Text("\(balance.rank)")
-                .subtitle4()
+                .subtitle6()
                 .frame(width: 32, height: 32)
                 .background(.bgPure, in: Circle())
                 .foregroundStyle(.textPrimary)
@@ -190,13 +190,13 @@ private struct BalanceItem: View {
     var body: some View {
         HStack(spacing: 32) {
             Text("\(balance.rank)")
-                .subtitle4()
+                .subtitle6()
                 .foregroundStyle(.textPrimary)
                 .frame(width: 32, height: 32)
                 .overlay(Circle().stroke(.bgComponentPrimary, lineWidth: 1))
             HStack(spacing: 16) {
                 Text(formatBalanceId(balance.id ?? ""))
-                    .subtitle4()
+                    .subtitle6()
                     .foregroundStyle(.textPrimary)
                 if isMyBalance {
                     Text("YOU")
@@ -209,7 +209,7 @@ private struct BalanceItem: View {
             }
             Spacer()
             HStack(spacing: 4) {
-                Text(balance.amount.formatted()).subtitle5()
+                Text(balance.amount.formatted()).subtitle7()
                 Image(Icons.rarimo).iconSmall()
             }
             .foregroundStyle(.textPrimary)

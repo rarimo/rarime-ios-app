@@ -95,7 +95,7 @@ struct ReserveTokensView: View {
                             .clipShape(Circle())
                             .overlay(Circle().stroke(.bgPrimary, lineWidth: 2))
                         Text(passportCountry.flag)
-                            .h4()
+                            .h2()
                             .frame(width: 72, height: 72)
                             .background(.bgPure)
                             .clipShape(Circle())
@@ -103,10 +103,10 @@ struct ReserveTokensView: View {
                     }
                     VStack(spacing: 12) {
                         Text("Reserve \(PASSPORT_RESERVE_TOKENS.formatted()) RMO tokens")
-                            .h6()
+                            .h4()
                             .foregroundStyle(.textPrimary)
                         Text("The passport is in the allowlist")
-                            .body3()
+                            .body4()
                             .foregroundStyle(.textSecondary)
                             .multilineTextAlignment(.center)
                     }
@@ -150,7 +150,7 @@ struct ReserveTokensView: View {
             .controlSize(.large)
             if isAlreadyReserved {
                 Text("You have already reserved tokens")
-                    .body3()
+                    .body4()
                     .foregroundStyle(.red)
                     .opacity(0.8)
             }

@@ -28,21 +28,21 @@ struct WaitlistPassportView: View {
             title: String(localized: "Waitlist passport"),
             description: country.name,
             icon: Text(country.flag)
-                .h4()
+                .h2()
                 .frame(width: 72, height: 72)
                 .background(.bgComponentPrimary, in: Circle())
                 .foregroundStyle(.textPrimary)
         ) {
             VStack(alignment: .leading, spacing: 24) {
                 Text("Become an ambassador")
-                    .subtitle2()
+                    .subtitle4()
                 Text("If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards")
-                    .body3()
+                    .body4()
                     .fixedSize(horizontal: false, vertical: true)
                 HStack(alignment: .top, spacing: 12) {
                     AppCheckbox(checked: $isChecked)
                     Text("By checking this box, you are agreeing to share the data groups of the passport and the government signature")
-                        .body4()
+                        .body5()
                         .fixedSize(horizontal: false, vertical: true)
                         .foregroundStyle(.textSecondary)
                 }
@@ -148,10 +148,10 @@ struct WaitlistPassportView: View {
                     .background(.bgComponentPrimary, in: Circle())
                     .foregroundStyle(.textPrimary)
                 Text("Save your passport data")
-                    .h6()
+                    .h4()
                     .foregroundStyle(.textPrimary)
                 Text("Your passport data will be saved on your device. You can share it with us to expedite the support of your passport.")
-                    .body3()
+                    .body4()
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: 320)
@@ -162,14 +162,14 @@ struct WaitlistPassportView: View {
                         .overline2()
                         .foregroundStyle(.textSecondary)
                     Text("1. Save passport data on your device")
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textPrimary)
                     Text("2. Send the saved file to the email address below")
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textPrimary)
                     HStack(spacing: 8) {
                         Text(ConfigManager.shared.feedback.feedbackEmail)
-                            .body2()
+                            .body3()
                             .foregroundStyle(.textPrimary)
                         Image(isCopied ? Icons.check : Icons.copySimple).iconMedium()
                     }
@@ -190,7 +190,7 @@ struct WaitlistPassportView: View {
                     .foregroundStyle(.textPrimary)
                     .cornerRadius(8)
                     Text("3. When we support your country, you will be notified in the app")
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textPrimary)
                 }
                 .frame(maxWidth: .infinity)

@@ -15,16 +15,16 @@ enum Images {
     static let gears = "Gears"
 
     static let passportTutorialThumbnail = "PassportTutorialThumbnail"
-    
+
     static let handWithPhone = "HandWithPhone"
     static let peopleEmojis = "PeopleEmojis"
     static let rarimoTokens = "RarimoTokens"
     static let seedPhraseShred = "SeedPhraseShred"
     static let dotCountry = "DotCountry"
 
-    // TODO: remove when actual images are used
-    static let rewardsTest1 = "RewardsTest1"
-    static let rewardsTest2 = "RewardsTest2"
-    
     static let passportFrame = "PassportFrame"
+
+    static let blackAndWhiteIcon = "BlackAndWhiteIcon"
+    static let blackAndGreenIcon = "BlackAndGreenIcon"
+    static let greenAndBlackIcon = "GreenAndBlackIcon"
 }

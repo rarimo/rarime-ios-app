@@ -2,13 +2,13 @@ import SwiftUI
 
 struct NotificationView: View {
     let notification: PushNotification
-    
+
     var body: some View {
         VStack {
             if notification.isRead {
                 HStack {
                     Text(notification.title ?? "")
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textPrimary)
                     Spacer()
                     Text(notification.receivedAt?.formatted(date: .abbreviated, time: .omitted) ?? "")
@@ -16,13 +16,13 @@ struct NotificationView: View {
                         .foregroundStyle(.textSecondary)
                 }
                 Text(notification.body ?? "")
-                    .body4()
+                    .body5()
                     .foregroundStyle(.textSecondary)
                     .align()
             } else {
                 HStack {
                     Text(notification.title ?? "")
-                        .subtitle4()
+                        .subtitle6()
                         .foregroundStyle(.textPrimary)
                     Spacer()
                     HStack {
@@ -35,7 +35,7 @@ struct NotificationView: View {
                     }
                 }
                 Text(notification.body ?? "")
-                    .subtitle5()
+                    .subtitle7()
                     .foregroundStyle(.textSecondary)
                     .align()
             }
@@ -51,6 +51,6 @@ struct NotificationView: View {
     pushNotification.body = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text"
     pushNotification.receivedAt = Date()
     pushNotification.isRead = false
-    
+
     return NotificationView(notification: pushNotification)
 }

@@ -14,7 +14,7 @@ struct CreateIdentityIntroView: View {
                 icon: Image(Images.rewardCoin).square(110)
             ) {
                 Text("Identity creation happens via a scan of your biometric passport.\n\nYour data never leaves the device or is shared with any third party. Proof of citizenship is generated locally using Zero-Knowledge technology.")
-                    .body3()
+                    .body4()
                     .foregroundStyle(.textPrimary)
                 InfoAlert(text: "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport") {}
             }

@@ -32,7 +32,7 @@ private struct AppIconItem: View {
     var body: some View {
         AppRadioButton(isSelected: isSelected, onSelect: onSelect) {
             HStack(spacing: 16) {
-                Image(uiImage: UIImage(named: icon.rawValue) ?? UIImage())
+                Image(icon.image)
                     .square(40)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)

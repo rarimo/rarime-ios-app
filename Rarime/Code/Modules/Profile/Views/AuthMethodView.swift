@@ -45,13 +45,13 @@ private struct AuthMethodItem: View {
                 .background(.bgComponentPrimary, in: Circle())
                 .foregroundStyle(.textPrimary)
             Text(label)
-                .subtitle4()
+                .subtitle6()
                 .foregroundStyle(.textPrimary)
             Spacer()
             AppToggle(isOn: $isOn)
         }
         .padding(16)
-        .background(.bgPure, in: RoundedRectangle(cornerRadius: 12))
+        .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 12))
     }
 }
 

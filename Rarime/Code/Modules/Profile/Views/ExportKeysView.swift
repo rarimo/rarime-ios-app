@@ -15,7 +15,7 @@ struct ExportKeysView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     if let user = userManager.user {
                         Text(user.secretKey.hex)
-                            .body3()
+                            .body4()
                             .foregroundStyle(.textPrimary)
                             .multilineTextAlignment(.leading)
                             .padding(.horizontal, 16)

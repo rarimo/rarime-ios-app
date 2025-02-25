@@ -14,7 +14,7 @@ struct ScanPassportLayoutView<Content: View>: View {
             VStack(alignment: .leading, spacing: 24) {
                 HStack {
                     Text("Step \(step)/\(TOTAL_STEPS)")
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textSecondary)
                     Spacer()
                     Button(action: onClose) {
@@ -25,10 +25,10 @@ struct ScanPassportLayoutView<Content: View>: View {
                 }
                 VStack(alignment: .leading, spacing: 8) {
                     Text(title)
-                        .subtitle2()
+                        .subtitle4()
                         .foregroundStyle(.textPrimary)
                     Text(text)
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textSecondary)
                 }
             }

@@ -20,14 +20,14 @@ struct NotificationsView: View {
                         .foregroundColor(.textPrimary)
                 }
                 Text("Notifications")
-                    .subtitle4()
+                    .subtitle6()
                     .foregroundStyle(.textPrimary)
                     .frame(maxWidth: .infinity)
             }
             if pushNotifications.isEmpty {
                 Spacer()
                 Text("No notifications")
-                    .body3()
+                    .body4()
                     .foregroundStyle(.textSecondary)
                 Spacer()
             } else {

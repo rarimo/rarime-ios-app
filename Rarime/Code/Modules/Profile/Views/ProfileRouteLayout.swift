@@ -15,7 +15,7 @@ struct ProfileRouteLayout<Content: View>: View {
                         .foregroundColor(.textPrimary)
                 }
                 Text(title)
-                    .subtitle4()
+                    .subtitle6()
                     .foregroundColor(.textPrimary)
                     .frame(maxWidth: .infinity)
             }

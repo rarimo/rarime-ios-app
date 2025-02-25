@@ -30,14 +30,19 @@ struct ProfileView: View {
                 switch route {
                 case .authMethod:
                     AuthMethodView(onBack: { path.removeLast() })
+                        .navigationBarBackButtonHidden()
                 case .exportKeys:
                     ExportKeysView(onBack: { path.removeLast() })
+                        .navigationBarBackButtonHidden()
                 case .language:
                     LanguageView(onBack: { path.removeLast() })
+                        .navigationBarBackButtonHidden()
                 case .theme:
                     ThemeView(onBack: { path.removeLast() })
+                        .navigationBarBackButtonHidden()
                 case .appIcon:
                     AppIconView(onBack: { path.removeLast() })
+                        .navigationBarBackButtonHidden()
                 }
             }
         }
@@ -47,7 +52,7 @@ struct ProfileView: View {
         V2MainViewLayout {
             VStack(alignment: .leading, spacing: 20) {
                 Text("Profile")
-                    .subtitle2()
+                    .subtitle4()
                     .padding(.horizontal, 8)
                 VStack(spacing: 12) {
                     ScrollView(showsIndicators: false) {
@@ -55,10 +60,10 @@ struct ProfileView: View {
                             HStack {
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text("Account")
-                                        .subtitle3()
+                                        .buttonLarge()
                                         .foregroundStyle(.textPrimary)
                                     Text("Address: \(RarimoUtils.formatAddress(userManager.userAddress))")
-                                        .body4()
+                                        .body5()
                                         .foregroundStyle(.textSecondary)
                                 }
                                 Spacer()
@@ -141,7 +146,7 @@ struct ProfileView: View {
                                         .padding(6)
                                         .background(.errorLighter, in: Circle())
                                     Text("Delete Account")
-                                        .subtitle4()
+                                        .buttonMedium()
                                     Spacer()
                                 }
                             }
@@ -149,8 +154,8 @@ struct ProfileView: View {
                             .foregroundStyle(.errorMain)
                         }
                         Text("App version: \(configManager.general.version)")
-                            .body4()
-                            .foregroundStyle(.textDisabled)
+                            .body5()
+                            .foregroundStyle(.textPlaceholder)
                             .padding(.bottom, 20)
                     }
                 }
@@ -202,16 +207,16 @@ private struct ProfileRow: View {
                     .background(.bgComponentPrimary, in: Circle())
                     .foregroundStyle(.textPrimary)
                 Text(title)
-                    .subtitle4()
+                    .buttonMedium()
                     .foregroundStyle(.textPrimary)
                 Spacer()
                 if let value {
                     Text(value)
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textSecondary)
                 }
                 Image(Icons.caretRight)
-                    .iconSmall()
+                    .iconMedium()
                     .foregroundStyle(.textSecondary)
             }
         }
@@ -223,7 +228,7 @@ private struct ProfileRow: View {
 
     return ProfileView()
         .environmentObject(AppView.ViewModel())
-        .environmentObject(MainView.ViewModel())
+        .environmentObject(V2MainView.ViewModel())
         .environmentObject(ConfigManager())
         .environmentObject(SettingsManager())
         .environmentObject(PassportManager())

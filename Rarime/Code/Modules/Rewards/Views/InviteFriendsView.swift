@@ -20,7 +20,7 @@ struct InviteFriendsView: View {
                     }
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Invite Friends")
-                            .h4()
+                            .h2()
                             .foregroundStyle(.textPrimary)
                     }
                 }
@@ -38,7 +38,7 @@ struct InviteFriendsView: View {
             VStack(alignment: .leading, spacing: 4) {
                 if let codes = balance.referralCodes {
                     Text("Invited \(codes.filter { $0.status != .active }.count)/\(codes.count)")
-                        .subtitle3()
+                        .subtitle5()
                         .foregroundStyle(.textPrimary)
                 }
             }
@@ -94,13 +94,13 @@ private struct InviteCodeView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(code)
-                        .subtitle4()
+                        .subtitle6()
                         .foregroundStyle(.textPrimary)
                     Text(invitationLink.dropFirst(8))
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textSecondary)
                     Text("Active")
-                        .body4()
+                        .body5()
                         .foregroundStyle(.successDark)
                 }
                 Spacer()
@@ -120,15 +120,15 @@ private struct InviteCodeView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(code)
                         .strikethrough()
-                        .subtitle4()
+                        .subtitle6()
                         .foregroundStyle(.textSecondary)
                     HStack(spacing: 4) {
-                        Text("Used").body4()
+                        Text("Used").body5()
                         Circle()
                             .fill(.bgComponentHovered)
                             .frame(width: 4)
                         Text(usedStatusText)
-                            .body4()
+                            .body5()
                     }
                     .foregroundStyle(.textSecondary)
                 }

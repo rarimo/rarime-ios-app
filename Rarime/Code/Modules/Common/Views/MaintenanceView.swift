@@ -9,14 +9,14 @@ struct MaintenanceView: View {
                 .frame(height: 136)
             VStack(spacing: 24) {
                 Text("Maintenance in progress")
-                    .subtitle1()
+                    .subtitle3()
                     .foregroundStyle(.textPrimary)
                 Text("We're upgrading for a better experience. Back soon!")
-                    .body3()
-                    .multilineTextAlignment(.center)
+                    .body4()
                     .foregroundStyle(.textSecondary)
             }
             .frame(width: 300)
+            .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.bgPure)
@@ -26,4 +26,3 @@ struct MaintenanceView: View {
 #Preview {
     MaintenanceView()
 }
-
