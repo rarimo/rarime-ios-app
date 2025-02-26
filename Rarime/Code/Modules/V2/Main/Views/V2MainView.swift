@@ -12,15 +12,17 @@ struct V2MainView: View {
             switch viewModel.selectedTab {
                 case .home: V2HomeView()
                 case .passport: HomeView()
-                case .scanQr: ScanQRView(
-                    // TODO: change routign after design impl
-                    onBack: { viewModel.selectedTab = .home },
-                    onScan: processQrCode
-                )
+                case .scanQr: EmptyView()
                 case .wallet: WalletView()
                 case .profile: ProfileView()
             }
-            ExternalRequestsView()
+            V2ExternalRequestsView()
+        }
+        .sheet(isPresented: $viewModel.isQrCodeScanSheetShown) {
+            ScanQRView(
+                onBack: { viewModel.isQrCodeScanSheetShown = false },
+                onScan: processQrCode
+            )
         }
         .environmentObject(viewModel)
         .onAppear(perform: checkNotificationPermission)
@@ -42,7 +44,7 @@ struct V2MainView: View {
         }
 
         externalRequestsManager.handleRarimeUrl(qrCodeUrl)
-        viewModel.selectedTab = .home
+        viewModel.isQrCodeScanSheetShown = false
     }
 }
 

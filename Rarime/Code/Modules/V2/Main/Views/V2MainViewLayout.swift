@@ -8,7 +8,10 @@ struct V2MainViewLayout<Content: View>: View {
         content
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .safeAreaInset(edge: .bottom, spacing: 0, content: {
-                V2NavBarView(selectedTab: $mainViewModel.selectedTab)
+                V2NavBarView(
+                    selectedTab: $mainViewModel.selectedTab,
+                    isQrCodeScanSheetShown: $mainViewModel.isQrCodeScanSheetShown
+                )
             })
     }
 }

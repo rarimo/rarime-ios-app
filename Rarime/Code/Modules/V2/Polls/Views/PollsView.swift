@@ -17,14 +17,15 @@ private enum PollsTab: CaseIterable, NavTab {
 
 struct PollsView: View {
     @Environment(\.openURL) var openURL
+    @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
+    @EnvironmentObject var mainViewModel: V2MainView.ViewModel
+    
     @StateObject private var pollsViewModel = PollsViewModel()
     
     let onClose: () -> Void
 
     var animation: Namespace.ID
     
-    @State private var isQrCodeScanSheetShown = false
-    @State private var isPollSheetShown = false
     @State private var currentTab = PollsTab.active
     @State private var isPollsLoading = true
     @State private var earlyPullTask: Task<Void, Never>? = nil
@@ -69,7 +70,7 @@ struct PollsView: View {
                                 openURL(url)
                             })
                                 .controlSize(.large)
-                            AppButton(variant: .tertiary, text: "Scan a QR", action: { isQrCodeScanSheetShown = true })
+                            AppButton(variant: .tertiary, text: "Scan a QR", action: { mainViewModel.isQrCodeScanSheetShown = true })
                                 .controlSize(.large)
                         }
                         HorizontalDivider(color: .bgComponentBasePrimary)
@@ -115,14 +116,8 @@ struct PollsView: View {
                 .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
                 .ignoresSafeArea()
         )
-        .sheet(isPresented: $isQrCodeScanSheetShown) {
-            ScanQRView(onBack: { isQrCodeScanSheetShown = false }) { result in
-                isQrCodeScanSheetShown = false
-                isPollSheetShown = true
-            }
-        }
-        .sheet(isPresented: $isPollSheetShown) {
-            PollView(onClose: { isPollSheetShown = false })
+        .sheet(item: $pollsViewModel.selectedPoll) { poll in
+            PollView(poll: poll, onClose: { pollsViewModel.selectedPoll = nil })
         }
         .environmentObject(pollsViewModel)
         .onAppear {
@@ -145,7 +140,6 @@ struct PollsView: View {
             ForEach(polls) { poll in
                 PollListCard(poll: poll, onViewPoll: {
                     pollsViewModel.selectedPoll = poll
-                    isPollSheetShown = true
                 })
             }
         }

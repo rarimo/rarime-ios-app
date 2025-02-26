@@ -3,8 +3,8 @@ import SwiftUI
 struct PollView: View {
     @EnvironmentObject var pollsViewModel: PollsViewModel
     
-    private var poll: Poll { pollsViewModel.selectedPoll! }
-    
+    let poll: Poll
+
     let onClose: () -> Void
     
     @State private var isSubmitting = false
@@ -49,7 +49,7 @@ struct PollView: View {
                 HorizontalDivider()
                 VStack(alignment: .leading, spacing: 16) {
                     if poll.status == .started || poll.status == .waiting {
-                        ActivePollOptionsView(poll: poll, onSubmit: onSubmitVote)
+                        ActivePollOptionsView(poll: poll, onSubmit: { _ in })
                     } else {
                         ClosedPollResultsView(poll: poll)
                     }
@@ -58,12 +58,10 @@ struct PollView: View {
         }
         .padding([.top, .horizontal], 20)
     }
-    
-    private func onSubmitVote(_ results: [PollResult]) {}
 }
 
 #Preview {
-    PollView(onClose: {})
+    PollView(poll: ACTIVE_POLLS[0], onClose: {})
         .environmentObject(PollsViewModel(poll: ACTIVE_POLLS[0]))
 }
 

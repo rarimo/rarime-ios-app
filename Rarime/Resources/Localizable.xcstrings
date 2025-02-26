@@ -1957,6 +1957,7 @@
 
     },
     "Place QR code within the frame to scan" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2032,6 +2033,9 @@
 
     },
     "Portugal" : {
+
+    },
+    "Position the QR code in the middle of the scanner" : {
 
     },
     "Pre-elections polls" : {
@@ -2390,6 +2394,7 @@
 
     },
     "Scan QR" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {

@@ -1,4 +1,5 @@
 import Foundation
+import Web3
 
 enum RarimeUrlHosts: String {
     case external
@@ -7,11 +8,13 @@ enum RarimeUrlHosts: String {
 enum ExternalRequestTypes: String, Codable {
     case proofRequest = "proof-request"
     case lightVerification = "light-verification"
+    case voting = "voting"
 }
 
 enum ExternalRequests: Equatable {
     case proofRequest(proofParamsUrl: URL, urlQueryParams: [URLQueryItem])
     case lightVerification(verificationParamsUrl: URL, urlQueryParams: [URLQueryItem])
+    case voting(proposalId: BigUInt)
 }
 
 class ExternalRequestsManager: ObservableObject {
@@ -49,6 +52,8 @@ class ExternalRequestsManager: ObservableObject {
             handleProofRequest(params: params)
         case ExternalRequestTypes.lightVerification.rawValue:
             handleLightVerificationRequest(params: params)
+        case ExternalRequestTypes.voting.rawValue:
+            handleVotingRequest(params: params)
         default:
             LoggerUtil.common.error("Invalid external request type: \(type, privacy: .public)")
         }
@@ -82,6 +87,18 @@ class ExternalRequestsManager: ObservableObject {
         }
 
         setRequest(.lightVerification(verificationParamsUrl: proofParamsUrl, urlQueryParams: params))
+    }
+    
+    private func handleVotingRequest(params: [URLQueryItem]) {
+        guard let rawProposalId = params.first(where: { $0.name == "proposal_id" })?.value?.removingPercentEncoding,
+              let proposalId = BigUInt(rawProposalId)
+        else {
+            LoggerUtil.common.error("Invalid voting ID: \(params, privacy: .public)")
+            AlertManager.shared.emitError(.unknown("Invalid voting ID"))
+            return
+        }
+
+        setRequest(.voting(proposalId: proposalId))
     }
 
     func setRequest(_ request: ExternalRequests) {

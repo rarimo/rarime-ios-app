@@ -86,6 +86,19 @@ class User {
         
         return true
     }
+    
+    func getNullifier(_ eventId: Data) throws -> Data {
+        var error: NSError? = nil
+        let nullifier = profile.calculateEventNullifierHex(
+            eventId.fullHex,
+            error: &error
+        )
+        if let error {
+            throw error
+        }
+        
+        return Data(hex: nullifier)
+    }
 }
 
 extension User {
