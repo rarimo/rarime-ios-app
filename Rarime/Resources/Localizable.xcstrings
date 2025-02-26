@@ -119,6 +119,16 @@
     "%lld extra referrals" : {
 
     },
+    "%lld. %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld. %2$@"
+          }
+        }
+      }
+    },
     "%lldm %llds" : {
       "localizations" : {
         "en" : {
@@ -128,6 +138,21 @@
           }
         }
       }
+    },
+    "%llu days" : {
+
+    },
+    "%lluh" : {
+
+    },
+    "%llum" : {
+
+    },
+    "%llus" : {
+
+    },
+    "1 day" : {
+
     },
     "1. Save passport data on your device" : {
 
@@ -244,6 +269,9 @@
 
     },
     "An error has occured, please try again" : {
+
+    },
+    "An identification and privacy solution that revolutionizes polling, surveying and election processes" : {
 
     },
     "An Unforgettable" : {
@@ -1110,10 +1138,16 @@
         }
       }
     },
+    "Finished" : {
+
+    },
     "Finland" : {
 
     },
     "France" : {
+
+    },
+    "Freedomtool" : {
 
     },
     "French Guiana" : {
@@ -1241,6 +1275,9 @@
 
     },
     "Hi" : {
+
+    },
+    "History" : {
 
     },
     "Hold your iPhone near an NFC enabled passport." : {
@@ -1997,6 +2034,9 @@
     "Portugal" : {
 
     },
+    "Pre-elections polls" : {
+
+    },
     "Privacy Policy" : {
       "localizations" : {
         "uk" : {
@@ -2343,6 +2383,9 @@
         }
       }
     },
+    "Scan a QR" : {
+
+    },
     "Scan passport" : {
 
     },
@@ -2376,6 +2419,9 @@
 
     },
     "Select an authorization method" : {
+
+    },
+    "Select answer" : {
 
     },
     "Send" : {
@@ -2477,6 +2523,9 @@
     "Something went wrong" : {
 
     },
+    "Soon" : {
+
+    },
     "Sorry, there was a problem reading the passport. %@. Error codes: [0x%u, 0x%u]" : {
       "localizations" : {
         "en" : {
@@ -2554,6 +2603,9 @@
           }
         }
       }
+    },
+    "Submit" : {
+
     },
     "Success" : {
 
@@ -2838,10 +2890,16 @@
     "Vietnam" : {
 
     },
+    "View" : {
+
+    },
     "Virgin Islands, British" : {
 
     },
     "Virgin Islands, U.S." : {
+
+    },
+    "Voting" : {
 
     },
     "Waitlist country" : {
@@ -3066,6 +3124,9 @@
           }
         }
       }
+    },
+    "Your vote counts, and you will be rewarded for every participation" : {
+
     },
     "Zambia" : {
 

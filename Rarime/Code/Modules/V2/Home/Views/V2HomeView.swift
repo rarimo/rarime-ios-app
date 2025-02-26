@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum V2HomeRoute: Hashable {
-    case notifications, identity, inviteFriends, claimTokens, wallet
+    case notifications, identity, inviteFriends, claimTokens, wallet, polls
 }
 
 struct V2HomeView: View {
@@ -13,7 +13,7 @@ struct V2HomeView: View {
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
     
-    @StateObject var viewModel = ViewModel()
+    @StateObject var viewModel = HomeViewModel()
 
     @State private var path: V2HomeRoute? = nil
     @State private var isCopied = false
@@ -22,7 +22,7 @@ struct V2HomeView: View {
     @Namespace var inviteFriendsAnimation
     @Namespace var claimTokensAnimation
     @Namespace var walletAnimation
-    @Namespace var votingAnimation
+    @Namespace var pollsAnimation
     
     var body: some View {
         ZStack {
@@ -79,6 +79,11 @@ struct V2HomeView: View {
                     onJoin: { path = nil },
                     animation: walletAnimation
                 )
+            case .polls:
+                PollsView(
+                    onClose: { path = nil },
+                    animation: pollsAnimation
+                )
             default: content
             }
         }
@@ -120,7 +125,7 @@ struct V2HomeView: View {
             VStack(spacing: 0) {
                 header
                 ZStack(alignment: .trailing) {
-                    SnapCarouselView(index: $viewModel.currentIndex) {
+                    SnapCarouselView(index: $viewModel.currentCardIndex) {
                         HomeCardView(
                             backgroundGradient: Gradients.gradientFirst,
                             topIcon: Icons.rarime,
@@ -250,11 +255,14 @@ struct V2HomeView: View {
                             title: "Freedomtool",
                             subtitle: "Voting",
                             bottomAdditionalContent: { EmptyView() },
-                            animation: votingAnimation
+                            animation: pollsAnimation
                         )
+                        .onTapGesture {
+                            path = .polls
+                        }
                     }
                     .padding(.horizontal, 22)
-                    V2StepIndicator(steps: 5, currentStep: viewModel.currentIndex)
+                    V2StepIndicator(steps: 5, currentStep: viewModel.currentCardIndex)
                         .padding(.trailing, 8)
                 }
             }

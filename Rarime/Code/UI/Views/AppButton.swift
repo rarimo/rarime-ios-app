@@ -22,14 +22,22 @@ private let primaryColors = ButtonColors(
 )
 
 private let secondaryColors = ButtonColors(
+    background: .bgComponentPrimary,
+    backgroundPressed: .bgComponentPrimary,
+    backgroundDisabled: .bgComponentPrimary,
+    foreground: .textPrimary,
+    foregroundDisabled: .textDisabled
+)
+
+private let tertiaryColors = ButtonColors(
     background: .bgComponentBasePrimary,
     backgroundPressed: .bgComponentBasePressed,
     backgroundDisabled: .bgComponentBaseDisabled,
     foreground: .baseBlack,
-    foregroundDisabled: .baseBlack.opacity(0.28)
+    foregroundDisabled: .baseBlack.opacity(0.5)
 )
 
-private let tertiaryColors = ButtonColors(
+private let quaternaryColors = ButtonColors(
     background: .clear,
     backgroundPressed: .bgComponentPressed,
     backgroundDisabled: .bgComponentDisabled,
@@ -81,7 +89,7 @@ struct AppButton: View {
         switch controlSize {
         case .small: 32
         case .large: 56
-        default: 40
+        default: 48
         }
     }
 

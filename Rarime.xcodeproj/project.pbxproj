@@ -158,6 +158,8 @@
 		C75512942C870AFD000258AD /* StepIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75512932C870AFD000258AD /* StepIndicator.swift */; };
 		C75512962C87617B000258AD /* RemoveCase.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C75512952C87617B000258AD /* RemoveCase.mp4 */; };
 		C75529F62D64DC7100C8B2F4 /* ViewArrayBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75529F52D64DC6900C8B2F4 /* ViewArrayBuilder.swift */; };
+		C755353C2D6F154200A562B5 /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755353B2D6F154000A562B5 /* Poll.swift */; };
+		C755353F2D6F196C00A562B5 /* ChildOffsetReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755353E2D6F196700A562B5 /* ChildOffsetReader.swift */; };
 		C772EE322D5E1AF000F2AAA3 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C772EE312D5E1AF000F2AAA3 /* Identity.xcframework */; };
 		C7780C842D632A2E0050B5BB /* IdentityIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C832D632A210050B5BB /* IdentityIntroView.swift */; };
 		C7780C962D634D8C0050B5BB /* V2ClaimTokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C952D634D830050B5BB /* V2ClaimTokensView.swift */; };
@@ -169,6 +171,15 @@
 		C7B57B642D650FB1001E86C4 /* AnimationNamespaceIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B57B632D650FA5001E86C4 /* AnimationNamespaceIds.swift */; };
 		C7B57B6B2D65D58C001E86C4 /* V2HomeView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B57B6A2D65D585001E86C4 /* V2HomeView+ViewModel.swift */; };
 		C7CE31D52C8B1CBD00EE6D2E /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */; };
+		C7D6244B2D6DB324007BA5A6 /* PollsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D6244A2D6DB320007BA5A6 /* PollsView.swift */; };
+		C7D6244D2D6DB32C007BA5A6 /* PollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D6244C2D6DB329007BA5A6 /* PollView.swift */; };
+		C7D6244F2D6DB337007BA5A6 /* PollsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D6244E2D6DB332007BA5A6 /* PollsViewModel.swift */; };
+		C7D624512D6DB351007BA5A6 /* PollsMockedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D624502D6DB34A007BA5A6 /* PollsMockedData.swift */; };
+		C7D624542D6DB4C6007BA5A6 /* ProposalsStateContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D624522D6DB4C0007BA5A6 /* ProposalsStateContract.swift */; };
+		C7D624572D6DB4E2007BA5A6 /* Multicall3Contract.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D624562D6DB4DD007BA5A6 /* Multicall3Contract.swift */; };
+		C7D6245A2D6DB9DB007BA5A6 /* GlassBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D624592D6DB9D0007BA5A6 /* GlassBottomSheet.swift */; };
+		C7D624612D6E1070007BA5A6 /* ActivePollOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D624602D6E1068007BA5A6 /* ActivePollOptionsView.swift */; };
+		C7D624632D6E1103007BA5A6 /* ClosedPollResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D624622D6E10FA007BA5A6 /* ClosedPollResultsView.swift */; };
 		C7DF8BD22D5F431200C8E2D2 /* MaintenanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF8BD12D5F430300C8E2D2 /* MaintenanceView.swift */; };
 		C7DF8BEA2D5F686200C8E2D2 /* V2HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF8BDF2D5F686200C8E2D2 /* V2HomeView.swift */; };
 		C7DF8BEB2D5F686200C8E2D2 /* V2NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF8BE62D5F686200C8E2D2 /* V2NavBarView.swift */; };
@@ -542,6 +553,8 @@
 		C75512932C870AFD000258AD /* StepIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepIndicator.swift; sourceTree = "<group>"; };
 		C75512952C87617B000258AD /* RemoveCase.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = RemoveCase.mp4; sourceTree = "<group>"; };
 		C75529F52D64DC6900C8B2F4 /* ViewArrayBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewArrayBuilder.swift; sourceTree = "<group>"; };
+		C755353B2D6F154000A562B5 /* Poll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Poll.swift; sourceTree = "<group>"; };
+		C755353E2D6F196700A562B5 /* ChildOffsetReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildOffsetReader.swift; sourceTree = "<group>"; };
 		C772EE312D5E1AF000F2AAA3 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		C7780C832D632A210050B5BB /* IdentityIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityIntroView.swift; sourceTree = "<group>"; };
 		C7780C952D634D830050B5BB /* V2ClaimTokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2ClaimTokensView.swift; sourceTree = "<group>"; };
@@ -552,6 +565,15 @@
 		C7B57B632D650FA5001E86C4 /* AnimationNamespaceIds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationNamespaceIds.swift; sourceTree = "<group>"; };
 		C7B57B6A2D65D585001E86C4 /* V2HomeView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "V2HomeView+ViewModel.swift"; sourceTree = "<group>"; };
 		C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
+		C7D6244A2D6DB320007BA5A6 /* PollsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollsView.swift; sourceTree = "<group>"; };
+		C7D6244C2D6DB329007BA5A6 /* PollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollView.swift; sourceTree = "<group>"; };
+		C7D6244E2D6DB332007BA5A6 /* PollsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollsViewModel.swift; sourceTree = "<group>"; };
+		C7D624502D6DB34A007BA5A6 /* PollsMockedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollsMockedData.swift; sourceTree = "<group>"; };
+		C7D624522D6DB4C0007BA5A6 /* ProposalsStateContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProposalsStateContract.swift; sourceTree = "<group>"; };
+		C7D624562D6DB4DD007BA5A6 /* Multicall3Contract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multicall3Contract.swift; sourceTree = "<group>"; };
+		C7D624592D6DB9D0007BA5A6 /* GlassBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassBottomSheet.swift; sourceTree = "<group>"; };
+		C7D624602D6E1068007BA5A6 /* ActivePollOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivePollOptionsView.swift; sourceTree = "<group>"; };
+		C7D624622D6E10FA007BA5A6 /* ClosedPollResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosedPollResultsView.swift; sourceTree = "<group>"; };
 		C7DF8BD12D5F430300C8E2D2 /* MaintenanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenanceView.swift; sourceTree = "<group>"; };
 		C7DF8BDE2D5F686200C8E2D2 /* HomeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardView.swift; sourceTree = "<group>"; };
 		C7DF8BDF2D5F686200C8E2D2 /* V2HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2HomeView.swift; sourceTree = "<group>"; };
@@ -1024,6 +1046,7 @@
 				567ADEC32C25CF32007070A7 /* JSONDocument.swift */,
 				CEF251392BD6E22700050507 /* User.swift */,
 				CEFF68B82CB692A7008769EA /* BN.swift */,
+				C755353B2D6F154000A562B5 /* Poll.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1186,6 +1209,8 @@
 		56F48BBC2BC02E02001F3AA4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C755353E2D6F196700A562B5 /* ChildOffsetReader.swift */,
+				C7D624592D6DB9D0007BA5A6 /* GlassBottomSheet.swift */,
 				C72F33172D677DB200AC1814 /* AppIconButton.swift */,
 				5641CC442C874E2B007B7A0D /* AppAlert.swift */,
 				56F48BBD2BC02E82001F3AA4 /* AppButton.swift */,
@@ -1285,6 +1310,35 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		C7D624472D6DB2EC007BA5A6 /* Polls */ = {
+			isa = PBXGroup;
+			children = (
+				C7D624502D6DB34A007BA5A6 /* PollsMockedData.swift */,
+				C7D624492D6DB2FC007BA5A6 /* ViewModels */,
+				C7D624482D6DB2F5007BA5A6 /* Views */,
+			);
+			path = Polls;
+			sourceTree = "<group>";
+		};
+		C7D624482D6DB2F5007BA5A6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C7D624622D6E10FA007BA5A6 /* ClosedPollResultsView.swift */,
+				C7D624602D6E1068007BA5A6 /* ActivePollOptionsView.swift */,
+				C7D6244C2D6DB329007BA5A6 /* PollView.swift */,
+				C7D6244A2D6DB320007BA5A6 /* PollsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C7D624492D6DB2FC007BA5A6 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C7D6244E2D6DB332007BA5A6 /* PollsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		C7DF8BE02D5F686200C8E2D2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1335,6 +1389,7 @@
 		C7DF8BE92D5F686200C8E2D2 /* V2 */ = {
 			isa = PBXGroup;
 			children = (
+				C7D624472D6DB2EC007BA5A6 /* Polls */,
 				C726E8B12D63894A000C9CA6 /* Wallet */,
 				C7780C922D634D770050B5BB /* Rewards */,
 				C7DF8BE12D5F686200C8E2D2 /* Home */,
@@ -1382,6 +1437,8 @@
 		CE68BE402BD9B69A00D92EBB /* Web3 */ = {
 			isa = PBXGroup;
 			children = (
+				C7D624562D6DB4DD007BA5A6 /* Multicall3Contract.swift */,
+				C7D624522D6DB4C0007BA5A6 /* ProposalsStateContract.swift */,
 				CEDC4D7E2BE9267300459D4E /* PoseidonSMTContract.swift */,
 				CE68BE412BD9B6A200D92EBB /* RegistrationContract.swift */,
 				CEDC4D822BE949F300459D4E /* Ethereum.swift */,
@@ -2008,6 +2065,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7D624612D6E1070007BA5A6 /* ActivePollOptionsView.swift in Sources */,
 				568820FA2C172C75001B729F /* ReserveTokensView.swift in Sources */,
 				562241412C107B9B000239FA /* AssetsSlider.swift in Sources */,
 				56933DF72BBAC7D10068C894 /* SelectPassportDataView.swift in Sources */,
@@ -2034,10 +2092,12 @@
 				564169602BE273260057AC03 /* PassportCardLook.swift in Sources */,
 				56933DFF2BBBFDA30068C894 /* ProcessingStatus.swift in Sources */,
 				5655E4352BD5173200B86C5C /* AppView+ViewModel.swift in Sources */,
+				C7D624572D6DB4E2007BA5A6 /* Multicall3Contract.swift in Sources */,
 				568D45C82C29AC200065D467 /* PassportChipErrorView.swift in Sources */,
 				56E2D9172BCE938F006E725D /* ActionCard.swift in Sources */,
 				CEFE5F392CB56C8700498F39 /* CryptoUtils.swift in Sources */,
 				568D45CA2C29AFCB0065D467 /* FeedbackMailView.swift in Sources */,
+				C7D6245A2D6DB9DB007BA5A6 /* GlassBottomSheet.swift in Sources */,
 				56E6AD4D2BD273BC00E4DDC1 /* ProfileRouteLayout.swift in Sources */,
 				56E2D91B2BCEA66A006E725D /* PassportCard.swift in Sources */,
 				5617AB132C8F47C2003947C9 /* ProofRequestView.swift in Sources */,
@@ -2055,13 +2115,16 @@
 				56DAA3152BB8CC95002CF710 /* PasscodeFieldView.swift in Sources */,
 				568350AC2BEA304B00B70E3D /* PassportIdentifier.swift in Sources */,
 				5655E4322BD2CF6900B86C5C /* SecurityManager.swift in Sources */,
+				C7D6244B2D6DB324007BA5A6 /* PollsView.swift in Sources */,
 				CEFF68C12CB6AF46008769EA /* Encodable+json.swift in Sources */,
 				560F0C2C2BD133A000067054 /* MainViewLayout.swift in Sources */,
 				5655E4372BD51E8E00B86C5C /* AppKeychain.swift in Sources */,
 				568B4FE52BB70CAA001C9C74 /* IntroStep.swift in Sources */,
 				5655E42A2BD2C7C800B86C5C /* ConfigManager.swift in Sources */,
+				C7D624542D6DB4C6007BA5A6 /* ProposalsStateContract.swift in Sources */,
 				563529E92BB072B80027C910 /* HomeView.swift in Sources */,
 				56722F202BCD62BB00300AD0 /* ProfileView.swift in Sources */,
+				C7D6244F2D6DB337007BA5A6 /* PollsViewModel.swift in Sources */,
 				CEF8C7F72BE0DE9700F8E1A4 /* CosmosTransferResponse.swift in Sources */,
 				CEDC578F2CA2C9EB00F02132 /* MRZScanView+ViewModel.swift in Sources */,
 				CEDC57962CA30A9D00F02132 /* CIImage+Extension.swift in Sources */,
@@ -2086,6 +2149,7 @@
 				56DAA3052BB72E35002CF710 /* InfoAlert.swift in Sources */,
 				563529E52BB072060027C910 /* RewardsView.swift in Sources */,
 				C789A2E82CA5978B00443900 /* LightVerificationView.swift in Sources */,
+				C755353F2D6F196C00A562B5 /* ChildOffsetReader.swift in Sources */,
 				C726E8D22D647FED000C9CA6 /* SnapCarouselView.swift in Sources */,
 				C7CE31D52C8B1CBD00EE6D2E /* CloudStorage.swift in Sources */,
 				CE19CB472BE39DA400B26DF7 /* RarimoUtils.swift in Sources */,
@@ -2185,6 +2249,7 @@
 				C7DF8BF32D5F699E00C8E2D2 /* Gradients.swift in Sources */,
 				56933DEF2BBABD100068C894 /* ScanPassportView.swift in Sources */,
 				56E6AD4F2BD2756200E4DDC1 /* SafariWebView.swift in Sources */,
+				C7D6244D2D6DB32C007BA5A6 /* PollView.swift in Sources */,
 				C7DF8BEA2D5F686200C8E2D2 /* V2HomeView.swift in Sources */,
 				C7DF8BEB2D5F686200C8E2D2 /* V2NavBarView.swift in Sources */,
 				C7DF8BEC2D5F686200C8E2D2 /* V2MainView+ViewModel.swift in Sources */,
@@ -2202,6 +2267,7 @@
 				C75512832C85F9D0000258AD /* PassportScanTutorialView.swift in Sources */,
 				563529F12BB0736A0027C910 /* TabBarView.swift in Sources */,
 				CE0DC57B2C0DB33A00EFC0D7 /* UpdateManager.swift in Sources */,
+				C755353C2D6F154200A562B5 /* Poll.swift in Sources */,
 				56E7AD0E2BDAD70200D3A258 /* RefreshableScrollView.swift in Sources */,
 				56A6C76A2BBC57B700992562 /* PassportViewModel.swift in Sources */,
 				56933DF52BBAC42E0068C894 /* ReadPassportNFCView.swift in Sources */,
@@ -2224,9 +2290,11 @@
 				560F0C252BD036F900067054 /* AppTextField.swift in Sources */,
 				C75512902C86F4BC000258AD /* PushNotification.xcdatamodeld in Sources */,
 				563529E72BB072870027C910 /* WalletView.swift in Sources */,
+				C7D624512D6DB351007BA5A6 /* PollsMockedData.swift in Sources */,
 				5659151D2BE92AA90050795A /* AppIcon.swift in Sources */,
 				56062BA02C120B3400C9BF9B /* WaitlistPassportView.swift in Sources */,
 				5641CC472C874E90007B7A0D /* AlertManagerView.swift in Sources */,
+				C7D624632D6E1103007BA5A6 /* ClosedPollResultsView.swift in Sources */,
 				5655E43C2BD522E800B86C5C /* AppLanguage.swift in Sources */,
 				56E7AD0A2BDAA4F000D3A258 /* AppRadioButton.swift in Sources */,
 				56933DFD2BBAFDD00068C894 /* PassportProofView.swift in Sources */,

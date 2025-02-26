@@ -8,7 +8,7 @@ struct IdentityIntroView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            AppIconButton(icon: Icons.closeFill, action: onClose)
+            AppIconButton(variant: .secondary, icon: Icons.closeFill, action: onClose)
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding([.top, .trailing], 20)
             Image(Images.handWithPhone)
@@ -39,7 +39,7 @@ struct IdentityIntroView: View {
                 Text("This app is where you privately store your digital identities, enabling you to go incognito across the web.")
                     .body3()
                     .foregroundStyle(.baseBlack.opacity(0.5))
-                AppButton(variant: .secondary, text: "Let’s Start", action: onStart)
+                AppButton(variant: .tertiary, text: "Let’s Start", action: onStart)
                     .controlSize(.large)
             }
             .frame(maxHeight: .infinity, alignment: .bottom)

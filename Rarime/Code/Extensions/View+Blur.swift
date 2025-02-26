@@ -1,19 +1,25 @@
 import SwiftUI
+import UIKit
 
-private struct VisualEffectBlur: UIViewRepresentable {
-    let style: UIBlurEffect.Style
+struct TransparentBlurView: UIViewRepresentable {
+    let removeAllFilters: Bool = false
 
     func makeUIView(context: Context) -> UIVisualEffectView {
-        return UIVisualEffectView(effect: UIBlurEffect(style: style))
+        let view = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial))
+        return view
     }
 
-    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {}
-}
-
-extension View {
-    func blurBackground(style: UIBlurEffect.Style = .systemThinMaterial) -> some View {
-        self.background(
-            VisualEffectBlur(style: style)
-        )
+    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+        DispatchQueue.main.async {
+            if let backdropLayer = uiView.layer.sublayers?.first {
+                if removeAllFilters {
+                    backdropLayer.filters = []
+                } else {
+                    backdropLayer.filters?.removeAll(where: { filter in
+                        String(describing: filter) != "gaussianBlur"
+                    })
+                }
+            }
+        }
     }
 }

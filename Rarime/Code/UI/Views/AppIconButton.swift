@@ -22,9 +22,9 @@ private let primaryColors = IconButtonColors(
 )
 
 private let secondaryColors = IconButtonColors(
-    background: .bgComponentPrimary,
-    backgroundPressed: .bgComponentPressed,
-    backgroundDisabled: .bgComponentDisabled,
+    background: .bgComponentBasePrimary,
+    backgroundPressed: .bgComponentBasePressed,
+    backgroundDisabled: .bgComponentBaseDisabled,
     foreground: .baseBlack,
     foregroundDisabled: .baseBlack.opacity(0.28)
 )

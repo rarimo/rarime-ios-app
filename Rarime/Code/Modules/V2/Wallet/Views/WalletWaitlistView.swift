@@ -8,7 +8,7 @@ struct WalletWaitlistView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            AppIconButton(icon: Icons.closeFill, action: onClose)
+            AppIconButton(variant: .secondary, icon: Icons.closeFill, action: onClose)
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding([.top, .trailing], 20)
             Image(Images.seedPhraseShred)
@@ -39,7 +39,7 @@ struct WalletWaitlistView: View {
                     .body3()
                     .foregroundStyle(.baseBlack.opacity(0.5))
                 VStack(alignment: .center, spacing: 16) {
-                    AppButton(variant: .secondary, text: "Join Waitlist", action: onJoin)
+                    AppButton(variant: .tertiary, text: "Join Waitlist", action: onJoin)
                         .controlSize(.large)
                     Text("49,421 other already joined")
                         .body5()
