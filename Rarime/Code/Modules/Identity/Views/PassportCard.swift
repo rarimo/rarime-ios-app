@@ -75,7 +75,7 @@ struct PassportCard: View {
 
         return ZStack(alignment: .topTrailing) {
             if let image = passport.passportImage {
-                Image(uiImage: image)
+                Image(uiImage: VisionUtils.removeBackground(image))
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 164)

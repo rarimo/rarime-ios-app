@@ -90,6 +90,8 @@
 		568B4FE52BB70CAA001C9C74 /* IntroStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B4FE42BB70CAA001C9C74 /* IntroStep.swift */; };
 		568D45C82C29AC200065D467 /* PassportChipErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D45C72C29AC200065D467 /* PassportChipErrorView.swift */; };
 		568D45CA2C29AFCB0065D467 /* FeedbackMailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D45C92C29AFCB0065D467 /* FeedbackMailView.swift */; };
+		569258942D709B30009E2F9E /* VisionUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569258932D709B30009E2F9E /* VisionUtils.swift */; };
+		569258952D709B30009E2F9E /* VisionUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569258932D709B30009E2F9E /* VisionUtils.swift */; };
 		56933DEF2BBABD100068C894 /* ScanPassportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DEE2BBABD100068C894 /* ScanPassportView.swift */; };
 		56933DF12BBAC1B10068C894 /* ScanPassportLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DF02BBAC1B10068C894 /* ScanPassportLayoutView.swift */; };
 		56933DF32BBAC2940068C894 /* ScanPassportMRZView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DF22BBAC2940068C894 /* ScanPassportMRZView.swift */; };
@@ -472,6 +474,7 @@
 		568B4FE42BB70CAA001C9C74 /* IntroStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroStep.swift; sourceTree = "<group>"; };
 		568D45C72C29AC200065D467 /* PassportChipErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportChipErrorView.swift; sourceTree = "<group>"; };
 		568D45C92C29AFCB0065D467 /* FeedbackMailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackMailView.swift; sourceTree = "<group>"; };
+		569258932D709B30009E2F9E /* VisionUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionUtils.swift; sourceTree = "<group>"; };
 		56933DEE2BBABD100068C894 /* ScanPassportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPassportView.swift; sourceTree = "<group>"; };
 		56933DF02BBAC1B10068C894 /* ScanPassportLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPassportLayoutView.swift; sourceTree = "<group>"; };
 		56933DF22BBAC2940068C894 /* ScanPassportMRZView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPassportMRZView.swift; sourceTree = "<group>"; };
@@ -982,6 +985,7 @@
 				CE61E88C2C247B4700940129 /* HMACUtils.swift */,
 				C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */,
 				C789A2E92CA59F5800443900 /* StringUtils.swift */,
+				569258932D709B30009E2F9E /* VisionUtils.swift */,
 				CEFE5F382CB56C8700498F39 /* CryptoUtils.swift */,
 				CEFF68BA2CB69EB3008769EA /* CircuitUtils.swift */,
 			);
@@ -1990,6 +1994,7 @@
 				CE3477592C78860C005E91FE /* ConfigManager.swift in Sources */,
 				CE06BF312D083CCB00F6C721 /* PubSignals.swift in Sources */,
 				CE2797422CEB41D3008649B0 /* AppUserDefaults.swift in Sources */,
+				569258952D709B30009E2F9E /* VisionUtils.swift in Sources */,
 				CE27974A2CEB4246008649B0 /* RegistrationContract.swift in Sources */,
 				CE7E95812CE774DC00D86A4F /* AppKeychain.swift in Sources */,
 				CEBA50052CF0E6F30069151C /* SupportRegisterIdentityCircuitAAType.swift in Sources */,
@@ -2099,6 +2104,7 @@
 				C7FFB5302C9ACE900037CBD4 /* ClaimableNotificationContent.swift in Sources */,
 				CE31E54A2C11FE150039CAA5 /* ImportIdentityView.swift in Sources */,
 				560F0C1F2BD027EA00067054 /* WalletReceiveView.swift in Sources */,
+				569258942D709B30009E2F9E /* VisionUtils.swift in Sources */,
 				CED314672C0483BD00DF31D5 /* MailView.swift in Sources */,
 				5617AB102C8F4469003947C9 /* VerificatorApi.swift in Sources */,
 				567ADEC42C25CF32007070A7 /* JSONDocument.swift in Sources */,
