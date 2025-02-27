@@ -45,51 +45,56 @@ struct IdentityView: View {
 
     private var content: some View {
         V2MainViewLayout {
-            VStack(alignment: .leading, spacing: 16) {
-                if hasDocument {
-                    HStack(alignment: .center, spacing: 8) {
-                        Text("You")
-                            .subtitle4()
-                            .foregroundStyle(.textPrimary)
-                        Spacer()
-                        AppIconButton(icon: Icons.addFill, action: {})
-                    }
-                    .padding(.top, 20)
-                    .padding(.horizontal, 20)
-                    if let passport = passportManager.passport {
-                        PassportCard(
-                            passport: passport,
-                            isWaitlist: userManager.registerZkProof == nil,
-                            look: Binding(
-                                get: { passportManager.passportCardLook },
-                                set: { passportManager.setPassportCardLook($0) }
-                            ),
-                            isIncognito: Binding(
-                                get: { passportManager.isIncognitoMode },
-                                set: { passportManager.setIncognitoMode($0) }
-                            ),
-                            identifiers: Binding(
-                                get: { passportManager.passportIdentifiers },
-                                set: { passportManager.setPassportIdentifiers($0) }
-                            )
-                        )
-                    }
-                    Spacer()
-                } else {
-                    SelectIdentityTypeView { identityTypeId in
-                        switch identityTypeId {
-                        case .passport:
-                            path.append(.scanPassport)
-                        case .zkLiveness:
-                            isLivenessSheetPresented = true
-                        default:
-                            break
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    if hasDocument {
+                        HStack(alignment: .center, spacing: 8) {
+                            Text("You")
+                                .subtitle4()
+                                .foregroundStyle(.textPrimary)
+                            Spacer()
+                            AppIconButton(icon: Icons.addFill, action: {})
                         }
-                    }
-                    .dynamicSheet(isPresented: $isLivenessSheetPresented, fullScreen: true) {
-                        ZkLivenessIntroView(onStart: {
-                            isLivenessSheetPresented = false
-                        })
+                        .padding(.top, 20)
+                        .padding(.horizontal, 20)
+                        VStack {
+                            if let passport = passportManager.passport {
+                                PassportCard(
+                                    passport: passport,
+                                    isWaitlist: userManager.registerZkProof == nil,
+                                    look: Binding(
+                                        get: { passportManager.passportCardLook },
+                                        set: { passportManager.setPassportCardLook($0) }
+                                    ),
+                                    isIncognito: Binding(
+                                        get: { passportManager.isIncognitoMode },
+                                        set: { passportManager.setIncognitoMode($0) }
+                                    ),
+                                    identifiers: Binding(
+                                        get: { passportManager.passportIdentifiers },
+                                        set: { passportManager.setPassportIdentifiers($0) }
+                                    )
+                                )
+                            }
+                        }
+                        .padding(.horizontal, 12)
+                        Spacer()
+                    } else {
+                        SelectIdentityTypeView { identityTypeId in
+                            switch identityTypeId {
+                            case .passport:
+                                path.append(.scanPassport)
+                            case .zkLiveness:
+                                isLivenessSheetPresented = true
+                            default:
+                                break
+                            }
+                        }
+                        .dynamicSheet(isPresented: $isLivenessSheetPresented, fullScreen: true) {
+                            ZkLivenessIntroView(onStart: {
+                                isLivenessSheetPresented = false
+                            })
+                        }
                     }
                 }
             }

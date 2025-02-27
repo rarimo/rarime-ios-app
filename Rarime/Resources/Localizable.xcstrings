@@ -448,6 +448,7 @@
       }
     },
     "Black" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1165,6 +1166,7 @@
 
     },
     "Green" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1874,6 +1876,9 @@
     "Passport" : {
 
     },
+    "PASSPORT" : {
+
+    },
     "Passport is already registered" : {
 
     },
@@ -2412,7 +2417,11 @@
     "Share your referral link and get bonuses when your friends join and make a purchase!" : {
 
     },
+    "Shows an identifier on the card" : {
+
+    },
     "Shows two identifiers on the card" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2874,6 +2883,7 @@
       }
     },
     "White" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -3025,6 +3035,9 @@
 
     },
     "ZK Identity" : {
+
+    },
+    "ZK Liveness\n(PoH Killer)" : {
 
     },
     "ZK Liveness (PoH Killer)" : {

@@ -69,53 +69,86 @@ struct PassportCard: View {
     }
 
     private var cardContent: some View {
-        let fullNameValue = isInfoHidden ? "••••• •••••••" : passport.fullName
+        let firstNameValue = isInfoHidden ? "•••••" : passport.firstName
+        let lastNameValue = isInfoHidden ? "•••••••" : passport.lastName
         let ageValue = isInfoHidden ? "••• ••••• •••" : String(localized: "\(passport.ageString) years old")
 
-        return VStack(spacing: 24) {
-            HStack(alignment: .top) {
-                PassportImageView(
-                    image: passport.passportImage,
-                    bgColor: look.foregroundColor.opacity(0.05)
-                )
-                .blur(radius: isInfoHidden ? 12 : 0)
-                Spacer()
-                HStack(spacing: 16) {
-                    Image(isIncognito ? Icons.eyeSlash : Icons.eye)
-                        .iconMedium()
-                        .padding(8)
-                        .background(look.foregroundColor.opacity(0.05))
-                        .clipShape(Circle())
-                        .onTapGesture { isIncognito.toggle() }
-                    Image(Icons.dotsThreeOutline)
-                        .iconMedium()
-                        .padding(8)
-                        .background(look.foregroundColor.opacity(0.05))
-                        .clipShape(Circle())
-                        .onTapGesture { isSettingsSheetPresented.toggle() }
-                }
+        return ZStack(alignment: .topTrailing) {
+            if let image = passport.passportImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 164)
+                    .offset(x: -24, y: 84)
+                    .blur(radius: isInfoHidden ? 24 : 0)
             }
-            VStack(alignment: .leading, spacing: 8) {
-                Text(fullNameValue).h4()
-                Text(ageValue).body3().opacity(0.56)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            HorizontalDivider(color: look.foregroundColor.opacity(0.05))
             VStack(alignment: .leading, spacing: 16) {
-                ForEach(identifiers, id: \.self) { identifier in
-                    makePassportInfoRow(
-                        title: isInfoHidden ? identifier.titleStub : identifier.title,
-                        value: isInfoHidden ? identifier.valueStub : identifier.getPassportValue(from: passport)
-                    )
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(firstNameValue)
+                        .h2()
+                        .foregroundStyle(.textPrimary)
+                    Text(lastNameValue)
+                        .additional2()
+                        .foregroundStyle(.textPlaceholder)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 16)
+                .padding(.horizontal, 16)
+                Text(ageValue)
+                    .body3()
+                    .foregroundStyle(.textSecondary)
+                    .padding(.horizontal, 16)
+                Spacer()
+                    .frame(height: 84)
+                HStack(alignment: .center) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        ForEach(identifiers, id: \.self) { identifier in
+                            Text(identifier.title)
+                                .subtitle6()
+                                .foregroundStyle(.textSecondary)
+                            Text(isInfoHidden ? identifier.valueStub : identifier.getPassportValue(from: passport))
+                                .subtitle5()
+                                .foregroundStyle(.textPrimary)
+                        }
+                    }
+                    Spacer()
+                    HStack(spacing: 12) {
+                        Image(isIncognito ? .eyeSlash : .eye)
+                            .iconMedium()
+                            .padding(8)
+                            .background(.bgComponentPrimary, in: Circle())
+                            .foregroundColor(.textSecondary)
+                            .onTapGesture { isIncognito.toggle() }
+                        Image(.dotsThreeOutline)
+                            .iconMedium()
+                            .padding(8)
+                            .background(.bgComponentPrimary, in: Circle())
+                            .foregroundColor(.textSecondary)
+                            .onTapGesture { isSettingsSheetPresented.toggle() }
+                    }
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .frame(height: 64)
+                .background(.bgBlur, in: RoundedRectangle(cornerRadius: 16))
             }
-            .frame(minHeight: 56, alignment: .top)
+            Text("PASSPORT")
+                .overline2()
+                .foregroundStyle(.textPrimary)
+                .padding(.vertical, 2)
+                .padding(.horizontal, 8)
+                .background(.bgComponentPrimary, in: Capsule())
+                .padding(8)
         }
         .frame(maxWidth: .infinity)
-        .padding(24)
-        .background(look.backgroundColor)
-        .foregroundStyle(look.foregroundColor)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .padding(8)
+        .background(
+            Image(look.backgroundImage)
+                .resizable()
+                .scaledToFill()
+                .background(.bgPrimary)
+        )
+        .clipShape(RoundedRectangle(cornerRadius: 24))
         .gesture(
             DragGesture(minimumDistance: 0)
                 .updating($isHolding) { _, state, _ in
@@ -126,14 +159,6 @@ struct PassportCard: View {
             if isHolding && isIncognito {
                 FeedbackGenerator.shared.impact(.light)
             }
-        }
-    }
-
-    private func makePassportInfoRow(title: String, value: String) -> some View {
-        HStack {
-            Text(title).body4().opacity(0.56)
-            Spacer()
-            Text(value).subtitle6()
         }
     }
 
@@ -168,35 +193,35 @@ private struct PassportLookOption: View {
         VStack(spacing: 8) {
             VStack(spacing: 4) {
                 Circle()
-                    .fill(look.foregroundColor.opacity(0.1))
+                    .fill(.bgComponentHovered)
                     .frame(width: 12)
                 RoundedRectangle(cornerRadius: 100)
-                    .fill(look.foregroundColor.opacity(0.1))
+                    .fill(.bgComponentHovered)
                     .frame(width: 29, height: 5)
                 RoundedRectangle(cornerRadius: 100)
-                    .fill(look.foregroundColor.opacity(0.1))
+                    .fill(.bgComponentHovered)
                     .frame(width: 19, height: 5)
             }
             .frame(maxWidth: .infinity)
             .padding(10)
-            .background(look.backgroundColor)
+            .background(
+                Image(look.backgroundImage)
+                    .resizable()
+                    .scaledToFill()
+            )
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(.bgComponentPrimary, lineWidth: 1)
             )
-            Text(look.name)
-                .subtitle6()
-                .foregroundStyle(.textPrimary)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 16)
         .padding(.horizontal, 24)
-        .background(isActive ? .bgComponentPrimary : .clear)
         .cornerRadius(8)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(.bgComponentPrimary, lineWidth: 1)
+                .stroke(isActive ? .textPrimary : .bgComponentPrimary, lineWidth: 1)
         )
         .onTapGesture {
             onLookChange(look)
@@ -207,13 +232,13 @@ private struct PassportLookOption: View {
 
 private struct PassportIdentifiersPicker: View {
     @Binding var identifiers: [PassportIdentifier]
-    let MAX_IDENTIFIERS = 2
+    let MAX_IDENTIFIERS = 1
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Data").overline2()
-                Text("Shows two identifiers on the card").body5()
+                Text("Shows an identifier on the card").body5()
             }
             .foregroundStyle(.textSecondary)
             ForEach(PassportIdentifier.allCases, id: \.self) { identifier in
@@ -256,9 +281,9 @@ private struct PreviewView: View {
         sod: Data(),
         signature: Data()
     )
-    @State private var look: PassportCardLook = .black
+    @State private var look: PassportCardLook = .holographicViolet
     @State private var isIncognito: Bool = false
-    @State private var identifiers: [PassportIdentifier] = [.nationality, .documentId]
+    @State private var identifiers: [PassportIdentifier] = [.documentId]
 
     var body: some View {
         PassportCard(

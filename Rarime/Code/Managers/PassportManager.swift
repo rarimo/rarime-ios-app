@@ -33,7 +33,7 @@ class PassportManager: ObservableObject {
 
     func setPassport(_ passport: Passport) {
         self.passport = passport
-        setPassportCardLook(.white)
+        setPassportCardLook(.celestialGlow)
         setIncognitoMode(true)
         try? AppKeychain.setValue(.passport, JSONEncoder().encode(passport))
     }
@@ -56,7 +56,7 @@ class PassportManager: ObservableObject {
     func reset() {
         passport = nil
         try? AppKeychain.removeValue(.passport)
-        setPassportCardLook(.white)
+        setPassportCardLook(.celestialGlow)
         setPassportIdentifiers([.nationality, .documentId])
         setIncognitoMode(true)
     }
