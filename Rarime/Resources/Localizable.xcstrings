@@ -31,6 +31,7 @@
 
     },
     "%@ ensures your history, reputation and actions are not lost, but remain confidential and under your control." : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -167,9 +168,6 @@
 
     },
     "Active tasks" : {
-
-    },
-    "Add a Document" : {
 
     },
     "Address" : {
@@ -391,6 +389,7 @@
 
     },
     "Balance: RMO" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -449,6 +448,7 @@
       }
     },
     "Black" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -632,6 +632,7 @@
 
     },
     "Congrats!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -705,9 +706,6 @@
           }
         }
       }
-    },
-    "Create your digital identity" : {
-
     },
     "Creating a confidential profile" : {
       "localizations" : {
@@ -1168,6 +1166,7 @@
 
     },
     "Green" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1267,13 +1266,10 @@
     "ID" : {
 
     },
+    "ID Card" : {
+
+    },
     "Identifiers" : {
-
-    },
-    "Identity creation happens via a scan of your biometric passport.\n\nYour data never leaves the device or is shared with any third party. Proof of citizenship is generated locally using Zero-Knowledge technology." : {
-
-    },
-    "If you lose access to the device or private keys, you won’t be able to claim future rewards using the same passport" : {
 
     },
     "If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards" : {
@@ -1286,6 +1282,7 @@
 
     },
     "Incognito mode" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1484,9 +1481,6 @@
         }
       }
     },
-    "Learn more about the App" : {
-
-    },
     "Learn more about the program" : {
 
     },
@@ -1500,6 +1494,9 @@
 
     },
     "Let's Start" : {
+
+    },
+    "Let’s start" : {
 
     },
     "Let’s Start" : {
@@ -1649,6 +1646,7 @@
 
     },
     "Move your passport page inside the border" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1753,6 +1751,9 @@
     "No internet connection" : {
 
     },
+    "No need for trusted third parties." : {
+
+    },
     "No notifications" : {
 
     },
@@ -1782,6 +1783,7 @@
 
     },
     "Okay" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1798,6 +1800,9 @@
 
     },
     "Only level %lld specials" : {
+
+    },
+    "Only your camera and device should attest to your identity." : {
 
     },
     "Open App Store" : {
@@ -1848,9 +1853,6 @@
     "Paraguay" : {
 
     },
-    "Participate and get rewarded: https://rarime.com" : {
-
-    },
     "Passcode" : {
       "localizations" : {
         "uk" : {
@@ -1870,6 +1872,12 @@
           }
         }
       }
+    },
+    "Passport" : {
+
+    },
+    "PASSPORT" : {
+
     },
     "Passport is already registered" : {
 
@@ -2018,6 +2026,9 @@
         }
       }
     },
+    "Proof of Employment" : {
+
+    },
     "Proof Request" : {
 
     },
@@ -2059,6 +2070,7 @@
 
     },
     "RARIME" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2095,6 +2107,7 @@
       }
     },
     "RariMe is a self-custody identity wallet where no personal data ever leaves the device and everything is processed locally." : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2113,9 +2126,6 @@
           }
         }
       }
-    },
-    "RariMe Rewards" : {
-
     },
     "Rarimo Airdrop Program Terms & Conditions" : {
       "localizations" : {
@@ -2218,9 +2228,6 @@
 
     },
     "Reserve %@ RMO tokens" : {
-
-    },
-    "Reserve tokens" : {
 
     },
     "Reserve tokens to unlock new levels and rewards" : {
@@ -2358,6 +2365,9 @@
     "Select an authorization method" : {
 
     },
+    "Select identity type" : {
+
+    },
     "Send" : {
       "localizations" : {
         "uk" : {
@@ -2404,13 +2414,14 @@
     "Seychelles" : {
 
     },
-    "Share Achievements" : {
-
-    },
     "Share your referral link and get bonuses when your friends join and make a purchase!" : {
 
     },
+    "Shows an identifier on the card" : {
+
+    },
     "Shows two identifiers on the card" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2456,6 +2467,9 @@
 
     },
     "Something went wrong" : {
+
+    },
+    "Soon" : {
 
     },
     "Sorry, there was a problem reading the passport. %@. Error codes: [0x%u, 0x%u]" : {
@@ -2593,6 +2607,7 @@
 
     },
     "Thanks!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2842,7 +2857,11 @@
     "Western Sahara" : {
 
     },
+    "What happens here, stays here!" : {
+
+    },
     "What is RariMe?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2864,6 +2883,7 @@
       }
     },
     "White" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2872,9 +2892,6 @@
           }
         }
       }
-    },
-    "With RariMe, identity becomes private but verifiable." : {
-
     },
     "Withdraw the %@ token" : {
 
@@ -2890,10 +2907,16 @@
         }
       }
     },
+    "X Verified Badge" : {
+
+    },
     "Yemen" : {
 
     },
     "Yes" : {
+
+    },
+    "You" : {
 
     },
     "YOU" : {
@@ -2925,19 +2948,11 @@
     "You must be invited or receive a code from social channels" : {
 
     },
-    "You successfully registered your identity!" : {
-
-    },
     "You will be notified once added" : {
 
     },
-    "You will be notified once your country is added" : {
-
-    },
-    "You’re entitled for %@ RMO" : {
-
-    },
     "You’ve joined the waitlist" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2958,7 +2973,7 @@
         }
       }
     },
-    "You’ve reserved %@ RMO tokens" : {
+    "Your" : {
 
     },
     "Your account is not backed up. If you lose your device, you will lose access to your account" : {
@@ -3017,6 +3032,15 @@
 
     },
     "Zimbabwe" : {
+
+    },
+    "ZK Identity" : {
+
+    },
+    "ZK Liveness\n(PoH Killer)" : {
+
+    },
+    "ZK Liveness (PoH Killer)" : {
 
     }
   },

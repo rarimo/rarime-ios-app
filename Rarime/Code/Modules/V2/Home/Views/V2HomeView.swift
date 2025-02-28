@@ -18,6 +18,10 @@ struct V2HomeView: View {
     @State private var path: V2HomeRoute? = nil
     @State private var isCopied = false
 
+    @State private var isBalanceFetching = true
+    @State private var pointsBalance: PointsBalanceRaw? = nil
+    @State private var cancelables: [Task<Void, Never>] = []
+
     @Namespace var identityAnimation
     @Namespace var inviteFriendsAnimation
     @Namespace var claimTokensAnimation
@@ -83,6 +87,8 @@ struct V2HomeView: View {
             }
         }
         .animation(.interpolatingSpring(mass: 1, stiffness: 100, damping: 15), value: path)
+        .onAppear(perform: fetchBalance)
+        .onDisappear(perform: cleanup)
     }
 
     private var header: some View {
@@ -267,6 +273,42 @@ struct V2HomeView: View {
                 }
             }
             .background(.bgPrimary)
+        }
+    }
+
+    func fetchBalance() {
+        isBalanceFetching = true
+
+        let cancelable = Task { @MainActor in
+            defer {
+                self.isBalanceFetching = false
+            }
+
+            if userManager.user?.userReferralCode == nil {
+                return
+            }
+
+            do {
+                guard let user = userManager.user else { throw "failed to get user" }
+
+                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+
+                let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
+
+                self.pointsBalance = pointsBalance
+            } catch is CancellationError {
+                return
+            } catch {
+                LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
+            }
+        }
+
+        cancelables.append(cancelable)
+    }
+
+    func cleanup() {
+        for cancelable in cancelables {
+            cancelable.cancel()
         }
     }
 }
