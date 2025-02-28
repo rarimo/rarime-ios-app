@@ -10,6 +10,7 @@ struct IdentityView: View {
 
     @State private var path: [IdentityRoute] = []
     @State private var isLivenessSheetPresented = false
+    @State private var isSelectTypeSheetPresented = false
 
     //    TODO: implement claiming tokens
     //    var canReserveTokens: Bool {
@@ -53,7 +54,15 @@ struct IdentityView: View {
                                 .subtitle4()
                                 .foregroundStyle(.textPrimary)
                             Spacer()
-                            AppIconButton(icon: Icons.addFill, action: {})
+                            AppIconButton(icon: Icons.addFill, action: {
+                                isSelectTypeSheetPresented = true
+                            })
+                            .dynamicSheet(isPresented: $isSelectTypeSheetPresented, fullScreen: true) {
+                                SelectIdentityTypeView { identityTypeId in
+                                    isSelectTypeSheetPresented = false
+                                    selectIdentityType(identityTypeId)
+                                }
+                            }
                         }
                         .padding(.top, 20)
                         .padding(.horizontal, 20)
@@ -80,26 +89,28 @@ struct IdentityView: View {
                         .padding(.horizontal, 12)
                         Spacer()
                     } else {
-                        SelectIdentityTypeView { identityTypeId in
-                            switch identityTypeId {
-                            case .passport:
-                                path.append(.scanPassport)
-                            case .zkLiveness:
-                                isLivenessSheetPresented = true
-                            default:
-                                break
-                            }
-                        }
-                        .dynamicSheet(isPresented: $isLivenessSheetPresented, fullScreen: true) {
-                            ZkLivenessIntroView(onStart: {
-                                isLivenessSheetPresented = false
-                            })
-                        }
+                        SelectIdentityTypeView(onSelect: selectIdentityType)
                     }
                 }
             }
         }
         .background(.bgPrimary)
+        .dynamicSheet(isPresented: $isLivenessSheetPresented, fullScreen: true) {
+            ZkLivenessIntroView(onStart: {
+                isLivenessSheetPresented = false
+            })
+        }
+    }
+
+    private func selectIdentityType(_ identityTypeId: IdentityTypeId) {
+        switch identityTypeId {
+        case .passport:
+            path.append(.scanPassport)
+        case .zkLiveness:
+            isLivenessSheetPresented = true
+        default:
+            break
+        }
     }
 }
 

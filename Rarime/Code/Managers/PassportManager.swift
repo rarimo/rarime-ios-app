@@ -57,7 +57,7 @@ class PassportManager: ObservableObject {
         passport = nil
         try? AppKeychain.removeValue(.passport)
         setPassportCardLook(.celestialGlow)
-        setPassportIdentifiers([.nationality, .documentId])
+        setPassportIdentifiers([.documentId])
         setIncognitoMode(true)
     }
 }

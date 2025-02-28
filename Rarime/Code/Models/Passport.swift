@@ -21,9 +21,9 @@ struct Passport: Codable {
     let signature: Data
     
     var fullName: String {
-        "\(firstName) \(lastName)"
+        "\(firstName) \(lastName)".trimmingCharacters(in: .whitespaces)
     }
-    
+
     var isExpired: Bool {
         if let expiryDate = try? DateUtil.parsePassportDate(documentExpiryDate) {
             return expiryDate < Date()
@@ -64,6 +64,15 @@ struct Passport: Codable {
         } catch {
             return "–"
         }
+    }
+    
+    var displayedFirstName: String {
+        firstName.isEmpty ? fullName.components(separatedBy: " ").first ?? "" : firstName
+    }
+    
+    var displayedLastName: String {
+        let lastNameParts = fullName.components(separatedBy: " ").dropFirst()
+        return lastNameParts.isEmpty ? lastName : lastNameParts.joined(separator: " ")
     }
     
     var encapsulatedContentSize: Int {

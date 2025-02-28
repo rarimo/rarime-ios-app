@@ -69,9 +69,13 @@ struct PassportCard: View {
     }
 
     private var cardContent: some View {
-        let firstNameValue = isInfoHidden ? "•••••" : passport.firstName
-        let lastNameValue = isInfoHidden ? "•••••••" : passport.lastName
-        let ageValue = isInfoHidden ? "••• ••••• •••" : String(localized: "\(passport.ageString) years old")
+        let nameParts = passport.fullName.split(separator: " ")
+        let firstName = nameParts.first == nil ? passport.firstName : String(nameParts.first!)
+        let lastName = nameParts.dropFirst().joined(separator: " ")
+
+        let firstNameValue: String = isInfoHidden ? "•••••" : passport.displayedFirstName
+        let lastNameValue = isInfoHidden ? "••••••••••••" : passport.displayedLastName
+        let ageValue = isInfoHidden ? "•••••••••" : String(localized: "\(passport.ageString) years old")
 
         return ZStack(alignment: .topTrailing) {
             if let image = passport.passportImage {
@@ -79,7 +83,7 @@ struct PassportCard: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 164)
-                    .offset(x: -24, y: 84)
+                    .offset(x: -24, y: 108)
                     .blur(radius: isInfoHidden ? 24 : 0)
             }
             VStack(alignment: .leading, spacing: 16) {
@@ -99,7 +103,7 @@ struct PassportCard: View {
                     .foregroundStyle(.textSecondary)
                     .padding(.horizontal, 16)
                 Spacer()
-                    .frame(height: 84)
+                    .frame(height: 108)
                 HStack(alignment: .center) {
                     VStack(alignment: .leading, spacing: 4) {
                         ForEach(identifiers, id: \.self) { identifier in
