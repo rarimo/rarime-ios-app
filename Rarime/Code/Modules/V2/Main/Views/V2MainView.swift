@@ -13,7 +13,7 @@ struct V2MainView: View {
                 case .home: V2HomeView()
                 case .identity: IdentityView()
                 case .scanQr: ScanQRView(
-                        // TODO: change routign after design impl
+                        // TODO: change routing after design impl
                         onBack: { viewModel.selectedTab = .home },
                         onScan: processQrCode
                     )
