@@ -56,6 +56,7 @@ extension ConfigManager {
         let multicall3ContractAddress: String
         let ipfsNodeURL: URL
         let votingWebsiteURL: URL
+        let votingRelayerURL: URL
       
         init() {
             do {
@@ -77,6 +78,7 @@ extension ConfigManager {
                 self.multicall3ContractAddress = try readFromInfoPlist(key: "MULTICALL3_CONTRACT_ADDRESS")
                 self.ipfsNodeURL = try readURLFromInfoPlist(key: "IPFS_NODE_URL")
                 self.votingWebsiteURL = try readURLFromInfoPlist(key: "VOTING_WEBSITE_URL")
+                self.votingRelayerURL = try readURLFromInfoPlist(key: "VOTING_RELAYER_URL")
             } catch {
                 fatalError("ConfigManager.API init error: \(error.localizedDescription)")
             }

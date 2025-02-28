@@ -1,7 +1,6 @@
 import Foundation
 import Alamofire
 
-// TODO: change if needed after BE impl
 class VotingRelayer {
     let url: URL
     
@@ -10,19 +9,17 @@ class VotingRelayer {
     }
     
     func vote(
-        _ proposalId: Int,
         _ calldata: String,
         _ destination: String
     ) async throws -> VoteResponse {
-        let requestUrl = url.appendingPathComponent("/integrations/voting-relayer/v1/vote")
+        let requestUrl = url.appendingPathComponent("/integrations/proof-verification-relayer/v2/vote")
         
         let payload = VoteRequest(
             data: VoteRequestData(
-                type: "vote",
+                type: "send_transaction",
                 attributes: VoteRequestAttributes(
                     txData: calldata,
-                    destination: destination,
-                    proposalId: proposalId
+                    destination: destination
                 )
             )
         )
@@ -51,12 +48,10 @@ struct VoteRequestData: Codable {
 
 struct VoteRequestAttributes: Codable {
     let txData, destination: String
-    let proposalId: Int
 
     enum CodingKeys: String, CodingKey {
         case txData = "tx_data"
         case destination
-        case proposalId = "proposal_id"
     }
 }
 

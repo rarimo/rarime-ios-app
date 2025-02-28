@@ -112,21 +112,21 @@ class PollsViewModel: ObservableObject {
         )
         
         let voteProofJson = try JSONEncoder().encode(voteProof)
+        let votingData = try PollsService.decodeVotingData(selectedPoll!)
                 
         let calldataBuilder = IdentityCallDataBuilder()
         let calldata = try calldataBuilder.buildVoteCalldata(
             voteProofJson,
             proposalID: Int64(self.selectedPoll!.id),
             pollResultsJSON: resultsJson,
-            citizenship: "" // TODO: Fix citizenship
+            citizenship: votingData.citizenshipMask.description
         )
         
-        let votingRelayer = VotingRelayer(ConfigManager.shared.api.relayerURL) // TODO: change URL
+        let votingRelayer = VotingRelayer(ConfigManager.shared.api.votingRelayerURL)
         
         let voteResponse = try await votingRelayer.vote(
-            Int(self.selectedPoll!.id),
-            calldata.fullHex,
-            self.selectedPoll!.votingsAddresses[0].hex(eip55: false)
+            String(self.selectedPoll!.id),
+            calldata.fullHex
         )
         
         LoggerUtil.common.info("Voting \(self.selectedPoll!.id), txHash: \(voteResponse.data.id)")

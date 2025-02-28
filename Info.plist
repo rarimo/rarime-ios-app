@@ -16,6 +16,8 @@
 	<string>${AUTHORIZE_URL}</string>
 	<key>VOTING_WEBSITE_URL</key>
 	<string>${VOTING_WEBSITE_URL}</string>
+	<key>VOTING_RELAYER_URL</key>
+	<string>${VOTING_RELAYER_URL}</string>
 	<key>IPFS_NODE_URL</key>
 	<string>${IPFS_NODE_URL}</string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
