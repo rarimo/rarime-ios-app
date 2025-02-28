@@ -26,7 +26,7 @@ private let secondaryColors = ButtonColors(
     backgroundPressed: .bgComponentBasePressed,
     backgroundDisabled: .bgComponentBaseDisabled,
     foreground: .baseBlack,
-    foregroundDisabled: .baseBlack.opacity(0.28)
+    foregroundDisabled: .baseBlack.opacity(0.5)
 )
 
 private let tertiaryColors = ButtonColors(

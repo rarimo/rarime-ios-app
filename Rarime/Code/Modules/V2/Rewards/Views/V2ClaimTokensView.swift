@@ -1,13 +1,17 @@
-
 import SwiftUI
+import ConfettiSwiftUI
 
 struct V2ClaimTokensView: View {
     @EnvironmentObject private var configManager: ConfigManager
     
+    @StateObject var rewardsViewModel = V2RewardsViewModel()
+    
     let onClose: () -> Void
-    let onClaim: () -> Void
     
     var animation: Namespace.ID
+    
+    @State private var confettiTrigger = 0
+    @State private var isTokensClaiming = false
     
     private var termsURL: String {
         configManager.general.termsOfUseURL.absoluteString
@@ -19,6 +23,16 @@ struct V2ClaimTokensView: View {
 
     private var airdropTermsURL: String {
         configManager.general.airdropTerms.absoluteString
+    }
+    
+    private var claimButtonText: LocalizedStringResource {
+        if isTokensClaiming {
+            return "Claiming..."
+        } else if rewardsViewModel.isTokensClaimed {
+            return "Claimed"
+        } else {
+            return "Claim"
+        }
     }
     
     var body: some View {
@@ -53,8 +67,14 @@ struct V2ClaimTokensView: View {
                 Text("This app is where you privately store your digital identities, enabling you to go incognito across the web.")
                     .body3()
                     .foregroundStyle(.baseBlack.opacity(0.5))
-                AppButton(variant: .secondary, text: "Claim", action: onClaim)
+                AppButton(
+                    variant: .secondary,
+                    text: claimButtonText,
+                    leftIcon: rewardsViewModel.isTokensClaimed ? Icons.checkLine : nil,
+                    action: onClaimTokens
+                )
                     .controlSize(.large)
+                    .disabled(rewardsViewModel.isTokensClaimed || isTokensClaiming)
                 (
                     Text("By continue, you are agreeing to ") +
                         Text(.init("[\(String(localized: "RariMe General Terms & Conditions"))](\(termsURL))")).underline() +
@@ -78,10 +98,30 @@ struct V2ClaimTokensView: View {
                 .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
                 .ignoresSafeArea()
         )
+        .confettiCannon(
+            trigger: $confettiTrigger,
+            num: 300,
+            colors: [.secondaryDarker, .secondaryDark, .secondaryMain, .successDarker, .successDark],
+            rainHeight: UIScreen.main.bounds.height,
+            openingAngle: Angle.degrees(0),
+            closingAngle: Angle.degrees(180),
+            radius: 480
+        )
+    }
+    
+    private func onClaimTokens() {
+        isTokensClaiming = true
+        confettiTrigger += 1
+        
+        // TODO: remove it after flow impl
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            rewardsViewModel.isTokensClaimed = true
+            isTokensClaiming = false
+        }
     }
 }
 
 #Preview {
-    V2ClaimTokensView(onClose: {}, onClaim: {}, animation: Namespace().wrappedValue)
+    V2ClaimTokensView(onClose: {}, animation: Namespace().wrappedValue)
         .environmentObject(ConfigManager())
 }

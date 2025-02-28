@@ -603,7 +603,13 @@
     "Claim RMO" : {
 
     },
+    "Claimed" : {
+
+    },
     "Claiming tokens results in a downgrade on the leaderboard" : {
+
+    },
+    "Claiming..." : {
 
     },
     "Close" : {

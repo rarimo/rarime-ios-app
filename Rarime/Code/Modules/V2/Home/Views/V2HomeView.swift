@@ -72,8 +72,6 @@ struct V2HomeView: View {
             case .claimTokens:
                 V2ClaimTokensView(
                     onClose: { path = nil },
-                    // TODO: change after design impl
-                    onClaim: { path = nil },
                     animation: claimTokensAnimation
                 )
             case .wallet:
