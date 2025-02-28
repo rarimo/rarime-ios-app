@@ -162,7 +162,7 @@
 		C75535432D6F2EA300A562B5 /* V2ExternalRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75535422D6F2E9A00A562B5 /* V2ExternalRequestsView.swift */; };
 		C75535482D6F2EF900A562B5 /* VotingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75535472D6F2EF300A562B5 /* VotingView.swift */; };
 		C755354C2D6F4E6000A562B5 /* PollsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755354B2D6F4E5F00A562B5 /* PollsService.swift */; };
-		C772EE322D5E1AF000F2AAA3 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C772EE312D5E1AF000F2AAA3 /* Identity.xcframework */; };
+		C755354F2D6F74D000A562B5 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C755354E2D6F74D000A562B5 /* Identity.xcframework */; };
 		C7780C842D632A2E0050B5BB /* IdentityIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C832D632A210050B5BB /* IdentityIntroView.swift */; };
 		C7780C962D634D8C0050B5BB /* V2ClaimTokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C952D634D830050B5BB /* V2ClaimTokensView.swift */; };
 		C7780C982D634DAE0050B5BB /* V2InviteFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C972D634D900050B5BB /* V2InviteFriendsView.swift */; };
@@ -172,6 +172,7 @@
 		C78EA4FA2C9B2EF5001DA0B3 /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
 		C7B57B642D650FB1001E86C4 /* AnimationNamespaceIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B57B632D650FA5001E86C4 /* AnimationNamespaceIds.swift */; };
 		C7B57B6B2D65D58C001E86C4 /* V2HomeView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B57B6A2D65D585001E86C4 /* V2HomeView+ViewModel.swift */; };
+		C7BBDBD62D71D44700E2905E /* VotingRelayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BBDBD52D71D43F00E2905E /* VotingRelayer.swift */; };
 		C7CE31D52C8B1CBD00EE6D2E /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */; };
 		C7D6244B2D6DB324007BA5A6 /* PollsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D6244A2D6DB320007BA5A6 /* PollsView.swift */; };
 		C7D6244D2D6DB32C007BA5A6 /* PollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D6244C2D6DB329007BA5A6 /* PollView.swift */; };
@@ -559,7 +560,7 @@
 		C75535422D6F2E9A00A562B5 /* V2ExternalRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2ExternalRequestsView.swift; sourceTree = "<group>"; };
 		C75535472D6F2EF300A562B5 /* VotingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingView.swift; sourceTree = "<group>"; };
 		C755354B2D6F4E5F00A562B5 /* PollsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollsService.swift; sourceTree = "<group>"; };
-		C772EE312D5E1AF000F2AAA3 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
+		C755354E2D6F74D000A562B5 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		C7780C832D632A210050B5BB /* IdentityIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityIntroView.swift; sourceTree = "<group>"; };
 		C7780C952D634D830050B5BB /* V2ClaimTokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2ClaimTokensView.swift; sourceTree = "<group>"; };
 		C7780C972D634D900050B5BB /* V2InviteFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2InviteFriendsView.swift; sourceTree = "<group>"; };
@@ -568,6 +569,7 @@
 		C789A2E92CA59F5800443900 /* StringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
 		C7B57B632D650FA5001E86C4 /* AnimationNamespaceIds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationNamespaceIds.swift; sourceTree = "<group>"; };
 		C7B57B6A2D65D585001E86C4 /* V2HomeView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "V2HomeView+ViewModel.swift"; sourceTree = "<group>"; };
+		C7BBDBD52D71D43F00E2905E /* VotingRelayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingRelayer.swift; sourceTree = "<group>"; };
 		C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		C7D6244A2D6DB320007BA5A6 /* PollsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollsView.swift; sourceTree = "<group>"; };
 		C7D6244C2D6DB329007BA5A6 /* PollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollView.swift; sourceTree = "<group>"; };
@@ -832,6 +834,7 @@
 				CE28D5052D3E887300042E1D /* libwitnesscalc_registerIdentityLight160.a in Frameworks */,
 				CE28D5062D3E887300042E1D /* libwitnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_4_256.a in Frameworks */,
 				CE28D5072D3E887300042E1D /* libwitnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256.a in Frameworks */,
+				C755354F2D6F74D000A562B5 /* Identity.xcframework in Frameworks */,
 				CEC76C8D2D674AFD00130CA1 /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a in Frameworks */,
 				CE28D5092D3E887300042E1D /* libwitnesscalc_registerIdentity_24_256_3_4_336_232_NA.a in Frameworks */,
 				CE28D50B2D3E887300042E1D /* libwitnesscalc_registerIdentity_1_256_3_3_576_248_NA.a in Frameworks */,
@@ -855,7 +858,6 @@
 				CEC562042BD923B4002D4954 /* librapidsnark.a in Frameworks */,
 				5609B6C82C188C7500CB6A1F /* MarkdownUI in Frameworks */,
 				CE7210312BD807140043DB7F /* ZipArchive in Frameworks */,
-				C772EE322D5E1AF000F2AAA3 /* Identity.xcframework in Frameworks */,
 				560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */,
 				CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */,
 			);
@@ -1531,6 +1533,7 @@
 		CE7E95792CE7572800D86A4F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C7BBDBD52D71D43F00E2905E /* VotingRelayer.swift */,
 				CE06BF332D08566400F6C721 /* LightRegistrationService.swift */,
 				CE0DA0D82BDA927000696503 /* AirDropResponse.swift */,
 				CE1FA5692C1708F100B2C191 /* Points.swift */,
@@ -1732,7 +1735,7 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C772EE312D5E1AF000F2AAA3 /* Identity.xcframework */,
+				C755354E2D6F74D000A562B5 /* Identity.xcframework */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562002BD923B3002D4954 /* prover.h */,
 				CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */,
@@ -2238,6 +2241,7 @@
 				CE68BE4B2BD9B75100D92EBB /* ContractABI.swift in Sources */,
 				56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */,
 				5609B6D02C19939600CB6A1F /* LevelingView.swift in Sources */,
+				C7BBDBD62D71D44700E2905E /* VotingRelayer.swift in Sources */,
 				C789A2EA2CA59F5800443900 /* StringUtils.swift in Sources */,
 				CEF723142BF4BB9000E79198 /* Errors.swift in Sources */,
 				CE059B442C9C4702006046B3 /* InternetConnectionRequiredView.swift in Sources */,

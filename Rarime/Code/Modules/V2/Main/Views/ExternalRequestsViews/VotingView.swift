@@ -3,16 +3,11 @@ import Foundation
 import Web3
 
 struct VotingView: View {
-    @EnvironmentObject private var userManager: UserManager
-    @EnvironmentObject private var passportManager: PassportManager
-    @EnvironmentObject private var decenralizedAuthManager: DecentralizedAuthManager
-    
     let proposalId: BigUInt
     let onSuccess: () -> Void
     let onDismiss: () -> Void
     
     @State private var poll: Poll? = nil
-    @State private var isSubmitting = false
 
     private var totalParticipants: Int {
         guard let poll = poll else { return 0 }
@@ -21,9 +16,9 @@ struct VotingView: View {
     }
     
     var body: some View {
-        ZStack {
-            if let poll = poll {
-                PollView(poll: poll, onClose: onDismiss)
+        Group {
+            if poll != nil {
+                EmptyView()
             } else {
                 ProgressView()
             }
@@ -43,5 +38,3 @@ struct VotingView: View {
 #Preview {
     VotingView(proposalId: .init(1), onSuccess: {}, onDismiss: {})
 }
-
-

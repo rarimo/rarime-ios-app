@@ -147,6 +147,55 @@ class PollsService {
         
         return call
     }
+    
+    static func decodeVotingData(_ poll: Poll) throws -> VotingData {
+        guard let encodedVotingData = poll.votingData.abiEncode(dynamic: false) else {
+           throw "Empty or nil voting data"
+       }
+        
+        let rawDecoded = try ABIDecoder.decodeTuple(
+            .tuple([
+                .array(type: .uint256, length: nil),
+                .uint256,
+                .uint256,
+                .uint256,
+                .uint256,
+            ]),
+            from: encodedVotingData
+        )
+        
+        guard let rawArray = rawDecoded as? [Any], rawArray.count == 5 else {
+            throw "Decoding error: unexpected structure"
+        }
+        
+        guard let citizenshipMask = rawArray[0] as? [BigUInt] else {
+            throw "Response does not contain array of citizenship masks"
+        }
+        
+        guard let timestampUpperbound = rawArray[1] as? BigUInt else {
+            throw "Response does not contain timestamp upperbound"
+        }
+        
+        guard let identityCounterUpperbound = rawArray[2] as? BigUInt else {
+            throw "Response does not contain identity counter upperbound"
+        }
+        
+        guard let birthDateUpperbound = rawArray[3] as? BigUInt else {
+            throw "Response does not contain birth date upperbound"
+        }
+        
+        guard let expirationDateLowerbound = rawArray[4] as? BigUInt else {
+            throw "Response does not contain expiration date lowerbound"
+        }
+        
+        return VotingData(
+            citizenshipMask: citizenshipMask,
+            timestampUpperbound: timestampUpperbound,
+            identityCounterUpperbound: identityCounterUpperbound,
+            birthDateUpperbound: birthDateUpperbound,
+            expirationDateLowerbound: expirationDateLowerbound
+        )
+    }
 }
 
 struct Poll: Identifiable {
@@ -176,6 +225,14 @@ struct Poll: Identifiable {
 
         return DateUtil.formatDuration(UInt(endDate.timeIntervalSinceNow), precision: .minutes)
     }
+}
+
+struct VotingData: Codable {
+    let citizenshipMask: [BigUInt]
+    let timestampUpperbound : BigUInt
+    let identityCounterUpperbound: BigUInt
+    let birthDateUpperbound: BigUInt
+    let expirationDateLowerbound: BigUInt
 }
 
 struct Question {

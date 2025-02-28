@@ -1,5 +1,9 @@
 import Foundation
 import Web3
+import Identity
+import Web3
+import Web3ContractABI
+import Web3PromiseKit
 
 class PollsViewModel: ObservableObject {
     private static var POLL_BASIC_REWARD: BigUInt = 50
@@ -64,5 +68,115 @@ class PollsViewModel: ObservableObject {
         let proof = try await proposalSmtContract.getProof(nullifier)
         
         return proof.existence
+    }
+    
+    func vote(
+        _ jwt: JWT,
+        _ user: User,
+        _ registerZkProof: ZkProof,
+        _ passport: Passport,
+        _ results: [PollResult]
+    ) async throws {
+        let stateKeeperContract = try StateKeeperContract()
+        let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.api.registrationSmtContractAddress, eip55: false)
+        let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
+        let passportInfoKey = registerZkProof.pubSignals[1]
+        
+        var error: NSError? = nil
+        let proofIndex = IdentityCalculateProofIndex(
+            passportInfoKey,
+            registerZkProof.pubSignals[3],
+            &error
+        )
+        if let error { throw error }
+        guard let proofIndex else { throw "Proof index is not initialized" }
+        
+        let smtProof = try await registrationSmtContract.getProof(proofIndex)
+        
+        let profileInitializer = IdentityProfile()
+        let profile = try profileInitializer.newProfile(user.secretKey)
+        
+        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
+        
+        let resultsJson = try JSONEncoder().encode(results)
+        
+        let voteProof = try await generateVoteProof(
+            stateKeeperContract,
+            profile,
+            passport,
+            smtProof,
+            passportInfoKey,
+            resultsJson,
+            passportInfo,
+            identityInfo
+        )
+        
+        let voteProofJson = try JSONEncoder().encode(voteProof)
+                
+        let calldataBuilder = IdentityCallDataBuilder()
+        let calldata = try calldataBuilder.buildVoteCalldata(
+            voteProofJson,
+            proposalID: Int64(self.selectedPoll!.id),
+            pollResultsJSON: resultsJson,
+            citizenship: "" // TODO: Fix citizenship
+        )
+        
+        let votingRelayer = VotingRelayer(ConfigManager.shared.api.relayerURL) // TODO: change URL
+        
+        let voteResponse = try await votingRelayer.vote(
+            Int(self.selectedPoll!.id),
+            calldata.fullHex,
+            self.selectedPoll!.votingsAddresses[0].hex(eip55: false)
+        )
+        
+        LoggerUtil.common.info("Voting \(self.selectedPoll!.id), txHash: \(voteResponse.data.id)")
+    }
+    
+    private func generateVoteProof(
+        _ stateKeeperContract: StateKeeperContract,
+        _ profile: IdentityProfile,
+        _ passport: Passport,
+        _ smtProof: SMTProof,
+        _ passportInfoKey: String,
+        _ pollResultsJson: Data,
+        _ passportInfo: PassportInfo,
+        _ identityInfo: IdentityInfo
+    ) async throws -> ZkProof {
+        let eventData = try profile.calculateVotingEventData(pollResultsJson)
+        
+        guard let encodedEventId = selectedPoll!.eventId.abiEncode(dynamic: false) else {
+            throw "Decoding event id error"
+        }
+    
+        let votingData = try PollsService.decodeVotingData(selectedPoll!)
+        
+        let queryProofInputs = try profile.buildQueryIdentityInputs(
+            passport.dg1,
+            smtProofJSON: JSONEncoder().encode(smtProof),
+            selector: "6657",
+            pkPassportHash: passportInfoKey,
+            issueTimestamp: identityInfo.issueTimestamp.description,
+            identityCounter: passportInfo.identityReissueCounter.description,
+            eventID: "0x" + encodedEventId,
+            eventData: eventData.description, // check if is working after voting relayer impl
+            timestampLowerbound: "0",
+            timestampUpperbound: votingData.timestampUpperbound.description,
+            identityCounterLowerbound: "0",
+            identityCounterUpperbound: votingData.identityCounterUpperbound.description,
+            expirationDateLowerbound: "0x303030303030",
+            expirationDateUpperbound: votingData.expirationDateLowerbound.description,
+            birthDateLowerbound: "0x303030303030",
+            birthDateUpperbound: votingData.birthDateUpperbound.description,
+            citizenshipMask: votingData.citizenshipMask[0].description
+        )
+        
+        let wtns = try ZKUtils.calcWtnsQueryIdentity(queryProofInputs)
+        
+        let (proofJson, pubSignalsJson) = try ZKUtils.groth16QueryIdentity(wtns)
+        
+        let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
+        let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
+        
+        return ZkProof(proof: proof, pubSignals: pubSignals)
     }
 }

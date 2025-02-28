@@ -111,6 +111,7 @@ struct PollsView: View {
                 .padding(.bottom, 24)
             }
         }
+        .environmentObject(pollsViewModel)
         .background(
             Gradients.gradientFifth
                 .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
@@ -118,8 +119,8 @@ struct PollsView: View {
         )
         .sheet(item: $pollsViewModel.selectedPoll) { poll in
             PollView(poll: poll, onClose: { pollsViewModel.selectedPoll = nil })
+                .environmentObject(pollsViewModel)
         }
-        .environmentObject(pollsViewModel)
         .onAppear {
             self.earlyPullTask = Task { @MainActor in
                 defer { isPollsLoading = false }
