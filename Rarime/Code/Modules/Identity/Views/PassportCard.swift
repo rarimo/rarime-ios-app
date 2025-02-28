@@ -117,7 +117,7 @@ struct PassportCard: View {
                     }
                     Spacer()
                     HStack(spacing: 12) {
-                        Image(isIncognito ? .eyeSlash : .eye)
+                        Image(isIncognito ? .eyeOffLine : .eyeLine)
                             .iconMedium()
                             .padding(8)
                             .background(.bgComponentPrimary, in: Circle())

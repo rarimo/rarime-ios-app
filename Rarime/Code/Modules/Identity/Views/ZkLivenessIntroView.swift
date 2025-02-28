@@ -8,7 +8,7 @@ struct ZkLivenessIntroView: View {
             Circle()
                 .foregroundStyle(Gradients.gradientSixth)
                 .frame(width: 400, height: 394)
-                .offset(x: -0, y: -300)
+                .offset(y: -300)
                 .opacity(0.6)
                 .blur(radius: 160)
             VStack(alignment: .leading, spacing: 40) {
