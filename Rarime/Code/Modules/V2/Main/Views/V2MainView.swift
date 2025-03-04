@@ -16,7 +16,7 @@ struct V2MainView: View {
                 case .wallet: WalletView()
                 case .profile: ProfileView()
             }
-            V2ExternalRequestsView()
+            ExternalRequestsView()
         }
         .sheet(isPresented: $viewModel.isQrCodeScanSheetShown) {
             ScanQRView(

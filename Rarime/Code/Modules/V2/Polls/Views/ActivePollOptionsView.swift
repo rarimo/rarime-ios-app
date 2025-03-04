@@ -1,11 +1,8 @@
 import SwiftUI
 
-struct PollResult: Codable {
-    let questionIndex: Int
-    let answerIndex: Int?
-}
-
 struct ActivePollOptionsView: View {
+    @EnvironmentObject var passportManager: PassportManager
+    
     let poll: Poll
     
     let onSubmit: ([PollResult]) -> Void
@@ -14,8 +11,12 @@ struct ActivePollOptionsView: View {
     @State private var selectedOption: Int? = nil
     @State private var pollResults: [PollResult] = []
 
-    var currentQuestion: Question {
+    private var currentQuestion: Question {
         poll.questions[currentOptionIndex]
+    }
+    
+    private var isVerified: Bool {
+        passportManager.passport != nil
     }
 
     var body: some View {
@@ -88,12 +89,13 @@ struct ActivePollOptionsView: View {
                 }
             )
             .controlSize(.large)
-            .disabled(selectedOption == nil)
+            .disabled(selectedOption == nil || !isVerified)
         }
     }
 }
 
 #Preview {
     ActivePollOptionsView(poll: ACTIVE_POLLS[0], onSubmit: { _ in })
+        .environmentObject(PassportManager())
         .padding(.horizontal, 24)
 }

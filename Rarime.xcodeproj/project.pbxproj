@@ -159,7 +159,6 @@
 		C75512962C87617B000258AD /* RemoveCase.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C75512952C87617B000258AD /* RemoveCase.mp4 */; };
 		C75529F62D64DC7100C8B2F4 /* ViewArrayBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75529F52D64DC6900C8B2F4 /* ViewArrayBuilder.swift */; };
 		C755353F2D6F196C00A562B5 /* ChildOffsetReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755353E2D6F196700A562B5 /* ChildOffsetReader.swift */; };
-		C75535432D6F2EA300A562B5 /* V2ExternalRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75535422D6F2E9A00A562B5 /* V2ExternalRequestsView.swift */; };
 		C75535482D6F2EF900A562B5 /* VotingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75535472D6F2EF300A562B5 /* VotingView.swift */; };
 		C755354C2D6F4E6000A562B5 /* PollsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755354B2D6F4E5F00A562B5 /* PollsService.swift */; };
 		C755354F2D6F74D000A562B5 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C755354E2D6F74D000A562B5 /* Identity.xcframework */; };
@@ -557,7 +556,6 @@
 		C75512952C87617B000258AD /* RemoveCase.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = RemoveCase.mp4; sourceTree = "<group>"; };
 		C75529F52D64DC6900C8B2F4 /* ViewArrayBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewArrayBuilder.swift; sourceTree = "<group>"; };
 		C755353E2D6F196700A562B5 /* ChildOffsetReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildOffsetReader.swift; sourceTree = "<group>"; };
-		C75535422D6F2E9A00A562B5 /* V2ExternalRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2ExternalRequestsView.swift; sourceTree = "<group>"; };
 		C75535472D6F2EF300A562B5 /* VotingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingView.swift; sourceTree = "<group>"; };
 		C755354B2D6F4E5F00A562B5 /* PollsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollsService.swift; sourceTree = "<group>"; };
 		C755354E2D6F74D000A562B5 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
@@ -885,6 +883,7 @@
 		5617AB112C8F47B1003947C9 /* ExternalRequests */ = {
 			isa = PBXGroup;
 			children = (
+				C75535472D6F2EF300A562B5 /* VotingView.swift */,
 				5617AB122C8F47C2003947C9 /* ProofRequestView.swift */,
 				C789A2E72CA5978B00443900 /* LightVerificationView.swift */,
 			);
@@ -1291,14 +1290,6 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
-		C75535442D6F2ED000A562B5 /* ExternalRequestsViews */ = {
-			isa = PBXGroup;
-			children = (
-				C75535472D6F2EF300A562B5 /* VotingView.swift */,
-			);
-			path = ExternalRequestsViews;
-			sourceTree = "<group>";
-		};
 		C7780C922D634D770050B5BB /* Rewards */ = {
 			isa = PBXGroup;
 			children = (
@@ -1384,8 +1375,6 @@
 		C7DF8BE72D5F686200C8E2D2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C75535442D6F2ED000A562B5 /* ExternalRequestsViews */,
-				C75535422D6F2E9A00A562B5 /* V2ExternalRequestsView.swift */,
 				C7DF8BE42D5F686200C8E2D2 /* V2MainView.swift */,
 				C7DF8BE52D5F686200C8E2D2 /* V2MainViewLayout.swift */,
 				C7DF8BE62D5F686200C8E2D2 /* V2NavBarView.swift */,
@@ -2116,7 +2105,6 @@
 				CEFE5F392CB56C8700498F39 /* CryptoUtils.swift in Sources */,
 				568D45CA2C29AFCB0065D467 /* FeedbackMailView.swift in Sources */,
 				C7D6245A2D6DB9DB007BA5A6 /* GlassBottomSheet.swift in Sources */,
-				C75535432D6F2EA300A562B5 /* V2ExternalRequestsView.swift in Sources */,
 				56E6AD4D2BD273BC00E4DDC1 /* ProfileRouteLayout.swift in Sources */,
 				56E2D91B2BCEA66A006E725D /* PassportCard.swift in Sources */,
 				5617AB132C8F47C2003947C9 /* ProofRequestView.swift in Sources */,

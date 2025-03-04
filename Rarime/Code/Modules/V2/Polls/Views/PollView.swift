@@ -11,11 +11,6 @@ struct PollView: View {
     
     @State private var isSubmitting = false
     
-    var totalParticipants: Int {
-        let questionParticipants = poll.proposalResults.map { $0.reduce(0) { $0 + Int($1) } }
-        return questionParticipants.max() ?? 0
-    }
-    
     var body: some View {
         VStack(spacing: 8) {
             AppIconButton(icon: Icons.closeFill, action: onClose)
@@ -37,7 +32,7 @@ struct PollView: View {
                             HStack(alignment: .center, spacing: 8) {
                                 Image(Icons.groupLine)
                                     .iconSmall()
-                                Text(totalParticipants.formatted())
+                                Text(pollsViewModel.pollTotalParticipants.formatted())
                                     .subtitle7()
                             }
                         }
@@ -84,7 +79,7 @@ struct PollView: View {
 
 #Preview {
     PollView(poll: ACTIVE_POLLS[0], onClose: {})
-        .environmentObject(PollsViewModel(poll: ACTIVE_POLLS[0]))
+        .environmentObject(PollsViewModel())
         .environmentObject(UserManager())
         .environmentObject(PassportManager())
         .environmentObject(DecentralizedAuthManager())

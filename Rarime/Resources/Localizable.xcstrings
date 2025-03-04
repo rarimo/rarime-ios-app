@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     " and " : {
       "localizations" : {
         "uk" : {
@@ -1597,9 +1594,6 @@
         }
       }
     },
-    "Light Verification" : {
-
-    },
     "Limited time events" : {
 
     },
@@ -2084,9 +2078,6 @@
           }
         }
       }
-    },
-    "Proof Request" : {
-
     },
     "Proofs" : {
       "localizations" : {

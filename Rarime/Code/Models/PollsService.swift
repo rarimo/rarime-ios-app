@@ -241,6 +241,21 @@ struct Question {
     let isSkipable: Bool
 }
 
+struct QuestionResult: Hashable {
+    let question: String
+    let options: [QuestionResultOption]
+}
+
+struct QuestionResultOption: Hashable {
+    let answer: String
+    let votes: Int
+}
+
+struct PollResult: Codable {
+    let questionIndex: Int
+    let answerIndex: Int?
+}
+
 extension BigUInt {
     static func fromRawSolidityArray(_ data: Data) throws -> BigUInt {
         let decoded = try ABIDecoder.decodeTuple(.uint256, from: data.fullHex)

@@ -51,10 +51,10 @@ struct GlassBottomSheet<Content: View>: View {
                     .coordinateSpace(name: spaceName)
                     .scrollDisabled(currentHeight < maxHeight)
                 }
-                .disabled(!canOpenSheet)
             }
             .frame(width: proxy.size.width, height: effectiveHeight, alignment: .top)
             .offset(y: proxy.size.height - effectiveHeight)
+            .allowsHitTesting(canOpenSheet)
             .gesture(
                 DragGesture()
                     .updating($dragOffset) { value, state, _ in

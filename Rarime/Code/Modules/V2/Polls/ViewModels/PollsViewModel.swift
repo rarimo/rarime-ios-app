@@ -5,8 +5,9 @@ import Web3
 import Web3ContractABI
 import Web3PromiseKit
 
+private let ZERO_IN_HEX: String = "0x303030303030"
+
 class PollsViewModel: ObservableObject {
-    private static var POLL_BASIC_REWARD: BigUInt = 50
     private static var FIRST_POLL_MAX_LIMIT: BigUInt = 20
     private static var POLL_MAX_LIMIT: BigUInt = 10
     
@@ -21,7 +22,15 @@ class PollsViewModel: ObservableObject {
         self.selectedPoll = poll
     }
     
-    var hasMore: Bool { self.polls.count < self.lastProposalId }
+    var hasMorePolls: Bool {
+        self.polls.count < self.lastProposalId
+    }
+    
+    var pollTotalParticipants: Int {
+        guard let poll = selectedPoll else { return 0 }
+        let questionParticipants = poll.proposalResults.map { $0.reduce(0) { $0 + Int($1) } }
+        return questionParticipants.max() ?? 0
+    }
     
     func loadNewPolls() async throws {
         if isFetchingMore {
@@ -163,9 +172,9 @@ class PollsViewModel: ObservableObject {
             timestampUpperbound: votingData.timestampUpperbound.description,
             identityCounterLowerbound: "0",
             identityCounterUpperbound: votingData.identityCounterUpperbound.description,
-            expirationDateLowerbound: "0x303030303030",
+            expirationDateLowerbound: ZERO_IN_HEX,
             expirationDateUpperbound: votingData.expirationDateLowerbound.description,
-            birthDateLowerbound: "0x303030303030",
+            birthDateLowerbound: ZERO_IN_HEX,
             birthDateUpperbound: votingData.birthDateUpperbound.description,
             citizenshipMask: votingData.citizenshipMask[0].description
         )

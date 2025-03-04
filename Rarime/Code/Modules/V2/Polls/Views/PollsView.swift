@@ -148,13 +148,11 @@ struct PollsView: View {
 }
 
 private struct PollListCard: View {
+    @EnvironmentObject var pollsViewModel: PollsViewModel
+    
     let poll: Poll
 
     let onViewPoll: () -> Void
-    
-    var totalParticipants: Int {
-        return poll.proposalResults.map { $0.reduce(0) { $0 + Int($1) } }.max() ?? 0
-    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -173,7 +171,7 @@ private struct PollListCard: View {
                     HStack(alignment: .center, spacing: 8) {
                         Image(Icons.groupLine)
                             .iconSmall()
-                        Text(totalParticipants.formatted())
+                        Text(pollsViewModel.pollTotalParticipants.formatted())
                             .subtitle7()
                     }
                 }

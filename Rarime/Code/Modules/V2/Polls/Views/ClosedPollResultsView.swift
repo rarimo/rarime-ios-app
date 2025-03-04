@@ -1,15 +1,5 @@
 import SwiftUI
 
-struct QuestionResult: Hashable {
-    let question: String
-    let options: [QuestionResultOption]
-}
-
-struct QuestionResultOption: Hashable {
-    let answer: String
-    let votes: Int
-}
-
 struct ClosedPollResultsView: View {
     let poll: Poll
     

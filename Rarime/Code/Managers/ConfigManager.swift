@@ -51,12 +51,12 @@ extension ConfigManager {
         let referralURL: URL
         let joinRewardsKey: String
         let lightSignaturePrivateKey: String
-        let qRpcURL: URL
         let proposalsStateContractAddress: String
         let multicall3ContractAddress: String
         let ipfsNodeURL: URL
         let votingWebsiteURL: URL
         let votingRelayerURL: URL
+        let votingRpcURL: URL
       
         init() {
             do {
@@ -73,12 +73,12 @@ extension ConfigManager {
                 self.referralURL = try readURLFromInfoPlist(key: "REFERRAL_URL")
                 self.joinRewardsKey = try readFromInfoPlist(key: "JOIN_REWARDS_KEY")
                 self.lightSignaturePrivateKey = try readFromInfoPlist(key: "LIGHT_SIGNATURE_PRIVATE_KEY")
-                self.qRpcURL = try readURLFromInfoPlist(key: "Q_RPC_URL")
                 self.proposalsStateContractAddress = try readFromInfoPlist(key: "PROPOSALS_STATE_CONTRACT_ADDRESS")
                 self.multicall3ContractAddress = try readFromInfoPlist(key: "MULTICALL3_CONTRACT_ADDRESS")
                 self.ipfsNodeURL = try readURLFromInfoPlist(key: "IPFS_NODE_URL")
                 self.votingWebsiteURL = try readURLFromInfoPlist(key: "VOTING_WEBSITE_URL")
                 self.votingRelayerURL = try readURLFromInfoPlist(key: "VOTING_RELAYER_URL")
+                self.votingRpcURL = try readURLFromInfoPlist(key: "VOTING_RPC_URL")
             } catch {
                 fatalError("ConfigManager.API init error: \(error.localizedDescription)")
             }

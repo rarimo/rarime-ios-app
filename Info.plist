@@ -161,8 +161,8 @@
 	<string>${DENOM}</string>
 	<key>EVM_RPC_URL</key>
 	<string>${EVM_RPC_URL}</string>
-	<key>Q_RPC_URL</key>
-	<string>${Q_RPC_URL}</string>
+	<key>VOTING_RPC_URL</key>
+	<string>${VOTING_RPC_URL}</string>
 	<key>FEEDBACK_EMAIL</key>
 	<string>${FEEDBACK_EMAIL}</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>

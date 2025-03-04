@@ -13,7 +13,7 @@ class Multicall3Contract {
     let contract: DynamicContract
     
     init() throws {
-        self.web3 = Web3(rpcURL: ConfigManager.shared.api.qRpcURL.absoluteString)
+        self.web3 = Web3(rpcURL: ConfigManager.shared.api.votingRpcURL.absoluteString)
         
         let contractAddress = try EthereumAddress(hex: ConfigManager.shared.api.multicall3ContractAddress, eip55: false)
         

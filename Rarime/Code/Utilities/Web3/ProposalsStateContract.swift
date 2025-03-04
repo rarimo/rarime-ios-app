@@ -12,7 +12,7 @@ class ProposalsStateContract {
     let contract: DynamicContract
     
     init() throws {
-        self.web3 = Web3(rpcURL: ConfigManager.shared.api.qRpcURL.absoluteString)
+        self.web3 = Web3(rpcURL: ConfigManager.shared.api.votingRpcURL.absoluteString)
         
         let contractAddress = try EthereumAddress(hex: ConfigManager.shared.api.proposalsStateContractAddress, eip55: false)
                 
