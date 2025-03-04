@@ -276,6 +276,7 @@
 		CE72102E2BD7F6780043DB7F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE72102D2BD7F6780043DB7F /* Alamofire */; };
 		CE7210312BD807140043DB7F /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = CE7210302BD807140043DB7F /* ZipArchive */; };
 		CE7210332BD818020043DB7F /* Double+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7210322BD818020043DB7F /* Double+Rounded.swift */; };
+		CE7BDE7B2D775DD8005AB8FD /* Swoir in Frameworks */ = {isa = PBXBuildFile; productRef = CE7BDE7A2D775DD8005AB8FD /* Swoir */; };
 		CE7BFAFD2D5A0A8D00B7CBAC /* ReadNfcUsa.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CE7BFAFB2D5A0A8D00B7CBAC /* ReadNfcUsa.mp4 */; };
 		CE7BFAFE2D5A0A8D00B7CBAC /* ScanMrzUsa.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CE7BFAFC2D5A0A8D00B7CBAC /* ScanMrzUsa.mp4 */; };
 		CE7D8AAC2BFB52EE009AF212 /* OpenApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7D8AAB2BFB52EE009AF212 /* OpenApiError.swift */; };
@@ -760,6 +761,7 @@
 				CE28D4FD2D3E887300042E1D /* libwitnesscalc_registerIdentity_21_256_3_3_336_232_NA.a in Frameworks */,
 				CE28D4FE2D3E887300042E1D /* libwitnesscalc_registerIdentity_2_256_3_6_336_248_1_2432_3_256.a in Frameworks */,
 				CE28D4FF2D3E887300042E1D /* libwitnesscalc_registerIdentity_21_256_3_3_576_232_NA.a in Frameworks */,
+				CE7BDE7B2D775DD8005AB8FD /* Swoir in Frameworks */,
 				CE28D5002D3E887300042E1D /* libwitnesscalc_registerIdentityLight224.a in Frameworks */,
 				CE28D5012D3E887300042E1D /* libwitnesscalc_registerIdentity_2_256_3_6_576_248_1_2432_3_256.a in Frameworks */,
 				CE28D5032D3E887300042E1D /* libwitnesscalc_queryIdentity.a in Frameworks */,
@@ -1699,6 +1701,7 @@
 				CE3477522C7885DA005E91FE /* FirebaseMessaging */,
 				5651D0792CB94C4400C6A704 /* AppsFlyerLib-Static */,
 				CEF5C2B52D3FEC3500E143D7 /* RarimeIOSUtils */,
+				CE7BDE7A2D775DD8005AB8FD /* Swoir */,
 			);
 			productName = Rarime;
 			productReference = CE9E82B22BA881F400AAF885 /* Rarime.app */;
@@ -1748,6 +1751,7 @@
 				CE34774F2C7885DA005E91FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				568EEE992CB9445E00F0950A /* XCRemoteSwiftPackageReference "AppsFlyerFramework-Static" */,
 				CEF5C2B42D3FEC3500E143D7 /* XCRemoteSwiftPackageReference "RarimeIOSUtils" */,
+				CE7BDE792D775DD8005AB8FD /* XCRemoteSwiftPackageReference "Swoir" */,
 			);
 			productRefGroup = CE9E82B32BA881F400AAF885 /* Products */;
 			projectDirPath = "";
@@ -2994,6 +2998,14 @@
 				version = 2.5.5;
 			};
 		};
+		CE7BDE792D775DD8005AB8FD /* XCRemoteSwiftPackageReference "Swoir" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swoir/Swoir.git";
+			requirement = {
+				kind = exactVersion;
+				version = "1.0.0-beta.3-2";
+			};
+		};
 		CE9347712C205B340034885C /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:lorenzofiamingo/swiftui-cached-async-image.git";
@@ -3127,6 +3139,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE72102F2BD807140043DB7F /* XCRemoteSwiftPackageReference "ZipArchive" */;
 			productName = ZipArchive;
+		};
+		CE7BDE7A2D775DD8005AB8FD /* Swoir */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE7BDE792D775DD8005AB8FD /* XCRemoteSwiftPackageReference "Swoir" */;
+			productName = Swoir;
 		};
 		CE7E957F2CE774BF00D86A4F /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;

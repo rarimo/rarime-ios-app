@@ -122,3 +122,9 @@ class ZKUtils {
         }
     }
 }
+
+extension ZKUtils {
+    static func generateNoirWitness(_ inputs: Data, _ circuit: Data) throws -> Data {
+        return Data()
+    }
+}

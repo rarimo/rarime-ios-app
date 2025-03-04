@@ -3,27 +3,55 @@ import FirebaseCore
 import FirebaseMessaging
 import SwiftUI
 
+import Swoir
+import Swoirenberg
+
 @main
 struct RarimeApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+//    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
         WindowGroup {
-            AppView()
-                .environmentObject(AlertManager.shared)
-                .environmentObject(UserManager.shared)
-                .environmentObject(ConfigManager.shared)
-                .environmentObject(SecurityManager.shared)
-                .environmentObject(WalletManager.shared)
-                .environmentObject(SettingsManager.shared)
-                .environmentObject(PassportManager.shared)
-                .environmentObject(AppIconManager.shared)
-                .environmentObject(UpdateManager.shared)
-                .environmentObject(DecentralizedAuthManager.shared)
-                .environmentObject(CircuitDataManager.shared)
-                .environmentObject(NotificationManager.shared)
-                .environmentObject(ExternalRequestsManager.shared)
-                .environmentObject(InternetConnectionManager.shared)
+//            AppView()
+//                .environmentObject(AlertManager.shared)
+//                .environmentObject(UserManager.shared)
+//                .environmentObject(ConfigManager.shared)
+//                .environmentObject(SecurityManager.shared)
+//                .environmentObject(WalletManager.shared)
+//                .environmentObject(SettingsManager.shared)
+//                .environmentObject(PassportManager.shared)
+//                .environmentObject(AppIconManager.shared)
+//                .environmentObject(UpdateManager.shared)
+//                .environmentObject(DecentralizedAuthManager.shared)
+//                .environmentObject(CircuitDataManager.shared)
+//                .environmentObject(NotificationManager.shared)
+//                .environmentObject(ExternalRequestsManager.shared)
+//                .environmentObject(InternetConnectionManager.shared)
+            VStack {}
+                .onAppear {
+                    LoggerUtil.common.debug("App started")
+                    
+                    Task {
+                        do {
+                            let exampleCircuit = NSDataAsset(name: "exampleCircuit")!.data
+                            let exampleWitness = NSDataAsset(name: "exampleWitness")!.data
+                            
+                            let swoir = Swoir(backend: Swoirenberg.self)
+                            
+                            let circuit = try swoir.createCircuit(manifest: exampleCircuit)
+                            
+                            try circuit.setupSrs()
+                            
+                            let proof = try circuit.prove(["a": 1, "b": 2, "c": 3])
+                            
+                            let isProofVerified = try circuit.verify(proof)
+                            
+                            LoggerUtil.common.info("isProofVerified: \(isProofVerified)")
+                        } catch {
+                            LoggerUtil.common.error("failed to calculate plonk proof: \(error.localizedDescription)")
+                        }
+                    }
+                }
         }
     }
 }
