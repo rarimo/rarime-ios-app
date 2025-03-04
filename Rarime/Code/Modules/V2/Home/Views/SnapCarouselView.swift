@@ -10,7 +10,6 @@ struct SnapCarouselView: View {
     var dampFactor: CGFloat
     
     @GestureState var offset: CGFloat = 0
-    @State var currentIndex: Int = 0
     
     init(
         index: Binding<Int>,
@@ -34,44 +33,36 @@ struct SnapCarouselView: View {
             let currentAdjustedOffset = self.adjustedOffset(for: offset)
             let effectiveIndex = self.effectiveIndex(using: currentAdjustedOffset, offsetHeight: offsetHeight)
             VStack(spacing: spacing) {
-                ForEach(views.indices, id: \.self) { idx in
-                    let distance = abs(CGFloat(idx) - effectiveIndex)
+                ForEach(views.indices, id: \.self) { index in
+                    let distance = abs(CGFloat(index) - effectiveIndex)
                     let scale = 1 - (0.1 * min(distance, 1))
-                    views[idx]
+                    views[index]
                         .frame(height: proxy.size.height - trailingSpace)
                         .scaleEffect(scale, anchor: .top)
                 }
             }
-            .offset(y: (CGFloat(currentIndex) * -offsetHeight) + currentAdjustedOffset)
+            .offset(y: (CGFloat(index) * -offsetHeight) + currentAdjustedOffset)
             .gesture(
                 DragGesture()
                     .updating($offset, body: { value, out, _ in
                         out = value.translation.height
                     })
-                    .onEnded({ value in
+                    .onEnded { value in
                         let offsetY = value.translation.height
                         let progress = -offsetY / offsetHeight * sensitivity
-                        let roundedIndex = progress.rounded()
+                        let delta = min(max(Int(progress.rounded()), -1), 1)
+                        let newIndex = max(min(index + delta, views.count - 1), 0)
                         
-                        currentIndex = max(min(currentIndex + Int(roundedIndex), views.count - 1), 0)
-                        currentIndex = index
-                    })
-                    .onChanged({ value in
-                        let offsetY = value.translation.height
-                        let progress = -offsetY / offsetHeight * sensitivity
-                        let roundedIndex = progress.rounded()
-                        let newIndex = max(min(currentIndex + Int(roundedIndex), views.count - 1), 0)
-                                                
                         if newIndex != index {
                             FeedbackGenerator.shared.impact(.light)
                         }
                         
                         index = newIndex
-                    })
+                    }
             )
         }
         .padding(.top, 42)
-        .animation(.interpolatingSpring(mass: 1, stiffness: 100, damping: 15), value: offset == 0)
+        .animation(.interpolatingSpring(mass: 1, stiffness: 100, damping: 15), value: index)
     }
     
     private func offsetHeight(for size: CGSize) -> CGFloat {
@@ -79,16 +70,16 @@ struct SnapCarouselView: View {
     }
     
     private func adjustedOffset(for gestureOffset: CGFloat) -> CGFloat {
-        if currentIndex == 0 && gestureOffset > 0 {
+        if index == 0 && gestureOffset > 0 {
             return gestureOffset * dampFactor
-        } else if currentIndex == views.count - 1 && gestureOffset < 0 {
+        } else if index == views.count - 1 && gestureOffset < 0 {
             return gestureOffset * dampFactor
         }
         return gestureOffset
     }
     
     private func effectiveIndex(using adjustedOffset: CGFloat, offsetHeight: CGFloat) -> CGFloat {
-        CGFloat(currentIndex) - (adjustedOffset / offsetHeight)
+        CGFloat(index) - (adjustedOffset / offsetHeight)
     }
 }
 
