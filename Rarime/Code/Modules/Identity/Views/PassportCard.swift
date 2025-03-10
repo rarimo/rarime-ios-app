@@ -1,8 +1,12 @@
 import SwiftUI
 
 struct PassportCard: View {
+    @EnvironmentObject private var passportViewModel: PassportViewModel
+    @EnvironmentObject private var userManager: UserManager
+    
     let passport: Passport
     let isWaitlist: Bool
+    
     @Binding var look: PassportCardLook
     @Binding var isIncognito: Bool
     @Binding var identifiers: [PassportIdentifier]
@@ -23,11 +27,15 @@ struct PassportCard: View {
     var isBadgeShown: Bool {
         isWaitlist
     }
+    
+    var isDisabled: Bool {
+        userManager.user?.status != .passportScanned
+    }
 
     var body: some View {
         VStack(spacing: isBadgeShown ? -48 : 0) {
             if isBadgeShown {
-                passportBadge
+                passportBadgeWrapper
             }
             cardContent.dynamicSheet(
                 isPresented: $isSettingsSheetPresented,
@@ -38,28 +46,24 @@ struct PassportCard: View {
         }
     }
 
-    private var passportBadge: some View {
+    private var passportBadgeWrapper: some View {
         HStack(spacing: 16) {
             if isWaitlist {
                 Image(Icons.globeSimpleTime)
-                    .square(24)
+                    .iconLarge()
                     .foregroundStyle(.warningMain)
             } else {
                 Image(Icons.globeSimpleX)
-                    .square(24)
+                    .iconLarge()
                     .foregroundStyle(.errorMain)
             }
-            VStack(alignment: .leading, spacing: 0) {
-                Text(isWaitlist ? "Waitlist country" : "Unsupported for rewards")
-                    .subtitle7()
-                    .foregroundStyle(.textPrimary)
-                if isWaitlist {
-                    Text("You will be notified once added")
-                        .body5()
-                        .foregroundStyle(.textSecondary)
-                }
-            }
+            Text(isWaitlist ? "Waitlisted country" : "Unsupported for rewards")
+                .subtitle6()
+                .foregroundStyle(.textPrimary)
             Spacer()
+            Image(Icons.informationLine)
+                .iconMedium()
+                .foregroundStyle(.textSecondary)
         }
         .frame(maxWidth: .infinity)
         .padding(.top, 12)
@@ -69,10 +73,6 @@ struct PassportCard: View {
     }
 
     private var cardContent: some View {
-        let nameParts = passport.fullName.split(separator: " ")
-        let firstName = nameParts.first == nil ? passport.firstName : String(nameParts.first!)
-        let lastName = nameParts.dropFirst().joined(separator: " ")
-
         let firstNameValue: String = isInfoHidden ? "•••••" : passport.displayedFirstName
         let lastNameValue = isInfoHidden ? "••••••••••••" : passport.displayedLastName
         let ageValue = isInfoHidden ? "•••••••••" : String(localized: "\(passport.ageString) years old")
@@ -90,7 +90,7 @@ struct PassportCard: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(firstNameValue)
                         .h2()
-                        .foregroundStyle(.textPrimary)
+                        .foregroundStyle(isDisabled ? .textPlaceholder : .textPrimary)
                     Text(lastNameValue)
                         .additional2()
                         .foregroundStyle(.textPlaceholder)
@@ -103,56 +103,40 @@ struct PassportCard: View {
                     .foregroundStyle(.textSecondary)
                     .padding(.horizontal, 16)
                 Spacer()
-                    .frame(height: 108)
-                HStack(alignment: .center) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        ForEach(identifiers, id: \.self) { identifier in
-                            Text(identifier.title)
-                                .subtitle6()
-                                .foregroundStyle(.textSecondary)
-                            Text(isInfoHidden ? identifier.valueStub : identifier.getPassportValue(from: passport))
-                                .subtitle5()
-                                .foregroundStyle(.textPrimary)
-                        }
+                Group {
+                    if userManager.user?.status == .passportScanned {
+                        cardIdentityDetails
                     }
-                    Spacer()
-                    HStack(spacing: 12) {
-                        Image(isIncognito ? .eyeOffLine : .eyeLine)
-                            .iconMedium()
-                            .padding(8)
-                            .background(.bgComponentPrimary, in: Circle())
-                            .foregroundColor(.textSecondary)
-                            .onTapGesture { isIncognito.toggle() }
-                        Image(.dotsThreeOutline)
-                            .iconMedium()
-                            .padding(8)
-                            .background(.bgComponentPrimary, in: Circle())
-                            .foregroundColor(.textSecondary)
-                            .onTapGesture { isSettingsSheetPresented.toggle() }
+                    if passportViewModel.processingStatus == .processing &&
+                       userManager.user?.status == .unscanned {
+                        cardProofGeneration
+                    }
+                    if passportViewModel.processingStatus == .success {
+                        cardProofError
                     }
                 }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-                .frame(height: 64)
-                .background(.bgBlur, in: RoundedRectangle(cornerRadius: 16))
+                .transition(.opacity)
             }
             Text("PASSPORT")
                 .overline2()
-                .foregroundStyle(.textPrimary)
+                .foregroundStyle(isDisabled ? .textPlaceholder : .textPrimary)
                 .padding(.vertical, 2)
                 .padding(.horizontal, 8)
                 .background(.bgComponentPrimary, in: Capsule())
                 .padding(8)
         }
         .frame(maxWidth: .infinity)
+        .frame(height: 326)
         .padding(8)
         .background(
             Image(look.backgroundImage)
                 .resizable()
                 .scaledToFill()
                 .background(.bgPrimary)
+                .grayscale(isDisabled ? 1 : 0)
         )
         .clipShape(RoundedRectangle(cornerRadius: 24))
+        .animation(.easeInOut, value: isDisabled)
         .gesture(
             DragGesture(minimumDistance: 0)
                 .updating($isHolding) { _, state, _ in
@@ -185,6 +169,107 @@ struct PassportCard: View {
         }
         .padding(.vertical, 16)
         .padding(.horizontal, 20)
+    }
+    
+    private var cardIdentityDetails: some View {
+        HStack(alignment: .center) {
+            VStack(alignment: .leading, spacing: 4) {
+                ForEach(identifiers, id: \.self) { identifier in
+                    Text(identifier.title)
+                        .subtitle6()
+                        .foregroundStyle(.textSecondary)
+                    Text(isInfoHidden ? identifier.valueStub : identifier.getPassportValue(from: passport))
+                        .subtitle5()
+                        .foregroundStyle(.textPrimary)
+                }
+            }
+            Spacer()
+            HStack(spacing: 12) {
+                Image(isIncognito ? .eyeOffLine : .eyeLine)
+                    .iconMedium()
+                    .padding(8)
+                    .background(.bgComponentPrimary, in: Circle())
+                    .foregroundColor(.textSecondary)
+                    .onTapGesture { isIncognito.toggle() }
+                Image(.dotsThreeOutline)
+                    .iconMedium()
+                    .padding(8)
+                    .background(.bgComponentPrimary, in: Circle())
+                    .foregroundColor(.textSecondary)
+                    .onTapGesture { isSettingsSheetPresented.toggle() }
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+        .frame(height: 64)
+        .background(.bgBlur, in: RoundedRectangle(cornerRadius: 16))
+    }
+    
+    private var cardProofGeneration: some View {
+        VStack(alignment: .center, spacing: 2) {
+            HStack(alignment: .center, spacing: 16) {
+                GeometryReader { geometry in
+                    ZStack(alignment: .leading) {
+                        Capsule()
+                            .fill(.bgComponentPrimary)
+                            .frame(height: 4)
+                        Capsule()
+                            .fill(.secondaryMain)
+                            .frame(width: geometry.size.width * (passportViewModel.proofState.progress / 100.0),
+                                   height: 3)
+                            .animation(.easeInOut, value: passportViewModel.proofState.progress)
+                    }
+                }
+                .frame(height: 4)
+                Text(passportViewModel.proofState.title)
+                    .subtitle6()
+                    .foregroundStyle(.textSecondary)
+                    .frame(width: 90, alignment: .center)
+            }
+            Text("Please don’t close application")
+                .body5()
+                .foregroundStyle(.textSecondary)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .frame(height: 64)
+        .background(.bgBlur, in: RoundedRectangle(cornerRadius: 16))
+    }
+    
+    private var cardProofError: some View {
+        HStack(alignment: .center, spacing: 8) {
+            Image(Icons.informationLine)
+                .iconMedium()
+                .foregroundStyle(.errorDark)
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Unknown error")
+                    .subtitle6()
+                    .foregroundStyle(.errorDark)
+                Text("Please try again")
+                    .body5()
+                    .foregroundStyle(.textSecondary)
+            }
+            Spacer()
+            // TODO: sync with design system
+            Button(action: {}) {
+                HStack(alignment: .center, spacing: 8) {
+                    Image(Icons.restartLine)
+                        .iconMedium()
+                        .foregroundStyle(.baseWhite)
+                    Text("Retry")
+                        .buttonMedium()
+                        .foregroundStyle(.invertedLight)
+                }
+            }
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .frame(height: 32)
+            .background(Capsule().fill(.textPrimary))
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .frame(height: 64)
+        .background(.bgBlur, in: RoundedRectangle(cornerRadius: 16))
     }
 }
 
@@ -302,4 +387,6 @@ private struct PreviewView: View {
 
 #Preview {
     PreviewView()
+        .environmentObject(PassportViewModel())
+        .environmentObject(UserManager())
 }

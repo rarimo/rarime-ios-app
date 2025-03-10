@@ -69,6 +69,7 @@
       }
     },
     "%@, Age: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -216,6 +217,7 @@
 
     },
     "All Done!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -282,7 +284,11 @@
         }
       }
     },
+    "Applying" : {
+
+    },
     "Applying Zero Knowledge" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -713,7 +719,11 @@
         }
       }
     },
+    "Creating" : {
+
+    },
     "Creating a confidential profile" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -724,6 +734,7 @@
       }
     },
     "Creating an incognito profile" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -769,6 +780,7 @@
       }
     },
     "Data generates an incognito profile" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -813,6 +825,7 @@
 
     },
     "Document class mode" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -823,6 +836,7 @@
       }
     },
     "Document data" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -852,6 +866,7 @@
 
     },
     "Done" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -861,7 +876,11 @@
         }
       }
     },
+    "Downloading" : {
+
+    },
     "Downloading data" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1041,6 +1060,7 @@
       }
     },
     "Failed" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1069,6 +1089,7 @@
 
     },
     "Female" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1275,9 +1296,6 @@
     "ID Card" : {
 
     },
-    "Identifiers" : {
-
-    },
     "If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards" : {
 
     },
@@ -1374,6 +1392,7 @@
 
     },
     "Issuing state code" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1574,6 +1593,7 @@
 
     },
     "Male" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1946,6 +1966,9 @@
         }
       }
     },
+    "Please don’t close application" : {
+
+    },
     "Please fill these fields" : {
 
     },
@@ -1959,7 +1982,11 @@
         }
       }
     },
+    "Please try again" : {
+
+    },
     "Please try again later" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1973,6 +2000,7 @@
 
     },
     "Please Wait..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2258,6 +2286,9 @@
 
     },
     "Restore your account" : {
+
+    },
+    "Retry" : {
 
     },
     "Reunion" : {
@@ -2752,6 +2783,9 @@
     "Unknown Country" : {
 
     },
+    "Unknown error" : {
+
+    },
     "Unknown service error" : {
 
     },
@@ -2814,10 +2848,10 @@
     "Virgin Islands, U.S." : {
 
     },
-    "Waitlist country" : {
+    "Waitlist passport" : {
 
     },
-    "Waitlist passport" : {
+    "Waitlisted country" : {
 
     },
     "Wallet" : {
@@ -2954,9 +2988,6 @@
     "You must be invited or receive a code from social channels" : {
 
     },
-    "You will be notified once added" : {
-
-    },
     "You’ve joined the waitlist" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -3001,6 +3032,7 @@
 
     },
     "Your passport proof is ready" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
