@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct V2InviteFriendsView: View {
-    let balance: PointsBalanceRaw
+    let balance: PointsBalanceRaw?
     let onClose: () -> Void
-    
+
     var animation: Namespace.ID
-    
+
     var body: some View {
         VStack(spacing: 0) {
             AppIconButton(icon: Icons.closeFill, action: onClose)
@@ -52,7 +52,7 @@ struct V2InviteFriendsView: View {
                     Text("Share your referral link and get bonuses when your friends join and make a purchase!")
                         .body3()
                         .foregroundStyle(.baseBlack.opacity(0.5))
-                    if let codes = balance.referralCodes {
+                    if let codes = balance?.referralCodes {
                         ScrollView(showsIndicators: false) {
                             VStack(spacing: 8) {
                                 ForEach(codes, id: \.id) { code in
@@ -75,11 +75,11 @@ struct V2InviteFriendsView: View {
 
 private struct ReferralBottomSheet<Content: View>: View {
     let content: Content
-    
+
     var minHeight: CGFloat
     var maxHeight: CGFloat
     var sensitivity: CGFloat
-   
+
     @State private var currentHeight: CGFloat
     @GestureState private var dragOffset: CGFloat = 0
 
@@ -95,7 +95,7 @@ private struct ReferralBottomSheet<Content: View>: View {
         self.sensitivity = sensitivity
         _currentHeight = State(initialValue: minHeight)
     }
-    
+
     var body: some View {
         GeometryReader { proxy in
             ZStack {
@@ -105,25 +105,24 @@ private struct ReferralBottomSheet<Content: View>: View {
             .offset(y: proxy.size.height - currentHeight + dragOffset)
             .animation(.spring(duration: 1, bounce: 0.1), value: dragOffset)
             .gesture(
-               DragGesture()
-                   .updating($dragOffset) { value, state, _ in
-                       state = value.translation.height * sensitivity
-                   }
-                   .onEnded { value in
-                       let proposedHeight = currentHeight - (value.translation.height * sensitivity)
-                       let midpoint = (minHeight + maxHeight) / 2
-                       if proposedHeight > midpoint {
-                           currentHeight = maxHeight
-                       } else {
-                           currentHeight = minHeight
-                       }
-                   }
-           )
+                DragGesture()
+                    .updating($dragOffset) { value, state, _ in
+                        state = value.translation.height * sensitivity
+                    }
+                    .onEnded { value in
+                        let proposedHeight = currentHeight - (value.translation.height * sensitivity)
+                        let midpoint = (minHeight + maxHeight) / 2
+                        if proposedHeight > midpoint {
+                            currentHeight = maxHeight
+                        } else {
+                            currentHeight = minHeight
+                        }
+                    }
+            )
         }
         .ignoresSafeArea(edges: .bottom)
     }
 }
-
 
 private struct InviteCodeView: View {
     let code: String

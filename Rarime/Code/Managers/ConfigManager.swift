@@ -50,6 +50,7 @@ extension ConfigManager {
         let authorizeURL: URL
         let referralURL: URL
         let joinRewardsKey: String
+        let defaultReferralCode: String
         let lightSignaturePrivateKey: String
 
         init() {
@@ -66,6 +67,7 @@ extension ConfigManager {
                 self.authorizeURL = try readURLFromInfoPlist(key: "AUTHORIZE_URL")
                 self.referralURL = try readURLFromInfoPlist(key: "REFERRAL_URL")
                 self.joinRewardsKey = try readFromInfoPlist(key: "JOIN_REWARDS_KEY")
+                self.defaultReferralCode = try readFromInfoPlist(key: "DEFAULT_REFERRAL_CODE")
                 self.lightSignaturePrivateKey = try readFromInfoPlist(key: "LIGHT_SIGNATURE_PRIVATE_KEY")
             } catch {
                 fatalError("ConfigManager.API init error: \(error.localizedDescription)")
