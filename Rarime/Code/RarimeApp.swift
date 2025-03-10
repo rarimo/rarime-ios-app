@@ -42,11 +42,9 @@ struct RarimeApp: App {
                             
                             try circuit.setupSrs()
                             
-                            let proof = try circuit.prove(["a": 1, "b": 2, "c": 3])
+                            let proof = try circuit.prove(["a": 1, "b": 2, "c": 3], proof_type: "plonk", recursive: true)
                             
-                            let isProofVerified = try circuit.verify(proof)
-                            
-                            LoggerUtil.common.info("isProofVerified: \(isProofVerified)")
+                            LoggerUtil.common.info("proof: \(proof.proof.fullHex)")
                         } catch {
                             LoggerUtil.common.error("failed to calculate plonk proof: \(error.localizedDescription)")
                         }
