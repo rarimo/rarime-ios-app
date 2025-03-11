@@ -285,6 +285,7 @@ struct PassportCard: View {
             userManager.registerZkProof = zkProof
             userManager.user?.status = .passportScanned
         } catch {
+            LoggerUtil.common.error("error while registering passport: \(error.localizedDescription, privacy: .public)")
             if let error = error as? Errors {
                 AlertManager.shared.emitError(error)
                 passportViewModel.processingStatus = .failure
