@@ -39,7 +39,8 @@ struct PassportCard: View {
             }
             cardContent.dynamicSheet(
                 isPresented: $isSettingsSheetPresented,
-                title: "Settings"
+                title: "Settings",
+                bgColor: .bgSurface1
             ) {
                 cardSettings
             }
@@ -152,8 +153,8 @@ struct PassportCard: View {
 
     private var cardSettings: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("CARD VISUAL")
-                .overline3()
+            Text("Data")
+                .overline2()
                 .foregroundStyle(.textSecondary)
             HStack(spacing: 16) {
                 ForEach(PassportCardLook.allCases, id: \.self) { look in
@@ -165,7 +166,7 @@ struct PassportCard: View {
                 }
             }
             HorizontalDivider()
-            PassportIdentifiersPicker(identifiers: $identifiers)
+            PassportIdentifiersPicker(identifiers: $identifiers, passport: passport)
         }
         .padding(.vertical, 16)
         .padding(.horizontal, 20)
@@ -341,34 +342,32 @@ private struct PassportLookOption: View {
     }
 }
 
+private let MAX_IDENTIFIERS = 1
 private struct PassportIdentifiersPicker: View {
     @Binding var identifiers: [PassportIdentifier]
-    let MAX_IDENTIFIERS = 1
-
+    
+    let passport: Passport
+   
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Data").overline2()
-                Text("Shows an identifier on the card").body5()
-            }
-            .foregroundStyle(.textSecondary)
+            Text("Data")
+                .overline2()
+                .foregroundStyle(.textSecondary)
             ForEach(PassportIdentifier.allCases, id: \.self) { identifier in
                 let isSelected = identifiers.contains(identifier)
                 HStack {
-                    Text(identifier.title)
-                        .subtitle6()
-                        .foregroundStyle(.textPrimary)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(identifier.title)
+                            .body4()
+                            .foregroundStyle(.textSecondary)
+                        Text(identifier.getPassportValue(from: passport))
+                            .subtitle5()
+                            .foregroundStyle(.textPrimary)
+                    }
                     Spacer()
-                    AppToggle(
-                        isOn: .constant(isSelected),
-                        onChanged: { _ in
-                            let newIdentifiers = isSelected
-                                ? identifiers.filter { $0 != identifier }
-                                : identifiers + [identifier]
-                            identifiers = newIdentifiers.sorted { $0.order < $1.order }
-                        }
-                    )
-                    .disabled(identifiers.count >= MAX_IDENTIFIERS && !isSelected)
+                    AppRadioButton(isSelected: isSelected) {
+                        identifiers = [identifier]
+                    }
                 }
             }
         }

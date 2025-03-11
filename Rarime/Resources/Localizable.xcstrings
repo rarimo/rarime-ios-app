@@ -563,6 +563,7 @@
       }
     },
     "CARD VISUAL" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2449,9 +2450,6 @@
 
     },
     "Share your referral link and get bonuses when your friends join and make a purchase!" : {
-
-    },
-    "Shows an identifier on the card" : {
 
     },
     "Shows two identifiers on the card" : {

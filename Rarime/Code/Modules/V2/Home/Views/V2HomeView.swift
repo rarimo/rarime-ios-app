@@ -49,8 +49,12 @@ struct V2HomeView: View {
             case .identity:
                 IdentityOnboardingView(
                     onClose: { path = nil },
-                    // TODO: change after design impl
-                    onStart: { path = nil },
+                    onStart: {
+                        path = nil
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            mainViewModel.selectedTab = .identity
+                        }
+                    },
                     animation: identityAnimation
                 )
             case .inviteFriends:
