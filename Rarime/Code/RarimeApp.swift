@@ -34,7 +34,9 @@ struct RarimeApp: App {
                     Task {
                         do {
                             let exampleCircuit = NSDataAsset(name: "exampleCircuit")!.data
-                            let exampleWitness = NSDataAsset(name: "exampleWitness")!.data
+                            
+                            let inputsData = NSDataAsset(name: "inputs")!.data
+                            let inputs = try JSONDecoder().decode(NoirInputs.self, from: inputsData)
                             
                             let swoir = Swoir(backend: Swoirenberg.self)
                             
@@ -42,15 +44,51 @@ struct RarimeApp: App {
                             
                             try circuit.setupSrs()
                             
-                            let proof = try circuit.prove(["a": 1, "b": 2, "c": 3], proof_type: "plonk", recursive: true)
+                            LoggerUtil.common.debug("inputs.toAnyMAp(): \(inputs.toAnyMAp().debugDescription)")
+                            
+                            let proof = try circuit.prove(inputs.toAnyMAp(), proof_type: "plonk", recursive: true)
                             
                             LoggerUtil.common.info("proof: \(proof.proof.fullHex)")
                         } catch {
-                            LoggerUtil.common.error("failed to calculate plonk proof: \(error.localizedDescription)")
+                            LoggerUtil.common.error("failed to calculate plonk proof: \(error)")
                         }
                     }
                 }
         }
+    }
+}
+
+struct NoirInputs: Codable {
+    let dg1, dg15, ec: [String]
+    let icaoRoot: String
+    let inclusionBrances, pk, reductionPk, sa: [String]
+    let sig: [String]
+    let skIdentity: String
+
+    enum CodingKeys: String, CodingKey {
+        case dg1, dg15, ec
+        case icaoRoot = "icao_root"
+        case inclusionBrances = "inclusion_brances"
+        case pk
+        case reductionPk = "reduction_pk"
+        case sa, sig
+        case skIdentity = "sk_identity"
+    }
+    
+    func toAnyMAp() -> [String: Any] {
+        var result: [String: Any] = [:]
+        result["dg1"] = dg1
+        result["dg15"] = dg15
+        result["ec"] = ec
+        result["icaoRoot"] = icaoRoot
+        result["inclusionBrances"] = inclusionBrances
+        result["pk"] = pk
+        result["reductionPk"] = reductionPk
+        result["sa"] = sa
+        result["sig"] = sig
+        result["skIdentity"] = skIdentity
+        
+        return result
     }
 }
 

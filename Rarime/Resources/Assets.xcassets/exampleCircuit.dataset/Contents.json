@@ -1,8 +1,9 @@
 {
   "data" : [
     {
-      "filename" : "example.json",
-      "idiom" : "universal"
+      "filename" : "noir_dl.json",
+      "idiom" : "universal",
+      "universal-type-identifier" : "public.json"
     }
   ],
   "info" : {
