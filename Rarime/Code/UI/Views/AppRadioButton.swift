@@ -19,7 +19,7 @@ struct AppRadioButton<Label: View>: View {
 
     var body: some View {
         Button(action: onSelect) {
-            if let label = label {
+            if let label {
                 HStack {
                     label()
                     Spacer()
