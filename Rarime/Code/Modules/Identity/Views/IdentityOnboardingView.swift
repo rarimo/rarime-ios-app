@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct IdentityIntroView: View {
+struct IdentityOnboardingView: View {
     let onClose: () -> Void
     let onStart: () -> Void
     
@@ -55,5 +55,5 @@ struct IdentityIntroView: View {
 }
 
 #Preview {
-    IdentityIntroView(onClose: {}, onStart: {}, animation: Namespace().wrappedValue)
+    IdentityOnboardingView(onClose: {}, onStart: {}, animation: Namespace().wrappedValue)
 }

@@ -96,11 +96,7 @@
 		56933DF12BBAC1B10068C894 /* ScanPassportLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DF02BBAC1B10068C894 /* ScanPassportLayoutView.swift */; };
 		56933DF32BBAC2940068C894 /* ScanPassportMRZView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DF22BBAC2940068C894 /* ScanPassportMRZView.swift */; };
 		56933DF52BBAC42E0068C894 /* ReadPassportNFCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DF42BBAC42E0068C894 /* ReadPassportNFCView.swift */; };
-		56933DF72BBAC7D10068C894 /* SelectPassportDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DF62BBAC7D10068C894 /* SelectPassportDataView.swift */; };
 		56933DFB2BBAFBD90068C894 /* AppToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DFA2BBAFBD90068C894 /* AppToggle.swift */; };
-		56933DFD2BBAFDD00068C894 /* PassportProofView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DFC2BBAFDD00068C894 /* PassportProofView.swift */; };
-		56933DFF2BBBFDA30068C894 /* ProcessingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933DFE2BBBFDA30068C894 /* ProcessingStatus.swift */; };
-		56933E032BBBFDFE0068C894 /* ProcessingChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E022BBBFDFE0068C894 /* ProcessingChipView.swift */; };
 		56933E052BBC00D60068C894 /* RewardChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56933E042BBC00D60068C894 /* RewardChipView.swift */; };
 		56A6C7542BBC192800992562 /* Passport.json in Resources */ = {isa = PBXBuildFile; fileRef = 56A6C7532BBC192800992562 /* Passport.json */; };
 		56A6C7562BBC194800992562 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C7552BBC194800992562 /* Animations.swift */; };
@@ -159,7 +155,7 @@
 		C75512962C87617B000258AD /* RemoveCase.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C75512952C87617B000258AD /* RemoveCase.mp4 */; };
 		C75529F62D64DC7100C8B2F4 /* ViewArrayBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75529F52D64DC6900C8B2F4 /* ViewArrayBuilder.swift */; };
 		C772EE322D5E1AF000F2AAA3 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C772EE312D5E1AF000F2AAA3 /* Identity.xcframework */; };
-		C7780C842D632A2E0050B5BB /* IdentityIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C832D632A210050B5BB /* IdentityIntroView.swift */; };
+		C7780C842D632A2E0050B5BB /* IdentityOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C832D632A210050B5BB /* IdentityOnboardingView.swift */; };
 		C7780C962D634D8C0050B5BB /* V2ClaimTokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C952D634D830050B5BB /* V2ClaimTokensView.swift */; };
 		C7780C982D634DAE0050B5BB /* V2InviteFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C972D634D900050B5BB /* V2InviteFriendsView.swift */; };
 		C7780C9A2D63573B0050B5BB /* Rewards.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C992D6357370050B5BB /* Rewards.swift */; };
@@ -180,6 +176,7 @@
 		C7DF8BEF2D5F686200C8E2D2 /* V2MainViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF8BE52D5F686200C8E2D2 /* V2MainViewLayout.swift */; };
 		C7DF8BF32D5F699E00C8E2D2 /* Gradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF8BF22D5F699400C8E2D2 /* Gradients.swift */; };
 		C7DF8BF52D5F9E1E00C8E2D2 /* V2StepIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF8BF42D5F9E0E00C8E2D2 /* V2StepIndicator.swift */; };
+		C7F3ED382D7F41A200AABE10 /* PassportRevocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F3ED372D7F419400AABE10 /* PassportRevocationView.swift */; };
 		C7FFB52E2C99D7820037CBD4 /* NotificationSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FFB52D2C99D7820037CBD4 /* NotificationSheetView.swift */; };
 		C7FFB5302C9ACE900037CBD4 /* ClaimableNotificationContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FFB52F2C9ACE900037CBD4 /* ClaimableNotificationContent.swift */; };
 		CE059B422C9C4608006046B3 /* InternetConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE059B412C9C4608006046B3 /* InternetConnectionManager.swift */; };
@@ -481,11 +478,7 @@
 		56933DF02BBAC1B10068C894 /* ScanPassportLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPassportLayoutView.swift; sourceTree = "<group>"; };
 		56933DF22BBAC2940068C894 /* ScanPassportMRZView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPassportMRZView.swift; sourceTree = "<group>"; };
 		56933DF42BBAC42E0068C894 /* ReadPassportNFCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadPassportNFCView.swift; sourceTree = "<group>"; };
-		56933DF62BBAC7D10068C894 /* SelectPassportDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPassportDataView.swift; sourceTree = "<group>"; };
 		56933DFA2BBAFBD90068C894 /* AppToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppToggle.swift; sourceTree = "<group>"; };
-		56933DFC2BBAFDD00068C894 /* PassportProofView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportProofView.swift; sourceTree = "<group>"; };
-		56933DFE2BBBFDA30068C894 /* ProcessingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingStatus.swift; sourceTree = "<group>"; };
-		56933E022BBBFDFE0068C894 /* ProcessingChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingChipView.swift; sourceTree = "<group>"; };
 		56933E042BBC00D60068C894 /* RewardChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardChipView.swift; sourceTree = "<group>"; };
 		56A6C7532BBC192800992562 /* Passport.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Passport.json; sourceTree = "<group>"; };
 		56A6C7552BBC194800992562 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
@@ -543,7 +536,7 @@
 		C75512952C87617B000258AD /* RemoveCase.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = RemoveCase.mp4; sourceTree = "<group>"; };
 		C75529F52D64DC6900C8B2F4 /* ViewArrayBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewArrayBuilder.swift; sourceTree = "<group>"; };
 		C772EE312D5E1AF000F2AAA3 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
-		C7780C832D632A210050B5BB /* IdentityIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityIntroView.swift; sourceTree = "<group>"; };
+		C7780C832D632A210050B5BB /* IdentityOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityOnboardingView.swift; sourceTree = "<group>"; };
 		C7780C952D634D830050B5BB /* V2ClaimTokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2ClaimTokensView.swift; sourceTree = "<group>"; };
 		C7780C972D634D900050B5BB /* V2InviteFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2InviteFriendsView.swift; sourceTree = "<group>"; };
 		C7780C992D6357370050B5BB /* Rewards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rewards.swift; sourceTree = "<group>"; };
@@ -562,6 +555,7 @@
 		C7DF8BE62D5F686200C8E2D2 /* V2NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2NavBarView.swift; sourceTree = "<group>"; };
 		C7DF8BF22D5F699400C8E2D2 /* Gradients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradients.swift; sourceTree = "<group>"; };
 		C7DF8BF42D5F9E0E00C8E2D2 /* V2StepIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2StepIndicator.swift; sourceTree = "<group>"; };
+		C7F3ED372D7F419400AABE10 /* PassportRevocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportRevocationView.swift; sourceTree = "<group>"; };
 		C7FFB52D2C99D7820037CBD4 /* NotificationSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSheetView.swift; sourceTree = "<group>"; };
 		C7FFB52F2C9ACE900037CBD4 /* ClaimableNotificationContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimableNotificationContent.swift; sourceTree = "<group>"; };
 		CE059B412C9C4608006046B3 /* InternetConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionManager.swift; sourceTree = "<group>"; };
@@ -872,7 +866,6 @@
 			isa = PBXGroup;
 			children = (
 				CE39DF842D3FA83F00799A4B /* DocumentType.swift */,
-				56933DFE2BBBFDA30068C894 /* ProcessingStatus.swift */,
 				5659151C2BE92AA90050795A /* AppIcon.swift */,
 				5655E42F2BD2CA5500B86C5C /* AppColorScheme.swift */,
 				5655E43B2BD522E700B86C5C /* AppLanguage.swift */,
@@ -946,6 +939,7 @@
 				56E2D91A2BCEA66A006E725D /* PassportCard.swift */,
 				56E2D9142BCE7FC4006E725D /* HomeIntroLayout.swift */,
 				56C6D2A42D6F22A300EB24D8 /* ZkLivenessIntroView.swift */,
+				C7780C832D632A210050B5BB /* IdentityOnboardingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1094,13 +1088,12 @@
 		56933E092BBC09A90068C894 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C7F3ED372D7F419400AABE10 /* PassportRevocationView.swift */,
 				56933DEE2BBABD100068C894 /* ScanPassportView.swift */,
 				56933DF22BBAC2940068C894 /* ScanPassportMRZView.swift */,
 				563706782C5CF374002F3AF4 /* MrzFormView.swift */,
 				56933DF42BBAC42E0068C894 /* ReadPassportNFCView.swift */,
-				56933DF62BBAC7D10068C894 /* SelectPassportDataView.swift */,
 				568D45C72C29AC200065D467 /* PassportChipErrorView.swift */,
-				56933DFC2BBAFDD00068C894 /* PassportProofView.swift */,
 				56062B9F2C120B3400C9BF9B /* WaitlistPassportView.swift */,
 				568820F92C172C75001B729F /* ReserveTokensView.swift */,
 				56933DF02BBAC1B10068C894 /* ScanPassportLayoutView.swift */,
@@ -1302,7 +1295,6 @@
 			isa = PBXGroup;
 			children = (
 				C726E8D12D647FE9000C9CA6 /* SnapCarouselView.swift */,
-				C7780C832D632A210050B5BB /* IdentityIntroView.swift */,
 				C7DF8BDE2D5F686200C8E2D2 /* HomeCardView.swift */,
 				C7DF8BDF2D5F686200C8E2D2 /* V2HomeView.swift */,
 			);
@@ -1648,7 +1640,6 @@
 				565E221B2BF7B33D00171692 /* CameraPermissionView.swift */,
 				56E2D92C2BD0196B006E725D /* QRCodeView.swift */,
 				56DAA3142BB8CC95002CF710 /* PasscodeFieldView.swift */,
-				56933E022BBBFDFE0068C894 /* ProcessingChipView.swift */,
 				56933E042BBC00D60068C894 /* RewardChipView.swift */,
 				56E2D9212BCFBA0B006E725D /* PassportImageView.swift */,
 				56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */,
@@ -2029,7 +2020,6 @@
 			files = (
 				568820FA2C172C75001B729F /* ReserveTokensView.swift in Sources */,
 				562241412C107B9B000239FA /* AssetsSlider.swift in Sources */,
-				56933DF72BBAC7D10068C894 /* SelectPassportDataView.swift in Sources */,
 				CE32CF4F2BAC97A800E507B6 /* MainView.swift in Sources */,
 				CE7E957D2CE757B400D86A4F /* UniversalNotificationContent.swift in Sources */,
 				C7DF8BD22D5F431200C8E2D2 /* MaintenanceView.swift in Sources */,
@@ -2044,14 +2034,13 @@
 				5609B6D92C1A15F800CB6A1F /* RewardsViewModel.swift in Sources */,
 				561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */,
 				CE51E2FB2C21CA0B00043D9A /* StateKeeperContract.swift in Sources */,
-				C7780C842D632A2E0050B5BB /* IdentityIntroView.swift in Sources */,
+				C7780C842D632A2E0050B5BB /* IdentityOnboardingView.swift in Sources */,
 				C75529F62D64DC7100C8B2F4 /* ViewArrayBuilder.swift in Sources */,
 				56DAA30B2BB8B977002CF710 /* View+DynamicSheet.swift in Sources */,
 				CE06BF322D083CCB00F6C721 /* PubSignals.swift in Sources */,
 				CEB91BBE2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift in Sources */,
 				5609B6CC2C19922400CB6A1F /* LinearProgressView.swift in Sources */,
 				564169602BE273260057AC03 /* PassportCardLook.swift in Sources */,
-				56933DFF2BBBFDA30068C894 /* ProcessingStatus.swift in Sources */,
 				5655E4352BD5173200B86C5C /* AppView+ViewModel.swift in Sources */,
 				568D45C82C29AC200065D467 /* PassportChipErrorView.swift in Sources */,
 				56E2D9172BCE938F006E725D /* ActionCard.swift in Sources */,
@@ -2137,6 +2126,7 @@
 				56E6AD492BD2731100E4DDC1 /* LanguageView.swift in Sources */,
 				CE7210332BD818020043DB7F /* Double+Rounded.swift in Sources */,
 				CE5980DC2D07B288000B6261 /* RegisterIdentityLightInputs.swift in Sources */,
+				C7F3ED382D7F41A200AABE10 /* PassportRevocationView.swift in Sources */,
 				CEC5620F2BD925D6002D4954 /* Circuits.swift in Sources */,
 				C7B57B6B2D65D58C001E86C4 /* V2HomeView+ViewModel.swift in Sources */,
 				CED909E02BDC1E0F0065E949 /* Rarimo.swift in Sources */,
@@ -2214,7 +2204,6 @@
 				567AEC9B2BBD9B8100A20E83 /* Passport.swift in Sources */,
 				5659151F2BE92B1F0050795A /* AppIconManager.swift in Sources */,
 				5609B6CE2C19926C00CB6A1F /* RewardChip.swift in Sources */,
-				56933E032BBBFDFE0068C894 /* ProcessingChipView.swift in Sources */,
 				CEF251382BD6E17800050507 /* UserManager.swift in Sources */,
 				C7780C962D634D8C0050B5BB /* V2ClaimTokensView.swift in Sources */,
 				5655E4252BD2C3B500B86C5C /* PassportManager.swift in Sources */,
@@ -2248,7 +2237,6 @@
 				5641CC472C874E90007B7A0D /* AlertManagerView.swift in Sources */,
 				5655E43C2BD522E800B86C5C /* AppLanguage.swift in Sources */,
 				56E7AD0A2BDAA4F000D3A258 /* AppRadioButton.swift in Sources */,
-				56933DFD2BBAFDD00068C894 /* PassportProofView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

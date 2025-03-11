@@ -1,16 +1,14 @@
 import SwiftUI
 
-private enum IdentityRoute: Hashable {
-    case scanPassport
-}
-
 struct IdentityView: View {
+    @EnvironmentObject private var passportViewModel: PassportViewModel
     @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var userManager: UserManager
 
-    @State private var path: [IdentityRoute] = []
-    @State private var isLivenessSheetPresented = false
     @State private var isSelectTypeSheetPresented = false
+    
+    @State private var isLivenessSheetPresented = false
+    @State private var isScanDocumentSheetPresented = false
 
     //    TODO: implement claiming tokens
     //    var canReserveTokens: Bool {
@@ -26,22 +24,29 @@ struct IdentityView: View {
     }
 
     var body: some View {
-        NavigationStack(path: $path) {
-            content.navigationDestination(for: IdentityRoute.self) { route in
-                switch route {
-                case .scanPassport:
-                    ScanPassportView(
-                        onComplete: { passport in
-                            userManager.user?.status = .passportScanned
-                            passportManager.setPassport(passport)
-                            path.removeLast()
-                        },
-                        onClose: { path.removeLast() }
-                    )
-                    .navigationBarBackButtonHidden()
+        content
+            .dynamicSheet(isPresented: $isSelectTypeSheetPresented, fullScreen: true) {
+                SelectIdentityTypeView { identityTypeId in
+                    isSelectTypeSheetPresented = false
+                    selectIdentityType(identityTypeId)
                 }
             }
-        }
+            .dynamicSheet(isPresented: $isScanDocumentSheetPresented, fullScreen: true) {
+                ScanPassportView(onClose: {
+                    isScanDocumentSheetPresented = false
+                })
+                .environmentObject(passportViewModel)
+            }
+            .dynamicSheet(isPresented: $isLivenessSheetPresented, fullScreen: true) {
+                ZkLivenessIntroView(onStart: {
+                    isLivenessSheetPresented = false
+                })
+            }
+            .sheet(isPresented: $passportViewModel.isUserRevoking) {
+                PassportRevocationView()
+                    .environmentObject(passportViewModel)
+                    .interactiveDismissDisabled()
+            }
     }
 
     private var content: some View {
@@ -57,12 +62,6 @@ struct IdentityView: View {
                             AppIconButton(icon: Icons.addFill, action: {
                                 isSelectTypeSheetPresented = true
                             })
-                            .dynamicSheet(isPresented: $isSelectTypeSheetPresented, fullScreen: true) {
-                                SelectIdentityTypeView { identityTypeId in
-                                    isSelectTypeSheetPresented = false
-                                    selectIdentityType(identityTypeId)
-                                }
-                            }
                         }
                         .padding(.top, 20)
                         .padding(.horizontal, 20)
@@ -70,7 +69,9 @@ struct IdentityView: View {
                             if let passport = passportManager.passport {
                                 PassportCard(
                                     passport: passport,
-                                    isWaitlist: userManager.registerZkProof == nil,
+                                    isWaitlist:
+                                        userManager.registerZkProof == nil &&
+                                        userManager.user?.status == .passportScanned,
                                     look: Binding(
                                         get: { passportManager.passportCardLook },
                                         set: { passportManager.setPassportCardLook($0) }
@@ -94,18 +95,14 @@ struct IdentityView: View {
                 }
             }
         }
+        .environmentObject(passportViewModel)
         .background(.bgPrimary)
-        .dynamicSheet(isPresented: $isLivenessSheetPresented, fullScreen: true) {
-            ZkLivenessIntroView(onStart: {
-                isLivenessSheetPresented = false
-            })
-        }
     }
 
     private func selectIdentityType(_ identityTypeId: IdentityTypeId) {
         switch identityTypeId {
         case .passport:
-            path.append(.scanPassport)
+            isScanDocumentSheetPresented = true
         case .zkLiveness:
             isLivenessSheetPresented = true
         default:

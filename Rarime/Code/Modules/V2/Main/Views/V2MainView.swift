@@ -6,6 +6,7 @@ struct V2MainView: View {
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
 
     @StateObject private var viewModel = ViewModel()
+    @StateObject private var passportViewModel = PassportViewModel()
 
     var body: some View {
         ZStack {
@@ -23,6 +24,7 @@ struct V2MainView: View {
             ExternalRequestsView()
         }
         .environmentObject(viewModel)
+        .environmentObject(passportViewModel)
         .onAppear(perform: checkNotificationPermission)
     }
 
