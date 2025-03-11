@@ -12,6 +12,7 @@ struct HomeView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
+    @EnvironmentObject private var configManager: ConfigManager
 
     @State private var path: [HomeRoute] = []
 
@@ -38,6 +39,7 @@ struct HomeView: View {
             && userManager.registerZkProof != nil
             && !userManager.isRevoked
             && userManager.user?.userReferralCode != nil
+            && pointsBalance != nil
     }
 
     var isWalletBalanceDisplayed: Bool {
@@ -303,6 +305,7 @@ struct HomeView: View {
             }
 
             if userManager.user?.userReferralCode == nil {
+                await verifyReferralCode()
                 return
             }
 
@@ -328,6 +331,52 @@ struct HomeView: View {
         }
 
         cancelables.append(cancelable)
+    }
+    
+    func verifyReferralCode() async {
+        var referralCode = configManager.api.defaultReferralCode
+        if let deferredReferralCode = userManager.user?.deferredReferralCode, !deferredReferralCode.isEmpty {
+            referralCode = deferredReferralCode
+        }
+
+        await attemptToCreateBalance(with: referralCode, fallback: configManager.api.defaultReferralCode)
+    }
+    
+    func attemptToCreateBalance(with referralCode: String, fallback: String) async {
+        do {
+            try await createBalance(referralCode)
+        } catch {
+            LoggerUtil.common.error("Failed to verify referral code: \(error.localizedDescription, privacy: .public)")
+            if referralCode != fallback {
+                await attemptToCreateBalance(with: fallback, fallback: fallback)
+            }
+        }
+    }
+
+    func createBalance(_ code: String) async throws {
+        guard let user = userManager.user else { throw "user is not initalized" }
+        let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+
+        let pointsSvc = Points(ConfigManager.shared.api.pointsServiceURL)
+        let result = try await pointsSvc.createPointsBalance(
+            accessJwt,
+            code
+        )
+
+        userManager.user?.userReferralCode = code
+        LoggerUtil.common.info("User verified code: \(code, privacy: .public)")
+
+        pointsBalance = PointsBalanceRaw(
+            id: result.data.id,
+            amount: result.data.attributes.amount,
+            isDisabled: result.data.attributes.isDisabled,
+            createdAt: result.data.attributes.createdAt,
+            updatedAt: result.data.attributes.updatedAt,
+            rank: result.data.attributes.rank,
+            referralCodes: result.data.attributes.referralCodes,
+            level: result.data.attributes.level,
+            isVerified: result.data.attributes.isVerified
+        )
     }
 
     func cleanup() {
