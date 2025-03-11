@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct IdentityView: View {
+    @EnvironmentObject private var passportViewModel: PassportViewModel
     @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var userManager: UserManager
 
@@ -8,8 +9,6 @@ struct IdentityView: View {
     
     @State private var isLivenessSheetPresented = false
     @State private var isScanDocumentSheetPresented = false
-    
-    @StateObject private var passportViewModel = PassportViewModel()
 
     //    TODO: implement claiming tokens
     //    var canReserveTokens: Bool {

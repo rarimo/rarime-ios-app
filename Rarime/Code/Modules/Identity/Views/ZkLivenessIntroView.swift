@@ -17,11 +17,13 @@ struct ZkLivenessIntroView: View {
                     VStack(spacing: 16) {
                         Image(.bodyScanFill)
                             .square(44)
+                            .foregroundColor(.baseBlack)
                             .padding(22)
                             .background(Gradients.gradientFirst, in: Circle())
                         Text("ZK Liveness\n(PoH Killer)")
                             .h2()
                             .foregroundStyle(.textPrimary)
+                            .multilineTextAlignment(.center)
                     }
                     Spacer()
                     makeListItem(
@@ -51,6 +53,7 @@ struct ZkLivenessIntroView: View {
         HStack(alignment: .center, spacing: 12) {
             Image(icon)
                 .iconMedium()
+                .foregroundColor(.baseBlack)
                 .padding(10)
                 .background(Gradients.gradientFirst, in: Circle())
             Text(text)

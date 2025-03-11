@@ -40,7 +40,7 @@ struct V2HomeView: View {
                     notificationManager.pushNotificationContainer.viewContext
                 )
             case .identity:
-                IdentityIntroView(
+                IdentityOnboardingView(
                     onClose: { path = nil },
                     // TODO: change after design impl
                     onStart: { path = nil },

@@ -111,7 +111,7 @@ struct PassportCard: View {
                        userManager.user?.status == .unscanned {
                         cardProofGeneration
                     }
-                    if passportViewModel.processingStatus == .success {
+                    if passportViewModel.processingStatus == .failure {
                         cardProofError
                     }
                 }
@@ -251,7 +251,11 @@ struct PassportCard: View {
             }
             Spacer()
             // TODO: sync with design system
-            Button(action: {}) {
+            Button(action: {
+                Task {
+                    await regenerateProof()
+                }
+            }) {
                 HStack(alignment: .center, spacing: 8) {
                     Image(Icons.restartLine)
                         .iconMedium()
@@ -270,6 +274,23 @@ struct PassportCard: View {
         .padding(.vertical, 12)
         .frame(height: 64)
         .background(.bgBlur, in: RoundedRectangle(cornerRadius: 16))
+    }
+    
+    private func regenerateProof() async {
+        do {
+            let zkProof = try await passportViewModel.register()
+
+            if passportViewModel.processingStatus != .success { return }
+
+            userManager.registerZkProof = zkProof
+            userManager.user?.status = .passportScanned
+        } catch {
+            if let error = error as? Errors {
+                AlertManager.shared.emitError(error)
+                passportViewModel.processingStatus = .failure
+                return
+            }
+        }
     }
 }
 
