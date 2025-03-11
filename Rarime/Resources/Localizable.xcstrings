@@ -2437,6 +2437,7 @@
 
     },
     "Settings" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {

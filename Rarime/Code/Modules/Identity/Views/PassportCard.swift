@@ -39,7 +39,7 @@ struct PassportCard: View {
             }
             cardContent.dynamicSheet(
                 isPresented: $isSettingsSheetPresented,
-                title: "Settings",
+                title: "Passport",
                 bgColor: .bgSurface1
             ) {
                 cardSettings
@@ -342,7 +342,6 @@ private struct PassportLookOption: View {
     }
 }
 
-private let MAX_IDENTIFIERS = 1
 private struct PassportIdentifiersPicker: View {
     @Binding var identifiers: [PassportIdentifier]
     
