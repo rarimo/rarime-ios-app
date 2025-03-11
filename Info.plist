@@ -161,6 +161,8 @@
 	<string>${ICAO_COSMOS_RPC}</string>
 	<key>JOIN_REWARDS_KEY</key>
 	<string>${JOIN_REWARDS_KEY}</string>
+	<key>DEFAULT_REFERRAL_CODE</key>
+	<string>${DEFAULT_REFERRAL_CODE}</string>
 	<key>MASTER_CERTIFICATES_BUCKETNAME</key>
 	<string>${MASTER_CERTIFICATES_BUCKETNAME}</string>
 	<key>MASTER_CERTIFICATES_FILENAME</key>

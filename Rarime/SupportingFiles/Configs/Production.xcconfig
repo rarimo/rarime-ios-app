@@ -21,6 +21,7 @@ POINTS_SERVICE_URL = "https:${SLASH}/api.app.rarime.com"
 AUTHORIZE_URL = "https:${SLASH}/api.app.rarime.com"
 REFERRAL_URL = "https:${SLASH}/app.rarime.com/r"
 JOIN_REWARDS_KEY = ""
+DEFAULT_REFERRAL_CODE = "2OTDcOmy0Pe"
 LIGHT_SIGNATURE_PRIVATE_KEY = ""
 
 // MARK: Cosmos
