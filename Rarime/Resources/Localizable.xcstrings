@@ -116,15 +116,8 @@
     "%lld extra referrals" : {
 
     },
-    "%lld. %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld. %2$@"
-          }
-        }
-      }
+    "%lld questions" : {
+
     },
     "%lldm %llds" : {
       "localizations" : {
@@ -615,6 +608,9 @@
     "Christmas Island" : {
 
     },
+    "Citizen of %@" : {
+
+    },
     "Claim" : {
       "localizations" : {
         "uk" : {
@@ -776,6 +772,9 @@
           }
         }
       }
+    },
+    "Criteria" : {
+
     },
     "Croatia" : {
 
@@ -1556,6 +1555,9 @@
     "Let's Scan" : {
 
     },
+    "Let's start" : {
+
+    },
     "Let's Start" : {
 
     },
@@ -1884,6 +1886,9 @@
     "Others" : {
 
     },
+    "Over %lld+" : {
+
+    },
     "Pakistan" : {
 
     },
@@ -2115,6 +2120,16 @@
     },
     "Qatar" : {
 
+    },
+    "Question: %lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Question: %1$lld/%2$lld"
+          }
+        }
+      }
     },
     "RARIME" : {
       "localizations" : {
@@ -2473,6 +2488,9 @@
 
     },
     "Share your referral link and get bonuses when your friends join and make a purchase!" : {
+
+    },
+    "Show results" : {
 
     },
     "Shows two identifiers on the card" : {
@@ -2880,6 +2898,9 @@
     "Venezuela" : {
 
     },
+    "Verification" : {
+
+    },
     "Verification..." : {
 
     },
@@ -2896,6 +2917,9 @@
 
     },
     "Virgin Islands, U.S." : {
+
+    },
+    "Voted" : {
 
     },
     "Voting" : {

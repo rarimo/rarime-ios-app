@@ -6,6 +6,7 @@ struct V2MainView: View {
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
     
     @StateObject private var viewModel = ViewModel()
+    @StateObject private var pollsViewModel = PollsViewModel()
     
     var body: some View {
         ZStack {

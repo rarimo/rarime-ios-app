@@ -19,8 +19,7 @@ struct PollsView: View {
     @Environment(\.openURL) var openURL
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
     @EnvironmentObject var mainViewModel: V2MainView.ViewModel
-    
-    @StateObject private var pollsViewModel = PollsViewModel()
+    @EnvironmentObject var pollsViewModel: PollsViewModel
     
     let onClose: () -> Void
 
@@ -29,6 +28,7 @@ struct PollsView: View {
     @State private var currentTab = PollsTab.active
     @State private var isPollsLoading = true
     @State private var earlyPullTask: Task<Void, Never>? = nil
+    @State private var isPollSheetShown = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -111,14 +111,13 @@ struct PollsView: View {
                 .padding(.bottom, 24)
             }
         }
-        .environmentObject(pollsViewModel)
         .background(
             Gradients.gradientFifth
                 .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
                 .ignoresSafeArea()
         )
-        .sheet(item: $pollsViewModel.selectedPoll) { poll in
-            PollView(poll: poll, onClose: { pollsViewModel.selectedPoll = nil })
+        .sheet(isPresented: $isPollSheetShown) {
+            PollView(poll: pollsViewModel.selectedPoll!, onClose: { isPollSheetShown = false })
                 .environmentObject(pollsViewModel)
         }
         .onAppear {
@@ -141,6 +140,7 @@ struct PollsView: View {
             ForEach(polls) { poll in
                 PollListCard(poll: poll, onViewPoll: {
                     pollsViewModel.selectedPoll = poll
+                    isPollSheetShown = true
                 })
             }
         }
@@ -171,7 +171,7 @@ private struct PollListCard: View {
                     HStack(alignment: .center, spacing: 8) {
                         Image(Icons.groupLine)
                             .iconSmall()
-                        Text(pollsViewModel.pollTotalParticipants.formatted())
+                        Text(pollsViewModel.totalParticipants.formatted())
                             .subtitle7()
                     }
                 }
@@ -191,4 +191,5 @@ private struct PollListCard: View {
 
 #Preview {
     PollsView(onClose: {}, animation: Namespace().wrappedValue)
+        .environmentObject(PollsViewModel())
 }

@@ -140,6 +140,7 @@
 		56E7AD112BDBA81000D3A258 /* PullToRefreshSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 56E7AD102BDBA81000D3A258 /* PullToRefreshSwiftUI */; };
 		56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F48BBD2BC02E82001F3AA4 /* AppButton.swift */; };
 		C71161B32CAAE3DB00ED41EA /* String+BigUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71161B22CAAE3DB00ED41EA /* String+BigUInt.swift */; };
+		C723825F2D81C5C800410A5C /* BigUInt+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C723825E2D81C5C200410A5C /* BigUInt+String.swift */; };
 		C726E8B42D6389F7000C9CA6 /* WalletWaitlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C726E8B32D638953000C9CA6 /* WalletWaitlistView.swift */; };
 		C726E8D22D647FED000C9CA6 /* SnapCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C726E8D12D647FE9000C9CA6 /* SnapCarouselView.swift */; };
 		C72F33182D677DBA00AC1814 /* AppIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72F33172D677DB200AC1814 /* AppIconButton.swift */; };
@@ -172,6 +173,7 @@
 		C7B57B642D650FB1001E86C4 /* AnimationNamespaceIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B57B632D650FA5001E86C4 /* AnimationNamespaceIds.swift */; };
 		C7B57B6B2D65D58C001E86C4 /* V2HomeView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B57B6A2D65D585001E86C4 /* V2HomeView+ViewModel.swift */; };
 		C7BBDBD62D71D44700E2905E /* VotingRelayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BBDBD52D71D43F00E2905E /* VotingRelayer.swift */; };
+		C7BD524B2D82ED7E0072F0BA /* View+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BD524A2D82ED730072F0BA /* View+Shadow.swift */; };
 		C7CE31D52C8B1CBD00EE6D2E /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */; };
 		C7D6244B2D6DB324007BA5A6 /* PollsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D6244A2D6DB320007BA5A6 /* PollsView.swift */; };
 		C7D6244D2D6DB32C007BA5A6 /* PollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D6244C2D6DB329007BA5A6 /* PollView.swift */; };
@@ -537,6 +539,7 @@
 		56E7AD0D2BDAD70200D3A258 /* RefreshableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableScrollView.swift; sourceTree = "<group>"; };
 		56F48BBD2BC02E82001F3AA4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		C71161B22CAAE3DB00ED41EA /* String+BigUInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+BigUInt.swift"; sourceTree = "<group>"; };
+		C723825E2D81C5C200410A5C /* BigUInt+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BigUInt+String.swift"; sourceTree = "<group>"; };
 		C726E8B32D638953000C9CA6 /* WalletWaitlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletWaitlistView.swift; sourceTree = "<group>"; };
 		C726E8D12D647FE9000C9CA6 /* SnapCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarouselView.swift; sourceTree = "<group>"; };
 		C72F33172D677DB200AC1814 /* AppIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconButton.swift; sourceTree = "<group>"; };
@@ -568,6 +571,7 @@
 		C7B57B632D650FA5001E86C4 /* AnimationNamespaceIds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationNamespaceIds.swift; sourceTree = "<group>"; };
 		C7B57B6A2D65D585001E86C4 /* V2HomeView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "V2HomeView+ViewModel.swift"; sourceTree = "<group>"; };
 		C7BBDBD52D71D43F00E2905E /* VotingRelayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingRelayer.swift; sourceTree = "<group>"; };
+		C7BD524A2D82ED730072F0BA /* View+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Shadow.swift"; sourceTree = "<group>"; };
 		C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		C7D6244A2D6DB320007BA5A6 /* PollsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollsView.swift; sourceTree = "<group>"; };
 		C7D6244C2D6DB329007BA5A6 /* PollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollView.swift; sourceTree = "<group>"; };
@@ -1464,6 +1468,8 @@
 		CE778B6F2BA9A73700B26485 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C7BD524A2D82ED730072F0BA /* View+Shadow.swift */,
+				C723825E2D81C5C200410A5C /* BigUInt+String.swift */,
 				C72F331B2D68A8D600AC1814 /* View+Blur.swift */,
 				56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */,
 				56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */,
@@ -2205,6 +2211,7 @@
 				CE61E88D2C247B4700940129 /* HMACUtils.swift in Sources */,
 				56E2D92D2BD0196B006E725D /* QRCodeView.swift in Sources */,
 				CEC9D8E72BFF41A800EACD0F /* HTTPStatusCode.swift in Sources */,
+				C7BD524B2D82ED7E0072F0BA /* View+Shadow.swift in Sources */,
 				568B4FCE2BB6C274001C9C74 /* IntroStepView.swift in Sources */,
 				568B4FD12BB6D88F001C9C74 /* Divider.swift in Sources */,
 				56DAA3112BB8C97D002CF710 /* EnableLayoutView.swift in Sources */,
@@ -2257,6 +2264,7 @@
 				C7DF8BF32D5F699E00C8E2D2 /* Gradients.swift in Sources */,
 				56933DEF2BBABD100068C894 /* ScanPassportView.swift in Sources */,
 				56E6AD4F2BD2756200E4DDC1 /* SafariWebView.swift in Sources */,
+				C723825F2D81C5C800410A5C /* BigUInt+String.swift in Sources */,
 				C7D6244D2D6DB32C007BA5A6 /* PollView.swift in Sources */,
 				C7DF8BEA2D5F686200C8E2D2 /* V2HomeView.swift in Sources */,
 				C7DF8BEB2D5F686200C8E2D2 /* V2NavBarView.swift in Sources */,

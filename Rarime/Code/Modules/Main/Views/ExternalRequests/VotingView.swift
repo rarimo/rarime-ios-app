@@ -3,20 +3,21 @@ import Foundation
 import Web3
 
 struct VotingView: View {
-    let proposalId: BigUInt
-    let onDismiss: () -> Void
+    @EnvironmentObject var pollsViewModel: PollsViewModel
     
-    @StateObject var pollsViewModel = PollsViewModel()
+    let proposalId: BigUInt
+    
+    let onDismiss: () -> Void
     
     var body: some View {
         Group {
             if let poll = pollsViewModel.selectedPoll {
                 PollView(poll: poll, onClose: onDismiss)
+                    .environmentObject(pollsViewModel)
             } else {
                 ProgressView()
             }
         }
-        .environmentObject(pollsViewModel)
         .onAppear {
             Task { @MainActor in
                 try await fetchPoll()

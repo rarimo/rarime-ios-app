@@ -8,6 +8,7 @@ struct V2HomeView: View {
     @EnvironmentObject private var notificationManager: NotificationManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var mainViewModel: V2MainView.ViewModel
+    @EnvironmentObject private var pollsViewModel: PollsViewModel
     @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
@@ -84,6 +85,7 @@ struct V2HomeView: View {
                     onClose: { path = nil },
                     animation: pollsAnimation
                 )
+                .environmentObject(pollsViewModel)
             default: content
             }
         }
