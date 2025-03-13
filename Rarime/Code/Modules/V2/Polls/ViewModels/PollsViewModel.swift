@@ -127,6 +127,8 @@ class PollsViewModel: ObservableObject {
             identityInfo
         )
         
+        print("vote proof", voteProof)
+        
         let voteProofJson = try JSONEncoder().encode(voteProof)
         
         guard let poll = selectedPoll else { throw "No selected poll" }
@@ -140,12 +142,18 @@ class PollsViewModel: ObservableObject {
             citizenship: votingData.citizenshipMask[0].description
         )
         
+        print("proposal Id", Int64(poll.id))
+        print("voting adresses", poll.votingsAddresses[0].hex(eip55: false))
+        print("calldata", calldata.fullHex)
+        
         let votingRelayer = VotingRelayer(ConfigManager.shared.api.votingRelayerURL)
         
         let voteResponse = try await votingRelayer.vote(
             calldata.fullHex,
             poll.votingsAddresses[0].hex(eip55: false)
         )
+        
+        
         
         LoggerUtil.common.info("Voting \(poll.id), txHash: \(voteResponse.data.id)")
     }

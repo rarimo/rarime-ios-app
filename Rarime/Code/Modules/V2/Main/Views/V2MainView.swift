@@ -26,6 +26,7 @@ struct V2MainView: View {
             )
         }
         .environmentObject(viewModel)
+        .environmentObject(pollsViewModel)
         .onAppear(perform: checkNotificationPermission)
     }
     
