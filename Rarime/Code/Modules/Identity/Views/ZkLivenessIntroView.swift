@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ZkLivenessIntroView: View {
+    let onClose: () -> Void
     let onStart: () -> Void
 
     var body: some View {
@@ -11,11 +12,15 @@ struct ZkLivenessIntroView: View {
                 .offset(y: -300)
                 .opacity(0.6)
                 .blur(radius: 160)
+            AppIconButton(icon: Icons.closeFill, action: onClose)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding([.top, .trailing], 20)
+            
             VStack(alignment: .leading, spacing: 40) {
                 VStack(spacing: 24) {
                     Spacer()
                     VStack(spacing: 16) {
-                        Image(.bodyScanFill)
+                        Image(Icons.bodyScanFill)
                             .square(44)
                             .foregroundColor(.baseBlack)
                             .padding(22)
@@ -65,5 +70,5 @@ struct ZkLivenessIntroView: View {
 }
 
 #Preview {
-    ZkLivenessIntroView {}
+    ZkLivenessIntroView(onClose: {}, onStart: {})
 }

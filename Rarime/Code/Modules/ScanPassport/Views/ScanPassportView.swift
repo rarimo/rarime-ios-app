@@ -43,14 +43,6 @@ struct ScanPassportView: View {
                     },
                     onClose: onClose
                 )
-                .dynamicSheet(isPresented: $isTutorialPresented, fullScreen: true) {
-                    PassportScanTutorialView(onStart: { isTutorialPresented = false })
-                }
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        presentScanTutorialIfNeeded()
-                    }
-                }
 
 #if DEVELOPMENT
                 AppButton(
@@ -62,10 +54,9 @@ struct ScanPassportView: View {
                 .padding(.horizontal, 20)
 #endif
             }
-            .padding(.bottom, 20)
-            .background(.bgPrimary)
-            .transition(.backslide)
+            .padding(.bottom, 16)
             .environmentObject(passportViewModel)
+            .transition(.backslide)
         case .readNFC:
             ReadPassportNFCView(
                 onNext: { passport in
@@ -117,14 +108,14 @@ struct ScanPassportView: View {
 
             LoggerUtil.common.info("Passport read successfully: \(passport.fullName, privacy: .public)")
         } catch {
+            LoggerUtil.common.error("error while registering passport: \(error.localizedDescription, privacy: .public)")
+            
             if passportViewModel.isUserRegistered {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     onClose()
                 }
             }
 
-            LoggerUtil.common.error("error while registering passport: \(error.localizedDescription, privacy: .public)")
-            
             if let afError = error as? AFError {
                 if case .sessionTaskFailed = afError {
                     LoggerUtil.common.error("Network connection lost")

@@ -281,9 +281,6 @@
         }
       }
     },
-    "Applying" : {
-
-    },
     "Applying Zero Knowledge" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -294,6 +291,9 @@
           }
         }
       }
+    },
+    "Applying ZK" : {
+
     },
     "Argentina" : {
 
@@ -789,6 +789,7 @@
       }
     },
     "Data never leaves this device" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2173,6 +2174,7 @@
 
     },
     "Reading Passport data" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2365,6 +2367,9 @@
         }
       }
     },
+    "Scan MRZ" : {
+
+    },
     "Scan passport" : {
 
     },
@@ -2382,6 +2387,7 @@
 
     },
     "Scan your Passport" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2568,6 +2574,7 @@
       }
     },
     "Step %lld/%lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

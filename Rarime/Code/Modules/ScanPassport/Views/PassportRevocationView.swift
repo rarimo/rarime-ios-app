@@ -4,20 +4,22 @@ struct PassportRevocationView: View {
     @EnvironmentObject var passportViewModel: PassportViewModel
 
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 28) {
             Spacer()
-            Image(Icons.warning)
-                .iconLarge()
-                .frame(width: 72, height: 72)
-                .background(.warningLighter, in: Circle())
-                .foregroundStyle(.warningMain)
-            Text("Passport is already registered")
-                .h6()
-                .foregroundStyle(.textPrimary)
-            Text("Please, scan your passport one more time to revoke your previous registration")
-                .body3()
-                .foregroundStyle(.textSecondary)
-                .multilineTextAlignment(.center)
+            Image(Icons.alertLine)
+                .square(44)
+                .foregroundColor(.warningMain)
+                .padding(22)
+                .background(.warningLight, in: Circle())
+            VStack(spacing: 8) {
+                Text("Passport is already registered")
+                    .h4()
+                    .foregroundStyle(.textPrimary)
+                Text("Please, scan your passport one more time to revoke your previous registration")
+                    .body3()
+                    .foregroundStyle(.textSecondary)
+                    .multilineTextAlignment(.center)
+            }
             Spacer()
             AppButton(text: "Scan passport") {
                 NFCScanner.scanPassport(
@@ -43,4 +45,9 @@ struct PassportRevocationView: View {
         }
         .padding(20)
     }
+}
+
+#Preview {
+    PassportRevocationView()
+        .environmentObject(PassportViewModel())
 }

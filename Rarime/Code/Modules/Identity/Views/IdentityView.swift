@@ -38,11 +38,12 @@ struct IdentityView: View {
                 .environmentObject(passportViewModel)
             }
             .dynamicSheet(isPresented: $isLivenessSheetPresented, fullScreen: true) {
-                ZkLivenessIntroView(onStart: {
-                    isLivenessSheetPresented = false
-                })
+                ZkLivenessIntroView(
+                    onClose: { isLivenessSheetPresented = false },
+                    onStart: { isLivenessSheetPresented = false }
+                )
             }
-            .sheet(isPresented: $passportViewModel.isUserRevoking) {
+            .dynamicSheet(isPresented: $passportViewModel.isUserRevoking, fullScreen: true) {
                 PassportRevocationView()
                     .environmentObject(passportViewModel)
                     .interactiveDismissDisabled()

@@ -89,9 +89,15 @@ struct V2HomeView: View {
                 Text("Hi")
                     .subtitle4()
                     .foregroundStyle(.textSecondary)
-                Text("User")
-                    .subtitle4()
-                    .foregroundStyle(.textPrimary)
+                Group {
+                    if passportManager.passport != nil {
+                        Text(passportManager.passport?.displayedFirstName ?? "")
+                    } else {
+                        Text("User")
+                    }
+                }
+                .subtitle4()
+                .foregroundStyle(.textPrimary)
             }
             #if DEVELOPMENT
                 Text(verbatim: "Development")

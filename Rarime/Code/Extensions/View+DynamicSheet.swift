@@ -61,13 +61,15 @@ extension View {
                 // Make sheet height dynamic
                 .fixedSize(horizontal: false, vertical: !fullScreen)
                 .modifier(DynamicSheetHeightModifier(fullScreen: fullScreen))
-                Button(action: { isPresented.wrappedValue = false }) {
-                    Image(Icons.closeFill)
-                        .iconLarge()
-                        .foregroundColor(.textPrimary)
+                if !fullScreen {
+                    Button(action: { isPresented.wrappedValue = false }) {
+                        Image(Icons.closeFill)
+                            .iconLarge()
+                            .foregroundColor(.textPrimary)
+                    }
+                    .padding(.top, 24)
+                    .padding(.trailing, 20)
                 }
-                .padding(.top, 24)
-                .padding(.trailing, 20)
             }
         }
     }
