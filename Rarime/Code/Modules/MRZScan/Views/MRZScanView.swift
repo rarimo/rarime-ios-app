@@ -12,12 +12,12 @@ struct MRZScanView: View {
                 Image(decorative: image, scale: 1)
                     .resizable()
                     .scaledToFill()
-                    .frame(maxWidth: .infinity, maxHeight: 300)
+                    .frame(maxWidth: .infinity, maxHeight: 305)
                     .clipped()
                     .contentShape(Rectangle())
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: 300)
+        .frame(maxWidth: .infinity, maxHeight: 305)
         .background(.black)
         .onAppear {
             viewModel.onUSA = { self.passportViewModel.isUSA = true }
