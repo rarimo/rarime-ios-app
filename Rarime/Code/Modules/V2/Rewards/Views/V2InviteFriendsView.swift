@@ -99,7 +99,7 @@ private struct ReferralBottomSheet<Content: View>: View {
     var body: some View {
         GeometryReader { proxy in
             ZStack {
-                content.blurBackground(style: .light)
+                content.transparentBlur()
             }
             .frame(width: proxy.size.width, height: currentHeight, alignment: .top)
             .offset(y: proxy.size.height - currentHeight + dragOffset)

@@ -88,47 +88,51 @@ struct V2HomeView: View {
     }
 
     private var header: some View {
-        HStack(alignment: .center, spacing: 8) {
-            HStack(alignment: .center, spacing: 10) {
-                Text("Hi")
+        ZStack(alignment: .top) {
+            TransparentBlurView(removeAllFilters: false)
+                .ignoresSafeArea(edges: .top)
+                .background(.bgBlur)
+            HStack(alignment: .center, spacing: 8) {
+                HStack(alignment: .center, spacing: 10) {
+                    Text("Hi")
+                        .subtitle4()
+                        .foregroundStyle(.textSecondary)
+                    Group {
+                        if passportManager.passport != nil {
+                            Text(passportManager.passport?.displayedFirstName ?? "")
+                        } else {
+                            Text("User")
+                        }
+                    }
                     .subtitle4()
-                    .foregroundStyle(.textSecondary)
-                Group {
-                    if passportManager.passport != nil {
-                        Text(passportManager.passport?.displayedFirstName ?? "")
-                    } else {
-                        Text("User")
+                    .foregroundStyle(.textPrimary)
+                }
+                #if DEVELOPMENT
+                    Text(verbatim: "Development")
+                        .caption2()
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 4)
+                        .background(.warningLighter, in: Capsule())
+                        .foregroundStyle(.warningDark)
+                #endif
+                Spacer()
+                ZStack {
+                    AppIconButton(icon: Icons.notification2Line, action: { path = .notifications })
+                    if notificationManager.unreadNotificationsCounter > 0 {
+                        Text(verbatim: notificationManager.unreadNotificationsCounter.formatted())
+                            .overline3()
+                            .foregroundStyle(.baseWhite)
+                            .frame(width: 16, height: 16)
+                            .background(.errorMain, in: Circle())
+                            .offset(x: 7, y: -8)
                     }
                 }
-                .subtitle4()
-                .foregroundStyle(.textPrimary)
             }
-            #if DEVELOPMENT
-                Text(verbatim: "Development")
-                    .caption2()
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 4)
-                    .background(.warningLighter, in: Capsule())
-                    .foregroundStyle(.warningDark)
-            #endif
-            Spacer()
-            ZStack {
-                AppIconButton(icon: Icons.notification2Line, action: { path = .notifications })
-                if notificationManager.unreadNotificationsCounter > 0 {
-                    Text(verbatim: notificationManager.unreadNotificationsCounter.formatted())
-                        .overline3()
-                        .foregroundStyle(.baseWhite)
-                        .frame(width: 16, height: 16)
-                        .background(.errorMain, in: Circle())
-                        .offset(x: 7, y: -8)
-                }
-            }
+            .padding([.top, .horizontal], 20)
+            .padding(.bottom, 16)
         }
-        .padding(.top, 20)
-        .padding(.bottom, 16)
-        .padding(.horizontal, 20)
-        .background(.bgBlur)
         .zIndex(1)
+        .frame(height: 83)
     }
 
     private var content: some View {

@@ -8,14 +8,24 @@ struct V2MainViewLayout<Content: View>: View {
         content
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .safeAreaInset(edge: .bottom, spacing: 0, content: {
-                V2NavBarView(selectedTab: $mainViewModel.selectedTab)
+                ZStack(alignment: .top) {
+                    TransparentBlurView(removeAllFilters: false)
+                        .ignoresSafeArea(edges: .bottom)
+                        .background(.bgBlur)
+                    V2NavBarView(selectedTab: $mainViewModel.selectedTab)
+                }
+                .frame(height: 70)
             })
     }
 }
 
 #Preview {
-    V2MainViewLayout {
-        Rectangle().fill(.bgPrimary)
-    }
-    .environmentObject(V2MainView.ViewModel())
+    V2HomeView()
+        .environmentObject(V2MainView.ViewModel())
+        .environmentObject(PassportManager())
+        .environmentObject(WalletManager())
+        .environmentObject(UserManager())
+        .environmentObject(ConfigManager())
+        .environmentObject(NotificationManager())
+        .environmentObject(ExternalRequestsManager())
 }
