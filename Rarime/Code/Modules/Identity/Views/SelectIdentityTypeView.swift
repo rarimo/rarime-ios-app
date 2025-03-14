@@ -63,7 +63,7 @@ struct SelectIdentityTypeView: View {
                 .offset(x: 200, y: -200)
                 .opacity(0.4)
                 .blur(radius: 100)
-            if let onClose = onClose {
+            if let onClose {
                 AppIconButton(icon: Icons.closeFill, action: onClose)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding([.top, .trailing], 20)

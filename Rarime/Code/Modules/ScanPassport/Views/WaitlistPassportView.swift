@@ -240,7 +240,7 @@ struct WaitlistPassportView: View {
                 
             LoggerUtil.common.info("User joined program")
         } catch {
-            LoggerUtil.common.info("failed to join rewards program: \(error, privacy: .public)")
+            LoggerUtil.common.error("failed to join rewards program: \(error, privacy: .public)")
         }
     }
     
@@ -254,7 +254,6 @@ struct WaitlistPassportView: View {
                 let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
 
                 let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
-                print("pointsBalance", pointsBalance)
                 isJoined = pointsBalance.isVerified
             } catch is CancellationError {
                 return
