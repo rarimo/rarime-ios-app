@@ -9,6 +9,9 @@ struct IdentityView: View {
     
     @State private var isLivenessSheetPresented = false
     @State private var isScanDocumentSheetPresented = false
+    
+    @State private var isWaitlistedCountrySheetPresented = false
+    @State private var isUnsupportedCountrySheetPresented = false
 
     //    TODO: implement claiming tokens
     //    var canReserveTokens: Bool {
@@ -26,10 +29,13 @@ struct IdentityView: View {
     var body: some View {
         content
             .dynamicSheet(isPresented: $isSelectTypeSheetPresented, fullScreen: true) {
-                SelectIdentityTypeView { identityTypeId in
-                    isSelectTypeSheetPresented = false
-                    selectIdentityType(identityTypeId)
-                }
+                SelectIdentityTypeView(
+                    onSelect: { identityTypeId in
+                        isSelectTypeSheetPresented = false
+                        selectIdentityType(identityTypeId)
+                    },
+                    onClose: { isSelectTypeSheetPresented = false }
+                )
             }
             .dynamicSheet(isPresented: $isScanDocumentSheetPresented, fullScreen: true) {
                 ScanPassportView(onClose: {
@@ -47,6 +53,18 @@ struct IdentityView: View {
                 PassportRevocationView()
                     .environmentObject(passportViewModel)
                     .interactiveDismissDisabled()
+            }
+            .dynamicSheet(isPresented: $isWaitlistedCountrySheetPresented, fullScreen: true) {
+                WaitlistPassportView(
+                    onNext: {
+                        userManager.user?.status = .passportScanned
+                        isWaitlistedCountrySheetPresented = false
+                    },
+                    onCancel: { isWaitlistedCountrySheetPresented = false }
+                )
+            }
+            .dynamicSheet(isPresented: $isUnsupportedCountrySheetPresented, fullScreen: true) {
+                UnsupportedPassportView(onClose: { isUnsupportedCountrySheetPresented = false })
             }
     }
 
@@ -70,9 +88,6 @@ struct IdentityView: View {
                             if let passport = passportManager.passport {
                                 PassportCard(
                                     passport: passport,
-                                    isWaitlist:
-                                        userManager.registerZkProof == nil &&
-                                        userManager.user?.status == .passportScanned,
                                     look: Binding(
                                         get: { passportManager.passportCardLook },
                                         set: { passportManager.setPassportCardLook($0) }
@@ -84,7 +99,9 @@ struct IdentityView: View {
                                     identifiers: Binding(
                                         get: { passportManager.passportIdentifiers },
                                         set: { passportManager.setPassportIdentifiers($0) }
-                                    )
+                                    ),
+                                    onWaitlisted: { isWaitlistedCountrySheetPresented = true },
+                                    onUnsupported: { isUnsupportedCountrySheetPresented = true }
                                 )
                             }
                         }
@@ -117,4 +134,5 @@ struct IdentityView: View {
         .environmentObject(V2MainView.ViewModel())
         .environmentObject(PassportManager())
         .environmentObject(UserManager())
+        .environmentObject(PassportViewModel())
 }

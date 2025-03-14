@@ -563,7 +563,6 @@
       }
     },
     "CARD VISUAL" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
