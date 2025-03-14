@@ -34,6 +34,10 @@ struct V2HomeView: View {
             .filter { $0.status == .active }
             .first?.id
     }
+    
+    private var userPointsBalance: Int {
+        pointsBalance?.amount ?? 0
+    }
 
     var body: some View {
         ZStack {
@@ -235,7 +239,7 @@ struct V2HomeView: View {
                                 path = .inviteFriends
                             }
                         }
-                        if (pointsBalance?.amount ?? 0) > 0 {
+                        if userPointsBalance > 0 {
                             HomeCardView(
                                 backgroundGradient: Gradients.gradientThird,
                                 topIcon: Icons.rarimo,
@@ -247,7 +251,7 @@ struct V2HomeView: View {
                                         .padding(.top, 100)
                                 },
                                 title: "Claim",
-                                subtitle: "\(pointsBalance!.amount.formatted()) RMO",
+                                subtitle: "\(userPointsBalance.formatted()) RMO",
                                 bottomAdditionalContent: { EmptyView() },
                                 animation: claimTokensAnimation
                             )

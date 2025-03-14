@@ -12,6 +12,12 @@ struct SelectIdentityTypeView: View {
     @EnvironmentObject private var passportManager: PassportManager
 
     let onSelect: (IdentityTypeId) -> Void
+    let onClose: (() -> Void)?
+    
+    init(onSelect: @escaping (IdentityTypeId) -> Void, onClose: (() -> Void)? = nil) {
+        self.onSelect = onSelect
+        self.onClose = onClose
+    }
 
     private var identityTypes: [IdentityType] {
         [
@@ -57,6 +63,11 @@ struct SelectIdentityTypeView: View {
                 .offset(x: 200, y: -200)
                 .opacity(0.4)
                 .blur(radius: 100)
+            if let onClose = onClose {
+                AppIconButton(icon: Icons.closeFill, action: onClose)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .padding([.top, .trailing], 20)
+            }
             VStack(alignment: .leading, spacing: 16) {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("Your")

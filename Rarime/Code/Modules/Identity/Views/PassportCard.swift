@@ -5,11 +5,13 @@ struct PassportCard: View {
     @EnvironmentObject private var userManager: UserManager
     
     let passport: Passport
-    let isWaitlist: Bool
     
     @Binding var look: PassportCardLook
     @Binding var isIncognito: Bool
     @Binding var identifiers: [PassportIdentifier]
+    
+    let onWaitlisted: () -> Void
+    let onUnsupported: () -> Void
 
     @State private var isSettingsSheetPresented = false
     @GestureState private var isHolding = false
@@ -23,9 +25,14 @@ struct PassportCard: View {
             Country.fromISOCode(passport.nationality)
         )
     }
+    
+    var isWaitlisted: Bool {
+        userManager.registerZkProof == nil &&
+        userManager.user?.status == .passportScanned
+    }
 
     var isBadgeShown: Bool {
-        isWaitlist
+        isWaitlisted || isUnsupported
     }
     
     var isDisabled: Bool {
@@ -49,7 +56,7 @@ struct PassportCard: View {
 
     private var passportBadgeWrapper: some View {
         HStack(spacing: 16) {
-            if isWaitlist {
+            if isWaitlisted {
                 Image(Icons.globeSimpleTime)
                     .iconLarge()
                     .foregroundStyle(.warningMain)
@@ -58,13 +65,15 @@ struct PassportCard: View {
                     .iconLarge()
                     .foregroundStyle(.errorMain)
             }
-            Text(isWaitlist ? "Waitlisted country" : "Unsupported for rewards")
+            Text(isWaitlisted ? "Waitlisted country" : "Unsupported for rewards")
                 .subtitle6()
                 .foregroundStyle(.textPrimary)
             Spacer()
-            Image(Icons.informationLine)
-                .iconMedium()
-                .foregroundStyle(.textSecondary)
+            Button(action: { isWaitlisted ? onWaitlisted() : onUnsupported() }) {
+                Image(Icons.informationLine)
+                    .iconMedium()
+                    .foregroundStyle(.textSecondary)
+            }
         }
         .frame(maxWidth: .infinity)
         .padding(.top, 12)
@@ -153,7 +162,7 @@ struct PassportCard: View {
 
     private var cardSettings: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Data")
+            Text("CARD VISUAL")
                 .overline2()
                 .foregroundStyle(.textSecondary)
             HStack(spacing: 16) {
@@ -354,18 +363,22 @@ private struct PassportIdentifiersPicker: View {
                 .foregroundStyle(.textSecondary)
             ForEach(PassportIdentifier.allCases, id: \.self) { identifier in
                 let isSelected = identifiers.contains(identifier)
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(identifier.title)
-                            .body4()
-                            .foregroundStyle(.textSecondary)
-                        Text(identifier.getPassportValue(from: passport))
-                            .subtitle5()
-                            .foregroundStyle(.textPrimary)
-                    }
-                    Spacer()
-                    AppRadioButton(isSelected: isSelected) {
-                        identifiers = [identifier]
+                Button(action: {
+                    identifiers = [identifier]
+                    FeedbackGenerator.shared.impact(.light)
+                }) {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(identifier.title)
+                                .body4()
+                                .foregroundStyle(.textSecondary)
+                            Text(identifier.getPassportValue(from: passport))
+                                .subtitle5()
+                                .foregroundStyle(.textPrimary)
+                        }
+                        Spacer()
+                        AppRadioButton(isSelected: isSelected, onSelect: {})
+                            .allowsHitTesting(false)
                     }
                 }
             }
@@ -397,10 +410,11 @@ private struct PreviewView: View {
     var body: some View {
         PassportCard(
             passport: passport,
-            isWaitlist: true,
             look: $look,
             isIncognito: $isIncognito,
-            identifiers: $identifiers
+            identifiers: $identifiers,
+            onWaitlisted: {},
+            onUnsupported: {}
         )
     }
 }

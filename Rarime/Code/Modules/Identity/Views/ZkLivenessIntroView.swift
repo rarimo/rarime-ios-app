@@ -15,7 +15,6 @@ struct ZkLivenessIntroView: View {
             AppIconButton(icon: Icons.closeFill, action: onClose)
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding([.top, .trailing], 20)
-            
             VStack(alignment: .leading, spacing: 40) {
                 VStack(spacing: 24) {
                     Spacer()

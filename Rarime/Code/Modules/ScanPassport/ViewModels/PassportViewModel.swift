@@ -52,17 +52,8 @@ class PassportViewModel: ObservableObject {
     
     var revocationPassportPublisher = PassthroughSubject<Passport, Error>()
     
-    var passportCountry: Country {
-        guard let passport = passport else { return .unknown }
-        return Country.fromISOCode(passport.nationality)
-    }
-    
-    var isEligibleForReward: Bool {
-        !UNSUPPORTED_REWARD_COUNTRIES.contains(passportCountry)
-    }
-    
     func setMrzKey(_ value: String) {
-        mrzKey = value
+        self.mrzKey = value
     }
 
     func setPassport(_ passport: Passport) {

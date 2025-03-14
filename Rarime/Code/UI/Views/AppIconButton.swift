@@ -22,9 +22,9 @@ private let primaryColors = IconButtonColors(
 )
 
 private let secondaryColors = IconButtonColors(
-    background: .bgComponentPrimary,
-    backgroundPressed: .bgComponentPressed,
-    backgroundDisabled: .bgComponentDisabled,
+    background: .bgComponentBasePrimary,
+    backgroundPressed: .bgComponentBasePressed,
+    backgroundDisabled: .bgComponentBaseDisabled,
     foreground: .baseBlack,
     foregroundDisabled: .baseBlack.opacity(0.28)
 )
@@ -119,10 +119,21 @@ struct AppIconButton: View {
 }
 
 #Preview {
-    HStack(alignment: .bottom, spacing: 10) {
-        AppIconButton(icon: Icons.closeFill, action: {}).controlSize(.large)
-        AppIconButton(icon: Icons.closeFill, action: {})
-        AppIconButton(icon: Icons.closeFill, action: {}).controlSize(.small)
+    VStack(spacing: 12) {
+        HStack(spacing: 12){
+            AppIconButton(icon: Icons.closeFill, action: {}).controlSize(.large)
+            AppIconButton(icon: Icons.closeFill, action: {})
+            AppIconButton(icon: Icons.closeFill, action: {}).controlSize(.small)
+        }
+        HStack(spacing: 12){
+            AppIconButton(variant: .secondary, icon: Icons.closeFill, action: {}).controlSize(.large)
+            AppIconButton(variant: .secondary, icon: Icons.closeFill, action: {})
+            AppIconButton(variant: .secondary, icon: Icons.closeFill, action: {}).controlSize(.small)
+        }
     }
-    .padding(.horizontal, 24)
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .background(
+        Gradients.gradientFirst
+            .ignoresSafeArea(.all)
+    )
 }

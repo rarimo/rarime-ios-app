@@ -177,6 +177,7 @@
 		C7DF8BF32D5F699E00C8E2D2 /* Gradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF8BF22D5F699400C8E2D2 /* Gradients.swift */; };
 		C7DF8BF52D5F9E1E00C8E2D2 /* V2StepIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF8BF42D5F9E0E00C8E2D2 /* V2StepIndicator.swift */; };
 		C7F3ED382D7F41A200AABE10 /* PassportRevocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F3ED372D7F419400AABE10 /* PassportRevocationView.swift */; };
+		C7F61DF52D84226000D4DC3A /* UnsupportedPassportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F61DF42D84225400D4DC3A /* UnsupportedPassportView.swift */; };
 		C7FFB52E2C99D7820037CBD4 /* NotificationSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FFB52D2C99D7820037CBD4 /* NotificationSheetView.swift */; };
 		C7FFB5302C9ACE900037CBD4 /* ClaimableNotificationContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FFB52F2C9ACE900037CBD4 /* ClaimableNotificationContent.swift */; };
 		CE059B422C9C4608006046B3 /* InternetConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE059B412C9C4608006046B3 /* InternetConnectionManager.swift */; };
@@ -556,6 +557,7 @@
 		C7DF8BF22D5F699400C8E2D2 /* Gradients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradients.swift; sourceTree = "<group>"; };
 		C7DF8BF42D5F9E0E00C8E2D2 /* V2StepIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2StepIndicator.swift; sourceTree = "<group>"; };
 		C7F3ED372D7F419400AABE10 /* PassportRevocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportRevocationView.swift; sourceTree = "<group>"; };
+		C7F61DF42D84225400D4DC3A /* UnsupportedPassportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsupportedPassportView.swift; sourceTree = "<group>"; };
 		C7FFB52D2C99D7820037CBD4 /* NotificationSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSheetView.swift; sourceTree = "<group>"; };
 		C7FFB52F2C9ACE900037CBD4 /* ClaimableNotificationContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimableNotificationContent.swift; sourceTree = "<group>"; };
 		CE059B412C9C4608006046B3 /* InternetConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionManager.swift; sourceTree = "<group>"; };
@@ -1088,6 +1090,7 @@
 		56933E092BBC09A90068C894 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C7F61DF42D84225400D4DC3A /* UnsupportedPassportView.swift */,
 				C7F3ED372D7F419400AABE10 /* PassportRevocationView.swift */,
 				56933DEE2BBABD100068C894 /* ScanPassportView.swift */,
 				56933DF22BBAC2940068C894 /* ScanPassportMRZView.swift */,
@@ -2113,6 +2116,7 @@
 				5617AB102C8F4469003947C9 /* VerificatorApi.swift in Sources */,
 				567ADEC42C25CF32007070A7 /* JSONDocument.swift in Sources */,
 				5655E4302BD2CA5500B86C5C /* AppColorScheme.swift in Sources */,
+				C7F61DF52D84226000D4DC3A /* UnsupportedPassportView.swift in Sources */,
 				CE3477622C78892F005E91FE /* View+Align.swift in Sources */,
 				5641CC452C874E2B007B7A0D /* AppAlert.swift in Sources */,
 				C71161B32CAAE3DB00ED41EA /* String+BigUInt.swift in Sources */,

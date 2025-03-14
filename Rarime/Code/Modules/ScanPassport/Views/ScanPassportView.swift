@@ -6,7 +6,6 @@ private enum ScanPassportState {
     case scanMRZ
     case readNFC
     case chipError
-    case waitlistPassport
 }
 
 struct ScanPassportView: View {
@@ -18,8 +17,6 @@ struct ScanPassportView: View {
     let onClose: () -> Void
 
     @State private var state: ScanPassportState = .scanMRZ
-    @State private var isTutorialPresented = false
-    @State private var isTutorialShown = AppUserDefaults.shared.isScanTutorialDisplayed
 
     var body: some View {
         switch state {
@@ -73,25 +70,6 @@ struct ScanPassportView: View {
         case .chipError:
             PassportChipErrorView(onClose: onClose)
                 .transition(.backslide)
-        case .waitlistPassport:
-            WaitlistPassportView(
-                onNext: {
-                    userManager.user?.status = .passportScanned
-                    passportManager.setPassport(passportViewModel.passport!)
-                    onClose()
-                },
-                onCancel: onClose
-            )
-            .environmentObject(passportViewModel)
-            .transition(.backslide)
-        }
-    }
-
-    private func presentScanTutorialIfNeeded() {
-        if !AppUserDefaults.shared.isScanTutorialDisplayed {
-            isTutorialPresented = !isTutorialShown
-            isTutorialShown = true
-            AppUserDefaults.shared.isScanTutorialDisplayed = true
         }
     }
     
@@ -137,8 +115,6 @@ struct ScanPassportView: View {
 
                 return
             }
-            
-            withAnimation { state = .waitlistPassport }
         }
     }
 }

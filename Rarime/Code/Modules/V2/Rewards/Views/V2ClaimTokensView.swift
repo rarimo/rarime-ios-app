@@ -37,7 +37,7 @@ struct V2ClaimTokensView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            AppIconButton(icon: Icons.closeFill, action: onClose)
+            AppIconButton(variant: .secondary, icon: Icons.closeFill, action: onClose)
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding([.top, .trailing], 20)
             Image(Images.rarimoTokens)
