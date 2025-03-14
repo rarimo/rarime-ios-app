@@ -15,7 +15,6 @@ struct V2NavBarView: View {
         }
         .padding(.top, 12)
         .frame(maxWidth: .infinity, alignment: .bottom)
-        .background(.bgBlur)
     }
 }
 
