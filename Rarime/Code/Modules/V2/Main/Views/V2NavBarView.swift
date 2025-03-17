@@ -24,7 +24,7 @@ struct V2NavBarTabItem: View {
     
     var body: some View {
         Image(isActive ? tab.activeIconName : tab.iconName)
-            .square(24)
+            .iconLarge()
             .frame(width: 48, height: 40)
             .background(isActive ? .bgComponentPrimary : .clear)
             .foregroundStyle(isActive ? .textPrimary : .textPlaceholder)
