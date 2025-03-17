@@ -1,78 +1,106 @@
 import SwiftUI
 
+struct HomeCarouselCard: Identifiable {
+    let id = UUID()
+    let content: () -> AnyView
+    let action: () -> Void
+    let isShouldDisplay: Bool
+    
+    init<V: View>(
+        isShouldDisplay: Bool = true,
+        action: @escaping () -> Void,
+        @ViewBuilder content: @escaping () -> V
+    ) {
+        self.isShouldDisplay = isShouldDisplay
+        self.action = action
+        self.content = { AnyView(content()) }
+    }
+}
+
 struct SnapCarouselView: View {
-    let views: [AnyView]
+    let cards: [HomeCarouselCard]
     @Binding var index: Int
     
     var spacing: CGFloat
     var trailingSpace: CGFloat
     var sensitivity: CGFloat
     var dampFactor: CGFloat
+    var nextCardScaleFactor: CGFloat
     
-    @GestureState var offset: CGFloat = 0
+    @State private var dragOffset: CGFloat = 0
     
     init(
         index: Binding<Int>,
-        @ViewArrayBuilder content: () -> [AnyView],
-        spacing: CGFloat = 44,
-        trailingSpace: CGFloat = 88,
-        sensitivity: CGFloat = 2.4,
-        dampFactor: CGFloat = 0.3
+        cards: [HomeCarouselCard],
+        spacing: CGFloat = 40,
+        trailingSpace: CGFloat = 68,
+        sensitivity: CGFloat = 2.5,
+        dampFactor: CGFloat = 0.4,
+        nextCardScaleFactor: CGFloat = 0.9
     ) {
         self.spacing = spacing
         self.trailingSpace = trailingSpace
         self._index = index
-        self.views = content()
+        self.cards = cards
         self.sensitivity = sensitivity
         self.dampFactor = dampFactor
+        self.nextCardScaleFactor = nextCardScaleFactor
     }
     
     var body: some View {
         GeometryReader { proxy in
-            let offsetHeight = self.offsetHeight(for: proxy.size)
-            let currentAdjustedOffset = self.adjustedOffset(for: offset)
+            let containerHeight = proxy.size.height
+            let cardHeight = (containerHeight - trailingSpace) * nextCardScaleFactor
+            let freeSpace = containerHeight - cardHeight
+            let offsetHeight = cardHeight + spacing
+            let currentAdjustedOffset = self.adjustedOffset(for: dragOffset)
             let effectiveIndex = self.effectiveIndex(using: currentAdjustedOffset, offsetHeight: offsetHeight)
             VStack(spacing: spacing) {
-                ForEach(views.indices, id: \.self) { index in
-                    let distance = abs(CGFloat(index) - effectiveIndex)
-                    let scale = 1 - (0.1 * min(distance, 1))
-                    views[index]
-                        .frame(height: proxy.size.height - trailingSpace)
+                ForEach(0..<cards.count, id: \.self) { idx in
+                    let distance = abs(CGFloat(idx) - effectiveIndex)
+                    let scale = 1 - ((1 - nextCardScaleFactor) * min(distance, 1))
+                    
+                    cards[idx].content()
+                        .frame(height: cardHeight)
                         .scaleEffect(scale, anchor: .top)
+                        .onTapGesture {
+                            cards[idx].action()
+                        }
                 }
             }
-            .offset(y: (CGFloat(index) * -offsetHeight) + currentAdjustedOffset)
+            .offset(y:
+                (CGFloat(index) * -offsetHeight) +
+                currentAdjustedOffset +
+                (freeSpace / 2) -
+                (spacing / 2)
+            )
             .gesture(
                 DragGesture()
-                    .updating($offset, body: { value, out, _ in
-                        out = value.translation.height
-                    })
+                    .onChanged { value in
+                        dragOffset = value.translation.height
+                    }
                     .onEnded { value in
                         let offsetY = value.translation.height
                         let progress = -offsetY / offsetHeight * sensitivity
                         let delta = min(max(Int(progress.rounded()), -1), 1)
-                        let newIndex = max(min(index + delta, views.count - 1), 0)
                         
-                        if newIndex != index {
-                            FeedbackGenerator.shared.impact(.light)
+                        withAnimation(.interpolatingSpring(mass: 1, stiffness: 100, damping: 15)) {
+                            let newIndex = max(min(index + delta, cards.count - 1), 0)
+                            if newIndex != index {
+                                FeedbackGenerator.shared.impact(.light)
+                            }
+                            index = newIndex
+                            dragOffset = 0
                         }
-                        
-                        index = newIndex
                     }
             )
         }
-        .padding(.top, 42)
-        .animation(.interpolatingSpring(mass: 1, stiffness: 100, damping: 15), value: index)
-    }
-    
-    private func offsetHeight(for size: CGSize) -> CGFloat {
-        size.height - (trailingSpace - spacing)
     }
     
     private func adjustedOffset(for gestureOffset: CGFloat) -> CGFloat {
         if index == 0 && gestureOffset > 0 {
             return gestureOffset * dampFactor
-        } else if index == views.count - 1 && gestureOffset < 0 {
+        } else if index == cards.count - 1 && gestureOffset < 0 {
             return gestureOffset * dampFactor
         }
         return gestureOffset

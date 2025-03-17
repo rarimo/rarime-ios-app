@@ -38,6 +38,147 @@ struct V2HomeView: View {
     private var userPointsBalance: Int {
         pointsBalance?.amount ?? 0
     }
+    
+    private var homeCards: [HomeCarouselCard] {
+        [
+            HomeCarouselCard(action: { path = .identity }) {
+                HomeCardView(
+                    backgroundGradient: Gradients.gradientFirst,
+                    topIcon: Icons.rarime,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(Images.handWithPhone)
+                            .resizable()
+                            .scaledToFit()
+                            .scaleEffect(0.88)
+                            .offset(x: 32)
+                            .padding(.top, 12)
+                    },
+                    title: "Your Device",
+                    subtitle: "Your Identity",
+                    bottomAdditionalContent: {
+                        Text("* Nothing leaves this device")
+                            .body4()
+                            .foregroundStyle(.baseBlack.opacity(0.6))
+                            .padding(.top, 24)
+                    },
+                    animation: identityAnimation
+                )
+            },
+            HomeCarouselCard(
+                isShouldDisplay: !isBalanceFetching && pointsBalance != nil,
+                action: { path = .inviteFriends }
+            ) {
+                HomeCardView(
+                    backgroundGradient: Gradients.gradientSecond,
+                    topIcon: Icons.rarime,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        ZStack(alignment: .bottomTrailing) {
+                            Image(Images.peopleEmojis)
+                                .resizable()
+                                .scaledToFit()
+                                .padding(.top, 84)
+
+                            Image(Icons.getTokensArrow)
+                                .foregroundStyle(.informationalDark)
+                                .offset(x: -44, y: 88)
+                                .matchedGeometryEffect(
+                                    id: AnimationNamespaceIds.additionalImage,
+                                    in: inviteFriendsAnimation
+                                )
+                        }
+                    },
+                    title: "Invite",
+                    subtitle: "Others",
+                    bottomAdditionalContent: {
+                        if let code = activeReferralCode {
+                            HStack(spacing: 16) {
+                                Text(code)
+                                    .subtitle4()
+                                    .foregroundStyle(.baseBlack)
+                                VerticalDivider(color: .bgComponentBasePrimary)
+                                Image(isCopied ? Icons.checkLine : Icons.fileCopyLine)
+                                    .iconMedium()
+                                    .foregroundStyle(.baseBlack.opacity(0.5))
+                            }
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(.baseWhite)
+                            .cornerRadius(8)
+                            .frame(maxWidth: 280, alignment: .leading)
+                            .padding(.top, 24)
+                            .onTapGesture {
+                                if isCopied { return }
+
+                                isCopied = true
+                                FeedbackGenerator.shared.impact(.medium)
+
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    withAnimation(.easeInOut) {
+                                        isCopied = false
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    animation: inviteFriendsAnimation
+                )
+            },
+            HomeCarouselCard(
+                isShouldDisplay: userPointsBalance > 0,
+                action: { path = .claimTokens }
+            ) {
+                HomeCardView(
+                    backgroundGradient: Gradients.gradientThird,
+                    topIcon: Icons.rarimo,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(Images.rarimoTokens)
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.top, 100)
+                    },
+                    title: "Claim",
+                    subtitle: "\(userPointsBalance.formatted()) RMO",
+                    animation: claimTokensAnimation
+                )
+            },
+            HomeCarouselCard(action: { path = .wallet }) {
+                HomeCardView(
+                    backgroundGradient: Gradients.gradientFourth,
+                    topIcon: Icons.rarime,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(Images.seedPhraseShred)
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.top, 96)
+                    },
+                    title: "An Unforgettable",
+                    subtitle: "Wallet",
+                    animation: walletAnimation
+                )
+            },
+            HomeCarouselCard(action: {}) {
+                HomeCardView(
+                    backgroundGradient: Gradients.gradientFifth,
+                    topIcon: Icons.freedomtool,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(Images.dotCountry)
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.top, 8)
+                    },
+                    title: "Freedomtool",
+                    subtitle: "Voting",
+                    animation: votingAnimation
+                )
+            }
+        ]
+    }
 
     var body: some View {
         ZStack {
@@ -88,51 +229,52 @@ struct V2HomeView: View {
     }
 
     private var header: some View {
-        ZStack(alignment: .top) {
-            TransparentBlurView(removeAllFilters: false)
-                .ignoresSafeArea(edges: .top)
-                .background(.bgBlur)
-            HStack(alignment: .center, spacing: 8) {
-                HStack(alignment: .center, spacing: 10) {
-                    Text("Hi")
-                        .subtitle4()
-                        .foregroundStyle(.textSecondary)
-                    Group {
-                        if passportManager.passport != nil {
-                            Text(passportManager.passport?.displayedFirstName ?? "")
-                        } else {
-                            Text("User")
-                        }
-                    }
+        HStack(alignment: .center, spacing: 8) {
+            HStack(alignment: .center, spacing: 10) {
+                Text("Hi")
                     .subtitle4()
-                    .foregroundStyle(.textPrimary)
-                }
-                #if DEVELOPMENT
-                    Text(verbatim: "Development")
-                        .caption2()
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 4)
-                        .background(.warningLighter, in: Capsule())
-                        .foregroundStyle(.warningDark)
-                #endif
-                Spacer()
-                ZStack {
-                    AppIconButton(icon: Icons.notification2Line, action: { path = .notifications })
-                    if notificationManager.unreadNotificationsCounter > 0 {
-                        Text(verbatim: notificationManager.unreadNotificationsCounter.formatted())
-                            .overline3()
-                            .foregroundStyle(.baseWhite)
-                            .frame(width: 16, height: 16)
-                            .background(.errorMain, in: Circle())
-                            .offset(x: 7, y: -8)
+                    .foregroundStyle(.textSecondary)
+                Group {
+                    if passportManager.passport != nil {
+                        Text(passportManager.passport?.displayedFirstName ?? "")
+                    } else {
+                        Text("User")
                     }
+                }
+                .subtitle4()
+                .foregroundStyle(.textPrimary)
+            }
+            #if DEVELOPMENT
+                Text(verbatim: "Development")
+                    .caption2()
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 4)
+                    .background(.warningLighter, in: Capsule())
+                    .foregroundStyle(.warningDark)
+            #endif
+            Spacer()
+            ZStack {
+                AppIconButton(icon: Icons.notification2Line, action: { path = .notifications })
+                if notificationManager.unreadNotificationsCounter > 0 {
+                    Text(verbatim: notificationManager.unreadNotificationsCounter.formatted())
+                        .overline3()
+                        .foregroundStyle(.baseWhite)
+                        .frame(width: 16, height: 16)
+                        .background(.errorMain, in: Circle())
+                        .offset(x: 7, y: -8)
                 }
             }
-            .padding([.top, .horizontal], 20)
-            .padding(.bottom, 16)
         }
         .zIndex(1)
-        .frame(height: 83)
+        .padding([.top, .horizontal], 20)
+        .padding(.bottom, 16)
+        .background {
+            ZStack {
+                Color.bgBlur
+                TransparentBlurView(removeAllFilters: false)
+            }
+            .ignoresSafeArea(.container, edges: .top)
+        }
     }
 
     private var content: some View {
@@ -140,148 +282,16 @@ struct V2HomeView: View {
             VStack(spacing: 0) {
                 header
                 ZStack(alignment: .trailing) {
-                    SnapCarouselView(index: $viewModel.currentIndex) {
-                        HomeCardView(
-                            backgroundGradient: Gradients.gradientFirst,
-                            topIcon: Icons.rarime,
-                            bottomIcon: Icons.arrowRightUpLine,
-                            imageContent: {
-                                Image(Images.handWithPhone)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .scaleEffect(0.88)
-                                    .offset(x: 32)
-                                    .padding(.top, 12)
-                            },
-                            title: "Your Device",
-                            subtitle: "Your Identity",
-                            bottomAdditionalContent: {
-                                Text("* Nothing leaves this device")
-                                    .body4()
-                                    .foregroundStyle(.baseBlack.opacity(0.6))
-                                    .padding(.top, 24)
-                            },
-                            animation: identityAnimation
-                        )
-                        .onTapGesture {
-                            path = .identity
-                        }
-                        HomeCardView(
-                            backgroundGradient: Gradients.gradientFourth,
-                            topIcon: Icons.rarime,
-                            bottomIcon: Icons.arrowRightUpLine,
-                            imageContent: {
-                                Image(Images.seedPhraseShred)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .padding(.top, 96)
-                            },
-                            title: "An Unforgettable",
-                            subtitle: "Wallet",
-                            bottomAdditionalContent: { EmptyView() },
-                            animation: walletAnimation
-                        )
-                        .onTapGesture {
-                            path = .wallet
-                        }
-                        if !isBalanceFetching && pointsBalance != nil {
-                            HomeCardView(
-                                backgroundGradient: Gradients.gradientSecond,
-                                topIcon: Icons.rarime,
-                                bottomIcon: Icons.arrowRightUpLine,
-                                imageContent: {
-                                    ZStack(alignment: .bottomTrailing) {
-                                        Image(Images.peopleEmojis)
-                                            .resizable()
-                                            .scaledToFit()
-                                            .padding(.top, 84)
-
-                                        Image(Icons.getTokensArrow)
-                                            .foregroundStyle(.informationalDark)
-                                            .offset(x: -44, y: 88)
-                                            .matchedGeometryEffect(
-                                                id: AnimationNamespaceIds.additionalImage,
-                                                in: inviteFriendsAnimation
-                                            )
-                                    }
-                                },
-                                title: "Invite",
-                                subtitle: "Others",
-                                bottomAdditionalContent: {
-                                    if let code = activeReferralCode {
-                                        HStack(spacing: 16) {
-                                            Text(code)
-                                                .subtitle4()
-                                                .foregroundStyle(.baseBlack)
-                                            VerticalDivider()
-                                            Image(isCopied ? Icons.checkLine : Icons.fileCopyLine)
-                                                .iconMedium()
-                                                .foregroundStyle(.baseBlack.opacity(0.5))
-                                        }
-                                        .fixedSize(horizontal: false, vertical: true)
-                                        .padding(.horizontal, 16)
-                                        .padding(.vertical, 8)
-                                        .background(.baseWhite)
-                                        .cornerRadius(8)
-                                        .frame(maxWidth: 230, alignment: .leading)
-                                        .padding(.top, 24)
-                                        .onTapGesture {
-                                            if isCopied { return }
-
-                                            isCopied = true
-                                            FeedbackGenerator.shared.impact(.medium)
-
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                                isCopied = false
-                                            }
-                                        }
-                                    }
-                                },
-                                animation: inviteFriendsAnimation
-                            )
-                            .onTapGesture {
-                                path = .inviteFriends
-                            }
-                        }
-                        if userPointsBalance > 0 {
-                            HomeCardView(
-                                backgroundGradient: Gradients.gradientThird,
-                                topIcon: Icons.rarimo,
-                                bottomIcon: Icons.arrowRightUpLine,
-                                imageContent: {
-                                    Image(Images.rarimoTokens)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .padding(.top, 100)
-                                },
-                                title: "Claim",
-                                subtitle: "\(userPointsBalance.formatted()) RMO",
-                                bottomAdditionalContent: { EmptyView() },
-                                animation: claimTokensAnimation
-                            )
-                            .onTapGesture {
-                                path = .claimTokens
-                            }
-                        }
-                        HomeCardView(
-                            backgroundGradient: Gradients.gradientFifth,
-                            topIcon: Icons.freedomtool,
-                            bottomIcon: Icons.arrowRightUpLine,
-                            imageContent: {
-                                Image(Images.dotCountry)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .padding(.top, 8)
-                            },
-                            title: "Freedomtool",
-                            subtitle: "Voting",
-                            bottomAdditionalContent: { EmptyView() },
-                            animation: votingAnimation
-                        )
-                    }
+                    SnapCarouselView(
+                        index: $viewModel.currentIndex,
+                        cards: homeCards.filter { $0.isShouldDisplay }
+                    )
                     .padding(.horizontal, 22)
-                    V2StepIndicator(steps: 5, currentStep: viewModel.currentIndex)
-                        .padding(.trailing, 8)
+                    V2StepIndicator(
+                        steps: homeCards.filter(\.isShouldDisplay).count,
+                        currentStep: viewModel.currentIndex
+                    )
+                    .padding(.trailing, 8)
                 }
             }
             .background(.bgPrimary)
