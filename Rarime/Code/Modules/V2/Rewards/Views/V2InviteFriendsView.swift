@@ -7,69 +7,71 @@ struct V2InviteFriendsView: View {
     var animation: Namespace.ID
 
     var body: some View {
-        VStack(spacing: 0) {
-            AppIconButton(variant: .secondary, icon: Icons.closeFill, action: onClose)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .padding([.top, .trailing], 20)
-            Image(Images.peopleEmojis)
-                .resizable()
-                .scaledToFit()
-                .padding(.top, 77)
-                .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
-            ReferralBottomSheet {
-                VStack(alignment: .leading, spacing: 24) {
-                    Capsule()
-                        .fill(.bgComponentBaseHovered)
-                        .frame(width: 36, height: 5)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                    HStack(alignment: .top, spacing: 64) {
-                        VStack(alignment: .leading, spacing: 0) {
-                            Text("Invite")
-                                .h1()
-                                .foregroundStyle(.baseBlack)
+        PullToCloseWrapperView(action: onClose) {
+            VStack(spacing: 0) {
+                AppIconButton(variant: .secondary, icon: Icons.closeFill, action: onClose)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .padding([.top, .trailing], 20)
+                Image(Images.peopleEmojis)
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.top, 77)
+                    .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
+                ReferralBottomSheet {
+                    VStack(alignment: .leading, spacing: 24) {
+                        Capsule()
+                            .fill(.bgComponentBaseHovered)
+                            .frame(width: 36, height: 5)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        HStack(alignment: .top, spacing: 64) {
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text("Invite")
+                                    .h1()
+                                    .foregroundStyle(.baseBlack)
+                                    .matchedGeometryEffect(
+                                        id: AnimationNamespaceIds.title,
+                                        in: animation,
+                                        properties: .position
+                                    )
+                                Text("Others")
+                                    .additional1()
+                                    .foregroundStyle(.baseBlack.opacity(0.4))
+                                    .matchedGeometryEffect(
+                                        id: AnimationNamespaceIds.subtitle,
+                                        in: animation,
+                                        properties: .position
+                                    )
+                            }
+                            Image(Icons.getTokensArrow)
+                                .foregroundStyle(.informationalDark)
+                                .padding(.top, 20)
                                 .matchedGeometryEffect(
-                                    id: AnimationNamespaceIds.title,
-                                    in: animation,
-                                    properties: .position
-                                )
-                            Text("Others")
-                                .additional1()
-                                .foregroundStyle(.baseBlack.opacity(0.4))
-                                .matchedGeometryEffect(
-                                    id: AnimationNamespaceIds.subtitle,
-                                    in: animation,
-                                    properties: .position
+                                    id: AnimationNamespaceIds.additionalImage,
+                                    in: animation
                                 )
                         }
-                        Image(Icons.getTokensArrow)
-                            .foregroundStyle(.informationalDark)
-                            .padding(.top, 20)
-                            .matchedGeometryEffect(
-                                id: AnimationNamespaceIds.additionalImage,
-                                in: animation
-                            )
-                    }
-                    Text("Share your referral link and get bonuses when your friends join and make a purchase!")
-                        .body3()
-                        .foregroundStyle(.baseBlack.opacity(0.5))
-                    if let codes = balance?.referralCodes {
-                        ScrollView(showsIndicators: false) {
-                            VStack(spacing: 8) {
-                                ForEach(codes, id: \.id) { code in
-                                    InviteCodeView(code: code.id, status: code.status)
+                        Text("Share your referral link and get bonuses when your friends join and make a purchase!")
+                            .body3()
+                            .foregroundStyle(.baseBlack.opacity(0.5))
+                        if let codes = balance?.referralCodes {
+                            ScrollView(showsIndicators: false) {
+                                VStack(spacing: 8) {
+                                    ForEach(codes, id: \.id) { code in
+                                        InviteCodeView(code: code.id, status: code.status)
+                                    }
                                 }
                             }
                         }
                     }
+                    .padding(.horizontal, 24)
                 }
-                .padding(.horizontal, 24)
             }
+            .background(
+                Gradients.gradientSecond
+                    .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
+                    .ignoresSafeArea()
+            )
         }
-        .background(
-            Gradients.gradientSecond
-                .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
-                .ignoresSafeArea()
-        )
     }
 }
 

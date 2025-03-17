@@ -176,6 +176,7 @@
 		C7DF8BEF2D5F686200C8E2D2 /* V2MainViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF8BE52D5F686200C8E2D2 /* V2MainViewLayout.swift */; };
 		C7DF8BF32D5F699E00C8E2D2 /* Gradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF8BF22D5F699400C8E2D2 /* Gradients.swift */; };
 		C7DF8BF52D5F9E1E00C8E2D2 /* V2StepIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DF8BF42D5F9E0E00C8E2D2 /* V2StepIndicator.swift */; };
+		C7E9F5152D88314D00FE1194 /* PullToCloseWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E9F5142D88314500FE1194 /* PullToCloseWrapperView.swift */; };
 		C7F3ED382D7F41A200AABE10 /* PassportRevocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F3ED372D7F419400AABE10 /* PassportRevocationView.swift */; };
 		C7F61DF52D84226000D4DC3A /* UnsupportedPassportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F61DF42D84225400D4DC3A /* UnsupportedPassportView.swift */; };
 		C7FFB52E2C99D7820037CBD4 /* NotificationSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FFB52D2C99D7820037CBD4 /* NotificationSheetView.swift */; };
@@ -556,6 +557,7 @@
 		C7DF8BE62D5F686200C8E2D2 /* V2NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2NavBarView.swift; sourceTree = "<group>"; };
 		C7DF8BF22D5F699400C8E2D2 /* Gradients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradients.swift; sourceTree = "<group>"; };
 		C7DF8BF42D5F9E0E00C8E2D2 /* V2StepIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2StepIndicator.swift; sourceTree = "<group>"; };
+		C7E9F5142D88314500FE1194 /* PullToCloseWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToCloseWrapperView.swift; sourceTree = "<group>"; };
 		C7F3ED372D7F419400AABE10 /* PassportRevocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportRevocationView.swift; sourceTree = "<group>"; };
 		C7F61DF42D84225400D4DC3A /* UnsupportedPassportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsupportedPassportView.swift; sourceTree = "<group>"; };
 		C7FFB52D2C99D7820037CBD4 /* NotificationSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSheetView.swift; sourceTree = "<group>"; };
@@ -1635,6 +1637,7 @@
 		CE9E82D52BA8915C00AAF885 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C7E9F5142D88314500FE1194 /* PullToCloseWrapperView.swift */,
 				C7DF8BD12D5F430300C8E2D2 /* MaintenanceView.swift */,
 				CE9E82D62BA8917100AAF885 /* LottieView.swift */,
 				56A88FCE2C062AB200D3A64A /* AirdropCheckboxView.swift */,
@@ -2116,6 +2119,7 @@
 				5617AB102C8F4469003947C9 /* VerificatorApi.swift in Sources */,
 				567ADEC42C25CF32007070A7 /* JSONDocument.swift in Sources */,
 				5655E4302BD2CA5500B86C5C /* AppColorScheme.swift in Sources */,
+				C7E9F5152D88314D00FE1194 /* PullToCloseWrapperView.swift in Sources */,
 				C7F61DF52D84226000D4DC3A /* UnsupportedPassportView.swift in Sources */,
 				CE3477622C78892F005E91FE /* View+Align.swift in Sources */,
 				5641CC452C874E2B007B7A0D /* AppAlert.swift in Sources */,

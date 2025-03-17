@@ -5,17 +5,18 @@ struct V2MainViewLayout<Content: View>: View {
     @ViewBuilder var content: Content
 
     var body: some View {
-        content
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .safeAreaInset(edge: .bottom, spacing: 0, content: {
-                ZStack(alignment: .top) {
-                    TransparentBlurView(removeAllFilters: false)
-                        .ignoresSafeArea(edges: .bottom)
-                        .background(.bgBlur)
-                    V2NavBarView(selectedTab: $mainViewModel.selectedTab)
+        VStack(spacing: 0) {
+            content
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            V2NavBarView(selectedTab: $mainViewModel.selectedTab)
+                .background {
+                    ZStack {
+                        Color.bgBlur
+                        TransparentBlurView(removeAllFilters: false)
+                    }
+                    .ignoresSafeArea(.container, edges: .bottom)
                 }
-                .frame(height: 70)
-            })
+        }
     }
 }
 
