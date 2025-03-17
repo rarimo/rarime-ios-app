@@ -86,6 +86,8 @@ class PollsViewModel: ObservableObject {
         _ passport: Passport,
         _ results: [PollResult]
     ) async throws {
+        guard let poll = selectedPoll else { throw "No selected poll" }
+        
         let stateKeeperContract = try StateKeeperContract()
         let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.api.registrationSmtContractAddress, eip55: false)
         let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
@@ -108,6 +110,7 @@ class PollsViewModel: ObservableObject {
         guard let proofIndex else { throw "Proof index is not initialized" }
         
         let smtProof = try await registrationSmtContract.getProof(proofIndex)
+        let smtProofJson = try JSONEncoder().encode(smtProof)
         
         let profileInitializer = IdentityProfile()
         let profile = try profileInitializer.newProfile(user.secretKey)
@@ -120,18 +123,15 @@ class PollsViewModel: ObservableObject {
             stateKeeperContract,
             profile,
             passport,
-            smtProof,
+            smtProofJson,
             passportKey,
             resultsJson,
             passportInfo,
             identityInfo
         )
         
-        print("vote proof", voteProof)
-        
         let voteProofJson = try JSONEncoder().encode(voteProof)
         
-        guard let poll = selectedPoll else { throw "No selected poll" }
         let votingData = try PollsService.decodeVotingData(poll)
                 
         let calldataBuilder = IdentityCallDataBuilder()
@@ -139,21 +139,14 @@ class PollsViewModel: ObservableObject {
             voteProofJson,
             proposalID: Int64(poll.id),
             pollResultsJSON: resultsJson,
-            citizenship: votingData.citizenshipMask[0].description
+            citizenship: votingData.citizenshipMask[0].asciiValue
         )
         
-        print("proposal Id", Int64(poll.id))
-        print("voting adresses", poll.votingsAddresses[0].hex(eip55: false))
-        print("calldata", calldata.fullHex)
-        
         let votingRelayer = VotingRelayer(ConfigManager.shared.api.votingRelayerURL)
-        
         let voteResponse = try await votingRelayer.vote(
             calldata.fullHex,
             poll.votingsAddresses[0].hex(eip55: false)
         )
-        
-        
         
         LoggerUtil.common.info("Voting \(poll.id), txHash: \(voteResponse.data.id)")
     }
@@ -162,7 +155,7 @@ class PollsViewModel: ObservableObject {
         _ stateKeeperContract: StateKeeperContract,
         _ profile: IdentityProfile,
         _ passport: Passport,
-        _ smtProof: SMTProof,
+        _ smtProofJson: Data,
         _ passportInfoKey: String,
         _ pollResultsJson: Data,
         _ passportInfo: PassportInfo,
@@ -171,12 +164,11 @@ class PollsViewModel: ObservableObject {
         guard let poll = selectedPoll else { throw "No selected poll" }
         
         let eventData = try profile.calculateVotingEventData(pollResultsJson)
-        guard let encodedEventId = poll.eventId.abiEncode(dynamic: false) else {
-            throw "Decoding event id error"
-        }
+//        guard let encodedEventId = poll.eventId.abiEncode(dynamic: false) else {
+//            throw "Decoding event id error"
+//        }
     
         let votingData = try PollsService.decodeVotingData(poll)
-        let smtProofJson = try JSONEncoder().encode(smtProof)
         
         let queryProofInputs = try profile.buildQueryIdentityInputs(
             passport.dg1,
@@ -185,7 +177,7 @@ class PollsViewModel: ObservableObject {
             pkPassportHash: passportInfoKey,
             issueTimestamp: identityInfo.issueTimestamp.description,
             identityCounter: passportInfo.identityReissueCounter.description,
-            eventID: "0x" + encodedEventId,
+            eventID: "0x" + poll.eventId.description,
             eventData: eventData.fullHex,
             timestampLowerbound: "0",
             timestampUpperbound: max(
