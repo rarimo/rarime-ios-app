@@ -10,14 +10,14 @@ struct TransparentBlurView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
-        DispatchQueue.main.async {
+        Task { @MainActor in
             if let backdropLayer = uiView.layer.sublayers?.first {
                 if removeAllFilters {
                     backdropLayer.filters = []
                 } else {
-                    backdropLayer.filters?.removeAll(where: { filter in
+                    backdropLayer.filters?.removeAll { filter in
                         String(describing: filter) != "gaussianBlur"
-                    })
+                    }
                 }
             }
         }
