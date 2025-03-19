@@ -32,6 +32,7 @@ enum Icons {
     static let closeFill = "CloseFill"
     static let cloud = "Cloud"
     static let copySimple = "CopySimple"
+    static let deleteBin6Line = "DeleteBin6Line"
     static let detective = "Detective"
     static let discord = "Discord"
     static let dotsSixVertical = "DotsSixVertical"

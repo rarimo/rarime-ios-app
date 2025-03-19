@@ -182,48 +182,51 @@ struct V2HomeView: View {
 
     var body: some View {
         ZStack {
-            switch path {
-            case .notifications:
-                NotificationsView(
-                    onBack: { path = nil }
-                )
-                .environment(
-                    \.managedObjectContext,
-                    notificationManager.pushNotificationContainer.viewContext
-                )
-            case .identity:
-                IdentityOnboardingView(
-                    onClose: { path = nil },
-                    onStart: {
-                        path = nil
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            mainViewModel.selectedTab = .identity
-                        }
-                    },
-                    animation: identityAnimation
-                )
-            case .inviteFriends:
-                V2InviteFriendsView(
-                    balance: pointsBalance,
-                    onClose: { path = nil },
-                    animation: inviteFriendsAnimation
-                )
-            case .claimTokens:
-                V2ClaimTokensView(
-                    onClose: { path = nil },
-                    animation: claimTokensAnimation
-                )
-            case .wallet:
-                WalletWaitlistView(
-                    onClose: { path = nil },
-                    // TODO: change after design impl
-                    onJoin: { path = nil },
-                    animation: walletAnimation
-                )
-            default: content
+            if path == .notifications {
+                NotificationsView(onBack: { path = nil })
+                    .environment(\.managedObjectContext, notificationManager.pushNotificationContainer.viewContext)
+                    .transition(.backslide)
+            } else {
+                switch path {
+                case .identity:
+                    IdentityOnboardingView(
+                        onClose: { path = nil },
+                        onStart: {
+                            path = nil
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                mainViewModel.selectedTab = .identity
+                            }
+                        },
+                        animation: identityAnimation
+                    )
+                case .inviteFriends:
+                    V2InviteFriendsView(
+                        balance: pointsBalance,
+                        onClose: { path = nil },
+                        animation: inviteFriendsAnimation
+                    )
+                case .claimTokens:
+                    V2ClaimTokensView(
+                        onClose: { path = nil },
+                        animation: claimTokensAnimation
+                    )
+                case .wallet:
+                    WalletWaitlistView(
+                        onClose: { path = nil },
+                        onJoin: { path = nil },
+                        animation: walletAnimation
+                    )
+                default:
+                    content
+                }
             }
         }
-        .animation(.interpolatingSpring(mass: 1, stiffness: 100, damping: 15), value: path)
+        .animation(
+            path == .notifications
+                ? .easeInOut
+                : .interpolatingSpring(mass: 1, stiffness: 100, damping: 15),
+            value: path
+        )
         .onAppear(perform: fetchBalance)
         .onDisappear(perform: cleanup)
     }
@@ -298,7 +301,7 @@ struct V2HomeView: View {
         }
     }
 
-    func fetchBalance() {
+    private func fetchBalance() {
         isBalanceFetching = true
 
         let cancelable = Task { @MainActor in
@@ -373,7 +376,7 @@ struct V2HomeView: View {
         )
     }
 
-    func cleanup() {
+    private func cleanup() {
         for cancelable in cancelables {
             cancelable.cancel()
         }
