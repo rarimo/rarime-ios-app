@@ -15,7 +15,7 @@ struct NoirRegisterIdentityInputs: Codable {
         case skIdentity = "sk_identity"
     }
 
-    func toAnyMAp() -> [String: Any] {
+    func toAnyMap() -> [String: Any] {
         var result: [String: Any] = [:]
         result["dg1"] = dg1
         result["dg15"] = dg15

@@ -3,9 +3,6 @@ import FirebaseCore
 import FirebaseMessaging
 import SwiftUI
 
-import Swoir
-import Swoirenberg
-
 @main
 struct RarimeApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate

@@ -2,6 +2,9 @@ import Foundation
 
 import RarimeIOSUtils
 
+import Swoir
+import Swoirenberg
+
 class ZKUtils {
     static let ERROR_SIZE = UInt(256)
     static let WITNESS_SIZE = UInt(100 * 1024 * 1024)
@@ -124,7 +127,15 @@ class ZKUtils {
 }
 
 extension ZKUtils {
-    static func generateNoirWitness(_ inputs: Data, _ circuit: Data) throws -> Data {
-        return Data()
+    static func generateNoirProof(_ inputs: NoirRegisterIdentityInputs) throws -> Data {
+        let swoir = Swoir(backend: Swoirenberg.self)
+
+        let circuit = try swoir.createCircuit(manifest: Circuits.noirRegisterCircuit)
+
+        try circuit.setupSrs()
+
+        let proof = try circuit.prove(inputs.toAnyMap(), proof_type: "plonk", recursive: true)
+        
+        return proof.proof
     }
 }
