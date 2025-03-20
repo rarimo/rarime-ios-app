@@ -12,6 +12,46 @@ class CircuitUtils {
         return bits
     }
     
+    static func SmartBNToArray120(_ n: UInt, _ k: UInt, _ x: BN) -> [BN] {
+        var mod = BN(1)
+        for _ in 0..<n {
+            mod = mod.mul(BN(2))
+        }
+        
+        var returnData: [BN] = []
+        var mut_x = x
+        for _ in 0..<k {
+            returnData.append(x.mod(mod))
+            mut_x = mut_x.div(mod)
+        }
+        
+        return returnData
+    }
+    
+    static func RSABarrettReductionParam(_ n: BN, _ n_bits: UInt) -> [BN] {
+        var chunk_number = n_bits / 120
+        if n_bits % 120 == 0 {
+            chunk_number += 1
+        }
+        
+        var base_x = BN(2).exp(BN((n_bits + 2) * 2))
+        
+        return SmartBNToArray120(120, chunk_number, base_x.div(n))
+    }
+    
+    static func splitBy120Bits(_ data: Data) -> [BN] {
+        var resultData: [BN] = []
+        let numberOfSplits = data.bytes.count / 15
+        for i in 0..<numberOfSplits {
+            let startIndex = data.index(data.startIndex, offsetBy: i * 15)
+            let endIndex = data.index(startIndex, offsetBy: 15)
+            
+            resultData.append(BN(data.subdata(in: startIndex..<endIndex)))
+        }
+        
+        return resultData
+    }
+    
     static func smartChunking(_ x: BN, chunksNumber: Int) -> [BN] {
         var value = x
         

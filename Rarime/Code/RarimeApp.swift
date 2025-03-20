@@ -8,87 +8,53 @@ import Swoirenberg
 
 @main
 struct RarimeApp: App {
-//    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
         WindowGroup {
-//            AppView()
-//                .environmentObject(AlertManager.shared)
-//                .environmentObject(UserManager.shared)
-//                .environmentObject(ConfigManager.shared)
-//                .environmentObject(SecurityManager.shared)
-//                .environmentObject(WalletManager.shared)
-//                .environmentObject(SettingsManager.shared)
-//                .environmentObject(PassportManager.shared)
-//                .environmentObject(AppIconManager.shared)
-//                .environmentObject(UpdateManager.shared)
-//                .environmentObject(DecentralizedAuthManager.shared)
-//                .environmentObject(CircuitDataManager.shared)
-//                .environmentObject(NotificationManager.shared)
-//                .environmentObject(ExternalRequestsManager.shared)
-//                .environmentObject(InternetConnectionManager.shared)
-            VStack {}
-                .onAppear {
-                    LoggerUtil.common.debug("App started")
-                    
-                    Task {
-                        do {
-                            let exampleCircuit = NSDataAsset(name: "exampleCircuit")!.data
-                            
-                            let inputsData = NSDataAsset(name: "inputs")!.data
-                            let inputs = try JSONDecoder().decode(NoirInputs.self, from: inputsData)
-                            
-                            let swoir = Swoir(backend: Swoirenberg.self)
-                            
-                            let circuit = try swoir.createCircuit(manifest: exampleCircuit)
-                            
-                            try circuit.setupSrs()
-                            
-                            LoggerUtil.common.debug("inputs.toAnyMAp(): \(inputs.toAnyMAp().debugDescription)")
-                            
-                            let proof = try circuit.prove(inputs.toAnyMAp(), proof_type: "plonk", recursive: true)
-                            
-                            LoggerUtil.common.info("proof: \(proof.proof.fullHex)")
-                        } catch {
-                            LoggerUtil.common.error("failed to calculate plonk proof: \(error)")
-                        }
-                    }
-                }
+            AppView()
+                .environmentObject(AlertManager.shared)
+                .environmentObject(UserManager.shared)
+                .environmentObject(ConfigManager.shared)
+                .environmentObject(SecurityManager.shared)
+                .environmentObject(WalletManager.shared)
+                .environmentObject(SettingsManager.shared)
+                .environmentObject(PassportManager.shared)
+                .environmentObject(AppIconManager.shared)
+                .environmentObject(UpdateManager.shared)
+                .environmentObject(DecentralizedAuthManager.shared)
+                .environmentObject(CircuitDataManager.shared)
+                .environmentObject(NotificationManager.shared)
+                .environmentObject(ExternalRequestsManager.shared)
+                .environmentObject(InternetConnectionManager.shared)
+//            VStack {}
+//                .onAppear {
+//                    LoggerUtil.common.debug("App started")
+//
+//                    Task {
+//                        do {
+//                            let exampleCircuit = NSDataAsset(name: "exampleCircuit")!.data
+//
+//                            let inputsData = NSDataAsset(name: "inputs")!.data
+//                            let inputs = try JSONDecoder().decode(NoirInputs.self, from: inputsData)
+//
+//                            let swoir = Swoir(backend: Swoirenberg.self)
+//
+//                            let circuit = try swoir.createCircuit(manifest: exampleCircuit)
+//
+//                            try circuit.setupSrs()
+//
+//                            LoggerUtil.common.debug("inputs.toAnyMAp(): \(inputs.toAnyMAp().debugDescription)")
+//
+//                            let proof = try circuit.prove(inputs.toAnyMAp(), proof_type: "plonk", recursive: true)
+//
+//                            LoggerUtil.common.info("proof: \(proof.proof.fullHex)")
+//                        } catch {
+//                            LoggerUtil.common.error("failed to calculate plonk proof: \(error)")
+//                        }
+//                    }
+//                }
         }
-    }
-}
-
-struct NoirInputs: Codable {
-    let dg1, dg15, ec: [String]
-    let icaoRoot: String
-    let inclusionBrances, pk, reductionPk, sa: [String]
-    let sig: [String]
-    let skIdentity: String
-
-    enum CodingKeys: String, CodingKey {
-        case dg1, dg15, ec
-        case icaoRoot = "icao_root"
-        case inclusionBrances = "inclusion_brances"
-        case pk
-        case reductionPk = "reduction_pk"
-        case sa, sig
-        case skIdentity = "sk_identity"
-    }
-    
-    func toAnyMAp() -> [String: Any] {
-        var result: [String: Any] = [:]
-        result["dg1"] = dg1
-        result["dg15"] = dg15
-        result["ec"] = ec
-        result["icaoRoot"] = icaoRoot
-        result["inclusionBrances"] = inclusionBrances
-        result["pk"] = pk
-        result["reductionPk"] = reductionPk
-        result["sa"] = sa
-        result["sig"] = sig
-        result["skIdentity"] = skIdentity
-        
-        return result
     }
 }
 
