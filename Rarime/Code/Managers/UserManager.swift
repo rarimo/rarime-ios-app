@@ -248,19 +248,17 @@ class UserManager: ObservableObject {
         return ZkProof(proof: proof, pubSignals: pubSignals)
     }
     
-    func register(_ registerZkProof: ZkProof, _ passport: Passport, _ isRevoked: Bool, _ registerIdentityCircuitName: String) async throws {
+    func register(_ proof: Data, _ passport: Passport, _ isRevoked: Bool, _ registerIdentityCircuitName: String) async throws {
         let slaveCertPem = try passport.getSlaveSodCertificatePem()
         
         let masterCertProof = try await passport.getCertificateSmtProof(slaveCertPem)
-        
-        let proofJson = try JSONEncoder().encode(registerZkProof)
         
         let sod = try passport.getSod()
         let ec = try sod.getEncapsulatedContent()
         
         let calldataBuilder = IdentityCallDataBuilder()
         let calldata = try calldataBuilder.buildRegisterCalldata(
-            proofJson,
+            proof,
             aaSignature: passport.signature,
             aaPubKeyPem: passport.getDG15PublicKeyPEM(),
             ecSizeInBits: ec.count * 8,

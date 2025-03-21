@@ -70,17 +70,13 @@ class PassportViewModel: ObservableObject {
         proofState = .applyingZK
             
         let proof = try ZKUtils.generateNoirProof(registerIdentityInputs)
-        
-        UIPasteboard.general.string = proof.fullHex
-        
-        throw "a"
             
         LoggerUtil.common.info("Passport registration proof generated")
             
         try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
         proofState = .createProfile
             
-//        try await UserManager.shared.register(proof, passport, isUserRevoking, registerIdentityCircuitName)
+        try await UserManager.shared.register(proof, passport, false, "registerIdentity_2_256_3_6_336_264_21_2448_6_2008")
             
         PassportManager.shared.setPassport(passport)
             
