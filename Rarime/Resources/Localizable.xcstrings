@@ -135,9 +135,6 @@
     "3. When we support your country, you will be notified in the app" : {
 
     },
-    "About the reward program" : {
-
-    },
     "Account" : {
       "localizations" : {
         "uk" : {
@@ -1051,9 +1048,6 @@
     "Failed to register, try again later" : {
 
     },
-    "Failed to verify code, try again later" : {
-
-    },
     "Failed, %lld attempts left" : {
 
     },
@@ -1245,12 +1239,6 @@
     "Hong Kong" : {
 
     },
-    "HOW CAN I GET A CODE?" : {
-
-    },
-    "HOW CAN I GET THE INVITE CODE?" : {
-
-    },
     "HOW TO SHARE" : {
 
     },
@@ -1276,6 +1264,9 @@
 
     },
     "If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards" : {
+
+    },
+    "Import JSON" : {
 
     },
     "INCOGNITO ID" : {
@@ -1307,9 +1298,6 @@
 
     },
     "Invalid HTTP status code: %lld" : {
-
-    },
-    "Invalid invitation code" : {
 
     },
     "Invalid private key" : {
@@ -1406,9 +1394,6 @@
         }
       }
     },
-    "Join Rewards Program" : {
-
-    },
     "Join the program" : {
 
     },
@@ -1475,9 +1460,6 @@
       }
     },
     "Learn more about the App" : {
-
-    },
-    "Learn more about the program" : {
 
     },
     "Lebanon" : {
@@ -2161,9 +2143,6 @@
     "Receive %@" : {
 
     },
-    "Receive rewards for using RariMe app" : {
-
-    },
     "Receive RMO" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2244,9 +2223,6 @@
 
     },
     "Rewards limit reached" : {
-
-    },
-    "RMO tokens will be exclusively distributed via the RariMe app. To claim tokens, create an incognito profile using your biometric passport. Depending on which country issued the passport, you’ll either be able to claim a token right away or be put on a waitlist.\n\nIf you are added to the waitlist it means that you are eligible to claim tokens in the next wave of airdrops. The app will notify you when you are added.\n\nCertain jurisdictions are excluded from the reward program: %@" : {
 
     },
     "Romania" : {
@@ -2435,9 +2411,6 @@
     "Some passports have a problem with chip scans" : {
 
     },
-    "Something went wrong" : {
-
-    },
     "Sorry, there was a problem reading the passport. %@. Error codes: [0x%u, 0x%u]" : {
       "localizations" : {
         "en" : {
@@ -2581,9 +2554,6 @@
           }
         }
       }
-    },
-    "The app’s rewards program is invite-only. Get invited by an authorized user or ask a community member for an invite code." : {
-
     },
     "The beta launch is focused on distributing tokens to Ukrainian citizens" : {
       "extractionState" : "stale",
@@ -2929,9 +2899,6 @@
 
     },
     "You have already reserved tokens" : {
-
-    },
-    "You must be invited or receive a code from social channels" : {
 
     },
     "You successfully registered your identity!" : {
