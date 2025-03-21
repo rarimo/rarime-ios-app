@@ -15,13 +15,17 @@ enum PassportProofState: Int, CaseIterable {
         }
     }
     
-    var progress: CGFloat {
+    var simulationDuration: TimeInterval {
         switch self {
-        case .downloadingData: 25
-        case .applyingZK: 50
-        case .createProfile: 75
-        case .finalizing: 100
+        case .downloadingData: return 0
+        case .applyingZK:     return 18
+        case .createProfile:  return 8
+        case .finalizing:     return 2
         }
+    }
+    
+    var simulationDurationNanoseconds: UInt64 {
+        UInt64(simulationDuration * 1_000_000_000)
     }
 }
 
@@ -32,11 +36,17 @@ enum ProcessingStatus: Equatable {
 class PassportViewModel: ObservableObject {
     @Published var mrzKey: String?
     @Published var passport: Passport?
-    @Published var proofState: PassportProofState = .downloadingData
+    @Published var proofState: PassportProofState = .downloadingData {
+        didSet {
+            if proofState != .downloadingData {
+                startProgressSimulation(for: proofState)
+            }
+        }
+    }
+    
     @Published var processingStatus: ProcessingStatus = .processing
-    
-    @Published var isAirdropClaimed = false
-    
+    @Published var overallProgress: Double = 0.0
+
     @Published var isUserRevoking = false
     @Published var revocationChallenge = Data()
     @Published var isUserRevoked = false {
@@ -49,6 +59,10 @@ class PassportViewModel: ObservableObject {
     @Published var isUserRegistered = false
     
     @Published var isUSA = false
+    
+    private var progressTimer: AnyCancellable?
+    private var simulationStartTime: Date?
+    private var isPaused: Bool = false
     
     var revocationPassportPublisher = PassthroughSubject<Passport, Error>()
     
@@ -88,26 +102,35 @@ class PassportViewModel: ObservableObject {
             
             let circuitData: CircuitData
             do {
-                circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData)
+                circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData) { progress in
+                    self.updateDownloadProgress(downloadProgressValue: progress)
+                }
             } catch {
                 throw Errors.unknown("Failed to download data, internet connection is unstable")
             }
             
+            if overallProgress < 0.25 { overallProgress = 0.25 }
+            
             isCriticalRegistrationProcessInProgress = true
             
+            completeCurrentStepProgress()
             proofState = .applyingZK
             
-            let registerIdentityInputs = try await CircuitBuilderManager.shared.registerIdentityCircuit.buildInputs(
-                user.secretKey,
-                passport,
-                registerIdentityCircuitType
-            )
+            let registerIdentityInputs = try await Task.detached {
+                return try await CircuitBuilderManager.shared.registerIdentityCircuit.buildInputs(
+                    user.secretKey,
+                    passport,
+                    registerIdentityCircuitType
+                )
+            }.value
             
-            let proof = try UserManager.shared.generateRegisterIdentityProof(registerIdentityInputs.json, circuitData, registeredCircuitData)
+            let proof = try await Task.detached {
+                return try UserManager.shared.generateRegisterIdentityProof(registerIdentityInputs.json, circuitData, registeredCircuitData)
+            }.value
             
             LoggerUtil.common.info("Passport registration proof generated")
             
-            try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
+            completeCurrentStepProgress()
             proofState = .createProfile
             
             let stateKeeperContract = try StateKeeperContract()
@@ -137,10 +160,12 @@ class PassportViewModel: ObservableObject {
                 
                 isUserRegistered = true
                 
-                try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
+                try await Task.sleep(nanoseconds: proofState.simulationDurationNanoseconds)
+                completeCurrentStepProgress()
                 proofState = .finalizing
                 
-                try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
+                try await Task.sleep(nanoseconds: proofState.simulationDurationNanoseconds)
+                completeCurrentStepProgress()
                 processingStatus = .success
                 
                 return proof
@@ -207,10 +232,12 @@ class PassportViewModel: ObservableObject {
             
             LoggerUtil.common.info("Passport registration succeed")
             
-            try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
+            try await Task.sleep(nanoseconds: proofState.simulationDurationNanoseconds)
+            completeCurrentStepProgress()
             proofState = .finalizing
             
-            try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
+            try await Task.sleep(nanoseconds: proofState.simulationDurationNanoseconds)
+            completeCurrentStepProgress()
             processingStatus = .success
             
             return proof
@@ -316,4 +343,57 @@ class PassportViewModel: ObservableObject {
             throw error
         }
     }
+    
+    func updateDownloadProgress(downloadProgressValue: Double) {
+        overallProgress = min(downloadProgressValue * 0.25, 0.25)
+    }
+    
+    func startProgressSimulation(for state: PassportProofState) {
+        let simulationDuration = state.simulationDuration
+        let stepProgress: Double = 0.25
+        let startProgress = overallProgress
+        let targetProgress = min(startProgress + stepProgress, 1.0)
+        
+        simulationStartTime = Date()
+        progressTimer?.cancel()
+        
+        progressTimer = Timer.publish(every: 0.05, on: .main, in: .common)
+            .autoconnect()
+            .sink { [weak self] _ in
+                guard let self = self,
+                      let startTime = self.simulationStartTime else { return }
+                
+                guard !self.isPaused else { return }
+                            
+                if Double.random(in: 0...1) < 0.4 {
+                    let pauseDuration = Double.random(in: 0.1...1)
+                    self.isPaused = true
+                    Task {
+                        try await Task.sleep(nanoseconds: UInt64(pauseDuration * 1_000_000_000))
+                        self.isPaused = false
+                    }
+                    return
+                }
+                
+                let elapsed = Date().timeIntervalSince(startTime)
+                
+                if elapsed >= simulationDuration {
+                    self.overallProgress = targetProgress
+                    self.progressTimer?.cancel()
+                } else {
+                    let remaining = targetProgress - self.overallProgress
+                    let randomIncrement = min(remaining, Double.random(in: 0.005...0.01))
+                    self.overallProgress = min(self.overallProgress + randomIncrement, targetProgress)
+                }
+            }
+    }
+    
+    func completeCurrentStepProgress() {
+        guard let state = PassportProofState.allCases.first(where: { $0 == proofState }),
+             state != .downloadingData else { return }
+       
+        let targetProgress = min(overallProgress + 0.25, 1.0)
+        overallProgress = targetProgress
+        progressTimer?.cancel()
+   }
 }

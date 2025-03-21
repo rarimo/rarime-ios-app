@@ -59,7 +59,10 @@ class CircuitDataManager: ObservableObject {
         self.circuitDataURLs = ConfigManager.shared.circuitData.circuitDataURLs
     }
     
-    func retriveCircuitData(_ circuitName: RegisteredCircuitData) async throws -> CircuitData {
+    func retriveCircuitData(
+        _ circuitName: RegisteredCircuitData,
+        _ downloadProgress: @escaping (Double) -> Void = { _ in }
+    ) async throws -> CircuitData {
         if !AppUserDefaults.shared.isCircuitsStorageCleared {
             try? FileManager.default.removeItem(at: CircuitDataManager.saveDirectory)
             
@@ -75,6 +78,9 @@ class CircuitDataManager: ObservableObject {
         }
         
         let fileUrl = try await AF.download(circuitDataURL)
+            .downloadProgress { progress in
+                downloadProgress(progress.fractionCompleted)
+            }
             .serializingDownloadedFileURL()
             .result
             .get()
