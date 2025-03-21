@@ -19,7 +19,7 @@ struct V2MainView: View {
             }
             ExternalRequestsView()
         }
-        .sheet(isPresented: $viewModel.isQrCodeScanSheetShown) {
+        .dynamicSheet(isPresented: $viewModel.isQrCodeScanSheetShown, fullScreen: true) {
             ScanQRView(
                 onBack: { viewModel.isQrCodeScanSheetShown = false },
                 onScan: processQrCode

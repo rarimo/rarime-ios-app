@@ -42,7 +42,7 @@ struct ClosedPollResultsView: View {
     }
 }
 
-private struct BarChartPollView: View {
+struct BarChartPollView: View {
     let result: QuestionResult
     let totalVotes: Int
     

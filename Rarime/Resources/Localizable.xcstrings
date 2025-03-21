@@ -1812,6 +1812,9 @@
     "No notifications" : {
 
     },
+    "No polls yet" : {
+
+    },
     "No transactions yet" : {
       "localizations" : {
         "uk" : {
@@ -2910,9 +2913,6 @@
     "Vietnam" : {
 
     },
-    "View" : {
-
-    },
     "Virgin Islands, British" : {
 
     },
@@ -3149,6 +3149,9 @@
       }
     },
     "Your vote counts, and you will be rewarded for every participation" : {
+
+    },
+    "Your vote has been counted" : {
 
     },
     "Zambia" : {

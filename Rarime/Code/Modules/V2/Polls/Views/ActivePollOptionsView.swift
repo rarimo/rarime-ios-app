@@ -36,6 +36,7 @@ struct ActivePollOptionsView: View {
                         .frame(height: 521)
                         .scaleEffect(0.9, anchor: .bottom)
                         .offset(y: 12)
+                        .animation(.easeInOut, value: isLastQuestion)
                 }
                 VStack(alignment: .leading, spacing: 24) {
                     Text(currentQuestion.title)
@@ -82,7 +83,7 @@ struct ActivePollOptionsView: View {
                                         .overlay {
                                             if selectedOption == index {
                                                 RoundedRectangle(cornerRadius: 16)
-                                                    .stroke(.primaryMain, lineWidth: 1)
+                                                    .strokeBorder(.primaryMain, lineWidth: 1)
                                             }
                                         }
                                 }
@@ -99,6 +100,8 @@ struct ActivePollOptionsView: View {
                     ShadowConfig(color: Color.black.opacity(0.02), radius: 1,  x: 0, y: 0.55),
                     ShadowConfig(color: Color.black.opacity(0.02), radius: 32, x: 0, y: 0)
                 ])
+                .id(currentOptionIndex)
+                .transition(.backslide)
             }
             .padding(.horizontal, 8)
             Spacer()
@@ -106,11 +109,13 @@ struct ActivePollOptionsView: View {
                 text: isLastQuestion ? "Submit" : "Next",
                 action: {
                     pollResults.append(PollResult(questionIndex: currentOptionIndex, answerIndex: selectedOption))
-                    if currentOptionIndex < poll.questions.count - 1 {
-                        currentOptionIndex += 1
-                        selectedOption = nil
-                    } else {
-                        onSubmit(pollResults)
+                    withAnimation {
+                        if currentOptionIndex < poll.questions.count - 1 {
+                            currentOptionIndex += 1
+                            selectedOption = nil
+                        } else {
+                            onSubmit(pollResults)
+                        }
                     }
                 }
             )

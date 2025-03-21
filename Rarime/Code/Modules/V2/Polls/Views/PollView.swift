@@ -1,11 +1,5 @@
 import SwiftUI
 
-private struct PollRequirement: Identifiable {
-    let id = UUID()
-    let text: String
-    let isEligible: Bool
-}
-
 struct PollView: View {
     @EnvironmentObject var pollsViewModel: PollsViewModel
     @EnvironmentObject var userManager: UserManager
@@ -15,51 +9,13 @@ struct PollView: View {
     let poll: Poll
     let onClose: () -> Void
     
-    @State private var isSubmitting = false
     @State private var isQuestionsShown = false
-
+    
+    @State private var isSubmitting = false
     @State private var isVoted = false
     @State private var isVotedSuccesfully = false
-    
-    private var formattedCountries: [Country] {
-        pollsViewModel.decodedVotingData?.citizenshipMask.map {
-            Country.fromISOCode($0.asciiValue)
-        } ?? []
-    }
-    
-    private var formattedMinAge: String {
-        pollsViewModel.decodedVotingData?.birthDateUpperbound.asciiValue ?? ""
-    }
-    
-    private var pollRequirements: [PollRequirement] {
-        let countries = formattedCountries.map { $0.name }.joined(separator: ", ")
-        
-        let rawMinAgeDate = (try? DateUtil.parsePassportDate(formattedMinAge)) ?? Date()
-        let userDOB = (try? DateUtil.parsePassportDate(passportManager.passport?.dateOfBirth ?? "")) ?? Date()
-        let age = Calendar.current.dateComponents([.year], from: rawMinAgeDate, to: Date()).year ?? 0
-        
-        let isAgeEligible = userDOB <= rawMinAgeDate
-        
-        let isNationalityEligible = {
-            guard let nationality = passportManager.passport?.nationality, !formattedCountries.isEmpty else { return false }
-            return formattedCountries.contains(Country.fromISOCode(nationality))
-        }()
-        
-        return [
-            PollRequirement(
-                text: String(localized: "Citizen of \(countries)"),
-                isEligible: isNationalityEligible
-            ),
-            PollRequirement(
-                text: String(localized: "Over \(age)+"),
-                isEligible: isAgeEligible
-            ),
-        ]
-    }
-    
-    private var isAdmittedToVote: Bool {
-        pollRequirements.allSatisfy { $0.isEligible }
-    }
+    @State private var isAdmittedToVote = false
+    @State private var isUserVoteChecking = false
     
     var body: some View {
         ZStack {
@@ -84,6 +40,8 @@ struct PollView: View {
                                     )
                                     
                                     isVotedSuccesfully = true
+                                    isQuestionsShown = false
+                                    AlertManager.shared.emitSuccess(String(localized: "Your vote has been counted"))
                                 } catch {
                                     onClose()
                                     LoggerUtil.common.error("Can't submit poll results: \(error, privacy: .public)")
@@ -103,9 +61,24 @@ struct PollView: View {
     }
     
     private var pollOverview: some View {
-        VStack(spacing: 8) {
-            AppIconButton(icon: Icons.closeFill, action: onClose)
-                .frame(maxWidth: .infinity, alignment: .trailing)
+        VStack(spacing: 24) {
+            ZStack(alignment: .topTrailing) {
+                // TODO: use image from ProposalMetadata
+                Image(.rewardsTest1)
+                    .resizable()
+                    .scaledToFill()
+                    .clipped()
+                    .frame(maxHeight: 228)
+                Button(action: onClose) {
+                    Image(Icons.closeFill)
+                        .iconMedium()
+                        .foregroundStyle(.textPrimary)
+                        .padding(.all, 10)
+                }
+                .background(.baseWhite)
+                .clipShape(RoundedRectangle(cornerRadius: 100))
+                .padding([.top, .trailing], 20)
+            }
             VStack(alignment: .leading, spacing: 24) {
                 VStack(alignment: .leading, spacing: 16) {
                     VStack(alignment: .leading, spacing: 12) {
@@ -142,7 +115,7 @@ struct PollView: View {
                     Text("Criteria")
                         .overline2()
                         .foregroundStyle(.textSecondary)
-                    ForEach(pollRequirements, id: \.id) { requirement in
+                    ForEach(pollsViewModel.pollRequirements, id: \.id) { requirement in
                         HStack(alignment: .center, spacing: 8) {
                             Image(requirement.isEligible ? Icons.checkboxCircleFill : Icons.closeCircleFill)
                                 .iconMedium()
@@ -173,29 +146,38 @@ struct PollView: View {
                 }
                 .controlSize(.large)
             }
+            .padding(.horizontal, 20)
         }
-        .padding([.top, .horizontal], 20)
-        .onAppear(perform: checkIfUserVoted)
+        .onAppear(perform: checkUserVote)
+        .onAppear(perform: checkPollRequirements)
     }
     
-    private func checkIfUserVoted() {
+    private func checkUserVote() {
+        isUserVoteChecking = true
         Task { @MainActor in
             do {
                 let nullifier = try userManager.generateNullifierForEvent(poll.eventId.toHex())
-//                TODO: Fix me
-//                isVoted = try await pollsViewModel.checkIfUserVoted(nullifier)
+                isVoted = try await pollsViewModel.checkUserVote(nullifier)
+                isUserVoteChecking = false
             } catch {
-                LoggerUtil.common.error("Can't check if user voted: \(error, privacy: .public)")
-                AlertManager.shared.emitError(.unknown("Can't check if user voted"))
+                LoggerUtil.common.error("Can't check user vote: \(error, privacy: .public)")
+                AlertManager.shared.emitError(.unknown("Can't check user vote"))
             }
         }
+    }
+    
+    private func checkPollRequirements() {
+        isAdmittedToVote = pollsViewModel.pollRequirements.allSatisfy { $0.isEligible }
     }
 }
 
 #Preview {
-    PollView(poll: ACTIVE_POLLS[0], onClose: {})
-        .environmentObject(PollsViewModel())
-        .environmentObject(UserManager())
-        .environmentObject(PassportManager())
-        .environmentObject(DecentralizedAuthManager())
+    ZStack{}
+        .dynamicSheet(isPresented: .constant(true), fullScreen: true) {
+            PollView(poll: ACTIVE_POLLS[0], onClose: {})
+                .environmentObject(PollsViewModel())
+                .environmentObject(UserManager())
+                .environmentObject(PassportManager())
+                .environmentObject(DecentralizedAuthManager())
+        }
 }

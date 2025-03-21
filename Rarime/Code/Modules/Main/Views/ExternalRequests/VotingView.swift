@@ -32,7 +32,7 @@ struct VotingView: View {
 
 #Preview {
     ZStack{}
-        .sheet(isPresented: .constant(true)) {
+        .dynamicSheet(isPresented: .constant(true), fullScreen: true) {
             VotingView(proposalId: .init(1), onDismiss: {})
         }
 }

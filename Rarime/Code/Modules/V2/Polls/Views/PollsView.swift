@@ -30,6 +30,18 @@ struct PollsView: View {
     @State private var earlyPullTask: Task<Void, Never>? = nil
     @State private var isPollSheetShown = false
     
+    private var aсtivePolls: [Poll] {
+        pollsViewModel.polls.filter { poll in
+            (poll.status == .waiting || poll.status == .started)
+        }
+    }
+    
+    private var endedPolls: [Poll] {
+        pollsViewModel.polls.filter { poll in
+            poll.status == .ended
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             AppIconButton(variant: .secondary, icon: Icons.closeFill, action: onClose)
@@ -39,7 +51,7 @@ struct PollsView: View {
                 .resizable()
                 .scaledToFill()
                 .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
-            GlassBottomSheet(minHeight: 330, maxHeight: 730, canOpenSheet: !pollsViewModel.polls.isEmpty) {
+            GlassBottomSheet(minHeight: 330, maxHeight: 730) {
                 VStack(spacing: 24) {
                     VStack(alignment: .leading, spacing: 24) {
                         VStack(alignment: .leading, spacing: 0) {
@@ -76,10 +88,17 @@ struct PollsView: View {
                         HorizontalDivider(color: .bgComponentBasePrimary)
                         HStack(alignment: .center, spacing: 8) {
                             ForEach(PollsTab.allCases, id: \.self) { tab in
-                                Button(action: { currentTab = tab }) {
-                                    Text(tab.title)
-                                        .overline2()
-                                        .foregroundStyle(currentTab == tab ? .baseBlack : .baseBlack.opacity(0.4))
+                                Button(action: {
+                                    withAnimation {
+                                        currentTab = tab
+                                    }
+                                }) {
+                                    Text(tab == .active
+                                         ? "\(aсtivePolls.count) \(tab.title)"
+                                         : tab.title
+                                    )
+                                    .overline2()
+                                    .foregroundStyle(currentTab == tab ? .baseBlack : .baseBlack.opacity(0.4))
                                 }
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 6)
@@ -89,21 +108,12 @@ struct PollsView: View {
                         }
                     }
                     .padding(.horizontal, 24)
-                    
-                    // TODO: rewrite with TabView
                     Group {
-                        if currentTab == .active {
-                            makePollsList(
-                                pollsViewModel.polls.filter { poll in
-                                    poll.status == .waiting || poll.status == .started
-                                }
-                            )
-                        } else {
-                            makePollsList(
-                                pollsViewModel.polls.filter { poll in
-                                    poll.status == .ended
-                                }
-                            )
+                        switch currentTab {
+                        case .active:
+                            makePollsList(aсtivePolls)
+                        case .history:
+                            makePollsList(endedPolls)
                         }
                     }
                     .padding(.horizontal, 8)
@@ -116,7 +126,7 @@ struct PollsView: View {
                 .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
                 .ignoresSafeArea()
         )
-        .sheet(isPresented: $isPollSheetShown) {
+        .dynamicSheet(isPresented: $isPollSheetShown, fullScreen: true) {
             PollView(poll: pollsViewModel.selectedPoll!, onClose: { isPollSheetShown = false })
                 .environmentObject(pollsViewModel)
         }
@@ -136,12 +146,23 @@ struct PollsView: View {
     }
     
     private func makePollsList(_ polls: [Poll]) -> some View {
-        VStack(spacing: 8) {
-            ForEach(polls) { poll in
-                PollListCard(poll: poll, onViewPoll: {
-                    pollsViewModel.selectedPoll = poll
-                    isPollSheetShown = true
-                })
+        ZStack {
+            if isPollsLoading && polls.isEmpty {
+                Text("No polls yet")
+                    .body3()
+                    .foregroundStyle(.textSecondary)
+                    .padding(.vertical, 40)
+            } else {
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 8) {
+                        ForEach(polls) { poll in
+                            PollListCard(poll: poll, onViewPoll: {
+                                pollsViewModel.selectedPoll = poll
+                                isPollSheetShown = true
+                            })
+                        }
+                    }
+                }
             }
         }
     }
@@ -153,6 +174,33 @@ private struct PollListCard: View {
     let poll: Poll
 
     let onViewPoll: () -> Void
+    
+    @State private var selectedIndex = 0
+    @State private var isVoted = false
+    
+    private var totalParticipants: Int {
+        let questionParticipants = poll.proposalResults.map { $0.reduce(0) { $0 + Int($1) } }
+        return questionParticipants.max() ?? 0
+    }
+    
+    private var questionResults: [QuestionResult] {
+        var results: [QuestionResult] = []
+        for (question, result) in zip(poll.questions, poll.proposalResults) {
+            results.append(
+                QuestionResult(
+                    question: question.title,
+                    options: question.variants.enumerated().map { index, answer in
+                        QuestionResultOption(
+                            answer: answer,
+                            votes: Int(result[index])
+                        )
+                    }
+                )
+            )
+        }
+
+        return results
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -171,25 +219,52 @@ private struct PollListCard: View {
                     HStack(alignment: .center, spacing: 8) {
                         Image(Icons.groupLine)
                             .iconSmall()
-                        Text(pollsViewModel.totalParticipants.formatted())
+                        Text(totalParticipants.formatted())
                             .subtitle7()
                     }
                 }
                 .foregroundStyle(.textSecondary)
             }
             HorizontalDivider()
-            AppButton(variant: .secondary, text: "View", action: onViewPoll)
+            HeightPreservingTabView(selection: $selectedIndex) {
+                ForEach(questionResults.indices, id: \.self) { index in
+                    VStack(alignment: .leading, spacing: 16) {
+                        let totalVotes = questionResults[index].options.map(\.votes).reduce(0, +)
+                        Text(questionResults[index].question)
+                           .subtitle6()
+                           .foregroundStyle(.textPrimary)
+                        BarChartPollView(
+                           result: questionResults[index],
+                           totalVotes: totalVotes
+                        )
+                    }
+                    .tag(index)
+                    .padding(.horizontal, 8)
+                }
+            }
+            .disabled(poll.questions.count < 1)
+            .padding(.horizontal, -8)
+            .frame(minHeight: 1)
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .animation(.default, value: selectedIndex)
+            if questionResults.count > 1 {
+               StepIndicator(steps: questionResults.count, currentStep: selectedIndex)
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
         }
         .padding(.all, 16)
         .background {
             RoundedRectangle(cornerRadius: 16)
                 .fill(.bgPrimary)
         }
+        .onTapGesture(perform: onViewPoll)
     }
 }
-
 
 #Preview {
     PollsView(onClose: {}, animation: Namespace().wrappedValue)
         .environmentObject(PollsViewModel())
+        .environmentObject(UserManager())
+        .environmentObject(PassportManager())
+        .environmentObject(DecentralizedAuthManager())
 }

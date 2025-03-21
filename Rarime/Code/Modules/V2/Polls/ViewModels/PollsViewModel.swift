@@ -5,6 +5,7 @@ import Web3ContractABI
 import Web3PromiseKit
 
 private let ZERO_IN_HEX: String = "0x303030303030"
+private let VOTING_SELECTOR: String = "39457"
 
 class PollsViewModel: ObservableObject {
     private static var FIRST_POLL_MAX_LIMIT: BigUInt = 20
@@ -16,6 +17,7 @@ class PollsViewModel: ObservableObject {
     var lastProposalId: BigUInt = 0
     var isLoadingMorePolls = false
     var hasLoadedInitialPolls = false
+    var isInitialPollLoaded = false
 
     init(poll: Poll? = nil) {
         self.selectedPoll = poll
@@ -25,15 +27,49 @@ class PollsViewModel: ObservableObject {
         self.polls.count < self.lastProposalId
     }
     
+    var decodedVotingData: VotingData? {
+        guard let poll = selectedPoll else { return nil }
+        return try? PollsService.decodeVotingData(poll)
+    }
+    
+    var pollRequirements: [PollRequirement] {
+        guard let votingData = decodedVotingData,
+              let passport = PassportManager.shared.passport else { return [] }
+        
+        let decodedCountries = votingData.citizenshipMask.map { Country.fromISOCode($0.asciiValue) }
+        let decodedMinAge = votingData.birthDateUpperbound.asciiValue
+        let countriesString = decodedCountries.map { $0.name }.joined(separator: ", ")
+        
+        let rawMinAgeDate = (try? DateUtil.parsePassportDate(decodedMinAge)) ?? Date()
+        let userDOB = (try? DateUtil.parsePassportDate(passport.dateOfBirth)) ?? Date()
+        let age = Calendar.current.dateComponents([.year], from: rawMinAgeDate, to: Date()).year ?? 0
+        
+        let isAgeEligible = userDOB <= rawMinAgeDate
+        let isNationalityEligible = decodedCountries.contains(Country.fromISOCode(passport.nationality))
+        
+        var requirements: [PollRequirement] = []
+        
+        if !decodedCountries.isEmpty {
+            requirements.append(PollRequirement(
+                text: String(localized: "Citizen of \(countriesString)"),
+                isEligible: isNationalityEligible
+            ))
+        }
+        
+        if votingData.birthDateUpperbound.toHex() != ZERO_IN_HEX {
+            requirements.append(PollRequirement(
+                text: String(localized: "Over \(age)+"),
+                isEligible: isAgeEligible
+            ))
+        }
+        
+        return requirements
+    }
+    
     var totalParticipants: Int {
         guard let poll = selectedPoll else { return 0 }
         let questionParticipants = poll.proposalResults.map { $0.reduce(0) { $0 + Int($1) } }
         return questionParticipants.max() ?? 0
-    }
-    
-    var decodedVotingData: VotingData? {
-        guard let poll = selectedPoll else { return nil }
-        return try? PollsService.decodeVotingData(poll)
     }
     
     func loadNewPolls() async throws {
@@ -51,9 +87,7 @@ class PollsViewModel: ObservableObject {
         
         let lastProposalId = try await contract.lastProposalId()
         
-        if lastProposalId == 0 {
-            return
-        }
+        if lastProposalId == 0 { return }
         
         let limit = min(PollsViewModel.FIRST_POLL_MAX_LIMIT, lastProposalId)
         
@@ -68,15 +102,6 @@ class PollsViewModel: ObservableObject {
         DispatchQueue.main.async {
             self.polls = newPolls
         }
-    }
-    
-    func checkIfUserVoted(_ nullifier: String) async throws -> Bool {
-        guard let poll = selectedPoll else { throw "No selected poll" }
-       
-        let proposalSmtContract = try PoseidonSMT(contractAddress: poll.proposalSMT)
-        let proof = try await proposalSmtContract.getProof(Data(hex: nullifier))
-        
-        return proof.existence
     }
     
     func vote(
@@ -120,7 +145,6 @@ class PollsViewModel: ObservableObject {
         let resultsJson = try JSONEncoder().encode(results)
         
         let voteProof = try await generateVoteProof(
-            stateKeeperContract,
             profile,
             passport,
             smtProofJson,
@@ -131,15 +155,13 @@ class PollsViewModel: ObservableObject {
         )
         
         let voteProofJson = try JSONEncoder().encode(voteProof)
-        
-        let votingData = try PollsService.decodeVotingData(poll)
                 
         let calldataBuilder = IdentityCallDataBuilder()
         let calldata = try calldataBuilder.buildVoteCalldata(
             voteProofJson,
             proposalID: Int64(poll.id),
             pollResultsJSON: resultsJson,
-            citizenship: votingData.citizenshipMask[0].asciiValue
+            citizenship: passport.nationality
         )
         
         let votingRelayer = VotingRelayer(ConfigManager.shared.api.votingRelayerURL)
@@ -152,7 +174,6 @@ class PollsViewModel: ObservableObject {
     }
     
     private func generateVoteProof(
-        _ stateKeeperContract: StateKeeperContract,
         _ profile: IdentityProfile,
         _ passport: Passport,
         _ smtProofJson: Data,
@@ -164,20 +185,16 @@ class PollsViewModel: ObservableObject {
         guard let poll = selectedPoll else { throw "No selected poll" }
         
         let eventData = try profile.calculateVotingEventData(pollResultsJson)
-//        guard let encodedEventId = poll.eventId.abiEncode(dynamic: false) else {
-//            throw "Decoding event id error"
-//        }
-    
         let votingData = try PollsService.decodeVotingData(poll)
         
         let queryProofInputs = try profile.buildQueryIdentityInputs(
             passport.dg1,
             smtProofJSON: smtProofJson,
-            selector: "6657",
+            selector: VOTING_SELECTOR,
             pkPassportHash: passportInfoKey,
             issueTimestamp: identityInfo.issueTimestamp.description,
             identityCounter: passportInfo.identityReissueCounter.description,
-            eventID: "0x" + poll.eventId.description,
+            eventID: poll.eventId.description,
             eventData: eventData.fullHex,
             timestampLowerbound: "0",
             timestampUpperbound: max(
@@ -185,21 +202,33 @@ class PollsViewModel: ObservableObject {
                 Int(identityInfo.issueTimestamp + 1)
             ).description,
             identityCounterLowerbound: "0",
-            identityCounterUpperbound: (passportInfo.identityReissueCounter + 1).description,
+            identityCounterUpperbound: votingData.identityCounterUpperbound.description,
             expirationDateLowerbound: votingData.expirationDateLowerbound.toHex(),
             expirationDateUpperbound: ZERO_IN_HEX,
             birthDateLowerbound: ZERO_IN_HEX,
             birthDateUpperbound: votingData.birthDateUpperbound.toHex(),
-            citizenshipMask: votingData.citizenshipMask[0].toHex()
+            citizenshipMask: "0"
         )
         
         let wtns = try ZKUtils.calcWtns_queryIdentity(Circuits.queryIdentityDat, queryProofInputs)
-        
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16QueryIdentity(wtns)
         
         let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
         let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
         
         return ZkProof(proof: proof, pubSignals: pubSignals)
+    }
+    
+    func checkUserVote(_ nullifier: String) async throws -> Bool {
+        guard let poll = selectedPoll else { throw "No selected poll" }
+       
+        let proposalSmtContract = try PoseidonSMT(
+            contractAddress: poll.proposalSMT,
+            rpcUrl: ConfigManager.shared.api.votingRpcURL
+        )
+        
+        let proof = try await proposalSmtContract.getProof(Data(hex: nullifier))
+        
+        return proof.existence
     }
 }

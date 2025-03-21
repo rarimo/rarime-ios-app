@@ -256,6 +256,12 @@ struct PollResult: Codable {
     let answerIndex: Int?
 }
 
+struct PollRequirement: Identifiable {
+    let id = UUID()
+    let text: String
+    let isEligible: Bool
+}
+
 extension BigUInt {
     static func fromRawSolidityArray(_ data: Data) throws -> BigUInt {
         let decoded = try ABIDecoder.decodeTuple(.uint256, from: data.fullHex)

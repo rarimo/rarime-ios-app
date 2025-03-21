@@ -162,7 +162,7 @@
 		C755353F2D6F196C00A562B5 /* ChildOffsetReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755353E2D6F196700A562B5 /* ChildOffsetReader.swift */; };
 		C75535482D6F2EF900A562B5 /* VotingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75535472D6F2EF300A562B5 /* VotingView.swift */; };
 		C755354C2D6F4E6000A562B5 /* PollsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755354B2D6F4E5F00A562B5 /* PollsService.swift */; };
-		C755354F2D6F74D000A562B5 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C755354E2D6F74D000A562B5 /* Identity.xcframework */; };
+		C75C4DF02D8D80D000D647DF /* HeightPreservingTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C4DEF2D8D80C800D647DF /* HeightPreservingTabView.swift */; };
 		C7780C842D632A2E0050B5BB /* IdentityIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C832D632A210050B5BB /* IdentityIntroView.swift */; };
 		C7780C962D634D8C0050B5BB /* V2ClaimTokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C952D634D830050B5BB /* V2ClaimTokensView.swift */; };
 		C7780C982D634DAE0050B5BB /* V2InviteFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C972D634D900050B5BB /* V2InviteFriendsView.swift */; };
@@ -170,6 +170,7 @@
 		C789A2E82CA5978B00443900 /* LightVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C789A2E72CA5978B00443900 /* LightVerificationView.swift */; };
 		C789A2EA2CA59F5800443900 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C789A2E92CA59F5800443900 /* StringUtils.swift */; };
 		C78EA4FA2C9B2EF5001DA0B3 /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
+		C7A5359F2D8B1E7B0055BDA7 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A5359E2D8B1E7B0055BDA7 /* Identity.xcframework */; };
 		C7B57B642D650FB1001E86C4 /* AnimationNamespaceIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B57B632D650FA5001E86C4 /* AnimationNamespaceIds.swift */; };
 		C7B57B6B2D65D58C001E86C4 /* V2HomeView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B57B6A2D65D585001E86C4 /* V2HomeView+ViewModel.swift */; };
 		C7BBDBD62D71D44700E2905E /* VotingRelayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BBDBD52D71D43F00E2905E /* VotingRelayer.swift */; };
@@ -561,13 +562,14 @@
 		C755353E2D6F196700A562B5 /* ChildOffsetReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildOffsetReader.swift; sourceTree = "<group>"; };
 		C75535472D6F2EF300A562B5 /* VotingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingView.swift; sourceTree = "<group>"; };
 		C755354B2D6F4E5F00A562B5 /* PollsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollsService.swift; sourceTree = "<group>"; };
-		C755354E2D6F74D000A562B5 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
+		C75C4DEF2D8D80C800D647DF /* HeightPreservingTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightPreservingTabView.swift; sourceTree = "<group>"; };
 		C7780C832D632A210050B5BB /* IdentityIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityIntroView.swift; sourceTree = "<group>"; };
 		C7780C952D634D830050B5BB /* V2ClaimTokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2ClaimTokensView.swift; sourceTree = "<group>"; };
 		C7780C972D634D900050B5BB /* V2InviteFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2InviteFriendsView.swift; sourceTree = "<group>"; };
 		C7780C992D6357370050B5BB /* Rewards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rewards.swift; sourceTree = "<group>"; };
 		C789A2E72CA5978B00443900 /* LightVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightVerificationView.swift; sourceTree = "<group>"; };
 		C789A2E92CA59F5800443900 /* StringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
+		C7A5359E2D8B1E7B0055BDA7 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		C7B57B632D650FA5001E86C4 /* AnimationNamespaceIds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationNamespaceIds.swift; sourceTree = "<group>"; };
 		C7B57B6A2D65D585001E86C4 /* V2HomeView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "V2HomeView+ViewModel.swift"; sourceTree = "<group>"; };
 		C7BBDBD52D71D43F00E2905E /* VotingRelayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingRelayer.swift; sourceTree = "<group>"; };
@@ -836,7 +838,7 @@
 				CE28D5052D3E887300042E1D /* libwitnesscalc_registerIdentityLight160.a in Frameworks */,
 				CE28D5062D3E887300042E1D /* libwitnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_4_256.a in Frameworks */,
 				CE28D5072D3E887300042E1D /* libwitnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256.a in Frameworks */,
-				C755354F2D6F74D000A562B5 /* Identity.xcframework in Frameworks */,
+				C7A5359F2D8B1E7B0055BDA7 /* Identity.xcframework in Frameworks */,
 				CEC76C8D2D674AFD00130CA1 /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a in Frameworks */,
 				CE28D5092D3E887300042E1D /* libwitnesscalc_registerIdentity_24_256_3_4_336_232_NA.a in Frameworks */,
 				CE28D50B2D3E887300042E1D /* libwitnesscalc_registerIdentity_1_256_3_3_576_248_NA.a in Frameworks */,
@@ -1218,6 +1220,7 @@
 		56F48BBC2BC02E02001F3AA4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C75C4DEF2D8D80C800D647DF /* HeightPreservingTabView.swift */,
 				C755353E2D6F196700A562B5 /* ChildOffsetReader.swift */,
 				C7D624592D6DB9D0007BA5A6 /* GlassBottomSheet.swift */,
 				C72F33172D677DB200AC1814 /* AppIconButton.swift */,
@@ -1730,7 +1733,7 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C755354E2D6F74D000A562B5 /* Identity.xcframework */,
+				C7A5359E2D8B1E7B0055BDA7 /* Identity.xcframework */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562002BD923B3002D4954 /* prover.h */,
 				CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */,
@@ -2160,6 +2163,7 @@
 				56474ADA2BB9ED6E0017AA25 /* AnyTransition+Backslide.swift in Sources */,
 				56DAA30F2BB8C3CB002CF710 /* EnablePasscodeView.swift in Sources */,
 				56DAA3052BB72E35002CF710 /* InfoAlert.swift in Sources */,
+				C75C4DF02D8D80D000D647DF /* HeightPreservingTabView.swift in Sources */,
 				563529E52BB072060027C910 /* RewardsView.swift in Sources */,
 				C789A2E82CA5978B00443900 /* LightVerificationView.swift in Sources */,
 				C755353F2D6F196C00A562B5 /* ChildOffsetReader.swift in Sources */,
