@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct NotificationSheetView: View {
+struct NotificationDetailsView: View {
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     
@@ -13,19 +13,18 @@ struct NotificationSheetView: View {
     @State private var isClaiming = false
     
     var body: some View {
-        VStack {
-            VStack(spacing: 20) {
-                VStack(spacing: 8) {
-                    Group {
-                        Text(notification.title ?? "")
-                            .h4()
-                            .foregroundStyle(.textPrimary)
-                        Text(notification.receivedAt?.formatted(date: .abbreviated, time: .omitted) ?? "")
-                            .caption2()
-                            .foregroundStyle(.textSecondary)
-                    }
-                    .multilineTextAlignment(.leading)
-                    .align()
+        VStack(spacing: 12) {
+            AppIconButton(icon: Icons.closeFill, action: onClose)
+                .padding([.top, .trailing], 20)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+            VStack(alignment: .leading, spacing: 24) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(notification.title ?? "")
+                        .subtitle4()
+                        .foregroundStyle(.textPrimary)
+                    Text(notification.receivedAt?.formatted(date: .abbreviated, time: .omitted) ?? "")
+                        .caption2()
+                        .foregroundStyle(.textSecondary)
                 }
                 ScrollView {
                     Text(notification.body ?? "")
@@ -40,15 +39,12 @@ struct NotificationSheetView: View {
                 ProgressView()
             }
             if !notificationEventId.isEmpty {
-                VStack(spacing: 24) {
-                    HorizontalDivider()
-                    AppButton(text: "Reserve", action: claimRewards)
-                        .disabled(isClaiming)
-                }
-                .padding(.horizontal, 24)
+                AppButton(text: "Reserve", action: claimRewards)
+                    .controlSize(.large)
+                    .disabled(isClaiming)
+                    .padding(.horizontal, 20)
             }
         }
-        .padding(.top, 60)
         .onAppear(perform: checkClaimable)
     }
     
@@ -117,7 +113,10 @@ struct NotificationSheetView: View {
     pushNotification.receivedAt = Date()
     pushNotification.isRead = false
     
-    return NotificationSheetView(notification: pushNotification) {}
-        .environmentObject(UserManager())
-        .environmentObject(DecentralizedAuthManager())
+    return ZStack{}
+        .dynamicSheet(isPresented: .constant(true), fullScreen: true) {
+            NotificationDetailsView(notification: pushNotification) {}
+                .environmentObject(UserManager())
+                .environmentObject(DecentralizedAuthManager())
+        }
 }

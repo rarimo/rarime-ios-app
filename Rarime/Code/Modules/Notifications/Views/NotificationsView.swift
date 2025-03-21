@@ -7,22 +7,18 @@ struct NotificationsView: View {
     let onBack: () -> Void
     
     @State private var chosenNotification: PushNotification? = nil
-    @State private var isNotificationSheetPresented = false
+    @State private var isNotificationDetailsSheetShown = false
 
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \PushNotification.receivedAt, ascending: false)]) var pushNotifications: FetchedResults<PushNotification>
     
     var body: some View {
-        VStack {
-            ZStack(alignment: .topLeading) {
-                Button(action: onBack) {
-                    Image(Icons.caretLeft)
-                        .iconMedium()
-                        .foregroundColor(.textPrimary)
-                }
+        VStack(spacing: 24) {
+            HStack(alignment: .center) {
                 Text("Notifications")
-                    .subtitle6()
+                    .subtitle4()
                     .foregroundStyle(.textPrimary)
-                    .frame(maxWidth: .infinity)
+                Spacer()
+                AppIconButton(icon: Icons.closeFill, action: onBack)
             }
             if pushNotifications.isEmpty {
                 Spacer()
@@ -35,7 +31,20 @@ struct NotificationsView: View {
                     List {
                         ForEach(pushNotifications, id: \.id) { pushNotification in
                             NotificationView(notification: pushNotification)
-                                .contentShape(Rectangle())
+                                .listRowInsets(.init(top: 16, leading: 0, bottom: 16, trailing: 0))
+                                .listSectionSeparator(.hidden, edges: .bottom)
+                                .swipeActions(allowsFullSwipe: false) {
+                                    Button(action: {
+                                        withAnimation {
+                                            delete(pushNotification)
+                                        }
+                                    }) {
+                                        Image(Icons.deleteBin6Line)
+                                            .iconMedium()
+                                            .foregroundStyle(.baseWhite)
+                                    }
+                                    .tint(.errorDark)
+                                }
                                 .onTapGesture {
                                     chosenNotification = pushNotification
                                 }
@@ -43,44 +52,37 @@ struct NotificationsView: View {
                                     markAsRead(pushNotification)
                                 }
                         }
-                        .onDelete(perform: delete)
                     }
                     .listStyle(.plain)
                     .onAppear {
                         scrollView.scrollTo(pushNotifications.last?.id)
                     }
                 }
-                Spacer()
             }
         }
-        .padding(.top, 20)
-        .padding(.horizontal, 20)
+        .padding([.top, .horizontal], 20)
         .onAppear {
             notificationsManager.eraceUnreadNotificationsCounter()
         }
         .onChange(of: chosenNotification) { notification in
-            isNotificationSheetPresented = notification != nil
+            isNotificationDetailsSheetShown = notification != nil
         }
-        .dynamicSheet(isPresented: $isNotificationSheetPresented, fullScreen: true) {
-            NotificationSheetView(notification: chosenNotification!) {
-                isNotificationSheetPresented = false
+        .dynamicSheet(isPresented: $isNotificationDetailsSheetShown, fullScreen: true) {
+            NotificationDetailsView(notification: chosenNotification!) {
+                isNotificationDetailsSheetShown = false
             }
         }
     }
     
-    func delete(at offsets: IndexSet) {
-        for index in offsets {
-            let pushNotification = pushNotifications[index]
+    func delete(_ notification: PushNotification) {
+        viewContext.delete(notification)
+        
+        do {
+            try viewContext.save()
             
-            viewContext.delete(pushNotification)
-
-            do {
-                try viewContext.save()
-                
-                LoggerUtil.common.info("Push notification deleted")
-            } catch {
-                LoggerUtil.common.error("Error deleting push notification: \(error, privacy: .public)")
-            }
+            LoggerUtil.common.info("Push notification deleted")
+        } catch {
+            LoggerUtil.common.error("Error deleting push notification: \(error, privacy: .public)")
         }
     }
     
@@ -101,7 +103,69 @@ struct NotificationsView: View {
     }
 }
 
+private struct NotificationView: View {
+    let notification: PushNotification
+
+    var body: some View {
+        VStack(spacing: 8) {
+            if notification.isRead {
+                HStack(alignment: .center) {
+                    Text(notification.title ?? "")
+                        .body4()
+                        .foregroundStyle(.textPrimary)
+                    Spacer()
+                    Text(notification.receivedAt?.formatted(date: .abbreviated, time: .omitted) ?? "")
+                        .caption3()
+                        .foregroundStyle(.textSecondary)
+                }
+                Text(notification.body ?? "")
+                    .body5()
+                    .foregroundStyle(.textSecondary)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(2)
+            } else {
+                HStack(alignment: .center) {
+                    Text(notification.title ?? "")
+                        .subtitle6()
+                        .foregroundStyle(.textPrimary)
+                    Spacer()
+                    HStack(alignment: .center, spacing: 4) {
+                        Circle()
+                            .fill(.secondaryDark)
+                            .frame(width: 8)
+                        Text(notification.receivedAt?.formatted(date: .abbreviated, time: .omitted) ?? "")
+                            .caption3()
+                            .foregroundStyle(.secondaryDark)
+                    }
+                }
+                Text(notification.body ?? "")
+                    .subtitle7()
+                    .foregroundStyle(.textSecondary)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(2)
+            }
+        }
+    }
+}
+
 #Preview {
     NotificationsView {}
         .environmentObject(NotificationManager.shared)
+        .environment(\.managedObjectContext, NotificationManager.shared.pushNotificationContainer.viewContext)
+        .onAppear {
+           let context = NotificationManager.shared.pushNotificationContainer.viewContext
+           
+           let pushNotification = PushNotification(context: context)
+           pushNotification.id = UUID()
+           pushNotification.title = "Other title"
+           pushNotification.body = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text"
+           pushNotification.receivedAt = Date()
+           pushNotification.isRead = true
+           
+           do {
+               try context.save()
+           } catch {
+               LoggerUtil.common.error("Error saving test notifications: \(error, privacy: .public)")
+           }
+       }
 }
