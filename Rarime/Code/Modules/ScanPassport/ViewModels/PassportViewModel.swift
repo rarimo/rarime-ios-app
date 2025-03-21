@@ -62,6 +62,8 @@ class PassportViewModel: ObservableObject {
     ) async throws {
         guard let passport else { throw "failed to get passport" }
         guard let user = UserManager.shared.user else { throw "failed to get user" }
+        
+        try await UserManager.shared.registerCertificate(passport)
             
         let registerIdentityInputs = try await CircuitBuilderManager.shared.noirRegisterIdentityCircuit.buildInputs(user.secretKey, passport)
             
@@ -69,7 +71,9 @@ class PassportViewModel: ObservableObject {
             
         let proof = try ZKUtils.generateNoirProof(registerIdentityInputs)
         
-        throw "Proof generated"
+        UIPasteboard.general.string = proof.fullHex
+        
+        throw "a"
             
         LoggerUtil.common.info("Passport registration proof generated")
             
