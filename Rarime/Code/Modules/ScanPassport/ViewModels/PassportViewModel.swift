@@ -68,6 +68,8 @@ class PassportViewModel: ObservableObject {
         proofState = .applyingZK
             
         let proof = try ZKUtils.generateNoirProof(registerIdentityInputs)
+        
+        throw "Proof generated"
             
         LoggerUtil.common.info("Passport registration proof generated")
             

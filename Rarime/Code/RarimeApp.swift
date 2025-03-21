@@ -24,33 +24,6 @@ struct RarimeApp: App {
                 .environmentObject(NotificationManager.shared)
                 .environmentObject(ExternalRequestsManager.shared)
                 .environmentObject(InternetConnectionManager.shared)
-//            VStack {}
-//                .onAppear {
-//                    LoggerUtil.common.debug("App started")
-//
-//                    Task {
-//                        do {
-//                            let exampleCircuit = NSDataAsset(name: "exampleCircuit")!.data
-//
-//                            let inputsData = NSDataAsset(name: "inputs")!.data
-//                            let inputs = try JSONDecoder().decode(NoirInputs.self, from: inputsData)
-//
-//                            let swoir = Swoir(backend: Swoirenberg.self)
-//
-//                            let circuit = try swoir.createCircuit(manifest: exampleCircuit)
-//
-//                            try circuit.setupSrs()
-//
-//                            LoggerUtil.common.debug("inputs.toAnyMAp(): \(inputs.toAnyMAp().debugDescription)")
-//
-//                            let proof = try circuit.prove(inputs.toAnyMAp(), proof_type: "plonk", recursive: true)
-//
-//                            LoggerUtil.common.info("proof: \(proof.proof.fullHex)")
-//                        } catch {
-//                            LoggerUtil.common.error("failed to calculate plonk proof: \(error)")
-//                        }
-//                    }
-//                }
         }
     }
 }

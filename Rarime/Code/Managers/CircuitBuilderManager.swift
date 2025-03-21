@@ -111,6 +111,7 @@ extension CircuitBuilderManager {
             let reductionPk = CircuitUtils.RSABarrettReductionParam(BN(pubkeyData), UInt(pubkeyData.count * 8)).map { $0.dec() }
             
             let pk = CircuitUtils.splitBy120Bits(pubkeyData).map { $0.dec() }
+            
             let sig = CircuitUtils.splitBy120Bits(signature).map { $0.dec() }
             
             return .init(
@@ -118,7 +119,7 @@ extension CircuitBuilderManager {
                 dg15: passport.dg15.map { $0.description },
                 ec: encapsulatedContent.map { $0.description },
                 icaoRoot: BN(certProof.root).dec(),
-                inclusionBrances: certProof.siblings.map { BN($0).dec() },
+                inclusionBranches: certProof.siblings.map { BN($0).dec() },
                 pk: pk,
                 reductionPk: reductionPk,
                 sa: signedAttributes.map { $0.description },

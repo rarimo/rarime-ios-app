@@ -6,13 +6,13 @@ struct PassportProofView: View {
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject var passportViewModel: PassportViewModel
 
-    let onFinish: (ZkProof) -> Void
+    let onFinish: () -> Void
     let onClose: () -> Void
     let onError: (Error) -> Void
 
     private func register() async {
         do {
-            let zkProof = try await passportViewModel.register { progress in
+            try await passportViewModel.register { progress in
                 passportViewModel.processingStatus = .downloading(progress)
             }
 
@@ -20,7 +20,7 @@ struct PassportProofView: View {
 
             try await Task.sleep(nanoseconds: NSEC_PER_SEC)
 
-            onFinish(zkProof)
+            onFinish()
         } catch {
             if passportViewModel.isUserRegistered {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -28,7 +28,7 @@ struct PassportProofView: View {
                 }
             }
 
-            LoggerUtil.common.error("error while registering passport: \(error.localizedDescription, privacy: .public)")
+            LoggerUtil.common.error("error while registering passport: \(error, privacy: .public)")
             onError(error)
         }
     }
@@ -216,7 +216,7 @@ private struct RevocationNFCScan: View {
 #Preview {
     let userManager = UserManager.shared
 
-    return PassportProofView(onFinish: { _ in }, onClose: {}, onError: { _ in })
+    return PassportProofView(onFinish: {}, onClose: {}, onError: { _ in })
         .environmentObject(WalletManager())
         .environmentObject(PassportViewModel())
         .environmentObject(UserManager())

@@ -98,8 +98,7 @@ struct ScanPassportView: View {
             .transition(.backslide)
         case .generateProof:
             PassportProofView(
-                onFinish: { registerZKProof in
-                    userManager.registerZkProof = registerZKProof
+                onFinish: {
                     onComplete(passportViewModel.passport!)
                 },
                 onClose: onClose,
