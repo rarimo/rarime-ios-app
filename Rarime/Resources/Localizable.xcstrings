@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     " and " : {
       "localizations" : {
         "uk" : {
@@ -121,6 +118,9 @@
     "%lld extra referrals" : {
 
     },
+    "%lld questions" : {
+
+    },
     "%lldm %llds" : {
       "localizations" : {
         "en" : {
@@ -130,6 +130,21 @@
           }
         }
       }
+    },
+    "%llu days" : {
+
+    },
+    "%lluh" : {
+
+    },
+    "%llum" : {
+
+    },
+    "%llus" : {
+
+    },
+    "1 day" : {
+
     },
     "1. Save passport data on your device" : {
 
@@ -241,6 +256,9 @@
 
     },
     "An error has occured, please try again" : {
+
+    },
+    "An identification and privacy solution that revolutionizes polling, surveying and election processes" : {
 
     },
     "An Unforgettable" : {
@@ -549,6 +567,9 @@
     "Cameroon" : {
 
     },
+    "Can't submit poll results" : {
+
+    },
     "Canada" : {
 
     },
@@ -588,6 +609,9 @@
 
     },
     "Christmas Island" : {
+
+    },
+    "Citizen of %@" : {
 
     },
     "Claim" : {
@@ -740,6 +764,9 @@
           }
         }
       }
+    },
+    "Criteria" : {
+
     },
     "Croatia" : {
 
@@ -1113,10 +1140,16 @@
         }
       }
     },
+    "Finished" : {
+
+    },
     "Finland" : {
 
     },
     "France" : {
+
+    },
+    "Freedomtool" : {
 
     },
     "French Guiana" : {
@@ -1245,6 +1278,9 @@
 
     },
     "Hi" : {
+
+    },
+    "History" : {
 
     },
     "Hold your iPhone near an NFC enabled passport." : {
@@ -1516,6 +1552,9 @@
     "Let's Scan" : {
 
     },
+    "Let's start" : {
+
+    },
     "Let's Start" : {
 
     },
@@ -1556,9 +1595,6 @@
           }
         }
       }
-    },
-    "Light Verification" : {
-
     },
     "Limited time events" : {
 
@@ -1781,6 +1817,9 @@
     "No notifications" : {
 
     },
+    "No polls yet" : {
+
+    },
     "No transactions yet" : {
       "localizations" : {
         "uk" : {
@@ -1859,6 +1898,9 @@
     "Others" : {
 
     },
+    "Over %lld+" : {
+
+    },
     "Pakistan" : {
 
     },
@@ -1932,6 +1974,7 @@
 
     },
     "Place QR code within the frame to scan" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2017,6 +2060,12 @@
     "Portugal" : {
 
     },
+    "Position the QR code in the middle of the scanner" : {
+
+    },
+    "Pre-elections polls" : {
+
+    },
     "Privacy Policy" : {
       "localizations" : {
         "uk" : {
@@ -2061,9 +2110,6 @@
     "Proof of Employment" : {
 
     },
-    "Proof Request" : {
-
-    },
     "Proofs" : {
       "localizations" : {
         "uk" : {
@@ -2100,6 +2146,16 @@
     },
     "Qatar" : {
 
+    },
+    "Question: %lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Question: %1$lld/%2$lld"
+          }
+        }
+      }
     },
     "RARIME" : {
       "extractionState" : "stale",
@@ -2366,6 +2422,9 @@
         }
       }
     },
+    "Scan a QR" : {
+
+    },
     "Scan MRZ" : {
 
     },
@@ -2373,6 +2432,7 @@
 
     },
     "Scan QR" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2403,6 +2463,9 @@
 
     },
     "Select an authorization method" : {
+
+    },
+    "Select answer" : {
 
     },
     "Select identity type" : {
@@ -2456,6 +2519,9 @@
 
     },
     "Share your referral link and get bonuses when your friends join and make a purchase!" : {
+
+    },
+    "Show results" : {
 
     },
     "Shows two identifiers on the card" : {
@@ -2588,6 +2654,9 @@
           }
         }
       }
+    },
+    "Submit" : {
+
     },
     "Success" : {
 
@@ -2835,6 +2904,9 @@
     "Venezuela" : {
 
     },
+    "Verification" : {
+
+    },
     "Verification..." : {
 
     },
@@ -2848,6 +2920,12 @@
 
     },
     "Virgin Islands, U.S." : {
+
+    },
+    "Voted" : {
+
+    },
+    "Voting" : {
 
     },
     "Waitlist passport" : {
@@ -3067,6 +3145,12 @@
           }
         }
       }
+    },
+    "Your vote counts, and you will be rewarded for every participation" : {
+
+    },
+    "Your vote has been counted" : {
+
     },
     "Zambia" : {
 

@@ -6,6 +6,7 @@ struct V2MainView: View {
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
 
     @StateObject private var viewModel = ViewModel()
+    @StateObject private var pollsViewModel = PollsViewModel()
     @StateObject private var passportViewModel = PassportViewModel()
 
     var body: some View {
@@ -23,7 +24,14 @@ struct V2MainView: View {
             }
             ExternalRequestsView()
         }
+        .dynamicSheet(isPresented: $viewModel.isQrCodeScanSheetShown, fullScreen: true) {
+            ScanQRView(
+                onBack: { viewModel.isQrCodeScanSheetShown = false },
+                onScan: processQrCode
+            )
+        }
         .environmentObject(viewModel)
+        .environmentObject(pollsViewModel)
         .environmentObject(passportViewModel)
         .onAppear(perform: checkNotificationPermission)
     }
@@ -44,7 +52,7 @@ struct V2MainView: View {
         }
 
         externalRequestsManager.handleRarimeUrl(qrCodeUrl)
-        viewModel.selectedTab = .home
+        viewModel.isQrCodeScanSheetShown = false
     }
 }
 

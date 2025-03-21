@@ -8,7 +8,10 @@ struct V2MainViewLayout<Content: View>: View {
         VStack(spacing: 0) {
             content
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-            V2NavBarView(selectedTab: $mainViewModel.selectedTab)
+            V2NavBarView(
+                selectedTab: $mainViewModel.selectedTab,
+                isQrCodeScanSheetShown: $mainViewModel.isQrCodeScanSheetShown
+            )
                 .background {
                     ZStack {
                         Color.bgBlur

@@ -1,20 +1,21 @@
 import SwiftUI
 
 enum V2HomeRoute: Hashable {
-    case notifications, identity, inviteFriends, claimTokens, wallet
+    case notifications, identity, inviteFriends, claimTokens, wallet, polls
 }
 
 struct V2HomeView: View {
     @EnvironmentObject private var notificationManager: NotificationManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var mainViewModel: V2MainView.ViewModel
+    @EnvironmentObject private var pollsViewModel: PollsViewModel
     @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
     @EnvironmentObject private var configManager: ConfigManager
 
-    @StateObject var viewModel = ViewModel()
+    @StateObject var viewModel = HomeViewModel()
 
     @State private var path: V2HomeRoute? = nil
     @State private var isCopied = false
@@ -161,7 +162,7 @@ struct V2HomeView: View {
                     animation: walletAnimation
                 )
             },
-            HomeCarouselCard(action: {}) {
+            HomeCarouselCard(action: { path = .polls }) {
                 HomeCardView(
                     backgroundGradient: Gradients.gradientFifth,
                     topIcon: Icons.freedomtool,
@@ -215,6 +216,11 @@ struct V2HomeView: View {
                         onClose: { path = nil },
                         onJoin: { path = nil },
                         animation: walletAnimation
+                    )
+                case .polls:
+                    PollsView(
+                        onClose: { path = nil },
+                        animation: votingAnimation
                     )
                 default:
                     content
@@ -286,13 +292,13 @@ struct V2HomeView: View {
                 header
                 ZStack(alignment: .trailing) {
                     SnapCarouselView(
-                        index: $viewModel.currentIndex,
+                        index: $viewModel.currentCardIndex,
                         cards: homeCards.filter { $0.isShouldDisplay }
                     )
                     .padding(.horizontal, 22)
                     V2StepIndicator(
                         steps: homeCards.filter(\.isShouldDisplay).count,
-                        currentStep: viewModel.currentIndex
+                        currentStep: viewModel.currentCardIndex
                     )
                     .padding(.trailing, 8)
                 }
