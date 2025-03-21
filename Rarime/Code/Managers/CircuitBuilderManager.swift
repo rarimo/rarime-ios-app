@@ -92,8 +92,7 @@ extension CircuitBuilderManager {
     class NoirRegisterIdentityCircuit {
         func buildInputs(
             _ privateKey: Data,
-            _ passport: Passport,
-            _ circuitType: RegisterIdentityCircuitType
+            _ passport: Passport
         ) async throws -> NoirRegisterIdentityInputs {
             let slaveCertPem = try passport.getSlaveSodCertificatePem()
             
