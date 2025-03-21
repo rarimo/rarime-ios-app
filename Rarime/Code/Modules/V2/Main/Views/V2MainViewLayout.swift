@@ -5,20 +5,31 @@ struct V2MainViewLayout<Content: View>: View {
     @ViewBuilder var content: Content
 
     var body: some View {
-        content
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .safeAreaInset(edge: .bottom, spacing: 0, content: {
-                V2NavBarView(
-                    selectedTab: $mainViewModel.selectedTab,
-                    isQrCodeScanSheetShown: $mainViewModel.isQrCodeScanSheetShown
-                )
-            })
+        VStack(spacing: 0) {
+            content
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            V2NavBarView(
+                selectedTab: $mainViewModel.selectedTab,
+                isQrCodeScanSheetShown: $mainViewModel.isQrCodeScanSheetShown
+            )
+                .background {
+                    ZStack {
+                        Color.bgBlur
+                        TransparentBlurView(removeAllFilters: false)
+                    }
+                    .ignoresSafeArea(.container, edges: .bottom)
+                }
+        }
     }
 }
 
 #Preview {
-    V2MainViewLayout {
-        Rectangle().fill(.bgPrimary)
-    }
-    .environmentObject(V2MainView.ViewModel())
+    V2HomeView()
+        .environmentObject(V2MainView.ViewModel())
+        .environmentObject(PassportManager())
+        .environmentObject(WalletManager())
+        .environmentObject(UserManager())
+        .environmentObject(ConfigManager())
+        .environmentObject(NotificationManager())
+        .environmentObject(ExternalRequestsManager())
 }

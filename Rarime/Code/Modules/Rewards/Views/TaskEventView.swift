@@ -33,7 +33,7 @@ struct TaskEventView: View {
                 HStack(alignment: .top, spacing: 16) {
                     VStack(alignment: .leading, spacing: 16) {
                         Text(event.attributes.meta.metaStatic.title)
-                            .subtitle2()
+                            .subtitle4()
                             .foregroundStyle(.textPrimary)
                         HStack(spacing: 16) {
                             RewardChip(reward: Double(event.attributes.meta.metaStatic.reward))
@@ -62,7 +62,7 @@ struct TaskEventView: View {
                 HorizontalDivider().padding(.top, 16)
                 ScrollView {
                     Markdown(event.attributes.meta.metaStatic.description)
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textPrimary)
                         .padding(.top, 16)
                         .frame(maxWidth: .infinity, alignment: .leading)

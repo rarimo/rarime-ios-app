@@ -6,24 +6,17 @@ private enum ScanPassportState {
     case scanMRZ
     case readNFC
     case chipError
-    case selectData
-    case generateProof
-    case waitlistPassport
 }
 
 struct ScanPassportView: View {
     @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
+    @EnvironmentObject private var passportViewModel: PassportViewModel
 
-    let onComplete: (_ passport: Passport) -> Void
     let onClose: () -> Void
 
     @State private var state: ScanPassportState = .scanMRZ
-    @State private var isTutorialPresented = false
-    @State private var isTutorialShown = AppUserDefaults.shared.isScanTutorialDisplayed
-
-    @StateObject private var passportViewModel = PassportViewModel()
 
     var body: some View {
         switch state {
@@ -31,8 +24,8 @@ struct ScanPassportView: View {
             ImportFileView(
                 onFinish: { passport in
                     passportViewModel.setPassport(passport)
-
-                    withAnimation { state = .selectData }
+                    onClose()
+                    Task { await register(passport) }
                 },
                 onClose: onClose
             )
@@ -47,14 +40,6 @@ struct ScanPassportView: View {
                     },
                     onClose: onClose
                 )
-                .dynamicSheet(isPresented: $isTutorialPresented, fullScreen: true) {
-                    PassportScanTutorialView(onStart: { isTutorialPresented = false })
-                }
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        presentScanTutorialIfNeeded()
-                    }
-                }
 
 #if DEVELOPMENT
                 AppButton(
@@ -66,17 +51,15 @@ struct ScanPassportView: View {
                 .padding(.horizontal, 20)
 #endif
             }
-            .padding(.bottom, 20)
-            .background(.bgPrimary)
-            .transition(.backslide)
+            .padding(.bottom, 16)
             .environmentObject(passportViewModel)
+            .transition(.backslide)
         case .readNFC:
             ReadPassportNFCView(
                 onNext: { passport in
                     passportViewModel.setPassport(passport)
-                    withAnimation { state = .selectData }
-
-                    LoggerUtil.common.info("Passport read successfully: \(passport.fullName, privacy: .public)")
+                    onClose()
+                    Task { await register(passport) }
                 },
                 onBack: { withAnimation { state = .scanMRZ } },
                 onResponseError: { withAnimation { state = .chipError } },
@@ -87,63 +70,51 @@ struct ScanPassportView: View {
         case .chipError:
             PassportChipErrorView(onClose: onClose)
                 .transition(.backslide)
-        case .selectData:
-            SelectPassportDataView(
-                onNext: {
-                    withAnimation { state = .generateProof }
-                },
-                onClose: onClose
-            )
-            .environmentObject(passportViewModel)
-            .transition(.backslide)
-        case .generateProof:
-            PassportProofView(
-                onFinish: { registerZKProof in
-                    userManager.registerZkProof = registerZKProof
-                    onComplete(passportViewModel.passport!)
-                },
-                onClose: onClose,
-                onError: { error in
-                    if let afError = error as? AFError {
-                        if case .sessionTaskFailed = afError {
-                            LoggerUtil.common.error("Network connection lost")
-
-                            AlertManager.shared.emitError(.connectionUnstable)
-
-                            onClose()
-
-                            return
-                        }
-                    } else if let error = error as? Errors {
-                        AlertManager.shared.emitError(error)
-
-                        onClose()
-
-                        return
-                    }
-
-                    withAnimation { state = .waitlistPassport }
-                }
-            )
-            .environmentObject(passportViewModel)
-            .transition(.backslide)
-        case .waitlistPassport:
-            WaitlistPassportView(
-                onNext: {
-                    onComplete(passportViewModel.passport!)
-                },
-                onCancel: onClose
-            )
-            .environmentObject(passportViewModel)
-            .transition(.backslide)
         }
     }
+    
+    private func register(_ passport: Passport) async {
+        do {
+            passportManager.setPassport(passport)
+            
+            let zkProof = try await passportViewModel.register()
 
-    private func presentScanTutorialIfNeeded() {
-        if !AppUserDefaults.shared.isScanTutorialDisplayed {
-            isTutorialPresented = !isTutorialShown
-            isTutorialShown = true
-            AppUserDefaults.shared.isScanTutorialDisplayed = true
+            if passportViewModel.processingStatus != .success { return }
+
+            userManager.registerZkProof = zkProof
+            userManager.user?.status = .passportScanned
+
+            LoggerUtil.common.info("Passport read successfully: \(passport.fullName, privacy: .public)")
+        } catch {
+            LoggerUtil.common.error("error while registering passport: \(error.localizedDescription, privacy: .public)")
+            
+            if passportViewModel.isUserRegistered {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    onClose()
+                }
+            }
+
+            if let afError = error as? AFError {
+                if case .sessionTaskFailed = afError {
+                    LoggerUtil.common.error("Network connection lost")
+
+                    AlertManager.shared.emitError(.connectionUnstable)
+
+                    onClose()
+                    
+                    passportViewModel.processingStatus = .failure
+
+                    return
+                }
+            } else if let error = error as? Errors {
+                AlertManager.shared.emitError(error)
+
+                onClose()
+                
+                passportViewModel.processingStatus = .failure
+
+                return
+            }
         }
     }
 }
@@ -151,13 +122,11 @@ struct ScanPassportView: View {
 #Preview {
     let userManager = UserManager.shared
 
-    return ScanPassportView(
-        onComplete: { _ in },
-        onClose: {}
-    )
+    return ScanPassportView(onClose: {})
     .environmentObject(WalletManager())
     .environmentObject(userManager)
     .environmentObject(PassportManager())
+    .environmentObject(PassportViewModel())
     .onAppear {
         _ = try? userManager.createNewUser()
     }

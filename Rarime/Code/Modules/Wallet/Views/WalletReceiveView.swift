@@ -18,11 +18,11 @@ struct WalletReceiveView: View {
                     QRCodeView(code: address)
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Your Address")
-                            .subtitle4()
+                            .subtitle6()
                             .foregroundStyle(.textPrimary)
                         HStack(spacing: 16) {
                             Text(address)
-                                .body3()
+                                .body4()
                                 .foregroundStyle(.textPrimary)
                                 .multilineTextAlignment(.leading)
                             Image(isCopied ? Icons.check : Icons.copySimple)

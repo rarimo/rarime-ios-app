@@ -6,7 +6,7 @@ struct RewardChip: View {
 
     var body: some View {
         HStack(spacing: 4) {
-            Text(String("+\(reward.formatted())")).subtitle5()
+            Text(String("+\(reward.formatted())")).subtitle7()
             Image(Icons.rarimo).iconSmall()
         }
         .padding(.vertical, 2)

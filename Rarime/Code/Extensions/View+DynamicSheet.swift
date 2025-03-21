@@ -35,17 +35,18 @@ extension View {
         isPresented: Binding<Bool>,
         fullScreen: Bool = false,
         title: LocalizedStringResource? = nil,
+        bgColor: Color = .bgPrimary,
         onDismiss: (() -> Void)? = nil,
         @ViewBuilder content: @escaping () -> Content
     ) -> some View where Content: View {
         return sheet(isPresented: isPresented) {
             ZStack(alignment: .topTrailing) {
-                Color.bgPure.ignoresSafeArea(.container)
+                bgColor.ignoresSafeArea(.container)
                 VStack(spacing: 0) {
                     if let title {
-                        VStack(alignment: .leading, spacing: 20) {
+                        VStack(alignment: .leading, spacing: 24) {
                             Text(title)
-                                .h6()
+                                .h4()
                                 .foregroundStyle(.textPrimary)
                                 .padding(.horizontal, 20)
                             HorizontalDivider()
@@ -60,13 +61,15 @@ extension View {
                 // Make sheet height dynamic
                 .fixedSize(horizontal: false, vertical: !fullScreen)
                 .modifier(DynamicSheetHeightModifier(fullScreen: fullScreen))
-                Button(action: { isPresented.wrappedValue = false }) {
-                    Image(Icons.close)
-                        .iconMedium()
-                        .foregroundColor(.textPrimary)
+                if !fullScreen {
+                    Button(action: { isPresented.wrappedValue = false }) {
+                        Image(Icons.closeFill)
+                            .iconLarge()
+                            .foregroundColor(.textPrimary)
+                    }
+                    .padding(.top, 24)
+                    .padding(.trailing, 20)
                 }
-                .padding(.top, 20)
-                .padding(.trailing, 20)
             }
         }
     }

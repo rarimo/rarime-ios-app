@@ -58,27 +58,25 @@ struct NewIdentityView: View {
                 }
             }
         ) {
-            CardContainer {
-                VStack(spacing: 20) {
-                    if let user = userManager.user {
-                        ZStack {
-                            Text(user.secretKey.hex)
-                                .body3()
-                                .foregroundStyle(.textPrimary)
-                                .multilineTextAlignment(.leading)
-                        }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 14)
-                        .background(.bgComponentPrimary)
-                        .cornerRadius(8)
-                        copyButton
-                    } else {
-                        ProgressView()
-                            .padding(.vertical, 20)
+            VStack(spacing: 20) {
+                if let user = userManager.user {
+                    ZStack {
+                        Text(user.secretKey.hex)
+                            .body3()
+                            .foregroundStyle(.textPrimary)
+                            .multilineTextAlignment(.leading)
                     }
-                    HorizontalDivider()
-                    InfoAlert(text: "Please store the private key safely and do not share it with anyone. If you lose this key, you will not be able to recover the account and will lose access forever.") {}
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 14)
+                    .background(.bgComponentPrimary)
+                    .cornerRadius(8)
+                    copyButton
+                } else {
+                    ProgressView()
+                        .padding(.vertical, 20)
                 }
+                HorizontalDivider()
+                InfoAlert(text: "Please store the private key safely and do not share it with anyone. If you lose this key, you will not be able to recover the account and will lose access forever.") {}
             }
         }
     }
@@ -103,17 +101,16 @@ struct NewIdentityView: View {
                 .clipShape(Circle())
                 VStack(spacing: 12) {
                     Text("Back up your account")
-                        .h4()
+                        .h2()
                         .foregroundStyle(.textPrimary)
                     Text("Your account is not backed up. If you lose your device, you will lose access to your account")
-                        .body2()
+                        .body3()
                         .foregroundStyle(.textSecondary)
                 }
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
                 Spacer()
                 VStack(spacing: 16) {
-                    HorizontalDivider()
                     VStack(spacing: 8) {
                         AppButton(
                             text: "Back up with iCloud",

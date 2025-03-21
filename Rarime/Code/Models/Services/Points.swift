@@ -324,7 +324,7 @@ class Points {
 
         return response
     }
-    
+
     func getMaintenanceMode() async throws -> GetMaintenanceModeResponse {
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/maintenance")
         let response = try await AF.request(requestUrl)
@@ -383,6 +383,8 @@ struct CreatePointBalanceResponseAttributes: Codable {
     let isDisabled: Bool
     let createdAt, updatedAt, rank: Int
     let level: Int
+    let referralCodes: [ReferalCode]?
+    let isVerified: Bool
 
     enum CodingKeys: String, CodingKey {
         case amount
@@ -391,6 +393,8 @@ struct CreatePointBalanceResponseAttributes: Codable {
         case updatedAt = "updated_at"
         case rank
         case level
+        case referralCodes = "referral_codes"
+        case isVerified = "is_verified"
     }
 }
 

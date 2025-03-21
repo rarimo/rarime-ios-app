@@ -78,7 +78,7 @@ private struct AssetCard: View {
                 .background(.bgComponentPrimary, in: Circle())
                 .foregroundStyle(.textPrimary)
             Text("Total \(asset.token.rawValue)")
-                .body3()
+                .body4()
                 .foregroundStyle(.textSecondary)
             Spacer()
             if isLoading {
@@ -86,7 +86,7 @@ private struct AssetCard: View {
             } else {
                 VStack(alignment: .trailing, spacing: 4) {
                     Text(asset.balance.formatted())
-                        .subtitle4()
+                        .subtitle6()
                         .foregroundStyle(.textPrimary)
                     Text(try! String(asset.usdBalance == nil ? "---" : "≈$\((asset.usdBalance ?? 0).formatted())"))
                         .caption3()
@@ -95,7 +95,7 @@ private struct AssetCard: View {
             }
         }
         .padding(16)
-        .background(.bgContainer, in: RoundedRectangle(cornerRadius: 24))
+        .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 24))
     }
 }
 

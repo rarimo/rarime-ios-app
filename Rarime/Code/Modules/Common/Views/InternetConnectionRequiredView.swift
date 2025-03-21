@@ -10,13 +10,13 @@ struct InternetConnectionRequiredView: View {
                 .foregroundStyle(.errorMain)
             VStack(spacing: 16) {
                 Text("No internet connection")
-                    .h5()
+                    .h3()
                     .foregroundStyle(.textPrimary)
                 Text("Your internet connection is down")
-                    .body3()
-                    .multilineTextAlignment(.center)
+                    .body4()
                     .foregroundStyle(.textSecondary)
             }
+            .multilineTextAlignment(.center)
         }
         .padding(.horizontal, 24)
         .frame(maxWidth: .infinity, maxHeight: .infinity)

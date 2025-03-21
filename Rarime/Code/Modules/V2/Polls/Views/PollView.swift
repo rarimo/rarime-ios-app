@@ -64,7 +64,7 @@ struct PollView: View {
         VStack(spacing: 24) {
             ZStack(alignment: .topTrailing) {
                 // TODO: use image from ProposalMetadata
-                Image(.rewardsTest1)
+                Image(.rewardCoin)
                     .resizable()
                     .scaledToFill()
                     .clipped()

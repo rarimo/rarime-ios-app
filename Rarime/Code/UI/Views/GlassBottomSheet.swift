@@ -38,7 +38,7 @@ struct GlassBottomSheet<Content: View>: View {
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: .top) {
-                TransparentBlurView()
+                TransparentBlurView(removeAllFilters: false)
                 VStack(spacing: 24) {
                     Capsule()
                         .fill(.bgComponentBaseHovered)

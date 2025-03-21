@@ -18,7 +18,7 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
         @ViewBuilder imageContent: @escaping () -> Content,
         title: String,
         subtitle: String,
-        @ViewBuilder bottomAdditionalContent: @escaping () -> BottomAdditionalContent?,
+        @ViewBuilder bottomAdditionalContent: @escaping () -> BottomAdditionalContent? =  { EmptyView() },
         animation: Namespace.ID
     ) {
         self.backgroundGradient = backgroundGradient
@@ -75,7 +75,7 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
                 .padding(.bottom, 24)
                 .padding(.trailing, 24)
         }
-        .frame(height: 500)
+        .frame(maxHeight: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 32)
                 .fill(backgroundGradient)

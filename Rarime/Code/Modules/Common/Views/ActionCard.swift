@@ -24,10 +24,10 @@ struct ActionCard<Icon: View>: View {
                 icon()
                 VStack(alignment: .leading, spacing: 4) {
                     Text(title)
-                        .subtitle3()
+                        .subtitle5()
                         .foregroundStyle(.textPrimary)
                     Text(description)
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textSecondary)
                 }
             }
@@ -37,7 +37,7 @@ struct ActionCard<Icon: View>: View {
                 .padding(4)
                 .background(.primaryMain)
                 .clipShape(Circle())
-                .foregroundStyle(.baseBlack)
+                .foregroundStyle(.invertedLight)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(20)

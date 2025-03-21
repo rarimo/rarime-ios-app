@@ -101,12 +101,12 @@ struct WalletSendView: View {
                         ) {
                             HStack {
                                 Text("Available:")
-                                    .body4()
+                                    .body5()
                                     .foregroundStyle(.textSecondary)
                                 Spacer()
                                 // TODO: use balance according to the token type
                                 Text(verbatim: "\(RarimoUtils.formatBalance(userManager.balance)) \(token.rawValue)")
-                                    .body4()
+                                    .body5()
                                     .foregroundStyle(.textPrimary)
                             }
                         }
@@ -125,10 +125,10 @@ struct WalletSendView: View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Receiver gets")
-                    .body4()
+                    .body5()
                     .foregroundStyle(.textSecondary)
                 Text(verbatim: "\(RarimoUtils.formatBalance(amountToSend)) \(token.rawValue)")
-                    .subtitle3()
+                    .subtitle5()
                     .foregroundStyle(.textPrimary)
             }
             Spacer()
@@ -259,9 +259,9 @@ private struct ConfirmationTextRow: View {
     
     var body: some View {
         HStack {
-            Text(title).body3()
+            Text(title).body4()
             Spacer()
-            Text(value).subtitle4()
+            Text(value).subtitle6()
         }
         .foregroundStyle(.textPrimary)
     }

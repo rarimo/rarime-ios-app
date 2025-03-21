@@ -85,10 +85,10 @@ struct LightVerificationView: View {
     private func makeItemRow(title: String, value: String) -> some View {
         HStack(spacing: 4) {
             Text(title)
-                .body3()
+                .body4()
             Spacer()
             Text(value)
-                .subtitle4()
+                .subtitle6()
                 .multilineTextAlignment(.trailing)
         }
         .foregroundStyle(.textPrimary)

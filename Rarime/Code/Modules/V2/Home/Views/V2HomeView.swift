@@ -13,95 +13,254 @@ struct V2HomeView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
-    
+    @EnvironmentObject private var configManager: ConfigManager
+
     @StateObject var viewModel = HomeViewModel()
 
     @State private var path: V2HomeRoute? = nil
     @State private var isCopied = false
-    
+
+    @State private var isBalanceFetching = true
+    @State private var pointsBalance: PointsBalanceRaw? = nil
+    @State private var cancelables: [Task<Void, Never>] = []
+
     @Namespace var identityAnimation
     @Namespace var inviteFriendsAnimation
     @Namespace var claimTokensAnimation
     @Namespace var walletAnimation
-    @Namespace var pollsAnimation
+    @Namespace var votingAnimation
+
+    private var activeReferralCode: String? {
+        pointsBalance?.referralCodes?
+            .filter { $0.status == .active }
+            .first?.id
+    }
     
-    var body: some View {
-        ZStack {
-            switch(path) {
-            case .notifications:
-                NotificationsView(
-                    onBack: { path = nil }
-                )
-                .environment(
-                    \.managedObjectContext,
-                     notificationManager.pushNotificationContainer.viewContext
-                )
-            case .identity:
-                IdentityIntroView(
-                    onClose: { path = nil },
-                    // TODO: change after design impl
-                    onStart: { path = nil },
+    private var userPointsBalance: Int {
+        pointsBalance?.amount ?? 0
+    }
+    
+    private var homeCards: [HomeCarouselCard] {
+        [
+            HomeCarouselCard(action: { path = .identity }) {
+                HomeCardView(
+                    backgroundGradient: Gradients.gradientFirst,
+                    topIcon: Icons.rarime,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(Images.handWithPhone)
+                            .resizable()
+                            .scaledToFit()
+                            .scaleEffect(0.88)
+                            .offset(x: 32)
+                            .padding(.top, 12)
+                    },
+                    title: "Your Device",
+                    subtitle: "Your Identity",
+                    bottomAdditionalContent: {
+                        Text("* Nothing leaves this device")
+                            .body4()
+                            .foregroundStyle(.baseBlack.opacity(0.6))
+                            .padding(.top, 24)
+                    },
                     animation: identityAnimation
                 )
-            case .inviteFriends:
-                V2InviteFriendsView(
-                    // TODO: change after design impl for nonscanned passports
-                    balance: PointsBalanceRaw(
-                        amount: 12,
-                        isDisabled: false,
-                        createdAt: Int(Date().timeIntervalSince1970),
-                        updatedAt: Int(Date().timeIntervalSince1970),
-                        rank: 12,
-                        referralCodes: [
-                            ReferalCode(id: "title 1", status: .active),
-                            ReferalCode(id: "title 2", status: .awaiting),
-                            ReferalCode(id: "title 3", status: .banned),
-                            ReferalCode(id: "title 4", status: .consumed),
-                            ReferalCode(id: "title 5", status: .limited),
-                            ReferalCode(id: "title 6", status: .rewarded)
-                        ],
-                        level: 2,
-                        isVerified: true
-                    ),
-                    onClose: { path = nil },
+            },
+            HomeCarouselCard(
+                isShouldDisplay: !isBalanceFetching && pointsBalance != nil,
+                action: { path = .inviteFriends }
+            ) {
+                HomeCardView(
+                    backgroundGradient: Gradients.gradientSecond,
+                    topIcon: Icons.rarime,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        ZStack(alignment: .bottomTrailing) {
+                            Image(Images.peopleEmojis)
+                                .resizable()
+                                .scaledToFit()
+                                .padding(.top, 84)
+
+                            Image(Icons.getTokensArrow)
+                                .foregroundStyle(.informationalDark)
+                                .offset(x: -44, y: 88)
+                                .matchedGeometryEffect(
+                                    id: AnimationNamespaceIds.additionalImage,
+                                    in: inviteFriendsAnimation
+                                )
+                        }
+                    },
+                    title: "Invite",
+                    subtitle: "Others",
+                    bottomAdditionalContent: {
+                        if let code = activeReferralCode {
+                            HStack(spacing: 16) {
+                                Text(code)
+                                    .subtitle4()
+                                    .foregroundStyle(.baseBlack)
+                                VerticalDivider(color: .bgComponentBasePrimary)
+                                Image(isCopied ? Icons.checkLine : Icons.fileCopyLine)
+                                    .iconMedium()
+                                    .foregroundStyle(.baseBlack.opacity(0.5))
+                            }
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(.baseWhite)
+                            .cornerRadius(8)
+                            .frame(maxWidth: 280, alignment: .leading)
+                            .padding(.top, 24)
+                            .onTapGesture {
+                                if isCopied { return }
+
+                                isCopied = true
+                                FeedbackGenerator.shared.impact(.medium)
+
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    withAnimation(.easeInOut) {
+                                        isCopied = false
+                                    }
+                                }
+                            }
+                        }
+                    },
                     animation: inviteFriendsAnimation
                 )
-            case .claimTokens:
-                V2ClaimTokensView(
-                    onClose: { path = nil },
-                    // TODO: change after design impl
-                    onClaim: { path = nil },
+            },
+            HomeCarouselCard(
+                isShouldDisplay: userPointsBalance > 0,
+                action: { path = .claimTokens }
+            ) {
+                HomeCardView(
+                    backgroundGradient: Gradients.gradientThird,
+                    topIcon: Icons.rarimo,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(Images.rarimoTokens)
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.top, 100)
+                    },
+                    title: "Claim",
+                    subtitle: "\(userPointsBalance.formatted()) RMO",
                     animation: claimTokensAnimation
                 )
-			case .wallet:
-                WalletWaitlistView(
-                    onClose: { path = nil },
-                    // TODO: change after design impl
-                    onJoin: { path = nil },
+            },
+            HomeCarouselCard(action: { path = .wallet }) {
+                HomeCardView(
+                    backgroundGradient: Gradients.gradientFourth,
+                    topIcon: Icons.rarime,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(Images.seedPhraseShred)
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.top, 96)
+                    },
+                    title: "An Unforgettable",
+                    subtitle: "Wallet",
                     animation: walletAnimation
                 )
-            case .polls:
-                PollsView(
-                    onClose: { path = nil },
-                    animation: pollsAnimation
+            },
+            HomeCarouselCard(action: { path = .polls }) {
+                HomeCardView(
+                    backgroundGradient: Gradients.gradientFifth,
+                    topIcon: Icons.freedomtool,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(Images.dotCountry)
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.top, 8)
+                    },
+                    title: "Freedomtool",
+                    subtitle: "Voting",
+                    animation: votingAnimation
                 )
-                .environmentObject(pollsViewModel)
-            default: content
+            }
+        ]
+    }
+
+    var body: some View {
+        ZStack {
+            if path == .notifications {
+                NotificationsView(onBack: { path = nil })
+                    .environment(\.managedObjectContext, notificationManager.pushNotificationContainer.viewContext)
+                    .transition(.backslide)
+            } else {
+                switch path {
+                case .identity:
+                    IdentityOnboardingView(
+                        onClose: { path = nil },
+                        onStart: {
+                            path = nil
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                mainViewModel.selectedTab = .identity
+                            }
+                        },
+                        animation: identityAnimation
+                    )
+                case .inviteFriends:
+                    V2InviteFriendsView(
+                        balance: pointsBalance,
+                        onClose: { path = nil },
+                        animation: inviteFriendsAnimation
+                    )
+                case .claimTokens:
+                    V2ClaimTokensView(
+                        onClose: { path = nil },
+                        animation: claimTokensAnimation
+                    )
+                case .wallet:
+                    WalletWaitlistView(
+                        onClose: { path = nil },
+                        onJoin: { path = nil },
+                        animation: walletAnimation
+                    )
+                case .polls:
+                    PollsView(
+                        onClose: { path = nil },
+                        animation: votingAnimation
+                    )
+                default:
+                    content
+                }
             }
         }
-        .animation(.interpolatingSpring(mass: 1, stiffness: 100, damping: 15), value: path)
+        .animation(
+            path == .notifications
+                ? .easeInOut
+                : .interpolatingSpring(mass: 1, stiffness: 100, damping: 15),
+            value: path
+        )
+        .onAppear(perform: fetchBalance)
+        .onDisappear(perform: cleanup)
     }
-        
+
     private var header: some View {
-        HStack {
+        HStack(alignment: .center, spacing: 8) {
             HStack(alignment: .center, spacing: 10) {
                 Text("Hi")
                     .subtitle4()
                     .foregroundStyle(.textSecondary)
-                Text("User")
-                    .subtitle4()
-                    .foregroundStyle(.textPrimary)
+                Group {
+                    if passportManager.passport != nil {
+                        Text(passportManager.passport?.displayedFirstName ?? "")
+                    } else {
+                        Text("User")
+                    }
+                }
+                .subtitle4()
+                .foregroundStyle(.textPrimary)
             }
+            #if DEVELOPMENT
+                Text(verbatim: "Development")
+                    .caption2()
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 4)
+                    .background(.warningLighter, in: Capsule())
+                    .foregroundStyle(.warningDark)
+            #endif
             Spacer()
             ZStack {
                 AppIconButton(icon: Icons.notification2Line, action: { path = .notifications })
@@ -115,11 +274,16 @@ struct V2HomeView: View {
                 }
             }
         }
-        .padding(.top, 20)
-        .padding(.bottom, 16)
-        .padding(.horizontal, 20)
-        .background(.bgBlur)
         .zIndex(1)
+        .padding([.top, .horizontal], 20)
+        .padding(.bottom, 16)
+        .background {
+            ZStack {
+                Color.bgBlur
+                TransparentBlurView(removeAllFilters: false)
+            }
+            .ignoresSafeArea(.container, edges: .top)
+        }
     }
 
     private var content: some View {
@@ -127,148 +291,100 @@ struct V2HomeView: View {
             VStack(spacing: 0) {
                 header
                 ZStack(alignment: .trailing) {
-                    SnapCarouselView(index: $viewModel.currentCardIndex) {
-                        HomeCardView(
-                            backgroundGradient: Gradients.gradientFirst,
-                            topIcon: Icons.rarime,
-                            bottomIcon: Icons.arrowRightUpLine,
-                            imageContent: {
-                                Image(Images.handWithPhone)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .scaleEffect(0.88)
-                                    .offset(x: 32)
-                                    .padding(.top, 12)
-                            },
-                            title: "Your Device",
-                            subtitle: "Your Identity",
-                            bottomAdditionalContent: {
-                                Text("* Nothing leaves this device")
-                                    .body4()
-                                    .foregroundStyle(.baseBlack.opacity(0.6))
-                                    .padding(.top, 24)
-                            },
-                            animation: identityAnimation
-                        )
-                        .onTapGesture {
-                            path = .identity
-                        }
-                        HomeCardView(
-                            backgroundGradient: Gradients.gradientSecond,
-                            topIcon: Icons.rarime,
-                            bottomIcon: Icons.arrowRightUpLine,
-                            imageContent: {
-                                ZStack(alignment: .bottomTrailing) {
-                                    Image(Images.peopleEmojis)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .padding(.top, 84)
-                                    
-                                    Image(Icons.getTokensArrow)
-                                        .foregroundStyle(.informationalDark)
-                                        .offset(x: -44, y: 88)
-                                        .matchedGeometryEffect(
-                                            id: AnimationNamespaceIds.additionalImage,
-                                            in: inviteFriendsAnimation
-                                        )
-                                }
-                            },
-                            title: "Invite",
-                            subtitle: "Others",
-                            bottomAdditionalContent: {
-                                HStack(spacing: 16) {
-                                    Text("14925-1592")
-                                        .subtitle4()
-                                        .foregroundStyle(.baseBlack)
-                                    VerticalDivider()
-                                    Image(isCopied ? Icons.checkLine : Icons.fileCopyLine)
-                                        .iconMedium()
-                                        .foregroundStyle(.baseBlack.opacity(0.5))
-                                }
-                                .fixedSize(horizontal: false, vertical: true)
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 8)
-                                .background(.baseWhite)
-                                .cornerRadius(8)
-                                .frame(maxWidth: 230, alignment: .leading)
-                                .padding(.top, 24)
-                                .onTapGesture {
-                                    if isCopied { return }
-                                    
-                                    isCopied = true
-                                    FeedbackGenerator.shared.impact(.medium)
-
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                        isCopied = false
-                                    }
-                                }
-                            },
-                            animation: inviteFriendsAnimation
-                        )
-                        .onTapGesture {
-                            path = .inviteFriends
-                        }
-                        HomeCardView(
-                            backgroundGradient: Gradients.gradientThird,
-                            topIcon: Icons.rarimo,
-                            bottomIcon: Icons.arrowRightUpLine,
-                            imageContent: {
-                                Image(Images.rarimoTokens)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .padding(.top, 100)
-                            },
-                            title: "Claim",
-                            subtitle: "10 RMO",
-                            bottomAdditionalContent: { EmptyView() },
-                            animation: claimTokensAnimation
-                        )
-                        .onTapGesture {
-                            path = .claimTokens
-                        }
-                        HomeCardView(
-                            backgroundGradient: Gradients.gradientFourth,
-                            topIcon: Icons.rarime,
-                            bottomIcon: Icons.arrowRightUpLine,
-                            imageContent: {
-                                Image(Images.seedPhraseShred)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .padding(.top, 96)
-                            },
-                            title: "An Unforgettable",
-                            subtitle: "Wallet",
-                            bottomAdditionalContent: { EmptyView() },
-                            animation: walletAnimation
-                        )
-                        .onTapGesture {
-                            path = .wallet
-                        }
-                        HomeCardView(
-                            backgroundGradient: Gradients.gradientFifth,
-                            topIcon: Icons.freedomtool,
-                            bottomIcon: Icons.arrowRightUpLine,
-                            imageContent: {
-                                Image(Images.dotCountry)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .padding(.top, 8)
-                            },
-                            title: "Freedomtool",
-                            subtitle: "Voting",
-                            bottomAdditionalContent: { EmptyView() },
-                            animation: pollsAnimation
-                        )
-                        .onTapGesture {
-                            path = .polls
-                        }
-                    }
+                    SnapCarouselView(
+                        index: $viewModel.currentCardIndex,
+                        cards: homeCards.filter { $0.isShouldDisplay }
+                    )
                     .padding(.horizontal, 22)
-                    V2StepIndicator(steps: 5, currentStep: viewModel.currentCardIndex)
-                        .padding(.trailing, 8)
+                    V2StepIndicator(
+                        steps: homeCards.filter(\.isShouldDisplay).count,
+                        currentStep: viewModel.currentCardIndex
+                    )
+                    .padding(.trailing, 8)
                 }
             }
             .background(.bgPrimary)
+        }
+    }
+
+    private func fetchBalance() {
+        isBalanceFetching = true
+
+        let cancelable = Task { @MainActor in
+            defer {
+                self.isBalanceFetching = false
+            }
+
+            if userManager.user?.userReferralCode == nil {
+                await verifyReferralCode()
+                return
+            }
+
+            do {
+                guard let user = userManager.user else { throw "failed to get user" }
+                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+
+                let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
+                self.pointsBalance = pointsBalance
+            } catch is CancellationError {
+                return
+            } catch {
+                LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
+            }
+        }
+
+        cancelables.append(cancelable)
+    }
+
+    private func verifyReferralCode() async {
+        var referralCode = configManager.api.defaultReferralCode
+        if let deferredReferralCode = userManager.user?.deferredReferralCode, !deferredReferralCode.isEmpty {
+            referralCode = deferredReferralCode
+        }
+
+        await attemptToCreateBalance(with: referralCode, fallback: configManager.api.defaultReferralCode)
+    }
+
+    private func attemptToCreateBalance(with referralCode: String, fallback: String) async {
+        do {
+            try await createBalance(referralCode)
+        } catch {
+            LoggerUtil.common.error("Failed to verify referral code: \(error.localizedDescription, privacy: .public)")
+            if referralCode != fallback {
+                await attemptToCreateBalance(with: fallback, fallback: fallback)
+            }
+        }
+    }
+
+    private func createBalance(_ code: String) async throws {
+        guard let user = userManager.user else { throw "user is not initalized" }
+        let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+
+        let pointsSvc = Points(ConfigManager.shared.api.pointsServiceURL)
+        let result = try await pointsSvc.createPointsBalance(
+            accessJwt,
+            code
+        )
+
+        userManager.user?.userReferralCode = code
+        LoggerUtil.common.info("User verified code: \(code, privacy: .public)")
+
+        pointsBalance = PointsBalanceRaw(
+            id: result.data.id,
+            amount: result.data.attributes.amount,
+            isDisabled: result.data.attributes.isDisabled,
+            createdAt: result.data.attributes.createdAt,
+            updatedAt: result.data.attributes.updatedAt,
+            rank: result.data.attributes.rank,
+            referralCodes: result.data.attributes.referralCodes,
+            level: result.data.attributes.level,
+            isVerified: result.data.attributes.isVerified
+        )
+    }
+
+    private func cleanup() {
+        for cancelable in cancelables {
+            cancelable.cancel()
         }
     }
 }

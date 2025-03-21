@@ -4,7 +4,7 @@ import SwiftUI
 
 struct WaitlistPassportView: View {
     @EnvironmentObject var decentralizedAuthManager: DecentralizedAuthManager
-    @EnvironmentObject var passportViewModel: PassportViewModel
+    @EnvironmentObject var passportManager: PassportManager
     @EnvironmentObject var userManager: UserManager
 
     let onNext: () -> Void
@@ -14,67 +14,88 @@ struct WaitlistPassportView: View {
     @State private var isSending = false
     @State private var isExporting = false
     @State private var isCopied = false
+    @State private var isBalanceLoading = false
+    @State private var isJoined = false
+    
+    @State private var cancelables: [Task<Void, Never>] = []
 
     var country: Country {
-        passportViewModel.passportCountry
+        passportManager.passportCountry
     }
     
     var serializedPassport: Data {
-        return (try? passportViewModel.passport?.serialize()) ?? Data()
+        return (try? passportManager.passport?.serialize()) ?? Data()
+    }
+    
+    var isEligibleForReward: Bool {
+        !UNSUPPORTED_REWARD_COUNTRIES.contains(country)
     }
 
     var body: some View {
-        HomeIntroLayout(
-            title: String(localized: "Waitlist passport"),
-            description: country.name,
-            icon: Text(country.flag)
-                .h4()
-                .frame(width: 72, height: 72)
-                .background(.bgComponentPrimary, in: Circle())
-                .foregroundStyle(.textPrimary)
-        ) {
-            VStack(alignment: .leading, spacing: 24) {
-                Text("Become an ambassador")
-                    .subtitle2()
-                Text("If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards")
-                    .body3()
-                    .fixedSize(horizontal: false, vertical: true)
-                HStack(alignment: .top, spacing: 12) {
-                    AppCheckbox(checked: $isChecked)
-                    Text("By checking this box, you are agreeing to share the data groups of the passport and the government signature")
+        ZStack(alignment: .topTrailing) {
+            AppIconButton(icon: Icons.closeFill, action: onCancel)
+                .padding([.top, .trailing], 20)
+            VStack(spacing: 28) {
+                Text(country.flag)
+                    .h2()
+                    .frame(width: 88, height: 88)
+                    .background(.bgComponentPrimary, in: Circle())
+                    .foregroundStyle(.textPrimary)
+                VStack(spacing: 8) {
+                    Text("Waitlist passport")
+                        .h3()
+                        .foregroundStyle(.textPrimary)
+                    Text(country.name)
                         .body4()
-                        .fixedSize(horizontal: false, vertical: true)
                         .foregroundStyle(.textSecondary)
                 }
-            }
-            .foregroundStyle(.textPrimary)
-        }
-        .padding(.top, 24)
-        Spacer()
-        VStack(spacing: 12) {
-            AppButton(
-                text: "Join the program",
-                rightIcon: Icons.arrowRight,
-                action: {
-                    Task { @MainActor in
-                        await joinRewardsProgram()
-                        if isChecked {
-                            isSending = true
-                        } else {
-                            onNext()
-                        }
+                HorizontalDivider()
+                VStack(alignment: .leading, spacing: 24) {
+                    Text("Become an ambassador")
+                        .h4()
+                    Text("If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards")
+                        .body4()
+                        .fixedSize(horizontal: false, vertical: true)
+                    HStack(alignment: .top, spacing: 12) {
+                        AppCheckbox(checked: $isChecked)
+                        Text("By checking this box, you are agreeing to share the data groups of the passport and the government signature")
+                            .body5()
+                            .fixedSize(horizontal: false, vertical: true)
+                            .foregroundStyle(.textSecondary)
                     }
                 }
-            )
-            .controlSize(.large)
-            AppButton(
-                variant: .tertiary,
-                text: "Cancel",
-                action: onCancel
-            )
-            .controlSize(.large)
+                .foregroundStyle(.textPrimary)
+                Spacer()
+                VStack(spacing: 8) {
+                    AppButton(
+                        text: "Join the program",
+                        rightIcon: Icons.arrowRight,
+                        action: {
+                            Task { @MainActor in
+                                await joinRewardsProgram()
+                                if isChecked {
+                                    isSending = true
+                                } else {
+                                    onNext()
+                                }
+                            }
+                        }
+                    )
+                    .controlSize(.large)
+                    .disabled(isJoined || isSending || isBalanceLoading)
+                    AppButton(
+                        variant: .tertiary,
+                        text: "Cancel",
+                        action: onCancel
+                    )
+                    .controlSize(.large)
+                }
+            }
+            .padding(.horizontal, 24)
+            .padding(.top, 140)
         }
-        .padding(.horizontal, 24)
+        .onAppear(perform: checkIfUserJoined)
+        .onDisappear(perform: cleanup)
         .onChange(of: isSending) { isSending in
             if !isSending {
                 onNext()
@@ -84,7 +105,7 @@ struct WaitlistPassportView: View {
             if MFMailComposeViewController.canSendMail() {
                 MailView(
                     subject: "Passport from: \(UIDevice.modelName)",
-                    attachment: (try? passportViewModel.passport?.serialize()) ?? Data(),
+                    attachment: (try? passportManager.passport?.serialize()) ?? Data(),
                     fileName: "passport.json",
                     isShowing: $isSending,
                     result: .constant(nil)
@@ -95,63 +116,19 @@ struct WaitlistPassportView: View {
         }
     }
     
-    func joinRewardsProgram() async {
-        if !passportViewModel.isEligibleForReward {
-            return
-        }
-        
-        do {
-            guard let user = userManager.user else { throw "failed to get user" }
-                
-            let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-                
-            let country = passportViewModel.passport?.nationality ?? ""
-                
-            let dg1 = passportViewModel.passport?.dg1 ?? Data()
-                
-            var calculateAnonymousIDError: NSError?
-            let anonymousID = IdentityCalculateAnonymousID(dg1, Points.PointsEventId, &calculateAnonymousIDError)
-            if let calculateAnonymousIDError {
-                throw calculateAnonymousIDError
-            }
-                
-            var error: NSError?
-            let hmacMessage = IdentityCalculateHmacMessage(accessJwt.payload.sub, country, anonymousID, &error)
-            if let error {
-                throw error
-            }
-                
-            let key = Data(hex: ConfigManager.shared.api.joinRewardsKey) ?? Data()
-                
-            let hmacSingature = HMACUtils.hmacSha256(hmacMessage ?? Data(), key)
-                
-            let points = Points(ConfigManager.shared.api.pointsServiceURL)
-            let _ = try await points.joinRewardsProgram(
-                accessJwt,
-                country,
-                hmacSingature.hex,
-                anonymousID?.hex ?? ""
-            )
-                
-            LoggerUtil.common.info("User joined program")
-        } catch {
-            LoggerUtil.common.info("failed to join rewards program: \(error, privacy: .public)")
-        }
-    }
-    
     var savePassportDataView: some View {
         VStack(alignment: .leading, spacing: 32) {
             VStack(spacing: 16) {
                 Image(Icons.identificationCard)
-                    .iconLarge()
-                    .frame(width: 72, height: 72)
+                    .square(44)
+                    .frame(width: 88, height: 88)
                     .background(.bgComponentPrimary, in: Circle())
                     .foregroundStyle(.textPrimary)
                 Text("Save your passport data")
-                    .h6()
+                    .h4()
                     .foregroundStyle(.textPrimary)
                 Text("Your passport data will be saved on your device. You can share it with us to expedite the support of your passport.")
-                    .body3()
+                    .body4()
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: 320)
@@ -162,14 +139,14 @@ struct WaitlistPassportView: View {
                         .overline2()
                         .foregroundStyle(.textSecondary)
                     Text("1. Save passport data on your device")
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textPrimary)
                     Text("2. Send the saved file to the email address below")
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textPrimary)
                     HStack(spacing: 8) {
                         Text(ConfigManager.shared.feedback.feedbackEmail)
-                            .body2()
+                            .body3()
                             .foregroundStyle(.textPrimary)
                         Image(isCopied ? Icons.check : Icons.copySimple).iconMedium()
                     }
@@ -190,7 +167,7 @@ struct WaitlistPassportView: View {
                     .foregroundStyle(.textPrimary)
                     .cornerRadius(8)
                     Text("3. When we support your country, you will be notified in the app")
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textPrimary)
                 }
                 .frame(maxWidth: .infinity)
@@ -221,6 +198,77 @@ struct WaitlistPassportView: View {
         .padding(.top, 80)
         .padding(.bottom, 20)
         .padding(.horizontal, 24)
+    }
+    
+    func joinRewardsProgram() async {
+        if !isEligibleForReward {
+            return
+        }
+        
+        do {
+            guard let user = userManager.user else { throw "failed to get user" }
+                
+            let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+                
+            let country = passportManager.passport?.nationality ?? ""
+                
+            let dg1 = passportManager.passport?.dg1 ?? Data()
+            
+            var calculateAnonymousIDError: NSError?
+            let anonymousID = IdentityCalculateAnonymousID(dg1, Points.PointsEventId, &calculateAnonymousIDError)
+            if let calculateAnonymousIDError {
+                throw calculateAnonymousIDError
+            }
+                
+            var error: NSError?
+            let hmacMessage = IdentityCalculateHmacMessage(accessJwt.payload.sub, country, anonymousID, &error)
+            if let error {
+                throw error
+            }
+                
+            let key = Data(hex: ConfigManager.shared.api.joinRewardsKey) ?? Data()
+                
+            let hmacSingature = HMACUtils.hmacSha256(hmacMessage ?? Data(), key)
+                
+            let points = Points(ConfigManager.shared.api.pointsServiceURL)
+            let _ = try await points.joinRewardsProgram(
+                accessJwt,
+                country,
+                hmacSingature.hex,
+                anonymousID?.hex ?? ""
+            )
+                
+            LoggerUtil.common.info("User joined program")
+        } catch {
+            LoggerUtil.common.error("failed to join rewards program: \(error, privacy: .public)")
+        }
+    }
+    
+    func checkIfUserJoined() {
+        isBalanceLoading = true
+
+        let cancelable = Task { @MainActor in
+            defer { self.isBalanceLoading = false }
+            do {
+                guard let user = userManager.user else { throw "failed to get user" }
+                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+
+                let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
+                isJoined = pointsBalance.isVerified
+            } catch is CancellationError {
+                return
+            } catch {
+                LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
+            }
+        }
+
+        cancelables.append(cancelable)
+    }
+    
+    func cleanup() {
+        for cancelable in cancelables {
+            cancelable.cancel()
+        }
     }
 }
 

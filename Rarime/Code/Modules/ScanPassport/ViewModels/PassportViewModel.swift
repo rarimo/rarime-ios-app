@@ -8,12 +8,25 @@ enum PassportProofState: Int, CaseIterable {
 
     var title: LocalizedStringResource {
         switch self {
-        case .downloadingData: "Downloading data"
-        case .applyingZK: "Applying Zero Knowledge"
-        case .createProfile: "Creating a confidential profile"
+        case .downloadingData: "Downloading"
+        case .applyingZK: "Applying ZK"
+        case .createProfile: "Creating"
         case .finalizing: "Finalizing"
         }
     }
+    
+    var progress: CGFloat {
+        switch self {
+        case .downloadingData: 25
+        case .applyingZK: 50
+        case .createProfile: 75
+        case .finalizing: 100
+        }
+    }
+}
+
+enum ProcessingStatus: Equatable {
+    case processing, success, failure
 }
 
 class PassportViewModel: ObservableObject {
@@ -39,17 +52,8 @@ class PassportViewModel: ObservableObject {
     
     var revocationPassportPublisher = PassthroughSubject<Passport, Error>()
     
-    var passportCountry: Country {
-        guard let passport = passport else { return .unknown }
-        return Country.fromISOCode(passport.nationality)
-    }
-    
-    var isEligibleForReward: Bool {
-        !UNSUPPORTED_REWARD_COUNTRIES.contains(passportCountry)
-    }
-    
     func setMrzKey(_ value: String) {
-        mrzKey = value
+        self.mrzKey = value
     }
 
     func setPassport(_ passport: Passport) {
@@ -57,9 +61,7 @@ class PassportViewModel: ObservableObject {
     }
 
     @MainActor
-    func register(
-        _ downloadProgress: @escaping (String) -> Void = { _ in }
-    ) async throws -> ZkProof {
+    func register() async throws -> ZkProof {
         var isCriticalRegistrationProcessInProgress = true
         
         do {
@@ -86,7 +88,7 @@ class PassportViewModel: ObservableObject {
             
             let circuitData: CircuitData
             do {
-                circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData, downloadProgress)
+                circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData)
             } catch {
                 throw Errors.unknown("Failed to download data, internet connection is unstable")
             }
@@ -134,8 +136,11 @@ class PassportViewModel: ObservableObject {
                 try UserManager.shared.saveRegisterZkProof(proof)
                 
                 isUserRegistered = true
+                
+                try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
                 proofState = .finalizing
                 
+                try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
                 processingStatus = .success
                 
                 return proof
@@ -205,7 +210,7 @@ class PassportViewModel: ObservableObject {
             try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
             proofState = .finalizing
             
-            try await Task.sleep(nanoseconds: 1 * NSEC_PER_SEC)
+            try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
             processingStatus = .success
             
             return proof

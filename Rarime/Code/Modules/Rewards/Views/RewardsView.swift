@@ -86,7 +86,7 @@ struct RewardsView: View {
                     VStack(spacing: 24) {
                         HStack {
                             Text("Rewards")
-                                .subtitle2()
+                                .subtitle4()
                                 .foregroundStyle(.textPrimary)
                             Spacer()
                             if !isUnsupportedCountry {
@@ -95,7 +95,7 @@ struct RewardsView: View {
                                         Button(action: { isLeaderboardSheetShown = true }) {
                                             HStack(spacing: 4) {
                                                 Image(Icons.trophy).iconSmall()
-                                                Text("\(balance.rank ?? 0)").subtitle5()
+                                                Text("\(balance.rank ?? 0)").subtitle7()
                                             }
                                             .padding(.vertical, 4)
                                             .padding(.horizontal, 8)
@@ -121,16 +121,16 @@ struct RewardsView: View {
                         if isUnsupportedCountry {
                             VStack(spacing: 8) {
                                 Text(passportManager.passportCountry.flag)
-                                    .h4()
+                                    .h2()
                                     .frame(width: 72, height: 72)
                                     .background(.bgComponentPrimary, in: Circle())
                                     .foregroundStyle(.textPrimary)
                                 Text("Unsupported country")
-                                    .h5()
+                                    .h3()
                                     .foregroundStyle(.textPrimary)
                                     .padding(.top, 16)
                                 Text("Unfortunately, these passports are not eligible for rewards. However, you can use your incognito ID for other upcoming mini apps.")
-                                    .body3()
+                                    .body4()
                                     .multilineTextAlignment(.center)
                                     .foregroundStyle(.textSecondary)
                             }
@@ -172,7 +172,7 @@ struct RewardsView: View {
                     HStack {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Reserved RMO")
-                                .body3()
+                                .body4()
                                 .foregroundStyle(.textSecondary)
                             Text(balance.amount.formatted()).h5()
                         }
@@ -188,14 +188,14 @@ struct RewardsView: View {
                     VStack(spacing: 8) {
                         HStack(spacing: 8) {
                             Text("Level \(balance.level)")
-                                .subtitle5()
+                                .subtitle7()
                                 .foregroundStyle(.textPrimary)
                             Image(Icons.caretRight)
                                 .iconSmall()
                                 .foregroundStyle(.textPrimary)
                             Spacer()
                             Text(String("\(balance.amount.formatted())/\(nextLevelBalance.formatted())"))
-                                .body4()
+                                .body5()
                                 .foregroundStyle(.textSecondary)
                         }
                         .onTapGesture { isLevelingSheetShown = true }
@@ -214,11 +214,11 @@ struct RewardsView: View {
             VStack(alignment: .leading, spacing: 20) {
                 HStack(spacing: 12) {
                     Text(verbatim: "🔥")
-                        .subtitle5()
+                        .subtitle7()
                         .frame(width: 24, height: 24)
                         .background(.warningLight, in: Circle())
                     Text("Limited time events")
-                        .subtitle3()
+                        .subtitle5()
                         .foregroundStyle(.textPrimary)
                 }
                 VStack(spacing: 16) {
@@ -245,7 +245,7 @@ struct RewardsView: View {
         CardContainer {
             VStack(alignment: .leading, spacing: 20) {
                 Text("Active tasks")
-                    .subtitle3()
+                    .subtitle5()
                     .foregroundStyle(.textPrimary)
                 VStack(spacing: 16) {
                     ForEach(notlimitedEvents.reversed(), id: \.id) { event in
@@ -264,7 +264,7 @@ struct RewardsView: View {
                     }
                     if notlimitedEvents.isEmpty {
                         Text("No active tasks")
-                            .body3()
+                            .body4()
                             .foregroundStyle(.textSecondary)
                     }
                 }
@@ -361,7 +361,7 @@ private struct LimitedEventItem: View {
             .clipShape(RoundedRectangle(cornerRadius: 8))
             VStack(alignment: .leading, spacing: 8) {
                 Text(event.attributes.meta.metaStatic.title)
-                    .subtitle4()
+                    .subtitle6()
                     .foregroundStyle(.textPrimary)
                 HStack(spacing: 16) {
                     RewardChip(reward: Double(event.attributes.meta.metaStatic.reward))
@@ -399,10 +399,10 @@ private struct ActiveEventItem: View {
             .clipShape(Circle())
             VStack(alignment: .leading, spacing: 4) {
                 Text(event.attributes.meta.metaStatic.title)
-                    .subtitle4()
+                    .subtitle6()
                     .foregroundStyle(.textPrimary)
                 Text(event.attributes.meta.metaStatic.shortDescription)
-                    .body4()
+                    .body5()
                     .foregroundStyle(.textSecondary)
             }
             .padding(.leading, 8)
