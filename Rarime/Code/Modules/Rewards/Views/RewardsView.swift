@@ -81,87 +81,78 @@ struct RewardsView: View {
 
     var content: some View {
         MainViewLayout {
-            if isCodeVerified {
-                ScrollView {
-                    VStack(spacing: 24) {
-                        HStack {
-                            Text("Rewards")
-                                .subtitle2()
-                                .foregroundStyle(.textPrimary)
-                            Spacer()
-                            if !isUnsupportedCountry {
-                                VStack {
-                                    if let balance = rewardsViewModel.pointsBalanceRaw {
-                                        Button(action: { isLeaderboardSheetShown = true }) {
-                                            HStack(spacing: 4) {
-                                                Image(Icons.trophy).iconSmall()
-                                                Text("\(balance.rank ?? 0)").subtitle5()
-                                            }
-                                            .padding(.vertical, 4)
-                                            .padding(.horizontal, 8)
-                                            .background(.warningLighter, in: RoundedRectangle(cornerRadius: 100))
-                                            .foregroundStyle(.warningDarker)
+            ScrollView {
+                VStack(spacing: 24) {
+                    HStack {
+                        Text("Rewards")
+                            .subtitle2()
+                            .foregroundStyle(.textPrimary)
+                        Spacer()
+                        if !isUnsupportedCountry {
+                            VStack {
+                                if let balance = rewardsViewModel.pointsBalanceRaw {
+                                    Button(action: { isLeaderboardSheetShown = true }) {
+                                        HStack(spacing: 4) {
+                                            Image(Icons.trophy).iconSmall()
+                                            Text("\(balance.rank ?? 0)").subtitle5()
                                         }
-                                        .dynamicSheet(isPresented: $isLeaderboardSheetShown, fullScreen: true) {
-                                            ZStack {
-                                                LeaderboardView(
-                                                    balances: rewardsViewModel.leaderboard,
-                                                    myBalance: balance,
-                                                    totalParticipants: rewardsViewModel.totalParticipants
-                                                )
-                                            }
+                                        .padding(.vertical, 4)
+                                        .padding(.horizontal, 8)
+                                        .background(.warningLighter, in: RoundedRectangle(cornerRadius: 100))
+                                        .foregroundStyle(.warningDarker)
+                                    }
+                                    .dynamicSheet(isPresented: $isLeaderboardSheetShown, fullScreen: true) {
+                                        ZStack {
+                                            LeaderboardView(
+                                                balances: rewardsViewModel.leaderboard,
+                                                myBalance: balance,
+                                                totalParticipants: rewardsViewModel.totalParticipants
+                                            )
                                         }
                                     }
                                 }
-                                .isLoading(!isLeaderboardLoaded)
                             }
-                        }
-                        .padding(.top, 20)
-                        .padding(.horizontal, 20)
-                        if isUnsupportedCountry {
-                            VStack(spacing: 8) {
-                                Text(passportManager.passportCountry.flag)
-                                    .h4()
-                                    .frame(width: 72, height: 72)
-                                    .background(.componentPrimary, in: Circle())
-                                    .foregroundStyle(.textPrimary)
-                                Text("Unsupported country")
-                                    .h5()
-                                    .foregroundStyle(.textPrimary)
-                                    .padding(.top, 16)
-                                Text("Unfortunately, these passports are not eligible for rewards. However, you can use your incognito ID for other upcoming mini apps.")
-                                    .body3()
-                                    .multilineTextAlignment(.center)
-                                    .foregroundStyle(.textSecondary)
-                            }
-                            .padding(.top, 120)
-                            .padding(.horizontal, 32)
-                        } else {
-                            VStack(spacing: 8) {
-                                balanceCard
-                                if !limitedEvents.isEmpty {
-                                    limitedEventsCard(limitedEvents)
-                                }
-                                activeEventsCard
-                            }
-                            .padding(.horizontal, 12)
+                            .isLoading(!isLeaderboardLoaded)
                         }
                     }
-                    .padding(.bottom, 124)
+                    .padding(.top, 20)
+                    .padding(.horizontal, 20)
+                    if isUnsupportedCountry {
+                        VStack(spacing: 8) {
+                            Text(passportManager.passportCountry.flag)
+                                .h4()
+                                .frame(width: 72, height: 72)
+                                .background(.componentPrimary, in: Circle())
+                                .foregroundStyle(.textPrimary)
+                            Text("Unsupported country")
+                                .h5()
+                                .foregroundStyle(.textPrimary)
+                                .padding(.top, 16)
+                            Text("Unfortunately, these passports are not eligible for rewards. However, you can use your incognito ID for other upcoming mini apps.")
+                                .body3()
+                                .multilineTextAlignment(.center)
+                                .foregroundStyle(.textSecondary)
+                        }
+                        .padding(.top, 120)
+                        .padding(.horizontal, 32)
+                    } else {
+                        VStack(spacing: 8) {
+                            balanceCard
+                            if !limitedEvents.isEmpty {
+                                limitedEventsCard(limitedEvents)
+                            }
+                            activeEventsCard
+                        }
+                        .padding(.horizontal, 12)
+                    }
                 }
-                .background(.backgroundPrimary)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .isLoading(!isRewardsLoaded)
-                .onAppear(perform: fetchEvents)
-                .onAppear(perform: fetchLeaderboard)
-            } else {
-                RewardsIntroView {
-                    isCodeVerified = true
-                }
-                .onAppear {
-                    isCodeVerified = userManager.user?.userReferralCode != nil
-                }
+                .padding(.bottom, 124)
             }
+            .background(.backgroundPrimary)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .isLoading(!isRewardsLoaded)
+            .onAppear(perform: fetchEvents)
+            .onAppear(perform: fetchLeaderboard)
         }
     }
 
