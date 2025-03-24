@@ -17,10 +17,10 @@ enum PassportProofState: Int, CaseIterable {
     
     var simulationDuration: TimeInterval {
         switch self {
-        case .downloadingData: return 0
-        case .applyingZK:     return 18
-        case .createProfile:  return 8
-        case .finalizing:     return 2
+        case .downloadingData: 0
+        case .applyingZK: 18
+        case .createProfile: 8
+        case .finalizing: 2
         }
     }
     

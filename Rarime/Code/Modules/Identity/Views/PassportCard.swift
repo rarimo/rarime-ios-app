@@ -246,9 +246,6 @@ struct PassportCard: View {
         .padding(.vertical, 12)
         .frame(height: 64)
         .background(.bgBlur, in: RoundedRectangle(cornerRadius: 16))
-        .onChange(of: passportViewModel.overallProgress) { newValue in
-            print("NEWVALUE", newValue)
-        }
     }
     
     private var cardProofError: some View {
