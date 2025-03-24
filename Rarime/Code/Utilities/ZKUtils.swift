@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 
 import RarimeIOSUtils
 
@@ -131,10 +131,12 @@ extension ZKUtils {
         let swoir = Swoir(backend: Swoirenberg.self)
 
         let circuit = try swoir.createCircuit(manifest: Circuits.noirRegisterCircuit)
+        
+        let noirTrustedSetup = Bundle.main.resourcePath! + "/" + "noirTrustedSetup.dat"
+        
+        try circuit.setupSrs(srs_path: noirTrustedSetup)
 
-        try circuit.setupSrs()
-
-        let proof = try circuit.prove(inputs.toAnyMap(), proof_type: "plonk", recursive: true)
+        let proof = try circuit.prove(inputs.toAnyMap(), proof_type: "plonk")
         
         return proof.proof
     }
