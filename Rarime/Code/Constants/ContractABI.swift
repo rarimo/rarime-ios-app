@@ -6,4 +6,8 @@ class ContractABI {
     static let poseidonSMTAbiJSON = NSDataAsset(name: "PoseidonSMTAbi.json")?.data ?? Data()
     
     static let stateKeeperAbiJSON = NSDataAsset(name: "StateKeeperAbi.json")?.data ?? Data()
+    
+    static let proposalsStateAbiJSON = NSDataAsset(name: "ProposalsStateAbi.json")?.data ?? Data()
+    
+    static let multicall3AbiJSON = NSDataAsset(name: "Multicall3Abi.json")?.data ?? Data()
 }

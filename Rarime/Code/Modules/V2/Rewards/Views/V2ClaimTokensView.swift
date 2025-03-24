@@ -69,7 +69,7 @@ struct V2ClaimTokensView: View {
                         .body3()
                         .foregroundStyle(.baseBlack.opacity(0.5))
                     AppButton(
-                        variant: .secondary,
+                        variant: .tertiary,
                         text: claimButtonText,
                         leftIcon: rewardsViewModel.isTokensClaimed ? Icons.checkLine : nil,
                         action: onClaimTokens

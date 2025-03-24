@@ -25,9 +25,13 @@ struct TransparentBlurView: UIViewRepresentable {
 }
 
 extension View {
-    func transparentBlur(removeAllFilters: Bool = false) -> some View {
-       self.background(
-           TransparentBlurView(removeAllFilters: removeAllFilters)
-       )
+    func backgroundBlur(removeAllFilters: Bool = false, bgColor: Color) -> some View {
+       self.background {
+           ZStack {
+               bgColor
+               TransparentBlurView(removeAllFilters: false)
+           }
+           .ignoresSafeArea(.container, edges: .bottom)
+       }
    }
 }

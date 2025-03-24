@@ -132,8 +132,4 @@ struct AppIconButton: View {
         }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .background(
-        Gradients.gradientFirst
-            .ignoresSafeArea(.all)
-    )
 }
