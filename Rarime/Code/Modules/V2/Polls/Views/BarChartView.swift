@@ -1,47 +1,5 @@
 import SwiftUI
 
-struct ClosedPollResultsView: View {
-    let poll: Poll
-    
-    var questionResults: [QuestionResult] {
-        var results: [QuestionResult] = []
-        for (question, result) in zip(poll.questions, poll.proposalResults) {
-            results.append(
-                QuestionResult(
-                    question: question.title,
-                    options: question.variants.enumerated().map { index, answer in
-                        QuestionResultOption(
-                            answer: answer,
-                            votes: Int(result[index])
-                        )
-                    }
-                )
-            )
-        }
-
-        return results
-    }
-    
-    var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(spacing: 16) {
-                ForEach(questionResults.indices, id: \.self) { index in
-                    VStack(alignment: .leading, spacing: 8) {
-                        let totalVotes = questionResults[index].options.map(\.votes).reduce(0, +)
-                        Text(questionResults[index].question)
-                            .subtitle5()
-                            .foregroundStyle(.textPrimary)
-                        BarChartPollView(
-                            result: questionResults[index],
-                            totalVotes: totalVotes
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
-
 struct BarChartPollView: View {
     let result: QuestionResult
     let totalVotes: Int
@@ -100,6 +58,23 @@ struct BarChartPollView: View {
 }
 
 #Preview {
-    ClosedPollResultsView(poll: FINISHED_POLLS[0])
-        .padding(.horizontal, 20)
+    BarChartPollView(
+        result: QuestionResult(
+            question: "Do you worry about online privacy?",
+            options: [
+                QuestionResultOption(
+                    answer: "Yes, very",
+                    votes: 200
+                ),
+                QuestionResultOption(
+                    answer: "Somewhat",
+                    votes: 200
+                ),
+                QuestionResultOption(
+                    answer: "Not at all",
+                    votes: 200
+                )
+            ]),
+        totalVotes: 1000
+    )
 }

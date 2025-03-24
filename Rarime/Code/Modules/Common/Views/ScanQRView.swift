@@ -33,20 +33,17 @@ struct ScanQRView: View {
                     .padding(.top, 360)
             }
             .ignoresSafeArea()
-
-            ZStack {
-                Button(action: onBack) {
-                    Image(Icons.closeFill)
-                        .iconMedium()
-                        .foregroundStyle(.baseWhite)
-                }
-                .padding(.all, 10)
-                .background(.bgComponentBasePrimary)
-                .clipShape(Circle())
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .frame(maxHeight: .infinity, alignment: .top)
-                .padding([.top, .trailing], 20)
+            Button(action: onBack) {
+                Image(Icons.closeFill)
+                    .iconMedium()
+                    .foregroundStyle(.baseWhite)
             }
+            .padding(.all, 10)
+            .backgroundBlur(bgColor: .bgComponentBasePrimary)
+            .clipShape(Circle())
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            .frame(maxHeight: .infinity, alignment: .top)
+            .padding([.top, .trailing], 20)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

@@ -296,7 +296,7 @@ struct V2HomeView: View {
                         cards: homeCards.filter { $0.isShouldDisplay }
                     )
                     .padding(.horizontal, 22)
-                    V2StepIndicator(
+                    V2VerticalStepIndicator(
                         steps: homeCards.filter(\.isShouldDisplay).count,
                         currentStep: viewModel.currentCardIndex
                     )

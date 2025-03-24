@@ -26,9 +26,15 @@ struct PollsView: View {
     var animation: Namespace.ID
     
     @State private var currentTab = PollsTab.active
+    @State private var isPollSheetShown = false
+    
     @State private var isPollsLoading = true
     @State private var earlyPullTask: Task<Void, Never>? = nil
-    @State private var isPollSheetShown = false
+    
+    private let spaceName = "polls.scroll"
+    
+    @State private var wholeSize: CGSize = .zero
+    @State private var scrollViewSize: CGSize = .zero
     
     private var aсtivePolls: [Poll] {
         pollsViewModel.polls.filter { poll in
@@ -43,92 +49,97 @@ struct PollsView: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            AppIconButton(variant: .secondary, icon: Icons.closeFill, action: onClose)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .padding([.top, .trailing], 20)
-            Image(Images.dotCountry)
-                .resizable()
-                .scaledToFill()
-                .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
-            GlassBottomSheet(minHeight: 330, maxHeight: 730) {
-                VStack(spacing: 24) {
-                    VStack(alignment: .leading, spacing: 24) {
-                        VStack(alignment: .leading, spacing: 0) {
-                            Text("Freedomtool")
-                                .h1()
-                                .foregroundStyle(.baseBlack)
-                                .matchedGeometryEffect(
-                                    id: AnimationNamespaceIds.title,
-                                    in: animation,
-                                    properties: .position
-                                )
-                            Text("Voting")
-                                .additional1()
-                                .foregroundStyle(.baseBlack.opacity(0.4))
-                                .matchedGeometryEffect(
-                                    id: AnimationNamespaceIds.subtitle,
-                                    in: animation,
-                                    properties: .position
-                                )
-                        }
-                        Text("An identification and privacy solution that revolutionizes polling, surveying and election processes")
-                            .body3()
-                            .foregroundStyle(.baseBlack.opacity(0.5))
-                            .fixedSize(horizontal: false, vertical: true)
-                        HStack(alignment: .center, spacing: 16) {
-                            AppIconButton(variant: .secondary, icon: Icons.addFill, cornerRadius: 20, action: {
-                                guard let url = URL(string: ConfigManager.shared.api.votingWebsiteURL.absoluteString) else { return }
-                                openURL(url)
-                            })
-                                .controlSize(.large)
-                            AppButton(variant: .tertiary, text: "Scan a QR", action: { mainViewModel.isQrCodeScanSheetShown = true })
-                                .controlSize(.large)
-                        }
-                        HorizontalDivider(color: .bgComponentBasePrimary)
-                        HStack(alignment: .center, spacing: 8) {
-                            ForEach(PollsTab.allCases, id: \.self) { tab in
-                                Button(action: {
-                                    withAnimation {
-                                        currentTab = tab
-                                    }
-                                }) {
-                                    Text(tab == .active
-                                         ? "\(aсtivePolls.count) \(tab.title)"
-                                         : tab.title
+        PullToCloseWrapperView(action: onClose) {
+            VStack(spacing: 0) {
+                AppIconButton(variant: .secondary, icon: Icons.closeFill, action: onClose)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .padding([.top, .trailing], 20)
+                Image(Images.dotCountry)
+                    .resizable()
+                    .scaledToFill()
+                    .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
+                GlassBottomSheet(minHeight: 330, maxHeight: 730) {
+                    VStack(spacing: 24) {
+                        VStack(alignment: .leading, spacing: 24) {
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text("Freedomtool")
+                                    .h1()
+                                    .foregroundStyle(.baseBlack)
+                                    .matchedGeometryEffect(
+                                        id: AnimationNamespaceIds.title,
+                                        in: animation,
+                                        properties: .position
                                     )
-                                    .overline2()
-                                    .foregroundStyle(currentTab == tab ? .baseBlack : .baseBlack.opacity(0.4))
+                                Text("Voting")
+                                    .additional1()
+                                    .foregroundStyle(.baseBlack.opacity(0.4))
+                                    .matchedGeometryEffect(
+                                        id: AnimationNamespaceIds.subtitle,
+                                        in: animation,
+                                        properties: .position
+                                    )
+                            }
+                            Text("An identification and privacy solution that revolutionizes polling, surveying and election processes")
+                                .body3()
+                                .foregroundStyle(.baseBlack.opacity(0.5))
+                                .fixedSize(horizontal: false, vertical: true)
+                            HStack(alignment: .center, spacing: 16) {
+                                AppIconButton(variant: .secondary, icon: Icons.addFill, cornerRadius: 20, action: {
+                                    guard let url = URL(string: ConfigManager.shared.api.votingWebsiteURL.absoluteString) else { return }
+                                    openURL(url)
+                                })
+                                    .controlSize(.large)
+                                AppButton(variant: .tertiary, text: "Scan a QR", action: { mainViewModel.isQrCodeScanSheetShown = true })
+                                    .controlSize(.large)
+                            }
+                            HorizontalDivider(color: .bgComponentBasePrimary)
+                            HStack(alignment: .center, spacing: 8) {
+                                ForEach(PollsTab.allCases, id: \.self) { tab in
+                                    Button(action: {
+                                        withAnimation {
+                                            currentTab = tab
+                                        }
+                                    }) {
+                                        Text(tab == .active
+                                             ? "\(aсtivePolls.count) \(tab.title)"
+                                             : tab.title
+                                        )
+                                        .overline2()
+                                        .foregroundStyle(currentTab == tab ? .baseBlack : .baseBlack.opacity(0.4))
+                                    }
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(currentTab == tab ? Color.bgComponentBasePrimary : Color.clear)
+                                    .clipShape(Capsule())
                                 }
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 6)
-                                .background(currentTab == tab ? Color.bgComponentBasePrimary : Color.clear)
-                                .clipShape(Capsule())
                             }
                         }
-                    }
-                    .padding(.horizontal, 24)
-                    Group {
-                        switch currentTab {
-                        case .active:
-                            makePollsList(aсtivePolls)
-                        case .history:
-                            makePollsList(endedPolls)
+                        .padding(.horizontal, 24)
+                        Group {
+                            switch currentTab {
+                            case .active:
+                                makePollsList(aсtivePolls)
+                            case .history:
+                                makePollsList(endedPolls)
+                            }
                         }
+                        .padding(.horizontal, 8)
                     }
-                    .padding(.horizontal, 8)
+                    .padding(.bottom, 24)
                 }
-                .padding(.bottom, 24)
             }
+            .background(
+                Gradients.gradientFifth
+                    .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
+                    .ignoresSafeArea()
+            )
         }
-        .background(
-            Gradients.gradientFifth
-                .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
-                .ignoresSafeArea()
-        )
-        .dynamicSheet(isPresented: $isPollSheetShown, fullScreen: true) {
-            PollView(poll: pollsViewModel.selectedPoll!, onClose: { isPollSheetShown = false })
-                .environmentObject(pollsViewModel)
+        .dynamicSheet(isPresented: $isPollSheetShown, fullScreen: true, bgColor: .additionalGreen) {
+            PollView(
+                poll: pollsViewModel.selectedPoll!,
+                onClose: { isPollSheetShown = false }
+            )
+            .environmentObject(pollsViewModel)
         }
         .onAppear {
             self.earlyPullTask = Task { @MainActor in
@@ -153,16 +164,44 @@ struct PollsView: View {
                     .foregroundStyle(.textSecondary)
                     .padding(.vertical, 40)
             } else {
-                ScrollView(.vertical, showsIndicators: false) {
-                    VStack(spacing: 8) {
-                        ForEach(polls) { poll in
-                            PollListCard(poll: poll, onViewPoll: {
-                                pollsViewModel.selectedPoll = poll
-                                isPollSheetShown = true
-                            })
+                ChildSizeReader(size: $wholeSize) {
+                    ScrollView(.vertical, showsIndicators: false) {
+                        ChildSizeReader(size: $scrollViewSize) {
+                            VStack(spacing: 8) {
+                                ForEach(polls) { poll in
+                                    PollListCard(poll: poll, onViewPoll: {
+                                        pollsViewModel.selectedPoll = poll
+                                        isPollSheetShown = true
+                                    })
+                                }
+                            }
+                            .background(
+                                GeometryReader { proxy in
+                                    Color.clear.preference(
+                                        key: ViewOffsetKey.self,
+                                        value: -1 * proxy.frame(in: .named(spaceName)).origin.y
+                                    )
+                                }
+                            )
+                            .onPreferenceChange(ViewOffsetKey.self) { value in
+                                if value >= scrollViewSize.height - wholeSize.height {
+                                    loadMorePolls()
+                                }
+                            }
                         }
                     }
+                    .coordinateSpace(name: spaceName)
                 }
+            }
+        }
+    }
+    
+    private func loadMorePolls() {
+        Task { @MainActor in
+            do {
+                try await pollsViewModel.loadMorePolls()
+            } catch {
+                LoggerUtil.common.error("failed to load more polls: \(error, privacy: .public)")
             }
         }
     }
@@ -247,9 +286,12 @@ private struct PollListCard: View {
             .frame(minHeight: 1)
             .tabViewStyle(.page(indexDisplayMode: .never))
             .animation(.default, value: selectedIndex)
-            if questionResults.count > 1 {
-               StepIndicator(steps: questionResults.count, currentStep: selectedIndex)
-                    .frame(maxWidth: .infinity, alignment: .center)
+            if poll.questions.count > 1 {
+                V2HorizontalStepIndicator(
+                    steps: questionResults.count,
+                    currentStep: selectedIndex
+                )
+                .frame(maxWidth: .infinity, alignment: .center)
             }
         }
         .padding(.all, 16)

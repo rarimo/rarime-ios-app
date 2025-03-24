@@ -56,12 +56,10 @@ class PollsViewModel: ObservableObject {
             ))
         }
         
-        if votingData.birthDateUpperbound.toHex() != ZERO_IN_HEX {
-            requirements.append(PollRequirement(
-                text: String(localized: "Over \(age)+"),
-                isEligible: isAgeEligible
-            ))
-        }
+        requirements.append(PollRequirement(
+            text: String(localized: "Over \(age)+"),
+            isEligible: isAgeEligible
+        ))
         
         return requirements
     }
@@ -101,6 +99,37 @@ class PollsViewModel: ObservableObject {
         
         DispatchQueue.main.async {
             self.polls = newPolls
+        }
+    }
+    
+    func loadMorePolls() async throws {
+        if isLoadingMorePolls || !isInitialPollLoaded { return }
+        isLoadingMorePolls = true
+        
+        defer { isLoadingMorePolls = false }
+        
+        if !self.hasMorePolls { return }
+        
+        let limit: BigUInt = {
+            if BigUInt(self.polls.count) + PollsViewModel.POLL_MAX_LIMIT > self.lastProposalId {
+                return self.lastProposalId - BigUInt(self.polls.count)
+            }
+            
+            return PollsViewModel.POLL_MAX_LIMIT
+        }()
+        
+        let lastIndex = BigUInt(self.polls.last!.id)
+        
+        let firstIndex = lastIndex - limit
+        
+        let ids = (firstIndex ... lastIndex-1).reversed()
+        
+        let multicall3Contract = try Multicall3Contract()
+        
+        let newPolls = try await PollsService.fetchPolls(multicall3Contract, Array(ids))
+        
+        DispatchQueue.main.async {
+            self.polls.append(contentsOf: newPolls)
         }
     }
     

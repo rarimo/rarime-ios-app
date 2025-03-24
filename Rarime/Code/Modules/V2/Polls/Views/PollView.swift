@@ -10,53 +10,45 @@ struct PollView: View {
     let onClose: () -> Void
     
     @State private var isQuestionsShown = false
-    
     @State private var isSubmitting = false
     @State private var isVoted = false
-    @State private var isVotedSuccesfully = false
     @State private var isAdmittedToVote = false
     @State private var isUserVoteChecking = false
     
     var body: some View {
-        ZStack {
-            if isQuestionsShown {
-                if poll.status == .started || poll.status == .waiting {
-                    ActivePollOptionsView(
-                        poll: poll,
-                        onSubmit: { results in
-                            isSubmitting = true
-                            Task { @MainActor in
-                                defer { isSubmitting = false }
-                                do {
-                                    guard let user = userManager.user else { return }
-                                    let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-                                    
-                                    try await pollsViewModel.vote(
-                                        accessJwt,
-                                        user,
-                                        userManager.registerZkProof!,
-                                        passportManager.passport!,
-                                        results
-                                    )
-                                    
-                                    isVotedSuccesfully = true
-                                    isQuestionsShown = false
-                                    AlertManager.shared.emitSuccess(String(localized: "Your vote has been counted"))
-                                } catch {
-                                    onClose()
-                                    LoggerUtil.common.error("Can't submit poll results: \(error, privacy: .public)")
-                                    AlertManager.shared.emitError(.unknown(String(localized: "Can't submit poll results")))
-                                }
-                            }
-                        },
-                        onClose: { isQuestionsShown = false }
-                    )
-                } else {
-                    ClosedPollResultsView(poll: poll)
-                }
-            } else {
-                pollOverview
-            }
+        if isQuestionsShown {
+            ActivePollOptionsView(
+                poll: poll,
+                onSubmit: { results in
+                    isSubmitting = true
+                    Task { @MainActor in
+                        defer { isSubmitting = false }
+                        do {
+                            guard let user = userManager.user else { return }
+                            let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+                            
+                            try await pollsViewModel.vote(
+                                accessJwt,
+                                user,
+                                userManager.registerZkProof!,
+                                passportManager.passport!,
+                                results
+                            )
+                            
+                            isQuestionsShown = false
+                            onClose()
+                            AlertManager.shared.emitSuccess(String(localized: "Your vote has been counted"))
+                        } catch {
+                            onClose()
+                            LoggerUtil.common.error("Can't submit poll results: \(error, privacy: .public)")
+                            AlertManager.shared.emitError(.unknown(String(localized: "Can't submit poll results")))
+                        }
+                    }
+                },
+                onClose: { isQuestionsShown = false }
+            )
+        } else {
+            pollOverview
         }
     }
     
@@ -128,20 +120,12 @@ struct PollView: View {
                 }
                 Spacer()
                 Group {
-                    if poll.status == .started {
-                        if passportManager.passport != nil {
-                            if isVoted {
-                                AppButton(text: "Voted", action: {})
-                                    .disabled(true)
-                            } else {
-                                AppButton(text: "Let's start", action: { isQuestionsShown = true })
-                                    .disabled(isSubmitting || !isAdmittedToVote)
-                            }
-                        } else {
-                            AppButton(text: "Verification", action: {})
-                        }
+                    if isVoted {
+                        AppButton(text: "Voted", action: {})
+                            .disabled(true)
                     } else {
-                        AppButton(text: "Show results", action: { isQuestionsShown = true })
+                        AppButton(text: "Let's start", action: { isQuestionsShown = true })
+                            .disabled(isSubmitting || !isAdmittedToVote)
                     }
                 }
                 .controlSize(.large)

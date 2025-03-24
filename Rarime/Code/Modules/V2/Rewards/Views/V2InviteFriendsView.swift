@@ -19,10 +19,6 @@ struct V2InviteFriendsView: View {
                     .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
                 GlassBottomSheet(minHeight: 360, maxHeight: 670) {
                     VStack(alignment: .leading, spacing: 24) {
-                        Capsule()
-                            .fill(.bgComponentBaseHovered)
-                            .frame(width: 36, height: 5)
-                            .frame(maxWidth: .infinity, alignment: .center)
                         HStack(alignment: .top, spacing: 64) {
                             VStack(alignment: .leading, spacing: 0) {
                                 Text("Invite")
