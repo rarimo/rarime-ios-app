@@ -225,9 +225,11 @@ struct PassportCard: View {
                             .frame(height: 4)
                         Capsule()
                             .fill(.secondaryMain)
-                            .frame(width: geometry.size.width * (passportViewModel.proofState.progress / 100.0),
-                                   height: 3)
-                            .animation(.easeInOut, value: passportViewModel.proofState.progress)
+                            .frame(
+                                width: geometry.size.width * passportViewModel.overallProgress,
+                                height: 3
+                            )
+                            .animation(.easeInOut, value: passportViewModel.overallProgress)
                     }
                 }
                 .frame(height: 4)
