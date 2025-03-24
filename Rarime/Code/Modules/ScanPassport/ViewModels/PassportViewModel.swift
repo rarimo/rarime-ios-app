@@ -63,6 +63,7 @@ class PassportViewModel: ObservableObject {
     private var progressTimer: AnyCancellable?
     private var simulationStartTime: Date?
     private var isPaused: Bool = false
+    private let stepFraction: Double = 1.0 / Double(PassportProofState.allCases.count)
     
     var revocationPassportPublisher = PassthroughSubject<Passport, Error>()
     
@@ -345,14 +346,13 @@ class PassportViewModel: ObservableObject {
     }
     
     func updateDownloadProgress(downloadProgressValue: Double) {
-        overallProgress = min(downloadProgressValue * 0.25, 0.25)
+        overallProgress = min(downloadProgressValue * stepFraction, stepFraction)
     }
     
     func startProgressSimulation(for state: PassportProofState) {
         let simulationDuration = state.simulationDuration
-        let stepProgress: Double = 0.25
         let startProgress = overallProgress
-        let targetProgress = min(startProgress + stepProgress, 1.0)
+        let targetProgress = min(startProgress + stepFraction, 1.0)
         
         simulationStartTime = Date()
         progressTimer?.cancel()
@@ -363,7 +363,7 @@ class PassportViewModel: ObservableObject {
                 guard let self = self,
                       let startTime = self.simulationStartTime else { return }
                 
-                guard !self.isPaused else { return }
+                if self.isPaused { return }
                             
                 if Double.random(in: 0...1) < 0.4 {
                     let pauseDuration = Double.random(in: 0.1...1)
@@ -392,7 +392,7 @@ class PassportViewModel: ObservableObject {
         guard let state = PassportProofState.allCases.first(where: { $0 == proofState }),
              state != .downloadingData else { return }
        
-        let targetProgress = min(overallProgress + 0.25, 1.0)
+        let targetProgress = min(overallProgress + stepFraction, 1.0)
         overallProgress = targetProgress
         progressTimer?.cancel()
    }
