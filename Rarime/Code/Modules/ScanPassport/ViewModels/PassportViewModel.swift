@@ -109,7 +109,7 @@ class PassportViewModel: ObservableObject {
                 throw Errors.unknown("Failed to download data, internet connection is unstable")
             }
             
-            if overallProgress < 0.25 { overallProgress = 0.25 }
+            updateDownloadProgress(downloadProgressValue: 1)
             
             isCriticalRegistrationProcessInProgress = true
             
