@@ -93,6 +93,7 @@ enum Icons {
     static let share1 = "Share1"
     static let share = "Share"
     static let shareLine = "ShareLine"
+    static let shareForwardLine = "ShareForwardLine"
     static let shieldCheck = "ShieldCheck"
     static let slidersHorizontal = "SlidersHorizontal"
     static let stackSimpleFill = "StackSimpleFill"
