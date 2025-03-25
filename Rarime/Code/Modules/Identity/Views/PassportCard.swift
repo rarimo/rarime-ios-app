@@ -262,20 +262,18 @@ struct PassportCard: View {
                     .foregroundStyle(.textSecondary)
             }
             Spacer()
-            // TODO: sync with design system
             Button(action: {
                 Task {
-                    await regenerateProof()
+                    await reregisterPassport()
                 }
             }) {
                 HStack(alignment: .center, spacing: 8) {
                     Image(Icons.restartLine)
                         .iconMedium()
-                        .foregroundStyle(.baseWhite)
                     Text("Retry")
                         .buttonMedium()
-                        .foregroundStyle(.invertedLight)
                 }
+                .foregroundStyle(.invertedLight)
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
@@ -288,19 +286,26 @@ struct PassportCard: View {
         .background(.bgBlur, in: RoundedRectangle(cornerRadius: 16))
     }
     
-    private func regenerateProof() async {
+    private func reregisterPassport() async {
         do {
+            passportViewModel.processingStatus = .processing
+            
             let zkProof = try await passportViewModel.register()
 
             if passportViewModel.processingStatus != .success { return }
+            
+            AppUserDefaults.shared.isRegistrationInterrupted = false
 
             userManager.registerZkProof = zkProof
             userManager.user?.status = .passportScanned
         } catch {
             LoggerUtil.common.error("error while registering passport: \(error.localizedDescription, privacy: .public)")
+            
             if let error = error as? Errors {
-                AlertManager.shared.emitError(error)
                 passportViewModel.processingStatus = .failure
+                
+                AlertManager.shared.emitError(error)
+                
                 return
             }
         }

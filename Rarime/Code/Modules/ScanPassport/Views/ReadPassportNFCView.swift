@@ -20,6 +20,7 @@ struct ReadPassportNFCView: View {
 
     var body: some View {
         ScanPassportLayoutView(
+            currentStep: 1,
             title: "NFC Reader",
             onPrevious: onBack,
             onClose: onClose
