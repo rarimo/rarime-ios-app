@@ -74,6 +74,8 @@ class PassportViewModel: ObservableObject {
     func register() async throws -> ZkProof {
         var isCriticalRegistrationProcessInProgress = true
         
+        AppUserDefaults.shared.isRegistrationInterrupted = false
+        
         do {
             guard let passport = PassportManager.shared.passport else { throw "failed to get passport" }
             guard let user = UserManager.shared.user else { throw "failed to get user" }

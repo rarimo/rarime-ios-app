@@ -264,7 +264,7 @@ struct PassportCard: View {
             Spacer()
             Button(action: {
                 Task {
-                    await reregisterPassport()
+                    await retryPassportRegistration()
                 }
             }) {
                 HStack(alignment: .center, spacing: 8) {
@@ -286,15 +286,13 @@ struct PassportCard: View {
         .background(.bgBlur, in: RoundedRectangle(cornerRadius: 16))
     }
     
-    private func reregisterPassport() async {
+    private func retryPassportRegistration() async {
         do {
             passportViewModel.processingStatus = .processing
             
             let zkProof = try await passportViewModel.register()
 
             if passportViewModel.processingStatus != .success { return }
-            
-            AppUserDefaults.shared.isRegistrationInterrupted = false
 
             userManager.registerZkProof = zkProof
             userManager.user?.status = .passportScanned

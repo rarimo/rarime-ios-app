@@ -77,8 +77,6 @@ struct ScanPassportView: View {
             let zkProof = try await passportViewModel.register()
 
             if passportViewModel.processingStatus != .success { return }
-            
-            AppUserDefaults.shared.isRegistrationInterrupted = false
 
             userManager.registerZkProof = zkProof
             userManager.user?.status = .passportScanned
