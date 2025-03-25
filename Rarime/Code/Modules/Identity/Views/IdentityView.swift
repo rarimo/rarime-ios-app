@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct IdentityView: View {
+    @Environment(\.scenePhase) var scenePhase
+    
     @EnvironmentObject private var passportViewModel: PassportViewModel
     @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var userManager: UserManager
@@ -65,6 +67,18 @@ struct IdentityView: View {
             }
             .dynamicSheet(isPresented: $isUnsupportedCountrySheetPresented, fullScreen: true) {
                 UnsupportedPassportView(onClose: { isUnsupportedCountrySheetPresented = false })
+            }
+            .onChange(of: scenePhase) { newPhase in
+                if userManager.user?.status == .unscanned
+                    && passportViewModel.processingStatus == .processing
+                    && newPhase == .background {
+                    AppUserDefaults.shared.isRegistrationInterrupted = true
+                }
+            }
+            .onAppear {
+                if AppUserDefaults.shared.isRegistrationInterrupted {
+                    passportViewModel.processingStatus = .failure
+                }
             }
     }
 

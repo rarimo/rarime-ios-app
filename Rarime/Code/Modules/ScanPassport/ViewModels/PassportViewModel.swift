@@ -35,7 +35,6 @@ enum ProcessingStatus: Equatable {
 
 class PassportViewModel: ObservableObject {
     @Published var mrzKey: String?
-    @Published var passport: Passport?
     @Published var proofState: PassportProofState = .downloadingData {
         didSet {
             if proofState != .downloadingData {
@@ -71,16 +70,14 @@ class PassportViewModel: ObservableObject {
         self.mrzKey = value
     }
 
-    func setPassport(_ passport: Passport) {
-        self.passport = passport
-    }
-
     @MainActor
     func register() async throws -> ZkProof {
         var isCriticalRegistrationProcessInProgress = true
         
+        AppUserDefaults.shared.isRegistrationInterrupted = false
+        
         do {
-            guard let passport else { throw "failed to get passport" }
+            guard let passport = PassportManager.shared.passport else { throw "failed to get passport" }
             guard let user = UserManager.shared.user else { throw "failed to get user" }
             
             try await UserManager.shared.registerCertificate(passport)
@@ -264,9 +261,9 @@ class PassportViewModel: ObservableObject {
     @MainActor
     func lightRegister() async throws -> ZkProof {
         do {
+            guard let passport = PassportManager.shared.passport else { throw "failed to get passport" }
             guard let user = UserManager.shared.user else { throw "failed to get user" }
-            guard let passport else { throw "failed to get passport" }
-
+            
             let registerIdentityLightCircuitName = try passport.getRegisterIdentityLightCircuitName()
             
             LoggerUtil.common.info("Registering passport with light circuit: \(registerIdentityLightCircuitName)")
@@ -395,5 +392,5 @@ class PassportViewModel: ObservableObject {
         let targetProgress = min(overallProgress + stepFraction, 1.0)
         overallProgress = targetProgress
         progressTimer?.cancel()
-   }
+    }
 }

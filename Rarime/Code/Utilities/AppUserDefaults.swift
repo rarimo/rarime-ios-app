@@ -67,4 +67,7 @@ public class AppUserDefaults: ObservableObject {
 
     @AppStorage("isScanTutorialDisplayed")
     public var isScanTutorialDisplayed = false
+    
+    @AppStorage("is_registration_interrupted")
+    public var isRegistrationInterrupted = false
 }

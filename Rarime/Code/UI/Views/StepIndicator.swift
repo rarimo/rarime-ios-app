@@ -9,7 +9,7 @@ struct StepIndicator: View {
             ForEach(0 ..< steps, id: \.self) { index in
                 RoundedRectangle(cornerRadius: 4)
                     .fill(index == currentStep ? .primaryMain : .bgComponentPrimary)
-                    .frame(width: index == currentStep ? 16 : 8, height: 8)
+                    .frame(width: index == currentStep ? 16 : 6, height: 6)
             }
         }
     }

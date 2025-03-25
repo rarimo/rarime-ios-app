@@ -8,8 +8,8 @@ struct ScanPassportMRZView: View {
 
     var body: some View {
         ScanPassportLayoutView(
+            currentStep: 0,
             title: "Scan MRZ",
-            onPrevious: onClose,
             onClose: onClose
         ) {
             ZStack {

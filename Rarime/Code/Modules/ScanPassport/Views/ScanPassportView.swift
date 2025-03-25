@@ -23,7 +23,6 @@ struct ScanPassportView: View {
         case .importJson:
             ImportFileView(
                 onFinish: { passport in
-                    passportViewModel.setPassport(passport)
                     onClose()
                     Task { await register(passport) }
                 },
@@ -40,7 +39,6 @@ struct ScanPassportView: View {
                     },
                     onClose: onClose
                 )
-
 #if DEVELOPMENT
                 AppButton(
                     text: "Import JSON",
@@ -57,7 +55,6 @@ struct ScanPassportView: View {
         case .readNFC:
             ReadPassportNFCView(
                 onNext: { passport in
-                    passportViewModel.setPassport(passport)
                     onClose()
                     Task { await register(passport) }
                 },
@@ -103,7 +100,7 @@ struct ScanPassportView: View {
                     onClose()
                     
                     passportViewModel.processingStatus = .failure
-
+                    
                     return
                 }
             } else if let error = error as? Errors {
