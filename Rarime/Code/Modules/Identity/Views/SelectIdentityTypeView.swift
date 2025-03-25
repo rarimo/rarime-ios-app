@@ -32,26 +32,26 @@ struct SelectIdentityTypeView: View {
                 id: .zkLiveness,
                 name: String(localized: "ZK Liveness (PoH Killer)"),
                 icon: Icons.userFocus,
-                isAvailable: true
-            ),
-            IdentityType(
-                id: .idCard,
-                name: String(localized: "ID Card"),
-                icon: Icons.identificationCard,
-                isAvailable: false
-            ),
-            IdentityType(
-                id: .xVerifiedBadge,
-                name: String(localized: "X Verified Badge"),
-                icon: Icons.sealCheck,
-                isAvailable: false
-            ),
-            IdentityType(
-                id: .proofOfEmployment,
-                name: String(localized: "Proof of Employment"),
-                icon: Icons.suitcaseSimple,
                 isAvailable: false
             )
+//            IdentityType(
+//                id: .idCard,
+//                name: String(localized: "ID Card"),
+//                icon: Icons.identificationCard,
+//                isAvailable: false
+//            ),
+//            IdentityType(
+//                id: .xVerifiedBadge,
+//                name: String(localized: "X Verified Badge"),
+//                icon: Icons.sealCheck,
+//                isAvailable: false
+//            ),
+//            IdentityType(
+//                id: .proofOfEmployment,
+//                name: String(localized: "Proof of Employment"),
+//                icon: Icons.suitcaseSimple,
+//                isAvailable: false
+//            )
         ].filter { !$0.isHidden }
     }
 
