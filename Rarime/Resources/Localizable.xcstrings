@@ -707,6 +707,7 @@
 
     },
     "Create Account" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -715,6 +716,9 @@
           }
         }
       }
+    },
+    "Create new identity" : {
+
     },
     "Creating" : {
 
@@ -2101,6 +2105,9 @@
     "Qatar" : {
 
     },
+    "RariMe" : {
+
+    },
     "RARIME" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2895,6 +2902,9 @@
           }
         }
       }
+    },
+    "Welcome To" : {
+
     },
     "Western Sahara" : {
 
