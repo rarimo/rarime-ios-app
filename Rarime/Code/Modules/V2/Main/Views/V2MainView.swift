@@ -18,7 +18,7 @@ struct V2MainView: View {
                         onBack: { viewModel.selectedTab = .home },
                         onScan: processQrCode
                     )
-                case .wallet: WalletView()
+//                case .wallet: WalletView()
                 case .profile: ProfileView()
             }
             ExternalRequestsView()

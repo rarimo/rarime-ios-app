@@ -2062,9 +2062,6 @@
         }
       }
     },
-    "Proof of Employment" : {
-
-    },
     "Proof Request" : {
 
     },
@@ -2596,6 +2593,9 @@
         }
       }
     },
+    "Stranger" : {
+
+    },
     "Success" : {
 
     },
@@ -2822,9 +2822,6 @@
 
     },
     "Used" : {
-
-    },
-    "User" : {
 
     },
     "User creation failed" : {

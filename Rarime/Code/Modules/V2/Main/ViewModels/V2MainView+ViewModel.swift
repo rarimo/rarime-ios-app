@@ -1,14 +1,15 @@
 import SwiftUI
 
 enum V2MainTabs: Int, CaseIterable {
-    case home, identity, scanQr, wallet, profile
+//    case home, identity, scanQr, wallet, profile
+    case home, identity, scanQr, profile
 
     var iconName: String {
         switch self {
         case .home: return Icons.homeLine
         case .identity: return Icons.passportLine
         case .scanQr: return Icons.qrScan2Line
-        case .wallet: return Icons.walletLine
+//        case .wallet: return Icons.walletLine
         case .profile: return Icons.userLine
         }
     }
@@ -18,7 +19,7 @@ enum V2MainTabs: Int, CaseIterable {
         case .home: return Icons.homeFill
         case .identity: return Icons.passportFill
         case .scanQr: return Icons.qrScan2Line
-        case .wallet: return Icons.walletFill
+//        case .wallet: return Icons.walletFill
         case .profile: return Icons.userFill
         }
     }
