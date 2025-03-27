@@ -6,15 +6,27 @@ struct AppToggle: View {
     @Binding var isOn: Bool
     var onChanged: ((Bool) -> Void)?
 
+    @ViewBuilder var trackBackground: some View {
+        if isOn {
+            Gradients.gradientSixth
+        } else {
+            Color.bgComponentPrimary
+        }
+    }
+
     var body: some View {
         ZStack {
             if isEnabled {
-                RoundedRectangle(cornerRadius: 16).fill(isOn ? .primaryDark : .componentPrimary)
+                Rectangle()
+                    .fill(Color.clear)
+                    .background(trackBackground)
+                    .cornerRadius(16)
             } else {
-                RoundedRectangle(cornerRadius: 16).stroke(.componentDisabled, lineWidth: 1)
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(.bgComponentDisabled, lineWidth: 1)
             }
             Circle()
-                .fill(isEnabled ? .baseWhite : .componentDisabled)
+                .fill(isEnabled ? .baseWhite : .bgComponentDisabled)
                 .shadow(color: isOn ? .clear : .baseBlack.opacity(0.12), radius: 1, x: 1, y: 1)
                 .padding(2)
                 .offset(x: isOn ? 8 : -8)

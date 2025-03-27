@@ -15,10 +15,10 @@ struct PassportChipErrorView: View {
                 .frame(height: 136)
             VStack(spacing: 16) {
                 Text("We’re working on a fix")
-                    .subtitle2()
+                    .subtitle4()
                     .foregroundStyle(.textPrimary)
                 Text("Some passports have a problem with chip scans")
-                    .body3()
+                    .body4()
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.textSecondary)
             }
@@ -50,7 +50,7 @@ struct PassportChipErrorView: View {
         }
         .padding(.horizontal, 24)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.backgroundPure)
+        .background(.bgPure)
         .dynamicSheet(isPresented: $isSending, fullScreen: true) {
             FeedbackMailView(isShowing: $isSending)
         }

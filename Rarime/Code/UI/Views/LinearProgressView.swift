@@ -11,7 +11,7 @@ struct LinearProgressView: View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 100)
-                    .fill(.componentPrimary)
+                    .fill(.bgComponentPrimary)
                     .frame(width: geometry.size.width, height: 8)
                 RoundedRectangle(cornerRadius: 100)
                     .fill(

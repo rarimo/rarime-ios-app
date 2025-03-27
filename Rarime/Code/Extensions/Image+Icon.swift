@@ -7,9 +7,9 @@ extension Image {
             .resizable()
             .frame(width: size, height: size)
     }
-
+    
     func iconLarge() -> some View {
-        self.square(32)
+        self.square(24)
     }
 
     func iconMedium() -> some View {

@@ -1,52 +1,60 @@
 import SwiftUI
 
-private let TOTAL_STEPS = 3
-
 struct ScanPassportLayoutView<Content: View>: View {
-    let step: Int
+    let currentStep: Int
     let title: LocalizedStringResource
-    let text: LocalizedStringResource
+    let onPrevious: (() -> Void)?
     let onClose: () -> Void
+    
+    var steps: Int = 2
+    
     @ViewBuilder let content: Content
+    
+    init(
+        currentStep: Int,
+        title: LocalizedStringResource,
+        onPrevious: (() -> Void)? = nil,
+        onClose: @escaping () -> Void,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.currentStep = currentStep
+        self.title = title
+        self.onPrevious = onPrevious
+        self.onClose = onClose
+        self.content = content()
+    }
 
     var body: some View {
         VStack(spacing: 0) {
-            VStack(alignment: .leading, spacing: 24) {
-                HStack {
-                    Text("Step \(step)/\(TOTAL_STEPS)")
-                        .body3()
-                        .foregroundStyle(.textSecondary)
-                    Spacer()
-                    Button(action: onClose) {
-                        Image(Icons.close)
-                            .iconMedium()
-                            .foregroundStyle(.textPrimary)
+            VStack(alignment: .leading, spacing: 38) {
+                ZStack(alignment: .center) {
+                    StepIndicator(steps: steps, currentStep: currentStep)
+                    
+                    HStack(alignment: .center) {
+                        if let onPrevious {
+                            AppIconButton(icon: Icons.arrowLeftSLine, action: onPrevious)
+                        }
+                        Spacer()
+                        AppIconButton(icon: Icons.closeFill, action: onClose)
                     }
                 }
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(title)
-                        .subtitle2()
-                        .foregroundStyle(.textPrimary)
-                    Text(text)
-                        .body3()
-                        .foregroundStyle(.textSecondary)
-                }
+                Text(title)
+                    .h2()
+                    .foregroundStyle(.textPrimary)
             }
             .padding(.horizontal, 20)
-            .padding(.bottom, 20)
+            .padding(.bottom, 40)
             content
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.top, 24)
-        .background(.backgroundPrimary)
+        .padding(.top, 20)
     }
 }
 
 #Preview {
     ScanPassportLayoutView(
-        step: 1,
+        currentStep: 0,
         title: LocalizedStringResource("Scan your Passport", table: "preview"),
-        text: LocalizedStringResource("Passport data is stored only on this device", table: "preview"),
         onClose: {}
     ) {
         Rectangle()

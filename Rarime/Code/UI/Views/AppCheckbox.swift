@@ -3,18 +3,26 @@ import SwiftUI
 struct AppCheckbox: View {
     @Binding var checked: Bool
     var onToggle: ((Bool) -> Void)?
+    
+    @ViewBuilder var background: some View {
+        if checked {
+            Gradients.gradientSixth
+        } else {
+            Color.bgComponentPrimary
+        }
+    }
 
     var body: some View {
         ZStack {
-            Image(Icons.check)
+            Image(Icons.checkLine)
                 .iconSmall()
-                .foregroundStyle(.baseBlack)
+                .foregroundStyle(.invertedLight)
                 .opacity(checked ? 1 : 0)
         }
         .frame(width: 20, height: 20)
-        .background(checked ? .primaryMain : .componentPrimary)
+        .background(background)
         .clipShape(RoundedRectangle(cornerRadius: 4))
-        .overlay(RoundedRectangle(cornerRadius: 4).stroke(.componentPrimary, lineWidth: 1))
+        .overlay(RoundedRectangle(cornerRadius: 4).stroke(.bgComponentPrimary, lineWidth: 1))
         .animation(.easeInOut(duration: 0.2), value: checked)
         .onTapGesture {
             checked.toggle()

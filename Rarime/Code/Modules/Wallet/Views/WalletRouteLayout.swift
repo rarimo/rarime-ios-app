@@ -17,10 +17,10 @@ struct WalletRouteLayout<Content: View>: View {
                 }
                 VStack(alignment: .leading, spacing: 8) {
                     Text(title)
-                        .subtitle2()
+                        .subtitle4()
                         .foregroundColor(.textPrimary)
                     Text(description)
-                        .body3()
+                        .body4()
                         .foregroundColor(.textSecondary)
                 }
             }
@@ -28,7 +28,7 @@ struct WalletRouteLayout<Content: View>: View {
             content()
         }
         .padding(.top, 20)
-        .background(.backgroundPrimary)
+        .background(.bgPrimary)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

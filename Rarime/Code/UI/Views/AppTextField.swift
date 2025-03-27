@@ -41,16 +41,16 @@ struct AppTextField<Hint: View, Action: View>: View {
     }
 
     var borderColor: Color {
-        if !isEnabled { return .componentDisabled }
+        if !isEnabled { return .bgComponentDisabled }
         if isError { return .errorMain }
-        return isFocused ? .componentPressed : .componentPrimary
+        return isFocused ? .bgComponentPressed : .bgComponentPrimary
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             if let label {
                 Text(label)
-                    .subtitle4()
+                    .subtitle6()
                     .foregroundStyle(isEnabled ? .textPrimary : .textDisabled)
             }
             HStack(spacing: 8) {
@@ -61,7 +61,7 @@ struct AppTextField<Hint: View, Action: View>: View {
                 .keyboardType(keyboardType)
                 .focused($isFocused)
                 .disabled(!isEnabled)
-                .body3()
+                .body4()
                 .frame(height: 20)
                 .padding(.vertical, controlSize == .large ? 18 : 14)
                 .onTapGesture { isFocused = true }
@@ -71,7 +71,7 @@ struct AppTextField<Hint: View, Action: View>: View {
                 action()
             }
             .padding(.horizontal, 16)
-            .background(isEnabled ? .clear : .componentDisabled)
+            .background(isEnabled ? .clear : .bgComponentDisabled)
             .clipShape(RoundedRectangle(cornerRadius: 8))
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
@@ -131,7 +131,7 @@ private struct PreviewView: View {
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.backgroundPure)
+        .background(.bgPure)
     }
 }
 

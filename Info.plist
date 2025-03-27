@@ -191,6 +191,7 @@
 	<string>${LIGHT_SIGNATURE_PRIVATE_KEY}</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Playfair-Bold.ttf</string>
 		<string>Inter-Bold.ttf</string>
 		<string>Inter-Medium.ttf</string>
 		<string>Inter-Regular.ttf</string>

@@ -44,11 +44,13 @@ struct WalletView: View {
                         token: token,
                         onBack: { path.removeLast() }
                     )
+                    .navigationBarBackButtonHidden()
                 case .send:
                     WalletSendView(
                         token: token,
                         onBack: { path.removeLast() }
                     )
+                    .navigationBarBackButtonHidden()
                 }
             }
         }
@@ -67,7 +69,7 @@ struct WalletView: View {
                 .padding(.bottom, 120)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.backgroundPrimary)
+            .background(.bgPrimary)
         }
         .onAppear(perform: fetchBalance)
         .onDisappear(perform: cleanup)
@@ -76,13 +78,13 @@ struct WalletView: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: 40) {
             Text("Wallet")
-                .subtitle2()
+                .subtitle4()
                 .foregroundStyle(.textPrimary)
             VStack(spacing: 8) {
                 Text("Total Balance")
-                    .body3()
+                    .body4()
                     .foregroundStyle(.textSecondary)
-                HStack(spacing: 8) {
+                HStack(alignment: .center, spacing: 8) {
                     if isBalanceFetching {
                         ProgressView()
                     } else {
@@ -90,10 +92,9 @@ struct WalletView: View {
                             .h4()
                             .foregroundStyle(.textPrimary)
                     }
-                    AppDropdown(value: $token, options: [
-                        DropdownOption(label: WalletToken.rmo.rawValue, value: WalletToken.rmo),
-                    ])
-                    .padding(.top, 8)
+                    Text(WalletToken.rmo.rawValue)
+                        .overline2()
+                        .foregroundStyle(.textPrimary)
                 }
                 .frame(height: 40)
                 .zIndex(1)
@@ -127,14 +128,14 @@ struct WalletView: View {
         CardContainer {
             VStack(alignment: .leading, spacing: 20) {
                 Text("Transactions")
-                    .subtitle3()
+                    .subtitle5()
                     .foregroundStyle(.textPrimary)
                 ForEach(walletManager.transactions) { tx in
                     TransactionItem(tx: tx, token: token)
                 }
                 if walletManager.transactions.isEmpty {
                     Text("No transactions yet")
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textSecondary)
                 }
             }
@@ -185,7 +186,7 @@ private struct WalletButton: View {
                     .iconMedium()
                     .foregroundStyle(.textPrimary)
                     .padding(14)
-                    .background(.componentPrimary, in: Circle())
+                    .background(.bgComponentPrimary, in: Circle())
                 Text(text)
                     .buttonSmall()
                     .foregroundStyle(.textSecondary)
@@ -207,20 +208,20 @@ private struct TransactionItem: View {
             Image(tx.icon)
                 .iconMedium()
                 .padding(10)
-                .background(.componentPrimary)
+                .background(.bgComponentPrimary)
                 .foregroundStyle(.textSecondary)
                 .clipShape(Circle())
             VStack(alignment: .leading, spacing: 4) {
                 Text(tx.title)
-                    .subtitle4()
+                    .subtitle6()
                     .foregroundStyle(.textPrimary)
                 Text(DateUtil.richDateFormatter.string(from: tx.date))
-                    .body4()
+                    .body5()
                     .foregroundStyle(.textSecondary)
             }
             Spacer()
             Text("\(balanceModifier)\(tx.amount.formatted()) \(token.rawValue)")
-                .subtitle5()
+                .subtitle7()
                 .foregroundStyle(tx.type == .sent ? .errorMain : .successMain)
         }
     }

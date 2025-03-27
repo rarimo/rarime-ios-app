@@ -1,23 +1,26 @@
 import SwiftUI
 
 enum MainTabs: Int, CaseIterable {
-    case home, wallet, rewards, profile
+//    case home, identity, scanQr, wallet, profile
+    case home, identity, scanQr, profile
 
     var iconName: String {
         switch self {
-        case .home: return Icons.houseSimple
-        case .wallet: return Icons.wallet
-        case .rewards: return Icons.airdrop
-        case .profile: return Icons.user
+        case .home: return Icons.homeLine
+        case .identity: return Icons.passportLine
+        case .scanQr: return Icons.qrScan2Line
+//        case .wallet: return Icons.walletLine
+        case .profile: return Icons.userLine
         }
     }
 
     var activeIconName: String {
         switch self {
-        case .home: return Icons.houseSimpleFill
-        case .wallet: return Icons.walletFilled
-        case .rewards: return Icons.airdrop
-        case .profile: return Icons.user
+        case .home: return Icons.homeFill
+        case .identity: return Icons.passportFill
+        case .scanQr: return Icons.qrScan2Line
+//        case .wallet: return Icons.walletFill
+        case .profile: return Icons.userFill
         }
     }
 }
@@ -25,7 +28,6 @@ enum MainTabs: Int, CaseIterable {
 extension MainView {
     class ViewModel: ObservableObject {
         @Published var selectedTab: MainTabs = .home
-        
         @Published var isRewardsSheetPresented = false
 
         func selectTab(_ tab: MainTabs) {

@@ -14,13 +14,10 @@ public class AppUserDefaults: ObservableObject {
     public var faceIdState = SecurityItemState.unset.rawValue
 
     @AppStorage("passport_card_look")
-    public var passportCardLook = PassportCardLook.black.rawValue
+    public var passportCardLook = PassportCardLook.holographicViolet.rawValue
 
-    @AppStorage("passport_identifiers")
-    public var passportIdentifiers = try! JSONEncoder().encode([
-        PassportIdentifier.nationality.rawValue,
-        PassportIdentifier.documentId.rawValue,
-    ])
+    @AppStorage("v2_passport_identifiers")
+    public var passportIdentifiers = try! JSONEncoder().encode([PassportIdentifier.documentId.rawValue])
 
     @AppStorage("is_passport_incognito_mode")
     public var isPassportIncognitoMode = false
@@ -70,4 +67,7 @@ public class AppUserDefaults: ObservableObject {
 
     @AppStorage("isScanTutorialDisplayed")
     public var isScanTutorialDisplayed = false
+    
+    @AppStorage("is_registration_interrupted")
+    public var isRegistrationInterrupted = false
 }

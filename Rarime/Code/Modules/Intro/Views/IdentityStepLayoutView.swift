@@ -22,24 +22,23 @@ struct IdentityStepLayoutView<Content: View, NextButton: View>: View {
                 }
                 VStack(alignment: .leading, spacing: 32) {
                     Text(title)
-                        .subtitle2()
+                        .subtitle4()
                         .foregroundColor(.textPrimary)
                     content()
                 }
                 .padding(.vertical, 24)
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 20)
-            .padding(.horizontal, 12)
+            .padding(20)
             Spacer()
             HStack {
                 nextButton()
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 16)
-            .background(.backgroundPure)
+            .background(.bgPure)
         }
-        .background(.backgroundPrimary)
+        .background(.bgPrimary)
     }
 }
 

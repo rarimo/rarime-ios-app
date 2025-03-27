@@ -1,5 +1,5 @@
 {
-  "originHash" : "71f8f157c9acdfcdc3d162adc9149129293c013f04ce702c3c3a3a02a01e2e33",
+  "originHash" : "8857326a88fdbba5304a73f1871c4b13feca2c717754097107356b3716c9a439",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -53,6 +53,15 @@
       "state" : {
         "revision" : "944a6a1ca030dbd890e647a678e718fc2115d35c",
         "version" : "2.4.1"
+      }
+    },
+    {
+      "identity" : "confettiswiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/simibac/ConfettiSwiftUI",
+      "state" : {
+        "revision" : "77ce21c82cc5fa608ac921a0dea09dd85b5432c7",
+        "version" : "2.0.2"
       }
     },
     {

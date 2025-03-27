@@ -1,5 +1,6 @@
 import NFCPassportReader
 import SwiftUI
+import AVKit
 
 struct ReadPassportNFCView: View {
     @EnvironmentObject private var passportViewModel: PassportViewModel
@@ -11,32 +12,55 @@ struct ReadPassportNFCView: View {
     let onClose: () -> Void
 
     @State private var useExtendedMode = false
+    @State private var player: AVPlayer = AVPlayer(url: Videos.readNfc)
+    
+    private var playerVideoURL: URL {
+        passportViewModel.isUSA ? Videos.readNfcUsa : Videos.readNfc
+    }
 
     var body: some View {
         ScanPassportLayoutView(
-            step: 2,
+            currentStep: 1,
             title: "NFC Reader",
-            text: "Reading Passport data",
+            onPrevious: onBack,
             onClose: onClose
         ) {
-            LottieView(animation: Animations.scanPassport)
-                .frame(width: .infinity, height: 300)
-            Text("Place your passport cover to the back of your phone")
-                .body3()
-                .foregroundStyle(.textSecondary)
-                .multilineTextAlignment(.center)
-                .frame(width: 250)
-            Spacer()
-            AppButton(text: "Scan", action: scanPassport)
-                .controlSize(.large)
-                .padding(.top, 12)
-                .padding(.bottom, 20)
-                .padding(.horizontal, 20)
-                .background(.backgroundPure)
+            GeometryReader { geometry in
+                VStack(spacing: 24) {
+                    VideoPlayer(player: player)
+                        .disabled(true)
+                        .aspectRatio(16/9, contentMode: .fill)
+                        .frame(width: geometry.size.width)
+                        .clipped()
+                        .onAppear {
+                            player = AVPlayer(url: playerVideoURL)
+                            player.play()
+                            player.volume = 0
+                            NotificationCenter.default.addObserver(
+                                forName: .AVPlayerItemDidPlayToEndTime,
+                                object: nil,
+                                queue: .main
+                            ) { _ in
+                                player.seek(to: .zero)
+                                player.play()
+                            }
+                        }
+                        .onDisappear {
+                            player.pause()
+                        }
+                    
+                    Spacer()
+
+                    AppButton(text: "Scan", action: scanPassport)
+                        .controlSize(.large)
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 24)
+                }
+            }
         }
     }
 
-    func scanPassport() {
+    private func scanPassport() {
         NFCScanner.scanPassport(
             passportViewModel.mrzKey ?? "",
             userManager.userChallenge,

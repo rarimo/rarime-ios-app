@@ -324,7 +324,7 @@ class Points {
 
         return response
     }
-    
+
     func getMaintenanceMode() async throws -> GetMaintenanceModeResponse {
         let requestUrl = url.appendingPathComponent("integrations/rarime-points-svc/v1/public/maintenance")
         let response = try await AF.request(requestUrl)

@@ -1,5 +1,5 @@
-import SwiftUI
 import Alamofire
+import SwiftUI
 
 struct ImportIdentityView: View {
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
@@ -24,7 +24,7 @@ struct ImportIdentityView: View {
     
     var manualImportView: some View {
         IdentityStepLayoutView(
-            title: "Import Identity" ,
+            title: "Import Identity",
             onBack: {
                 userManager.user = nil
                 isManualBackup = false
@@ -40,18 +40,16 @@ struct ImportIdentityView: View {
             }
         ) {
             VStack {
-                CardContainer {
-                    VStack(spacing: 20) {
-                        AppTextField(
-                            text: $privateKeyHex,
-                            errorMessage: $privateKeyHexError,
-                            placeholder: String(localized: "Your private key")
-                        )
-                        .onSubmit(importIdentity)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                        .disabled(isImporting)
-                    }
+                VStack(spacing: 20) {
+                    AppTextField(
+                        text: $privateKeyHex,
+                        errorMessage: $privateKeyHexError,
+                        placeholder: String(localized: "Your private key")
+                    )
+                    .onSubmit(importIdentity)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .disabled(isImporting)
                 }
             }
         }
@@ -77,17 +75,16 @@ struct ImportIdentityView: View {
                 .clipShape(Circle())
                 VStack(spacing: 12) {
                     Text("Restore your account")
-                        .h4()
+                        .h2()
                         .foregroundStyle(.textPrimary)
                     Text("You can restore your account using your iCloud backup or private key")
-                        .body2()
+                        .body3()
                         .foregroundStyle(.textSecondary)
                 }
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
                 Spacer()
                 VStack(spacing: 16) {
-                    HorizontalDivider()
                     VStack(spacing: 8) {
                         AppButton(
                             text: "Restore with iCloud",
@@ -110,7 +107,7 @@ struct ImportIdentityView: View {
             .padding(.top, 80)
             .padding(.bottom, 16)
         }
-        .background(.backgroundPure)
+        .background(.bgPure)
     }
     
     func restoreFromICloud() {
@@ -151,7 +148,7 @@ struct ImportIdentityView: View {
     }
     
     func importIdentity() {
-        self.isImporting = true
+        isImporting = true
         
         Task { @MainActor in
             defer {
@@ -159,7 +156,7 @@ struct ImportIdentityView: View {
             }
             
             do {
-                if !(try isValidPrivateKey(privateKeyHex)) {
+                if try !isValidPrivateKey(privateKeyHex) {
                     privateKeyHexError = String(localized: "Invalid private key")
                     return
                 }
@@ -211,7 +208,7 @@ struct ImportIdentityView: View {
     }
 }
 
-fileprivate func isValidPrivateKey(_ privateKey: String) throws -> Bool {
+private func isValidPrivateKey(_ privateKey: String) throws -> Bool {
     let regex = try NSRegularExpression(
         pattern: "^[0-9a-fA-F]{64}$",
         options: .caseInsensitive

@@ -61,7 +61,7 @@ class CircuitDataManager: ObservableObject {
     
     func retriveCircuitData(
         _ circuitName: RegisteredCircuitData,
-        _ downloadProgress: @escaping (String) -> Void = { _ in }
+        _ downloadProgress: @escaping (Double) -> Void = { _ in }
     ) async throws -> CircuitData {
         if !AppUserDefaults.shared.isCircuitsStorageCleared {
             try? FileManager.default.removeItem(at: CircuitDataManager.saveDirectory)
@@ -79,10 +79,7 @@ class CircuitDataManager: ObservableObject {
         
         let fileUrl = try await AF.download(circuitDataURL)
             .downloadProgress { progress in
-                let currentDownloadedMb = String(format: "%.1f", Double(progress.completedUnitCount)/1000/1000)
-                let totalDownloadedMb = String(format: "%.1f", Double(progress.totalUnitCount)/1000/1000)
-                
-                downloadProgress("\(currentDownloadedMb)/\(totalDownloadedMb) MB")
+                downloadProgress(progress.fractionCompleted)
             }
             .serializingDownloadedFileURL()
             .result

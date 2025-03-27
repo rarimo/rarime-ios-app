@@ -1,7 +1,7 @@
 import SwiftUI
 
-private enum HomeRoute: Hashable {
-    case scanPassport, reserveTokens, claimRewards, notifications, scanQr
+enum HomeRoute: Hashable {
+    case notifications, identity, inviteFriends, claimTokens, wallet
 }
 
 struct HomeView: View {
@@ -14,205 +14,250 @@ struct HomeView: View {
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
     @EnvironmentObject private var configManager: ConfigManager
 
-    @State private var path: [HomeRoute] = []
+    @StateObject var viewModel = ViewModel()
 
-    @State private var isRarimeSheetPresented = false
-    @State private var isCreateIdentityIntroPresented = false
-
-    @State private var isCongratsShown = false
-    @State private var isClaimed = false
+    @State private var path: HomeRoute? = nil
+    @State private var isCopied = false
 
     @State private var isBalanceFetching = true
     @State private var pointsBalance: PointsBalanceRaw? = nil
     @State private var cancelables: [Task<Void, Never>] = []
 
-    var canClaimAirdrop: Bool {
-        !walletManager.isClaimed
-            && passportManager.isEligibleForAirdrop
-            && !userManager.isRevoked
-            && userManager.registerZkProof != nil
+    @Namespace var identityAnimation
+    @Namespace var inviteFriendsAnimation
+    @Namespace var claimTokensAnimation
+    @Namespace var walletAnimation
+    @Namespace var votingAnimation
+
+    private var activeReferralCode: String? {
+        pointsBalance?.referralCodes?
+            .filter { $0.status == .active }
+            .first?.id
     }
 
-    var canReserveTokens: Bool {
-        !(pointsBalance?.isVerified ?? false)
-            && !passportManager.isUnsupportedForRewards
-            && userManager.registerZkProof != nil
-            && !userManager.isRevoked
-            && userManager.user?.userReferralCode != nil
-            && pointsBalance != nil
+    private var userPointsBalance: Int {
+        pointsBalance?.amount ?? 0
     }
 
-    var isWalletBalanceDisplayed: Bool {
-        passportManager.passport != nil && passportManager.isUnsupportedForRewards
-    }
-
-    var displayedBalance: Double {
-        isWalletBalanceDisplayed
-            ? userManager.balance / Double(Rarimo.rarimoTokenMantis)
-            : Double(pointsBalance?.amount ?? 0)
+    private var homeCards: [HomeCarouselCard] {
+        [
+            HomeCarouselCard(action: { path = .identity }) {
+                HomeCardView(
+                    backgroundGradient: Gradients.gradientFirst,
+                    topIcon: Icons.rarime,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(Images.handWithPhone)
+                            .resizable()
+                            .scaledToFit()
+                            .scaleEffect(0.88)
+                            .offset(x: 32)
+                            .padding(.top, 12)
+                    },
+                    title: "Your Device",
+                    subtitle: "Your Identity",
+                    bottomAdditionalContent: {
+                        Text("* Nothing leaves this device")
+                            .body4()
+                            .foregroundStyle(.baseBlack.opacity(0.6))
+                            .padding(.top, 24)
+                    },
+                    animation: identityAnimation
+                )
+            }
+//            HomeCarouselCard(
+//                isShouldDisplay: !isBalanceFetching && pointsBalance != nil,
+//                action: { path = .inviteFriends }
+//            ) {
+//                HomeCardView(
+//                    backgroundGradient: Gradients.gradientSecond,
+//                    topIcon: Icons.rarime,
+//                    bottomIcon: Icons.arrowRightUpLine,
+//                    imageContent: {
+//                        ZStack(alignment: .bottomTrailing) {
+//                            Image(Images.peopleEmojis)
+//                                .resizable()
+//                                .scaledToFit()
+//                                .padding(.top, 84)
+//
+//                            Image(Icons.getTokensArrow)
+//                                .foregroundStyle(.informationalDark)
+//                                .offset(x: -44, y: 88)
+//                                .matchedGeometryEffect(
+//                                    id: AnimationNamespaceIds.additionalImage,
+//                                    in: inviteFriendsAnimation
+//                                )
+//                        }
+//                    },
+//                    title: "Invite",
+//                    subtitle: "Others",
+//                    bottomAdditionalContent: {
+//                        if let code = activeReferralCode {
+//                            HStack(spacing: 16) {
+//                                Text(code)
+//                                    .subtitle4()
+//                                    .foregroundStyle(.baseBlack)
+//                                VerticalDivider(color: .bgComponentBasePrimary)
+//                                Image(isCopied ? Icons.checkLine : Icons.fileCopyLine)
+//                                    .iconMedium()
+//                                    .foregroundStyle(.baseBlack.opacity(0.5))
+//                            }
+//                            .fixedSize(horizontal: false, vertical: true)
+//                            .padding(.horizontal, 16)
+//                            .padding(.vertical, 8)
+//                            .background(.baseWhite)
+//                            .cornerRadius(8)
+//                            .frame(maxWidth: 280, alignment: .leading)
+//                            .padding(.top, 24)
+//                            .onTapGesture {
+//                                if isCopied { return }
+//
+//                                isCopied = true
+//                                FeedbackGenerator.shared.impact(.medium)
+//
+//                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                                    withAnimation(.easeInOut) {
+//                                        isCopied = false
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    },
+//                    animation: inviteFriendsAnimation
+//                )
+//            },
+//            HomeCarouselCard(
+//                isShouldDisplay: userPointsBalance > 0,
+//                action: { path = .claimTokens }
+//            ) {
+//                HomeCardView(
+//                    backgroundGradient: Gradients.gradientThird,
+//                    topIcon: Icons.rarimo,
+//                    bottomIcon: Icons.arrowRightUpLine,
+//                    imageContent: {
+//                        Image(Images.rarimoTokens)
+//                            .resizable()
+//                            .scaledToFit()
+//                            .padding(.top, 100)
+//                    },
+//                    title: "Claim",
+//                    subtitle: "\(userPointsBalance.formatted()) RMO",
+//                    animation: claimTokensAnimation
+//                )
+//            },
+//            HomeCarouselCard(action: { path = .wallet }) {
+//                HomeCardView(
+//                    backgroundGradient: Gradients.gradientFourth,
+//                    topIcon: Icons.rarime,
+//                    bottomIcon: Icons.arrowRightUpLine,
+//                    imageContent: {
+//                        Image(Images.seedPhraseShred)
+//                            .resizable()
+//                            .scaledToFit()
+//                            .padding(.top, 96)
+//                    },
+//                    title: "An Unforgettable",
+//                    subtitle: "Wallet",
+//                    animation: walletAnimation
+//                )
+//            },
+//            HomeCarouselCard(action: {}) {
+//                HomeCardView(
+//                    backgroundGradient: Gradients.gradientFifth,
+//                    topIcon: Icons.freedomtool,
+//                    bottomIcon: Icons.arrowRightUpLine,
+//                    imageContent: {
+//                        Image(Images.dotCountry)
+//                            .resizable()
+//                            .scaledToFit()
+//                            .padding(.top, 8)
+//                    },
+//                    title: "Freedomtool",
+//                    subtitle: "Voting",
+//                    animation: votingAnimation
+//                )
+//            }
+        ]
     }
 
     var body: some View {
-        NavigationStack(path: $path) {
-            content.navigationDestination(for: HomeRoute.self) { route in
-                switch route {
-                case .scanPassport:
-                    ScanPassportView(
-                        onComplete: { passport in
-                            userManager.user?.status = .passportScanned
-
-                            passportManager.setPassport(passport)
-                            isCongratsShown = true
-                            path.removeLast()
-                        },
-                        onClose: { path.removeLast() }
-                    )
-                    .navigationBarBackButtonHidden()
-                case .reserveTokens:
-                    ReserveTokensView(
-                        showTerms: true,
-
-                        passport: passportManager.passport,
-                        onFinish: { isClaimed in
-                            if isClaimed {
-                                self.isClaimed = isClaimed
-                                self.isCongratsShown = true
-                            }
-
-                            path.removeLast()
-                        },
-                        onClose: { path.removeLast() }
-                    )
-                    .navigationBarBackButtonHidden()
-                case .claimRewards:
-                    ClaimTokensView(
-                        showTerms: true,
-                        passport: passportManager.passport,
-                        onFinish: { _ in
-                            isClaimed = true
-                            isCongratsShown = true
-                            path.removeLast()
-                        },
-                        onClose: { path.removeLast() }
-                    )
-                    .navigationBarBackButtonHidden()
-                case .notifications:
-                    NotificationsView(
-                        onBack: {
-                            path.removeLast()
-                        }
-                    )
+        ZStack {
+            if path == .notifications {
+                NotificationsView(onBack: { path = nil })
                     .environment(\.managedObjectContext, notificationManager.pushNotificationContainer.viewContext)
-                    .navigationBarBackButtonHidden()
-                case .scanQr:
-                    ScanQRView(
-                        onBack: { path.removeLast() },
-                        onScan: processQrCode
+                    .transition(.backslide)
+            } else {
+                switch path {
+                case .identity:
+                    IdentityOnboardingView(
+                        onClose: { path = nil },
+                        onStart: {
+                            path = nil
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                mainViewModel.selectedTab = .identity
+                            }
+                        },
+                        animation: identityAnimation
                     )
-                    .navigationBarBackButtonHidden()
+                case .inviteFriends:
+                    InviteFriendsView(
+                        balance: pointsBalance,
+                        onClose: { path = nil },
+                        animation: inviteFriendsAnimation
+                    )
+                case .claimTokens:
+                    ClaimTokensView(
+                        onClose: { path = nil },
+                        animation: claimTokensAnimation
+                    )
+                case .wallet:
+                    WalletWaitlistView(
+                        onClose: { path = nil },
+                        onJoin: { path = nil },
+                        animation: walletAnimation
+                    )
+                default:
+                    content
                 }
             }
         }
-        .onAppear(perform: fetchBalance)
-        .onDisappear(perform: cleanup)
-    }
-
-    private var content: some View {
-        MainViewLayout {
-            RefreshableScrollView(
-                onRefresh: {
-                    fetchBalance()
-                    try await Task.sleep(nanoseconds: 1_200_000_000)
-                }
-            ) { _ in
-                VStack(spacing: 0) {
-#if DEVELOPMENT
-                    Text(verbatim: "Development")
-                        .body3()
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 4)
-                        .background(.warningLighter)
-                        .foregroundStyle(.warningDark)
-#endif
-                    VStack(alignment: .leading, spacing: 12) {
-                        header
-                        if let passport = passportManager.passport {
-                            PassportCard(
-                                passport: passport,
-                                isWaitlist: userManager.registerZkProof == nil,
-                                look: Binding(
-                                    get: { passportManager.passportCardLook },
-                                    set: { passportManager.setPassportCardLook($0) }
-                                ),
-                                isIncognito: Binding(
-                                    get: { passportManager.isIncognitoMode },
-                                    set: { passportManager.setIncognitoMode($0) }
-                                ),
-                                identifiers: Binding(
-                                    get: { passportManager.passportIdentifiers },
-                                    set: { passportManager.setPassportIdentifiers($0) }
-                                )
-                            )
-                        } else {
-                            rewardsCard
-                        }
-                        rarimeCard
-
-                        if canReserveTokens && !isBalanceFetching {
-                            reserveTokensCard
-                        }
-                        Spacer().frame(height: 120)
-                    }
-                    .padding(.horizontal, 12)
-                }
-            }
-            .background(.backgroundPrimary)
-        }
-        .blur(radius: isCongratsShown ? 12 : 0)
-        .overlay(
-            CongratsView(
-                open: isCongratsShown,
-                isClaimed: isClaimed,
-                onClose: {
-                    isCongratsShown = false
-                    fetchBalance()
-                }
-            )
+        .animation(
+            path == .notifications
+                ? .easeInOut
+                : .interpolatingSpring(mass: 1, stiffness: 100, damping: 15),
+            value: path
         )
-        .sheet(isPresented: $isCreateIdentityIntroPresented) {
-            CreateIdentityIntroView {
-                self.isCreateIdentityIntroPresented = false
-                path.append(.scanPassport)
-            }
-        }
+//        .onAppear(perform: fetchBalance)
+//        .onDisappear(perform: cleanup)
     }
 
     private var header: some View {
-        HStack(alignment: .top, spacing: 20) {
-            VStack(alignment: .leading, spacing: 8) {
-                Button(action: {
-                    mainViewModel.selectTab(isWalletBalanceDisplayed ? .wallet : .rewards)
-                }) {
-                    HStack(spacing: 4) {
-                        Text(isWalletBalanceDisplayed ? "Balance: RMO" : "Reserved RMO").body3()
-                        Image(Icons.caretRight).iconSmall()
+        HStack(alignment: .center, spacing: 8) {
+            HStack(alignment: .center, spacing: 10) {
+                Text("Hi")
+                    .subtitle4()
+                    .foregroundStyle(.textSecondary)
+                Group {
+                    if passportManager.passport != nil {
+                        Text(passportManager.passport?.displayedFirstName ?? "")
+                    } else {
+                        Text("Stranger")
                     }
                 }
-                .foregroundStyle(.textSecondary)
-                if isBalanceFetching {
-                    ProgressView().frame(height: 40)
-                } else {
-                    Text(displayedBalance.formatted())
-                        .h4()
-                        .foregroundStyle(.textPrimary)
-                }
+                .subtitle4()
+                .foregroundStyle(.textPrimary)
             }
+            #if DEVELOPMENT
+                Text(verbatim: "Development")
+                    .caption2()
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 4)
+                    .background(.warningLighter, in: Capsule())
+                    .foregroundStyle(.warningDark)
+            #endif
             Spacer()
             ZStack {
-                Image(Icons.bell)
-                    .iconMedium()
-                    .foregroundStyle(.textPrimary)
-                    .onTapGesture { path.append(.notifications) }
+                AppIconButton(icon: Icons.notification2Line, action: { path = .notifications })
                 if notificationManager.unreadNotificationsCounter > 0 {
                     Text(verbatim: notificationManager.unreadNotificationsCounter.formatted())
                         .overline3()
@@ -222,168 +267,122 @@ struct HomeView: View {
                         .offset(x: 7, y: -8)
                 }
             }
-            Image(Icons.qrCode)
-                .iconMedium()
-                .foregroundStyle(.textPrimary)
-                .onTapGesture { path.append(.scanQr) }
         }
-        .padding(.top, 24)
-        .padding(.horizontal, 8)
+        .zIndex(1)
+        .padding([.top, .horizontal], 20)
+        .padding(.bottom, 16)
+        .background {
+            ZStack {
+                Color.bgBlur
+                TransparentBlurView(removeAllFilters: false)
+            }
+            .ignoresSafeArea(.container, edges: .top)
+        }
     }
 
-    private var rewardsCard: some View {
-        CardContainer {
-            VStack(spacing: 20) {
-                Image(Images.rewardCoin).square(110)
-                VStack(spacing: 8) {
-                    Text("Add a Document")
-                        .h6()
-                        .foregroundStyle(.textPrimary)
-                    Text("Create your digital identity")
-                        .body2()
-                        .multilineTextAlignment(.center)
-                        .foregroundStyle(.textSecondary)
+    private var content: some View {
+        MainViewLayout {
+            VStack(spacing: 0) {
+                header
+                ZStack(alignment: .trailing) {
+                    SnapCarouselView(
+                        index: $viewModel.currentIndex,
+                        cards: homeCards.filter { $0.isShouldDisplay }
+                    )
+                    .padding(.horizontal, 22)
+                    if homeCards.count > 1 {
+                        V2StepIndicator(
+                            steps: homeCards.filter(\.isShouldDisplay).count,
+                            currentStep: viewModel.currentIndex
+                        )
+                        .padding(.trailing, 8)
+                    }
                 }
-                HorizontalDivider()
-                AppButton(text: "Let’s Start", rightIcon: Icons.arrowRight) {
-                    self.isCreateIdentityIntroPresented = true
-                }
-                .controlSize(.large)
             }
-            .frame(maxWidth: .infinity)
+            .background(.bgPrimary)
         }
     }
 
-    private var rarimeCard: some View {
-        ActionCard(
-            title: String(localized: "RARIME"),
-            description: String(localized: "Learn more about the App"),
-            transparent: true,
-            icon: { Image(Icons.info).square(24).padding(8) }
-        )
-        .onTapGesture { isRarimeSheetPresented = true }
-        .dynamicSheet(isPresented: $isRarimeSheetPresented, fullScreen: true) {
-            RarimeInfoView(onClose: { isRarimeSheetPresented = false })
-        }
-    }
-
-    private var reserveTokensCard: some View {
-        ActionCard(
-            title: String(localized: "Reserve tokens"),
-            description: String(localized: "You’re entitled for \(PASSPORT_RESERVE_TOKENS.formatted()) RMO"),
-            icon: { Image(Images.rewardCoin).square(40) }
-        )
-        .onTapGesture { path.append(.reserveTokens) }
-    }
-
-    private var claimCard: some View {
-        ActionCard(
-            title: String(localized: "Claim"),
-            description: String(localized: "You’ve earned \(RARIMO_AIRDROP_REWARD) RMO"),
-            icon: { Text(Country.ukraine.flag).frame(width: 40, height: 40) }
-        )
-        .onTapGesture { path.append(.claimRewards) }
-    }
-
-    func processQrCode(_ code: String) {
-        guard let qrCodeUrl = URL(string: code) else {
-            LoggerUtil.common.error("Invalid QR code: \(code, privacy: .public)")
-            AlertManager.shared.emitError(.unknown("Invalid QR code"))
-            return
-        }
-
-        externalRequestsManager.handleRarimeUrl(qrCodeUrl)
-        path.removeLast()
-    }
-
-    func fetchBalance() {
-        isBalanceFetching = true
-
-        let cancelable = Task { @MainActor in
-            defer {
-                self.isBalanceFetching = false
-            }
-
-            if userManager.user?.userReferralCode == nil {
-                await verifyReferralCode()
-                return
-            }
-
-            do {
-                if isWalletBalanceDisplayed {
-                    let balance = try await userManager.fetchBalanse()
-                    userManager.balance = Double(balance) ?? 0
-                    return
-                }
-
-                guard let user = userManager.user else { throw "failed to get user" }
-
-                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-
-                let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
-
-                self.pointsBalance = pointsBalance
-            } catch is CancellationError {
-                return
-            } catch {
-                LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
-            }
-        }
-
-        cancelables.append(cancelable)
-    }
-    
-    func verifyReferralCode() async {
-        var referralCode = configManager.api.defaultReferralCode
-        if let deferredReferralCode = userManager.user?.deferredReferralCode, !deferredReferralCode.isEmpty {
-            referralCode = deferredReferralCode
-        }
-
-        await attemptToCreateBalance(with: referralCode, fallback: configManager.api.defaultReferralCode)
-    }
-    
-    func attemptToCreateBalance(with referralCode: String, fallback: String) async {
-        do {
-            try await createBalance(referralCode)
-        } catch {
-            LoggerUtil.common.error("Failed to verify referral code: \(error.localizedDescription, privacy: .public)")
-            if referralCode != fallback {
-                await attemptToCreateBalance(with: fallback, fallback: fallback)
-            }
-        }
-    }
-
-    func createBalance(_ code: String) async throws {
-        guard let user = userManager.user else { throw "user is not initalized" }
-        let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-
-        let pointsSvc = Points(ConfigManager.shared.api.pointsServiceURL)
-        let result = try await pointsSvc.createPointsBalance(
-            accessJwt,
-            code
-        )
-
-        userManager.user?.userReferralCode = code
-        LoggerUtil.common.info("User verified code: \(code, privacy: .public)")
-
-        pointsBalance = PointsBalanceRaw(
-            id: result.data.id,
-            amount: result.data.attributes.amount,
-            isDisabled: result.data.attributes.isDisabled,
-            createdAt: result.data.attributes.createdAt,
-            updatedAt: result.data.attributes.updatedAt,
-            rank: result.data.attributes.rank,
-            referralCodes: result.data.attributes.referralCodes,
-            level: result.data.attributes.level,
-            isVerified: result.data.attributes.isVerified
-        )
-    }
-
-    func cleanup() {
-        for cancelable in cancelables {
-            cancelable.cancel()
-        }
-    }
+//    private func fetchBalance() {
+//        isBalanceFetching = true
+//
+//        let cancelable = Task { @MainActor in
+//            defer {
+//                self.isBalanceFetching = false
+//            }
+//
+//            if userManager.user?.userReferralCode == nil {
+//                await verifyReferralCode()
+//                return
+//            }
+//
+//            do {
+//                guard let user = userManager.user else { throw "failed to get user" }
+//                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+//
+//                let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
+//                self.pointsBalance = pointsBalance
+//            } catch is CancellationError {
+//                return
+//            } catch {
+//                LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
+//            }
+//        }
+//
+//        cancelables.append(cancelable)
+//    }
+//
+//    private func verifyReferralCode() async {
+//        var referralCode = configManager.api.defaultReferralCode
+//        if let deferredReferralCode = userManager.user?.deferredReferralCode, !deferredReferralCode.isEmpty {
+//            referralCode = deferredReferralCode
+//        }
+//
+//        await attemptToCreateBalance(with: referralCode, fallback: configManager.api.defaultReferralCode)
+//    }
+//
+//    private func attemptToCreateBalance(with referralCode: String, fallback: String) async {
+//        do {
+//            try await createBalance(referralCode)
+//        } catch {
+//            LoggerUtil.common.error("Failed to verify referral code: \(error.localizedDescription, privacy: .public)")
+//            if referralCode != fallback {
+//                await attemptToCreateBalance(with: fallback, fallback: fallback)
+//            }
+//        }
+//    }
+//
+//    private func createBalance(_ code: String) async throws {
+//        guard let user = userManager.user else { throw "user is not initalized" }
+//        let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+//
+//        let pointsSvc = Points(ConfigManager.shared.api.pointsServiceURL)
+//        let result = try await pointsSvc.createPointsBalance(
+//            accessJwt,
+//            code
+//        )
+//
+//        userManager.user?.userReferralCode = code
+//        LoggerUtil.common.info("User verified code: \(code, privacy: .public)")
+//
+//        pointsBalance = PointsBalanceRaw(
+//            id: result.data.id,
+//            amount: result.data.attributes.amount,
+//            isDisabled: result.data.attributes.isDisabled,
+//            createdAt: result.data.attributes.createdAt,
+//            updatedAt: result.data.attributes.updatedAt,
+//            rank: result.data.attributes.rank,
+//            referralCodes: result.data.attributes.referralCodes,
+//            level: result.data.attributes.level,
+//            isVerified: result.data.attributes.isVerified
+//        )
+//    }
+//
+//    private func cleanup() {
+//        for cancelable in cancelables {
+//            cancelable.cancel()
+//        }
+//    }
 }
 
 #Preview {

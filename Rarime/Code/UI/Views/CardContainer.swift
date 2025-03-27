@@ -7,7 +7,7 @@ struct CardContainer<Content: View>: View {
         VStack(alignment: .leading, content: content)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(20)
-            .background(.backgroundOpacity)
+            .background(.bgComponentPrimary)
             .clipShape(RoundedRectangle(cornerRadius: 24))
     }
 }
@@ -16,11 +16,11 @@ struct CardContainer<Content: View>: View {
     VStack {
         CardContainer {
             VStack(alignment: .leading, spacing: 4) {
-                Text(String("Wallet")).subtitle2()
-                Text(String("Manage your assets")).body3()
+                Text(String("Wallet")).buttonLarge()
+                Text(String("Manage your assets")).body4()
             }
         }
     }
     .frame(height: 300)
-    .background(.backgroundPrimary)
+    .background(.bgPrimary)
 }

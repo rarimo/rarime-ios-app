@@ -5,7 +5,7 @@ struct AppSkeleton: View {
 
     var body: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
-            .fill(.componentPrimary)
+            .fill(.bgComponentPrimary)
     }
 }
 

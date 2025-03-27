@@ -68,7 +68,7 @@ private struct PulseAnimationView<Content: View>: View {
         onRefresh: { try await Task.sleep(nanoseconds: 1_200_000_000) }
     ) { _ in
         VStack {
-            Color(.componentPrimary)
+            Color(.bgPrimary)
                 .frame(height: 1000)
         }
     }

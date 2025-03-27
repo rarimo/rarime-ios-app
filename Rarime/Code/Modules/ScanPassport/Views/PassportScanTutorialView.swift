@@ -20,17 +20,17 @@ struct PassportScanTutorialButton: View {
                 }
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Play video tutorial")
-                        .subtitle4()
+                        .subtitle6()
                         .foregroundStyle(.textPrimary)
                     Text("Learn how to scan passport correctly")
-                        .body4()
+                        .body5()
                         .multilineTextAlignment(.leading)
                         .foregroundStyle(.textSecondary)
                 }
                 Spacer()
             }
             .padding(12)
-            .background(.componentPrimary, in: RoundedRectangle(cornerRadius: 16))
+            .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 16))
         }
         .dynamicSheet(isPresented: $isTutorialPresented, fullScreen: true) {
             PassportScanTutorialView(onStart: { isTutorialPresented = false })
@@ -109,13 +109,13 @@ private struct PassportScanTutorialStep: View {
             
             VStack(alignment: .leading, spacing: 16) {
                 Text(step.title)
-                    .h4()
+                    .h2()
                     .foregroundStyle(.textPrimary)
                     .multilineTextAlignment(.leading)
                     .fixedSize(horizontal: false, vertical: true)
                 
                 Text(step.text)
-                    .body2()
+                    .body3()
                     .foregroundStyle(.textSecondary)
                     .multilineTextAlignment(.leading)
                     .fixedSize(horizontal: false, vertical: true)

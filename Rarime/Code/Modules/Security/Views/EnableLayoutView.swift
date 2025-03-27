@@ -19,34 +19,31 @@ struct EnableLayoutView: View {
             .clipShape(Circle())
             VStack(spacing: 12) {
                 Text(title)
-                    .h4()
+                    .h2()
                     .foregroundStyle(.textPrimary)
                     .multilineTextAlignment(.center)
                     .fixedSize()
                 Text(description)
-                    .body3()
+                    .body4()
                     .foregroundStyle(.textSecondary)
             }
             .padding(.vertical, 64)
             Spacer()
-            VStack(spacing: 16) {
-                HorizontalDivider()
-                VStack(spacing: 8) {
-                    AppButton(text: "Enable", action: enableAction)
-                        .controlSize(.large)
-                    AppButton(
-                        variant: .tertiary,
-                        text: "Maybe Later",
-                        action: skipAction
-                    )
+            VStack(spacing: 8) {
+                AppButton(text: "Enable", action: enableAction)
                     .controlSize(.large)
-                }
-                .padding(.horizontal, 20)
+                AppButton(
+                    variant: .tertiary,
+                    text: "Maybe Later",
+                    action: skipAction
+                )
+                .controlSize(.large)
             }
+            .padding(.horizontal, 20)
         }
         .padding(.top, 72)
         .padding(.bottom, 16)
-        .background(.backgroundPure)
+        .background(.bgPure)
     }
 }
 

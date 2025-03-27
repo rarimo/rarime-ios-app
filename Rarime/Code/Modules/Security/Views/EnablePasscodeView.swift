@@ -34,6 +34,7 @@ struct EnablePasscodeView: View {
                             path.removeLast()
                         }
                     )
+                    .navigationBarBackButtonHidden()
                 case .repeatPasscode:
                     PasscodeView(
                         passcode: $repeatPasscode,
@@ -56,6 +57,7 @@ struct EnablePasscodeView: View {
                             path.removeLast()
                         }
                     )
+                    .navigationBarBackButtonHidden()
                 }
             }
         }
@@ -68,7 +70,7 @@ struct PasscodeView: View {
     let title: LocalizedStringResource
     let onFill: () -> Void
     let onClose: () -> Void
-    
+
     let isClosable: Bool
 
     init(
@@ -100,7 +102,7 @@ struct PasscodeView: View {
             }
             VStack {
                 Text(title)
-                    .h4()
+                    .h2()
                     .foregroundStyle(.textPrimary)
                 Spacer()
                 PasscodeFieldView(
@@ -114,7 +116,7 @@ struct PasscodeView: View {
             .padding(.bottom, 16)
             .padding(.horizontal, 8)
         }
-        .background(.backgroundPure)
+        .background(.bgPure)
         .navigationBarBackButtonHidden()
     }
 }

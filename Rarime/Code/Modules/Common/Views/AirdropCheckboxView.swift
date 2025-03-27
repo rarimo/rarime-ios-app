@@ -27,7 +27,7 @@ struct AirdropCheckboxView: View {
                     Text(" and ") +
                     Text(.init("[\(String(localized: "Rarimo Airdrop Program Terms & Conditions"))](\(airdropTermsURL))")).underline()
             )
-            .body4()
+            .body5()
             .tint(.textSecondary)
             .foregroundStyle(.textSecondary)
             Spacer()

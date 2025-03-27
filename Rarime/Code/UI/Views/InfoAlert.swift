@@ -7,7 +7,7 @@ struct InfoAlert<Content: View>: View {
     var body: some View {
         HStack(spacing: 8) {
             Image(Icons.info).iconMedium()
-            Text(text).body4()
+            Text(text).body5()
             Spacer()
             actionButton()
         }

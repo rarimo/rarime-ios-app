@@ -42,16 +42,16 @@ private struct AuthMethodItem: View {
             Image(icon)
                 .iconMedium()
                 .padding(6)
-                .background(.componentPrimary, in: Circle())
+                .background(.bgComponentPrimary, in: Circle())
                 .foregroundStyle(.textPrimary)
             Text(label)
-                .subtitle4()
+                .subtitle6()
                 .foregroundStyle(.textPrimary)
             Spacer()
             AppToggle(isOn: $isOn)
         }
         .padding(16)
-        .background(.backgroundOpacity, in: RoundedRectangle(cornerRadius: 12))
+        .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 12))
     }
 }
 

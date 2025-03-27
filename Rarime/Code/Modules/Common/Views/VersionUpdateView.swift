@@ -9,14 +9,14 @@ struct VersionUpdateView: View {
                 .frame(height: 136)
             VStack(spacing: 8) {
                 Text("Update app")
-                    .subtitle1()
+                    .subtitle3()
                     .foregroundStyle(.textPrimary)
                 Text("To continue, please install the latest version of the app")
-                    .body3()
-                    .multilineTextAlignment(.center)
+                    .body4()
                     .foregroundStyle(.textSecondary)
             }
             .frame(width: 250)
+            .multilineTextAlignment(.center)
             AppButton(
                 text: "Open App Store",
                 width: nil,
@@ -29,7 +29,7 @@ struct VersionUpdateView: View {
             .controlSize(.large)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.backgroundPure)
+        .background(.bgPure)
     }
 }
 

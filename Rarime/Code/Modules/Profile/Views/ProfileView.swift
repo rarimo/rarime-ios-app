@@ -30,14 +30,19 @@ struct ProfileView: View {
                 switch route {
                 case .authMethod:
                     AuthMethodView(onBack: { path.removeLast() })
+                        .navigationBarBackButtonHidden()
                 case .exportKeys:
                     ExportKeysView(onBack: { path.removeLast() })
+                        .navigationBarBackButtonHidden()
                 case .language:
                     LanguageView(onBack: { path.removeLast() })
+                        .navigationBarBackButtonHidden()
                 case .theme:
                     ThemeView(onBack: { path.removeLast() })
+                        .navigationBarBackButtonHidden()
                 case .appIcon:
                     AppIconView(onBack: { path.removeLast() })
+                        .navigationBarBackButtonHidden()
                 }
             }
         }
@@ -47,18 +52,18 @@ struct ProfileView: View {
         MainViewLayout {
             VStack(alignment: .leading, spacing: 20) {
                 Text("Profile")
-                    .subtitle2()
+                    .subtitle4()
                     .padding(.horizontal, 8)
                 VStack(spacing: 12) {
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         CardContainer {
                             HStack {
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text("Account")
-                                        .subtitle3()
+                                        .buttonLarge()
                                         .foregroundStyle(.textPrimary)
                                     Text("Address: \(RarimoUtils.formatAddress(userManager.userAddress))")
-                                        .body4()
+                                        .body5()
                                         .foregroundStyle(.textSecondary)
                                 }
                                 Spacer()
@@ -141,27 +146,23 @@ struct ProfileView: View {
                                         .padding(6)
                                         .background(.errorLighter, in: Circle())
                                     Text("Delete Account")
-                                        .subtitle4()
+                                        .buttonMedium()
                                     Spacer()
                                 }
                             }
                             .buttonStyle(.plain)
                             .foregroundStyle(.errorMain)
                         }
-                    }
-                    VStack {
                         Text("App version: \(configManager.general.version)")
-                            .body4()
-                            .foregroundStyle(.textDisabled)
-                        Spacer()
+                            .body5()
+                            .foregroundStyle(.textPlaceholder)
+                            .padding(.bottom, 20)
                     }
-                    .frame(height: 100)
                 }
-                Spacer()
             }
-            .padding(.vertical, 20)
+            .padding(.top, 20)
             .padding(.horizontal, 12)
-            .background(.backgroundPrimary)
+            .background(.bgPrimary)
             .alert(
                 "Delete your account?",
                 isPresented: $isAccountDeleting,
@@ -203,19 +204,19 @@ private struct ProfileRow: View {
                 Image(icon)
                     .iconMedium()
                     .padding(6)
-                    .background(.componentPrimary, in: Circle())
+                    .background(.bgComponentPrimary, in: Circle())
                     .foregroundStyle(.textPrimary)
                 Text(title)
-                    .subtitle4()
+                    .buttonMedium()
                     .foregroundStyle(.textPrimary)
                 Spacer()
                 if let value {
                     Text(value)
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textSecondary)
                 }
                 Image(Icons.caretRight)
-                    .iconSmall()
+                    .iconMedium()
                     .foregroundStyle(.textSecondary)
             }
         }

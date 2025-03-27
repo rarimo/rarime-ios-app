@@ -41,8 +41,14 @@ struct AppView: View {
                         .transition(.backslide)
                 }
             } else {
-                ProgressView()
-                    .controlSize(.large)
+                Spacer()
+                Image(Icons.rarime)
+                    .square(96)
+                    .foregroundStyle(Gradients.gradientFirst)
+                    .padding(.all, 44)
+                    .background(.textPrimary)
+                    .clipShape(RoundedRectangle(cornerRadius: 48))
+                Spacer()
             }
             AlertManagerView()
         }

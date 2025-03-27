@@ -12,8 +12,8 @@ struct IntroStepView: View {
                 }
                 .frame(maxWidth: .infinity)
                 VStack(alignment: .leading, spacing: 16) {
-                    Text(step.title).h4().foregroundStyle(.textPrimary)
-                    Text(step.text).body2()
+                    Text(step.title).h2().foregroundStyle(.textPrimary)
+                    Text(step.text).body3()
                         .foregroundStyle(.textSecondary)
                 }
                 .padding(.horizontal, 24)

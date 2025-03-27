@@ -14,25 +14,25 @@ private struct ButtonColors {
 }
 
 private let primaryColors = ButtonColors(
-    background: .primaryMain,
-    backgroundPressed: .primaryDark,
-    backgroundDisabled: .componentDisabled,
-    foreground: .baseBlack,
+    background: .textPrimary,
+    backgroundPressed: .textSecondary,
+    backgroundDisabled: .bgComponentDisabled,
+    foreground: .invertedLight,
     foregroundDisabled: .textDisabled
 )
 
 private let secondaryColors = ButtonColors(
-    background: .componentPrimary,
-    backgroundPressed: .componentPressed,
-    backgroundDisabled: .componentDisabled,
-    foreground: .textPrimary,
-    foregroundDisabled: .textDisabled
+    background: .bgComponentBasePrimary,
+    backgroundPressed: .bgComponentBasePressed,
+    backgroundDisabled: .bgComponentBaseDisabled,
+    foreground: .baseBlack,
+    foregroundDisabled: .baseBlack.opacity(0.5)
 )
 
 private let tertiaryColors = ButtonColors(
     background: .clear,
-    backgroundPressed: .componentPressed,
-    backgroundDisabled: .componentDisabled,
+    backgroundPressed: .bgComponentPressed,
+    backgroundDisabled: .bgComponentDisabled,
     foreground: .textPrimary,
     foregroundDisabled: .textDisabled
 )
@@ -80,7 +80,7 @@ struct AppButton: View {
     private var height: CGFloat {
         switch controlSize {
         case .small: 32
-        case .large: 48
+        case .large: 56
         default: 40
         }
     }
@@ -88,11 +88,19 @@ struct AppButton: View {
     private var paddingHorizontal: CGFloat {
         switch controlSize {
         case .small: 16
-        case .large: 32
+        case .large: 14
         default: 24
         }
     }
-
+    
+    private var cornerRadius: CGFloat {
+        switch controlSize {
+        case .small: 12
+        case .large: 20
+        default: 16
+        }
+    }
+    
     private var iconSize: CGFloat {
         controlSize == .small ? 16 : 20
     }
@@ -105,7 +113,7 @@ struct AppButton: View {
                 .padding(.horizontal, paddingHorizontal)
         }
         .buttonStyle(AppButtonStyle(variant: variant))
-        .clipShape(RoundedRectangle(cornerRadius: 1000))
+        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
     }
 
     var label: some View {
@@ -127,32 +135,55 @@ struct AppButton: View {
 
 #Preview {
     VStack {
-        AppButton(text: LocalizedStringResource("Primary", table: "preview"), action: {})
-            .controlSize(.large)
+        AppButton(
+            text: LocalizedStringResource("Primary", table: "preview"),
+            action: {}
+        )
+        .controlSize(.large)
         AppButton(
             text: LocalizedStringResource("Primary Medium", table: "preview"),
-            leftIcon: Icons.arrowLeft,
-            rightIcon: Icons.arrowRight,
             width: nil,
             action: {}
         )
-        AppButton(text: LocalizedStringResource("Primary Small", table: "preview"), width: nil, action: {})
-            .controlSize(.small)
-
+        .disabled(true)
+        AppButton(
+            text: LocalizedStringResource("Primary Small", table: "preview"),
+            width: nil,
+            action: {}
+        )
+        .controlSize(.small)
         AppButton(
             variant: .secondary,
             text: LocalizedStringResource("Secondary", table: "preview"),
-            leftIcon: Icons.arrowLeft,
-            rightIcon: Icons.arrowRight,
             action: {}
         ).controlSize(.large)
-
+        AppButton(
+            variant: .secondary,
+            text: LocalizedStringResource("Secondary", table: "preview"),
+            action: {}
+        )
+        .disabled(true)
+        AppButton(
+            variant: .secondary,
+            text: LocalizedStringResource("Secondary", table: "preview"),
+            action: {}
+        ).controlSize(.small)
         AppButton(
             variant: .tertiary,
             text: LocalizedStringResource("Tertiary", table: "preview"),
-            leftIcon: Icons.arrowLeft,
-            rightIcon: Icons.arrowRight,
             action: {}
         ).controlSize(.large)
+        AppButton(
+            variant: .tertiary,
+            text: LocalizedStringResource("Tertiary", table: "preview"),
+            action: {}
+        )
+        .disabled(true)
+        AppButton(
+            variant: .tertiary,
+            text: LocalizedStringResource("Tertiary", table: "preview"),
+            action: {}
+        ).controlSize(.small)
     }
+    .padding(.horizontal, 24)
 }

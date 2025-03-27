@@ -24,10 +24,10 @@ struct ActionCard<Icon: View>: View {
                 icon()
                 VStack(alignment: .leading, spacing: 4) {
                     Text(title)
-                        .subtitle3()
+                        .subtitle5()
                         .foregroundStyle(.textPrimary)
                     Text(description)
-                        .body3()
+                        .body4()
                         .foregroundStyle(.textSecondary)
                 }
             }
@@ -37,14 +37,14 @@ struct ActionCard<Icon: View>: View {
                 .padding(4)
                 .background(.primaryMain)
                 .clipShape(Circle())
-                .foregroundStyle(.baseBlack)
+                .foregroundStyle(.invertedLight)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(20)
-        .background(transparent ? .clear : .backgroundOpacity, in: RoundedRectangle(cornerRadius: 24))
+        .background(transparent ? .clear : .bgPrimary, in: RoundedRectangle(cornerRadius: 24))
         .overlay(
             RoundedRectangle(cornerRadius: 24)
-                .stroke(.componentPrimary, lineWidth: transparent ? 1 : 0)
+                .stroke(.bgComponentPrimary, lineWidth: transparent ? 1 : 0)
         )
     }
 }
@@ -68,5 +68,5 @@ struct ActionCard<Icon: View>: View {
     }
     .padding(12)
     .frame(maxHeight: .infinity)
-    .background(.backgroundPrimary)
+    .background(.bgPrimary)
 }

@@ -18,7 +18,7 @@ struct AssetsSlider: View {
                     ForEach(0 ..< walletAssets.count, id: \.self) { idx in
                         RoundedRectangle(cornerRadius: 100)
                             .frame(width: idx == selectedTab ? 16 : 8, height: 8)
-                            .foregroundColor(idx == selectedTab ? .primaryMain : .componentPrimary)
+                            .foregroundColor(idx == selectedTab ? .primaryMain : .bgComponentPrimary)
                             .onTapGesture { selectedTab = idx }
                     }
                 }
@@ -75,10 +75,10 @@ private struct AssetCard: View {
             Image(icon)
                 .iconMedium()
                 .padding(10)
-                .background(.componentPrimary, in: Circle())
+                .background(.bgComponentPrimary, in: Circle())
                 .foregroundStyle(.textPrimary)
             Text("Total \(asset.token.rawValue)")
-                .body3()
+                .body4()
                 .foregroundStyle(.textSecondary)
             Spacer()
             if isLoading {
@@ -86,7 +86,7 @@ private struct AssetCard: View {
             } else {
                 VStack(alignment: .trailing, spacing: 4) {
                     Text(asset.balance.formatted())
-                        .subtitle4()
+                        .subtitle6()
                         .foregroundStyle(.textPrimary)
                     Text(try! String(asset.usdBalance == nil ? "---" : "≈$\((asset.usdBalance ?? 0).formatted())"))
                         .caption3()
@@ -95,7 +95,7 @@ private struct AssetCard: View {
             }
         }
         .padding(16)
-        .background(.backgroundOpacity, in: RoundedRectangle(cornerRadius: 24))
+        .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 24))
     }
 }
 
