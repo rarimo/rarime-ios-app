@@ -9,10 +9,12 @@ struct MainViewLayout<Content: View>: View {
             content
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             NavBarView(selectedTab: $mainViewModel.selectedTab)
+                // TODO: move to extenstion with blur
                 .background {
                     ZStack {
                         Color.bgBlur
                         TransparentBlurView(removeAllFilters: false)
+                            .allowsHitTesting(false)
                     }
                     .ignoresSafeArea(.container, edges: .bottom)
                 }

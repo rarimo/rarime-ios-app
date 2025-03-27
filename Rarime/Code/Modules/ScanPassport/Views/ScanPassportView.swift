@@ -28,7 +28,6 @@ struct ScanPassportView: View {
                 },
                 onClose: onClose
             )
-            .transition(.backslide)
         case .scanMRZ:
             VStack(spacing: 8) {
                 ScanPassportMRZView(
@@ -51,7 +50,6 @@ struct ScanPassportView: View {
             }
             .padding(.bottom, 16)
             .environmentObject(passportViewModel)
-            .transition(.backslide)
         case .readNFC:
             ReadPassportNFCView(
                 onNext: { passport in
@@ -63,10 +61,8 @@ struct ScanPassportView: View {
                 onClose: onClose
             )
             .environmentObject(passportViewModel)
-            .transition(.backslide)
         case .chipError:
             PassportChipErrorView(onClose: onClose)
-                .transition(.backslide)
         }
     }
     

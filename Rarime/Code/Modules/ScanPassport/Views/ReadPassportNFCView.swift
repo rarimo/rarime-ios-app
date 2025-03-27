@@ -70,31 +70,22 @@ struct ReadPassportNFCView: View {
                 case .success(let passport):
                     if passport.isExpired {
                         LoggerUtil.common.info("Passport is expired")
-
                         AlertManager.shared.emitError(.unknown("Passport is expired"))
-
-                        onBack()
-
+                        onClose()
                         return
                     }
 
                     if !passport.isOver18 {
                         LoggerUtil.common.info("User is underage")
-
                         AlertManager.shared.emitError(.unknown("You are under 18"))
-
-                        onBack()
-
+                        onClose()
                         return
                     }
 
                     if passport.documentType != DocumentType.passport.rawValue {
                         LoggerUtil.common.info("Document is not ePassport")
-
                         AlertManager.shared.emitError(.unknown("Document is not ePassport"))
-
-                        onBack()
-
+                        onClose()
                         return
                     }
 
@@ -105,14 +96,11 @@ struct ReadPassportNFCView: View {
                     case NFCPassportReaderError.Unknown:
                         if useExtendedMode {
                             onBack()
-
                             return
                         }
 
                         useExtendedMode = true
-
                         AlertManager.shared.emitError(.unknown("A scanning error occurred. Attempting to use extended mode. Please try again."))
-
                         scanPassport()
                     case NFCPassportReaderError.ResponseError(let reason, _, _)
                         where reason == "Referenced data not found":

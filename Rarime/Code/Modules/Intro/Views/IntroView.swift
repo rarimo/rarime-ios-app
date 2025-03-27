@@ -62,7 +62,7 @@ struct IntroView: View {
                     .square(96)
                     .foregroundStyle(Gradients.gradientFirst)
                     .padding(.all, 44)
-                    .background(.textPrimary)
+                    .background(.baseBlack)
                     .clipShape(RoundedRectangle(cornerRadius: 48))
                     .offset(y: isInitialAnimationActive ? 0 : (geometry.size.height / 2 - geometry.size.height * 0.7))
                 Spacer()

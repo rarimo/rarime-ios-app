@@ -46,22 +46,23 @@ struct AppAlert: View {
         HStack(spacing: 16) {
             if type == .processing {
                 ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
                     .tint(.baseWhite)
             } else {
-                Image(icon).iconMedium()
+                Image(icon)
+                    .iconMedium()
             }
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
-                    .subtitle4()
+                    .h5()
                 Text(message ?? defaultMessage)
                     .body4()
-                    .opacity(0.64)
+                    .opacity(0.7)
             }
             Spacer()
         }
-        .padding(16)
-        .background(bgColor, in: RoundedRectangle(cornerRadius: 24))
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .background(bgColor, in: RoundedRectangle(cornerRadius: 16))
         .foregroundStyle(.baseWhite)
         .padding(.top, 16)
         .padding(.horizontal, 20)

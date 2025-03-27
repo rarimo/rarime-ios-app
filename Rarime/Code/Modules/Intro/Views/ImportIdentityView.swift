@@ -122,7 +122,7 @@ struct ImportIdentityView: View {
                 let isICloudAvailable = try await CloudStorage.shared.isICloudAvailable()
                 if !isICloudAvailable {
                     AlertManager.shared.emitError(.unknown(String(localized: "iCloud is not available")))
-                    
+                    onBack()
                     return
                 }
                 
@@ -130,7 +130,7 @@ struct ImportIdentityView: View {
                 
                 if userManager.user == nil {
                     AlertManager.shared.emitError(.unknown(String(localized: "No backup found in iCloud")))
-                    
+                    onBack()
                     return
                 }
                 

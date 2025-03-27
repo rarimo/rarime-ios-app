@@ -185,48 +185,44 @@ struct HomeView: View {
             if path == .notifications {
                 NotificationsView(onBack: { path = nil })
                     .environment(\.managedObjectContext, notificationManager.pushNotificationContainer.viewContext)
-                    .transition(.backslide)
             } else {
-                switch path {
-                case .identity:
-                    IdentityOnboardingView(
-                        onClose: { path = nil },
-                        onStart: {
-                            path = nil
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                mainViewModel.selectedTab = .identity
-                            }
-                        },
-                        animation: identityAnimation
-                    )
-                case .inviteFriends:
-                    InviteFriendsView(
-                        balance: pointsBalance,
-                        onClose: { path = nil },
-                        animation: inviteFriendsAnimation
-                    )
-                case .claimTokens:
-                    ClaimTokensView(
-                        onClose: { path = nil },
-                        animation: claimTokensAnimation
-                    )
-                case .wallet:
-                    WalletWaitlistView(
-                        onClose: { path = nil },
-                        onJoin: { path = nil },
-                        animation: walletAnimation
-                    )
-                default:
-                    content
+                ZStack {
+                    switch path {
+                    case .identity:
+                        IdentityOnboardingView(
+                            onClose: { path = nil },
+                            onStart: {
+                                path = nil
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    mainViewModel.selectedTab = .identity
+                                }
+                            },
+                            animation: identityAnimation
+                        )
+                    case .inviteFriends:
+                        InviteFriendsView(
+                            balance: pointsBalance,
+                            onClose: { path = nil },
+                            animation: inviteFriendsAnimation
+                        )
+                    case .claimTokens:
+                        ClaimTokensView(
+                            onClose: { path = nil },
+                            animation: claimTokensAnimation
+                        )
+                    case .wallet:
+                        WalletWaitlistView(
+                            onClose: { path = nil },
+                            onJoin: { path = nil },
+                            animation: walletAnimation
+                        )
+                    default:
+                        content
+                    }
                 }
+                .animation(.interpolatingSpring(stiffness: 100, damping: 15), value: path)
             }
         }
-        .animation(
-            path == .notifications
-                ? .easeInOut
-                : .interpolatingSpring(mass: 1, stiffness: 100, damping: 15),
-            value: path
-        )
 //        .onAppear(perform: fetchBalance)
 //        .onDisappear(perform: cleanup)
     }
@@ -275,6 +271,7 @@ struct HomeView: View {
             ZStack {
                 Color.bgBlur
                 TransparentBlurView(removeAllFilters: false)
+                    .allowsHitTesting(false)
             }
             .ignoresSafeArea(.container, edges: .top)
         }
