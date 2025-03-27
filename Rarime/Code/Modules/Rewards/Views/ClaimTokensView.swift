@@ -1,10 +1,10 @@
-import SwiftUI
 import ConfettiSwiftUI
+import SwiftUI
 
-struct V2ClaimTokensView: View {
+struct ClaimTokensView: View {
     @EnvironmentObject private var configManager: ConfigManager
     
-    @StateObject var rewardsViewModel = V2RewardsViewModel()
+    @StateObject var rewardsViewModel = RewardsViewModel()
     
     let onClose: () -> Void
     
@@ -74,8 +74,8 @@ struct V2ClaimTokensView: View {
                         leftIcon: rewardsViewModel.isTokensClaimed ? Icons.checkLine : nil,
                         action: onClaimTokens
                     )
-                        .controlSize(.large)
-                        .disabled(rewardsViewModel.isTokensClaimed || isTokensClaiming)
+                    .controlSize(.large)
+                    .disabled(rewardsViewModel.isTokensClaimed || isTokensClaiming)
                     (
                         Text("By continue, you are agreeing to ") +
                             Text(.init("[\(String(localized: "RariMe General Terms & Conditions"))](\(termsURL))")).underline() +
@@ -124,6 +124,6 @@ struct V2ClaimTokensView: View {
 }
 
 #Preview {
-    V2ClaimTokensView(onClose: {}, animation: Namespace().wrappedValue)
+    ClaimTokensView(onClose: {}, animation: Namespace().wrappedValue)
         .environmentObject(ConfigManager())
 }

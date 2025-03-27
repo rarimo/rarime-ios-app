@@ -2,16 +2,16 @@ import SwiftUI
 
 struct IdentityView: View {
     @Environment(\.scenePhase) var scenePhase
-    
+
     @EnvironmentObject private var passportViewModel: PassportViewModel
     @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var userManager: UserManager
 
     @State private var isSelectTypeSheetPresented = false
-    
+
     @State private var isLivenessSheetPresented = false
     @State private var isScanDocumentSheetPresented = false
-    
+
     @State private var isWaitlistedCountrySheetPresented = false
     @State private var isUnsupportedCountrySheetPresented = false
 
@@ -71,7 +71,8 @@ struct IdentityView: View {
             .onChange(of: scenePhase) { newPhase in
                 if userManager.user?.status == .unscanned
                     && passportViewModel.processingStatus == .processing
-                    && newPhase == .background {
+                    && newPhase == .background
+                {
                     AppUserDefaults.shared.isRegistrationInterrupted = true
                 }
             }
@@ -83,7 +84,7 @@ struct IdentityView: View {
     }
 
     private var content: some View {
-        V2MainViewLayout {
+        MainViewLayout {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     if hasDocument {
@@ -145,7 +146,7 @@ struct IdentityView: View {
 
 #Preview {
     IdentityView()
-        .environmentObject(V2MainView.ViewModel())
+        .environmentObject(MainView.ViewModel())
         .environmentObject(PassportManager())
         .environmentObject(UserManager())
         .environmentObject(PassportViewModel())

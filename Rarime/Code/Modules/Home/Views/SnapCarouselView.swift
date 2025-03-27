@@ -56,7 +56,7 @@ struct SnapCarouselView: View {
             let currentAdjustedOffset = self.adjustedOffset(for: dragOffset)
             let effectiveIndex = self.effectiveIndex(using: currentAdjustedOffset, offsetHeight: offsetHeight)
             VStack(spacing: spacing) {
-                ForEach(0..<cards.count, id: \.self) { idx in
+                ForEach(0 ..< cards.count, id: \.self) { idx in
                     let distance = abs(CGFloat(idx) - effectiveIndex)
                     let scale = 1 - ((1 - nextCardScaleFactor) * min(distance, 1))
                     
@@ -70,9 +70,9 @@ struct SnapCarouselView: View {
             }
             .offset(y:
                 (CGFloat(index) * -offsetHeight) +
-                currentAdjustedOffset +
-                (freeSpace / 2) -
-                (spacing / 2)
+                    currentAdjustedOffset +
+                    (freeSpace / 2) -
+                    (spacing / 2)
             )
             .gesture(
                 DragGesture()
@@ -112,8 +112,8 @@ struct SnapCarouselView: View {
 }
 
 #Preview {
-    V2HomeView()
-        .environmentObject(V2MainView.ViewModel())
+    HomeView()
+        .environmentObject(MainView.ViewModel())
         .environmentObject(PassportManager())
         .environmentObject(WalletManager())
         .environmentObject(UserManager())

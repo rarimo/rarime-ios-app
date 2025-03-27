@@ -3,7 +3,7 @@ import SwiftUI
 struct V2StepIndicator: View {
     let steps: Int
     let currentStep: Int
-    
+
     var body: some View {
         VStack(spacing: 8) {
             ForEach(0 ..< steps, id: \.self) { index in

@@ -5,18 +5,28 @@ struct MainViewLayout<Content: View>: View {
     @ViewBuilder var content: Content
 
     var body: some View {
-        ZStack(alignment: .bottom) {
+        VStack(spacing: 0) {
             content
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-            TabBarView(selectedTab: $mainViewModel.selectedTab)
+            NavBarView(selectedTab: $mainViewModel.selectedTab)
+                .background {
+                    ZStack {
+                        Color.bgBlur
+                        TransparentBlurView(removeAllFilters: false)
+                    }
+                    .ignoresSafeArea(.container, edges: .bottom)
+                }
         }
-        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
 #Preview {
-    MainViewLayout {
-        Rectangle().fill(.bgPrimary)
-    }
-    .environmentObject(MainView.ViewModel())
+    HomeView()
+        .environmentObject(MainView.ViewModel())
+        .environmentObject(PassportManager())
+        .environmentObject(WalletManager())
+        .environmentObject(UserManager())
+        .environmentObject(ConfigManager())
+        .environmentObject(NotificationManager())
+        .environmentObject(ExternalRequestsManager())
 }

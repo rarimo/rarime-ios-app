@@ -1,6 +1,6 @@
 import Foundation
 
-extension V2HomeView {
+extension HomeView {
     class ViewModel: ObservableObject {
         @Published var currentIndex: Int = 0
     }

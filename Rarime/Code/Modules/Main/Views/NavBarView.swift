@@ -1,12 +1,12 @@
 import SwiftUI
 
-struct V2NavBarView: View {
-    @Binding var selectedTab: V2MainTabs
+struct NavBarView: View {
+    @Binding var selectedTab: MainTabs
 
     var body: some View {
         HStack(spacing: 8) {
-            ForEach(V2MainTabs.allCases, id: \.self) { item in
-                V2NavBarTabItem(tab: item, isActive: selectedTab == item)
+            ForEach(MainTabs.allCases, id: \.self) { item in
+                NavBarTabItem(tab: item, isActive: selectedTab == item)
                     .onTapGesture {
                         selectedTab = item
                         FeedbackGenerator.shared.impact(.light)
@@ -18,10 +18,10 @@ struct V2NavBarView: View {
     }
 }
 
-struct V2NavBarTabItem: View {
-    let tab: V2MainTabs
+struct NavBarTabItem: View {
+    let tab: MainTabs
     let isActive: Bool
-    
+
     var body: some View {
         Image(isActive ? tab.activeIconName : tab.iconName)
             .iconLarge()
@@ -32,7 +32,6 @@ struct V2NavBarTabItem: View {
     }
 }
 
-
 #Preview {
-    V2NavBarView(selectedTab: .constant(.home))
+    NavBarView(selectedTab: .constant(.home))
 }

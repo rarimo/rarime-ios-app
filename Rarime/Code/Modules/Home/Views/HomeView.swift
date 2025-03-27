@@ -1,13 +1,13 @@
 import SwiftUI
 
-enum V2HomeRoute: Hashable {
+enum HomeRoute: Hashable {
     case notifications, identity, inviteFriends, claimTokens, wallet
 }
 
-struct V2HomeView: View {
+struct HomeView: View {
     @EnvironmentObject private var notificationManager: NotificationManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
-    @EnvironmentObject private var mainViewModel: V2MainView.ViewModel
+    @EnvironmentObject private var mainViewModel: MainView.ViewModel
     @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
@@ -16,7 +16,7 @@ struct V2HomeView: View {
 
     @StateObject var viewModel = ViewModel()
 
-    @State private var path: V2HomeRoute? = nil
+    @State private var path: HomeRoute? = nil
     @State private var isCopied = false
 
     @State private var isBalanceFetching = true
@@ -34,11 +34,11 @@ struct V2HomeView: View {
             .filter { $0.status == .active }
             .first?.id
     }
-    
+
     private var userPointsBalance: Int {
         pointsBalance?.amount ?? 0
     }
-    
+
     private var homeCards: [HomeCarouselCard] {
         [
             HomeCarouselCard(action: { path = .identity }) {
@@ -200,13 +200,13 @@ struct V2HomeView: View {
                         animation: identityAnimation
                     )
                 case .inviteFriends:
-                    V2InviteFriendsView(
+                    InviteFriendsView(
                         balance: pointsBalance,
                         onClose: { path = nil },
                         animation: inviteFriendsAnimation
                     )
                 case .claimTokens:
-                    V2ClaimTokensView(
+                    ClaimTokensView(
                         onClose: { path = nil },
                         animation: claimTokensAnimation
                     )
@@ -281,7 +281,7 @@ struct V2HomeView: View {
     }
 
     private var content: some View {
-        V2MainViewLayout {
+        MainViewLayout {
             VStack(spacing: 0) {
                 header
                 ZStack(alignment: .trailing) {
@@ -386,8 +386,8 @@ struct V2HomeView: View {
 }
 
 #Preview {
-    V2HomeView()
-        .environmentObject(V2MainView.ViewModel())
+    HomeView()
+        .environmentObject(MainView.ViewModel())
         .environmentObject(PassportManager())
         .environmentObject(WalletManager())
         .environmentObject(UserManager())

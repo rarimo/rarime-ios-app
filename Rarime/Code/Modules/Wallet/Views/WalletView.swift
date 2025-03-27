@@ -57,7 +57,7 @@ struct WalletView: View {
     }
 
     private var content: some View {
-        V2MainViewLayout {
+        MainViewLayout {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     header
@@ -229,7 +229,7 @@ private struct TransactionItem: View {
 
 #Preview {
     WalletView()
-        .environmentObject(V2MainView.ViewModel())
+        .environmentObject(MainView.ViewModel())
         .environmentObject(WalletManager())
         .environmentObject(UserManager())
 }
