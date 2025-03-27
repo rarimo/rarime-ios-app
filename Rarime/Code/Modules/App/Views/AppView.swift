@@ -12,50 +12,18 @@ struct AppView: View {
     @StateObject private var viewModel = ViewModel()
 
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            // TODO: It's look ugly
-            if let isDeprecated = updateManager.isDeprecated {
-                if isDeprecated {
-                    VersionUpdateView()
-                } else if !internetConnectionManager.isInternetPresent {
-                    InternetConnectionRequiredView()
-                } else if updateManager.isMaintenance {
-                    MaintenanceView()
-                } else if
-                    securityManager.passcodeState != .unset,
-                    securityManager.faceIdState != .unset,
-                    securityManager.isPasscodeCorrect
-                {
-                    MainView().transition(.backslide)
-                } else if
-                    securityManager.passcodeState != .unset,
-                    securityManager.faceIdState != .unset
-                {
-                    LockScreenView()
-                } else if securityManager.passcodeState != .unset {
-                    EnableFaceIdView().transition(.backslide)
-                } else if viewModel.isIntroFinished {
-                    EnablePasscodeView().transition(.backslide)
-                } else {
-                    IntroView(onFinish: { viewModel.finishIntro() })
-                        .transition(.backslide)
-                }
-            } else {
-                ProgressView()
-                    .controlSize(.large)
-            }
-            AlertManagerView()
-        }
-        .preferredColorScheme(settingsManager.colorScheme.rawScheme)
-        .onAppear {
-            Task { @MainActor in
-                await updateManager.checkMaintenanceMode()
-                await updateManager.checkForUpdate()
-            }
+        VStack {}
+            .onAppear {
+                do {
+                    let inputsData = NSDataAsset(name: "inputs")!.data
 
-            UIApplication.shared.isIdleTimerDisabled = true
-        }
-        .environmentObject(viewModel)
+                    let inputs = try JSONDecoder().decode(NoirRegisterIdentityInputs.self, from: inputsData)
+
+                    _ = try ZKUtils.generateCustomNoirProof(inputs, Circuits.registerIdentity_21_256_3_3_224_336_NA)
+                } catch {
+                    LoggerUtil.common.error("error: \(error)")
+                }
+            }
     }
 }
 

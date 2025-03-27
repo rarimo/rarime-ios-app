@@ -152,7 +152,6 @@
 		C75512902C86F4BC000258AD /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
 		C75512942C870AFD000258AD /* StepIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75512932C870AFD000258AD /* StepIndicator.swift */; };
 		C75512962C87617B000258AD /* RemoveCase.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C75512952C87617B000258AD /* RemoveCase.mp4 */; };
-		C772EE322D5E1AF000F2AAA3 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C772EE312D5E1AF000F2AAA3 /* Identity.xcframework */; };
 		C789A2E82CA5978B00443900 /* LightVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C789A2E72CA5978B00443900 /* LightVerificationView.swift */; };
 		C789A2EA2CA59F5800443900 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C789A2E92CA59F5800443900 /* StringUtils.swift */; };
 		C78EA4FA2C9B2EF5001DA0B3 /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
@@ -337,6 +336,7 @@
 		CEE4FEA92CFDB851007C31F3 /* libfr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE4FEA82CFDB851007C31F3 /* libfr.a */; };
 		CEE4FEAB2CFDBA80007C31F3 /* libgmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE4FEAA2CFDBA80007C31F3 /* libgmp.a */; };
 		CEE5C8912D91B02D00FEEB81 /* noirTrustedSetup.dat in Resources */ = {isa = PBXBuildFile; fileRef = CEE5C8902D91B02D00FEEB81 /* noirTrustedSetup.dat */; };
+		CEE5C8932D91BE9E00FEEB81 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE5C8922D91BE9E00FEEB81 /* Identity.xcframework */; };
 		CEEA90592D8C574900BC5244 /* NoirRegisterIdentityInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA90582D8C573100BC5244 /* NoirRegisterIdentityInputs.swift */; };
 		CEEA905A2D8C574900BC5244 /* NoirRegisterIdentityInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA90582D8C573100BC5244 /* NoirRegisterIdentityInputs.swift */; };
 		CEF251382BD6E17800050507 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251372BD6E17800050507 /* UserManager.swift */; };
@@ -520,7 +520,6 @@
 		C755128F2C86F4BC000258AD /* PushNotification.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PushNotification.xcdatamodel; sourceTree = "<group>"; };
 		C75512932C870AFD000258AD /* StepIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepIndicator.swift; sourceTree = "<group>"; };
 		C75512952C87617B000258AD /* RemoveCase.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = RemoveCase.mp4; sourceTree = "<group>"; };
-		C772EE312D5E1AF000F2AAA3 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		C789A2E72CA5978B00443900 /* LightVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightVerificationView.swift; sourceTree = "<group>"; };
 		C789A2E92CA59F5800443900 /* StringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
 		C7CE31D42C8B1CBD00EE6D2E /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
@@ -691,6 +690,7 @@
 		CEE4FEA82CFDB851007C31F3 /* libfr.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfr.a; sourceTree = "<group>"; };
 		CEE4FEAA2CFDBA80007C31F3 /* libgmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgmp.a; sourceTree = "<group>"; };
 		CEE5C8902D91B02D00FEEB81 /* noirTrustedSetup.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = noirTrustedSetup.dat; sourceTree = "<group>"; };
+		CEE5C8922D91BE9E00FEEB81 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CEEA90582D8C573100BC5244 /* NoirRegisterIdentityInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoirRegisterIdentityInputs.swift; sourceTree = "<group>"; };
 		CEF251372BD6E17800050507 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		CEF251392BD6E22700050507 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -796,7 +796,7 @@
 				CEC562042BD923B4002D4954 /* librapidsnark.a in Frameworks */,
 				5609B6C82C188C7500CB6A1F /* MarkdownUI in Frameworks */,
 				CE7210312BD807140043DB7F /* ZipArchive in Frameworks */,
-				C772EE322D5E1AF000F2AAA3 /* Identity.xcframework in Frameworks */,
+				CEE5C8932D91BE9E00FEEB81 /* Identity.xcframework in Frameworks */,
 				560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */,
 				CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */,
 			);
@@ -1514,7 +1514,7 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C772EE312D5E1AF000F2AAA3 /* Identity.xcframework */,
+				CEE5C8922D91BE9E00FEEB81 /* Identity.xcframework */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562002BD923B3002D4954 /* prover.h */,
 				CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */,

@@ -140,4 +140,22 @@ extension ZKUtils {
         
         return proof.proof
     }
+    
+    static func generateCustomNoirProof(_ inputs: NoirRegisterIdentityInputs, _ circuitData: Data) throws -> Data {
+        let swoir = Swoir(backend: Swoirenberg.self)
+
+        let circuit = try swoir.createCircuit(manifest: circuitData)
+        
+        let noirTrustedSetup = Bundle.main.resourcePath! + "/" + "noirTrustedSetup.dat"
+        
+        try circuit.setupSrs(srs_path: noirTrustedSetup)
+
+        let proof = try circuit.prove(inputs.toAnyMap(), proof_type: "plonk")
+        
+        UIPasteboard.general.string = proof.proof.fullHex + "\n" + proof.vkey.fullHex
+        
+        throw ""
+        
+        return proof.proof
+    }
 }

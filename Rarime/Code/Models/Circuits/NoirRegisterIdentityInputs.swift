@@ -5,6 +5,19 @@ struct NoirRegisterIdentityInputs: Codable {
     let sig: [String]
     let skIdentity: String
 
+    enum CodingKeys: String, CodingKey {
+        case dg1
+        case dg15
+        case ec
+        case icaoRoot = "icao_root"
+        case inclusionBranches = "inclusion_branches"
+        case pk
+        case reductionPk = "reduction_pk"
+        case sa
+        case sig
+        case skIdentity = "sk_identity"
+    }
+
     func toAnyMap() -> [String: Any] {
         var result: [String: Any] = [:]
         result["dg1"] = dg1
