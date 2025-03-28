@@ -26,7 +26,7 @@ struct AppView: View {
                     securityManager.faceIdState != .unset,
                     securityManager.isPasscodeCorrect
                 {
-                    MainView().transition(.backslide)
+                    V2MainView().transition(.backslide)
                 } else if
                     securityManager.passcodeState != .unset,
                     securityManager.faceIdState != .unset
@@ -41,18 +41,14 @@ struct AppView: View {
                         .transition(.backslide)
                 }
             } else {
-                VStack {
-                    Spacer()
-                    Image(Icons.rarime)
-                        .square(96)
-                        .foregroundStyle(Gradients.gradientFirst)
-                        .padding(.all, 44)
-                        .background(.baseBlack)
-                        .clipShape(RoundedRectangle(cornerRadius: 48))
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(.bgPrimary)
+                Spacer()
+                Image(Icons.rarime)
+                    .square(96)
+                    .foregroundStyle(Gradients.gradientFirst)
+                    .padding(.all, 44)
+                    .background(.textPrimary)
+                    .clipShape(RoundedRectangle(cornerRadius: 48))
+                Spacer()
             }
             AlertManagerView()
         }
