@@ -53,7 +53,11 @@ struct ExternalRequestsView: View {
                 }
             }
             .onOpenURL { url in
-                externalRequestsManager.handleRarimeUrl(url)
+                externalRequestsManager.handleUrl(url)
+            }
+            .onContinueUserActivity(NSUserActivityTypeBrowsingWeb) { userActivity in
+                guard let url = userActivity.webpageURL else { return }
+                externalRequestsManager.handleUrl(url)
             }
     }
 

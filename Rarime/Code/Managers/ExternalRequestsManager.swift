@@ -18,10 +18,15 @@ class ExternalRequestsManager: ObservableObject {
     static let shared = ExternalRequestsManager()
 
     @Published private(set) var request: ExternalRequests? = nil
-
+    
+    func handleUrl(_ url: URL) {
+        url.path.hasPrefix("/r/") ? handleRefferalCode(url) : handleRarimeUrl(url)
+    }
+    
     func handleRarimeUrl(_ url: URL) {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-              let params = components.queryItems
+              let params = components.queryItems,
+              self.isValidExternalUrl(url)
         else {
             LoggerUtil.common.error("Invalid RariMe app URL: \(url.absoluteString, privacy: .public)")
             AlertManager.shared.emitError(.unknown("Invalid RariMe app URL"))
@@ -34,6 +39,13 @@ class ExternalRequestsManager: ObservableObject {
         default:
             LoggerUtil.common.error("Invalid RariMe URL host: \(url.host ?? "nil", privacy: .public)")
         }
+    }
+    
+    private func handleRefferalCode(_ url: URL) {
+        let code = String(url.path.dropFirst(3))
+        AppUserDefaults.shared.deferredReferralCode = code
+        UserManager.shared.user?.deferredReferralCode = code
+        LoggerUtil.common.info("Deferred referral code set: \(code, privacy: .public)")
     }
 
     private func handleExternalRequest(params: [URLQueryItem]) {
@@ -82,6 +94,18 @@ class ExternalRequestsManager: ObservableObject {
         }
 
         setRequest(.lightVerification(verificationParamsUrl: proofParamsUrl, urlQueryParams: params))
+    }
+    
+    private func isValidExternalUrl(_ url: URL) -> Bool {
+        if url.scheme == "rarime", url.host == "external" {
+            return true
+        }
+        
+        if url.scheme == "https", let host = url.host, ["app.rarime.com", "app.stage.rarime.com"].contains(host), url.path.hasPrefix("/external") {
+            return true
+        }
+        
+        return false
     }
 
     func setRequest(_ request: ExternalRequests) {
