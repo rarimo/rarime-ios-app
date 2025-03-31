@@ -3,7 +3,9 @@ import Foundation
 import Web3
 
 struct VotingView: View {
-    @EnvironmentObject var pollsViewModel: PollsViewModel
+    @EnvironmentObject private var pollsViewModel: PollsViewModel
+    @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
+    @EnvironmentObject private var userManager: UserManager
     
     let proposalId: BigUInt
     
@@ -26,6 +28,14 @@ struct VotingView: View {
     }
     
     private func fetchPoll() async throws {
+        guard let user = userManager.user else { throw "failed to get user" }
+        let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+
+        let qrLinkApi = VotingQRCode(ConfigManager.shared.api.votingRelayerURL)
+        let qrCode = try await qrLinkApi.getLink(accessJwt, String(proposalId))
+        
+        if !qrCode.data.attributes.active { throw "QR code is expired" }
+        
         pollsViewModel.selectedPoll = try await PollsService.fetchPoll(proposalId)
     }
 }

@@ -36,16 +36,44 @@ class PollsViewModel: ObservableObject {
         guard let votingData = decodedVotingData,
               let passport = PassportManager.shared.passport else { return [] }
         
-        let decodedCountries = votingData.citizenshipMask.map { Country.fromISOCode($0.asciiValue) }
-        let decodedMinAge = votingData.birthDateUpperbound.asciiValue
+        let decodedCountries = votingData.citizenshipMask.map { Country.fromISOCode($0.serialize().ascii) }
+//        let decodedMinAge = votingData.birthDateLowerbound.serialize().ascii
+        let decodedMaxAge = votingData.birthDateUpperbound.serialize().ascii
+//        let decodedGender = votingData.sex.serialize().ascii
+        
         let countriesString = decodedCountries.map { $0.name }.joined(separator: ", ")
+//        let ageString = {
+//            if decodedMinAge != ZERO_IN_HEX && decodedMaxAge != ZERO_IN_HEX {
+//                return "\(decodedMinAge)-\(decodedMaxAge)"
+//            } else if decodedMinAge != ZERO_IN_HEX  {
+//                return "\(decodedMinAge)+"
+//            } else if decodedMaxAge != ZERO_IN_HEX {
+//                return "\(decodedMaxAge) and below"
+//            }
+//            return ""
+//        }()
         
-        let rawMinAgeDate = (try? DateUtil.parsePassportDate(decodedMinAge)) ?? Date()
+//        let rawMinAge = (try? DateUtil.parsePassportDate(decodedMinAge)) ?? nil
+        let rawMaxAge = (try? DateUtil.parsePassportDate(decodedMaxAge)) ?? nil
         let userDOB = (try? DateUtil.parsePassportDate(passport.dateOfBirth)) ?? Date()
-        let age = Calendar.current.dateComponents([.year], from: rawMinAgeDate, to: Date()).year ?? 0
         
-        let isAgeEligible = userDOB <= rawMinAgeDate
         let isNationalityEligible = decodedCountries.contains(Country.fromISOCode(passport.nationality))
+//        let isAgeEligible = {
+//            if let minDate = rawMinAge, let maxDate = rawMaxAge {
+//                return userDOB >= maxDate && userDOB <= minDate
+//            } else if let minDate = rawMinAge {
+//                return userDOB <= minDate
+//            } else if let maxDate = rawMaxAge {
+//                return userDOB >= maxDate
+//            } else {
+//                return false
+//            }
+//        }()
+        
+//        let isGengerEligible = {
+//            if decodedGender == "0" { return  true }
+//            return decodedGender == passport.gender
+//        }()
         
         var requirements: [PollRequirement] = []
         
@@ -56,10 +84,19 @@ class PollsViewModel: ObservableObject {
             ))
         }
         
-        requirements.append(PollRequirement(
-            text: String(localized: "Over \(age)+"),
-            isEligible: isAgeEligible
-        ))
+//        if decodedMinAge != ZERO_IN_HEX && decodedMaxAge != ZERO_IN_HEX {
+//            requirements.append(PollRequirement(
+//                text: ageString,
+//                isEligible: isAgeEligible
+//            ))
+//        }
+        
+//        if decodedGender != "0" {
+//            requirements.append(PollRequirement(
+//                text: decodedGender == "M" ? "Male only" : "Female only",
+//                isEligible: isGengerEligible
+//            ))
+//        }
         
         return requirements
     }
@@ -131,6 +168,11 @@ class PollsViewModel: ObservableObject {
         DispatchQueue.main.async {
             self.polls.append(contentsOf: newPolls)
         }
+    }
+    
+    func reloadPoll() async throws {
+        guard let poll = selectedPoll else { throw "No selected poll" }
+        let _ = try await PollsService.fetchPoll(BigUInt(poll.id))
     }
     
     func vote(
@@ -232,12 +274,30 @@ class PollsViewModel: ObservableObject {
             ).description,
             identityCounterLowerbound: "0",
             identityCounterUpperbound: votingData.identityCounterUpperbound.description,
-            expirationDateLowerbound: votingData.expirationDateLowerbound.toHex(),
+            expirationDateLowerbound: votingData.expirationDateLowerbound.serialize().fullHex,
             expirationDateUpperbound: ZERO_IN_HEX,
             birthDateLowerbound: ZERO_IN_HEX,
-            birthDateUpperbound: votingData.birthDateUpperbound.toHex(),
+            birthDateUpperbound: votingData.birthDateUpperbound.serialize().fullHex,
             citizenshipMask: "0"
         )
+        
+        print("dg1: \(passport.dg1)")
+        print("smtProofJSON: \(smtProofJson)")
+        print("selector: \(VOTING_SELECTOR)")
+        print("pkPassportHash: \(passportInfoKey)")
+        print("issueTimestamp: \(identityInfo.issueTimestamp.description)")
+        print("identityCounter: \(passportInfo.identityReissueCounter.description)")
+        print("eventID: \(poll.eventId.description)")
+        print("eventData: \(eventData.fullHex)")
+        print("timestampLowerbound: 0")
+        print("timestampUpperbound: \(max(Int(votingData.timestampUpperbound), Int(identityInfo.issueTimestamp + 1)).description)")
+        print("identityCounterLowerbound: 0")
+        print("identityCounterUpperbound: \(votingData.identityCounterUpperbound.description)")
+        print("expirationDateLowerbound: \(votingData.expirationDateLowerbound.serialize().fullHex)")
+        print("expirationDateUpperbound: \(ZERO_IN_HEX)")
+        print("birthDateLowerbound: \(ZERO_IN_HEX)")
+        print("birthDateUpperbound: \(votingData.birthDateUpperbound.serialize().fullHex)")
+        print("citizenshipMask: 0")
         
         let wtns = try ZKUtils.calcWtns_queryIdentity(Circuits.queryIdentityDat, queryProofInputs)
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16QueryIdentity(wtns)

@@ -192,8 +192,10 @@ class PollsService {
             citizenshipMask: citizenshipMask,
             timestampUpperbound: timestampUpperbound,
             identityCounterUpperbound: identityCounterUpperbound,
+//            birthDateLowerbound: "0x303030303030",
             birthDateUpperbound: birthDateUpperbound,
             expirationDateLowerbound: expirationDateLowerbound
+//            sex: "0x4d"
         )
     }
 }
@@ -231,8 +233,10 @@ struct VotingData: Codable {
     let citizenshipMask: [BigUInt]
     let timestampUpperbound : BigUInt
     let identityCounterUpperbound: BigUInt
+//    let birthDateLowerbound: BigUInt
     let birthDateUpperbound: BigUInt
     let expirationDateLowerbound: BigUInt
+//    let sex: BigUInt
 }
 
 struct Question {

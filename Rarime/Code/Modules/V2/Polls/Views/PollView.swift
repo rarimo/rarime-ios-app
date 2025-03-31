@@ -39,9 +39,9 @@ struct PollView: View {
                             onClose()
                             AlertManager.shared.emitSuccess(String(localized: "Your vote has been counted"))
                         } catch {
-                            onClose()
                             LoggerUtil.common.error("Can't submit poll results: \(error, privacy: .public)")
                             AlertManager.shared.emitError(.unknown(String(localized: "Can't submit poll results")))
+                            onClose()
                         }
                     }
                 },
@@ -64,7 +64,7 @@ struct PollView: View {
                 Button(action: onClose) {
                     Image(Icons.closeFill)
                         .iconMedium()
-                        .foregroundStyle(.textPrimary)
+                        .foregroundStyle(.baseBlack)
                         .padding(.all, 10)
                 }
                 .background(.baseWhite)
@@ -94,13 +94,13 @@ struct PollView: View {
                         }
                         .foregroundStyle(.textSecondary)
                     }
-                    Text(poll.description)
-                        .body4()
-                        .foregroundStyle(.textSecondary)
-                        .multilineTextAlignment(.leading)
-                    Text("\(poll.questions.count) questions")
-                        .body4()
-                        .foregroundStyle(.textSecondary)
+                    Group {
+                        Text(poll.description)
+                            .multilineTextAlignment(.leading)
+                        Text("\(poll.questions.count) questions")
+                    }
+                    .body4()
+                    .foregroundStyle(.textSecondary)
                 }
                 HorizontalDivider()
                 VStack(alignment: .leading, spacing: 16) {
@@ -120,12 +120,14 @@ struct PollView: View {
                 }
                 Spacer()
                 Group {
-                    if isVoted {
-                        AppButton(text: "Voted", action: {})
-                            .disabled(true)
-                    } else {
-                        AppButton(text: "Let's start", action: { isQuestionsShown = true })
-                            .disabled(isSubmitting || !isAdmittedToVote)
+                    if poll.status != .ended {
+                        if isVoted {
+                            AppButton(text: "Voted", action: {})
+                                .disabled(true)
+                        } else {
+                            AppButton(text: "Let's start", action: { isQuestionsShown = true })
+                                .disabled(isSubmitting || !isAdmittedToVote)
+                        }
                     }
                 }
                 .controlSize(.large)
@@ -140,7 +142,7 @@ struct PollView: View {
         isUserVoteChecking = true
         Task { @MainActor in
             do {
-                let nullifier = try userManager.generateNullifierForEvent(poll.eventId.toHex())
+                let nullifier = try userManager.generateNullifierForEvent(poll.eventId.serialize().fullHex)
                 isVoted = try await pollsViewModel.checkUserVote(nullifier)
                 isUserVoteChecking = false
             } catch {

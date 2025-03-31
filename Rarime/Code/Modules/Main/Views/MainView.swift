@@ -25,6 +25,7 @@ struct MainView: View {
             if !(await notificationManager.isAuthorized()) {
                 try? await notificationManager.request()
             }
+           
         }
     }
 }
