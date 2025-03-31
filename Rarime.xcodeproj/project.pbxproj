@@ -144,7 +144,6 @@
 		C75512942C870AFD000258AD /* StepIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75512932C870AFD000258AD /* StepIndicator.swift */; };
 		C75512962C87617B000258AD /* RemoveCase.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C75512952C87617B000258AD /* RemoveCase.mp4 */; };
 		C75529F62D64DC7100C8B2F4 /* ViewArrayBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75529F52D64DC6900C8B2F4 /* ViewArrayBuilder.swift */; };
-		C772EE322D5E1AF000F2AAA3 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C772EE312D5E1AF000F2AAA3 /* Identity.xcframework */; };
 		C7780C842D632A2E0050B5BB /* IdentityOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C832D632A210050B5BB /* IdentityOnboardingView.swift */; };
 		C7780C9A2D63573B0050B5BB /* Rewards.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C992D6357370050B5BB /* Rewards.swift */; };
 		C789A2E82CA5978B00443900 /* LightVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C789A2E72CA5978B00443900 /* LightVerificationView.swift */; };
@@ -265,6 +264,7 @@
 		CE51E2FB2C21CA0B00043D9A /* StateKeeperContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51E2FA2C21CA0B00043D9A /* StateKeeperContract.swift */; };
 		CE5315C32C77664C0087D53D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE5315C22C77664C0087D53D /* GoogleService-Info.plist */; };
 		CE5315CA2C7769A20087D53D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5315C92C7769A20087D53D /* NotificationManager.swift */; };
+		CE53BCB12D9A8BAD007B1892 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE53BCB02D9A8BAD007B1892 /* Identity.xcframework */; };
 		CE5980DC2D07B288000B6261 /* RegisterIdentityLightInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5980DB2D07B279000B6261 /* RegisterIdentityLightInputs.swift */; };
 		CE5980DD2D07B288000B6261 /* RegisterIdentityLightInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5980DB2D07B279000B6261 /* RegisterIdentityLightInputs.swift */; };
 		CE61E8832C24240000940129 /* Semaphore in Frameworks */ = {isa = PBXBuildFile; productRef = CE61E8822C24240000940129 /* Semaphore */; };
@@ -512,7 +512,6 @@
 		C75512932C870AFD000258AD /* StepIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepIndicator.swift; sourceTree = "<group>"; };
 		C75512952C87617B000258AD /* RemoveCase.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = RemoveCase.mp4; sourceTree = "<group>"; };
 		C75529F52D64DC6900C8B2F4 /* ViewArrayBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewArrayBuilder.swift; sourceTree = "<group>"; };
-		C772EE312D5E1AF000F2AAA3 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		C7780C832D632A210050B5BB /* IdentityOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityOnboardingView.swift; sourceTree = "<group>"; };
 		C7780C992D6357370050B5BB /* Rewards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rewards.swift; sourceTree = "<group>"; };
 		C789A2E72CA5978B00443900 /* LightVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightVerificationView.swift; sourceTree = "<group>"; };
@@ -608,6 +607,7 @@
 		CE51E2FA2C21CA0B00043D9A /* StateKeeperContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateKeeperContract.swift; sourceTree = "<group>"; };
 		CE5315C22C77664C0087D53D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE5315C92C7769A20087D53D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		CE53BCB02D9A8BAD007B1892 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE5980DB2D07B279000B6261 /* RegisterIdentityLightInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterIdentityLightInputs.swift; sourceTree = "<group>"; };
 		CE61E88C2C247B4700940129 /* HMACUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACUtils.swift; sourceTree = "<group>"; };
 		CE664C7D2D19808900988A5E /* witnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.h; sourceTree = "<group>"; };
@@ -802,7 +802,7 @@
 				CEC562042BD923B4002D4954 /* librapidsnark.a in Frameworks */,
 				5609B6C82C188C7500CB6A1F /* MarkdownUI in Frameworks */,
 				CE7210312BD807140043DB7F /* ZipArchive in Frameworks */,
-				C772EE322D5E1AF000F2AAA3 /* Identity.xcframework in Frameworks */,
+				CE53BCB12D9A8BAD007B1892 /* Identity.xcframework in Frameworks */,
 				560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */,
 				CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */,
 			);
@@ -1554,7 +1554,7 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C772EE312D5E1AF000F2AAA3 /* Identity.xcframework */,
+				CE53BCB02D9A8BAD007B1892 /* Identity.xcframework */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562002BD923B3002D4954 /* prover.h */,
 				CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */,

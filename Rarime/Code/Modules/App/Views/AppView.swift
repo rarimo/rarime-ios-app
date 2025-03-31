@@ -58,6 +58,8 @@ struct AppView: View {
         }
         .preferredColorScheme(settingsManager.colorScheme.rawScheme)
         .onAppear {
+            LoggerUtil.common.info("Application started")
+
             Task { @MainActor in
                 await updateManager.checkMaintenanceMode()
                 await updateManager.checkForUpdate()
