@@ -2,6 +2,9 @@ import Foundation
 
 import RarimeIOSUtils
 
+import Swoir
+import Swoirenberg
+
 class ZKUtils {
     static let ERROR_SIZE = UInt(256)
     static let WITNESS_SIZE = UInt(100 * 1024 * 1024)
@@ -91,6 +94,21 @@ class ZKUtils {
         
         return (proof: proof, pubSignals: pubSignals)
 #endif
+    }
+    
+    public static func ultraPlonk(
+        _ trustedSetupPath: String,
+        _ circuitData: Data,
+        _ inputs: [String: Any]
+    ) throws -> Data {
+        let circuit = try Swoir(backend: Swoirenberg.self)
+            .createCircuit(manifest: circuitData)
+        
+        try circuit.setupSrs(srs_path: trustedSetupPath)
+
+        let proof = try circuit.prove(inputs, proof_type: "plonk")
+        
+        return proof.proof
     }
     
     private static func handleGroth16ProverError(

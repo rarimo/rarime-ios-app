@@ -10,6 +10,7 @@ class ConfigManager: ObservableObject {
     let feedback = Feedback()
     let circuitData = CircuitData()
     let appsFlyer = AppsFlyer()
+    let noirCircuitData = NoirCircuitData()
 }
 
 extension ConfigManager {
@@ -155,6 +156,13 @@ extension ConfigManager {
                 fatalError("ConfigManager.AppsFlyer init error: \(error.localizedDescription)")
             }
         }
+    }
+}
+
+extension ConfigManager {
+    class NoirCircuitData {
+        let noirTrustedSetupURL: String = try! readFromInfoPlist(key: "NOIR_TRUSTED_SETUP_URL")
+        let noirCircuitDataURLs: [String: URL] = try! readURLDictionaryFromInfoPlist(key: "NOIR_CIRCUIT_DATA_URLS")
     }
 }
 

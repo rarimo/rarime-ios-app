@@ -118,10 +118,10 @@ class UserManager: ObservableObject {
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16Prover(circuitData.circuitZkey, wtns)
         
-        let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
-        let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
+        let proof = try JSONDecoder().decode(GrothZkProofPoints.self, from: proofJson)
+        let pubSignals = try JSONDecoder().decode(GrothZkProofPubSignals.self, from: pubSignalsJson)
         
-        return ZkProof(proof: proof, pubSignals: pubSignals)
+        return ZkProof.groth(GrothZkProof(proof: proof, pubSignals: pubSignals))
     }
     
     func generateRegisterIdentityProof(
@@ -242,10 +242,10 @@ class UserManager: ObservableObject {
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16Prover(circuitData.circuitZkey, wtns)
         
-        let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
-        let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
+        let proof = try JSONDecoder().decode(GrothZkProofPoints.self, from: proofJson)
+        let pubSignals = try JSONDecoder().decode(GrothZkProofPubSignals.self, from: pubSignalsJson)
         
-        return ZkProof(proof: proof, pubSignals: pubSignals)
+        return ZkProof.groth(GrothZkProof(proof: proof, pubSignals: pubSignals))
     }
     
     func register(_ registerZkProof: ZkProof, _ passport: Passport, _ isRevoked: Bool, _ registerIdentityCircuitName: String) async throws {
@@ -430,10 +430,10 @@ class UserManager: ObservableObject {
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16QueryIdentity(wtns)
         
-        let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
-        let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
+        let proof = try JSONDecoder().decode(GrothZkProofPoints.self, from: proofJson)
+        let pubSignals = try JSONDecoder().decode(GrothZkProofPubSignals.self, from: pubSignalsJson)
         
-        return ZkProof(proof: proof, pubSignals: pubSignals)
+        return ZkProof.groth(GrothZkProof(proof: proof, pubSignals: pubSignals))
     }
     
     func generateQueryProof(
@@ -499,16 +499,16 @@ class UserManager: ObservableObject {
         let wtns = try ZKUtils.calcWtns_queryIdentity(Circuits.queryIdentityDat, queryProofInputs)
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16QueryIdentity(wtns)
         
-        let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
-        let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
+        let proof = try JSONDecoder().decode(GrothZkProofPoints.self, from: proofJson)
+        let pubSignals = try JSONDecoder().decode(GrothZkProofPubSignals.self, from: pubSignalsJson)
         
-        return ZkProof(proof: proof, pubSignals: pubSignals)
+        return ZkProof.groth(GrothZkProof(proof: proof, pubSignals: pubSignals))
     }
     
     func collectPubSignals(
         passport: Passport,
         params: GetProofParamsResponseAttributes
-    ) throws -> PubSignals {
+    ) throws -> GrothZkProofPubSignals {
         let nullifier = try generateNullifierForEvent(params.eventID)
         let currentTimestamp = String(format: "%.0f", Date().timeIntervalSince1970 * 1000)
         
@@ -598,10 +598,10 @@ class UserManager: ObservableObject {
         let wtns = try ZKUtils.calcWtns_queryIdentity(Circuits.queryIdentityDat, queryProofInputs)
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16QueryIdentity(wtns)
         
-        let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
-        let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
+        let proof = try JSONDecoder().decode(GrothZkProofPoints.self, from: proofJson)
+        let pubSignals = try JSONDecoder().decode(GrothZkProofPubSignals.self, from: pubSignalsJson)
         
-        return ZkProof(proof: proof, pubSignals: pubSignals)
+        return ZkProof.groth(GrothZkProof(proof: proof, pubSignals: pubSignals))
     }
     
     func airdrop(_ queryZkProof: ZkProof) async throws {
@@ -756,15 +756,16 @@ class UserManager: ObservableObject {
     func getPassportKey(_ passport: Passport) -> String? {
         guard let registerZkProof else { return nil }
         
+        let registerIdentityPubSignals = RegisterIdentityPubSignals(registerZkProof)
+        
         var passportKey: String
-        switch registerZkProof.pubSignals.count {
+        switch registerIdentityPubSignals.raw.count {
         case RegisterIdentityPubSignals.SignalKey.allCases.count:
-            let pubSignals = RegisterIdentityPubSignals(registerZkProof.pubSignals)
             
             if passport.dg15.isEmpty {
-                passportKey = pubSignals.getSignalRaw(.passportHash)
+                passportKey = registerIdentityPubSignals.getSignalRaw(.passportHash)
             } else {
-                passportKey = pubSignals.getSignalRaw(.passportKey)
+                passportKey = registerIdentityPubSignals.getSignalRaw(.passportKey)
             }
         case RegisterIdentityLightPubSignals.SignalKey.allCases.count:
             guard let lightRegistrationData else {
@@ -785,21 +786,22 @@ class UserManager: ObservableObject {
     
     func getIdentityKey(_ passport: Passport) -> String? {
         guard let registerZkProof else { return nil }
-        
-        var identityKey: String
-        switch registerZkProof.pubSignals.count {
-        case RegisterIdentityPubSignals.SignalKey.allCases.count:
-            let pubSignals = RegisterIdentityPubSignals(registerZkProof.pubSignals)
-            
-            identityKey = pubSignals.getSignalRaw(.identityKey)
-        case RegisterIdentityLightPubSignals.SignalKey.allCases.count:
-            let pubSignals = RegisterIdentityLightPubSignals(registerZkProof.pubSignals)
-            
-            identityKey = pubSignals.getSignalRaw(.identityKey)
-        default:
-            return nil
+        switch registerZkProof {
+        case .groth(let grothZkProof):
+            switch grothZkProof.pubSignals.count {
+            case RegisterIdentityPubSignals.SignalKey.allCases.count:
+                let pubSignals = RegisterIdentityPubSignals(grothZkProof.pubSignals)
+                
+                return pubSignals.getSignalRaw(.identityKey)
+            case RegisterIdentityLightPubSignals.SignalKey.allCases.count:
+                let pubSignals = RegisterIdentityLightPubSignals(grothZkProof.pubSignals)
+                
+                return pubSignals.getSignalRaw(.identityKey)
+            default:
+                return nil
+            }
+        case .plonk(let data):
+            return RegisterIdentityPubSignals(data).getSignalRaw(.identityKey)
         }
-        
-        return identityKey
     }
 }

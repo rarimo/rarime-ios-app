@@ -10,6 +10,7 @@ class CircuitBuilderManager {
     
     let registerIdentityCircuit = RegisterIdentityCircuit()
     let registerIdentityLightCircuit = RegisterIdentityLightCircuit()
+    let noirRegisterIdentityCircuit = NoirRegisterIdentityCircuit()
 }
 
 extension CircuitBuilderManager {
@@ -81,6 +82,48 @@ extension CircuitBuilderManager {
             return RegisterIdentityLightInputs(
                 skIdentity: privateKey.fullHex,
                 dg1: CircuitUtils.smartChunking2(passport.dg1, 2, 512)
+            )
+        }
+    }
+}
+
+extension CircuitBuilderManager {
+    class NoirRegisterIdentityCircuit {
+        func buildInputs(
+            _ privateKey: Data,
+            _ passport: Passport
+        ) async throws -> NoirRegisterIdentityInputs {
+            let slaveCertPem = try passport.getSlaveSodCertificatePem()
+            
+            let certProof = try await passport.getCertificateSmtProof(slaveCertPem)
+            
+            let sod = try passport.getSod()
+            let encapsulatedContent = try sod.getEncapsulatedContent()
+            let signedAttributes = try sod.getSignedAttributes()
+            let signature = try sod.getSignature()
+            let publicKey = try sod.getPublicKey()
+            
+            guard let pubkeyData = CryptoUtils.getDataFromPublicKey(publicKey) else {
+                throw "invalid pubkey data"
+            }
+            
+            let reductionPk = CircuitUtils.RSABarrettReductionParam(BN(pubkeyData), UInt(pubkeyData.count * 8)).map { $0.dec() }
+            
+            let pk = CircuitUtils.splitBy120Bits(pubkeyData).map { $0.dec() }
+            
+            let sig = CircuitUtils.splitBy120Bits(signature).map { $0.dec() }
+            
+            return .init(
+                dg1: passport.dg1.map { $0.description },
+                dg15: passport.dg15.map { $0.description },
+                ec: encapsulatedContent.map { $0.description },
+                icaoRoot: BN(certProof.root).dec(),
+                inclusionBranches: certProof.siblings.map { BN($0).dec() },
+                pk: pk,
+                reductionPk: reductionPk,
+                sa: signedAttributes.map { $0.description },
+                sig: sig,
+                skIdentity: BN(privateKey).dec()
             )
         }
     }

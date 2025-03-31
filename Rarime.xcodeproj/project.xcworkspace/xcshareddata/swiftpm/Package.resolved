@@ -1,5 +1,5 @@
 {
-  "originHash" : "8857326a88fdbba5304a73f1871c4b13feca2c717754097107356b3716c9a439",
+  "originHash" : "e838ac7ec516d9ee65b01feb430abf8506534ec1d0f71e9ba058bfbd8044bfa2",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -394,6 +394,32 @@
       "state" : {
         "revision" : "467a3d17479887943ab917a379e62bbaff60ac8a",
         "version" : "2.1.1"
+      }
+    },
+    {
+      "identity" : "swoir",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/rarimo/Swoir.git",
+      "state" : {
+        "revision" : "1f30e5f8494cc859e9084d283e881191180ec034"
+      }
+    },
+    {
+      "identity" : "swoircore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Swoir/SwoirCore.git",
+      "state" : {
+        "revision" : "ad7e3d5c33366d045152b1f785c7f02f8e523a03",
+        "version" : "0.7.1"
+      }
+    },
+    {
+      "identity" : "swoirenberg",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/rarimo/Swoirenberg.git",
+      "state" : {
+        "revision" : "45b74e93865aa8e91b32baf50c52406e37b301c6",
+        "version" : "1.0.0-beta.1"
       }
     },
     {

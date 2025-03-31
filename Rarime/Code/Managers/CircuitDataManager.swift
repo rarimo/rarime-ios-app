@@ -48,15 +48,24 @@ enum RegisteredCircuitData: String {
     case registerIdentity_20_160_3_3_736_200_NA
 }
 
+enum RegisteredNoirCircuitData: String {
+    case trustedSetup
+    
+    case registerIdentity_2_256_3_6_336_264_21_2448_6_2008
+}
+
 class CircuitDataManager: ObservableObject {
     static let saveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "circuitsData", directoryHint: .isDirectory)
+    static let noirSaveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "noirCircuitsData", directoryHint: .isDirectory)
     
     static let shared = CircuitDataManager()
 
     let circuitDataURLs: [String: URL]
+    let noirCircuitDataURLs: [String: URL]
 
     init() {
         self.circuitDataURLs = ConfigManager.shared.circuitData.circuitDataURLs
+        self.noirCircuitDataURLs = ConfigManager.shared.noirCircuitData.noirCircuitDataURLs
     }
     
     func retriveCircuitData(
@@ -64,7 +73,7 @@ class CircuitDataManager: ObservableObject {
         _ downloadProgress: @escaping (Double) -> Void = { _ in }
     ) async throws -> CircuitData {
         if !AppUserDefaults.shared.isCircuitsStorageCleared {
-            try? FileManager.default.removeItem(at: CircuitDataManager.saveDirectory)
+            clearCache()
             
             AppUserDefaults.shared.isCircuitsStorageCleared = true
         }
@@ -112,6 +121,58 @@ class CircuitDataManager: ObservableObject {
             circutDatPath: circuitDatPath.path(),
             circuitZkeyPath: circuitZkeyPath.path()
         )
+    }
+    
+    func retriveNoirCircuitDataPath(
+        _ circuitDataName: RegisteredNoirCircuitData,
+        _ downloadProgress: @escaping (Double) -> Void = { _ in }
+    ) async throws -> URL {
+        if !AppUserDefaults.shared.isCircuitsStorageCleared {
+            clearCache()
+            
+            AppUserDefaults.shared.isCircuitsStorageCleared = true
+        }
+        
+        if let circuitData = try retriveNoirCircuitDataPathFromCache(circuitDataName.rawValue) {
+            return circuitData
+        }
+        
+        guard let noirCircuitDataURL = noirCircuitDataURLs[circuitDataName.rawValue] else {
+            throw "Circuit data URL not found"
+        }
+        
+        let fileUrl = try await AF.download(noirCircuitDataURL)
+            .downloadProgress { progress in
+                downloadProgress(progress.fractionCompleted)
+            }
+            .serializingDownloadedFileURL()
+            .result
+            .get()
+        
+        let moveDirectory = CircuitDataManager.saveDirectory.appending(path: "\(circuitDataName)")
+        
+        try FileManager.default.moveItem(atPath: fileUrl.path(), toPath: moveDirectory.path())
+        
+        guard let circuitData = try retriveNoirCircuitDataPathFromCache(circuitDataName.rawValue) else {
+            throw "Failed to retrive circuit data path from cache"
+        }
+        
+        return circuitData
+    }
+    
+    func retriveNoirCircuitDataPathFromCache(_ circuitDataName: String) throws -> URL? {
+        let circuitDataPath = CircuitDataManager.saveDirectory.appending(path: "\(circuitDataName)")
+                
+        if !FileManager.default.fileExists(atPath: circuitDataPath.path()) {
+            return nil
+        }
+        
+        return circuitDataPath
+    }
+    
+    func clearCache() {
+        try? FileManager.default.removeItem(at: CircuitDataManager.saveDirectory)
+        try? FileManager.default.removeItem(at: CircuitDataManager.noirSaveDirectory)
     }
 }
 

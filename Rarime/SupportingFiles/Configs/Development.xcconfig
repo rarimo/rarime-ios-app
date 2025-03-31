@@ -90,7 +90,9 @@ CIRCUIT_DATA_URL_37 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passpo
 CIRCUIT_DATA_URL_38 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.12/registerIdentity_20_160_3_3_736_200_NA-download.zip"
 
 // MARK: NoirCircuitsData
-NOIR_CIRCUIT_DATA_URL_1 = "https:${SLASH}/storage.googleapis.com/rarimo-store/noir-circuits/v0.1.0/noir-circuit-1.dat"
+NOIR_TRUSTED_SETUP_URL = "https:/${SLASH}/storage.googleapis.com/rarimo-store/trusted-setups/ultraPlonkTrustedSetup.dat"
+
+NOIR_CIRCUIT_DATA_URL_0 = "https:${SLASH}/storage.googleapis.com/rarimo-store/noir-circuits/v0.1.0/noir-circuit-1.json"
 
 // MARK: AppsFlyer
 APPSFLYER_DEV_KEY = "FsxpXXrjsFBLiF6jMe7jZY"

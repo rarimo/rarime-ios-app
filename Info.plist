@@ -218,5 +218,12 @@
 	<string>${REGISTRATION_SIMPLE_CONTRACT_ADRRESS}</string>
 	<key>REGISTRATION3_CONTRACT_ADDRESS</key>
 	<string>${REGISTRATION3_CONTRACT_ADDRESS}</string>
+	<key>NOIR_TRUSTED_SETUP_URL</key>
+	<string>${NOIR_TRUSTED_SETUP_URL}</string>
+	<key>NOIR_CIRCUIT_DATA_URLS</key>
+	<dict>
+		<key>registerIdentity_2_256_3_6_336_264_21_2448_6_2008</key>
+		<string>${NOIR_CIRCUIT_DATA_URL_0}</string>
+	</dict>
 </dict>
 </plist>
