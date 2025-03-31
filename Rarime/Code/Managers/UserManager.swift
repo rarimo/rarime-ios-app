@@ -259,18 +259,38 @@ class UserManager: ObservableObject {
         let ec = try sod.getEncapsulatedContent()
         
         let calldataBuilder = IdentityCallDataBuilder()
-        let calldata = try calldataBuilder.buildRegisterCalldata(
-            proofJson,
-            aaSignature: passport.signature,
-            aaPubKeyPem: passport.getDG15PublicKeyPEM(),
-            ecSizeInBits: ec.count * 8,
-            certificatesRootRaw: masterCertProof.root,
-            isRevoked: isRevoked,
-            circuitName: registerIdentityCircuitName
-        )
+        
+        let calldata: Data
+        let destination: String
+        switch registerZkProof {
+        case .groth(let proof):
+            calldata = try calldataBuilder.buildRegisterCalldata(
+                proof.json,
+                aaSignature: passport.signature,
+                aaPubKeyPem: passport.getDG15PublicKeyPEM(),
+                ecSizeInBits: ec.count * 8,
+                certificatesRootRaw: masterCertProof.root,
+                isRevoked: isRevoked,
+                circuitName: registerIdentityCircuitName
+            )
+            
+            destination = ConfigManager.shared.api.registerContractAddress
+        case .plonk(let data):
+            calldata = try calldataBuilder.buildRegisterCalldata(
+                data,
+                aaSignature: passport.signature,
+                aaPubKeyPem: passport.getDG15PublicKeyPEM(),
+                ecSizeInBits: ec.count * 8,
+                certificatesRootRaw: masterCertProof.root,
+                isRevoked: isRevoked,
+                circuitName: registerIdentityCircuitName
+            )
+            
+            destination = ConfigManager.shared.api.registration3ContractAddress
+        }
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.register(calldata, ConfigManager.shared.api.registerContractAddress)
+        let response = try await relayer.register(calldata, destination)
         
         LoggerUtil.common.info("Passport register EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
         
