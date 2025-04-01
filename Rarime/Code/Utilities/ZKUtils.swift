@@ -2,8 +2,11 @@ import Foundation
 
 import RarimeIOSUtils
 
+#if targetEnvironment(simulator)
+#else
 import Swoir
 import Swoirenberg
+#endif
 
 class ZKUtils {
     static let ERROR_SIZE = UInt(256)
@@ -101,6 +104,10 @@ class ZKUtils {
         _ circuitData: Data,
         _ inputs: [String: Any]
     ) throws -> Data {
+#if targetEnvironment(simulator)
+        return Data()
+#else
+        
         let circuit = try Swoir(backend: Swoirenberg.self)
             .createCircuit(manifest: circuitData)
         
@@ -109,6 +116,7 @@ class ZKUtils {
         let proof = try circuit.prove(inputs, proof_type: "plonk")
         
         return proof.proof
+#endif
     }
     
     private static func handleGroth16ProverError(
