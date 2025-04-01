@@ -49,7 +49,8 @@ enum RegisteredCircuitData: String {
 }
 
 enum RegisteredNoirCircuitData: String {
-    case trustedSetup
+    // If you decided to remove ".dat", well, good luck to debug buddy
+    case trustedSetup = "trustedSetup.dat"
     
     case registerIdentity_2_256_3_6_336_264_21_2448_6_2008
 }
@@ -137,9 +138,18 @@ class CircuitDataManager: ObservableObject {
             return circuitData
         }
         
-        guard let noirCircuitDataURL = noirCircuitDataURLs[circuitDataName.rawValue] else {
-            throw "Circuit data URL not found"
+        let noirCircuitDataURL: URL
+        if circuitDataName == .trustedSetup {
+            noirCircuitDataURL = ConfigManager.shared.noirCircuitData.noirTrustedSetupURL
+        } else {
+            guard let selectedCircuitDataURL = noirCircuitDataURLs[circuitDataName.rawValue] else {
+                throw "Circuit data URL not found"
+            }
+            
+            noirCircuitDataURL = selectedCircuitDataURL
         }
+        
+        LoggerUtil.common.debug("noirCircuitDataURL: \(noirCircuitDataURL.absoluteString)")
         
         let fileUrl = try await AF.download(noirCircuitDataURL)
             .downloadProgress { progress in
@@ -149,7 +159,13 @@ class CircuitDataManager: ObservableObject {
             .result
             .get()
         
-        let moveDirectory = CircuitDataManager.saveDirectory.appending(path: "\(circuitDataName)")
+        if !FileManager.default.fileExists(atPath: CircuitDataManager.noirSaveDirectory.path()) {
+            try FileManager.default.createDirectory(at: CircuitDataManager.noirSaveDirectory, withIntermediateDirectories: true)
+        }
+        
+        let moveDirectory = CircuitDataManager.noirSaveDirectory.appending(path: "\(circuitDataName.rawValue)")
+        
+        LoggerUtil.common.debug("moveDirectory: \(moveDirectory.absoluteString)")
         
         try FileManager.default.moveItem(atPath: fileUrl.path(), toPath: moveDirectory.path())
         
@@ -161,7 +177,7 @@ class CircuitDataManager: ObservableObject {
     }
     
     func retriveNoirCircuitDataPathFromCache(_ circuitDataName: String) throws -> URL? {
-        let circuitDataPath = CircuitDataManager.saveDirectory.appending(path: "\(circuitDataName)")
+        let circuitDataPath = CircuitDataManager.noirSaveDirectory.appending(path: "\(circuitDataName)")
                 
         if !FileManager.default.fileExists(atPath: circuitDataPath.path()) {
             return nil
