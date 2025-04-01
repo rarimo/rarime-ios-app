@@ -105,6 +105,7 @@ class PassportViewModel: ObservableObject {
                 proof = try await generatePlonkRegisterProof(
                     user,
                     passport,
+                    registerIdentityCircuitType,
                     registeredCircuitData,
                     &isCriticalRegistrationProcessInProgress
                 )
@@ -287,6 +288,7 @@ class PassportViewModel: ObservableObject {
     func generatePlonkRegisterProof(
         _ user: User,
         _ passport: Passport,
+        _ registerIdentityCircuitType: RegisterIdentityCircuitType,
         _ registeredNoirCircuitData: RegisteredNoirCircuitData,
         _ isCriticalRegistrationProcessInProgress: inout Bool
     ) async throws -> ZkProof {
@@ -312,7 +314,8 @@ class PassportViewModel: ObservableObject {
         
         let registerIdentityInputs = try await CircuitBuilderManager.shared.noirRegisterIdentityCircuit.buildInputs(
             user.secretKey,
-            passport
+            passport,
+            registerIdentityCircuitType
         )
         
         guard let circuitData = FileManager.default.contents(atPath: circuitDataPath.path()) else {

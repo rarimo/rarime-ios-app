@@ -91,7 +91,8 @@ extension CircuitBuilderManager {
     class NoirRegisterIdentityCircuit {
         func buildInputs(
             _ privateKey: Data,
-            _ passport: Passport
+            _ passport: Passport,
+            _ registerIdentityCircuitType: RegisterIdentityCircuitType
         ) async throws -> NoirRegisterIdentityInputs {
             let slaveCertPem = try passport.getSlaveSodCertificatePem()
             
@@ -107,7 +108,13 @@ extension CircuitBuilderManager {
                 throw "invalid pubkey data"
             }
             
-            let reductionPk = CircuitUtils.RSABarrettReductionParam(BN(pubkeyData), UInt(pubkeyData.count * 8)).map { $0.dec() }
+            let reductionPk: [String]
+            switch registerIdentityCircuitType.signatureType.algorithm {
+            case .RSA, .RSAPSS:
+                reductionPk = CircuitUtils.RSABarrettReductionParam(BN(pubkeyData), UInt(pubkeyData.count * 8)).map { $0.dec() }
+            case .ECDSA:
+                reductionPk = CircuitUtils.splitEmptyData(pubkeyData).map { $0.dec() }
+            }
             
             let pk = CircuitUtils.splitBy120Bits(pubkeyData).map { $0.dec() }
             

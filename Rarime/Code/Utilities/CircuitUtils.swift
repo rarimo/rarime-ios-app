@@ -98,6 +98,17 @@ class CircuitUtils {
             
         return SmartBNToArray120(120, chunk_number, base_x.div(n))
     }
+    
+    static func splitEmptyData(_ data: Data) -> [BN] {
+        let n_bits = data.count * 8
+        
+        var chunk_number = n_bits / 120
+        if n_bits % 120 != 0 {
+            chunk_number += 1
+        }
+            
+        return SmartBNToArray120(120, UInt(chunk_number), BN(0))
+    }
         
     static func splitBy120Bits(_ data: Data) -> [BN] {
         var chunk_number = (data.count * 8) / 120
