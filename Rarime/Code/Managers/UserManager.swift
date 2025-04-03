@@ -261,7 +261,6 @@ class UserManager: ObservableObject {
         let calldataBuilder = IdentityCallDataBuilder()
         
         let calldata: Data
-        let destination: String
         switch registerZkProof {
         case .groth(let proof):
             calldata = try calldataBuilder.buildRegisterCalldata(
@@ -273,10 +272,8 @@ class UserManager: ObservableObject {
                 isRevoked: isRevoked,
                 circuitName: registerIdentityCircuitName
             )
-            
-            destination = ConfigManager.shared.api.registerContractAddress
         case .plonk(let data):
-            calldata = try calldataBuilder.buildRegisterCalldata(
+            calldata = try calldataBuilder.buildNoirRegisterCalldata(
                 data,
                 aaSignature: passport.signature,
                 aaPubKeyPem: passport.getDG15PublicKeyPEM(),
@@ -285,12 +282,10 @@ class UserManager: ObservableObject {
                 isRevoked: isRevoked,
                 circuitName: registerIdentityCircuitName
             )
-            
-            destination = ConfigManager.shared.api.registration3ContractAddress
         }
         
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.register(calldata, destination)
+        let response = try await relayer.register(calldata, ConfigManager.shared.api.registerContractAddress)
         
         LoggerUtil.common.info("Passport register EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
         
