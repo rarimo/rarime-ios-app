@@ -149,8 +149,6 @@ class CircuitDataManager: ObservableObject {
             noirCircuitDataURL = selectedCircuitDataURL
         }
         
-        LoggerUtil.common.debug("noirCircuitDataURL: \(noirCircuitDataURL.absoluteString)")
-        
         let fileUrl = try await AF.download(noirCircuitDataURL)
             .downloadProgress { progress in
                 downloadProgress(progress.fractionCompleted)
@@ -164,8 +162,6 @@ class CircuitDataManager: ObservableObject {
         }
         
         let moveDirectory = CircuitDataManager.noirSaveDirectory.appending(path: "\(circuitDataName.rawValue)")
-        
-        LoggerUtil.common.debug("moveDirectory: \(moveDirectory.absoluteString)")
         
         try FileManager.default.moveItem(atPath: fileUrl.path(), toPath: moveDirectory.path())
         
