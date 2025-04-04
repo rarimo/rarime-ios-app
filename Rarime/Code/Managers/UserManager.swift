@@ -172,8 +172,6 @@ class UserManager: ObservableObject {
             wtns = try ZKUtils.calcWtns_registerIdentity_1_256_3_5_576_248_NA(circuitData.circuitDat, inputs)
         case .registerIdentity_1_256_3_6_576_248_1_2432_5_296:
             wtns = try ZKUtils.calcWtns_registerIdentity_1_256_3_6_576_248_1_2432_5_296(circuitData.circuitDat, inputs)
-        case .registerIdentity_2_256_3_6_336_264_21_2448_6_2008:
-            wtns = try ZKUtils.calcWtns_registerIdentity_2_256_3_6_336_264_21_2448_6_2008(circuitData.circuitDat, inputs)
         case .registerIdentity_21_256_3_7_336_264_21_3072_6_2008:
             wtns = try ZKUtils.calcWtns_registerIdentity_21_256_3_7_336_264_21_3072_6_2008(circuitData.circuitDat, inputs)
         case .registerIdentity_1_256_3_6_576_264_1_2448_3_256:
@@ -252,8 +250,6 @@ class UserManager: ObservableObject {
         let slaveCertPem = try passport.getSlaveSodCertificatePem()
         
         let masterCertProof = try await passport.getCertificateSmtProof(slaveCertPem)
-        
-        let proofJson = try JSONEncoder().encode(registerZkProof)
         
         let sod = try passport.getSod()
         let ec = try sod.getEncapsulatedContent()

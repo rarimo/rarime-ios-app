@@ -13,7 +13,6 @@ RELAYER_URL = "https:${SLASH}/api.app.rarime.com"
 EVM_RPC_URL = "https:${SLASH}/l2.rarimo.com"
 REGISTER_CONTRACT_ADDRESS = "0x11BB4B14AA6e4b836580F3DBBa741dD89423B971"
 REGISTRATION_SIMPLE_CONTRACT_ADRRESS = "0x497D6957729d3a39D43843BD27E6cbD12310F273"
-REGISTRATION3_CONTRACT_ADDRESS = ""
 CERTIFICATES_SMT_CONTRACT_ADDRESS = "0xA8b350d699632569D5351B20ffC1b31202AcEDD8"
 REGISTRATION_SMT_CONTRACT_ADDRESS = "0x479F84502Db545FA8d2275372E0582425204A879"
 STATE_KEEPER_CONTRACT_ADDRESS = "0x61aa5b68D811884dA4FEC2De4a7AA0464df166E1"
@@ -88,6 +87,12 @@ CIRCUIT_DATA_URL_35 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passpo
 CIRCUIT_DATA_URL_36 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.12/registerIdentity_4_160_3_3_336_216_1_1296_3_256-download.zip"
 CIRCUIT_DATA_URL_37 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.12/registerIdentity_15_512_3_3_336_248_NA-download.zip"
 CIRCUIT_DATA_URL_38 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.12/registerIdentity_20_160_3_3_736_200_NA-download.zip"
+
+// MARK: NoirCircuitsData
+NOIR_TRUSTED_SETUP_URL = "https:${SLASH}/storage.googleapis.com/rarimo-store/trusted-setups/ultraPlonkTrustedSetup.dat"
+
+NOIR_CIRCUIT_DATA_URL_0 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.1/registerIdentity_2_256_3_6_336_264_21_2448_6_2008.json"
+NOIR_CIRCUIT_DATA_URL_1 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.2/registerIdentity_2_256_3_6_248_336_1_2432_3_256.json"
 
 // MARK: AppsFlyer
 APPSFLYER_DEV_KEY = "FsxpXXrjsFBLiF6jMe7jZY"

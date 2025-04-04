@@ -109,16 +109,29 @@ extension CircuitBuilderManager {
             }
             
             let reductionPk: [String]
+            let pk: [String]
+            let sig: [String]
             switch registerIdentityCircuitType.signatureType.algorithm {
             case .RSA, .RSAPSS:
+                pk = CircuitUtils.splitBy120Bits(pubkeyData).map { $0.dec() }
+                
                 reductionPk = CircuitUtils.RSABarrettReductionParam(BN(pubkeyData), UInt(pubkeyData.count * 8)).map { $0.dec() }
+                
+                sig = CircuitUtils.splitBy120Bits(signature).map { $0.dec() }
             case .ECDSA:
-                reductionPk = CircuitUtils.splitEmptyData(pubkeyData).map { $0.dec() }
+                
+                let pubKeyX = pubkeyData.subdata(in: 0..<pubkeyData.count / 2)
+                let pubKeyY = pubkeyData.subdata(in: pubkeyData.count / 2..<pubkeyData.count)
+                
+                pk = (CircuitUtils.splitBy120Bits(pubKeyX) + CircuitUtils.splitBy120Bits(pubKeyY)).map { $0.dec() }
+                
+                reductionPk = (CircuitUtils.splitEmptyData(pubKeyX) + CircuitUtils.splitEmptyData(pubKeyY)).map { $0.dec() }
+                
+                let sigX = signature.subdata(in: 0..<signature.count / 2)
+                let sigY = signature.subdata(in: signature.count / 2..<signature.count)
+                
+                sig = (CircuitUtils.splitBy120Bits(sigX) + CircuitUtils.splitBy120Bits(sigY)).map { $0.dec() }
             }
-            
-            let pk = CircuitUtils.splitBy120Bits(pubkeyData).map { $0.dec() }
-            
-            let sig = CircuitUtils.splitBy120Bits(signature).map { $0.dec() }
             
             return .init(
                 dg1: passport.dg1.map { $0.description },
