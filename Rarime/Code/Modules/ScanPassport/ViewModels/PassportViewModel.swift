@@ -341,7 +341,7 @@ class PassportViewModel: ObservableObject {
             
             let registerIdentityLightCircuitName = try passport.getRegisterIdentityLightCircuitName()
             
-            LoggerUtil.common.info("Registering passport with light circuit: \(registerIdentityLightCircuitName)")
+            LoggerUtil.common.info("Registering passport with light circuit: \(registerIdentityLightCircuitName, privacy: .public)")
             
             guard let registeredCircuitData = RegisteredCircuitData(rawValue: registerIdentityLightCircuitName) else {
                 throw "failed to get registered circuit data, circuit does not exist"

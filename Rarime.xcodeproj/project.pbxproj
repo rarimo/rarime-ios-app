@@ -267,8 +267,7 @@
 		CE51E2FB2C21CA0B00043D9A /* StateKeeperContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51E2FA2C21CA0B00043D9A /* StateKeeperContract.swift */; };
 		CE5315C32C77664C0087D53D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE5315C22C77664C0087D53D /* GoogleService-Info.plist */; };
 		CE5315CA2C7769A20087D53D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5315C92C7769A20087D53D /* NotificationManager.swift */; };
-		CE53BCB12D9A8BAD007B1892 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE53BCB02D9A8BAD007B1892 /* Identity.xcframework */; };
-		CE53BCC22D9A9A2C007B1892 /* Swoir in Frameworks */ = {isa = PBXBuildFile; productRef = CE53BCC12D9A9A2C007B1892 /* Swoir */; };
+		CE53BCC22D9A9A2C007B1892 /* Swoir in Frameworks */ = {isa = PBXBuildFile; productRef = CE53BCC12D9A9A2C007B1892 /* Swoir */; settings = {ATTRIBUTES = (Required, ); }; };
 		CE5980DC2D07B288000B6261 /* RegisterIdentityLightInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5980DB2D07B279000B6261 /* RegisterIdentityLightInputs.swift */; };
 		CE5980DD2D07B288000B6261 /* RegisterIdentityLightInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5980DB2D07B279000B6261 /* RegisterIdentityLightInputs.swift */; };
 		CE61E8832C24240000940129 /* Semaphore in Frameworks */ = {isa = PBXBuildFile; productRef = CE61E8822C24240000940129 /* Semaphore */; };
@@ -305,6 +304,7 @@
 		CE8FEB5F2C1AFF0A0008381A /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB5E2C1AFF0A0008381A /* JWT.swift */; };
 		CE8FEB622C1B03C10008381A /* AuthCircuitInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB612C1B03C10008381A /* AuthCircuitInputs.swift */; };
 		CE9347732C205B340034885C /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = CE9347722C205B340034885C /* CachedAsyncImage */; };
+		CE9B5BD42D9FE3A0000B4E3B /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9B5BD32D9FE3A0000B4E3B /* Identity.xcframework */; };
 		CE9E82B62BA881F400AAF885 /* RarimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82B52BA881F400AAF885 /* RarimeApp.swift */; };
 		CE9E82B82BA881F400AAF885 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82B72BA881F400AAF885 /* AppView.swift */; };
 		CE9E82BA2BA881F500AAF885 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9E82B92BA881F500AAF885 /* Assets.xcassets */; };
@@ -612,7 +612,6 @@
 		CE51E2FA2C21CA0B00043D9A /* StateKeeperContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateKeeperContract.swift; sourceTree = "<group>"; };
 		CE5315C22C77664C0087D53D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE5315C92C7769A20087D53D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		CE53BCB02D9A8BAD007B1892 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE5980DB2D07B279000B6261 /* RegisterIdentityLightInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterIdentityLightInputs.swift; sourceTree = "<group>"; };
 		CE61E88C2C247B4700940129 /* HMACUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACUtils.swift; sourceTree = "<group>"; };
 		CE664C7D2D19808900988A5E /* witnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.h; sourceTree = "<group>"; };
@@ -639,6 +638,7 @@
 		CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_auth.h; sourceTree = "<group>"; };
 		CE8FEB5E2C1AFF0A0008381A /* JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
 		CE8FEB612C1B03C10008381A /* AuthCircuitInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCircuitInputs.swift; sourceTree = "<group>"; };
+		CE9B5BD32D9FE3A0000B4E3B /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE9E82B22BA881F400AAF885 /* Rarime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rarime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE9E82B52BA881F400AAF885 /* RarimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarimeApp.swift; sourceTree = "<group>"; };
 		CE9E82B72BA881F400AAF885 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
@@ -769,6 +769,7 @@
 				CEC76C922D6750D800130CA1 /* libwitnesscalc_registerIdentity_1_256_3_6_576_248_1_2432_5_296.a in Frameworks */,
 				CEC76C932D6750D800130CA1 /* libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a in Frameworks */,
 				CE39DFE22D3FAA5200799A4B /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.a in Frameworks */,
+				CE9B5BD42D9FE3A0000B4E3B /* Identity.xcframework in Frameworks */,
 				CE39DFE32D3FAA5200799A4B /* libwitnesscalc_registerIdentity_3_160_3_4_576_216_1_1512_3_256.a in Frameworks */,
 				CE28D4FB2D3E887300042E1D /* libwitnesscalc_registerIdentityLight256.a in Frameworks */,
 				CE39E09C2D3FCA1900799A4B /* libwitnesscalc_registerIdentity_21_256_3_4_576_232_NA.a in Frameworks */,
@@ -808,7 +809,6 @@
 				CEC562042BD923B4002D4954 /* librapidsnark.a in Frameworks */,
 				5609B6C82C188C7500CB6A1F /* MarkdownUI in Frameworks */,
 				CE7210312BD807140043DB7F /* ZipArchive in Frameworks */,
-				CE53BCB12D9A8BAD007B1892 /* Identity.xcframework in Frameworks */,
 				560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */,
 				CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */,
 			);
@@ -1561,7 +1561,7 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CE53BCB02D9A8BAD007B1892 /* Identity.xcframework */,
+				CE9B5BD32D9FE3A0000B4E3B /* Identity.xcframework */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562002BD923B3002D4954 /* prover.h */,
 				CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */,
@@ -3045,7 +3045,7 @@
 			repositoryURL = "https://github.com/rarimo/Swoir.git";
 			requirement = {
 				kind = revision;
-				revision = 1f30e5f8494cc859e9084d283e881191180ec034;
+				revision = 197d5acbc861f601d51c0c707c81b84f1fa4e22b;
 			};
 		};
 		CE61E8812C24240000940129 /* XCRemoteSwiftPackageReference "Semaphore" */ = {
