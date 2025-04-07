@@ -14,7 +14,7 @@ enum ExternalRequestTypes: String, Codable {
 enum ExternalRequests: Equatable {
     case proofRequest(proofParamsUrl: URL, urlQueryParams: [URLQueryItem])
     case lightVerification(verificationParamsUrl: URL, urlQueryParams: [URLQueryItem])
-    case voting(proposalId: BigUInt)
+    case voting(qrCodeUrl: URL)
 }
 
 class ExternalRequestsManager: ObservableObject {
@@ -90,15 +90,15 @@ class ExternalRequestsManager: ObservableObject {
     }
     
     private func handleVotingRequest(params: [URLQueryItem]) {
-        guard let rawProposalId = params.first(where: { $0.name == "proposal_id" })?.value?.removingPercentEncoding,
-              let proposalId = BigUInt(rawProposalId)
+        guard let rawQrCodeUrl = params.first(where: { $0.name == "qr_code_url" })?.value?.removingPercentEncoding,
+              let qrCodeUrl = URL(string: rawQrCodeUrl)
         else {
-            LoggerUtil.common.error("Invalid voting ID: \(params, privacy: .public)")
-            AlertManager.shared.emitError(.unknown("Invalid voting ID"))
+            LoggerUtil.common.error("Invalid QR Code URL: \(params, privacy: .public)")
+            AlertManager.shared.emitError(.unknown("Invalid QR Code URL"))
             return
         }
-
-        setRequest(.voting(proposalId: proposalId))
+    
+        setRequest(.voting(qrCodeUrl: qrCodeUrl))
     }
 
     func setRequest(_ request: ExternalRequests) {

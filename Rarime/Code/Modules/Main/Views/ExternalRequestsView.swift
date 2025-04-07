@@ -30,9 +30,9 @@ struct ExternalRequestsView: View {
                         },
                         onDismiss: { isSheetPresented = false }
                     )
-                case let .voting(proposalId):
-                    VotingView(
-                        proposalId: proposalId,
+                case let .voting(qrCodeUrl):
+                    PollQRCodeView(
+                        qrCodeUrl: qrCodeUrl,
                         onDismiss: { isSheetPresented = false }
                     )
                 default:

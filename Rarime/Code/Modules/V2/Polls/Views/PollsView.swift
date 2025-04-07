@@ -243,28 +243,30 @@ private struct PollListCard: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 12) {
-                Text(poll.title)
-                    .h3()
-                    .foregroundStyle(.textPrimary)
-                    .multilineTextAlignment(.leading)
-                HStack(alignment: .center, spacing: 12) {
-                    HStack(alignment: .center, spacing: 8) {
-                        Image(Icons.timerLine)
-                            .iconSmall()
-                        Text(poll.endAt)
-                            .subtitle7()
+            Group {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(poll.title)
+                        .h3()
+                        .foregroundStyle(.textPrimary)
+                        .multilineTextAlignment(.leading)
+                    HStack(alignment: .center, spacing: 12) {
+                        HStack(alignment: .center, spacing: 8) {
+                            Image(Icons.timerLine)
+                                .iconSmall()
+                            Text(poll.endAt)
+                                .subtitle7()
+                        }
+                        HStack(alignment: .center, spacing: 8) {
+                            Image(Icons.groupLine)
+                                .iconSmall()
+                            Text(totalParticipants.formatted())
+                                .subtitle7()
+                        }
                     }
-                    HStack(alignment: .center, spacing: 8) {
-                        Image(Icons.groupLine)
-                            .iconSmall()
-                        Text(totalParticipants.formatted())
-                            .subtitle7()
-                    }
+                    .foregroundStyle(.textSecondary)
                 }
-                .foregroundStyle(.textSecondary)
+                HorizontalDivider()
             }
-            HorizontalDivider()
             HeightPreservingTabView(selection: $selectedIndex) {
                 ForEach(questionResults.indices, id: \.self) { index in
                     VStack(alignment: .leading, spacing: 16) {
@@ -277,13 +279,18 @@ private struct PollListCard: View {
                            totalVotes: totalVotes
                         )
                     }
-                    .tag(index)
                     .padding(.horizontal, 8)
+                    .tag(index)
+                    .background(
+                        GeometryReader { geometry in
+                            Color.clear.preference(
+                                key: TabViewHeightPreferenceKey<Int>.self,
+                                value: [index: geometry.size.height]
+                            )
+                        }
+                    )
                 }
             }
-            .disabled(poll.questions.count < 1)
-            .padding(.horizontal, -8)
-            .frame(minHeight: 1)
             .tabViewStyle(.page(indexDisplayMode: .never))
             .animation(.default, value: selectedIndex)
             if poll.questions.count > 1 {

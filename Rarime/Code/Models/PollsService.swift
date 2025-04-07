@@ -3,6 +3,7 @@ import Foundation
 import Web3
 import Web3ContractABI
 import Web3PromiseKit
+import UIKit
 
 class PollsService {
     static func fetchPolls(
@@ -29,14 +30,16 @@ class PollsService {
             let proposalEventId = try BigUInt.fromRawSolidityArray(results[half + i].returnData)
             
             var proposalMetadata = ProposalMetadata.empty()
+            var pollImage: UIImage?
+            
             if proposalInfo.status != .doNotShow {
                 do {
-                    let ipfsNodeURL = ConfigManager.shared.api.ipfsNodeURL
-                    let proposalInfoUrl = ipfsNodeURL
-                        .appendingPathComponent("ipfs")
-                        .appendingPathComponent(proposalInfo.config.description)
+                    let ipfs = IPFS()
+                    proposalMetadata = try await ipfs.load(proposalInfo.config.description)
                     
-                    proposalMetadata = try await ProposalMetadata.fromURL(proposalInfoUrl)
+                    if let imageCid = proposalMetadata.imageCid {
+                        pollImage = try await ipfs.loadImage(imageCid)
+                    }
                 } catch {
                     LoggerUtil.common.warning("Can't get proposal metadata for proposalId: \(i, privacy: .public), error: \(error, privacy: .public)")
                 }
@@ -44,6 +47,7 @@ class PollsService {
             
             let poll = Poll(
                 id: UInt(id),
+                image: pollImage,
                 title: proposalMetadata.title,
                 description: proposalMetadata.description,
                 startsAt: Date(timeIntervalSince1970: Double(proposalInfo.config.startTimestamp)),
@@ -82,14 +86,16 @@ class PollsService {
         let proposalEventId = try BigUInt.fromRawSolidityArray(results[1].returnData)
         var proposalMetadata = ProposalMetadata.empty()
         
+        var pollImage: UIImage?
+        
         if proposalInfo.status != .doNotShow {
             do {
-                let ipfsNodeURL = ConfigManager.shared.api.ipfsNodeURL
-                let proposalInfoUrl = ipfsNodeURL
-                    .appendingPathComponent("ipfs")
-                    .appendingPathComponent(proposalInfo.config.description)
+                let ipfs = IPFS()
+                proposalMetadata = try await ipfs.load(proposalInfo.config.description)
                 
-                proposalMetadata = try await ProposalMetadata.fromURL(proposalInfoUrl)
+                if let imageCid = proposalMetadata.imageCid {
+                    pollImage = try await ipfs.loadImage(imageCid)
+                }
             } catch {
                 LoggerUtil.common.warning("Can't get proposal metadata for proposalId: \(id, privacy: .public), error: \(error, privacy: .public)")
             }
@@ -97,6 +103,7 @@ class PollsService {
         
         return Poll(
             id: UInt(id),
+            image: pollImage,
             title: proposalMetadata.title,
             description: proposalMetadata.description,
             startsAt: Date(timeIntervalSince1970: Double(proposalInfo.config.startTimestamp)),
@@ -151,11 +158,14 @@ class PollsService {
     static func decodeVotingData(_ poll: Poll) throws -> VotingData {
         guard let encodedVotingData = poll.votingData.abiEncode(dynamic: false) else {
            throw "Empty or nil voting data"
-       }
+        }
         
         let rawDecoded = try ABIDecoder.decodeTuple(
             .tuple([
+                .uint256,
                 .array(type: .uint256, length: nil),
+                .uint256,
+                .uint256,
                 .uint256,
                 .uint256,
                 .uint256,
@@ -164,44 +174,58 @@ class PollsService {
             from: encodedVotingData
         )
         
-        guard let rawArray = rawDecoded as? [Any], rawArray.count == 5 else {
+        guard let rawArray = rawDecoded as? [Any], rawArray.count == 8 else {
             throw "Decoding error: unexpected structure"
         }
         
-        guard let citizenshipMask = rawArray[0] as? [BigUInt] else {
-            throw "Response does not contain array of citizenship masks"
+        guard let selector = rawArray[0] as? BigUInt else {
+            throw "Response does not contain selector"
         }
         
-        guard let timestampUpperbound = rawArray[1] as? BigUInt else {
+        guard let citizenshipWhitelist = rawArray[1] as? [BigUInt] else {
+            throw "Response does not contain array of citizenship whitelist"
+        }
+        
+        guard let timestampUpperbound = rawArray[2] as? BigUInt else {
             throw "Response does not contain timestamp upperbound"
         }
         
-        guard let identityCounterUpperbound = rawArray[2] as? BigUInt else {
+        guard let identityCounterUpperbound = rawArray[3] as? BigUInt else {
             throw "Response does not contain identity counter upperbound"
         }
         
-        guard let birthDateUpperbound = rawArray[3] as? BigUInt else {
+        guard let gender = rawArray[4] as? BigUInt else {
+            throw "Response does not contain gender"
+        }
+        
+        guard let birthDateLowerbound = rawArray[5] as? BigUInt else {
+            throw "Response does not contain birth date lowerbound"
+        }
+        
+        guard let birthDateUpperbound = rawArray[6] as? BigUInt else {
             throw "Response does not contain birth date upperbound"
         }
         
-        guard let expirationDateLowerbound = rawArray[4] as? BigUInt else {
+        guard let expirationDateLowerbound = rawArray[7] as? BigUInt else {
             throw "Response does not contain expiration date lowerbound"
         }
         
         return VotingData(
-            citizenshipMask: citizenshipMask,
+            selector: selector,
+            citizenshipWhitelist: citizenshipWhitelist,
             timestampUpperbound: timestampUpperbound,
             identityCounterUpperbound: identityCounterUpperbound,
-//            birthDateLowerbound: "0x303030303030",
+            gender: gender,
+            birthDateLowerbound: birthDateLowerbound,
             birthDateUpperbound: birthDateUpperbound,
             expirationDateLowerbound: expirationDateLowerbound
-//            sex: "0x4d"
         )
     }
 }
 
 struct Poll: Identifiable {
     let id: UInt
+    let image: UIImage?
     let title: String
     let description: String
     let startsAt: Date
@@ -230,13 +254,14 @@ struct Poll: Identifiable {
 }
 
 struct VotingData: Codable {
-    let citizenshipMask: [BigUInt]
+    let selector: BigUInt
+    let citizenshipWhitelist: [BigUInt]
     let timestampUpperbound : BigUInt
     let identityCounterUpperbound: BigUInt
-//    let birthDateLowerbound: BigUInt
+    let gender: BigUInt
+    let birthDateLowerbound: BigUInt
     let birthDateUpperbound: BigUInt
     let expirationDateLowerbound: BigUInt
-//    let sex: BigUInt
 }
 
 struct Question {

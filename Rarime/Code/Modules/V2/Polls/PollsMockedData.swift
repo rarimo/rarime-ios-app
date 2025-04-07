@@ -4,6 +4,7 @@ import Foundation
 let ACTIVE_POLLS: [Poll] = [
     Poll(
         id: 1,
+        image: nil,
         title: String(localized: "Pre-elections polls"),
         description: String(localized: "Your vote counts, and you will be rewarded for every participation"),
         startsAt: Date(),
@@ -45,6 +46,7 @@ let ACTIVE_POLLS: [Poll] = [
 let FINISHED_POLLS: [Poll] = [
     Poll(
         id: 2,
+        image: nil,
         title: "Finished poll",
         description: "Your vote counts, and you will be rewarded for every participation",
         startsAt: Date().addingTimeInterval(-20 * 24 * 60 * 60), // 20 days ago

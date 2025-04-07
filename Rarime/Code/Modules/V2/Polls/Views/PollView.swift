@@ -55,12 +55,13 @@ struct PollView: View {
     private var pollOverview: some View {
         VStack(spacing: 24) {
             ZStack(alignment: .topTrailing) {
-                // TODO: use image from ProposalMetadata
-                Image(.rewardCoin)
-                    .resizable()
-                    .scaledToFill()
-                    .clipped()
-                    .frame(maxHeight: 228)
+                if let image = poll.image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(maxHeight: 228)
+                        .clipped()
+                }
                 Button(action: onClose) {
                     Image(Icons.closeFill)
                         .iconMedium()
@@ -69,6 +70,7 @@ struct PollView: View {
                 }
                 .background(.baseWhite)
                 .clipShape(RoundedRectangle(cornerRadius: 100))
+                .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding([.top, .trailing], 20)
             }
             VStack(alignment: .leading, spacing: 24) {
@@ -102,35 +104,42 @@ struct PollView: View {
                     .body4()
                     .foregroundStyle(.textSecondary)
                 }
-                HorizontalDivider()
-                VStack(alignment: .leading, spacing: 16) {
-                    Text("Criteria")
-                        .overline2()
-                        .foregroundStyle(.textSecondary)
-                    ForEach(pollsViewModel.pollRequirements, id: \.id) { requirement in
-                        HStack(alignment: .center, spacing: 8) {
-                            Image(requirement.isEligible ? Icons.checkboxCircleFill : Icons.closeCircleFill)
-                                .iconMedium()
-                                .foregroundStyle(requirement.isEligible ? .secondaryMain : .errorMain)
-                            Text(requirement.text)
-                                .subtitle6()
-                                .foregroundStyle(.textPrimary)
+                if !pollsViewModel.pollRequirements.isEmpty {
+                    HorizontalDivider()
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text("Criteria")
+                            .overline2()
+                            .foregroundStyle(.textSecondary)
+                        ForEach(pollsViewModel.pollRequirements, id: \.id) { requirement in
+                            HStack(alignment: .center, spacing: 8) {
+                                Image(requirement.isEligible ? Icons.checkboxCircleFill : Icons.closeCircleFill)
+                                    .iconMedium()
+                                    .foregroundStyle(requirement.isEligible ? .secondaryMain : .errorMain)
+                                Text(requirement.text)
+                                    .subtitle6()
+                                    .foregroundStyle(.textPrimary)
+                            }
                         }
                     }
                 }
                 Spacer()
-                Group {
-                    if poll.status != .ended {
-                        if isVoted {
-                            AppButton(text: "Voted", action: {})
-                                .disabled(true)
-                        } else {
-                            AppButton(text: "Let's start", action: { isQuestionsShown = true })
-                                .disabled(isSubmitting || !isAdmittedToVote)
+                if isUserVoteChecking {
+                    ProgressView()
+                        .frame(maxWidth: .infinity, alignment: .center)
+                } else {
+                    Group {
+                        if poll.status != .ended {
+                            if isVoted {
+                                AppButton(text: "Voted", action: {})
+                                    .disabled(true)
+                            } else {
+                                AppButton(text: "Let's start", action: { isQuestionsShown = true })
+                                    .disabled(isSubmitting || !isAdmittedToVote)
+                            }
                         }
                     }
+                    .controlSize(.large)
                 }
-                .controlSize(.large)
             }
             .padding(.horizontal, 20)
         }

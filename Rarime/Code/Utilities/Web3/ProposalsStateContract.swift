@@ -172,20 +172,14 @@ struct ProposalInfo: Codable {
 
 struct ProposalMetadata: Codable {
     let title, description: String
+    let imageCid: String?
     let acceptedOptions: [ProposalMetadataAcceptedOption]
-    
-    static func fromURL(_ url: URL) async throws -> Self {
-        return try await AF.request(url)
-            .validate(OpenApiError.catchInstance)
-            .serializingDecodable(Self.self)
-            .result
-            .get()
-    }
     
     static func empty() -> Self {
         return Self(
             title: "",
             description: "",
+            imageCid: nil,
             acceptedOptions: []
         )
     }

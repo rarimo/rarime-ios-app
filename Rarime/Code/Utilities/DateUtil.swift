@@ -90,4 +90,10 @@ class DateUtil {
 
         return result
     }
+    
+    static func yearsBetween(from startDate: Date, to endDate: Date = Date()) -> Int {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year], from: startDate, to: endDate)
+        return components.year ?? 0
+    }
 }

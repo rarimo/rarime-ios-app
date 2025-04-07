@@ -2,34 +2,32 @@ import SwiftUI
 
 struct HeightPreservingTabView<SelectionValue: Hashable, Content: View>: View {
     var selection: Binding<SelectionValue>?
-    
     @ViewBuilder var content: () -> Content
 
-    @State private var minHeight: CGFloat = 1
+    @State private var currentHeight: CGFloat = 1
 
     var body: some View {
         TabView(selection: selection) {
             content()
-                .background {
-                    GeometryReader { geometry in
-                        Color.clear.preference(
-                            key: TabViewMinHeightPreference.self,
-                            value: geometry.frame(in: .local).height
-                        )
-                    }
-                }
         }
-        .frame(minHeight: minHeight)
-        .onPreferenceChange(TabViewMinHeightPreference.self) { minHeight in
-            self.minHeight = minHeight
+        .frame(height: currentHeight)
+        .onPreferenceChange(TabViewHeightPreferenceKey<SelectionValue>.self) { heights in
+            if let selected = selection?.wrappedValue,
+               let newHeight = heights[selected] {
+                withAnimation {
+                    currentHeight = newHeight
+                }
+            }
         }
     }
 }
 
-private struct TabViewMinHeightPreference: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = max(value, nextValue())
+struct TabViewHeightPreferenceKey<SelectionValue: Hashable>: PreferenceKey {
+    typealias Value = [SelectionValue: CGFloat]
+    
+    static var defaultValue: [SelectionValue: CGFloat] { [:] }
+    
+    static func reduce(value: inout [SelectionValue: CGFloat], nextValue: () -> [SelectionValue: CGFloat]) {
+        value.merge(nextValue(), uniquingKeysWith: { $1 })
     }
 }

@@ -154,10 +154,9 @@
 		C75512942C870AFD000258AD /* StepIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75512932C870AFD000258AD /* StepIndicator.swift */; };
 		C75512962C87617B000258AD /* RemoveCase.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C75512952C87617B000258AD /* RemoveCase.mp4 */; };
 		C755353F2D6F196C00A562B5 /* ChildOffsetReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755353E2D6F196700A562B5 /* ChildOffsetReader.swift */; };
-		C75535482D6F2EF900A562B5 /* VotingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75535472D6F2EF300A562B5 /* VotingView.swift */; };
+		C75535482D6F2EF900A562B5 /* PollQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75535472D6F2EF300A562B5 /* PollQRCodeView.swift */; };
 		C755354C2D6F4E6000A562B5 /* PollsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755354B2D6F4E5F00A562B5 /* PollsService.swift */; };
 		C75C4DF02D8D80D000D647DF /* HeightPreservingTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C4DEF2D8D80C800D647DF /* HeightPreservingTabView.swift */; };
-		C764106F2D9AAC3300B72A74 /* VotingQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764106E2D9AAC2500B72A74 /* VotingQRCode.swift */; };
 		C7780C842D632A2E0050B5BB /* IdentityOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C832D632A210050B5BB /* IdentityOnboardingView.swift */; };
 		C7780C962D634D8C0050B5BB /* V2ClaimTokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C952D634D830050B5BB /* V2ClaimTokensView.swift */; };
 		C7780C982D634DAE0050B5BB /* V2InviteFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7780C972D634D900050B5BB /* V2InviteFriendsView.swift */; };
@@ -165,6 +164,8 @@
 		C789A2E82CA5978B00443900 /* LightVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C789A2E72CA5978B00443900 /* LightVerificationView.swift */; };
 		C789A2EA2CA59F5800443900 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C789A2E92CA59F5800443900 /* StringUtils.swift */; };
 		C78EA4FA2C9B2EF5001DA0B3 /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
+		C7A27D772DA3BAB5005A1070 /* IPFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A27D762DA3BAB0005A1070 /* IPFS.swift */; };
+		C7A27D8D2DA406B5005A1070 /* QRLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A27D8C2DA406B2005A1070 /* QRLink.swift */; };
 		C7A5359F2D8B1E7B0055BDA7 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A5359E2D8B1E7B0055BDA7 /* Identity.xcframework */; };
 		C7B57B642D650FB1001E86C4 /* AnimationNamespaceIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B57B632D650FA5001E86C4 /* AnimationNamespaceIds.swift */; };
 		C7B57B6B2D65D58C001E86C4 /* V2HomeView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B57B6A2D65D585001E86C4 /* V2HomeView+ViewModel.swift */; };
@@ -552,16 +553,17 @@
 		C75512932C870AFD000258AD /* StepIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepIndicator.swift; sourceTree = "<group>"; };
 		C75512952C87617B000258AD /* RemoveCase.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = RemoveCase.mp4; sourceTree = "<group>"; };
 		C755353E2D6F196700A562B5 /* ChildOffsetReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildOffsetReader.swift; sourceTree = "<group>"; };
-		C75535472D6F2EF300A562B5 /* VotingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingView.swift; sourceTree = "<group>"; };
+		C75535472D6F2EF300A562B5 /* PollQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollQRCodeView.swift; sourceTree = "<group>"; };
 		C755354B2D6F4E5F00A562B5 /* PollsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollsService.swift; sourceTree = "<group>"; };
 		C75C4DEF2D8D80C800D647DF /* HeightPreservingTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightPreservingTabView.swift; sourceTree = "<group>"; };
-		C764106E2D9AAC2500B72A74 /* VotingQRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingQRCode.swift; sourceTree = "<group>"; };
 		C7780C832D632A210050B5BB /* IdentityOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityOnboardingView.swift; sourceTree = "<group>"; };
 		C7780C952D634D830050B5BB /* V2ClaimTokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2ClaimTokensView.swift; sourceTree = "<group>"; };
 		C7780C972D634D900050B5BB /* V2InviteFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2InviteFriendsView.swift; sourceTree = "<group>"; };
 		C7780C992D6357370050B5BB /* Rewards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rewards.swift; sourceTree = "<group>"; };
 		C789A2E72CA5978B00443900 /* LightVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightVerificationView.swift; sourceTree = "<group>"; };
 		C789A2E92CA59F5800443900 /* StringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
+		C7A27D762DA3BAB0005A1070 /* IPFS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPFS.swift; sourceTree = "<group>"; };
+		C7A27D8C2DA406B2005A1070 /* QRLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRLink.swift; sourceTree = "<group>"; };
 		C7A5359E2D8B1E7B0055BDA7 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		C7B57B632D650FA5001E86C4 /* AnimationNamespaceIds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationNamespaceIds.swift; sourceTree = "<group>"; };
 		C7B57B6A2D65D585001E86C4 /* V2HomeView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "V2HomeView+ViewModel.swift"; sourceTree = "<group>"; };
@@ -890,7 +892,7 @@
 		5617AB112C8F47B1003947C9 /* ExternalRequests */ = {
 			isa = PBXGroup;
 			children = (
-				C75535472D6F2EF300A562B5 /* VotingView.swift */,
+				C75535472D6F2EF300A562B5 /* PollQRCodeView.swift */,
 				5617AB122C8F47C2003947C9 /* ProofRequestView.swift */,
 				C789A2E72CA5978B00443900 /* LightVerificationView.swift */,
 			);
@@ -1538,7 +1540,8 @@
 		CE7E95792CE7572800D86A4F /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				C764106E2D9AAC2500B72A74 /* VotingQRCode.swift */,
+				C7A27D8C2DA406B2005A1070 /* QRLink.swift */,
+				C7A27D762DA3BAB0005A1070 /* IPFS.swift */,
 				C7BBDBD52D71D43F00E2905E /* VotingRelayer.swift */,
 				CE06BF332D08566400F6C721 /* LightRegistrationService.swift */,
 				CE0DA0D82BDA927000696503 /* AirDropResponse.swift */,
@@ -2202,6 +2205,7 @@
 				C7F61DF52D84226000D4DC3A /* UnsupportedPassportView.swift in Sources */,
 				CE3477622C78892F005E91FE /* View+Align.swift in Sources */,
 				5641CC452C874E2B007B7A0D /* AppAlert.swift in Sources */,
+				C7A27D8D2DA406B5005A1070 /* QRLink.swift in Sources */,
 				C71161B32CAAE3DB00ED41EA /* String+BigUInt.swift in Sources */,
 				563706792C5CF374002F3AF4 /* MrzFormView.swift in Sources */,
 				CED909D02BDBA9FC0065E949 /* Cosmos.swift in Sources */,
@@ -2255,6 +2259,7 @@
 				56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */,
 				5609B6D02C19939600CB6A1F /* LevelingView.swift in Sources */,
 				C7BBDBD62D71D44700E2905E /* VotingRelayer.swift in Sources */,
+				C7A27D772DA3BAB5005A1070 /* IPFS.swift in Sources */,
 				C789A2EA2CA59F5800443900 /* StringUtils.swift in Sources */,
 				CEF723142BF4BB9000E79198 /* Errors.swift in Sources */,
 				CE059B442C9C4702006046B3 /* InternetConnectionRequiredView.swift in Sources */,
@@ -2266,7 +2271,6 @@
 				CE0881A12BF773CC00B31735 /* AlertManager.swift in Sources */,
 				CE7D8AAC2BFB52EE009AF212 /* OpenApiError.swift in Sources */,
 				56933DF12BBAC1B10068C894 /* ScanPassportLayoutView.swift in Sources */,
-				C764106F2D9AAC3300B72A74 /* VotingQRCode.swift in Sources */,
 				5659151B2BE927A20050795A /* AppIconView.swift in Sources */,
 				560F0C272BD1146C00067054 /* ScanQRView.swift in Sources */,
 				56933DFB2BBAFBD90068C894 /* AppToggle.swift in Sources */,
@@ -2322,7 +2326,7 @@
 				5609B6CA2C18950700CB6A1F /* ClaimRewardsView.swift in Sources */,
 				560F0C252BD036F900067054 /* AppTextField.swift in Sources */,
 				C75512902C86F4BC000258AD /* PushNotification.xcdatamodeld in Sources */,
-				C75535482D6F2EF900A562B5 /* VotingView.swift in Sources */,
+				C75535482D6F2EF900A562B5 /* PollQRCodeView.swift in Sources */,
 				563529E72BB072870027C910 /* WalletView.swift in Sources */,
 				C7D624512D6DB351007BA5A6 /* PollsMockedData.swift in Sources */,
 				5659151D2BE92AA90050795A /* AppIcon.swift in Sources */,
