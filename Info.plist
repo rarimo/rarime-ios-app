@@ -222,8 +222,10 @@
 	<dict>
 		<key>registerIdentity_2_256_3_6_336_264_21_2448_6_2008</key>
 		<string>${NOIR_CIRCUIT_DATA_URL_0}</string>
-		<key>registerIdentity_2_256_3_6_248_336_1_2432_3_256</key>
+		<key>registerIdentity_2_256_3_6_336_248_1_2432_3_256</key>
 		<string>${NOIR_CIRCUIT_DATA_URL_1}</string>
+		<key>registerIdentity_20_256_3_3_336_224_NA</key>
+		<string>${NOIR_CIRCUIT_DATA_URL_2}</string>
 	</dict>
 </dict>
 </plist>

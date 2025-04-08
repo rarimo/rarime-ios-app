@@ -212,7 +212,6 @@
 		CE28D4FB2D3E887300042E1D /* libwitnesscalc_registerIdentityLight256.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE28D4F62D3E887300042E1D /* libwitnesscalc_registerIdentityLight256.a */; };
 		CE28D4FC2D3E887300042E1D /* libwitnesscalc_registerIdentity_12_256_3_3_336_232_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE28D4EE2D3E887300042E1D /* libwitnesscalc_registerIdentity_12_256_3_3_336_232_NA.a */; };
 		CE28D4FD2D3E887300042E1D /* libwitnesscalc_registerIdentity_21_256_3_3_336_232_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE28D4F02D3E887300042E1D /* libwitnesscalc_registerIdentity_21_256_3_3_336_232_NA.a */; };
-		CE28D4FE2D3E887300042E1D /* libwitnesscalc_registerIdentity_2_256_3_6_336_248_1_2432_3_256.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE28D4E52D3E887300042E1D /* libwitnesscalc_registerIdentity_2_256_3_6_336_248_1_2432_3_256.a */; };
 		CE28D4FF2D3E887300042E1D /* libwitnesscalc_registerIdentity_21_256_3_3_576_232_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE28D4F12D3E887300042E1D /* libwitnesscalc_registerIdentity_21_256_3_3_576_232_NA.a */; };
 		CE28D5002D3E887300042E1D /* libwitnesscalc_registerIdentityLight224.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE28D4F52D3E887300042E1D /* libwitnesscalc_registerIdentityLight224.a */; };
 		CE28D5012D3E887300042E1D /* libwitnesscalc_registerIdentity_2_256_3_6_576_248_1_2432_3_256.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE28D4E82D3E887300042E1D /* libwitnesscalc_registerIdentity_2_256_3_6_576_248_1_2432_3_256.a */; };
@@ -253,7 +252,6 @@
 		CE39DFE12D3FAA5200799A4B /* libwitnesscalc_registerIdentity_3_160_3_3_336_200_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE39DFDF2D3FAA5200799A4B /* libwitnesscalc_registerIdentity_3_160_3_3_336_200_NA.a */; };
 		CE39DFE22D3FAA5200799A4B /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE39DFDE2D3FAA5200799A4B /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.a */; };
 		CE39DFE32D3FAA5200799A4B /* libwitnesscalc_registerIdentity_3_160_3_4_576_216_1_1512_3_256.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE39DFE02D3FAA5200799A4B /* libwitnesscalc_registerIdentity_3_160_3_4_576_216_1_1512_3_256.a */; };
-		CE39E03C2D3FB33600799A4B /* libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE39E03B2D3FB33600799A4B /* libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a */; };
 		CE39E09C2D3FCA1900799A4B /* libwitnesscalc_registerIdentity_21_256_3_4_576_232_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE39E09B2D3FCA1900799A4B /* libwitnesscalc_registerIdentity_21_256_3_4_576_232_NA.a */; };
 		CE39E09D2D3FCA1900799A4B /* libwitnesscalc_registerIdentity_11_256_3_3_576_240_1_864_5_264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE39E09A2D3FCA1900799A4B /* libwitnesscalc_registerIdentity_11_256_3_3_576_240_1_864_5_264.a */; };
 		CE3CD3AE2C6CCD0E008313B8 /* ImportFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD3AD2C6CCD0E008313B8 /* ImportFileView.swift */; };
@@ -323,7 +321,6 @@
 		CEC5620F2BD925D6002D4954 /* Circuits.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC5620E2BD925D6002D4954 /* Circuits.swift */; };
 		CEC562112BD926AA002D4954 /* ZKUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC562102BD926AA002D4954 /* ZKUtils.swift */; };
 		CEC562192BD92B3E002D4954 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC562132BD9281A002D4954 /* libresolv.9.tbd */; };
-		CEC76C8D2D674AFD00130CA1 /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC76C8C2D674AFD00130CA1 /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a */; };
 		CEC76C912D6750D800130CA1 /* libwitnesscalc_registerIdentity_1_256_3_5_576_248_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC76C8E2D6750D800130CA1 /* libwitnesscalc_registerIdentity_1_256_3_5_576_248_NA.a */; };
 		CEC76C922D6750D800130CA1 /* libwitnesscalc_registerIdentity_1_256_3_6_576_248_1_2432_5_296.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC76C8F2D6750D800130CA1 /* libwitnesscalc_registerIdentity_1_256_3_6_576_248_1_2432_5_296.a */; };
 		CEC76C932D6750D800130CA1 /* libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC76C902D6750D800130CA1 /* libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a */; };
@@ -556,7 +553,6 @@
 		CE28D4E02D3E887300042E1D /* libwitnesscalc_registerIdentity_1_256_3_4_336_232_1_1480_5_296.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_1_256_3_4_336_232_1_1480_5_296.a; sourceTree = "<group>"; };
 		CE28D4E12D3E887300042E1D /* libwitnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256.a; sourceTree = "<group>"; };
 		CE28D4E42D3E887300042E1D /* libwitnesscalc_registerIdentity_1_256_3_6_576_264_1_2448_3_256.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_1_256_3_6_576_264_1_2448_3_256.a; sourceTree = "<group>"; };
-		CE28D4E52D3E887300042E1D /* libwitnesscalc_registerIdentity_2_256_3_6_336_248_1_2432_3_256.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_2_256_3_6_336_248_1_2432_3_256.a; sourceTree = "<group>"; };
 		CE28D4E82D3E887300042E1D /* libwitnesscalc_registerIdentity_2_256_3_6_576_248_1_2432_3_256.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_2_256_3_6_576_248_1_2432_3_256.a; sourceTree = "<group>"; };
 		CE28D4EB2D3E887300042E1D /* libwitnesscalc_registerIdentity_10_256_3_3_576_248_1_1184_5_264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_10_256_3_3_576_248_1_1184_5_264.a; sourceTree = "<group>"; };
 		CE28D4EC2D3E887300042E1D /* libwitnesscalc_registerIdentity_11_256_3_3_576_248_1_1184_5_264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_11_256_3_3_576_248_1_1184_5_264.a; sourceTree = "<group>"; };
@@ -596,7 +592,6 @@
 		CE39DFDE2D3FAA5200799A4B /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.a; sourceTree = "<group>"; };
 		CE39DFDF2D3FAA5200799A4B /* libwitnesscalc_registerIdentity_3_160_3_3_336_200_NA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_3_160_3_3_336_200_NA.a; sourceTree = "<group>"; };
 		CE39DFE02D3FAA5200799A4B /* libwitnesscalc_registerIdentity_3_160_3_4_576_216_1_1512_3_256.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_3_160_3_4_576_216_1_1512_3_256.a; sourceTree = "<group>"; };
-		CE39E03B2D3FB33600799A4B /* libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a; sourceTree = "<group>"; };
 		CE39E09A2D3FCA1900799A4B /* libwitnesscalc_registerIdentity_11_256_3_3_576_240_1_864_5_264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_11_256_3_3_576_240_1_864_5_264.a; sourceTree = "<group>"; };
 		CE39E09B2D3FCA1900799A4B /* libwitnesscalc_registerIdentity_21_256_3_4_576_232_NA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_21_256_3_4_576_232_NA.a; sourceTree = "<group>"; };
 		CE39E09E2D3FCF9400799A4B /* witnesscalc_registerIdentity_11_256_3_3_576_240_1_864_5_264.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_11_256_3_3_576_240_1_864_5_264.h; sourceTree = "<group>"; };
@@ -623,7 +618,6 @@
 		CE68BE412BD9B6A200D92EBB /* RegistrationContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationContract.swift; sourceTree = "<group>"; };
 		CE68BE4A2BD9B75100D92EBB /* ContractABI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractABI.swift; sourceTree = "<group>"; };
 		CE6BC17E2CBEA9AC00880287 /* witnesscalc_registerIdentity_1_256_3_6_576_264_1_2448_3_256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_1_256_3_6_576_264_1_2448_3_256.h; sourceTree = "<group>"; };
-		CE6BC17F2CBEA9C200880287 /* witnesscalc_registerIdentity_2_256_3_6_336_248_1_2432_3_256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_2_256_3_6_336_248_1_2432_3_256.h; sourceTree = "<group>"; };
 		CE6BC1802CBEA9D600880287 /* witnesscalc_registerIdentity_2_256_3_6_576_248_1_2432_3_256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_2_256_3_6_576_248_1_2432_3_256.h; sourceTree = "<group>"; };
 		CE72101D2BD7BD9D0043DB7F /* Data+Utf8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Utf8.swift"; sourceTree = "<group>"; };
 		CE7210282BD7D0D10043DB7F /* String+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Hex.swift"; sourceTree = "<group>"; };
@@ -666,8 +660,6 @@
 		CEC562102BD926AA002D4954 /* ZKUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZKUtils.swift; sourceTree = "<group>"; };
 		CEC562132BD9281A002D4954 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		CEC562142BD9281A002D4954 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
-		CEC76C892D6748A600130CA1 /* witnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.h; sourceTree = "<group>"; };
-		CEC76C8C2D674AFD00130CA1 /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a; sourceTree = "<group>"; };
 		CEC76C8E2D6750D800130CA1 /* libwitnesscalc_registerIdentity_1_256_3_5_576_248_NA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_1_256_3_5_576_248_NA.a; sourceTree = "<group>"; };
 		CEC76C8F2D6750D800130CA1 /* libwitnesscalc_registerIdentity_1_256_3_6_576_248_1_2432_5_296.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_1_256_3_6_576_248_1_2432_5_296.a; sourceTree = "<group>"; };
 		CEC76C902D6750D800130CA1 /* libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a; sourceTree = "<group>"; };
@@ -685,7 +677,6 @@
 		CED909CF2BDBA9FC0065E949 /* Cosmos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cosmos.swift; sourceTree = "<group>"; };
 		CED909DF2BDC1E0F0065E949 /* Rarimo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rarimo.swift; sourceTree = "<group>"; };
 		CED9CEE22CF8C9CF00FD3929 /* witnesscalc_registerIdentity_1_256_3_3_576_248_NA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_1_256_3_3_576_248_NA.h; sourceTree = "<group>"; };
-		CED9CEE32CF8C9DF00FD3929 /* witnesscalc_registerIdentity_20_256_3_3_336_224_NA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_20_256_3_3_336_224_NA.h; sourceTree = "<group>"; };
 		CEDC4D7E2BE9267300459D4E /* PoseidonSMTContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoseidonSMTContract.swift; sourceTree = "<group>"; };
 		CEDC4D802BE9475400459D4E /* Certificates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Certificates.swift; sourceTree = "<group>"; };
 		CEDC4D822BE949F300459D4E /* Ethereum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ethereum.swift; sourceTree = "<group>"; };
@@ -776,7 +767,6 @@
 				CE39E09D2D3FCA1900799A4B /* libwitnesscalc_registerIdentity_11_256_3_3_576_240_1_864_5_264.a in Frameworks */,
 				CE28D4FC2D3E887300042E1D /* libwitnesscalc_registerIdentity_12_256_3_3_336_232_NA.a in Frameworks */,
 				CE28D4FD2D3E887300042E1D /* libwitnesscalc_registerIdentity_21_256_3_3_336_232_NA.a in Frameworks */,
-				CE28D4FE2D3E887300042E1D /* libwitnesscalc_registerIdentity_2_256_3_6_336_248_1_2432_3_256.a in Frameworks */,
 				CE28D4FF2D3E887300042E1D /* libwitnesscalc_registerIdentity_21_256_3_3_576_232_NA.a in Frameworks */,
 				CE28D5002D3E887300042E1D /* libwitnesscalc_registerIdentityLight224.a in Frameworks */,
 				CE28D5012D3E887300042E1D /* libwitnesscalc_registerIdentity_2_256_3_6_576_248_1_2432_3_256.a in Frameworks */,
@@ -784,7 +774,6 @@
 				CE28D5052D3E887300042E1D /* libwitnesscalc_registerIdentityLight160.a in Frameworks */,
 				CE28D5062D3E887300042E1D /* libwitnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_4_256.a in Frameworks */,
 				CE28D5072D3E887300042E1D /* libwitnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256.a in Frameworks */,
-				CEC76C8D2D674AFD00130CA1 /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a in Frameworks */,
 				CE28D5092D3E887300042E1D /* libwitnesscalc_registerIdentity_24_256_3_4_336_232_NA.a in Frameworks */,
 				CE28D50B2D3E887300042E1D /* libwitnesscalc_registerIdentity_1_256_3_3_576_248_NA.a in Frameworks */,
 				CE28D50E2D3E887300042E1D /* libwitnesscalc_registerIdentityLight384.a in Frameworks */,
@@ -792,7 +781,6 @@
 				CE28D5112D3E887300042E1D /* libwitnesscalc_registerIdentity_1_160_3_3_576_200_NA.a in Frameworks */,
 				CE28D5122D3E887300042E1D /* libwitnesscalc_registerIdentity_1_256_3_6_576_264_1_2448_3_256.a in Frameworks */,
 				CE53BCC22D9A9A2C007B1892 /* Swoir in Frameworks */,
-				CE39E03C2D3FB33600799A4B /* libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a in Frameworks */,
 				CE28D5132D3E887300042E1D /* libwitnesscalc_registerIdentityLight512.a in Frameworks */,
 				CE9347732C205B340034885C /* CachedAsyncImage in Frameworks */,
 				CE32CF522BAC981300E507B6 /* Lottie in Frameworks */,
@@ -1570,9 +1558,7 @@
 				CEE3259E2CB7CA6E00468BE4 /* witnesscalc_registerIdentity_1_256_3_5_576_248_NA.h */,
 				CED39E2A2CB949D8001D0400 /* witnesscalc_registerIdentity_1_256_3_6_576_248_1_2432_5_296.h */,
 				CE6BC17E2CBEA9AC00880287 /* witnesscalc_registerIdentity_1_256_3_6_576_264_1_2448_3_256.h */,
-				CE6BC17F2CBEA9C200880287 /* witnesscalc_registerIdentity_2_256_3_6_336_248_1_2432_3_256.h */,
 				CE6BC1802CBEA9D600880287 /* witnesscalc_registerIdentity_2_256_3_6_576_248_1_2432_3_256.h */,
-				CEC76C892D6748A600130CA1 /* witnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.h */,
 				CED39E2B2CB949D8001D0400 /* witnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.h */,
 				CEB3558D2CC160D7001EB4F6 /* witnesscalc_registerIdentity_11_256_3_3_576_248_1_1184_5_264.h */,
 				CEB3558E2CC160FA001EB4F6 /* witnesscalc_registerIdentity_12_256_3_3_336_232_NA.h */,
@@ -1581,7 +1567,6 @@
 				CEF56DE72CF5D9CF00F4A477 /* witnesscalc_registerIdentity_21_256_3_3_336_232_NA.h */,
 				CEF56DE82CF5D9D600F4A477 /* witnesscalc_registerIdentity_24_256_3_4_336_232_NA.h */,
 				CED9CEE22CF8C9CF00FD3929 /* witnesscalc_registerIdentity_1_256_3_3_576_248_NA.h */,
-				CED9CEE32CF8C9DF00FD3929 /* witnesscalc_registerIdentity_20_256_3_3_336_224_NA.h */,
 				CEAC71182D0326F70090DCC0 /* witnesscalc_registerIdentity_10_256_3_3_576_248_1_1184_5_264.h */,
 				CEAC71192D0326F70090DCC0 /* witnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_4_256.h */,
 				CEAC711A2D0326F70090DCC0 /* witnesscalc_registerIdentity_21_256_3_3_576_232_NA.h */,
@@ -1616,7 +1601,6 @@
 				CE28D4E02D3E887300042E1D /* libwitnesscalc_registerIdentity_1_256_3_4_336_232_1_1480_5_296.a */,
 				CE28D4E12D3E887300042E1D /* libwitnesscalc_registerIdentity_1_256_3_4_600_248_1_1496_3_256.a */,
 				CE28D4E42D3E887300042E1D /* libwitnesscalc_registerIdentity_1_256_3_6_576_264_1_2448_3_256.a */,
-				CE28D4E52D3E887300042E1D /* libwitnesscalc_registerIdentity_2_256_3_6_336_248_1_2432_3_256.a */,
 				CE28D4E82D3E887300042E1D /* libwitnesscalc_registerIdentity_2_256_3_6_576_248_1_2432_3_256.a */,
 				CE28D4EB2D3E887300042E1D /* libwitnesscalc_registerIdentity_10_256_3_3_576_248_1_1184_5_264.a */,
 				CE28D4EC2D3E887300042E1D /* libwitnesscalc_registerIdentity_11_256_3_3_576_248_1_1184_5_264.a */,
@@ -1633,7 +1617,6 @@
 				CE39DFDE2D3FAA5200799A4B /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.a */,
 				CE39DFDF2D3FAA5200799A4B /* libwitnesscalc_registerIdentity_3_160_3_3_336_200_NA.a */,
 				CE39DFE02D3FAA5200799A4B /* libwitnesscalc_registerIdentity_3_160_3_4_576_216_1_1512_3_256.a */,
-				CE39E03B2D3FB33600799A4B /* libwitnesscalc_registerIdentity_20_256_3_3_336_224_NA.a */,
 				CE39E09A2D3FCA1900799A4B /* libwitnesscalc_registerIdentity_11_256_3_3_576_240_1_864_5_264.a */,
 				CE39E09B2D3FCA1900799A4B /* libwitnesscalc_registerIdentity_21_256_3_4_576_232_NA.a */,
 				CEE33A992D47951C00A2C705 /* libwitnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_5_296.a */,
@@ -1646,7 +1629,6 @@
 				CE30FA9A2D50DF6D0057F897 /* libwitnesscalc_registerIdentity_20_160_3_3_736_200_NA.a */,
 				CE30FA9B2D50DF6D0057F897 /* libwitnesscalc_registerIdentity_20_256_3_5_336_72_NA.a */,
 				CE30FA9C2D50DF6D0057F897 /* libwitnesscalc_registerIdentity_21_256_3_5_576_232_NA.a */,
-				CEC76C8C2D674AFD00130CA1 /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_21_2448_6_2008.a */,
 				CEC76C8E2D6750D800130CA1 /* libwitnesscalc_registerIdentity_1_256_3_5_576_248_NA.a */,
 				CEC76C8F2D6750D800130CA1 /* libwitnesscalc_registerIdentity_1_256_3_6_576_248_1_2432_5_296.a */,
 				CEC76C902D6750D800130CA1 /* libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a */,
