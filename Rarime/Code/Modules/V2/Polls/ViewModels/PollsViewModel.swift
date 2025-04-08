@@ -12,6 +12,11 @@ class PollsViewModel: ObservableObject {
     
     @Published var selectedPoll: Poll?
     @Published var polls: [Poll] = []
+    @Published var votingPollsIds: [Int] = AppUserDefaults.shared.votedPollsIds {
+        didSet {
+            AppUserDefaults.shared.votedPollsIds = votingPollsIds
+        }
+    }
     
     var lastProposalId: BigUInt = 0
     var isLoadingMorePolls = false
@@ -112,16 +117,8 @@ class PollsViewModel: ObservableObject {
         return requirements
     }
     
-    var totalParticipants: Int {
-        guard let poll = selectedPoll else { return 0 }
-        let questionParticipants = poll.proposalResults.map { $0.reduce(0) { $0 + Int($1) } }
-        return questionParticipants.max() ?? 0
-    }
-    
-    func loadNewPolls() async throws {
-        if isLoadingMorePolls {
-            return
-        }
+    func loadPollsByIds(_ ids: [Int]) async throws {
+        if isLoadingMorePolls { return }
         
         isLoadingMorePolls = true
         defer {
@@ -129,55 +126,12 @@ class PollsViewModel: ObservableObject {
             hasLoadedInitialPolls = true
         }
         
-        let contract = try ProposalsStateContract()
-        
-        let lastProposalId = try await contract.lastProposalId()
-        
-        if lastProposalId == 0 { return }
-        
-        let limit = min(PollsViewModel.FIRST_POLL_MAX_LIMIT, lastProposalId)
-        
-        let ids = (lastProposalId - limit + 1 ... lastProposalId).reversed()
-        
         let multicall3Contract = try Multicall3Contract()
         
-        let newPolls = try await PollsService.fetchPolls(multicall3Contract, Array(ids))
-        
-        self.lastProposalId = lastProposalId
+        let newPolls = try await PollsService.fetchPolls(multicall3Contract, ids.reversed().map { BigUInt($0) })
         
         DispatchQueue.main.async {
             self.polls = newPolls
-        }
-    }
-    
-    func loadMorePolls() async throws {
-        if isLoadingMorePolls || !isInitialPollLoaded { return }
-        isLoadingMorePolls = true
-        
-        defer { isLoadingMorePolls = false }
-        
-        if !self.hasMorePolls { return }
-        
-        let limit: BigUInt = {
-            if BigUInt(self.polls.count) + PollsViewModel.POLL_MAX_LIMIT > self.lastProposalId {
-                return self.lastProposalId - BigUInt(self.polls.count)
-            }
-            
-            return PollsViewModel.POLL_MAX_LIMIT
-        }()
-        
-        let lastIndex = BigUInt(self.polls.last!.id)
-        
-        let firstIndex = lastIndex - limit
-        
-        let ids = (firstIndex ... lastIndex-1).reversed()
-        
-        let multicall3Contract = try Multicall3Contract()
-        
-        let newPolls = try await PollsService.fetchPolls(multicall3Contract, Array(ids))
-        
-        DispatchQueue.main.async {
-            self.polls.append(contentsOf: newPolls)
         }
     }
     
@@ -239,7 +193,7 @@ class PollsViewModel: ObservableObject {
             voteProofJson,
             proposalID: Int64(poll.id),
             pollResultsJSON: resultsJson,
-            citizenship: passport.nationality
+            citizenship: votingData.citizenshipWhitelist.isEmpty ? Data(hex: "0x0")?.ascii : passport.nationality
         )
         
         let votingRelayer = VotingRelayer(ConfigManager.shared.api.votingRelayerURL)
@@ -308,5 +262,9 @@ class PollsViewModel: ObservableObject {
         let proof = try await proposalSmtContract.getProof(Data(hex: nullifier))
         
         return proof.existence
+    }
+    
+    func reset() {
+        AppUserDefaults.shared.votedPollsIds = []
     }
 }

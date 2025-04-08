@@ -28,6 +28,10 @@ struct PollQRCodeView: View {
                 try await fetchPoll()
             }
         }
+        // TODO: check if it works properly
+        .onDisappear {
+            pollsViewModel.selectedPoll = nil
+        }
     }
     
     private func fetchPoll() async throws {
@@ -38,10 +42,11 @@ struct PollQRCodeView: View {
             pollsViewModel.selectedPoll = try await PollsService.fetchPoll(
                 BigUInt(scanedQRLink.data.attributes.metadata.proposalId)
             )
-        } catch let error as AFError {
-            if error.responseCode != 200 {
-                throw "QR code is expired"
+        } catch {
+            if let afError = error as? AFError, afError.responseCode != 200 {
+                AlertManager.shared.emitError(.unknown(String(localized: "QR code is expired")))
             }
+            onDismiss()
             throw error
         }
     }

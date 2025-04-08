@@ -17,6 +17,7 @@ private enum PollsTab: CaseIterable, NavTab {
 
 struct PollsView: View {
     @Environment(\.openURL) var openURL
+    
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
     @EnvironmentObject var mainViewModel: V2MainView.ViewModel
     @EnvironmentObject var pollsViewModel: PollsViewModel
@@ -30,11 +31,6 @@ struct PollsView: View {
     
     @State private var isPollsLoading = true
     @State private var earlyPullTask: Task<Void, Never>? = nil
-    
-    private let spaceName = "polls.scroll"
-    
-    @State private var wholeSize: CGSize = .zero
-    @State private var scrollViewSize: CGSize = .zero
     
     private var aсtivePolls: [Poll] {
         pollsViewModel.polls.filter { poll in
@@ -135,75 +131,63 @@ struct PollsView: View {
             )
         }
         .dynamicSheet(isPresented: $isPollSheetShown, fullScreen: true, bgColor: .additionalGreen) {
-            PollView(
-                poll: pollsViewModel.selectedPoll!,
-                onClose: { isPollSheetShown = false }
-            )
-            .environmentObject(pollsViewModel)
-        }
-        .onAppear {
-            self.earlyPullTask = Task { @MainActor in
-                defer { isPollsLoading = false }
-                do {
-                    try await pollsViewModel.loadNewPolls()
-                } catch {
-                    LoggerUtil.common.error("failed to pull polls: \(error, privacy: .public)")
-                }
+            if let selectedPoll = pollsViewModel.selectedPoll {
+                PollView(
+                    poll: selectedPoll,
+                    onClose: { isPollSheetShown = false }
+                )
+                .environmentObject(pollsViewModel)
             }
         }
-        .onDisappear {
-            earlyPullTask?.cancel()
+        .onAppear {
+            Task { await loadPolls() }
         }
+        .onReceive(pollsViewModel.$votingPollsIds) { _ in
+            Task { await loadPolls() }
+        }
+        .onDisappear(perform: cleanCancellables)
     }
     
     private func makePollsList(_ polls: [Poll]) -> some View {
         ZStack {
-            if isPollsLoading && polls.isEmpty {
+            if isPollsLoading {
+                ProgressView()
+                    .controlSize(.large)
+                    .tint(.baseBlack.opacity(0.4))
+                    .frame(height: 240, alignment: .center)
+            } else if !isPollsLoading && polls.isEmpty {
                 Text("No polls yet")
                     .body3()
-                    .foregroundStyle(.textSecondary)
-                    .padding(.vertical, 40)
+                    .foregroundStyle(.baseBlack.opacity(0.4))
+                    .frame(height: 240, alignment: .center)
             } else {
-                ChildSizeReader(size: $wholeSize) {
-                    ScrollView(.vertical, showsIndicators: false) {
-                        ChildSizeReader(size: $scrollViewSize) {
-                            VStack(spacing: 8) {
-                                ForEach(polls) { poll in
-                                    PollListCard(poll: poll, onViewPoll: {
-                                        pollsViewModel.selectedPoll = poll
-                                        isPollSheetShown = true
-                                    })
-                                }
-                            }
-                            .background(
-                                GeometryReader { proxy in
-                                    Color.clear.preference(
-                                        key: ViewOffsetKey.self,
-                                        value: -1 * proxy.frame(in: .named(spaceName)).origin.y
-                                    )
-                                }
-                            )
-                            .onPreferenceChange(ViewOffsetKey.self) { value in
-                                if value >= scrollViewSize.height - wholeSize.height {
-                                    loadMorePolls()
-                                }
-                            }
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 8) {
+                        ForEach(polls) { poll in
+                            PollListCard(poll: poll, onViewPoll: {
+                                pollsViewModel.selectedPoll = poll
+                                isPollSheetShown = true
+                            })
                         }
                     }
-                    .coordinateSpace(name: spaceName)
                 }
             }
         }
     }
     
-    private func loadMorePolls() {
-        Task { @MainActor in
+    private func loadPolls() async {
+        self.earlyPullTask = Task { @MainActor in
+            defer { isPollsLoading = false }
             do {
-                try await pollsViewModel.loadMorePolls()
+                try await pollsViewModel.loadPollsByIds(AppUserDefaults.shared.votedPollsIds)
             } catch {
-                LoggerUtil.common.error("failed to load more polls: \(error, privacy: .public)")
+                LoggerUtil.common.error("failed to pull polls: \(error, privacy: .public)")
             }
         }
+    }
+    
+    private func cleanCancellables() {
+        earlyPullTask?.cancel()
     }
 }
 
@@ -215,7 +199,6 @@ private struct PollListCard: View {
     let onViewPoll: () -> Void
     
     @State private var selectedIndex = 0
-    @State private var isVoted = false
     
     private var totalParticipants: Int {
         let questionParticipants = poll.proposalResults.map { $0.reduce(0) { $0 + Int($1) } }
@@ -237,7 +220,6 @@ private struct PollListCard: View {
                 )
             )
         }
-
         return results
     }
     

@@ -15,6 +15,11 @@ struct PollView: View {
     @State private var isAdmittedToVote = false
     @State private var isUserVoteChecking = false
     
+    private var totalParticipants: Int {
+        let questionParticipants = poll.proposalResults.map { $0.reduce(0) { $0 + Int($1) } }
+        return questionParticipants.max() ?? 0
+    }
+    
     var body: some View {
         if isQuestionsShown {
             ActivePollOptionsView(
@@ -35,9 +40,13 @@ struct PollView: View {
                                 results
                             )
                             
+                            if !pollsViewModel.votingPollsIds.contains(Int(poll.id)) {
+                                pollsViewModel.votingPollsIds.append(Int(poll.id))
+                            }
+                            
                             isQuestionsShown = false
-                            onClose()
                             AlertManager.shared.emitSuccess(String(localized: "Your vote has been counted"))
+                            onClose()
                         } catch {
                             LoggerUtil.common.error("Can't submit poll results: \(error, privacy: .public)")
                             AlertManager.shared.emitError(.unknown(String(localized: "Can't submit poll results")))
@@ -90,7 +99,7 @@ struct PollView: View {
                             HStack(alignment: .center, spacing: 8) {
                                 Image(Icons.groupLine)
                                     .iconSmall()
-                                Text(pollsViewModel.totalParticipants.formatted())
+                                Text(totalParticipants.formatted())
                                     .subtitle7()
                             }
                         }
