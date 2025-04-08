@@ -194,8 +194,6 @@ class UserManager: ObservableObject {
             wtns = try ZKUtils.calcWtns_registerIdentity_24_256_3_4_336_232_NA(circuitData.circuitDat, inputs)
         case .registerIdentity_1_256_3_3_576_248_NA:
             wtns = try ZKUtils.calcWtns_registerIdentity_1_256_3_3_576_248_NA(circuitData.circuitDat, inputs)
-        case .registerIdentity_20_256_3_3_336_224_NA:
-            wtns = try ZKUtils.calcWtns_registerIdentity_20_256_3_3_336_224_NA(circuitData.circuitDat, inputs)
         case .registerIdentity_21_256_3_3_576_232_NA:
             wtns = try ZKUtils.calcWtns_registerIdentity_21_256_3_3_576_232_NA(circuitData.circuitDat, inputs)
         case .registerIdentity_11_256_3_5_576_248_1_1808_4_256:

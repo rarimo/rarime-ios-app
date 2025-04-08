@@ -29,7 +29,6 @@ class ZKUtils {
     #registerCircuitWitness("registerIdentity_21_256_3_3_336_232_NA")
     #registerCircuitWitness("registerIdentity_24_256_3_4_336_232_NA")
     #registerCircuitWitness("registerIdentity_1_256_3_3_576_248_NA")
-    #registerCircuitWitness("registerIdentity_20_256_3_3_336_224_NA")
     #registerCircuitWitness("registerIdentity_21_256_3_3_576_232_NA")
     #registerCircuitWitness("registerIdentity_11_256_3_5_576_248_1_1808_4_256")
     #registerCircuitWitness("registerIdentity_10_256_3_3_576_248_1_1184_5_264")
@@ -123,6 +122,8 @@ class ZKUtils {
     ) throws -> Data {
         let circuit = try Swoir(backend: Swoirenberg.self)
             .createCircuit(manifest: circuitData)
+        
+        try circuit.setupSrs(srs_path: trustedSetupPath)
         
         return try Swoirenberg.get_verification_key(bytecode: circuit.bytecode)
     }
