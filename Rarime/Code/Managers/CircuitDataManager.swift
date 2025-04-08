@@ -54,7 +54,7 @@ enum RegisteredCircuitData: String {
 }
 
 enum RegisteredNoirCircuitData: String {
-    // If you decided to remove ".dat", well, good luck to debug buddy
+    // If you decided to remove ".dat", well, good luck to debug crash buddy
     case trustedSetup = "trustedSetup.dat"
     
     case registerIdentity_2_256_3_6_336_264_21_2448_6_2008
