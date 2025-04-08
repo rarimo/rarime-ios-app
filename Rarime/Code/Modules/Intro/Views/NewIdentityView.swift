@@ -119,7 +119,7 @@ struct NewIdentityView: View {
                         .controlSize(.large)
                         .disabled(isSubmitting)
                         AppButton(
-                            variant: .tertiary,
+                            variant: .quartenary,
                             text: "Back up manually",
                             action: { isManualBackup = true }
                         )

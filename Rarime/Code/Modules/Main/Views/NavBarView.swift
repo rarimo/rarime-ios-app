@@ -2,13 +2,18 @@ import SwiftUI
 
 struct NavBarView: View {
     @Binding var selectedTab: MainTabs
+ 	@Binding var isQrCodeScanSheetShown: Bool
 
     var body: some View {
         HStack(spacing: 8) {
             ForEach(MainTabs.allCases, id: \.self) { item in
                 NavBarTabItem(tab: item, isActive: selectedTab == item)
                     .onTapGesture {
-                        selectedTab = item
+                        if item == .scanQr {
+                            isQrCodeScanSheetShown = true
+                        } else {
+                            selectedTab = item
+                        }
                         FeedbackGenerator.shared.impact(.light)
                     }
             }
@@ -33,5 +38,5 @@ struct NavBarTabItem: View {
 }
 
 #Preview {
-    NavBarView(selectedTab: .constant(.home))
+    NavBarView(selectedTab: .constant(.home), isQrCodeScanSheetShown: .constant(false))
 }

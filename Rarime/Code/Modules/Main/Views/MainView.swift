@@ -7,17 +7,14 @@ struct MainView: View {
 
     @StateObject private var viewModel = ViewModel()
     @StateObject private var passportViewModel = PassportViewModel()
+    @StateObject private var pollsViewModel = PollsViewModel()
 
     var body: some View {
         ZStack {
             switch viewModel.selectedTab {
                 case .home: HomeView()
                 case .identity: IdentityView()
-                case .scanQr: ScanQRView(
-                        // TODO: change routing after design impl
-                        onBack: { viewModel.selectedTab = .home },
-                        onScan: processQrCode
-                    )
+                case .scanQr: EmptyView()
 //                case .wallet: WalletView()
                 case .profile: ProfileView()
             }
@@ -25,7 +22,14 @@ struct MainView: View {
         }
         .environmentObject(viewModel)
         .environmentObject(passportViewModel)
+        .environmentObject(pollsViewModel)
         .onAppear(perform: checkNotificationPermission)
+        .dynamicSheet(isPresented: $viewModel.isQrCodeScanSheetShown, fullScreen: true) {
+            ScanQRView(
+                onBack: { viewModel.isQrCodeScanSheetShown = false },
+                onScan: processQrCode
+            )
+        }
     }
 
     func checkNotificationPermission() {
@@ -44,7 +48,7 @@ struct MainView: View {
         }
 
         externalRequestsManager.handleRarimeUrl(qrCodeUrl)
-        viewModel.selectedTab = .home
+        viewModel.isQrCodeScanSheetShown = false
     }
 }
 

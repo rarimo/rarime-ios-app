@@ -40,7 +40,7 @@ struct IdentityOnboardingView: View {
                     Text("This app is where you privately store your digital identities, enabling you to go incognito across the web.")
                         .body3()
                         .foregroundStyle(.baseBlack.opacity(0.5))
-                    AppButton(variant: .secondary, text: "Let’s Start", action: onStart)
+                    AppButton(variant: .tertiary, text: "Let’s Start", action: onStart)
                         .controlSize(.large)
                 }
                 .frame(maxHeight: .infinity, alignment: .bottom)

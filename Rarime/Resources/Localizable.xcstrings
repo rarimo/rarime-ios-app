@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     " and " : {
       "localizations" : {
         "uk" : {
@@ -107,6 +104,12 @@
         }
       }
     },
+    "%lld" : {
+
+    },
+    "%lld questions" : {
+
+    },
     "%lld RMO" : {
 
     },
@@ -119,6 +122,21 @@
           }
         }
       }
+    },
+    "%llu days" : {
+
+    },
+    "%lluh" : {
+
+    },
+    "%llum" : {
+
+    },
+    "%llus" : {
+
+    },
+    "1 day" : {
+
     },
     "1. Save passport data on your device" : {
 
@@ -221,6 +239,9 @@
 
     },
     "An error has occured, please try again" : {
+
+    },
+    "An identification and privacy solution that revolutionizes polling, surveying and election processes" : {
 
     },
     "An Unforgettable" : {
@@ -526,6 +547,9 @@
     "Cameroon" : {
 
     },
+    "Can't submit poll results" : {
+
+    },
     "Canada" : {
 
     },
@@ -712,6 +736,9 @@
           }
         }
       }
+    },
+    "Criteria" : {
+
     },
     "Croatia" : {
 
@@ -1070,10 +1097,16 @@
         }
       }
     },
+    "Finished" : {
+
+    },
     "Finland" : {
 
     },
     "France" : {
+
+    },
+    "Freedomtool" : {
 
     },
     "French Guiana" : {
@@ -1196,6 +1229,9 @@
 
     },
     "Hi" : {
+
+    },
+    "History" : {
 
     },
     "Hold your iPhone near an NFC enabled passport." : {
@@ -1430,6 +1466,9 @@
     "Let's Scan" : {
 
     },
+    "Let's start" : {
+
+    },
     "Let’s start" : {
 
     },
@@ -1461,9 +1500,6 @@
           }
         }
       }
-    },
-    "Light Verification" : {
-
     },
     "Lithuania" : {
 
@@ -1680,6 +1716,9 @@
     "No notifications" : {
 
     },
+    "No polls yet" : {
+
+    },
     "No transactions yet" : {
       "localizations" : {
         "uk" : {
@@ -1825,6 +1864,7 @@
 
     },
     "Place QR code within the frame to scan" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1910,6 +1950,12 @@
     "Portugal" : {
 
     },
+    "Position the QR code in the middle of the scanner" : {
+
+    },
+    "Pre-elections polls" : {
+
+    },
     "Privacy Policy" : {
       "localizations" : {
         "uk" : {
@@ -1951,9 +1997,6 @@
         }
       }
     },
-    "Proof Request" : {
-
-    },
     "Proofs" : {
       "localizations" : {
         "uk" : {
@@ -1990,6 +2033,19 @@
     },
     "Qatar" : {
 
+    },
+    "QR code is expired" : {
+
+    },
+    "Question: %lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Question: %1$lld/%2$lld"
+          }
+        }
+      }
     },
     "RariMe" : {
 
@@ -2238,6 +2294,9 @@
         }
       }
     },
+    "Scan a QR" : {
+
+    },
     "Scan MRZ" : {
 
     },
@@ -2245,6 +2304,7 @@
 
     },
     "Scan QR" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2275,6 +2335,9 @@
 
     },
     "Select an authorization method" : {
+
+    },
+    "Select answer" : {
 
     },
     "Select identity type" : {
@@ -2453,6 +2516,9 @@
       }
     },
     "Stranger" : {
+
+    },
+    "Submit" : {
 
     },
     "Success" : {
@@ -2695,6 +2761,9 @@
     "Venezuela" : {
 
     },
+    "Verification" : {
+
+    },
     "Verification..." : {
 
     },
@@ -2708,6 +2777,9 @@
 
     },
     "Virgin Islands, U.S." : {
+
+    },
+    "Voting" : {
 
     },
     "Waitlist passport" : {
@@ -2924,6 +2996,12 @@
           }
         }
       }
+    },
+    "Your vote counts, and you will be rewarded for every participation" : {
+
+    },
+    "Your vote has been counted" : {
+
     },
     "Zambia" : {
 

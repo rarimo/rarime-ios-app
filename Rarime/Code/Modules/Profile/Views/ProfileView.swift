@@ -16,6 +16,7 @@ struct ProfileView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var notificationManager: NotificationManager
+    @EnvironmentObject private var pollsViewModel: PollsViewModel
 
     @State private var path: [ProfileRoute] = []
 
@@ -178,6 +179,7 @@ struct ProfileView: View {
                         walletManager.reset()
                         decentralizedAuthManager.reset()
                         notificationManager.reset()
+                        pollsViewModel.reset()
 
                         Task {
                             try? await notificationManager.unsubscribe(fromTopic: ConfigManager.shared.general.claimableNotificationTopic)

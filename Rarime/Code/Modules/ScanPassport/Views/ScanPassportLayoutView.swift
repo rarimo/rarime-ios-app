@@ -28,7 +28,7 @@ struct ScanPassportLayoutView<Content: View>: View {
         VStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 38) {
                 ZStack(alignment: .center) {
-                    StepIndicator(steps: steps, currentStep: currentStep)
+                    HorizontalStepIndicator(steps: steps, currentStep: currentStep)
                     
                     HStack(alignment: .center) {
                         if let onPrevious {

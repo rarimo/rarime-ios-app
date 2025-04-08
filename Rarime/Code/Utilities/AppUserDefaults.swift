@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import Web3
 
 public class AppUserDefaults: ObservableObject {
     public static let shared = AppUserDefaults()
@@ -70,4 +71,13 @@ public class AppUserDefaults: ObservableObject {
     
     @AppStorage("is_registration_interrupted")
     public var isRegistrationInterrupted = false
+
+    public var votedPollsIds: [Int] {
+        get {
+            return UserDefaults.standard.array(forKey: "voted_polls_ids") as? [Int] ?? []
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "voted_polls_ids")
+        }
+    }
 }
