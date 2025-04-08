@@ -1412,7 +1412,6 @@
 		C7DF8BE92D5F686200C8E2D2 /* V2 */ = {
 			isa = PBXGroup;
 			children = (
-				C7D624472D6DB2EC007BA5A6 /* Polls */,
 				C726E8B12D63894A000C9CA6 /* Wallet */,
 				C7780C922D634D770050B5BB /* Rewards */,
 				C7DF8BE12D5F686200C8E2D2 /* Home */,
@@ -1677,6 +1676,7 @@
 				56DAA30C2BB8C38D002CF710 /* Security */,
 				563529E02BB071930027C910 /* Profile */,
 				563529DB2BB071570027C910 /* Wallet */,
+				C7D624472D6DB2EC007BA5A6 /* Polls */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
