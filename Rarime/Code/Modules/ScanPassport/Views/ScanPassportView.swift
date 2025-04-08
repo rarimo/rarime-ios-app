@@ -23,13 +23,11 @@ struct ScanPassportView: View {
         case .importJson:
             ImportFileView(
                 onFinish: { passport in
-                    passportViewModel.setPassport(passport)
                     onClose()
                     Task { await register(passport) }
                 },
                 onClose: onClose
             )
-            .transition(.backslide)
         case .scanMRZ:
             VStack(spacing: 8) {
                 ScanPassportMRZView(
@@ -40,7 +38,6 @@ struct ScanPassportView: View {
                     },
                     onClose: onClose
                 )
-
 #if DEVELOPMENT
                 AppButton(
                     text: "Import JSON",
@@ -53,11 +50,9 @@ struct ScanPassportView: View {
             }
             .padding(.bottom, 16)
             .environmentObject(passportViewModel)
-            .transition(.backslide)
         case .readNFC:
             ReadPassportNFCView(
                 onNext: { passport in
-                    passportViewModel.setPassport(passport)
                     onClose()
                     Task { await register(passport) }
                 },
@@ -66,10 +61,8 @@ struct ScanPassportView: View {
                 onClose: onClose
             )
             .environmentObject(passportViewModel)
-            .transition(.backslide)
         case .chipError:
             PassportChipErrorView(onClose: onClose)
-                .transition(.backslide)
         }
     }
     
@@ -103,7 +96,7 @@ struct ScanPassportView: View {
                     onClose()
                     
                     passportViewModel.processingStatus = .failure
-
+                    
                     return
                 }
             } else if let error = error as? Errors {

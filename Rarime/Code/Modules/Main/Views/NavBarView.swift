@@ -1,13 +1,13 @@
 import SwiftUI
 
-struct V2NavBarView: View {
-    @Binding var selectedTab: V2MainTabs
-    @Binding var isQrCodeScanSheetShown: Bool
+struct NavBarView: View {
+    @Binding var selectedTab: MainTabs
+ 	@Binding var isQrCodeScanSheetShown: Bool
 
     var body: some View {
-        HStack(spacing: 12) {
-            ForEach(V2MainTabs.allCases, id: \.self) { item in
-                V2NavBarTabItem(tab: item, isActive: selectedTab == item)
+        HStack(spacing: 8) {
+            ForEach(MainTabs.allCases, id: \.self) { item in
+                NavBarTabItem(tab: item, isActive: selectedTab == item)
                     .onTapGesture {
                         if item == .scanQr {
                             isQrCodeScanSheetShown = true
@@ -23,10 +23,10 @@ struct V2NavBarView: View {
     }
 }
 
-struct V2NavBarTabItem: View {
-    let tab: V2MainTabs
+struct NavBarTabItem: View {
+    let tab: MainTabs
     let isActive: Bool
-    
+
     var body: some View {
         Image(isActive ? tab.activeIconName : tab.iconName)
             .iconLarge()
@@ -37,7 +37,6 @@ struct V2NavBarTabItem: View {
     }
 }
 
-
 #Preview {
-    V2NavBarView(selectedTab: .constant(.home), isQrCodeScanSheetShown: .constant(false))
+    NavBarView(selectedTab: .constant(.home), isQrCodeScanSheetShown: .constant(false))
 }

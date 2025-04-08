@@ -119,7 +119,7 @@ struct NewIdentityView: View {
                         .controlSize(.large)
                         .disabled(isSubmitting)
                         AppButton(
-                            variant: .tertiary,
+                            variant: .quartenary,
                             text: "Back up manually",
                             action: { isManualBackup = true }
                         )
@@ -168,7 +168,7 @@ struct NewIdentityView: View {
 
                 if !isICloudAvailable {
                     AlertManager.shared.emitError(.unknown(String(localized: "iCloud is not available")))
-                    
+                    onBack()
                     return
                 }
 
@@ -176,7 +176,7 @@ struct NewIdentityView: View {
 
                 if !isSaved {
                     AlertManager.shared.emitError(.unknown(String(localized: "Backup already exists, try restore instead")))
-                    
+                    onBack()
                     return
                 }
 
@@ -184,6 +184,7 @@ struct NewIdentityView: View {
             } catch {
                 LoggerUtil.common.error("back up error: \(error, privacy: .public)")
                 AlertManager.shared.emitError(.unknown(String(localized: "Failed to register, try again later")))
+                onBack()
             }
         }
     }

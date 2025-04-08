@@ -1,12 +1,13 @@
-import SwiftUI
 import ConfettiSwiftUI
+import SwiftUI
 
-struct V2ClaimTokensView: View {
+struct ClaimTokensView: View {
     @EnvironmentObject private var configManager: ConfigManager
     
-    @StateObject var rewardsViewModel = V2RewardsViewModel()
+    @StateObject var rewardsViewModel = RewardsViewModel()
     
     let onClose: () -> Void
+    let pointsBalance: PointsBalanceRaw?
     
     var animation: Namespace.ID
     
@@ -35,6 +36,10 @@ struct V2ClaimTokensView: View {
         }
     }
     
+    private var isBalanceSufficient: Bool {
+        pointsBalance != nil && pointsBalance?.amount ?? 0 > 0
+    }
+    
     var body: some View {
         PullToCloseWrapperView(action: onClose) {
             VStack(spacing: 0) {
@@ -44,11 +49,11 @@ struct V2ClaimTokensView: View {
                 Image(Images.rarimoTokens)
                     .resizable()
                     .scaledToFit()
-                    .padding(.top, 54)
+                    .padding(.top, 96)
                     .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
                 VStack(alignment: .leading, spacing: 24) {
                     VStack(alignment: .leading, spacing: 0) {
-                        Text("Claim")
+                        Text(isBalanceSufficient ? "Reserved" : "Upcoming")
                             .h1()
                             .foregroundStyle(.baseBlack)
                             .matchedGeometryEffect(
@@ -56,7 +61,7 @@ struct V2ClaimTokensView: View {
                                 in: animation,
                                 properties: .position
                             )
-                        Text("10 RMO")
+                        Text(isBalanceSufficient ? "\(pointsBalance?.amount ?? 0) RMO" : "RMO")
                             .additional1()
                             .foregroundStyle(.baseBlack.opacity(0.4))
                             .matchedGeometryEffect(
@@ -65,17 +70,18 @@ struct V2ClaimTokensView: View {
                                 properties: .position
                             )
                     }
-                    Text("This app is where you privately store your digital identities, enabling you to go incognito across the web.")
-                        .body3()
-                        .foregroundStyle(.baseBlack.opacity(0.5))
-                    AppButton(
-                        variant: .tertiary,
-                        text: claimButtonText,
-                        leftIcon: rewardsViewModel.isTokensClaimed ? Icons.checkLine : nil,
-                        action: onClaimTokens
-                    )
-                        .controlSize(.large)
-                        .disabled(rewardsViewModel.isTokensClaimed || isTokensClaiming)
+//                    TODO: uncomment after desing and flow impl
+//                    Text("This app is where you privately store your digital identities, enabling you to go incognito across the web.")
+//                        .body3()
+//                        .foregroundStyle(.baseBlack.opacity(0.5))
+//                    AppButton(
+//                        variant: .secondary,
+//                        text: claimButtonText,
+//                        leftIcon: rewardsViewModel.isTokensClaimed ? Icons.checkLine : nil,
+//                        action: onClaimTokens
+//                    )
+//                    .controlSize(.large)
+//                    .disabled(rewardsViewModel.isTokensClaimed || isTokensClaiming)
                     (
                         Text("By continue, you are agreeing to ") +
                             Text(.init("[\(String(localized: "RariMe General Terms & Conditions"))](\(termsURL))")).underline() +
@@ -111,19 +117,19 @@ struct V2ClaimTokensView: View {
         }
     }
     
-    private func onClaimTokens() {
-        isTokensClaiming = true
-        
-        // TODO: remove it after flow impl
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            rewardsViewModel.isTokensClaimed = true
-            isTokensClaiming = false
-            confettiTrigger += 1
-        }
-    }
+//    private func onClaimTokens() {
+//        isTokensClaiming = true
+//        
+//        // TODO: remove it after flow impl
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//            rewardsViewModel.isTokensClaimed = true
+//            isTokensClaiming = false
+//            confettiTrigger += 1
+//        }
+//    }
 }
 
 #Preview {
-    V2ClaimTokensView(onClose: {}, animation: Namespace().wrappedValue)
+    ClaimTokensView(onClose: {}, pointsBalance: nil, animation: Namespace().wrappedValue)
         .environmentObject(ConfigManager())
 }

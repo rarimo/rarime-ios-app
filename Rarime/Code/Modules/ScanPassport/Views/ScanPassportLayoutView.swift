@@ -1,19 +1,42 @@
 import SwiftUI
 
 struct ScanPassportLayoutView<Content: View>: View {
+    let currentStep: Int
     let title: LocalizedStringResource
-    let onPrevious: () -> Void
+    let onPrevious: (() -> Void)?
     let onClose: () -> Void
     
+    var steps: Int = 2
+    
     @ViewBuilder let content: Content
+    
+    init(
+        currentStep: Int,
+        title: LocalizedStringResource,
+        onPrevious: (() -> Void)? = nil,
+        onClose: @escaping () -> Void,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.currentStep = currentStep
+        self.title = title
+        self.onPrevious = onPrevious
+        self.onClose = onClose
+        self.content = content()
+    }
 
     var body: some View {
         VStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 38) {
-                HStack(alignment: .center) {
-                    AppIconButton(icon: Icons.arrowLeftSLine, action: onPrevious)
-                    Spacer()
-                    AppIconButton(icon: Icons.closeFill, action: onClose)
+                ZStack(alignment: .center) {
+                    HorizontalStepIndicator(steps: steps, currentStep: currentStep)
+                    
+                    HStack(alignment: .center) {
+                        if let onPrevious {
+                            AppIconButton(icon: Icons.arrowLeftSLine, action: onPrevious)
+                        }
+                        Spacer()
+                        AppIconButton(icon: Icons.closeFill, action: onClose)
+                    }
                 }
                 Text(title)
                     .h2()
@@ -30,8 +53,8 @@ struct ScanPassportLayoutView<Content: View>: View {
 
 #Preview {
     ScanPassportLayoutView(
+        currentStep: 0,
         title: LocalizedStringResource("Scan your Passport", table: "preview"),
-        onPrevious: {},
         onClose: {}
     ) {
         Rectangle()

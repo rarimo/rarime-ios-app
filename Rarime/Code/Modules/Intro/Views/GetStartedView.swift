@@ -20,7 +20,7 @@ struct GetStartedView: View {
                 )
                 GetStartedButton(
                     title: "Re-activate old profile",
-                    text: "Uses pregenerated keys or iClould",
+                    text: "Uses pregenerated keys or iCloud",
                     icon: Icons.share1,
                     action: onImport
                 )

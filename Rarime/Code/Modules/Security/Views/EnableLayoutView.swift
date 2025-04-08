@@ -33,7 +33,7 @@ struct EnableLayoutView: View {
                 AppButton(text: "Enable", action: enableAction)
                     .controlSize(.large)
                 AppButton(
-                    variant: .tertiary,
+                    variant: .quartenary,
                     text: "Maybe Later",
                     action: skipAction
                 )

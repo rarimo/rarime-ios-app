@@ -8,7 +8,7 @@ struct ExternalRequestsView: View {
 
     var body: some View {
         ZStack {}
-            .sheet(isPresented: $isSheetPresented) {
+            .dynamicSheet(isPresented: $isSheetPresented, fullScreen: true) {
                 switch externalRequestsManager.request {
                 case let .proofRequest(proofParamsUrl, urlQueryParams):
                     ProofRequestView(

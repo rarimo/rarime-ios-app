@@ -23,7 +23,7 @@ class NotificationService: UNNotificationServiceExtension {
                         return
                     }
                 } catch {
-                    LoggerUtil.common.error("Failed to handle universal notification: \(error)")
+                    LoggerUtil.common.error("Failed to handle universal notification: \(error, privacy: .public)")
                 }
             }
             

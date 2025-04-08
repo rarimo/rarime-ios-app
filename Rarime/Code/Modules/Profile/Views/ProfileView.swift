@@ -50,7 +50,7 @@ struct ProfileView: View {
     }
 
     var content: some View {
-        V2MainViewLayout {
+        MainViewLayout {
             VStack(alignment: .leading, spacing: 20) {
                 Text("Profile")
                     .subtitle4()
@@ -230,7 +230,7 @@ private struct ProfileRow: View {
 
     return ProfileView()
         .environmentObject(AppView.ViewModel())
-        .environmentObject(V2MainView.ViewModel())
+        .environmentObject(MainView.ViewModel())
         .environmentObject(ConfigManager())
         .environmentObject(SettingsManager())
         .environmentObject(PassportManager())

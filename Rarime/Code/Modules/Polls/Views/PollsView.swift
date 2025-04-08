@@ -19,7 +19,7 @@ struct PollsView: View {
     @Environment(\.openURL) var openURL
     
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
-    @EnvironmentObject var mainViewModel: V2MainView.ViewModel
+    @EnvironmentObject var mainViewModel: MainView.ViewModel
     @EnvironmentObject var pollsViewModel: PollsViewModel
     
     let onClose: () -> Void
@@ -134,7 +134,14 @@ struct PollsView: View {
             if let selectedPoll = pollsViewModel.selectedPoll {
                 PollView(
                     poll: selectedPoll,
-                    onClose: { isPollSheetShown = false }
+                    onClose: { isPollSheetShown = false },
+                    onVerification: {
+                        isPollSheetShown = false
+                        onClose()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            mainViewModel.selectedTab = .identity
+                        }
+                    }
                 )
                 .environmentObject(pollsViewModel)
             }
@@ -195,7 +202,7 @@ private struct PollListCard: View {
     @EnvironmentObject var pollsViewModel: PollsViewModel
     
     let poll: Poll
-
+    
     let onViewPoll: () -> Void
     
     @State private var selectedIndex = 0
@@ -224,9 +231,9 @@ private struct PollListCard: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Group {
-                VStack(alignment: .leading, spacing: 12) {
+        VStack(spacing: 16) {
+            VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: 8) {
                     Text(poll.title)
                         .h3()
                         .foregroundStyle(.textPrimary)
@@ -249,46 +256,49 @@ private struct PollListCard: View {
                 }
                 HorizontalDivider()
             }
-            HeightPreservingTabView(selection: $selectedIndex) {
-                ForEach(questionResults.indices, id: \.self) { index in
-                    VStack(alignment: .leading, spacing: 16) {
-                        let totalVotes = questionResults[index].options.map(\.votes).reduce(0, +)
-                        Text(questionResults[index].question)
-                           .subtitle6()
-                           .foregroundStyle(.textPrimary)
-                        BarChartPollView(
-                           result: questionResults[index],
-                           totalVotes: totalVotes
-                        )
-                    }
-                    .padding(.horizontal, 8)
-                    .tag(index)
-                    .background(
-                        GeometryReader { geometry in
-                            Color.clear.preference(
-                                key: TabViewHeightPreferenceKey<Int>.self,
-                                value: [index: geometry.size.height]
+            .padding([.top, .horizontal], 16)
+            Group {
+                HeightPreservingTabView(selection: $selectedIndex) {
+                    ForEach(questionResults.indices, id: \.self) { index in
+                        VStack(alignment: .leading, spacing: 16) {
+                            let totalVotes = questionResults[index].options.map(\.votes).reduce(0, +)
+                            Text(questionResults[index].question)
+                                .subtitle6()
+                                .foregroundStyle(.textPrimary)
+                            BarChartPollView(
+                                result: questionResults[index],
+                                totalVotes: totalVotes
                             )
                         }
+                        .padding(.horizontal, 16)
+                        .tag(index)
+                        .background(
+                            GeometryReader { geometry in
+                                Color.clear.preference(
+                                    key: TabViewHeightPreferenceKey<Int>.self,
+                                    value: [index: geometry.size.height]
+                                )
+                            }
+                        )
+                    }
+                }
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                .animation(.default, value: selectedIndex)
+                if poll.questions.count > 1 {
+                    HorizontalStepIndicator(
+                        steps: questionResults.count,
+                        currentStep: selectedIndex
                     )
+                    .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
-            .tabViewStyle(.page(indexDisplayMode: .never))
-            .animation(.default, value: selectedIndex)
-            if poll.questions.count > 1 {
-                V2HorizontalStepIndicator(
-                    steps: questionResults.count,
-                    currentStep: selectedIndex
-                )
-                .frame(maxWidth: .infinity, alignment: .center)
-            }
-        }
-        .padding(.all, 16)
-        .background {
-            RoundedRectangle(cornerRadius: 16)
-                .fill(.bgPrimary)
+            .padding(.bottom, 16)
         }
         .onTapGesture(perform: onViewPoll)
+        .background {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(.bgPrimary)
+        }
     }
 }
 

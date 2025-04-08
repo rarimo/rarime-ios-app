@@ -68,7 +68,7 @@ struct ProofRequestView: View {
                         .disabled(isSubmitting)
                         .controlSize(.large)
                         AppButton(
-                            variant: .tertiary,
+                            variant: .quartenary,
                             text: "Cancel",
                             action: onDismiss
                         )

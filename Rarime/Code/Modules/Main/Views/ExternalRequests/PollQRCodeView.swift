@@ -7,6 +7,7 @@ struct PollQRCodeView: View {
     @EnvironmentObject private var pollsViewModel: PollsViewModel
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var userManager: UserManager
+    @EnvironmentObject private var mainViewModel: MainView.ViewModel
     
     let qrCodeUrl: URL
     
@@ -15,8 +16,17 @@ struct PollQRCodeView: View {
     var body: some View {
         Group {
             if let poll = pollsViewModel.selectedPoll {
-                PollView(poll: poll, onClose: onDismiss)
-                    .environmentObject(pollsViewModel)
+                PollView(
+                    poll: poll,
+                    onClose: onDismiss,
+                    onVerification: {
+                        onDismiss()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            mainViewModel.selectedTab = .identity
+                        }
+                    }
+                )
+                .environmentObject(pollsViewModel)
             } else {
                 ProgressView()
                     .controlSize(.large)

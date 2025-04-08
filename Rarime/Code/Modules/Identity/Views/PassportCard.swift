@@ -225,9 +225,11 @@ struct PassportCard: View {
                             .frame(height: 4)
                         Capsule()
                             .fill(.secondaryMain)
-                            .frame(width: geometry.size.width * (passportViewModel.proofState.progress / 100.0),
-                                   height: 3)
-                            .animation(.easeInOut, value: passportViewModel.proofState.progress)
+                            .frame(
+                                width: geometry.size.width * passportViewModel.overallProgress,
+                                height: 3
+                            )
+                            .animation(.easeInOut, value: passportViewModel.overallProgress)
                     }
                 }
                 .frame(height: 4)
@@ -260,20 +262,18 @@ struct PassportCard: View {
                     .foregroundStyle(.textSecondary)
             }
             Spacer()
-            // TODO: sync with design system
             Button(action: {
                 Task {
-                    await regenerateProof()
+                    await retryPassportRegistration()
                 }
             }) {
                 HStack(alignment: .center, spacing: 8) {
                     Image(Icons.restartLine)
                         .iconMedium()
-                        .foregroundStyle(.baseWhite)
                     Text("Retry")
                         .buttonMedium()
-                        .foregroundStyle(.invertedLight)
                 }
+                .foregroundStyle(.invertedLight)
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
@@ -286,8 +286,10 @@ struct PassportCard: View {
         .background(.bgBlur, in: RoundedRectangle(cornerRadius: 16))
     }
     
-    private func regenerateProof() async {
+    private func retryPassportRegistration() async {
         do {
+            passportViewModel.processingStatus = .processing
+            
             let zkProof = try await passportViewModel.register()
 
             if passportViewModel.processingStatus != .success { return }
@@ -296,9 +298,12 @@ struct PassportCard: View {
             userManager.user?.status = .passportScanned
         } catch {
             LoggerUtil.common.error("error while registering passport: \(error.localizedDescription, privacy: .public)")
+            
             if let error = error as? Errors {
-                AlertManager.shared.emitError(error)
                 passportViewModel.processingStatus = .failure
+                
+                AlertManager.shared.emitError(error)
+                
                 return
             }
         }

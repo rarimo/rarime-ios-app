@@ -32,7 +32,7 @@ struct SelectIdentityTypeView: View {
                 id: .zkLiveness,
                 name: String(localized: "ZK Liveness (PoH Killer)"),
                 icon: Icons.userFocus,
-                isAvailable: true
+                isAvailable: false
             ),
             IdentityType(
                 id: .idCard,
@@ -44,12 +44,6 @@ struct SelectIdentityTypeView: View {
                 id: .xVerifiedBadge,
                 name: String(localized: "X Verified Badge"),
                 icon: Icons.sealCheck,
-                isAvailable: false
-            ),
-            IdentityType(
-                id: .proofOfEmployment,
-                name: String(localized: "Proof of Employment"),
-                icon: Icons.suitcaseSimple,
                 isAvailable: false
             )
         ].filter { !$0.isHidden }

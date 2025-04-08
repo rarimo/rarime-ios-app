@@ -8,8 +8,8 @@ struct ScanPassportMRZView: View {
 
     var body: some View {
         ScanPassportLayoutView(
+            currentStep: 0,
             title: "Scan MRZ",
-            onPrevious: onClose,
             onClose: onClose
         ) {
             ZStack {
@@ -21,14 +21,14 @@ struct ScanPassportMRZView: View {
             }
             .frame(maxWidth: .infinity)
             Text("Scan your passport’s first page inside the border")
-                .body4()
+                .overline2()
                 .foregroundStyle(.textSecondary)
                 .multilineTextAlignment(.center)
                 .padding(.top, 24)
                 .frame(width: 250)
             Spacer()
             AppButton(
-                variant: .tertiary,
+                variant: .quartenary,
                 text: "Fill Manually",
                 action: { isManualMrzSheetPresented = true }
             )

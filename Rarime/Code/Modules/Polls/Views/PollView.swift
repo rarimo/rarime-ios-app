@@ -8,6 +8,7 @@ struct PollView: View {
 
     let poll: Poll
     let onClose: () -> Void
+    let onVerification: () -> Void
     
     @State private var isQuestionsShown = false
     @State private var isSubmitting = false
@@ -65,11 +66,14 @@ struct PollView: View {
         VStack(spacing: 24) {
             ZStack(alignment: .topTrailing) {
                 if let image = poll.image {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(maxHeight: 228)
-                        .clipped()
+                    GeometryReader { geometry in
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: geometry.size.width)
+                            .clipped()
+                    }
+                    .frame(height: 228)
                 }
                 Button(action: onClose) {
                     Image(Icons.closeFill)
@@ -137,14 +141,11 @@ struct PollView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                 } else {
                     Group {
-                        if poll.status != .ended {
-                            if isVoted {
-                                AppButton(text: "Voted", action: {})
-                                    .disabled(true)
-                            } else {
-                                AppButton(text: "Let's start", action: { isQuestionsShown = true })
-                                    .disabled(isSubmitting || !isAdmittedToVote)
-                            }
+                        if userManager.registerZkProof == nil {
+                            AppButton(text: "Verification", action: onVerification)
+                        } else {
+                            AppButton(text: "Let's start", action: { isQuestionsShown = true })
+                                .disabled(isSubmitting || !isAdmittedToVote || poll.status == .ended || poll.status == .waiting)
                         }
                     }
                     .controlSize(.large)
@@ -178,7 +179,7 @@ struct PollView: View {
 #Preview {
     ZStack{}
         .dynamicSheet(isPresented: .constant(true), fullScreen: true) {
-            PollView(poll: ACTIVE_POLLS[0], onClose: {})
+            PollView(poll: ACTIVE_POLLS[0], onClose: {}, onVerification: {})
                 .environmentObject(PollsViewModel())
                 .environmentObject(UserManager())
                 .environmentObject(PassportManager())

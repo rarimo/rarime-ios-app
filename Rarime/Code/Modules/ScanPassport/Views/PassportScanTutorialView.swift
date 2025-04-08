@@ -130,7 +130,7 @@ private struct PassportScanTutorialStep: View {
                         action()
                     }
                 } else {
-                    StepIndicator(steps: PassportTutorialStep.allCases.count, currentStep: step.rawValue)
+                    HorizontalStepIndicator(steps: PassportTutorialStep.allCases.count, currentStep: step.rawValue)
                     Spacer()
                     AppButton(text: step.buttonText, rightIcon: Icons.arrowRight, width: nil) {
                         currentStep += 1

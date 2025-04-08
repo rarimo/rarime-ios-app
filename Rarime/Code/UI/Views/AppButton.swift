@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum ButtonVariant {
-    case primary, secondary, tertiary
+    case primary, secondary, tertiary, quartenary
 }
 
 private struct ButtonColors {
@@ -54,6 +54,7 @@ struct AppButtonStyle: ButtonStyle {
         switch variant {
         case .secondary: secondaryColors
         case .tertiary: tertiaryColors
+        case .quartenary: quaternaryColors
         default: primaryColors
         }
     }
@@ -190,6 +191,22 @@ struct AppButton: View {
         AppButton(
             variant: .tertiary,
             text: LocalizedStringResource("Tertiary", table: "preview"),
+            action: {}
+        ).controlSize(.small)
+        AppButton(
+            variant: .quartenary,
+            text: LocalizedStringResource("Quartenary", table: "preview"),
+            action: {}
+        ).controlSize(.large)
+        AppButton(
+            variant: .quartenary,
+            text: LocalizedStringResource("Quartenary", table: "preview"),
+            action: {}
+        )
+        .disabled(true)
+        AppButton(
+            variant: .quartenary,
+            text: LocalizedStringResource("Quartenary", table: "preview"),
             action: {}
         ).controlSize(.small)
     }

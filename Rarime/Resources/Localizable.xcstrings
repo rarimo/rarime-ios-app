@@ -24,9 +24,6 @@
     "* Nothing leaves this device" : {
 
     },
-    "/%@" : {
-
-    },
     "%@ ensures your history, reputation and actions are not lost, but remain confidential and under your control." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -38,10 +35,8 @@
         }
       }
     },
-    "%@ participants" : {
-
-    },
     "%@ RMO" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -112,13 +107,10 @@
     "%lld" : {
 
     },
-    "%lld days left" : {
-
-    },
-    "%lld extra referrals" : {
-
-    },
     "%lld questions" : {
+
+    },
+    "%lld RMO" : {
 
     },
     "%lldm %llds" : {
@@ -155,13 +147,7 @@
     "3. When we support your country, you will be notified in the app" : {
 
     },
-    "10 RMO" : {
-
-    },
     "49,421 other already joined" : {
-
-    },
-    "About the reward program" : {
 
     },
     "Account" : {
@@ -178,9 +164,6 @@
 
     },
     "Active" : {
-
-    },
-    "Active tasks" : {
 
     },
     "Address" : {
@@ -406,9 +389,6 @@
     "Bahrain" : {
 
     },
-    "Balance" : {
-
-    },
     "Balance: RMO" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -621,16 +601,7 @@
         }
       }
     },
-    "Claim amount" : {
-
-    },
-    "Claim RMO" : {
-
-    },
     "Claimed" : {
-
-    },
-    "Claiming tokens results in a downgrade on the leaderboard" : {
 
     },
     "Claiming..." : {
@@ -728,6 +699,7 @@
 
     },
     "Create Account" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -736,6 +708,9 @@
           }
         }
       }
+    },
+    "Create new identity" : {
+
     },
     "Creating" : {
 
@@ -912,9 +887,6 @@
         }
       }
     },
-    "Earn more rewards" : {
-
-    },
     "Ecuador" : {
 
     },
@@ -997,9 +969,6 @@
     "Enter" : {
 
     },
-    "Enter amount" : {
-
-    },
     "Enter Passcode" : {
       "localizations" : {
         "uk" : {
@@ -1033,12 +1002,6 @@
 
     },
     "Ethiopia" : {
-
-    },
-    "Exclusive campaigns" : {
-
-    },
-    "Exp: %@" : {
 
     },
     "Expiry date" : {
@@ -1093,9 +1056,6 @@
       }
     },
     "Failed to register, try again later" : {
-
-    },
-    "Failed to verify code, try again later" : {
 
     },
     "Failed, %lld attempts left" : {
@@ -1156,12 +1116,6 @@
 
     },
     "French Southern Territories" : {
-
-    },
-    "From" : {
-
-    },
-    "From a reserved pool to a wallet" : {
 
     },
     "Gabon" : {
@@ -1303,12 +1257,6 @@
     "Hong Kong" : {
 
     },
-    "HOW CAN I GET A CODE?" : {
-
-    },
-    "HOW CAN I GET THE INVITE CODE?" : {
-
-    },
     "HOW TO SHARE" : {
 
     },
@@ -1331,9 +1279,6 @@
 
     },
     "Import JSON" : {
-
-    },
-    "INCOGNITO ID" : {
 
     },
     "Incognito mode" : {
@@ -1365,9 +1310,6 @@
     "Invalid HTTP status code: %lld" : {
 
     },
-    "Invalid invitation code" : {
-
-    },
     "Invalid private key" : {
 
     },
@@ -1388,24 +1330,8 @@
     "Invite" : {
 
     },
-    "Invite Friends" : {
-
-    },
-    "Invite more people, earn more rewards" : {
-
-    },
     "Invite to RariMe" : {
 
-    },
-    "Invited %lld/%lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Invited %1$lld/%2$lld"
-          }
-        }
-      }
     },
     "Iran" : {
 
@@ -1466,9 +1392,6 @@
         }
       }
     },
-    "Join Rewards Program" : {
-
-    },
     "Join the program" : {
 
     },
@@ -1520,9 +1443,6 @@
     "Latvia" : {
 
     },
-    "Leaderboard" : {
-
-    },
     "Learn how to scan passport correctly" : {
 
     },
@@ -1537,9 +1457,6 @@
         }
       }
     },
-    "Learn more about the program" : {
-
-    },
     "Lebanon" : {
 
     },
@@ -1550,9 +1467,6 @@
 
     },
     "Let's start" : {
-
-    },
-    "Let's Start" : {
 
     },
     "Let’s start" : {
@@ -1567,12 +1481,6 @@
           }
         }
       }
-    },
-    "Level %lld" : {
-
-    },
-    "Leveling" : {
-
     },
     "Liberia" : {
 
@@ -1592,9 +1500,6 @@
           }
         }
       }
-    },
-    "Limited time events" : {
-
     },
     "Lithuania" : {
 
@@ -1799,9 +1704,6 @@
     "No" : {
 
     },
-    "No active tasks" : {
-
-    },
     "No backup found in iCloud" : {
 
     },
@@ -1857,9 +1759,6 @@
 
     },
     "One of our services is down, try again later. RequestURL=%@" : {
-
-    },
-    "Only level %lld specials" : {
 
     },
     "Only your camera and device should attest to your identity." : {
@@ -1962,9 +1861,6 @@
 
     },
     "Pitcairn" : {
-
-    },
-    "PLACE" : {
 
     },
     "Place QR code within the frame to scan" : {
@@ -2101,9 +1997,6 @@
         }
       }
     },
-    "Proof of Employment" : {
-
-    },
     "Proofs" : {
       "localizations" : {
         "uk" : {
@@ -2154,6 +2047,9 @@
         }
       }
     },
+    "RariMe" : {
+
+    },
     "RARIME" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2174,12 +2070,6 @@
           }
         }
       }
-    },
-    "RariMe Event" : {
-
-    },
-    "RariMe Event: %@\n\nParticipate and get rewarded: https://rarime.com" : {
-
     },
     "RariMe General Terms & Conditions" : {
       "localizations" : {
@@ -2270,9 +2160,6 @@
     "Receive %@" : {
 
     },
-    "Receive rewards for using RariMe app" : {
-
-    },
     "Receive RMO" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2316,16 +2203,7 @@
     "Reserve %@ RMO tokens" : {
 
     },
-    "Reserve tokens to unlock new levels and rewards" : {
-
-    },
     "Reserved" : {
-
-    },
-    "RESERVED" : {
-
-    },
-    "Reserved RMO" : {
 
     },
     "Reserving..." : {
@@ -2349,13 +2227,10 @@
     "Review Transaction" : {
 
     },
-    "Rewards" : {
-
-    },
     "Rewards limit reached" : {
 
     },
-    "RMO tokens will be exclusively distributed via the RariMe app. To claim tokens, create an incognito profile using your biometric passport. Depending on which country issued the passport, you’ll either be able to claim a token right away or be put on a waitlist.\n\nIf you are added to the waitlist it means that you are eligible to claim tokens in the next wave of airdrops. The app will notify you when you are added.\n\nCertain jurisdictions are excluded from the reward program: %@" : {
+    "RMO" : {
 
     },
     "Romania" : {
@@ -2564,9 +2439,6 @@
     "Some passports have a problem with chip scans" : {
 
     },
-    "Something went wrong" : {
-
-    },
     "Soon" : {
 
     },
@@ -2605,9 +2477,6 @@
     "Sri Lanka" : {
 
     },
-    "Staking" : {
-
-    },
     "Start building your incognito profile and earn rewards as an early community member." : {
       "localizations" : {
         "uk" : {
@@ -2617,9 +2486,6 @@
           }
         }
       }
-    },
-    "Start journey to unlock rewards" : {
-
     },
     "Starting in July" : {
       "extractionState" : "stale",
@@ -2648,6 +2514,9 @@
           }
         }
       }
+    },
+    "Stranger" : {
+
     },
     "Submit" : {
 
@@ -2719,9 +2588,6 @@
         }
       }
     },
-    "The app’s rewards program is invite-only. Get invited by an authorized user or ask a community member for an invite code." : {
-
-    },
     "The passport is in the allowlist" : {
 
     },
@@ -2760,9 +2626,6 @@
       }
     },
     "Timor-Leste" : {
-
-    },
-    "To" : {
 
     },
     "To continue, please install the latest version of the app" : {
@@ -2860,6 +2723,9 @@
     "Unsupported for rewards" : {
 
     },
+    "Upcoming" : {
+
+    },
     "Upcoming airdrops will include citizens from all over the world.\n\nCreate an incognito profile by scanning your passport, and we will notify you when you become eligible." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2880,13 +2746,10 @@
     "Used" : {
 
     },
-    "User" : {
-
-    },
     "User creation failed" : {
 
     },
-    "Uses pregenerated keys or iClould" : {
+    "Uses pregenerated keys or iCloud" : {
 
     },
     "Uzbekistan" : {
@@ -2896,6 +2759,9 @@
 
     },
     "Venezuela" : {
+
+    },
+    "Verification" : {
 
     },
     "Verification..." : {
@@ -2911,9 +2777,6 @@
 
     },
     "Virgin Islands, U.S." : {
-
-    },
-    "Voted" : {
 
     },
     "Voting" : {
@@ -2964,6 +2827,9 @@
           }
         }
       }
+    },
+    "Welcome To" : {
+
     },
     "Western Sahara" : {
 
@@ -3030,9 +2896,6 @@
     "You" : {
 
     },
-    "YOU" : {
-
-    },
     "You can restore your account using your iCloud backup or private key" : {
 
     },
@@ -3054,9 +2917,6 @@
 
     },
     "You have already reserved tokens" : {
-
-    },
-    "You must be invited or receive a code from social channels" : {
 
     },
     "You’ve joined the waitlist" : {

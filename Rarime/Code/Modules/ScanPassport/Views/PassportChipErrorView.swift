@@ -41,7 +41,7 @@ struct PassportChipErrorView: View {
                 )
                 .controlSize(.large)
                 AppButton(
-                    variant: .tertiary,
+                    variant: .quartenary,
                     text: "Cancel",
                     action: onClose
                 )
