@@ -1,8 +1,8 @@
-import Foundation
 import Identity
 import NFCPassportReader
 import OpenSSL
 import Security
+import SwiftUI
 import Web3
 
 class CircuitBuilderManager {
@@ -101,7 +101,7 @@ extension CircuitBuilderManager {
             let sod = try passport.getSod()
             let encapsulatedContent = try sod.getEncapsulatedContent()
             let signedAttributes = try sod.getSignedAttributes()
-            let signature = try sod.getSignature()
+            var signature = try sod.getSignature()
             let publicKey = try sod.getPublicKey()
             
             guard let pubkeyData = CryptoUtils.getDataFromPublicKey(publicKey) else {
@@ -127,10 +127,12 @@ extension CircuitBuilderManager {
                 
                 reductionPk = (CircuitUtils.splitEmptyData(pubKeyX) + CircuitUtils.splitEmptyData(pubKeyY)).map { $0.dec() }
                 
-                let sigX = signature.subdata(in: 0..<signature.count / 2)
-                let sigY = signature.subdata(in: signature.count / 2..<signature.count)
+                signature = try CryptoUtils.decodeECDSASignatureFromASN1(signature)
                 
-                sig = (CircuitUtils.splitBy120Bits(sigX) + CircuitUtils.splitBy120Bits(sigY)).map { $0.dec() }
+                let sigR = signature.subdata(in: 0..<signature.count / 2)
+                let sigS = signature.subdata(in: signature.count / 2..<signature.count)
+                
+                sig = (CircuitUtils.splitBy120Bits(sigR) + CircuitUtils.splitBy120Bits(sigS)).map { $0.fullHex() }
             }
             
             return .init(
