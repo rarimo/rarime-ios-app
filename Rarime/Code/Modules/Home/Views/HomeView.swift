@@ -38,6 +38,10 @@ struct HomeView: View {
     private var userPointsBalance: Int {
         pointsBalance?.amount ?? 0
     }
+    
+    private var isBalanceSufficient: Bool {
+        pointsBalance != nil && userPointsBalance > 0
+    }
 
     private var homeCards: [HomeCarouselCard] {
         [
@@ -64,7 +68,8 @@ struct HomeView: View {
                     },
                     animation: identityAnimation
                 )
-            }
+            },
+//            TODO: uncomment after desing and flow impl
 //            HomeCarouselCard(
 //                isShouldDisplay: !isBalanceFetching && pointsBalance != nil,
 //                action: { path = .inviteFriends }
@@ -126,25 +131,23 @@ struct HomeView: View {
 //                    animation: inviteFriendsAnimation
 //                )
 //            },
-//            HomeCarouselCard(
-//                isShouldDisplay: userPointsBalance > 0,
-//                action: { path = .claimTokens }
-//            ) {
-//                HomeCardView(
-//                    backgroundGradient: Gradients.gradientThird,
-//                    topIcon: Icons.rarimo,
-//                    bottomIcon: Icons.arrowRightUpLine,
-//                    imageContent: {
-//                        Image(Images.rarimoTokens)
-//                            .resizable()
-//                            .scaledToFit()
-//                            .padding(.top, 100)
-//                    },
-//                    title: "Claim",
-//                    subtitle: "\(userPointsBalance.formatted()) RMO",
-//                    animation: claimTokensAnimation
-//                )
-//            },
+            HomeCarouselCard(action: { path = .claimTokens }) {
+                HomeCardView(
+                    backgroundGradient: Gradients.gradientThird,
+                    topIcon: Icons.rarimo,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(Images.rarimoTokens)
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.top, 100)
+                    },
+                    title: isBalanceSufficient ? "Reserved" : "Upcoming",
+                    subtitle: isBalanceSufficient ? "\(userPointsBalance) RMO" : "RMO" ,
+                    animation: claimTokensAnimation
+                )
+            },
+//            TODO: uncomment after desing and flow impl
 //            HomeCarouselCard(action: { path = .wallet }) {
 //                HomeCardView(
 //                    backgroundGradient: Gradients.gradientFourth,
@@ -208,6 +211,7 @@ struct HomeView: View {
                     case .claimTokens:
                         ClaimTokensView(
                             onClose: { path = nil },
+                            pointsBalance: pointsBalance,
                             animation: claimTokensAnimation
                         )
                     case .wallet:
@@ -223,8 +227,8 @@ struct HomeView: View {
                 .animation(.interpolatingSpring(stiffness: 100, damping: 15), value: path)
             }
         }
-//        .onAppear(perform: fetchBalance)
-//        .onDisappear(perform: cleanup)
+        .onAppear(perform: fetchBalance)
+        .onDisappear(perform: cleanup)
     }
 
     private var header: some View {
@@ -300,35 +304,32 @@ struct HomeView: View {
         }
     }
 
-//    private func fetchBalance() {
-//        isBalanceFetching = true
-//
-//        let cancelable = Task { @MainActor in
-//            defer {
-//                self.isBalanceFetching = false
-//            }
-//
-//            if userManager.user?.userReferralCode == nil {
-//                await verifyReferralCode()
-//                return
-//            }
-//
-//            do {
-//                guard let user = userManager.user else { throw "failed to get user" }
-//                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-//
-//                let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
-//                self.pointsBalance = pointsBalance
-//            } catch is CancellationError {
-//                return
-//            } catch {
-//                LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
-//            }
-//        }
-//
-//        cancelables.append(cancelable)
-//    }
-//
+    private func fetchBalance() {
+        isBalanceFetching = true
+
+        let cancelable = Task { @MainActor in
+            defer {
+                self.isBalanceFetching = false
+            }
+            
+            if userManager.user?.userReferralCode == nil { return }
+
+            do {
+                guard let user = userManager.user else { throw "failed to get user" }
+                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+
+                let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
+                self.pointsBalance = pointsBalance
+            } catch is CancellationError {
+                return
+            } catch {
+                LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
+            }
+        }
+
+        cancelables.append(cancelable)
+    }
+//    TODO: uncomment after desing and flow impl
 //    private func verifyReferralCode() async {
 //        var referralCode = configManager.api.defaultReferralCode
 //        if let deferredReferralCode = userManager.user?.deferredReferralCode, !deferredReferralCode.isEmpty {
@@ -375,11 +376,11 @@ struct HomeView: View {
 //        )
 //    }
 //
-//    private func cleanup() {
-//        for cancelable in cancelables {
-//            cancelable.cancel()
-//        }
-//    }
+    private func cleanup() {
+        for cancelable in cancelables {
+            cancelable.cancel()
+        }
+    }
 }
 
 #Preview {

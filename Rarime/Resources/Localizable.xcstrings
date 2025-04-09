@@ -107,6 +107,9 @@
         }
       }
     },
+    "%lld RMO" : {
+
+    },
     "%lldm %llds" : {
       "localizations" : {
         "en" : {
@@ -124,9 +127,6 @@
 
     },
     "3. When we support your country, you will be notified in the app" : {
-
-    },
-    "10 RMO" : {
 
     },
     "49,421 other already joined" : {
@@ -2147,6 +2147,9 @@
     "Reserve %@ RMO tokens" : {
 
     },
+    "Reserved" : {
+
+    },
     "Reserving..." : {
 
     },
@@ -2169,6 +2172,9 @@
 
     },
     "Rewards limit reached" : {
+
+    },
+    "RMO" : {
 
     },
     "Romania" : {
@@ -2649,6 +2655,9 @@
 
     },
     "Unsupported for rewards" : {
+
+    },
+    "Upcoming" : {
 
     },
     "Upcoming airdrops will include citizens from all over the world.\n\nCreate an incognito profile by scanning your passport, and we will notify you when you become eligible." : {
