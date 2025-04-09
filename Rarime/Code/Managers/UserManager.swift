@@ -384,65 +384,6 @@ class UserManager: ObservableObject {
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
     }
     
-    func generateAirdropQueryProof(_ registerZkProof: ZkProof, _ passport: Passport) async throws -> ZkProof {
-        guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
-        
-        let stateKeeperContract = try StateKeeperContract()
-        
-        let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.api.registrationSmtContractAddress, eip55: false)
-        
-        let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
-        
-        guard let passportKey = getPassportKey(passport) else {
-            throw "failed to get passport key"
-        }
-        
-        guard let identityKey = getIdentityKey(passport) else {
-            throw "failed to get identity key"
-        }
-        
-        var error: NSError? = nil
-        let proofIndex = IdentityCalculateProofIndex(
-            passportKey,
-            identityKey,
-            &error
-        )
-        if let error { throw error }
-        guard let proofIndex else { throw "proof index is not initialized" }
-        
-        let smtProof = try await registrationSmtContract.getProof(proofIndex)
-        
-        let smtProofJson = try JSONEncoder().encode(smtProof)
-        
-        let profileInitializer = IdentityProfile()
-        let profile = try profileInitializer.newProfile(secretKey)
-        
-        let (passportInfo, identityInfo) = try await stateKeeperContract.getPassportInfo(passportKey)
-        
-        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let aidropParams = try await relayer.getAirdropParams()
-
-        let queryProofInputs = try profile.buildAirdropQueryIdentityInputs(
-            passport.dg1,
-            smtProofJSON: smtProofJson,
-            selector: aidropParams.data.attributes.querySelector,
-            pkPassportHash: passportKey,
-            issueTimestamp: identityInfo.issueTimestamp.description,
-            identityCounter: passportInfo.identityReissueCounter.description,
-            eventID: aidropParams.data.attributes.eventID,
-            startedAt: Int64(aidropParams.data.attributes.startedAt)
-        )
-        
-        let wtns = try ZKUtils.calcWtns_queryIdentity(Circuits.queryIdentityDat, queryProofInputs)
-        
-        let (proofJson, pubSignalsJson) = try ZKUtils.groth16QueryIdentity(wtns)
-        
-        let proof = try JSONDecoder().decode(GrothZkProofPoints.self, from: proofJson)
-        let pubSignals = try JSONDecoder().decode(GrothZkProofPubSignals.self, from: pubSignalsJson)
-        
-        return ZkProof.groth(GrothZkProof(proof: proof, pubSignals: pubSignals))
-    }
-    
     func generateQueryProof(
         passport: Passport,
         params: GetProofParamsResponseAttributes
@@ -556,7 +497,7 @@ class UserManager: ObservableObject {
         ]
     }
     
-    func generatePointsProof(_ registerZkProof: ZkProof, _ passport: Passport) async throws -> ZkProof {
+    func generatePointsProof(_ passport: Passport) async throws -> ZkProof {
         guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
         
         let stateKeeperContract = try StateKeeperContract()
@@ -700,8 +641,8 @@ class UserManager: ObservableObject {
         return try JSONDecoder().decode(CosmosTransferResponse.self, from: response)
     }
     
-    func reserveTokens(_ jwt: JWT, _ registerProof: ZkProof, _ passport: Passport) async throws {
-        let queryProof = try await generatePointsProof(registerProof, passport)
+    func reserveTokens(_ jwt: JWT, _ passport: Passport) async throws {
+        let queryProof = try await generatePointsProof(passport)
         
         var calculateAnonymousIDError: NSError?
         let anonymousID = IdentityCalculateAnonymousID(passport.dg1, Points.PointsEventId, &calculateAnonymousIDError)

@@ -29,4 +29,14 @@ struct GrothZkProof: Codable {
 enum ZkProof: Codable {
     case groth(GrothZkProof)
     case plonk(Data)
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .groth(let proof):
+            try container.encode(proof)
+        case .plonk(let proof):
+            try container.encode(proof)
+        }
+    }
 }

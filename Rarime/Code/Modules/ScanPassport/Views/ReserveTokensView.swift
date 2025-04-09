@@ -52,9 +52,8 @@ struct ReserveTokensView: View {
             let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
             
             guard let passport else { throw "passport is nil" }
-            guard let registerZkProof = userManager.registerZkProof else { throw "registerZkProof is nil" }
             
-            try await userManager.reserveTokens(accessJwt, registerZkProof, passport)
+            try await userManager.reserveTokens(accessJwt, passport)
             FeedbackGenerator.shared.notify(.success)
             onFinish(true)
         } catch {
