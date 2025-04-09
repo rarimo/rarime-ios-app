@@ -46,9 +46,13 @@ class UserManager: ObservableObject {
             self.isRevoked = AppUserDefaults.shared.isUserRevoked
             
             if let registerZkProofJson = try AppKeychain.getValue(.registerZkProof) {
-                let registerZkProof = try JSONDecoder().decode(ZkProof.self, from: registerZkProofJson)
-                
-                self.registerZkProof = registerZkProof
+                if let grothZkProof = try? JSONDecoder().decode(GrothZkProof.self, from: registerZkProofJson) {
+                    self.registerZkProof = .groth(grothZkProof)
+                } else if let plonkZkProof = try? JSONDecoder().decode(Data.self, from: registerZkProofJson) {
+                    self.registerZkProof = .plonk(plonkZkProof)
+                } else {
+                    throw "failed to decode registerZkProof"
+                }
             }
             
             if let lightRegistrationData = try AppKeychain.getValue(.lightRegistrationData) {
