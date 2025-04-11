@@ -1,15 +1,15 @@
 import CoreData
 import Foundation
+import UIKit
 import Web3
 import Web3ContractABI
 import Web3PromiseKit
-import UIKit
 
 class PollsService {
     static func fetchPolls(
         _ multicall3Contract: Multicall3Contract,
         _ ids: [BigUInt]
-    ) async throws  -> [Poll]{
+    ) async throws -> [Poll] {
         var calls: [Multicall3Contract.Call3] = []
         for id in ids {
             try calls.append(self.buildGetProposalInfoCall(id))
@@ -157,7 +157,7 @@ class PollsService {
     
     static func decodeVotingData(_ poll: Poll) throws -> VotingData {
         guard let encodedVotingData = poll.votingData.abiEncode(dynamic: false) else {
-           throw "Empty or nil voting data"
+            throw "Empty or nil voting data"
         }
         
         let rawDecoded = try ABIDecoder.decodeTuple(
@@ -169,7 +169,7 @@ class PollsService {
                 .uint256,
                 .uint256,
                 .uint256,
-                .uint256,
+                .uint256
             ]),
             from: encodedVotingData
         )
@@ -213,7 +213,7 @@ class PollsService {
         return VotingData(
             selector: selector,
             citizenshipWhitelist: citizenshipWhitelist,
-            timestampUpperbound: timestampUpperbound,
+            identityCreationTimestampUpperBound: timestampUpperbound,
             identityCounterUpperbound: identityCounterUpperbound,
             gender: gender,
             birthDateLowerbound: birthDateLowerbound,
@@ -256,7 +256,7 @@ struct Poll: Identifiable {
 struct VotingData: Codable {
     let selector: BigUInt
     let citizenshipWhitelist: [BigUInt]
-    let timestampUpperbound : BigUInt
+    let identityCreationTimestampUpperBound: BigUInt
     let identityCounterUpperbound: BigUInt
     let gender: BigUInt
     let birthDateLowerbound: BigUInt
@@ -392,4 +392,3 @@ extension ProposalInfo {
         )
     }
 }
-

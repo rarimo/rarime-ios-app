@@ -28,7 +28,7 @@ class PollsViewModel: ObservableObject {
     }
     
     var hasMorePolls: Bool {
-        self.polls.count < self.lastProposalId
+        polls.count < lastProposalId
     }
     
     var pollRequirements: [PollRequirement] {
@@ -53,22 +53,22 @@ class PollsViewModel: ObservableObject {
             }
 
             if let formattedMinAge, let formattedMaxAge {
-                 return userDateOfBirth <= formattedMinAge && userDateOfBirth >= formattedMaxAge
+                return userDateOfBirth <= formattedMinAge && userDateOfBirth >= formattedMaxAge
             }
             
             if let formattedMinAge {
-                 return userDateOfBirth <= formattedMinAge
+                return userDateOfBirth <= formattedMinAge
             }
             
             if let formattedMaxAge {
-                 return userDateOfBirth >= formattedMaxAge
+                return userDateOfBirth >= formattedMaxAge
             }
             
             return false
         }()
         let isGengerEligible = {
             if decodedGender == "M" || decodedGender == "F" {
-               return decodedGender == passport.gender
+                return decodedGender == passport.gender
             }
             return false
         }()
@@ -219,6 +219,28 @@ class PollsViewModel: ObservableObject {
         let eventData = try profile.calculateVotingEventData(pollResultsJson)
         let votingData = try PollsService.decodeVotingData(poll)
         
+        let votingStartDate = Date(timeIntervalSince1970: TimeInterval(votingData.identityCreationTimestampUpperBound))
+        
+        LoggerUtil.common.info("votingStartDate: \(votingStartDate)")
+        
+        let registrationSMTAddress = try EthereumAddress(hex: ConfigManager.shared.api.votingRegistartionSmtContractAddress, eip55: false)
+        let registrationSMTContract = try PoseidonSMT(contractAddress: registrationSMTAddress, rpcUrl: ConfigManager.shared.api.votingRpcURL)
+        
+        let root_validity = try await registrationSMTContract.ROOT_VALIDITY()
+        
+        var identityCreationTimestampUpperBound = votingData.identityCreationTimestampUpperBound.subtracting(root_validity)
+        var identityCounterUpperBound = BigUInt(UInt(UInt32.max))
+        
+        LoggerUtil.common.debug("identityCounterUpperBound: \(identityCounterUpperBound))")
+        
+        if identityInfo.issueTimestamp > votingData.identityCreationTimestampUpperBound {
+            identityCreationTimestampUpperBound = try BigUInt(identityInfo.issueTimestamp)
+            
+            LoggerUtil.common.debug("identityInfo.issueTimestamp: \(identityCreationTimestampUpperBound))")
+            
+            identityCounterUpperBound = votingData.identityCounterUpperbound
+        }
+        
         let queryProofInputs = try profile.buildQueryIdentityInputs(
             passport.dg1,
             smtProofJSON: smtProofJson,
@@ -229,12 +251,9 @@ class PollsViewModel: ObservableObject {
             eventID: poll.eventId.description,
             eventData: eventData.fullHex,
             timestampLowerbound: "0",
-            timestampUpperbound: max(
-                Int(votingData.timestampUpperbound),
-                Int(identityInfo.issueTimestamp + 1)
-            ).description,
+            timestampUpperbound: identityCreationTimestampUpperBound.description,
             identityCounterLowerbound: "0",
-            identityCounterUpperbound: votingData.identityCounterUpperbound.description,
+            identityCounterUpperbound: identityCounterUpperBound.description,
             expirationDateLowerbound: votingData.expirationDateLowerbound.serialize().fullHex,
             expirationDateUpperbound: ZERO_IN_HEX,
             birthDateLowerbound: votingData.birthDateLowerbound.serialize().fullHex,

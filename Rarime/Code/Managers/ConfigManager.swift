@@ -58,7 +58,8 @@ extension ConfigManager {
         let votingWebsiteURL: URL
         let votingRelayerURL: URL
         let votingRpcURL: URL
-      
+        let votingRegistartionSmtContractAddress: String
+
         init() {
             do {
                 self.relayerURL = try readURLFromInfoPlist(key: "RELAYER_URL")
@@ -81,6 +82,7 @@ extension ConfigManager {
                 self.votingWebsiteURL = try readURLFromInfoPlist(key: "VOTING_WEBSITE_URL")
                 self.votingRelayerURL = try readURLFromInfoPlist(key: "VOTING_RELAYER_URL")
                 self.votingRpcURL = try readURLFromInfoPlist(key: "VOTING_RPC_URL")
+                self.votingRegistartionSmtContractAddress = try readFromInfoPlist(key: "VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS")
             } catch {
                 fatalError("ConfigManager.API init error: \(error.localizedDescription)")
             }
