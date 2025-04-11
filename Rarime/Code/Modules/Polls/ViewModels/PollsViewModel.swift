@@ -175,7 +175,7 @@ class PollsViewModel: ObservableObject {
         
         let resultsJson = try JSONEncoder().encode(results)
         
-        let (voteProof, isReissuedAfterVoting) = try await generateVoteProof(
+        let (voteProof, isRegisteredAfterVoting) = try await generateVoteProof(
             profile,
             passport,
             smtProofJson,
@@ -184,8 +184,6 @@ class PollsViewModel: ObservableObject {
             passportInfo,
             identityInfo
         )
-        
-        LoggerUtil.common.debug("isReissuedAfterVoting: \(isReissuedAfterVoting)")
         
         let voteProofJson = try JSONEncoder().encode(voteProof)
         let votingData = try PollsService.decodeVotingData(poll)
@@ -196,7 +194,7 @@ class PollsViewModel: ObservableObject {
             proposalID: Int64(poll.id),
             pollResultsJSON: resultsJson,
             citizenship: votingData.citizenshipWhitelist.isEmpty ? Data(hex: "0x0")?.ascii : passport.nationality,
-            isReissuedAfterVoting: isReissuedAfterVoting
+            isRegisteredAfterVoting: isRegisteredAfterVoting
         )
         
         let votingRelayer = VotingRelayer(ConfigManager.shared.api.votingRelayerURL)
@@ -230,8 +228,8 @@ class PollsViewModel: ObservableObject {
         var identityCreationTimestampUpperBound = votingData.identityCreationTimestampUpperBound.subtracting(root_validity)
         var identityCounterUpperBound = BigUInt(UInt(UInt32.max))
         
-        var isReissuedAfterVoting = false
-        if identityInfo.issueTimestamp > votingData.identityCreationTimestampUpperBound {
+        var isRegisteredAfterVoting = false
+        if identityInfo.issueTimestamp > identityCreationTimestampUpperBound {
             if passportInfo.identityReissueCounter > votingData.identityCounterUpperbound {
                 throw "Your identity can not be uniquely verified for voting"
             }
@@ -240,7 +238,7 @@ class PollsViewModel: ObservableObject {
             
             identityCounterUpperBound = votingData.identityCounterUpperbound
             
-            isReissuedAfterVoting = true
+            isRegisteredAfterVoting = true
         }
         
         let queryProofInputs = try profile.buildQueryIdentityInputs(
@@ -269,7 +267,7 @@ class PollsViewModel: ObservableObject {
         let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
         let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
         
-        return (ZkProof(proof: proof, pubSignals: pubSignals), isReissuedAfterVoting)
+        return (ZkProof(proof: proof, pubSignals: pubSignals), isRegisteredAfterVoting)
     }
     
     func checkUserVote(_ nullifier: String) async throws -> Bool {

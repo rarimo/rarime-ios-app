@@ -193,7 +193,7 @@
 		CE0DA0D92BDA927000696503 /* AirDropResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D82BDA927000696503 /* AirDropResponse.swift */; };
 		CE0DC57B2C0DB33A00EFC0D7 /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DC57A2C0DB33A00EFC0D7 /* UpdateManager.swift */; };
 		CE0DC57D2C0DB9B200EFC0D7 /* VersionUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DC57C2C0DB9B200EFC0D7 /* VersionUpdateView.swift */; };
-		CE1201702DA95607006843A7 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE12016F2DA95607006843A7 /* Identity.xcframework */; };
+		CE1201722DA960A3006843A7 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1201712DA960A3006843A7 /* Identity.xcframework */; };
 		CE19CB472BE39DA400B26DF7 /* RarimoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB462BE39DA400B26DF7 /* RarimoUtils.swift */; };
 		CE19CB492BE3AD4200B26DF7 /* LockScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB482BE3AD4200B26DF7 /* LockScreenView.swift */; };
 		CE1FA56A2C1708F100B2C191 /* Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1FA5692C1708F100B2C191 /* Points.swift */; };
@@ -574,7 +574,7 @@
 		CE0DA0D82BDA927000696503 /* AirDropResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirDropResponse.swift; sourceTree = "<group>"; };
 		CE0DC57A2C0DB33A00EFC0D7 /* UpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateManager.swift; sourceTree = "<group>"; };
 		CE0DC57C2C0DB9B200EFC0D7 /* VersionUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionUpdateView.swift; sourceTree = "<group>"; };
-		CE12016F2DA95607006843A7 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
+		CE1201712DA960A3006843A7 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE19CB462BE39DA400B26DF7 /* RarimoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarimoUtils.swift; sourceTree = "<group>"; };
 		CE19CB482BE3AD4200B26DF7 /* LockScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenView.swift; sourceTree = "<group>"; };
 		CE1FA5692C1708F100B2C191 /* Points.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Points.swift; sourceTree = "<group>"; };
@@ -834,7 +834,7 @@
 				CEC562042BD923B4002D4954 /* librapidsnark.a in Frameworks */,
 				5609B6C82C188C7500CB6A1F /* MarkdownUI in Frameworks */,
 				CE7210312BD807140043DB7F /* ZipArchive in Frameworks */,
-				CE1201702DA95607006843A7 /* Identity.xcframework in Frameworks */,
+				CE1201722DA960A3006843A7 /* Identity.xcframework in Frameworks */,
 				560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */,
 				CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */,
 			);
@@ -1626,7 +1626,7 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CE12016F2DA95607006843A7 /* Identity.xcframework */,
+				CE1201712DA960A3006843A7 /* Identity.xcframework */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562002BD923B3002D4954 /* prover.h */,
 				CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */,
