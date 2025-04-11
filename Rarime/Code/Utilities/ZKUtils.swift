@@ -120,12 +120,16 @@ class ZKUtils {
         _ trustedSetupPath: String,
         _ circuitData: Data
     ) throws -> Data {
+#if targetEnvironment(simulator)
+        return Data()
+#else
         let circuit = try Swoir(backend: Swoirenberg.self)
             .createCircuit(manifest: circuitData)
         
         try circuit.setupSrs(srs_path: trustedSetupPath)
         
         return try Swoirenberg.get_verification_key(bytecode: circuit.bytecode)
+#endif
     }
     
     private static func handleGroth16ProverError(
