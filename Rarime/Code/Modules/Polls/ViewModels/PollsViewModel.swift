@@ -175,7 +175,7 @@ class PollsViewModel: ObservableObject {
         
         let resultsJson = try JSONEncoder().encode(results)
         
-        let voteProof = try await generateVoteProof(
+        let (voteProof, isReissuedAfterVoting) = try await generateVoteProof(
             profile,
             passport,
             smtProofJson,
@@ -185,6 +185,8 @@ class PollsViewModel: ObservableObject {
             identityInfo
         )
         
+        LoggerUtil.common.debug("isReissuedAfterVoting: \(isReissuedAfterVoting)")
+        
         let voteProofJson = try JSONEncoder().encode(voteProof)
         let votingData = try PollsService.decodeVotingData(poll)
                 
@@ -193,7 +195,8 @@ class PollsViewModel: ObservableObject {
             voteProofJson,
             proposalID: Int64(poll.id),
             pollResultsJSON: resultsJson,
-            citizenship: votingData.citizenshipWhitelist.isEmpty ? Data(hex: "0x0")?.ascii : passport.nationality
+            citizenship: votingData.citizenshipWhitelist.isEmpty ? Data(hex: "0x0")?.ascii : passport.nationality,
+            isReissuedAfterVoting: isReissuedAfterVoting
         )
         
         let votingRelayer = VotingRelayer(ConfigManager.shared.api.votingRelayerURL)
@@ -213,15 +216,11 @@ class PollsViewModel: ObservableObject {
         _ pollResultsJson: Data,
         _ passportInfo: PassportInfo,
         _ identityInfo: IdentityInfo
-    ) async throws -> ZkProof {
+    ) async throws -> (ZkProof, Bool) {
         guard let poll = selectedPoll else { throw "No selected poll" }
         
         let eventData = try profile.calculateVotingEventData(pollResultsJson)
         let votingData = try PollsService.decodeVotingData(poll)
-        
-        let votingStartDate = Date(timeIntervalSince1970: TimeInterval(votingData.identityCreationTimestampUpperBound))
-        
-        LoggerUtil.common.info("votingStartDate: \(votingStartDate)")
         
         let registrationSMTAddress = try EthereumAddress(hex: ConfigManager.shared.api.votingRegistartionSmtContractAddress, eip55: false)
         let registrationSMTContract = try PoseidonSMT(contractAddress: registrationSMTAddress, rpcUrl: ConfigManager.shared.api.votingRpcURL)
@@ -231,14 +230,17 @@ class PollsViewModel: ObservableObject {
         var identityCreationTimestampUpperBound = votingData.identityCreationTimestampUpperBound.subtracting(root_validity)
         var identityCounterUpperBound = BigUInt(UInt(UInt32.max))
         
-        LoggerUtil.common.debug("identityCounterUpperBound: \(identityCounterUpperBound))")
-        
+        var isReissuedAfterVoting = false
         if identityInfo.issueTimestamp > votingData.identityCreationTimestampUpperBound {
-            identityCreationTimestampUpperBound = try BigUInt(identityInfo.issueTimestamp)
+            if passportInfo.identityReissueCounter > votingData.identityCounterUpperbound {
+                throw "Your identity can not be uniquely verified for voting"
+            }
             
-            LoggerUtil.common.debug("identityInfo.issueTimestamp: \(identityCreationTimestampUpperBound))")
+            identityCreationTimestampUpperBound = try BigUInt(identityInfo.issueTimestamp + 1)
             
             identityCounterUpperBound = votingData.identityCounterUpperbound
+            
+            isReissuedAfterVoting = true
         }
         
         let queryProofInputs = try profile.buildQueryIdentityInputs(
@@ -267,7 +269,7 @@ class PollsViewModel: ObservableObject {
         let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
         let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
         
-        return ZkProof(proof: proof, pubSignals: pubSignals)
+        return (ZkProof(proof: proof, pubSignals: pubSignals), isReissuedAfterVoting)
     }
     
     func checkUserVote(_ nullifier: String) async throws -> Bool {
