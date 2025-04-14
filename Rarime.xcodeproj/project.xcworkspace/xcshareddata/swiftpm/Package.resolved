@@ -401,7 +401,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/rarimo/Swoir.git",
       "state" : {
-        "revision" : "8e0e0b1f4f96e3618f93642a6a45d4b24608b7e8"
+        "revision" : "59bf91879d5aca5c275d6c646f65d47c97fa14eb"
       }
     },
     {
@@ -418,8 +418,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/rarimo/Swoirenberg.git",
       "state" : {
-        "revision" : "6ddfacd6bdcbc7adf874a02e87c2ffa607872c5d",
-        "version" : "1.1.1"
+        "revision" : "f0e469e0c73cf59444fa3cdf9a9ad61f5e79d280",
+        "version" : "1.1.4"
       }
     },
     {

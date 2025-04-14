@@ -119,9 +119,9 @@ class ZKUtils {
     public static func getNoirVerificationKey(
         _ trustedSetupPath: String,
         _ circuitData: Data
-    ) throws -> Data {
+    ) throws -> String {
 #if targetEnvironment(simulator)
-        return Data()
+        return ""
 #else
         let circuit = try Swoir(backend: Swoirenberg.self)
             .createCircuit(manifest: circuitData)

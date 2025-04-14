@@ -3027,7 +3027,7 @@
 			repositoryURL = "https://github.com/rarimo/Swoir.git";
 			requirement = {
 				kind = revision;
-				revision = 8e0e0b1f4f96e3618f93642a6a45d4b24608b7e8;
+				revision = 59bf91879d5aca5c275d6c646f65d47c97fa14eb;
 			};
 		};
 		CE61E8812C24240000940129 /* XCRemoteSwiftPackageReference "Semaphore" */ = {
