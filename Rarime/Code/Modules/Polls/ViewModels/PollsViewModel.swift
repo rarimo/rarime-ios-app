@@ -203,7 +203,7 @@ class PollsViewModel: ObservableObject {
             poll.votingsAddresses[0].hex(eip55: false)
         )
         
-        LoggerUtil.common.info("Voting \(poll.id), txHash: \(voteResponse.data.id)")
+        LoggerUtil.common.info("Voting \(poll.id, privacy: .public), txHash: \(voteResponse.data.id, privacy: .public)")
     }
     
     private func generateVoteProof(
