@@ -28,7 +28,7 @@ class PollsViewModel: ObservableObject {
     }
     
     var hasMorePolls: Bool {
-        self.polls.count < self.lastProposalId
+        polls.count < lastProposalId
     }
     
     var pollRequirements: [PollRequirement] {
@@ -53,22 +53,22 @@ class PollsViewModel: ObservableObject {
             }
 
             if let formattedMinAge, let formattedMaxAge {
-                 return userDateOfBirth <= formattedMinAge && userDateOfBirth >= formattedMaxAge
+                return userDateOfBirth <= formattedMinAge && userDateOfBirth >= formattedMaxAge
             }
             
             if let formattedMinAge {
-                 return userDateOfBirth <= formattedMinAge
+                return userDateOfBirth <= formattedMinAge
             }
             
             if let formattedMaxAge {
-                 return userDateOfBirth >= formattedMaxAge
+                return userDateOfBirth >= formattedMaxAge
             }
             
             return false
         }()
         let isGengerEligible = {
             if decodedGender == "M" || decodedGender == "F" {
-               return decodedGender == passport.gender
+                return decodedGender == passport.gender
             }
             return false
         }()
@@ -175,7 +175,7 @@ class PollsViewModel: ObservableObject {
         
         let resultsJson = try JSONEncoder().encode(results)
         
-        let voteProof = try await generateVoteProof(
+        let (voteProof, isRegisteredAfterVoting) = try await generateVoteProof(
             profile,
             passport,
             smtProofJson,
@@ -193,7 +193,8 @@ class PollsViewModel: ObservableObject {
             voteProofJson,
             proposalID: Int64(poll.id),
             pollResultsJSON: resultsJson,
-            citizenship: votingData.citizenshipWhitelist.isEmpty ? Data(hex: "0x0")?.ascii : passport.nationality
+            citizenship: votingData.citizenshipWhitelist.isEmpty ? Data(hex: "0x0")?.ascii : passport.nationality,
+            isRegisteredAfterVoting: isRegisteredAfterVoting
         )
         
         let votingRelayer = VotingRelayer(ConfigManager.shared.api.votingRelayerURL)
@@ -202,7 +203,7 @@ class PollsViewModel: ObservableObject {
             poll.votingsAddresses[0].hex(eip55: false)
         )
         
-        LoggerUtil.common.info("Voting \(poll.id), txHash: \(voteResponse.data.id)")
+        LoggerUtil.common.info("Voting \(poll.id, privacy: .public), txHash: \(voteResponse.data.id, privacy: .public)")
     }
     
     private func generateVoteProof(
@@ -213,11 +214,32 @@ class PollsViewModel: ObservableObject {
         _ pollResultsJson: Data,
         _ passportInfo: PassportInfo,
         _ identityInfo: IdentityInfo
-    ) async throws -> ZkProof {
+    ) async throws -> (ZkProof, Bool) {
         guard let poll = selectedPoll else { throw "No selected poll" }
         
         let eventData = try profile.calculateVotingEventData(pollResultsJson)
         let votingData = try PollsService.decodeVotingData(poll)
+        
+        let registrationSMTAddress = try EthereumAddress(hex: ConfigManager.shared.api.votingRegistartionSmtContractAddress, eip55: false)
+        let registrationSMTContract = try PoseidonSMT(contractAddress: registrationSMTAddress, rpcUrl: ConfigManager.shared.api.votingRpcURL)
+        
+        let root_validity = try await registrationSMTContract.ROOT_VALIDITY()
+        
+        var identityCreationTimestampUpperBound = votingData.identityCreationTimestampUpperBound.subtracting(root_validity)
+        var identityCounterUpperBound = BigUInt(UInt(UInt32.max))
+        
+        var isRegisteredAfterVoting = false
+        if identityInfo.issueTimestamp > identityCreationTimestampUpperBound {
+            if passportInfo.identityReissueCounter > votingData.identityCounterUpperbound {
+                throw "Your identity can not be uniquely verified for voting"
+            }
+            
+            identityCreationTimestampUpperBound = try BigUInt(identityInfo.issueTimestamp + 1)
+            
+            identityCounterUpperBound = votingData.identityCounterUpperbound
+            
+            isRegisteredAfterVoting = true
+        }
         
         let queryProofInputs = try profile.buildQueryIdentityInputs(
             passport.dg1,
@@ -229,12 +251,9 @@ class PollsViewModel: ObservableObject {
             eventID: poll.eventId.description,
             eventData: eventData.fullHex,
             timestampLowerbound: "0",
-            timestampUpperbound: max(
-                Int(votingData.timestampUpperbound),
-                Int(identityInfo.issueTimestamp + 1)
-            ).description,
+            timestampUpperbound: identityCreationTimestampUpperBound.description,
             identityCounterLowerbound: "0",
-            identityCounterUpperbound: votingData.identityCounterUpperbound.description,
+            identityCounterUpperbound: identityCounterUpperBound.description,
             expirationDateLowerbound: votingData.expirationDateLowerbound.serialize().fullHex,
             expirationDateUpperbound: ZERO_IN_HEX,
             birthDateLowerbound: votingData.birthDateLowerbound.serialize().fullHex,
@@ -248,7 +267,7 @@ class PollsViewModel: ObservableObject {
         let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
         let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
         
-        return ZkProof(proof: proof, pubSignals: pubSignals)
+        return (ZkProof(proof: proof, pubSignals: pubSignals), isRegisteredAfterVoting)
     }
     
     func checkUserVote(_ nullifier: String) async throws -> Bool {

@@ -50,7 +50,7 @@ struct PollView: View {
                             onClose()
                         } catch {
                             LoggerUtil.common.error("Can't submit poll results: \(error, privacy: .public)")
-                            AlertManager.shared.emitError(.unknown(String(localized: "Can't submit poll results")))
+                            AlertManager.shared.emitError(.unknown(error.localizedDescription))
                             onClose()
                         }
                     }
@@ -177,7 +177,7 @@ struct PollView: View {
 }
 
 #Preview {
-    ZStack{}
+    ZStack {}
         .dynamicSheet(isPresented: .constant(true), fullScreen: true) {
             PollView(poll: ACTIVE_POLLS[0], onClose: {}, onVerification: {})
                 .environmentObject(PollsViewModel())

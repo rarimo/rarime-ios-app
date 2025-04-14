@@ -1,8 +1,8 @@
 import Foundation
 
 import Web3
-import Web3PromiseKit
 import Web3ContractABI
+import Web3PromiseKit
 
 import OSLog
 import SwiftUI
@@ -58,6 +58,16 @@ class PoseidonSMT {
         
         guard let root = response[""] as? Data else {
             throw "Response does not contain root"
+        }
+        
+        return root
+    }
+    
+    func ROOT_VALIDITY() async throws -> BigUInt {
+        let response = try contract["ROOT_VALIDITY"]!().call().wait()
+        
+        guard let root = response[""] as? BigUInt else {
+            throw "Response does not contain BigUInt"
         }
         
         return root
