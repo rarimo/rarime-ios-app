@@ -241,6 +241,12 @@ class PassportViewModel: ObservableObject {
             
             return proof
         } catch {
+            if "\(error)".contains("invalid passport authentication") {
+                processingStatus = .failure
+                
+                throw Errors.unknown("Active authentication signature is invalid")
+            }
+            
             if !isCriticalRegistrationProcessInProgress {
                 processingStatus = .failure
                 
