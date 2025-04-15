@@ -2,7 +2,8 @@ import SwiftUI
 
 struct ActivePollOptionsView: View {
     let poll: Poll
-    
+    let isSubmitting: Bool
+
     let onSubmit: ([PollResult]) -> Void
     let onClose: () -> Void
 
@@ -13,7 +14,7 @@ struct ActivePollOptionsView: View {
     private var currentQuestion: Question {
         poll.questions[currentOptionIndex]
     }
-    
+
     private var isLastQuestion: Bool {
         currentOptionIndex == poll.questions.count - 1
     }
@@ -97,7 +98,7 @@ struct ActivePollOptionsView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 24))
                 .applyShadows([
                     ShadowConfig(color: Color.black.opacity(0.02), radius: 32, x: 0, y: 8),
-                    ShadowConfig(color: Color.black.opacity(0.02), radius: 1,  x: 0, y: 0.55),
+                    ShadowConfig(color: Color.black.opacity(0.02), radius: 1, x: 0, y: 0.55),
                     ShadowConfig(color: Color.black.opacity(0.02), radius: 32, x: 0, y: 0)
                 ])
                 .id(currentOptionIndex)
@@ -106,7 +107,7 @@ struct ActivePollOptionsView: View {
             .padding(.horizontal, 8)
             Spacer()
             AppButton(
-                text: isLastQuestion ? "Submit" : "Next",
+                text: isSubmitting ? "Submitting..." : isLastQuestion ? "Submit" : "Next",
                 action: {
                     pollResults.append(PollResult(questionIndex: currentOptionIndex, answerIndex: selectedOption))
                     withAnimation {
@@ -120,7 +121,7 @@ struct ActivePollOptionsView: View {
                 }
             )
             .controlSize(.large)
-            .disabled(selectedOption == nil)
+            .disabled(selectedOption == nil || isSubmitting)
             .padding(.horizontal, 20)
         }
         .padding(.top, 20)
@@ -128,6 +129,11 @@ struct ActivePollOptionsView: View {
 }
 
 #Preview {
-    ActivePollOptionsView(poll: ACTIVE_POLLS[0], onSubmit: { _ in }, onClose: {})
-        .environmentObject(PassportManager())
+    ActivePollOptionsView(
+        poll: ACTIVE_POLLS[0],
+        isSubmitting: false,
+        onSubmit: { _ in },
+        onClose: {}
+    )
+    .environmentObject(PassportManager())
 }
