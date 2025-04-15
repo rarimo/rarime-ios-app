@@ -20,7 +20,7 @@ struct DebugOptionsView: View {
                 Toggle(
                     "Force light registration",
                     isOn: .init(
-                        get: { DebugController.shared.shouldForceRegistration },
+                        get: { DebugController.shared.shouldForceLightRegistration },
                         set: { value in DebugController.shared.shouldForceLightRegistration = value }
                     )
                 )
