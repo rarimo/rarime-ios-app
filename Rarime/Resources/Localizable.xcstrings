@@ -776,6 +776,9 @@
     "Date of expiry (dd/mm/yy)" : {
 
     },
+    "Debug options" : {
+
+    },
     "Delete Account" : {
 
     },
@@ -1071,6 +1074,12 @@
       }
     },
     "Finland" : {
+
+    },
+    "Force light registration" : {
+
+    },
+    "Force registration" : {
 
     },
     "France" : {

@@ -267,6 +267,8 @@
 		CE5980DD2D07B288000B6261 /* RegisterIdentityLightInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5980DB2D07B279000B6261 /* RegisterIdentityLightInputs.swift */; };
 		CE61E8832C24240000940129 /* Semaphore in Frameworks */ = {isa = PBXBuildFile; productRef = CE61E8822C24240000940129 /* Semaphore */; };
 		CE61E88D2C247B4700940129 /* HMACUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61E88C2C247B4700940129 /* HMACUtils.swift */; };
+		CE65A3D32DAEA541004A423D /* DebugOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65A3D22DAEA541004A423D /* DebugOptionsView.swift */; };
+		CE65A3D52DAEA5ED004A423D /* DebugController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65A3D42DAEA5E8004A423D /* DebugController.swift */; };
 		CE66B1462CA4148B002F658E /* ScanPassport.json in Resources */ = {isa = PBXBuildFile; fileRef = CE66B1452CA4148B002F658E /* ScanPassport.json */; };
 		CE68BE3D2BD9B23D00D92EBB /* ZkProof.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */; };
 		CE68BE3F2BD9B4B200D92EBB /* Relayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */; };
@@ -603,6 +605,8 @@
 		CE5315C92C7769A20087D53D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		CE5980DB2D07B279000B6261 /* RegisterIdentityLightInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterIdentityLightInputs.swift; sourceTree = "<group>"; };
 		CE61E88C2C247B4700940129 /* HMACUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACUtils.swift; sourceTree = "<group>"; };
+		CE65A3D22DAEA541004A423D /* DebugOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugOptionsView.swift; sourceTree = "<group>"; };
+		CE65A3D42DAEA5E8004A423D /* DebugController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugController.swift; sourceTree = "<group>"; };
 		CE664C7D2D19808900988A5E /* witnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.h; sourceTree = "<group>"; };
 		CE664C7E2D19809D00988A5E /* witnesscalc_registerIdentity_3_160_3_3_336_200_NA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_3_160_3_3_336_200_NA.h; sourceTree = "<group>"; };
 		CE664C7F2D19809D00988A5E /* witnesscalc_registerIdentity_3_160_3_4_576_216_1_1512_3_256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_3_160_3_4_576_216_1_1512_3_256.h; sourceTree = "<group>"; };
@@ -903,6 +907,7 @@
 				56E6AD4A2BD2732300E4DDC1 /* ThemeView.swift */,
 				5659151A2BE927A20050795A /* AppIconView.swift */,
 				56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */,
+				CE65A3D22DAEA541004A423D /* DebugOptionsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -934,6 +939,7 @@
 		5655E41D2BD2C38E00B86C5C /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				CE65A3D42DAEA5E8004A423D /* DebugController.swift */,
 				5659151E2BE92B1F0050795A /* AppIconManager.swift */,
 				5655E4292BD2C7C800B86C5C /* ConfigManager.swift */,
 				5655E4242BD2C3B500B86C5C /* PassportManager.swift */,
@@ -1990,6 +1996,7 @@
 				56E6AD492BD2731100E4DDC1 /* LanguageView.swift in Sources */,
 				CE7210332BD818020043DB7F /* Double+Rounded.swift in Sources */,
 				CE5980DC2D07B288000B6261 /* RegisterIdentityLightInputs.swift in Sources */,
+				CE65A3D52DAEA5ED004A423D /* DebugController.swift in Sources */,
 				C7F3ED382D7F41A200AABE10 /* PassportRevocationView.swift in Sources */,
 				CEC5620F2BD925D6002D4954 /* Circuits.swift in Sources */,
 				C7B57B6B2D65D58C001E86C4 /* HomeView+ViewModel.swift in Sources */,
@@ -2028,6 +2035,7 @@
 				CEFE5F372CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift in Sources */,
 				CE68BE4B2BD9B75100D92EBB /* ContractABI.swift in Sources */,
 				56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */,
+				CE65A3D32DAEA541004A423D /* DebugOptionsView.swift in Sources */,
 				C789A2EA2CA59F5800443900 /* StringUtils.swift in Sources */,
 				CEF723142BF4BB9000E79198 /* Errors.swift in Sources */,
 				CE059B442C9C4702006046B3 /* InternetConnectionRequiredView.swift in Sources */,

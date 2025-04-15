@@ -24,6 +24,8 @@ struct ProfileView: View {
     @State private var isShareWithDeveloper = false
     @State private var isAccountDeleting = false
 
+    @State private var isDebugOptionsShown = false
+
     var body: some View {
         NavigationStack(path: $path) {
             content.navigationDestination(for: ProfileRoute.self) { route in
@@ -46,6 +48,7 @@ struct ProfileView: View {
                 }
             }
         }
+        .sheet(isPresented: $isDebugOptionsShown, content: DebugOptionsView.init)
     }
 
     var content: some View {
@@ -138,6 +141,19 @@ struct ProfileView: View {
                                 }
                             }
                         }
+#if DEVELOPMENT
+                        CardContainer {
+                            VStack(spacing: 20) {
+                                ProfileRow(
+                                    icon: Icons.dotsThreeOutline,
+                                    title: String(localized: "Debug options"),
+                                    action: {
+                                        isDebugOptionsShown = true
+                                    }
+                                )
+                            }
+                        }
+#endif
                         CardContainer {
                             Button(action: { isAccountDeleting = true }) {
                                 HStack {

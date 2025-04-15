@@ -77,6 +77,12 @@ class PassportViewModel: ObservableObject {
         AppUserDefaults.shared.isRegistrationInterrupted = false
         
         do {
+#if DEVELOPMENT
+            if DebugController.shared.shouldForceLightRegistration {
+                throw "DEBUG"
+            }
+#endif
+            
             guard let passport = PassportManager.shared.passport else { throw "failed to get passport" }
             guard let user = UserManager.shared.user else { throw "failed to get user" }
             
@@ -158,7 +164,13 @@ class PassportViewModel: ObservableObject {
                 return proof
             }
             
-            let isUserRevoking = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
+            var isUserRevoking = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
+#if DEVELOPMENT
+            if DebugController.shared.shouldForceRegistration {
+                isUserRevoking = false
+            }
+#endif
+            
             let isUserAlreadyRevoked = passportInfo.activeIdentity == PoseidonSMT.revokedValue
             
             if isUserRevoking {
