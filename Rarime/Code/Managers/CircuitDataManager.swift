@@ -15,16 +15,13 @@ enum RegisteredCircuitData: String {
     case registerIdentity_12_256_3_3_336_232_NA
     
     case registerIdentity_1_256_3_4_336_232_1_1480_5_296
-    case registerIdentity_1_256_3_4_600_248_1_1496_3_256
     case registerIdentity_1_160_3_3_576_200_NA
     
     case registerIdentity_21_256_3_3_336_232_NA
     case registerIdentity_24_256_3_4_336_232_NA
     case registerIdentity_1_256_3_3_576_248_NA
     
-    case registerIdentity_21_256_3_3_576_232_NA
     case registerIdentity_11_256_3_5_576_248_1_1808_4_256
-    case registerIdentity_10_256_3_3_576_248_1_1184_5_264
     
     case registerIdentityLight160
     case registerIdentityLight224
@@ -60,6 +57,10 @@ enum RegisteredNoirCircuitData: String {
     case registerIdentity_2_256_3_6_336_264_21_2448_6_2008
     case registerIdentity_2_256_3_6_336_248_1_2432_3_256
     case registerIdentity_20_256_3_3_336_224_NA
+    
+    case registerIdentity_10_256_3_3_576_248_1_1184_5_264
+    case registerIdentity_1_256_3_4_600_248_1_1496_3_256
+    case registerIdentity_21_256_3_3_576_232_NA
 }
 
 class CircuitDataManager: ObservableObject {
