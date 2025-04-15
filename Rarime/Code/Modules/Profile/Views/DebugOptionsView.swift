@@ -5,7 +5,7 @@ import SwiftUI
 struct DebugOptionsView: View {
     var body: some View {
         VStack {
-            Text("Debug options")
+            Text("Debug Options")
                 .h3()
             Spacer()
             VStack(spacing: 20) {

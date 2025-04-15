@@ -146,7 +146,7 @@ struct ProfileView: View {
                             VStack(spacing: 20) {
                                 ProfileRow(
                                     icon: Icons.dotsThreeOutline,
-                                    title: String(localized: "Debug options"),
+                                    title: String(localized: "Debug Options"),
                                     action: {
                                         isDebugOptionsShown = true
                                     }
