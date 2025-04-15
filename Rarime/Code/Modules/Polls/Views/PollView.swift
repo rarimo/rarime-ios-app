@@ -25,6 +25,7 @@ struct PollView: View {
         if isQuestionsShown {
             ActivePollOptionsView(
                 poll: poll,
+                isSubmitting: isSubmitting,
                 onSubmit: { results in
                     isSubmitting = true
                     Task { @MainActor in

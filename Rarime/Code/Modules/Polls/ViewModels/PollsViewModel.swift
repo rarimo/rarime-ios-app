@@ -38,30 +38,30 @@ class PollsViewModel: ObservableObject {
         guard let votingData = try? PollsService.decodeVotingData(poll) else { return [] }
         
         let decodedCountries = votingData.citizenshipWhitelist.map { Country.fromISOCode($0.serialize().ascii) }
-        let decodedMinAge = votingData.birthDateUpperbound.serialize().ascii
-        let decodedMaxAge = votingData.birthDateLowerbound.serialize().ascii
+        let decodedBirthDateUpperbound = votingData.birthDateUpperbound.serialize().ascii
+        let decodedBirthDateLowerbound = votingData.birthDateLowerbound.serialize().ascii
         let decodedGender = votingData.gender.serialize().ascii
         
-        let formattedMinAge = try? DateUtil.parsePassportDate(decodedMinAge)
-        let formattedMaxAge = try? DateUtil.parsePassportDate(decodedMaxAge)
-        let userDateOfBirth = (try? DateUtil.parsePassportDate(passport.dateOfBirth)) ?? Date()
+        let upperboundBirthDate = try? DateUtil.parsePassportDate(decodedBirthDateUpperbound, true)
+        let lowerBoundBirthDate = try? DateUtil.parsePassportDate(decodedBirthDateLowerbound, true)
+        let userBirthDate = (try? DateUtil.parsePassportDate(passport.dateOfBirth, true)) ?? Date()
         
         let isNationalityEligible = decodedCountries.contains(Country.fromISOCode(passport.nationality))
         let isAgeEligible: Bool = {
-            if formattedMinAge == nil && formattedMaxAge == nil {
+            if upperboundBirthDate == nil && lowerBoundBirthDate == nil {
                 return true
             }
 
-            if let formattedMinAge, let formattedMaxAge {
-                return userDateOfBirth <= formattedMinAge && userDateOfBirth >= formattedMaxAge
+            if let upperboundBirthDate, let lowerBoundBirthDate {
+                return userBirthDate <= upperboundBirthDate && userBirthDate >= lowerBoundBirthDate
             }
             
-            if let formattedMinAge {
-                return userDateOfBirth <= formattedMinAge
+            if let upperboundBirthDate {
+                return userBirthDate <= upperboundBirthDate
             }
             
-            if let formattedMaxAge {
-                return userDateOfBirth >= formattedMaxAge
+            if let lowerBoundBirthDate {
+                return userBirthDate >= lowerBoundBirthDate
             }
             
             return false
@@ -72,21 +72,21 @@ class PollsViewModel: ObservableObject {
             }
             return false
         }()
-        let countriesString = decodedCountries.map { $0.name }.joined(separator: ", ")
+        let countriesString = Set(decodedCountries.map { $0.name }).joined(separator: ", ")
         let ageString: String = {
-            let minYear = DateUtil.yearsBetween(from: formattedMinAge ?? Date())
-            let maxYear = DateUtil.yearsBetween(from: formattedMaxAge ?? Date())
+            let minYear = DateUtil.yearsBetween(from: upperboundBirthDate ?? Date(), to: poll.startsAt)
+            let maxYear = DateUtil.yearsBetween(from: lowerBoundBirthDate ?? Date(), to: poll.startsAt)
             
-            if decodedMinAge != "000000" && decodedMaxAge != "000000" {
-                return "\(minYear)-\(maxYear)"
+            if decodedBirthDateUpperbound != "000000" && decodedBirthDateLowerbound != "000000" {
+                return "\(minYear)-\(maxYear) years"
             }
         
-            if decodedMinAge != "000000" {
+            if decodedBirthDateUpperbound != "000000" {
                 return "\(minYear)+"
             }
         
-            if decodedMaxAge != "000000" {
-                return "\(maxYear) and below"
+            if decodedBirthDateLowerbound != "000000" {
+                return "\(maxYear) years or less"
             }
         
             return "-"
@@ -101,7 +101,7 @@ class PollsViewModel: ObservableObject {
                 isEligible: isNationalityEligible
             ))
         }
-        if decodedMinAge != "000000" || decodedMaxAge != "000000" {
+        if decodedBirthDateUpperbound != "000000" || decodedBirthDateLowerbound != "000000" {
             requirements.append(PollRequirement(
                 text: ageString,
                 isEligible: isAgeEligible

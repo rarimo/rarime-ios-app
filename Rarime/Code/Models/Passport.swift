@@ -33,7 +33,7 @@ struct Passport: Codable {
     }
     
     var isOver18: Bool {
-        if let dob = try? DateUtil.parsePassportDate(dateOfBirth) {
+        if let dob = try? DateUtil.parsePassportDate(dateOfBirth, true) {
             return Calendar.current.dateComponents([.year], from: dob, to: Date()).year! >= 18
         } else {
             return false
@@ -57,7 +57,7 @@ struct Passport: Codable {
             return try String(
                 Calendar.current.dateComponents(
                     [.year],
-                    from: DateUtil.parsePassportDate(dateOfBirth),
+                    from: DateUtil.parsePassportDate(dateOfBirth, true),
                     to: Date()
                 ).year!
             )
