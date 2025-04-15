@@ -1,3 +1,5 @@
+#if DEVELOPMENT
+
 import SwiftUI
 
 struct DebugOptionsView: View {
@@ -19,7 +21,7 @@ struct DebugOptionsView: View {
                     "Force light registration",
                     isOn: .init(
                         get: { DebugController.shared.shouldForceRegistration },
-                        set: { value in DebugController.shared.shouldForceRegistration = value }
+                        set: { value in DebugController.shared.shouldForceLightRegistration = value }
                     )
                 )
                 .bold()
@@ -34,3 +36,5 @@ struct DebugOptionsView: View {
     VStack {}
         .sheet(isPresented: .constant(true), content: DebugOptionsView.init)
 }
+
+#endif

@@ -1,3 +1,5 @@
+#if DEVELOPMENT
+
 import Foundation
 
 class DebugController {
@@ -7,3 +9,5 @@ class DebugController {
 
     var shouldForceLightRegistration = false
 }
+
+#endif

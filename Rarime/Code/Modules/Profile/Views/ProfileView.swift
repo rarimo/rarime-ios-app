@@ -195,6 +195,8 @@ struct ProfileView: View {
                         decentralizedAuthManager.reset()
                         notificationManager.reset()
 
+                        AppUserDefaults.shared.isRegistrationInterrupted = false
+
                         Task {
                             try? await notificationManager.unsubscribe(fromTopic: ConfigManager.shared.general.claimableNotificationTopic)
                         }
