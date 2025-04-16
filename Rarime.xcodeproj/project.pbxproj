@@ -143,7 +143,6 @@
 		C75512902C86F4BC000258AD /* PushNotification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C755128E2C86F4BC000258AD /* PushNotification.xcdatamodeld */; };
 		C75512942C870AFD000258AD /* StepIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75512932C870AFD000258AD /* StepIndicator.swift */; };
 		C75512962C87617B000258AD /* RemoveCase.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C75512952C87617B000258AD /* RemoveCase.mp4 */; };
-		C75529F62D64DC7100C8B2F4 /* ViewArrayBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75529F52D64DC6900C8B2F4 /* ViewArrayBuilder.swift */; };
 		C755353F2D6F196C00A562B5 /* ChildOffsetReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755353E2D6F196700A562B5 /* ChildOffsetReader.swift */; };
 		C75535482D6F2EF900A562B5 /* PollQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75535472D6F2EF300A562B5 /* PollQRCodeView.swift */; };
 		C755354C2D6F4E6000A562B5 /* PollsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755354B2D6F4E5F00A562B5 /* PollsService.swift */; };
@@ -197,7 +196,6 @@
 		CE0DA0D92BDA927000696503 /* AirDropResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DA0D82BDA927000696503 /* AirDropResponse.swift */; };
 		CE0DC57B2C0DB33A00EFC0D7 /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DC57A2C0DB33A00EFC0D7 /* UpdateManager.swift */; };
 		CE0DC57D2C0DB9B200EFC0D7 /* VersionUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DC57C2C0DB9B200EFC0D7 /* VersionUpdateView.swift */; };
-		CE1201722DA960A3006843A7 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1201712DA960A3006843A7 /* Identity.xcframework */; };
 		CE19CB472BE39DA400B26DF7 /* RarimoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB462BE39DA400B26DF7 /* RarimoUtils.swift */; };
 		CE19CB492BE3AD4200B26DF7 /* LockScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CB482BE3AD4200B26DF7 /* LockScreenView.swift */; };
 		CE1FA56A2C1708F100B2C191 /* Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1FA5692C1708F100B2C191 /* Points.swift */; };
@@ -529,7 +527,6 @@
 		C755128F2C86F4BC000258AD /* PushNotification.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PushNotification.xcdatamodel; sourceTree = "<group>"; };
 		C75512932C870AFD000258AD /* StepIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepIndicator.swift; sourceTree = "<group>"; };
 		C75512952C87617B000258AD /* RemoveCase.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = RemoveCase.mp4; sourceTree = "<group>"; };
-		C75529F52D64DC6900C8B2F4 /* ViewArrayBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewArrayBuilder.swift; sourceTree = "<group>"; };
 		C755353E2D6F196700A562B5 /* ChildOffsetReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildOffsetReader.swift; sourceTree = "<group>"; };
 		C75535472D6F2EF300A562B5 /* PollQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollQRCodeView.swift; sourceTree = "<group>"; };
 		C755354B2D6F4E5F00A562B5 /* PollsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollsService.swift; sourceTree = "<group>"; };
@@ -578,7 +575,6 @@
 		CE0DA0D82BDA927000696503 /* AirDropResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirDropResponse.swift; sourceTree = "<group>"; };
 		CE0DC57A2C0DB33A00EFC0D7 /* UpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateManager.swift; sourceTree = "<group>"; };
 		CE0DC57C2C0DB9B200EFC0D7 /* VersionUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionUpdateView.swift; sourceTree = "<group>"; };
-		CE1201712DA960A3006843A7 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE19CB462BE39DA400B26DF7 /* RarimoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarimoUtils.swift; sourceTree = "<group>"; };
 		CE19CB482BE3AD4200B26DF7 /* LockScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenView.swift; sourceTree = "<group>"; };
 		CE1FA5692C1708F100B2C191 /* Points.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Points.swift; sourceTree = "<group>"; };

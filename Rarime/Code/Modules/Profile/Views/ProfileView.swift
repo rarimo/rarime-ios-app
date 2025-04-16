@@ -49,7 +49,9 @@ struct ProfileView: View {
                 }
             }
         }
+#if DEVELOPMENT
         .sheet(isPresented: $isDebugOptionsShown, content: DebugOptionsView.init)
+#endif
     }
 
     var content: some View {
