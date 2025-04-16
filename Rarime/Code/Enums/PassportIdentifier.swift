@@ -36,7 +36,7 @@ extension PassportIdentifier {
             let date = try? DateUtil.parsePassportDate(passport.documentExpiryDate)
             return date == nil ? "–" : DateUtil.mdyDateFormatter.string(from: date!)
         case .birthDate:
-            let date = try? DateUtil.parsePassportDate(passport.dateOfBirth)
+            let date = try? DateUtil.parsePassportDate(passport.dateOfBirth, true)
             return date == nil ? "–" : DateUtil.mdyDateFormatter.string(from: date!)
         }
     }

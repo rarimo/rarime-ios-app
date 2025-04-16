@@ -1,8 +1,8 @@
 import Foundation
 
 import Web3
-import Web3PromiseKit
 import Web3ContractABI
+import Web3PromiseKit
 
 import OSLog
 import SwiftUI
@@ -13,8 +13,8 @@ class PoseidonSMT {
     let web3: Web3
     let contract: DynamicContract
     
-    init(contractAddress: EthereumAddress) throws {
-        self.web3 = Web3(rpcURL: ConfigManager.shared.api.evmRpcURL.absoluteString)
+    init(contractAddress: EthereumAddress, rpcUrl: URL = ConfigManager.shared.api.evmRpcURL) throws {
+        self.web3 = Web3(rpcURL: rpcUrl.absoluteString)
         
         self.contract = try web3.eth.Contract(
             json: ContractABI.poseidonSMTAbiJSON,
@@ -58,6 +58,16 @@ class PoseidonSMT {
         
         guard let root = response[""] as? Data else {
             throw "Response does not contain root"
+        }
+        
+        return root
+    }
+    
+    func ROOT_VALIDITY() async throws -> BigUInt {
+        let response = try contract["ROOT_VALIDITY"]!().call().wait()
+        
+        guard let root = response[""] as? BigUInt else {
+            throw "Response does not contain BigUInt"
         }
         
         return root

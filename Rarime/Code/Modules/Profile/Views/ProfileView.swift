@@ -16,6 +16,7 @@ struct ProfileView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var notificationManager: NotificationManager
+    @EnvironmentObject private var pollsViewModel: PollsViewModel
 
     @State private var path: [ProfileRoute] = []
 
@@ -194,6 +195,7 @@ struct ProfileView: View {
                         walletManager.reset()
                         decentralizedAuthManager.reset()
                         notificationManager.reset()
+                        pollsViewModel.reset()
 
                         AppUserDefaults.shared.isRegistrationInterrupted = false
 

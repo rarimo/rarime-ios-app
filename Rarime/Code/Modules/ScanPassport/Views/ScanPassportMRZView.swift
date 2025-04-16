@@ -28,7 +28,7 @@ struct ScanPassportMRZView: View {
                 .frame(width: 250)
             Spacer()
             AppButton(
-                variant: .tertiary,
+                variant: .quartenary,
                 text: "Fill Manually",
                 action: { isManualMrzSheetPresented = true }
             )

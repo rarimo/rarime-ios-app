@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>PROPOSALS_STATE_CONTRACT_ADDRESS</key>
+	<string>${PROPOSALS_STATE_CONTRACT_ADDRESS}</string>
+	<key>MULTICALL3_CONTRACT_ADDRESS</key>
+	<string>${MULTICALL3_CONTRACT_ADDRESS}</string>
 	<key>AIRDROP_TERMS_URL</key>
 	<string>${AIRDROP_TERMS_URL}</string>
 	<key>APPSFLYER_DEV_KEY</key>
@@ -10,6 +14,12 @@
 	<string>${APPSFLYER_APP_ID}</string>
 	<key>AUTHORIZE_URL</key>
 	<string>${AUTHORIZE_URL}</string>
+	<key>VOTING_WEBSITE_URL</key>
+	<string>${VOTING_WEBSITE_URL}</string>
+	<key>VOTING_RELAYER_URL</key>
+	<string>${VOTING_RELAYER_URL}</string>
+	<key>IPFS_NODE_URL</key>
+	<string>${IPFS_NODE_URL}</string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
 		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
@@ -145,6 +155,8 @@
 	<string>${DENOM}</string>
 	<key>EVM_RPC_URL</key>
 	<string>${EVM_RPC_URL}</string>
+	<key>VOTING_RPC_URL</key>
+	<string>${VOTING_RPC_URL}</string>
 	<key>FEEDBACK_EMAIL</key>
 	<string>${FEEDBACK_EMAIL}</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
@@ -227,5 +239,7 @@
 		<key>registerIdentity_21_256_3_3_576_232_NA</key>
 		<string>${NOIR_CIRCUIT_DATA_URL_5}</string>
 	</dict>
+	<key>VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS</key>
+	<string>${VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS}</string>
 </dict>
 </plist>

@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum HomeRoute: Hashable {
-    case notifications, identity, inviteFriends, claimTokens, wallet
+    case notifications, identity, inviteFriends, claimTokens, wallet, voting
 }
 
 struct HomeView: View {
@@ -164,22 +164,22 @@ struct HomeView: View {
 //                    animation: walletAnimation
 //                )
 //            },
-//            HomeCarouselCard(action: {}) {
-//                HomeCardView(
-//                    backgroundGradient: Gradients.gradientFifth,
-//                    topIcon: Icons.freedomtool,
-//                    bottomIcon: Icons.arrowRightUpLine,
-//                    imageContent: {
-//                        Image(Images.dotCountry)
-//                            .resizable()
-//                            .scaledToFit()
-//                            .padding(.top, 8)
-//                    },
-//                    title: "Freedomtool",
-//                    subtitle: "Voting",
-//                    animation: votingAnimation
-//                )
-//            }
+            HomeCarouselCard(action: { path = .voting }) {
+                HomeCardView(
+                    backgroundGradient: Gradients.gradientFifth,
+                    topIcon: Icons.freedomtool,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(Images.dotCountry)
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.top, 8)
+                    },
+                    title: "Freedomtool",
+                    subtitle: "Voting",
+                    animation: votingAnimation
+                )
+            }
         ]
     }
 
@@ -219,6 +219,11 @@ struct HomeView: View {
                             onClose: { path = nil },
                             onJoin: { path = nil },
                             animation: walletAnimation
+                        )
+                    case .voting:
+                        PollsView(
+                            onClose: { path = nil },
+                            animation: votingAnimation
                         )
                     default:
                         content
@@ -292,7 +297,7 @@ struct HomeView: View {
                     )
                     .padding(.horizontal, 22)
                     if homeCards.count > 1 {
-                        V2StepIndicator(
+                        VerticalStepIndicator(
                             steps: homeCards.filter(\.isShouldDisplay).count,
                             currentStep: viewModel.currentIndex
                         )

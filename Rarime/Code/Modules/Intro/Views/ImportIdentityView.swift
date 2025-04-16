@@ -93,7 +93,7 @@ struct ImportIdentityView: View {
                         .controlSize(.large)
                         .disabled(isImporting)
                         AppButton(
-                            variant: .tertiary,
+                            variant: .quartenary,
                             text: "Restore manually",
                             action: { isManualBackup = true }
                         )
