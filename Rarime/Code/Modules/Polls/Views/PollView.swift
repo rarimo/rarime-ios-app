@@ -144,6 +144,9 @@ struct PollView: View {
                     Group {
                         if userManager.registerZkProof == nil {
                             AppButton(text: "Verification", action: onVerification)
+                        } else if isVoted {
+                            AppButton(text: "Already voted", action: {})
+                                .disabled(true)
                         } else {
                             AppButton(text: "Let's start", action: { isQuestionsShown = true })
                                 .disabled(isSubmitting || !isAdmittedToVote || poll.status == .ended || poll.status == .waiting)
