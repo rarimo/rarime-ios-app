@@ -264,10 +264,10 @@ class PollsViewModel: ObservableObject {
         let wtns = try ZKUtils.calcWtns_queryIdentity(Circuits.queryIdentityDat, queryProofInputs)
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16QueryIdentity(wtns)
         
-        let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
-        let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
+        let proof = try JSONDecoder().decode(GrothZkProofPoints.self, from: proofJson)
+        let pubSignals = try JSONDecoder().decode(GrothZkProofPubSignals.self, from: pubSignalsJson)
         
-        return (ZkProof(proof: proof, pubSignals: pubSignals), isRegisteredAfterVoting)
+        return (ZkProof.groth(GrothZkProof(proof: proof, pubSignals: pubSignals)), isRegisteredAfterVoting)
     }
     
     func checkUserVote(_ nullifier: String) async throws -> Bool {

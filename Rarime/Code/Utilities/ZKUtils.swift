@@ -2,6 +2,12 @@ import Foundation
 
 import RarimeIOSUtils
 
+#if targetEnvironment(simulator)
+#else
+import Swoir
+import Swoirenberg
+#endif
+
 class ZKUtils {
     static let ERROR_SIZE = UInt(256)
     static let WITNESS_SIZE = UInt(100 * 1024 * 1024)
@@ -12,23 +18,17 @@ class ZKUtils {
     #registerCircuitWitness("queryIdentity")
     #registerCircuitWitness("registerIdentity_1_256_3_5_576_248_NA")
     #registerCircuitWitness("registerIdentity_1_256_3_6_576_248_1_2432_5_296")
-    #registerCircuitWitness("registerIdentity_2_256_3_6_336_264_21_2448_6_2008")
     #registerCircuitWitness("registerIdentity_21_256_3_7_336_264_21_3072_6_2008")
     #registerCircuitWitness("registerIdentity_1_256_3_6_576_264_1_2448_3_256")
-    #registerCircuitWitness("registerIdentity_2_256_3_6_336_248_1_2432_3_256")
     #registerCircuitWitness("registerIdentity_2_256_3_6_576_248_1_2432_3_256")
     #registerCircuitWitness("registerIdentity_11_256_3_3_576_248_1_1184_5_264")
     #registerCircuitWitness("registerIdentity_12_256_3_3_336_232_NA")
     #registerCircuitWitness("registerIdentity_1_256_3_4_336_232_1_1480_5_296")
-    #registerCircuitWitness("registerIdentity_1_256_3_4_600_248_1_1496_3_256")
     #registerCircuitWitness("registerIdentity_1_160_3_3_576_200_NA")
     #registerCircuitWitness("registerIdentity_21_256_3_3_336_232_NA")
     #registerCircuitWitness("registerIdentity_24_256_3_4_336_232_NA")
     #registerCircuitWitness("registerIdentity_1_256_3_3_576_248_NA")
-    #registerCircuitWitness("registerIdentity_20_256_3_3_336_224_NA")
-    #registerCircuitWitness("registerIdentity_21_256_3_3_576_232_NA")
     #registerCircuitWitness("registerIdentity_11_256_3_5_576_248_1_1808_4_256")
-    #registerCircuitWitness("registerIdentity_10_256_3_3_576_248_1_1184_5_264")
     #registerCircuitWitness("registerIdentityLight160")
     #registerCircuitWitness("registerIdentityLight224")
     #registerCircuitWitness("registerIdentityLight256")
@@ -90,6 +90,42 @@ class ZKUtils {
         pubSignals = pubSignals[0..<pubSignalsNullIndex]
         
         return (proof: proof, pubSignals: pubSignals)
+#endif
+    }
+    
+    public static func ultraPlonk(
+        _ trustedSetupPath: String,
+        _ circuitData: Data,
+        _ inputs: [String: Any]
+    ) throws -> Data {
+#if targetEnvironment(simulator)
+        return Data()
+#else
+        
+        let circuit = try Swoir(backend: Swoirenberg.self)
+            .createCircuit(manifest: circuitData)
+        
+        try circuit.setupSrs(srs_path: trustedSetupPath)
+
+        let proof = try circuit.prove(inputs, proof_type: "plonk")
+        
+        return proof.proof
+#endif
+    }
+    
+    public static func getNoirVerificationKey(
+        _ trustedSetupPath: String,
+        _ circuitData: Data
+    ) throws -> String {
+#if targetEnvironment(simulator)
+        return ""
+#else
+        let circuit = try Swoir(backend: Swoirenberg.self)
+            .createCircuit(manifest: circuitData)
+        
+        try circuit.setupSrs(srs_path: trustedSetupPath)
+        
+        return try Swoirenberg.get_verification_key(bytecode: circuit.bytecode)
 #endif
     }
     

@@ -29,8 +29,8 @@ class VerificatorApi {
 
         return response
     }
-    
-    static func sendSignature(url: URL, userId: String, signature: String, pubSignals: PubSignals) async throws -> SendSignatureResponse {
+
+    static func sendSignature(url: URL, userId: String, signature: String, pubSignals: GrothZkProofPubSignals) async throws -> SendSignatureResponse {
         let request = SendSignatureRequest(
             data: SendSignatureRequestData(
                 id: userId,
@@ -116,7 +116,7 @@ struct SendSignatureRequestData: Codable {
 struct SendSignatureRequestAttributes: Codable {
     let signature: String
     let pubSignals: [String]
-    
+
     enum CodingKeys: String, CodingKey {
         case signature
         case pubSignals = "pub_signals"

@@ -67,7 +67,7 @@ class PassportViewModel: ObservableObject {
     var revocationPassportPublisher = PassthroughSubject<Passport, Error>()
     
     func setMrzKey(_ value: String) {
-        self.mrzKey = value
+        mrzKey = value
     }
 
     @MainActor
@@ -77,6 +77,12 @@ class PassportViewModel: ObservableObject {
         AppUserDefaults.shared.isRegistrationInterrupted = false
         
         do {
+#if DEVELOPMENT
+            if DebugController.shared.shouldForceLightRegistration {
+                throw "DEBUG"
+            }
+#endif
+            
             guard let passport = PassportManager.shared.passport else { throw "failed to get passport" }
             guard let user = UserManager.shared.user else { throw "failed to get user" }
             
@@ -92,39 +98,26 @@ class PassportViewModel: ObservableObject {
             
             LoggerUtil.common.info("Registering passport with circuit: \(registerIdentityCircuitName)")
             
-            guard let registeredCircuitData = RegisteredCircuitData(rawValue: registerIdentityCircuitName) else {
+            var proof: ZkProof
+            if let registeredCircuitData = RegisteredCircuitData(rawValue: registerIdentityCircuitName) {
+                proof = try await generateGrothRegisterProof(
+                    user,
+                    passport,
+                    registerIdentityCircuitType,
+                    registeredCircuitData,
+                    &isCriticalRegistrationProcessInProgress
+                )
+            } else if let registeredCircuitData = RegisteredNoirCircuitData(rawValue: registerIdentityCircuitName) {
+                proof = try await generatePlonkRegisterProof(
+                    user,
+                    passport,
+                    registerIdentityCircuitType,
+                    registeredCircuitData,
+                    &isCriticalRegistrationProcessInProgress
+                )
+            } else {
                 throw "failed to get registered circuit data, circuit does not exist"
             }
-            
-            isCriticalRegistrationProcessInProgress = false
-            
-            let circuitData: CircuitData
-            do {
-                circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData) { progress in
-                    self.updateDownloadProgress(downloadProgressValue: progress)
-                }
-            } catch {
-                throw Errors.unknown("Failed to download data, internet connection is unstable")
-            }
-            
-            updateDownloadProgress(downloadProgressValue: 1)
-            
-            isCriticalRegistrationProcessInProgress = true
-            
-            completeCurrentStepProgress()
-            proofState = .applyingZK
-            
-            let registerIdentityInputs = try await Task.detached {
-                return try await CircuitBuilderManager.shared.registerIdentityCircuit.buildInputs(
-                    user.secretKey,
-                    passport,
-                    registerIdentityCircuitType
-                )
-            }.value
-            
-            let proof = try await Task.detached {
-                return try UserManager.shared.generateRegisterIdentityProof(registerIdentityInputs.json, circuitData, registeredCircuitData)
-            }.value
             
             LoggerUtil.common.info("Passport registration proof generated")
             
@@ -133,11 +126,13 @@ class PassportViewModel: ObservableObject {
             
             let stateKeeperContract = try StateKeeperContract()
             
+            let registerProofPubSignals = RegisterIdentityPubSignals(proof)
+            
             let passportInfoKey: String
             if passport.dg15.isEmpty {
-                passportInfoKey = proof.pubSignals[1]
+                passportInfoKey = registerProofPubSignals.getSignalRaw(.passportHash)
             } else {
-                passportInfoKey = proof.pubSignals[0]
+                passportInfoKey = registerProofPubSignals.getSignalRaw(.passportKey)
             }
             
             let profile = try IdentityProfile().newProfile(UserManager.shared.user?.secretKey)
@@ -169,7 +164,13 @@ class PassportViewModel: ObservableObject {
                 return proof
             }
             
-            let isUserRevoking = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
+            var isUserRevoking = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
+#if DEVELOPMENT
+            if DebugController.shared.shouldForceRegistration {
+                isUserRevoking = false
+            }
+#endif
+            
             let isUserAlreadyRevoked = passportInfo.activeIdentity == PoseidonSMT.revokedValue
             
             if isUserRevoking {
@@ -240,6 +241,12 @@ class PassportViewModel: ObservableObject {
             
             return proof
         } catch {
+            if "\(error)".contains("invalid passport authentication") {
+                processingStatus = .failure
+                
+                throw Errors.unknown("Active authentication signature is invalid")
+            }
+            
             if !isCriticalRegistrationProcessInProgress {
                 processingStatus = .failure
                 
@@ -258,6 +265,92 @@ class PassportViewModel: ObservableObject {
         }
     }
     
+    func generateGrothRegisterProof(
+        _ user: User,
+        _ passport: Passport,
+        _ registerIdentityCircuitType: RegisterIdentityCircuitType,
+        _ registeredCircuitData: RegisteredCircuitData,
+        _ isCriticalRegistrationProcessInProgress: inout Bool
+    ) async throws -> ZkProof {
+        isCriticalRegistrationProcessInProgress = false
+        
+        let circuitData: CircuitData
+        do {
+            circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData) { progress in
+                self.updateDownloadProgress(downloadProgressValue: progress)
+            }
+        } catch {
+            throw Errors.unknown("Failed to download data, internet connection is unstable")
+        }
+        
+        updateDownloadProgress(downloadProgressValue: 1)
+        
+        isCriticalRegistrationProcessInProgress = true
+        
+        completeCurrentStepProgress()
+        proofState = .applyingZK
+        
+        let registerIdentityInputs = try await CircuitBuilderManager.shared.registerIdentityCircuit.buildInputs(
+            user.secretKey,
+            passport,
+            registerIdentityCircuitType
+        )
+        
+        let proof = try await Task.detached {
+            try UserManager.shared.generateRegisterIdentityProof(registerIdentityInputs.json, circuitData, registeredCircuitData)
+        }.value
+        
+        return proof
+    }
+    
+    func generatePlonkRegisterProof(
+        _ user: User,
+        _ passport: Passport,
+        _ registerIdentityCircuitType: RegisterIdentityCircuitType,
+        _ registeredNoirCircuitData: RegisteredNoirCircuitData,
+        _ isCriticalRegistrationProcessInProgress: inout Bool
+    ) async throws -> ZkProof {
+        isCriticalRegistrationProcessInProgress = false
+        
+        let trustedSetupPath = try await CircuitDataManager.shared.retriveNoirCircuitDataPath(.trustedSetup) { progress in
+            self.updateDownloadProgress(downloadProgressValue: progress)
+        }
+        
+        let circuitDataPath: URL
+        do {
+            circuitDataPath = try await CircuitDataManager.shared.retriveNoirCircuitDataPath(registeredNoirCircuitData)
+        } catch {
+            throw Errors.unknown("Failed to download data, internet connection is unstable")
+        }
+        
+        updateDownloadProgress(downloadProgressValue: 1)
+        
+        isCriticalRegistrationProcessInProgress = true
+        
+        completeCurrentStepProgress()
+        proofState = .applyingZK
+        
+        let registerIdentityInputs = try await CircuitBuilderManager.shared.noirRegisterIdentityCircuit.buildInputs(
+            user.secretKey,
+            passport,
+            registerIdentityCircuitType
+        )
+        
+        guard let circuitData = FileManager.default.contents(atPath: circuitDataPath.path()) else {
+            throw Errors.unknown("Failed to read circuit data")
+        }
+        
+        let proof = try await Task.detached {
+            try ZKUtils.ultraPlonk(
+                trustedSetupPath.path(),
+                circuitData,
+                registerIdentityInputs.toAnyMap()
+            )
+        }.value
+        
+        return ZkProof.plonk(proof)
+    }
+    
     @MainActor
     func lightRegister() async throws -> ZkProof {
         do {
@@ -266,7 +359,7 @@ class PassportViewModel: ObservableObject {
             
             let registerIdentityLightCircuitName = try passport.getRegisterIdentityLightCircuitName()
             
-            LoggerUtil.common.info("Registering passport with light circuit: \(registerIdentityLightCircuitName)")
+            LoggerUtil.common.info("Registering passport with light circuit: \(registerIdentityLightCircuitName, privacy: .public)")
             
             guard let registeredCircuitData = RegisteredCircuitData(rawValue: registerIdentityLightCircuitName) else {
                 throw "failed to get registered circuit data, circuit does not exist"
@@ -387,7 +480,7 @@ class PassportViewModel: ObservableObject {
     
     func completeCurrentStepProgress() {
         guard let state = PassportProofState.allCases.first(where: { $0 == proofState }),
-             state != .downloadingData else { return }
+              state != .downloadingData else { return }
        
         let targetProgress = min(overallProgress + stepFraction, 1.0)
         overallProgress = targetProgress
