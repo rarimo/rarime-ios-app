@@ -8,7 +8,10 @@ struct MainViewLayout<Content: View>: View {
         VStack(spacing: 0) {
             content
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-            NavBarView(selectedTab: $mainViewModel.selectedTab)
+            NavBarView(
+                selectedTab: $mainViewModel.selectedTab,
+                isQrCodeScanSheetShown: $mainViewModel.isQrCodeScanSheetShown
+            )
                 // TODO: move to extenstion with blur
                 .background {
                     ZStack {

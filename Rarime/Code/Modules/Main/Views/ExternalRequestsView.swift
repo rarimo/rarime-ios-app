@@ -6,17 +6,9 @@ struct ExternalRequestsView: View {
 
     @State private var isSheetPresented = false
 
-    private var sheetTitle: LocalizedStringResource {
-        switch externalRequestsManager.request {
-        case .proofRequest: "Proof Request"
-        case .lightVerification: "Light Verification"
-        default: ""
-        }
-    }
-
     var body: some View {
         ZStack {}
-            .dynamicSheet(isPresented: $isSheetPresented, title: sheetTitle) {
+            .dynamicSheet(isPresented: $isSheetPresented, fullScreen: true) {
                 switch externalRequestsManager.request {
                 case let .proofRequest(proofParamsUrl, urlQueryParams):
                     ProofRequestView(
@@ -36,6 +28,11 @@ struct ExternalRequestsView: View {
 
                             handleRedirect(urlQueryParams)
                         },
+                        onDismiss: { isSheetPresented = false }
+                    )
+                case let .voting(qrCodeUrl):
+                    PollQRCodeView(
+                        qrCodeUrl: qrCodeUrl,
                         onDismiss: { isSheetPresented = false }
                     )
                 default:

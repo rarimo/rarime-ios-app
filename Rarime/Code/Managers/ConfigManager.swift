@@ -10,6 +10,7 @@ class ConfigManager: ObservableObject {
     let feedback = Feedback()
     let circuitData = CircuitData()
     let appsFlyer = AppsFlyer()
+    let noirCircuitData = NoirCircuitData()
 }
 
 extension ConfigManager {
@@ -52,6 +53,13 @@ extension ConfigManager {
         let joinRewardsKey: String
         let defaultReferralCode: String
         let lightSignaturePrivateKey: String
+        let proposalsStateContractAddress: String
+        let multicall3ContractAddress: String
+        let ipfsNodeURL: URL
+        let votingWebsiteURL: URL
+        let votingRelayerURL: URL
+        let votingRpcURL: URL
+        let votingRegistartionSmtContractAddress: String
 
         init() {
             do {
@@ -69,6 +77,13 @@ extension ConfigManager {
                 self.joinRewardsKey = try readFromInfoPlist(key: "JOIN_REWARDS_KEY")
                 self.defaultReferralCode = try readFromInfoPlist(key: "DEFAULT_REFERRAL_CODE")
                 self.lightSignaturePrivateKey = try readFromInfoPlist(key: "LIGHT_SIGNATURE_PRIVATE_KEY")
+                self.proposalsStateContractAddress = try readFromInfoPlist(key: "PROPOSALS_STATE_CONTRACT_ADDRESS")
+                self.multicall3ContractAddress = try readFromInfoPlist(key: "MULTICALL3_CONTRACT_ADDRESS")
+                self.ipfsNodeURL = try readURLFromInfoPlist(key: "IPFS_NODE_URL")
+                self.votingWebsiteURL = try readURLFromInfoPlist(key: "VOTING_WEBSITE_URL")
+                self.votingRelayerURL = try readURLFromInfoPlist(key: "VOTING_RELAYER_URL")
+                self.votingRpcURL = try readURLFromInfoPlist(key: "VOTING_RPC_URL")
+                self.votingRegistartionSmtContractAddress = try readFromInfoPlist(key: "VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS")
             } catch {
                 fatalError("ConfigManager.API init error: \(error.localizedDescription)")
             }
@@ -153,6 +168,13 @@ extension ConfigManager {
                 fatalError("ConfigManager.AppsFlyer init error: \(error.localizedDescription)")
             }
         }
+    }
+}
+
+extension ConfigManager {
+    class NoirCircuitData {
+        let noirTrustedSetupURL: URL = try! readURLFromInfoPlist(key: "NOIR_TRUSTED_SETUP_URL")
+        let noirCircuitDataURLs: [String: URL] = try! readURLDictionaryFromInfoPlist(key: "NOIR_CIRCUIT_DATA_URLS")
     }
 }
 

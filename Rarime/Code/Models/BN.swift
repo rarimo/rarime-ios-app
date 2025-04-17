@@ -112,6 +112,16 @@ extension BN {
         return BN(result)
     }
     
+    func exp(_ other: BN) -> BN {
+        let ctx = BN_CTX_new()
+        defer { BN_CTX_free(ctx) }
+            
+        let result = BN_new()
+        BN_exp(result, bn, other.bn, ctx)
+            
+        return BN(result)
+    }
+    
     func lshift(_ n: Int) -> BN {
         let result = BN_new()
         BN_lshift(result, bn, Int32(n))

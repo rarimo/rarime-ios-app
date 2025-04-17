@@ -178,7 +178,7 @@ struct WalletSendView: View {
                 .controlSize(.large)
                 .disabled(isTransfering)
                 AppButton(
-                    variant: .tertiary,
+                    variant: .quartenary,
                     text: "Cancel",
                     action: { isConfirmationSheetPresented = false }
                 )

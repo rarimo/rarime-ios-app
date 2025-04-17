@@ -1,8 +1,8 @@
-import Foundation
 import Identity
 import NFCPassportReader
 import OpenSSL
 import Security
+import SwiftUI
 import Web3
 
 class CircuitBuilderManager {
@@ -10,6 +10,7 @@ class CircuitBuilderManager {
     
     let registerIdentityCircuit = RegisterIdentityCircuit()
     let registerIdentityLightCircuit = RegisterIdentityLightCircuit()
+    let noirRegisterIdentityCircuit = NoirRegisterIdentityCircuit()
 }
 
 extension CircuitBuilderManager {
@@ -81,6 +82,70 @@ extension CircuitBuilderManager {
             return RegisterIdentityLightInputs(
                 skIdentity: privateKey.fullHex,
                 dg1: CircuitUtils.smartChunking2(passport.dg1, 2, 512)
+            )
+        }
+    }
+}
+
+extension CircuitBuilderManager {
+    class NoirRegisterIdentityCircuit {
+        func buildInputs(
+            _ privateKey: Data,
+            _ passport: Passport,
+            _ registerIdentityCircuitType: RegisterIdentityCircuitType
+        ) async throws -> NoirRegisterIdentityInputs {
+            let slaveCertPem = try passport.getSlaveSodCertificatePem()
+            
+            let certProof = try await passport.getCertificateSmtProof(slaveCertPem)
+            
+            let sod = try passport.getSod()
+            let encapsulatedContent = try sod.getEncapsulatedContent()
+            let signedAttributes = try sod.getSignedAttributes()
+            var signature = try sod.getSignature()
+            let publicKey = try sod.getPublicKey()
+            
+            guard let pubkeyData = CryptoUtils.getDataFromPublicKey(publicKey) else {
+                throw "invalid pubkey data"
+            }
+            
+            let reductionPk: [String]
+            let pk: [String]
+            let sig: [String]
+            switch registerIdentityCircuitType.signatureType.algorithm {
+            case .RSA, .RSAPSS:
+                pk = CircuitUtils.splitBy120Bits(pubkeyData).map { $0.dec() }
+                
+                reductionPk = CircuitUtils.RSABarrettReductionParam(BN(pubkeyData), UInt(pubkeyData.count * 8)).map { $0.dec() }
+                
+                sig = CircuitUtils.splitBy120Bits(signature).map { $0.dec() }
+            case .ECDSA:
+                
+                let pubKeyX = pubkeyData.subdata(in: 0..<pubkeyData.count / 2)
+                let pubKeyY = pubkeyData.subdata(in: pubkeyData.count / 2..<pubkeyData.count)
+                
+                pk = (CircuitUtils.splitBy120Bits(pubKeyX) + CircuitUtils.splitBy120Bits(pubKeyY)).map { $0.dec() }
+                
+                reductionPk = (CircuitUtils.splitEmptyData(pubKeyX) + CircuitUtils.splitEmptyData(pubKeyY)).map { $0.dec() }
+                
+                signature = try CryptoUtils.decodeECDSASignatureFromASN1(signature)
+                
+                let sigR = signature.subdata(in: 0..<signature.count / 2)
+                let sigS = signature.subdata(in: signature.count / 2..<signature.count)
+                
+                sig = (CircuitUtils.splitBy120Bits(sigR) + CircuitUtils.splitBy120Bits(sigS)).map { $0.fullHex() }
+            }
+            
+            return .init(
+                dg1: passport.dg1.map { $0.description },
+                dg15: passport.dg15.map { $0.description },
+                ec: encapsulatedContent.map { $0.description },
+                icaoRoot: BN(certProof.root).dec(),
+                inclusionBranches: certProof.siblings.map { BN($0).dec() },
+                pk: pk,
+                reductionPk: reductionPk,
+                sa: signedAttributes.map { $0.description },
+                sig: sig,
+                skIdentity: BN(privateKey).dec()
             )
         }
     }

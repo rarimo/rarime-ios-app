@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum ButtonVariant {
-    case primary, secondary, tertiary
+    case primary, secondary, tertiary, quartenary
 }
 
 private struct ButtonColors {
@@ -22,6 +22,14 @@ private let primaryColors = ButtonColors(
 )
 
 private let secondaryColors = ButtonColors(
+    background: .bgComponentPrimary,
+    backgroundPressed: .bgComponentPrimary,
+    backgroundDisabled: .bgComponentPrimary,
+    foreground: .textPrimary,
+    foregroundDisabled: .textDisabled
+)
+
+private let tertiaryColors = ButtonColors(
     background: .bgComponentBasePrimary,
     backgroundPressed: .bgComponentBasePressed,
     backgroundDisabled: .bgComponentBaseDisabled,
@@ -29,7 +37,7 @@ private let secondaryColors = ButtonColors(
     foregroundDisabled: .baseBlack.opacity(0.5)
 )
 
-private let tertiaryColors = ButtonColors(
+private let quaternaryColors = ButtonColors(
     background: .clear,
     backgroundPressed: .bgComponentPressed,
     backgroundDisabled: .bgComponentDisabled,
@@ -46,6 +54,7 @@ struct AppButtonStyle: ButtonStyle {
         switch variant {
         case .secondary: secondaryColors
         case .tertiary: tertiaryColors
+        case .quartenary: quaternaryColors
         default: primaryColors
         }
     }
@@ -81,7 +90,7 @@ struct AppButton: View {
         switch controlSize {
         case .small: 32
         case .large: 56
-        default: 40
+        default: 48
         }
     }
 
@@ -182,6 +191,22 @@ struct AppButton: View {
         AppButton(
             variant: .tertiary,
             text: LocalizedStringResource("Tertiary", table: "preview"),
+            action: {}
+        ).controlSize(.small)
+        AppButton(
+            variant: .quartenary,
+            text: LocalizedStringResource("Quartenary", table: "preview"),
+            action: {}
+        ).controlSize(.large)
+        AppButton(
+            variant: .quartenary,
+            text: LocalizedStringResource("Quartenary", table: "preview"),
+            action: {}
+        )
+        .disabled(true)
+        AppButton(
+            variant: .quartenary,
+            text: LocalizedStringResource("Quartenary", table: "preview"),
             action: {}
         ).controlSize(.small)
     }

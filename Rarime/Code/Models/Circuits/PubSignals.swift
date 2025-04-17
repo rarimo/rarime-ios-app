@@ -1,5 +1,7 @@
 import Foundation
 
+private let SIGNALS_SIZE_IN_BYTES: Int = 32
+
 struct QueryIdentityPubSignals {
     var raw: [String]
     
@@ -45,10 +47,31 @@ struct QueryIdentityPubSignals {
 }
 
 struct RegisterIdentityPubSignals {
-    var raw: [String]
+    var raw: [BN]
+    
+    init(_ zkProof: ZkProof) {
+        switch zkProof {
+        case .groth(let proof):
+            self.init(proof.pubSignals)
+        case .plonk(let data):
+            self.init(data)
+        }
+    }
     
     init(_ raw: [String]) {
-        self.raw = raw
+        self.raw = raw.map { (try? BN(dec: $0)) ?? BN(0) }
+    }
+    
+    init(_ data: Data) {
+        self.raw = []
+        
+        let signalsCount = SignalKey.allCases.count
+        for i in 0..<signalsCount {
+            let signalData = data.subdata(in: i * SIGNALS_SIZE_IN_BYTES..<(i + 1) * SIGNALS_SIZE_IN_BYTES)
+            
+            let signal = BN(signalData)
+            raw.append(signal)
+        }
     }
     
     enum SignalKey: Int, CaseIterable {
@@ -60,13 +83,11 @@ struct RegisterIdentityPubSignals {
     }
     
     func getSignal(_ key: SignalKey) throws -> BN {
-        let value = raw[key.rawValue]
-        
-        return try BN(dec: value)
+        return raw[key.rawValue]
     }
     
     func getSignalRaw(_ key: SignalKey) -> String {
-        return raw[key.rawValue]
+        return raw[key.rawValue].dec()
     }
 }
 

@@ -84,7 +84,7 @@ struct WaitlistPassportView: View {
                     .controlSize(.large)
                     .disabled(isJoined || isSending || isBalanceLoading)
                     AppButton(
-                        variant: .tertiary,
+                        variant: .quartenary,
                         text: "Cancel",
                         action: onCancel
                     )

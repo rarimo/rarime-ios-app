@@ -1,8 +1,8 @@
 import Foundation
 
-typealias PubSignals = [String]
+typealias GrothZkProofPubSignals = [String]
 
-struct Proof: Codable {
+struct GrothZkProofPoints: Codable {
     let piA: [String]
     let piB: [[String]]
     let piC: [String]
@@ -16,12 +16,27 @@ struct Proof: Codable {
     }
 }
 
-struct ZkProof: Codable {
-    let proof: Proof
-    let pubSignals: PubSignals
+struct GrothZkProof: Codable {
+    let proof: GrothZkProofPoints
+    let pubSignals: GrothZkProofPubSignals
 
     enum CodingKeys: String, CodingKey {
         case proof
         case pubSignals = "pub_signals"
+    }
+}
+
+enum ZkProof: Codable {
+    case groth(GrothZkProof)
+    case plonk(Data)
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .groth(let proof):
+            try container.encode(proof)
+        case .plonk(let proof):
+            try container.encode(proof)
+        }
     }
 }

@@ -21,33 +21,29 @@ struct ScanQRView: View {
                 .ignoresSafeArea()
             }
             ZStack {
-                Color.black
-                    .opacity(0.7)
-                    .mask(MaskShape(size: 235).fill(style: FillStyle(eoFill: true)))
-                Image(Images.qrFrame).square(240)
-                Text("Place QR code within the frame to scan")
-                    .body4()
+                Color.baseBlack
+                    .opacity(0.6)
+                    .mask(MaskShape(size: 247).fill(style: FillStyle(eoFill: true)))
+                Image(Images.qrFrame).square(247)
+                Text("Position the QR code in the middle of the scanner")
+                    .body3()
                     .foregroundStyle(.baseWhite)
                     .multilineTextAlignment(.center)
-                    .frame(width: 200)
-                    .padding(.top, 320)
+                    .frame(width: 220)
+                    .padding(.top, 360)
             }
             .ignoresSafeArea()
-
-            VStack {
-                HStack {
-                    Button(action: onBack) {
-                        Image(Icons.caretLeft).iconMedium()
-                    }
-                    Spacer()
-                    Text("Scan QR").subtitle6()
-                    Spacer()
-                    Rectangle().frame(width: 20, height: 0)
-                }
-                .foregroundStyle(.baseWhite)
-                .padding(20)
-                Spacer()
+            Button(action: onBack) {
+                Image(Icons.closeFill)
+                    .iconMedium()
+                    .foregroundStyle(.baseWhite)
             }
+            .padding(.all, 10)
+            .backgroundBlur(bgColor: .bgComponentBasePrimary)
+            .clipShape(Circle())
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            .frame(maxHeight: .infinity, alignment: .top)
+            .padding([.top, .trailing], 20)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

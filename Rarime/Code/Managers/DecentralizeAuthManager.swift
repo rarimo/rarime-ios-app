@@ -43,10 +43,10 @@ class DecentralizedAuthManager: ObservableObject {
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16Auth(wtns)
         
-        let proof = try JSONDecoder().decode(Proof.self, from: proofJson)
-        let pubSignals = try JSONDecoder().decode(PubSignals.self, from: pubSignalsJson)
+        let proof = try JSONDecoder().decode(GrothZkProofPoints.self, from: proofJson)
+        let pubSignals = try JSONDecoder().decode(GrothZkProofPubSignals.self, from: pubSignalsJson)
         
-        let zkProof = ZkProof(proof: proof, pubSignals: pubSignals)
+        let zkProof = ZkProof.groth(GrothZkProof(proof: proof, pubSignals: pubSignals))
         
         let authorizeUserResponse = try await authorize.authorizeUser(nullifier, zkProof)
         
