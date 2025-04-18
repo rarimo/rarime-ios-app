@@ -8,7 +8,7 @@ enum RarimeUrlHosts: String {
 enum ExternalRequestTypes: String, Codable {
     case proofRequest = "proof-request"
     case lightVerification = "light-verification"
-    case voting = "voting"
+    case voting
 }
 
 enum ExternalRequests: Equatable {
@@ -21,29 +21,28 @@ class ExternalRequestsManager: ObservableObject {
     static let shared = ExternalRequestsManager()
 
     @Published private(set) var request: ExternalRequests? = nil
-    
+
     func handleUrl(_ url: URL) {
         url.path.hasPrefix("/r/") ? handleRefferalCode(url) : handleRarimeUrl(url)
     }
-    
+
     func handleRarimeUrl(_ url: URL) {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-              let params = components.queryItems,
-              self.isValidExternalUrl(url)
+              let params = components.queryItems
         else {
             LoggerUtil.common.error("Invalid RariMe app URL: \(url.absoluteString, privacy: .public)")
             AlertManager.shared.emitError(.unknown("Invalid RariMe app URL"))
             return
         }
 
-        switch url.host {
-        case RarimeUrlHosts.external.rawValue:
+        if isValidExternalUrl(url) {
             handleExternalRequest(params: params)
-        default:
-            LoggerUtil.common.error("Invalid RariMe URL host: \(url.host ?? "nil", privacy: .public)")
+            return
         }
+
+        LoggerUtil.common.error("Invalid RariMe URL host: \(url.host ?? "nil", privacy: .public)")
     }
-    
+
     private func handleRefferalCode(_ url: URL) {
         let code = String(url.path.dropFirst(3))
         AppUserDefaults.shared.deferredReferralCode = code
@@ -100,19 +99,19 @@ class ExternalRequestsManager: ObservableObject {
 
         setRequest(.lightVerification(verificationParamsUrl: proofParamsUrl, urlQueryParams: params))
     }
-    
+
     private func isValidExternalUrl(_ url: URL) -> Bool {
         if url.scheme == "rarime", url.host == "external" {
             return true
         }
-        
+
         if url.scheme == "https", let host = url.host, ["app.rarime.com", "app.stage.rarime.com"].contains(host), url.path.hasPrefix("/external") {
             return true
         }
-        
+
         return false
     }
-    
+
     private func handleVotingRequest(params: [URLQueryItem]) {
         guard let rawQrCodeUrl = params.first(where: { $0.name == "qr_code_url" })?.value?.removingPercentEncoding,
               let qrCodeUrl = URL(string: rawQrCodeUrl)
@@ -121,7 +120,7 @@ class ExternalRequestsManager: ObservableObject {
             AlertManager.shared.emitError(.unknown("Invalid QR Code URL"))
             return
         }
-    
+
         setRequest(.voting(qrCodeUrl: qrCodeUrl))
     }
 

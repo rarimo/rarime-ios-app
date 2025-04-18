@@ -6,9 +6,24 @@ struct ExternalRequestsView: View {
 
     @State private var isSheetPresented = false
 
+    private var sheetTitle: LocalizedStringResource? {
+        switch externalRequestsManager.request {
+        case .proofRequest: "Proof Request"
+        case .lightVerification: "Light Verification"
+        default: nil
+        }
+    }
+
+    private var isFullScreen: Bool {
+        switch externalRequestsManager.request {
+        case .voting: return true
+        default: return false
+        }
+    }
+
     var body: some View {
         ZStack {}
-            .dynamicSheet(isPresented: $isSheetPresented, fullScreen: true) {
+            .dynamicSheet(isPresented: $isSheetPresented, fullScreen: isFullScreen, title: sheetTitle) {
                 switch externalRequestsManager.request {
                 case let .proofRequest(proofParamsUrl, urlQueryParams):
                     ProofRequestView(
