@@ -162,18 +162,24 @@ struct LikenessView: View {
     }
 
     func takePicture() {
+        FeedbackGenerator.shared.impact(.light)
+
         isPictureTaken = true
 
         viewModel.pauseScanning()
     }
 
     func retakePicture() {
+        FeedbackGenerator.shared.impact(.light)
+
         isPictureTaken = false
 
         viewModel.startScanning()
     }
 
     func confirmPicture() {
+        FeedbackGenerator.shared.impact(.light)
+
         let confirmedPicture = viewModel.currentFrame!
 
         cleanup()
