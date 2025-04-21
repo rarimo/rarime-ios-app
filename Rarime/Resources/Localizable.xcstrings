@@ -192,6 +192,9 @@
     "Age" : {
 
     },
+    "AI can now replicate your face, voice, and identity without asking for your permission. But you never agreed to that, raising a fundamental question: who owns your likeness?\n\nRarimo is building the infrastructure to give you back that control. With this app, you can create a private, verifiable record that defines how your likeness can and can’t be used.\n\nYour face stays on your device. No company owns it. And over time, no AI model will be able to ignore your rule." : {
+
+    },
     "Airdrop" : {
       "localizations" : {
         "uk" : {
@@ -821,6 +824,9 @@
     "Denmark" : {
 
     },
+    "Digital likeness" : {
+
+    },
     "Djibouti" : {
 
     },
@@ -1104,6 +1110,9 @@
 
     },
     "Finland" : {
+
+    },
+    "First human-AI Contract" : {
 
     },
     "Force light registration" : {
@@ -1789,6 +1798,9 @@
     "Operation completed successfully" : {
 
     },
+    "Other already set" : {
+
+    },
     "Other passport holders" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2386,6 +2398,12 @@
 
     },
     "Serbia" : {
+
+    },
+    "Set a rule" : {
+
+    },
+    "Set the rule" : {
 
     },
     "Settings" : {

@@ -49,7 +49,8 @@ struct HomeView: View {
             // TODO: move below after testing
             HomeCarouselCard(action: { path = .likeness }) {
                 HomeCardView(
-                    backgroundGradient: Gradients.purple,
+                    backgroundGradient: Gradients.purpleBg,
+                    foregroundGradient: Gradients.purpleText,
                     topIcon: Icons.rarime,
                     bottomIcon: Icons.arrowRightUpLine,
                     imageContent: {
@@ -248,6 +249,11 @@ struct HomeView: View {
                         PollsView(
                             onClose: { path = nil },
                             animation: votingAnimation
+                        )
+                    case .likeness:
+                        LikenessView(
+                            onClose: { path = nil },
+                            animation: likenessAnimation
                         )
                     default:
                         content
