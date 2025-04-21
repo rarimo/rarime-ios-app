@@ -35,4 +35,9 @@ enum Gradients {
         startPoint: .top,
         endPoint: .bottom
     )
+    static let purple = LinearGradient(
+        gradient: Gradient(colors: [.purpleGradient1, .purpleGradient2, .purpleGradient3]),
+        startPoint: .top,
+        endPoint: .bottom
+    )
 }

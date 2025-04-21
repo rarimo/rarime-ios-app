@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum HomeRoute: Hashable {
-    case notifications, identity, inviteFriends, claimTokens, wallet, voting
+    case notifications, identity, inviteFriends, claimTokens, wallet, voting, likeness
 }
 
 struct HomeView: View {
@@ -28,6 +28,7 @@ struct HomeView: View {
     @Namespace var claimTokensAnimation
     @Namespace var walletAnimation
     @Namespace var votingAnimation
+    @Namespace var likenessAnimation
 
     private var activeReferralCode: String? {
         pointsBalance?.referralCodes?
@@ -45,6 +46,29 @@ struct HomeView: View {
 
     private var homeCards: [HomeCarouselCard] {
         [
+            // TODO: move below after testing
+            HomeCarouselCard(action: { path = .likeness }) {
+                HomeCardView(
+                    backgroundGradient: Gradients.purple,
+                    topIcon: Icons.rarime,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(.likenessFace)
+                            .resizable()
+                            .scaledToFit()
+                            .scaleEffect(0.7)
+                    },
+                    title: "Digital likeness",
+                    subtitle: "Set a rule",
+                    bottomAdditionalContent: {
+                        Text("First human-AI Contract")
+                            .body4()
+                            .foregroundStyle(.baseBlack.opacity(0.6))
+                            .padding(.top, 24)
+                    },
+                    animation: likenessAnimation
+                )
+            },
             HomeCarouselCard(action: { path = .identity }) {
                 HomeCardView(
                     backgroundGradient: Gradients.gradientFirst,
