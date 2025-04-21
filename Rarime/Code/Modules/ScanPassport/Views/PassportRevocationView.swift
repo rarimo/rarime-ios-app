@@ -23,7 +23,7 @@ struct PassportRevocationView: View {
             Spacer()
             AppButton(text: "Scan passport") {
                 NFCScanner.scanPassport(
-                    passportViewModel.mrzKey ?? "",
+                    passportViewModel.mrzKey ?? AppUserDefaults.shared.lastMRZKey,
                     passportViewModel.revocationChallenge,
                     false,
                     onCompletion: { result in
