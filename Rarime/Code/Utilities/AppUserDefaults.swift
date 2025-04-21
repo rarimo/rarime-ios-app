@@ -68,7 +68,7 @@ public class AppUserDefaults: ObservableObject {
 
     @AppStorage("isScanTutorialDisplayed")
     public var isScanTutorialDisplayed = false
-    
+
     @AppStorage("is_registration_interrupted")
     public var isRegistrationInterrupted = false
 
@@ -80,4 +80,10 @@ public class AppUserDefaults: ObservableObject {
             UserDefaults.standard.set(newValue, forKey: "voted_polls_ids")
         }
     }
+
+    @AppStorage("passport_processing_status")
+    public var passportProcessingStatus: Int = PassportProcessingStatus.processing.rawValue
+
+    @AppStorage("last_mrz_key")
+    public var lastMRZKey: String = ""
 }

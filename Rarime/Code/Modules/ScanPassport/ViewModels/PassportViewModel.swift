@@ -29,10 +29,6 @@ enum PassportProofState: Int, CaseIterable {
     }
 }
 
-enum ProcessingStatus: Equatable {
-    case processing, success, failure
-}
-
 class PassportViewModel: ObservableObject {
     @Published var mrzKey: String?
     @Published var proofState: PassportProofState = .downloadingData {
@@ -43,7 +39,12 @@ class PassportViewModel: ObservableObject {
         }
     }
     
-    @Published var processingStatus: ProcessingStatus = .processing
+    @Published var processingStatus: PassportProcessingStatus = .init(rawValue: AppUserDefaults.shared.passportProcessingStatus) ?? .processing {
+        didSet {
+            AppUserDefaults.shared.passportProcessingStatus = processingStatus.rawValue
+        }
+    }
+
     @Published var overallProgress: Double = 0.0
 
     @Published var isUserRevoking = false
@@ -68,6 +69,8 @@ class PassportViewModel: ObservableObject {
     
     func setMrzKey(_ value: String) {
         mrzKey = value
+        
+        AppUserDefaults.shared.lastMRZKey = value
     }
 
     @MainActor
@@ -210,6 +213,8 @@ class PassportViewModel: ObservableObject {
                     
                     passport = newPassport
                 } catch {
+                    LoggerUtil.common.error("Revocation scan failed: \(error, privacy: .public)")
+                    
                     throw Errors.unknown("Failed to read document, try again")
                 }
                 

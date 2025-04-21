@@ -65,11 +65,11 @@ struct ScanPassportView: View {
             PassportChipErrorView(onClose: onClose)
         }
     }
-    
+
     private func register(_ passport: Passport) async {
         do {
             passportManager.setPassport(passport)
-            
+
             let zkProof = try await passportViewModel.register()
 
             if passportViewModel.processingStatus != .success { return }
@@ -80,7 +80,7 @@ struct ScanPassportView: View {
             LoggerUtil.common.info("Passport read successfully: \(passport.fullName, privacy: .public)")
         } catch {
             LoggerUtil.common.error("error while registering passport: \(error.localizedDescription, privacy: .public)")
-            
+
             if passportViewModel.isUserRegistered {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     onClose()
@@ -94,16 +94,16 @@ struct ScanPassportView: View {
                     AlertManager.shared.emitError(.connectionUnstable)
 
                     onClose()
-                    
+
                     passportViewModel.processingStatus = .failure
-                    
+
                     return
                 }
             } else if let error = error as? Errors {
                 AlertManager.shared.emitError(error)
 
                 onClose()
-                
+
                 passportViewModel.processingStatus = .failure
 
                 return
@@ -116,11 +116,11 @@ struct ScanPassportView: View {
     let userManager = UserManager.shared
 
     return ScanPassportView(onClose: {})
-    .environmentObject(WalletManager())
-    .environmentObject(userManager)
-    .environmentObject(PassportManager())
-    .environmentObject(PassportViewModel())
-    .onAppear {
-        _ = try? userManager.createNewUser()
-    }
+        .environmentObject(WalletManager())
+        .environmentObject(userManager)
+        .environmentObject(PassportManager())
+        .environmentObject(PassportViewModel())
+        .onAppear {
+            _ = try? userManager.createNewUser()
+        }
 }

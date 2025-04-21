@@ -179,3 +179,7 @@ struct Passport: Codable {
         return try encoder.encode(self)
     }
 }
+
+enum PassportProcessingStatus: Int, Equatable {
+    case processing, success, failure
+}

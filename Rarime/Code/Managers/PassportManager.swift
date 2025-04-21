@@ -59,5 +59,9 @@ class PassportManager: ObservableObject {
         setPassportCardLook(.celestialGlow)
         setPassportIdentifiers([.documentId])
         setIncognitoMode(true)
+
+        AppUserDefaults.shared.isRegistrationInterrupted = false
+        AppUserDefaults.shared.passportProcessingStatus = PassportProcessingStatus.processing.rawValue
+        AppUserDefaults.shared.lastMRZKey = ""
     }
 }

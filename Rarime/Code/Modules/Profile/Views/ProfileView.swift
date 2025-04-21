@@ -199,8 +199,6 @@ struct ProfileView: View {
                         notificationManager.reset()
                         pollsViewModel.reset()
 
-                        AppUserDefaults.shared.isRegistrationInterrupted = false
-
                         Task {
                             try? await notificationManager.unsubscribe(fromTopic: ConfigManager.shared.general.claimableNotificationTopic)
                         }
