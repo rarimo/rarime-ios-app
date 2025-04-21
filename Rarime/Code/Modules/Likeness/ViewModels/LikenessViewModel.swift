@@ -61,18 +61,12 @@ enum SetupRegisterTask: Int, CaseIterable, SetupActionTask {
 class LikenessViewModel: ObservableObject {
     @Published var currentFrame: CGImage?
         
-    private let cameraManager = FaceCaptureSession()
+    private var cameraManager = FaceCaptureSession()
         
     @Published var cameraTask: Task<Void, Never>? = nil
         
-    @Published var loadingProgress = 0.0
-        
     @Published var recoveryProgress: SetupRecoveryTask? = nil
     @Published var registerProgress: SetupRegisterTask? = nil
-        
-    @Published var processingTask: Task<Void, Never>? = nil
-        
-    private var recentZKProofResult: Result<ZkProof, Error>?
         
     @MainActor
     func markRecoveryProgress(_ progress: SetupRecoveryTask) {
@@ -96,6 +90,10 @@ class LikenessViewModel: ObservableObject {
         cameraManager.stopSession()
             
         cameraTask?.cancel()
+    }
+    
+    func pauseScanning() {
+        cameraManager.stopSession()
     }
         
     func handleCameraPreviews() async {

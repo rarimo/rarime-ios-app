@@ -108,7 +108,7 @@ struct LikenessView: View {
                     .foregroundStyle(.baseWhite)
                     .opacity(0.05)
                 Text("Confirm")
-                    .foregroundStyle(.invertedLight)
+                    .foregroundStyle(.baseWhite)
                     .buttonLarge()
             }
         }
@@ -122,7 +122,7 @@ struct LikenessView: View {
                     .foregroundStyle(.baseWhite)
                     .opacity(0.05)
                 Image(systemName: "arrow.circlepath")
-                    .foregroundStyle(.invertedLight)
+                    .foregroundStyle(.baseWhite)
                     .buttonLarge()
             }
         }
@@ -164,7 +164,7 @@ struct LikenessView: View {
     func takePicture() {
         isPictureTaken = true
 
-        viewModel.stopScanning()
+        viewModel.pauseScanning()
     }
 
     func retakePicture() {
@@ -176,7 +176,7 @@ struct LikenessView: View {
     func confirmPicture() {
         let confirmedPicture = viewModel.currentFrame!
 
-        viewModel.clearImages()
+        cleanup()
 
         onConfirm(confirmedPicture)
     }
