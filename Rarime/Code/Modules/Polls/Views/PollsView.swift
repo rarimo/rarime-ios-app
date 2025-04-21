@@ -1,4 +1,3 @@
-import Glur
 import SwiftUI
 
 protocol NavTab {
