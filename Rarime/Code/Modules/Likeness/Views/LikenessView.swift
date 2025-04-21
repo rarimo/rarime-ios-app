@@ -162,7 +162,7 @@ struct LikenessView: View {
     }
 
     func takePicture() {
-        FeedbackGenerator.shared.impact(.light)
+        FeedbackGenerator.shared.impact(.medium)
 
         isPictureTaken = true
 
@@ -170,7 +170,7 @@ struct LikenessView: View {
     }
 
     func retakePicture() {
-        FeedbackGenerator.shared.impact(.light)
+        FeedbackGenerator.shared.impact(.medium)
 
         isPictureTaken = false
 
@@ -178,7 +178,7 @@ struct LikenessView: View {
     }
 
     func confirmPicture() {
-        FeedbackGenerator.shared.impact(.light)
+        FeedbackGenerator.shared.impact(.medium)
 
         let confirmedPicture = viewModel.currentFrame!
 
