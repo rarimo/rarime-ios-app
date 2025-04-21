@@ -3,39 +3,182 @@ import SwiftUI
 struct LikenessView: View {
     @StateObject private var viewModel = LikenessViewModel()
 
+    let onConfirm: (CGImage) -> Void
+
+    let onBack: () -> Void
+
+    @State private var isPictureTaken: Bool = false
+
     var body: some View {
-        VStack {
-            if let face = viewModel.currentFrame {
-                ZStack {
-                    Image(decorative: face, scale: 1)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .blur(radius: 76)
-                    Image(decorative: face, scale: 1)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipShape(FaceOval())
-                        .clipped()
+        withCloseButton {
+            ZStack {
+                facePreview
+                    .scaleEffect(x: -1, y: 1)
+                VStack {
+                    topHint
+                        .padding(.top, 50)
+                    Spacer()
+                    bottomHint
+                    if isPictureTaken {
+                        confirmAndRetakeButton
+                    } else {
+                        takeButton
+                    }
                 }
-                .scaleEffect(x: -1, y: 1)
+            }
+            .onAppear {
+                viewModel.startScanning()
+
+                if PreviewUtils.isPreview {
+                    doPreviewSetup()
+                }
+            }
+            .onDisappear(perform: cleanup)
+        }
+    }
+
+    var topHint: some View {
+        VStack(spacing: 25) {
+            Image(uiImage: UIImage(resource: .faceScan))
+            Text("Turn your head slightly to the left")
+                .subtitle5()
+                .foregroundStyle(.white)
+        }
+    }
+
+    var facePreview: some View {
+        ZStack {
+            if let face = viewModel.currentFrame {
+                bluredFace(Image(decorative: face, scale: 1))
+            } else {
+                FaceOval()
+                    .foregroundStyle(.bgComponentPrimary)
             }
         }
-        .onAppear {
-            viewModel.startScanning()
+    }
 
-            if PreviewUtils.isPreview {
-                doPreviewSetup()
+    func bluredFace(_ image: Image) -> some View {
+        ZStack {
+            image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .blur(radius: 76)
+            image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .clipShape(FaceOval())
+                .clipped()
+        }
+    }
+
+    var bottomHint: some View {
+        Text("Your face never leaves the device. You create an anonymous record that carries your rules, so AI knows how to treat you")
+            .body4()
+            .multilineTextAlignment(.center)
+            .foregroundStyle(.baseWhite)
+            .opacity(0.6)
+            .frame(width: 342)
+    }
+
+    var takeButton: some View {
+        Button(action: takePicture) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 20)
+                    .foregroundStyle(.baseWhite)
+                    .opacity(0.05)
+                Text("Take")
+                    .foregroundStyle(.baseWhite)
+                    .buttonLarge()
             }
         }
-        .onDisappear {
-            viewModel.stopScanning()
+        .frame(width: 350, height: 56)
+    }
 
-            viewModel.clearImages()
+    var confirmAndRetakeButton: some View {
+        HStack(spacing: 10) {
+            retakeButton
+            confirmButton
+        }
+    }
+
+    var confirmButton: some View {
+        Button(action: confirmPicture) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 20)
+                    .foregroundStyle(.baseWhite)
+                    .opacity(0.05)
+                Text("Confirm")
+                    .foregroundStyle(.invertedLight)
+                    .buttonLarge()
+            }
+        }
+        .frame(width: 284, height: 56)
+    }
+
+    var retakeButton: some View {
+        Button(action: retakePicture) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 20)
+                    .foregroundStyle(.baseWhite)
+                    .opacity(0.05)
+                Image(systemName: "arrow.circlepath")
+                    .foregroundStyle(.invertedLight)
+                    .buttonLarge()
+            }
+        }
+        .frame(width: 56, height: 56)
+    }
+
+    func withCloseButton(_ body: () -> some View) -> some View {
+        ZStack {
+            body()
+            VStack {
+                Button(action: {
+                    cleanup()
+                }) {
+                    ZStack {
+                        Circle()
+                            .foregroundColor(.baseWhite)
+                            .opacity(0.05)
+                        Image(systemName: "xmark")
+                            .foregroundColor(.baseWhite)
+                    }
+                }
+                .frame(width: 40, height: 40)
+                .padding(.leading, UIScreen.main.bounds.width - 100)
+                .padding(.bottom, UIScreen.main.bounds.height - 200)
+            }
         }
     }
 
     private func doPreviewSetup() {
         viewModel.currentFrame = UIImage(resource: .debugFace).cgImage!
+    }
+
+    func cleanup() {
+        viewModel.stopScanning()
+
+        viewModel.clearImages()
+    }
+
+    func takePicture() {
+        isPictureTaken = true
+
+        viewModel.stopScanning()
+    }
+
+    func retakePicture() {
+        isPictureTaken = false
+
+        viewModel.startScanning()
+    }
+
+    func confirmPicture() {
+        let confirmedPicture = viewModel.currentFrame!
+
+        viewModel.clearImages()
+
+        onConfirm(confirmedPicture)
     }
 }
 
@@ -59,5 +202,7 @@ private struct FaceOval: Shape {
 
 #Preview {
     VStack {}
-        .sheet(isPresented: .constant(true), content: LikenessView.init)
+        .sheet(isPresented: .constant(true)) {
+            LikenessView(onConfirm: { _ in }, onBack: {})
+        }
 }

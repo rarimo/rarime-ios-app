@@ -60,9 +60,6 @@ enum SetupRegisterTask: Int, CaseIterable, SetupActionTask {
 
 class LikenessViewModel: ObservableObject {
     @Published var currentFrame: CGImage?
-    @Published var faceImage: UIImage?
-
-    var faceImages: [UIImage] = []
         
     private let cameraManager = FaceCaptureSession()
         
@@ -114,7 +111,6 @@ class LikenessViewModel: ObservableObject {
     func handleFaceImage(_ image: CGImage) {}
     
     func clearImages() {
-        faceImage = nil
-        faceImages = []
+        currentFrame = nil
     }
 }

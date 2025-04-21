@@ -25,7 +25,9 @@ struct RarimeApp: App {
 //                .environmentObject(ExternalRequestsManager.shared)
 //                .environmentObject(InternetConnectionManager.shared)
             VStack {}
-                .sheet(isPresented: .constant(true), content: LikenessView.init)
+                .sheet(isPresented: .constant(true)) {
+                    LikenessView(onConfirm: { _ in }, onBack: {})
+                }
         }
     }
 }
