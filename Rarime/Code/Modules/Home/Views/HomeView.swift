@@ -38,7 +38,7 @@ struct HomeView: View {
     private var userPointsBalance: Int {
         pointsBalance?.amount ?? 0
     }
-    
+
     private var isBalanceSufficient: Bool {
         pointsBalance != nil && userPointsBalance > 0
     }
@@ -131,6 +131,22 @@ struct HomeView: View {
 //                    animation: inviteFriendsAnimation
 //                )
 //            },
+            HomeCarouselCard(action: { path = .voting }) {
+                HomeCardView(
+                    backgroundGradient: Gradients.gradientFifth,
+                    topIcon: Icons.freedomtool,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(Images.dotCountry)
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.top, 8)
+                    },
+                    title: "Freedomtool",
+                    subtitle: "Voting",
+                    animation: votingAnimation
+                )
+            },
             HomeCarouselCard(action: { path = .claimTokens }) {
                 HomeCardView(
                     backgroundGradient: Gradients.gradientThird,
@@ -143,7 +159,7 @@ struct HomeView: View {
                             .padding(.top, 100)
                     },
                     title: isBalanceSufficient ? "Reserved" : "Upcoming",
-                    subtitle: isBalanceSufficient ? "\(userPointsBalance) RMO" : "RMO" ,
+                    subtitle: isBalanceSufficient ? "\(userPointsBalance) RMO" : "RMO",
                     animation: claimTokensAnimation
                 )
             },
@@ -164,22 +180,6 @@ struct HomeView: View {
 //                    animation: walletAnimation
 //                )
 //            },
-            HomeCarouselCard(action: { path = .voting }) {
-                HomeCardView(
-                    backgroundGradient: Gradients.gradientFifth,
-                    topIcon: Icons.freedomtool,
-                    bottomIcon: Icons.arrowRightUpLine,
-                    imageContent: {
-                        Image(Images.dotCountry)
-                            .resizable()
-                            .scaledToFit()
-                            .padding(.top, 8)
-                    },
-                    title: "Freedomtool",
-                    subtitle: "Voting",
-                    animation: votingAnimation
-                )
-            }
         ]
     }
 
@@ -316,7 +316,7 @@ struct HomeView: View {
             defer {
                 self.isBalanceFetching = false
             }
-            
+
             if userManager.user?.userReferralCode == nil { return }
 
             do {
@@ -334,6 +334,7 @@ struct HomeView: View {
 
         cancelables.append(cancelable)
     }
+
 //    TODO: uncomment after desing and flow impl
 //    private func verifyReferralCode() async {
 //        var referralCode = configManager.api.defaultReferralCode

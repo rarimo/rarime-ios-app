@@ -1,3 +1,4 @@
+import Glur
 import SwiftUI
 
 protocol NavTab {
@@ -34,7 +35,7 @@ struct PollsView: View {
     
     private var aсtivePolls: [Poll] {
         pollsViewModel.polls.filter { poll in
-            (poll.status == .waiting || poll.status == .started)
+            poll.status == .waiting || poll.status == .started
         }
     }
     
@@ -50,12 +51,18 @@ struct PollsView: View {
                 AppIconButton(variant: .secondary, icon: Icons.closeFill, action: onClose)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding([.top, .trailing], 20)
-                Image(Images.dotCountry)
-                    .resizable()
-                    .scaledToFill()
-                    .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
-                GlassBottomSheet(minHeight: 330, maxHeight: 730) {
-                    VStack(spacing: 24) {
+                GlassBottomSheet(
+                    minHeight: 390,
+                    maxHeight: 730,
+                    maxBlur: 20,
+                    background: {
+                        Image(Images.dotCountry)
+                            .resizable()
+                            .scaledToFit()
+                            .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
+                    }
+                ) {
+                    VStack(spacing: 12) {
                         VStack(alignment: .leading, spacing: 24) {
                             VStack(alignment: .leading, spacing: 0) {
                                 Text("Freedomtool")
@@ -84,7 +91,7 @@ struct PollsView: View {
                                     guard let url = URL(string: ConfigManager.shared.api.votingWebsiteURL.absoluteString) else { return }
                                     openURL(url)
                                 })
-                                    .controlSize(.large)
+                                .controlSize(.large)
                                 AppButton(variant: .tertiary, text: "Scan a QR", action: { mainViewModel.isQrCodeScanSheetShown = true })
                                     .controlSize(.large)
                             }
@@ -97,8 +104,8 @@ struct PollsView: View {
                                         }
                                     }) {
                                         Text(tab == .active
-                                             ? "\(aсtivePolls.count) \(tab.title)"
-                                             : tab.title
+                                            ? "\(aсtivePolls.count) \(tab.title)"
+                                            : tab.title
                                         )
                                         .overline2()
                                         .foregroundStyle(currentTab == tab ? .baseBlack : .baseBlack.opacity(0.4))
@@ -122,6 +129,8 @@ struct PollsView: View {
                         .padding(.horizontal, 8)
                     }
                     .padding(.bottom, 24)
+                    // HACK: prevent pull to close on empty space
+                    .background(.white.opacity(0.01))
                 }
             }
             .background(
@@ -177,13 +186,14 @@ struct PollsView: View {
                             })
                         }
                     }
+                    .padding(.top, 12)
                 }
             }
         }
     }
     
     private func loadPolls() async {
-        self.earlyPullTask = Task { @MainActor in
+        earlyPullTask = Task { @MainActor in
             defer { isPollsLoading = false }
             do {
                 try await pollsViewModel.loadPollsByIds(AppUserDefaults.shared.votedPollsIds)

@@ -12,17 +12,20 @@ struct InviteFriendsView: View {
                 AppIconButton(variant: .secondary, icon: Icons.closeFill, action: onClose)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding([.top, .trailing], 20)
-                Image(Images.peopleEmojis)
-                    .resizable()
-                    .scaledToFit()
-                    .padding(.top, 77)
-                    .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
-                ReferralBottomSheet {
+
+                GlassBottomSheet(
+                    minHeight: 420,
+                    maxHeight: 730,
+                    maxBlur: 70,
+                    background: {
+                        Image(Images.peopleEmojis)
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.top, 77)
+                            .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
+                    }
+                ) {
                     VStack(alignment: .leading, spacing: 24) {
-                        Capsule()
-                            .fill(.bgComponentBaseHovered)
-                            .frame(width: 36, height: 5)
-                            .frame(maxWidth: .infinity, alignment: .center)
                         HStack(alignment: .top, spacing: 64) {
                             VStack(alignment: .leading, spacing: 0) {
                                 Text("Invite")
@@ -72,57 +75,6 @@ struct InviteFriendsView: View {
                     .ignoresSafeArea()
             )
         }
-    }
-}
-
-private struct ReferralBottomSheet<Content: View>: View {
-    let content: Content
-
-    var minHeight: CGFloat
-    var maxHeight: CGFloat
-    var sensitivity: CGFloat
-
-    @State private var currentHeight: CGFloat
-    @GestureState private var dragOffset: CGFloat = 0
-
-    init(
-        @ViewBuilder content: () -> Content,
-        minHeight: CGFloat = 360,
-        maxHeight: CGFloat = 670,
-        sensitivity: CGFloat = 2.4
-    ) {
-        self.content = content()
-        self.minHeight = minHeight
-        self.maxHeight = maxHeight
-        self.sensitivity = sensitivity
-        _currentHeight = State(initialValue: minHeight)
-    }
-
-    var body: some View {
-        GeometryReader { proxy in
-            ZStack {
-                content.backgroundBlur(bgColor: .bgBlur)
-            }
-            .frame(width: proxy.size.width, height: currentHeight, alignment: .top)
-            .offset(y: proxy.size.height - currentHeight + dragOffset)
-            .animation(.spring(duration: 1, bounce: 0.1), value: dragOffset)
-            .gesture(
-                DragGesture()
-                    .updating($dragOffset) { value, state, _ in
-                        state = value.translation.height * sensitivity
-                    }
-                    .onEnded { value in
-                        let proposedHeight = currentHeight - (value.translation.height * sensitivity)
-                        let midpoint = (minHeight + maxHeight) / 2
-                        if proposedHeight > midpoint {
-                            currentHeight = maxHeight
-                        } else {
-                            currentHeight = minHeight
-                        }
-                    }
-            )
-        }
-        .ignoresSafeArea(edges: .bottom)
     }
 }
 
