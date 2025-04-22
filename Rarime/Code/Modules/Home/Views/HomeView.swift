@@ -46,7 +46,46 @@ struct HomeView: View {
 
     private var homeCards: [HomeCarouselCard] {
         [
-            // TODO: move below after testing
+            HomeCarouselCard(action: { path = .identity }) {
+                HomeCardView(
+                    backgroundGradient: Gradients.gradientFirst,
+                    topIcon: Icons.rarime,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(Images.handWithPhone)
+                            .resizable()
+                            .scaledToFit()
+                            .scaleEffect(0.88)
+                            .offset(x: 32)
+                            .padding(.top, 12)
+                    },
+                    title: "Your Device",
+                    subtitle: "Your Identity",
+                    bottomAdditionalContent: {
+                        Text("* Nothing leaves this device")
+                            .body4()
+                            .foregroundStyle(.baseBlack.opacity(0.6))
+                            .padding(.top, 24)
+                    },
+                    animation: identityAnimation
+                )
+            },
+            HomeCarouselCard(action: { path = .voting }) {
+                HomeCardView(
+                    backgroundGradient: Gradients.gradientFifth,
+                    topIcon: Icons.freedomtool,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(Images.dotCountry)
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.top, 8)
+                    },
+                    title: "Freedomtool",
+                    subtitle: "Voting",
+                    animation: votingAnimation
+                )
+            },
             HomeCarouselCard(action: { path = .likeness }) {
                 HomeCardView(
                     backgroundGradient: Gradients.purpleBg,
@@ -75,108 +114,6 @@ struct HomeView: View {
                     animation: likenessAnimation
                 )
             },
-            HomeCarouselCard(action: { path = .identity }) {
-                HomeCardView(
-                    backgroundGradient: Gradients.gradientFirst,
-                    topIcon: Icons.rarime,
-                    bottomIcon: Icons.arrowRightUpLine,
-                    imageContent: {
-                        Image(Images.handWithPhone)
-                            .resizable()
-                            .scaledToFit()
-                            .scaleEffect(0.88)
-                            .offset(x: 32)
-                            .padding(.top, 12)
-                    },
-                    title: "Your Device",
-                    subtitle: "Your Identity",
-                    bottomAdditionalContent: {
-                        Text("* Nothing leaves this device")
-                            .body4()
-                            .foregroundStyle(.baseBlack.opacity(0.6))
-                            .padding(.top, 24)
-                    },
-                    animation: identityAnimation
-                )
-            },
-//            TODO: uncomment after desing and flow impl
-//            HomeCarouselCard(
-//                isShouldDisplay: !isBalanceFetching && pointsBalance != nil,
-//                action: { path = .inviteFriends }
-//            ) {
-//                HomeCardView(
-//                    backgroundGradient: Gradients.gradientSecond,
-//                    topIcon: Icons.rarime,
-//                    bottomIcon: Icons.arrowRightUpLine,
-//                    imageContent: {
-//                        ZStack(alignment: .bottomTrailing) {
-//                            Image(Images.peopleEmojis)
-//                                .resizable()
-//                                .scaledToFit()
-//                                .padding(.top, 84)
-//
-//                            Image(Icons.getTokensArrow)
-//                                .foregroundStyle(.informationalDark)
-//                                .offset(x: -44, y: 88)
-//                                .matchedGeometryEffect(
-//                                    id: AnimationNamespaceIds.additionalImage,
-//                                    in: inviteFriendsAnimation
-//                                )
-//                        }
-//                    },
-//                    title: "Invite",
-//                    subtitle: "Others",
-//                    bottomAdditionalContent: {
-//                        if let code = activeReferralCode {
-//                            HStack(spacing: 16) {
-//                                Text(code)
-//                                    .subtitle4()
-//                                    .foregroundStyle(.baseBlack)
-//                                VerticalDivider(color: .bgComponentBasePrimary)
-//                                Image(isCopied ? Icons.checkLine : Icons.fileCopyLine)
-//                                    .iconMedium()
-//                                    .foregroundStyle(.baseBlack.opacity(0.5))
-//                            }
-//                            .fixedSize(horizontal: false, vertical: true)
-//                            .padding(.horizontal, 16)
-//                            .padding(.vertical, 8)
-//                            .background(.baseWhite)
-//                            .cornerRadius(8)
-//                            .frame(maxWidth: 280, alignment: .leading)
-//                            .padding(.top, 24)
-//                            .onTapGesture {
-//                                if isCopied { return }
-//
-//                                isCopied = true
-//                                FeedbackGenerator.shared.impact(.medium)
-//
-//                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                                    withAnimation(.easeInOut) {
-//                                        isCopied = false
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    },
-//                    animation: inviteFriendsAnimation
-//                )
-//            },
-            HomeCarouselCard(action: { path = .voting }) {
-                HomeCardView(
-                    backgroundGradient: Gradients.gradientFifth,
-                    topIcon: Icons.freedomtool,
-                    bottomIcon: Icons.arrowRightUpLine,
-                    imageContent: {
-                        Image(Images.dotCountry)
-                            .resizable()
-                            .scaledToFit()
-                            .padding(.top, 8)
-                    },
-                    title: "Freedomtool",
-                    subtitle: "Voting",
-                    animation: votingAnimation
-                )
-            },
             HomeCarouselCard(action: { path = .claimTokens }) {
                 HomeCardView(
                     backgroundGradient: Gradients.gradientThird,
@@ -193,6 +130,68 @@ struct HomeView: View {
                     animation: claimTokensAnimation
                 )
             },
+            //            TODO: uncomment after desing and flow impl
+            //            HomeCarouselCard(
+            //                isShouldDisplay: !isBalanceFetching && pointsBalance != nil,
+            //                action: { path = .inviteFriends }
+            //            ) {
+            //                HomeCardView(
+            //                    backgroundGradient: Gradients.gradientSecond,
+            //                    topIcon: Icons.rarime,
+            //                    bottomIcon: Icons.arrowRightUpLine,
+            //                    imageContent: {
+            //                        ZStack(alignment: .bottomTrailing) {
+            //                            Image(Images.peopleEmojis)
+            //                                .resizable()
+            //                                .scaledToFit()
+            //                                .padding(.top, 84)
+            //
+            //                            Image(Icons.getTokensArrow)
+            //                                .foregroundStyle(.informationalDark)
+            //                                .offset(x: -44, y: 88)
+            //                                .matchedGeometryEffect(
+            //                                    id: AnimationNamespaceIds.additionalImage,
+            //                                    in: inviteFriendsAnimation
+            //                                )
+            //                        }
+            //                    },
+            //                    title: "Invite",
+            //                    subtitle: "Others",
+            //                    bottomAdditionalContent: {
+            //                        if let code = activeReferralCode {
+            //                            HStack(spacing: 16) {
+            //                                Text(code)
+            //                                    .subtitle4()
+            //                                    .foregroundStyle(.baseBlack)
+            //                                VerticalDivider(color: .bgComponentBasePrimary)
+            //                                Image(isCopied ? Icons.checkLine : Icons.fileCopyLine)
+            //                                    .iconMedium()
+            //                                    .foregroundStyle(.baseBlack.opacity(0.5))
+            //                            }
+            //                            .fixedSize(horizontal: false, vertical: true)
+            //                            .padding(.horizontal, 16)
+            //                            .padding(.vertical, 8)
+            //                            .background(.baseWhite)
+            //                            .cornerRadius(8)
+            //                            .frame(maxWidth: 280, alignment: .leading)
+            //                            .padding(.top, 24)
+            //                            .onTapGesture {
+            //                                if isCopied { return }
+            //
+            //                                isCopied = true
+            //                                FeedbackGenerator.shared.impact(.medium)
+            //
+            //                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            //                                    withAnimation(.easeInOut) {
+            //                                        isCopied = false
+            //                                    }
+            //                                }
+            //                            }
+            //                        }
+            //                    },
+            //                    animation: inviteFriendsAnimation
+            //                )
+            //            },
 //            TODO: uncomment after desing and flow impl
 //            HomeCarouselCard(action: { path = .wallet }) {
 //                HomeCardView(

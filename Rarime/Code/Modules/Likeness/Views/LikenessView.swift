@@ -22,13 +22,11 @@ struct LikenessView: View {
                         bottomOffset: 160,
                         maxBlur: 200,
                         background: {
-                            ZStack {
-                                Image(.likenessFace)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .scaleEffect(0.7)
-                                    .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
-                            }
+                            Image(.likenessFace)
+                                .resizable()
+                                .scaledToFit()
+                                .scaleEffect(0.7)
+                                .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
                         }
                     ) {
                         VStack(spacing: 12) {
@@ -74,7 +72,7 @@ struct LikenessView: View {
                         HorizontalDivider()
                         HStack(alignment: .center, spacing: 8) {
                             VStack(alignment: .leading, spacing: 4) {
-                                Text(RULES_SET_COUNT, format: .number)
+                                Text(RULES_SET_COUNT.formatted(.number))
                                     .h4()
                                     .foregroundStyle(.baseBlack)
                                 Text("Other already set")
