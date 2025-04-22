@@ -1,5 +1,7 @@
+import Alamofire
 import Foundation
 import Identity
+
 import Web3
 import Web3ContractABI
 import Web3PromiseKit
@@ -149,11 +151,11 @@ class PollsViewModel: ObservableObject {
         let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
         
         guard let passportKey = UserManager.shared.getPassportKey(passport) else {
-            throw "failed to get passport key"
+            throw "Failed to get passport key"
         }
         
         guard let identityKey = UserManager.shared.getIdentityKey(passport) else {
-            throw "failed to get identity key"
+            throw "Failed to get identity key"
         }
         
         var error: NSError? = nil
@@ -202,7 +204,7 @@ class PollsViewModel: ObservableObject {
             calldata.fullHex,
             poll.votingsAddresses[0].hex(eip55: false)
         )
-        
+
         LoggerUtil.common.info("Voting \(poll.id, privacy: .public), txHash: \(voteResponse.data.id, privacy: .public)")
     }
     
