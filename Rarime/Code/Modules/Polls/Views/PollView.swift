@@ -1,3 +1,4 @@
+import Alamofire
 import SwiftUI
 
 struct PollView: View {
@@ -51,7 +52,19 @@ struct PollView: View {
                             onClose()
                         } catch {
                             LoggerUtil.common.error("Can't submit poll results: \(error, privacy: .public)")
-                            AlertManager.shared.emitError(.unknown(error.localizedDescription))
+                            
+                            guard let error = error as? AFError else {
+                                AlertManager.shared.emitError(.unknown(error.localizedDescription))
+                                onClose()
+                                return
+                            }
+
+                            let openApiHttpCode = try error.retriveOpenApiHttpCode()
+                            let serverError = openApiHttpCode == HTTPStatusCode.forbidden.rawValue
+                                ? Errors.unknown("The maximum number of participants has been reached, contact the poll owner")
+                                : Errors.unknown("Service unavailable, try again later. Status code: \(openApiHttpCode)")
+                            
+                            AlertManager.shared.emitError(serverError)
                             onClose()
                         }
                     }
