@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    " " : {
+
+    },
     " and " : {
       "localizations" : {
         "uk" : {
@@ -314,7 +317,7 @@
     "Aruba" : {
 
     },
-    "Ask me\nfirst" : {
+    "Ask me first" : {
 
     },
     "ASSETS (%lld)" : {

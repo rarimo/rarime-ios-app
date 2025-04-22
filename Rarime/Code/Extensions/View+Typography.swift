@@ -31,7 +31,9 @@ extension View {
     
     // additional
     func additional1() -> some View {
-        self.applyFont(fontFamily: Fonts.playfairBold, fontSize: 48, lineHeight: 56, fontWeight: .bold)
+        self
+            .applyFont(fontFamily: Fonts.playfairBold, fontSize: 48, lineHeight: 40, fontWeight: .bold)
+            .kerning(-1.92)
     }
     
     func additional2() -> some View {

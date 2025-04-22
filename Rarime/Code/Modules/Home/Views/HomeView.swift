@@ -44,6 +44,14 @@ struct HomeView: View {
         pointsBalance != nil && userPointsBalance > 0
     }
 
+    private var isLikenessRegistered: Bool {
+        AppUserDefaults.shared.isLikenessRegistered
+    }
+
+    var likenessRule: LikenessRule {
+        LikenessRule(rawValue: AppUserDefaults.shared.likenessRule) ?? .unset
+    }
+
     private var homeCards: [HomeCarouselCard] {
         [
             HomeCarouselCard(action: { path = .identity }) {
@@ -98,18 +106,20 @@ struct HomeView: View {
                             .scaledToFit()
                             .scaleEffect(0.7)
                     },
-                    title: "Digital likeness",
-                    subtitle: "Set a rule",
+                    title: isLikenessRegistered ? nil : "Digital likeness",
+                    subtitle: isLikenessRegistered ? likenessRule.title : "Set a rule",
                     bottomAdditionalContent: {
-                        Text("First human-AI Contract")
-                            .body4()
-                            .foregroundStyle(.baseBlack.opacity(0.5))
-                            .padding(.top, 12)
-                            .matchedGeometryEffect(
-                                id: AnimationNamespaceIds.footer,
-                                in: likenessAnimation,
-                                properties: .position
-                            )
+                        if !isLikenessRegistered {
+                            Text("First human-AI Contract")
+                                .body4()
+                                .foregroundStyle(.baseBlack.opacity(0.5))
+                                .padding(.top, 12)
+                                .matchedGeometryEffect(
+                                    id: AnimationNamespaceIds.footer,
+                                    in: likenessAnimation,
+                                    properties: .position
+                                )
+                        }
                     },
                     animation: likenessAnimation
                 )

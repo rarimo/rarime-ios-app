@@ -6,7 +6,7 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
     let topIcon: String
     let bottomIcon: String
     let imageContent: () -> Content
-    let title: String
+    let title: String?
     let subtitle: String
     let bottomAdditionalContent: () -> BottomAdditionalContent?
 
@@ -18,7 +18,7 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
         topIcon: String,
         bottomIcon: String,
         @ViewBuilder imageContent: @escaping () -> Content,
-        title: String,
+        title: String?,
         subtitle: String,
         @ViewBuilder bottomAdditionalContent: @escaping () -> BottomAdditionalContent? = { EmptyView() },
         animation: Namespace.ID
@@ -47,14 +47,16 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .clipped()
             VStack(alignment: .leading, spacing: 0) {
-                Text(title)
-                    .h1()
-                    .foregroundStyle(.baseBlack)
-                    .matchedGeometryEffect(
-                        id: AnimationNamespaceIds.title,
-                        in: animation,
-                        properties: .position
-                    )
+                if let title {
+                    Text(title)
+                        .h1()
+                        .foregroundStyle(.baseBlack)
+                        .matchedGeometryEffect(
+                            id: AnimationNamespaceIds.title,
+                            in: animation,
+                            properties: .position
+                        )
+                }
                 Text(subtitle)
                     .additional1()
                     .foregroundStyle(foregroundGradient == nil ? AnyShapeStyle(Color.baseBlack.opacity(0.4)) : AnyShapeStyle(foregroundGradient!))
@@ -70,12 +72,12 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(maxHeight: .infinity, alignment: .bottom)
             .padding(.leading, 24)
-            .padding(.bottom, 24)
+            .padding(.bottom, 32)
             Image(bottomIcon)
                 .iconLarge()
                 .foregroundStyle(.baseBlack)
                 .frame(maxHeight: .infinity, alignment: .bottom)
-                .padding(.bottom, 24)
+                .padding(.bottom, 32)
                 .padding(.trailing, 24)
         }
         .frame(maxHeight: .infinity)
