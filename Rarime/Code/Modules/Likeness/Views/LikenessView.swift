@@ -4,10 +4,14 @@ struct LikenessView: View {
     let onClose: () -> Void
     var animation: Namespace.ID
 
-    // TODO: use actual count
-    let RULES_SET_COUNT = 49421
+    @StateObject var viewModel = LikenessViewModel()
 
     @State private var isRuleSheetPresented = false
+    @State private var isScanSheetPresented = false
+    @State private var isFaceScanned = false
+
+    // TODO: use actual count
+    let RULES_SET_COUNT = 49421
 
     var body: some View {
         PullToCloseWrapperView(action: onClose) {
@@ -94,12 +98,34 @@ struct LikenessView: View {
                                     onSave: { ruleId in
                                         isRuleSheetPresented = false
                                         AppUserDefaults.shared.likenessRuleId = ruleId.rawValue
+                                        isScanSheetPresented = true
                                     }
                                 )
                             }
                         }
                     }
                     .padding(20)
+                }
+            }
+            .sheet(isPresented: $isScanSheetPresented) {
+                if isFaceScanned {
+                    LikenessProcessing<LikenessProcessingRegisterTask>(
+                        onCompletion: {
+                            // TODO: handle completion
+                            isFaceScanned = false
+                            isScanSheetPresented = false
+                        },
+                        onBack: {
+                            isFaceScanned = false
+                            isScanSheetPresented = false
+                        }
+                    )
+                } else {
+                    FaceLikenessView(
+                        onConfirm: { _ in isFaceScanned = true },
+                        onBack: { isScanSheetPresented = false }
+                    )
+                    .environmentObject(viewModel)
                 }
             }
             .background(

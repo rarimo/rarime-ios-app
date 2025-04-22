@@ -113,6 +113,9 @@
     "%lld RMO" : {
 
     },
+    "%lld%%" : {
+
+    },
     "%lldm %llds" : {
       "localizations" : {
         "en" : {
