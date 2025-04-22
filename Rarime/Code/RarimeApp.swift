@@ -5,29 +5,25 @@ import SwiftUI
 
 @main
 struct RarimeApp: App {
-//    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
         WindowGroup {
-//            AppView()
-//                .environmentObject(AlertManager.shared)
-//                .environmentObject(UserManager.shared)
-//                .environmentObject(ConfigManager.shared)
-//                .environmentObject(SecurityManager.shared)
-//                .environmentObject(WalletManager.shared)
-//                .environmentObject(SettingsManager.shared)
-//                .environmentObject(PassportManager.shared)
-//                .environmentObject(AppIconManager.shared)
-//                .environmentObject(UpdateManager.shared)
-//                .environmentObject(DecentralizedAuthManager.shared)
-//                .environmentObject(CircuitDataManager.shared)
-//                .environmentObject(NotificationManager.shared)
-//                .environmentObject(ExternalRequestsManager.shared)
-//                .environmentObject(InternetConnectionManager.shared)
-            VStack {}
-                .sheet(isPresented: .constant(true)) {
-                    FaceLikenessView(onConfirm: { _ in }, onBack: {})
-                }
+            AppView()
+                .environmentObject(AlertManager.shared)
+                .environmentObject(UserManager.shared)
+                .environmentObject(ConfigManager.shared)
+                .environmentObject(SecurityManager.shared)
+                .environmentObject(WalletManager.shared)
+                .environmentObject(SettingsManager.shared)
+                .environmentObject(PassportManager.shared)
+                .environmentObject(AppIconManager.shared)
+                .environmentObject(UpdateManager.shared)
+                .environmentObject(DecentralizedAuthManager.shared)
+                .environmentObject(CircuitDataManager.shared)
+                .environmentObject(NotificationManager.shared)
+                .environmentObject(ExternalRequestsManager.shared)
+                .environmentObject(InternetConnectionManager.shared)
         }
     }
 }

@@ -145,8 +145,8 @@ struct LikenessProcessingEntry<ActionTask: LikenessProcessingTask>: View {
 #Preview {
     VStack {}
         .sheet(isPresented: .constant(true)) {
-            LikenessProcessing<LikenessProcessingRegisterTask>(onCompletion: {}, onBack: {})
+//            LikenessProcessing<LikenessProcessingRegisterTask>(onCompletion: {}, onBack: {})
 
-//            LikenessProcessing<LikenessProcessingTaskRecoveryTask>(onCompletion: {}, onBack: {})
+            LikenessProcessing<LikenessProcessingRecoveryTask>(onCompletion: {}, onBack: {})
         }
 }
