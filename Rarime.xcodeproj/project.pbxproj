@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5601341D2DB78CAC0041B009 /* LikenessRuleId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5601341C2DB78CAC0041B009 /* LikenessRuleId.swift */; };
+		5601341E2DB78CAC0041B009 /* LikenessRuleId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5601341C2DB78CAC0041B009 /* LikenessRuleId.swift */; };
 		56062B9A2C12007A00C9BF9B /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B992C12007A00C9BF9B /* Country.swift */; };
 		56062B9C2C12032700C9BF9B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9B2C12032700C9BF9B /* Constants.swift */; };
 		56062BA02C120B3400C9BF9B /* WaitlistPassportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9F2C120B3400C9BF9B /* WaitlistPassportView.swift */; };
@@ -125,6 +127,7 @@
 		56E7AD0E2BDAD70200D3A258 /* RefreshableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7AD0D2BDAD70200D3A258 /* RefreshableScrollView.swift */; };
 		56E7AD112BDBA81000D3A258 /* PullToRefreshSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 56E7AD102BDBA81000D3A258 /* PullToRefreshSwiftUI */; };
 		56F1B8BA2DB689EC00BCCE1F /* LikenessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F1B8B82DB689EC00BCCE1F /* LikenessView.swift */; };
+		56F1B8BD2DB6A44700BCCE1F /* IdentityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F1B8BB2DB6A44700BCCE1F /* IdentityType.swift */; };
 		56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F48BBD2BC02E82001F3AA4 /* AppButton.swift */; };
 		C71161B32CAAE3DB00ED41EA /* String+BigUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71161B22CAAE3DB00ED41EA /* String+BigUInt.swift */; };
 		C726E8B42D6389F7000C9CA6 /* WalletWaitlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C726E8B32D638953000C9CA6 /* WalletWaitlistView.swift */; };
@@ -399,6 +402,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5601341C2DB78CAC0041B009 /* LikenessRuleId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessRuleId.swift; sourceTree = "<group>"; };
 		56062B992C12007A00C9BF9B /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		56062B9B2C12032700C9BF9B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		56062B9F2C120B3400C9BF9B /* WaitlistPassportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitlistPassportView.swift; sourceTree = "<group>"; };
@@ -510,6 +514,7 @@
 		56E7AD092BDAA4F000D3A258 /* AppRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRadioButton.swift; sourceTree = "<group>"; };
 		56E7AD0D2BDAD70200D3A258 /* RefreshableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableScrollView.swift; sourceTree = "<group>"; };
 		56F1B8B82DB689EC00BCCE1F /* LikenessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessView.swift; sourceTree = "<group>"; };
+		56F1B8BB2DB6A44700BCCE1F /* IdentityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityType.swift; sourceTree = "<group>"; };
 		56F48BBD2BC02E82001F3AA4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		C71161B22CAAE3DB00ED41EA /* String+BigUInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+BigUInt.swift"; sourceTree = "<group>"; };
 		C726E8B32D638953000C9CA6 /* WalletWaitlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletWaitlistView.swift; sourceTree = "<group>"; };
@@ -738,10 +743,6 @@
 		CEFF68C02CB6AF46008769EA /* Encodable+json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+json.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		56C6D2A02D6F16B500EB24D8 /* Enums */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Enums; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
 		CE3D41C22C779BC400D0AA65 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -852,6 +853,7 @@
 		561C3C262BADA89000FBB3B9 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				5601341C2DB78CAC0041B009 /* LikenessRuleId.swift */,
 				CE39DF842D3FA83F00799A4B /* DocumentType.swift */,
 				5659151C2BE92AA90050795A /* AppIcon.swift */,
 				5655E42F2BD2CA5500B86C5C /* AppColorScheme.swift */,
@@ -867,7 +869,7 @@
 		563529DA2BB0714A0027C910 /* Identity */ = {
 			isa = PBXGroup;
 			children = (
-				56C6D2A02D6F16B500EB24D8 /* Enums */,
+				56F1B8BC2DB6A44700BCCE1F /* Enums */,
 				563529DF2BB0718E0027C910 /* Views */,
 			);
 			path = Identity;
@@ -1170,6 +1172,14 @@
 				56F1B8B82DB689EC00BCCE1F /* LikenessView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		56F1B8BC2DB6A44700BCCE1F /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				56F1B8BB2DB6A44700BCCE1F /* IdentityType.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		56F48BBB2BC02DD0001F3AA4 /* UI */ = {
@@ -1796,9 +1806,6 @@
 			dependencies = (
 				CE3D41CB2C779BC400D0AA65 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				56C6D2A02D6F16B500EB24D8 /* Enums */,
-			);
 			name = Rarime;
 			packageProductDependencies = (
 				CE32CF512BAC981300E507B6 /* Lottie */,
@@ -1951,6 +1958,7 @@
 				CE7E95822CE7786F00D86A4F /* PassportManager.swift in Sources */,
 				CEBA50072CF0E7010069151C /* CryptoUtils.swift in Sources */,
 				CE3D41D62C779C8D00D0AA65 /* NotificationManager.swift in Sources */,
+				5601341D2DB78CAC0041B009 /* LikenessRuleId.swift in Sources */,
 				CE39DF862D3FA84400799A4B /* DocumentType.swift in Sources */,
 				CE7E95882CE778C900D86A4F /* PassportIdentifier.swift in Sources */,
 				CE3D41C82C779BC400D0AA65 /* NotificationService.swift in Sources */,
@@ -2104,6 +2112,7 @@
 				CED909E02BDC1E0F0065E949 /* Rarimo.swift in Sources */,
 				563529EB2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift in Sources */,
 				CE06BF342D08567500F6C721 /* LightRegistrationService.swift in Sources */,
+				5601341E2DB78CAC0041B009 /* LikenessRuleId.swift in Sources */,
 				CEFF68BD2CB6A1C2008769EA /* RegisterIdentityInputs.swift in Sources */,
 				56DAA3132BB8CA4F002CF710 /* EnableFaceIdView.swift in Sources */,
 				CE0DA0D72BDA6F1900696503 /* EvmTxResponse.swift in Sources */,
@@ -2160,6 +2169,7 @@
 				CEFE5F3B2CB5718100498F39 /* SODAlgorithm.swift in Sources */,
 				C726E8B42D6389F7000C9CA6 /* WalletWaitlistView.swift in Sources */,
 				56E2D9152BCE7FC4006E725D /* HomeIntroLayout.swift in Sources */,
+				56F1B8BD2DB6A44700BCCE1F /* IdentityType.swift in Sources */,
 				CE19CB492BE3AD4200B26DF7 /* LockScreenView.swift in Sources */,
 				CEDC4D832BE949F300459D4E /* Ethereum.swift in Sources */,
 				5655E4282BD2C3FD00B86C5C /* Transaction.swift in Sources */,

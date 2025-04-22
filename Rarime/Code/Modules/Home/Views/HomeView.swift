@@ -64,8 +64,13 @@ struct HomeView: View {
                     bottomAdditionalContent: {
                         Text("First human-AI Contract")
                             .body4()
-                            .foregroundStyle(.baseBlack.opacity(0.6))
-                            .padding(.top, 24)
+                            .foregroundStyle(.baseBlack.opacity(0.5))
+                            .padding(.top, 12)
+                            .matchedGeometryEffect(
+                                id: AnimationNamespaceIds.footer,
+                                in: likenessAnimation,
+                                properties: .position
+                            )
                     },
                     animation: likenessAnimation
                 )

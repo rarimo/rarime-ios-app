@@ -86,4 +86,7 @@ public class AppUserDefaults: ObservableObject {
 
     @AppStorage("last_mrz_key")
     public var lastMRZKey: String = ""
+
+    @AppStorage("likeness_rule_id")
+    public var likenessRuleId: Int = LikenessRuleId.unset.rawValue
 }

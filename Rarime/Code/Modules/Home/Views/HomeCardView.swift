@@ -48,7 +48,7 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
                 .clipped()
             VStack(alignment: .leading, spacing: 0) {
                 Text(title)
-                    .h2()
+                    .h1()
                     .foregroundStyle(.baseBlack)
                     .matchedGeometryEffect(
                         id: AnimationNamespaceIds.title,
@@ -56,7 +56,7 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
                         properties: .position
                     )
                 Text(subtitle)
-                    .additional2()
+                    .additional1()
                     .foregroundStyle(foregroundGradient == nil ? AnyShapeStyle(Color.baseBlack.opacity(0.4)) : AnyShapeStyle(foregroundGradient!))
                     .matchedGeometryEffect(
                         id: AnimationNamespaceIds.subtitle,
