@@ -113,6 +113,9 @@
     "%lld RMO" : {
 
     },
+    "%lld%%" : {
+
+    },
     "%lldm %llds" : {
       "localizations" : {
         "en" : {
@@ -190,6 +193,9 @@
 
     },
     "Age" : {
+
+    },
+    "AI can now replicate your face, voice, and identity without asking for your permission. But you never agreed to that, raising a fundamental question: who owns your likeness?\n\nRarimo is building the infrastructure to give you back that control. With this app, you can create a private, verifiable record that defines how your likeness can and can’t be used.\n\nYour face stays on your device. No company owns it. And over time, no AI model will be able to ignore your rule." : {
 
     },
     "Airdrop" : {
@@ -306,6 +312,9 @@
 
     },
     "Aruba" : {
+
+    },
+    "Ask me\nfirst" : {
 
     },
     "ASSETS (%lld)" : {
@@ -821,6 +830,9 @@
     "Denmark" : {
 
     },
+    "Digital likeness" : {
+
+    },
     "Djibouti" : {
 
     },
@@ -863,6 +875,9 @@
 
     },
     "Dominican Republic" : {
+
+    },
+    "Don’t use my face at all" : {
 
     },
     "Done" : {
@@ -1104,6 +1119,9 @@
 
     },
     "Finland" : {
+
+    },
+    "First human-AI Contract" : {
 
     },
     "Force light registration" : {
@@ -1789,6 +1807,9 @@
     "Operation completed successfully" : {
 
     },
+    "Other already set" : {
+
+    },
     "Other passport holders" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2287,6 +2308,9 @@
     "Saudi Arabia" : {
 
     },
+    "Save" : {
+
+    },
     "Save to files" : {
 
     },
@@ -2386,6 +2410,12 @@
 
     },
     "Serbia" : {
+
+    },
+    "Set a rule" : {
+
+    },
+    "Set the rule" : {
 
     },
     "Settings" : {
@@ -2620,6 +2650,9 @@
         }
       }
     },
+    "The rules are yours to change" : {
+
+    },
     "Theme" : {
       "localizations" : {
         "uk" : {
@@ -2762,6 +2795,9 @@
 
     },
     "Uruguay" : {
+
+    },
+    "Use my likeness and pay me" : {
 
     },
     "Used" : {

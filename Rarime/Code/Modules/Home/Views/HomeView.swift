@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum HomeRoute: Hashable {
-    case notifications, identity, inviteFriends, claimTokens, wallet, voting
+    case notifications, identity, inviteFriends, claimTokens, wallet, voting, likeness
 }
 
 struct HomeView: View {
@@ -28,6 +28,7 @@ struct HomeView: View {
     @Namespace var claimTokensAnimation
     @Namespace var walletAnimation
     @Namespace var votingAnimation
+    @Namespace var likenessAnimation
 
     private var activeReferralCode: String? {
         pointsBalance?.referralCodes?
@@ -69,68 +70,6 @@ struct HomeView: View {
                     animation: identityAnimation
                 )
             },
-//            TODO: uncomment after desing and flow impl
-//            HomeCarouselCard(
-//                isShouldDisplay: !isBalanceFetching && pointsBalance != nil,
-//                action: { path = .inviteFriends }
-//            ) {
-//                HomeCardView(
-//                    backgroundGradient: Gradients.gradientSecond,
-//                    topIcon: Icons.rarime,
-//                    bottomIcon: Icons.arrowRightUpLine,
-//                    imageContent: {
-//                        ZStack(alignment: .bottomTrailing) {
-//                            Image(Images.peopleEmojis)
-//                                .resizable()
-//                                .scaledToFit()
-//                                .padding(.top, 84)
-//
-//                            Image(Icons.getTokensArrow)
-//                                .foregroundStyle(.informationalDark)
-//                                .offset(x: -44, y: 88)
-//                                .matchedGeometryEffect(
-//                                    id: AnimationNamespaceIds.additionalImage,
-//                                    in: inviteFriendsAnimation
-//                                )
-//                        }
-//                    },
-//                    title: "Invite",
-//                    subtitle: "Others",
-//                    bottomAdditionalContent: {
-//                        if let code = activeReferralCode {
-//                            HStack(spacing: 16) {
-//                                Text(code)
-//                                    .subtitle4()
-//                                    .foregroundStyle(.baseBlack)
-//                                VerticalDivider(color: .bgComponentBasePrimary)
-//                                Image(isCopied ? Icons.checkLine : Icons.fileCopyLine)
-//                                    .iconMedium()
-//                                    .foregroundStyle(.baseBlack.opacity(0.5))
-//                            }
-//                            .fixedSize(horizontal: false, vertical: true)
-//                            .padding(.horizontal, 16)
-//                            .padding(.vertical, 8)
-//                            .background(.baseWhite)
-//                            .cornerRadius(8)
-//                            .frame(maxWidth: 280, alignment: .leading)
-//                            .padding(.top, 24)
-//                            .onTapGesture {
-//                                if isCopied { return }
-//
-//                                isCopied = true
-//                                FeedbackGenerator.shared.impact(.medium)
-//
-//                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                                    withAnimation(.easeInOut) {
-//                                        isCopied = false
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    },
-//                    animation: inviteFriendsAnimation
-//                )
-//            },
             HomeCarouselCard(action: { path = .voting }) {
                 HomeCardView(
                     backgroundGradient: Gradients.gradientFifth,
@@ -145,6 +84,34 @@ struct HomeView: View {
                     title: "Freedomtool",
                     subtitle: "Voting",
                     animation: votingAnimation
+                )
+            },
+            HomeCarouselCard(action: { path = .likeness }) {
+                HomeCardView(
+                    backgroundGradient: Gradients.purpleBg,
+                    foregroundGradient: Gradients.purpleText,
+                    topIcon: Icons.rarime,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(.likenessFace)
+                            .resizable()
+                            .scaledToFit()
+                            .scaleEffect(0.7)
+                    },
+                    title: "Digital likeness",
+                    subtitle: "Set a rule",
+                    bottomAdditionalContent: {
+                        Text("First human-AI Contract")
+                            .body4()
+                            .foregroundStyle(.baseBlack.opacity(0.5))
+                            .padding(.top, 12)
+                            .matchedGeometryEffect(
+                                id: AnimationNamespaceIds.footer,
+                                in: likenessAnimation,
+                                properties: .position
+                            )
+                    },
+                    animation: likenessAnimation
                 )
             },
             HomeCarouselCard(action: { path = .claimTokens }) {
@@ -163,6 +130,68 @@ struct HomeView: View {
                     animation: claimTokensAnimation
                 )
             },
+            //            TODO: uncomment after desing and flow impl
+            //            HomeCarouselCard(
+            //                isShouldDisplay: !isBalanceFetching && pointsBalance != nil,
+            //                action: { path = .inviteFriends }
+            //            ) {
+            //                HomeCardView(
+            //                    backgroundGradient: Gradients.gradientSecond,
+            //                    topIcon: Icons.rarime,
+            //                    bottomIcon: Icons.arrowRightUpLine,
+            //                    imageContent: {
+            //                        ZStack(alignment: .bottomTrailing) {
+            //                            Image(Images.peopleEmojis)
+            //                                .resizable()
+            //                                .scaledToFit()
+            //                                .padding(.top, 84)
+            //
+            //                            Image(Icons.getTokensArrow)
+            //                                .foregroundStyle(.informationalDark)
+            //                                .offset(x: -44, y: 88)
+            //                                .matchedGeometryEffect(
+            //                                    id: AnimationNamespaceIds.additionalImage,
+            //                                    in: inviteFriendsAnimation
+            //                                )
+            //                        }
+            //                    },
+            //                    title: "Invite",
+            //                    subtitle: "Others",
+            //                    bottomAdditionalContent: {
+            //                        if let code = activeReferralCode {
+            //                            HStack(spacing: 16) {
+            //                                Text(code)
+            //                                    .subtitle4()
+            //                                    .foregroundStyle(.baseBlack)
+            //                                VerticalDivider(color: .bgComponentBasePrimary)
+            //                                Image(isCopied ? Icons.checkLine : Icons.fileCopyLine)
+            //                                    .iconMedium()
+            //                                    .foregroundStyle(.baseBlack.opacity(0.5))
+            //                            }
+            //                            .fixedSize(horizontal: false, vertical: true)
+            //                            .padding(.horizontal, 16)
+            //                            .padding(.vertical, 8)
+            //                            .background(.baseWhite)
+            //                            .cornerRadius(8)
+            //                            .frame(maxWidth: 280, alignment: .leading)
+            //                            .padding(.top, 24)
+            //                            .onTapGesture {
+            //                                if isCopied { return }
+            //
+            //                                isCopied = true
+            //                                FeedbackGenerator.shared.impact(.medium)
+            //
+            //                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            //                                    withAnimation(.easeInOut) {
+            //                                        isCopied = false
+            //                                    }
+            //                                }
+            //                            }
+            //                        }
+            //                    },
+            //                    animation: inviteFriendsAnimation
+            //                )
+            //            },
 //            TODO: uncomment after desing and flow impl
 //            HomeCarouselCard(action: { path = .wallet }) {
 //                HomeCardView(
@@ -224,6 +253,11 @@ struct HomeView: View {
                         PollsView(
                             onClose: { path = nil },
                             animation: votingAnimation
+                        )
+                    case .likeness:
+                        LikenessView(
+                            onClose: { path = nil },
+                            animation: likenessAnimation
                         )
                     default:
                         content

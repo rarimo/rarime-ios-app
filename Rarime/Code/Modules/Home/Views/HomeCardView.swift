@@ -2,26 +2,29 @@ import SwiftUI
 
 struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
     let backgroundGradient: LinearGradient
+    let foregroundGradient: LinearGradient?
     let topIcon: String
     let bottomIcon: String
     let imageContent: () -> Content
     let title: String
     let subtitle: String
     let bottomAdditionalContent: () -> BottomAdditionalContent?
-    
+
     var animation: Namespace.ID
-    
+
     init(
         backgroundGradient: LinearGradient,
+        foregroundGradient: LinearGradient? = nil,
         topIcon: String,
         bottomIcon: String,
         @ViewBuilder imageContent: @escaping () -> Content,
         title: String,
         subtitle: String,
-        @ViewBuilder bottomAdditionalContent: @escaping () -> BottomAdditionalContent? =  { EmptyView() },
+        @ViewBuilder bottomAdditionalContent: @escaping () -> BottomAdditionalContent? = { EmptyView() },
         animation: Namespace.ID
     ) {
         self.backgroundGradient = backgroundGradient
+        self.foregroundGradient = foregroundGradient
         self.topIcon = topIcon
         self.bottomIcon = bottomIcon
         self.imageContent = imageContent
@@ -30,7 +33,7 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
         self.bottomAdditionalContent = bottomAdditionalContent
         self.animation = animation
     }
-    
+
     var body: some View {
         ZStack(alignment: .trailing) {
             Image(topIcon)
@@ -45,7 +48,7 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
                 .clipped()
             VStack(alignment: .leading, spacing: 0) {
                 Text(title)
-                    .h2()
+                    .h1()
                     .foregroundStyle(.baseBlack)
                     .matchedGeometryEffect(
                         id: AnimationNamespaceIds.title,
@@ -53,8 +56,8 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
                         properties: .position
                     )
                 Text(subtitle)
-                    .additional2()
-                    .foregroundStyle(.baseBlack.opacity(0.4))
+                    .additional1()
+                    .foregroundStyle(foregroundGradient == nil ? AnyShapeStyle(Color.baseBlack.opacity(0.4)) : AnyShapeStyle(foregroundGradient!))
                     .matchedGeometryEffect(
                         id: AnimationNamespaceIds.subtitle,
                         in: animation,

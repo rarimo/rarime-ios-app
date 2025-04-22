@@ -1,12 +1,15 @@
 import SwiftUI
 
-struct GlassBottomSheet<Background: View, Content: View>: View {
+struct GlassBottomSheet<Background: View, Content: View, Footer: View>: View {
     let background: Background
     let content: Content
+    let footer: Footer
 
     var minHeight: CGFloat
     var maxHeight: CGFloat
     var maxBlur: CGFloat
+    var bottomOffset: CGFloat
+    var hideDragIndicator: Bool
     
     private let spaceName = "scroll"
    
@@ -17,14 +20,22 @@ struct GlassBottomSheet<Background: View, Content: View>: View {
     init(
         minHeight: CGFloat,
         maxHeight: CGFloat,
+        bottomOffset: CGFloat = 0,
+        
         maxBlur: CGFloat,
+        hideDragIndicator: Bool = false,
         @ViewBuilder background: () -> Background,
+        @ViewBuilder footer: () -> Footer = { EmptyView() },
         @ViewBuilder content: () -> Content
     ) {
         self.minHeight = minHeight
         self.maxHeight = maxHeight
+        self.bottomOffset = bottomOffset
         self.maxBlur = maxBlur
+        self.hideDragIndicator = hideDragIndicator
+        
         self.background = background()
+        self.footer = footer()
         self.content = content()
         _currentHeight = State(initialValue: minHeight)
     }
@@ -43,34 +54,40 @@ struct GlassBottomSheet<Background: View, Content: View>: View {
             ZStack(alignment: .top) {
                 background
                     .blur(radius: blurRadius)
+                    .animation(.spring(response: 0.5, dampingFraction: 0.8), value: blurRadius)
                 ZStack(alignment: .top) {
-                    VStack(spacing: 24) {
-                        Capsule()
-                            .fill(.bgComponentBaseHovered)
-                            .frame(width: 36, height: 5)
-                        ChildOffsetReader(offset: $scrollOffset) {
-                            content
-                        }
-                    }
-                }
-                .frame(width: proxy.size.width, height: effectiveHeight, alignment: .top)
-                .offset(y: proxy.size.height - effectiveHeight)
-                .gesture(
-                    DragGesture()
-                        .updating($dragOffset) { value, state, _ in
-                            if currentHeight < maxHeight || (currentHeight == maxHeight && scrollOffset <= 0) {
-                                state = value.translation.height
+                    ZStack(alignment: .top) {
+                        VStack(spacing: 24) {
+                            if !hideDragIndicator {
+                                Capsule()
+                                    .fill(.bgComponentBaseHovered)
+                                    .frame(width: 36, height: 5)
+                            }
+                            ChildOffsetReader(offset: $scrollOffset) {
+                                content
                             }
                         }
-                        .onEnded { value in
-                            let proposedHeight = currentHeight - value.translation.height
-                            let midpoint = (minHeight + maxHeight) / 2
-                            currentHeight = proposedHeight > midpoint ? maxHeight : minHeight
-                        }
-                )
-                .animation(.spring(response: 0.5, dampingFraction: 0.8), value: dragOffset)
+                    }
+                    .frame(width: proxy.size.width, height: effectiveHeight, alignment: .top)
+                    .offset(y: proxy.size.height - effectiveHeight)
+                    .gesture(
+                        DragGesture()
+                            .updating($dragOffset) { value, state, _ in
+                                if currentHeight < maxHeight || (currentHeight == maxHeight && scrollOffset <= 0) {
+                                    state = value.translation.height
+                                }
+                            }
+                            .onEnded { value in
+                                let proposedHeight = currentHeight - value.translation.height
+                                let midpoint = (minHeight + maxHeight) / 2
+                                currentHeight = proposedHeight > midpoint ? maxHeight : minHeight
+                            }
+                    )
+                    .animation(.spring(response: 0.5, dampingFraction: 0.8), value: dragOffset)
+                }
+                .frame(width: proxy.size.width, height: proxy.size.height - bottomOffset, alignment: .top)
+                .clipped()
             }
-            .frame(width: proxy.size.width, height: proxy.size.height, alignment: .top)
         }
         .ignoresSafeArea(edges: .bottom)
     }
