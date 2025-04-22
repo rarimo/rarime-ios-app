@@ -270,7 +270,7 @@
 		CE3CD3AE2C6CCD0E008313B8 /* ImportFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD3AD2C6CCD0E008313B8 /* ImportFileView.swift */; };
 		CE3CD78C2DB67B4200112E46 /* FaceCaptureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD78B2DB67B2600112E46 /* FaceCaptureSession.swift */; };
 		CE3CD78E2DB67D2000112E46 /* LikenessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD78D2DB67D1800112E46 /* LikenessViewModel.swift */; };
-		CE3CD7902DB67E9700112E46 /* LikenessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD78F2DB67E8C00112E46 /* LikenessView.swift */; };
+		CE3CD7902DB67E9700112E46 /* FaceLikenessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD78F2DB67E8C00112E46 /* FaceLikenessView.swift */; };
 		CE3CD7922DB6819B00112E46 /* PreviewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD7912DB6819800112E46 /* PreviewUtils.swift */; };
 		CE3CD7932DB6819B00112E46 /* PreviewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD7912DB6819800112E46 /* PreviewUtils.swift */; };
 		CE3CD7952DB6834B00112E46 /* DebugAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD7942DB6834700112E46 /* DebugAssets.swift */; };
@@ -359,6 +359,7 @@
 		CEDC57922CA2CA0F00F02132 /* MRZCameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC57912CA2CA0F00F02132 /* MRZCameraManager.swift */; };
 		CEDC57942CA2CA4100F02132 /* CMSampleBuffer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC57932CA2CA4100F02132 /* CMSampleBuffer+Extension.swift */; };
 		CEDC57962CA30A9D00F02132 /* CIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC57952CA30A9D00F02132 /* CIImage+Extension.swift */; };
+		CEE167E82DB794280044E1EB /* LikenessProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE167E72DB794150044E1EB /* LikenessProcessingView.swift */; };
 		CEE33A9A2D47951C00A2C705 /* libwitnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_5_296.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE33A992D47951C00A2C705 /* libwitnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_5_296.a */; };
 		CEE4FEA92CFDB851007C31F3 /* libfr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE4FEA82CFDB851007C31F3 /* libfr.a */; };
 		CEE4FEAB2CFDBA80007C31F3 /* libgmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE4FEAA2CFDBA80007C31F3 /* libgmp.a */; };
@@ -633,7 +634,7 @@
 		CE3CD3AD2C6CCD0E008313B8 /* ImportFileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFileView.swift; sourceTree = "<group>"; };
 		CE3CD78B2DB67B2600112E46 /* FaceCaptureSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCaptureSession.swift; sourceTree = "<group>"; };
 		CE3CD78D2DB67D1800112E46 /* LikenessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessViewModel.swift; sourceTree = "<group>"; };
-		CE3CD78F2DB67E8C00112E46 /* LikenessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessView.swift; sourceTree = "<group>"; };
+		CE3CD78F2DB67E8C00112E46 /* FaceLikenessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceLikenessView.swift; sourceTree = "<group>"; };
 		CE3CD7912DB6819800112E46 /* PreviewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewUtils.swift; sourceTree = "<group>"; };
 		CE3CD7942DB6834700112E46 /* DebugAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugAssets.swift; sourceTree = "<group>"; };
 		CE3D41BF2C77974500D0AA65 /* PushNotificationsRaw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationsRaw.swift; sourceTree = "<group>"; };
@@ -723,6 +724,7 @@
 		CEDC57912CA2CA0F00F02132 /* MRZCameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRZCameraManager.swift; sourceTree = "<group>"; };
 		CEDC57932CA2CA4100F02132 /* CMSampleBuffer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMSampleBuffer+Extension.swift"; sourceTree = "<group>"; };
 		CEDC57952CA30A9D00F02132 /* CIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+Extension.swift"; sourceTree = "<group>"; };
+		CEE167E72DB794150044E1EB /* LikenessProcessingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessProcessingView.swift; sourceTree = "<group>"; };
 		CEE3259E2CB7CA6E00468BE4 /* witnesscalc_registerIdentity_1_256_3_5_576_248_NA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_1_256_3_5_576_248_NA.h; sourceTree = "<group>"; };
 		CEE33A382D4794CB00A2C705 /* witnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_5_296.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_5_296.h; sourceTree = "<group>"; };
 		CEE33A992D47951C00A2C705 /* libwitnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_5_296.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_5_296.a; sourceTree = "<group>"; };
@@ -1334,7 +1336,8 @@
 		CE3CD7882DB67AFE00112E46 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CE3CD78F2DB67E8C00112E46 /* LikenessView.swift */,
+				CEE167E72DB794150044E1EB /* LikenessProcessingView.swift */,
+				CE3CD78F2DB67E8C00112E46 /* FaceLikenessView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2128,6 +2131,7 @@
 				56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */,
 				56E6AD492BD2731100E4DDC1 /* LanguageView.swift in Sources */,
 				CE7210332BD818020043DB7F /* Double+Rounded.swift in Sources */,
+				CEE167E82DB794280044E1EB /* LikenessProcessingView.swift in Sources */,
 				CE5980DC2D07B288000B6261 /* RegisterIdentityLightInputs.swift in Sources */,
 				CE65A3D52DAEA5ED004A423D /* DebugController.swift in Sources */,
 				C7F3ED382D7F41A200AABE10 /* PassportRevocationView.swift in Sources */,
@@ -2156,7 +2160,7 @@
 				CE72101E2BD7BD9D0043DB7F /* Data+Utf8.swift in Sources */,
 				CE5315CA2C7769A20087D53D /* NotificationManager.swift in Sources */,
 				C7780C9A2D63573B0050B5BB /* Rewards.swift in Sources */,
-				CE3CD7902DB67E9700112E46 /* LikenessView.swift in Sources */,
+				CE3CD7902DB67E9700112E46 /* FaceLikenessView.swift in Sources */,
 				5655E4232BD2C3AC00B86C5C /* SettingsManager.swift in Sources */,
 				CEDC4D812BE9475400459D4E /* Certificates.swift in Sources */,
 				56E6AD472BD272FB00E4DDC1 /* ExportKeysView.swift in Sources */,

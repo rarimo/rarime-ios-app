@@ -2,13 +2,13 @@ import Web3
 
 import SwiftUI
 
-protocol SetupActionTask: CaseIterable {
+protocol LikenessProcessingTask: CaseIterable {
     var rawValue: Int { get }
     var description: String { get }
     var progressTime: Int { get }
 }
 
-enum SetupRecoveryTask: Int, SetupActionTask {
+enum LikenessProcessingRecoveryTask: Int, LikenessProcessingTask {
     case downloadingCircuitData = 0
     case extractionImageFeatures = 1
     case runningZKMK = 2
@@ -33,7 +33,7 @@ enum SetupRecoveryTask: Int, SetupActionTask {
     }
 }
 
-enum SetupRegisterTask: Int, CaseIterable, SetupActionTask {
+enum LikenessProcessingRegisterTask: Int, CaseIterable, LikenessProcessingTask {
     case downloadingCircuitData = 0
     case extractionImageFeatures = 1
     case runningZKMK = 2
@@ -64,19 +64,6 @@ class LikenessViewModel: ObservableObject {
     private var cameraManager = FaceCaptureSession()
         
     @Published var cameraTask: Task<Void, Never>? = nil
-        
-    @Published var recoveryProgress: SetupRecoveryTask? = nil
-    @Published var registerProgress: SetupRegisterTask? = nil
-        
-    @MainActor
-    func markRecoveryProgress(_ progress: SetupRecoveryTask) {
-        recoveryProgress = progress
-    }
-    
-    @MainActor
-    func markRegisterProgress(_ progress: SetupRegisterTask) {
-        registerProgress = progress
-    }
         
     func startScanning() {
         cameraTask = Task {

@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct LikenessView: View {
-    @StateObject private var viewModel = LikenessViewModel()
+struct FaceLikenessView: View {
+    @EnvironmentObject var viewModel: LikenessViewModel
 
     let onConfirm: (CGImage) -> Void
 
@@ -26,13 +26,7 @@ struct LikenessView: View {
                     }
                 }
             }
-            .onAppear {
-                viewModel.startScanning()
-
-                if PreviewUtils.isPreview {
-                    doPreviewSetup()
-                }
-            }
+            .onAppear(perform: viewModel.startScanning)
             .onDisappear(perform: cleanup)
         }
     }
@@ -151,10 +145,6 @@ struct LikenessView: View {
         }
     }
 
-    private func doPreviewSetup() {
-        viewModel.currentFrame = UIImage(resource: .debugFace).cgImage!
-    }
-
     func cleanup() {
         viewModel.stopScanning()
 
@@ -209,6 +199,11 @@ private struct FaceOval: Shape {
 #Preview {
     VStack {}
         .sheet(isPresented: .constant(true)) {
-            LikenessView(onConfirm: { _ in }, onBack: {})
+            let likenessViewModel = LikenessViewModel()
+
+            likenessViewModel.currentFrame = UIImage(resource: .debugFace).cgImage!
+
+            return FaceLikenessView(onConfirm: { _ in }, onBack: {})
+                .environmentObject(likenessViewModel)
         }
 }

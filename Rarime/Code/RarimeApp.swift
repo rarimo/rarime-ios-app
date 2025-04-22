@@ -26,7 +26,7 @@ struct RarimeApp: App {
 //                .environmentObject(InternetConnectionManager.shared)
             VStack {}
                 .sheet(isPresented: .constant(true)) {
-                    LikenessView(onConfirm: { _ in }, onBack: {})
+                    FaceLikenessView(onConfirm: { _ in }, onBack: {})
                 }
         }
     }
