@@ -97,11 +97,12 @@
 		56A6C76E2BBD474200992562 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6C76D2BBD474200992562 /* DateUtil.swift */; };
 		56A88FCF2C062AB200D3A64A /* AirdropCheckboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A88FCE2C062AB200D3A64A /* AirdropCheckboxView.swift */; };
 		56AC03402BB06A2D00A34A00 /* Image+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */; };
-		56B589F02DB7B05F00266105 /* LikenessRuleId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B589EF2DB7B05F00266105 /* LikenessRuleId.swift */; };
-		56B589F12DB7B05F00266105 /* LikenessRuleId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B589EF2DB7B05F00266105 /* LikenessRuleId.swift */; };
+		56B589F02DB7B05F00266105 /* LikenessRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B589EF2DB7B05F00266105 /* LikenessRule.swift */; };
+		56B589F12DB7B05F00266105 /* LikenessRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B589EF2DB7B05F00266105 /* LikenessRule.swift */; };
 		56B589F32DB7B07800266105 /* LikenessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B589F22DB7B07800266105 /* LikenessView.swift */; };
 		56C6D29E2D6E266300EB24D8 /* SelectIdentityTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C6D29D2D6E265B00EB24D8 /* SelectIdentityTypeView.swift */; };
 		56C6D2A52D6F22AF00EB24D8 /* ZkLivenessIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C6D2A42D6F22A300EB24D8 /* ZkLivenessIntroView.swift */; };
+		56D8F8E92DB7CAF4002EA4A2 /* LikenessRuleSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8F8E82DB7CAF4002EA4A2 /* LikenessRuleSheetView.swift */; };
 		56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3002BB723A1002CF710 /* NewIdentityView.swift */; };
 		56DAA3052BB72E35002CF710 /* InfoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3042BB72E35002CF710 /* InfoAlert.swift */; };
 		56DAA3072BB77550002CF710 /* IdentityStepLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3062BB77550002CF710 /* IdentityStepLayoutView.swift */; };
@@ -272,7 +273,7 @@
 		CE39E09D2D3FCA1900799A4B /* libwitnesscalc_registerIdentity_11_256_3_3_576_240_1_864_5_264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE39E09A2D3FCA1900799A4B /* libwitnesscalc_registerIdentity_11_256_3_3_576_240_1_864_5_264.a */; };
 		CE3CD3AE2C6CCD0E008313B8 /* ImportFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD3AD2C6CCD0E008313B8 /* ImportFileView.swift */; };
 		CE3CD78C2DB67B4200112E46 /* FaceCaptureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD78B2DB67B2600112E46 /* FaceCaptureSession.swift */; };
-		CE3CD78E2DB67D2000112E46 /* LikenessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD78D2DB67D1800112E46 /* LikenessViewModel.swift */; };
+		CE3CD78E2DB67D2000112E46 /* LikenessFaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD78D2DB67D1800112E46 /* LikenessFaceViewModel.swift */; };
 		CE3CD7902DB67E9700112E46 /* FaceLikenessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD78F2DB67E8C00112E46 /* FaceLikenessView.swift */; };
 		CE3CD7922DB6819B00112E46 /* PreviewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD7912DB6819800112E46 /* PreviewUtils.swift */; };
 		CE3CD7932DB6819B00112E46 /* PreviewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD7912DB6819800112E46 /* PreviewUtils.swift */; };
@@ -493,10 +494,11 @@
 		56A6C76D2BBD474200992562 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		56A88FCE2C062AB200D3A64A /* AirdropCheckboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirdropCheckboxView.swift; sourceTree = "<group>"; };
 		56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Icon.swift"; sourceTree = "<group>"; };
-		56B589EF2DB7B05F00266105 /* LikenessRuleId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessRuleId.swift; sourceTree = "<group>"; };
+		56B589EF2DB7B05F00266105 /* LikenessRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessRule.swift; sourceTree = "<group>"; };
 		56B589F22DB7B07800266105 /* LikenessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessView.swift; sourceTree = "<group>"; };
 		56C6D29D2D6E265B00EB24D8 /* SelectIdentityTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectIdentityTypeView.swift; sourceTree = "<group>"; };
 		56C6D2A42D6F22A300EB24D8 /* ZkLivenessIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZkLivenessIntroView.swift; sourceTree = "<group>"; };
+		56D8F8E82DB7CAF4002EA4A2 /* LikenessRuleSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessRuleSheetView.swift; sourceTree = "<group>"; };
 		56DAA3002BB723A1002CF710 /* NewIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIdentityView.swift; sourceTree = "<group>"; };
 		56DAA3042BB72E35002CF710 /* InfoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlert.swift; sourceTree = "<group>"; };
 		56DAA3062BB77550002CF710 /* IdentityStepLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityStepLayoutView.swift; sourceTree = "<group>"; };
@@ -638,7 +640,7 @@
 		CE39E09F2D3FD00400799A4B /* witnesscalc_registerIdentity_21_256_3_4_576_232_NA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_21_256_3_4_576_232_NA.h; sourceTree = "<group>"; };
 		CE3CD3AD2C6CCD0E008313B8 /* ImportFileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFileView.swift; sourceTree = "<group>"; };
 		CE3CD78B2DB67B2600112E46 /* FaceCaptureSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCaptureSession.swift; sourceTree = "<group>"; };
-		CE3CD78D2DB67D1800112E46 /* LikenessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessViewModel.swift; sourceTree = "<group>"; };
+		CE3CD78D2DB67D1800112E46 /* LikenessFaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessFaceViewModel.swift; sourceTree = "<group>"; };
 		CE3CD78F2DB67E8C00112E46 /* FaceLikenessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceLikenessView.swift; sourceTree = "<group>"; };
 		CE3CD7912DB6819800112E46 /* PreviewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewUtils.swift; sourceTree = "<group>"; };
 		CE3CD7942DB6834700112E46 /* DebugAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugAssets.swift; sourceTree = "<group>"; };
@@ -871,7 +873,7 @@
 				CE39DF842D3FA83F00799A4B /* DocumentType.swift */,
 				5659151C2BE92AA90050795A /* AppIcon.swift */,
 				5655E42F2BD2CA5500B86C5C /* AppColorScheme.swift */,
-				56B589EF2DB7B05F00266105 /* LikenessRuleId.swift */,
+				56B589EF2DB7B05F00266105 /* LikenessRule.swift */,
 				5655E43B2BD522E700B86C5C /* AppLanguage.swift */,
 				5641695F2BE273260057AC03 /* PassportCardLook.swift */,
 				568350AB2BEA304B00B70E3D /* PassportIdentifier.swift */,
@@ -1344,6 +1346,7 @@
 			children = (
 				CEE167E72DB794150044E1EB /* LikenessProcessingView.swift */,
 				56B589F22DB7B07800266105 /* LikenessView.swift */,
+				56D8F8E82DB7CAF4002EA4A2 /* LikenessRuleSheetView.swift */,
 				CE3CD78F2DB67E8C00112E46 /* FaceLikenessView.swift */,
 			);
 			path = Views;
@@ -1352,7 +1355,7 @@
 		CE3CD7892DB67B0300112E46 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				CE3CD78D2DB67D1800112E46 /* LikenessViewModel.swift */,
+				CE3CD78D2DB67D1800112E46 /* LikenessFaceViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -2009,7 +2012,7 @@
 				CE27974B2CEB4258008649B0 /* DateUtil.swift in Sources */,
 				CE2797452CEB41F7008649B0 /* AppColorScheme.swift in Sources */,
 				CE3CD7932DB6819B00112E46 /* PreviewUtils.swift in Sources */,
-				56B589F02DB7B05F00266105 /* LikenessRuleId.swift in Sources */,
+				56B589F02DB7B05F00266105 /* LikenessRule.swift in Sources */,
 				CE2797442CEB41F0008649B0 /* SecurityManager.swift in Sources */,
 				CEBA50082CF0E7080069151C /* Data+FindSubarrayIndex.swift in Sources */,
 				CEBA50042CF0E6EB0069151C /* SupportRegisterIdentityCircuitSignatureType.swift in Sources */,
@@ -2143,7 +2146,7 @@
 				CEE167E82DB794280044E1EB /* LikenessProcessingView.swift in Sources */,
 				CE5980DC2D07B288000B6261 /* RegisterIdentityLightInputs.swift in Sources */,
 				CE65A3D52DAEA5ED004A423D /* DebugController.swift in Sources */,
-				56B589F12DB7B05F00266105 /* LikenessRuleId.swift in Sources */,
+				56B589F12DB7B05F00266105 /* LikenessRule.swift in Sources */,
 				C7F3ED382D7F41A200AABE10 /* PassportRevocationView.swift in Sources */,
 				CEC5620F2BD925D6002D4954 /* Circuits.swift in Sources */,
 				C7B57B6B2D65D58C001E86C4 /* HomeView+ViewModel.swift in Sources */,
@@ -2182,7 +2185,7 @@
 				CE8FEB622C1B03C10008381A /* AuthCircuitInputs.swift in Sources */,
 				5655E42E2BD2C94F00B86C5C /* AppUserDefaults.swift in Sources */,
 				CEFE5F372CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift in Sources */,
-				CE3CD78E2DB67D2000112E46 /* LikenessViewModel.swift in Sources */,
+				CE3CD78E2DB67D2000112E46 /* LikenessFaceViewModel.swift in Sources */,
 				CE68BE4B2BD9B75100D92EBB /* ContractABI.swift in Sources */,
 				56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */,
 				CE65A3D32DAEA541004A423D /* DebugOptionsView.swift in Sources */,
@@ -2247,6 +2250,7 @@
 				560F0C252BD036F900067054 /* AppTextField.swift in Sources */,
 				C75512902C86F4BC000258AD /* PushNotification.xcdatamodeld in Sources */,
 				C75535482D6F2EF900A562B5 /* PollQRCodeView.swift in Sources */,
+				56D8F8E92DB7CAF4002EA4A2 /* LikenessRuleSheetView.swift in Sources */,
 				563529E72BB072870027C910 /* WalletView.swift in Sources */,
 				C7D624512D6DB351007BA5A6 /* PollsMockedData.swift in Sources */,
 				5659151D2BE92AA90050795A /* AppIcon.swift in Sources */,

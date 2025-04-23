@@ -199,6 +199,9 @@ struct ProfileView: View {
                         notificationManager.reset()
                         pollsViewModel.reset()
 
+                        AppUserDefaults.shared.likenessRule = LikenessRule.unset.rawValue
+                        AppUserDefaults.shared.isLikenessRegistered = false
+
                         Task {
                             try? await notificationManager.unsubscribe(fromTopic: ConfigManager.shared.general.claimableNotificationTopic)
                         }

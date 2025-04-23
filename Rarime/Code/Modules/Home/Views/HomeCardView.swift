@@ -6,8 +6,8 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
     let topIcon: String
     let bottomIcon: String
     let imageContent: () -> Content
-    let title: String
-    let subtitle: String
+    let title: String?
+    let subtitle: String?
     let bottomAdditionalContent: () -> BottomAdditionalContent?
 
     var animation: Namespace.ID
@@ -18,8 +18,8 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
         topIcon: String,
         bottomIcon: String,
         @ViewBuilder imageContent: @escaping () -> Content,
-        title: String,
-        subtitle: String,
+        title: String?,
+        subtitle: String?,
         @ViewBuilder bottomAdditionalContent: @escaping () -> BottomAdditionalContent? = { EmptyView() },
         animation: Namespace.ID
     ) {
@@ -37,32 +37,37 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
     var body: some View {
         ZStack(alignment: .trailing) {
             Image(topIcon)
-                .square(32)
-                .foregroundStyle(.baseBlack.opacity(0.5))
-                .frame(maxHeight: .infinity, alignment: .top)
-                .padding(.trailing, 20)
-                .padding(.top, 20)
+                .square(24)
+                .foregroundStyle(.baseBlack)
+                .padding(8)
+                .background(.bgComponentPrimary, in: Circle())
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .padding([.top, .leading], 20)
             imageContent()
                 .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .clipped()
             VStack(alignment: .leading, spacing: 0) {
-                Text(title)
-                    .h1()
-                    .foregroundStyle(.baseBlack)
-                    .matchedGeometryEffect(
-                        id: AnimationNamespaceIds.title,
-                        in: animation,
-                        properties: .position
-                    )
-                Text(subtitle)
-                    .additional1()
-                    .foregroundStyle(foregroundGradient == nil ? AnyShapeStyle(Color.baseBlack.opacity(0.4)) : AnyShapeStyle(foregroundGradient!))
-                    .matchedGeometryEffect(
-                        id: AnimationNamespaceIds.subtitle,
-                        in: animation,
-                        properties: .position
-                    )
+                if let title {
+                    Text(title)
+                        .h1()
+                        .foregroundStyle(.baseBlack)
+                        .matchedGeometryEffect(
+                            id: AnimationNamespaceIds.title,
+                            in: animation,
+                            properties: .position
+                        )
+                }
+                if let subtitle {
+                    Text(subtitle)
+                        .additional1()
+                        .foregroundStyle(foregroundGradient == nil ? AnyShapeStyle(Color.baseBlack.opacity(0.4)) : AnyShapeStyle(foregroundGradient!))
+                        .matchedGeometryEffect(
+                            id: AnimationNamespaceIds.subtitle,
+                            in: animation,
+                            properties: .position
+                        )
+                }
                 if let bottomView = bottomAdditionalContent() {
                     bottomView
                 }
@@ -70,12 +75,12 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(maxHeight: .infinity, alignment: .bottom)
             .padding(.leading, 24)
-            .padding(.bottom, 24)
+            .padding(.bottom, 32)
             Image(bottomIcon)
                 .iconLarge()
                 .foregroundStyle(.baseBlack)
                 .frame(maxHeight: .infinity, alignment: .bottom)
-                .padding(.bottom, 24)
+                .padding(.bottom, 32)
                 .padding(.trailing, 24)
         }
         .frame(maxHeight: .infinity)

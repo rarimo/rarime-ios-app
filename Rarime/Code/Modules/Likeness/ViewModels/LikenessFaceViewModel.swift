@@ -50,15 +50,15 @@ enum LikenessProcessingRegisterTask: Int, CaseIterable, LikenessProcessingTask {
     
     var progressTime: Int {
         switch self {
-        case .downloadingCircuitData: return 15
-        case .extractionImageFeatures: return 5
-        case .runningZKMK: return 10
-        case .creatingAccount: return 7
+        case .downloadingCircuitData: return 7
+        case .extractionImageFeatures: return 3
+        case .runningZKMK: return 5
+        case .creatingAccount: return 4
         }
     }
 }
 
-class LikenessViewModel: ObservableObject {
+class LikenessFaceViewModel: ObservableObject {
     @Published var currentFrame: CGImage?
         
     private var cameraManager = FaceCaptureSession()
@@ -68,14 +68,12 @@ class LikenessViewModel: ObservableObject {
     func startScanning() {
         cameraTask = Task {
             await cameraManager.startSession()
-                
             await handleCameraPreviews()
         }
     }
         
     func stopScanning() {
         cameraManager.stopSession()
-            
         cameraTask?.cancel()
     }
     
@@ -87,7 +85,6 @@ class LikenessViewModel: ObservableObject {
         for await image in cameraManager.previewStream {
             Task { @MainActor in
                 currentFrame = image
-                    
                 handleFaceImage(image)
             }
         }

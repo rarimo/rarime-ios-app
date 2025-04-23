@@ -4,5 +4,5 @@ enum AnimationNamespaceIds: String {
     case additionalImage
     case image
     case background
-    case footer
+    case extra
 }

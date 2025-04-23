@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    " " : {
+
+    },
     " and " : {
       "localizations" : {
         "uk" : {
@@ -314,7 +317,7 @@
     "Aruba" : {
 
     },
-    "Ask me\nfirst" : {
+    "Ask me first" : {
 
     },
     "ASSETS (%lld)" : {
@@ -1442,6 +1445,9 @@
     "Kazakhstan" : {
 
     },
+    "Keep your face in the frame" : {
+
+    },
     "Kenya" : {
 
     },
@@ -1661,6 +1667,9 @@
           }
         }
       }
+    },
+    "My Rule:" : {
+
     },
     "Myanmar" : {
 
@@ -2569,6 +2578,9 @@
     "Success" : {
 
     },
+    "Success! Your rule is set. You can update it anytime by clicking the title." : {
+
+    },
     "Sudan" : {
 
     },
@@ -2606,7 +2618,7 @@
     "Tajikistan" : {
 
     },
-    "Take" : {
+    "Take a picture" : {
 
     },
     "Tanzania" : {
@@ -2720,9 +2732,6 @@
 
     },
     "Turks and Caicos Islands" : {
-
-    },
-    "Turn your head slightly to the left" : {
 
     },
     "Tuvalu" : {

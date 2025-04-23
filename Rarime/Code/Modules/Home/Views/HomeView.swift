@@ -44,6 +44,14 @@ struct HomeView: View {
         pointsBalance != nil && userPointsBalance > 0
     }
 
+    private var isLikenessRegistered: Bool {
+        AppUserDefaults.shared.isLikenessRegistered
+    }
+
+    var likenessRule: LikenessRule {
+        LikenessRule(rawValue: AppUserDefaults.shared.likenessRule) ?? .unset
+    }
+
     private var homeCards: [HomeCarouselCard] {
         [
             HomeCarouselCard(action: { path = .identity }) {
@@ -79,7 +87,7 @@ struct HomeView: View {
                         Image(Images.dotCountry)
                             .resizable()
                             .scaledToFit()
-                            .padding(.top, 8)
+                            .padding(.top, 20)
                     },
                     title: "Freedomtool",
                     subtitle: "Voting",
@@ -96,20 +104,45 @@ struct HomeView: View {
                         Image(.likenessFace)
                             .resizable()
                             .scaledToFit()
-                            .scaleEffect(0.7)
+                            .scaleEffect(0.75)
                     },
-                    title: "Digital likeness",
-                    subtitle: "Set a rule",
+                    title: isLikenessRegistered ? nil : "Digital likeness",
+                    subtitle: isLikenessRegistered ? nil : "Set a rule",
                     bottomAdditionalContent: {
-                        Text("First human-AI Contract")
-                            .body4()
-                            .foregroundStyle(.baseBlack.opacity(0.5))
-                            .padding(.top, 12)
-                            .matchedGeometryEffect(
-                                id: AnimationNamespaceIds.footer,
-                                in: likenessAnimation,
-                                properties: .position
-                            )
+                        if isLikenessRegistered {
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text("My Rule:")
+                                    .h5()
+                                    .foregroundStyle(Gradients.purpleText)
+                                    .padding(.bottom, 12)
+                                    .matchedGeometryEffect(
+                                        id: AnimationNamespaceIds.extra,
+                                        in: likenessAnimation,
+                                        properties: .position
+                                    )
+                                Text(likenessRule.title)
+                                    .additional1()
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundStyle(Gradients.purpleText)
+                                    .frame(maxWidth: 306, alignment: .leading)
+                                    .matchedGeometryEffect(
+                                        id: AnimationNamespaceIds.subtitle,
+                                        in: likenessAnimation,
+                                        properties: .position
+                                    )
+                            }
+                        } else {
+                            Text("First human-AI Contract")
+                                .body4()
+                                .foregroundStyle(.baseBlack.opacity(0.5))
+                                .padding(.top, 12)
+                                .matchedGeometryEffect(
+                                    id: AnimationNamespaceIds.extra,
+                                    in: likenessAnimation,
+                                    properties: .position
+                                )
+                        }
                     },
                     animation: likenessAnimation
                 )
@@ -272,19 +305,19 @@ struct HomeView: View {
 
     private var header: some View {
         HStack(alignment: .center, spacing: 8) {
-            HStack(alignment: .center, spacing: 10) {
+            HStack(alignment: .center, spacing: 8) {
                 Text("Hi")
                     .subtitle4()
-                    .foregroundStyle(.textSecondary)
+                    .foregroundStyle(.textPrimary)
                 Group {
                     if passportManager.passport != nil {
-                        Text(passportManager.passport?.displayedFirstName ?? "")
+                        Text(passportManager.passport?.displayedFirstName.capitalized ?? "")
                     } else {
                         Text("Stranger")
                     }
                 }
-                .subtitle4()
-                .foregroundStyle(.textPrimary)
+                .additional3()
+                .foregroundStyle(.textSecondary)
             }
             #if DEVELOPMENT
                 Text(verbatim: "Development")
@@ -296,13 +329,18 @@ struct HomeView: View {
             #endif
             Spacer()
             ZStack {
-                AppIconButton(icon: Icons.notification2Line, action: { path = .notifications })
+                Button(action: { path = .notifications }) {
+                    Image(.notification2Line)
+                        .iconMedium()
+                        .foregroundStyle(.textPrimary)
+                }
                 if notificationManager.unreadNotificationsCounter > 0 {
                     Text(verbatim: notificationManager.unreadNotificationsCounter.formatted())
                         .overline3()
                         .foregroundStyle(.baseWhite)
                         .frame(width: 16, height: 16)
                         .background(.errorMain, in: Circle())
+                        .overlay { Circle().stroke(.invertedLight, lineWidth: 2) }
                         .offset(x: 7, y: -8)
                 }
             }
@@ -327,7 +365,9 @@ struct HomeView: View {
                 ZStack(alignment: .trailing) {
                     SnapCarouselView(
                         index: $viewModel.currentIndex,
-                        cards: homeCards.filter { $0.isShouldDisplay }
+                        cards: homeCards.filter { $0.isShouldDisplay },
+                        spacing: 30,
+                        trailingSpace: 20
                     )
                     .padding(.horizontal, 22)
                     if homeCards.count > 1 {

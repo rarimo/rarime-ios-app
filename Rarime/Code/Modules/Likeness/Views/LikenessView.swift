@@ -4,11 +4,23 @@ struct LikenessView: View {
     let onClose: () -> Void
     var animation: Namespace.ID
 
-    @StateObject var viewModel = LikenessViewModel()
-
     @State private var isRuleSheetPresented = false
     @State private var isScanSheetPresented = false
     @State private var isFaceScanned = false
+
+    @State private var isSuccessTooltipShown = false
+
+    @State private var likenessRule: LikenessRule = .init(rawValue: AppUserDefaults.shared.likenessRule) ?? .unset {
+        didSet {
+            AppUserDefaults.shared.likenessRule = likenessRule.rawValue
+        }
+    }
+
+    @State private var isLikenessRegistered = AppUserDefaults.shared.isLikenessRegistered {
+        didSet {
+            AppUserDefaults.shared.isLikenessRegistered = isLikenessRegistered
+        }
+    }
 
     // TODO: use actual count
     let RULES_SET_COUNT = 49421
@@ -21,112 +33,41 @@ struct LikenessView: View {
                     .padding([.top, .trailing], 20)
                 ZStack(alignment: .bottom) {
                     GlassBottomSheet(
-                        minHeight: 390,
+                        minHeight: 410,
                         maxHeight: 730,
-                        bottomOffset: 160,
+                        bottomOffset: isLikenessRegistered ? 0 : 146,
                         maxBlur: 200,
+                        dimBackground: true,
                         background: {
                             Image(.likenessFace)
                                 .resizable()
                                 .scaledToFit()
-                                .scaleEffect(0.7)
+                                .scaleEffect(0.75)
                                 .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
                         }
                     ) {
-                        VStack(spacing: 12) {
-                            VStack(alignment: .leading, spacing: 24) {
-                                VStack(alignment: .leading, spacing: 0) {
-                                    Text("Digital likeness")
-                                        .h1()
-                                        .foregroundStyle(.baseBlack)
-                                        .matchedGeometryEffect(
-                                            id: AnimationNamespaceIds.title,
-                                            in: animation,
-                                            properties: .position
-                                        )
-                                    Text("Set a rule")
-                                        .additional1()
-                                        .foregroundStyle(Gradients.purpleText)
-                                        .matchedGeometryEffect(
-                                            id: AnimationNamespaceIds.subtitle,
-                                            in: animation,
-                                            properties: .position
-                                        )
-                                    Text("First human-AI Contract")
-                                        .body4()
-                                        .foregroundStyle(.baseBlack.opacity(0.5))
-                                        .padding(.top, 12)
-                                        .matchedGeometryEffect(
-                                            id: AnimationNamespaceIds.footer,
-                                            in: animation,
-                                            properties: .position
-                                        )
-                                }
-                                Text("AI can now replicate your face, voice, and identity without asking for your permission. But you never agreed to that, raising a fundamental question: who owns your likeness?\n\nRarimo is building the infrastructure to give you back that control. With this app, you can create a private, verifiable record that defines how your likeness can and can’t be used.\n\nYour face stays on your device. No company owns it. And over time, no AI model will be able to ignore your rule.")
-                                    .body3()
-                                    .foregroundStyle(.baseBlack.opacity(0.5))
-                                    .fixedSize(horizontal: false, vertical: true)
+                        mainSheetContent
+                    }
+                    if !isLikenessRegistered {
+                        footer
+                    }
+                }
+                .dynamicSheet(isPresented: $isRuleSheetPresented) {
+                    LikenessSetRuleView(
+                        rule: likenessRule,
+                        onSave: { rule in
+                            isRuleSheetPresented = false
+                            likenessRule = rule
+                            if !isLikenessRegistered {
+                                isScanSheetPresented = true
                             }
                         }
-                        // HACK: prevent pull to close on empty space
-                        .background(.white.opacity(0.01))
-                        .padding(.horizontal, 20)
-                    }
-                    VStack(spacing: 24) {
-                        HorizontalDivider()
-                        HStack(alignment: .center, spacing: 8) {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(RULES_SET_COUNT.formatted(.number))
-                                    .h4()
-                                    .foregroundStyle(.baseBlack)
-                                Text("Other already set")
-                                    .body4()
-                                    .foregroundStyle(.baseBlack.opacity(0.5))
-                            }
-                            Spacer()
-                            AppButton(
-                                text: "Set the rule",
-                                width: 146,
-                                action: {
-                                    isRuleSheetPresented = true
-                                }
-                            )
-                            .controlSize(.large)
-                            .dynamicSheet(isPresented: $isRuleSheetPresented) {
-                                LikenessRuleSheetView(
-                                    ruleId: LikenessRuleId(rawValue: AppUserDefaults.shared.likenessRuleId) ?? .unset,
-                                    onSave: { ruleId in
-                                        isRuleSheetPresented = false
-                                        AppUserDefaults.shared.likenessRuleId = ruleId.rawValue
-                                        isScanSheetPresented = true
-                                    }
-                                )
-                            }
-                        }
-                    }
-                    .padding(20)
+                    )
                 }
             }
             .sheet(isPresented: $isScanSheetPresented) {
-                if isFaceScanned {
-                    LikenessProcessing<LikenessProcessingRegisterTask>(
-                        onCompletion: {
-                            // TODO: handle completion
-                            isFaceScanned = false
-                            isScanSheetPresented = false
-                        },
-                        onBack: {
-                            isFaceScanned = false
-                            isScanSheetPresented = false
-                        }
-                    )
-                } else {
-                    FaceLikenessView(
-                        onConfirm: { _ in isFaceScanned = true },
-                        onBack: { isScanSheetPresented = false }
-                    )
-                    .environmentObject(viewModel)
-                }
+                scanSheetContent
+                    .interactiveDismissDisabled()
             }
             .background(
                 Gradients.purpleBg
@@ -135,111 +76,160 @@ struct LikenessView: View {
             )
         }
     }
-}
 
-private struct LikenessRuleItem: Identifiable, Hashable {
-    var id: LikenessRuleId
-    var title: String
-    var icon: ImageResource
-    var isSoon: Bool
-}
-
-private let LIKENESS_RULE_ITEMS: [LikenessRuleItem] = [
-    LikenessRuleItem(
-        id: .useAndPay,
-        title: String(localized: "Use my likeness and pay me"),
-        icon: .moneyDollarCircleLine,
-        isSoon: true
-    ),
-    LikenessRuleItem(
-        id: .notUse,
-        title: String(localized: "Don’t use my face at all"),
-        icon: .subtractFill,
-        isSoon: true
-    ),
-    LikenessRuleItem(
-        id: .askFirst,
-        title: String(localized: "Ask me\nfirst"),
-        icon: .questionLine,
-        isSoon: true
-    )
-]
-
-struct LikenessRuleSheetView: View {
-    let ruleId: LikenessRuleId
-    let onSave: (_ ruleId: LikenessRuleId) -> Void
-
-    @State private var selectedRuleId: LikenessRuleId
-
-    init(
-        ruleId: LikenessRuleId,
-        onSave: @escaping (_ ruleId: LikenessRuleId) -> Void
-    ) {
-        self.ruleId = ruleId
-        self.onSave = onSave
-        self.selectedRuleId = ruleId
-    }
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 32) {
-            VStack(alignment: .leading, spacing: 12) {
-                Text("Set a rule")
-                    .h2()
-                    .foregroundStyle(.textPrimary)
-                Text("The rules are yours to change")
-                    .body3()
-                    .foregroundStyle(.textSecondary)
-            }
-            .padding(.horizontal, 20)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
-                    ForEach(LIKENESS_RULE_ITEMS) { item in
-                        Button(action: {
-                            selectedRuleId = item.id
-                            FeedbackGenerator.shared.impact(.light)
-                        }) {
-                            VStack(alignment: .leading, spacing: 0) {
-                                Image(item.icon)
-                                    .iconMedium()
-                                    .padding(10)
-                                    .background(item.id == selectedRuleId ? .invertedDark : .bgComponentPrimary, in: Circle())
-                                    .foregroundStyle(item.id == selectedRuleId ? .invertedLight : .textPrimary)
-                                if item.isSoon {
-                                    Text("Soon")
-                                        .overline3()
-                                        .foregroundStyle(.informationalDark)
-                                        .padding(.vertical, 2)
-                                        .padding(.horizontal, 4)
-                                        .background(.informationalLighter, in: Capsule())
-                                        .padding(.top, 20)
-                                }
-                                Text(item.title)
-                                    .subtitle6()
-                                    .foregroundStyle(.textPrimary)
-                                    .multilineTextAlignment(.leading)
-                                    .padding(.top, 8)
-                            }
-                            .padding(16)
-                            .frame(width: 148, alignment: .leading)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(item.id == selectedRuleId ? .invertedDark : .bgComponentPrimary, lineWidth: 1)
+    var mainSheetContent: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: 0) {
+                if isLikenessRegistered {
+                    Text("My Rule:")
+                        .h5()
+                        .foregroundStyle(Gradients.purpleText)
+                        .padding(.bottom, 12)
+                        .matchedGeometryEffect(
+                            id: AnimationNamespaceIds.extra,
+                            in: animation,
+                            properties: .position
+                        )
+                    ZStack(alignment: .topLeading) {
+                        if isSuccessTooltipShown {
+                            ruleTooltip
+                        }
+                        Button(action: { isRuleSheetPresented = true }) {
+                            (
+                                Text(likenessRule.title) +
+                                    Text(" ") +
+                                    Text(Image(.arrowDownSLine))
+                                    .foregroundColor(.baseBlack)
+                            )
+                            .additional1()
+                            .fixedSize(horizontal: false, vertical: true)
+                            .multilineTextAlignment(.leading)
+                            .foregroundStyle(Gradients.purpleText)
+                            .frame(maxWidth: 306, alignment: .leading)
+                            .matchedGeometryEffect(
+                                id: AnimationNamespaceIds.subtitle,
+                                in: animation,
+                                properties: .position
                             )
                         }
                     }
+                } else {
+                    Text("Digital likeness")
+                        .h1()
+                        .foregroundStyle(.baseBlack)
+                        .matchedGeometryEffect(
+                            id: AnimationNamespaceIds.title,
+                            in: animation,
+                            properties: .position
+                        )
+                    Text("Set a rule")
+                        .additional1()
+                        .fixedSize(horizontal: false, vertical: true)
+                        .foregroundStyle(Gradients.purpleText)
+                        .matchedGeometryEffect(
+                            id: AnimationNamespaceIds.subtitle,
+                            in: animation,
+                            properties: .position
+                        )
+                    Text("First human-AI Contract")
+                        .body4()
+                        .foregroundStyle(.baseBlack.opacity(0.5))
+                        .padding(.top, 12)
+                        .matchedGeometryEffect(
+                            id: AnimationNamespaceIds.extra,
+                            in: animation,
+                            properties: .position
+                        )
                 }
-                .padding(.horizontal, 20)
-                .padding(.vertical, 1)
             }
-            AppButton(
-                text: selectedRuleId == .unset ? "Set a rule" : "Save",
-                action: { onSave(selectedRuleId) }
-            )
-            .disabled(selectedRuleId == .unset)
-            .controlSize(.large)
-            .padding(.horizontal, 20)
+            Text("AI can now replicate your face, voice, and identity without asking for your permission. But you never agreed to that, raising a fundamental question: who owns your likeness?\n\nRarimo is building the infrastructure to give you back that control. With this app, you can create a private, verifiable record that defines how your likeness can and can’t be used.\n\nYour face stays on your device. No company owns it. And over time, no AI model will be able to ignore your rule.")
+                .body3()
+                .foregroundStyle(.baseBlack.opacity(0.5))
+                .fixedSize(horizontal: false, vertical: true)
         }
-        .padding(.vertical, 20)
+        // HACK: prevent pull to close on empty space
+        .background(.white.opacity(0.01))
+        .padding(.horizontal, 20)
+    }
+
+    var footer: some View {
+        VStack(spacing: 24) {
+            HorizontalDivider()
+            HStack(alignment: .center, spacing: 8) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(RULES_SET_COUNT.formatted(.number))
+                        .h4()
+                        .foregroundStyle(.baseBlack)
+                    Text("Other already set")
+                        .body4()
+                        .foregroundStyle(.baseBlack.opacity(0.5))
+                }
+                Spacer()
+                AppButton(
+                    text: "Set the rule",
+                    width: 146,
+                    action: { isRuleSheetPresented = true }
+                )
+                .controlSize(.large)
+            }
+        }
+        .padding(20)
+    }
+
+    var scanSheetContent: some View {
+        ZStack {
+            if isFaceScanned {
+                LikenessProcessing<LikenessProcessingRegisterTask>(
+                    onCompletion: {
+                        isLikenessRegistered = true
+                        isFaceScanned = false
+                        isScanSheetPresented = false
+
+                        FeedbackGenerator.shared.notify(.success)
+                        showSuccessTooltip()
+                    },
+                    onBack: {
+                        isFaceScanned = false
+                        isScanSheetPresented = false
+                    }
+                )
+            } else {
+                FaceLikenessView(
+                    onConfirm: { _ in isFaceScanned = true },
+                    onBack: { isScanSheetPresented = false }
+                )
+            }
+        }
+    }
+
+    var ruleTooltip: some View {
+        ZStack(alignment: .bottomLeading) {
+            Text("Success! Your rule is set. You can update it anytime by clicking the title.")
+                .body5()
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(.baseBlack, in: RoundedRectangle(cornerRadius: 12))
+                .foregroundStyle(.baseWhite)
+                .frame(maxWidth: 243)
+                .fixedSize(horizontal: false, vertical: true)
+            Rectangle()
+                .background(.baseBlack)
+                .frame(width: 8, height: 8)
+                .rotationEffect(.degrees(45))
+                .offset(x: 18, y: 4)
+        }
+        .offset(x: -6, y: -66)
+    }
+
+    private func showSuccessTooltip() {
+        withAnimation {
+            isSuccessTooltipShown = true
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            withAnimation {
+                isSuccessTooltipShown = false
+            }
+        }
     }
 }
 
