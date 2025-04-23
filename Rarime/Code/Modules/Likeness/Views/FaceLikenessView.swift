@@ -1,24 +1,21 @@
 import SwiftUI
 
 struct FaceLikenessView: View {
-    @EnvironmentObject var viewModel: LikenessViewModel
-
     let onConfirm: (CGImage) -> Void
-
     let onBack: () -> Void
 
+    @StateObject var viewModel = LikenessFaceViewModel()
     @State private var isPictureTaken: Bool = false
 
     var body: some View {
-        withCloseButton {
+        ZStack {
             ZStack {
                 facePreview
                     .scaleEffect(x: -1, y: 1)
-                VStack {
-                    topHint
-                        .padding(.top, 50)
+                VStack(spacing: 0) {
+                    topHint.padding(.top, 50)
                     Spacer()
-                    bottomHint
+                    bottomHint.padding(.bottom, 20)
                     if isPictureTaken {
                         confirmAndRetakeButton
                     } else {
@@ -26,15 +23,17 @@ struct FaceLikenessView: View {
                     }
                 }
             }
-            .onAppear(perform: viewModel.startScanning)
-            .onDisappear(perform: cleanup)
+            closeButton
         }
+        .background(.baseBlack)
+        .onAppear(perform: viewModel.startScanning)
+        .onDisappear(perform: cleanup)
     }
 
     var topHint: some View {
         VStack(spacing: 25) {
             Image(uiImage: UIImage(resource: .faceScan))
-            Text("Turn your head slightly to the left")
+            Text("Keep your face in the frame")
                 .subtitle5()
                 .foregroundStyle(.white)
         }
@@ -43,7 +42,7 @@ struct FaceLikenessView: View {
     var facePreview: some View {
         ZStack {
             if let face = viewModel.currentFrame {
-                bluredFace(Image(decorative: face, scale: 1))
+                blurredFace(Image(decorative: face, scale: 1))
             } else {
                 FaceOval()
                     .foregroundStyle(.bgComponentPrimary)
@@ -51,7 +50,7 @@ struct FaceLikenessView: View {
         }
     }
 
-    func bluredFace(_ image: Image) -> some View {
+    func blurredFace(_ image: Image) -> some View {
         ZStack {
             image
                 .resizable()
@@ -80,7 +79,7 @@ struct FaceLikenessView: View {
                 RoundedRectangle(cornerRadius: 20)
                     .foregroundStyle(.baseWhite)
                     .opacity(0.05)
-                Text("Take")
+                Text("Take a picture")
                     .foregroundStyle(.baseWhite)
                     .buttonLarge()
             }
@@ -123,57 +122,43 @@ struct FaceLikenessView: View {
         .frame(width: 56, height: 56)
     }
 
-    func withCloseButton(_ body: () -> some View) -> some View {
-        ZStack {
-            body()
-            VStack {
-                Button(action: {
-                    cleanup()
-                }) {
-                    ZStack {
-                        Circle()
-                            .foregroundColor(.baseWhite)
-                            .opacity(0.05)
-                        Image(systemName: "xmark")
-                            .foregroundColor(.baseWhite)
-                    }
-                }
-                .frame(width: 40, height: 40)
-                .padding(.leading, UIScreen.main.bounds.width - 100)
-                .padding(.bottom, UIScreen.main.bounds.height - 200)
-            }
+    var closeButton: some View {
+        Button(action: {
+            cleanup()
+            onBack()
+        }) {
+            Image(.closeFill)
+                .iconMedium()
+                .padding(10)
+                .background(.baseBlack.opacity(0.05), in: Circle())
+                .foregroundStyle(.baseWhite)
         }
+        .padding(.leading, UIScreen.main.bounds.width - 80)
+        .padding(.bottom, UIScreen.main.bounds.height - 180)
     }
 
     func cleanup() {
         viewModel.stopScanning()
-
         viewModel.clearImages()
     }
 
     func takePicture() {
         FeedbackGenerator.shared.impact(.medium)
-
         isPictureTaken = true
-
         viewModel.pauseScanning()
     }
 
     func retakePicture() {
         FeedbackGenerator.shared.impact(.medium)
-
         isPictureTaken = false
-
         viewModel.startScanning()
     }
 
     func confirmPicture() {
         FeedbackGenerator.shared.impact(.medium)
-
         let confirmedPicture = viewModel.currentFrame!
 
         cleanup()
-
         onConfirm(confirmedPicture)
     }
 }
@@ -199,11 +184,6 @@ private struct FaceOval: Shape {
 #Preview {
     VStack {}
         .sheet(isPresented: .constant(true)) {
-            let likenessViewModel = LikenessViewModel()
-
-            likenessViewModel.currentFrame = UIImage(resource: .debugFace).cgImage!
-
-            return FaceLikenessView(onConfirm: { _ in }, onBack: {})
-                .environmentObject(likenessViewModel)
+            FaceLikenessView(onConfirm: { _ in }, onBack: {})
         }
 }

@@ -37,11 +37,12 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
     var body: some View {
         ZStack(alignment: .trailing) {
             Image(topIcon)
-                .square(32)
-                .foregroundStyle(.baseBlack.opacity(0.5))
-                .frame(maxHeight: .infinity, alignment: .top)
-                .padding(.trailing, 20)
-                .padding(.top, 20)
+                .square(24)
+                .foregroundStyle(.baseBlack)
+                .padding(8)
+                .background(.bgComponentPrimary, in: Circle())
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .padding([.top, .leading], 20)
             imageContent()
                 .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)

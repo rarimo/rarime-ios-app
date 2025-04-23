@@ -10,6 +10,7 @@ struct GlassBottomSheet<Background: View, Content: View, Footer: View>: View {
     var maxBlur: CGFloat
     var bottomOffset: CGFloat
     var hideDragIndicator: Bool
+    var dimBackground: Bool
     
     private let spaceName = "scroll"
    
@@ -24,6 +25,7 @@ struct GlassBottomSheet<Background: View, Content: View, Footer: View>: View {
         
         maxBlur: CGFloat,
         hideDragIndicator: Bool = false,
+        dimBackground: Bool = false,
         @ViewBuilder background: () -> Background,
         @ViewBuilder footer: () -> Footer = { EmptyView() },
         @ViewBuilder content: () -> Content
@@ -33,6 +35,7 @@ struct GlassBottomSheet<Background: View, Content: View, Footer: View>: View {
         self.bottomOffset = bottomOffset
         self.maxBlur = maxBlur
         self.hideDragIndicator = hideDragIndicator
+        self.dimBackground = dimBackground
         
         self.background = background()
         self.footer = footer()
@@ -49,13 +52,17 @@ struct GlassBottomSheet<Background: View, Content: View, Footer: View>: View {
         return (effectiveHeight - minHeight) / maxHeight * maxBlur
     }
     
+    var isBgDimmed: Bool {
+        return dimBackground && effectiveHeight <= minHeight
+    }
+    
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: .top) {
                 background
                     .blur(radius: blurRadius)
                     .animation(.spring(response: 0.5, dampingFraction: 0.8), value: blurRadius)
-                ZStack(alignment: .top) {
+                ZStack(alignment: .bottom) {
                     ZStack(alignment: .top) {
                         VStack(spacing: 24) {
                             if !hideDragIndicator {
@@ -87,6 +94,18 @@ struct GlassBottomSheet<Background: View, Content: View, Footer: View>: View {
                 }
                 .frame(width: proxy.size.width, height: proxy.size.height - bottomOffset, alignment: .top)
                 .clipped()
+                .mask {
+                    LinearGradient(
+                        gradient: Gradient(stops: [
+                            .init(color: .baseWhite, location: 0.85),
+                            .init(color: .baseWhite.opacity(isBgDimmed ? 0.5 : 1), location: 0.925),
+                            .init(color: .baseWhite.opacity(isBgDimmed ? 0 : 1), location: 1)
+                        ]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    .animation(.easeInOut, value: isBgDimmed)
+                }
             }
         }
         .ignoresSafeArea(edges: .bottom)
@@ -98,7 +117,9 @@ struct GlassBottomSheet<Background: View, Content: View, Footer: View>: View {
         GlassBottomSheet(
             minHeight: 360,
             maxHeight: 720,
+            bottomOffset: 150,
             maxBlur: 20,
+            dimBackground: true,
             background: {
                 Image(Images.dotCountry)
                     .resizable()

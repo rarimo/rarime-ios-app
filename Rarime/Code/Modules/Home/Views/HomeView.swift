@@ -87,7 +87,7 @@ struct HomeView: View {
                         Image(Images.dotCountry)
                             .resizable()
                             .scaledToFit()
-                            .padding(.top, 8)
+                            .padding(.top, 20)
                     },
                     title: "Freedomtool",
                     subtitle: "Voting",
@@ -104,7 +104,7 @@ struct HomeView: View {
                         Image(.likenessFace)
                             .resizable()
                             .scaledToFit()
-                            .scaleEffect(0.7)
+                            .scaleEffect(0.75)
                     },
                     title: isLikenessRegistered ? nil : "Digital likeness",
                     subtitle: isLikenessRegistered ? nil : "Set a rule",
@@ -305,19 +305,19 @@ struct HomeView: View {
 
     private var header: some View {
         HStack(alignment: .center, spacing: 8) {
-            HStack(alignment: .center, spacing: 10) {
+            HStack(alignment: .center, spacing: 8) {
                 Text("Hi")
                     .subtitle4()
-                    .foregroundStyle(.textSecondary)
+                    .foregroundStyle(.textPrimary)
                 Group {
                     if passportManager.passport != nil {
-                        Text(passportManager.passport?.displayedFirstName ?? "")
+                        Text(passportManager.passport?.displayedFirstName.capitalized ?? "")
                     } else {
                         Text("Stranger")
                     }
                 }
-                .subtitle4()
-                .foregroundStyle(.textPrimary)
+                .additional3()
+                .foregroundStyle(.textSecondary)
             }
             #if DEVELOPMENT
                 Text(verbatim: "Development")
@@ -329,13 +329,18 @@ struct HomeView: View {
             #endif
             Spacer()
             ZStack {
-                AppIconButton(icon: Icons.notification2Line, action: { path = .notifications })
+                Button(action: { path = .notifications }) {
+                    Image(.notification2Line)
+                        .iconMedium()
+                        .foregroundStyle(.textPrimary)
+                }
                 if notificationManager.unreadNotificationsCounter > 0 {
                     Text(verbatim: notificationManager.unreadNotificationsCounter.formatted())
                         .overline3()
                         .foregroundStyle(.baseWhite)
                         .frame(width: 16, height: 16)
                         .background(.errorMain, in: Circle())
+                        .overlay { Circle().stroke(.invertedLight, lineWidth: 2) }
                         .offset(x: 7, y: -8)
                 }
             }
@@ -360,7 +365,9 @@ struct HomeView: View {
                 ZStack(alignment: .trailing) {
                     SnapCarouselView(
                         index: $viewModel.currentIndex,
-                        cards: homeCards.filter { $0.isShouldDisplay }
+                        cards: homeCards.filter { $0.isShouldDisplay },
+                        spacing: 30,
+                        trailingSpace: 20
                     )
                     .padding(.horizontal, 22)
                     if homeCards.count > 1 {

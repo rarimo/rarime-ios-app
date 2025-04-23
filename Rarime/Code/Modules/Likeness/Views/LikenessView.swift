@@ -4,8 +4,6 @@ struct LikenessView: View {
     let onClose: () -> Void
     var animation: Namespace.ID
 
-    @StateObject var viewModel = LikenessViewModel()
-
     @State private var isRuleSheetPresented = false
     @State private var isScanSheetPresented = false
     @State private var isFaceScanned = false
@@ -35,15 +33,16 @@ struct LikenessView: View {
                     .padding([.top, .trailing], 20)
                 ZStack(alignment: .bottom) {
                     GlassBottomSheet(
-                        minHeight: 390,
+                        minHeight: 410,
                         maxHeight: 730,
-                        bottomOffset: isLikenessRegistered ? 0 : 152,
+                        bottomOffset: isLikenessRegistered ? 0 : 146,
                         maxBlur: 200,
+                        dimBackground: true,
                         background: {
                             Image(.likenessFace)
                                 .resizable()
                                 .scaledToFit()
-                                .scaleEffect(0.7)
+                                .scaleEffect(0.75)
                                 .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
                         }
                     ) {
@@ -68,6 +67,7 @@ struct LikenessView: View {
             }
             .sheet(isPresented: $isScanSheetPresented) {
                 scanSheetContent
+                    .interactiveDismissDisabled()
             }
             .background(
                 Gradients.purpleBg
@@ -185,6 +185,7 @@ struct LikenessView: View {
                         isFaceScanned = false
                         isScanSheetPresented = false
 
+                        FeedbackGenerator.shared.notify(.success)
                         showSuccessTooltip()
                     },
                     onBack: {
@@ -197,7 +198,6 @@ struct LikenessView: View {
                     onConfirm: { _ in isFaceScanned = true },
                     onBack: { isScanSheetPresented = false }
                 )
-                .environmentObject(viewModel)
             }
         }
     }

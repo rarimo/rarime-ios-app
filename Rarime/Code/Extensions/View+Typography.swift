@@ -40,6 +40,12 @@ extension View {
         self.applyFont(fontFamily: Fonts.playfairBold, fontSize: 40, lineHeight: 36, fontWeight: .bold)
     }
     
+    func additional3() -> some View {
+        self
+            .applyFont(fontFamily: Fonts.playfairBold, fontSize: 24, lineHeight: 24, fontWeight: .bold)
+            .kerning(-0.96)
+    }
+    
     // headline
     func h1() -> some View {
         self.applyFont(fontSize: 40, lineHeight: 48, fontWeight: .bold)

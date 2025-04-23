@@ -273,7 +273,7 @@
 		CE39E09D2D3FCA1900799A4B /* libwitnesscalc_registerIdentity_11_256_3_3_576_240_1_864_5_264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE39E09A2D3FCA1900799A4B /* libwitnesscalc_registerIdentity_11_256_3_3_576_240_1_864_5_264.a */; };
 		CE3CD3AE2C6CCD0E008313B8 /* ImportFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD3AD2C6CCD0E008313B8 /* ImportFileView.swift */; };
 		CE3CD78C2DB67B4200112E46 /* FaceCaptureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD78B2DB67B2600112E46 /* FaceCaptureSession.swift */; };
-		CE3CD78E2DB67D2000112E46 /* LikenessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD78D2DB67D1800112E46 /* LikenessViewModel.swift */; };
+		CE3CD78E2DB67D2000112E46 /* LikenessFaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD78D2DB67D1800112E46 /* LikenessFaceViewModel.swift */; };
 		CE3CD7902DB67E9700112E46 /* FaceLikenessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD78F2DB67E8C00112E46 /* FaceLikenessView.swift */; };
 		CE3CD7922DB6819B00112E46 /* PreviewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD7912DB6819800112E46 /* PreviewUtils.swift */; };
 		CE3CD7932DB6819B00112E46 /* PreviewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CD7912DB6819800112E46 /* PreviewUtils.swift */; };
@@ -640,7 +640,7 @@
 		CE39E09F2D3FD00400799A4B /* witnesscalc_registerIdentity_21_256_3_4_576_232_NA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_21_256_3_4_576_232_NA.h; sourceTree = "<group>"; };
 		CE3CD3AD2C6CCD0E008313B8 /* ImportFileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFileView.swift; sourceTree = "<group>"; };
 		CE3CD78B2DB67B2600112E46 /* FaceCaptureSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCaptureSession.swift; sourceTree = "<group>"; };
-		CE3CD78D2DB67D1800112E46 /* LikenessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessViewModel.swift; sourceTree = "<group>"; };
+		CE3CD78D2DB67D1800112E46 /* LikenessFaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessFaceViewModel.swift; sourceTree = "<group>"; };
 		CE3CD78F2DB67E8C00112E46 /* FaceLikenessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceLikenessView.swift; sourceTree = "<group>"; };
 		CE3CD7912DB6819800112E46 /* PreviewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewUtils.swift; sourceTree = "<group>"; };
 		CE3CD7942DB6834700112E46 /* DebugAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugAssets.swift; sourceTree = "<group>"; };
@@ -1355,7 +1355,7 @@
 		CE3CD7892DB67B0300112E46 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				CE3CD78D2DB67D1800112E46 /* LikenessViewModel.swift */,
+				CE3CD78D2DB67D1800112E46 /* LikenessFaceViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -2185,7 +2185,7 @@
 				CE8FEB622C1B03C10008381A /* AuthCircuitInputs.swift in Sources */,
 				5655E42E2BD2C94F00B86C5C /* AppUserDefaults.swift in Sources */,
 				CEFE5F372CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift in Sources */,
-				CE3CD78E2DB67D2000112E46 /* LikenessViewModel.swift in Sources */,
+				CE3CD78E2DB67D2000112E46 /* LikenessFaceViewModel.swift in Sources */,
 				CE68BE4B2BD9B75100D92EBB /* ContractABI.swift in Sources */,
 				56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */,
 				CE65A3D32DAEA541004A423D /* DebugOptionsView.swift in Sources */,
