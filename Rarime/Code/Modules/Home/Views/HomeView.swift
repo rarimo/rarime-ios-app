@@ -107,15 +107,38 @@ struct HomeView: View {
                             .scaleEffect(0.7)
                     },
                     title: isLikenessRegistered ? nil : "Digital likeness",
-                    subtitle: isLikenessRegistered ? likenessRule.title : "Set a rule",
+                    subtitle: isLikenessRegistered ? nil : "Set a rule",
                     bottomAdditionalContent: {
-                        if !isLikenessRegistered {
+                        if isLikenessRegistered {
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text("My Rule:")
+                                    .h5()
+                                    .foregroundStyle(Gradients.purpleText)
+                                    .padding(.bottom, 12)
+                                    .matchedGeometryEffect(
+                                        id: AnimationNamespaceIds.extra,
+                                        in: likenessAnimation,
+                                        properties: .position
+                                    )
+                                Text(likenessRule.title)
+                                    .additional1()
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundStyle(Gradients.purpleText)
+                                    .frame(maxWidth: 306, alignment: .leading)
+                                    .matchedGeometryEffect(
+                                        id: AnimationNamespaceIds.subtitle,
+                                        in: likenessAnimation,
+                                        properties: .position
+                                    )
+                            }
+                        } else {
                             Text("First human-AI Contract")
                                 .body4()
                                 .foregroundStyle(.baseBlack.opacity(0.5))
                                 .padding(.top, 12)
                                 .matchedGeometryEffect(
-                                    id: AnimationNamespaceIds.footer,
+                                    id: AnimationNamespaceIds.extra,
                                     in: likenessAnimation,
                                     properties: .position
                                 )

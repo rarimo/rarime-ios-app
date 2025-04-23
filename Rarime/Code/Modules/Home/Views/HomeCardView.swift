@@ -7,7 +7,7 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
     let bottomIcon: String
     let imageContent: () -> Content
     let title: String?
-    let subtitle: String
+    let subtitle: String?
     let bottomAdditionalContent: () -> BottomAdditionalContent?
 
     var animation: Namespace.ID
@@ -19,7 +19,7 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
         bottomIcon: String,
         @ViewBuilder imageContent: @escaping () -> Content,
         title: String?,
-        subtitle: String,
+        subtitle: String?,
         @ViewBuilder bottomAdditionalContent: @escaping () -> BottomAdditionalContent? = { EmptyView() },
         animation: Namespace.ID
     ) {
@@ -57,14 +57,16 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
                             properties: .position
                         )
                 }
-                Text(subtitle)
-                    .additional1()
-                    .foregroundStyle(foregroundGradient == nil ? AnyShapeStyle(Color.baseBlack.opacity(0.4)) : AnyShapeStyle(foregroundGradient!))
-                    .matchedGeometryEffect(
-                        id: AnimationNamespaceIds.subtitle,
-                        in: animation,
-                        properties: .position
-                    )
+                if let subtitle {
+                    Text(subtitle)
+                        .additional1()
+                        .foregroundStyle(foregroundGradient == nil ? AnyShapeStyle(Color.baseBlack.opacity(0.4)) : AnyShapeStyle(foregroundGradient!))
+                        .matchedGeometryEffect(
+                            id: AnimationNamespaceIds.subtitle,
+                            in: animation,
+                            properties: .position
+                        )
+                }
                 if let bottomView = bottomAdditionalContent() {
                     bottomView
                 }

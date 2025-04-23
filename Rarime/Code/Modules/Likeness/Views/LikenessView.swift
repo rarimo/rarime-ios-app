@@ -10,7 +10,7 @@ struct LikenessView: View {
     @State private var isScanSheetPresented = false
     @State private var isFaceScanned = false
 
-    @State private var isRegistrationSuccess = false
+    @State private var isSuccessTooltipShown = false
 
     @State private var likenessRule: LikenessRule = .init(rawValue: AppUserDefaults.shared.likenessRule) ?? .unset {
         didSet {
@@ -81,23 +81,37 @@ struct LikenessView: View {
         VStack(alignment: .leading, spacing: 24) {
             VStack(alignment: .leading, spacing: 0) {
                 if isLikenessRegistered {
-                    Button(action: { isRuleSheetPresented = true }) {
-                        (
-                            Text(likenessRule.title) +
-                                Text(" ") +
-                                Text(Image(.arrowDownSLine))
-                                .foregroundColor(.baseBlack)
-                        )
-                        .additional1()
-                        .fixedSize(horizontal: false, vertical: true)
-                        .multilineTextAlignment(.leading)
+                    Text("My Rule:")
+                        .h5()
                         .foregroundStyle(Gradients.purpleText)
-                        .frame(maxWidth: 306, alignment: .leading)
+                        .padding(.bottom, 12)
                         .matchedGeometryEffect(
-                            id: AnimationNamespaceIds.subtitle,
+                            id: AnimationNamespaceIds.extra,
                             in: animation,
                             properties: .position
                         )
+                    ZStack(alignment: .topLeading) {
+                        if isSuccessTooltipShown {
+                            ruleTooltip
+                        }
+                        Button(action: { isRuleSheetPresented = true }) {
+                            (
+                                Text(likenessRule.title) +
+                                    Text(" ") +
+                                    Text(Image(.arrowDownSLine))
+                                    .foregroundColor(.baseBlack)
+                            )
+                            .additional1()
+                            .fixedSize(horizontal: false, vertical: true)
+                            .multilineTextAlignment(.leading)
+                            .foregroundStyle(Gradients.purpleText)
+                            .frame(maxWidth: 306, alignment: .leading)
+                            .matchedGeometryEffect(
+                                id: AnimationNamespaceIds.subtitle,
+                                in: animation,
+                                properties: .position
+                            )
+                        }
                     }
                 } else {
                     Text("Digital likeness")
@@ -122,7 +136,7 @@ struct LikenessView: View {
                         .foregroundStyle(.baseBlack.opacity(0.5))
                         .padding(.top, 12)
                         .matchedGeometryEffect(
-                            id: AnimationNamespaceIds.footer,
+                            id: AnimationNamespaceIds.extra,
                             in: animation,
                             properties: .position
                         )
@@ -167,10 +181,11 @@ struct LikenessView: View {
             if isFaceScanned {
                 LikenessProcessing<LikenessProcessingRegisterTask>(
                     onCompletion: {
-                        isRegistrationSuccess = true
                         isLikenessRegistered = true
                         isFaceScanned = false
                         isScanSheetPresented = false
+
+                        showSuccessTooltip()
                     },
                     onBack: {
                         isFaceScanned = false
@@ -183,6 +198,36 @@ struct LikenessView: View {
                     onBack: { isScanSheetPresented = false }
                 )
                 .environmentObject(viewModel)
+            }
+        }
+    }
+
+    var ruleTooltip: some View {
+        ZStack(alignment: .bottomLeading) {
+            Text("Success! Your rule is set. You can update it anytime by clicking the title.")
+                .body5()
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(.baseBlack, in: RoundedRectangle(cornerRadius: 12))
+                .foregroundStyle(.baseWhite)
+                .frame(maxWidth: 243)
+                .fixedSize(horizontal: false, vertical: true)
+            Rectangle()
+                .background(.baseBlack)
+                .frame(width: 8, height: 8)
+                .rotationEffect(.degrees(45))
+                .offset(x: 18, y: 4)
+        }
+        .offset(x: -6, y: -66)
+    }
+
+    private func showSuccessTooltip() {
+        withAnimation {
+            isSuccessTooltipShown = true
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            withAnimation {
+                isSuccessTooltipShown = false
             }
         }
     }
