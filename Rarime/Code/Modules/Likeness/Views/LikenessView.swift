@@ -174,9 +174,7 @@ struct LikenessView: View {
             if likenessManager.faceImage == nil {
                 FaceLikenessView(
                     onConfirm: { image in
-                        likenessManager.setFaceImage(
-                            VisionUtils.removeBackground(UIImage(cgImage: image))
-                        )
+                        likenessManager.setFaceImage(UIImage(cgImage: image))
                     },
                     onBack: { isScanSheetPresented = false }
                 )
@@ -208,7 +206,7 @@ struct LikenessView: View {
                 .frame(maxWidth: 243)
                 .fixedSize(horizontal: false, vertical: true)
             Rectangle()
-                .background(.baseBlack)
+                .fill(.baseBlack)
                 .frame(width: 8, height: 8)
                 .rotationEffect(.degrees(45))
                 .offset(x: 18, y: 4)

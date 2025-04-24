@@ -305,7 +305,7 @@ struct HomeView: View {
         HStack(alignment: .center, spacing: 8) {
             HStack(alignment: .center, spacing: 8) {
                 Text("Hi")
-                    .subtitle4()
+                    .h3()
                     .foregroundStyle(.textPrimary)
                 Group {
                     if passportManager.passport != nil {
