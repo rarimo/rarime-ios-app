@@ -31,6 +31,7 @@
 		562241412C107B9B000239FA /* AssetsSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562241402C107B9B000239FA /* AssetsSlider.swift */; };
 		562241432C107E16000239FA /* AppDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562241422C107E16000239FA /* AppDropdown.swift */; };
 		56337CE12DBA385B00973721 /* LikenessFaceImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56337CE02DBA385B00973721 /* LikenessFaceImageView.swift */; };
+		56337CE32DBA3D1500973721 /* LikenessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56337CE22DBA3D1500973721 /* LikenessManager.swift */; };
 		563529E72BB072870027C910 /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529E62BB072870027C910 /* WalletView.swift */; };
 		563529E92BB072B80027C910 /* IdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529E82BB072B80027C910 /* IdentityView.swift */; };
 		563529EB2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563529EA2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift */; };
@@ -431,6 +432,7 @@
 		562241402C107B9B000239FA /* AssetsSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsSlider.swift; sourceTree = "<group>"; };
 		562241422C107E16000239FA /* AppDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDropdown.swift; sourceTree = "<group>"; };
 		56337CE02DBA385B00973721 /* LikenessFaceImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessFaceImageView.swift; sourceTree = "<group>"; };
+		56337CE22DBA3D1500973721 /* LikenessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessManager.swift; sourceTree = "<group>"; };
 		563529E62BB072870027C910 /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
 		563529E82BB072B80027C910 /* IdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityView.swift; sourceTree = "<group>"; };
 		563529EA2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+HiddenNavBar.swift"; sourceTree = "<group>"; };
@@ -1010,6 +1012,7 @@
 				CE51E2E42C21790700043D9A /* CircuitDataManager.swift */,
 				CE5315C92C7769A20087D53D /* NotificationManager.swift */,
 				5617AB142C8F48BE003947C9 /* ExternalRequestsManager.swift */,
+				56337CE22DBA3D1500973721 /* LikenessManager.swift */,
 				CE059B412C9C4608006046B3 /* InternetConnectionManager.swift */,
 				CEFF68BE2CB6A3E7008769EA /* CircuitBuilderManager.swift */,
 			);
@@ -2148,6 +2151,7 @@
 				56E6AD492BD2731100E4DDC1 /* LanguageView.swift in Sources */,
 				CE7210332BD818020043DB7F /* Double+Rounded.swift in Sources */,
 				CEE167E82DB794280044E1EB /* LikenessProcessingView.swift in Sources */,
+				56337CE32DBA3D1500973721 /* LikenessManager.swift in Sources */,
 				CE5980DC2D07B288000B6261 /* RegisterIdentityLightInputs.swift in Sources */,
 				CE65A3D52DAEA5ED004A423D /* DebugController.swift in Sources */,
 				56B589F12DB7B05F00266105 /* LikenessRule.swift in Sources */,

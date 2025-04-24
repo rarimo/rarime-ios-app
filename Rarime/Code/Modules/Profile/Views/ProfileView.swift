@@ -16,6 +16,7 @@ struct ProfileView: View {
     @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var notificationManager: NotificationManager
+    @EnvironmentObject private var likenessManager: LikenessManager
     @EnvironmentObject private var pollsViewModel: PollsViewModel
 
     @State private var path: [ProfileRoute] = []
@@ -198,9 +199,7 @@ struct ProfileView: View {
                         decentralizedAuthManager.reset()
                         notificationManager.reset()
                         pollsViewModel.reset()
-
-                        AppUserDefaults.shared.likenessRule = LikenessRule.unset.rawValue
-                        AppUserDefaults.shared.isLikenessRegistered = false
+                        likenessManager.reset()
 
                         Task {
                             try? await notificationManager.unsubscribe(fromTopic: ConfigManager.shared.general.claimableNotificationTopic)
@@ -260,6 +259,7 @@ private struct ProfileRow: View {
         .environmentObject(WalletManager())
         .environmentObject(DecentralizedAuthManager())
         .environmentObject(NotificationManager())
+        .environmentObject(LikenessManager())
         .environmentObject(userManager)
         .onAppear {
             _ = try? userManager.createNewUser()

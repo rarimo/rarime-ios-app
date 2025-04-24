@@ -24,6 +24,7 @@ struct RarimeApp: App {
                 .environmentObject(NotificationManager.shared)
                 .environmentObject(ExternalRequestsManager.shared)
                 .environmentObject(InternetConnectionManager.shared)
+                .environmentObject(LikenessManager.shared)
         }
     }
 }

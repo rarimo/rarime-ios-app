@@ -1,26 +1,14 @@
 import SwiftUI
 
 struct LikenessView: View {
+    @EnvironmentObject private var likenessManager: LikenessManager
+
     let onClose: () -> Void
     var animation: Namespace.ID
 
     @State private var isRuleSheetPresented = false
     @State private var isScanSheetPresented = false
-
-    @State private var faceImage: CGImage? = nil
     @State private var isSuccessTooltipShown = false
-
-    @State private var likenessRule: LikenessRule = .init(rawValue: AppUserDefaults.shared.likenessRule) ?? .unset {
-        didSet {
-            AppUserDefaults.shared.likenessRule = likenessRule.rawValue
-        }
-    }
-
-    @State private var isLikenessRegistered = AppUserDefaults.shared.isLikenessRegistered {
-        didSet {
-            AppUserDefaults.shared.isLikenessRegistered = isLikenessRegistered
-        }
-    }
 
     // TODO: use actual count
     let RULES_SET_COUNT = 49421
@@ -35,35 +23,35 @@ struct LikenessView: View {
                     GlassBottomSheet(
                         minHeight: 410,
                         maxHeight: 730,
-                        bottomOffset: isLikenessRegistered ? 0 : 146,
+                        bottomOffset: likenessManager.isRegistered ? 0 : 146,
                         maxBlur: 200,
                         dimBackground: true,
                         background: {
-                            if faceImage == nil {
+                            if let faceImage = likenessManager.faceImage {
+                                LikenessFaceImageView(image: faceImage)
+                                    .padding(.top, 80)
+                            } else {
                                 Image(.likenessFace)
                                     .resizable()
                                     .scaledToFit()
                                     .scaleEffect(0.75)
                                     .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
-                            } else {
-                                LikenessFaceImageView(image: UIImage(cgImage: faceImage!))
-                                    .padding(.top, 80)
                             }
                         }
                     ) {
                         mainSheetContent
                     }
-                    if !isLikenessRegistered {
+                    if !likenessManager.isRegistered {
                         footer
                     }
                 }
                 .dynamicSheet(isPresented: $isRuleSheetPresented) {
                     LikenessSetRuleView(
-                        rule: likenessRule,
+                        rule: likenessManager.rule,
                         onSave: { rule in
                             isRuleSheetPresented = false
-                            likenessRule = rule
-                            if !isLikenessRegistered {
+                            likenessManager.setRule(rule)
+                            if !likenessManager.isRegistered {
                                 isScanSheetPresented = true
                             }
                         }
@@ -85,7 +73,7 @@ struct LikenessView: View {
     var mainSheetContent: some View {
         VStack(alignment: .leading, spacing: 24) {
             VStack(alignment: .leading, spacing: 0) {
-                if isLikenessRegistered {
+                if likenessManager.isRegistered {
                     Text("My Rule:")
                         .h5()
                         .foregroundStyle(Gradients.purpleText)
@@ -101,7 +89,7 @@ struct LikenessView: View {
                         }
                         Button(action: { isRuleSheetPresented = true }) {
                             (
-                                Text(likenessRule.title) +
+                                Text(likenessManager.rule.title) +
                                     Text(" ") +
                                     Text(Image(.arrowDownSLine))
                                     .foregroundColor(.baseBlack)
@@ -183,30 +171,25 @@ struct LikenessView: View {
 
     var scanSheetContent: some View {
         ZStack {
-            if faceImage == nil {
+            if likenessManager.faceImage == nil {
                 FaceLikenessView(
                     onConfirm: { image in
-                        faceImage = image
-
-                        isLikenessRegistered = true
-                        isScanSheetPresented = false
-
-                        FeedbackGenerator.shared.notify(.success)
-                        showSuccessTooltip()
+                        likenessManager.setFaceImage(
+                            VisionUtils.removeBackground(UIImage(cgImage: image))
+                        )
                     },
                     onBack: { isScanSheetPresented = false }
                 )
             } else {
                 LikenessProcessing<LikenessProcessingRegisterTask>(
                     onCompletion: {
-                        isLikenessRegistered = true
+                        likenessManager.setIsRegistered(true)
                         isScanSheetPresented = false
-
                         FeedbackGenerator.shared.notify(.success)
                         showSuccessTooltip()
                     },
                     onBack: {
-                        faceImage = nil
+                        likenessManager.setFaceImage(nil)
                         isScanSheetPresented = false
                     }
                 )
@@ -247,4 +230,5 @@ struct LikenessView: View {
 
 #Preview {
     LikenessView(onClose: {}, animation: Namespace().wrappedValue)
+        .environmentObject(LikenessManager())
 }
