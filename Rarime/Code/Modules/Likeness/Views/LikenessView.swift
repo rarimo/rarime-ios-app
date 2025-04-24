@@ -180,13 +180,13 @@ struct LikenessView: View {
                 )
             } else {
                 LikenessProcessing<LikenessProcessingRegisterTask>(
-                    onCompletion: {
+                    onComplete: {
                         likenessManager.setIsRegistered(true)
                         isScanSheetPresented = false
                         FeedbackGenerator.shared.notify(.success)
                         showSuccessTooltip()
                     },
-                    onBack: {
+                    onClose: {
                         likenessManager.setFaceImage(nil)
                         isScanSheetPresented = false
                     }
