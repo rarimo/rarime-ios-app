@@ -6,8 +6,8 @@ struct LikenessView: View {
 
     @State private var isRuleSheetPresented = false
     @State private var isScanSheetPresented = false
-    @State private var isFaceScanned = false
 
+    @State private var faceImage: CGImage? = nil
     @State private var isSuccessTooltipShown = false
 
     @State private var likenessRule: LikenessRule = .init(rawValue: AppUserDefaults.shared.likenessRule) ?? .unset {
@@ -39,11 +39,16 @@ struct LikenessView: View {
                         maxBlur: 200,
                         dimBackground: true,
                         background: {
-                            Image(.likenessFace)
-                                .resizable()
-                                .scaledToFit()
-                                .scaleEffect(0.75)
-                                .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
+                            if faceImage == nil {
+                                Image(.likenessFace)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .scaleEffect(0.75)
+                                    .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
+                            } else {
+                                LikenessFaceImageView(image: UIImage(cgImage: faceImage!))
+                                    .padding(.top, 80)
+                            }
                         }
                     ) {
                         mainSheetContent
@@ -178,25 +183,32 @@ struct LikenessView: View {
 
     var scanSheetContent: some View {
         ZStack {
-            if isFaceScanned {
+            if faceImage == nil {
+                FaceLikenessView(
+                    onConfirm: { image in
+                        faceImage = image
+
+                        isLikenessRegistered = true
+                        isScanSheetPresented = false
+
+                        FeedbackGenerator.shared.notify(.success)
+                        showSuccessTooltip()
+                    },
+                    onBack: { isScanSheetPresented = false }
+                )
+            } else {
                 LikenessProcessing<LikenessProcessingRegisterTask>(
                     onCompletion: {
                         isLikenessRegistered = true
-                        isFaceScanned = false
                         isScanSheetPresented = false
 
                         FeedbackGenerator.shared.notify(.success)
                         showSuccessTooltip()
                     },
                     onBack: {
-                        isFaceScanned = false
+                        faceImage = nil
                         isScanSheetPresented = false
                     }
-                )
-            } else {
-                FaceLikenessView(
-                    onConfirm: { _ in isFaceScanned = true },
-                    onBack: { isScanSheetPresented = false }
                 )
             }
         }
