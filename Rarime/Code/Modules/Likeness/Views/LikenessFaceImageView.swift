@@ -3,6 +3,8 @@ import SwiftUI
 struct LikenessFaceImageView: View {
     let image: UIImage
 
+    // HACK: Remove background is available only in iOS 17,
+    // so we just clip the image to a circle in iOS 16.
     var faceClipShape: AnyShape {
         if #available(iOS 17, *) {
             AnyShape(Rectangle())
