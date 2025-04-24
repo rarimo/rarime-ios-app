@@ -8,52 +8,24 @@ protocol LikenessProcessingTask: CaseIterable {
     var progressTime: Int { get }
 }
 
-enum LikenessProcessingRecoveryTask: Int, LikenessProcessingTask {
-    case downloadingCircuitData = 0
-    case extractionImageFeatures = 1
-    case runningZKMK = 2
-    case overridingAccess = 3
-    
-    var description: String {
-        switch self {
-        case .downloadingCircuitData: return "Downloading circuit data"
-        case .extractionImageFeatures: return "Extracting image features"
-        case .runningZKMK: return "Running ZKML"
-        case .overridingAccess: return "Overriding access"
-        }
-    }
-    
-    var progressTime: Int {
-        switch self {
-        case .downloadingCircuitData: return 15
-        case .extractionImageFeatures: return 5
-        case .runningZKMK: return 10
-        case .overridingAccess: return 7
-        }
-    }
-}
-
 enum LikenessProcessingRegisterTask: Int, CaseIterable, LikenessProcessingTask {
     case downloadingCircuitData = 0
     case extractionImageFeatures = 1
     case runningZKMK = 2
-    case creatingAccount = 3
     
     var description: String {
         switch self {
         case .downloadingCircuitData: return "Downloading circuit data"
         case .extractionImageFeatures: return "Extracting image features"
         case .runningZKMK: return "Running ZKML"
-        case .creatingAccount: return "Registering recovery method"
         }
     }
     
     var progressTime: Int {
         switch self {
         case .downloadingCircuitData: return 7
-        case .extractionImageFeatures: return 3
-        case .runningZKMK: return 5
-        case .creatingAccount: return 4
+        case .extractionImageFeatures: return 5
+        case .runningZKMK: return 7
         }
     }
 }

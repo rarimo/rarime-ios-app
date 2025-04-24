@@ -6,4 +6,5 @@ enum Videos {
     static let readNfc = Bundle.main.url(forResource: "ReadNfc", withExtension: "mp4")!
     static let readNfcUsa = Bundle.main.url(forResource: "ReadNfcUsa", withExtension: "mp4")!
     static let scanMrzUsa = Bundle.main.url(forResource: "ScanMrzUsa", withExtension: "mp4")!
+    static let likenessProcessing = Bundle.main.url(forResource: "LikenessProcessing", withExtension: "mp4")!
 }

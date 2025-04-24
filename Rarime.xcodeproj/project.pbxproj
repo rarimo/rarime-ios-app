@@ -10,6 +10,8 @@
 		56062B9A2C12007A00C9BF9B /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B992C12007A00C9BF9B /* Country.swift */; };
 		56062B9C2C12032700C9BF9B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9B2C12032700C9BF9B /* Constants.swift */; };
 		56062BA02C120B3400C9BF9B /* WaitlistPassportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9F2C120B3400C9BF9B /* WaitlistPassportView.swift */; };
+		560781762DBA64930073654B /* LoopVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560781752DBA64930073654B /* LoopVideoPlayer.swift */; };
+		560781782DBA69540073654B /* LikenessProcessing.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 560781772DBA69540073654B /* LikenessProcessing.mp4 */; };
 		5609B6C82C188C7500CB6A1F /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5609B6C72C188C7500CB6A1F /* MarkdownUI */; };
 		5609B6CC2C19922400CB6A1F /* LinearProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609B6CB2C19922400CB6A1F /* LinearProgressView.swift */; };
 		560F0C1D2BD0234300067054 /* QRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 560F0C1C2BD0234300067054 /* QRCode */; };
@@ -414,6 +416,8 @@
 		56062B992C12007A00C9BF9B /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		56062B9B2C12032700C9BF9B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		56062B9F2C120B3400C9BF9B /* WaitlistPassportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitlistPassportView.swift; sourceTree = "<group>"; };
+		560781752DBA64930073654B /* LoopVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopVideoPlayer.swift; sourceTree = "<group>"; };
+		560781772DBA69540073654B /* LikenessProcessing.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = LikenessProcessing.mp4; sourceTree = "<group>"; };
 		5609B6CB2C19922400CB6A1F /* LinearProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressView.swift; sourceTree = "<group>"; };
 		560F0C1E2BD027EA00067054 /* WalletReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletReceiveView.swift; sourceTree = "<group>"; };
 		560F0C202BD027FB00067054 /* WalletRouteLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRouteLayout.swift; sourceTree = "<group>"; };
@@ -1209,6 +1213,7 @@
 				563529F52BB077AB0027C910 /* CardContainer.swift */,
 				568B4FD02BB6D88F001C9C74 /* Divider.swift */,
 				56DAA3042BB72E35002CF710 /* InfoAlert.swift */,
+				560781752DBA64930073654B /* LoopVideoPlayer.swift */,
 				5609B6CB2C19922400CB6A1F /* LinearProgressView.swift */,
 				C75512932C870AFD000258AD /* StepIndicator.swift */,
 			);
@@ -1241,6 +1246,7 @@
 				C75512852C8603D2000258AD /* ReadNfc.mp4 */,
 				C75512862C8603D3000258AD /* ScanMrz.mp4 */,
 				CE7BFAFB2D5A0A8D00B7CBAC /* ReadNfcUsa.mp4 */,
+				560781772DBA69540073654B /* LikenessProcessing.mp4 */,
 				CE7BFAFC2D5A0A8D00B7CBAC /* ScanMrzUsa.mp4 */,
 			);
 			path = Videos;
@@ -1955,6 +1961,7 @@
 				C72F33282D68AC6F00AC1814 /* Inter-Regular.ttf in Resources */,
 				C72F33292D68AC6F00AC1814 /* Inter-SemiBold.ttf in Resources */,
 				CEA90C5F2D0C63A800622F81 /* Processing.json in Resources */,
+				560781782DBA69540073654B /* LikenessProcessing.mp4 in Resources */,
 				5689C8392BE900FA00A4B767 /* IntroRewards.json in Resources */,
 				5689C8372BE900D400A4B767 /* IntroIncognito.json in Resources */,
 				568B4FE02BB70852001C9C74 /* Localizable.xcstrings in Resources */,
@@ -2037,6 +2044,7 @@
 				5613F4322BD18409008E6CBE /* AppSkeleton.swift in Sources */,
 				56AC03402BB06A2D00A34A00 /* Image+Icon.swift in Sources */,
 				C7EB15062D91836000073E72 /* BarChartView.swift in Sources */,
+				560781762DBA64930073654B /* LoopVideoPlayer.swift in Sources */,
 				56A6C75F2BBC309A00992562 /* NFCScanner.swift in Sources */,
 				CE9E82B82BA881F400AAF885 /* AppView.swift in Sources */,
 				CEFF68BB2CB69EB3008769EA /* CircuitUtils.swift in Sources */,
