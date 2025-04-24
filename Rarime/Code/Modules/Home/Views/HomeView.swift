@@ -13,6 +13,7 @@ struct HomeView: View {
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
     @EnvironmentObject private var configManager: ConfigManager
+    @EnvironmentObject private var likenessManager: LikenessManager
 
     @StateObject var viewModel = ViewModel()
 
@@ -42,14 +43,6 @@ struct HomeView: View {
 
     private var isBalanceSufficient: Bool {
         pointsBalance != nil && userPointsBalance > 0
-    }
-
-    private var isLikenessRegistered: Bool {
-        AppUserDefaults.shared.isLikenessRegistered
-    }
-
-    var likenessRule: LikenessRule {
-        LikenessRule(rawValue: AppUserDefaults.shared.likenessRule) ?? .unset
     }
 
     private var homeCards: [HomeCarouselCard] {
@@ -101,15 +94,20 @@ struct HomeView: View {
                     topIcon: Icons.rarime,
                     bottomIcon: Icons.arrowRightUpLine,
                     imageContent: {
-                        Image(.likenessFace)
-                            .resizable()
-                            .scaledToFit()
-                            .scaleEffect(0.75)
+                        if let faceImage = likenessManager.faceImage {
+                            LikenessFaceImageView(image: faceImage)
+                                .padding(.top, 80)
+                        } else {
+                            Image(.likenessFace)
+                                .resizable()
+                                .scaledToFit()
+                                .scaleEffect(0.75)
+                        }
                     },
-                    title: isLikenessRegistered ? nil : "Digital likeness",
-                    subtitle: isLikenessRegistered ? nil : "Set a rule",
+                    title: likenessManager.isRegistered ? nil : "Digital likeness",
+                    subtitle: likenessManager.isRegistered ? nil : "Set a rule",
                     bottomAdditionalContent: {
-                        if isLikenessRegistered {
+                        if likenessManager.isRegistered {
                             VStack(alignment: .leading, spacing: 0) {
                                 Text("My Rule:")
                                     .h5()
@@ -120,7 +118,7 @@ struct HomeView: View {
                                         in: likenessAnimation,
                                         properties: .position
                                     )
-                                Text(likenessRule.title)
+                                Text(likenessManager.rule.title)
                                     .additional1()
                                     .fixedSize(horizontal: false, vertical: true)
                                     .multilineTextAlignment(.leading)
@@ -307,7 +305,7 @@ struct HomeView: View {
         HStack(alignment: .center, spacing: 8) {
             HStack(alignment: .center, spacing: 8) {
                 Text("Hi")
-                    .subtitle4()
+                    .h3()
                     .foregroundStyle(.textPrimary)
                 Group {
                     if passportManager.passport != nil {
@@ -472,4 +470,5 @@ struct HomeView: View {
         .environmentObject(ConfigManager())
         .environmentObject(NotificationManager())
         .environmentObject(ExternalRequestsManager())
+        .environmentObject(LikenessManager())
 }
