@@ -37,7 +37,7 @@ struct ClaimTokensView: View {
     }
     
     private var isBalanceSufficient: Bool {
-        pointsBalance != nil && pointsBalance?.amount ?? 0 > 0
+        pointsBalance != nil && (pointsBalance?.amount ?? 0) > 0
     }
     
     var body: some View {
@@ -119,7 +119,7 @@ struct ClaimTokensView: View {
     
 //    private func onClaimTokens() {
 //        isTokensClaiming = true
-//        
+//
 //        // TODO: remove it after flow impl
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 //            rewardsViewModel.isTokensClaimed = true

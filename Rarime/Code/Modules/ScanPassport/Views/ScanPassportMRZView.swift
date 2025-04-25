@@ -21,7 +21,7 @@ struct ScanPassportMRZView: View {
             }
             .frame(maxWidth: .infinity)
             Text("Scan your passport’s first page inside the border")
-                .overline2()
+                .body4()
                 .foregroundStyle(.textSecondary)
                 .multilineTextAlignment(.center)
                 .padding(.top, 24)

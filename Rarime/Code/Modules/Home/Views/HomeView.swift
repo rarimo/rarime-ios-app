@@ -14,6 +14,7 @@ struct HomeView: View {
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
     @EnvironmentObject private var configManager: ConfigManager
     @EnvironmentObject private var likenessManager: LikenessManager
+    @EnvironmentObject private var pollsViewModel: PollsViewModel
 
     @StateObject var viewModel = ViewModel()
 
@@ -71,7 +72,7 @@ struct HomeView: View {
                     animation: identityAnimation
                 )
             },
-            HomeCarouselCard(action: { path = .voting }) {
+            HomeCarouselCard(isVisible: pollsViewModel.hasVoted, action: { path = .voting }) {
                 HomeCardView(
                     backgroundGradient: Gradients.gradientFifth,
                     topIcon: Icons.freedomtool,
@@ -145,7 +146,7 @@ struct HomeView: View {
                     animation: likenessAnimation
                 )
             },
-            HomeCarouselCard(action: { path = .claimTokens }) {
+            HomeCarouselCard(isVisible: isBalanceSufficient, action: { path = .claimTokens }) {
                 HomeCardView(
                     backgroundGradient: Gradients.gradientThird,
                     topIcon: Icons.rarimo,
@@ -163,7 +164,7 @@ struct HomeView: View {
             },
             //            TODO: uncomment after desing and flow impl
             //            HomeCarouselCard(
-            //                isShouldDisplay: !isBalanceFetching && pointsBalance != nil,
+            //                isVisible: !isBalanceFetching && pointsBalance != nil,
             //                action: { path = .inviteFriends }
             //            ) {
             //                HomeCardView(
@@ -363,14 +364,14 @@ struct HomeView: View {
                 ZStack(alignment: .trailing) {
                     SnapCarouselView(
                         index: $viewModel.currentIndex,
-                        cards: homeCards.filter { $0.isShouldDisplay },
+                        cards: homeCards.filter { $0.isVisible },
                         spacing: 30,
                         trailingSpace: 20
                     )
                     .padding(.horizontal, 22)
                     if homeCards.count > 1 {
                         VerticalStepIndicator(
-                            steps: homeCards.filter(\.isShouldDisplay).count,
+                            steps: homeCards.filter(\.isVisible).count,
                             currentStep: viewModel.currentIndex
                         )
                         .padding(.trailing, 8)
@@ -471,4 +472,5 @@ struct HomeView: View {
         .environmentObject(NotificationManager())
         .environmentObject(ExternalRequestsManager())
         .environmentObject(LikenessManager())
+        .environmentObject(PollsViewModel())
 }
