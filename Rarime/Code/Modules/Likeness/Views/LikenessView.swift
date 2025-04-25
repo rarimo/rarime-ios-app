@@ -159,7 +159,7 @@ struct LikenessView: View {
                 }
                 Spacer()
                 AppButton(
-                    text: "Set the rule",
+                    text: "Set a rule",
                     width: 146,
                     action: { isRuleSheetPresented = true }
                 )
