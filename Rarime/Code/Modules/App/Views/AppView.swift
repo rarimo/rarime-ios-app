@@ -61,7 +61,7 @@ struct AppView: View {
             }
             AlertManagerView()
         }
-        .colorScheme(settingsManager.colorScheme.rawScheme ?? colorScheme)
+        .preferredColorScheme(settingsManager.colorScheme.rawScheme ?? colorScheme)
         .blur(radius: blurRadius)
         .animation(.easeOut(duration: 0.1), value: blurRadius)
         .onChange(of: scenePhase, perform: { value in
