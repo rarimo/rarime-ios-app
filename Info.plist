@@ -241,5 +241,10 @@
 	</dict>
 	<key>VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS</key>
 	<string>${VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS}</string>
+	<key>ZKEY_URLS</key>
+	<dict>
+		<key>likeness</key>
+		<string>${ZKEY_URL_0}</string>
+	</dict>
 </dict>
 </plist>
