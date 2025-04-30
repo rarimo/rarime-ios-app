@@ -197,8 +197,8 @@ class CircuitDataManager: ObservableObject {
             AppUserDefaults.shared.isCircuitsStorageCleared = true
         }
         
-        if let circuitData = try retriveZkeyPathFromCache(zkeyName.rawValue) {
-            return circuitData
+        if let zkeyPath = try retriveZkeyPathFromCache(zkeyName.rawValue) {
+            return zkeyPath
         }
         
         guard let zkeyURL = zkeyURLs[zkeyName.rawValue] else {
