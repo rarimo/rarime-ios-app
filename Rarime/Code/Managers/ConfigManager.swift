@@ -15,159 +15,74 @@ class ConfigManager: ObservableObject {
 
 extension ConfigManager {
     class General {
-        let privacyPolicyURL: URL
-        let termsOfUseURL: URL
-        let airdropTerms: URL
-        let version: String
-        let generalNotificationTopic: String
-        let claimableNotificationTopic: String
-
-        init() {
-            do {
-                self.privacyPolicyURL = try readURLFromInfoPlist(key: "PRIVACY_POLICY_URL")
-                self.termsOfUseURL = try readURLFromInfoPlist(key: "TERMS_OF_USE_URL")
-                self.airdropTerms = try readURLFromInfoPlist(key: "AIRDROP_TERMS_URL")
-                self.version = try readFromInfoPlist(key: "CFBundleShortVersionString")
-                self.generalNotificationTopic = try readFromInfoPlist(key: "GENERAL_NOTIFICATION_TOPIC")
-                self.claimableNotificationTopic = try readFromInfoPlist(key: "CLAIMABLE_NOTIFICATION_TOPIC")
-            } catch {
-                fatalError("ConfigManager.General init error: \(error.localizedDescription)")
-            }
-        }
+        let privacyPolicyURL: URL = try! readURLFromInfoPlist(key: "PRIVACY_POLICY_URL")
+        let termsOfUseURL: URL = try! readURLFromInfoPlist(key: "TERMS_OF_USE_URL")
+        let airdropTerms: URL = try! readURLFromInfoPlist(key: "AIRDROP_TERMS_URL")
+        let version: String = try! readFromInfoPlist(key: "CFBundleShortVersionString")
+        let generalNotificationTopic: String = try! readFromInfoPlist(key: "GENERAL_NOTIFICATION_TOPIC")
+        let claimableNotificationTopic: String = try! readFromInfoPlist(key: "CLAIMABLE_NOTIFICATION_TOPIC")
     }
 }
 
 extension ConfigManager {
     class API {
-        let relayerURL: URL
-        let evmRpcURL: URL
-        let registerContractAddress: String
-        let registrationSimpleContractAddress: String
-        let certificatesSmtContractAddress: String
-        let registrationSmtContractAddress: String
-        let stateKeeperContractAddress: String
-        let cosmosRpcURL: URL
-        let pointsServiceURL: URL
-        let authorizeURL: URL
-        let referralURL: URL
-        let joinRewardsKey: String
-        let defaultReferralCode: String
-        let lightSignaturePrivateKey: String
-        let proposalsStateContractAddress: String
-        let multicall3ContractAddress: String
-        let ipfsNodeURL: URL
-        let votingWebsiteURL: URL
-        let votingRelayerURL: URL
-        let votingRpcURL: URL
-        let votingRegistartionSmtContractAddress: String
-
-        init() {
-            do {
-                self.relayerURL = try readURLFromInfoPlist(key: "RELAYER_URL")
-                self.evmRpcURL = try readURLFromInfoPlist(key: "EVM_RPC_URL")
-                self.registerContractAddress = try readFromInfoPlist(key: "REGISTER_CONTRACT_ADDRESS")
-                self.registrationSimpleContractAddress = try readFromInfoPlist(key: "REGISTRATION_SIMPLE_CONTRACT_ADRRESS")
-                self.certificatesSmtContractAddress = try readFromInfoPlist(key: "CERTIFICATES_SMT_CONTRACT_ADDRESS")
-                self.registrationSmtContractAddress = try readFromInfoPlist(key: "REGISTRATION_SMT_CONTRACT_ADDRESS")
-                self.stateKeeperContractAddress = try readFromInfoPlist(key: "STATE_KEEPER_CONTRACT_ADDRESS")
-                self.cosmosRpcURL = try readURLFromInfoPlist(key: "COSMOS_RPC_URL")
-                self.pointsServiceURL = try readURLFromInfoPlist(key: "POINTS_SERVICE_URL")
-                self.authorizeURL = try readURLFromInfoPlist(key: "AUTHORIZE_URL")
-                self.referralURL = try readURLFromInfoPlist(key: "REFERRAL_URL")
-                self.joinRewardsKey = try readFromInfoPlist(key: "JOIN_REWARDS_KEY")
-                self.defaultReferralCode = try readFromInfoPlist(key: "DEFAULT_REFERRAL_CODE")
-                self.lightSignaturePrivateKey = try readFromInfoPlist(key: "LIGHT_SIGNATURE_PRIVATE_KEY")
-                self.proposalsStateContractAddress = try readFromInfoPlist(key: "PROPOSALS_STATE_CONTRACT_ADDRESS")
-                self.multicall3ContractAddress = try readFromInfoPlist(key: "MULTICALL3_CONTRACT_ADDRESS")
-                self.ipfsNodeURL = try readURLFromInfoPlist(key: "IPFS_NODE_URL")
-                self.votingWebsiteURL = try readURLFromInfoPlist(key: "VOTING_WEBSITE_URL")
-                self.votingRelayerURL = try readURLFromInfoPlist(key: "VOTING_RELAYER_URL")
-                self.votingRpcURL = try readURLFromInfoPlist(key: "VOTING_RPC_URL")
-                self.votingRegistartionSmtContractAddress = try readFromInfoPlist(key: "VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS")
-            } catch {
-                fatalError("ConfigManager.API init error: \(error.localizedDescription)")
-            }
-        }
+        let relayerURL: URL = try! readURLFromInfoPlist(key: "RELAYER_URL")
+        let evmRpcURL: URL = try! readURLFromInfoPlist(key: "EVM_RPC_URL")
+        let registerContractAddress: String = try! readFromInfoPlist(key: "REGISTER_CONTRACT_ADDRESS")
+        let registrationSimpleContractAddress: String = try! readFromInfoPlist(key: "REGISTRATION_SIMPLE_CONTRACT_ADRRESS")
+        let certificatesSmtContractAddress: String = try! readFromInfoPlist(key: "CERTIFICATES_SMT_CONTRACT_ADDRESS")
+        let registrationSmtContractAddress: String = try! readFromInfoPlist(key: "REGISTRATION_SMT_CONTRACT_ADDRESS")
+        let stateKeeperContractAddress: String = try! readFromInfoPlist(key: "STATE_KEEPER_CONTRACT_ADDRESS")
+        let cosmosRpcURL: URL = try! readURLFromInfoPlist(key: "COSMOS_RPC_URL")
+        let pointsServiceURL: URL = try! readURLFromInfoPlist(key: "POINTS_SERVICE_URL")
+        let authorizeURL: URL = try! readURLFromInfoPlist(key: "AUTHORIZE_URL")
+        let referralURL: URL = try! readURLFromInfoPlist(key: "REFERRAL_URL")
+        let joinRewardsKey: String = try! readFromInfoPlist(key: "JOIN_REWARDS_KEY")
+        let defaultReferralCode: String = try! readFromInfoPlist(key: "DEFAULT_REFERRAL_CODE")
+        let lightSignaturePrivateKey: String = try! readFromInfoPlist(key: "LIGHT_SIGNATURE_PRIVATE_KEY")
+        let proposalsStateContractAddress: String = try! readFromInfoPlist(key: "PROPOSALS_STATE_CONTRACT_ADDRESS")
+        let multicall3ContractAddress: String = try! readFromInfoPlist(key: "MULTICALL3_CONTRACT_ADDRESS")
+        let ipfsNodeURL: URL = try! readURLFromInfoPlist(key: "IPFS_NODE_URL")
+        let votingWebsiteURL: URL = try! readURLFromInfoPlist(key: "VOTING_WEBSITE_URL")
+        let votingRelayerURL: URL = try! readURLFromInfoPlist(key: "VOTING_RELAYER_URL")
+        let votingRpcURL: URL = try! readURLFromInfoPlist(key: "VOTING_RPC_URL")
+        let votingRegistartionSmtContractAddress: String = try! readFromInfoPlist(key: "VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS")
     }
 }
 
 extension ConfigManager {
     class Cosmos {
-        let chainId: String
-        let denom: String
-        let rpcIp: String
-
-        init() {
-            do {
-                self.chainId = try readFromInfoPlist(key: "CHAIN_ID")
-                self.denom = try readFromInfoPlist(key: "DENOM")
-                self.rpcIp = try readFromInfoPlist(key: "RPC_IP")
-            } catch {
-                fatalError("ConfigManager.Cosmos init error: \(error.localizedDescription)")
-            }
-        }
+        let chainId: String = try! readFromInfoPlist(key: "CHAIN_ID")
+        let denom: String = try! readFromInfoPlist(key: "DENOM")
+        let rpcIp: String = try! readFromInfoPlist(key: "RPC_IP")
     }
 }
 
 extension ConfigManager {
     class CertificatesStorage {
-        let icaoCosmosRpc: String
-        let masterCertificatesBucketname: String
-        let masterCertificatesFilename: String
-
-        init() {
-            do {
-                self.icaoCosmosRpc = try readFromInfoPlist(key: "ICAO_COSMOS_RPC")
-                self.masterCertificatesBucketname = try readFromInfoPlist(key: "MASTER_CERTIFICATES_BUCKETNAME")
-                self.masterCertificatesFilename = try readFromInfoPlist(key: "MASTER_CERTIFICATES_FILENAME")
-            } catch {
-                fatalError("ConfigManager.CertificatesStorage init error: \(error.localizedDescription)")
-            }
-        }
+        let icaoCosmosRpc: String = try! readFromInfoPlist(key: "ICAO_COSMOS_RPC")
+        let masterCertificatesBucketname: String = try! readFromInfoPlist(key: "MASTER_CERTIFICATES_BUCKETNAME")
+        let masterCertificatesFilename: String = try! readFromInfoPlist(key: "MASTER_CERTIFICATES_FILENAME")
     }
 }
 
 extension ConfigManager {
     class CircuitData {
-        let circuitDataURLs: [String: URL]
-
-        init() {
-            do {
-                self.circuitDataURLs = try readURLDictionaryFromInfoPlist(key: "CIRCUIT_DATA_URLS")
-            } catch {
-                fatalError("ConfigManager.CircuitData init error: \(error)")
-            }
-        }
+        let circuitDataURLs: [String: URL] = try! readURLDictionaryFromInfoPlist(key: "CIRCUIT_DATA_URLS")
+        let zkeyURLs: [String: URL] = try! readURLDictionaryFromInfoPlist(key: "ZKEY_URLS")
     }
 }
 
 extension ConfigManager {
     class Feedback {
-        let feedbackEmail: String
-
-        init() {
-            do {
-                self.feedbackEmail = try readFromInfoPlist(key: "FEEDBACK_EMAIL")
-            } catch {
-                fatalError("ConfigManager.Feedback init error: \(error.localizedDescription)")
-            }
-        }
+        let feedbackEmail: String = try! readFromInfoPlist(key: "FEEDBACK_EMAIL")
     }
 }
 
 extension ConfigManager {
     class AppsFlyer {
-        let appId: String
-        let devKey: String
-
-        init() {
-            do {
-                self.appId = try readFromInfoPlist(key: "APPSFLYER_APP_ID")
-                self.devKey = try readFromInfoPlist(key: "APPSFLYER_DEV_KEY")
-            } catch {
-                fatalError("ConfigManager.AppsFlyer init error: \(error.localizedDescription)")
-            }
-        }
+        let appId: String = try! readFromInfoPlist(key: "APPSFLYER_APP_ID")
+        let devKey: String = try! readFromInfoPlist(key: "APPSFLYER_DEV_KEY")
     }
 }
 

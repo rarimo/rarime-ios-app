@@ -50,6 +50,10 @@ enum RegisteredCircuitData: String {
     case registerIdentity_20_160_3_3_736_200_NA
 }
 
+enum RegisteredCircuitZkey: String {
+    case likeness
+}
+
 enum RegisteredNoirCircuitData: String {
     // If you decided to remove ".dat", well, good luck to debug crash buddy
     case trustedSetup = "trustedSetup.dat"
@@ -66,11 +70,13 @@ enum RegisteredNoirCircuitData: String {
 class CircuitDataManager: ObservableObject {
     static let saveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "circuitsData", directoryHint: .isDirectory)
     static let noirSaveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "noirCircuitsData", directoryHint: .isDirectory)
+    static let zkeySaveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "zkeys", directoryHint: .isDirectory)
     
     static let shared = CircuitDataManager()
 
     let circuitDataURLs: [String: URL]
     let noirCircuitDataURLs: [String: URL]
+    let zkeyURLs: [String: URL]
 
     init() {
         self.circuitDataURLs = ConfigManager.shared.circuitData.circuitDataURLs
