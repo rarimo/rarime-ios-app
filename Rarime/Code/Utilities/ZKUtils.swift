@@ -113,6 +113,16 @@ class ZKUtils {
 #endif
     }
     
+    public static func bionetta(_ inputs: Data) throws -> Data {
+#if targetEnvironment(simulator)
+        return Data()
+#else
+        let result = bionet((inputs as NSData).bytes, UInt(inputs.count))
+        
+        return Data(bytes: result.data, count: Int(result.len))
+#endif
+    }
+    
     public static func getNoirVerificationKey(
         _ trustedSetupPath: String,
         _ circuitData: Data

@@ -9,22 +9,32 @@ struct RarimeApp: App {
     
     var body: some Scene {
         WindowGroup {
-            AppView()
-                .environmentObject(AlertManager.shared)
-                .environmentObject(UserManager.shared)
-                .environmentObject(ConfigManager.shared)
-                .environmentObject(SecurityManager.shared)
-                .environmentObject(WalletManager.shared)
-                .environmentObject(SettingsManager.shared)
-                .environmentObject(PassportManager.shared)
-                .environmentObject(AppIconManager.shared)
-                .environmentObject(UpdateManager.shared)
-                .environmentObject(DecentralizedAuthManager.shared)
-                .environmentObject(CircuitDataManager.shared)
-                .environmentObject(NotificationManager.shared)
-                .environmentObject(ExternalRequestsManager.shared)
-                .environmentObject(InternetConnectionManager.shared)
-                .environmentObject(LikenessManager.shared)
+//            AppView()
+//                .environmentObject(AlertManager.shared)
+//                .environmentObject(UserManager.shared)
+//                .environmentObject(ConfigManager.shared)
+//                .environmentObject(SecurityManager.shared)
+//                .environmentObject(WalletManager.shared)
+//                .environmentObject(SettingsManager.shared)
+//                .environmentObject(PassportManager.shared)
+//                .environmentObject(AppIconManager.shared)
+//                .environmentObject(UpdateManager.shared)
+//                .environmentObject(DecentralizedAuthManager.shared)
+//                .environmentObject(CircuitDataManager.shared)
+//                .environmentObject(NotificationManager.shared)
+//                .environmentObject(ExternalRequestsManager.shared)
+//                .environmentObject(InternetConnectionManager.shared)
+//                .environmentObject(LikenessManager.shared)
+            
+            VStack {}
+                .onAppear {
+                    Task {
+                        do {
+                        } catch {
+                            LoggerUtil.common.error("error: \(error)")
+                        }
+                    }
+                }
         }
     }
 }

@@ -307,6 +307,7 @@
 		CE68BE472BD9B6EA00D92EBB /* Web3ContractABI in Frameworks */ = {isa = PBXBuildFile; productRef = CE68BE462BD9B6EA00D92EBB /* Web3ContractABI */; };
 		CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE68BE482BD9B6EA00D92EBB /* Web3PromiseKit */; };
 		CE68BE4B2BD9B75100D92EBB /* ContractABI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE4A2BD9B75100D92EBB /* ContractABI.swift */; };
+		CE6FFBCC2DC370870083E855 /* libbionet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6FFBCB2DC370870083E855 /* libbionet.a */; };
 		CE72101E2BD7BD9D0043DB7F /* Data+Utf8.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72101D2BD7BD9D0043DB7F /* Data+Utf8.swift */; };
 		CE7210292BD7D0D10043DB7F /* String+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7210282BD7D0D10043DB7F /* String+Hex.swift */; };
 		CE72102E2BD7F6780043DB7F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE72102D2BD7F6780043DB7F /* Alamofire */; };
@@ -676,6 +677,8 @@
 		CE68BE4A2BD9B75100D92EBB /* ContractABI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractABI.swift; sourceTree = "<group>"; };
 		CE6BC17E2CBEA9AC00880287 /* witnesscalc_registerIdentity_1_256_3_6_576_264_1_2448_3_256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_1_256_3_6_576_264_1_2448_3_256.h; sourceTree = "<group>"; };
 		CE6BC1802CBEA9D600880287 /* witnesscalc_registerIdentity_2_256_3_6_576_248_1_2432_3_256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_2_256_3_6_576_248_1_2432_3_256.h; sourceTree = "<group>"; };
+		CE6FFBCB2DC370870083E855 /* libbionet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbionet.a; sourceTree = "<group>"; };
+		CE6FFBCD2DC3709B0083E855 /* bionet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bionet.h; sourceTree = "<group>"; };
 		CE72101D2BD7BD9D0043DB7F /* Data+Utf8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Utf8.swift"; sourceTree = "<group>"; };
 		CE7210282BD7D0D10043DB7F /* String+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Hex.swift"; sourceTree = "<group>"; };
 		CE7210322BD818020043DB7F /* Double+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Rounded.swift"; sourceTree = "<group>"; };
@@ -816,6 +819,7 @@
 				CEC76C932D6750D800130CA1 /* libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a in Frameworks */,
 				CE39DFE22D3FAA5200799A4B /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.a in Frameworks */,
 				CE9B5BD42D9FE3A0000B4E3B /* Identity.xcframework in Frameworks */,
+				CE6FFBCC2DC370870083E855 /* libbionet.a in Frameworks */,
 				CE39DFE32D3FAA5200799A4B /* libwitnesscalc_registerIdentity_3_160_3_4_576_216_1_1512_3_256.a in Frameworks */,
 				CE28D4FB2D3E887300042E1D /* libwitnesscalc_registerIdentityLight256.a in Frameworks */,
 				CE39E09C2D3FCA1900799A4B /* libwitnesscalc_registerIdentity_21_256_3_4_576_232_NA.a in Frameworks */,
@@ -1691,6 +1695,7 @@
 				CE9B5BD32D9FE3A0000B4E3B /* Identity.xcframework */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562002BD923B3002D4954 /* prover.h */,
+				CE6FFBCD2DC3709B0083E855 /* bionet.h */,
 				CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */,
 				CEC561FD2BD923B3002D4954 /* witnesscalc_queryIdentity.h */,
 				CEF56DE62CF5D9AF00F4A477 /* witnesscalc_registerIdentity_1_160_3_3_576_200_NA.h */,
@@ -1726,6 +1731,7 @@
 				CE30FA912D50DE640057F897 /* witnesscalc_registerIdentity_20_160_3_3_736_200_NA.h */,
 				CE30FA922D50DE710057F897 /* witnesscalc_registerIdentity_20_256_3_5_336_72_NA.h */,
 				CE30FA932D50DE7F0057F897 /* witnesscalc_registerIdentity_21_256_3_5_576_232_NA.h */,
+				CE6FFBCB2DC370870083E855 /* libbionet.a */,
 				CEE4FEA82CFDB851007C31F3 /* libfr.a */,
 				CEC562022BD923B4002D4954 /* libfq.a */,
 				CEE4FEAA2CFDBA80007C31F3 /* libgmp.a */,
