@@ -198,6 +198,7 @@
 		CE059B442C9C4702006046B3 /* InternetConnectionRequiredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE059B432C9C4702006046B3 /* InternetConnectionRequiredView.swift */; };
 		CE06590E2DC8C0E0004FBDD5 /* NeuralUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE06590D2DC8C0AA004FBDD5 /* NeuralUtils.swift */; };
 		CE06590F2DC8C0E0004FBDD5 /* NeuralUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE06590D2DC8C0AA004FBDD5 /* NeuralUtils.swift */; };
+		CE0659112DC8C1B1004FBDD5 /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0659102DC8C1AE004FBDD5 /* UIImage+resize.swift */; };
 		CE06BF312D083CCB00F6C721 /* PubSignals.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE06BF302D083CC900F6C721 /* PubSignals.swift */; };
 		CE06BF322D083CCB00F6C721 /* PubSignals.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE06BF302D083CC900F6C721 /* PubSignals.swift */; };
 		CE06BF342D08567500F6C721 /* LightRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE06BF332D08566400F6C721 /* LightRegistrationService.swift */; };
@@ -309,7 +310,6 @@
 		CE68BE472BD9B6EA00D92EBB /* Web3ContractABI in Frameworks */ = {isa = PBXBuildFile; productRef = CE68BE462BD9B6EA00D92EBB /* Web3ContractABI */; };
 		CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE68BE482BD9B6EA00D92EBB /* Web3PromiseKit */; };
 		CE68BE4B2BD9B75100D92EBB /* ContractABI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE4A2BD9B75100D92EBB /* ContractABI.swift */; };
-		CE6FFBCC2DC370870083E855 /* libbionet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6FFBCB2DC370870083E855 /* libbionet.a */; };
 		CE72101E2BD7BD9D0043DB7F /* Data+Utf8.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72101D2BD7BD9D0043DB7F /* Data+Utf8.swift */; };
 		CE7210292BD7D0D10043DB7F /* String+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7210282BD7D0D10043DB7F /* String+Hex.swift */; };
 		CE72102E2BD7F6780043DB7F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE72102D2BD7F6780043DB7F /* Alamofire */; };
@@ -597,6 +597,7 @@
 		CE059B412C9C4608006046B3 /* InternetConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionManager.swift; sourceTree = "<group>"; };
 		CE059B432C9C4702006046B3 /* InternetConnectionRequiredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionRequiredView.swift; sourceTree = "<group>"; };
 		CE06590D2DC8C0AA004FBDD5 /* NeuralUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuralUtils.swift; sourceTree = "<group>"; };
+		CE0659102DC8C1AE004FBDD5 /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
 		CE06BF302D083CC900F6C721 /* PubSignals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubSignals.swift; sourceTree = "<group>"; };
 		CE06BF332D08566400F6C721 /* LightRegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightRegistrationService.swift; sourceTree = "<group>"; };
 		CE0881A02BF773CC00B31735 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
@@ -827,7 +828,6 @@
 				CEC76C932D6750D800130CA1 /* libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a in Frameworks */,
 				CE39DFE22D3FAA5200799A4B /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.a in Frameworks */,
 				CE9B5BD42D9FE3A0000B4E3B /* Identity.xcframework in Frameworks */,
-				CE6FFBCC2DC370870083E855 /* libbionet.a in Frameworks */,
 				CE39DFE32D3FAA5200799A4B /* libwitnesscalc_registerIdentity_3_160_3_4_576_216_1_1512_3_256.a in Frameworks */,
 				CE28D4FB2D3E887300042E1D /* libwitnesscalc_registerIdentityLight256.a in Frameworks */,
 				CE39E09C2D3FCA1900799A4B /* libwitnesscalc_registerIdentity_21_256_3_4_576_232_NA.a in Frameworks */,
@@ -1439,6 +1439,7 @@
 		CE778B6F2BA9A73700B26485 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CE0659102DC8C1AE004FBDD5 /* UIImage+resize.swift */,
 				C7BD524A2D82ED730072F0BA /* View+Shadow.swift */,
 				C72F331B2D68A8D600AC1814 /* View+Blur.swift */,
 				56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */,
@@ -2083,6 +2084,7 @@
 				564169602BE273260057AC03 /* PassportCardLook.swift in Sources */,
 				5655E4352BD5173200B86C5C /* AppView+ViewModel.swift in Sources */,
 				C7D624572D6DB4E2007BA5A6 /* Multicall3Contract.swift in Sources */,
+				CE0659112DC8C1B1004FBDD5 /* UIImage+resize.swift in Sources */,
 				568D45C82C29AC200065D467 /* PassportChipErrorView.swift in Sources */,
 				56E2D9172BCE938F006E725D /* ActionCard.swift in Sources */,
 				CEFE5F392CB56C8700498F39 /* CryptoUtils.swift in Sources */,
@@ -2796,6 +2798,10 @@
 				MARKETING_VERSION = 2.2.7;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
+					"-lc++",
+					"$(PROJECT_DIR)/Frameworks/libbionet.a",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2849,6 +2855,10 @@
 				MARKETING_VERSION = 2.2.7;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
+					"-lc++",
+					"$(PROJECT_DIR)/Frameworks/libbionet.a",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2968,6 +2978,10 @@
 				MARKETING_VERSION = 2.2.7;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
+					"-lc++",
+					"$(PROJECT_DIR)/Frameworks/libbionet.a",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -3080,6 +3094,10 @@
 				MARKETING_VERSION = 2.2.7;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
+					"-lc++",
+					"$(PROJECT_DIR)/Frameworks/libbionet.a",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Rarilabs.Rarime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
