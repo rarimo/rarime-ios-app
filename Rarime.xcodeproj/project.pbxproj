@@ -332,8 +332,8 @@
 		CE8FEB5F2C1AFF0A0008381A /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB5E2C1AFF0A0008381A /* JWT.swift */; };
 		CE8FEB622C1B03C10008381A /* AuthCircuitInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB612C1B03C10008381A /* AuthCircuitInputs.swift */; };
 		CE9347732C205B340034885C /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = CE9347722C205B340034885C /* CachedAsyncImage */; };
-		CE937B032DC8B65300D254D1 /* TenserFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE937B022DC8B64F00D254D1 /* TenserFlow.swift */; };
-		CE937B052DC8B6EC00D254D1 /* TenserFlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE937B042DC8B6E000D254D1 /* TenserFlowManager.swift */; };
+		CE937B032DC8B65300D254D1 /* TensorFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE937B022DC8B64F00D254D1 /* TensorFlow.swift */; };
+		CE937B052DC8B6EC00D254D1 /* TensorFlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE937B042DC8B6E000D254D1 /* TensorFlowManager.swift */; };
 		CE937B082DC8B98900D254D1 /* TensorFlowLiteSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE937B072DC8B98900D254D1 /* TensorFlowLiteSwift */; };
 		CE9B5BD42D9FE3A0000B4E3B /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9B5BD32D9FE3A0000B4E3B /* Identity.xcframework */; };
 		CE9E82B62BA881F400AAF885 /* RarimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82B52BA881F400AAF885 /* RarimeApp.swift */; };
@@ -695,8 +695,8 @@
 		CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_auth.h; sourceTree = "<group>"; };
 		CE8FEB5E2C1AFF0A0008381A /* JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
 		CE8FEB612C1B03C10008381A /* AuthCircuitInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCircuitInputs.swift; sourceTree = "<group>"; };
-		CE937B022DC8B64F00D254D1 /* TenserFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenserFlow.swift; sourceTree = "<group>"; };
-		CE937B042DC8B6E000D254D1 /* TenserFlowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenserFlowManager.swift; sourceTree = "<group>"; };
+		CE937B022DC8B64F00D254D1 /* TensorFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TensorFlow.swift; sourceTree = "<group>"; };
+		CE937B042DC8B6E000D254D1 /* TensorFlowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TensorFlowManager.swift; sourceTree = "<group>"; };
 		CE9B5BD32D9FE3A0000B4E3B /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE9E82B22BA881F400AAF885 /* Rarime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rarime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE9E82B52BA881F400AAF885 /* RarimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarimeApp.swift; sourceTree = "<group>"; };
@@ -1012,7 +1012,7 @@
 		5655E41D2BD2C38E00B86C5C /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				CE937B042DC8B6E000D254D1 /* TenserFlowManager.swift */,
+				CE937B042DC8B6E000D254D1 /* TensorFlowManager.swift */,
 				CE65A3D42DAEA5E8004A423D /* DebugManager.swift */,
 				5659151E2BE92B1F0050795A /* AppIconManager.swift */,
 				5655E4292BD2C7C800B86C5C /* ConfigManager.swift */,
@@ -1181,7 +1181,7 @@
 		56E2D92B2BCFFC69006E725D /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				CE937B022DC8B64F00D254D1 /* TenserFlow.swift */,
+				CE937B022DC8B64F00D254D1 /* TensorFlow.swift */,
 				CE3CD7942DB6834700112E46 /* DebugAssets.swift */,
 				C7780C992D6357370050B5BB /* Rewards.swift */,
 				C7DF8BF22D5F699400C8E2D2 /* Gradients.swift */,
@@ -2104,7 +2104,7 @@
 				CEFF68C12CB6AF46008769EA /* Encodable+json.swift in Sources */,
 				5655E4372BD51E8E00B86C5C /* AppKeychain.swift in Sources */,
 				568B4FE52BB70CAA001C9C74 /* IntroStep.swift in Sources */,
-				CE937B032DC8B65300D254D1 /* TenserFlow.swift in Sources */,
+				CE937B032DC8B65300D254D1 /* TensorFlow.swift in Sources */,
 				5655E42A2BD2C7C800B86C5C /* ConfigManager.swift in Sources */,
 				563529E92BB072B80027C910 /* IdentityView.swift in Sources */,
 				C7D624542D6DB4C6007BA5A6 /* ProposalsStateContract.swift in Sources */,
@@ -2159,7 +2159,7 @@
 				CED314672C0483BD00DF31D5 /* MailView.swift in Sources */,
 				5617AB102C8F4469003947C9 /* VerificatorApi.swift in Sources */,
 				567ADEC42C25CF32007070A7 /* JSONDocument.swift in Sources */,
-				CE937B052DC8B6EC00D254D1 /* TenserFlowManager.swift in Sources */,
+				CE937B052DC8B6EC00D254D1 /* TensorFlowManager.swift in Sources */,
 				5655E4302BD2CA5500B86C5C /* AppColorScheme.swift in Sources */,
 				C7E9F5152D88314D00FE1194 /* PullToCloseWrapperView.swift in Sources */,
 				C7F61DF52D84226000D4DC3A /* UnsupportedPassportView.swift in Sources */,

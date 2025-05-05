@@ -2,8 +2,8 @@ import Foundation
 
 import TensorFlowLite
 
-class TenserFlowManager {
-    static let shared = TenserFlowManager()
+class TensorFlowManager {
+    static let shared = TensorFlowManager()
 
     func compute(_ inputs: [Float], tfData: Data) throws -> [Float] {
         let interpreter = try Interpreter(modelData: tfData)
