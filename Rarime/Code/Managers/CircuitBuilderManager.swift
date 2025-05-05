@@ -150,3 +150,33 @@ extension CircuitBuilderManager {
         }
     }
 }
+
+extension CircuitBuilderManager {
+    private static let threshold: Int = 107374182
+    
+    class BionetCircuit {
+        func inputs(
+            _ imageData: Data,
+            _ features: [Float],
+            _ nonce: Int,
+            _ address: String
+        ) -> BionetInputs {
+            var imageMatrix: [[Int]] = []
+            for x in 0..<TenserFlow.bionetImageBoundary {
+                var imageRow: [Int] = []
+                for y in 0..<TenserFlow.bionetImageBoundary {
+                    let pixelValue = imageData[x * TenserFlow.bionetImageBoundary + y]
+                    imageRow.append(Int(pixelValue))
+                }
+            }
+            
+            return .init(
+                image: [imageMatrix],
+                features: features.map { Int($0 * 255) },
+                nonce: nonce,
+                address: address,
+                threshold: CircuitBuilderManager.threshold
+            )
+        }
+    }
+}
