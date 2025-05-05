@@ -175,6 +175,14 @@ struct LikenessView: View {
                 FaceLikenessView(
                     onConfirm: { image in
                         likenessManager.setFaceImage(UIImage(cgImage: image))
+
+                        Task {
+                            do {
+                                try await likenessManager.runRegistration()
+                            } catch {
+                                LoggerUtil.common.error("error: \(error)")
+                            }
+                        }
                     },
                     onBack: { isScanSheetPresented = false }
                 )

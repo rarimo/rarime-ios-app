@@ -11,6 +11,7 @@ class CircuitBuilderManager {
     let registerIdentityCircuit = RegisterIdentityCircuit()
     let registerIdentityLightCircuit = RegisterIdentityLightCircuit()
     let noirRegisterIdentityCircuit = NoirRegisterIdentityCircuit()
+    let bionetCircuit = BionetCircuit()
 }
 
 extension CircuitBuilderManager {
@@ -159,15 +160,17 @@ extension CircuitBuilderManager {
             _ imageData: Data,
             _ features: [Float],
             _ nonce: Int,
-            _ address: String
+            _ address: Int
         ) -> BionetInputs {
             var imageMatrix: [[Int]] = []
-            for x in 0..<TenserFlow.bionetImageBoundary {
+            for x in 0..<TensorFlow.bionetImageBoundary {
                 var imageRow: [Int] = []
-                for y in 0..<TenserFlow.bionetImageBoundary {
-                    let pixelValue = imageData[x * TenserFlow.bionetImageBoundary + y]
+                for y in 0..<TensorFlow.bionetImageBoundary {
+                    let pixelValue = imageData[x * TensorFlow.bionetImageBoundary + y]
                     imageRow.append(Int(pixelValue))
                 }
+                
+                imageMatrix.append(imageRow)
             }
             
             return .init(

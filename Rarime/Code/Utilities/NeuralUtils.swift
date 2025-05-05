@@ -57,8 +57,8 @@ class NeuralUtils {
         return (UIImage(cgImage: grayscaleCgImage), Data(pixelsData))
     }
 
-    func normalizeModel(_ model: Data) -> [Double] {
-        return model.map { Double($0) / 255.0 }
+    static func normalizeModel(_ model: Data) -> [Float] {
+        return model.map { Float($0) / 255.0 }
     }
 }
 

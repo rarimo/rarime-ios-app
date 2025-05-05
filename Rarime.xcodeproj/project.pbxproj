@@ -196,7 +196,6 @@
 		CE00DF4E2D9ACD5E00614151 /* NoirRegisterIdentityInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00DF4C2D9ACD5C00614151 /* NoirRegisterIdentityInputs.swift */; };
 		CE059B422C9C4608006046B3 /* InternetConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE059B412C9C4608006046B3 /* InternetConnectionManager.swift */; };
 		CE059B442C9C4702006046B3 /* InternetConnectionRequiredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE059B432C9C4702006046B3 /* InternetConnectionRequiredView.swift */; };
-		CE06590E2DC8C0E0004FBDD5 /* NeuralUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE06590D2DC8C0AA004FBDD5 /* NeuralUtils.swift */; };
 		CE06590F2DC8C0E0004FBDD5 /* NeuralUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE06590D2DC8C0AA004FBDD5 /* NeuralUtils.swift */; };
 		CE0659112DC8C1B1004FBDD5 /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0659102DC8C1AE004FBDD5 /* UIImage+resize.swift */; };
 		CE0659172DC8EDD6004FBDD5 /* BionetInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0659162DC8EDC7004FBDD5 /* BionetInputs.swift */; };
@@ -2017,7 +2016,6 @@
 				CE2797492CEB4229008649B0 /* Images.swift in Sources */,
 				CE7E95832CE7788200D86A4F /* Passport.swift in Sources */,
 				CE3D41D72C779C9E00D0AA65 /* PushNotificationsRaw.swift in Sources */,
-				CE06590E2DC8C0E0004FBDD5 /* NeuralUtils.swift in Sources */,
 				CE34775A2C788620005E91FE /* String+Error.swift in Sources */,
 				CE0659172DC8EDD6004FBDD5 /* BionetInputs.swift in Sources */,
 				CE27974E2CEB4281008649B0 /* PoseidonSMTContract.swift in Sources */,
