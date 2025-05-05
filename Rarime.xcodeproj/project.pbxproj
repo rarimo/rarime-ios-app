@@ -196,6 +196,8 @@
 		CE00DF4E2D9ACD5E00614151 /* NoirRegisterIdentityInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00DF4C2D9ACD5C00614151 /* NoirRegisterIdentityInputs.swift */; };
 		CE059B422C9C4608006046B3 /* InternetConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE059B412C9C4608006046B3 /* InternetConnectionManager.swift */; };
 		CE059B442C9C4702006046B3 /* InternetConnectionRequiredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE059B432C9C4702006046B3 /* InternetConnectionRequiredView.swift */; };
+		CE06590E2DC8C0E0004FBDD5 /* NeuralUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE06590D2DC8C0AA004FBDD5 /* NeuralUtils.swift */; };
+		CE06590F2DC8C0E0004FBDD5 /* NeuralUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE06590D2DC8C0AA004FBDD5 /* NeuralUtils.swift */; };
 		CE06BF312D083CCB00F6C721 /* PubSignals.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE06BF302D083CC900F6C721 /* PubSignals.swift */; };
 		CE06BF322D083CCB00F6C721 /* PubSignals.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE06BF302D083CC900F6C721 /* PubSignals.swift */; };
 		CE06BF342D08567500F6C721 /* LightRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE06BF332D08566400F6C721 /* LightRegistrationService.swift */; };
@@ -594,6 +596,7 @@
 		CE00DF4C2D9ACD5C00614151 /* NoirRegisterIdentityInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoirRegisterIdentityInputs.swift; sourceTree = "<group>"; };
 		CE059B412C9C4608006046B3 /* InternetConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionManager.swift; sourceTree = "<group>"; };
 		CE059B432C9C4702006046B3 /* InternetConnectionRequiredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionRequiredView.swift; sourceTree = "<group>"; };
+		CE06590D2DC8C0AA004FBDD5 /* NeuralUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuralUtils.swift; sourceTree = "<group>"; };
 		CE06BF302D083CC900F6C721 /* PubSignals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubSignals.swift; sourceTree = "<group>"; };
 		CE06BF332D08566400F6C721 /* LightRegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightRegistrationService.swift; sourceTree = "<group>"; };
 		CE0881A02BF773CC00B31735 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
@@ -989,6 +992,7 @@
 			children = (
 				CE68BE402BD9B69A00D92EBB /* Web3 */,
 				5655E42D2BD2C94F00B86C5C /* AppUserDefaults.swift */,
+				CE06590D2DC8C0AA004FBDD5 /* NeuralUtils.swift */,
 				CE3CD7912DB6819800112E46 /* PreviewUtils.swift */,
 				56062B9B2C12032700C9BF9B /* Constants.swift */,
 				5655E4362BD51E8E00B86C5C /* AppKeychain.swift */,
@@ -2008,6 +2012,7 @@
 				CE2797492CEB4229008649B0 /* Images.swift in Sources */,
 				CE7E95832CE7788200D86A4F /* Passport.swift in Sources */,
 				CE3D41D72C779C9E00D0AA65 /* PushNotificationsRaw.swift in Sources */,
+				CE06590E2DC8C0E0004FBDD5 /* NeuralUtils.swift in Sources */,
 				CE34775A2C788620005E91FE /* String+Error.swift in Sources */,
 				CE27974E2CEB4281008649B0 /* PoseidonSMTContract.swift in Sources */,
 				CE27974C2CEB426A008649B0 /* ContractABI.swift in Sources */,
@@ -2121,6 +2126,7 @@
 				561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */,
 				CEFF68BF2CB6A3E7008769EA /* CircuitBuilderManager.swift in Sources */,
 				CED314692C04889D00DF31D5 /* UIDevice+modelName.swift in Sources */,
+				CE06590F2DC8C0E0004FBDD5 /* NeuralUtils.swift in Sources */,
 				CE3CD3AE2C6CCD0E008313B8 /* ImportFileView.swift in Sources */,
 				C72F33182D677DBA00AC1814 /* AppIconButton.swift in Sources */,
 				CEDC57942CA2CA4100F02132 /* CMSampleBuffer+Extension.swift in Sources */,
