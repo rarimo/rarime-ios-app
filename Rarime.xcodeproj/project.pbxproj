@@ -298,7 +298,7 @@
 		CE61E8832C24240000940129 /* Semaphore in Frameworks */ = {isa = PBXBuildFile; productRef = CE61E8822C24240000940129 /* Semaphore */; };
 		CE61E88D2C247B4700940129 /* HMACUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61E88C2C247B4700940129 /* HMACUtils.swift */; };
 		CE65A3D32DAEA541004A423D /* DebugOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65A3D22DAEA541004A423D /* DebugOptionsView.swift */; };
-		CE65A3D52DAEA5ED004A423D /* DebugController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65A3D42DAEA5E8004A423D /* DebugController.swift */; };
+		CE65A3D52DAEA5ED004A423D /* DebugManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65A3D42DAEA5E8004A423D /* DebugManager.swift */; };
 		CE66B1462CA4148B002F658E /* ScanPassport.json in Resources */ = {isa = PBXBuildFile; fileRef = CE66B1452CA4148B002F658E /* ScanPassport.json */; };
 		CE68BE3D2BD9B23D00D92EBB /* ZkProof.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */; };
 		CE68BE3F2BD9B4B200D92EBB /* Relayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE3E2BD9B4B200D92EBB /* Relayer.swift */; };
@@ -332,6 +332,9 @@
 		CE8FEB5F2C1AFF0A0008381A /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB5E2C1AFF0A0008381A /* JWT.swift */; };
 		CE8FEB622C1B03C10008381A /* AuthCircuitInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB612C1B03C10008381A /* AuthCircuitInputs.swift */; };
 		CE9347732C205B340034885C /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = CE9347722C205B340034885C /* CachedAsyncImage */; };
+		CE937B032DC8B65300D254D1 /* TenserFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE937B022DC8B64F00D254D1 /* TenserFlow.swift */; };
+		CE937B052DC8B6EC00D254D1 /* TenserFlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE937B042DC8B6E000D254D1 /* TenserFlowManager.swift */; };
+		CE937B082DC8B98900D254D1 /* TensorFlowLiteSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE937B072DC8B98900D254D1 /* TensorFlowLiteSwift */; };
 		CE9B5BD42D9FE3A0000B4E3B /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9B5BD32D9FE3A0000B4E3B /* Identity.xcframework */; };
 		CE9E82B62BA881F400AAF885 /* RarimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82B52BA881F400AAF885 /* RarimeApp.swift */; };
 		CE9E82B82BA881F400AAF885 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E82B72BA881F400AAF885 /* AppView.swift */; };
@@ -666,7 +669,7 @@
 		CE5980DB2D07B279000B6261 /* RegisterIdentityLightInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterIdentityLightInputs.swift; sourceTree = "<group>"; };
 		CE61E88C2C247B4700940129 /* HMACUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACUtils.swift; sourceTree = "<group>"; };
 		CE65A3D22DAEA541004A423D /* DebugOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugOptionsView.swift; sourceTree = "<group>"; };
-		CE65A3D42DAEA5E8004A423D /* DebugController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugController.swift; sourceTree = "<group>"; };
+		CE65A3D42DAEA5E8004A423D /* DebugManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugManager.swift; sourceTree = "<group>"; };
 		CE664C7D2D19808900988A5E /* witnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.h; sourceTree = "<group>"; };
 		CE664C7E2D19809D00988A5E /* witnesscalc_registerIdentity_3_160_3_3_336_200_NA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_3_160_3_3_336_200_NA.h; sourceTree = "<group>"; };
 		CE664C7F2D19809D00988A5E /* witnesscalc_registerIdentity_3_160_3_4_576_216_1_1512_3_256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_3_160_3_4_576_216_1_1512_3_256.h; sourceTree = "<group>"; };
@@ -692,6 +695,8 @@
 		CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_auth.h; sourceTree = "<group>"; };
 		CE8FEB5E2C1AFF0A0008381A /* JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
 		CE8FEB612C1B03C10008381A /* AuthCircuitInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCircuitInputs.swift; sourceTree = "<group>"; };
+		CE937B022DC8B64F00D254D1 /* TenserFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenserFlow.swift; sourceTree = "<group>"; };
+		CE937B042DC8B6E000D254D1 /* TenserFlowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenserFlowManager.swift; sourceTree = "<group>"; };
 		CE9B5BD32D9FE3A0000B4E3B /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE9E82B22BA881F400AAF885 /* Rarime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rarime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE9E82B52BA881F400AAF885 /* RarimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarimeApp.swift; sourceTree = "<group>"; };
@@ -833,6 +838,7 @@
 				CE28D5062D3E887300042E1D /* libwitnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_4_256.a in Frameworks */,
 				CE28D5092D3E887300042E1D /* libwitnesscalc_registerIdentity_24_256_3_4_336_232_NA.a in Frameworks */,
 				CE28D50B2D3E887300042E1D /* libwitnesscalc_registerIdentity_1_256_3_3_576_248_NA.a in Frameworks */,
+				CE937B082DC8B98900D254D1 /* TensorFlowLiteSwift in Frameworks */,
 				CE28D50E2D3E887300042E1D /* libwitnesscalc_registerIdentityLight384.a in Frameworks */,
 				CE28D5112D3E887300042E1D /* libwitnesscalc_registerIdentity_1_160_3_3_576_200_NA.a in Frameworks */,
 				CE28D5122D3E887300042E1D /* libwitnesscalc_registerIdentity_1_256_3_6_576_264_1_2448_3_256.a in Frameworks */,
@@ -1006,7 +1012,8 @@
 		5655E41D2BD2C38E00B86C5C /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				CE65A3D42DAEA5E8004A423D /* DebugController.swift */,
+				CE937B042DC8B6E000D254D1 /* TenserFlowManager.swift */,
+				CE65A3D42DAEA5E8004A423D /* DebugManager.swift */,
 				5659151E2BE92B1F0050795A /* AppIconManager.swift */,
 				5655E4292BD2C7C800B86C5C /* ConfigManager.swift */,
 				5655E4242BD2C3B500B86C5C /* PassportManager.swift */,
@@ -1174,6 +1181,7 @@
 		56E2D92B2BCFFC69006E725D /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				CE937B022DC8B64F00D254D1 /* TenserFlow.swift */,
 				CE3CD7942DB6834700112E46 /* DebugAssets.swift */,
 				C7780C992D6357370050B5BB /* Rewards.swift */,
 				C7DF8BF22D5F699400C8E2D2 /* Gradients.swift */,
@@ -1881,6 +1889,7 @@
 				CEF5C2B52D3FEC3500E143D7 /* RarimeIOSUtils */,
 				C7BBDBD82D71E59800E2905E /* ConfettiSwiftUI */,
 				CE53BCC12D9A9A2C007B1892 /* Swoir */,
+				CE937B072DC8B98900D254D1 /* TensorFlowLiteSwift */,
 			);
 			productName = Rarime;
 			productReference = CE9E82B22BA881F400AAF885 /* Rarime.app */;
@@ -1932,6 +1941,7 @@
 				CEF5C2B42D3FEC3500E143D7 /* XCRemoteSwiftPackageReference "RarimeIOSUtils" */,
 				C7BBDBD72D71E59800E2905E /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
 				CE53BCC02D9A9A2C007B1892 /* XCRemoteSwiftPackageReference "Swoir" */,
+				CE937B062DC8B98900D254D1 /* XCRemoteSwiftPackageReference "TensorFlowLiteSwift" */,
 			);
 			productRefGroup = CE9E82B32BA881F400AAF885 /* Products */;
 			projectDirPath = "";
@@ -2094,6 +2104,7 @@
 				CEFF68C12CB6AF46008769EA /* Encodable+json.swift in Sources */,
 				5655E4372BD51E8E00B86C5C /* AppKeychain.swift in Sources */,
 				568B4FE52BB70CAA001C9C74 /* IntroStep.swift in Sources */,
+				CE937B032DC8B65300D254D1 /* TenserFlow.swift in Sources */,
 				5655E42A2BD2C7C800B86C5C /* ConfigManager.swift in Sources */,
 				563529E92BB072B80027C910 /* IdentityView.swift in Sources */,
 				C7D624542D6DB4C6007BA5A6 /* ProposalsStateContract.swift in Sources */,
@@ -2148,6 +2159,7 @@
 				CED314672C0483BD00DF31D5 /* MailView.swift in Sources */,
 				5617AB102C8F4469003947C9 /* VerificatorApi.swift in Sources */,
 				567ADEC42C25CF32007070A7 /* JSONDocument.swift in Sources */,
+				CE937B052DC8B6EC00D254D1 /* TenserFlowManager.swift in Sources */,
 				5655E4302BD2CA5500B86C5C /* AppColorScheme.swift in Sources */,
 				C7E9F5152D88314D00FE1194 /* PullToCloseWrapperView.swift in Sources */,
 				C7F61DF52D84226000D4DC3A /* UnsupportedPassportView.swift in Sources */,
@@ -2167,7 +2179,7 @@
 				CEE167E82DB794280044E1EB /* LikenessProcessingView.swift in Sources */,
 				56337CE32DBA3D1500973721 /* LikenessManager.swift in Sources */,
 				CE5980DC2D07B288000B6261 /* RegisterIdentityLightInputs.swift in Sources */,
-				CE65A3D52DAEA5ED004A423D /* DebugController.swift in Sources */,
+				CE65A3D52DAEA5ED004A423D /* DebugManager.swift in Sources */,
 				56B589F12DB7B05F00266105 /* LikenessRule.swift in Sources */,
 				C7F3ED382D7F41A200AABE10 /* PassportRevocationView.swift in Sources */,
 				CEC5620F2BD925D6002D4954 /* Circuits.swift in Sources */,
@@ -3243,6 +3255,14 @@
 				version = 2.1.1;
 			};
 		};
+		CE937B062DC8B98900D254D1 /* XCRemoteSwiftPackageReference "TensorFlowLiteSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rarimo/TensorFlowLiteSwift";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		CEF5C2B42D3FEC3500E143D7 /* XCRemoteSwiftPackageReference "RarimeIOSUtils" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:rarimo/RarimeIOSUtils.git";
@@ -3393,6 +3413,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE9347712C205B340034885C /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
 			productName = CachedAsyncImage;
+		};
+		CE937B072DC8B98900D254D1 /* TensorFlowLiteSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE937B062DC8B98900D254D1 /* XCRemoteSwiftPackageReference "TensorFlowLiteSwift" */;
+			productName = TensorFlowLiteSwift;
 		};
 		CEF5C2B52D3FEC3500E143D7 /* RarimeIOSUtils */ = {
 			isa = XCSwiftPackageProductDependency;

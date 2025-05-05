@@ -81,7 +81,7 @@ class PassportViewModel: ObservableObject {
         
         do {
 #if DEVELOPMENT
-            if DebugController.shared.shouldForceLightRegistration {
+            if DebugManager.shared.shouldForceLightRegistration {
                 throw "DEBUG"
             }
 #endif
@@ -169,7 +169,7 @@ class PassportViewModel: ObservableObject {
             
             var isUserRevoking = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
 #if DEVELOPMENT
-            if DebugController.shared.shouldForceRegistration {
+            if DebugManager.shared.shouldForceRegistration {
                 isUserRevoking = false
             }
 #endif

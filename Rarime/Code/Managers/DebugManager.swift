@@ -2,8 +2,8 @@
 
 import Foundation
 
-class DebugController {
-    static let shared = DebugController()
+class DebugManager {
+    static let shared = DebugManager()
 
     var shouldForceRegistration = false
 
