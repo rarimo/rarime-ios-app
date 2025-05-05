@@ -4,7 +4,7 @@ import UIKit
 import Vision
 
 class NeuralUtils {
-    func extractFaceFromImage(_ image: UIImage) throws -> UIImage? {
+    static func extractFaceFromImage(_ image: UIImage) throws -> UIImage? {
         let detectFaceRequest = VNDetectFaceCaptureQualityRequest()
 
         guard let cgImage = image.cgImage else {
@@ -24,6 +24,41 @@ class NeuralUtils {
         }
 
         return try extractFaceFromImageObservation(results[0], cgImage)
+    }
+
+    static func convertFaceToGrayscaleData(_ image: UIImage, _ boundary: Int) throws -> (UIImage, Data) {
+        let preProcessedImage = try image.resize(boundary, boundary)
+
+        guard let cgImage = preProcessedImage.cgImage else {
+            throw "Invalid image data"
+        }
+
+        let width = cgImage.width
+        let height = cgImage.height
+
+        let dataSize = width * height
+        var pixelsData = [UInt8](repeating: 0, count: Int(dataSize))
+        let context = CGContext(
+            data: &pixelsData,
+            width: width,
+            height: height,
+            bitsPerComponent: 8,
+            bytesPerRow: width,
+            space: CGColorSpaceCreateDeviceGray(),
+            bitmapInfo: CGImageAlphaInfo.none.rawValue
+        )
+
+        context?.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+
+        guard let grayscaleCgImage = context?.makeImage() else {
+            throw "Failed to convert image to grayscale"
+        }
+
+        return (UIImage(cgImage: grayscaleCgImage), Data(pixelsData))
+    }
+
+    func normalizeModel(_ model: Data) -> [Double] {
+        return model.map { Double($0) / 255.0 }
     }
 }
 
