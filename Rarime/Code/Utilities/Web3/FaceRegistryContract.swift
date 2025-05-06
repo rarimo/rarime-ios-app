@@ -5,7 +5,7 @@ import Web3ContractABI
 import Web3PromiseKit
 
 class FaceRegistryContract {
-    static let eventId = "0x33479fba7a69b6aaecd137c541a6860858207877a3bf70da303a7a4bdfab466a"
+    static let eventId = "0x00479fba7a69b6aaecd137c541a6860858207877a3bf70da303a7a4bdfab466a"
     
     let web3: Web3
     
