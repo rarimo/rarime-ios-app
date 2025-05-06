@@ -246,5 +246,7 @@
 		<key>likeness</key>
 		<string>${ZKEY_URL_0}</string>
 	</dict>
+	<key>FACE_REGISTRY_CONTRACT_ADDRESS</key>
+	<string>${FACE_REGISTRY_CONTRACT_ADDRESS}</string>
 </dict>
 </plist>

@@ -1,6 +1,10 @@
 import Foundation
 import SwiftUI
 
+import Identity
+
+import Web3
+
 class LikenessManager: ObservableObject {
     static let shared = LikenessManager()
 
@@ -54,15 +58,36 @@ class LikenessManager: ObservableObject {
             throw Errors.unknown("Face can not be detected")
         }
 
+        let address = try UserManager.shared.generateNullifierForEvent(FaceRegistryContract.eventId)
+
+        let faceRegistryContract = try FaceRegistryContract()
+
+        if try await faceRegistryContract.isUserRegistered(address) {
+            LoggerUtil.common.info("Face registration is irrelevant")
+
+            return
+        }
+
+        let nonceBigUint = try await faceRegistryContract.getVerificationNonce(address)
+        let nonce = try BN(dec: nonceBigUint.description)
+
         let (_, grayscaleData) = try NeuralUtils.convertFaceToGrayscaleData(foundFace, TensorFlow.bionetImageBoundary)
 
         let model = NeuralUtils.normalizeModel(grayscaleData)
 
         let features = try TensorFlowManager.shared.compute(model, tfData: TensorFlow.bioNetV3)
 
-        let zkInputs = CircuitBuilderManager.shared.bionetCircuit.inputs(grayscaleData, features, 0, 1)
+        let zkInputs = try CircuitBuilderManager.shared.bionetCircuit.inputs(grayscaleData, features, nonce, BN(hex: address))
 
-        let zkWitness = try ZKUtils.bionetta(zkInputs.json)
+        let zkProof = try await generateBionettaProof(zkInputs.json)
+
+        let registerUserCalldata = try IdentityCallDataBuilder().buildFaceRegistryRegisterUser(zkProof.json)
+
+        LoggerUtil.common.info("Face registration is finished")
+    }
+
+    func generateBionettaProof(_ inputs: Data) async throws -> GrothZkProof {
+        let zkWitness = try ZKUtils.bionetta(inputs)
 
         let zkeyPath = try await CircuitDataManager.shared.retriveZkeyPath(.likeness)
 
@@ -73,9 +98,7 @@ class LikenessManager: ObservableObject {
         let proof = try JSONDecoder().decode(GrothZkProofPoints.self, from: proofJson)
         let pubSignals = try JSONDecoder().decode(GrothZkProofPubSignals.self, from: pubSignalsJson)
 
-        let zkProof = GrothZkProof(proof: proof, pubSignals: pubSignals)
-
-        LoggerUtil.common.info("Face registration is finished")
+        return GrothZkProof(proof: proof, pubSignals: pubSignals)
     }
 
     func reset() {

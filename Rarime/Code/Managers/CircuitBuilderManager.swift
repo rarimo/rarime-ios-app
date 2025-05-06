@@ -159,8 +159,8 @@ extension CircuitBuilderManager {
         func inputs(
             _ imageData: Data,
             _ features: [Float],
-            _ nonce: Int,
-            _ address: Int
+            _ nonce: BN,
+            _ address: BN
         ) -> BionetInputs {
             var imageMatrix: [[Int]] = []
             for x in 0..<TensorFlow.bionetImageBoundary {

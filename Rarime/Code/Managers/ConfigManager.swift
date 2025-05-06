@@ -47,6 +47,7 @@ extension ConfigManager {
         let votingRelayerURL: URL = try! readURLFromInfoPlist(key: "VOTING_RELAYER_URL")
         let votingRpcURL: URL = try! readURLFromInfoPlist(key: "VOTING_RPC_URL")
         let votingRegistartionSmtContractAddress: String = try! readFromInfoPlist(key: "VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS")
+        let faceRegistryContractAddress: String = try! readFromInfoPlist(key: "FACE_REGISTRY_CONTRACT_ADDRESS")
     }
 }
 

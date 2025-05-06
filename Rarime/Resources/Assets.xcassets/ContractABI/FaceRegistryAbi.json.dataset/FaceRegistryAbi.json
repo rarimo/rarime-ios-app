@@ -1,0 +1,1209 @@
+[
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "target",
+          "type": "address"
+        }
+      ],
+      "name": "AddressEmptyCode",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "implementation",
+          "type": "address"
+        }
+      ],
+      "name": "ERC1967InvalidImplementation",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1967NonPayable",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "FailedCall",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "FailedToCallVerifyProof",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "featureHash",
+          "type": "uint256"
+        }
+      ],
+      "name": "FeatureHashAlreadyUsed",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "currentNonce",
+          "type": "uint256"
+        }
+      ],
+      "name": "InvalidAccountNonce",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256[2]",
+              "name": "a",
+              "type": "uint256[2]"
+            },
+            {
+              "internalType": "uint256[2][2]",
+              "name": "b",
+              "type": "uint256[2][2]"
+            },
+            {
+              "internalType": "uint256[2]",
+              "name": "c",
+              "type": "uint256[2]"
+            }
+          ],
+          "internalType": "struct Groth16VerifierHelper.ProofPoints",
+          "name": "proof",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "pubSignals",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "InvalidCircomProof",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidInitialization",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "key",
+          "type": "bytes32"
+        }
+      ],
+      "name": "KeyAlreadyExists",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint32",
+          "name": "maxDepth",
+          "type": "uint32"
+        }
+      ],
+      "name": "MaxDepthExceedsHardCap",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "MaxDepthIsZero",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "MaxDepthReached",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint32",
+          "name": "currentDepth",
+          "type": "uint32"
+        },
+        {
+          "internalType": "uint32",
+          "name": "newDepth",
+          "type": "uint32"
+        }
+      ],
+      "name": "NewMaxDepthMustBeLarger",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "NotAnOracle",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotInitializing",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "TreeAlreadyInitialized",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "TreeIsNotEmpty",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "TreeNotInitialized",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "UUPSUnauthorizedCallContext",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "slot",
+          "type": "bytes32"
+        }
+      ],
+      "name": "UUPSUnsupportedProxiableUUID",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "UnauthorizedAccount",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "userAddress",
+          "type": "uint256"
+        }
+      ],
+      "name": "UserAlreadyRegistered",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "userAddress",
+          "type": "uint256"
+        }
+      ],
+      "name": "UserNotRegistered",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "version",
+          "type": "uint64"
+        }
+      ],
+      "name": "Initialized",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "oldThreshold",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newThreshold",
+          "type": "uint256"
+        }
+      ],
+      "name": "MinThresholdUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address[]",
+          "name": "newOwners",
+          "type": "address[]"
+        }
+      ],
+      "name": "OwnersAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address[]",
+          "name": "removedOwners",
+          "type": "address[]"
+        }
+      ],
+      "name": "OwnersRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "root",
+          "type": "bytes32"
+        }
+      ],
+      "name": "RootUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "userAddress",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newState",
+          "type": "uint256"
+        }
+      ],
+      "name": "RulesUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "oldVerifier",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "newVerifier",
+          "type": "address"
+        }
+      ],
+      "name": "RulesVerifierUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "implementation",
+          "type": "address"
+        }
+      ],
+      "name": "Upgraded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "userAddress",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "featureHash",
+          "type": "uint256"
+        }
+      ],
+      "name": "UserRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "oldVerifier",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "newVerifier",
+          "type": "address"
+        }
+      ],
+      "name": "VerifierUpdated",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "EVENT_ID",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "FACE_PROOF_SIGNALS_COUNT",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ROOT_VALIDITY",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "RULES_PROOF_SIGNALS_COUNT",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "UPGRADE_INTERFACE_VERSION",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "evidenceRegistry_",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "faceVerifier_",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "rulesVerifier_",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "minThreshold_",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "treeHeight_",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address[]",
+          "name": "oracles_",
+          "type": "address[]"
+        }
+      ],
+      "name": "__FaceRegistry_init",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "oracles_",
+          "type": "address[]"
+        }
+      ],
+      "name": "addOracles",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "newOwners_",
+          "type": "address[]"
+        }
+      ],
+      "name": "addOwners",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "evidenceRegistry",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "faceVerifier",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "userAddress_",
+          "type": "uint256"
+        }
+      ],
+      "name": "getFeatureHash",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getMinThreshold",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "userAddress_",
+          "type": "uint256"
+        }
+      ],
+      "name": "getNodeByKey",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "enum SparseMerkleTree.NodeType",
+              "name": "nodeType",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint64",
+              "name": "childLeft",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "childRight",
+              "type": "uint64"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "nodeHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "key",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "value",
+              "type": "bytes32"
+            }
+          ],
+          "internalType": "struct SparseMerkleTree.Node",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getOracles",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getOwners",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "userAddress_",
+          "type": "uint256"
+        }
+      ],
+      "name": "getProof",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "root",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32[]",
+              "name": "siblings",
+              "type": "bytes32[]"
+            },
+            {
+              "internalType": "bool",
+              "name": "existence",
+              "type": "bool"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "key",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "value",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bool",
+              "name": "auxExistence",
+              "type": "bool"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "auxKey",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "auxValue",
+              "type": "bytes32"
+            }
+          ],
+          "internalType": "struct SparseMerkleTree.Proof",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getRoot",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "userAddress_",
+          "type": "uint256"
+        }
+      ],
+      "name": "getRule",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "address_",
+          "type": "uint256"
+        }
+      ],
+      "name": "getVerificationNonce",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "implementation",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "featureHash_",
+          "type": "uint256"
+        }
+      ],
+      "name": "isFeatureHashUsed",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "oracle_",
+          "type": "address"
+        }
+      ],
+      "name": "isOracle",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "address_",
+          "type": "address"
+        }
+      ],
+      "name": "isOwner",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "root_",
+          "type": "bytes32"
+        }
+      ],
+      "name": "isRootLatest",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "root_",
+          "type": "bytes32"
+        }
+      ],
+      "name": "isRootValid",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "userAddress_",
+          "type": "uint256"
+        }
+      ],
+      "name": "isUserRegistered",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "minThreshold",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "nonces",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "proxiableUUID",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "userAddress_",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "featureHash_",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256[2]",
+              "name": "a",
+              "type": "uint256[2]"
+            },
+            {
+              "internalType": "uint256[2][2]",
+              "name": "b",
+              "type": "uint256[2][2]"
+            },
+            {
+              "internalType": "uint256[2]",
+              "name": "c",
+              "type": "uint256[2]"
+            }
+          ],
+          "internalType": "struct Groth16VerifierHelper.ProofPoints",
+          "name": "zkPoints_",
+          "type": "tuple"
+        }
+      ],
+      "name": "registerUser",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "oracles_",
+          "type": "address[]"
+        }
+      ],
+      "name": "removeOracles",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "oldOwners_",
+          "type": "address[]"
+        }
+      ],
+      "name": "removeOwners",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rootHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "roots",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "featureHash",
+          "type": "uint256"
+        }
+      ],
+      "name": "rules",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "state",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "rulesVerifier",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newVerifier_",
+          "type": "address"
+        }
+      ],
+      "name": "setFaceVerifier",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "newThreshold_",
+          "type": "uint256"
+        }
+      ],
+      "name": "setMinThreshold",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newVerifier_",
+          "type": "address"
+        }
+      ],
+      "name": "setRulesVerifier",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "userAddress_",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "newState_",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256[2]",
+              "name": "a",
+              "type": "uint256[2]"
+            },
+            {
+              "internalType": "uint256[2][2]",
+              "name": "b",
+              "type": "uint256[2][2]"
+            },
+            {
+              "internalType": "uint256[2]",
+              "name": "c",
+              "type": "uint256[2]"
+            }
+          ],
+          "internalType": "struct Groth16VerifierHelper.ProofPoints",
+          "name": "zkPoints_",
+          "type": "tuple"
+        }
+      ],
+      "name": "updateRule",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newImplementation",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "upgradeToAndCall",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "featureHash",
+          "type": "uint256"
+        }
+      ],
+      "name": "usedFeatureHashes",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "userAddress",
+          "type": "uint256"
+        }
+      ],
+      "name": "userRegistryHash",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "featureHash",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
