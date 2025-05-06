@@ -72,6 +72,8 @@ struct LikenessProcessing<ProcessingTask: LikenessProcessingTask>: View {
 
                 isExecutionCompleted = true
             } catch {
+                LoggerUtil.common.error("Face registration: \(error)")
+                
                 onError(error)
             }
         }

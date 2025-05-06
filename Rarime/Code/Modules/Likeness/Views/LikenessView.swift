@@ -189,13 +189,15 @@ struct LikenessView: View {
                     onError: { error in
                         likenessManager.setFaceImage(nil)
 
+                        FeedbackGenerator.shared.notify(.error)
+
+                        isScanSheetPresented = false
+
                         if let error = error as? Errors {
                             AlertManager.shared.emitError(error)
                         } else {
                             AlertManager.shared.emitError(.unknown("Unknown error occurred"))
                         }
-
-                        FeedbackGenerator.shared.notify(.error)
                     },
                     onClose: {
                         likenessManager.setFaceImage(nil)
