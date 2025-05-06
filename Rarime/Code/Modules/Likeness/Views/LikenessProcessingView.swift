@@ -1,12 +1,17 @@
 import SwiftUI
 
-struct LikenessProcessing<Task: LikenessProcessingTask>: View {
+struct LikenessProcessing<ProcessingTask: LikenessProcessingTask>: View {
+    @EnvironmentObject private var likenessManager: LikenessManager
+
     let onComplete: () -> Void
+    let onError: (Error) -> Void
     let onClose: () -> Void
 
-    @State private var completedTasks: [Task] = []
-    @State private var currentTask: Task = .allCases.first!
+    @State private var completedTasks: [ProcessingTask] = []
+    @State private var currentTask: ProcessingTask = .allCases.first!
     @State private var progress: Double = 0
+
+    @State private var isExecutionCompleted = false
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -23,7 +28,7 @@ struct LikenessProcessing<Task: LikenessProcessingTask>: View {
                     .foregroundStyle(.textSecondary)
                 Spacer()
                 VStack(spacing: 8) {
-                    ForEach(Array(Task.allCases), id: \.rawValue) { task in
+                    ForEach(Array(ProcessingTask.allCases), id: \.rawValue) { task in
                         LikenessProcessingEntry(
                             task: task,
                             completedTasks: $completedTasks,
@@ -33,10 +38,16 @@ struct LikenessProcessing<Task: LikenessProcessingTask>: View {
                 }
                 .padding(.horizontal, 20)
                 .onChange(of: completedTasks.count) { val in
-                    FeedbackGenerator.shared.impact(.light)
+                    Task {
+                        FeedbackGenerator.shared.impact(.light)
 
-                    if val == Task.allCases.count {
-                        onComplete()
+                        if val == ProcessingTask.allCases.count {
+                            while !isExecutionCompleted {
+                                try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
+                            }
+
+                            onComplete()
+                        }
                     }
                 }
             }
@@ -46,6 +57,18 @@ struct LikenessProcessing<Task: LikenessProcessingTask>: View {
                 .padding([.top, .trailing], 20)
         }
         .padding(.bottom, 20)
+    }
+
+    func runProcess() {
+        Task {
+            do {
+                try await likenessManager.runRegistration()
+
+                isExecutionCompleted = true
+            } catch {
+                onError(error)
+            }
+        }
     }
 }
 
@@ -139,6 +162,7 @@ struct LikenessProcessingEntry<ActionTask: LikenessProcessingTask>: View {
 #Preview {
     VStack {}
         .sheet(isPresented: .constant(true)) {
-            LikenessProcessing<LikenessProcessingRegisterTask>(onComplete: {}, onClose: {})
+            LikenessProcessing<LikenessProcessingRegisterTask>(onComplete: {}, onError: { _ in }, onClose: {})
+                .environmentObject(LikenessManager.shared)
         }
 }

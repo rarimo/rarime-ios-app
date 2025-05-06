@@ -44,7 +44,7 @@ class LikenessManager: ObservableObject {
     }
 
     func runRegistration() async throws {
-        LoggerUtil.common.debug("Face registration is running")
+        LoggerUtil.common.info("Face registration is running")
 
         guard let faceImage else {
             throw "Face image is not initialized"
@@ -75,7 +75,7 @@ class LikenessManager: ObservableObject {
 
         let zkProof = GrothZkProof(proof: proof, pubSignals: pubSignals)
 
-        LoggerUtil.common.debug("Face registration is finished")
+        LoggerUtil.common.info("Face registration is finished")
     }
 
     func reset() {

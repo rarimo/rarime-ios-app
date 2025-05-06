@@ -175,14 +175,6 @@ struct LikenessView: View {
                 FaceLikenessView(
                     onConfirm: { image in
                         likenessManager.setFaceImage(UIImage(cgImage: image))
-
-                        Task {
-                            do {
-                                try await likenessManager.runRegistration()
-                            } catch {
-                                LoggerUtil.common.error("error: \(error)")
-                            }
-                        }
                     },
                     onBack: { isScanSheetPresented = false }
                 )
@@ -193,6 +185,17 @@ struct LikenessView: View {
                         isScanSheetPresented = false
                         FeedbackGenerator.shared.notify(.success)
                         showSuccessTooltip()
+                    },
+                    onError: { error in
+                        likenessManager.setFaceImage(nil)
+
+                        if let error = error as? Errors {
+                            AlertManager.shared.emitError(error)
+                        } else {
+                            AlertManager.shared.emitError(.unknown("Unknown error occurred"))
+                        }
+
+                        FeedbackGenerator.shared.notify(.error)
                     },
                     onClose: {
                         likenessManager.setFaceImage(nil)
