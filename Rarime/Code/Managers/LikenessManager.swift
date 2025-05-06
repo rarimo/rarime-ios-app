@@ -83,7 +83,13 @@ class LikenessManager: ObservableObject {
 
         let registerUserCalldata = try IdentityCallDataBuilder().buildFaceRegistryRegisterUser(zkProof.json)
 
-        LoggerUtil.common.info("Face registration is finished")
+        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
+        let response = try await relayer.likenessRegistry(registerUserCalldata, ConfigManager.shared.api.registrationSimpleContractAddress, false)
+
+        LoggerUtil.common.info("Face register EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
+
+        let eth = Ethereum()
+        try await eth.waitForTxSuccess(response.data.attributes.txHash)
     }
 
     func generateBionettaProof(_ inputs: Data) async throws -> GrothZkProof {
