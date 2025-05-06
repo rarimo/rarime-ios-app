@@ -13,6 +13,8 @@ struct LikenessProcessing<ProcessingTask: LikenessProcessingTask>: View {
 
     @State private var isExecutionCompleted = false
 
+    @State private var task: Task<Void, Never>? = nil
+
     var body: some View {
         ZStack(alignment: .topTrailing) {
             VStack(spacing: 16) {
@@ -57,10 +59,14 @@ struct LikenessProcessing<ProcessingTask: LikenessProcessingTask>: View {
                 .padding([.top, .trailing], 20)
         }
         .padding(.bottom, 20)
+        .onAppear(perform: runProcess)
+        .onDisappear {
+            task?.cancel()
+        }
     }
 
     func runProcess() {
-        Task {
+        task = Task {
             do {
                 try await likenessManager.runRegistration()
 
