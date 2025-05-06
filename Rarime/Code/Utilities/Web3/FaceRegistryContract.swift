@@ -24,7 +24,7 @@ class FaceRegistryContract {
     }
     
     func isUserRegistered(_ userAddressHex: String) async throws -> Bool {
-        guard let userAddress = BigUInt(userAddressHex, radix: 16) else {
+        guard let userAddress = BigUInt(String(userAddressHex.dropFirst(2)), radix: 16) else {
             throw "Invalid user address hex"
         }
         
@@ -40,7 +40,7 @@ class FaceRegistryContract {
     }
     
     func getVerificationNonce(_ userAddressHex: String) async throws -> BigUInt {
-        guard let userAddress = BigUInt(userAddressHex, radix: 16) else {
+        guard let userAddress = BigUInt(String(userAddressHex.dropFirst(2)), radix: 16) else {
             throw "Invalid user address hex"
         }
         
