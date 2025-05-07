@@ -1,9 +1,9 @@
 import Foundation
 
 struct BionetInputs: Codable {
-    let image: [[[Int]]]
-    let features: [Int]
-    let nonce: BN
-    let address: BN
-    let threshold: Int
+    let image: [[[String]]]
+    let features: [String]
+    let nonce: String
+    let address: String
+    let threshold: String
 }

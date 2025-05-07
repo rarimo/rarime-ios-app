@@ -162,12 +162,12 @@ extension CircuitBuilderManager {
             _ nonce: BN,
             _ address: BN
         ) -> BionetInputs {
-            var imageMatrix: [[Int]] = []
+            var imageMatrix: [[String]] = []
             for x in 0..<TensorFlow.bionetImageBoundary {
-                var imageRow: [Int] = []
+                var imageRow: [String] = []
                 for y in 0..<TensorFlow.bionetImageBoundary {
                     let pixelValue = imageData[x * TensorFlow.bionetImageBoundary + y]
-                    imageRow.append(Int(pixelValue))
+                    imageRow.append(Int(pixelValue).description)
                 }
                 
                 imageMatrix.append(imageRow)
@@ -175,10 +175,10 @@ extension CircuitBuilderManager {
             
             return .init(
                 image: [imageMatrix],
-                features: features.map { Int($0 * 255) },
-                nonce: nonce,
-                address: address,
-                threshold: CircuitBuilderManager.threshold
+                features: features.map { Int($0 * 255).description },
+                nonce: nonce.dec(),
+                address: address.dec(),
+                threshold: CircuitBuilderManager.threshold.description
             )
         }
     }

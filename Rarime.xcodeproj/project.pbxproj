@@ -596,6 +596,7 @@
 		C7FFB52D2C99D7820037CBD4 /* NotificationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailsView.swift; sourceTree = "<group>"; };
 		C7FFB52F2C9ACE900037CBD4 /* ClaimableNotificationContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimableNotificationContent.swift; sourceTree = "<group>"; };
 		CE00DF4C2D9ACD5C00614151 /* NoirRegisterIdentityInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoirRegisterIdentityInputs.swift; sourceTree = "<group>"; };
+		CE05040C2DCB6182000F4724 /* libbionet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbionet.a; sourceTree = "<group>"; };
 		CE059B412C9C4608006046B3 /* InternetConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionManager.swift; sourceTree = "<group>"; };
 		CE059B432C9C4702006046B3 /* InternetConnectionRequiredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionRequiredView.swift; sourceTree = "<group>"; };
 		CE06590D2DC8C0AA004FBDD5 /* NeuralUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuralUtils.swift; sourceTree = "<group>"; };
@@ -689,7 +690,6 @@
 		CE68BE4A2BD9B75100D92EBB /* ContractABI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractABI.swift; sourceTree = "<group>"; };
 		CE6BC17E2CBEA9AC00880287 /* witnesscalc_registerIdentity_1_256_3_6_576_264_1_2448_3_256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_1_256_3_6_576_264_1_2448_3_256.h; sourceTree = "<group>"; };
 		CE6BC1802CBEA9D600880287 /* witnesscalc_registerIdentity_2_256_3_6_576_248_1_2432_3_256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_2_256_3_6_576_248_1_2432_3_256.h; sourceTree = "<group>"; };
-		CE6FFBCB2DC370870083E855 /* libbionet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbionet.a; sourceTree = "<group>"; };
 		CE6FFBCD2DC3709B0083E855 /* bionet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bionet.h; sourceTree = "<group>"; };
 		CE72101D2BD7BD9D0043DB7F /* Data+Utf8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Utf8.swift"; sourceTree = "<group>"; };
 		CE7210282BD7D0D10043DB7F /* String+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Hex.swift"; sourceTree = "<group>"; };
@@ -1750,7 +1750,7 @@
 				CE30FA912D50DE640057F897 /* witnesscalc_registerIdentity_20_160_3_3_736_200_NA.h */,
 				CE30FA922D50DE710057F897 /* witnesscalc_registerIdentity_20_256_3_5_336_72_NA.h */,
 				CE30FA932D50DE7F0057F897 /* witnesscalc_registerIdentity_21_256_3_5_576_232_NA.h */,
-				CE6FFBCB2DC370870083E855 /* libbionet.a */,
+				CE05040C2DCB6182000F4724 /* libbionet.a */,
 				CEE4FEA82CFDB851007C31F3 /* libfr.a */,
 				CEC562022BD923B4002D4954 /* libfq.a */,
 				CEE4FEAA2CFDBA80007C31F3 /* libgmp.a */,

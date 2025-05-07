@@ -118,6 +118,9 @@ class ZKUtils {
         return Data()
 #else
         let result = bionet((inputs as NSData).bytes, UInt(inputs.count))
+        if result.error != nil {
+            throw String(data: Data(bytes: result.error!, count: Int(result.error_size)), encoding: .utf8)!
+        }
         
         return Data(bytes: result.data, count: Int(result.len))
 #endif
