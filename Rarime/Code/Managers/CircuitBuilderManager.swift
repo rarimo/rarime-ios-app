@@ -153,6 +153,8 @@ extension CircuitBuilderManager {
 }
 
 extension CircuitBuilderManager {
+    private static let imageMultiplier: Float = 32768
+    
     private static let threshold: Int = 107374182
     
     class BionetCircuit {
@@ -166,8 +168,11 @@ extension CircuitBuilderManager {
             for x in 0..<TensorFlow.bionetImageBoundary {
                 var imageRow: [String] = []
                 for y in 0..<TensorFlow.bionetImageBoundary {
-                    let pixelValue = imageData[x * TensorFlow.bionetImageBoundary + y]
-                    imageRow.append(Int(pixelValue).description)
+                    let pixelValue = Float(imageData[x * TensorFlow.bionetImageBoundary + y])
+                    
+                    let normalizedValue = (pixelValue / 255) * CircuitBuilderManager.imageMultiplier
+                    
+                    imageRow.append(Int(normalizedValue).description)
                 }
                 
                 imageMatrix.append(imageRow)
@@ -175,7 +180,7 @@ extension CircuitBuilderManager {
             
             return .init(
                 image: [imageMatrix],
-                features: features.map { Int($0 * 255).description },
+                features: features.map { Int($0 * CircuitBuilderManager.imageMultiplier).description },
                 nonce: nonce.dec(),
                 address: address.dec(),
                 threshold: CircuitBuilderManager.threshold.description
