@@ -41,6 +41,8 @@ class LikenessManager: ObservableObject {
             do {
                 isRegistered = try await isUserRegistered()
                 rule = try await getRule()
+
+                isLoading = false
             } catch {
                 LoggerUtil.common.error("Failed to init likenessManager: \(error)")
             }
