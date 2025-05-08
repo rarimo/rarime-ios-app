@@ -54,4 +54,20 @@ class FaceRegistryContract {
         
         return nonce
     }
+    
+    func getRule(_ userAddressHex: String) async throws -> BigUInt {
+        guard let userAddress = BigUInt(String(userAddressHex.dropFirst(2)), radix: 16) else {
+            throw "Invalid user address hex"
+        }
+        
+        let method = contract["getRule"]!(userAddress)
+        
+        let response = try method.call().wait()
+        
+        guard let rule = response[""] as? BigUInt else {
+            throw "Response does not contain rule"
+        }
+        
+        return rule
+    }
 }

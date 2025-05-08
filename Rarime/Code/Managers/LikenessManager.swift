@@ -135,6 +135,24 @@ class LikenessManager: ObservableObject {
         return try await faceRegistryContract.isUserRegistered(address)
     }
 
+    func getRule() async throws -> LikenessRule {
+        let address = try UserManager.shared.generateNullifierForEvent(FaceRegistryContract.eventId)
+
+        let faceRegistryContract = try FaceRegistryContract()
+
+        let rawRule = try await faceRegistryContract.getRule(address)
+
+        guard let rawRuleValue = Int(rawRule.description) else {
+            throw "Invalid rule format"
+        }
+
+        guard let rule = LikenessRule(rawValue: rawRuleValue) else {
+            throw "Invalid rule value"
+        }
+
+        return rule
+    }
+
     func generateBionettaProof(_ inputs: Data) async throws -> GrothZkProof {
         let zkWitness = try ZKUtils.bionetta(inputs)
 
