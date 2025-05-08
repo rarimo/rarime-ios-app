@@ -84,12 +84,14 @@ class LikenessManager: ObservableObject {
         let registerUserCalldata = try IdentityCallDataBuilder().buildFaceRegistryRegisterUser(zkProof.json)
 
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.likenessRegistry(registerUserCalldata, ConfigManager.shared.api.registrationSimpleContractAddress, false)
+        let response = try await relayer.likenessRegistry(registerUserCalldata, ConfigManager.shared.api.faceRegistryContractAddress)
 
         LoggerUtil.common.info("Face register EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
 
         let eth = Ethereum()
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
+
+        try await updateRule()
     }
 
     func updateRule() async throws {
@@ -117,12 +119,14 @@ class LikenessManager: ObservableObject {
         )
 
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.likenessRegistry(updateRuleCalldata, ConfigManager.shared.api.registrationSimpleContractAddress, false)
+        let response = try await relayer.likenessRegistry(updateRuleCalldata, ConfigManager.shared.api.faceRegistryContractAddress, false)
 
         LoggerUtil.common.info("Update face rule EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
 
         let eth = Ethereum()
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
+
+        try await updateRule()
     }
 
     func generateBionettaProof(_ inputs: Data) async throws -> GrothZkProof {
