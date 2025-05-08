@@ -1,6 +1,6 @@
 import Foundation
 
-struct FaceRegistryNoInclusionInputs {
+struct FaceRegistryNoInclusionInputs: Codable {
     let eventId: String
     let nonce: String
     let value: String

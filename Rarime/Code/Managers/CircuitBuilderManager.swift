@@ -12,6 +12,7 @@ class CircuitBuilderManager {
     let registerIdentityLightCircuit = RegisterIdentityLightCircuit()
     let noirRegisterIdentityCircuit = NoirRegisterIdentityCircuit()
     let bionetCircuit = BionetCircuit()
+    let faceRegistryNoInclusionCircuit = FaceRegistryNoInclusionCircuit()
 }
 
 extension CircuitBuilderManager {

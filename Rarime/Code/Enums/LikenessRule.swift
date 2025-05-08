@@ -1,10 +1,10 @@
 import SwiftUI
 
 enum LikenessRule: Int {
-    case unset
-    case useAndPay
-    case notUse
-    case askFirst
+    case unset = 0
+    case useAndPay = 1
+    case notUse = 2
+    case askFirst = 3
 }
 
 extension LikenessRule {

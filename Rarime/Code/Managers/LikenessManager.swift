@@ -92,6 +92,39 @@ class LikenessManager: ObservableObject {
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
     }
 
+    func updateRule() async throws {
+        let address = try UserManager.shared.generateNullifierForEvent(FaceRegistryContract.eventId)
+
+        let faceRegistryContract = try FaceRegistryContract()
+
+        let nonceBigUint = try await faceRegistryContract.getVerificationNonce(address)
+
+        guard let user = UserManager.shared.user else {
+            throw "user is not initialized"
+        }
+
+        let zkInputs = CircuitBuilderManager.shared.faceRegistryNoInclusionCircuit.inputs(
+            eventId: FaceRegistryContract.eventId,
+            nonce: nonceBigUint.description,
+            privateKey: BN(user.secretKey).dec()
+        )
+
+        let zkProof = try await generateFaceRegistryNoInclusionProof(zkInputs.json)
+
+        let updateRuleCalldata = try IdentityCallDataBuilder().buildFaceRegistryUpdateRule(
+            rule.rawValue.description,
+            zkPointsJSON: zkProof.json
+        )
+
+        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
+        let response = try await relayer.likenessRegistry(updateRuleCalldata, ConfigManager.shared.api.registrationSimpleContractAddress, false)
+
+        LoggerUtil.common.info("Update face rule EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
+
+        let eth = Ethereum()
+        try await eth.waitForTxSuccess(response.data.attributes.txHash)
+    }
+
     func generateBionettaProof(_ inputs: Data) async throws -> GrothZkProof {
         let zkWitness = try ZKUtils.bionetta(inputs)
 
