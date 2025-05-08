@@ -22,12 +22,29 @@ class LikenessManager: ObservableObject {
 
     @Published var faceImage: UIImage?
 
+    @Published var isLoading: Bool = false
+
     init() {
-        rule = .init(rawValue: AppUserDefaults.shared.likenessRule) ?? .unset
-        isRegistered = AppUserDefaults.shared.isLikenessRegistered
+        isLoading = true
+
+        rule = .unset
+        isRegistered = false
 
         let imageData = try? AppKeychain.getValue(.likenessFace)
         faceImage = imageData == nil ? nil : UIImage(data: imageData!)
+
+        postInitialization()
+    }
+
+    func postInitialization() {
+        Task {
+            do {
+                isRegistered = try await isUserRegistered()
+                rule = try await getRule()
+            } catch {
+                LoggerUtil.common.error("Failed to init likenessManager: \(error)")
+            }
+        }
     }
 
     func setRule(_ rule: LikenessRule) {
@@ -128,14 +145,26 @@ class LikenessManager: ObservableObject {
     }
 
     func isUserRegistered() async throws -> Bool {
+        if AppUserDefaults.shared.isLikenessRegistered {
+            return true
+        }
+
         let address = try UserManager.shared.generateNullifierForEvent(FaceRegistryContract.eventId)
 
         let faceRegistryContract = try FaceRegistryContract()
 
-        return try await faceRegistryContract.isUserRegistered(address)
+        let isUserRegistered = try await faceRegistryContract.isUserRegistered(address)
+
+        AppUserDefaults.shared.isLikenessRegistered = isUserRegistered
+
+        return isUserRegistered
     }
 
     func getRule() async throws -> LikenessRule {
+        if AppUserDefaults.shared.likenessRule != LikenessRule.unset.rawValue {
+            return LikenessRule(rawValue: AppUserDefaults.shared.likenessRule) ?? .unset
+        }
+
         let address = try UserManager.shared.generateNullifierForEvent(FaceRegistryContract.eventId)
 
         let faceRegistryContract = try FaceRegistryContract()
@@ -149,6 +178,8 @@ class LikenessManager: ObservableObject {
         guard let rule = LikenessRule(rawValue: rawRuleValue) else {
             throw "Invalid rule value"
         }
+
+        AppUserDefaults.shared.likenessRule = rawRuleValue
 
         return rule
     }
