@@ -127,6 +127,14 @@ class LikenessManager: ObservableObject {
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
     }
 
+    func isUserRegistered() async throws -> Bool {
+        let address = try UserManager.shared.generateNullifierForEvent(FaceRegistryContract.eventId)
+
+        let faceRegistryContract = try FaceRegistryContract()
+
+        return try await faceRegistryContract.isUserRegistered(address)
+    }
+
     func generateBionettaProof(_ inputs: Data) async throws -> GrothZkProof {
         let zkWitness = try ZKUtils.bionetta(inputs)
 
