@@ -103,7 +103,7 @@ class LikenessManager: ObservableObject {
         let registerUserCalldata = try IdentityCallDataBuilder().buildFaceRegistryRegisterUser(zkProof.json)
 
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.likenessRegistry(registerUserCalldata, ConfigManager.shared.api.faceRegistryContractAddress)
+        let response = try await relayer.likenessRegistry(registerUserCalldata)
 
         LoggerUtil.common.info("Face register EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
 
@@ -138,7 +138,7 @@ class LikenessManager: ObservableObject {
         )
 
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.likenessRegistry(updateRuleCalldata, ConfigManager.shared.api.faceRegistryContractAddress, false)
+        let response = try await relayer.likenessRegistry(updateRuleCalldata)
 
         LoggerUtil.common.info("Update face rule EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
 
