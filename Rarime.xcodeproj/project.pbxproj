@@ -253,6 +253,8 @@
 		CE28D5132D3E887300042E1D /* libwitnesscalc_registerIdentityLight512.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE28D4F82D3E887300042E1D /* libwitnesscalc_registerIdentityLight512.a */; };
 		CE2FF42D2DCCAB1F00E4151D /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2FF42C2DCCAB1F00E4151D /* Identity.xcframework */; };
 		CE2FF4B62DCCAC6E00E4151D /* libwitnesscalc_faceRegistryNoInclusion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2FF4B52DCCAC6E00E4151D /* libwitnesscalc_faceRegistryNoInclusion.a */; };
+		CE2FF4B92DCCB85D00E4151D /* FaceRegistryNoInclusionInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2FF4B82DCCB85A00E4151D /* FaceRegistryNoInclusionInputs.swift */; };
+		CE2FF4BA2DCCB85D00E4151D /* FaceRegistryNoInclusionInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2FF4B82DCCB85A00E4151D /* FaceRegistryNoInclusionInputs.swift */; };
 		CE30FA9D2D50DF6D0057F897 /* libwitnesscalc_registerIdentity_14_256_3_4_336_64_1_1480_5_296.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE30FA982D50DF6D0057F897 /* libwitnesscalc_registerIdentity_14_256_3_4_336_64_1_1480_5_296.a */; };
 		CE30FA9E2D50DF6D0057F897 /* libwitnesscalc_registerIdentity_4_160_3_3_336_216_1_1296_3_256.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE30FA962D50DF6D0057F897 /* libwitnesscalc_registerIdentity_4_160_3_3_336_216_1_1296_3_256.a */; };
 		CE30FA9F2D50DF6D0057F897 /* libwitnesscalc_registerIdentity_11_256_3_3_336_248_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE30FA972D50DF6D0057F897 /* libwitnesscalc_registerIdentity_11_256_3_3_336_248_NA.a */; };
@@ -632,6 +634,7 @@
 		CE2FF42C2DCCAB1F00E4151D /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE2FF4B52DCCAC6E00E4151D /* libwitnesscalc_faceRegistryNoInclusion.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_faceRegistryNoInclusion.a; sourceTree = "<group>"; };
 		CE2FF4B72DCCACAD00E4151D /* witnesscalc_faceRegistryNoInclusion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_faceRegistryNoInclusion.h; sourceTree = "<group>"; };
+		CE2FF4B82DCCB85A00E4151D /* FaceRegistryNoInclusionInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceRegistryNoInclusionInputs.swift; sourceTree = "<group>"; };
 		CE30FA8B2D50DE100057F897 /* witnesscalc_registerIdentity_1_256_3_6_336_248_1_2744_4_256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_1_256_3_6_336_248_1_2744_4_256.h; sourceTree = "<group>"; };
 		CE30FA8C2D50DE1C0057F897 /* witnesscalc_registerIdentity_1_256_3_6_336_560_1_2744_4_256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_1_256_3_6_336_560_1_2744_4_256.h; sourceTree = "<group>"; };
 		CE30FA8D2D50DE2F0057F897 /* witnesscalc_registerIdentity_4_160_3_3_336_216_1_1296_3_256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_4_160_3_3_336_216_1_1296_3_256.h; sourceTree = "<group>"; };
@@ -1547,6 +1550,7 @@
 		CE8FEB602C1B03A70008381A /* Circuits */ = {
 			isa = PBXGroup;
 			children = (
+				CE2FF4B82DCCB85A00E4151D /* FaceRegistryNoInclusionInputs.swift */,
 				CE0659162DC8EDC7004FBDD5 /* BionetInputs.swift */,
 				CE00DF4C2D9ACD5C00614151 /* NoirRegisterIdentityInputs.swift */,
 				CE06BF302D083CC900F6C721 /* PubSignals.swift */,
@@ -2057,6 +2061,7 @@
 				CE2797462CEB4200008649B0 /* AppLanguage.swift in Sources */,
 				CE00DF4D2D9ACD5E00614151 /* NoirRegisterIdentityInputs.swift in Sources */,
 				CE27974B2CEB4258008649B0 /* DateUtil.swift in Sources */,
+				CE2FF4BA2DCCB85D00E4151D /* FaceRegistryNoInclusionInputs.swift in Sources */,
 				CE2797452CEB41F7008649B0 /* AppColorScheme.swift in Sources */,
 				CE3CD7932DB6819B00112E46 /* PreviewUtils.swift in Sources */,
 				56B589F02DB7B05F00266105 /* LikenessRule.swift in Sources */,
@@ -2255,6 +2260,7 @@
 				CEDC4D7F2BE9267300459D4E /* PoseidonSMTContract.swift in Sources */,
 				CEF2513A2BD6E22700050507 /* User.swift in Sources */,
 				CE0881A12BF773CC00B31735 /* AlertManager.swift in Sources */,
+				CE2FF4B92DCCB85D00E4151D /* FaceRegistryNoInclusionInputs.swift in Sources */,
 				CE7D8AAC2BFB52EE009AF212 /* OpenApiError.swift in Sources */,
 				56933DF12BBAC1B10068C894 /* ScanPassportLayoutView.swift in Sources */,
 				5659151B2BE927A20050795A /* AppIconView.swift in Sources */,

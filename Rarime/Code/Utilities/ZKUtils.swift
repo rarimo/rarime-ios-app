@@ -14,6 +14,7 @@ class ZKUtils {
     static let PROOF_SIZE = UInt(4 * 1024 * 1024)
     static let PUB_SIGNALS_SIZE = UInt(4 * 1024 * 1024)
     
+    #registerCircuitWitness("faceRegistryNoInclusion")
     #registerCircuitWitness("auth")
     #registerCircuitWitness("queryIdentity")
     #registerCircuitWitness("registerIdentity_1_256_3_5_576_248_NA")
@@ -49,6 +50,10 @@ class ZKUtils {
     #registerCircuitWitness("registerIdentity_20_160_3_3_736_200_NA")
     #registerCircuitWitness("registerIdentity_20_256_3_5_336_72_NA")
     #registerCircuitWitness("registerIdentity_21_256_3_5_576_232_NA")
+    
+    public static func groth16FaceRegistryNoInclusion(_ wtns: Data) throws -> (proof: Data, pubSignals: Data) {
+        return try groth16Prover(Circuits.faceRegistryNoInclusionZkey, wtns)
+    }
     
     public static func groth16QueryIdentity(_ wtns: Data) throws -> (proof: Data, pubSignals: Data) {
         return try groth16Prover(Circuits.queryIdentityZkey, wtns)

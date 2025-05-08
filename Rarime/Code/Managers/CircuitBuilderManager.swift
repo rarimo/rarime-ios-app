@@ -188,3 +188,20 @@ extension CircuitBuilderManager {
         }
     }
 }
+
+extension CircuitBuilderManager {
+    class FaceRegistryNoInclusionCircuit {
+        func inputs(
+            eventId: String,
+            nonce: String,
+            privateKey: String
+        ) -> FaceRegistryNoInclusionInputs {
+            return .init(
+                eventId: eventId,
+                nonce: nonce,
+                value: "0",
+                skIdentity: privateKey
+            )
+        }
+    }
+}

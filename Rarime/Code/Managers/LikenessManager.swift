@@ -107,6 +107,17 @@ class LikenessManager: ObservableObject {
         return GrothZkProof(proof: proof, pubSignals: pubSignals)
     }
 
+    func generateFaceRegistryNoInclusionProof(_ inputs: Data) async throws -> GrothZkProof {
+        let zkWitness = try ZKUtils.calcWtns_faceRegistryNoInclusion(Circuits.faceRegistryNoInclusionDat, inputs)
+
+        let (proofJson, pubSignalsJson) = try ZKUtils.groth16FaceRegistryNoInclusion(zkWitness)
+
+        let proof = try JSONDecoder().decode(GrothZkProofPoints.self, from: proofJson)
+        let pubSignals = try JSONDecoder().decode(GrothZkProofPubSignals.self, from: pubSignalsJson)
+
+        return GrothZkProof(proof: proof, pubSignals: pubSignals)
+    }
+
     func reset() {
         setRule(.unset)
         setIsRegistered(false)
