@@ -88,7 +88,13 @@ struct HomeView: View {
                     animation: votingAnimation
                 )
             },
-            HomeCarouselCard(action: { path = .likeness }) {
+            HomeCarouselCard(action: {
+                if likenessManager.isLoading {
+                    return
+                }
+
+                path = .likeness
+            }) {
                 HomeCardView(
                     backgroundGradient: Gradients.purpleBg,
                     foregroundGradient: Gradients.purpleText,
