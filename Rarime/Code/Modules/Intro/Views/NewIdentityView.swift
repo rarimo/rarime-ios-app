@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct NewIdentityView: View {
+    @EnvironmentObject private var likenessManager: LikenessManager
+    
     @EnvironmentObject private var userManager: UserManager
     
     let onBack: () -> Void
@@ -40,6 +42,8 @@ struct NewIdentityView: View {
                         action: {
                             do {
                                 try user.save()
+                                
+                                likenessManager.postInitialization()
                             } catch {
                                 LoggerUtil.common.error("failed to save user: \(error.localizedDescription, privacy: .public)")
                                 
@@ -233,5 +237,5 @@ struct NewIdentityView: View {
 
 #Preview {
     NewIdentityView(onBack: {}, onNext: {})
-        .environmentObject(UserManager())
+        .environmentObject(LikenessManager())
 }
