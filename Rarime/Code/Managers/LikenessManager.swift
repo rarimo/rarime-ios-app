@@ -125,8 +125,6 @@ class LikenessManager: ObservableObject {
 
         let eth = Ethereum()
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
-
-        try await updateRule()
     }
 
     func generateBionettaProof(_ inputs: Data) async throws -> GrothZkProof {
