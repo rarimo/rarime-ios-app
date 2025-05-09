@@ -2,6 +2,7 @@ import Alamofire
 import SwiftUI
 
 struct ImportIdentityView: View {
+    @EnvironmentObject private var likenessManager: LikenessManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var userManager: UserManager
     
@@ -140,6 +141,8 @@ struct ImportIdentityView: View {
                 
                 LoggerUtil.common.info("Identity was imported")
                 
+                likenessManager.postInitialization()
+                
                 onNext()
             } catch {
                 LoggerUtil.common.error("Failed to restore from iCloud: \(error, privacy: .public)")
@@ -172,6 +175,8 @@ struct ImportIdentityView: View {
                 try await setReferralCodeIfUserHasPointsBalance()
                 
                 LoggerUtil.common.info("Identity was imported")
+                
+                likenessManager.postInitialization()
                 
                 onNext()
             } catch {
@@ -225,4 +230,5 @@ private func isValidPrivateKey(_ privateKey: String) throws -> Bool {
     ImportIdentityView(onNext: {}, onBack: {})
         .environmentObject(DecentralizedAuthManager.shared)
         .environmentObject(UserManager.shared)
+        .environmentObject(LikenessManager.shared)
 }

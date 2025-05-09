@@ -24,6 +24,8 @@ class LikenessManager: ObservableObject {
 
     @Published var isLoading: Bool = false
 
+    @Published var isRuleUpdating: Bool = false
+
     init() {
         isLoading = true
 
@@ -37,7 +39,7 @@ class LikenessManager: ObservableObject {
     }
 
     func postInitialization() {
-        Task {
+        Task { @MainActor in
             do {
                 isRegistered = try await isUserRegistered()
                 rule = try await getRule()

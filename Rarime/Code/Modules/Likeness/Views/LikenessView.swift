@@ -23,7 +23,7 @@ struct LikenessView: View {
                     GlassBottomSheet(
                         minHeight: 410,
                         maxHeight: 730,
-                        bottomOffset: likenessManager.isRegistered ? 0 : 146,
+                        bottomOffset: 146,
                         maxBlur: 200,
                         dimBackground: true,
                         background: {
@@ -235,7 +235,14 @@ struct LikenessView: View {
                 likenessManager.setRule(rule)
 
                 if likenessManager.isRegistered {
+                    likenessManager.isRuleUpdating = true
+                    defer { likenessManager.isRuleUpdating = false }
+
                     try await likenessManager.updateRule()
+
+                    FeedbackGenerator.shared.notify(.success)
+
+                    AlertManager.shared.emitSuccess("Role updated successfully")
                 } else {
                     isScanSheetPresented = true
                 }

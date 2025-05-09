@@ -27,6 +27,9 @@
     "* Nothing leaves this device" : {
 
     },
+    "%@" : {
+
+    },
     "%@ ensures your history, reputation and actions are not lost, but remain confidential and under your control." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2320,9 +2323,6 @@
     "Saudi Arabia" : {
 
     },
-    "Save" : {
-
-    },
     "Save to files" : {
 
     },
@@ -2801,6 +2801,12 @@
       }
     },
     "Update app" : {
+
+    },
+    "Update the rule" : {
+
+    },
+    "Update the rule " : {
 
     },
     "Uruguay" : {
