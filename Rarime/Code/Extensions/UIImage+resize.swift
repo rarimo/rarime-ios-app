@@ -3,9 +3,9 @@ import UIKit
 
 public extension UIImage {
     func resize(_ width: Int, _ height: Int) throws -> UIImage {
-        let dimantionSize = max(width, height)
+        let dimentionSize = max(width, height)
 
-        let maxSize = CGSize(width: dimantionSize, height: dimantionSize)
+        let maxSize = CGSize(width: dimentionSize, height: dimentionSize)
 
         let availableRect = AVFoundation.AVMakeRect(
             aspectRatio: self.size,

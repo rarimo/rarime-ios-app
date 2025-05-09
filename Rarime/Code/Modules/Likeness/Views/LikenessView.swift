@@ -148,7 +148,7 @@ struct LikenessView: View {
                 }
                 Spacer()
                 AppButton(
-                    text: likenessManager.isRegistered ? "Update the rule " : "Set a rule",
+                    text: likenessManager.isRegistered ? "Update the rule" : "Set a rule",
                     width: 146,
                     action: { isRuleSheetPresented = true }
                 )
