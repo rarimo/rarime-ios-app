@@ -41,21 +41,10 @@ struct LikenessView: View {
                     ) {
                         mainSheetContent
                     }
-                    if !likenessManager.isRegistered {
-                        footer
-                    }
+                    footer
                 }
                 .dynamicSheet(isPresented: $isRuleSheetPresented) {
-                    LikenessSetRuleView(
-                        rule: likenessManager.rule,
-                        onSave: { rule in
-                            isRuleSheetPresented = false
-                            likenessManager.setRule(rule)
-                            if !likenessManager.isRegistered {
-                                isScanSheetPresented = true
-                            }
-                        }
-                    )
+                    LikenessSetRuleView(rule: likenessManager.rule, onSave: onRuleUpdate)
                 }
             }
             .sheet(isPresented: $isScanSheetPresented) {
@@ -159,7 +148,7 @@ struct LikenessView: View {
                 }
                 Spacer()
                 AppButton(
-                    text: "Set a rule",
+                    text: likenessManager.isRegistered ? "Update the rule " : "Set a rule",
                     width: 146,
                     action: { isRuleSheetPresented = true }
                 )
@@ -234,6 +223,28 @@ struct LikenessView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             withAnimation {
                 isSuccessTooltipShown = false
+            }
+        }
+    }
+
+    private func onRuleUpdate(_ rule: LikenessRule) {
+        Task {
+            defer { isRuleSheetPresented = false }
+
+            do {
+                likenessManager.setRule(rule)
+
+                if likenessManager.isRegistered {
+                    try await likenessManager.updateRule()
+                } else {
+                    isScanSheetPresented = true
+                }
+            } catch {
+                FeedbackGenerator.shared.notify(.error)
+
+                AlertManager.shared.emitError(.unknown("Unknown error occurred"))
+
+                LoggerUtil.common.error("Failed to update the rule: \(error)")
             }
         }
     }
