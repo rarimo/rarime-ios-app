@@ -23,7 +23,7 @@ struct LikenessView: View {
                     GlassBottomSheet(
                         minHeight: 410,
                         maxHeight: 730,
-                        bottomOffset: likenessManager.isRegistered ? 0 : 146,
+                        bottomOffset: 146,
                         maxBlur: 200,
                         dimBackground: true,
                         background: {
@@ -41,21 +41,10 @@ struct LikenessView: View {
                     ) {
                         mainSheetContent
                     }
-                    if !likenessManager.isRegistered {
-                        footer
-                    }
+                    footer
                 }
                 .dynamicSheet(isPresented: $isRuleSheetPresented) {
-                    LikenessSetRuleView(
-                        rule: likenessManager.rule,
-                        onSave: { rule in
-                            isRuleSheetPresented = false
-                            likenessManager.setRule(rule)
-                            if !likenessManager.isRegistered {
-                                isScanSheetPresented = true
-                            }
-                        }
-                    )
+                    LikenessSetRuleView(rule: likenessManager.rule, onSave: onRuleUpdate)
                 }
             }
             .sheet(isPresented: $isScanSheetPresented) {
@@ -159,7 +148,7 @@ struct LikenessView: View {
                 }
                 Spacer()
                 AppButton(
-                    text: "Set a rule",
+                    text: likenessManager.isRegistered ? "Update the rule" : "Set a rule",
                     width: 146,
                     action: { isRuleSheetPresented = true }
                 )
@@ -185,6 +174,19 @@ struct LikenessView: View {
                         isScanSheetPresented = false
                         FeedbackGenerator.shared.notify(.success)
                         showSuccessTooltip()
+                    },
+                    onError: { error in
+                        likenessManager.setFaceImage(nil)
+
+                        FeedbackGenerator.shared.notify(.error)
+
+                        isScanSheetPresented = false
+
+                        if let error = error as? Errors {
+                            AlertManager.shared.emitError(error)
+                        } else {
+                            AlertManager.shared.emitError(.unknown("Unknown error occurred"))
+                        }
                     },
                     onClose: {
                         likenessManager.setFaceImage(nil)
@@ -221,6 +223,35 @@ struct LikenessView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             withAnimation {
                 isSuccessTooltipShown = false
+            }
+        }
+    }
+
+    private func onRuleUpdate(_ rule: LikenessRule) {
+        Task {
+            defer { isRuleSheetPresented = false }
+
+            do {
+                likenessManager.setRule(rule)
+
+                if likenessManager.isRegistered {
+                    likenessManager.isRuleUpdating = true
+                    defer { likenessManager.isRuleUpdating = false }
+
+                    try await likenessManager.updateRule()
+
+                    FeedbackGenerator.shared.notify(.success)
+
+                    AlertManager.shared.emitSuccess("Rule updated successfully")
+                } else {
+                    isScanSheetPresented = true
+                }
+            } catch {
+                FeedbackGenerator.shared.notify(.error)
+
+                AlertManager.shared.emitError(.unknown("Unknown error occurred"))
+
+                LoggerUtil.common.error("Failed to update the rule: \(error)")
             }
         }
     }

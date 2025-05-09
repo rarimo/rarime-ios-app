@@ -1,5 +1,5 @@
 {
-  "originHash" : "c38828b7ae47f965c375736e6acd9b3a3dd71bce23858a5bfbbc5d23cdb41e1c",
+  "originHash" : "87b9ad7a5d868d8689d213f5d5e8a5a22c8e71c51e65f02b9803206b3ae06d9a",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -420,6 +420,24 @@
       "state" : {
         "revision" : "f0e469e0c73cf59444fa3cdf9a9ad61f5e79d280",
         "version" : "1.1.4"
+      }
+    },
+    {
+      "identity" : "tensorflowlitec",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/rarimo/TensorFlowLiteC.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "4238cdcaf1fb760d97808d3820c924514d683c6e"
+      }
+    },
+    {
+      "identity" : "tensorflowliteswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/rarimo/TensorFlowLiteSwift",
+      "state" : {
+        "branch" : "main",
+        "revision" : "189d43414cb0185f60d64328f3fd129e46281825"
       }
     },
     {

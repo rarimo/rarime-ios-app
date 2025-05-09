@@ -50,6 +50,10 @@ enum RegisteredCircuitData: String {
     case registerIdentity_20_160_3_3_736_200_NA
 }
 
+enum RegisteredZkey: String {
+    case likeness
+}
+
 enum RegisteredNoirCircuitData: String {
     // If you decided to remove ".dat", well, good luck to debug crash buddy
     case trustedSetup = "trustedSetup.dat"
@@ -66,15 +70,18 @@ enum RegisteredNoirCircuitData: String {
 class CircuitDataManager: ObservableObject {
     static let saveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "circuitsData", directoryHint: .isDirectory)
     static let noirSaveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "noirCircuitsData", directoryHint: .isDirectory)
+    static let zkeySaveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "zkeys", directoryHint: .isDirectory)
     
     static let shared = CircuitDataManager()
 
     let circuitDataURLs: [String: URL]
     let noirCircuitDataURLs: [String: URL]
+    let zkeyURLs: [String: URL]
 
     init() {
         self.circuitDataURLs = ConfigManager.shared.circuitData.circuitDataURLs
         self.noirCircuitDataURLs = ConfigManager.shared.noirCircuitData.noirCircuitDataURLs
+        self.zkeyURLs = ConfigManager.shared.circuitData.zkeyURLs
     }
     
     func retriveCircuitData(
@@ -180,8 +187,49 @@ class CircuitDataManager: ObservableObject {
         return circuitData
     }
     
+    func retriveZkeyPath(
+        _ zkeyName: RegisteredZkey,
+        _ downloadProgress: @escaping (Double) -> Void = { _ in }
+    ) async throws -> URL {
+        if !AppUserDefaults.shared.isCircuitsStorageCleared {
+            clearCache()
+            
+            AppUserDefaults.shared.isCircuitsStorageCleared = true
+        }
+        
+        if let zkeyPath = try retriveZkeyPathFromCache(zkeyName.rawValue) {
+            return zkeyPath
+        }
+        
+        guard let zkeyURL = zkeyURLs[zkeyName.rawValue] else {
+            throw "Zkey URL not found"
+        }
+
+        let fileUrl = try await AF.download(zkeyURL)
+            .downloadProgress { progress in
+                downloadProgress(progress.fractionCompleted)
+            }
+            .serializingDownloadedFileURL()
+            .result
+            .get()
+        
+        if !FileManager.default.fileExists(atPath: CircuitDataManager.zkeySaveDirectory.path()) {
+            try FileManager.default.createDirectory(at: CircuitDataManager.zkeySaveDirectory, withIntermediateDirectories: true)
+        }
+        
+        let moveDirectory = CircuitDataManager.zkeySaveDirectory.appending(path: "\(zkeyName.rawValue)")
+        
+        try FileManager.default.moveItem(atPath: fileUrl.path(), toPath: moveDirectory.path())
+        
+        guard let zkeyPath = try retriveZkeyPathFromCache(zkeyName.rawValue) else {
+            throw "Failed to retrive zkey path from cache"
+        }
+        
+        return zkeyPath
+    }
+    
     func retriveNoirCircuitDataPathFromCache(_ circuitDataName: String) throws -> URL? {
-        let circuitDataPath = CircuitDataManager.noirSaveDirectory.appending(path: "\(circuitDataName)")
+        let circuitDataPath = CircuitDataManager.noirSaveDirectory.appending(path: circuitDataName)
                 
         if !FileManager.default.fileExists(atPath: circuitDataPath.path()) {
             return nil
@@ -190,9 +238,20 @@ class CircuitDataManager: ObservableObject {
         return circuitDataPath
     }
     
+    func retriveZkeyPathFromCache(_ zkeyName: String) throws -> URL? {
+        let zKeyPath = CircuitDataManager.zkeySaveDirectory.appending(path: zkeyName)
+        
+        if !FileManager.default.fileExists(atPath: zKeyPath.path()) {
+            return nil
+        }
+        
+        return zKeyPath
+    }
+    
     func clearCache() {
         try? FileManager.default.removeItem(at: CircuitDataManager.saveDirectory)
         try? FileManager.default.removeItem(at: CircuitDataManager.noirSaveDirectory)
+        try? FileManager.default.removeItem(at: CircuitDataManager.zkeySaveDirectory)
     }
 }
 

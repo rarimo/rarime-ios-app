@@ -7,6 +7,8 @@ private let displayedLikenessRules: [LikenessRule] = [
 ]
 
 struct LikenessSetRuleView: View {
+    @EnvironmentObject private var likenessManager: LikenessManager
+
     let rule: LikenessRule
     let onSave: (_ rule: LikenessRule) -> Void
 
@@ -24,7 +26,7 @@ struct LikenessSetRuleView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 32) {
             VStack(alignment: .leading, spacing: 12) {
-                Text("Set a rule")
+                Text(likenessManager.isRegistered ? "Update the rule" : "Set a rule")
                     .h2()
                     .foregroundStyle(.textPrimary)
                 Text("The rules are yours to change")
@@ -70,15 +72,32 @@ struct LikenessSetRuleView: View {
                 .padding(.horizontal, 20)
                 .padding(.vertical, 1)
             }
-            AppButton(
-                text: selectedRule == .unset ? "Set a rule" : "Save",
-                action: { onSave(selectedRule) }
-            )
-            .disabled(selectedRule == .unset)
-            .controlSize(.large)
-            .padding(.horizontal, 20)
+            if likenessManager.isRuleUpdating {
+                ProgressView()
+                    .align(.center)
+            } else {
+                AppButton(
+                    text: "\(saveButtonText)",
+                    action: { onSave(selectedRule) }
+                )
+                .disabled(selectedRule == .unset)
+                .controlSize(.large)
+                .padding(.horizontal, 20)
+            }
         }
         .padding(.vertical, 20)
+    }
+
+    var saveButtonText: String {
+        if selectedRule == .unset {
+            return "Set a rule"
+        }
+
+        if likenessManager.isRegistered {
+            return "Update"
+        }
+
+        return "Save"
     }
 }
 
@@ -87,4 +106,5 @@ struct LikenessSetRuleView: View {
         rule: .unset,
         onSave: { _ in }
     )
+    .environmentObject(LikenessManager.shared)
 }

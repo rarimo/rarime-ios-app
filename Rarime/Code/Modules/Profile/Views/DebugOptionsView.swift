@@ -12,16 +12,16 @@ struct DebugOptionsView: View {
                 Toggle(
                     "Force registration",
                     isOn: .init(
-                        get: { DebugController.shared.shouldForceRegistration },
-                        set: { value in DebugController.shared.shouldForceRegistration = value }
+                        get: { DebugManager.shared.shouldForceRegistration },
+                        set: { value in DebugManager.shared.shouldForceRegistration = value }
                     )
                 )
                 .bold()
                 Toggle(
                     "Force light registration",
                     isOn: .init(
-                        get: { DebugController.shared.shouldForceLightRegistration },
-                        set: { value in DebugController.shared.shouldForceLightRegistration = value }
+                        get: { DebugManager.shared.shouldForceLightRegistration },
+                        set: { value in DebugManager.shared.shouldForceLightRegistration = value }
                     )
                 )
                 .bold()
