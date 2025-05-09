@@ -242,7 +242,7 @@ struct LikenessView: View {
 
                     FeedbackGenerator.shared.notify(.success)
 
-                    AlertManager.shared.emitSuccess("Role updated successfully")
+                    AlertManager.shared.emitSuccess("Rule updated successfully")
                 } else {
                     isScanSheetPresented = true
                 }
