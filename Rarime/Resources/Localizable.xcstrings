@@ -1281,9 +1281,6 @@
     "ID" : {
 
     },
-    "ID Card" : {
-
-    },
     "If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards" : {
 
     },
@@ -1476,9 +1473,6 @@
 
     },
     "Let's start" : {
-
-    },
-    "Let’s start" : {
 
     },
     "Let’s Start" : {
@@ -1719,9 +1713,6 @@
     "No internet connection" : {
 
     },
-    "No need for trusted third parties." : {
-
-    },
     "No notifications" : {
 
     },
@@ -1768,9 +1759,6 @@
 
     },
     "One of our services is down, try again later. RequestURL=%@" : {
-
-    },
-    "Only your camera and device should attest to your identity." : {
 
     },
     "Open App Store" : {
@@ -2352,9 +2340,6 @@
     "Select answer" : {
 
     },
-    "Select identity type" : {
-
-    },
     "Send" : {
       "localizations" : {
         "uk" : {
@@ -2849,9 +2834,6 @@
     "Western Sahara" : {
 
     },
-    "What happens here, stays here!" : {
-
-    },
     "What is RariMe?" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2898,9 +2880,6 @@
           }
         }
       }
-    },
-    "X Verified Badge" : {
-
     },
     "Yemen" : {
 
@@ -2955,9 +2934,6 @@
           }
         }
       }
-    },
-    "Your" : {
-
     },
     "Your account is not backed up. If you lose your device, you will lose access to your account" : {
 
@@ -3022,15 +2998,6 @@
 
     },
     "Zimbabwe" : {
-
-    },
-    "ZK Identity" : {
-
-    },
-    "ZK Liveness\n(PoH Killer)" : {
-
-    },
-    "ZK Liveness (PoH Killer)" : {
 
     }
   },
