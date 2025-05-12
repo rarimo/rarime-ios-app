@@ -258,7 +258,7 @@ class PassportViewModel: ObservableObject {
                 throw error
             }
             
-            LoggerUtil.common.error("Trying light registration because of: \(error.localizedDescription, privacy: .public)")
+            LoggerUtil.common.error("Trying light registration because of: \(error, privacy: .public)")
             
             do {
                 return try await lightRegister()
@@ -340,6 +340,8 @@ class PassportViewModel: ObservableObject {
             passport,
             registerIdentityCircuitType
         )
+        
+        UIPasteboard.general.string = registerIdentityInputs.json.utf8
         
         guard let circuitData = FileManager.default.contents(atPath: circuitDataPath.path()) else {
             throw Errors.unknown("Failed to read circuit data")
