@@ -45,6 +45,10 @@ struct FaceLikenessView: View {
                 blurredFace(Image(decorative: face, scale: 1))
                 if let mask = viewModel.maskFrame {
                     Image(uiImage: mask)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .rotationEffect(.degrees(180))
+                        .scaleEffect(x: -1, y: 1)
                 }
             } else {
                 FaceOval()

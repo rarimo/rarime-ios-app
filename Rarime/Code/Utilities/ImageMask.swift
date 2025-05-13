@@ -1,5 +1,5 @@
 // This import is required otherwise it will crash
-import Darwin
+// import Darwin
 
 import Foundation
 
@@ -33,14 +33,16 @@ class ImageMasks {
             return nil
         }
         
+        let faceBoundingBox = boundingBox.scaled(to: .init(width: image.width, height: image.height))
+        
         guard let allPoints = observation.landmarks?.allPoints else {
             return nil
         }
         
-        return convertPointsForFace(allPoints, boundingBox)
+        return convertPointsForFace(image, allPoints, faceBoundingBox)
     }
     
-    private static func convertPointsForFace(_ landmark: VNFaceLandmarkRegion2D, _ boundingBox: CGRect) -> UIImage {
+    private static func convertPointsForFace(_ image: CGImage, _ landmark: VNFaceLandmarkRegion2D, _ boundingBox: CGRect) -> UIImage {
         let faceLandmarkVertices = landmark.normalizedPoints.map { (point: CGPoint) -> Vertex in
             let pointX = point.x * boundingBox.width + boundingBox.origin.x
             let pointY = point.y * boundingBox.height + boundingBox.origin.y
@@ -48,13 +50,10 @@ class ImageMasks {
             return Vertex(x: Double(pointX), y: Double(pointY))
         }
             
-        return draw(faceLandmarkVertices, boundingBox)
+        return draw(image, faceLandmarkVertices, boundingBox)
     }
     
-    private static func draw(_ vertices: [Vertex], _ boundingBox: CGRect) -> UIImage {
-        let newLayer = CAShapeLayer()
-        newLayer.strokeColor = UIColor.blue.cgColor
-        newLayer.lineWidth = 4.0
+    private static func draw(_ image: CGImage, _ vertices: [Vertex], _ boundingBox: CGRect) -> UIImage {
         var newVertices = vertices
         
         newVertices.remove(at: newVertices.count - 1)
@@ -62,11 +61,13 @@ class ImageMasks {
         let triangles = Delaunay().triangulate(newVertices)
         
         let shapeLayer = CAShapeLayer()
+        shapeLayer.frame = .init(x: 0, y: 0, width: image.width, height: image.height)
+        shapeLayer.lineWidth = 4.0
         
         for triangle in triangles {
             let triangleLayer = CAShapeLayer()
             triangleLayer.path = triangle.toPath()
-            triangleLayer.strokeColor = UIColor.red.cgColor
+            triangleLayer.strokeColor = UIColor.white.cgColor
             triangleLayer.lineWidth = 1.0
             triangleLayer.fillColor = UIColor.clear.cgColor
             triangleLayer.backgroundColor = UIColor.clear.cgColor
@@ -74,9 +75,7 @@ class ImageMasks {
             shapeLayer.addSublayer(triangleLayer)
         }
         
-        LoggerUtil.common.debug("drawn")
-        
-        return convertShapeLayerToImage(shapeLayer, size: boundingBox.size)
+        return convertShapeLayerToImage(shapeLayer, size: .init(width: image.width, height: image.height))
     }
     
     private static func convertShapeLayerToImage(_ shapeLayer: CAShapeLayer, size: CGSize) -> UIImage {
@@ -342,5 +341,16 @@ class Delaunay {
         }
         
         return results
+    }
+}
+
+extension CGRect {
+    func scaled(to size: CGSize) -> CGRect {
+        return CGRect(
+            x: origin.x * size.width,
+            y: origin.y * size.height,
+            width: self.size.width * size.width,
+            height: self.size.height * size.height
+        )
     }
 }
