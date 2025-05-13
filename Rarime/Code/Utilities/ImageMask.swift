@@ -56,7 +56,7 @@ class ImageMasks {
     private static func draw(_ image: CGImage, _ vertices: [Vertex], _ boundingBox: CGRect) -> UIImage {
         var newVertices = vertices
         
-        newVertices.remove(at: newVertices.count - 1)
+        newVertices.removeLast()
         
         let triangles = Delaunay().triangulate(newVertices)
         
