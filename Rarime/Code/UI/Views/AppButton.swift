@@ -101,7 +101,7 @@ struct AppButton: View {
         default: 24
         }
     }
-    
+
     private var cornerRadius: CGFloat {
         switch controlSize {
         case .small: 12
@@ -109,7 +109,7 @@ struct AppButton: View {
         default: 16
         }
     }
-    
+
     private var iconSize: CGFloat {
         controlSize == .small ? 16 : 20
     }
@@ -131,7 +131,6 @@ struct AppButton: View {
                 Image(leftIcon).square(iconSize)
             }
             switch controlSize {
-            case .small: Text(text).buttonSmall()
             case .large: Text(text).buttonLarge()
             default: Text(text).buttonMedium()
             }

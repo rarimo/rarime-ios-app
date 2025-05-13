@@ -27,6 +27,9 @@
     "* Nothing leaves this device" : {
 
     },
+    "/3 scans" : {
+
+    },
     "%@" : {
 
     },
@@ -144,6 +147,9 @@
     "%llus" : {
 
     },
+    "+1 scan" : {
+
+    },
     "1 day" : {
 
     },
@@ -153,7 +159,13 @@
     "2. Send the saved file to the email address below" : {
 
     },
+    "3" : {
+
+    },
     "3. When we support your country, you will be notified in the app" : {
+
+    },
+    "23:59:59" : {
 
     },
     "49,421 other already joined" : {
@@ -365,6 +377,9 @@
         }
       }
     },
+    "Available" : {
+
+    },
     "Available RMO" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -503,6 +518,9 @@
     "Bonaire" : {
 
     },
+    "Bonus scan" : {
+
+    },
     "Bosnia and Herzegovina" : {
 
     },
@@ -589,6 +607,9 @@
       }
     },
     "Cayman Islands" : {
+
+    },
+    "Center the person's face" : {
 
     },
     "Central African Republic" : {
@@ -1139,6 +1160,9 @@
     "Force registration" : {
 
     },
+    "Found hidden prize $1000" : {
+
+    },
     "France" : {
 
     },
@@ -1267,6 +1291,9 @@
     "Hi" : {
 
     },
+    "Hidden prize" : {
+
+    },
     "History" : {
 
     },
@@ -1364,6 +1391,12 @@
 
     },
     "Invite" : {
+
+    },
+    "Invite a friend" : {
+
+    },
+    "Invite a friend and get 1 bonus scan for each invited friend, or share the post and get 1 bonus scan as a one-time reward." : {
 
     },
     "Invite to RariMe" : {
@@ -2441,6 +2474,12 @@
     "Seychelles" : {
 
     },
+    "Share" : {
+
+    },
+    "Share on socials" : {
+
+    },
     "Share your referral link and get bonuses when your friends join and make a purchase!" : {
 
     },
@@ -2689,6 +2728,12 @@
       }
     },
     "Timor-Leste" : {
+
+    },
+    "Tip:" : {
+
+    },
+    "Tip: I think there's something as light as ether in that face..." : {
 
     },
     "To continue, please install the latest version of the app" : {
@@ -2983,6 +3028,9 @@
 
     },
     "You entered wrong passcode.\nLoading time: %@" : {
+
+    },
+    "You have 3 scan attempts every 24 hours, but you can also earn extra scans by sharing and inviting friends." : {
 
     },
     "You have already reserved tokens" : {
