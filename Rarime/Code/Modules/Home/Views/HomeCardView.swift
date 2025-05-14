@@ -87,6 +87,10 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
         .background(
             RoundedRectangle(cornerRadius: 32)
                 .fill(backgroundGradient)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 32)
+                        .stroke(.bgComponentPrimary, lineWidth: 1)
+                )
                 .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
         )
     }

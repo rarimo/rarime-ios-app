@@ -176,7 +176,7 @@ struct FaceLikenessView: View {
     }
 }
 
-private struct FaceOval: Shape {
+struct FaceOval: Shape {
     private static let SHAPE_WIDTH = 290
     private static let SHAPE_HEIGHT = 395
 

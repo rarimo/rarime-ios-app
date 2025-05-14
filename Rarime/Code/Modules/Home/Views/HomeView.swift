@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum HomeRoute: Hashable {
-    case notifications, identity, inviteFriends, claimTokens, wallet, voting, likeness
+    case notifications, identity, inviteFriends, claimTokens, wallet, voting, likeness, prizeScan
 }
 
 struct HomeView: View {
@@ -31,6 +31,7 @@ struct HomeView: View {
     @Namespace var walletAnimation
     @Namespace var votingAnimation
     @Namespace var likenessAnimation
+    @Namespace var prizeScanAnimation
 
     private var activeReferralCode: String? {
         pointsBalance?.referralCodes?
@@ -48,6 +49,34 @@ struct HomeView: View {
 
     private var homeCards: [HomeCarouselCard] {
         [
+            HomeCarouselCard(action: { path = .prizeScan }) {
+                HomeCardView(
+                    backgroundGradient: Gradients.purpleBg,
+                    foregroundGradient: Gradients.purpleText,
+                    topIcon: Icons.freedomtool,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(.hiddenPrizeBg)
+                            .resizable()
+                            .scaledToFill()
+                            .clipShape(RoundedRectangle(cornerRadius: 32))
+                    },
+                    title: "Hidden prize",
+                    subtitle: "Scan",
+                    bottomAdditionalContent: {
+                        Text("Found hidden prize $1000")
+                            .body4()
+                            .foregroundStyle(.baseBlack.opacity(0.5))
+                            .padding(.top, 12)
+                            .matchedGeometryEffect(
+                                id: AnimationNamespaceIds.extra,
+                                in: prizeScanAnimation,
+                                properties: .position
+                            )
+                    },
+                    animation: prizeScanAnimation
+                )
+            },
             HomeCarouselCard(action: { path = .identity }) {
                 HomeCardView(
                     backgroundGradient: Gradients.gradientFirst,
@@ -296,6 +325,11 @@ struct HomeView: View {
                         LikenessView(
                             onClose: { path = nil },
                             animation: likenessAnimation
+                        )
+                    case .prizeScan:
+                        PrizeScanView(
+                            onClose: { path = nil },
+                            animation: prizeScanAnimation
                         )
                     default:
                         content
