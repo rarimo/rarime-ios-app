@@ -239,6 +239,7 @@ class CircuitDataManager: ObservableObject {
         try? FileManager.default.removeItem(at: CircuitDataManager.saveDirectory)
         try? FileManager.default.removeItem(at: CircuitDataManager.noirSaveDirectory)
         try? FileManager.default.removeItem(at: CircuitDataManager.zkeySaveDirectory)
+        try? FileManager.default.removeItem(at: CircuitDataManager.downloadblesSaveDirectory)
     }
 }
 
