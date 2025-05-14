@@ -3,15 +3,13 @@ import SwiftUI
 struct IdentityView: View {
     @Environment(\.scenePhase) var scenePhase
 
+    @EnvironmentObject private var mainViewModel: MainView.ViewModel
     @EnvironmentObject private var passportViewModel: PassportViewModel
+
     @EnvironmentObject private var passportManager: PassportManager
     @EnvironmentObject private var userManager: UserManager
 
-    @State private var isSelectTypeSheetPresented = false
-
-    @State private var isLivenessSheetPresented = false
     @State private var isScanDocumentSheetPresented = false
-
     @State private var isWaitlistedCountrySheetPresented = false
     @State private var isUnsupportedCountrySheetPresented = false
 
@@ -30,26 +28,11 @@ struct IdentityView: View {
 
     var body: some View {
         content
-            .dynamicSheet(isPresented: $isSelectTypeSheetPresented, fullScreen: true) {
-                SelectIdentityTypeView(
-                    onSelect: { identityTypeId in
-                        isSelectTypeSheetPresented = false
-                        selectIdentityType(identityTypeId)
-                    },
-                    onClose: { isSelectTypeSheetPresented = false }
-                )
-            }
             .dynamicSheet(isPresented: $isScanDocumentSheetPresented, fullScreen: true) {
                 ScanPassportView(onClose: {
                     isScanDocumentSheetPresented = false
                 })
                 .environmentObject(passportViewModel)
-            }
-            .dynamicSheet(isPresented: $isLivenessSheetPresented, fullScreen: true) {
-                ZkLivenessIntroView(
-                    onClose: { isLivenessSheetPresented = false },
-                    onStart: { isLivenessSheetPresented = false }
-                )
             }
             .dynamicSheet(isPresented: $passportViewModel.isUserRevoking, fullScreen: true) {
                 PassportRevocationView()
@@ -80,6 +63,19 @@ struct IdentityView: View {
                 if AppUserDefaults.shared.isRegistrationInterrupted {
                     passportViewModel.processingStatus = .failure
                 }
+
+                if !hasDocument {
+                    isScanDocumentSheetPresented = true
+                }
+            }
+            .onChange(of: isScanDocumentSheetPresented) { newValue in
+                if !newValue && !hasDocument {
+                    Task {
+                        // Delay to allow the sheet to dismiss
+                        try await Task.sleep(for: .seconds(0.1))
+                        mainViewModel.selectedTab = .home
+                    }
+                }
             }
     }
 
@@ -93,9 +89,6 @@ struct IdentityView: View {
                                 .subtitle4()
                                 .foregroundStyle(.textPrimary)
                             Spacer()
-                            AppIconButton(icon: Icons.addFill, action: {
-                                isSelectTypeSheetPresented = true
-                            })
                         }
                         .padding(.top, 20)
                         .padding(.horizontal, 20)
@@ -122,25 +115,11 @@ struct IdentityView: View {
                         }
                         .padding(.horizontal, 12)
                         Spacer()
-                    } else {
-                        SelectIdentityTypeView(onSelect: selectIdentityType)
                     }
                 }
             }
         }
-        .environmentObject(passportViewModel)
         .background(.bgPrimary)
-    }
-
-    private func selectIdentityType(_ identityTypeId: IdentityTypeId) {
-        switch identityTypeId {
-        case .passport:
-            isScanDocumentSheetPresented = true
-        case .zkLiveness:
-            isLivenessSheetPresented = true
-        default:
-            break
-        }
     }
 }
 
