@@ -67,21 +67,28 @@ enum RegisteredNoirCircuitData: String {
     case registerIdentity_21_256_3_3_576_232_NA
 }
 
+enum RegisteredDownloadbleFiles: String {
+    case faceRecognitionTFLite
+}
+
 class CircuitDataManager: ObservableObject {
     static let saveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "circuitsData", directoryHint: .isDirectory)
     static let noirSaveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "noirCircuitsData", directoryHint: .isDirectory)
     static let zkeySaveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "zkeys", directoryHint: .isDirectory)
+    static let downloadblesSaveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "downloadbles", directoryHint: .isDirectory)
     
     static let shared = CircuitDataManager()
 
     let circuitDataURLs: [String: URL]
     let noirCircuitDataURLs: [String: URL]
     let zkeyURLs: [String: URL]
+    let downloadbleFileURLs: [String: URL]
 
     init() {
         self.circuitDataURLs = ConfigManager.shared.circuitData.circuitDataURLs
         self.noirCircuitDataURLs = ConfigManager.shared.noirCircuitData.noirCircuitDataURLs
         self.zkeyURLs = ConfigManager.shared.circuitData.zkeyURLs
+        self.downloadbleFileURLs = ConfigManager.shared.general.downloadbleFileURLs
     }
     
     func retriveCircuitData(
@@ -159,6 +166,18 @@ class CircuitDataManager: ObservableObject {
             zkeyName.rawValue,
             zkeyURLs,
             CircuitDataManager.zkeySaveDirectory,
+            downloadProgress
+        )
+    }
+    
+    func retriveDownloadbleFilePath(
+        _ fileName: RegisteredDownloadbleFiles,
+        _ downloadProgress: @escaping (Double) -> Void = { _ in }
+    ) async throws -> URL {
+        return try await retriveFilePath(
+            fileName.rawValue,
+            downloadbleFileURLs,
+            CircuitDataManager.downloadblesSaveDirectory,
             downloadProgress
         )
     }

@@ -110,3 +110,6 @@ APPSFLYER_APP_ID = "id6503300598"
 
 // MARK: ZKeys
 ZKEY_URL_0 = "https:${SLASH}/storage.googleapis.com/rarimo-store/zkey/circuit_final.zkey"
+
+// MARK: DownloadableFile
+DOWNLOADABLE_FILE_URL_0 = "https:${SLASH}/storage.googleapis.com/rarimo-store/face-recognition/face-recognition.tflite"

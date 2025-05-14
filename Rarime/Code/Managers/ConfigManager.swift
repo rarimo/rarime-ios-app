@@ -21,6 +21,7 @@ extension ConfigManager {
         let version: String = try! readFromInfoPlist(key: "CFBundleShortVersionString")
         let generalNotificationTopic: String = try! readFromInfoPlist(key: "GENERAL_NOTIFICATION_TOPIC")
         let claimableNotificationTopic: String = try! readFromInfoPlist(key: "CLAIMABLE_NOTIFICATION_TOPIC")
+        let downloadbleFileURLs: [String: URL] = try! readURLDictionaryFromInfoPlist(key: "DOWNLOADABLE_FILE_URLS")
     }
 }
 

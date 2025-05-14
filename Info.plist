@@ -248,5 +248,10 @@
 	</dict>
 	<key>FACE_REGISTRY_CONTRACT_ADDRESS</key>
 	<string>${FACE_REGISTRY_CONTRACT_ADDRESS}</string>
+	<key>DOWNLOADABLE_FILE_URLS</key>
+	<dict>
+		<key>faceRecognitionTFLite</key>
+		<string>${DOWNLOADABLE_FILE_URL_0}</string>
+	</dict>
 </dict>
 </plist>
