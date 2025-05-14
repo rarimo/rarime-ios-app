@@ -253,5 +253,7 @@
 		<key>faceRecognitionTFLite</key>
 		<string>${DOWNLOADABLE_FILE_URL_0}</string>
 	</dict>
+	<key>GUESS_CELEBRITY_GAME_CONTRACT_ADDRESS</key>
+	<string>${GUESS_CELEBRITY_GAME_CONTRACT_ADDRESS}</string>
 </dict>
 </plist>
