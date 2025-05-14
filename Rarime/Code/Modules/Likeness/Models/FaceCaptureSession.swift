@@ -64,6 +64,12 @@ class FaceCaptureSession: NSObject {
             
         captureSession.addInput(deviceInput)
         captureSession.addOutput(videoOutput)
+        
+        // Set frame rate to 21 FPS
+        try systemPreferredCamera.lockForConfiguration()
+        systemPreferredCamera.activeVideoMinFrameDuration = CMTime(value: 1, timescale: 21)
+        systemPreferredCamera.activeVideoMaxFrameDuration = CMTime(value: 1, timescale: 21)
+        systemPreferredCamera.unlockForConfiguration()
     }
 
     public func startSession() async {

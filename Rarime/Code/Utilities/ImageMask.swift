@@ -1,5 +1,5 @@
 // This import is required otherwise it will crash
-// import Darwin
+import Darwin
 
 import Foundation
 

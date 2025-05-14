@@ -55,7 +55,7 @@ class LikenessFaceViewModel: ObservableObject {
     }
         
     func handleCameraPreviews() async {
-        for await image in cameraManager.previewStream {
+        for await image in cameraManager.previewStream {            
             Task { @MainActor in
                 maskFrame = try ImageMasks.processFace(image)
                 
