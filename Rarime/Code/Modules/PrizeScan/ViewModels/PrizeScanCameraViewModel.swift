@@ -36,4 +36,8 @@ class PrizeScanCameraViewModel: ObservableObject {
     func clearImages() {
         currentFrame = nil
     }
+    
+    func claimReward() async throws {
+        
+    }
 }

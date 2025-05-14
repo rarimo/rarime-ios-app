@@ -303,7 +303,7 @@
 		CE3E0D3B2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E0D3A2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift */; };
 		CE423B732DD4DEB80025803D /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE423B722DD4DEB80025803D /* Identity.xcframework */; };
 		CE423B782DD4E3B90025803D /* GuessCelebrityContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE423B772DD4E3AB0025803D /* GuessCelebrityContract.swift */; };
-		CE51E2E52C21790700043D9A /* CircuitDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51E2E42C21790700043D9A /* CircuitDataManager.swift */; };
+		CE51E2E52C21790700043D9A /* DownloadableDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51E2E42C21790700043D9A /* DownloadableDataManager.swift */; };
 		CE51E2FB2C21CA0B00043D9A /* StateKeeperContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51E2FA2C21CA0B00043D9A /* StateKeeperContract.swift */; };
 		CE5315C32C77664C0087D53D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE5315C22C77664C0087D53D /* GoogleService-Info.plist */; };
 		CE5315CA2C7769A20087D53D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5315C92C7769A20087D53D /* NotificationManager.swift */; };
@@ -692,7 +692,7 @@
 		CE423B722DD4DEB80025803D /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE423B772DD4E3AB0025803D /* GuessCelebrityContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessCelebrityContract.swift; sourceTree = "<group>"; };
 		CE45F0682DCD122D0098ED22 /* libbionet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbionet.a; sourceTree = "<group>"; };
-		CE51E2E42C21790700043D9A /* CircuitDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircuitDataManager.swift; sourceTree = "<group>"; };
+		CE51E2E42C21790700043D9A /* DownloadableDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadableDataManager.swift; sourceTree = "<group>"; };
 		CE51E2FA2C21CA0B00043D9A /* StateKeeperContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateKeeperContract.swift; sourceTree = "<group>"; };
 		CE5315C22C77664C0087D53D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE5315C92C7769A20087D53D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -1082,7 +1082,7 @@
 				CE0881A02BF773CC00B31735 /* AlertManager.swift */,
 				CE0DC57A2C0DB33A00EFC0D7 /* UpdateManager.swift */,
 				CE8FEB592C1AF1BE0008381A /* DecentralizeAuthManager.swift */,
-				CE51E2E42C21790700043D9A /* CircuitDataManager.swift */,
+				CE51E2E42C21790700043D9A /* DownloadableDataManager.swift */,
 				CE5315C92C7769A20087D53D /* NotificationManager.swift */,
 				5617AB142C8F48BE003947C9 /* ExternalRequestsManager.swift */,
 				56337CE22DBA3D1500973721 /* LikenessManager.swift */,
@@ -2358,7 +2358,7 @@
 				CEA03F0A2C7C7A17002F218A /* View+IsLoading.swift in Sources */,
 				CE059B422C9C4608006046B3 /* InternetConnectionManager.swift in Sources */,
 				CE1FA56A2C1708F100B2C191 /* Points.swift in Sources */,
-				CE51E2E52C21790700043D9A /* CircuitDataManager.swift in Sources */,
+				CE51E2E52C21790700043D9A /* DownloadableDataManager.swift in Sources */,
 				C7B57B642D650FB1001E86C4 /* AnimationNamespaceIds.swift in Sources */,
 				56E2D9282BCFF5DE006E725D /* Images.swift in Sources */,
 				CE7210292BD7D0D10043DB7F /* String+Hex.swift in Sources */,

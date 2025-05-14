@@ -67,17 +67,17 @@ enum RegisteredNoirCircuitData: String {
     case registerIdentity_21_256_3_3_576_232_NA
 }
 
-enum RegisteredDownloadbleFiles: String {
+enum RegisteredDownloadableFiles: String {
     case faceRecognitionTFLite
 }
 
-class CircuitDataManager: ObservableObject {
+class DownloadableDataManager: ObservableObject {
     static let saveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "circuitsData", directoryHint: .isDirectory)
     static let noirSaveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "noirCircuitsData", directoryHint: .isDirectory)
     static let zkeySaveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "zkeys", directoryHint: .isDirectory)
-    static let downloadblesSaveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "downloadbles", directoryHint: .isDirectory)
+    static let downloadablesSaveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "downloadbles", directoryHint: .isDirectory)
     
-    static let shared = CircuitDataManager()
+    static let shared = DownloadableDataManager()
 
     let circuitDataURLs: [String: URL]
     let noirCircuitDataURLs: [String: URL]
@@ -118,7 +118,7 @@ class CircuitDataManager: ObservableObject {
             .get()
         
         let archivePath = fileUrl.path()
-        let unarchivePath = CircuitDataManager.saveDirectory.path()
+        let unarchivePath = DownloadableDataManager.saveDirectory.path()
         
         SSZipArchive.unzipFile(atPath: archivePath, toDestination: unarchivePath)
         
@@ -130,8 +130,8 @@ class CircuitDataManager: ObservableObject {
     }
     
     func retriveCircuitDataFromCache(_ circuitName: String) throws -> CircuitData? {
-        let circuitDatPath = CircuitDataManager.saveDirectory.appending(path: "\(circuitName)-download/\(circuitName).dat")
-        let circuitZkeyPath = CircuitDataManager.saveDirectory.appending(path: "\(circuitName)-download/circuit_final.zkey")
+        let circuitDatPath = DownloadableDataManager.saveDirectory.appending(path: "\(circuitName)-download/\(circuitName).dat")
+        let circuitZkeyPath = DownloadableDataManager.saveDirectory.appending(path: "\(circuitName)-download/circuit_final.zkey")
                 
         if
             !FileManager.default.fileExists(atPath: circuitDatPath.path()) ||
@@ -153,7 +153,7 @@ class CircuitDataManager: ObservableObject {
         return try await retriveFilePath(
             circuitDataName.rawValue,
             noirCircuitDataURLs,
-            CircuitDataManager.noirSaveDirectory,
+            DownloadableDataManager.noirSaveDirectory,
             downloadProgress
         )
     }
@@ -165,19 +165,19 @@ class CircuitDataManager: ObservableObject {
         return try await retriveFilePath(
             zkeyName.rawValue,
             zkeyURLs,
-            CircuitDataManager.zkeySaveDirectory,
+            DownloadableDataManager.zkeySaveDirectory,
             downloadProgress
         )
     }
     
     func retriveDownloadbleFilePath(
-        _ fileName: RegisteredDownloadbleFiles,
+        _ fileName: RegisteredDownloadableFiles,
         _ downloadProgress: @escaping (Double) -> Void = { _ in }
     ) async throws -> URL {
         return try await retriveFilePath(
             fileName.rawValue,
             downloadbleFileURLs,
-            CircuitDataManager.downloadblesSaveDirectory,
+            DownloadableDataManager.downloadablesSaveDirectory,
             downloadProgress
         )
     }
@@ -236,10 +236,10 @@ class CircuitDataManager: ObservableObject {
     }
     
     func clearCache() {
-        try? FileManager.default.removeItem(at: CircuitDataManager.saveDirectory)
-        try? FileManager.default.removeItem(at: CircuitDataManager.noirSaveDirectory)
-        try? FileManager.default.removeItem(at: CircuitDataManager.zkeySaveDirectory)
-        try? FileManager.default.removeItem(at: CircuitDataManager.downloadblesSaveDirectory)
+        try? FileManager.default.removeItem(at: DownloadableDataManager.saveDirectory)
+        try? FileManager.default.removeItem(at: DownloadableDataManager.noirSaveDirectory)
+        try? FileManager.default.removeItem(at: DownloadableDataManager.zkeySaveDirectory)
+        try? FileManager.default.removeItem(at: DownloadableDataManager.downloadablesSaveDirectory)
     }
 }
 

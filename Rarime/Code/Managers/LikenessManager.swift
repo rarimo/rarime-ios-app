@@ -191,7 +191,7 @@ class LikenessManager: ObservableObject {
     func generateBionettaProof(_ inputs: Data) async throws -> GrothZkProof {
         let zkWitness = try ZKUtils.bionetta(inputs)
 
-        let zkeyPath = try await CircuitDataManager.shared.retriveZkeyPath(.likeness)
+        let zkeyPath = try await DownloadableDataManager.shared.retriveZkeyPath(.likeness)
 
         let zkey = try Data(contentsOf: zkeyPath)
 
