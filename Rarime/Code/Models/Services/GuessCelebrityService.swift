@@ -150,13 +150,11 @@ struct GuessCelebrityUserResponseAttributes: Codable {
 
 struct GuessCelebrityUserResponseRelationships: Codable {
     let userStats: JsonApiRelationship
-    let serviceStatus: JsonApiRelationship
-    let hint: JsonApiRelationship
+    let celebrity: JsonApiRelationship
 
     enum CodingKeys: String, CodingKey {
         case userStats = "user_stats"
-        case serviceStatus = "service_status"
-        case hint
+        case celebrity
     }
 }
 
@@ -172,10 +170,11 @@ struct GuessCelebrityUserResponseIncludedAttributes: Codable {
     let totalAttemptsCount: Int?
     let resetTime: TimeInterval?
 
-    // service_status
+    // celebrity
+    let title: String?
+    let description: String?
     let status: String?
-
-    // hint
+    let image: String?
     let hint: String?
 
     enum CodingKeys: String, CodingKey {
@@ -183,7 +182,7 @@ struct GuessCelebrityUserResponseIncludedAttributes: Codable {
         case extraAttemptsLeft = "extra_attempts_left"
         case totalAttemptsCount = "total_attempts_count"
         case resetTime = "reset_time"
-        case status, hint
+        case title, description, status, image, hint
     }
 }
 
@@ -206,11 +205,13 @@ struct GuessCelebritySubmitRequestAttributes: Codable {
 
 struct GuessCelebritySubmitResponse: Codable {
     let data: GuessCelebritySubmitResponseData
+    let included: [GuessCelebrityUserResponseIncluded]
 }
 
 struct GuessCelebritySubmitResponseData: Codable {
     let id, type: String
     let attributes: GuessCelebritySubmitResponseAttributes
+    let relationships: GuessCelebrityUserResponseRelationships
 }
 
 struct GuessCelebritySubmitResponseAttributes: Codable {
