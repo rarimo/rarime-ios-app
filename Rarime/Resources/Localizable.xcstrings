@@ -27,7 +27,7 @@
     "* Nothing leaves this device" : {
 
     },
-    "/3 scans" : {
+    "/%lld scans" : {
 
     },
     "%@" : {
@@ -157,9 +157,6 @@
 
     },
     "2. Send the saved file to the email address below" : {
-
-    },
-    "3" : {
 
     },
     "3. When we support your country, you will be notified in the app" : {
@@ -3039,7 +3036,7 @@
     "You entered wrong passcode.\nLoading time: %@" : {
 
     },
-    "You have 3 scan attempts every 24 hours, but you can also earn extra scans by sharing and inviting friends." : {
+    "You have %lld scan attempts every 24 hours, but you can also earn extra scans by sharing and inviting friends." : {
 
     },
     "You have already reserved tokens" : {

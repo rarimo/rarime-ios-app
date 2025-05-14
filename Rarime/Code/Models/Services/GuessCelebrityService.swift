@@ -8,13 +8,10 @@ class GuessCelebrityService {
         self.url = url
     }
 
-    func createUser(jwt: JWT, nullifier: String, referredBy: String?) async throws -> GuessCelebrityUserResponse {
-        let headers = HTTPHeaders(
-            [
-                HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
-            ]
-        )
+    func createUser(jwt: JWT, referredBy: String?) async throws -> GuessCelebrityUserResponse {
+        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")])
 
+        let nullifier = jwt.payload.sub
         let requestUrl = url.appendingPathComponent("integrations/guess-celebrity-svc/v1/public/users")
 
         let requestPayload = GuessCelebrityUserRequest(
@@ -36,14 +33,12 @@ class GuessCelebrityService {
         return response
     }
 
-    func getUserInformation(jwt: JWT, nullifier: String) async throws -> GuessCelebrityUserResponse {
-        let headers = HTTPHeaders(
-            [
-                HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
-            ]
-        )
+    func getUserInformation(jwt: JWT) async throws -> GuessCelebrityUserResponse {
+        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")])
 
+        let nullifier = jwt.payload.sub
         let requestUrl = url.appendingPathComponent("integrations/guess-celebrity-svc/v1/public/users/\(nullifier)")
+
         var response = try await AF.request(requestUrl, headers: headers)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(GuessCelebrityUserResponse.self)
@@ -53,14 +48,12 @@ class GuessCelebrityService {
         return response
     }
 
-    func addExtraAttempt(jwt: JWT, nullifier: String) async throws -> Data {
-        let headers = HTTPHeaders(
-            [
-                HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
-            ]
-        )
+    func addExtraAttempt(jwt: JWT) async throws -> Data {
+        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")])
 
+        let nullifier = jwt.payload.sub
         let requestUrl = url.appendingPathComponent("integrations/guess-celebrity-svc/v1/public/users/\(nullifier)/extra")
+
         let response = try await AF.request(requestUrl, method: .post, headers: headers)
             .validate(OpenApiError.catchInstance)
             .serializingData()
@@ -70,13 +63,10 @@ class GuessCelebrityService {
         return response
     }
 
-    func submitCelebrityGuess(jwt: JWT, nullifier: String, features: [Float]) async throws -> GuessCelebritySubmitResponse {
-        let headers = HTTPHeaders(
-            [
-                HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
-            ]
-        )
+    func submitCelebrityGuess(jwt: JWT, features: [Float]) async throws -> GuessCelebritySubmitResponse {
+        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")])
 
+        let nullifier = jwt.payload.sub
         let requestUrl = url.appendingPathComponent("integrations/guess-celebrity-svc/v1/public/users/\(nullifier)/guess")
 
         let requestPayload = GuessCelebritySubmitRequest(
