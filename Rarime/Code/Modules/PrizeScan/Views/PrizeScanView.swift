@@ -8,15 +8,28 @@ struct PrizeScanView: View {
     @State private var isBonusScanSheetPresented = false
 
     private var hasAttempts: Bool {
-        false
+        // TODO: use backend data
+        true
     }
 
     private var canGetBonusScans: Bool {
+        // TODO: use backend data
         true
     }
 
     private var tip: String? {
-        return "I think there's something as light as ether in that face..."
+        // TODO: use backend data
+        "I think there's something as light as ether in that face..."
+    }
+
+    private var invitationLink: String {
+        // TODO: use backend data
+        "https://app.rarime.com/r/test"
+    }
+
+    private var imageToShare: Data {
+        // TODO: use different image for sharing
+        UIImage(named: "HiddenPrizeBg")!.pngData()!
     }
 
     var body: some View {
@@ -43,6 +56,7 @@ struct PrizeScanView: View {
                 }
             }
         }
+        .background(.baseWhite)
         .sheet(isPresented: $isScanSheetPresented) {
             PrizeScanCameraView(
                 onClose: { isScanSheetPresented = false }
@@ -94,14 +108,14 @@ struct PrizeScanView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Available")
                         .subtitle6()
-                        .foregroundStyle(.textPrimary)
+                        .foregroundStyle(.baseBlack)
                     HStack(spacing: 2) {
                         Text("3")
                             .h4()
                             .foregroundStyle(Gradients.purpleText)
                         Text("/3 scans")
                             .body4()
-                            .foregroundStyle(.textSecondary)
+                            .foregroundStyle(.baseBlack.opacity(0.5))
                     }
                 }
                 Spacer()
@@ -199,12 +213,20 @@ struct PrizeScanView: View {
                             .foregroundStyle(.textSecondary)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    AppButton(
-                        text: "Share",
-                        width: 100,
-                        action: {}
-                    )
-                    .controlSize(.small)
+                    ShareLink(
+                        item: imageToShare,
+                        subject: Text("Hidden Prize Scan"),
+                        preview: SharePreview("Hidden Prize Scan", image: Image(uiImage: UIImage(data: imageToShare)!))
+                    ) {
+                        Text("Share")
+                            .buttonMedium()
+                            .foregroundStyle(.invertedLight)
+                    }
+                    .frame(width: 100, height: 32)
+                    .background(.textPrimary, in: RoundedRectangle(cornerRadius: 12))
+                    .simultaneousGesture(TapGesture().onEnded {
+                        // TODO: Make a request to get extra scan
+                    })
                 }
                 .frame(maxWidth: .infinity)
 
@@ -223,12 +245,17 @@ struct PrizeScanView: View {
                             .foregroundStyle(.textSecondary)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    AppButton(
-                        text: "Invite",
-                        width: 100,
-                        action: {}
-                    )
-                    .controlSize(.small)
+                    ShareLink(
+                        item: URL(string: invitationLink)!,
+                        subject: Text("Invite to Hidden Prize Scan"),
+                        message: Text("Join Hidden Prize Scan with my link:\n\n\(invitationLink)")
+                    ) {
+                        Text("Invite")
+                            .buttonMedium()
+                            .foregroundStyle(.invertedLight)
+                    }
+                    .frame(width: 100, height: 32)
+                    .background(.textPrimary, in: RoundedRectangle(cornerRadius: 12))
                 }
                 .frame(maxWidth: .infinity)
             }

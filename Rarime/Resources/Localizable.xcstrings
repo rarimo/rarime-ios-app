@@ -1294,6 +1294,9 @@
     "Hidden prize" : {
 
     },
+    "Hidden Prize Scan" : {
+
+    },
     "History" : {
 
     },
@@ -1399,6 +1402,9 @@
     "Invite a friend and get 1 bonus scan for each invited friend, or share the post and get 1 bonus scan as a one-time reward." : {
 
     },
+    "Invite to Hidden Prize Scan" : {
+
+    },
     "Invite to RariMe" : {
 
     },
@@ -1450,6 +1456,9 @@
           }
         }
       }
+    },
+    "Join Hidden Prize Scan with my link:\n\n%@" : {
+
     },
     "Join RariMe with my invite code: %@\n\n%@" : {
       "localizations" : {
