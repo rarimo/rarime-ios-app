@@ -31,6 +31,7 @@ enum LikenessProcessingRegisterTask: Int, CaseIterable, LikenessProcessingTask {
 }
 
 class LikenessFaceViewModel: ObservableObject {
+    @Published var maskFrame: UIImage?
     @Published var currentFrame: CGImage?
         
     private var cameraManager = FaceCaptureSession()
@@ -54,15 +55,14 @@ class LikenessFaceViewModel: ObservableObject {
     }
         
     func handleCameraPreviews() async {
-        for await image in cameraManager.previewStream {
+        for await image in cameraManager.previewStream {            
             Task { @MainActor in
+                maskFrame = try ImageMasks.processFace(image)
+                
                 currentFrame = image
-                handleFaceImage(image)
             }
         }
     }
-        
-    func handleFaceImage(_ image: CGImage) {}
     
     func clearImages() {
         currentFrame = nil

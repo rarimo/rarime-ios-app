@@ -382,6 +382,8 @@
 		CEE33A9A2D47951C00A2C705 /* libwitnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_5_296.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE33A992D47951C00A2C705 /* libwitnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_5_296.a */; };
 		CEE4FEA92CFDB851007C31F3 /* libfr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE4FEA82CFDB851007C31F3 /* libfr.a */; };
 		CEE4FEAB2CFDBA80007C31F3 /* libgmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE4FEAA2CFDBA80007C31F3 /* libgmp.a */; };
+		CEED94D12DD3512C004BFE93 /* ImageMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED94D02DD35125004BFE93 /* ImageMask.swift */; };
+		CEED94D22DD3512C004BFE93 /* ImageMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED94D02DD35125004BFE93 /* ImageMask.swift */; };
 		CEF251382BD6E17800050507 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251372BD6E17800050507 /* UserManager.swift */; };
 		CEF2513A2BD6E22700050507 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251392BD6E22700050507 /* User.swift */; };
 		CEF5C2B62D3FEC3500E143D7 /* RarimeIOSUtils in Frameworks */ = {isa = PBXBuildFile; productRef = CEF5C2B52D3FEC3500E143D7 /* RarimeIOSUtils */; };
@@ -767,6 +769,7 @@
 		CEE33A992D47951C00A2C705 /* libwitnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_5_296.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_5_296.a; sourceTree = "<group>"; };
 		CEE4FEA82CFDB851007C31F3 /* libfr.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfr.a; sourceTree = "<group>"; };
 		CEE4FEAA2CFDBA80007C31F3 /* libgmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgmp.a; sourceTree = "<group>"; };
+		CEED94D02DD35125004BFE93 /* ImageMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMask.swift; sourceTree = "<group>"; };
 		CEF251372BD6E17800050507 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		CEF251392BD6E22700050507 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CEF56DE62CF5D9AF00F4A477 /* witnesscalc_registerIdentity_1_160_3_3_576_200_NA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_1_160_3_3_576_200_NA.h; sourceTree = "<group>"; };
@@ -1003,6 +1006,7 @@
 			children = (
 				CE68BE402BD9B69A00D92EBB /* Web3 */,
 				5655E42D2BD2C94F00B86C5C /* AppUserDefaults.swift */,
+				CEED94D02DD35125004BFE93 /* ImageMask.swift */,
 				CE06590D2DC8C0AA004FBDD5 /* NeuralUtils.swift */,
 				CE3CD7912DB6819800112E46 /* PreviewUtils.swift */,
 				56062B9B2C12032700C9BF9B /* Constants.swift */,
@@ -2062,6 +2066,7 @@
 				CE00DF4D2D9ACD5E00614151 /* NoirRegisterIdentityInputs.swift in Sources */,
 				CE27974B2CEB4258008649B0 /* DateUtil.swift in Sources */,
 				CE2FF4BA2DCCB85D00E4151D /* FaceRegistryNoInclusionInputs.swift in Sources */,
+				CEED94D12DD3512C004BFE93 /* ImageMask.swift in Sources */,
 				CE2797452CEB41F7008649B0 /* AppColorScheme.swift in Sources */,
 				CE3CD7932DB6819B00112E46 /* PreviewUtils.swift in Sources */,
 				56B589F02DB7B05F00266105 /* LikenessRule.swift in Sources */,
@@ -2170,6 +2175,7 @@
 				56C6D29E2D6E266300EB24D8 /* SelectIdentityTypeView.swift in Sources */,
 				CE19CB472BE39DA400B26DF7 /* RarimoUtils.swift in Sources */,
 				CE68BE422BD9B6A200D92EBB /* RegistrationContract.swift in Sources */,
+				CEED94D22DD3512C004BFE93 /* ImageMask.swift in Sources */,
 				CE3D41C02C77974500D0AA65 /* PushNotificationsRaw.swift in Sources */,
 				CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */,
 				561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */,

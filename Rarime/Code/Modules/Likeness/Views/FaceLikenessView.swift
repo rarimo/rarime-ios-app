@@ -43,11 +43,24 @@ struct FaceLikenessView: View {
         ZStack {
             if let face = viewModel.currentFrame {
                 blurredFace(Image(decorative: face, scale: 1))
+                if let mask = viewModel.maskFrame {
+                    drawMask(mask)
+                }
             } else {
                 FaceOval()
                     .foregroundStyle(.bgComponentPrimary)
             }
         }
+    }
+
+    func drawMask(_ mask: UIImage) -> some View {
+        Image(uiImage: mask)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .rotationEffect(.degrees(180))
+            .scaleEffect(x: -1, y: 1)
+            .clipShape(FaceOval())
+            .clipped()
     }
 
     func blurredFace(_ image: Image) -> some View {
