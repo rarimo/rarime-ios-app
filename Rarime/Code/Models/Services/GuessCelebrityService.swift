@@ -70,7 +70,7 @@ class GuessCelebrityService {
         return response
     }
 
-    func submitCelebrityGuess(jwt: JWT, nullifier: String, features: [Float]) async throws -> GuessCelebritySubmitResponse {
+    func submitCelebrityGuess(_ jwt: JWT, _ nullifier: String, _ features: [Float]) async throws -> GuessCelebritySubmitResponse {
         let headers = HTTPHeaders(
             [
                 HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")
