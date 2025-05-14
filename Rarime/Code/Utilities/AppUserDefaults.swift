@@ -86,4 +86,7 @@ public class AppUserDefaults: ObservableObject {
 
     @AppStorage("last_mrz_key")
     public var lastMRZKey: String = ""
+
+    @AppStorage("is_passport_failed_by_impossible_revocation")
+    public var isPassportFailedByImpossibleRevocation: Bool = false
 }

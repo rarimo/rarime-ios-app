@@ -63,5 +63,6 @@ class PassportManager: ObservableObject {
         AppUserDefaults.shared.isRegistrationInterrupted = false
         AppUserDefaults.shared.passportProcessingStatus = PassportProcessingStatus.processing.rawValue
         AppUserDefaults.shared.lastMRZKey = ""
+        AppUserDefaults.shared.isPassportFailedByImpossibleRevocation = false
     }
 }
