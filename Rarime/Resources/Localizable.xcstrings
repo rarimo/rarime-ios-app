@@ -122,6 +122,16 @@
     "%lld RMO" : {
 
     },
+    "%lld/%lld invited" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld invited"
+          }
+        }
+      }
+    },
     "%lld%%" : {
 
     },

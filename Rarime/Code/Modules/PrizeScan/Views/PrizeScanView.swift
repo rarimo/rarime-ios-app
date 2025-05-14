@@ -234,7 +234,9 @@ struct PrizeScanView: View {
                     .frame(width: 100, height: 32)
                     .background(.textPrimary, in: RoundedRectangle(cornerRadius: 12))
                     .simultaneousGesture(TapGesture().onEnded {
-                        getExtraAttempt()
+                        Task {
+                            await getExtraAttempt()
+                        }
                     })
                 }
                 .frame(maxWidth: .infinity)
@@ -249,7 +251,7 @@ struct PrizeScanView: View {
                         Text("Invite a friend")
                             .subtitle5()
                             .foregroundStyle(.textPrimary)
-                        Text("+1 scan")
+                        Text("\(prizeScanUser.referralsCount)/\(prizeScanUser.referralsLimit) invited")
                             .body5()
                             .foregroundStyle(.textSecondary)
                     }
