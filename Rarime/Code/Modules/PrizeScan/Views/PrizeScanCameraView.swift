@@ -150,24 +150,6 @@ struct PrizeScanCameraView: View {
     }
 }
 
-private struct FaceOval: Shape {
-    private static let SHAPE_WIDTH = 290
-    private static let SHAPE_HEIGHT = 395
-
-    func path(in rect: CGRect) -> Path {
-        let ovalRect = CGRect(
-            x: Int(rect.midX) - FaceOval.SHAPE_WIDTH / 2,
-            y: Int(rect.midY) - FaceOval.SHAPE_HEIGHT / 2,
-            width: FaceOval.SHAPE_WIDTH,
-            height: FaceOval.SHAPE_HEIGHT
-        )
-
-        return Path { path in
-            path.addEllipse(in: ovalRect)
-        }
-    }
-}
-
 #Preview {
     ZStack {}
         .sheet(isPresented: .constant(true)) {
