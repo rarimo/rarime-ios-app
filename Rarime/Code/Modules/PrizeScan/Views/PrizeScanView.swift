@@ -296,7 +296,7 @@ struct PrizeScanView: View {
 
                 try await LikenessManager.shared.claimReward(accessJwt, UIImage(cgImage: image))
             } catch {
-                LoggerUtil.common.error("PrizeScan: Failed to submit quess: \(error.localizedDescription, privacy: .public)")
+                LoggerUtil.common.error("Failed to submit quess: \(error.localizedDescription, privacy: .public)")
 
                 if let error = error as? Errors {
                     AlertManager.shared.emitError(error)
