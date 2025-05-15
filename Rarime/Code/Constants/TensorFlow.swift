@@ -5,5 +5,5 @@ class TensorFlow {
 
     static var bionetImageBoundary: Int = 40
 
-    static var faceRecognitionImageBoundary: Int = 224
+    static var faceRecognitionImageBoundary: Int = 112
 }

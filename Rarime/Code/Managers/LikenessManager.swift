@@ -163,10 +163,12 @@ class LikenessManager: ObservableObject {
 
         let (_, rgbData) = try NeuralUtils.convertFaceToRgb(foundFace, TensorFlow.faceRecognitionImageBoundary)
 
-        let features = try TensorFlowManager.shared.computeRaw(rgbData, tfData: faceRecognitionTFLile)
+        let normalizedInput = NeuralUtils.normalizeModel(rgbData)
+
+        let features = try TensorFlowManager.shared.compute(normalizedInput, tfData: faceRecognitionTFLile)
 
         let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.api.pointsServiceURL)
-        let guessResponse = try await guessCelebrityService.submitCelebrityGuess(jwt, NeuralUtils.normalizeModel(features))
+        let guessResponse = try await guessCelebrityService.submitCelebrityGuess(jwt, features)
 
         if !guessResponse.data.attributes.success {
             throw Errors.unknown("You're wrong")

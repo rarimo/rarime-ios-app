@@ -30,18 +30,4 @@ class TensorFlowManager {
 
         return outputArrayFloat.map { $0 / sqrt(sumOfSquare) }
     }
-
-    func computeRaw(_ input: Data, tfData: Data) throws -> Data {
-        let interpreter = try Interpreter(modelData: tfData)
-
-        try interpreter.allocateTensors()
-
-        try interpreter.copy(input, toInputAt: 0)
-
-        try interpreter.invoke()
-
-        let outputTensor = try interpreter.output(at: 0)
-
-        return outputTensor.data
-    }
 }
