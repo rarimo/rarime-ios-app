@@ -39,7 +39,7 @@ class GuessCelebrityService {
         let nullifier = jwt.payload.sub
         let requestUrl = url.appendingPathComponent("integrations/guess-celebrity-svc/v1/public/users/\(nullifier)")
 
-        var response = try await AF.request(requestUrl, headers: headers)
+        let response = try await AF.request(requestUrl, headers: headers)
             .validate(OpenApiError.catchInstance)
             .serializingDecodable(GuessCelebrityUserResponse.self)
             .result
@@ -117,7 +117,7 @@ struct GuessCelebrityUserResponse: Codable {
 struct GuessCelebrityUserResponseData: Codable {
     let id, type: String
     let attributes: GuessCelebrityUserResponseAttributes
-//    let relationships: GuessCelebrityUserResponseRelationships
+    let relationships: GuessCelebrityUserResponseRelationships
 }
 
 struct GuessCelebrityUserResponseAttributes: Codable {

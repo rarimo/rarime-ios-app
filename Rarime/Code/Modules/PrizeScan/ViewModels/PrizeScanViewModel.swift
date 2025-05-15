@@ -68,15 +68,11 @@ class PrizeScanViewModel: ObservableObject {
             }
         }
 
-        // TODO: Uncomment when backend is fixed
-//        let userStatsRel = userResponse.data.relationships.userStats.data
-//        let userStats = userResponse.included.first(where: { $0.id == userStatsRel.id && $0.type == userStatsRel.type })
-//
-//        let celebrityRel = userResponse.data.relationships.celebrity.data
-//        let celebrity = userResponse.included.first(where: { $0.id == celebrityRel.id && $0.type == celebrityRel.type })
+        let userStatsRel = userResponse.data.relationships.userStats.data
+        let userStats = userResponse.included.first(where: { $0.id == userStatsRel.id && $0.type == userStatsRel.type })
 
-        let userStats = userResponse.included.first(where: { $0.type == "user_stats" })
-        let celebrity = userResponse.included.first(where: { $0.type == "celebrity" })
+        let celebrityRel = userResponse.data.relationships.celebrity.data
+        let celebrity = userResponse.included.first(where: { $0.id == celebrityRel.id && $0.type == celebrityRel.type })
 
         user = PrizeScanUser(
             id: userResponse.data.id,
