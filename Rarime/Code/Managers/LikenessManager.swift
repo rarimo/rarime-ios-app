@@ -196,6 +196,9 @@ class LikenessManager: ObservableObject {
         let response = try await relayer.register(guessCalldata)
 
         LoggerUtil.common.info("Claim reward EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
+
+        let eth = Ethereum()
+        try await eth.waitForTxSuccess(response.data.attributes.txHash)
     }
 
     func isUserRegistered() async throws -> Bool {
