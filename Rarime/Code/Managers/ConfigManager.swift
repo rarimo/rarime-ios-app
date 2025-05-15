@@ -21,6 +21,7 @@ extension ConfigManager {
         let version: String = try! readFromInfoPlist(key: "CFBundleShortVersionString")
         let generalNotificationTopic: String = try! readFromInfoPlist(key: "GENERAL_NOTIFICATION_TOPIC")
         let claimableNotificationTopic: String = try! readFromInfoPlist(key: "CLAIMABLE_NOTIFICATION_TOPIC")
+        let downloadbleFileURLs: [String: URL] = try! readURLDictionaryFromInfoPlist(key: "DOWNLOADABLE_FILE_URLS")
     }
 }
 
@@ -48,6 +49,7 @@ extension ConfigManager {
         let votingRpcURL: URL = try! readURLFromInfoPlist(key: "VOTING_RPC_URL")
         let votingRegistartionSmtContractAddress: String = try! readFromInfoPlist(key: "VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS")
         let faceRegistryContractAddress: String = try! readFromInfoPlist(key: "FACE_REGISTRY_CONTRACT_ADDRESS")
+        let guessCelebrityGameContractAddress: String = try! readFromInfoPlist(key: "GUESS_CELEBRITY_GAME_CONTRACT_ADDRESS")
     }
 }
 

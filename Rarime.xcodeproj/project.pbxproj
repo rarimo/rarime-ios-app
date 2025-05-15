@@ -258,7 +258,6 @@
 		CE28D5112D3E887300042E1D /* libwitnesscalc_registerIdentity_1_160_3_3_576_200_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE28D4DE2D3E887300042E1D /* libwitnesscalc_registerIdentity_1_160_3_3_576_200_NA.a */; };
 		CE28D5122D3E887300042E1D /* libwitnesscalc_registerIdentity_1_256_3_6_576_264_1_2448_3_256.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE28D4E42D3E887300042E1D /* libwitnesscalc_registerIdentity_1_256_3_6_576_264_1_2448_3_256.a */; };
 		CE28D5132D3E887300042E1D /* libwitnesscalc_registerIdentityLight512.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE28D4F82D3E887300042E1D /* libwitnesscalc_registerIdentityLight512.a */; };
-		CE2FF42D2DCCAB1F00E4151D /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2FF42C2DCCAB1F00E4151D /* Identity.xcframework */; };
 		CE2FF4B62DCCAC6E00E4151D /* libwitnesscalc_faceRegistryNoInclusion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2FF4B52DCCAC6E00E4151D /* libwitnesscalc_faceRegistryNoInclusion.a */; };
 		CE2FF4B92DCCB85D00E4151D /* FaceRegistryNoInclusionInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2FF4B82DCCB85A00E4151D /* FaceRegistryNoInclusionInputs.swift */; };
 		CE2FF4BA2DCCB85D00E4151D /* FaceRegistryNoInclusionInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2FF4B82DCCB85A00E4151D /* FaceRegistryNoInclusionInputs.swift */; };
@@ -303,7 +302,9 @@
 		CE3D41D62C779C8D00D0AA65 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5315C92C7769A20087D53D /* NotificationManager.swift */; };
 		CE3D41D72C779C9E00D0AA65 /* PushNotificationsRaw.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D41BF2C77974500D0AA65 /* PushNotificationsRaw.swift */; };
 		CE3E0D3B2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E0D3A2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift */; };
-		CE51E2E52C21790700043D9A /* CircuitDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51E2E42C21790700043D9A /* CircuitDataManager.swift */; };
+		CE423B732DD4DEB80025803D /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE423B722DD4DEB80025803D /* Identity.xcframework */; };
+		CE423B782DD4E3B90025803D /* GuessCelebrityContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE423B772DD4E3AB0025803D /* GuessCelebrityContract.swift */; };
+		CE51E2E52C21790700043D9A /* DownloadableDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51E2E42C21790700043D9A /* DownloadableDataManager.swift */; };
 		CE51E2FB2C21CA0B00043D9A /* StateKeeperContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51E2FA2C21CA0B00043D9A /* StateKeeperContract.swift */; };
 		CE5315C32C77664C0087D53D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE5315C22C77664C0087D53D /* GoogleService-Info.plist */; };
 		CE5315CA2C7769A20087D53D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5315C92C7769A20087D53D /* NotificationManager.swift */; };
@@ -645,7 +646,6 @@
 		CE28D4F62D3E887300042E1D /* libwitnesscalc_registerIdentityLight256.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentityLight256.a; sourceTree = "<group>"; };
 		CE28D4F72D3E887300042E1D /* libwitnesscalc_registerIdentityLight384.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentityLight384.a; sourceTree = "<group>"; };
 		CE28D4F82D3E887300042E1D /* libwitnesscalc_registerIdentityLight512.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentityLight512.a; sourceTree = "<group>"; };
-		CE2FF42C2DCCAB1F00E4151D /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE2FF4B52DCCAC6E00E4151D /* libwitnesscalc_faceRegistryNoInclusion.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_faceRegistryNoInclusion.a; sourceTree = "<group>"; };
 		CE2FF4B72DCCACAD00E4151D /* witnesscalc_faceRegistryNoInclusion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_faceRegistryNoInclusion.h; sourceTree = "<group>"; };
 		CE2FF4B82DCCB85A00E4151D /* FaceRegistryNoInclusionInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceRegistryNoInclusionInputs.swift; sourceTree = "<group>"; };
@@ -691,8 +691,10 @@
 		CE3D41C92C779BC400D0AA65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE3D41D32C779BE200D0AA65 /* NotificationBackgroundProcessor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationBackgroundProcessor.entitlements; sourceTree = "<group>"; };
 		CE3E0D3A2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AFError+RetriveOpenApiHttpCode.swift"; sourceTree = "<group>"; };
+		CE423B722DD4DEB80025803D /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
+		CE423B772DD4E3AB0025803D /* GuessCelebrityContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessCelebrityContract.swift; sourceTree = "<group>"; };
 		CE45F0682DCD122D0098ED22 /* libbionet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbionet.a; sourceTree = "<group>"; };
-		CE51E2E42C21790700043D9A /* CircuitDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircuitDataManager.swift; sourceTree = "<group>"; };
+		CE51E2E42C21790700043D9A /* DownloadableDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadableDataManager.swift; sourceTree = "<group>"; };
 		CE51E2FA2C21CA0B00043D9A /* StateKeeperContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateKeeperContract.swift; sourceTree = "<group>"; };
 		CE5315C22C77664C0087D53D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE5315C92C7769A20087D53D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -854,7 +856,6 @@
 				CEC76C922D6750D800130CA1 /* libwitnesscalc_registerIdentity_1_256_3_6_576_248_1_2432_5_296.a in Frameworks */,
 				CEC76C932D6750D800130CA1 /* libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a in Frameworks */,
 				CE39DFE22D3FAA5200799A4B /* libwitnesscalc_registerIdentity_2_256_3_6_336_264_1_2448_3_256.a in Frameworks */,
-				CE2FF42D2DCCAB1F00E4151D /* Identity.xcframework in Frameworks */,
 				CE39DFE32D3FAA5200799A4B /* libwitnesscalc_registerIdentity_3_160_3_4_576_216_1_1512_3_256.a in Frameworks */,
 				CE28D4FB2D3E887300042E1D /* libwitnesscalc_registerIdentityLight256.a in Frameworks */,
 				CE39E09C2D3FCA1900799A4B /* libwitnesscalc_registerIdentity_21_256_3_4_576_232_NA.a in Frameworks */,
@@ -889,6 +890,7 @@
 				CEC562042BD923B4002D4954 /* librapidsnark.a in Frameworks */,
 				5609B6C82C188C7500CB6A1F /* MarkdownUI in Frameworks */,
 				CE7210312BD807140043DB7F /* ZipArchive in Frameworks */,
+				CE423B732DD4DEB80025803D /* Identity.xcframework in Frameworks */,
 				560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */,
 				CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */,
 			);
@@ -1083,7 +1085,7 @@
 				CE0881A02BF773CC00B31735 /* AlertManager.swift */,
 				CE0DC57A2C0DB33A00EFC0D7 /* UpdateManager.swift */,
 				CE8FEB592C1AF1BE0008381A /* DecentralizeAuthManager.swift */,
-				CE51E2E42C21790700043D9A /* CircuitDataManager.swift */,
+				CE51E2E42C21790700043D9A /* DownloadableDataManager.swift */,
 				CE5315C92C7769A20087D53D /* NotificationManager.swift */,
 				5617AB142C8F48BE003947C9 /* ExternalRequestsManager.swift */,
 				56337CE22DBA3D1500973721 /* LikenessManager.swift */,
@@ -1473,6 +1475,7 @@
 		CE68BE402BD9B69A00D92EBB /* Web3 */ = {
 			isa = PBXGroup;
 			children = (
+				CE423B772DD4E3AB0025803D /* GuessCelebrityContract.swift */,
 				CE5A1D972DCA274C0045FD38 /* FaceRegistryContract.swift */,
 				C7D624562D6DB4DD007BA5A6 /* Multicall3Contract.swift */,
 				C7D624522D6DB4C0007BA5A6 /* ProposalsStateContract.swift */,
@@ -1766,7 +1769,7 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CE2FF42C2DCCAB1F00E4151D /* Identity.xcframework */,
+				CE423B722DD4DEB80025803D /* Identity.xcframework */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562002BD923B3002D4954 /* prover.h */,
 				CE6FFBCD2DC3709B0083E855 /* bionet.h */,
@@ -2147,6 +2150,7 @@
 				CE06BF322D083CCB00F6C721 /* PubSignals.swift in Sources */,
 				CEB91BBE2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift in Sources */,
 				5609B6CC2C19922400CB6A1F /* LinearProgressView.swift in Sources */,
+				CE423B782DD4E3B90025803D /* GuessCelebrityContract.swift in Sources */,
 				56B589F32DB7B07800266105 /* LikenessView.swift in Sources */,
 				564CE3032DD4CE7500D03E6D /* JsonApi.swift in Sources */,
 				564169602BE273260057AC03 /* PassportCardLook.swift in Sources */,
@@ -2358,7 +2362,7 @@
 				CEA03F0A2C7C7A17002F218A /* View+IsLoading.swift in Sources */,
 				CE059B422C9C4608006046B3 /* InternetConnectionManager.swift in Sources */,
 				CE1FA56A2C1708F100B2C191 /* Points.swift in Sources */,
-				CE51E2E52C21790700043D9A /* CircuitDataManager.swift in Sources */,
+				CE51E2E52C21790700043D9A /* DownloadableDataManager.swift in Sources */,
 				C7B57B642D650FB1001E86C4 /* AnimationNamespaceIds.swift in Sources */,
 				56E2D9282BCFF5DE006E725D /* Images.swift in Sources */,
 				CE7210292BD7D0D10043DB7F /* String+Hex.swift in Sources */,

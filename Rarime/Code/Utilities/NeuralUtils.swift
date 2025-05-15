@@ -57,6 +57,44 @@ class NeuralUtils {
         return (UIImage(cgImage: grayscaleCgImage), Data(pixelsData))
     }
 
+    static func convertFaceToRgb(_ image: UIImage, _ boundary: Int) throws -> (UIImage, Data) {
+        let preProcessedImage = try image.resize(boundary, boundary)
+
+        guard let cgImage = preProcessedImage.cgImage else {
+            throw "Invalid image data"
+        }
+
+        let width = cgImage.width
+        let height = cgImage.height
+
+        let dataSize = width * height * 4
+        var pixelsData = [UInt8](repeating: 0, count: Int(dataSize))
+        let context = CGContext(
+            data: &pixelsData,
+            width: width,
+            height: height,
+            bitsPerComponent: 8,
+            bytesPerRow: 4 * width,
+            space: CGColorSpaceCreateDeviceRGB(),
+            bitmapInfo: CGImageAlphaInfo.noneSkipLast.rawValue
+        )
+
+        context?.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+
+        guard let rgbCgImage = context?.makeImage() else {
+            throw "Failed to convert image to rgb"
+        }
+
+        var pixelsDataWithoutAlpha: [UInt8] = []
+        for i in 0 ..< pixelsData.count / 4 {
+            pixelsDataWithoutAlpha.append(pixelsData[i * 4])
+            pixelsDataWithoutAlpha.append(pixelsData[i * 4 + 1])
+            pixelsDataWithoutAlpha.append(pixelsData[i * 4 + 2])
+        }
+
+        return (UIImage(cgImage: rgbCgImage), Data(pixelsDataWithoutAlpha))
+    }
+
     static func normalizeModel(_ model: Data) -> [Float] {
         return model.map { Float($0) / 255.0 }
     }

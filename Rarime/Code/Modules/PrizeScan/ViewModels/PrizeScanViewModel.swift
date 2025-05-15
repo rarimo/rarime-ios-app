@@ -110,19 +110,4 @@ class PrizeScanViewModel: ObservableObject {
             LoggerUtil.common.error("PrizeScan: Failed to get extra attempt: \(error, privacy: .public)")
         }
     }
-
-    func submitGuess(jwt: JWT, features: [Float]) async -> Bool {
-        var isSuccess = false
-
-        do {
-            let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.api.pointsServiceURL)
-            let submitResponse = try await guessCelebrityService.submitCelebrityGuess(jwt: jwt, features: features)
-            isSuccess = submitResponse.data.attributes.success
-        } catch {
-            LoggerUtil.common.error("PrizeScan: Failed to submit guess: \(error, privacy: .public)")
-        }
-
-        await loadUser(jwt: jwt)
-        return isSuccess
-    }
 }

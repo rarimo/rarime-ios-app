@@ -148,6 +148,59 @@ class LikenessManager: ObservableObject {
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
     }
 
+    func claimReward(_ jwt: JWT, _ image: UIImage) async throws {
+        guard let foundFace = try NeuralUtils.extractFaceFromImage(image) else {
+            throw Errors.unknown("Face can not be detected")
+        }
+
+        guard let address = UserManager.shared.ethereumAddress else {
+            throw Errors.unknown("User is not initialized")
+        }
+
+        let faceRecognitionTFLilePath = try await DownloadableDataManager.shared.retriveDownloadbleFilePath(.faceRecognitionTFLite)
+
+        let faceRecognitionTFLile = try Data(contentsOf: faceRecognitionTFLilePath)
+
+        let (_, rgbData) = try NeuralUtils.convertFaceToRgb(foundFace, TensorFlow.faceRecognitionImageBoundary)
+
+        let normalizedInput = NeuralUtils.normalizeModel(rgbData)
+
+        let features = try TensorFlowManager.shared.compute(normalizedInput, tfData: faceRecognitionTFLile)
+
+        let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.api.pointsServiceURL)
+        let guessResponse = try await guessCelebrityService.submitCelebrityGuess(jwt, features)
+
+        if !guessResponse.data.attributes.success {
+            throw Errors.unknown("You're wrong")
+        }
+
+        guard let originalFeature = guessResponse.data.attributes.originalFeatureVector else {
+            throw Errors.unknown("Original feature vector is absent")
+        }
+
+        let (_, grayscaleData) = try NeuralUtils.convertFaceToGrayscaleData(foundFace, TensorFlow.faceRecognitionImageBoundary)
+
+        let inputAddress = try BN(hex: address)
+
+        let faceRegistryContract = try FaceRegistryContract()
+        let nonceBigUint = try await faceRegistryContract.getVerificationNonce(inputAddress.fullHex())
+        let nonce = try BN(dec: nonceBigUint.description)
+
+        let guessInputs = CircuitBuilderManager.shared.bionetCircuit.inputs(grayscaleData, originalFeature, nonce, inputAddress)
+
+        let zkProof = try await generateBionettaProof(guessInputs.json)
+
+        let guessCalldata = try IdentityCallDataBuilder().buildGuessCelebrityClaimRewardCalldata(address, zkPointsJSON: zkProof.json)
+
+        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
+        let response = try await relayer.register(guessCalldata)
+
+        LoggerUtil.common.info("Claim reward EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
+
+        let eth = Ethereum()
+        try await eth.waitForTxSuccess(response.data.attributes.txHash)
+    }
+
     func isUserRegistered() async throws -> Bool {
         if AppUserDefaults.shared.isLikenessRegistered {
             return true
@@ -191,7 +244,7 @@ class LikenessManager: ObservableObject {
     func generateBionettaProof(_ inputs: Data) async throws -> GrothZkProof {
         let zkWitness = try ZKUtils.bionetta(inputs)
 
-        let zkeyPath = try await CircuitDataManager.shared.retriveZkeyPath(.likeness)
+        let zkeyPath = try await DownloadableDataManager.shared.retriveZkeyPath(.likeness)
 
         let zkey = try Data(contentsOf: zkeyPath)
 

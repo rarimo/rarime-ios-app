@@ -281,7 +281,7 @@ class PassportViewModel: ObservableObject {
         
         let circuitData: CircuitData
         do {
-            circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData) { progress in
+            circuitData = try await DownloadableDataManager.shared.retriveCircuitData(registeredCircuitData) { progress in
                 self.updateDownloadProgress(downloadProgressValue: progress)
             }
         } catch {
@@ -317,13 +317,13 @@ class PassportViewModel: ObservableObject {
     ) async throws -> ZkProof {
         isCriticalRegistrationProcessInProgress = false
         
-        let trustedSetupPath = try await CircuitDataManager.shared.retriveNoirCircuitDataPath(.trustedSetup) { progress in
+        let trustedSetupPath = try await DownloadableDataManager.shared.retriveNoirCircuitDataPath(.trustedSetup) { progress in
             self.updateDownloadProgress(downloadProgressValue: progress)
         }
         
         let circuitDataPath: URL
         do {
-            circuitDataPath = try await CircuitDataManager.shared.retriveNoirCircuitDataPath(registeredNoirCircuitData)
+            circuitDataPath = try await DownloadableDataManager.shared.retriveNoirCircuitDataPath(registeredNoirCircuitData)
         } catch {
             throw Errors.unknown("Failed to download data, internet connection is unstable")
         }
@@ -370,7 +370,7 @@ class PassportViewModel: ObservableObject {
                 throw "failed to get registered circuit data, circuit does not exist"
             }
             
-            let circuitData = try await CircuitDataManager.shared.retriveCircuitData(registeredCircuitData)
+            let circuitData = try await DownloadableDataManager.shared.retriveCircuitData(registeredCircuitData)
             
             let registerIdentityLightInputs = try CircuitBuilderManager.shared.registerIdentityLightCircuit.buildInputs(user.secretKey, passport)
             

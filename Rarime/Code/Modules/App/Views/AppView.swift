@@ -4,7 +4,7 @@ import SwiftUI
 
 struct AppView: View {
     @EnvironmentObject private var internetConnectionManager: InternetConnectionManager
-    @EnvironmentObject private var circuitDataManager: CircuitDataManager
+    @EnvironmentObject private var DownloadableDataManager: DownloadableDataManager
     @EnvironmentObject private var updateManager: UpdateManager
     @EnvironmentObject private var alertManager: AlertManager
     @EnvironmentObject private var securityManager: SecurityManager
@@ -88,7 +88,7 @@ struct AppView: View {
 
 #Preview {
     AppView()
-        .environmentObject(CircuitDataManager())
+        .environmentObject(DownloadableDataManager())
         .environmentObject(AlertManager())
         .environmentObject(SecurityManager())
         .environmentObject(SettingsManager())

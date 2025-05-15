@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PrizeScanCameraView: View {
+    let onConfirm: (CGImage) -> Void
     let onClose: () -> Void
 
     @StateObject var viewModel = PrizeScanCameraViewModel()
@@ -146,13 +147,13 @@ struct PrizeScanCameraView: View {
         let confirmedPicture = viewModel.currentFrame!
 
         cleanup()
-        onClose()
+        onConfirm(confirmedPicture)
     }
 }
 
 #Preview {
     ZStack {}
         .sheet(isPresented: .constant(true)) {
-            PrizeScanCameraView(onClose: {})
+            PrizeScanCameraView(onConfirm: { _ in }, onClose: {})
         }
 }
