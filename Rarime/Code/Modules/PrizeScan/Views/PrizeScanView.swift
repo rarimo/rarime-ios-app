@@ -1,30 +1,38 @@
 import SwiftUI
 
 struct PrizeScanView: View {
+    @EnvironmentObject private var userManager: UserManager
+    @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
+    @EnvironmentObject private var viewModel: PrizeScanViewModel
+
     let onClose: () -> Void
     var animation: Namespace.ID
 
     @State private var isScanSheetPresented = false
     @State private var isBonusScanSheetPresented = false
 
+    private var prizeScanUser: PrizeScanUser {
+        viewModel.user ?? PrizeScanUser.empty()
+    }
+
+    private var totalAttemptsLeft: Int {
+        prizeScanUser.attemptsLeft + prizeScanUser.extraAttemptsLeft
+    }
+
     private var hasAttempts: Bool {
-        // TODO: use backend data
-        true
+        totalAttemptsLeft > 0
     }
 
     private var canGetBonusScans: Bool {
-        // TODO: use backend data
-        true
+        !prizeScanUser.socialShare || prizeScanUser.referralsCount < prizeScanUser.referralsLimit
     }
 
-    private var tip: String? {
-        // TODO: use backend data
-        "I think there's something as light as ether in that face..."
+    private var tip: String {
+        prizeScanUser.celebrity?.hint ?? ""
     }
 
-    private var invitationLink: String {
-        // TODO: use backend data
-        "https://app.rarime.com/r/test"
+    var invitationLink: String {
+        ConfigManager.shared.api.referralURL.appendingPathComponent(prizeScanUser.referralCode).absoluteString
     }
 
     private var imageToShare: Data {
@@ -94,13 +102,13 @@ struct PrizeScanView: View {
                         in: animation,
                         properties: .position
                     )
-                Text("You have 3 scan attempts every 24 hours, but you can also earn extra scans by sharing and inviting friends.")
+                Text("You have \(prizeScanUser.totalAttemptsCount) scan attempts every 24 hours, but you can also earn extra scans by sharing and inviting friends.")
                     .body4()
                     .foregroundStyle(.baseBlack.opacity(0.5))
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.top, 12)
             }
-            if tip != nil {
+            if !tip.isEmpty {
                 scanTip
             }
             HorizontalDivider()
@@ -110,10 +118,10 @@ struct PrizeScanView: View {
                         .subtitle6()
                         .foregroundStyle(.baseBlack)
                     HStack(spacing: 2) {
-                        Text("3")
+                        Text(verbatim: "\(totalAttemptsLeft)")
                             .h4()
                             .foregroundStyle(Gradients.purpleText)
-                        Text("/3 scans")
+                        Text("/\(prizeScanUser.totalAttemptsCount) scans")
                             .body4()
                             .foregroundStyle(.baseBlack.opacity(0.5))
                     }
@@ -133,7 +141,7 @@ struct PrizeScanView: View {
                 Image(.bulb).iconSmall()
                 Text("Tip:").subtitle7()
             }
-            Text(verbatim: tip ?? "")
+            Text(verbatim: tip)
                 .body4()
                 .fixedSize(horizontal: false, vertical: true)
         }
@@ -149,6 +157,7 @@ struct PrizeScanView: View {
             if hasAttempts || !canGetBonusScans {
                 AppButton(
                     variant: .primary,
+                    // TODO: timer
                     text: hasAttempts ? "Scan" : "23:59:59",
                     leftIcon: hasAttempts ? Icons.userFocus : Icons.lock,
                     width: 160,
@@ -225,7 +234,9 @@ struct PrizeScanView: View {
                     .frame(width: 100, height: 32)
                     .background(.textPrimary, in: RoundedRectangle(cornerRadius: 12))
                     .simultaneousGesture(TapGesture().onEnded {
-                        // TODO: Make a request to get extra scan
+                        Task {
+                            await getExtraAttempt()
+                        }
                     })
                 }
                 .frame(maxWidth: .infinity)
@@ -240,7 +251,7 @@ struct PrizeScanView: View {
                         Text("Invite a friend")
                             .subtitle5()
                             .foregroundStyle(.textPrimary)
-                        Text("+1 scan")
+                        Text("\(prizeScanUser.referralsCount)/\(prizeScanUser.referralsLimit) invited")
                             .body5()
                             .foregroundStyle(.textSecondary)
                     }
@@ -263,8 +274,21 @@ struct PrizeScanView: View {
         .padding(.top, 32)
         .padding(.horizontal, 24)
     }
+
+    private func getExtraAttempt() async {
+        do {
+            guard let user = userManager.user else { throw "failed to get user" }
+            let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+            await viewModel.getExtraAttempt(jwt: accessJwt)
+        } catch {
+            LoggerUtil.common.error("failed to fetch prize scan user: \(error.localizedDescription, privacy: .public)")
+        }
+    }
 }
 
 #Preview {
     PrizeScanView(onClose: {}, animation: Namespace().wrappedValue)
+        .environmentObject(UserManager())
+        .environmentObject(DecentralizedAuthManager())
+        .environmentObject(PrizeScanViewModel())
 }

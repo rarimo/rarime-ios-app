@@ -17,6 +17,7 @@ struct HomeView: View {
     @EnvironmentObject private var pollsViewModel: PollsViewModel
 
     @StateObject var viewModel = ViewModel()
+    @StateObject var prizeScanViewModel = PrizeScanViewModel()
 
     @State private var path: HomeRoute? = nil
     @State private var isCopied = false
@@ -49,7 +50,10 @@ struct HomeView: View {
 
     private var homeCards: [HomeCarouselCard] {
         [
-            HomeCarouselCard(action: { path = .prizeScan }) {
+            HomeCarouselCard(
+                isVisible: prizeScanViewModel.user != nil,
+                action: { path = .prizeScan }
+            ) {
                 HomeCardView(
                     backgroundGradient: Gradients.purpleBg,
                     foregroundGradient: Gradients.purpleText,
@@ -331,6 +335,7 @@ struct HomeView: View {
                             onClose: { path = nil },
                             animation: prizeScanAnimation
                         )
+                        .environmentObject(prizeScanViewModel)
                     default:
                         content
                     }
@@ -339,6 +344,7 @@ struct HomeView: View {
             }
         }
         .onAppear(perform: fetchBalance)
+        .onAppear(perform: fetchPrizeScanUser)
         .onDisappear(perform: cleanup)
     }
 
@@ -442,6 +448,23 @@ struct HomeView: View {
                 return
             } catch {
                 LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
+            }
+        }
+
+        cancelables.append(cancelable)
+    }
+
+    private func fetchPrizeScanUser() {
+        let cancelable = Task { @MainActor in
+            do {
+                guard let user = userManager.user else { throw "failed to get user" }
+                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+
+                await prizeScanViewModel.loadUser(jwt: accessJwt, referralCode: user.userReferralCode)
+            } catch is CancellationError {
+                return
+            } catch {
+                LoggerUtil.common.error("failed to fetch prize scan user: \(error.localizedDescription, privacy: .public)")
             }
         }
 
