@@ -8,7 +8,7 @@ class GuessCelebrityService {
         self.url = url
     }
 
-    func createUser(jwt: JWT, referredBy: String?) async throws -> GuessCelebrityUserResponse {
+    func createUser(jwt: JWT, referredBy: String? = nil) async throws -> GuessCelebrityUserResponse {
         let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer \(jwt.raw)")])
 
         let nullifier = jwt.payload.sub
@@ -19,7 +19,7 @@ class GuessCelebrityService {
                 id: nullifier,
                 type: "users",
                 attributes: GuessCelebrityUserRequestAttributes(
-                    referredBy: referredBy ?? ""
+                    referredBy: referredBy
                 )
             )
         )
@@ -100,7 +100,7 @@ struct GuessCelebrityUserRequestData: Codable {
 }
 
 struct GuessCelebrityUserRequestAttributes: Codable {
-    let referredBy: String
+    let referredBy: String?
 
     enum CodingKeys: String, CodingKey {
         case referredBy = "referred_by"
@@ -117,7 +117,7 @@ struct GuessCelebrityUserResponse: Codable {
 struct GuessCelebrityUserResponseData: Codable {
     let id, type: String
     let attributes: GuessCelebrityUserResponseAttributes
-    let relationships: GuessCelebrityUserResponseRelationships
+//    let relationships: GuessCelebrityUserResponseRelationships
 }
 
 struct GuessCelebrityUserResponseAttributes: Codable {

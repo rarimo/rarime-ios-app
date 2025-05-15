@@ -290,4 +290,5 @@ struct PrizeScanView: View {
     PrizeScanView(onClose: {}, animation: Namespace().wrappedValue)
         .environmentObject(UserManager())
         .environmentObject(DecentralizedAuthManager())
+        .environmentObject(PrizeScanViewModel())
 }

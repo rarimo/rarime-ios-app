@@ -24,7 +24,14 @@ extension PrizeScanUser {
             extraAttemptsLeft: 0,
             totalAttemptsCount: 0,
             resetTime: 0,
-            celebrity: nil
+            celebrity: PrizeScanCelebrity(
+                id: "",
+                title: "",
+                description: "",
+                status: "",
+                image: "",
+                hint: ""
+            )
         )
     }
 }
@@ -36,6 +43,7 @@ struct PrizeScanCelebrity {
 class PrizeScanViewModel: ObservableObject {
     @Published var user: PrizeScanUser? = nil
 
+    @MainActor
     func loadUser(jwt: JWT, referralCode: String? = nil) async {
         let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.api.pointsServiceURL)
         var userResponse: GuessCelebrityUserResponse
@@ -48,7 +56,8 @@ class PrizeScanViewModel: ObservableObject {
                 let openApiHttpCode = try error.retriveOpenApiHttpCode()
                 if openApiHttpCode == HTTPStatusCode.notFound.rawValue {
                     LoggerUtil.common.info("PrizeScan: User is not found, creating a new user")
-                    userResponse = try await guessCelebrityService.createUser(jwt: jwt, referredBy: referralCode)
+                    // TODO: pass referral code to the backend
+                    userResponse = try await guessCelebrityService.createUser(jwt: jwt)
                 } else {
                     throw error
                 }
@@ -59,11 +68,15 @@ class PrizeScanViewModel: ObservableObject {
             }
         }
 
-        let userStatsRel = userResponse.data.relationships.userStats.data
-        let userStats = userResponse.included.first(where: { $0.id == userStatsRel.id && $0.type == userStatsRel.type })
+        // TODO: Uncomment when backend is fixed
+//        let userStatsRel = userResponse.data.relationships.userStats.data
+//        let userStats = userResponse.included.first(where: { $0.id == userStatsRel.id && $0.type == userStatsRel.type })
+//
+//        let celebrityRel = userResponse.data.relationships.celebrity.data
+//        let celebrity = userResponse.included.first(where: { $0.id == celebrityRel.id && $0.type == celebrityRel.type })
 
-        let celebrityRel = userResponse.data.relationships.celebrity.data
-        let celebrity = userResponse.included.first(where: { $0.id == celebrityRel.id && $0.type == celebrityRel.type })
+        let userStats = userResponse.included.first(where: { $0.type == "user_stats" })
+        let celebrity = userResponse.included.first(where: { $0.type == "celebrity" })
 
         user = PrizeScanUser(
             id: userResponse.data.id,
