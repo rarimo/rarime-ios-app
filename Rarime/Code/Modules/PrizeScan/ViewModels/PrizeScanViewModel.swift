@@ -112,21 +112,4 @@ class PrizeScanViewModel: ObservableObject {
             LoggerUtil.common.error("PrizeScan: Failed to get extra attempt: \(error, privacy: .public)")
         }
     }
-
-    @MainActor
-    func submitGuess(_ jwt: JWT, _ image: UIImage) {
-        Task {
-            do {
-                try await LikenessManager.shared.claimReward(jwt, image)
-            } catch {
-                LoggerUtil.common.error("PrizeScan: Failed to submit quess: \(error.localizedDescription, privacy: .public)")
-
-                if let error = error as? Errors {
-                    AlertManager.shared.emitError(error)
-                } else {
-                    AlertManager.shared.emitError(.unknown("Failed to submit guess"))
-                }
-            }
-        }
-    }
 }
