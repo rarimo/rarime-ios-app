@@ -1,6 +1,8 @@
 import Alamofire
 import Foundation
 
+import UIKit
+
 struct PrizeScanUser {
     let id, referralCode: String
     let referralsCount, referralsLimit: Int
@@ -111,18 +113,20 @@ class PrizeScanViewModel: ObservableObject {
         }
     }
 
-    func submitGuess(jwt: JWT, features: [Float]) async -> Bool {
-        var isSuccess = false
+    @MainActor
+    func submitGuess(_ jwt: JWT, _ image: UIImage) {
+        Task {
+            do {
+                try await LikenessManager.shared.claimReward(jwt, image)
+            } catch {
+                LoggerUtil.common.error("PrizeScan: Failed to submit quess: \(error.localizedDescription, privacy: .public)")
 
-        do {
-            let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.api.pointsServiceURL)
-            let submitResponse = try await guessCelebrityService.submitCelebrityGuess(jwt: jwt, features: features)
-            isSuccess = submitResponse.data.attributes.success
-        } catch {
-            LoggerUtil.common.error("PrizeScan: Failed to submit guess: \(error, privacy: .public)")
+                if let error = error as? Errors {
+                    AlertManager.shared.emitError(error)
+                } else {
+                    AlertManager.shared.emitError(.unknown("Failed to submit guess"))
+                }
+            }
         }
-
-        await loadUser(jwt: jwt)
-        return isSuccess
     }
 }

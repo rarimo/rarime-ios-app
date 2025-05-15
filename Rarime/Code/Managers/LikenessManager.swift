@@ -148,12 +148,13 @@ class LikenessManager: ObservableObject {
         try await eth.waitForTxSuccess(response.data.attributes.txHash)
     }
 
-    func claimReward(
-        _ image: UIImage,
-        _ address: String
-    ) async throws {
+    func claimReward(_ jwt: JWT, _ image: UIImage) async throws {
         guard let foundFace = try NeuralUtils.extractFaceFromImage(image) else {
             throw Errors.unknown("Face can not be detected")
+        }
+
+        guard let address = UserManager.shared.ethereumAddress else {
+            throw Errors.unknown("User is not initialized")
         }
 
         let nullifier = try UserManager.shared.generateNullifierForEvent(FaceRegistryContract.eventId)
@@ -170,7 +171,7 @@ class LikenessManager: ObservableObject {
         )
 
         let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.api.relayerURL)
-        let guessResponse = try await guessCelebrityService.submitCelebrityGuess(.init(""), nullifier, features)
+        let guessResponse = try await guessCelebrityService.submitCelebrityGuess(jwt, features)
 
         if !guessResponse.data.attributes.success {
             throw Errors.unknown("You're wrong")
