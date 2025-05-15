@@ -157,8 +157,6 @@ class LikenessManager: ObservableObject {
             throw Errors.unknown("User is not initialized")
         }
 
-        let nullifier = try UserManager.shared.generateNullifierForEvent(FaceRegistryContract.eventId)
-
         let faceRecognitionTFLilePath = try await DownloadableDataManager.shared.retriveDownloadbleFilePath(.faceRecognitionTFLite)
 
         let faceRecognitionTFLile = try Data(contentsOf: faceRecognitionTFLilePath)
@@ -170,7 +168,7 @@ class LikenessManager: ObservableObject {
             tfData: faceRecognitionTFLile
         )
 
-        let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.api.relayerURL)
+        let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.api.pointsServiceURL)
         let guessResponse = try await guessCelebrityService.submitCelebrityGuess(jwt, features)
 
         if !guessResponse.data.attributes.success {
@@ -183,11 +181,11 @@ class LikenessManager: ObservableObject {
 
         let (_, grayscaleData) = try NeuralUtils.convertFaceToGrayscaleData(foundFace, TensorFlow.faceRecognitionImageBoundary)
 
-        let faceRegistryContract = try FaceRegistryContract()
-        let nonceBigUint = try await faceRegistryContract.getVerificationNonce(nullifier)
-        let nonce = try BN(dec: nonceBigUint.description)
-
         let inputAddress = try BN(hex: address)
+
+        let faceRegistryContract = try FaceRegistryContract()
+        let nonceBigUint = try await faceRegistryContract.getVerificationNonce(inputAddress.fullHex())
+        let nonce = try BN(dec: nonceBigUint.description)
 
         let guessInputs = CircuitBuilderManager.shared.bionetCircuit.inputs(grayscaleData, originalFeature, nonce, inputAddress)
 
