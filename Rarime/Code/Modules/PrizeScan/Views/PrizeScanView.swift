@@ -67,7 +67,7 @@ struct PrizeScanView: View {
         .background(.baseWhite)
         .sheet(isPresented: $isScanSheetPresented) {
             PrizeScanCameraView(
-                onConfirm: submitQuess,
+                onConfirm: submitGuess,
                 onClose: { isScanSheetPresented = false }
             )
             .interactiveDismissDisabled()
@@ -286,7 +286,7 @@ struct PrizeScanView: View {
         }
     }
 
-    private func submitQuess(_ image: CGImage) {
+    private func submitGuess(_ image: CGImage) {
         Task {
             do {
                 LoggerUtil.common.info("Submitting guess")
@@ -296,7 +296,7 @@ struct PrizeScanView: View {
 
                 try await LikenessManager.shared.claimReward(accessJwt, UIImage(cgImage: image))
             } catch {
-                LoggerUtil.common.error("Failed to submit quess: \(error.localizedDescription, privacy: .public)")
+                LoggerUtil.common.error("Failed to submit guess: \(error.localizedDescription, privacy: .public)")
 
                 if let error = error as? Errors {
                     AlertManager.shared.emitError(error)
