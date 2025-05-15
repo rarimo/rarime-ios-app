@@ -42,7 +42,10 @@ struct PrizeScanCameraView: View {
                 case .claiming:
                     Text("Claiming")
                 case .finished:
-                    Text("Finished")
+                    PrizeScanFinishedView(onViewWallet: {
+                        cleanup()
+                        onClose()
+                    })
             }
         }
     }
