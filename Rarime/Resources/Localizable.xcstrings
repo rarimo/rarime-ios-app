@@ -160,6 +160,9 @@
     "+1 scan" : {
 
     },
+    "0.3" : {
+
+    },
     "1 day" : {
 
     },
@@ -647,6 +650,9 @@
     "Claimed" : {
 
     },
+    "Claiming" : {
+
+    },
     "Claiming..." : {
 
     },
@@ -676,7 +682,6 @@
 
     },
     "Congrats!" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2070,6 +2075,9 @@
         }
       }
     },
+    "Processing..." : {
+
+    },
     "Profile" : {
       "localizations" : {
         "uk" : {
@@ -2394,6 +2402,9 @@
     "Scan a QR" : {
 
     },
+    "Scan again" : {
+
+    },
     "Scan MRZ" : {
 
     },
@@ -2703,6 +2714,9 @@
         }
       }
     },
+    "The face you scanned is not the correct one. You can try again." : {
+
+    },
     "The passport is in the allowlist" : {
 
     },
@@ -2749,7 +2763,7 @@
     "Tip:" : {
 
     },
-    "Tip: I think there's something as light as ether in that face..." : {
+    "Tip: %@" : {
 
     },
     "To continue, please install the latest version of the app" : {
@@ -2781,6 +2795,9 @@
       }
     },
     "Trinidad and Tobago" : {
+
+    },
+    "Try again later" : {
 
     },
     "Tunisia" : {
@@ -3014,6 +3031,9 @@
         }
       }
     },
+    "Wrong face..." : {
+
+    },
     "X Verified Badge" : {
 
     },
@@ -3050,6 +3070,9 @@
 
     },
     "You have already reserved tokens" : {
+
+    },
+    "You've found the hidden keys" : {
 
     },
     "You’ve joined the waitlist" : {
@@ -3121,6 +3144,9 @@
           }
         }
       }
+    },
+    "Your prize" : {
+
     },
     "Your Rarimo Address" : {
       "extractionState" : "stale",
