@@ -1,8 +1,6 @@
 import Alamofire
 import Foundation
 
-import UIKit
-
 struct PrizeScanUser {
     let id, referralCode: String
     let referralsCount, referralsLimit: Int
