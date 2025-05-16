@@ -1290,6 +1290,9 @@
     "Import JSON" : {
 
     },
+    "Impossible to revoke your account" : {
+
+    },
     "Incognito mode" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2672,6 +2675,9 @@
       }
     },
     "Trinidad and Tobago" : {
+
+    },
+    "Try using your previous private key" : {
 
     },
     "Tunisia" : {
