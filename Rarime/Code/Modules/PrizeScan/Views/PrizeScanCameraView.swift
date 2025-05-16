@@ -40,7 +40,10 @@ struct PrizeScanCameraView: View {
                         scanState = .claiming
                     })
                 case .claiming:
-                    Text("Claiming")
+                    PrizeScanClaimingView(
+                        onFinish: { scanState = .finished },
+                        onError: { scanState = .success }
+                    )
                 case .finished:
                     PrizeScanFinishedView(onViewWallet: {
                         cleanup()
