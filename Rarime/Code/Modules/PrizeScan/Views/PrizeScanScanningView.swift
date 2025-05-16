@@ -3,15 +3,13 @@ import SwiftUI
 struct PrizeScanScanningView: View {
     @EnvironmentObject private var viewModel: PrizeScanCameraViewModel
     @EnvironmentObject private var prizeScanViewModel: PrizeScanViewModel
+    @EnvironmentObject private var userManager: UserManager
+    @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
 
     let onSubmit: (_ result: Bool) -> Void
 
     @State private var isPictureTaken: Bool = false
     @State private var isSubmitting: Bool = false
-
-    private var tip: String {
-        prizeScanViewModel.user?.celebrity?.hint ?? ""
-    }
 
     var body: some View {
         ZStack {
@@ -19,19 +17,17 @@ struct PrizeScanScanningView: View {
                 Image(decorative: face, scale: 1)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .clipShape(FaceOval())
+                    .clipShape(FaceSquare())
                     .clipped()
-                    .scaleEffect(x: -1, y: 1)
+                Image(.faceFrame)
+                    .square(FaceSquare.SHAPE_SIZE)
             } else {
-                FaceOval()
+                FaceSquare()
                     .foregroundStyle(.bgComponentPrimary)
             }
             VStack(spacing: 20) {
                 topHint.padding(.top, 50)
                 Spacer()
-                if !tip.isEmpty {
-                    bottomHint
-                }
                 if isPictureTaken {
                     HStack(spacing: 12) {
                         retakeButton
@@ -55,14 +51,6 @@ struct PrizeScanScanningView: View {
                 .subtitle5()
                 .foregroundStyle(.baseWhite)
         }
-    }
-
-    var bottomHint: some View {
-        Text("Tip: \(tip)")
-            .body4()
-            .multilineTextAlignment(.center)
-            .foregroundStyle(.baseWhite.opacity(0.6))
-            .padding(.horizontal, 24)
     }
 
     var takeButton: some View {
@@ -114,19 +102,52 @@ struct PrizeScanScanningView: View {
         FeedbackGenerator.shared.impact(.medium)
         Task { @MainActor in
             isSubmitting = true
-            // TODO: process and submit the image
-            try await Task.sleep(nanoseconds: 3_000_000_000)
-            isSubmitting = false
 
-            // TODO: Replace with actual result from image processing
-            let isSuccess = Bool.random() // Simulate a result
-            if isSuccess {
-                FeedbackGenerator.shared.notify(.success)
-            } else {
+            do {
+                LoggerUtil.common.info("Submitting guess")
+
+                guard let user = userManager.user else { throw "failed to get user" }
+                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+
+                let isSuccess = try await prizeScanViewModel.submitGuess(
+                    jwt: accessJwt,
+                    image: UIImage(cgImage: viewModel.currentFrame!)
+                )
+
+                if isSuccess {
+                    FeedbackGenerator.shared.notify(.success)
+                } else {
+                    FeedbackGenerator.shared.notify(.error)
+                }
+
+                onSubmit(isSuccess)
+            } catch {
                 FeedbackGenerator.shared.notify(.error)
+                LoggerUtil.common.error("Failed to submit guess: \(error.localizedDescription, privacy: .public)")
+                AlertManager.shared.emitError(.unknown("Failed to submit guess"))
+
+                isPictureTaken = false
+                viewModel.startScanning()
             }
 
-            onSubmit(isSuccess)
+            isSubmitting = false
+        }
+    }
+}
+
+private struct FaceSquare: Shape {
+    static let SHAPE_SIZE: CGFloat = 300
+
+    func path(in rect: CGRect) -> Path {
+        let rect = CGRect(
+            x: rect.midX - FaceSquare.SHAPE_SIZE / 2,
+            y: rect.midY - FaceSquare.SHAPE_SIZE / 2,
+            width: FaceSquare.SHAPE_SIZE,
+            height: FaceSquare.SHAPE_SIZE
+        )
+
+        return Path { path in
+            path.addRoundedRect(in: rect, cornerSize: CGSize(width: 24, height: 24))
         }
     }
 }
@@ -135,4 +156,6 @@ struct PrizeScanScanningView: View {
     PrizeScanScanningView(onSubmit: { _ in })
         .environmentObject(PrizeScanViewModel())
         .environmentObject(PrizeScanCameraViewModel())
+        .environmentObject(UserManager())
+        .environmentObject(DecentralizedAuthManager())
 }

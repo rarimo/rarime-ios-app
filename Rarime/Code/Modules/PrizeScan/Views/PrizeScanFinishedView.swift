@@ -22,7 +22,7 @@ struct PrizeScanFinishedView: View {
                     .h3()
                     .foregroundStyle(.baseWhite)
                     .padding(.top, 32)
-                Text("The prize has been successfully credited to your wallet.")
+                Text("Your prize just zipped into your wallet")
                     .body3()
                     .foregroundStyle(.baseWhite.opacity(0.6))
                     .multilineTextAlignment(.center)
@@ -41,8 +41,8 @@ struct PrizeScanFinishedView: View {
                     }
                     ShareLink(
                         item: imageToShare,
-                        subject: Text("Hidden Prize Winner"),
-                        preview: SharePreview("Hidden Prize Winner", image: Image(uiImage: UIImage(data: imageToShare)!))
+                        subject: Text("Find Face Winner"),
+                        preview: SharePreview("Find Face Winner", image: Image(uiImage: UIImage(data: imageToShare)!))
                     ) {
                         Text("Share")
                             .buttonLarge()

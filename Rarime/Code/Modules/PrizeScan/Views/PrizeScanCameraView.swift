@@ -7,7 +7,6 @@ private enum ScanState {
 struct PrizeScanCameraView: View {
     @EnvironmentObject private var prizeScanViewModel: PrizeScanViewModel
 
-    let onConfirm: (CGImage) -> Void
     let onClose: () -> Void
 
     @StateObject var viewModel = PrizeScanCameraViewModel()
@@ -76,7 +75,6 @@ struct PrizeScanCameraView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .blur(radius: 76)
-                    .scaleEffect(x: -1, y: 1)
             }
             Color.baseBlack.opacity(0.7)
                 .ignoresSafeArea()
@@ -92,6 +90,6 @@ struct PrizeScanCameraView: View {
 #Preview {
     ZStack {}
         .sheet(isPresented: .constant(true)) {
-            PrizeScanCameraView(onConfirm: { _ in }, onClose: {})
+            PrizeScanCameraView(onClose: {})
         }
 }

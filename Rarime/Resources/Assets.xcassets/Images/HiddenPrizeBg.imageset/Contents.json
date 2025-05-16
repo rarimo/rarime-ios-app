@@ -3,6 +3,16 @@
     {
       "filename" : "hidden-prize-bg.png",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "hidden-prize-bg-dark.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {

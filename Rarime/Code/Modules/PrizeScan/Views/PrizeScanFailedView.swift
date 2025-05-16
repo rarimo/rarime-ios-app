@@ -28,7 +28,7 @@ struct PrizeScanFailedView: View {
                     .h3()
                     .foregroundStyle(.baseWhite)
                     .padding(.top, 32)
-                Text("The face you scanned is not the correct one. You can try again.")
+                Text("Swing and a miss, this face isn’t hiding the key. Keep scanning!")
                     .body3()
                     .foregroundStyle(.baseWhite.opacity(0.6))
                     .multilineTextAlignment(.center)
@@ -38,13 +38,11 @@ struct PrizeScanFailedView: View {
             }
             VStack(spacing: 20) {
                 Spacer()
-                if !tip.isEmpty {
-                    Text(tip)
-                        .body4()
-                        .foregroundStyle(.baseWhite.opacity(0.6))
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
+                Text("Different photos of the same person return the same result, try scanning a new face")
+                    .body4()
+                    .foregroundStyle(.baseWhite.opacity(0.6))
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
                 Button(action: onScanAgain) {
                     Text(hasAttempts ? "Scan again" : "Try again later")
                         .foregroundStyle(.baseWhite.opacity(hasAttempts ? 1 : 0.6))

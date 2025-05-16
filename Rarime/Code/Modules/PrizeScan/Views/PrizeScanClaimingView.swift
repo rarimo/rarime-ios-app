@@ -1,13 +1,13 @@
 import SwiftUI
 
 struct PrizeScanClaimingView: View {
+    @EnvironmentObject private var prizeScanViewModel: PrizeScanViewModel
+
     let onFinish: () -> Void
     let onError: () -> Void
 
-    let MAX_PROGRESS: Int = 150
-
     @State private var progress: Int = 0
-    @State private var timer: Timer? = nil
+    @State private var maxProgress: Int = 0
 
     var body: some View {
         VStack(spacing: 0) {
@@ -18,13 +18,11 @@ struct PrizeScanClaimingView: View {
                 .background(.baseWhite.opacity(0.2), in: Circle())
                 .foregroundStyle(.baseWhite)
                 .overlay(Circle().stroke(.baseWhite, lineWidth: 3))
-            Image(.dotsThreeOutline)
-                .square(24)
             Text("Claiming")
                 .h3()
                 .foregroundStyle(.baseWhite)
                 .padding(.top, 32)
-            Text("Downloading some data for the proof generation and send the proof on chain")
+            Text("Scooping up the magic bits to brew your proof")
                 .body3()
                 .foregroundStyle(.baseWhite.opacity(0.6))
                 .multilineTextAlignment(.center)
@@ -32,14 +30,14 @@ struct PrizeScanClaimingView: View {
                 .frame(maxWidth: 260)
                 .padding(.top, 12)
             LinearProgressView(
-                progress: Double(progress) / Double(MAX_PROGRESS),
+                progress: maxProgress > 0 ? Double(progress) / Double(maxProgress) : 1,
                 height: 4,
                 backgroundFill: AnyShapeStyle(Color.baseWhite.opacity(0.1)),
                 foregroundFill: AnyShapeStyle(Color.baseWhite)
             )
             .padding(.top, 48)
             .padding(.horizontal, 24)
-            Text("\(progress)/\(MAX_PROGRESS) MB")
+            Text(progress >= maxProgress ? "Processing..." : "\(progress)/\(maxProgress) MB")
                 .body4()
                 .foregroundStyle(.baseWhite.opacity(0.6))
                 .padding(.top, 24)
@@ -47,18 +45,23 @@ struct PrizeScanClaimingView: View {
         }
         .padding(.horizontal, 32)
         .onAppear {
-            startTimer()
+            Task {
+                await claimReward()
+            }
         }
     }
 
-    func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-            if progress < MAX_PROGRESS {
-                progress += 1
-            } else {
-                timer?.invalidate()
-                onFinish()
+    func claimReward() async {
+        do {
+            try await prizeScanViewModel.claimReward { progress in
+                self.progress = Int(progress.completedUnitCount / 1024 / 1024)
+                self.maxProgress = Int(progress.totalUnitCount / 1024 / 1024)
             }
+            onFinish()
+        } catch {
+            LoggerUtil.common.error("PrizeScan: Failed to claim reward: \(error)")
+            AlertManager.shared.emitError(.unknown("Failed to claim reward, try again"))
+            onError()
         }
     }
 }
@@ -66,4 +69,5 @@ struct PrizeScanClaimingView: View {
 #Preview {
     PrizeScanClaimingView(onFinish: {}, onError: {})
         .background(.baseBlack)
+        .environmentObject(PrizeScanViewModel())
 }

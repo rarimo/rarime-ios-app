@@ -41,11 +41,8 @@ struct PrizeScanView: View {
     }
 
     var body: some View {
-        PullToCloseWrapperView(action: onClose) {
-            ZStack(alignment: .topTrailing) {
-                AppIconButton(variant: .secondary, icon: Icons.closeFill, action: onClose)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding([.top, .trailing], 20)
+        ZStack(alignment: .topTrailing) {
+            PullToCloseWrapperView(action: onClose) {
                 ZStack(alignment: .bottom) {
                     GlassBottomSheet(
                         minHeight: 470,
@@ -63,29 +60,34 @@ struct PrizeScanView: View {
                     }
                 }
             }
+            Button(action: onClose) {
+                Image(.closeFill)
+                    .iconMedium()
+                    .foregroundStyle(.textPrimary)
+                    .padding(10)
+                    .background(.bgComponentPrimary, in: Circle())
+            }
+            .padding([.top, .trailing], 20)
         }
-        .background(.baseWhite)
         .sheet(isPresented: $isScanSheetPresented) {
-            PrizeScanCameraView(
-                onConfirm: submitGuess,
-                onClose: { isScanSheetPresented = false }
-            )
-            .interactiveDismissDisabled()
+            PrizeScanCameraView(onClose: { isScanSheetPresented = false })
+                .interactiveDismissDisabled()
         }
+        .background(.invertedLight)
     }
 
     var mainSheetContent: some View {
         VStack(alignment: .leading, spacing: 24) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("Hidden prize")
+                Text("Hidden keys")
                     .h1()
-                    .foregroundStyle(.baseBlack)
+                    .foregroundStyle(.invertedDark)
                     .matchedGeometryEffect(
                         id: AnimationNamespaceIds.title,
                         in: animation,
                         properties: .position
                     )
-                Text("Scan")
+                Text("Find a face")
                     .additional1()
                     .fixedSize(horizontal: false, vertical: true)
                     .foregroundStyle(Gradients.purpleText)
@@ -94,18 +96,9 @@ struct PrizeScanView: View {
                         in: animation,
                         properties: .position
                     )
-                Text("Found hidden prize $1000")
+                Text("Somewhere out on the open web, one famous face carries a key sealed inside its ZK-vector.  Test any image you find, and the first player to prove the match claims the prize. Ready to hunt?")
                     .body4()
-                    .foregroundStyle(.baseBlack.opacity(0.5))
-                    .padding(.top, 12)
-                    .matchedGeometryEffect(
-                        id: AnimationNamespaceIds.extra,
-                        in: animation,
-                        properties: .position
-                    )
-                Text("You have \(prizeScanUser.totalAttemptsCount) scan attempts every 24 hours, but you can also earn extra scans by sharing and inviting friends.")
-                    .body4()
-                    .foregroundStyle(.baseBlack.opacity(0.5))
+                    .foregroundStyle(.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.top, 12)
             }
@@ -117,23 +110,24 @@ struct PrizeScanView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Available")
                         .subtitle6()
-                        .foregroundStyle(.baseBlack)
+                        .foregroundStyle(.textPrimary)
                     HStack(spacing: 2) {
                         Text(verbatim: "\(totalAttemptsLeft)")
                             .h4()
                             .foregroundStyle(Gradients.purpleText)
                         Text("/\(prizeScanUser.totalAttemptsCount) scans")
                             .body4()
-                            .foregroundStyle(.baseBlack.opacity(0.5))
+                            .foregroundStyle(.textSecondary)
                     }
                 }
                 Spacer()
                 scanActions
             }
         }
-        // HACK: prevent pull to close on empty space
-        .background(.white.opacity(0.01))
-        .padding(.horizontal, 20)
+        .padding([.top, .horizontal], 20)
+        // TODO: fix bottom padding
+        .padding(.bottom, 420)
+        .background(.invertedLight, in: RoundedRectangle(cornerRadius: 16))
     }
 
     private var scanTip: some View {
@@ -142,11 +136,12 @@ struct PrizeScanView: View {
                 Image(.bulb).iconSmall()
                 Text("Tip:").subtitle7()
             }
+            .foregroundStyle(Gradients.purpleText)
             Text(verbatim: tip)
                 .body4()
                 .fixedSize(horizontal: false, vertical: true)
+                .foregroundStyle(.textPrimary)
         }
-        .foregroundStyle(Gradients.purpleText)
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
@@ -200,7 +195,7 @@ struct PrizeScanView: View {
                     .h3()
                     .foregroundStyle(.textPrimary)
                     .padding(.top, 20)
-                Text("Invite a friend and get 1 bonus scan for each invited friend, or share the post and get 1 bonus scan as a one-time reward.")
+                Text("Out of daily scans? Earn extra scans for every friend who joins and a one-time by sharing the hunt")
                     .body3()
                     .foregroundStyle(.baseBlack.opacity(0.5))
                     .fixedSize(horizontal: false, vertical: true)
@@ -280,30 +275,9 @@ struct PrizeScanView: View {
         do {
             guard let user = userManager.user else { throw "failed to get user" }
             let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-            await viewModel.getExtraAttempt(jwt: accessJwt)
+            try await viewModel.getExtraAttempt(jwt: accessJwt)
         } catch {
-            LoggerUtil.common.error("failed to fetch prize scan user: \(error.localizedDescription, privacy: .public)")
-        }
-    }
-
-    private func submitGuess(_ image: CGImage) {
-        Task {
-            do {
-                LoggerUtil.common.info("Submitting guess")
-
-                guard let user = userManager.user else { throw "failed to get user" }
-                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-
-                try await LikenessManager.shared.claimReward(accessJwt, UIImage(cgImage: image))
-            } catch {
-                LoggerUtil.common.error("Failed to submit guess: \(error.localizedDescription, privacy: .public)")
-
-                if let error = error as? Errors {
-                    AlertManager.shared.emitError(error)
-                } else {
-                    AlertManager.shared.emitError(.unknown("Failed to submit guess"))
-                }
-            }
+            LoggerUtil.common.error("failed to get extra attempt: \(error.localizedDescription, privacy: .public)")
         }
     }
 }
