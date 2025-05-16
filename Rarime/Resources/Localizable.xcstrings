@@ -132,6 +132,16 @@
         }
       }
     },
+    "%lld/%lld MB" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld MB"
+          }
+        }
+      }
+    },
     "%lld%%" : {
 
     },
@@ -947,6 +957,9 @@
         }
       }
     },
+    "Downloading some data for the proof generation and send the proof on chain" : {
+
+    },
     "Ecuador" : {
 
     },
@@ -1307,6 +1320,9 @@
 
     },
     "Hidden Prize Scan" : {
+
+    },
+    "Hidden Prize Winner" : {
 
     },
     "History" : {
@@ -2720,6 +2736,9 @@
     "The passport is in the allowlist" : {
 
     },
+    "The prize has been successfully credited to your wallet." : {
+
+    },
     "The rewards program will allow you to receive weekly airdrops.\n\nYou can earn additional rewards by using RariMe’s incognito proofs with other ecosystem apps." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2918,6 +2937,9 @@
 
     },
     "Vietnam" : {
+
+    },
+    "View Wallet" : {
 
     },
     "Virgin Islands, British" : {

@@ -67,6 +67,7 @@ struct PrizeScanView: View {
         .background(.baseWhite)
         .sheet(isPresented: $isScanSheetPresented) {
             PrizeScanCameraView(
+                onConfirm: submitGuess,
                 onClose: { isScanSheetPresented = false }
             )
             .interactiveDismissDisabled()
@@ -282,6 +283,27 @@ struct PrizeScanView: View {
             await viewModel.getExtraAttempt(jwt: accessJwt)
         } catch {
             LoggerUtil.common.error("failed to fetch prize scan user: \(error.localizedDescription, privacy: .public)")
+        }
+    }
+
+    private func submitGuess(_ image: CGImage) {
+        Task {
+            do {
+                LoggerUtil.common.info("Submitting guess")
+
+                guard let user = userManager.user else { throw "failed to get user" }
+                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+
+                try await LikenessManager.shared.claimReward(accessJwt, UIImage(cgImage: image))
+            } catch {
+                LoggerUtil.common.error("Failed to submit guess: \(error.localizedDescription, privacy: .public)")
+
+                if let error = error as? Errors {
+                    AlertManager.shared.emitError(error)
+                } else {
+                    AlertManager.shared.emitError(.unknown("Failed to submit guess"))
+                }
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ private enum ScanState {
 struct PrizeScanCameraView: View {
     @EnvironmentObject private var prizeScanViewModel: PrizeScanViewModel
 
+    let onConfirm: (CGImage) -> Void
     let onClose: () -> Void
 
     @StateObject var viewModel = PrizeScanCameraViewModel()
@@ -91,6 +92,6 @@ struct PrizeScanCameraView: View {
 #Preview {
     ZStack {}
         .sheet(isPresented: .constant(true)) {
-            PrizeScanCameraView(onClose: {})
+            PrizeScanCameraView(onConfirm: { _ in }, onClose: {})
         }
 }

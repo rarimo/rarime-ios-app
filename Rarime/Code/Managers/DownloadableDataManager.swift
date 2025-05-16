@@ -67,21 +67,28 @@ enum RegisteredNoirCircuitData: String {
     case registerIdentity_21_256_3_3_576_232_NA
 }
 
-class CircuitDataManager: ObservableObject {
+enum RegisteredDownloadableFiles: String {
+    case faceRecognitionTFLite
+}
+
+class DownloadableDataManager: ObservableObject {
     static let saveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "circuitsData", directoryHint: .isDirectory)
     static let noirSaveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "noirCircuitsData", directoryHint: .isDirectory)
     static let zkeySaveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "zkeys", directoryHint: .isDirectory)
+    static let downloadablesSaveDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appending(path: "downloadbles", directoryHint: .isDirectory)
     
-    static let shared = CircuitDataManager()
+    static let shared = DownloadableDataManager()
 
     let circuitDataURLs: [String: URL]
     let noirCircuitDataURLs: [String: URL]
     let zkeyURLs: [String: URL]
+    let downloadbleFileURLs: [String: URL]
 
     init() {
         self.circuitDataURLs = ConfigManager.shared.circuitData.circuitDataURLs
         self.noirCircuitDataURLs = ConfigManager.shared.noirCircuitData.noirCircuitDataURLs
         self.zkeyURLs = ConfigManager.shared.circuitData.zkeyURLs
+        self.downloadbleFileURLs = ConfigManager.shared.general.downloadbleFileURLs
     }
     
     func retriveCircuitData(
@@ -111,7 +118,7 @@ class CircuitDataManager: ObservableObject {
             .get()
         
         let archivePath = fileUrl.path()
-        let unarchivePath = CircuitDataManager.saveDirectory.path()
+        let unarchivePath = DownloadableDataManager.saveDirectory.path()
         
         SSZipArchive.unzipFile(atPath: archivePath, toDestination: unarchivePath)
         
@@ -123,8 +130,8 @@ class CircuitDataManager: ObservableObject {
     }
     
     func retriveCircuitDataFromCache(_ circuitName: String) throws -> CircuitData? {
-        let circuitDatPath = CircuitDataManager.saveDirectory.appending(path: "\(circuitName)-download/\(circuitName).dat")
-        let circuitZkeyPath = CircuitDataManager.saveDirectory.appending(path: "\(circuitName)-download/circuit_final.zkey")
+        let circuitDatPath = DownloadableDataManager.saveDirectory.appending(path: "\(circuitName)-download/\(circuitName).dat")
+        let circuitZkeyPath = DownloadableDataManager.saveDirectory.appending(path: "\(circuitName)-download/circuit_final.zkey")
                 
         if
             !FileManager.default.fileExists(atPath: circuitDatPath.path()) ||
@@ -143,52 +150,42 @@ class CircuitDataManager: ObservableObject {
         _ circuitDataName: RegisteredNoirCircuitData,
         _ downloadProgress: @escaping (Double) -> Void = { _ in }
     ) async throws -> URL {
-        if !AppUserDefaults.shared.isCircuitsStorageCleared {
-            clearCache()
-            
-            AppUserDefaults.shared.isCircuitsStorageCleared = true
-        }
-        
-        if let circuitData = try retriveNoirCircuitDataPathFromCache(circuitDataName.rawValue) {
-            return circuitData
-        }
-        
-        let noirCircuitDataURL: URL
-        if circuitDataName == .trustedSetup {
-            noirCircuitDataURL = ConfigManager.shared.noirCircuitData.noirTrustedSetupURL
-        } else {
-            guard let selectedCircuitDataURL = noirCircuitDataURLs[circuitDataName.rawValue] else {
-                throw "Circuit data URL not found"
-            }
-            
-            noirCircuitDataURL = selectedCircuitDataURL
-        }
-        
-        let fileUrl = try await AF.download(noirCircuitDataURL)
-            .downloadProgress { progress in
-                downloadProgress(progress.fractionCompleted)
-            }
-            .serializingDownloadedFileURL()
-            .result
-            .get()
-        
-        if !FileManager.default.fileExists(atPath: CircuitDataManager.noirSaveDirectory.path()) {
-            try FileManager.default.createDirectory(at: CircuitDataManager.noirSaveDirectory, withIntermediateDirectories: true)
-        }
-        
-        let moveDirectory = CircuitDataManager.noirSaveDirectory.appending(path: "\(circuitDataName.rawValue)")
-        
-        try FileManager.default.moveItem(atPath: fileUrl.path(), toPath: moveDirectory.path())
-        
-        guard let circuitData = try retriveNoirCircuitDataPathFromCache(circuitDataName.rawValue) else {
-            throw "Failed to retrive circuit data path from cache"
-        }
-        
-        return circuitData
+        return try await retriveFilePath(
+            circuitDataName.rawValue,
+            noirCircuitDataURLs,
+            DownloadableDataManager.noirSaveDirectory,
+            downloadProgress
+        )
     }
     
     func retriveZkeyPath(
         _ zkeyName: RegisteredZkey,
+        _ downloadProgress: @escaping (Double) -> Void = { _ in }
+    ) async throws -> URL {
+        return try await retriveFilePath(
+            zkeyName.rawValue,
+            zkeyURLs,
+            DownloadableDataManager.zkeySaveDirectory,
+            downloadProgress
+        )
+    }
+    
+    func retriveDownloadbleFilePath(
+        _ fileName: RegisteredDownloadableFiles,
+        _ downloadProgress: @escaping (Double) -> Void = { _ in }
+    ) async throws -> URL {
+        return try await retriveFilePath(
+            fileName.rawValue,
+            downloadbleFileURLs,
+            DownloadableDataManager.downloadablesSaveDirectory,
+            downloadProgress
+        )
+    }
+    
+    func retriveFilePath(
+        _ fileName: String,
+        _ fileURLsMap: [String: URL],
+        _ saveDirectory: URL,
         _ downloadProgress: @escaping (Double) -> Void = { _ in }
     ) async throws -> URL {
         if !AppUserDefaults.shared.isCircuitsStorageCleared {
@@ -197,15 +194,15 @@ class CircuitDataManager: ObservableObject {
             AppUserDefaults.shared.isCircuitsStorageCleared = true
         }
         
-        if let zkeyPath = try retriveZkeyPathFromCache(zkeyName.rawValue) {
-            return zkeyPath
+        if let filePath = try retriveFilePathFromCache(fileName, saveDirectory) {
+            return filePath
         }
         
-        guard let zkeyURL = zkeyURLs[zkeyName.rawValue] else {
-            throw "Zkey URL not found"
+        guard let fileURL = fileURLsMap[fileName] else {
+            throw "File URL not found"
         }
 
-        let fileUrl = try await AF.download(zkeyURL)
+        let downloadedfileUrl = try await AF.download(fileURL)
             .downloadProgress { progress in
                 downloadProgress(progress.fractionCompleted)
             }
@@ -213,45 +210,36 @@ class CircuitDataManager: ObservableObject {
             .result
             .get()
         
-        if !FileManager.default.fileExists(atPath: CircuitDataManager.zkeySaveDirectory.path()) {
-            try FileManager.default.createDirectory(at: CircuitDataManager.zkeySaveDirectory, withIntermediateDirectories: true)
+        if !FileManager.default.fileExists(atPath: saveDirectory.path()) {
+            try FileManager.default.createDirectory(at: saveDirectory, withIntermediateDirectories: true)
         }
         
-        let moveDirectory = CircuitDataManager.zkeySaveDirectory.appending(path: "\(zkeyName.rawValue)")
+        let moveDirectory = saveDirectory.appending(path: fileName)
         
-        try FileManager.default.moveItem(atPath: fileUrl.path(), toPath: moveDirectory.path())
+        try FileManager.default.moveItem(atPath: downloadedfileUrl.path(), toPath: moveDirectory.path())
         
-        guard let zkeyPath = try retriveZkeyPathFromCache(zkeyName.rawValue) else {
-            throw "Failed to retrive zkey path from cache"
+        guard let filePath = try retriveFilePathFromCache(fileName, saveDirectory) else {
+            throw "Failed to retrive file path from cache"
         }
         
-        return zkeyPath
+        return filePath
     }
     
-    func retriveNoirCircuitDataPathFromCache(_ circuitDataName: String) throws -> URL? {
-        let circuitDataPath = CircuitDataManager.noirSaveDirectory.appending(path: circuitDataName)
-                
-        if !FileManager.default.fileExists(atPath: circuitDataPath.path()) {
+    func retriveFilePathFromCache(_ fileName: String, _ saveDirectory: URL) throws -> URL? {
+        let filePath = saveDirectory.appending(path: fileName)
+        
+        if !FileManager.default.fileExists(atPath: filePath.path()) {
             return nil
         }
         
-        return circuitDataPath
-    }
-    
-    func retriveZkeyPathFromCache(_ zkeyName: String) throws -> URL? {
-        let zKeyPath = CircuitDataManager.zkeySaveDirectory.appending(path: zkeyName)
-        
-        if !FileManager.default.fileExists(atPath: zKeyPath.path()) {
-            return nil
-        }
-        
-        return zKeyPath
+        return filePath
     }
     
     func clearCache() {
-        try? FileManager.default.removeItem(at: CircuitDataManager.saveDirectory)
-        try? FileManager.default.removeItem(at: CircuitDataManager.noirSaveDirectory)
-        try? FileManager.default.removeItem(at: CircuitDataManager.zkeySaveDirectory)
+        try? FileManager.default.removeItem(at: DownloadableDataManager.saveDirectory)
+        try? FileManager.default.removeItem(at: DownloadableDataManager.noirSaveDirectory)
+        try? FileManager.default.removeItem(at: DownloadableDataManager.zkeySaveDirectory)
+        try? FileManager.default.removeItem(at: DownloadableDataManager.downloadablesSaveDirectory)
     }
 }
 
