@@ -92,4 +92,6 @@ public class AppUserDefaults: ObservableObject {
 
     @AppStorage("is_likeness_registered")
     public var isLikenessRegistered: Bool = false
+    @AppStorage("is_passport_failed_by_impossible_revocation")
+    public var isPassportFailedByImpossibleRevocation: Bool = false
 }

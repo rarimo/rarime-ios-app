@@ -3,13 +3,13 @@ import SwiftUI
 struct PassportCard: View {
     @EnvironmentObject private var passportViewModel: PassportViewModel
     @EnvironmentObject private var userManager: UserManager
-    
+
     let passport: Passport
-    
+
     @Binding var look: PassportCardLook
     @Binding var isIncognito: Bool
     @Binding var identifiers: [PassportIdentifier]
-    
+
     let onWaitlisted: () -> Void
     let onUnsupported: () -> Void
 
@@ -25,16 +25,16 @@ struct PassportCard: View {
             Country.fromISOCode(passport.nationality)
         )
     }
-    
+
     var isWaitlisted: Bool {
         userManager.registerZkProof == nil &&
-        userManager.user?.status == .passportScanned
+            userManager.user?.status == .passportScanned
     }
 
     var isBadgeShown: Bool {
         isWaitlisted || isUnsupported
     }
-    
+
     var isDisabled: Bool {
         userManager.user?.status != .passportScanned
     }
@@ -118,7 +118,8 @@ struct PassportCard: View {
                         cardIdentityDetails
                     }
                     if passportViewModel.processingStatus == .processing &&
-                       userManager.user?.status == .unscanned {
+                        userManager.user?.status == .unscanned
+                    {
                         cardProofGeneration
                     }
                     if passportViewModel.processingStatus == .failure {
@@ -180,7 +181,7 @@ struct PassportCard: View {
         .padding(.vertical, 16)
         .padding(.horizontal, 20)
     }
-    
+
     private var cardIdentityDetails: some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading, spacing: 4) {
@@ -214,7 +215,7 @@ struct PassportCard: View {
         .frame(height: 64)
         .background(.bgBlur, in: RoundedRectangle(cornerRadius: 16))
     }
-    
+
     private var cardProofGeneration: some View {
         VStack(alignment: .center, spacing: 2) {
             HStack(alignment: .center, spacing: 16) {
@@ -247,49 +248,59 @@ struct PassportCard: View {
         .frame(height: 64)
         .background(.bgBlur, in: RoundedRectangle(cornerRadius: 16))
     }
-    
+
     private var cardProofError: some View {
         HStack(alignment: .center, spacing: 8) {
             Image(Icons.informationLine)
                 .iconMedium()
                 .foregroundStyle(.errorDark)
             VStack(alignment: .leading, spacing: 0) {
-                Text("Unknown error")
-                    .subtitle6()
-                    .foregroundStyle(.errorDark)
-                Text("Please try again")
-                    .body5()
-                    .foregroundStyle(.textSecondary)
+                Text(
+                    passportViewModel.isPassportFailedByImpossibleRevocation
+                        ? "Impossible to revoke your account"
+                        : "Unknown error"
+                )
+                .subtitle6()
+                .foregroundStyle(.errorDark)
+                Text(
+                    passportViewModel.isPassportFailedByImpossibleRevocation
+                        ? "Try using your previous private key"
+                        : "Please try again"
+                )
+                .body5()
+                .foregroundStyle(.textSecondary)
             }
             Spacer()
-            Button(action: {
-                Task {
-                    await retryPassportRegistration()
+            if !passportViewModel.isPassportFailedByImpossibleRevocation {
+                Button(action: {
+                    Task {
+                        await retryPassportRegistration()
+                    }
+                }) {
+                    HStack(alignment: .center, spacing: 8) {
+                        Image(Icons.restartLine)
+                            .iconMedium()
+                        Text("Retry")
+                            .buttonMedium()
+                    }
+                    .foregroundStyle(.invertedLight)
                 }
-            }) {
-                HStack(alignment: .center, spacing: 8) {
-                    Image(Icons.restartLine)
-                        .iconMedium()
-                    Text("Retry")
-                        .buttonMedium()
-                }
-                .foregroundStyle(.invertedLight)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 10)
+                .frame(height: 32)
+                .background(Capsule().fill(.textPrimary))
             }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
-            .frame(height: 32)
-            .background(Capsule().fill(.textPrimary))
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
         .frame(height: 64)
         .background(.bgBlur, in: RoundedRectangle(cornerRadius: 16))
     }
-    
+
     private func retryPassportRegistration() async {
         do {
             passportViewModel.processingStatus = .processing
-            
+
             let zkProof = try await passportViewModel.register()
 
             if passportViewModel.processingStatus != .success { return }
@@ -298,12 +309,12 @@ struct PassportCard: View {
             userManager.user?.status = .passportScanned
         } catch {
             LoggerUtil.common.error("error while registering passport: \(error.localizedDescription, privacy: .public)")
-            
+
             if let error = error as? Errors {
                 passportViewModel.processingStatus = .failure
-                
+
                 AlertManager.shared.emitError(error)
-                
+
                 return
             }
         }
@@ -358,9 +369,9 @@ private struct PassportLookOption: View {
 
 private struct PassportIdentifiersPicker: View {
     @Binding var identifiers: [PassportIdentifier]
-    
+
     let passport: Passport
-   
+
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Data")
