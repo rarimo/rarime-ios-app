@@ -66,7 +66,7 @@ class PrizeScanViewModel: ObservableObject {
                     throw error
                 }
             } catch {
-                AlertManager.shared.emitError(.unknown("Failed to load user information"))
+                AlertManager.shared.emitError("Failed to load user information")
                 LoggerUtil.common.error("PrizeScan: Failed to load user information: \(error, privacy: .public)")
                 return
             }

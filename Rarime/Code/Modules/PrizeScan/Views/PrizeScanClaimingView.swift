@@ -60,7 +60,7 @@ struct PrizeScanClaimingView: View {
             onFinish()
         } catch {
             LoggerUtil.common.error("PrizeScan: Failed to claim reward: \(error)")
-            AlertManager.shared.emitError(.unknown("Failed to claim reward, try again"))
+            AlertManager.shared.emitError("Failed to claim reward, try again")
             onError()
         }
     }

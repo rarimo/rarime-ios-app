@@ -124,7 +124,7 @@ struct PrizeScanScanningView: View {
             } catch {
                 FeedbackGenerator.shared.notify(.error)
                 LoggerUtil.common.error("Failed to submit guess: \(error.localizedDescription, privacy: .public)")
-                AlertManager.shared.emitError(.unknown("Failed to submit guess"))
+                AlertManager.shared.emitError("Failed to submit guess")
 
                 isPictureTaken = false
                 viewModel.startScanning()

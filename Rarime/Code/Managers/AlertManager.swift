@@ -16,6 +16,10 @@ class AlertManager: ObservableObject {
         subject.send(AppAlertSubject(type: .error, message: error.localizedDescription))
     }
 
+    func emitError(_ message: String) {
+        subject.send(AppAlertSubject(type: .error, message: message))
+    }
+
     func emitSuccess(_ message: String) {
         subject.send(AppAlertSubject(type: .success, message: message))
     }
