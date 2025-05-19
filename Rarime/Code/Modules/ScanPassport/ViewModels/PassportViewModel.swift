@@ -349,8 +349,6 @@ class PassportViewModel: ObservableObject {
             registerIdentityCircuitType
         )
         
-        UIPasteboard.general.string = registerIdentityInputs.json.utf8
-        
         guard let circuitData = FileManager.default.contents(atPath: circuitDataPath.path()) else {
             throw Errors.unknown("Failed to read circuit data")
         }
