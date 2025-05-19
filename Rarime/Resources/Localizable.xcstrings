@@ -27,9 +27,6 @@
     "* Nothing leaves this device" : {
 
     },
-    "/%lld scans" : {
-
-    },
     "%@" : {
 
     },
@@ -168,9 +165,6 @@
 
     },
     "+1 scan" : {
-
-    },
-    "0.3" : {
 
     },
     "1 day" : {
@@ -2081,6 +2075,9 @@
         }
       }
     },
+    "Prize-pool:" : {
+
+    },
     "Processing" : {
       "localizations" : {
         "uk" : {
@@ -2456,6 +2453,9 @@
 
     },
     "Scan your passport’s first page inside the border" : {
+
+    },
+    "scans" : {
 
     },
     "Scooping up the magic bits to brew your proof" : {

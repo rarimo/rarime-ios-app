@@ -65,7 +65,7 @@ struct HomeView: View {
                     },
                     title: "Your Device",
                     subtitle: "Your Identity",
-                    bottomAdditionalContent: {
+                    bottomContent: {
                         Text("* Nothing leaves this device")
                             .body4()
                             .foregroundStyle(.baseBlack.opacity(0.6))
@@ -92,6 +92,20 @@ struct HomeView: View {
                     },
                     title: "Hidden keys",
                     subtitle: "Find a face",
+                    topContent: {
+                        HStack(spacing: 8) {
+                            Text("Prize-pool:")
+                                .subtitle6()
+                            Text(verbatim: String(PRIZE_SCAN_ETH_REWARD))
+                                .h6()
+                            Image(.ethereum)
+                                .iconSmall()
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 6)
+                        .background(.bgComponentPrimary, in: Capsule())
+                        .padding(.bottom, 12)
+                    },
                     animation: prizeScanAnimation
                 )
             },
@@ -136,7 +150,7 @@ struct HomeView: View {
                     },
                     title: likenessManager.isRegistered ? nil : "Digital likeness",
                     subtitle: likenessManager.isRegistered ? nil : "Set a rule",
-                    bottomAdditionalContent: {
+                    bottomContent: {
                         if likenessManager.isRegistered {
                             VStack(alignment: .leading, spacing: 0) {
                                 Text("My Rule:")
@@ -218,7 +232,7 @@ struct HomeView: View {
             //                    },
             //                    title: "Invite",
             //                    subtitle: "Others",
-            //                    bottomAdditionalContent: {
+            //                    bottomContent: {
             //                        if let code = activeReferralCode {
             //                            HStack(spacing: 16) {
             //                                Text(code)

@@ -35,7 +35,7 @@ struct PrizeScanSuccessView: View {
                         .subtitle6()
                         .foregroundStyle(.baseWhite.opacity(0.6))
                     HStack(spacing: 10) {
-                        Text("0.3")
+                        Text(verbatim: PRIZE_SCAN_ETH_REWARD.formatted())
                             .h3()
                             .foregroundStyle(.baseWhite)
                         Image(.ethereum)

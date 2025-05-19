@@ -45,7 +45,7 @@ struct PrizeScanView: View {
             PullToCloseWrapperView(action: onClose) {
                 ZStack(alignment: .bottom) {
                     GlassBottomSheet(
-                        minHeight: 470,
+                        minHeight: 500,
                         maxHeight: 730,
                         maxBlur: 100,
                         background: {
@@ -79,23 +79,25 @@ struct PrizeScanView: View {
     var mainSheetContent: some View {
         VStack(alignment: .leading, spacing: 24) {
             VStack(alignment: .leading, spacing: 0) {
+                HStack(spacing: 8) {
+                    Text("Prize-pool:")
+                        .subtitle6()
+                    Text(verbatim: String(PRIZE_SCAN_ETH_REWARD))
+                        .h6()
+                    Image(.ethereum)
+                        .iconSmall()
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 6)
+                .background(.bgComponentPrimary, in: Capsule())
                 Text("Hidden keys")
                     .h1()
                     .foregroundStyle(.invertedDark)
-                    .matchedGeometryEffect(
-                        id: AnimationNamespaceIds.title,
-                        in: animation,
-                        properties: .position
-                    )
+                    .padding(.top, 12)
                 Text("Find a face")
                     .additional1()
                     .fixedSize(horizontal: false, vertical: true)
                     .foregroundStyle(Gradients.purpleText)
-                    .matchedGeometryEffect(
-                        id: AnimationNamespaceIds.subtitle,
-                        in: animation,
-                        properties: .position
-                    )
                 Text("Somewhere out on the open web, one famous face carries a key sealed inside its ZK-vector.  Test any image you find, and the first player to prove the match claims the prize. Ready to hunt?")
                     .body4()
                     .foregroundStyle(.textSecondary)
@@ -111,11 +113,11 @@ struct PrizeScanView: View {
                     Text("Available")
                         .subtitle6()
                         .foregroundStyle(.textPrimary)
-                    HStack(spacing: 2) {
+                    HStack(spacing: 4) {
                         Text(verbatim: "\(totalAttemptsLeft)")
                             .h4()
                             .foregroundStyle(Gradients.purpleText)
-                        Text("/\(prizeScanUser.totalAttemptsCount) scans")
+                        Text("scans")
                             .body4()
                             .foregroundStyle(.textSecondary)
                     }
@@ -189,8 +191,8 @@ struct PrizeScanView: View {
                 Image(.flashlightFill)
                     .square(24)
                     .padding(16)
-                    .foregroundStyle(Gradients.purpleText)
-                    .background(Gradients.purpleText.opacity(0.05), in: Circle())
+                    .foregroundStyle(.additionalPurple)
+                    .background(.additionalPurple.opacity(0.05), in: Circle())
                 Text("Bonus scan")
                     .h3()
                     .foregroundStyle(.textPrimary)
