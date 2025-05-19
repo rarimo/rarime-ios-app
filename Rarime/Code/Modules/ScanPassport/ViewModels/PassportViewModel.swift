@@ -60,6 +60,12 @@ class PassportViewModel: ObservableObject {
     
     @Published var isUSA = false
     
+    @Published var isPassportFailedByImpossibleRevocation = AppUserDefaults.shared.isPassportFailedByImpossibleRevocation {
+        didSet {
+            AppUserDefaults.shared.isPassportFailedByImpossibleRevocation = isPassportFailedByImpossibleRevocation
+        }
+    }
+    
     private var progressTimer: AnyCancellable?
     private var simulationStartTime: Date?
     private var isPaused: Bool = false
@@ -190,6 +196,8 @@ class PassportViewModel: ObservableObject {
                 isCriticalRegistrationProcessInProgress = false
                 
                 if passport.dg15.isEmpty {
+                    isPassportFailedByImpossibleRevocation = true
+                    
                     throw Errors.unknown("You can't register with already used passport")
                 }
                 
@@ -258,7 +266,7 @@ class PassportViewModel: ObservableObject {
                 throw error
             }
             
-            LoggerUtil.common.error("Trying light registration because of: \(error.localizedDescription, privacy: .public)")
+            LoggerUtil.common.error("Trying light registration because of: \(error, privacy: .public)")
             
             do {
                 return try await lightRegister()
