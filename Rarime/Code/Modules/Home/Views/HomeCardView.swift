@@ -3,6 +3,7 @@ import SwiftUI
 struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
     let backgroundGradient: LinearGradient
     let foregroundGradient: LinearGradient?
+    let foregroundColor: Color
     let topIcon: String
     let bottomIcon: String
     let imageContent: () -> Content
@@ -15,6 +16,7 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
     init(
         backgroundGradient: LinearGradient,
         foregroundGradient: LinearGradient? = nil,
+        foregroundColor: Color = .baseBlack,
         topIcon: String,
         bottomIcon: String,
         @ViewBuilder imageContent: @escaping () -> Content,
@@ -25,6 +27,7 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
     ) {
         self.backgroundGradient = backgroundGradient
         self.foregroundGradient = foregroundGradient
+        self.foregroundColor = foregroundColor
         self.topIcon = topIcon
         self.bottomIcon = bottomIcon
         self.imageContent = imageContent
@@ -36,22 +39,22 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
 
     var body: some View {
         ZStack(alignment: .trailing) {
-            Image(topIcon)
-                .square(24)
-                .foregroundStyle(.baseBlack)
-                .padding(8)
-                .background(.bgComponentPrimary, in: Circle())
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .padding([.top, .leading], 20)
             imageContent()
                 .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .clipped()
+            Image(topIcon)
+                .square(24)
+                .foregroundStyle(foregroundColor)
+                .padding(8)
+                .background(.bgComponentPrimary, in: Circle())
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .padding([.top, .leading], 20)
             VStack(alignment: .leading, spacing: 0) {
                 if let title {
                     Text(title)
                         .h1()
-                        .foregroundStyle(.baseBlack)
+                        .foregroundStyle(foregroundColor)
                         .matchedGeometryEffect(
                             id: AnimationNamespaceIds.title,
                             in: animation,
@@ -61,7 +64,7 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
                 if let subtitle {
                     Text(subtitle)
                         .additional1()
-                        .foregroundStyle(foregroundGradient == nil ? AnyShapeStyle(Color.baseBlack.opacity(0.4)) : AnyShapeStyle(foregroundGradient!))
+                        .foregroundStyle(foregroundGradient == nil ? AnyShapeStyle(foregroundColor.opacity(0.4)) : AnyShapeStyle(foregroundGradient!))
                         .matchedGeometryEffect(
                             id: AnimationNamespaceIds.subtitle,
                             in: animation,
@@ -78,7 +81,7 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
             .padding(.bottom, 32)
             Image(bottomIcon)
                 .iconLarge()
-                .foregroundStyle(.baseBlack)
+                .foregroundStyle(foregroundColor)
                 .frame(maxHeight: .infinity, alignment: .bottom)
                 .padding(.bottom, 32)
                 .padding(.trailing, 24)

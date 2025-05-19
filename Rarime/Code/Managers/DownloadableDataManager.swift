@@ -93,7 +93,7 @@ class DownloadableDataManager: ObservableObject {
     
     func retriveCircuitData(
         _ circuitName: RegisteredCircuitData,
-        _ downloadProgress: @escaping (Double) -> Void = { _ in }
+        _ downloadProgress: @escaping (Progress) -> Void = { _ in }
     ) async throws -> CircuitData {
         if !AppUserDefaults.shared.isCircuitsStorageCleared {
             clearCache()
@@ -111,7 +111,7 @@ class DownloadableDataManager: ObservableObject {
         
         let fileUrl = try await AF.download(circuitDataURL)
             .downloadProgress { progress in
-                downloadProgress(progress.fractionCompleted)
+                downloadProgress(progress)
             }
             .serializingDownloadedFileURL()
             .result
@@ -148,7 +148,7 @@ class DownloadableDataManager: ObservableObject {
     
     func retriveNoirCircuitDataPath(
         _ circuitDataName: RegisteredNoirCircuitData,
-        _ downloadProgress: @escaping (Double) -> Void = { _ in }
+        _ downloadProgress: @escaping (Progress) -> Void = { _ in }
     ) async throws -> URL {
         return try await retriveFilePath(
             circuitDataName.rawValue,
@@ -160,7 +160,7 @@ class DownloadableDataManager: ObservableObject {
     
     func retriveZkeyPath(
         _ zkeyName: RegisteredZkey,
-        _ downloadProgress: @escaping (Double) -> Void = { _ in }
+        _ downloadProgress: @escaping (Progress) -> Void = { _ in }
     ) async throws -> URL {
         return try await retriveFilePath(
             zkeyName.rawValue,
@@ -172,7 +172,7 @@ class DownloadableDataManager: ObservableObject {
     
     func retriveDownloadbleFilePath(
         _ fileName: RegisteredDownloadableFiles,
-        _ downloadProgress: @escaping (Double) -> Void = { _ in }
+        _ downloadProgress: @escaping (Progress) -> Void = { _ in }
     ) async throws -> URL {
         return try await retriveFilePath(
             fileName.rawValue,
@@ -186,7 +186,7 @@ class DownloadableDataManager: ObservableObject {
         _ fileName: String,
         _ fileURLsMap: [String: URL],
         _ saveDirectory: URL,
-        _ downloadProgress: @escaping (Double) -> Void = { _ in }
+        _ downloadProgress: @escaping (Progress) -> Void = { _ in }
     ) async throws -> URL {
         if !AppUserDefaults.shared.isCircuitsStorageCleared {
             clearCache()
@@ -204,7 +204,7 @@ class DownloadableDataManager: ObservableObject {
 
         let downloadedfileUrl = try await AF.download(fileURL)
             .downloadProgress { progress in
-                downloadProgress(progress.fractionCompleted)
+                downloadProgress(progress)
             }
             .serializingDownloadedFileURL()
             .result
