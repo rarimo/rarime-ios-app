@@ -2,6 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     " and " : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -73,16 +74,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$@, вік: %2$@"
-          }
-        }
-      }
-    },
-    "%@%@ %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@%2$@ %3$@"
           }
         }
       }
@@ -167,6 +158,7 @@
 
     },
     "Address" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -193,6 +185,7 @@
 
     },
     "Airdrop" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -229,6 +222,7 @@
 
     },
     "Amount" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -237,9 +231,6 @@
           }
         }
       }
-    },
-    "Amount must be greater than 0" : {
-
     },
     "An error has occured, please try again" : {
 
@@ -308,9 +299,6 @@
     "Aruba" : {
 
     },
-    "ASSETS (%lld)" : {
-
-    },
     "Australia" : {
 
     },
@@ -362,6 +350,7 @@
       }
     },
     "Available:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -516,6 +505,7 @@
 
     },
     "By checking this box, you are agreeing to " : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -624,9 +614,6 @@
 
     },
     "Comoros" : {
-
-    },
-    "Confirm" : {
 
     },
     "Congo" : {
@@ -1070,9 +1057,6 @@
     "Faroe Islands" : {
 
     },
-    "Fee" : {
-
-    },
     "Female" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1310,13 +1294,7 @@
     "Indonesia" : {
 
     },
-    "Insufficient balance" : {
-
-    },
     "Internet connection is unstable" : {
-
-    },
-    "Invalid address" : {
 
     },
     "Invalid HTTP status code: %lld" : {
@@ -1570,6 +1548,7 @@
 
     },
     "MAX" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1732,6 +1711,7 @@
 
     },
     "No transactions yet" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2118,6 +2098,7 @@
       }
     },
     "Rarimo Airdrop Program Terms & Conditions" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2163,6 +2144,7 @@
       }
     },
     "Receive" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2171,9 +2153,6 @@
           }
         }
       }
-    },
-    "Receive %@" : {
-
     },
     "Receive RMO" : {
       "extractionState" : "stale",
@@ -2187,6 +2166,7 @@
       }
     },
     "Receiver gets" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2215,13 +2195,7 @@
     "Reserve" : {
 
     },
-    "Reserve %@ RMO tokens" : {
-
-    },
     "Reserved" : {
-
-    },
-    "Reserving..." : {
 
     },
     "Restore manually" : {
@@ -2237,9 +2211,6 @@
 
     },
     "Reunion" : {
-
-    },
-    "Review Transaction" : {
 
     },
     "Rewards limit reached" : {
@@ -2359,6 +2330,7 @@
 
     },
     "Send" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2367,9 +2339,6 @@
           }
         }
       }
-    },
-    "Send %@" : {
-
     },
     "Send RMO" : {
       "extractionState" : "stale",
@@ -2381,9 +2350,6 @@
           }
         }
       }
-    },
-    "Sending..." : {
-
     },
     "Senegal" : {
 
@@ -2606,9 +2572,6 @@
         }
       }
     },
-    "The passport is in the allowlist" : {
-
-    },
     "The rewards program will allow you to receive weekly airdrops.\n\nYou can earn additional rewards by using RariMe’s incognito proofs with other ecosystem apps." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2658,13 +2621,8 @@
     "Tonga" : {
 
     },
-    "Total %@" : {
-
-    },
-    "Total Balance" : {
-
-    },
     "Transactions" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2891,9 +2849,6 @@
         }
       }
     },
-    "Withdraw the %@ token" : {
-
-    },
     "Withdraw the RMO token" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2931,13 +2886,7 @@
         }
       }
     },
-    "You can use the QR code or the wallet address to deposit the %@ token to your account" : {
-
-    },
     "You entered wrong passcode.\nLoading time: %@" : {
-
-    },
-    "You have already reserved tokens" : {
 
     },
     "You’ve joined the waitlist" : {
@@ -2966,9 +2915,6 @@
 
     },
     "Your account is not backed up. If you lose your device, you will lose access to your account" : {
-
-    },
-    "Your Address" : {
 
     },
     "Your Device" : {

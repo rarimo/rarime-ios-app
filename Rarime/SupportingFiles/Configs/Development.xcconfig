@@ -6,7 +6,6 @@ CLAIMABLE_NOTIFICATION_TOPIC = "rarime-rewardable-stage"
 // MARK: Intro
 PRIVACY_POLICY_URL = "https:${SLASH}/staging.rarime.com/privacy-notice.html"
 TERMS_OF_USE_URL = "https:${SLASH}/staging.rarime.com/general-terms.html"
-AIRDROP_TERMS_URL = "https:${SLASH}/staging.rarime.com/airdrop-terms.html"
 
 // MARK: API
 RELAYER_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"

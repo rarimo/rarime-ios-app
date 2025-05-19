@@ -57,7 +57,6 @@ struct MainView: View {
 
     return MainView()
         .environmentObject(PassportManager())
-        .environmentObject(WalletManager())
         .environmentObject(UserManager())
         .environmentObject(ConfigManager())
         .environmentObject(NotificationManager())

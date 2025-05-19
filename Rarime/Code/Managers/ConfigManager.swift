@@ -17,7 +17,6 @@ extension ConfigManager {
     class General {
         let privacyPolicyURL: URL
         let termsOfUseURL: URL
-        let airdropTerms: URL
         let version: String
         let generalNotificationTopic: String
         let claimableNotificationTopic: String
@@ -26,7 +25,6 @@ extension ConfigManager {
             do {
                 self.privacyPolicyURL = try readURLFromInfoPlist(key: "PRIVACY_POLICY_URL")
                 self.termsOfUseURL = try readURLFromInfoPlist(key: "TERMS_OF_USE_URL")
-                self.airdropTerms = try readURLFromInfoPlist(key: "AIRDROP_TERMS_URL")
                 self.version = try readFromInfoPlist(key: "CFBundleShortVersionString")
                 self.generalNotificationTopic = try readFromInfoPlist(key: "GENERAL_NOTIFICATION_TOPIC")
                 self.claimableNotificationTopic = try readFromInfoPlist(key: "CLAIMABLE_NOTIFICATION_TOPIC")

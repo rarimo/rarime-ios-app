@@ -6,8 +6,6 @@
 	<string>${PROPOSALS_STATE_CONTRACT_ADDRESS}</string>
 	<key>MULTICALL3_CONTRACT_ADDRESS</key>
 	<string>${MULTICALL3_CONTRACT_ADDRESS}</string>
-	<key>AIRDROP_TERMS_URL</key>
-	<string>${AIRDROP_TERMS_URL}</string>
 	<key>APPSFLYER_DEV_KEY</key>
 	<string>${APPSFLYER_DEV_KEY}</string>
 	<key>APPSFLYER_APP_ID</key>

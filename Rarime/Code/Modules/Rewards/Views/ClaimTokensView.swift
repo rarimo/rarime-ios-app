@@ -21,10 +21,6 @@ struct ClaimTokensView: View {
     private var privacyURL: String {
         configManager.general.privacyPolicyURL.absoluteString
     }
-
-    private var airdropTermsURL: String {
-        configManager.general.airdropTerms.absoluteString
-    }
     
     private var claimButtonText: LocalizedStringResource {
         if isTokensClaiming {
@@ -86,9 +82,7 @@ struct ClaimTokensView: View {
                         Text("By continue, you are agreeing to ") +
                             Text(.init("[\(String(localized: "RariMe General Terms & Conditions"))](\(termsURL))")).underline() +
                             Text(", ") +
-                            Text(.init("[\(String(localized: "RariMe Privacy Notice"))](\(privacyURL))")).underline() +
-                            Text(" and ") +
-                            Text(.init("[\(String(localized: "Rarimo Airdrop Program Terms & Conditions"))](\(airdropTermsURL))")).underline()
+                            Text(.init("[\(String(localized: "RariMe Privacy Notice"))](\(privacyURL))")).underline()
                     )
                     .body5()
                     .tint(.baseBlack.opacity(0.5))
@@ -119,7 +113,7 @@ struct ClaimTokensView: View {
     
 //    private func onClaimTokens() {
 //        isTokensClaiming = true
-//        
+//
 //        // TODO: remove it after flow impl
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 //            rewardsViewModel.isTokensClaimed = true
