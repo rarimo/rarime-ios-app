@@ -290,7 +290,7 @@ class PassportViewModel: ObservableObject {
         let circuitData: CircuitData
         do {
             circuitData = try await DownloadableDataManager.shared.retriveCircuitData(registeredCircuitData) { progress in
-                self.updateDownloadProgress(downloadProgressValue: progress)
+                self.updateDownloadProgress(downloadProgressValue: progress.fractionCompleted)
             }
         } catch {
             throw Errors.unknown("Failed to download data, internet connection is unstable")
@@ -326,7 +326,7 @@ class PassportViewModel: ObservableObject {
         isCriticalRegistrationProcessInProgress = false
         
         let trustedSetupPath = try await DownloadableDataManager.shared.retriveNoirCircuitDataPath(.trustedSetup) { progress in
-            self.updateDownloadProgress(downloadProgressValue: progress)
+            self.updateDownloadProgress(downloadProgressValue: progress.fractionCompleted)
         }
         
         let circuitDataPath: URL

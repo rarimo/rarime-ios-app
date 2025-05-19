@@ -1,5 +1,7 @@
 import Alamofire
 import Foundation
+import Identity
+import SwiftUI
 
 struct PrizeScanUser {
     let id, referralCode: String
@@ -42,6 +44,8 @@ struct PrizeScanCelebrity {
 
 class PrizeScanViewModel: ObservableObject {
     @Published var user: PrizeScanUser? = nil
+    @Published var originalFeatures: [Float] = []
+    @Published var foundFace: UIImage? = nil
 
     @MainActor
     func loadUser(jwt: JWT, referralCode: String? = nil) async {
@@ -62,21 +66,17 @@ class PrizeScanViewModel: ObservableObject {
                     throw error
                 }
             } catch {
-                AlertManager.shared.emitError(.unknown("Failed to load user information"))
+                AlertManager.shared.emitError("Failed to load user information")
                 LoggerUtil.common.error("PrizeScan: Failed to load user information: \(error, privacy: .public)")
                 return
             }
         }
 
-        // TODO: Uncomment when backend is fixed
-//        let userStatsRel = userResponse.data.relationships.userStats.data
-//        let userStats = userResponse.included.first(where: { $0.id == userStatsRel.id && $0.type == userStatsRel.type })
-//
-//        let celebrityRel = userResponse.data.relationships.celebrity.data
-//        let celebrity = userResponse.included.first(where: { $0.id == celebrityRel.id && $0.type == celebrityRel.type })
+        let userStatsRel = userResponse.data.relationships.userStats.data
+        let userStats = userResponse.included.first(where: { $0.id == userStatsRel.id && $0.type == userStatsRel.type })
 
-        let userStats = userResponse.included.first(where: { $0.type == "user_stats" })
-        let celebrity = userResponse.included.first(where: { $0.type == "celebrity" })
+        let celebrityRel = userResponse.data.relationships.celebrity.data
+        let celebrity = userResponse.included.first(where: { $0.id == celebrityRel.id && $0.type == celebrityRel.type })
 
         user = PrizeScanUser(
             id: userResponse.data.id,
@@ -101,13 +101,73 @@ class PrizeScanViewModel: ObservableObject {
         )
     }
 
-    func getExtraAttempt(jwt: JWT) async {
-        do {
-            let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.api.pointsServiceURL)
-            let _ = try await guessCelebrityService.addExtraAttempt(jwt: jwt)
-            await loadUser(jwt: jwt)
-        } catch {
-            LoggerUtil.common.error("PrizeScan: Failed to get extra attempt: \(error, privacy: .public)")
+    func getExtraAttempt(jwt: JWT) async throws {
+        let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.api.pointsServiceURL)
+        let _ = try await guessCelebrityService.addExtraAttempt(jwt: jwt)
+        await loadUser(jwt: jwt)
+    }
+
+    func submitGuess(jwt: JWT, image: UIImage) async throws -> Bool {
+        guard let foundFace = try NeuralUtils.extractFaceFromImage(image) else {
+            throw Errors.unknown("Face can not be detected")
         }
+
+        self.foundFace = foundFace
+
+        let faceRecognitionTFLilePath = try await DownloadableDataManager.shared.retriveDownloadbleFilePath(.faceRecognitionTFLite)
+
+        let faceRecognitionTFLile = try Data(contentsOf: faceRecognitionTFLilePath)
+
+        let (_, rgbData) = try NeuralUtils.convertFaceToRgb(foundFace, TensorFlow.faceRecognitionImageBoundary)
+
+        let normalizedInput = NeuralUtils.normalizeModel(rgbData)
+
+        let features = try TensorFlowManager.shared.compute(normalizedInput, tfData: faceRecognitionTFLile)
+
+        let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.api.pointsServiceURL)
+        let guessResponse = try await guessCelebrityService.submitCelebrityGuess(jwt, features)
+        await loadUser(jwt: jwt)
+
+        let isSuccess = guessResponse.data.attributes.success
+        if isSuccess {
+            guard let originalFeatureVector = guessResponse.data.attributes.originalFeatureVector else {
+                throw Errors.unknown("Original feature vector is absent")
+            }
+
+            originalFeatures = originalFeatureVector
+        }
+
+        return isSuccess
+    }
+
+    func claimReward(_ downloadProgress: @escaping (Progress) -> Void) async throws {
+        guard let address = UserManager.shared.ethereumAddress else {
+            throw Errors.unknown("User is not initialized")
+        }
+
+        guard let foundFace else {
+            throw Errors.unknown("Face can not be detected")
+        }
+
+        let (_, grayscaleData) = try NeuralUtils.convertFaceToGrayscaleData(foundFace, TensorFlow.faceRecognitionImageBoundary)
+
+        let inputAddress = try BN(hex: address)
+
+        let faceRegistryContract = try FaceRegistryContract()
+        let nonceBigUint = try await faceRegistryContract.getVerificationNonce(inputAddress.fullHex())
+        let nonce = try BN(dec: nonceBigUint.description)
+
+        let guessInputs = CircuitBuilderManager.shared.bionetCircuit.inputs(grayscaleData, originalFeatures, nonce, inputAddress)
+        let zkProof = try await LikenessManager.shared.generateBionettaProof(guessInputs.json, downloadProgress)
+
+        let guessCalldata = try IdentityCallDataBuilder().buildGuessCelebrityClaimRewardCalldata(address, zkPointsJSON: zkProof.json)
+
+        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
+        let response = try await relayer.register(guessCalldata)
+
+        LoggerUtil.common.info("Claim reward EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
+
+        let eth = Ethereum()
+        try await eth.waitForTxSuccess(response.data.attributes.txHash)
     }
 }

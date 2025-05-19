@@ -59,7 +59,6 @@ struct AppView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(.bgPrimary)
             }
-            AlertManagerView()
         }
         .preferredColorScheme(settingsManager.colorScheme.rawScheme ?? colorScheme)
         .blur(radius: blurRadius)

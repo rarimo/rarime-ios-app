@@ -5,7 +5,7 @@ class FaceCaptureSession: NSObject {
     private let captureSession = AVCaptureSession()
     private var deviceInput: AVCaptureDeviceInput?
     private var videoOutput: AVCaptureVideoDataOutput?
-    private let systemPreferredCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
+    private var systemPreferredCamera: AVCaptureDevice?
     private var sessionQueue = DispatchQueue(label: "video.face.session")
     
     private var isAuthorized: Bool {
@@ -30,8 +30,10 @@ class FaceCaptureSession: NSObject {
         }
     }
     
-    override init() {
+    init(cameraPosition: AVCaptureDevice.Position = .front) {
         super.init()
+        
+        self.systemPreferredCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: cameraPosition)
         
         Task {
             do {

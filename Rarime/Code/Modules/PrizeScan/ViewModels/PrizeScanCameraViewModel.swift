@@ -1,7 +1,7 @@
 import SwiftUI
 
 class PrizeScanCameraViewModel: ObservableObject {
-    private var cameraManager = FaceCaptureSession()
+    private var cameraManager = FaceCaptureSession(cameraPosition: .back)
     
     @Published var currentFrame: CGImage?
     @Published var cameraTask: Task<Void, Never>? = nil
@@ -26,13 +26,10 @@ class PrizeScanCameraViewModel: ObservableObject {
         for await image in cameraManager.previewStream {
             Task { @MainActor in
                 currentFrame = image
-                handleFaceImage(image)
             }
         }
     }
         
-    func handleFaceImage(_ image: CGImage) {}
-    
     func clearImages() {
         currentFrame = nil
     }
