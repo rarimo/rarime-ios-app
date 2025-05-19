@@ -38,6 +38,8 @@ extension PrizeScanUser {
     }
 }
 
+private let PRIZE_SCAN_REFERRAL_CODE_LENGTH = 10
+
 struct PrizeScanCelebrity {
     let id, title, description, status, image, hint: String
 }
@@ -60,8 +62,14 @@ class PrizeScanViewModel: ObservableObject {
                 let openApiHttpCode = try error.retriveOpenApiHttpCode()
                 if openApiHttpCode == HTTPStatusCode.notFound.rawValue {
                     LoggerUtil.common.info("PrizeScan: User is not found, creating a new user")
-                    // TODO: pass referral code to the backend
-                    userResponse = try await guessCelebrityService.createUser(jwt: jwt)
+
+                    // Because referral codes can be used in different services,
+                    // we check whether the code belongs to the guess celebrity service
+                    let refCode = referralCode?.count == PRIZE_SCAN_REFERRAL_CODE_LENGTH
+                        ? referralCode
+                        : nil
+
+                    userResponse = try await guessCelebrityService.createUser(jwt: jwt, referredBy: refCode)
                 } else {
                     throw error
                 }
