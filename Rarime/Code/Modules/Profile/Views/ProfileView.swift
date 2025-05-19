@@ -67,9 +67,6 @@ struct ProfileView: View {
                                     Text("Account")
                                         .buttonLarge()
                                         .foregroundStyle(.textPrimary)
-                                    Text("Address: \(RarimoUtils.formatAddress(userManager.userAddress))")
-                                        .body5()
-                                        .foregroundStyle(.textSecondary)
                                 }
                                 Spacer()
                                 PassportImageView(image: passportManager.passport?.passportImage, size: 40)

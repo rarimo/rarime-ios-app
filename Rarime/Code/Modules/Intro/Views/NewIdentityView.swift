@@ -198,7 +198,7 @@ struct NewIdentityView: View {
             do {
                 try userManager.createNewUser()
                 
-                LoggerUtil.common.info("New user created: \(userManager.userAddress, privacy: .public)")
+                LoggerUtil.common.info("New user created")
             } catch is CancellationError {
                 return
             } catch {

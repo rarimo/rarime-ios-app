@@ -91,10 +91,6 @@ class UserManager: ObservableObject {
         self.lightRegistrationData = lightRegistrationData
     }
     
-    var userAddress: String {
-        self.user?.profile.getRarimoAddress() ?? "undefined"
-    }
-    
     var userChallenge: Data {
         (try? self.user?.profile.getRegistrationChallenge()) ?? Data()
     }
@@ -556,23 +552,6 @@ class UserManager: ObservableObject {
         let balanceResponse = try await points.getPointsBalance(jwt, true, true)
         
         return balanceResponse.data.attributes
-    }
-    
-    func sendTokens(_ destination: String, _ amount: String) async throws -> CosmosTransferResponse {
-        guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
-        
-        let profileInitializer = IdentityProfile()
-        let profile = try profileInitializer.newProfile(secretKey)
-        
-        let response = try profile.walletSend(
-            destination,
-            amount: amount,
-            chainID: ConfigManager.shared.cosmos.chainId,
-            denom: ConfigManager.shared.cosmos.denom,
-            rpcIP: ConfigManager.shared.cosmos.rpcIp
-        )
-        
-        return try JSONDecoder().decode(CosmosTransferResponse.self, from: response)
     }
     
     func reserveTokens(_ jwt: JWT, _ passport: Passport) async throws {

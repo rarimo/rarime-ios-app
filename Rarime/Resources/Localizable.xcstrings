@@ -169,6 +169,7 @@
       }
     },
     "Address: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
