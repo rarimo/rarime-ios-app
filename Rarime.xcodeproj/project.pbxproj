@@ -42,7 +42,6 @@
 		564169602BE273260057AC03 /* PassportCardLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5641695F2BE273260057AC03 /* PassportCardLook.swift */; };
 		5641CC432C872F77007B7A0D /* ExternalRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5641CC422C872F77007B7A0D /* ExternalRequestsView.swift */; };
 		5641CC452C874E2B007B7A0D /* AppAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5641CC442C874E2B007B7A0D /* AppAlert.swift */; };
-		5641CC472C874E90007B7A0D /* AlertManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5641CC462C874E90007B7A0D /* AlertManagerView.swift */; };
 		56474AD62BB9860E0017AA25 /* FaceIdAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */; };
 		56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */; };
 		56474ADA2BB9ED6E0017AA25 /* AnyTransition+Backslide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */; };
@@ -472,7 +471,6 @@
 		5641695F2BE273260057AC03 /* PassportCardLook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportCardLook.swift; sourceTree = "<group>"; };
 		5641CC422C872F77007B7A0D /* ExternalRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalRequestsView.swift; sourceTree = "<group>"; };
 		5641CC442C874E2B007B7A0D /* AppAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAlert.swift; sourceTree = "<group>"; };
-		5641CC462C874E90007B7A0D /* AlertManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManagerView.swift; sourceTree = "<group>"; };
 		56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIdAuth.swift; sourceTree = "<group>"; };
 		56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
 		56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+Backslide.swift"; sourceTree = "<group>"; };
@@ -1738,7 +1736,6 @@
 			isa = PBXGroup;
 			children = (
 				CE9E82B72BA881F400AAF885 /* AppView.swift */,
-				5641CC462C874E90007B7A0D /* AlertManagerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2401,7 +2398,6 @@
 				5659151D2BE92AA90050795A /* AppIcon.swift in Sources */,
 				564CE3152DD62CFC00D03E6D /* PrizeScanClaimingView.swift in Sources */,
 				56062BA02C120B3400C9BF9B /* WaitlistPassportView.swift in Sources */,
-				5641CC472C874E90007B7A0D /* AlertManagerView.swift in Sources */,
 				5655E43C2BD522E800B86C5C /* AppLanguage.swift in Sources */,
 				56E7AD0A2BDAA4F000D3A258 /* AppRadioButton.swift in Sources */,
 			);
