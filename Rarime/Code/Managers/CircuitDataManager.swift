@@ -4,13 +4,10 @@ import Foundation
 import ZipArchive
 
 enum RegisteredCircuitData: String {
-    case registerIdentity_1_256_3_5_576_248_NA
     case registerIdentity_1_256_3_6_576_248_1_2432_5_296
     
     case registerIdentity_21_256_3_7_336_264_21_3072_6_2008
-    case registerIdentity_1_256_3_6_576_264_1_2448_3_256
     
-    case registerIdentity_2_256_3_6_576_248_1_2432_3_256
     case registerIdentity_11_256_3_3_576_248_1_1184_5_264
     case registerIdentity_12_256_3_3_336_232_NA
     
@@ -34,7 +31,6 @@ enum RegisteredCircuitData: String {
     case registerIdentity_3_160_3_4_576_216_1_1512_3_256
     
     case registerIdentity_11_256_3_3_576_240_1_864_5_264
-    case registerIdentity_21_256_3_4_576_232_NA
     case registerIdentity_11_256_3_5_576_248_1_1808_5_296
     
     case registerIdentity_11_256_3_3_336_248_NA
@@ -61,6 +57,36 @@ enum RegisteredNoirCircuitData: String {
     case registerIdentity_10_256_3_3_576_248_1_1184_5_264
     case registerIdentity_1_256_3_4_600_248_1_1496_3_256
     case registerIdentity_21_256_3_3_576_232_NA
+    
+    case registerIdentity_21_256_3_4_576_232_NA
+    
+    case registerIdentity_11_256_3_4_336_232_1_1480_4_256
+    case registerIdentity_2_256_3_6_576_248_1_2432_3_256
+    case registerIdentity_3_512_3_3_336_264_NA
+    
+    case registerIdentity_1_256_3_5_336_248_1_2120_4_256
+    case registerIdentity_2_256_3_4_336_232_1_1480_4_256
+    case registerIdentity_2_256_3_4_336_248_NA
+    
+    case registerIdentity_14_256_3_3_576_240_NA
+    case registerIdentity_14_256_3_4_576_248_1_1496_3_256
+    case registerIdentity_20_160_3_2_576_184_NA
+    
+    case registerIdentity_1_256_3_5_576_248_NA
+    case registerIdentity_1_256_3_6_576_264_1_2448_3_256
+    case registerIdentity_20_160_3_3_576_200_NA
+    
+    case registerIdentity_11_256_3_3_576_248_NA
+    case registerIdentity_23_160_3_3_576_200_NA
+    case registerIdentity_3_256_3_4_600_248_1_1496_3_256
+    
+    case registerIdentity_20_256_3_5_336_248_NA
+    case registerIdentity_24_256_3_4_336_248_NA
+    case registerIdentity_6_160_3_3_336_216_1_1080_3_256
+    
+    case registerIdentity_11_256_3_5_576_248_NA
+    case registerIdentity_14_256_3_4_336_232_1_1480_5_296
+    case registerIdentity_1_256_3_4_576_232_1_1480_3_256
 }
 
 class CircuitDataManager: ObservableObject {

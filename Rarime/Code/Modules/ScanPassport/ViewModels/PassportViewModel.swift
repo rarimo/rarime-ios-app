@@ -266,7 +266,7 @@ class PassportViewModel: ObservableObject {
                 throw error
             }
             
-            LoggerUtil.common.error("Trying light registration because of: \(error.localizedDescription, privacy: .public)")
+            LoggerUtil.common.error("Trying light registration because of: \(error, privacy: .public)")
             
             do {
                 return try await lightRegister()

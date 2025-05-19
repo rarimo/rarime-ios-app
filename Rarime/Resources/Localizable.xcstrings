@@ -791,9 +791,6 @@
     "Date of expiry (dd/mm/yy)" : {
 
     },
-    "Debug Options" : {
-
-    },
     "Delete Account" : {
 
     },
@@ -1091,12 +1088,6 @@
     "Finland" : {
 
     },
-    "Force light registration" : {
-
-    },
-    "Force registration" : {
-
-    },
     "France" : {
 
     },
@@ -1270,9 +1261,6 @@
 
     },
     "If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards" : {
-
-    },
-    "Import JSON" : {
 
     },
     "Impossible to revoke your account" : {
