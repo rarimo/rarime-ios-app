@@ -44,7 +44,6 @@ extension ConfigManager {
         let certificatesSmtContractAddress: String
         let registrationSmtContractAddress: String
         let stateKeeperContractAddress: String
-        let cosmosRpcURL: URL
         let pointsServiceURL: URL
         let authorizeURL: URL
         let referralURL: URL
@@ -68,7 +67,6 @@ extension ConfigManager {
                 self.certificatesSmtContractAddress = try readFromInfoPlist(key: "CERTIFICATES_SMT_CONTRACT_ADDRESS")
                 self.registrationSmtContractAddress = try readFromInfoPlist(key: "REGISTRATION_SMT_CONTRACT_ADDRESS")
                 self.stateKeeperContractAddress = try readFromInfoPlist(key: "STATE_KEEPER_CONTRACT_ADDRESS")
-                self.cosmosRpcURL = try readURLFromInfoPlist(key: "COSMOS_RPC_URL")
                 self.pointsServiceURL = try readURLFromInfoPlist(key: "POINTS_SERVICE_URL")
                 self.authorizeURL = try readURLFromInfoPlist(key: "AUTHORIZE_URL")
                 self.referralURL = try readURLFromInfoPlist(key: "REFERRAL_URL")

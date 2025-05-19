@@ -147,8 +147,6 @@
 		<key>registerIdentity_20_160_3_3_736_200_NA</key>
 		<string>${CIRCUIT_DATA_URL_38}</string>
 	</dict>
-	<key>COSMOS_RPC_URL</key>
-	<string>${COSMOS_RPC_URL}</string>
 	<key>DENOM</key>
 	<string>${DENOM}</string>
 	<key>EVM_RPC_URL</key>
