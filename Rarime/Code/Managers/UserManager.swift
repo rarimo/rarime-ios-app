@@ -91,10 +91,6 @@ class UserManager: ObservableObject {
         self.lightRegistrationData = lightRegistrationData
     }
     
-    var userAddress: String {
-        self.user?.profile.getRarimoAddress() ?? "undefined"
-    }
-    
     var userChallenge: Data {
         (try? self.user?.profile.getRegistrationChallenge()) ?? Data()
     }
@@ -542,93 +538,12 @@ class UserManager: ObservableObject {
         return ZkProof.groth(GrothZkProof(proof: proof, pubSignals: pubSignals))
     }
     
-    func airdrop(_ queryZkProof: ZkProof) async throws {
-        guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
-        
-        let profileInitializer = IdentityProfile()
-        let profile = try profileInitializer.newProfile(secretKey)
-        
-        let rarimoAddress = profile.getRarimoAddress()
-        
-        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let _ = try await relayer.airdrop(queryZkProof, to: rarimoAddress)
-    }
-    
-    func isAirdropClaimed() async throws -> Bool {
-        guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
-        
-        let profileInitializer = IdentityProfile()
-        let profile = try profileInitializer.newProfile(secretKey)
-        
-        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let airdropParams = try await relayer.getAirdropParams()
-        
-        var error: NSError? = nil
-        let airdropEventNullifier = profile.calculateEventNullifierInt(
-            airdropParams.data.attributes.eventID,
-            error: &error
-        )
-        if let error {
-            throw error
-        }
-        
-        do {
-            let _ = try await relayer.getAirdropInfo(airdropEventNullifier)
-        } catch {
-            guard let error = error as? AFError else { throw error }
-            
-            guard case .responseValidationFailed(let errorReason) = error else { throw error }
-            
-            guard case .customValidationFailed(let validationError) = errorReason else { throw error }
-            
-            guard let localError = validationError as? Errors else { throw error }
-            
-            guard case .openAPIErrors(let openApiErrors) = localError else { throw error }
-            
-            guard let openApiError = openApiErrors.first else { throw error }
-            
-            if openApiError.status == HTTPStatusCode.notFound.rawValue {
-                return false
-            }
-            
-            throw error
-        }
-        
-        return true
-    }
-    
-    func fetchBalanse() async throws -> String {
-        let address = self.userAddress
-        
-        let cosmos = Cosmos(ConfigManager.shared.api.cosmosRpcURL)
-        let spendableBalances = try await cosmos.getSpendableBalances(address)
-        
-        return spendableBalances.balances.first?.amount ?? "0"
-    }
-    
     func fetchPointsBalance(_ jwt: JWT) async throws -> PointsBalanceRaw {
         let points = Points(ConfigManager.shared.api.pointsServiceURL)
         
         let balanceResponse = try await points.getPointsBalance(jwt, true, true)
         
         return balanceResponse.data.attributes
-    }
-    
-    func sendTokens(_ destination: String, _ amount: String) async throws -> CosmosTransferResponse {
-        guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
-        
-        let profileInitializer = IdentityProfile()
-        let profile = try profileInitializer.newProfile(secretKey)
-        
-        let response = try profile.walletSend(
-            destination,
-            amount: amount,
-            chainID: ConfigManager.shared.cosmos.chainId,
-            denom: ConfigManager.shared.cosmos.denom,
-            rpcIP: ConfigManager.shared.cosmos.rpcIp
-        )
-        
-        return try JSONDecoder().decode(CosmosTransferResponse.self, from: response)
     }
     
     func reserveTokens(_ jwt: JWT, _ passport: Passport) async throws {

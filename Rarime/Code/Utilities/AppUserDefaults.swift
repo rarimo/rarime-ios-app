@@ -29,12 +29,6 @@ public class AppUserDefaults: ObservableObject {
     @AppStorage("language")
     public var language = AppLanguage.english.rawValue
 
-    @AppStorage("wallet_transactions")
-    public var walletTransactions = Data()
-
-    @AppStorage("is_airdrop_claimed")
-    public var isAirdropClaimed = false
-
     @AppStorage("is_first_launch")
     public var isFirstLaunch = true
 

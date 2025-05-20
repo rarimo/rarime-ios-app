@@ -218,6 +218,7 @@
       }
     },
     "Address: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -237,6 +238,7 @@
 
     },
     "Airdrop" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -569,6 +571,7 @@
 
     },
     "By checking this box, you are agreeing to " : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -579,9 +582,6 @@
       }
     },
     "By checking this box, you are agreeing to share the data groups of the passport and the government signature" : {
-
-    },
-    "By continue, you are agreeing to " : {
 
     },
     "Cabo Verde" : {
@@ -862,6 +862,9 @@
 
     },
     "Date of expiry (dd/mm/yy)" : {
+
+    },
+    "Debug Options" : {
 
     },
     "Delete Account" : {
@@ -1369,6 +1372,9 @@
     "If you would like to enroll your country in the early phase, we will need your consent to share some data. Enrolling your country’s passports will entitle you to additional rewards" : {
 
     },
+    "Import JSON" : {
+
+    },
     "Impossible to revoke your account" : {
 
     },
@@ -1826,6 +1832,7 @@
 
     },
     "No transactions yet" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2318,13 +2325,7 @@
     "Reserve" : {
 
     },
-    "Reserve %@ RMO tokens" : {
-
-    },
     "Reserved" : {
-
-    },
-    "Reserving..." : {
 
     },
     "Restore manually" : {
@@ -2736,9 +2737,6 @@
         }
       }
     },
-    "The passport is in the allowlist" : {
-
-    },
     "The rewards program will allow you to receive weekly airdrops.\n\nYou can earn additional rewards by using RariMe’s incognito proofs with other ecosystem apps." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2814,6 +2812,9 @@
 
     },
     "Try again later" : {
+
+    },
+    "Try using your previous private key" : {
 
     },
     "Tunisia" : {
@@ -3083,9 +3084,6 @@
 
     },
     "You entered wrong passcode.\nLoading time: %@" : {
-
-    },
-    "You have already reserved tokens" : {
 
     },
     "You've found the hidden keys" : {

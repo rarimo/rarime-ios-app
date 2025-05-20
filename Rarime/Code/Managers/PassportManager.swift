@@ -19,10 +19,6 @@ class PassportManager: ObservableObject {
         passportIdentifiers = rawIdentifiers.map { PassportIdentifier(rawValue: $0)! }
     }
 
-    var isEligibleForAirdrop: Bool {
-        passport?.nationality == "UKR"
-    }
-
     var passportCountry: Country {
         .fromISOCode(passport?.nationality ?? "")
     }

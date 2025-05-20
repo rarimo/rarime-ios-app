@@ -12,15 +12,15 @@ struct MainViewLayout<Content: View>: View {
                 selectedTab: $mainViewModel.selectedTab,
                 isQrCodeScanSheetShown: $mainViewModel.isQrCodeScanSheetShown
             )
-                // TODO: move to extenstion with blur
-                .background {
-                    ZStack {
-                        Color.bgBlur
-                        TransparentBlurView(removeAllFilters: false)
-                            .allowsHitTesting(false)
-                    }
-                    .ignoresSafeArea(.container, edges: .bottom)
+            // TODO: move to extenstion with blur
+            .background {
+                ZStack {
+                    Color.bgBlur
+                    TransparentBlurView(removeAllFilters: false)
+                        .allowsHitTesting(false)
                 }
+                .ignoresSafeArea(.container, edges: .bottom)
+            }
         }
     }
 }
@@ -29,7 +29,6 @@ struct MainViewLayout<Content: View>: View {
     HomeView()
         .environmentObject(MainView.ViewModel())
         .environmentObject(PassportManager())
-        .environmentObject(WalletManager())
         .environmentObject(UserManager())
         .environmentObject(ConfigManager())
         .environmentObject(NotificationManager())
