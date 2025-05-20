@@ -1829,7 +1829,6 @@
 
     },
     "No transactions yet" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {

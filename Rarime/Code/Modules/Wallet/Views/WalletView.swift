@@ -128,6 +128,14 @@ struct WalletView: View {
                 Text("Transactions")
                     .subtitle5()
                     .foregroundStyle(.textPrimary)
+                ForEach(walletManager.transactions) { tx in
+                    TransactionItem(tx: tx, token: token)
+                }
+                if walletManager.transactions.isEmpty {
+                    Text("No transactions yet")
+                        .body4()
+                        .foregroundStyle(.textSecondary)
+                }
             }
         }
         .padding(.horizontal, 12)
