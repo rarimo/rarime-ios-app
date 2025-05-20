@@ -6,6 +6,7 @@ CLAIMABLE_NOTIFICATION_TOPIC = "rarime-rewardable"
 // MARK: Intro
 PRIVACY_POLICY_URL = "https:${SLASH}/rarime.com/privacy-notice.html"
 TERMS_OF_USE_URL = "https:${SLASH}/rarime.com/general-terms.html"
+AIRDROP_TERMS_URL = "https:${SLASH}/rarime.com/airdrop-terms.html"
 
 // MARK: API
 RELAYER_URL = "https:${SLASH}/api.app.rarime.com"

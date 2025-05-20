@@ -273,5 +273,7 @@
 	</dict>
 	<key>VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS</key>
 	<string>${VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS}</string>
+	<key>AIRDROP_TERMS_URL</key>
+	<string>${AIRDROP_TERMS_URL}</string>
 </dict>
 </plist>

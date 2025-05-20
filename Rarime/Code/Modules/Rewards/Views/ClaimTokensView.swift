@@ -22,6 +22,10 @@ struct ClaimTokensView: View {
         configManager.general.privacyPolicyURL.absoluteString
     }
     
+    private var airdropTermsURL: String {
+        configManager.general.airdropTerms.absoluteString
+    }
+    
     private var claimButtonText: LocalizedStringResource {
         if isTokensClaiming {
             return "Claiming..."
@@ -79,10 +83,11 @@ struct ClaimTokensView: View {
 //                    .controlSize(.large)
 //                    .disabled(rewardsViewModel.isTokensClaimed || isTokensClaiming)
                     (
-                        Text("By continue, you are agreeing to ") +
-                            Text(.init("[\(String(localized: "RariMe General Terms & Conditions"))](\(termsURL))")).underline() +
+                        Text(.init("[\(String(localized: "RariMe General Terms & Conditions"))](\(termsURL))")).underline() +
                             Text(", ") +
-                            Text(.init("[\(String(localized: "RariMe Privacy Notice"))](\(privacyURL))")).underline()
+                            Text(.init("[\(String(localized: "RariMe Privacy Notice"))](\(privacyURL))")).underline() +
+                            Text(" and ") +
+                            Text(.init("[\(String(localized: "Rarimo Airdrop Program Terms & Conditions"))](\(airdropTermsURL))")).underline()
                     )
                     .body5()
                     .tint(.baseBlack.opacity(0.5))
