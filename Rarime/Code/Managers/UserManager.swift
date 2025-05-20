@@ -657,4 +657,14 @@ class UserManager: ObservableObject {
             return RegisterIdentityPubSignals(data).getSignalRaw(.identityKey)
         }
     }
+    
+    var ethereumAddress: String? {
+        guard let user else { return nil }
+            
+        guard let ethereumPrivateKey = try? EthereumPrivateKey(privateKey: user.secretKey.bytes) else {
+            return nil
+        }
+            
+        return ethereumPrivateKey.address.hex(eip55: false)
+    }
 }

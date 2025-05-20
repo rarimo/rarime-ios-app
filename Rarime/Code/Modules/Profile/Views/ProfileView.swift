@@ -67,6 +67,9 @@ struct ProfileView: View {
                                     Text("Account")
                                         .buttonLarge()
                                         .foregroundStyle(.textPrimary)
+                                    Text("\(userManager.ethereumAddress ?? "")")
+                                        .body4()
+                                        .foregroundStyle(.textSecondary)
                                 }
                                 Spacer()
                                 PassportImageView(image: passportManager.passport?.passportImage, size: 40)
