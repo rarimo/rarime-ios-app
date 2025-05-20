@@ -62,8 +62,4 @@ class Ethereum {
         let pattern = "^0x[a-fA-F0-9]{40}$"
         return address.range(of: pattern, options: .regularExpression) != nil
     }
-    
-    static func formatAddress(_ address: String) -> String {
-        
-    }
 }
