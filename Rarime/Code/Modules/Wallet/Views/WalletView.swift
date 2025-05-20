@@ -39,7 +39,7 @@ struct WalletView: View {
                 switch route {
                 case .receive:
                     WalletReceiveView(
-                        address: userManager.userAddress,
+                        address: userManager.ethereumAddress ?? "",
                         token: token,
                         onBack: { path.removeLast() }
                     )
@@ -138,20 +138,8 @@ struct WalletView: View {
         isBalanceFetching = true
 
         let cancelable = Task { @MainActor in
-
             defer {
                 self.isBalanceFetching = false
-            }
-
-            do {
-                let balance = try await userManager.fetchBalanse()
-                self.userManager.balance = Double(balance) ?? 0
-
-                self.selectedAsset.balance = self.userManager.balance / Double(Rarimo.rarimoTokenMantis)
-            } catch is CancellationError {
-                return
-            } catch {
-                LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
             }
         }
 
