@@ -65,7 +65,7 @@ struct WalletView: View {
 //                    AssetsSlider(walletAssets: [selectedAsset], isLoading: isBalanceFetching)
 //                    HorizontalDivider()
 //                        .padding(.horizontal, 20)
-//                    transactionsList
+                    transactionsList
                 }
                 .padding(.bottom, 120)
             }
@@ -89,9 +89,9 @@ struct WalletView: View {
                     if isBalanceFetching {
                         ProgressView()
                     } else {
-//                        Text(walletManager.balance)
-//                            .h4()
-//                            .foregroundStyle(.textPrimary)
+                        Text(walletManager.dispayableBalance)
+                            .h4()
+                            .foregroundStyle(.textPrimary)
                     }
                     Text(WalletToken.eth.rawValue)
                         .overline2()
