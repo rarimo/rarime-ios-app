@@ -3,6 +3,11 @@ import Foundation
 import Identity
 import SwiftUI
 
+struct PrizeScanCelebrity {
+    let id, title, description, image, hint: String
+    let status: GuessCelebrityStatus
+}
+
 struct PrizeScanUser {
     let id, referralCode: String
     let referralsCount, referralsLimit: Int
@@ -11,7 +16,7 @@ struct PrizeScanUser {
     let attemptsLeft, extraAttemptsLeft, totalAttemptsCount: Int
     let resetTime: TimeInterval
 
-    let celebrity: PrizeScanCelebrity?
+    let celebrity: PrizeScanCelebrity
 }
 
 extension PrizeScanUser {
@@ -30,19 +35,15 @@ extension PrizeScanUser {
                 id: "",
                 title: "",
                 description: "",
-                status: "",
                 image: "",
-                hint: ""
+                hint: "",
+                status: .maintenance
             )
         )
     }
 }
 
 private let PRIZE_SCAN_REFERRAL_CODE_LENGTH = 10
-
-struct PrizeScanCelebrity {
-    let id, title, description, status, image, hint: String
-}
 
 class PrizeScanViewModel: ObservableObject {
     @Published var user: PrizeScanUser? = nil
@@ -102,9 +103,9 @@ class PrizeScanViewModel: ObservableObject {
                 id: celebrity?.id ?? "",
                 title: celebrity?.attributes.title ?? "",
                 description: celebrity?.attributes.description ?? "",
-                status: celebrity?.attributes.status ?? "",
                 image: celebrity?.attributes.image ?? "",
-                hint: celebrity?.attributes.hint ?? ""
+                hint: celebrity?.attributes.hint ?? "",
+                status: celebrity?.attributes.status ?? .maintenance
             )
         )
     }

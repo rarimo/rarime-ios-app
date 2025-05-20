@@ -75,7 +75,7 @@ struct HomeView: View {
                 )
             },
             HomeCarouselCard(
-                isVisible: prizeScanViewModel.user != nil,
+                isVisible: prizeScanViewModel.user != nil && prizeScanViewModel.user?.celebrity.status != .maintenance,
                 action: { path = .prizeScan }
             ) {
                 HomeCardView(
@@ -93,18 +93,7 @@ struct HomeView: View {
                     title: "Hidden keys",
                     subtitle: "Find a face",
                     topContent: {
-                        HStack(spacing: 8) {
-                            Text("Prize-pool:")
-                                .subtitle6()
-                            Text(verbatim: String(PRIZE_SCAN_ETH_REWARD))
-                                .h6()
-                            Image(.ethereum)
-                                .iconSmall()
-                        }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 6)
-                        .background(.bgComponentPrimary, in: Capsule())
-                        .padding(.bottom, 12)
+                        PrizeScanStatusChip(status: prizeScanViewModel.user?.celebrity.status ?? .maintenance)
                     },
                     animation: prizeScanAnimation
                 )
