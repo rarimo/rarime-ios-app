@@ -2,7 +2,6 @@ import Combine
 import SwiftUI
 
 struct WalletSendView: View {
-    @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
     
     let token: WalletToken
@@ -216,14 +215,6 @@ struct WalletSendView: View {
             }
             
             do {
-                try await Task.sleep(nanoseconds: NSEC_PER_SEC * 3)
-                // TODO: calculate according to the token type
-                let amountToSendRaw = Int(amountToSend.rounded())
-                let _ = try await userManager.sendTokens(address, amountToSendRaw.description)
-                
-                walletManager.transfer(Double(amount) ?? 0)
-                try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
-                
                 onBack()
             } catch is CancellationError {
                 return
@@ -269,6 +260,5 @@ private struct ConfirmationTextRow: View {
 
 #Preview {
     WalletSendView(token: WalletToken.rmo, onBack: {})
-        .environmentObject(WalletManager())
         .environmentObject(UserManager())
 }

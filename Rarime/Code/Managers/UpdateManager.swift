@@ -32,30 +32,26 @@ class UpdateManager: ObservableObject {
         return firstResult.version.compare(currentVersion, options: .numeric) == .orderedDescending
     }
     
+    @MainActor
     func checkMaintenanceMode() async {
         do {
             let points = Points(ConfigManager.shared.api.pointsServiceURL)
             let maintenanceResponse = try await points.getMaintenanceMode()
             
-            DispatchQueue.main.async {
-                self.isMaintenance = maintenanceResponse.data.attributes.maintenance
-            }
+            self.isMaintenance = maintenanceResponse.data.attributes.maintenance
         } catch {
             LoggerUtil.common.error("Failed to check for maintenance: \(error, privacy: .public)")
         }
     }
     
+    @MainActor
     func checkForUpdate() async {
         do {
             let isDeprecated = try await isUpdateAvailable()
             
-            DispatchQueue.main.async {
-                self.isDeprecated = isDeprecated
-            }
+            self.isDeprecated = isDeprecated
         } catch {
-            DispatchQueue.main.async {
-                self.isDeprecated = false
-            }
+            self.isDeprecated = false
             
             LoggerUtil.common.error("Failed to check for update: \(error, privacy: .public)")
         }

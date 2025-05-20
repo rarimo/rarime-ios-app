@@ -17,7 +17,6 @@ struct WalletAsset {
 }
 
 struct WalletView: View {
-    @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
 
     @State private var path: [WalletRoute] = []
@@ -40,7 +39,7 @@ struct WalletView: View {
                 switch route {
                 case .receive:
                     WalletReceiveView(
-                        address: userManager.userAddress,
+                        address: userManager.ethereumAddress ?? "",
                         token: token,
                         onBack: { path.removeLast() }
                     )
@@ -130,14 +129,6 @@ struct WalletView: View {
                 Text("Transactions")
                     .subtitle5()
                     .foregroundStyle(.textPrimary)
-                ForEach(walletManager.transactions) { tx in
-                    TransactionItem(tx: tx, token: token)
-                }
-                if walletManager.transactions.isEmpty {
-                    Text("No transactions yet")
-                        .body4()
-                        .foregroundStyle(.textSecondary)
-                }
             }
         }
         .padding(.horizontal, 12)
@@ -147,20 +138,8 @@ struct WalletView: View {
         isBalanceFetching = true
 
         let cancelable = Task { @MainActor in
-
             defer {
                 self.isBalanceFetching = false
-            }
-
-            do {
-                let balance = try await userManager.fetchBalanse()
-                self.userManager.balance = Double(balance) ?? 0
-
-                self.selectedAsset.balance = self.userManager.balance / Double(Rarimo.rarimoTokenMantis)
-            } catch is CancellationError {
-                return
-            } catch {
-                LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
             }
         }
 
@@ -230,6 +209,5 @@ private struct TransactionItem: View {
 #Preview {
     WalletView()
         .environmentObject(MainView.ViewModel())
-        .environmentObject(WalletManager())
         .environmentObject(UserManager())
 }
