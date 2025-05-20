@@ -19,8 +19,6 @@ class UserManager: ObservableObject {
     
     @Published var masterCertProof: SMTProof?
     
-    @Published var balance: Double
-    
     @Published var isRevoked: Bool
     
     private var recentZKProofResult: Result<ZkProof, Error>?
@@ -42,7 +40,6 @@ class UserManager: ObservableObject {
             }
             
             self.user = try User.load()
-            self.balance = 0
             self.isRevoked = AppUserDefaults.shared.isUserRevoked
             
             if let registerZkProofJson = try AppKeychain.getValue(.registerZkProof) {
@@ -589,7 +586,6 @@ class UserManager: ObservableObject {
             try AppKeychain.removeValue(.lightRegistrationData)
             
             self.user = nil
-            self.balance = 0
             self.registerZkProof = nil
         } catch {
             fatalError("\(error.localizedDescription)")

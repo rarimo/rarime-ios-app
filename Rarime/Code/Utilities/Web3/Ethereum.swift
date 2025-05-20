@@ -1,11 +1,11 @@
 import Foundation
 
 import Web3
-import Web3PromiseKit
 import Web3ContractABI
+import Web3PromiseKit
 
 class Ethereum {
-    static let ZERO_BYTES32: Data = Data(repeating: 0, count: 32)
+    static let ZERO_BYTES32: Data = .init(repeating: 0, count: 32)
     
     static let TX_PULL_INTERVAL: UInt64 = NSEC_PER_SEC * 3
     
@@ -56,5 +56,14 @@ class Ethereum {
             
             try await Task.sleep(nanoseconds: Ethereum.TX_PULL_INTERVAL)
         }
+    }
+    
+    static func isValidAddress(_ address: String) -> Bool {
+        let pattern = "^0x[a-fA-F0-9]{40}$"
+        return address.range(of: pattern, options: .regularExpression) != nil
+    }
+    
+    static func formatAddress(_ address: String) -> String {
+        
     }
 }

@@ -62,6 +62,7 @@ struct WalletView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     header
+                    // TODO: add full support for assets
 //                    AssetsSlider(walletAssets: [selectedAsset], isLoading: isBalanceFetching)
 //                    HorizontalDivider()
 //                        .padding(.horizontal, 20)
