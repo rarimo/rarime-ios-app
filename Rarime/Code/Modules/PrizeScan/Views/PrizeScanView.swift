@@ -123,7 +123,7 @@ struct PrizeScanView: View {
         }
         .padding([.top, .horizontal], 20)
         .padding(.bottom, 8)
-        .background(.invertedLight, in: RoundedRectangle(cornerRadius: 16))
+        .background(.bgBlur, in: RoundedRectangle(cornerRadius: 16))
     }
 
     private var scanTip: some View {
@@ -321,7 +321,7 @@ struct PrizeScanView: View {
         .padding(16)
         .background(
             RoundedRectangle(cornerRadius: 16)
-                .fill(.invertedLight)
+                .fill(.bgBlur)
                 .shadow(color: .purpleMain.opacity(0.2), radius: 6, x: 0, y: 4)
         )
         .overlay(

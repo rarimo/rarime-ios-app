@@ -56,8 +56,6 @@
 		564CE30F2DD6228800D03E6D /* PrizeScanScanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE30E2DD6228800D03E6D /* PrizeScanScanningView.swift */; };
 		564CE3112DD62CC500D03E6D /* PrizeScanSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE3102DD62CC500D03E6D /* PrizeScanSuccessView.swift */; };
 		564CE3132DD62CD300D03E6D /* PrizeScanFailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE3122DD62CD300D03E6D /* PrizeScanFailedView.swift */; };
-		564CE3152DD62CFC00D03E6D /* PrizeScanClaimingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE3142DD62CFC00D03E6D /* PrizeScanClaimingView.swift */; };
-		564CE3172DD62D0300D03E6D /* PrizeScanFinishedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE3162DD62D0300D03E6D /* PrizeScanFinishedView.swift */; };
 		564CE3192DD7387A00D03E6D /* DotsLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE3182DD7387A00D03E6D /* DotsLoadingView.swift */; };
 		5651D07A2CB94C4400C6A704 /* AppsFlyerLib-Static in Frameworks */ = {isa = PBXBuildFile; productRef = 5651D0792CB94C4400C6A704 /* AppsFlyerLib-Static */; };
 		5655E41F2BD2C39B00B86C5C /* WalletManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E41E2BD2C39B00B86C5C /* WalletManager.swift */; };
@@ -481,8 +479,6 @@
 		564CE30E2DD6228800D03E6D /* PrizeScanScanningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeScanScanningView.swift; sourceTree = "<group>"; };
 		564CE3102DD62CC500D03E6D /* PrizeScanSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeScanSuccessView.swift; sourceTree = "<group>"; };
 		564CE3122DD62CD300D03E6D /* PrizeScanFailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeScanFailedView.swift; sourceTree = "<group>"; };
-		564CE3142DD62CFC00D03E6D /* PrizeScanClaimingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeScanClaimingView.swift; sourceTree = "<group>"; };
-		564CE3162DD62D0300D03E6D /* PrizeScanFinishedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeScanFinishedView.swift; sourceTree = "<group>"; };
 		564CE3182DD7387A00D03E6D /* DotsLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsLoadingView.swift; sourceTree = "<group>"; };
 		5655E41E2BD2C39B00B86C5C /* WalletManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletManager.swift; sourceTree = "<group>"; };
 		5655E4222BD2C3AC00B86C5C /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
@@ -1057,8 +1053,6 @@
 				564CE30E2DD6228800D03E6D /* PrizeScanScanningView.swift */,
 				564CE3122DD62CD300D03E6D /* PrizeScanFailedView.swift */,
 				564CE3102DD62CC500D03E6D /* PrizeScanSuccessView.swift */,
-				564CE3142DD62CFC00D03E6D /* PrizeScanClaimingView.swift */,
-				564CE3162DD62D0300D03E6D /* PrizeScanFinishedView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2288,7 +2282,6 @@
 				CE72101E2BD7BD9D0043DB7F /* Data+Utf8.swift in Sources */,
 				CE5315CA2C7769A20087D53D /* NotificationManager.swift in Sources */,
 				C7780C9A2D63573B0050B5BB /* Rewards.swift in Sources */,
-				564CE3172DD62D0300D03E6D /* PrizeScanFinishedView.swift in Sources */,
 				CE3CD7902DB67E9700112E46 /* FaceLikenessView.swift in Sources */,
 				5655E4232BD2C3AC00B86C5C /* SettingsManager.swift in Sources */,
 				CEDC4D812BE9475400459D4E /* Certificates.swift in Sources */,
@@ -2376,7 +2369,6 @@
 				563529E72BB072870027C910 /* WalletView.swift in Sources */,
 				C7D624512D6DB351007BA5A6 /* PollsMockedData.swift in Sources */,
 				5659151D2BE92AA90050795A /* AppIcon.swift in Sources */,
-				564CE3152DD62CFC00D03E6D /* PrizeScanClaimingView.swift in Sources */,
 				56062BA02C120B3400C9BF9B /* WaitlistPassportView.swift in Sources */,
 				5655E43C2BD522E800B86C5C /* AppLanguage.swift in Sources */,
 				56E7AD0A2BDAA4F000D3A258 /* AppRadioButton.swift in Sources */,

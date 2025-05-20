@@ -1,7 +1,7 @@
 import SwiftUI
 
 private enum ScanState {
-    case scanning, failed, success, claiming, finished
+    case scanning, failed, success
 }
 
 struct PrizeScanCameraView: View {
@@ -16,7 +16,9 @@ struct PrizeScanCameraView: View {
         ZStack {
             blurredFace
             mainContent
-            closeButton
+            if scanState != .success {
+                closeButton
+            }
         }
         .background(.baseBlack)
     }
@@ -36,19 +38,11 @@ struct PrizeScanCameraView: View {
                     })
                     .environmentObject(prizeScanViewModel)
                 case .success:
-                    PrizeScanSuccessView(onClaim: {
-                        scanState = .claiming
-                    })
-                case .claiming:
-                    PrizeScanClaimingView(
-                        onFinish: { scanState = .finished },
-                        onError: { scanState = .success }
-                    )
-                case .finished:
-                    PrizeScanFinishedView(onViewWallet: {
+                    PrizeScanSuccessView(onViewWallet: {
                         cleanup()
                         onClose()
                     })
+                    .environmentObject(prizeScanViewModel)
             }
         }
     }
@@ -91,5 +85,6 @@ struct PrizeScanCameraView: View {
     ZStack {}
         .sheet(isPresented: .constant(true)) {
             PrizeScanCameraView(onClose: {})
+                .environmentObject(PrizeScanViewModel())
         }
 }
