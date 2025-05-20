@@ -37,14 +37,14 @@ struct WalletSendView: View {
     var body: some View {
         ZStack {
             if isScanning {
-                ScanQRView(onBack: { toggleScan() }) { result in
+                ScanQRView(onBack: { toggleScan() }) { _ in
                     toggleScan()
                     // TODO: validate according to the token type
-                    if RarimoUtils.isValidAddress(result) {
-                        address = result
-                    } else {
-                        addressErrorMessage = String(localized: "Invalid address")
-                    }
+//                    if RarimoUtils.isValidAddress(result) {
+//                        address = result
+//                    } else {
+//                        addressErrorMessage = String(localized: "Invalid address")
+//                    }
                 }
                 .transition(.move(edge: .bottom))
             } else {
@@ -104,9 +104,9 @@ struct WalletSendView: View {
                                     .foregroundStyle(.textSecondary)
                                 Spacer()
                                 // TODO: use balance according to the token type
-                                Text(verbatim: "\(RarimoUtils.formatBalance(userManager.balance)) \(token.rawValue)")
-                                    .body5()
-                                    .foregroundStyle(.textPrimary)
+//                                Text(verbatim: "\(RarimoUtils.formatBalance(userManager.balance)) \(token.rawValue)")
+//                                    .body5()
+//                                    .foregroundStyle(.textPrimary)
                             }
                         }
                         .disabled(isTransfering)
@@ -126,7 +126,7 @@ struct WalletSendView: View {
                 Text("Receiver gets")
                     .body5()
                     .foregroundStyle(.textSecondary)
-                Text(verbatim: "\(RarimoUtils.formatBalance(amountToSend)) \(token.rawValue)")
+//                Text(verbatim: "\(RarimoUtils.formatBalance(amountToSend)) \(token.rawValue)")
                     .subtitle5()
                     .foregroundStyle(.textPrimary)
             }
@@ -156,14 +156,14 @@ struct WalletSendView: View {
     var confirmationView: some View {
         VStack(spacing: 24) {
             VStack(spacing: 16) {
-                ConfirmationTextRow(
-                    title: String(localized: "Address"),
-                    value: RarimoUtils.formatAddress(address)
-                )
-                ConfirmationTextRow(
-                    title: String(localized: "Amount"),
-                    value: "\(RarimoUtils.formatBalance(amountToSend)) \(token.rawValue)"
-                )
+//                ConfirmationTextRow(
+//                    title: String(localized: "Address"),
+//                    value: RarimoUtils.formatAddress(address)
+//                )
+//                ConfirmationTextRow(
+//                    title: String(localized: "Amount"),
+//                    value: "\(RarimoUtils.formatBalance(amountToSend)) \(token.rawValue)"
+//                )
                 ConfirmationTextRow(
                     title: String(localized: "Fee"),
                     value: "\(fee.formatted()) \(token.rawValue)"
@@ -190,9 +190,9 @@ struct WalletSendView: View {
     
     func validateForm() -> Bool {
         // TODO: validate according to the token type
-        if !RarimoUtils.isValidAddress(address) {
-            addressErrorMessage = String(localized: "Invalid address")
-        }
+//        if !RarimoUtils.isValidAddress(address) {
+//            addressErrorMessage = String(localized: "Invalid address")
+//        }
         
         // TODO: calculate according to the token type
         if userManager.balance < amountToSend {
@@ -259,6 +259,6 @@ private struct ConfirmationTextRow: View {
 }
 
 #Preview {
-    WalletSendView(token: WalletToken.rmo, onBack: {})
+    WalletSendView(token: WalletToken.eth, onBack: {})
         .environmentObject(UserManager())
 }
