@@ -37,8 +37,12 @@ struct WalletSendView: View {
             if isScanning {
                 ScanQRView(onBack: { toggleScan() }) { result in
                     toggleScan()
-                    if Ethereum.isValidAddress(result) {
-                        address = result
+                    
+                    var addressToPaste = result
+                    addressToPaste = addressToPaste.replacingOccurrences(of: "ethereum:", with: "")
+                    
+                    if Ethereum.isValidAddress(addressToPaste) {
+                        address = addressToPaste
                     } else {
                         addressErrorMessage = String(localized: "Invalid address")
                     }
@@ -158,7 +162,7 @@ struct WalletSendView: View {
                 )
                 ConfirmationTextRow(
                     title: String(localized: "Amount"),
-                    value: walletManager.dispayableBalance
+                    value: amount
                 )
                 ConfirmationTextRow(
                     title: String(localized: "Fee"),
@@ -236,6 +240,8 @@ struct WalletSendView: View {
                 return
             } catch {
                 LoggerUtil.common.error("failed to send tokens: \(error.localizedDescription, privacy: .public)")
+                
+                AlertManager.shared.emitError(.unknown("Failed to send tokens"))
             }
         }
         
