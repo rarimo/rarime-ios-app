@@ -66,12 +66,27 @@ class Ethereum {
 
 extension EthereumQuantity {
     var double: Double {
-        let ethValue = self.quantity.eth.description
-
-        let gweiValue = self.quantity.gwei.description
+        let ethValue = self.quantity / BigUInt(10).power(18)
         
-        let value = ethValue + "." + gweiValue.prefix(2)
+        var gweiValue: BigUInt
+        if ethValue > 0 {
+            gweiValue = self.quantity % BigUInt(10).power(9)
+        } else {
+            gweiValue = self.quantity / BigUInt(10).power(9)
+        }
+        
+        let value = ethValue.description + "." + gweiValue.description.prefix(2)
 
         return Double(value) ?? 0
+    }
+    
+    init(_ value: Double) {
+        let ethValue = BigUInt(Int(value)) * BigUInt(10).power(18)
+        
+        let gweiValue = BigUInt(Int(value * 1_000_000_000)) % BigUInt(10).power(9)
+        
+        let quantity = ethValue + gweiValue
+        
+        self.init(quantity: quantity)
     }
 }
