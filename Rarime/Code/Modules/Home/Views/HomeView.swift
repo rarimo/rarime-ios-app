@@ -324,8 +324,12 @@ struct HomeView: View {
                         )
                     case .prizeScan:
                         PrizeScanView(
+                            animation: prizeScanAnimation,
                             onClose: { path = nil },
-                            animation: prizeScanAnimation
+                            onViewWallet: {
+                                cleanup()
+                                mainViewModel.selectedTab = .wallet
+                            }
                         )
                         .environmentObject(prizeScanViewModel)
                     default:

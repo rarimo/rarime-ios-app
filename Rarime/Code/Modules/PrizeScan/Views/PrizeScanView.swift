@@ -5,8 +5,9 @@ struct PrizeScanView: View {
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var viewModel: PrizeScanViewModel
 
-    let onClose: () -> Void
     var animation: Namespace.ID
+    let onClose: () -> Void
+    let onViewWallet: () -> Void
 
     @State private var isScanSheetPresented = false
     @State private var isBonusScanSheetPresented = false
@@ -71,8 +72,14 @@ struct PrizeScanView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .sheet(isPresented: $isScanSheetPresented) {
-            PrizeScanCameraView(onClose: { isScanSheetPresented = false })
-                .interactiveDismissDisabled()
+            PrizeScanCameraView(
+                onClose: { isScanSheetPresented = false },
+                onViewWallet: {
+                    isScanSheetPresented = false
+                    onViewWallet()
+                }
+            )
+            .interactiveDismissDisabled()
         }
     }
 
@@ -352,7 +359,7 @@ struct PrizeScanView: View {
 }
 
 #Preview {
-    PrizeScanView(onClose: {}, animation: Namespace().wrappedValue)
+    PrizeScanView(animation: Namespace().wrappedValue, onClose: {}, onViewWallet: {})
         .environmentObject(UserManager())
         .environmentObject(DecentralizedAuthManager())
         .environmentObject(PrizeScanViewModel())

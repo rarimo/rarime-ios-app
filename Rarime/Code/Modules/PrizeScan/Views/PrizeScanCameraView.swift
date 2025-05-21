@@ -8,6 +8,7 @@ struct PrizeScanCameraView: View {
     @EnvironmentObject private var prizeScanViewModel: PrizeScanViewModel
 
     let onClose: () -> Void
+    let onViewWallet: () -> Void
 
     @StateObject var viewModel = PrizeScanCameraViewModel()
     @State private var scanState: ScanState = .scanning
@@ -40,7 +41,7 @@ struct PrizeScanCameraView: View {
                 case .success:
                     PrizeScanSuccessView(onViewWallet: {
                         cleanup()
-                        onClose()
+                        onViewWallet()
                     })
                     .environmentObject(prizeScanViewModel)
             }
@@ -84,7 +85,7 @@ struct PrizeScanCameraView: View {
 #Preview {
     ZStack {}
         .sheet(isPresented: .constant(true)) {
-            PrizeScanCameraView(onClose: {})
+            PrizeScanCameraView(onClose: {}, onViewWallet: {})
                 .environmentObject(PrizeScanViewModel())
         }
 }
