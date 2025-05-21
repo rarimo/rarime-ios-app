@@ -90,9 +90,11 @@ struct WalletView: View {
                     if isBalanceFetching {
                         ProgressView()
                     } else {
-                        Text(walletManager.dispayableBalance)
-                            .h4()
-                            .foregroundStyle(.textPrimary)
+                        Button(action: fetchBalance) {
+                            Text(walletManager.dispayableBalance)
+                                .h4()
+                                .foregroundStyle(.textPrimary)
+                        }
                     }
                     Text(WalletToken.eth.rawValue)
                         .overline2()

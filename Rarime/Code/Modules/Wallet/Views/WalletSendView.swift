@@ -20,7 +20,7 @@ struct WalletSendView: View {
     @State private var isTransfering = false
     @State private var isConfirmationSheetPresented = false
     
-    @State private var isFeeCalculating = true
+    @State private var isFeeCalculating = false
     
     @State private var fee: EthereumQuantity?
     
@@ -241,6 +241,10 @@ struct WalletSendView: View {
     }
     
     func calculateFee() {
+        if isFeeCalculating {
+            return
+        }
+        
         isFeeCalculating = true
         
         let cancelable = Task { @MainActor in

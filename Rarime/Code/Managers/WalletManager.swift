@@ -51,6 +51,10 @@ class WalletManager: ObservableObject {
         let ethPrivateKey = try EthereumPrivateKey(privateKey: privateKey.bytes)
 
         balance = try web3.eth.getBalance(address: ethPrivateKey.address, block: .latest).wait()
+
+        let toPrint = balance!.quantity.description
+
+        LoggerUtil.common.debug("balance: \(toPrint)")
     }
 
     func getFeeForTransfer() async throws -> EthereumQuantity {
