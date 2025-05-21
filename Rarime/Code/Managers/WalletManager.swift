@@ -12,7 +12,7 @@ class WalletManager: ObservableObject {
 
     @Published var balance: EthereumQuantity?
 
-    @Published private(set) var transactions: [Transaction] {
+    @Published var transactions: [Transaction] {
         didSet {
             AppUserDefaults.shared.walletTransactions = transactions.json
         }
@@ -56,11 +56,45 @@ class WalletManager: ObservableObject {
     func getFeeForTransfer() async throws -> EthereumQuantity {
         let gasPrice = try web3.eth.gasPrice().wait()
 
-        let fee = (gasPrice.quantity * (gasPrice.quantity / 5)) * 21_000
+        let fee = (gasPrice.quantity + (gasPrice.quantity / 5)) * 21_000
 
         return .init(quantity: fee)
     }
 
+    func transfer(
+        _ amount: Double,
+        _ to: String
+    ) async throws {
+        guard let privateKey else {
+            return
+        }
+
+        let amountToTransfer = EthereumQuantity(amount)
+
+        let ethPrivateKey = try EthereumPrivateKey(privateKey: privateKey.bytes)
+
+        let nonce = try web3.eth.getTransactionCount(address: ethPrivateKey.address, block: .latest).wait()
+
+        var gasPrice = try web3.eth.gasPrice().wait()
+        gasPrice = EthereumQuantity(quantity: gasPrice.quantity + (gasPrice.quantity / 5))
+
+        let tx = try EthereumTransaction(
+            nonce: nonce,
+            gasPrice: gasPrice,
+            gasLimit: 21_000,
+            from: ethPrivateKey.address,
+            to: EthereumAddress(hex: to, eip55: true),
+            value: amountToTransfer
+        )
+
+        let signedTx = try tx.sign(with: ethPrivateKey, chainId: .init(ConfigManager.shared.api.evmChainId))
+
+        let txHash = try web3.eth.sendRawTransaction(transaction: signedTx).wait()
+
+        LoggerUtil.common.debug("Transaction hash: \(txHash.hex(), privacy: .public)")
+    }
+
+    @MainActor
     func registerTransfer(_ amount: Double) {
         transactions.append(
             Transaction(
