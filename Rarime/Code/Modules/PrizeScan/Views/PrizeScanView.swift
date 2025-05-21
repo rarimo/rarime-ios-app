@@ -66,6 +66,7 @@ struct PrizeScanView: View {
                     .padding(10)
                     .background(.bgComponentPrimary, in: Circle())
             }
+            .padding(.top, 12)
             .padding(.trailing, 20)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -146,20 +147,17 @@ struct PrizeScanView: View {
 
     private var scanActions: some View {
         ZStack {
-            if hasAttempts || !canGetBonusScans {
+            if hasAttempts {
                 AppButton(
                     variant: .primary,
-                    // TODO: timer
-                    text: hasAttempts ? "Scan" : "23:59:59",
-                    leftIcon: hasAttempts ? Icons.userFocus : Icons.lock,
+                    text: "Scan",
+                    leftIcon: Icons.userFocus,
                     width: 160,
-                    action: {
-                        isScanSheetPresented = true
-                    }
+                    action: { isScanSheetPresented = true }
                 )
                 .controlSize(.large)
                 .disabled(!hasAttempts)
-            } else {
+            } else if !canGetBonusScans {
                 Button(action: { isBonusScanSheetPresented = true }) {
                     HStack(spacing: 12) {
                         Image(.flashlightFill)
@@ -172,6 +170,17 @@ struct PrizeScanView: View {
                     .padding(.horizontal, 24)
                     .background(Gradients.purpleText, in: RoundedRectangle(cornerRadius: 20))
                 }
+            } else {
+                HStack(spacing: 12) {
+                    Image(.lock2Line)
+                        .square(24)
+                    CountdownView(endTimestamp: prizeScanUser.resetTime)
+                        .buttonLarge()
+                }
+                .padding(18)
+                .frame(width: 160)
+                .background(.bgComponentDisabled, in: RoundedRectangle(cornerRadius: 20))
+                .foregroundStyle(.textDisabled)
             }
         }
         .dynamicSheet(isPresented: $isBonusScanSheetPresented) {

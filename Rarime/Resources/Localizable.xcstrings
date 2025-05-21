@@ -129,16 +129,6 @@
         }
       }
     },
-    "%lld/%lld MB" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld/%2$lld MB"
-          }
-        }
-      }
-    },
     "%lld%%" : {
 
     },
@@ -167,6 +157,9 @@
     "+1 scan" : {
 
     },
+    "0x00000...0000" : {
+
+    },
     "1 day" : {
 
     },
@@ -177,9 +170,6 @@
 
     },
     "3. When we support your country, you will be notified in the app" : {
-
-    },
-    "23:59:59" : {
 
     },
     "49,421 other already joined" : {
@@ -652,9 +642,6 @@
       }
     },
     "Claimed" : {
-
-    },
-    "Claiming" : {
 
     },
     "Claiming..." : {
@@ -1167,9 +1154,6 @@
     "Find a face" : {
 
     },
-    "Find Face Winner" : {
-
-    },
     "Finished" : {
 
     },
@@ -1313,6 +1297,9 @@
     "Hi" : {
 
     },
+    "Hidden face:" : {
+
+    },
     "Hidden keys" : {
 
     },
@@ -1349,6 +1336,9 @@
 
     },
     "Hungary" : {
+
+    },
+    "I've found the key!" : {
 
     },
     "Iceland" : {
@@ -1785,6 +1775,9 @@
         }
       }
     },
+    "Next one soon" : {
+
+    },
     "NFC Reader" : {
       "localizations" : {
         "uk" : {
@@ -2079,6 +2072,9 @@
       }
     },
     "Prize-pool:" : {
+
+    },
+    "Prize:" : {
 
     },
     "Processing" : {
@@ -2459,9 +2455,6 @@
 
     },
     "scans" : {
-
-    },
-    "Scooping up the magic bits to brew your proof" : {
 
     },
     "Select an authorization method" : {
@@ -3045,6 +3038,9 @@
         }
       }
     },
+    "Winner:" : {
+
+    },
     "Withdraw the %@ token" : {
 
     },
@@ -3170,10 +3166,7 @@
         }
       }
     },
-    "Your prize" : {
-
-    },
-    "Your prize just zipped into your wallet" : {
+    "Your prize:" : {
 
     },
     "Your Rarimo Address" : {

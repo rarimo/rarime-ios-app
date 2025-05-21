@@ -74,6 +74,7 @@
 		5659151D2BE92AA90050795A /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659151C2BE92AA90050795A /* AppIcon.swift */; };
 		5659151F2BE92B1F0050795A /* AppIconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659151E2BE92B1F0050795A /* AppIconManager.swift */; };
 		565E221C2BF7B33D00171692 /* CameraPermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565E221B2BF7B33D00171692 /* CameraPermissionView.swift */; };
+		566E93CF2DDCDEC9007C596A /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E93CE2DDCDEC9007C596A /* CountdownView.swift */; };
 		56722F202BCD62BB00300AD0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56722F1F2BCD62BB00300AD0 /* ProfileView.swift */; };
 		567ADEC42C25CF32007070A7 /* JSONDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567ADEC32C25CF32007070A7 /* JSONDocument.swift */; };
 		567AEC9B2BBD9B8100A20E83 /* Passport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567AEC9A2BBD9B8100A20E83 /* Passport.swift */; };
@@ -495,6 +496,7 @@
 		5659151C2BE92AA90050795A /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		5659151E2BE92B1F0050795A /* AppIconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconManager.swift; sourceTree = "<group>"; };
 		565E221B2BF7B33D00171692 /* CameraPermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionView.swift; sourceTree = "<group>"; };
+		566E93CE2DDCDEC9007C596A /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
 		56722F1F2BCD62BB00300AD0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		567ADEC32C25CF32007070A7 /* JSONDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDocument.swift; sourceTree = "<group>"; };
 		567AEC9A2BBD9B8100A20E83 /* Passport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passport.swift; sourceTree = "<group>"; };
@@ -1278,6 +1280,7 @@
 				56933DFA2BBAFBD90068C894 /* AppToggle.swift */,
 				562241422C107E16000239FA /* AppDropdown.swift */,
 				560F0C242BD036F900067054 /* AppTextField.swift */,
+				566E93CE2DDCDEC9007C596A /* CountdownView.swift */,
 				56E2D91F2BCED460006E725D /* AppCheckbox.swift */,
 				5613F4312BD18409008E6CBE /* AppSkeleton.swift */,
 				563529F52BB077AB0027C910 /* CardContainer.swift */,
@@ -2146,6 +2149,7 @@
 				5655E4352BD5173200B86C5C /* AppView+ViewModel.swift in Sources */,
 				C7D624572D6DB4E2007BA5A6 /* Multicall3Contract.swift in Sources */,
 				CE0659112DC8C1B1004FBDD5 /* UIImage+resize.swift in Sources */,
+				566E93CF2DDCDEC9007C596A /* CountdownView.swift in Sources */,
 				568D45C82C29AC200065D467 /* PassportChipErrorView.swift in Sources */,
 				56E2D9172BCE938F006E725D /* ActionCard.swift in Sources */,
 				CEFE5F392CB56C8700498F39 /* CryptoUtils.swift in Sources */,
