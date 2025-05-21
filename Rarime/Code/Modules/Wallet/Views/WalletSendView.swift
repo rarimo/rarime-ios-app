@@ -225,6 +225,8 @@ struct WalletSendView: View {
             }
             
             do {
+                try await walletManager.transfer(amount, address)
+                
                 walletManager.registerTransfer(amount)
                 
                 onBack()
