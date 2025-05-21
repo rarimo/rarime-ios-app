@@ -64,7 +64,7 @@ struct HomeView: View {
                     },
                     title: "Your Device",
                     subtitle: "Your Identity",
-                    bottomAdditionalContent: {
+                    bottomContent: {
                         Text("* Nothing leaves this device")
                             .body4()
                             .foregroundStyle(.baseBlack.opacity(0.6))
@@ -74,7 +74,7 @@ struct HomeView: View {
                 )
             },
             HomeCarouselCard(
-                isVisible: prizeScanViewModel.user != nil,
+                isVisible: prizeScanViewModel.user != nil && prizeScanViewModel.user?.celebrity.status != .maintenance,
                 action: { path = .prizeScan }
             ) {
                 HomeCardView(
@@ -91,6 +91,9 @@ struct HomeView: View {
                     },
                     title: "Hidden keys",
                     subtitle: "Find a face",
+                    topContent: {
+                        PrizeScanStatusChip(status: prizeScanViewModel.user?.celebrity.status ?? .maintenance)
+                    },
                     animation: prizeScanAnimation
                 )
             },
@@ -135,7 +138,7 @@ struct HomeView: View {
                     },
                     title: likenessManager.isRegistered ? nil : "Digital likeness",
                     subtitle: likenessManager.isRegistered ? nil : "Set a rule",
-                    bottomAdditionalContent: {
+                    bottomContent: {
                         if likenessManager.isRegistered {
                             VStack(alignment: .leading, spacing: 0) {
                                 Text("My Rule:")
@@ -217,7 +220,7 @@ struct HomeView: View {
             //                    },
             //                    title: "Invite",
             //                    subtitle: "Others",
-            //                    bottomAdditionalContent: {
+            //                    bottomContent: {
             //                        if let code = activeReferralCode {
             //                            HStack(spacing: 16) {
             //                                Text(code)
@@ -321,8 +324,12 @@ struct HomeView: View {
                         )
                     case .prizeScan:
                         PrizeScanView(
+                            animation: prizeScanAnimation,
                             onClose: { path = nil },
-                            animation: prizeScanAnimation
+                            onViewWallet: {
+                                cleanup()
+                                mainViewModel.selectedTab = .wallet
+                            }
                         )
                         .environmentObject(prizeScanViewModel)
                     default:

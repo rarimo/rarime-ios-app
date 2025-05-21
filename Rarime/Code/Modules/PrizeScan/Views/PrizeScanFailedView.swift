@@ -6,7 +6,7 @@ struct PrizeScanFailedView: View {
     let onScanAgain: () -> Void
 
     private var tip: String {
-        prizeScanViewModel.user?.celebrity?.hint ?? ""
+        prizeScanViewModel.user?.celebrity.hint ?? ""
     }
 
     private var totalAttemptsLeft: Int {

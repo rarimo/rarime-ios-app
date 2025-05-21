@@ -18,3 +18,5 @@ let UNSUPPORTED_REWARD_COUNTRIES: [Country] = [
 ]
 
 let PASSPORT_RESERVE_TOKENS: Double = 10.0
+
+let PRIZE_SCAN_ETH_REWARD: Double = 0.3

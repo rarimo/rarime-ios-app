@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
+struct HomeCardView<Content: View, TopContent: View, BottomContent: View>: View {
     let backgroundGradient: LinearGradient
     let foregroundGradient: LinearGradient?
     let foregroundColor: Color
@@ -9,7 +9,8 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
     let imageContent: () -> Content
     let title: String?
     let subtitle: String?
-    let bottomAdditionalContent: () -> BottomAdditionalContent?
+    let topContent: () -> TopContent?
+    let bottomContent: () -> BottomContent?
 
     var animation: Namespace.ID
 
@@ -22,7 +23,8 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
         @ViewBuilder imageContent: @escaping () -> Content,
         title: String?,
         subtitle: String?,
-        @ViewBuilder bottomAdditionalContent: @escaping () -> BottomAdditionalContent? = { EmptyView() },
+        @ViewBuilder topContent: @escaping () -> TopContent? = { EmptyView() },
+        @ViewBuilder bottomContent: @escaping () -> BottomContent? = { EmptyView() },
         animation: Namespace.ID
     ) {
         self.backgroundGradient = backgroundGradient
@@ -33,7 +35,8 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
         self.imageContent = imageContent
         self.title = title
         self.subtitle = subtitle
-        self.bottomAdditionalContent = bottomAdditionalContent
+        self.topContent = topContent
+        self.bottomContent = bottomContent
         self.animation = animation
     }
 
@@ -51,6 +54,9 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .padding([.top, .leading], 20)
             VStack(alignment: .leading, spacing: 0) {
+                if let topView = topContent() {
+                    topView
+                }
                 if let title {
                     Text(title)
                         .h1()
@@ -71,7 +77,7 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
                             properties: .position
                         )
                 }
-                if let bottomView = bottomAdditionalContent() {
+                if let bottomView = bottomContent() {
                     bottomView
                 }
             }
@@ -114,7 +120,7 @@ struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
         },
         title: "Your Device",
         subtitle: "Your Identity",
-        bottomAdditionalContent: {
+        bottomContent: {
             Text("* Nothing leaves this device")
                 .body4()
                 .foregroundStyle(.baseBlack.opacity(0.6))

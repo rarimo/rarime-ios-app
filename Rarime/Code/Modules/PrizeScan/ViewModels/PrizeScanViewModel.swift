@@ -3,6 +3,11 @@ import Foundation
 import Identity
 import SwiftUI
 
+struct PrizeScanCelebrity {
+    let id, title, description, image, hint: String
+    let status: GuessCelebrityStatus
+}
+
 struct PrizeScanUser {
     let id, referralCode: String
     let referralsCount, referralsLimit: Int
@@ -11,7 +16,7 @@ struct PrizeScanUser {
     let attemptsLeft, extraAttemptsLeft, totalAttemptsCount: Int
     let resetTime: TimeInterval
 
-    let celebrity: PrizeScanCelebrity?
+    let celebrity: PrizeScanCelebrity
 }
 
 extension PrizeScanUser {
@@ -30,17 +35,15 @@ extension PrizeScanUser {
                 id: "",
                 title: "",
                 description: "",
-                status: "",
                 image: "",
-                hint: ""
+                hint: "",
+                status: .maintenance
             )
         )
     }
 }
 
-struct PrizeScanCelebrity {
-    let id, title, description, status, image, hint: String
-}
+private let PRIZE_SCAN_REFERRAL_CODE_LENGTH = 10
 
 class PrizeScanViewModel: ObservableObject {
     @Published var user: PrizeScanUser? = nil
@@ -60,8 +63,14 @@ class PrizeScanViewModel: ObservableObject {
                 let openApiHttpCode = try error.retriveOpenApiHttpCode()
                 if openApiHttpCode == HTTPStatusCode.notFound.rawValue {
                     LoggerUtil.common.info("PrizeScan: User is not found, creating a new user")
-                    // TODO: pass referral code to the backend
-                    userResponse = try await guessCelebrityService.createUser(jwt: jwt)
+
+                    // Because referral codes can be used in different services,
+                    // we check whether the code belongs to the guess celebrity service
+                    let refCode = referralCode?.count == PRIZE_SCAN_REFERRAL_CODE_LENGTH
+                        ? referralCode
+                        : nil
+
+                    userResponse = try await guessCelebrityService.createUser(jwt: jwt, referredBy: refCode)
                 } else {
                     throw error
                 }
@@ -94,9 +103,9 @@ class PrizeScanViewModel: ObservableObject {
                 id: celebrity?.id ?? "",
                 title: celebrity?.attributes.title ?? "",
                 description: celebrity?.attributes.description ?? "",
-                status: celebrity?.attributes.status ?? "",
                 image: celebrity?.attributes.image ?? "",
-                hint: celebrity?.attributes.hint ?? ""
+                hint: celebrity?.attributes.hint ?? "",
+                status: celebrity?.attributes.status ?? .maintenance
             )
         )
     }
