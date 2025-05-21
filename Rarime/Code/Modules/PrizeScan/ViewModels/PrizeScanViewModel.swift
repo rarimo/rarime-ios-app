@@ -43,7 +43,7 @@ struct PrizeScanCelebrity {
 }
 
 class PrizeScanViewModel: ObservableObject {
-    static let faceThreshold = 740881858
+    static let faceThreshold = 74088185856
 
     @Published var user: PrizeScanUser? = nil
     @Published var originalFeatures: [Float] = []
