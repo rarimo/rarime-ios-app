@@ -289,5 +289,7 @@
 	<string>${GUESS_CELEBRITY_GAME_CONTRACT_ADDRESS}</string>
 	<key>AIRDROP_TERMS_URL</key>
 	<string>${AIRDROP_TERMS_URL}</string>
+	<key>EVM_CHAIN_ID</key>
+	<string>${EVM_CHAIN_ID}</string>
 </dict>
 </plist>

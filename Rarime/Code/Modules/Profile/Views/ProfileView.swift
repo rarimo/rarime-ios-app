@@ -17,6 +17,7 @@ struct ProfileView: View {
     @EnvironmentObject private var notificationManager: NotificationManager
     @EnvironmentObject private var likenessManager: LikenessManager
     @EnvironmentObject private var pollsViewModel: PollsViewModel
+    @EnvironmentObject private var walletManager: WalletManager
 
     @State private var path: [ProfileRoute] = []
 
@@ -198,6 +199,7 @@ struct ProfileView: View {
                         notificationManager.reset()
                         pollsViewModel.reset()
                         likenessManager.reset()
+                        walletManager.reset()
 
                         Task {
                             try? await notificationManager.unsubscribe(fromTopic: ConfigManager.shared.general.claimableNotificationTopic)
@@ -258,6 +260,7 @@ private struct ProfileRow: View {
         .environmentObject(NotificationManager())
         .environmentObject(LikenessManager())
         .environmentObject(userManager)
+        .environmentObject(WalletManager())
         .onAppear {
             _ = try? userManager.createNewUser()
         }

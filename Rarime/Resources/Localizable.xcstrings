@@ -1128,6 +1128,9 @@
         }
       }
     },
+    "Failed to get balance" : {
+
+    },
     "Failed to register, try again later" : {
 
     },
@@ -1402,6 +1405,9 @@
 
     },
     "Invalid address" : {
+
+    },
+    "Invalid amount" : {
 
     },
     "Invalid HTTP status code: %lld" : {
@@ -1832,7 +1838,6 @@
 
     },
     "No transactions yet" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {

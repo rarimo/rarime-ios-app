@@ -1,11 +1,11 @@
 import Foundation
 
 import Web3
-import Web3PromiseKit
 import Web3ContractABI
+import Web3PromiseKit
 
 class Ethereum {
-    static let ZERO_BYTES32: Data = Data(repeating: 0, count: 32)
+    static let ZERO_BYTES32: Data = .init(repeating: 0, count: 32)
     
     static let TX_PULL_INTERVAL: UInt64 = NSEC_PER_SEC * 3
     
@@ -56,5 +56,37 @@ class Ethereum {
             
             try await Task.sleep(nanoseconds: Ethereum.TX_PULL_INTERVAL)
         }
+    }
+    
+    static func isValidAddress(_ address: String) -> Bool {
+        let pattern = "^0x[a-fA-F0-9]{40}$"
+        return address.range(of: pattern, options: .regularExpression) != nil
+    }
+}
+
+extension EthereumQuantity {
+    var double: Double {
+        let ethValue = self.quantity / BigUInt(10).power(18)
+        
+        var gweiValue: BigUInt
+        if ethValue > 0 {
+            gweiValue = self.quantity % BigUInt(10).power(9)
+        } else {
+            gweiValue = self.quantity / BigUInt(10).power(9)
+        }
+        
+        let value = ethValue.description + "." + gweiValue.description.prefix(2)
+
+        return Double(value) ?? 0
+    }
+    
+    init(_ value: Double) {
+        let ethValue = BigUInt(Int(value)) * BigUInt(10).power(18)
+        
+        let gweiValue = BigUInt(Int(value * 1_000_000_000)) % BigUInt(10).power(9) * BigUInt(10).power(9)
+        
+        let quantity = ethValue + gweiValue
+        
+        self.init(quantity: quantity)
     }
 }

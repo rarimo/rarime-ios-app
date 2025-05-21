@@ -1,7 +1,10 @@
 import Combine
 import SwiftUI
 
+import Web3
+
 struct WalletSendView: View {
+    @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
     
     let token: WalletToken
@@ -17,16 +20,11 @@ struct WalletSendView: View {
     @State private var isTransfering = false
     @State private var isConfirmationSheetPresented = false
     
+    @State private var isFeeCalculating = false
+    
+    @State private var fee: EthereumQuantity?
+    
     @State private var cancelables: [Task<Void, Never>] = []
-    
-    private var amountToSend: Double {
-        return (Double(amount) ?? 0) * Double(Rarimo.rarimoTokenMantis)
-    }
-    
-    // TODO: calculate according to the token type
-    private var fee: Double {
-        return 0
-    }
 
     func toggleScan() {
         withAnimation(.easeInOut(duration: 0.2)) {
@@ -39,9 +37,12 @@ struct WalletSendView: View {
             if isScanning {
                 ScanQRView(onBack: { toggleScan() }) { result in
                     toggleScan()
-                    // TODO: validate according to the token type
-                    if RarimoUtils.isValidAddress(result) {
-                        address = result
+                    
+                    var addressToPaste = result
+                    addressToPaste = addressToPaste.replacingOccurrences(of: "ethereum:", with: "")
+                    
+                    if Ethereum.isValidAddress(addressToPaste) {
+                        address = addressToPaste
                     } else {
                         addressErrorMessage = String(localized: "Invalid address")
                     }
@@ -51,6 +52,7 @@ struct WalletSendView: View {
                 content
             }
         }
+        .onAppear(perform: calculateFee)
         .onDisappear(perform: cleanup)
     }
 
@@ -87,8 +89,7 @@ struct WalletSendView: View {
                                 HStack(spacing: 16) {
                                     VerticalDivider()
                                     Button(action: {
-                                        // TODO: use balance according to the token type
-                                        amount = String(userManager.balance / Double(Rarimo.rarimoTokenMantis))
+                                        amount = walletManager.displayedBalance
                                     }) {
                                         Text("MAX")
                                             .buttonMedium()
@@ -103,8 +104,7 @@ struct WalletSendView: View {
                                     .body5()
                                     .foregroundStyle(.textSecondary)
                                 Spacer()
-                                // TODO: use balance according to the token type
-                                Text(verbatim: "\(RarimoUtils.formatBalance(userManager.balance)) \(token.rawValue)")
+                                Text(walletManager.displayedBalance)
                                     .body5()
                                     .foregroundStyle(.textPrimary)
                             }
@@ -126,7 +126,7 @@ struct WalletSendView: View {
                 Text("Receiver gets")
                     .body5()
                     .foregroundStyle(.textSecondary)
-                Text(verbatim: "\(RarimoUtils.formatBalance(amountToSend)) \(token.rawValue)")
+                Text(walletManager.displayedBalance)
                     .subtitle5()
                     .foregroundStyle(.textPrimary)
             }
@@ -158,15 +158,15 @@ struct WalletSendView: View {
             VStack(spacing: 16) {
                 ConfirmationTextRow(
                     title: String(localized: "Address"),
-                    value: RarimoUtils.formatAddress(address)
+                    value: address
                 )
                 ConfirmationTextRow(
                     title: String(localized: "Amount"),
-                    value: "\(RarimoUtils.formatBalance(amountToSend)) \(token.rawValue)"
+                    value: amount
                 )
                 ConfirmationTextRow(
                     title: String(localized: "Fee"),
-                    value: "\(fee.formatted()) \(token.rawValue)"
+                    value: "\(fee?.double ?? 0)"
                 )
             }
             VStack(spacing: 4) {
@@ -189,13 +189,23 @@ struct WalletSendView: View {
     }
     
     func validateForm() -> Bool {
-        // TODO: validate according to the token type
-        if !RarimoUtils.isValidAddress(address) {
+        if !Ethereum.isValidAddress(address) {
             addressErrorMessage = String(localized: "Invalid address")
         }
         
-        // TODO: calculate according to the token type
-        if userManager.balance < amountToSend {
+        guard let amountToSend = Double(amount) else {
+            amountErrorMessage = String(localized: "Invalid amount")
+            
+            return false
+        }
+        
+        guard let availableBalance = Double(walletManager.displayedBalance) else {
+            amountErrorMessage = String(localized: "Failed to get balance")
+            
+            return false
+        }
+        
+        if availableBalance < amountToSend {
             amountErrorMessage = String(localized: "Insufficient balance")
         }
         
@@ -214,8 +224,44 @@ struct WalletSendView: View {
                 isTransfering = false
             }
             
+            guard let amount = Double(amount) else {
+                return
+            }
+            
             do {
+                try await walletManager.transfer(amount, address)
+                
+                walletManager.registerTransfer(amount)
+                
+                AlertManager.shared.emitSuccess("Transaction sent")
+                
                 onBack()
+            } catch is CancellationError {
+                return
+            } catch {
+                LoggerUtil.common.error("failed to send tokens: \(error.localizedDescription, privacy: .public)")
+                
+                AlertManager.shared.emitError(.unknown("Failed to send tokens"))
+            }
+        }
+        
+        cancelables.append(cancelable)
+    }
+    
+    func calculateFee() {
+        if isFeeCalculating {
+            return
+        }
+        
+        isFeeCalculating = true
+        
+        let cancelable = Task { @MainActor in
+            defer {
+                isFeeCalculating = false
+            }
+            
+            do {
+                fee = try await walletManager.getFeeForTransfer()
             } catch is CancellationError {
                 return
             } catch {
@@ -259,6 +305,7 @@ private struct ConfirmationTextRow: View {
 }
 
 #Preview {
-    WalletSendView(token: WalletToken.rmo, onBack: {})
+    WalletSendView(token: WalletToken.eth, onBack: {})
         .environmentObject(UserManager())
+        .environmentObject(WalletManager())
 }
