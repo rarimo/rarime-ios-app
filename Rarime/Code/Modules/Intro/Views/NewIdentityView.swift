@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct NewIdentityView: View {
+    @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var likenessManager: LikenessManager
     
     @EnvironmentObject private var userManager: UserManager
@@ -42,6 +43,8 @@ struct NewIdentityView: View {
                         action: {
                             do {
                                 try user.save()
+                                
+                                walletManager.privateKey = user.secretKey
                                 
                                 likenessManager.postInitialization()
                             } catch {
@@ -202,7 +205,7 @@ struct NewIdentityView: View {
             do {
                 try userManager.createNewUser()
                 
-                LoggerUtil.common.info("New user created: \(userManager.userAddress, privacy: .public)")
+                LoggerUtil.common.info("New user created: \(userManager.ethereumAddress ?? "", privacy: .public)")
             } catch is CancellationError {
                 return
             } catch {
@@ -238,4 +241,5 @@ struct NewIdentityView: View {
 #Preview {
     NewIdentityView(onBack: {}, onNext: {})
         .environmentObject(LikenessManager())
+        .environmentObject(WalletManager())
 }

@@ -34,7 +34,6 @@ extension ConfigManager {
         let certificatesSmtContractAddress: String = try! readFromInfoPlist(key: "CERTIFICATES_SMT_CONTRACT_ADDRESS")
         let registrationSmtContractAddress: String = try! readFromInfoPlist(key: "REGISTRATION_SMT_CONTRACT_ADDRESS")
         let stateKeeperContractAddress: String = try! readFromInfoPlist(key: "STATE_KEEPER_CONTRACT_ADDRESS")
-        let cosmosRpcURL: URL = try! readURLFromInfoPlist(key: "COSMOS_RPC_URL")
         let pointsServiceURL: URL = try! readURLFromInfoPlist(key: "POINTS_SERVICE_URL")
         let authorizeURL: URL = try! readURLFromInfoPlist(key: "AUTHORIZE_URL")
         let referralURL: URL = try! readURLFromInfoPlist(key: "REFERRAL_URL")
@@ -50,6 +49,7 @@ extension ConfigManager {
         let votingRegistartionSmtContractAddress: String = try! readFromInfoPlist(key: "VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS")
         let faceRegistryContractAddress: String = try! readFromInfoPlist(key: "FACE_REGISTRY_CONTRACT_ADDRESS")
         let guessCelebrityGameContractAddress: String = try! readFromInfoPlist(key: "GUESS_CELEBRITY_GAME_CONTRACT_ADDRESS")
+        let evmChainId: UInt64 = try! readUInt64FromInfoPlist(key: "EVM_CHAIN_ID")
     }
 }
 
@@ -114,6 +114,14 @@ private func readURLFromInfoPlist(key: String) throws -> URL {
     guard let url = URL(string: value) else { throw "\(key) isn't URL" }
 
     return url
+}
+
+private func readUInt64FromInfoPlist(key: String) throws -> UInt64 {
+    let value: String = try readFromInfoPlist(key: key)
+
+    guard let uint64 = UInt64(value) else { throw "\(key) isn't UInt64" }
+
+    return uint64
 }
 
 private func readURLDictionaryFromInfoPlist(key: String) throws -> [String: URL] {

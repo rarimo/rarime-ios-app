@@ -14,7 +14,6 @@ struct RarimeApp: App {
                 .environmentObject(UserManager.shared)
                 .environmentObject(ConfigManager.shared)
                 .environmentObject(SecurityManager.shared)
-                .environmentObject(WalletManager.shared)
                 .environmentObject(SettingsManager.shared)
                 .environmentObject(PassportManager.shared)
                 .environmentObject(AppIconManager.shared)
@@ -25,6 +24,7 @@ struct RarimeApp: App {
                 .environmentObject(ExternalRequestsManager.shared)
                 .environmentObject(InternetConnectionManager.shared)
                 .environmentObject(LikenessManager.shared)
+                .environmentObject(WalletManager.shared)
         }
     }
 }

@@ -1,55 +1,101 @@
-import Foundation
+import SwiftUI
+
+import PromiseKit
+import Web3
 
 class WalletManager: ObservableObject {
     static let shared = WalletManager()
 
-    @Published private(set) var transactions: [Transaction] {
-        didSet {
-            AppUserDefaults.shared.walletTransactions = try! JSONEncoder().encode(transactions)
-        }
-    }
+    let web3: Web3
 
-    @Published var isClaimed: Bool {
+    var privateKey: Data?
+
+    @Published var balance: EthereumQuantity?
+
+    @Published var transactions: [Transaction] {
         didSet {
-            AppUserDefaults.shared.isAirdropClaimed = isClaimed
+            AppUserDefaults.shared.walletTransactions = transactions.json
         }
     }
 
     init() {
-        isClaimed = true
-        transactions = AppUserDefaults.shared.walletTransactions.isEmpty
+        do {
+            if try AppKeychain.containsValue(.privateKey) {
+                self.privateKey = try AppKeychain.getValue(.privateKey)
+            }
+        } catch {
+            LoggerUtil.common.error("Failed to get private key: \(error.localizedDescription, privacy: .public)")
+        }
+
+        self.transactions = AppUserDefaults.shared.walletTransactions.isEmpty
             ? []
             : try! JSONDecoder().decode([Transaction].self, from: AppUserDefaults.shared.walletTransactions)
 
-        Task {
-            do {
-                let isClaimed = try await UserManager.shared.isAirdropClaimed()
+        self.web3 = Web3(rpcURL: ConfigManager.shared.api.evmRpcURL.absoluteString)
+    }
 
-                DispatchQueue.main.async { self.isClaimed = isClaimed }
-            } catch {}
+    var displayedBalance: String {
+        guard let balance else {
+            return "0.00"
         }
+
+        return balance.double.description
     }
 
     @MainActor
-    func claimAirdrop() async throws {
-        if isClaimed {
+    func updateBalance() async throws {
+        guard let privateKey else {
             return
         }
 
-        try await Task.sleep(nanoseconds: 1_200_000_000)
-        transactions.append(
-            Transaction(
-                title: String(localized: "Airdrop"),
-                icon: Icons.airdrop,
-                amount: 3.0,
-                date: Date(),
-                type: .received
-            )
-        )
-        isClaimed = true
+        let ethPrivateKey = try EthereumPrivateKey(privateKey: privateKey.bytes)
+
+        balance = try web3.eth.getBalance(address: ethPrivateKey.address, block: .latest).wait()
     }
 
-    func transfer(_ amount: Double) {
+    func getFeeForTransfer() async throws -> EthereumQuantity {
+        let gasPrice = try web3.eth.gasPrice().wait()
+
+        let fee = (gasPrice.quantity + (gasPrice.quantity / 5)) * 21_000
+
+        return .init(quantity: fee)
+    }
+
+    func transfer(
+        _ amount: Double,
+        _ to: String
+    ) async throws {
+        guard let privateKey else {
+            return
+        }
+
+        let amountToTransfer = EthereumQuantity(amount)
+
+        let ethPrivateKey = try EthereumPrivateKey(privateKey: privateKey.bytes)
+
+        let nonce = try web3.eth.getTransactionCount(address: ethPrivateKey.address, block: .latest).wait()
+
+        var gasPrice = try web3.eth.gasPrice().wait()
+        gasPrice = EthereumQuantity(quantity: gasPrice.quantity + (gasPrice.quantity / 5))
+
+        let tx = try EthereumTransaction(
+            nonce: nonce,
+            gasPrice: gasPrice,
+            gasLimit: 21_000,
+            from: ethPrivateKey.address,
+            to: EthereumAddress(hex: to, eip55: true),
+            value: amountToTransfer
+        )
+
+        let signedTx = try tx.sign(with: ethPrivateKey, chainId: .init(ConfigManager.shared.api.evmChainId))
+
+        let txHash = try web3.eth.sendRawTransaction(transaction: signedTx).wait()
+
+        LoggerUtil.common.info("Transaction hash: \(txHash.hex(), privacy: .public)")
+    }
+
+    @MainActor
+    func registerTransfer(_ amount: Double) {
         transactions.append(
             Transaction(
                 title: String(localized: "Send"),
@@ -63,6 +109,5 @@ class WalletManager: ObservableObject {
 
     func reset() {
         transactions = []
-        isClaimed = false
     }
 }

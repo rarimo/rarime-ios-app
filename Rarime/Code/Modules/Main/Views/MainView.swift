@@ -15,7 +15,7 @@ struct MainView: View {
                 case .home: HomeView()
                 case .identity: IdentityView()
                 case .scanQr: EmptyView()
-//                case .wallet: WalletView()
+                case .wallet: WalletView()
                 case .profile: ProfileView()
             }
             ExternalRequestsView()
@@ -57,7 +57,6 @@ struct MainView: View {
 
     return MainView()
         .environmentObject(PassportManager())
-        .environmentObject(WalletManager())
         .environmentObject(UserManager())
         .environmentObject(ConfigManager())
         .environmentObject(NotificationManager())

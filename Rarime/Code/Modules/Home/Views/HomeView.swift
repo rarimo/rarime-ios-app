@@ -9,7 +9,6 @@ struct HomeView: View {
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var mainViewModel: MainView.ViewModel
     @EnvironmentObject private var passportManager: PassportManager
-    @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
     @EnvironmentObject private var configManager: ConfigManager
@@ -522,7 +521,6 @@ struct HomeView: View {
     HomeView()
         .environmentObject(MainView.ViewModel())
         .environmentObject(PassportManager())
-        .environmentObject(WalletManager())
         .environmentObject(UserManager())
         .environmentObject(ConfigManager())
         .environmentObject(NotificationManager())

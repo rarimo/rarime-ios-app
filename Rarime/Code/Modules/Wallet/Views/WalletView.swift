@@ -6,7 +6,7 @@ private enum WalletRoute: String, Hashable {
 
 // TODO: move to model/manager
 enum WalletToken: String {
-    case rmo = "RMO"
+    case eth = "ETH"
 }
 
 // TODO: move to model/manager
@@ -26,13 +26,14 @@ struct WalletView: View {
     @State private var cancelables: [Task<Void, Never>] = []
 
     // TODO: use the token from the manager and save to store
-    @State private var token = WalletToken.rmo
+    @State private var token = WalletToken.eth
 
-    @State private var selectedAsset = WalletAsset(
-        token: WalletToken.rmo,
-        balance: 0,
-        usdBalance: nil
-    )
+    // TODO: use the assets from the manager and save to store
+//    @State private var selectedAsset = WalletAsset(
+//        token: WalletToken.eth,
+//        balance: 0,
+//        usdBalance: nil
+//    )
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -40,7 +41,7 @@ struct WalletView: View {
                 switch route {
                 case .receive:
                     WalletReceiveView(
-                        address: userManager.userAddress,
+                        address: userManager.ethereumAddress ?? "",
                         token: token,
                         onBack: { path.removeLast() }
                     )
@@ -61,9 +62,10 @@ struct WalletView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     header
-                    AssetsSlider(walletAssets: [selectedAsset], isLoading: isBalanceFetching)
-                    HorizontalDivider()
-                        .padding(.horizontal, 20)
+                    // TODO: add full support for assets
+//                    AssetsSlider(walletAssets: [selectedAsset], isLoading: isBalanceFetching)
+//                    HorizontalDivider()
+//                        .padding(.horizontal, 20)
                     transactionsList
                 }
                 .padding(.bottom, 120)
@@ -88,19 +90,18 @@ struct WalletView: View {
                     if isBalanceFetching {
                         ProgressView()
                     } else {
-                        Text(RarimoUtils.formatBalance(userManager.balance))
-                            .h4()
-                            .foregroundStyle(.textPrimary)
+                        Button(action: fetchBalance) {
+                            Text(walletManager.displayedBalance)
+                                .h4()
+                                .foregroundStyle(.textPrimary)
+                        }
                     }
-                    Text(WalletToken.rmo.rawValue)
+                    Text(WalletToken.eth.rawValue)
                         .overline2()
                         .foregroundStyle(.textPrimary)
                 }
                 .frame(height: 40)
                 .zIndex(1)
-                Text(try! String(selectedAsset.usdBalance == nil ? "---" : "≈$\((selectedAsset.usdBalance ?? 0).formatted())"))
-                    .caption2()
-                    .foregroundStyle(.textSecondary)
             }
             .frame(maxWidth: .infinity)
             .zIndex(1)
@@ -144,23 +145,23 @@ struct WalletView: View {
     }
 
     func fetchBalance() {
+        if isBalanceFetching {
+            return
+        }
+
         isBalanceFetching = true
 
         let cancelable = Task { @MainActor in
-
             defer {
                 self.isBalanceFetching = false
             }
 
             do {
-                let balance = try await userManager.fetchBalanse()
-                self.userManager.balance = Double(balance) ?? 0
-
-                self.selectedAsset.balance = self.userManager.balance / Double(Rarimo.rarimoTokenMantis)
-            } catch is CancellationError {
-                return
+                try await walletManager.updateBalance()
             } catch {
-                LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
+                LoggerUtil.common.error("Failed to fetch balance: \(error.localizedDescription, privacy: .public)")
+
+                AlertManager.shared.emitError(.unknown("Failed to fetch balance"))
             }
         }
 
@@ -230,6 +231,6 @@ private struct TransactionItem: View {
 #Preview {
     WalletView()
         .environmentObject(MainView.ViewModel())
-        .environmentObject(WalletManager())
         .environmentObject(UserManager())
+        .environmentObject(WalletManager())
 }

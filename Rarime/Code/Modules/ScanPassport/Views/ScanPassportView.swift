@@ -10,7 +10,6 @@ private enum ScanPassportState {
 
 struct ScanPassportView: View {
     @EnvironmentObject private var passportManager: PassportManager
-    @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var passportViewModel: PassportViewModel
 
@@ -116,7 +115,6 @@ struct ScanPassportView: View {
     let userManager = UserManager.shared
 
     return ScanPassportView(onClose: {})
-        .environmentObject(WalletManager())
         .environmentObject(userManager)
         .environmentObject(PassportManager())
         .environmentObject(PassportViewModel())

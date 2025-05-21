@@ -13,11 +13,11 @@ struct ProfileView: View {
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var appIconManager: AppIconManager
     @EnvironmentObject private var securityManager: SecurityManager
-    @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var notificationManager: NotificationManager
     @EnvironmentObject private var likenessManager: LikenessManager
     @EnvironmentObject private var pollsViewModel: PollsViewModel
+    @EnvironmentObject private var walletManager: WalletManager
 
     @State private var path: [ProfileRoute] = []
 
@@ -69,8 +69,8 @@ struct ProfileView: View {
                                     Text("Account")
                                         .buttonLarge()
                                         .foregroundStyle(.textPrimary)
-                                    Text("Address: \(RarimoUtils.formatAddress(userManager.userAddress))")
-                                        .body5()
+                                    Text("\(userManager.ethereumAddress ?? "")")
+                                        .body4()
                                         .foregroundStyle(.textSecondary)
                                 }
                                 Spacer()
@@ -195,11 +195,11 @@ struct ProfileView: View {
                         passportManager.reset()
                         securityManager.reset()
                         userManager.reset()
-                        walletManager.reset()
                         decentralizedAuthManager.reset()
                         notificationManager.reset()
                         pollsViewModel.reset()
                         likenessManager.reset()
+                        walletManager.reset()
 
                         Task {
                             try? await notificationManager.unsubscribe(fromTopic: ConfigManager.shared.general.claimableNotificationTopic)
@@ -256,11 +256,11 @@ private struct ProfileRow: View {
         .environmentObject(PassportManager())
         .environmentObject(SecurityManager())
         .environmentObject(AppIconManager())
-        .environmentObject(WalletManager())
         .environmentObject(DecentralizedAuthManager())
         .environmentObject(NotificationManager())
         .environmentObject(LikenessManager())
         .environmentObject(userManager)
+        .environmentObject(WalletManager())
         .onAppear {
             _ = try? userManager.createNewUser()
         }

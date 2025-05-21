@@ -115,7 +115,6 @@ struct SnapCarouselView: View {
     HomeView()
         .environmentObject(MainView.ViewModel())
         .environmentObject(PassportManager())
-        .environmentObject(WalletManager())
         .environmentObject(UserManager())
         .environmentObject(ConfigManager())
         .environmentObject(NotificationManager())
