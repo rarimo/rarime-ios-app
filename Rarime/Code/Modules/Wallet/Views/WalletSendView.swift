@@ -89,7 +89,7 @@ struct WalletSendView: View {
                                 HStack(spacing: 16) {
                                     VerticalDivider()
                                     Button(action: {
-                                        amount = walletManager.dispayableBalance
+                                        amount = walletManager.displayedBalance
                                     }) {
                                         Text("MAX")
                                             .buttonMedium()
@@ -104,7 +104,7 @@ struct WalletSendView: View {
                                     .body5()
                                     .foregroundStyle(.textSecondary)
                                 Spacer()
-                                Text(walletManager.dispayableBalance)
+                                Text(walletManager.displayedBalance)
                                     .body5()
                                     .foregroundStyle(.textPrimary)
                             }
@@ -126,7 +126,7 @@ struct WalletSendView: View {
                 Text("Receiver gets")
                     .body5()
                     .foregroundStyle(.textSecondary)
-                Text(walletManager.dispayableBalance)
+                Text(walletManager.displayedBalance)
                     .subtitle5()
                     .foregroundStyle(.textPrimary)
             }
@@ -199,7 +199,7 @@ struct WalletSendView: View {
             return false
         }
         
-        guard let availableBalance = Double(walletManager.dispayableBalance) else {
+        guard let availableBalance = Double(walletManager.displayedBalance) else {
             amountErrorMessage = String(localized: "Failed to get balance")
             
             return false

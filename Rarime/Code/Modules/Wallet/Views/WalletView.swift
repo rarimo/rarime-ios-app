@@ -91,7 +91,7 @@ struct WalletView: View {
                         ProgressView()
                     } else {
                         Button(action: fetchBalance) {
-                            Text(walletManager.dispayableBalance)
+                            Text(walletManager.displayedBalance)
                                 .h4()
                                 .foregroundStyle(.textPrimary)
                         }

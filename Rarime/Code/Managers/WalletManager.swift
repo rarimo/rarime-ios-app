@@ -34,7 +34,7 @@ class WalletManager: ObservableObject {
         self.web3 = Web3(rpcURL: ConfigManager.shared.api.evmRpcURL.absoluteString)
     }
 
-    var dispayableBalance: String {
+    var displayedBalance: String {
         guard let balance else {
             return "0.00"
         }
