@@ -157,7 +157,7 @@ struct PrizeScanView: View {
                 )
                 .controlSize(.large)
                 .disabled(!hasAttempts)
-            } else if !canGetBonusScans {
+            } else if canGetBonusScans {
                 Button(action: { isBonusScanSheetPresented = true }) {
                     HStack(spacing: 12) {
                         Image(.flashlightFill)
@@ -218,7 +218,7 @@ struct PrizeScanView: View {
                         Text("Share on socials")
                             .subtitle5()
                             .foregroundStyle(.textPrimary)
-                        Text("+1 scan")
+                        Text(prizeScanUser.socialShare ? "Shared" : "+1 scan")
                             .body5()
                             .foregroundStyle(.textSecondary)
                     }
@@ -309,6 +309,7 @@ struct PrizeScanView: View {
                         .subtitle6()
                         .foregroundStyle(.textPrimary)
                     Spacer()
+                    // TODO: replace with winner address
                     Text("0x00000...0000")
                         .body4()
                         .underline()

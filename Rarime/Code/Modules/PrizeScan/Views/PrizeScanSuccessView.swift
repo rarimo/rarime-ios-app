@@ -17,8 +17,7 @@ struct PrizeScanSuccessView: View {
     }
 
     private var imageToShare: Data {
-        // TODO: use different image for sharing
-        UIImage(named: "HiddenPrizeBg")!.pngData()!
+        UIImage(resource: .hiddenPrizeWinner).pngData() ?? Data()
     }
 
     private var claimButtonText: String {
@@ -33,33 +32,35 @@ struct PrizeScanSuccessView: View {
 
     var body: some View {
         ZStack(alignment: .top) {
-            ZStack(alignment: .top) {
-                Image(.hiddenPrizeBg)
-                    .resizable()
-                    .scaledToFit()
-                    .ignoresSafeArea()
-                AsyncImage(
-                    url: URL(string: prizeScanUser.celebrity.image),
-                    content: { image in
-                        image
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 118, height: 135)
-                            .clipShape(RoundedRectangle(cornerRadius: 8))
-                            .clipped()
-                            .padding(.top, 172)
-                            .ignoresSafeArea()
-                    },
-                    placeholder: {
-                        ProgressView()
-                            .frame(width: 118, height: 135)
-                            .background(.bgBlur.opacity(0.2))
-                            .backgroundBlur(bgColor: .clear)
-                            .clipShape(RoundedRectangle(cornerRadius: 8))
-                            .padding(.top, 172)
-                            .ignoresSafeArea()
-                    }
-                )
+            GeometryReader { geo in
+                ZStack(alignment: .top) {
+                    Image(.hiddenPrizeBg)
+                        .resizable()
+                        .scaledToFit()
+                        .ignoresSafeArea()
+                    AsyncImage(
+                        url: URL(string: prizeScanUser.celebrity.image),
+                        content: { image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: geo.size.width / 3.5, height: geo.size.height / 5.25)
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                                .clipped()
+                                .padding(.top, geo.size.height / 4.125)
+                                .ignoresSafeArea()
+                        },
+                        placeholder: {
+                            ProgressView()
+                                .frame(width: geo.size.width / 3.5, height: geo.size.height / 5.25)
+                                .background(.bgBlur.opacity(0.2))
+                                .backgroundBlur(bgColor: .clear)
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                                .padding(.top, geo.size.height / 4.125)
+                                .ignoresSafeArea()
+                        }
+                    )
+                }
             }
             .offset(x: 0, y: -80)
             Rectangle()
@@ -112,6 +113,7 @@ struct PrizeScanSuccessView: View {
                         )
                     }
                     .padding(.top, 12)
+                    .disabled(isClaiming || isClaimed)
                 }
                 .padding(20)
                 .frame(maxWidth: .infinity)
@@ -145,7 +147,7 @@ struct PrizeScanSuccessView: View {
                 }
             }
             .padding(.top, 304)
-            .padding(.horizontal, 24)
+            .padding(.horizontal, 32)
             .padding(.bottom, 8)
         }
         .background(.bgPrimary)
@@ -176,8 +178,11 @@ struct PrizeScanSuccessView: View {
             try await prizeScanViewModel.claimReward { progress in
                 self.progress = Int(progress.fractionCompleted * 100)
             }
+
+            FeedbackGenerator.shared.notify(.success)
             isClaimed = true
         } catch {
+            FeedbackGenerator.shared.notify(.error)
             LoggerUtil.common.error("PrizeScan: Failed to claim reward: \(error)")
             AlertManager.shared.emitError("Failed to claim reward, try again")
         }

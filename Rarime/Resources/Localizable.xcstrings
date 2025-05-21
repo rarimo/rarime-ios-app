@@ -2525,6 +2525,9 @@
     "Share your referral link and get bonuses when your friends join and make a purchase!" : {
 
     },
+    "Shared" : {
+
+    },
     "Shows two identifiers on the card" : {
       "extractionState" : "stale",
       "localizations" : {
