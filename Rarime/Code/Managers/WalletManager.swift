@@ -91,7 +91,7 @@ class WalletManager: ObservableObject {
 
         let txHash = try web3.eth.sendRawTransaction(transaction: signedTx).wait()
 
-        LoggerUtil.common.debug("Transaction hash: \(txHash.hex(), privacy: .public)")
+        LoggerUtil.common.info("Transaction hash: \(txHash.hex(), privacy: .public)")
     }
 
     @MainActor

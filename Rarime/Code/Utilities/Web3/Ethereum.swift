@@ -83,7 +83,7 @@ extension EthereumQuantity {
     init(_ value: Double) {
         let ethValue = BigUInt(Int(value)) * BigUInt(10).power(18)
         
-        let gweiValue = BigUInt(Int(value * 1_000_000_000)) % BigUInt(10).power(9)
+        let gweiValue = BigUInt(Int(value * 1_000_000_000)) % BigUInt(10).power(9) * BigUInt(10).power(9)
         
         let quantity = ethValue + gweiValue
         
