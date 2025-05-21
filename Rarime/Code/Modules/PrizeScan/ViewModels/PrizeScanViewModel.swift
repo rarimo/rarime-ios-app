@@ -43,6 +43,8 @@ struct PrizeScanCelebrity {
 }
 
 class PrizeScanViewModel: ObservableObject {
+    static let faceThreshold = 740881858
+
     @Published var user: PrizeScanUser? = nil
     @Published var originalFeatures: [Float] = []
     @Published var foundFace: UIImage? = nil
@@ -157,13 +159,13 @@ class PrizeScanViewModel: ObservableObject {
         let nonceBigUint = try await faceRegistryContract.getVerificationNonce(inputAddress.fullHex())
         let nonce = try BN(dec: nonceBigUint.description)
 
-        let guessInputs = CircuitBuilderManager.shared.bionetCircuit.inputs(grayscaleData, originalFeatures, nonce, inputAddress)
+        let guessInputs = CircuitBuilderManager.shared.bionetCircuit.inputs(grayscaleData, originalFeatures, nonce, inputAddress, PrizeScanViewModel.faceThreshold)
         let zkProof = try await LikenessManager.shared.generateBionettaProof(guessInputs.json, downloadProgress)
 
         let guessCalldata = try IdentityCallDataBuilder().buildGuessCelebrityClaimRewardCalldata(address, zkPointsJSON: zkProof.json)
 
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.register(guessCalldata)
+        let response = try await relayer.register(guessCalldata, ConfigManager.shared.api.guessCelebrityGameContractAddress)
 
         LoggerUtil.common.info("Claim reward EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
 
