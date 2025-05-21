@@ -20,6 +20,10 @@ struct WalletSendView: View {
     @State private var isTransfering = false
     @State private var isConfirmationSheetPresented = false
     
+    @State private var isFeeCalculating = true
+    
+    @State private var fee: EthereumQuantity?
+    
     @State private var cancelables: [Task<Void, Never>] = []
 
     func toggleScan() {
@@ -44,6 +48,7 @@ struct WalletSendView: View {
                 content
             }
         }
+        .onAppear(perform: calculateFee)
         .onDisappear(perform: cleanup)
     }
 
@@ -155,10 +160,10 @@ struct WalletSendView: View {
                     title: String(localized: "Amount"),
                     value: walletManager.dispayableBalance
                 )
-//                ConfirmationTextRow(
-//                    title: String(localized: "Fee"),
-//                    value: "\(fee.formatted()) \(token.rawValue)"
-//                )
+                ConfirmationTextRow(
+                    title: String(localized: "Fee"),
+                    value: "\(fee?.double ?? 0)"
+                )
             }
             VStack(spacing: 4) {
                 AppButton(
@@ -221,6 +226,28 @@ struct WalletSendView: View {
             
             do {
                 walletManager.registerTransfer(amount)
+                
+                onBack()
+            } catch is CancellationError {
+                return
+            } catch {
+                LoggerUtil.common.error("failed to send tokens: \(error.localizedDescription, privacy: .public)")
+            }
+        }
+        
+        cancelables.append(cancelable)
+    }
+    
+    func calculateFee() {
+        isFeeCalculating = true
+        
+        let cancelable = Task { @MainActor in
+            defer {
+                isFeeCalculating = false
+            }
+            
+            do {
+                fee = try await walletManager.getFeeForTransfer()
                 
                 onBack()
             } catch is CancellationError {

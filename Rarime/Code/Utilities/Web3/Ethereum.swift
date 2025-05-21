@@ -63,3 +63,15 @@ class Ethereum {
         return address.range(of: pattern, options: .regularExpression) != nil
     }
 }
+
+extension EthereumQuantity {
+    var double: Double {
+        let ethValue = self.quantity.eth.description
+
+        let gweiValue = self.quantity.gwei.description
+        
+        let value = ethValue + "." + gweiValue.prefix(2)
+
+        return Double(value) ?? 0
+    }
+}

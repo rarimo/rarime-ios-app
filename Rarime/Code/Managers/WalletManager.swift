@@ -39,11 +39,7 @@ class WalletManager: ObservableObject {
             return "0.00"
         }
 
-        let ethValue = balance.quantity.eth.description
-
-        let gweiValue = balance.quantity.gwei.description
-
-        return ethValue + "." + gweiValue.prefix(2)
+        return balance.double.description
     }
 
     @MainActor
@@ -55,6 +51,14 @@ class WalletManager: ObservableObject {
         let ethPrivateKey = try EthereumPrivateKey(privateKey: privateKey.bytes)
 
         balance = try web3.eth.getBalance(address: ethPrivateKey.address, block: .latest).wait()
+    }
+
+    func getFeeForTransfer() async throws -> EthereumQuantity {
+        let gasPrice = try web3.eth.gasPrice().wait()
+
+        let fee = (gasPrice.quantity * (gasPrice.quantity / 5)) * 21_000
+
+        return .init(quantity: fee)
     }
 
     func registerTransfer(_ amount: Double) {
