@@ -229,6 +229,8 @@ struct WalletSendView: View {
                 
                 walletManager.registerTransfer(amount)
                 
+                AlertManager.shared.emitSuccess("Transaction sent")
+                
                 onBack()
             } catch is CancellationError {
                 return
@@ -254,8 +256,6 @@ struct WalletSendView: View {
             
             do {
                 fee = try await walletManager.getFeeForTransfer()
-                
-                onBack()
             } catch is CancellationError {
                 return
             } catch {

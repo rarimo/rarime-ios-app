@@ -21,7 +21,7 @@ class WalletManager: ObservableObject {
     init() {
         do {
             if try AppKeychain.containsValue(.privateKey) {
-                self.privateKey = try AppKeychain.getValue(.passport)
+                self.privateKey = try AppKeychain.getValue(.privateKey)
             }
         } catch {
             LoggerUtil.common.error("Failed to get private key: \(error.localizedDescription, privacy: .public)")
