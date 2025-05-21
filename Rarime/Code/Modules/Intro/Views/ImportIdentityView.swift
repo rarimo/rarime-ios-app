@@ -2,6 +2,7 @@ import Alamofire
 import SwiftUI
 
 struct ImportIdentityView: View {
+    @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var likenessManager: LikenessManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var userManager: UserManager
@@ -141,6 +142,8 @@ struct ImportIdentityView: View {
                 
                 LoggerUtil.common.info("Identity was imported")
                 
+                walletManager.privateKey = userManager.user?.secretKey
+                
                 likenessManager.postInitialization()
                 
                 onNext()
@@ -175,6 +178,8 @@ struct ImportIdentityView: View {
                 try await setReferralCodeIfUserHasPointsBalance()
                 
                 LoggerUtil.common.info("Identity was imported")
+                
+                walletManager.privateKey = userManager.user?.secretKey
                 
                 likenessManager.postInitialization()
                 
@@ -231,4 +236,5 @@ private func isValidPrivateKey(_ privateKey: String) throws -> Bool {
         .environmentObject(DecentralizedAuthManager.shared)
         .environmentObject(UserManager.shared)
         .environmentObject(LikenessManager.shared)
+        .environmentObject(WalletManager.shared)
 }
