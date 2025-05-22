@@ -170,13 +170,14 @@ struct GuessCelebrityUserResponseIncludedAttributes: Codable {
     let status: GuessCelebrityStatus?
     let image: String?
     let hint: String?
+    let winner: String?
 
     enum CodingKeys: String, CodingKey {
         case attemptsLeft = "attempts_left"
         case extraAttemptsLeft = "extra_attempts_left"
         case totalAttemptsCount = "total_attempts_count"
         case resetTime = "reset_time"
-        case title, description, status, image, hint
+        case title, description, status, image, hint, winner
     }
 }
 
