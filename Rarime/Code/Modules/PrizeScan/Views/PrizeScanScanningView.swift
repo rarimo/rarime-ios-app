@@ -19,8 +19,15 @@ struct PrizeScanScanningView: View {
                     .aspectRatio(contentMode: .fill)
                     .clipShape(FaceSquare())
                     .clipped()
-                Image(.faceFrame)
-                    .square(FaceSquare.SHAPE_SIZE)
+                if let mask = viewModel.maskFrame {
+                    Image(uiImage: mask)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .rotationEffect(.degrees(180))
+                        .scaleEffect(x: -1, y: 1)
+                        .clipShape(FaceSquare())
+                        .clipped()
+                }
             } else {
                 FaceSquare()
                     .foregroundStyle(.bgComponentPrimary)
