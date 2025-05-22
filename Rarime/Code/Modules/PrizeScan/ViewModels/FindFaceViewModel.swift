@@ -3,12 +3,12 @@ import Foundation
 import Identity
 import SwiftUI
 
-struct PrizeScanCelebrity {
+struct FindFaceCelebrity {
     let id, title, description, image, hint, winner: String
     let status: GuessCelebrityStatus
 }
 
-struct PrizeScanUser {
+struct FindFaceUser {
     let id, referralCode: String
     let referralsCount, referralsLimit: Int
     let socialShare: Bool
@@ -16,12 +16,12 @@ struct PrizeScanUser {
     let attemptsLeft, extraAttemptsLeft, totalAttemptsCount: Int
     let resetTime: TimeInterval
 
-    let celebrity: PrizeScanCelebrity
+    let celebrity: FindFaceCelebrity
 }
 
-extension PrizeScanUser {
-    static func empty() -> PrizeScanUser {
-        PrizeScanUser(
+extension FindFaceUser {
+    static func empty() -> FindFaceUser {
+        FindFaceUser(
             id: "",
             referralCode: "",
             referralsCount: 0,
@@ -31,7 +31,7 @@ extension PrizeScanUser {
             extraAttemptsLeft: 0,
             totalAttemptsCount: 0,
             resetTime: 0,
-            celebrity: PrizeScanCelebrity(
+            celebrity: FindFaceCelebrity(
                 id: "",
                 title: "",
                 description: "",
@@ -44,10 +44,10 @@ extension PrizeScanUser {
     }
 }
 
-private let PRIZE_SCAN_REFERRAL_CODE_LENGTH = 10
+private let FIND_FACE_REFERRAL_CODE_LENGTH = 10
 
-class PrizeScanViewModel: ObservableObject {
-    @Published var user: PrizeScanUser? = nil
+class FindFaceViewModel: ObservableObject {
+    @Published var user: FindFaceUser? = nil
     @Published var originalFeatures: [Float] = []
     @Published var foundFace: UIImage? = nil
 
@@ -63,11 +63,11 @@ class PrizeScanViewModel: ObservableObject {
                 guard let error = error as? AFError else { throw error }
                 let openApiHttpCode = try error.retriveOpenApiHttpCode()
                 if openApiHttpCode == HTTPStatusCode.notFound.rawValue {
-                    LoggerUtil.common.info("PrizeScan: User is not found, creating a new user")
+                    LoggerUtil.common.info("FindFace: User is not found, creating a new user")
 
                     // Because referral codes can be used in different services,
                     // we check whether the code belongs to the guess celebrity service
-                    let refCode = referralCode?.count == PRIZE_SCAN_REFERRAL_CODE_LENGTH
+                    let refCode = referralCode?.count == FIND_FACE_REFERRAL_CODE_LENGTH
                         ? referralCode
                         : nil
 
@@ -77,7 +77,7 @@ class PrizeScanViewModel: ObservableObject {
                 }
             } catch {
                 AlertManager.shared.emitError("Failed to load user information")
-                LoggerUtil.common.error("PrizeScan: Failed to load user information: \(error, privacy: .public)")
+                LoggerUtil.common.error("FindFace: Failed to load user information: \(error, privacy: .public)")
                 return
             }
         }
@@ -88,7 +88,7 @@ class PrizeScanViewModel: ObservableObject {
         let celebrityRel = userResponse.data.relationships.celebrity.data
         let celebrity = userResponse.included.first(where: { $0.id == celebrityRel.id && $0.type == celebrityRel.type })
 
-        user = PrizeScanUser(
+        user = FindFaceUser(
             id: userResponse.data.id,
             referralCode: userResponse.data.attributes.referralCode,
             referralsCount: userResponse.data.attributes.referralsCount,
@@ -100,7 +100,7 @@ class PrizeScanViewModel: ObservableObject {
             totalAttemptsCount: userStats?.attributes.totalAttemptsCount ?? 0,
             resetTime: userStats?.attributes.resetTime ?? 0,
 
-            celebrity: PrizeScanCelebrity(
+            celebrity: FindFaceCelebrity(
                 id: celebrity?.id ?? "",
                 title: celebrity?.attributes.title ?? "",
                 description: celebrity?.attributes.description ?? "",

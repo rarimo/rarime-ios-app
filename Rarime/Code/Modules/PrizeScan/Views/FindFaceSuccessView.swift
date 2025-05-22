@@ -1,8 +1,8 @@
 import ConfettiSwiftUI
 import SwiftUI
 
-struct PrizeScanSuccessView: View {
-    @EnvironmentObject private var prizeScanViewModel: PrizeScanViewModel
+struct FindFaceSuccessView: View {
+    @EnvironmentObject private var findFaceViewModel: FindFaceViewModel
 
     let onViewWallet: () -> Void
 
@@ -12,12 +12,12 @@ struct PrizeScanSuccessView: View {
     @State private var isClaiming = false
     @State private var isClaimed = false
 
-    private var prizeScanUser: PrizeScanUser {
-        prizeScanViewModel.user ?? PrizeScanUser.empty()
+    private var findFaceUser: FindFaceUser {
+        findFaceViewModel.user ?? FindFaceUser.empty()
     }
 
     private var imageToShare: Data {
-        UIImage(resource: .hiddenPrizeWinner).pngData() ?? Data()
+        UIImage(resource: .findFaceWinner).pngData() ?? Data()
     }
 
     private var claimButtonText: String {
@@ -34,12 +34,12 @@ struct PrizeScanSuccessView: View {
         ZStack(alignment: .top) {
             GeometryReader { geo in
                 ZStack(alignment: .top) {
-                    Image(.hiddenPrizeBg)
+                    Image(.findFaceBg)
                         .resizable()
                         .scaledToFit()
                         .ignoresSafeArea()
                     AsyncImage(
-                        url: URL(string: prizeScanUser.celebrity.image),
+                        url: URL(string: findFaceUser.celebrity.image),
                         content: { image in
                             image
                                 .resizable()
@@ -85,7 +85,7 @@ struct PrizeScanSuccessView: View {
                         .subtitle6()
                         .foregroundStyle(.textSecondary)
                     HStack(spacing: 10) {
-                        Text(verbatim: String(PRIZE_SCAN_ETH_REWARD))
+                        Text(verbatim: String(FIND_FACE_ETH_REWARD))
                             .h3()
                             .foregroundStyle(.textPrimary)
                         Image(.ethereum)
@@ -175,7 +175,7 @@ struct PrizeScanSuccessView: View {
     func claimReward() async {
         do {
             isClaiming = true
-            try await prizeScanViewModel.claimReward { progress in
+            try await findFaceViewModel.claimReward { progress in
                 self.progress = Int(progress.fractionCompleted * 100)
             }
 
@@ -183,7 +183,7 @@ struct PrizeScanSuccessView: View {
             isClaimed = true
         } catch {
             FeedbackGenerator.shared.notify(.error)
-            LoggerUtil.common.error("PrizeScan: Failed to claim reward: \(error)")
+            LoggerUtil.common.error("FindFace: Failed to claim reward: \(error)")
             AlertManager.shared.emitError("Failed to claim reward, try again")
         }
 
@@ -194,7 +194,7 @@ struct PrizeScanSuccessView: View {
 #Preview {
     ZStack {}
         .sheet(isPresented: .constant(true)) {
-            PrizeScanSuccessView(onViewWallet: {})
-                .environmentObject(PrizeScanViewModel())
+            FindFaceSuccessView(onViewWallet: {})
+                .environmentObject(FindFaceViewModel())
         }
 }

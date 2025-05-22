@@ -4,13 +4,13 @@ private enum ScanState {
     case scanning, failed, success
 }
 
-struct PrizeScanCameraView: View {
-    @EnvironmentObject private var prizeScanViewModel: PrizeScanViewModel
+struct FindFaceScanView: View {
+    @EnvironmentObject private var findFaceViewModel: FindFaceViewModel
 
     let onClose: () -> Void
     let onViewWallet: () -> Void
 
-    @StateObject var viewModel = PrizeScanCameraViewModel()
+    @StateObject var viewModel = FindFaceCameraViewModel()
     @State private var scanState: ScanState = .scanning
 
     var body: some View {
@@ -28,22 +28,22 @@ struct PrizeScanCameraView: View {
         ZStack {
             switch scanState {
                 case .scanning:
-                    PrizeScanScanningView(onSubmit: { result in
+                    FindFaceScanningView(onSubmit: { result in
                         scanState = result ? .success : .failed
                     })
                     .environmentObject(viewModel)
-                    .environmentObject(prizeScanViewModel)
+                    .environmentObject(findFaceViewModel)
                 case .failed:
-                    PrizeScanFailedView(onScanAgain: {
+                    FindFaceFailedView(onScanAgain: {
                         scanState = .scanning
                     })
-                    .environmentObject(prizeScanViewModel)
+                    .environmentObject(findFaceViewModel)
                 case .success:
-                    PrizeScanSuccessView(onViewWallet: {
+                    FindFaceSuccessView(onViewWallet: {
                         cleanup()
                         onViewWallet()
                     })
-                    .environmentObject(prizeScanViewModel)
+                    .environmentObject(findFaceViewModel)
             }
         }
     }
@@ -85,7 +85,7 @@ struct PrizeScanCameraView: View {
 #Preview {
     ZStack {}
         .sheet(isPresented: .constant(true)) {
-            PrizeScanCameraView(onClose: {}, onViewWallet: {})
-                .environmentObject(PrizeScanViewModel())
+            FindFaceScanView(onClose: {}, onViewWallet: {})
+                .environmentObject(FindFaceViewModel())
         }
 }
