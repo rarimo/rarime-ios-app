@@ -1,6 +1,6 @@
 import SwiftUI
 
-class PrizeScanCameraViewModel: ObservableObject {
+class FindFaceCameraViewModel: ObservableObject {
     private var cameraManager = FaceCaptureSession(cameraPosition: .back)
     
     @Published var currentFrame: CGImage?

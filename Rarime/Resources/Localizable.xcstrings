@@ -1303,9 +1303,6 @@
     "Hidden keys" : {
 
     },
-    "Hidden Prize Scan" : {
-
-    },
     "History" : {
 
     },
@@ -1417,7 +1414,7 @@
     "Invite a friend" : {
 
     },
-    "Invite to Hidden Prize Scan" : {
+    "Invite to Find a Face Game" : {
 
     },
     "Invite to RariMe" : {
@@ -1472,7 +1469,7 @@
         }
       }
     },
-    "Join Hidden Prize Scan with my link:\n\n%@" : {
+    "Join Find a face game with my link:\n\n%@" : {
 
     },
     "Join RariMe with my invite code: %@\n\n%@" : {

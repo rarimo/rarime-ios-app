@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PrizeScanStatusChip: View {
+struct FindFaceStatusChip: View {
     let status: GuessCelebrityStatus
 
     var body: some View {
@@ -11,7 +11,7 @@ struct PrizeScanStatusChip: View {
             } else {
                 Text("Prize-pool:")
                     .subtitle6()
-                Text(verbatim: String(PRIZE_SCAN_ETH_REWARD))
+                Text(verbatim: String(FIND_FACE_ETH_REWARD))
                     .h6()
                 Image(.ethereum)
                     .iconSmall()
@@ -25,5 +25,5 @@ struct PrizeScanStatusChip: View {
 }
 
 #Preview {
-    PrizeScanStatusChip(status: .active)
+    FindFaceStatusChip(status: .active)
 }

@@ -1,8 +1,8 @@
 import SwiftUI
 
-struct PrizeScanScanningView: View {
-    @EnvironmentObject private var viewModel: PrizeScanCameraViewModel
-    @EnvironmentObject private var prizeScanViewModel: PrizeScanViewModel
+struct FindFaceScanningView: View {
+    @EnvironmentObject private var cameraViewModel: FindFaceCameraViewModel
+    @EnvironmentObject private var findFaceViewModel: FindFaceViewModel
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
 
@@ -13,13 +13,15 @@ struct PrizeScanScanningView: View {
 
     var body: some View {
         ZStack {
-            if let face = viewModel.currentFrame {
+            if let face = cameraViewModel.currentFrame {
                 Image(decorative: face, scale: 1)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .clipShape(FaceSquare())
                     .clipped()
-                if let mask = viewModel.maskFrame {
+                Image(.faceFrame)
+                    .square(FaceSquare.SHAPE_SIZE)
+                if let mask = cameraViewModel.maskFrame {
                     Image(uiImage: mask)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -46,7 +48,7 @@ struct PrizeScanScanningView: View {
             }
             .padding(.horizontal, 32)
         }
-        .onAppear(perform: viewModel.startScanning)
+        .onAppear(perform: cameraViewModel.startScanning)
     }
 
     var topHint: some View {
@@ -96,13 +98,13 @@ struct PrizeScanScanningView: View {
     func takePicture() {
         FeedbackGenerator.shared.impact(.medium)
         isPictureTaken = true
-        viewModel.pauseScanning()
+        cameraViewModel.pauseScanning()
     }
 
     func retakePicture() {
         FeedbackGenerator.shared.impact(.medium)
         isPictureTaken = false
-        viewModel.startScanning()
+        cameraViewModel.startScanning()
     }
 
     func confirmPicture() {
@@ -116,9 +118,9 @@ struct PrizeScanScanningView: View {
                 guard let user = userManager.user else { throw "failed to get user" }
                 let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
 
-                let isSuccess = try await prizeScanViewModel.submitGuess(
+                let isSuccess = try await findFaceViewModel.submitGuess(
                     jwt: accessJwt,
-                    image: UIImage(cgImage: viewModel.currentFrame!)
+                    image: UIImage(cgImage: cameraViewModel.currentFrame!)
                 )
 
                 if isSuccess {
@@ -134,7 +136,7 @@ struct PrizeScanScanningView: View {
                 AlertManager.shared.emitError("Failed to submit guess")
 
                 isPictureTaken = false
-                viewModel.startScanning()
+                cameraViewModel.startScanning()
             }
 
             isSubmitting = false
@@ -160,9 +162,9 @@ private struct FaceSquare: Shape {
 }
 
 #Preview {
-    PrizeScanScanningView(onSubmit: { _ in })
-        .environmentObject(PrizeScanViewModel())
-        .environmentObject(PrizeScanCameraViewModel())
+    FindFaceScanningView(onSubmit: { _ in })
+        .environmentObject(FindFaceViewModel())
+        .environmentObject(FindFaceCameraViewModel())
         .environmentObject(UserManager())
         .environmentObject(DecentralizedAuthManager())
 }

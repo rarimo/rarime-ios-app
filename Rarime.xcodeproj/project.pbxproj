@@ -27,7 +27,7 @@
 		561C3C2B2BADBF1000FBB3B9 /* View+Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C2A2BADBF1000FBB3B9 /* View+Typography.swift */; };
 		561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C382BADE64B00FBB3B9 /* Fonts.swift */; };
 		561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C422BAEE2D600FBB3B9 /* String+Error.swift */; };
-		561DA2EB2DDC7FCA004BC001 /* PrizeScanStatusChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DA2EA2DDC7FCA004BC001 /* PrizeScanStatusChip.swift */; };
+		561DA2EB2DDC7FCA004BC001 /* FindFaceStatusChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DA2EA2DDC7FCA004BC001 /* FindFaceStatusChip.swift */; };
 		562241432C107E16000239FA /* AppDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562241422C107E16000239FA /* AppDropdown.swift */; };
 		56337CE12DBA385B00973721 /* LikenessFaceImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56337CE02DBA385B00973721 /* LikenessFaceImageView.swift */; };
 		56337CE32DBA3D1500973721 /* LikenessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56337CE22DBA3D1500973721 /* LikenessManager.swift */; };
@@ -41,16 +41,16 @@
 		56474AD62BB9860E0017AA25 /* FaceIdAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */; };
 		56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */; };
 		56474ADA2BB9ED6E0017AA25 /* AnyTransition+Backslide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */; };
-		564CE2F52DD2500600D03E6D /* PrizeScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE2F42DD2500200D03E6D /* PrizeScanView.swift */; };
-		564CE2F72DD348BA00D03E6D /* PrizeScanCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE2F62DD348BA00D03E6D /* PrizeScanCameraView.swift */; };
-		564CE2FA2DD34A5300D03E6D /* PrizeScanCameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE2F92DD34A5300D03E6D /* PrizeScanCameraViewModel.swift */; };
+		564CE2F52DD2500600D03E6D /* FindFaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE2F42DD2500200D03E6D /* FindFaceView.swift */; };
+		564CE2F72DD348BA00D03E6D /* FindFaceScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE2F62DD348BA00D03E6D /* FindFaceScanView.swift */; };
+		564CE2FA2DD34A5300D03E6D /* FindFaceCameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE2F92DD34A5300D03E6D /* FindFaceCameraViewModel.swift */; };
 		564CE3002DD4C88000D03E6D /* GuessCelebrityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE2FF2DD4C88000D03E6D /* GuessCelebrityService.swift */; };
 		564CE3022DD4CE7500D03E6D /* JsonApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE3012DD4CE7500D03E6D /* JsonApi.swift */; };
 		564CE3032DD4CE7500D03E6D /* JsonApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE3012DD4CE7500D03E6D /* JsonApi.swift */; };
-		564CE3092DD4E11F00D03E6D /* PrizeScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE3082DD4E11F00D03E6D /* PrizeScanViewModel.swift */; };
-		564CE30F2DD6228800D03E6D /* PrizeScanScanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE30E2DD6228800D03E6D /* PrizeScanScanningView.swift */; };
-		564CE3112DD62CC500D03E6D /* PrizeScanSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE3102DD62CC500D03E6D /* PrizeScanSuccessView.swift */; };
-		564CE3132DD62CD300D03E6D /* PrizeScanFailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE3122DD62CD300D03E6D /* PrizeScanFailedView.swift */; };
+		564CE3092DD4E11F00D03E6D /* FindFaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE3082DD4E11F00D03E6D /* FindFaceViewModel.swift */; };
+		564CE30F2DD6228800D03E6D /* FindFaceScanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE30E2DD6228800D03E6D /* FindFaceScanningView.swift */; };
+		564CE3112DD62CC500D03E6D /* FindFaceSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE3102DD62CC500D03E6D /* FindFaceSuccessView.swift */; };
+		564CE3132DD62CD300D03E6D /* FindFaceFailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE3122DD62CD300D03E6D /* FindFaceFailedView.swift */; };
 		564CE3192DD7387A00D03E6D /* DotsLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE3182DD7387A00D03E6D /* DotsLoadingView.swift */; };
 		5651D07A2CB94C4400C6A704 /* AppsFlyerLib-Static in Frameworks */ = {isa = PBXBuildFile; productRef = 5651D0792CB94C4400C6A704 /* AppsFlyerLib-Static */; };
 		5655E4232BD2C3AC00B86C5C /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E4222BD2C3AC00B86C5C /* SettingsManager.swift */; };
@@ -446,7 +446,7 @@
 		561C3C2A2BADBF1000FBB3B9 /* View+Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Typography.swift"; sourceTree = "<group>"; };
 		561C3C382BADE64B00FBB3B9 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		561C3C422BAEE2D600FBB3B9 /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
-		561DA2EA2DDC7FCA004BC001 /* PrizeScanStatusChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeScanStatusChip.swift; sourceTree = "<group>"; };
+		561DA2EA2DDC7FCA004BC001 /* FindFaceStatusChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFaceStatusChip.swift; sourceTree = "<group>"; };
 		562241422C107E16000239FA /* AppDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDropdown.swift; sourceTree = "<group>"; };
 		56337CE02DBA385B00973721 /* LikenessFaceImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessFaceImageView.swift; sourceTree = "<group>"; };
 		56337CE22DBA3D1500973721 /* LikenessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessManager.swift; sourceTree = "<group>"; };
@@ -460,15 +460,15 @@
 		56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIdAuth.swift; sourceTree = "<group>"; };
 		56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
 		56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+Backslide.swift"; sourceTree = "<group>"; };
-		564CE2F42DD2500200D03E6D /* PrizeScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeScanView.swift; sourceTree = "<group>"; };
-		564CE2F62DD348BA00D03E6D /* PrizeScanCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeScanCameraView.swift; sourceTree = "<group>"; };
-		564CE2F92DD34A5300D03E6D /* PrizeScanCameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeScanCameraViewModel.swift; sourceTree = "<group>"; };
+		564CE2F42DD2500200D03E6D /* FindFaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFaceView.swift; sourceTree = "<group>"; };
+		564CE2F62DD348BA00D03E6D /* FindFaceScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFaceScanView.swift; sourceTree = "<group>"; };
+		564CE2F92DD34A5300D03E6D /* FindFaceCameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFaceCameraViewModel.swift; sourceTree = "<group>"; };
 		564CE2FF2DD4C88000D03E6D /* GuessCelebrityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessCelebrityService.swift; sourceTree = "<group>"; };
 		564CE3012DD4CE7500D03E6D /* JsonApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonApi.swift; sourceTree = "<group>"; };
-		564CE3082DD4E11F00D03E6D /* PrizeScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeScanViewModel.swift; sourceTree = "<group>"; };
-		564CE30E2DD6228800D03E6D /* PrizeScanScanningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeScanScanningView.swift; sourceTree = "<group>"; };
-		564CE3102DD62CC500D03E6D /* PrizeScanSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeScanSuccessView.swift; sourceTree = "<group>"; };
-		564CE3122DD62CD300D03E6D /* PrizeScanFailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeScanFailedView.swift; sourceTree = "<group>"; };
+		564CE3082DD4E11F00D03E6D /* FindFaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFaceViewModel.swift; sourceTree = "<group>"; };
+		564CE30E2DD6228800D03E6D /* FindFaceScanningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFaceScanningView.swift; sourceTree = "<group>"; };
+		564CE3102DD62CC500D03E6D /* FindFaceSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFaceSuccessView.swift; sourceTree = "<group>"; };
+		564CE3122DD62CD300D03E6D /* FindFaceFailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFaceFailedView.swift; sourceTree = "<group>"; };
 		564CE3182DD7387A00D03E6D /* DotsLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsLoadingView.swift; sourceTree = "<group>"; };
 		5655E4222BD2C3AC00B86C5C /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		5655E4242BD2C3B500B86C5C /* PassportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportManager.swift; sourceTree = "<group>"; };
@@ -1016,12 +1016,12 @@
 		564CE2F32DD24FFA00D03E6D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				564CE2F42DD2500200D03E6D /* PrizeScanView.swift */,
-				561DA2EA2DDC7FCA004BC001 /* PrizeScanStatusChip.swift */,
-				564CE2F62DD348BA00D03E6D /* PrizeScanCameraView.swift */,
-				564CE30E2DD6228800D03E6D /* PrizeScanScanningView.swift */,
-				564CE3122DD62CD300D03E6D /* PrizeScanFailedView.swift */,
-				564CE3102DD62CC500D03E6D /* PrizeScanSuccessView.swift */,
+				564CE2F42DD2500200D03E6D /* FindFaceView.swift */,
+				561DA2EA2DDC7FCA004BC001 /* FindFaceStatusChip.swift */,
+				564CE2F62DD348BA00D03E6D /* FindFaceScanView.swift */,
+				564CE30E2DD6228800D03E6D /* FindFaceScanningView.swift */,
+				564CE3122DD62CD300D03E6D /* FindFaceFailedView.swift */,
+				564CE3102DD62CC500D03E6D /* FindFaceSuccessView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1029,8 +1029,8 @@
 		564CE2F82DD34A4500D03E6D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				564CE2F92DD34A5300D03E6D /* PrizeScanCameraViewModel.swift */,
-				564CE3082DD4E11F00D03E6D /* PrizeScanViewModel.swift */,
+				564CE2F92DD34A5300D03E6D /* FindFaceCameraViewModel.swift */,
+				564CE3082DD4E11F00D03E6D /* FindFaceViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -2101,7 +2101,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7D624612D6E1070007BA5A6 /* ActivePollOptionsView.swift in Sources */,
-				561DA2EB2DDC7FCA004BC001 /* PrizeScanStatusChip.swift in Sources */,
+				561DA2EB2DDC7FCA004BC001 /* FindFaceStatusChip.swift in Sources */,
 				CE7E957D2CE757B400D86A4F /* UniversalNotificationContent.swift in Sources */,
 				C7DF8BD22D5F431200C8E2D2 /* MaintenanceView.swift in Sources */,
 				5613F4322BD18409008E6CBE /* AppSkeleton.swift in Sources */,
@@ -2147,7 +2147,7 @@
 				C755128D2C86173A000258AD /* PassportTutorialStep.swift in Sources */,
 				565E221C2BF7B33D00171692 /* CameraPermissionView.swift in Sources */,
 				56E6AD452BD272D100E4DDC1 /* AuthMethodView.swift in Sources */,
-				564CE2F72DD348BA00D03E6D /* PrizeScanCameraView.swift in Sources */,
+				564CE2F72DD348BA00D03E6D /* FindFaceScanView.swift in Sources */,
 				56062B9C2C12032700C9BF9B /* Constants.swift in Sources */,
 				56DAA3152BB8CC95002CF710 /* PasscodeFieldView.swift in Sources */,
 				568350AC2BEA304B00B70E3D /* PassportIdentifier.swift in Sources */,
@@ -2202,7 +2202,7 @@
 				561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */,
 				561C3C2B2BADBF1000FBB3B9 /* View+Typography.swift in Sources */,
 				560F0C342BD175EB00067054 /* LoggerUtil.swift in Sources */,
-				564CE30F2DD6228800D03E6D /* PrizeScanScanningView.swift in Sources */,
+				564CE30F2DD6228800D03E6D /* FindFaceScanningView.swift in Sources */,
 				568B4FCC2BB6C164001C9C74 /* IntroView.swift in Sources */,
 				CEEE2B572DDCC63D00532E72 /* WalletManager.swift in Sources */,
 				56337CE12DBA385B00973721 /* LikenessFaceImageView.swift in Sources */,
@@ -2222,7 +2222,7 @@
 				5641CC452C874E2B007B7A0D /* AppAlert.swift in Sources */,
 				C7A27D8D2DA406B5005A1070 /* QRLink.swift in Sources */,
 				C71161B32CAAE3DB00ED41EA /* String+BigUInt.swift in Sources */,
-				564CE2FA2DD34A5300D03E6D /* PrizeScanCameraViewModel.swift in Sources */,
+				564CE2FA2DD34A5300D03E6D /* FindFaceCameraViewModel.swift in Sources */,
 				563706792C5CF374002F3AF4 /* MrzFormView.swift in Sources */,
 				CED909D02BDBA9FC0065E949 /* Cosmos.swift in Sources */,
 				56A6C76E2BBD474200992562 /* DateUtil.swift in Sources */,
@@ -2257,7 +2257,7 @@
 				568B4FCE2BB6C274001C9C74 /* IntroStepView.swift in Sources */,
 				568B4FD12BB6D88F001C9C74 /* Divider.swift in Sources */,
 				56DAA3112BB8C97D002CF710 /* EnableLayoutView.swift in Sources */,
-				564CE2F52DD2500600D03E6D /* PrizeScanView.swift in Sources */,
+				564CE2F52DD2500600D03E6D /* FindFaceView.swift in Sources */,
 				56E2D9202BCED460006E725D /* AppCheckbox.swift in Sources */,
 				CE72101E2BD7BD9D0043DB7F /* Data+Utf8.swift in Sources */,
 				CE5315CA2C7769A20087D53D /* NotificationManager.swift in Sources */,
@@ -2299,10 +2299,10 @@
 				56933DFB2BBAFBD90068C894 /* AppToggle.swift in Sources */,
 				CEDC578B2CA2C9A600F02132 /* MRZScanView.swift in Sources */,
 				CE34775F2C7888E1005E91FE /* NotificationsView.swift in Sources */,
-				564CE3092DD4E11F00D03E6D /* PrizeScanViewModel.swift in Sources */,
+				564CE3092DD4E11F00D03E6D /* FindFaceViewModel.swift in Sources */,
 				56E6AD4B2BD2732300E4DDC1 /* ThemeView.swift in Sources */,
 				CEFE5F3B2CB5718100498F39 /* SODAlgorithm.swift in Sources */,
-				564CE3112DD62CC500D03E6D /* PrizeScanSuccessView.swift in Sources */,
+				564CE3112DD62CC500D03E6D /* FindFaceSuccessView.swift in Sources */,
 				CEEE2B442DDCBF5500532E72 /* WalletReceiveView.swift in Sources */,
 				C726E8B42D6389F7000C9CA6 /* WalletWaitlistView.swift in Sources */,
 				CE3CD7922DB6819B00112E46 /* PreviewUtils.swift in Sources */,
@@ -2325,7 +2325,7 @@
 				CEF251382BD6E17800050507 /* UserManager.swift in Sources */,
 				5655E4252BD2C3B500B86C5C /* PassportManager.swift in Sources */,
 				C75512832C85F9D0000258AD /* PassportScanTutorialView.swift in Sources */,
-				564CE3132DD62CD300D03E6D /* PrizeScanFailedView.swift in Sources */,
+				564CE3132DD62CD300D03E6D /* FindFaceFailedView.swift in Sources */,
 				CE0DC57B2C0DB33A00EFC0D7 /* UpdateManager.swift in Sources */,
 				56E7AD0E2BDAD70200D3A258 /* RefreshableScrollView.swift in Sources */,
 				56A6C76A2BBC57B700992562 /* PassportViewModel.swift in Sources */,

@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct PrizeScanView: View {
+struct FindFaceView: View {
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
-    @EnvironmentObject private var viewModel: PrizeScanViewModel
+    @EnvironmentObject private var viewModel: FindFaceViewModel
 
     var animation: Namespace.ID
     let onClose: () -> Void
@@ -12,12 +12,12 @@ struct PrizeScanView: View {
     @State private var isScanSheetPresented = false
     @State private var isBonusScanSheetPresented = false
 
-    private var prizeScanUser: PrizeScanUser {
-        viewModel.user ?? PrizeScanUser.empty()
+    private var findFaceUser: FindFaceUser {
+        viewModel.user ?? FindFaceUser.empty()
     }
 
     private var totalAttemptsLeft: Int {
-        prizeScanUser.attemptsLeft + prizeScanUser.extraAttemptsLeft
+        findFaceUser.attemptsLeft + findFaceUser.extraAttemptsLeft
     }
 
     private var hasAttempts: Bool {
@@ -25,23 +25,23 @@ struct PrizeScanView: View {
     }
 
     private var canGetBonusScans: Bool {
-        !prizeScanUser.socialShare || prizeScanUser.referralsCount < prizeScanUser.referralsLimit
+        !findFaceUser.socialShare || findFaceUser.referralsCount < findFaceUser.referralsLimit
     }
 
     private var tip: String {
-        prizeScanUser.celebrity.hint
+        findFaceUser.celebrity.hint
     }
 
     private var isCompleted: Bool {
-        prizeScanUser.celebrity.status == .completed
+        findFaceUser.celebrity.status == .completed
     }
 
     private var invitationLink: String {
-        ConfigManager.shared.api.referralURL.appendingPathComponent(prizeScanUser.referralCode).absoluteString
+        ConfigManager.shared.api.referralURL.appendingPathComponent(findFaceUser.referralCode).absoluteString
     }
 
     private var formattedWinnerAddress: String {
-        let address = prizeScanUser.celebrity.winner
+        let address = findFaceUser.celebrity.winner
         return address.isEmpty
             ? "–"
             : "\(address.prefix(6))...\(address.suffix(4))"
@@ -49,14 +49,14 @@ struct PrizeScanView: View {
 
     private var imageToShare: Data {
         // TODO: use different image for sharing
-        UIImage(named: "HiddenPrizeBg")!.pngData()!
+        UIImage(resource: .findFaceBg).pngData() ?? Data()
     }
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
             PullToCloseWrapperView(action: onClose) {
                 ZStack(alignment: .top) {
-                    Image(.hiddenPrizeBg)
+                    Image(.findFaceBg)
                         .resizable()
                         .scaledToFit()
                         .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
@@ -79,7 +79,7 @@ struct PrizeScanView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .sheet(isPresented: $isScanSheetPresented) {
-            PrizeScanCameraView(
+            FindFaceScanView(
                 onClose: { isScanSheetPresented = false },
                 onViewWallet: {
                     isScanSheetPresented = false
@@ -93,7 +93,7 @@ struct PrizeScanView: View {
     var mainSheetContent: some View {
         VStack(alignment: .leading, spacing: 24) {
             VStack(alignment: .leading, spacing: 0) {
-                PrizeScanStatusChip(status: prizeScanUser.celebrity.status)
+                FindFaceStatusChip(status: findFaceUser.celebrity.status)
                 Text("Hidden keys")
                     .h1()
                     .foregroundStyle(.invertedDark)
@@ -188,7 +188,7 @@ struct PrizeScanView: View {
                 HStack(spacing: 12) {
                     Image(.lock2Line)
                         .square(24)
-                    CountdownView(endTimestamp: prizeScanUser.resetTime)
+                    CountdownView(endTimestamp: findFaceUser.resetTime)
                         .buttonLarge()
                 }
                 .padding(18)
@@ -232,15 +232,15 @@ struct PrizeScanView: View {
                         Text("Share on socials")
                             .subtitle5()
                             .foregroundStyle(.textPrimary)
-                        Text(prizeScanUser.socialShare ? "Shared" : "+1 scan")
+                        Text(findFaceUser.socialShare ? "Shared" : "+1 scan")
                             .body5()
                             .foregroundStyle(.textSecondary)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     ShareLink(
                         item: imageToShare,
-                        subject: Text("Hidden Prize Scan"),
-                        preview: SharePreview("Hidden Prize Scan", image: Image(uiImage: UIImage(data: imageToShare)!))
+                        subject: Text("Find a face"),
+                        preview: SharePreview("Find a face", image: Image(uiImage: UIImage(data: imageToShare)!))
                     ) {
                         Text("Share")
                             .buttonMedium()
@@ -266,15 +266,15 @@ struct PrizeScanView: View {
                         Text("Invite a friend")
                             .subtitle5()
                             .foregroundStyle(.textPrimary)
-                        Text("\(prizeScanUser.referralsCount)/\(prizeScanUser.referralsLimit) invited")
+                        Text("\(findFaceUser.referralsCount)/\(findFaceUser.referralsLimit) invited")
                             .body5()
                             .foregroundStyle(.textSecondary)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     ShareLink(
                         item: URL(string: invitationLink)!,
-                        subject: Text("Invite to Hidden Prize Scan"),
-                        message: Text("Join Hidden Prize Scan with my link:\n\n\(invitationLink)")
+                        subject: Text("Invite to Find a Face Game"),
+                        message: Text("Join Find a face game with my link:\n\n\(invitationLink)")
                     ) {
                         Text("Invite")
                             .buttonMedium()
@@ -296,7 +296,7 @@ struct PrizeScanView: View {
                 .subtitle6()
                 .foregroundStyle(.textPrimary)
             HStack(spacing: 16) {
-                AsyncImage(url: URL(string: prizeScanUser.celebrity.image)) { image in
+                AsyncImage(url: URL(string: findFaceUser.celebrity.image)) { image in
                     image
                         .resizable()
                         .scaledToFill()
@@ -308,10 +308,10 @@ struct PrizeScanView: View {
                         .frame(width: 80, height: 80)
                 }
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(prizeScanUser.celebrity.title)
+                    Text(findFaceUser.celebrity.title)
                         .h5()
                         .foregroundStyle(.textPrimary)
-                    Text(prizeScanUser.celebrity.description)
+                    Text(findFaceUser.celebrity.description)
                         .body5()
                         .foregroundStyle(.textSecondary)
                 }
@@ -332,7 +332,7 @@ struct PrizeScanView: View {
                         .subtitle6()
                         .foregroundStyle(.textPrimary)
                     Spacer()
-                    Text(String(PRIZE_SCAN_ETH_REWARD))
+                    Text(String(FIND_FACE_ETH_REWARD))
                         .body4()
                         .foregroundStyle(.textSecondary)
                     Image(.ethereum)
@@ -364,8 +364,8 @@ struct PrizeScanView: View {
 }
 
 #Preview {
-    PrizeScanView(animation: Namespace().wrappedValue, onClose: {}, onViewWallet: {})
+    FindFaceView(animation: Namespace().wrappedValue, onClose: {}, onViewWallet: {})
         .environmentObject(UserManager())
         .environmentObject(DecentralizedAuthManager())
-        .environmentObject(PrizeScanViewModel())
+        .environmentObject(FindFaceViewModel())
 }
