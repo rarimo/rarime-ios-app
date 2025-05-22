@@ -36,8 +36,15 @@ struct PrizeScanView: View {
         prizeScanUser.celebrity.status == .completed
     }
 
-    var invitationLink: String {
+    private var invitationLink: String {
         ConfigManager.shared.api.referralURL.appendingPathComponent(prizeScanUser.referralCode).absoluteString
+    }
+
+    private var formattedWinnerAddress: String {
+        let address = prizeScanUser.celebrity.winner
+        return address.isEmpty
+            ? "–"
+            : "\(address.prefix(6))...\(address.suffix(4))"
     }
 
     private var imageToShare: Data {
@@ -316,10 +323,8 @@ struct PrizeScanView: View {
                         .subtitle6()
                         .foregroundStyle(.textPrimary)
                     Spacer()
-                    // TODO: replace with winner address
-                    Text("0x00000...0000")
+                    Text(verbatim: formattedWinnerAddress)
                         .body4()
-                        .underline()
                         .foregroundStyle(.textSecondary)
                 }
                 HStack(spacing: 8) {

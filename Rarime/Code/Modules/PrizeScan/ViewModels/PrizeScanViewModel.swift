@@ -4,7 +4,7 @@ import Identity
 import SwiftUI
 
 struct PrizeScanCelebrity {
-    let id, title, description, image, hint: String
+    let id, title, description, image, hint, winner: String
     let status: GuessCelebrityStatus
 }
 
@@ -37,6 +37,7 @@ extension PrizeScanUser {
                 description: "",
                 image: "",
                 hint: "",
+                winner: "",
                 status: .maintenance
             )
         )
@@ -105,6 +106,7 @@ class PrizeScanViewModel: ObservableObject {
                 description: celebrity?.attributes.description ?? "",
                 image: celebrity?.attributes.image ?? "",
                 hint: celebrity?.attributes.hint ?? "",
+                winner: celebrity?.attributes.winner ?? "",
                 status: celebrity?.attributes.status ?? .maintenance
             )
         )
