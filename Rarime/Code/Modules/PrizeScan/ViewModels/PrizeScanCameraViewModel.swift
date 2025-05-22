@@ -4,6 +4,7 @@ class PrizeScanCameraViewModel: ObservableObject {
     private var cameraManager = FaceCaptureSession(cameraPosition: .back)
     
     @Published var currentFrame: CGImage?
+    @Published var maskFrame: UIImage?
     @Published var cameraTask: Task<Void, Never>? = nil
         
     func startScanning() {
@@ -26,11 +27,13 @@ class PrizeScanCameraViewModel: ObservableObject {
         for await image in cameraManager.previewStream {
             Task { @MainActor in
                 currentFrame = image
+                maskFrame = try ImageMasks.processFace(image)
             }
         }
     }
         
     func clearImages() {
         currentFrame = nil
+        maskFrame = nil
     }
 }
