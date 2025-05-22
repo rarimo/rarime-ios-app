@@ -19,6 +19,8 @@ struct FindFaceScanningView: View {
                     .aspectRatio(contentMode: .fill)
                     .clipShape(FaceSquare())
                     .clipped()
+                Image(.faceFrame)
+                    .square(FaceSquare.SHAPE_SIZE)
                 if let mask = cameraViewModel.maskFrame {
                     Image(uiImage: mask)
                         .resizable()
