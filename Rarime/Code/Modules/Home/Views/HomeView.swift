@@ -456,7 +456,7 @@ struct HomeView: View {
                 guard let user = userManager.user else { throw "failed to get user" }
                 let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
 
-                await findFaceViewModel.loadUser(jwt: accessJwt, referralCode: user.userReferralCode)
+                await findFaceViewModel.loadUser(jwt: accessJwt, referralCode: user.deferredReferralCode)
             } catch is CancellationError {
                 return
             } catch {
@@ -469,8 +469,12 @@ struct HomeView: View {
 
 //    TODO: uncomment after desing and flow impl
 //    private func verifyReferralCode() async {
+//        let POINTS_REFERRAL_CODE_LENGTH = 11
 //        var referralCode = configManager.api.defaultReferralCode
-//        if let deferredReferralCode = userManager.user?.deferredReferralCode, !deferredReferralCode.isEmpty {
+//        if let deferredReferralCode = userManager.user?.deferredReferralCode,
+//           !deferredReferralCode.isEmpty,
+//           deferredReferralCode.count == POINTS_REFERRAL_CODE_LENGTH
+//        {
 //            referralCode = deferredReferralCode
 //        }
 //
