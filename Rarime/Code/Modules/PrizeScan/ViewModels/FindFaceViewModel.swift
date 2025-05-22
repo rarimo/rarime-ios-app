@@ -47,6 +47,8 @@ extension FindFaceUser {
 private let FIND_FACE_REFERRAL_CODE_LENGTH = 10
 
 class FindFaceViewModel: ObservableObject {
+    static let faceThreshold = 74088185856
+
     @Published var user: FindFaceUser? = nil
     @Published var originalFeatures: [Float] = []
     @Published var foundFace: UIImage? = nil
@@ -168,13 +170,13 @@ class FindFaceViewModel: ObservableObject {
         let nonceBigUint = try await faceRegistryContract.getVerificationNonce(inputAddress.fullHex())
         let nonce = try BN(dec: nonceBigUint.description)
 
-        let guessInputs = CircuitBuilderManager.shared.bionetCircuit.inputs(grayscaleData, originalFeatures, nonce, inputAddress)
+        let guessInputs = CircuitBuilderManager.shared.bionetCircuit.inputs(grayscaleData, originalFeatures, nonce, inputAddress, FindFaceViewModel.faceThreshold)
         let zkProof = try await LikenessManager.shared.generateBionettaProof(guessInputs.json, downloadProgress)
 
         let guessCalldata = try IdentityCallDataBuilder().buildGuessCelebrityClaimRewardCalldata(address, zkPointsJSON: zkProof.json)
 
         let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.register(guessCalldata)
+        let response = try await relayer.register(guessCalldata, ConfigManager.shared.api.guessCelebrityGameContractAddress)
 
         LoggerUtil.common.info("Claim reward EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
 

@@ -163,7 +163,8 @@ extension CircuitBuilderManager {
             _ imageData: Data,
             _ features: [Float],
             _ nonce: BN,
-            _ address: BN
+            _ address: BN,
+            _ threshold: Int = CircuitBuilderManager.threshold
         ) -> BionetInputs {
             var imageMatrix: [[String]] = []
             for x in 0..<TensorFlow.bionetImageBoundary {
@@ -184,7 +185,7 @@ extension CircuitBuilderManager {
                 features: features.map { Int($0 * CircuitBuilderManager.imageMultiplier).description },
                 nonce: nonce.dec(),
                 address: address.dec(),
-                threshold: CircuitBuilderManager.threshold.description
+                threshold: threshold.description
             )
         }
     }
