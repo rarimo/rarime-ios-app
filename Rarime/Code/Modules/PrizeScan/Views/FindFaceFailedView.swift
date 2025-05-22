@@ -1,16 +1,16 @@
 import SwiftUI
 
-struct PrizeScanFailedView: View {
-    @EnvironmentObject private var prizeScanViewModel: PrizeScanViewModel
+struct FindFaceFailedView: View {
+    @EnvironmentObject private var findFaceViewModel: FindFaceViewModel
 
     let onScanAgain: () -> Void
 
     private var tip: String {
-        prizeScanViewModel.user?.celebrity?.hint ?? ""
+        findFaceViewModel.user?.celebrity.hint ?? ""
     }
 
     private var totalAttemptsLeft: Int {
-        (prizeScanViewModel.user?.attemptsLeft ?? 0) + (prizeScanViewModel.user?.extraAttemptsLeft ?? 0)
+        (findFaceViewModel.user?.attemptsLeft ?? 0) + (findFaceViewModel.user?.extraAttemptsLeft ?? 0)
     }
 
     private var hasAttempts: Bool {
@@ -59,7 +59,7 @@ struct PrizeScanFailedView: View {
 }
 
 #Preview {
-    PrizeScanFailedView(onScanAgain: {})
+    FindFaceFailedView(onScanAgain: {})
         .background(.baseBlack)
-        .environmentObject(PrizeScanViewModel())
+        .environmentObject(FindFaceViewModel())
 }

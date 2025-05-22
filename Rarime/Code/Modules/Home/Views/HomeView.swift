@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum HomeRoute: Hashable {
-    case notifications, identity, inviteFriends, claimTokens, wallet, voting, likeness, prizeScan
+    case notifications, identity, inviteFriends, claimTokens, wallet, voting, likeness, findFace
 }
 
 struct HomeView: View {
@@ -16,7 +16,7 @@ struct HomeView: View {
     @EnvironmentObject private var pollsViewModel: PollsViewModel
 
     @StateObject var viewModel = ViewModel()
-    @StateObject var prizeScanViewModel = PrizeScanViewModel()
+    @StateObject var findFaceViewModel = FindFaceViewModel()
 
     @State private var path: HomeRoute? = nil
     @State private var isCopied = false
@@ -31,7 +31,7 @@ struct HomeView: View {
     @Namespace var walletAnimation
     @Namespace var votingAnimation
     @Namespace var likenessAnimation
-    @Namespace var prizeScanAnimation
+    @Namespace var findFaceAnimation
 
     private var activeReferralCode: String? {
         pointsBalance?.referralCodes?
@@ -64,7 +64,7 @@ struct HomeView: View {
                     },
                     title: "Your Device",
                     subtitle: "Your Identity",
-                    bottomAdditionalContent: {
+                    bottomContent: {
                         Text("* Nothing leaves this device")
                             .body4()
                             .foregroundStyle(.baseBlack.opacity(0.6))
@@ -74,8 +74,8 @@ struct HomeView: View {
                 )
             },
             HomeCarouselCard(
-                isVisible: prizeScanViewModel.user != nil,
-                action: { path = .prizeScan }
+                isVisible: findFaceViewModel.user != nil && findFaceViewModel.user?.celebrity.status != .maintenance,
+                action: { path = .findFace }
             ) {
                 HomeCardView(
                     backgroundGradient: Gradients.purpleBg,
@@ -84,14 +84,17 @@ struct HomeView: View {
                     topIcon: Icons.rarime,
                     bottomIcon: Icons.arrowRightUpLine,
                     imageContent: {
-                        Image(.hiddenPrizeBg)
+                        Image(.findFaceBg)
                             .resizable()
                             .scaledToFill()
                             .clipShape(RoundedRectangle(cornerRadius: 32))
                     },
                     title: "Hidden keys",
                     subtitle: "Find a face",
-                    animation: prizeScanAnimation
+                    topContent: {
+                        FindFaceStatusChip(status: findFaceViewModel.user?.celebrity.status ?? .maintenance)
+                    },
+                    animation: findFaceAnimation
                 )
             },
             HomeCarouselCard(isVisible: pollsViewModel.hasVoted, action: { path = .voting }) {
@@ -135,7 +138,7 @@ struct HomeView: View {
                     },
                     title: likenessManager.isRegistered ? nil : "Digital likeness",
                     subtitle: likenessManager.isRegistered ? nil : "Set a rule",
-                    bottomAdditionalContent: {
+                    bottomContent: {
                         if likenessManager.isRegistered {
                             VStack(alignment: .leading, spacing: 0) {
                                 Text("My Rule:")
@@ -217,7 +220,7 @@ struct HomeView: View {
             //                    },
             //                    title: "Invite",
             //                    subtitle: "Others",
-            //                    bottomAdditionalContent: {
+            //                    bottomContent: {
             //                        if let code = activeReferralCode {
             //                            HStack(spacing: 16) {
             //                                Text(code)
@@ -319,12 +322,16 @@ struct HomeView: View {
                             onClose: { path = nil },
                             animation: likenessAnimation
                         )
-                    case .prizeScan:
-                        PrizeScanView(
+                    case .findFace:
+                        FindFaceView(
+                            animation: findFaceAnimation,
                             onClose: { path = nil },
-                            animation: prizeScanAnimation
+                            onViewWallet: {
+                                cleanup()
+                                mainViewModel.selectedTab = .wallet
+                            }
                         )
-                        .environmentObject(prizeScanViewModel)
+                        .environmentObject(findFaceViewModel)
                     default:
                         content
                     }
@@ -333,7 +340,7 @@ struct HomeView: View {
             }
         }
         .onAppear(perform: fetchBalance)
-        .onAppear(perform: fetchPrizeScanUser)
+        .onAppear(perform: fetchFindFaceUser)
         .onDisappear(perform: cleanup)
     }
 
@@ -443,17 +450,17 @@ struct HomeView: View {
         cancelables.append(cancelable)
     }
 
-    private func fetchPrizeScanUser() {
+    private func fetchFindFaceUser() {
         let cancelable = Task { @MainActor in
             do {
                 guard let user = userManager.user else { throw "failed to get user" }
                 let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
 
-                await prizeScanViewModel.loadUser(jwt: accessJwt, referralCode: user.userReferralCode)
+                await findFaceViewModel.loadUser(jwt: accessJwt, referralCode: user.userReferralCode)
             } catch is CancellationError {
                 return
             } catch {
-                LoggerUtil.common.error("failed to fetch prize scan user: \(error.localizedDescription, privacy: .public)")
+                LoggerUtil.common.error("failed to fetch find face user: \(error.localizedDescription, privacy: .public)")
             }
         }
 

@@ -3,7 +3,12 @@ import Foundation
 import Identity
 import SwiftUI
 
-struct PrizeScanUser {
+struct FindFaceCelebrity {
+    let id, title, description, image, hint, winner: String
+    let status: GuessCelebrityStatus
+}
+
+struct FindFaceUser {
     let id, referralCode: String
     let referralsCount, referralsLimit: Int
     let socialShare: Bool
@@ -11,12 +16,12 @@ struct PrizeScanUser {
     let attemptsLeft, extraAttemptsLeft, totalAttemptsCount: Int
     let resetTime: TimeInterval
 
-    let celebrity: PrizeScanCelebrity?
+    let celebrity: FindFaceCelebrity
 }
 
-extension PrizeScanUser {
-    static func empty() -> PrizeScanUser {
-        PrizeScanUser(
+extension FindFaceUser {
+    static func empty() -> FindFaceUser {
+        FindFaceUser(
             id: "",
             referralCode: "",
             referralsCount: 0,
@@ -26,26 +31,25 @@ extension PrizeScanUser {
             extraAttemptsLeft: 0,
             totalAttemptsCount: 0,
             resetTime: 0,
-            celebrity: PrizeScanCelebrity(
+            celebrity: FindFaceCelebrity(
                 id: "",
                 title: "",
                 description: "",
-                status: "",
                 image: "",
-                hint: ""
+                hint: "",
+                winner: "",
+                status: .maintenance
             )
         )
     }
 }
 
-struct PrizeScanCelebrity {
-    let id, title, description, status, image, hint: String
-}
+private let FIND_FACE_REFERRAL_CODE_LENGTH = 10
 
-class PrizeScanViewModel: ObservableObject {
+class FindFaceViewModel: ObservableObject {
     static let faceThreshold = 74088185856
 
-    @Published var user: PrizeScanUser? = nil
+    @Published var user: FindFaceUser? = nil
     @Published var originalFeatures: [Float] = []
     @Published var foundFace: UIImage? = nil
 
@@ -61,15 +65,21 @@ class PrizeScanViewModel: ObservableObject {
                 guard let error = error as? AFError else { throw error }
                 let openApiHttpCode = try error.retriveOpenApiHttpCode()
                 if openApiHttpCode == HTTPStatusCode.notFound.rawValue {
-                    LoggerUtil.common.info("PrizeScan: User is not found, creating a new user")
-                    // TODO: pass referral code to the backend
-                    userResponse = try await guessCelebrityService.createUser(jwt: jwt)
+                    LoggerUtil.common.info("FindFace: User is not found, creating a new user")
+
+                    // Because referral codes can be used in different services,
+                    // we check whether the code belongs to the guess celebrity service
+                    let refCode = referralCode?.count == FIND_FACE_REFERRAL_CODE_LENGTH
+                        ? referralCode
+                        : nil
+
+                    userResponse = try await guessCelebrityService.createUser(jwt: jwt, referredBy: refCode)
                 } else {
                     throw error
                 }
             } catch {
                 AlertManager.shared.emitError("Failed to load user information")
-                LoggerUtil.common.error("PrizeScan: Failed to load user information: \(error, privacy: .public)")
+                LoggerUtil.common.error("FindFace: Failed to load user information: \(error, privacy: .public)")
                 return
             }
         }
@@ -80,7 +90,7 @@ class PrizeScanViewModel: ObservableObject {
         let celebrityRel = userResponse.data.relationships.celebrity.data
         let celebrity = userResponse.included.first(where: { $0.id == celebrityRel.id && $0.type == celebrityRel.type })
 
-        user = PrizeScanUser(
+        user = FindFaceUser(
             id: userResponse.data.id,
             referralCode: userResponse.data.attributes.referralCode,
             referralsCount: userResponse.data.attributes.referralsCount,
@@ -92,13 +102,14 @@ class PrizeScanViewModel: ObservableObject {
             totalAttemptsCount: userStats?.attributes.totalAttemptsCount ?? 0,
             resetTime: userStats?.attributes.resetTime ?? 0,
 
-            celebrity: PrizeScanCelebrity(
+            celebrity: FindFaceCelebrity(
                 id: celebrity?.id ?? "",
                 title: celebrity?.attributes.title ?? "",
                 description: celebrity?.attributes.description ?? "",
-                status: celebrity?.attributes.status ?? "",
                 image: celebrity?.attributes.image ?? "",
-                hint: celebrity?.attributes.hint ?? ""
+                hint: celebrity?.attributes.hint ?? "",
+                winner: celebrity?.attributes.winner ?? "",
+                status: celebrity?.attributes.status ?? .maintenance
             )
         )
     }
@@ -159,7 +170,7 @@ class PrizeScanViewModel: ObservableObject {
         let nonceBigUint = try await faceRegistryContract.getVerificationNonce(inputAddress.fullHex())
         let nonce = try BN(dec: nonceBigUint.description)
 
-        let guessInputs = CircuitBuilderManager.shared.bionetCircuit.inputs(grayscaleData, originalFeatures, nonce, inputAddress, PrizeScanViewModel.faceThreshold)
+        let guessInputs = CircuitBuilderManager.shared.bionetCircuit.inputs(grayscaleData, originalFeatures, nonce, inputAddress, FindFaceViewModel.faceThreshold)
         let zkProof = try await LikenessManager.shared.generateBionettaProof(guessInputs.json, downloadProgress)
 
         let guessCalldata = try IdentityCallDataBuilder().buildGuessCelebrityClaimRewardCalldata(address, zkPointsJSON: zkProof.json)

@@ -27,9 +27,6 @@
     "* Nothing leaves this device" : {
 
     },
-    "/%lld scans" : {
-
-    },
     "%@" : {
 
     },
@@ -132,16 +129,6 @@
         }
       }
     },
-    "%lld/%lld MB" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld/%2$lld MB"
-          }
-        }
-      }
-    },
     "%lld%%" : {
 
     },
@@ -170,9 +157,6 @@
     "+1 scan" : {
 
     },
-    "0.3" : {
-
-    },
     "1 day" : {
 
     },
@@ -183,9 +167,6 @@
 
     },
     "3. When we support your country, you will be notified in the app" : {
-
-    },
-    "23:59:59" : {
 
     },
     "49,421 other already joined" : {
@@ -658,9 +639,6 @@
       }
     },
     "Claimed" : {
-
-    },
-    "Claiming" : {
 
     },
     "Claiming..." : {
@@ -1176,9 +1154,6 @@
     "Find a face" : {
 
     },
-    "Find Face Winner" : {
-
-    },
     "Finished" : {
 
     },
@@ -1322,10 +1297,10 @@
     "Hi" : {
 
     },
-    "Hidden keys" : {
+    "Hidden face:" : {
 
     },
-    "Hidden Prize Scan" : {
+    "Hidden keys" : {
 
     },
     "History" : {
@@ -1358,6 +1333,9 @@
 
     },
     "Hungary" : {
+
+    },
+    "I've found the key!" : {
 
     },
     "Iceland" : {
@@ -1436,7 +1414,7 @@
     "Invite a friend" : {
 
     },
-    "Invite to Hidden Prize Scan" : {
+    "Invite to Find a Face Game" : {
 
     },
     "Invite to RariMe" : {
@@ -1491,7 +1469,7 @@
         }
       }
     },
-    "Join Hidden Prize Scan with my link:\n\n%@" : {
+    "Join Find a face game with my link:\n\n%@" : {
 
     },
     "Join RariMe with my invite code: %@\n\n%@" : {
@@ -1797,6 +1775,9 @@
         }
       }
     },
+    "Next one soon" : {
+
+    },
     "NFC Reader" : {
       "localizations" : {
         "uk" : {
@@ -2089,6 +2070,12 @@
           }
         }
       }
+    },
+    "Prize-pool:" : {
+
+    },
+    "Prize:" : {
+
     },
     "Processing" : {
       "localizations" : {
@@ -2461,7 +2448,7 @@
     "Scan your passport’s first page inside the border" : {
 
     },
-    "Scooping up the magic bits to brew your proof" : {
+    "scans" : {
 
     },
     "Select an authorization method" : {
@@ -2530,6 +2517,9 @@
 
     },
     "Share your referral link and get bonuses when your friends join and make a purchase!" : {
+
+    },
+    "Shared" : {
 
     },
     "Shows two identifiers on the card" : {
@@ -3042,6 +3032,9 @@
         }
       }
     },
+    "Winner:" : {
+
+    },
     "Withdraw the %@ token" : {
 
     },
@@ -3164,10 +3157,7 @@
         }
       }
     },
-    "Your prize" : {
-
-    },
-    "Your prize just zipped into your wallet" : {
+    "Your prize:" : {
 
     },
     "Your Rarimo Address" : {
