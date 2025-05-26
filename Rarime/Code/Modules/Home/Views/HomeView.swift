@@ -112,13 +112,17 @@ struct HomeView: View {
                     animation: votingAnimation
                 )
             },
-            HomeCarouselCard(action: {
-                if likenessManager.isLoading {
-                    return
-                }
+            HomeCarouselCard(
+                // TODO: make it visible when likeness is ready
+                isVisible: false,
+                action: {
+                    if likenessManager.isLoading {
+                        return
+                    }
 
-                path = .likeness
-            }) {
+                    path = .likeness
+                }
+            ) {
                 HomeCardView(
                     backgroundGradient: Gradients.purpleBg,
                     foregroundGradient: Gradients.purpleText,
