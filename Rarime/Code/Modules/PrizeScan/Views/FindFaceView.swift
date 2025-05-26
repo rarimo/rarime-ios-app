@@ -103,7 +103,7 @@ struct FindFaceView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .foregroundStyle(Gradients.purpleText)
                 if !isCompleted {
-                    Text("Somewhere out on the open web, one famous face carries a key sealed inside its ZK-vector.  Test any image you find, and the first player to prove the match claims the prize. Ready to hunt?")
+                    Text("Somewhere out on the open web, one famous face carries a key sealed inside its ZK-vector. Test any image you find, and the first player to prove the match claims the prize. Ready to hunt?")
                         .body4()
                         .foregroundStyle(.textSecondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -216,7 +216,7 @@ struct FindFaceView: View {
                     .padding(.top, 20)
                 Text("Out of daily scans? Earn extra scans for every friend who joins and a one-time by sharing the hunt")
                     .body3()
-                    .foregroundStyle(.baseBlack.opacity(0.5))
+                    .foregroundStyle(.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.top, 8)
             }
@@ -288,6 +288,7 @@ struct FindFaceView: View {
         }
         .padding(.top, 32)
         .padding(.horizontal, 24)
+        .background(.bgSurface1)
     }
 
     private var hiddenFaceBlock: some View {

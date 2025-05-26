@@ -78,7 +78,6 @@ struct HomeView: View {
                 action: { path = .findFace }
             ) {
                 HomeCardView(
-                    backgroundGradient: Gradients.purpleBg,
                     foregroundGradient: Gradients.purpleText,
                     foregroundColor: .invertedDark,
                     topIcon: Icons.rarime,

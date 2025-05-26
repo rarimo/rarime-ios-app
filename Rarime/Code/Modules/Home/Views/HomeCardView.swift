@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct HomeCardView<Content: View, TopContent: View, BottomContent: View>: View {
-    let backgroundGradient: LinearGradient
+    let backgroundGradient: LinearGradient?
     let foregroundGradient: LinearGradient?
     let foregroundColor: Color
     let topIcon: String
@@ -15,7 +15,7 @@ struct HomeCardView<Content: View, TopContent: View, BottomContent: View>: View 
     var animation: Namespace.ID
 
     init(
-        backgroundGradient: LinearGradient,
+        backgroundGradient: LinearGradient? = nil,
         foregroundGradient: LinearGradient? = nil,
         foregroundColor: Color = .baseBlack,
         topIcon: String,
@@ -95,7 +95,7 @@ struct HomeCardView<Content: View, TopContent: View, BottomContent: View>: View 
         .frame(maxHeight: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 32)
-                .fill(backgroundGradient)
+                .fill(backgroundGradient == nil ? AnyShapeStyle(Color.clear) : AnyShapeStyle(backgroundGradient!))
                 .overlay(
                     RoundedRectangle(cornerRadius: 32)
                         .stroke(.bgComponentPrimary, lineWidth: 1)
