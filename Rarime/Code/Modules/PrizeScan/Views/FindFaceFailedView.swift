@@ -43,6 +43,7 @@ struct FindFaceFailedView: View {
                     .foregroundStyle(.baseWhite.opacity(0.6))
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
+                    .padding(.horizontal, 4)
                 Button(action: onScanAgain) {
                     Text(hasAttempts ? "Scan again" : "Try again later")
                         .foregroundStyle(.baseWhite.opacity(hasAttempts ? 1 : 0.6))
@@ -54,7 +55,8 @@ struct FindFaceFailedView: View {
                 .disabled(!hasAttempts)
             }
         }
-        .padding(.horizontal, 32)
+        .padding(.horizontal, 20)
+        .padding(.bottom, 8)
     }
 }
 

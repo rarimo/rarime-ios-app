@@ -68,7 +68,8 @@ struct FindFaceScanView: View {
             if let face = viewModel.currentFrame {
                 Image(decorative: face, scale: 1)
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .ignoresSafeArea()
                     .blur(radius: 76)
             }
             Color.baseBlack.opacity(0.7)
