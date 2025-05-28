@@ -14,14 +14,16 @@ struct FindFaceScanView: View {
     @State private var scanState: ScanState = .scanning
 
     var body: some View {
-        ZStack {
-            blurredFace
-            mainContent
-            if scanState != .success {
-                closeButton
+        CameraPermissionView(onCancel: onClose) {
+            ZStack {
+                blurredFace
+                mainContent
+                if scanState != .success {
+                    closeButton
+                }
             }
+            .background(.baseBlack)
         }
-        .background(.baseBlack)
     }
 
     var mainContent: some View {
