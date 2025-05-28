@@ -146,7 +146,6 @@ struct WalletView: View {
     func fetchBalance() async {
         do {
             try await walletManager.updateBalance()
-            LoggerUtil.common.info("Balance fetched successfully: \(walletManager.displayedBalance, privacy: .public)")
         } catch {
             LoggerUtil.common.error("Failed to fetch balance: \(error.localizedDescription, privacy: .public)")
             AlertManager.shared.emitError(.unknown("Failed to fetch balance"))

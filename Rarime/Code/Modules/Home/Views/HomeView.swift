@@ -390,14 +390,7 @@ struct HomeView: View {
         .zIndex(1)
         .padding([.top, .horizontal], 20)
         .padding(.bottom, 16)
-        .background {
-            ZStack {
-                Color.bgBlur
-                TransparentBlurView(removeAllFilters: false)
-                    .allowsHitTesting(false)
-            }
-            .ignoresSafeArea(.container, edges: .top)
-        }
+        .background(.bgPrimary)
     }
 
     private var content: some View {
