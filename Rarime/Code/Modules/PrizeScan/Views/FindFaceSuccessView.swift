@@ -124,7 +124,7 @@ struct FindFaceSuccessView: View {
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(.purpleLighter, lineWidth: 1)
+                        .stroke(.purpleBorder, lineWidth: 1)
                 )
                 if isClaimed {
                     VStack(spacing: 8) {
