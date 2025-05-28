@@ -44,19 +44,19 @@ struct FindFaceSuccessView: View {
                             image
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: geo.size.width / 3.5, height: geo.size.height / 5.25)
+                                .frame(width: geo.size.width / 3.5, height: geo.size.height / 5.5)
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                                 .clipped()
-                                .padding(.top, geo.size.height / 4.125)
+                                .padding(.top, geo.size.height / 4.5)
                                 .ignoresSafeArea()
                         },
                         placeholder: {
                             ProgressView()
-                                .frame(width: geo.size.width / 3.5, height: geo.size.height / 5.25)
+                                .frame(width: geo.size.width / 3.5, height: geo.size.height / 5.5)
                                 .background(.bgBlur.opacity(0.2))
                                 .backgroundBlur(bgColor: .clear)
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
-                                .padding(.top, geo.size.height / 4.125)
+                                .padding(.top, geo.size.height / 4.5)
                                 .ignoresSafeArea()
                         }
                     )
@@ -124,7 +124,7 @@ struct FindFaceSuccessView: View {
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(.purpleLighter, lineWidth: 1)
+                        .stroke(.purpleBorder, lineWidth: 1)
                 )
                 if isClaimed {
                     VStack(spacing: 8) {
@@ -147,7 +147,7 @@ struct FindFaceSuccessView: View {
                 }
             }
             .padding(.top, 304)
-            .padding(.horizontal, 32)
+            .padding(.horizontal, 20)
             .padding(.bottom, 8)
         }
         .background(.bgPrimary)
@@ -160,15 +160,13 @@ struct FindFaceSuccessView: View {
                 .purpleMain,
                 .purpleDark
             ],
-            rainHeight: UIScreen.main.bounds.height,
+            rainHeight: 1000,
             openingAngle: Angle.degrees(0),
             closingAngle: Angle.degrees(180),
             radius: 480
         )
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                confettiTrigger += 1
-            }
+            confettiTrigger += 1
         }
     }
 

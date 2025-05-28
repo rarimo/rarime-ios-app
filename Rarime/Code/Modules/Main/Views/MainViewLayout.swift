@@ -12,15 +12,7 @@ struct MainViewLayout<Content: View>: View {
                 selectedTab: $mainViewModel.selectedTab,
                 isQrCodeScanSheetShown: $mainViewModel.isQrCodeScanSheetShown
             )
-            // TODO: move to extenstion with blur
-            .background {
-                ZStack {
-                    Color.bgBlur
-                    TransparentBlurView(removeAllFilters: false)
-                        .allowsHitTesting(false)
-                }
-                .ignoresSafeArea(.container, edges: .bottom)
-            }
+            .background(.bgPrimary)
         }
     }
 }

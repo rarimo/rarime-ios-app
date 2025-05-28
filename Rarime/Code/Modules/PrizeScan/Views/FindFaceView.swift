@@ -349,7 +349,7 @@ struct FindFaceView: View {
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(.purpleLighter, lineWidth: 1)
+                .stroke(.purpleBorder, lineWidth: 1)
         )
     }
 

@@ -1,3 +1,4 @@
+import Alamofire
 import SwiftUI
 
 enum HomeRoute: Hashable {
@@ -23,7 +24,6 @@ struct HomeView: View {
 
     @State private var isBalanceFetching = true
     @State private var pointsBalance: PointsBalanceRaw? = nil
-    @State private var cancelables: [Task<Void, Never>] = []
 
     @Namespace var identityAnimation
     @Namespace var inviteFriendsAnimation
@@ -330,7 +330,6 @@ struct HomeView: View {
                             animation: findFaceAnimation,
                             onClose: { path = nil },
                             onViewWallet: {
-                                cleanup()
                                 mainViewModel.selectedTab = .wallet
                             }
                         )
@@ -342,9 +341,8 @@ struct HomeView: View {
                 .animation(.interpolatingSpring(stiffness: 100, damping: 15), value: path)
             }
         }
-        .onAppear(perform: fetchBalance)
-        .onAppear(perform: fetchFindFaceUser)
-        .onDisappear(perform: cleanup)
+        .task { await fetchBalance() }
+        .task { await fetchFindFaceUser() }
     }
 
     private var header: some View {
@@ -392,14 +390,7 @@ struct HomeView: View {
         .zIndex(1)
         .padding([.top, .horizontal], 20)
         .padding(.bottom, 16)
-        .background {
-            ZStack {
-                Color.bgBlur
-                TransparentBlurView(removeAllFilters: false)
-                    .allowsHitTesting(false)
-            }
-            .ignoresSafeArea(.container, edges: .top)
-        }
+        .background(.bgPrimary)
     }
 
     private var content: some View {
@@ -427,47 +418,36 @@ struct HomeView: View {
         }
     }
 
-    private func fetchBalance() {
+    private func fetchBalance() async {
         isBalanceFetching = true
+        defer { isBalanceFetching = false }
 
-        let cancelable = Task { @MainActor in
-            defer {
-                self.isBalanceFetching = false
-            }
+        if userManager.user?.userReferralCode == nil { return }
 
-            if userManager.user?.userReferralCode == nil { return }
+        do {
+            guard let user = userManager.user else { throw "failed to get user" }
+            let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
 
-            do {
-                guard let user = userManager.user else { throw "failed to get user" }
-                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-
-                let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
-                self.pointsBalance = pointsBalance
-            } catch is CancellationError {
-                return
-            } catch {
-                LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
-            }
+            let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
+            self.pointsBalance = pointsBalance
+        } catch let afError as AFError where afError.isExplicitlyCancelledError {
+            return
+        } catch {
+            LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
         }
-
-        cancelables.append(cancelable)
     }
 
-    private func fetchFindFaceUser() {
-        let cancelable = Task { @MainActor in
-            do {
-                guard let user = userManager.user else { throw "failed to get user" }
-                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+    private func fetchFindFaceUser() async {
+        do {
+            guard let user = userManager.user else { throw "failed to get user" }
+            let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
 
-                await findFaceViewModel.loadUser(jwt: accessJwt, referralCode: user.deferredReferralCode)
-            } catch is CancellationError {
-                return
-            } catch {
-                LoggerUtil.common.error("failed to fetch find face user: \(error.localizedDescription, privacy: .public)")
-            }
+            await findFaceViewModel.loadUser(jwt: accessJwt, referralCode: user.deferredReferralCode)
+        } catch let afError as AFError where afError.isExplicitlyCancelledError {
+            return
+        } catch {
+            LoggerUtil.common.error("failed to fetch find face user: \(error.localizedDescription, privacy: .public)")
         }
-
-        cancelables.append(cancelable)
     }
 
 //    TODO: uncomment after desing and flow impl
@@ -521,11 +501,6 @@ struct HomeView: View {
 //        )
 //    }
 //
-    private func cleanup() {
-        for cancelable in cancelables {
-            cancelable.cancel()
-        }
-    }
 }
 
 #Preview {

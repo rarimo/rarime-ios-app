@@ -16,7 +16,8 @@ struct FindFaceScanningView: View {
             if let face = cameraViewModel.currentFrame {
                 Image(decorative: face, scale: 1)
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .ignoresSafeArea()
                     .clipShape(FaceSquare())
                     .clipped()
                 Image(.faceFrame)
@@ -24,7 +25,8 @@ struct FindFaceScanningView: View {
                 if let mask = cameraViewModel.maskFrame {
                     Image(uiImage: mask)
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .ignoresSafeArea()
                         .rotationEffect(.degrees(180))
                         .scaleEffect(x: -1, y: 1)
                         .clipShape(FaceSquare())
@@ -46,7 +48,8 @@ struct FindFaceScanningView: View {
                     takeButton
                 }
             }
-            .padding(.horizontal, 32)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 8)
         }
         .onAppear(perform: cameraViewModel.startScanning)
     }
