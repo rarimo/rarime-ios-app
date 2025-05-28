@@ -77,6 +77,8 @@ class FindFaceViewModel: ObservableObject {
                 } else {
                     throw error
                 }
+            } catch let afError as AFError where afError.isExplicitlyCancelledError {
+                return
             } catch {
                 AlertManager.shared.emitError("Failed to load user information")
                 LoggerUtil.common.error("FindFace: Failed to load user information: \(error, privacy: .public)")

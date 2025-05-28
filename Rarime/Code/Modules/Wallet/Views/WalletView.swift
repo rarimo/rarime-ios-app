@@ -22,9 +22,6 @@ struct WalletView: View {
 
     @State private var path: [WalletRoute] = []
 
-    @State private var isBalanceFetching = false
-    @State private var cancelables: [Task<Void, Never>] = []
-
     // TODO: use the token from the manager and save to store
     @State private var token = WalletToken.eth
 
@@ -73,8 +70,7 @@ struct WalletView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.bgPrimary)
         }
-        .onAppear(perform: fetchBalance)
-        .onDisappear(perform: cleanup)
+        .task { await fetchBalance() }
     }
 
     private var header: some View {
@@ -87,10 +83,12 @@ struct WalletView: View {
                     .body4()
                     .foregroundStyle(.textSecondary)
                 HStack(alignment: .center, spacing: 8) {
-                    if isBalanceFetching {
+                    if walletManager.isBalanceLoading {
                         ProgressView()
                     } else {
-                        Button(action: fetchBalance) {
+                        Button(action: {
+                            Task { await fetchBalance() }
+                        }) {
                             Text(walletManager.displayedBalance)
                                 .h4()
                                 .foregroundStyle(.textPrimary)
@@ -144,33 +142,14 @@ struct WalletView: View {
         .padding(.horizontal, 12)
     }
 
-    func fetchBalance() {
-        if isBalanceFetching {
-            return
-        }
-
-        isBalanceFetching = true
-
-        let cancelable = Task { @MainActor in
-            defer {
-                self.isBalanceFetching = false
-            }
-
-            do {
-                try await walletManager.updateBalance()
-            } catch {
-                LoggerUtil.common.error("Failed to fetch balance: \(error.localizedDescription, privacy: .public)")
-
-                AlertManager.shared.emitError(.unknown("Failed to fetch balance"))
-            }
-        }
-
-        cancelables.append(cancelable)
-    }
-
-    func cleanup() {
-        for cancelable in cancelables {
-            cancelable.cancel()
+    @MainActor
+    func fetchBalance() async {
+        do {
+            try await walletManager.updateBalance()
+            LoggerUtil.common.info("Balance fetched successfully: \(walletManager.displayedBalance, privacy: .public)")
+        } catch {
+            LoggerUtil.common.error("Failed to fetch balance: \(error.localizedDescription, privacy: .public)")
+            AlertManager.shared.emitError(.unknown("Failed to fetch balance"))
         }
     }
 }

@@ -1,3 +1,4 @@
+import Alamofire
 import Identity
 import MessageUI
 import SwiftUI
@@ -255,7 +256,7 @@ struct WaitlistPassportView: View {
 
                 let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
                 isJoined = pointsBalance.isVerified
-            } catch is CancellationError {
+            } catch let afError as AFError where afError.isExplicitlyCancelledError {
                 return
             } catch {
                 LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")

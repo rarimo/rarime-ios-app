@@ -64,9 +64,9 @@ private struct AssetCard: View {
     let asset: WalletAsset
     let isLoading: Bool
 
-    var icon: String {
+    var icon: ImageResource {
         switch asset.token {
-        case .eth: Icons.rarimo
+        case .eth: .ethereum
         }
     }
 

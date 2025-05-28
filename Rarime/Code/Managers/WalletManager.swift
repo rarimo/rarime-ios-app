@@ -3,6 +3,20 @@ import SwiftUI
 import PromiseKit
 import Web3
 
+extension Web3.Eth {
+    func getBalanceAsync(address: EthereumAddress, block: EthereumQuantityTag) async throws -> EthereumQuantity {
+        try await withCheckedThrowingContinuation { continuation in
+            firstly {
+                getBalance(address: address, block: block)
+            }.done { qty in
+                continuation.resume(returning: qty)
+            }.catch { err in
+                continuation.resume(throwing: err)
+            }
+        }
+    }
+}
+
 class WalletManager: ObservableObject {
     static let shared = WalletManager()
 
@@ -11,6 +25,7 @@ class WalletManager: ObservableObject {
     var privateKey: Data?
 
     @Published var balance: EthereumQuantity?
+    @Published var isBalanceLoading = false
 
     @Published var transactions: [Transaction] {
         didSet {
@@ -44,13 +59,14 @@ class WalletManager: ObservableObject {
 
     @MainActor
     func updateBalance() async throws {
-        guard let privateKey else {
-            return
-        }
+        if isBalanceLoading { return }
+        guard let privateKey else { return }
+
+        isBalanceLoading = true
+        defer { isBalanceLoading = false }
 
         let ethPrivateKey = try EthereumPrivateKey(privateKey: privateKey.bytes)
-
-        balance = try web3.eth.getBalance(address: ethPrivateKey.address, block: .latest).wait()
+        balance = try await web3.eth.getBalanceAsync(address: ethPrivateKey.address, block: .latest)
     }
 
     func getFeeForTransfer() async throws -> EthereumQuantity {
