@@ -431,7 +431,6 @@ struct HomeView: View {
             let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
             self.pointsBalance = pointsBalance
         } catch let afError as AFError where afError.isExplicitlyCancelledError {
-            LoggerUtil.common.info("fetchBalance task was cancelled")
             return
         } catch {
             LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
@@ -445,7 +444,6 @@ struct HomeView: View {
 
             await findFaceViewModel.loadUser(jwt: accessJwt, referralCode: user.deferredReferralCode)
         } catch let afError as AFError where afError.isExplicitlyCancelledError {
-            LoggerUtil.common.info("fetchFindFaceUser task was cancelled")
             return
         } catch {
             LoggerUtil.common.error("failed to fetch find face user: \(error.localizedDescription, privacy: .public)")
