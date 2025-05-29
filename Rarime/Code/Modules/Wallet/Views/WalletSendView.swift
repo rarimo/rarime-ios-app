@@ -33,6 +33,14 @@ struct WalletSendView: View {
         
         return EthereumQuantity(decimal: amount)
     }
+    
+    private var maxAmount: Decimal {
+        guard let balance = walletManager.balance?.decimal else {
+            return 0
+        }
+        
+        return balance - (fee?.decimal ?? 0)
+    }
 
     func toggleScan() {
         withAnimation(.easeInOut(duration: 0.2)) {
@@ -97,7 +105,7 @@ struct WalletSendView: View {
                                 HStack(spacing: 16) {
                                     VerticalDivider()
                                     Button(action: {
-                                        amount = NSDecimalNumber(decimal: walletManager.balance?.decimal ?? Decimal(0)).stringValue
+                                        amount = NSDecimalNumber(decimal: maxAmount).stringValue
                                     }) {
                                         Text("MAX")
                                             .buttonMedium()
@@ -134,7 +142,7 @@ struct WalletSendView: View {
                 Text("Receiver gets")
                     .body5()
                     .foregroundStyle(.textSecondary)
-                Text(amountToReceive?.format() ?? "0.00")
+                Text(verbatim: "\(amountToReceive?.format() ?? "0.00") \(token.rawValue)")
                     .subtitle5()
                     .foregroundStyle(.textPrimary)
             }
@@ -174,7 +182,7 @@ struct WalletSendView: View {
                 )
                 ConfirmationTextRow(
                     title: String(localized: "Fee"),
-                    value: fee == nil ? "–" : "\(fee!.format()) \(token.rawValue)"
+                    value: fee == nil ? "–" : "\(fee!.format(maxFractionDigits: 8)) \(token.rawValue)"
                 )
             }
             VStack(spacing: 4) {
@@ -240,6 +248,7 @@ struct WalletSendView: View {
                 try await walletManager.transfer(amount, address)
                 walletManager.registerTransfer(NSDecimalNumber(decimal: amount).doubleValue)
                 
+                isConfirmationSheetPresented = false
                 AlertManager.shared.emitSuccess("Transaction sent")
                 
                 onBack()
