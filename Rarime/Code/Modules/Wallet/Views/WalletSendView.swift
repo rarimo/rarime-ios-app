@@ -211,17 +211,10 @@ struct WalletSendView: View {
         
         guard let amountToSend = Decimal(string: amount) else {
             amountErrorMessage = String(localized: "Invalid amount")
-            
             return false
         }
         
-        guard let availableBalance = walletManager.balance?.decimal else {
-            amountErrorMessage = String(localized: "Failed to get balance")
-            
-            return false
-        }
-        
-        if availableBalance < amountToSend {
+        if amountToSend > maxAmount {
             amountErrorMessage = String(localized: "Insufficient balance")
         }
         

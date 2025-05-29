@@ -56,16 +56,13 @@ struct WalletView: View {
 
     private var content: some View {
         MainViewLayout {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    header
-                    // TODO: add full support for assets
+            VStack(alignment: .leading, spacing: 20) {
+                header
+                // TODO: add full support for assets
 //                    AssetsSlider(walletAssets: [selectedAsset], isLoading: isBalanceFetching)
 //                    HorizontalDivider()
 //                        .padding(.horizontal, 20)
-                    transactionsList
-                }
-                .padding(.bottom, 120)
+                transactionsList
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.bgPrimary)
@@ -129,9 +126,12 @@ struct WalletView: View {
                 Text("Transactions")
                     .subtitle5()
                     .foregroundStyle(.textPrimary)
-                ForEach(walletManager.transactions.reversed()) { tx in
-                    TransactionItem(tx: tx, token: token)
+                ScrollView {
+                    ForEach(walletManager.transactions.reversed()) { tx in
+                        TransactionItem(tx: tx, token: token)
+                    }
                 }
+                .scrollIndicators(.hidden)
                 if walletManager.transactions.isEmpty {
                     Text("No transactions yet")
                         .body4()
