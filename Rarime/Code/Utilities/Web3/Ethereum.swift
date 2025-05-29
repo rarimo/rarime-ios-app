@@ -62,31 +62,50 @@ class Ethereum {
         let pattern = "^0x[a-fA-F0-9]{40}$"
         return address.range(of: pattern, options: .regularExpression) != nil
     }
+    
+    static func formatAddress(_ address: String) -> String {
+        return isValidAddress(address) ? "\(address.prefix(6))...\(address.suffix(4))" : "–"
+    }
+}
+
+extension Web3.Eth {
+    func getBalanceAsync(address: EthereumAddress, block: EthereumQuantityTag) async throws -> EthereumQuantity {
+        try await withCheckedThrowingContinuation { continuation in
+            firstly {
+                getBalance(address: address, block: block)
+            }.done { qty in
+                continuation.resume(returning: qty)
+            }.catch { err in
+                continuation.resume(throwing: err)
+            }
+        }
+    }
+}
+
+let ONE_ETHER = Decimal(sign: .plus, exponent: 18, significand: Decimal(1))
+
+extension EthereumQuantity {
+    var decimal: Decimal {
+        let weiDecimal = Decimal(string: quantity.description) ?? .zero
+        return weiDecimal / ONE_ETHER
+    }
+    
+    init(decimal: Decimal) {
+        let weiString = NSDecimalNumber(decimal: decimal * ONE_ETHER).stringValue
+        self.init(quantity: BigUInt(weiString) ?? BigUInt(0))
+    }
 }
 
 extension EthereumQuantity {
-    var double: Double {
-        let ethValue = self.quantity / BigUInt(10).power(18)
-        
-        var gweiValue: BigUInt
-        if ethValue > 0 {
-            gweiValue = self.quantity % BigUInt(10).power(9)
-        } else {
-            gweiValue = self.quantity / BigUInt(10).power(9)
-        }
-        
-        let value = ethValue.description + "." + gweiValue.description.prefix(2)
+    func format(
+        minFractionDigits: Int = 2,
+        maxFractionDigits: Int = 6
+    ) -> String {
+        let fmt = NumberFormatter()
+        fmt.numberStyle = .decimal
+        fmt.minimumFractionDigits = minFractionDigits
+        fmt.maximumFractionDigits = maxFractionDigits
 
-        return Double(value) ?? 0
-    }
-    
-    init(_ value: Double) {
-        let ethValue = BigUInt(Int(value)) * BigUInt(10).power(18)
-        
-        let gweiValue = BigUInt(Int(value * 1_000_000_000)) % BigUInt(10).power(9) * BigUInt(10).power(9)
-        
-        let quantity = ethValue + gweiValue
-        
-        self.init(quantity: quantity)
+        return fmt.string(from: NSDecimalNumber(decimal: decimal)) ?? "–"
     }
 }

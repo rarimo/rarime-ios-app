@@ -40,13 +40,6 @@ struct FindFaceView: View {
         ConfigManager.shared.api.referralURL.appendingPathComponent(findFaceUser.referralCode).absoluteString
     }
 
-    private var formattedWinnerAddress: String {
-        let address = findFaceUser.celebrity.winner
-        return address.isEmpty
-            ? "–"
-            : "\(address.prefix(6))...\(address.suffix(4))"
-    }
-
     private var imageToShare: Data {
         // TODO: use different image for sharing
         UIImage(resource: .findFaceBg).pngData() ?? Data()
@@ -324,7 +317,7 @@ struct FindFaceView: View {
                         .subtitle6()
                         .foregroundStyle(.textPrimary)
                     Spacer()
-                    Text(verbatim: formattedWinnerAddress)
+                    Text(verbatim: Ethereum.formatAddress(findFaceUser.celebrity.winner))
                         .body4()
                         .foregroundStyle(.textSecondary)
                 }

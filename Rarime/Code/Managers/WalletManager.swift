@@ -3,20 +3,6 @@ import SwiftUI
 import PromiseKit
 import Web3
 
-extension Web3.Eth {
-    func getBalanceAsync(address: EthereumAddress, block: EthereumQuantityTag) async throws -> EthereumQuantity {
-        try await withCheckedThrowingContinuation { continuation in
-            firstly {
-                getBalance(address: address, block: block)
-            }.done { qty in
-                continuation.resume(returning: qty)
-            }.catch { err in
-                continuation.resume(throwing: err)
-            }
-        }
-    }
-}
-
 class WalletManager: ObservableObject {
     static let shared = WalletManager()
 
@@ -54,7 +40,7 @@ class WalletManager: ObservableObject {
             return "0.00"
         }
 
-        return balance.double.description
+        return balance.format()
     }
 
     @MainActor
@@ -78,17 +64,15 @@ class WalletManager: ObservableObject {
     }
 
     func transfer(
-        _ amount: Double,
+        _ amount: Decimal,
         _ to: String
     ) async throws {
         guard let privateKey else {
             return
         }
 
-        let amountToTransfer = EthereumQuantity(amount)
-
+        let amountToTransfer = EthereumQuantity(decimal: amount)
         let ethPrivateKey = try EthereumPrivateKey(privateKey: privateKey.bytes)
-
         let nonce = try web3.eth.getTransactionCount(address: ethPrivateKey.address, block: .latest).wait()
 
         var gasPrice = try web3.eth.gasPrice().wait()
@@ -99,12 +83,11 @@ class WalletManager: ObservableObject {
             gasPrice: gasPrice,
             gasLimit: 21_000,
             from: ethPrivateKey.address,
-            to: EthereumAddress(hex: to, eip55: true),
+            to: EthereumAddress(hex: to, eip55: false),
             value: amountToTransfer
         )
 
         let signedTx = try tx.sign(with: ethPrivateKey, chainId: .init(ConfigManager.shared.api.evmChainId))
-
         let txHash = try web3.eth.sendRawTransaction(transaction: signedTx).wait()
 
         LoggerUtil.common.info("Transaction hash: \(txHash.hex(), privacy: .public)")

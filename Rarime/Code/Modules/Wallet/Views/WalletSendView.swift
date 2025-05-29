@@ -25,6 +25,14 @@ struct WalletSendView: View {
     @State private var fee: EthereumQuantity?
     
     @State private var cancelables: [Task<Void, Never>] = []
+    
+    private var amountToReceive: EthereumQuantity? {
+        guard let amount = Decimal(string: amount) else {
+            return nil
+        }
+        
+        return EthereumQuantity(decimal: amount)
+    }
 
     func toggleScan() {
         withAnimation(.easeInOut(duration: 0.2)) {
@@ -89,7 +97,7 @@ struct WalletSendView: View {
                                 HStack(spacing: 16) {
                                     VerticalDivider()
                                     Button(action: {
-                                        amount = walletManager.displayedBalance
+                                        amount = NSDecimalNumber(decimal: walletManager.balance?.decimal ?? Decimal(0)).stringValue
                                     }) {
                                         Text("MAX")
                                             .buttonMedium()
@@ -126,7 +134,7 @@ struct WalletSendView: View {
                 Text("Receiver gets")
                     .body5()
                     .foregroundStyle(.textSecondary)
-                Text(walletManager.displayedBalance)
+                Text(amountToReceive?.format() ?? "0.00")
                     .subtitle5()
                     .foregroundStyle(.textPrimary)
             }
@@ -158,15 +166,15 @@ struct WalletSendView: View {
             VStack(spacing: 16) {
                 ConfirmationTextRow(
                     title: String(localized: "Address"),
-                    value: address
+                    value: Ethereum.formatAddress(address)
                 )
                 ConfirmationTextRow(
                     title: String(localized: "Amount"),
-                    value: amount
+                    value: "\(amountToReceive?.format() ?? "0.00") \(token.rawValue)"
                 )
                 ConfirmationTextRow(
                     title: String(localized: "Fee"),
-                    value: "\(fee?.double ?? 0)"
+                    value: fee == nil ? "–" : "\(fee!.format()) \(token.rawValue)"
                 )
             }
             VStack(spacing: 4) {
@@ -224,14 +232,13 @@ struct WalletSendView: View {
                 isTransfering = false
             }
             
-            guard let amount = Double(amount) else {
+            guard let amount = Decimal(string: amount) else {
                 return
             }
             
             do {
                 try await walletManager.transfer(amount, address)
-                
-                walletManager.registerTransfer(amount)
+                walletManager.registerTransfer(NSDecimalNumber(decimal: amount).doubleValue)
                 
                 AlertManager.shared.emitSuccess("Transaction sent")
                 
@@ -265,7 +272,7 @@ struct WalletSendView: View {
             } catch is CancellationError {
                 return
             } catch {
-                LoggerUtil.common.error("failed to send tokens: \(error.localizedDescription, privacy: .public)")
+                LoggerUtil.common.error("failed to calculate fee: \(error.localizedDescription, privacy: .public)")
             }
         }
         
