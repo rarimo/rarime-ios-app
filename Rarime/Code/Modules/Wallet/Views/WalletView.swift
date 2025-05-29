@@ -129,7 +129,7 @@ struct WalletView: View {
                 Text("Transactions")
                     .subtitle5()
                     .foregroundStyle(.textPrimary)
-                ForEach(walletManager.transactions) { tx in
+                ForEach(walletManager.transactions.reversed()) { tx in
                     TransactionItem(tx: tx, token: token)
                 }
                 if walletManager.transactions.isEmpty {

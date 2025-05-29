@@ -661,6 +661,6 @@ class UserManager: ObservableObject {
             return nil
         }
         
-        return ethereumPrivateKey.address.hex(eip55: false)
+        return ethereumPrivateKey.address.hex(eip55: true)
     }
 }
