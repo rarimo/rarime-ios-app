@@ -209,13 +209,13 @@ struct WalletSendView: View {
             addressErrorMessage = String(localized: "Invalid address")
         }
         
-        guard let amountToSend = Double(amount) else {
+        guard let amountToSend = Decimal(string: amount) else {
             amountErrorMessage = String(localized: "Invalid amount")
             
             return false
         }
         
-        guard let availableBalance = Double(walletManager.displayedBalance) else {
+        guard let availableBalance = walletManager.balance?.decimal else {
             amountErrorMessage = String(localized: "Failed to get balance")
             
             return false
