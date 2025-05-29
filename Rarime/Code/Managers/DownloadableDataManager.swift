@@ -51,9 +51,6 @@ enum RegisteredZkey: String {
 }
 
 enum RegisteredNoirCircuitData: String {
-    // If you decided to remove ".dat", well, good luck to debug crash buddy
-    case trustedSetup = "trustedSetup.dat"
-    
     case registerIdentity_2_256_3_6_336_264_21_2448_6_2008
     case registerIdentity_2_256_3_6_336_248_1_2432_3_256
     case registerIdentity_20_256_3_3_336_224_NA
@@ -95,6 +92,9 @@ enum RegisteredNoirCircuitData: String {
 
 enum RegisteredDownloadableFiles: String {
     case faceRecognitionTFLite
+    
+    // If you decided to remove ".dat", well, good luck to debug crash buddy
+    case ultraPlonkTrustedSetup = "ultraPlonkTrustedSetup.dat"
 }
 
 class DownloadableDataManager: ObservableObject {

@@ -325,7 +325,7 @@ class PassportViewModel: ObservableObject {
     ) async throws -> ZkProof {
         isCriticalRegistrationProcessInProgress = false
         
-        let trustedSetupPath = try await DownloadableDataManager.shared.retriveNoirCircuitDataPath(.trustedSetup) { progress in
+        let trustedSetupPath = try await DownloadableDataManager.shared.retriveDownloadbleFilePath(.ultraPlonkTrustedSetup) { progress in
             self.updateDownloadProgress(downloadProgressValue: progress.fractionCompleted)
         }
         
