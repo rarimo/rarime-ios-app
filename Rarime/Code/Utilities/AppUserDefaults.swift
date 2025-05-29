@@ -81,6 +81,14 @@ public class AppUserDefaults: ObservableObject {
     @AppStorage("last_mrz_key")
     public var lastMRZKey: String = ""
 
+    @AppStorage("likeness_rule")
+    public var likenessRule: Int = LikenessRule.unset.rawValue
+
+    @AppStorage("is_likeness_registered")
+    public var isLikenessRegistered: Bool = false
     @AppStorage("is_passport_failed_by_impossible_revocation")
     public var isPassportFailedByImpossibleRevocation: Bool = false
+
+    @AppStorage("wallet_transactions")
+    public var walletTransactions = Data()
 }

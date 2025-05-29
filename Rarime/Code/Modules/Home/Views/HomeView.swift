@@ -1,7 +1,8 @@
+import Alamofire
 import SwiftUI
 
 enum HomeRoute: Hashable {
-    case notifications, identity, inviteFriends, claimTokens, wallet, voting
+    case notifications, identity, inviteFriends, claimTokens, wallet, voting, likeness, findFace
 }
 
 struct HomeView: View {
@@ -12,21 +13,25 @@ struct HomeView: View {
     @EnvironmentObject private var userManager: UserManager
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
     @EnvironmentObject private var configManager: ConfigManager
+    @EnvironmentObject private var likenessManager: LikenessManager
+    @EnvironmentObject private var pollsViewModel: PollsViewModel
 
     @StateObject var viewModel = ViewModel()
+    @StateObject var findFaceViewModel = FindFaceViewModel()
 
     @State private var path: HomeRoute? = nil
     @State private var isCopied = false
 
     @State private var isBalanceFetching = true
     @State private var pointsBalance: PointsBalanceRaw? = nil
-    @State private var cancelables: [Task<Void, Never>] = []
 
     @Namespace var identityAnimation
     @Namespace var inviteFriendsAnimation
     @Namespace var claimTokensAnimation
     @Namespace var walletAnimation
     @Namespace var votingAnimation
+    @Namespace var likenessAnimation
+    @Namespace var findFaceAnimation
 
     private var activeReferralCode: String? {
         pointsBalance?.referralCodes?
@@ -59,7 +64,7 @@ struct HomeView: View {
                     },
                     title: "Your Device",
                     subtitle: "Your Identity",
-                    bottomAdditionalContent: {
+                    bottomContent: {
                         Text("* Nothing leaves this device")
                             .body4()
                             .foregroundStyle(.baseBlack.opacity(0.6))
@@ -68,69 +73,30 @@ struct HomeView: View {
                     animation: identityAnimation
                 )
             },
-//            TODO: uncomment after desing and flow impl
-//            HomeCarouselCard(
-//                isShouldDisplay: !isBalanceFetching && pointsBalance != nil,
-//                action: { path = .inviteFriends }
-//            ) {
-//                HomeCardView(
-//                    backgroundGradient: Gradients.gradientSecond,
-//                    topIcon: Icons.rarime,
-//                    bottomIcon: Icons.arrowRightUpLine,
-//                    imageContent: {
-//                        ZStack(alignment: .bottomTrailing) {
-//                            Image(Images.peopleEmojis)
-//                                .resizable()
-//                                .scaledToFit()
-//                                .padding(.top, 84)
-//
-//                            Image(Icons.getTokensArrow)
-//                                .foregroundStyle(.informationalDark)
-//                                .offset(x: -44, y: 88)
-//                                .matchedGeometryEffect(
-//                                    id: AnimationNamespaceIds.additionalImage,
-//                                    in: inviteFriendsAnimation
-//                                )
-//                        }
-//                    },
-//                    title: "Invite",
-//                    subtitle: "Others",
-//                    bottomAdditionalContent: {
-//                        if let code = activeReferralCode {
-//                            HStack(spacing: 16) {
-//                                Text(code)
-//                                    .subtitle4()
-//                                    .foregroundStyle(.baseBlack)
-//                                VerticalDivider(color: .bgComponentBasePrimary)
-//                                Image(isCopied ? Icons.checkLine : Icons.fileCopyLine)
-//                                    .iconMedium()
-//                                    .foregroundStyle(.baseBlack.opacity(0.5))
-//                            }
-//                            .fixedSize(horizontal: false, vertical: true)
-//                            .padding(.horizontal, 16)
-//                            .padding(.vertical, 8)
-//                            .background(.baseWhite)
-//                            .cornerRadius(8)
-//                            .frame(maxWidth: 280, alignment: .leading)
-//                            .padding(.top, 24)
-//                            .onTapGesture {
-//                                if isCopied { return }
-//
-//                                isCopied = true
-//                                FeedbackGenerator.shared.impact(.medium)
-//
-//                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                                    withAnimation(.easeInOut) {
-//                                        isCopied = false
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    },
-//                    animation: inviteFriendsAnimation
-//                )
-//            },
-            HomeCarouselCard(action: { path = .voting }) {
+            HomeCarouselCard(
+                isVisible: findFaceViewModel.user != nil && findFaceViewModel.user?.celebrity.status != .maintenance,
+                action: { path = .findFace }
+            ) {
+                HomeCardView(
+                    foregroundGradient: Gradients.purpleText,
+                    foregroundColor: .invertedDark,
+                    topIcon: Icons.rarime,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        Image(.findFaceBg)
+                            .resizable()
+                            .scaledToFill()
+                            .clipShape(RoundedRectangle(cornerRadius: 32))
+                    },
+                    title: "Hidden keys",
+                    subtitle: "Find a face",
+                    topContent: {
+                        FindFaceStatusChip(status: findFaceViewModel.user?.celebrity.status ?? .maintenance)
+                    },
+                    animation: findFaceAnimation
+                )
+            },
+            HomeCarouselCard(isVisible: pollsViewModel.hasVoted, action: { path = .voting }) {
                 HomeCardView(
                     backgroundGradient: Gradients.gradientFifth,
                     topIcon: Icons.freedomtool,
@@ -139,14 +105,82 @@ struct HomeView: View {
                         Image(Images.dotCountry)
                             .resizable()
                             .scaledToFit()
-                            .padding(.top, 8)
+                            .padding(.top, 20)
                     },
                     title: "Freedomtool",
                     subtitle: "Voting",
                     animation: votingAnimation
                 )
             },
-            HomeCarouselCard(action: { path = .claimTokens }) {
+            HomeCarouselCard(
+                // TODO: make it visible when likeness is ready
+                isVisible: false,
+                action: {
+                    if likenessManager.isLoading {
+                        return
+                    }
+
+                    path = .likeness
+                }
+            ) {
+                HomeCardView(
+                    backgroundGradient: Gradients.purpleBg,
+                    foregroundGradient: Gradients.purpleText,
+                    topIcon: Icons.rarime,
+                    bottomIcon: Icons.arrowRightUpLine,
+                    imageContent: {
+                        if let faceImage = likenessManager.faceImage {
+                            LikenessFaceImageView(image: faceImage)
+                                .padding(.top, 80)
+                        } else {
+                            Image(.likenessFace)
+                                .resizable()
+                                .scaledToFit()
+                                .scaleEffect(0.75)
+                        }
+                    },
+                    title: likenessManager.isRegistered ? nil : "Digital likeness",
+                    subtitle: likenessManager.isRegistered ? nil : "Set a rule",
+                    bottomContent: {
+                        if likenessManager.isRegistered {
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text("My Rule:")
+                                    .h5()
+                                    .foregroundStyle(Gradients.purpleText)
+                                    .padding(.bottom, 12)
+                                    .matchedGeometryEffect(
+                                        id: AnimationNamespaceIds.extra,
+                                        in: likenessAnimation,
+                                        properties: .position
+                                    )
+                                Text(likenessManager.rule.title)
+                                    .additional1()
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundStyle(Gradients.purpleText)
+                                    .frame(maxWidth: 306, alignment: .leading)
+                                    .matchedGeometryEffect(
+                                        id: AnimationNamespaceIds.subtitle,
+                                        in: likenessAnimation,
+                                        properties: .position
+                                    )
+                            }
+                        } else {
+                            Text("First human-AI Contract")
+                                .body4()
+                                .foregroundStyle(.baseBlack.opacity(0.5))
+                                .padding(.top, 12)
+                                .matchedGeometryEffect(
+                                    id: AnimationNamespaceIds.extra,
+                                    in: likenessAnimation,
+                                    properties: .position
+                                )
+                        }
+                    },
+                    animation: likenessAnimation
+                )
+            },
+            HomeCarouselCard(isVisible: isBalanceSufficient, action: { path = .claimTokens }) {
                 HomeCardView(
                     backgroundGradient: Gradients.gradientThird,
                     topIcon: Icons.rarimo,
@@ -162,6 +196,68 @@ struct HomeView: View {
                     animation: claimTokensAnimation
                 )
             },
+            //            TODO: uncomment after desing and flow impl
+            //            HomeCarouselCard(
+            //                isVisible: !isBalanceFetching && pointsBalance != nil,
+            //                action: { path = .inviteFriends }
+            //            ) {
+            //                HomeCardView(
+            //                    backgroundGradient: Gradients.gradientSecond,
+            //                    topIcon: Icons.rarime,
+            //                    bottomIcon: Icons.arrowRightUpLine,
+            //                    imageContent: {
+            //                        ZStack(alignment: .bottomTrailing) {
+            //                            Image(Images.peopleEmojis)
+            //                                .resizable()
+            //                                .scaledToFit()
+            //                                .padding(.top, 84)
+            //
+            //                            Image(Icons.getTokensArrow)
+            //                                .foregroundStyle(.informationalDark)
+            //                                .offset(x: -44, y: 88)
+            //                                .matchedGeometryEffect(
+            //                                    id: AnimationNamespaceIds.additionalImage,
+            //                                    in: inviteFriendsAnimation
+            //                                )
+            //                        }
+            //                    },
+            //                    title: "Invite",
+            //                    subtitle: "Others",
+            //                    bottomContent: {
+            //                        if let code = activeReferralCode {
+            //                            HStack(spacing: 16) {
+            //                                Text(code)
+            //                                    .subtitle4()
+            //                                    .foregroundStyle(.baseBlack)
+            //                                VerticalDivider(color: .bgComponentBasePrimary)
+            //                                Image(isCopied ? Icons.checkLine : Icons.fileCopyLine)
+            //                                    .iconMedium()
+            //                                    .foregroundStyle(.baseBlack.opacity(0.5))
+            //                            }
+            //                            .fixedSize(horizontal: false, vertical: true)
+            //                            .padding(.horizontal, 16)
+            //                            .padding(.vertical, 8)
+            //                            .background(.baseWhite)
+            //                            .cornerRadius(8)
+            //                            .frame(maxWidth: 280, alignment: .leading)
+            //                            .padding(.top, 24)
+            //                            .onTapGesture {
+            //                                if isCopied { return }
+            //
+            //                                isCopied = true
+            //                                FeedbackGenerator.shared.impact(.medium)
+            //
+            //                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            //                                    withAnimation(.easeInOut) {
+            //                                        isCopied = false
+            //                                    }
+            //                                }
+            //                            }
+            //                        }
+            //                    },
+            //                    animation: inviteFriendsAnimation
+            //                )
+            //            },
 //            TODO: uncomment after desing and flow impl
 //            HomeCarouselCard(action: { path = .wallet }) {
 //                HomeCardView(
@@ -224,6 +320,20 @@ struct HomeView: View {
                             onClose: { path = nil },
                             animation: votingAnimation
                         )
+                    case .likeness:
+                        LikenessView(
+                            onClose: { path = nil },
+                            animation: likenessAnimation
+                        )
+                    case .findFace:
+                        FindFaceView(
+                            animation: findFaceAnimation,
+                            onClose: { path = nil },
+                            onViewWallet: {
+                                mainViewModel.selectedTab = .wallet
+                            }
+                        )
+                        .environmentObject(findFaceViewModel)
                     default:
                         content
                     }
@@ -231,25 +341,25 @@ struct HomeView: View {
                 .animation(.interpolatingSpring(stiffness: 100, damping: 15), value: path)
             }
         }
-        .onAppear(perform: fetchBalance)
-        .onDisappear(perform: cleanup)
+        .task { await fetchBalance() }
+        .task { await fetchFindFaceUser() }
     }
 
     private var header: some View {
         HStack(alignment: .center, spacing: 8) {
-            HStack(alignment: .center, spacing: 10) {
+            HStack(alignment: .center, spacing: 8) {
                 Text("Hi")
-                    .subtitle4()
-                    .foregroundStyle(.textSecondary)
+                    .h3()
+                    .foregroundStyle(.textPrimary)
                 Group {
                     if passportManager.passport != nil {
-                        Text(passportManager.passport?.displayedFirstName ?? "")
+                        Text(passportManager.passport?.displayedFirstName.capitalized ?? "")
                     } else {
                         Text("Stranger")
                     }
                 }
-                .subtitle4()
-                .foregroundStyle(.textPrimary)
+                .additional3()
+                .foregroundStyle(.textSecondary)
             }
             #if DEVELOPMENT
                 Text(verbatim: "Development")
@@ -261,13 +371,18 @@ struct HomeView: View {
             #endif
             Spacer()
             ZStack {
-                AppIconButton(icon: Icons.notification2Line, action: { path = .notifications })
+                Button(action: { path = .notifications }) {
+                    Image(.notification2Line)
+                        .iconMedium()
+                        .foregroundStyle(.textPrimary)
+                }
                 if notificationManager.unreadNotificationsCounter > 0 {
                     Text(verbatim: notificationManager.unreadNotificationsCounter.formatted())
                         .overline3()
                         .foregroundStyle(.baseWhite)
                         .frame(width: 16, height: 16)
                         .background(.errorMain, in: Circle())
+                        .overlay { Circle().stroke(.invertedLight, lineWidth: 2) }
                         .offset(x: 7, y: -8)
                 }
             }
@@ -275,14 +390,7 @@ struct HomeView: View {
         .zIndex(1)
         .padding([.top, .horizontal], 20)
         .padding(.bottom, 16)
-        .background {
-            ZStack {
-                Color.bgBlur
-                TransparentBlurView(removeAllFilters: false)
-                    .allowsHitTesting(false)
-            }
-            .ignoresSafeArea(.container, edges: .top)
-        }
+        .background(.bgPrimary)
     }
 
     private var content: some View {
@@ -292,12 +400,14 @@ struct HomeView: View {
                 ZStack(alignment: .trailing) {
                     SnapCarouselView(
                         index: $viewModel.currentIndex,
-                        cards: homeCards.filter { $0.isShouldDisplay }
+                        cards: homeCards.filter { $0.isVisible },
+                        spacing: 30,
+                        trailingSpace: 20
                     )
                     .padding(.horizontal, 22)
                     if homeCards.count > 1 {
                         VerticalStepIndicator(
-                            steps: homeCards.filter(\.isShouldDisplay).count,
+                            steps: homeCards.filter(\.isVisible).count,
                             currentStep: viewModel.currentIndex
                         )
                         .padding(.trailing, 8)
@@ -308,36 +418,46 @@ struct HomeView: View {
         }
     }
 
-    private func fetchBalance() {
+    private func fetchBalance() async {
         isBalanceFetching = true
+        defer { isBalanceFetching = false }
 
-        let cancelable = Task { @MainActor in
-            defer {
-                self.isBalanceFetching = false
-            }
+        if userManager.user?.userReferralCode == nil { return }
 
-            if userManager.user?.userReferralCode == nil { return }
+        do {
+            guard let user = userManager.user else { throw "failed to get user" }
+            let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
 
-            do {
-                guard let user = userManager.user else { throw "failed to get user" }
-                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-
-                let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
-                self.pointsBalance = pointsBalance
-            } catch is CancellationError {
-                return
-            } catch {
-                LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
-            }
+            let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
+            self.pointsBalance = pointsBalance
+        } catch let afError as AFError where afError.isExplicitlyCancelledError {
+            return
+        } catch {
+            LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
         }
+    }
 
-        cancelables.append(cancelable)
+    private func fetchFindFaceUser() async {
+        do {
+            guard let user = userManager.user else { throw "failed to get user" }
+            let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+
+            await findFaceViewModel.loadUser(jwt: accessJwt, referralCode: user.deferredReferralCode)
+        } catch let afError as AFError where afError.isExplicitlyCancelledError {
+            return
+        } catch {
+            LoggerUtil.common.error("failed to fetch find face user: \(error.localizedDescription, privacy: .public)")
+        }
     }
 
 //    TODO: uncomment after desing and flow impl
 //    private func verifyReferralCode() async {
+//        let POINTS_REFERRAL_CODE_LENGTH = 11
 //        var referralCode = configManager.api.defaultReferralCode
-//        if let deferredReferralCode = userManager.user?.deferredReferralCode, !deferredReferralCode.isEmpty {
+//        if let deferredReferralCode = userManager.user?.deferredReferralCode,
+//           !deferredReferralCode.isEmpty,
+//           deferredReferralCode.count == POINTS_REFERRAL_CODE_LENGTH
+//        {
 //            referralCode = deferredReferralCode
 //        }
 //
@@ -381,11 +501,6 @@ struct HomeView: View {
 //        )
 //    }
 //
-    private func cleanup() {
-        for cancelable in cancelables {
-            cancelable.cancel()
-        }
-    }
 }
 
 #Preview {
@@ -396,4 +511,6 @@ struct HomeView: View {
         .environmentObject(ConfigManager())
         .environmentObject(NotificationManager())
         .environmentObject(ExternalRequestsManager())
+        .environmentObject(LikenessManager())
+        .environmentObject(PollsViewModel())
 }

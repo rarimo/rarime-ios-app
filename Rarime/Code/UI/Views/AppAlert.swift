@@ -57,6 +57,7 @@ struct AppAlert: View {
                 Text(message ?? defaultMessage)
                     .body4()
                     .opacity(0.7)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             Spacer()
         }

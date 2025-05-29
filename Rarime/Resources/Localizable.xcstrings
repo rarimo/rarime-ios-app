@@ -1,8 +1,10 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    " " : {
+
+    },
     " and " : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -23,6 +25,9 @@
       }
     },
     "* Nothing leaves this device" : {
+
+    },
+    "%@" : {
 
     },
     "%@ ensures your history, reputation and actions are not lost, but remain confidential and under your control." : {
@@ -78,6 +83,16 @@
         }
       }
     },
+    "%@%@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@%2$@ %3$@"
+          }
+        }
+      }
+    },
     "%@%@ RMO" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -104,6 +119,19 @@
     "%lld RMO" : {
 
     },
+    "%lld/%lld invited" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld invited"
+          }
+        }
+      }
+    },
+    "%lld%%" : {
+
+    },
     "%lldm %llds" : {
       "localizations" : {
         "en" : {
@@ -124,6 +152,9 @@
 
     },
     "%llus" : {
+
+    },
+    "+1 scan" : {
 
     },
     "1 day" : {
@@ -158,7 +189,6 @@
 
     },
     "Address" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -183,6 +213,9 @@
 
     },
     "Age" : {
+
+    },
+    "AI can now replicate your face, voice, and identity without asking for your permission. But you never agreed to that, raising a fundamental question: who owns your likeness?\n\nRarimo is building the infrastructure to give you back that control. With this app, you can create a private, verifiable record that defines how your likeness can and can’t be used.\n\nYour face stays on your device. No company owns it. And over time, no AI model will be able to ignore your rule." : {
 
     },
     "Airdrop" : {
@@ -223,7 +256,6 @@
 
     },
     "Amount" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -232,6 +264,9 @@
           }
         }
       }
+    },
+    "Amount must be greater than 0" : {
+
     },
     "An error has occured, please try again" : {
 
@@ -300,6 +335,12 @@
     "Aruba" : {
 
     },
+    "Ask me first" : {
+
+    },
+    "ASSETS (%lld)" : {
+
+    },
     "Australia" : {
 
     },
@@ -339,6 +380,9 @@
         }
       }
     },
+    "Available" : {
+
+    },
     "Available RMO" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -351,7 +395,6 @@
       }
     },
     "Available:" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -478,6 +521,9 @@
     "Bonaire" : {
 
     },
+    "Bonus scan" : {
+
+    },
     "Bosnia and Herzegovina" : {
 
     },
@@ -517,9 +563,6 @@
       }
     },
     "By checking this box, you are agreeing to share the data groups of the passport and the government signature" : {
-
-    },
-    "By continue, you are agreeing to " : {
 
     },
     "Cabo Verde" : {
@@ -565,6 +608,9 @@
       }
     },
     "Cayman Islands" : {
+
+    },
+    "Center the person's face" : {
 
     },
     "Central African Republic" : {
@@ -617,11 +663,13 @@
     "Comoros" : {
 
     },
+    "Confirm" : {
+
+    },
     "Congo" : {
 
     },
     "Congrats!" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -725,6 +773,9 @@
         }
       }
     },
+    "Creating likeness record" : {
+
+    },
     "Criteria" : {
 
     },
@@ -809,6 +860,12 @@
     "Denmark" : {
 
     },
+    "Different photos of the same person return the same result, try scanning a new face" : {
+
+    },
+    "Digital likeness" : {
+
+    },
     "Djibouti" : {
 
     },
@@ -851,6 +908,9 @@
 
     },
     "Dominican Republic" : {
+
+    },
+    "Don’t use my face at all" : {
 
     },
     "Done" : {
@@ -1046,6 +1106,9 @@
         }
       }
     },
+    "Failed to get balance" : {
+
+    },
     "Failed to register, try again later" : {
 
     },
@@ -1056,6 +1119,9 @@
 
     },
     "Faroe Islands" : {
+
+    },
+    "Fee" : {
 
     },
     "Female" : {
@@ -1085,10 +1151,16 @@
         }
       }
     },
+    "Find a face" : {
+
+    },
     "Finished" : {
 
     },
     "Finland" : {
+
+    },
+    "First human-AI Contract" : {
 
     },
     "Force light registration" : {
@@ -1225,6 +1297,12 @@
     "Hi" : {
 
     },
+    "Hidden face:" : {
+
+    },
+    "Hidden keys" : {
+
+    },
     "History" : {
 
     },
@@ -1255,6 +1333,9 @@
 
     },
     "Hungary" : {
+
+    },
+    "I've found the key!" : {
 
     },
     "Iceland" : {
@@ -1292,7 +1373,16 @@
     "Indonesia" : {
 
     },
+    "Insufficient balance" : {
+
+    },
     "Internet connection is unstable" : {
+
+    },
+    "Invalid address" : {
+
+    },
+    "Invalid amount" : {
 
     },
     "Invalid HTTP status code: %lld" : {
@@ -1316,6 +1406,12 @@
 
     },
     "Invite" : {
+
+    },
+    "Invite a friend" : {
+
+    },
+    "Invite to Find a Face Game" : {
 
     },
     "Invite to RariMe" : {
@@ -1370,6 +1466,9 @@
         }
       }
     },
+    "Join Find a face game with my link:\n\n%@" : {
+
+    },
     "Join RariMe with my invite code: %@\n\n%@" : {
       "localizations" : {
         "en" : {
@@ -1401,6 +1500,9 @@
 
     },
     "Kazakhstan" : {
+
+    },
+    "Keep your face in the frame" : {
 
     },
     "Kenya" : {
@@ -1543,7 +1645,6 @@
 
     },
     "MAX" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1621,6 +1722,9 @@
         }
       }
     },
+    "My Rule:" : {
+
+    },
     "Myanmar" : {
 
     },
@@ -1665,6 +1769,9 @@
         }
       }
     },
+    "Next one soon" : {
+
+    },
     "NFC Reader" : {
       "localizations" : {
         "uk" : {
@@ -1703,7 +1810,6 @@
 
     },
     "No transactions yet" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1761,6 +1867,9 @@
     "Operation completed successfully" : {
 
     },
+    "Other already set" : {
+
+    },
     "Other passport holders" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1773,6 +1882,9 @@
       }
     },
     "Others" : {
+
+    },
+    "Out of daily scans? Earn extra scans for every friend who joins and a one-time by sharing the hunt" : {
 
     },
     "Pakistan" : {
@@ -1947,6 +2059,12 @@
         }
       }
     },
+    "Prize-pool:" : {
+
+    },
+    "Prize:" : {
+
+    },
     "Processing" : {
       "localizations" : {
         "uk" : {
@@ -1956,6 +2074,9 @@
           }
         }
       }
+    },
+    "Processing..." : {
+
     },
     "Profile" : {
       "localizations" : {
@@ -2087,7 +2208,6 @@
       }
     },
     "Rarimo Airdrop Program Terms & Conditions" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2133,7 +2253,6 @@
       }
     },
     "Receive" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2142,6 +2261,9 @@
           }
         }
       }
+    },
+    "Receive %@" : {
+
     },
     "Receive RMO" : {
       "extractionState" : "stale",
@@ -2155,7 +2277,6 @@
       }
     },
     "Receiver gets" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2200,6 +2321,9 @@
 
     },
     "Reunion" : {
+
+    },
+    "Review Transaction" : {
 
     },
     "Rewards limit reached" : {
@@ -2272,6 +2396,9 @@
     "Scan a QR" : {
 
     },
+    "Scan again" : {
+
+    },
     "Scan MRZ" : {
 
     },
@@ -2309,6 +2436,9 @@
     "Scan your passport’s first page inside the border" : {
 
     },
+    "scans" : {
+
+    },
     "Select an authorization method" : {
 
     },
@@ -2316,7 +2446,6 @@
 
     },
     "Send" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2325,6 +2454,9 @@
           }
         }
       }
+    },
+    "Send %@" : {
+
     },
     "Send RMO" : {
       "extractionState" : "stale",
@@ -2337,10 +2469,16 @@
         }
       }
     },
+    "Sending..." : {
+
+    },
     "Senegal" : {
 
     },
     "Serbia" : {
+
+    },
+    "Set a rule" : {
 
     },
     "Settings" : {
@@ -2357,7 +2495,16 @@
     "Seychelles" : {
 
     },
+    "Share" : {
+
+    },
+    "Share on socials" : {
+
+    },
     "Share your referral link and get bonuses when your friends join and make a purchase!" : {
+
+    },
+    "Shared" : {
 
     },
     "Shows two identifiers on the card" : {
@@ -2404,6 +2551,9 @@
 
     },
     "Some passports have a problem with chip scans" : {
+
+    },
+    "Somewhere out on the open web, one famous face carries a key sealed inside its ZK-vector. Test any image you find, and the first player to prove the match claims the prize. Ready to hunt?" : {
 
     },
     "Soon" : {
@@ -2494,6 +2644,9 @@
     "Success" : {
 
     },
+    "Success! Your rule is set. You can update it anytime by clicking the title." : {
+
+    },
     "Sudan" : {
 
     },
@@ -2504,6 +2657,9 @@
 
     },
     "Sweden" : {
+
+    },
+    "Swing and a miss, this face isn’t hiding the key. Keep scanning!" : {
 
     },
     "Switzerland" : {
@@ -2529,6 +2685,9 @@
 
     },
     "Tajikistan" : {
+
+    },
+    "Take a picture" : {
 
     },
     "Tanzania" : {
@@ -2569,6 +2728,9 @@
         }
       }
     },
+    "The rules are yours to change" : {
+
+    },
     "Theme" : {
       "localizations" : {
         "uk" : {
@@ -2595,6 +2757,9 @@
     "Timor-Leste" : {
 
     },
+    "Tip:" : {
+
+    },
     "To continue, please install the latest version of the app" : {
 
     },
@@ -2607,8 +2772,13 @@
     "Tonga" : {
 
     },
+    "Total %@" : {
+
+    },
+    "Total Balance" : {
+
+    },
     "Transactions" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2619,6 +2789,9 @@
       }
     },
     "Trinidad and Tobago" : {
+
+    },
+    "Try again later" : {
 
     },
     "Try using your previous private key" : {
@@ -2705,7 +2878,13 @@
     "Update app" : {
 
     },
+    "Update the rule" : {
+
+    },
     "Uruguay" : {
+
+    },
+    "Use my likeness and pay me" : {
 
     },
     "Used" : {
@@ -2736,6 +2915,9 @@
 
     },
     "Vietnam" : {
+
+    },
+    "View Wallet" : {
 
     },
     "Virgin Islands, British" : {
@@ -2832,6 +3014,12 @@
         }
       }
     },
+    "Winner:" : {
+
+    },
+    "Withdraw the %@ token" : {
+
+    },
     "Withdraw the RMO token" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2842,6 +3030,9 @@
           }
         }
       }
+    },
+    "Wrong face..." : {
+
     },
     "Yemen" : {
 
@@ -2866,7 +3057,13 @@
         }
       }
     },
+    "You can use the QR code or the wallet address to deposit the %@ token to your account" : {
+
+    },
     "You entered wrong passcode.\nLoading time: %@" : {
+
+    },
+    "You've found the hidden keys" : {
 
     },
     "You’ve joined the waitlist" : {
@@ -2894,7 +3091,13 @@
     "Your account is not backed up. If you lose your device, you will lose access to your account" : {
 
     },
+    "Your Address" : {
+
+    },
     "Your Device" : {
+
+    },
+    "Your face never leaves the device. You create an anonymous record that carries your rules, so AI knows how to treat you" : {
 
     },
     "Your Identity" : {
@@ -2929,6 +3132,9 @@
           }
         }
       }
+    },
+    "Your prize:" : {
+
     },
     "Your Rarimo Address" : {
       "extractionState" : "stale",

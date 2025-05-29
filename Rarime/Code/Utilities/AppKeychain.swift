@@ -7,6 +7,7 @@ enum AppKeychainItemKey: String {
     case passport
     case registerZkProof
     case lightRegistrationData
+    case likenessFace
 }
 
 class AppKeychain {

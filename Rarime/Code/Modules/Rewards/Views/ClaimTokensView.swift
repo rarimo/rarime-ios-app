@@ -37,7 +37,7 @@ struct ClaimTokensView: View {
     }
     
     private var isBalanceSufficient: Bool {
-        pointsBalance != nil && pointsBalance?.amount ?? 0 > 0
+        pointsBalance != nil && (pointsBalance?.amount ?? 0) > 0
     }
     
     var body: some View {

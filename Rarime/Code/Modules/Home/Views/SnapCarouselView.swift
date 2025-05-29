@@ -4,14 +4,14 @@ struct HomeCarouselCard: Identifiable {
     let id = UUID()
     let content: () -> AnyView
     let action: () -> Void
-    let isShouldDisplay: Bool
+    let isVisible: Bool
     
     init<V: View>(
-        isShouldDisplay: Bool = true,
+        isVisible: Bool = true,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> V
     ) {
-        self.isShouldDisplay = isShouldDisplay
+        self.isVisible = isVisible
         self.action = action
         self.content = { AnyView(content()) }
     }

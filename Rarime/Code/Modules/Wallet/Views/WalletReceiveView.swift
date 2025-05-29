@@ -57,7 +57,7 @@ struct WalletReceiveView: View {
 #Preview {
     WalletReceiveView(
         address: "0x39872a2f48fe565b1a7b8659a1358164e57d8efe",
-        token: WalletToken.rmo,
+        token: WalletToken.eth,
         onBack: {}
     )
 }

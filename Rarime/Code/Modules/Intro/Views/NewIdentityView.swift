@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct NewIdentityView: View {
+    @EnvironmentObject private var walletManager: WalletManager
+    @EnvironmentObject private var likenessManager: LikenessManager
+    
     @EnvironmentObject private var userManager: UserManager
     
     let onBack: () -> Void
@@ -40,6 +43,10 @@ struct NewIdentityView: View {
                         action: {
                             do {
                                 try user.save()
+                                
+                                walletManager.privateKey = user.secretKey
+                                
+                                likenessManager.postInitialization()
                             } catch {
                                 LoggerUtil.common.error("failed to save user: \(error.localizedDescription, privacy: .public)")
                                 
@@ -233,5 +240,6 @@ struct NewIdentityView: View {
 
 #Preview {
     NewIdentityView(onBack: {}, onNext: {})
-        .environmentObject(UserManager())
+        .environmentObject(LikenessManager())
+        .environmentObject(WalletManager())
 }
