@@ -3,6 +3,17 @@ import SwiftUI
 import PromiseKit
 import Web3
 
+enum WalletError: Error, LocalizedError {
+    case transactionTimeout
+
+    var errorDescription: String? {
+        switch self {
+        case .transactionTimeout:
+            return String(localized: "Transaction timed out")
+        }
+    }
+}
+
 class WalletManager: ObservableObject {
     static let shared = WalletManager()
 
@@ -57,9 +68,7 @@ class WalletManager: ObservableObject {
 
     func getFeeForTransfer() async throws -> EthereumQuantity {
         let gasPrice = try web3.eth.gasPrice().wait()
-
-        let fee = (gasPrice.quantity + (gasPrice.quantity / 5)) * 21_000
-
+        let fee = (gasPrice.quantity * 2) * 21_000
         return .init(quantity: fee)
     }
 
@@ -76,7 +85,7 @@ class WalletManager: ObservableObject {
         let nonce = try web3.eth.getTransactionCount(address: ethPrivateKey.address, block: .latest).wait()
 
         var gasPrice = try web3.eth.gasPrice().wait()
-        gasPrice = EthereumQuantity(quantity: gasPrice.quantity + (gasPrice.quantity / 5))
+        gasPrice = EthereumQuantity(quantity: gasPrice.quantity * 2)
 
         let tx = try EthereumTransaction(
             nonce: nonce,
@@ -90,7 +99,26 @@ class WalletManager: ObservableObject {
         let signedTx = try tx.sign(with: ethPrivateKey, chainId: .init(ConfigManager.shared.api.evmChainId))
         let txHash = try web3.eth.sendRawTransaction(transaction: signedTx).wait()
 
-        LoggerUtil.common.info("Transaction hash: \(txHash.hex(), privacy: .public)")
+        let receipt = await waitForTransactionReceipt(txHash: txHash)
+        if receipt == nil {
+            throw WalletError.transactionTimeout
+        }
+
+        LoggerUtil.common.info("Transfer transaction hash: \(receipt!.transactionHash.hex(), privacy: .public)")
+    }
+
+    func waitForTransactionReceipt(txHash: EthereumData, timeout: TimeInterval = 60) async -> EthereumTransactionReceiptObject? {
+        let startTime = Date()
+        while Date().timeIntervalSince(startTime) < timeout {
+            let receipt = try? web3.eth.getTransactionReceipt(transactionHash: txHash).wait()
+            if receipt != nil {
+                return receipt
+            }
+
+            try? await Task.sleep(for: .seconds(2))
+        }
+
+        return nil
     }
 
     @MainActor
