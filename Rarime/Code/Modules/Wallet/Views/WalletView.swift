@@ -126,16 +126,17 @@ struct WalletView: View {
                 Text("Transactions")
                     .subtitle5()
                     .foregroundStyle(.textPrimary)
-                ScrollView {
-                    ForEach(walletManager.transactions.reversed()) { tx in
-                        TransactionItem(tx: tx, token: token)
-                    }
-                }
-                .scrollIndicators(.hidden)
                 if walletManager.transactions.isEmpty {
                     Text("No transactions yet")
                         .body4()
                         .foregroundStyle(.textSecondary)
+                } else {
+                    ScrollView {
+                        ForEach(walletManager.transactions.reversed()) { tx in
+                            TransactionItem(tx: tx, token: token)
+                        }
+                    }
+                    .scrollIndicators(.hidden)
                 }
             }
         }

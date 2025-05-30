@@ -1106,9 +1106,6 @@
         }
       }
     },
-    "Failed to get balance" : {
-
-    },
     "Failed to register, try again later" : {
 
     },
@@ -2776,6 +2773,9 @@
 
     },
     "Total Balance" : {
+
+    },
+    "Transaction timed out" : {
 
     },
     "Transactions" : {
