@@ -20,6 +20,7 @@ struct EvmScanTransactionItem: Codable {
     let from: EvmScanTransactionAddress
     let to: EvmScanTransactionAddress
     let method: String
+    let timestamp: Date
 }
 
 // MARK: - EvmScanTransactionFrom

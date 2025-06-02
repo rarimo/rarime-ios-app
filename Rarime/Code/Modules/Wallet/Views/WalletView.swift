@@ -208,7 +208,11 @@ private struct TransactionItem: View {
 }
 
 #Preview {
-    WalletView()
+    var walletManager = WalletManager()
+
+    walletManager.registerTransfer(1)
+
+    return WalletView()
         .environmentObject(MainView.ViewModel())
         .environmentObject(UserManager())
         .environmentObject(WalletManager())

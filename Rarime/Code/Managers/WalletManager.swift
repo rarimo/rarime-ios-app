@@ -24,15 +24,9 @@ class WalletManager: ObservableObject {
     @Published var balance: EthereumQuantity?
     @Published var isBalanceLoading = false
 
-    @Published var transactions: [Transaction] {
-        didSet {
-            AppUserDefaults.shared.walletTransactions = transactions.json
-        }
-    }
+    @Published var transactions: [Transaction] = []
 
     @Published var isTransactionsLoading = false
-
-    @Published var scanTransactions: [EvmScanTransactionItem] = []
 
     var nextPageParams: EvmScanTransactionNextPageParams?
 
@@ -44,10 +38,6 @@ class WalletManager: ObservableObject {
         } catch {
             LoggerUtil.common.error("Failed to get private key: \(error.localizedDescription, privacy: .public)")
         }
-
-        self.transactions = AppUserDefaults.shared.walletTransactions.isEmpty
-            ? []
-            : try! JSONDecoder().decode([Transaction].self, from: AppUserDefaults.shared.walletTransactions)
 
         self.web3 = Web3(rpcURL: ConfigManager.shared.api.evmRpcURL.absoluteString)
     }
@@ -150,7 +140,21 @@ class WalletManager: ObservableObject {
 
         let transactionResponse = try await EvmScanAPI.shared.getTransactions(ethereumAddress, nextPageParams)
 
-        scanTransactions.append(contentsOf: transactionResponse.items)
+        for tx in transactionResponse.items {
+            var isSending = tx.from.hash.lowercased() == ethereumAddress.lowercased()
+
+            guard let amount = Decimal(string: tx.value) else {
+                continue
+            }
+
+            transactions.append(Transaction(
+                title: tx.method,
+                icon: isSending ? Icons.arrowUp : Icons.arrowDown,
+                amount: NSDecimalNumber(decimal: amount).doubleValue,
+                date: tx.timestamp,
+                type: isSending ? .sent : .received
+            ))
+        }
 
         nextPageParams = transactionResponse.nextPageParams
     }
