@@ -27,19 +27,22 @@ struct ScanPassportMRZView: View {
                 .padding(.top, 24)
                 .frame(width: 250)
             Spacer()
-            AppButton(
-                variant: .quartenary,
-                text: "Fill Manually",
-                action: { isManualMrzSheetPresented = true }
-            )
-            .controlSize(.large)
-            .padding(.horizontal, 20)
-            .dynamicSheet(isPresented: $isManualMrzSheetPresented, title: "Fill Manually") {
-                MrzFormView(onSubmitted: { mrzKey in
-                    LoggerUtil.common.info("MRZ filled manually")
-                    onNext(mrzKey)
-                })
+            VStack(spacing: 8) {
+                PassportScanTutorialButton()
+                AppButton(
+                    variant: .quartenary,
+                    text: "Fill Manually",
+                    action: { isManualMrzSheetPresented = true }
+                )
+                .controlSize(.large)
+                .dynamicSheet(isPresented: $isManualMrzSheetPresented, title: "Fill Manually") {
+                    MrzFormView(onSubmitted: { mrzKey in
+                        LoggerUtil.common.info("MRZ filled manually")
+                        onNext(mrzKey)
+                    })
+                }
             }
+            .padding(.horizontal, 20)
         }
     }
 }
