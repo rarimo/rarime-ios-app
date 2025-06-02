@@ -69,10 +69,7 @@ struct DetectableScrollView<Content: View>: View {
 }
 
 #Preview {
-    DetectableScrollView(
-        onTop: { LoggerUtil.common.debug("top") },
-        onBottom: { LoggerUtil.common.debug("bottom") }
-    ) {
+    DetectableScrollView(onTop: {}, onBottom: {}) {
         VStack {
             ForEach(0 ..< 10) { _ in
                 Text("Test")

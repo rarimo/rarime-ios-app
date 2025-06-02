@@ -156,7 +156,7 @@ struct WalletView: View {
                         onBottom: walletManager.pullTransactions
                     ) {
                         VStack {
-                            ForEach(walletManager.transactions.reversed()) { tx in
+                            ForEach(walletManager.transactions) { tx in
                                 TransactionItem(tx: tx, token: token)
                                     .padding(.vertical, 5)
                             }

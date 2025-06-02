@@ -159,7 +159,7 @@ class WalletManager: ObservableObject {
                     if let method = tx.method {
                         title = method
                     } else {
-                        title = isSending ? String(localized: "Sent") : String(localized: "Received")
+                        title = isSending ? String(localized: "Send") : String(localized: "Received")
                     }
 
                     transactions.append(Transaction(
