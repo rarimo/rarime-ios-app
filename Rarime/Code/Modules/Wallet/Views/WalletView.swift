@@ -127,17 +127,21 @@ struct WalletView: View {
                 Text("Transactions")
                     .subtitle5()
                     .foregroundStyle(.textPrimary)
-                if walletManager.transactions.isEmpty {
+                if walletManager.transactions.isEmpty && !walletManager.isTransactionsLoading {
                     Text("No transactions yet")
                         .body4()
                         .foregroundStyle(.textSecondary)
                 } else {
-                    ScrollView {
-                        ForEach(walletManager.transactions.reversed()) { tx in
-                            TransactionItem(tx: tx, token: token)
+                    if walletManager.isTransactionsLoading {
+                        ProgressView()
+                    } else {
+                        ScrollView {
+                            ForEach(walletManager.transactions.reversed()) { tx in
+                                TransactionItem(tx: tx, token: token)
+                            }
                         }
+                        .scrollIndicators(.hidden)
                     }
-                    .scrollIndicators(.hidden)
                 }
             }
         }
@@ -201,9 +205,11 @@ private struct TransactionItem: View {
                     .foregroundStyle(.textSecondary)
             }
             Spacer()
-            Text("\(balanceModifier)\(tx.amount.formatted()) \(token.rawValue)")
-                .subtitle7()
-                .foregroundStyle(tx.type == .sent ? .errorMain : .successMain)
+            if tx.amount != 0 {
+                Text("\(balanceModifier)\(tx.amount.formatted()) \(token.rawValue)")
+                    .subtitle7()
+                    .foregroundStyle(tx.type == .sent ? .errorMain : .successMain)
+            }
         }
     }
 }
