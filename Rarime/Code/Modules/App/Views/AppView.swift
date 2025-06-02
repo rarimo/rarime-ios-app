@@ -82,21 +82,6 @@ struct AppView: View {
             UIApplication.shared.isIdleTimerDisabled = true
         }
         .environmentObject(viewModel)
-        .onAppear {
-            Task {
-                do {
-                    let transactionsResponse = try await EvmScanAPI.shared.getTransactions("0x52749da41B7196A7001D85Ce38fa794FE0F9044E")
-
-                    LoggerUtil.common.info("transactions: \(transactionsResponse.items.json.utf8)")
-
-                    let secondTransactionResponse = try await EvmScanAPI.shared.getTransactions("0x52749da41B7196A7001D85Ce38fa794FE0F9044E", transactionsResponse.nextPageParams)
-
-                    LoggerUtil.common.info("second transactions: \(secondTransactionResponse.items.json.utf8)")
-                } catch {
-                    LoggerUtil.common.error("failed to fetch transactions: \(error)")
-                }
-            }
-        }
     }
 }
 

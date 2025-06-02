@@ -141,7 +141,7 @@ class WalletManager: ObservableObject {
         let transactionResponse = try await EvmScanAPI.shared.getTransactions(ethereumAddress, nextPageParams)
 
         for tx in transactionResponse.items {
-            var isSending = tx.from.hash.lowercased() == ethereumAddress.lowercased()
+            let isSending = tx.from.hash.lowercased() == ethereumAddress.lowercased()
 
             guard let amount = Decimal(string: tx.value) else {
                 continue
@@ -151,7 +151,7 @@ class WalletManager: ObservableObject {
                 title: tx.method,
                 icon: isSending ? Icons.arrowUp : Icons.arrowDown,
                 amount: NSDecimalNumber(decimal: amount).doubleValue,
-                date: tx.timestamp,
+                date: tx.date,
                 type: isSending ? .sent : .received
             ))
         }
