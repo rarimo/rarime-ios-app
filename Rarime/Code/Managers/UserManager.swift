@@ -597,7 +597,7 @@ class UserManager: ObservableObject {
     }
     
     func generateNullifierForEvent(_ eventId: String) throws -> String {
-        guard let user else { throw "User is not initalized" }
+        guard let user else { throw "User is not initialized" }
         
         var error: NSError?
         let nullifier = user.profile.calculateEventNullifierHex(eventId, error: &error)
