@@ -52,18 +52,26 @@ struct WalletView: View {
                 }
             }
         }
-        .onAppear(perform: walletManager.pullTransactions)
+        .onAppear {
+            if !walletManager.transactions.isEmpty {
+                return
+            }
+
+            walletManager.pullTransactions()
+        }
     }
 
     private var content: some View {
         MainViewLayout {
             VStack(alignment: .leading, spacing: 20) {
                 header
+                Spacer()
                 // TODO: add full support for assets
 //                    AssetsSlider(walletAssets: [selectedAsset], isLoading: isBalanceFetching)
 //                    HorizontalDivider()
 //                        .padding(.horizontal, 20)
                 transactionsList
+                Spacer()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.bgPrimary)
@@ -130,20 +138,34 @@ struct WalletView: View {
                 if walletManager.transactions.isEmpty {
                     if walletManager.isTransactionsLoading {
                         ProgressView()
+                            .align(.center)
                     } else {
                         Text("No transactions yet")
                             .body4()
                             .foregroundStyle(.textSecondary)
                     }
                 } else {
-                    ScrollView {
-                        ForEach(walletManager.transactions.reversed()) { tx in
-                            TransactionItem(tx: tx, token: token)
+                    DetectableScrollView(
+                        onTop: {
+                            walletManager.transactions = []
+                            walletManager.scanTXsNextPageParams = nil
+                            walletManager.isLastTXsPage = false
+
+                            walletManager.pullTransactions()
+                        },
+                        onBottom: walletManager.pullTransactions
+                    ) {
+                        VStack {
+                            ForEach(walletManager.transactions.reversed()) { tx in
+                                TransactionItem(tx: tx, token: token)
+                                    .padding(.vertical, 5)
+                            }
                         }
                     }
                     .scrollIndicators(.hidden)
                     if walletManager.isTransactionsLoading {
                         ProgressView()
+                            .align(.center)
                     }
                 }
             }
