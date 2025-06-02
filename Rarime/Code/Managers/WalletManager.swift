@@ -28,7 +28,9 @@ class WalletManager: ObservableObject {
 
     @Published var isTransactionsLoading = false
 
-    var nextPageParams: EvmScanTransactionNextPageParams?
+    var scanTXsNextPageParams: EvmScanTransactionNextPageParams?
+
+    var isLastTXsPage = false
 
     init() {
         do {
@@ -132,16 +134,19 @@ class WalletManager: ObservableObject {
 
     @MainActor
     func pullTransactions() {
+        if isTransactionsLoading || isLastTXsPage {
+            return
+        }
+
+        isTransactionsLoading = true
+
         Task { @MainActor in
             do {
-                isTransactionsLoading = true
-                defer { isTransactionsLoading = false }
-
                 guard let ethereumAddress = UserManager.shared.ethereumAddress else {
                     return
                 }
 
-                let transactionResponse = try await EvmScanAPI.shared.getTransactions(ethereumAddress, nextPageParams)
+                let transactionResponse = try await EvmScanAPI.shared.getTransactions(ethereumAddress, scanTXsNextPageParams)
 
                 for tx in transactionResponse.items {
                     let isSending = tx.from.hash.lowercased() == ethereumAddress.lowercased()
@@ -150,8 +155,15 @@ class WalletManager: ObservableObject {
                         continue
                     }
 
+                    var title: String
+                    if let method = tx.method {
+                        title = method
+                    } else {
+                        title = isSending ? String(localized: "Sent") : String(localized: "Received")
+                    }
+
                     transactions.append(Transaction(
-                        title: tx.method,
+                        title: title,
                         icon: isSending ? Icons.arrowUp : Icons.arrowDown,
                         amount: NSDecimalNumber(decimal: amount).doubleValue,
                         date: tx.date,
@@ -159,9 +171,16 @@ class WalletManager: ObservableObject {
                     ))
                 }
 
-                nextPageParams = transactionResponse.nextPageParams
+                scanTXsNextPageParams = transactionResponse.nextPageParams
+                if scanTXsNextPageParams == nil {
+                    isLastTXsPage = true
+                }
+
+                isTransactionsLoading = false
             } catch {
                 LoggerUtil.common.error("Failed to pull transactions: \(error, privacy: .public)")
+
+                AlertManager.shared.emitError(.unknown("Failed to pull transactions"))
             }
         }
     }

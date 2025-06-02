@@ -127,20 +127,23 @@ struct WalletView: View {
                 Text("Transactions")
                     .subtitle5()
                     .foregroundStyle(.textPrimary)
-                if walletManager.transactions.isEmpty && !walletManager.isTransactionsLoading {
-                    Text("No transactions yet")
-                        .body4()
-                        .foregroundStyle(.textSecondary)
-                } else {
+                if walletManager.transactions.isEmpty {
                     if walletManager.isTransactionsLoading {
                         ProgressView()
                     } else {
-                        ScrollView {
-                            ForEach(walletManager.transactions.reversed()) { tx in
-                                TransactionItem(tx: tx, token: token)
-                            }
+                        Text("No transactions yet")
+                            .body4()
+                            .foregroundStyle(.textSecondary)
+                    }
+                } else {
+                    ScrollView {
+                        ForEach(walletManager.transactions.reversed()) { tx in
+                            TransactionItem(tx: tx, token: token)
                         }
-                        .scrollIndicators(.hidden)
+                    }
+                    .scrollIndicators(.hidden)
+                    if walletManager.isTransactionsLoading {
+                        ProgressView()
                     }
                 }
             }

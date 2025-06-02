@@ -18,8 +18,8 @@ struct EvmScanTransactionItem: Codable {
     let hash: String
     let value: String
     let from: EvmScanTransactionAddress
-    let to: EvmScanTransactionAddress
-    let method: String
+    let to: EvmScanTransactionAddress?
+    let method: String?
     let timestamp: String
 
     var date: Date {
