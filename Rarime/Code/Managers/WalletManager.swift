@@ -30,6 +30,12 @@ class WalletManager: ObservableObject {
         }
     }
 
+    @Published var isTransactionsLoading = false
+
+    @Published var scanTransactions: [EvmScanTransactionItem] = []
+
+    var nextPageParams: EvmScanTransactionNextPageParams?
+
     init() {
         do {
             if try AppKeychain.containsValue(.privateKey) {
@@ -132,6 +138,21 @@ class WalletManager: ObservableObject {
                 type: .sent
             )
         )
+    }
+
+    func pullTransactions() async throws {
+        isTransactionsLoading = true
+        defer { isTransactionsLoading = false }
+
+        guard let ethereumAddress = UserManager.shared.ethereumAddress else {
+            return
+        }
+
+        let transactionResponse = try await EvmScanAPI.shared.getTransactions(ethereumAddress, nextPageParams)
+
+        scanTransactions.append(contentsOf: transactionResponse.items)
+
+        nextPageParams = transactionResponse.nextPageParams
     }
 
     func reset() {
