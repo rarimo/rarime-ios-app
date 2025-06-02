@@ -240,9 +240,7 @@ private struct TransactionItem: View {
 }
 
 #Preview {
-    var walletManager = WalletManager()
-
-    return WalletView()
+    WalletView()
         .environmentObject(MainView.ViewModel())
         .environmentObject(UserManager())
         .environmentObject(WalletManager())
