@@ -130,33 +130,40 @@ class WalletManager: ObservableObject {
         )
     }
 
-    func pullTransactions() async throws {
-        isTransactionsLoading = true
-        defer { isTransactionsLoading = false }
+    @MainActor
+    func pullTransactions() {
+        Task { @MainActor in
+            do {
+                isTransactionsLoading = true
+                defer { isTransactionsLoading = false }
 
-        guard let ethereumAddress = UserManager.shared.ethereumAddress else {
-            return
-        }
+                guard let ethereumAddress = UserManager.shared.ethereumAddress else {
+                    return
+                }
 
-        let transactionResponse = try await EvmScanAPI.shared.getTransactions(ethereumAddress, nextPageParams)
+                let transactionResponse = try await EvmScanAPI.shared.getTransactions(ethereumAddress, nextPageParams)
 
-        for tx in transactionResponse.items {
-            let isSending = tx.from.hash.lowercased() == ethereumAddress.lowercased()
+                for tx in transactionResponse.items {
+                    let isSending = tx.from.hash.lowercased() == ethereumAddress.lowercased()
 
-            guard let amount = Decimal(string: tx.value) else {
-                continue
+                    guard let amount = Decimal(string: tx.value) else {
+                        continue
+                    }
+
+                    transactions.append(Transaction(
+                        title: tx.method,
+                        icon: isSending ? Icons.arrowUp : Icons.arrowDown,
+                        amount: NSDecimalNumber(decimal: amount).doubleValue,
+                        date: tx.date,
+                        type: isSending ? .sent : .received
+                    ))
+                }
+
+                nextPageParams = transactionResponse.nextPageParams
+            } catch {
+                LoggerUtil.common.error("Failed to pull transactions: \(error, privacy: .public)")
             }
-
-            transactions.append(Transaction(
-                title: tx.method,
-                icon: isSending ? Icons.arrowUp : Icons.arrowDown,
-                amount: NSDecimalNumber(decimal: amount).doubleValue,
-                date: tx.date,
-                type: isSending ? .sent : .received
-            ))
         }
-
-        nextPageParams = transactionResponse.nextPageParams
     }
 
     func reset() {

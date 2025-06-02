@@ -52,6 +52,7 @@ struct WalletView: View {
                 }
             }
         }
+        .onAppear(perform: walletManager.pullTransactions)
     }
 
     private var content: some View {
@@ -209,8 +210,6 @@ private struct TransactionItem: View {
 
 #Preview {
     var walletManager = WalletManager()
-
-    walletManager.registerTransfer(1)
 
     return WalletView()
         .environmentObject(MainView.ViewModel())
