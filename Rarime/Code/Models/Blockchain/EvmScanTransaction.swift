@@ -4,7 +4,7 @@ import Foundation
 
 struct EvmScanTransaction: Codable {
     let items: [EvmScanTransactionItem]
-    let nextPageParams: EvmScanTransactionNextPageParams
+    let nextPageParams: EvmScanTransactionNextPageParams?
 
     enum CodingKeys: String, CodingKey {
         case items
