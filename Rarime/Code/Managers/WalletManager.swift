@@ -24,11 +24,13 @@ class WalletManager: ObservableObject {
     @Published var balance: EthereumQuantity?
     @Published var isBalanceLoading = false
 
-    @Published var transactions: [Transaction] {
-        didSet {
-            AppUserDefaults.shared.walletTransactions = transactions.json
-        }
-    }
+    @Published var transactions: [Transaction] = []
+
+    @Published var isTransactionsLoading = false
+
+    var scanTXsNextPageParams: EvmScanTransactionNextPageParams?
+
+    var isLastTXsPage = false
 
     init() {
         do {
@@ -38,10 +40,6 @@ class WalletManager: ObservableObject {
         } catch {
             LoggerUtil.common.error("Failed to get private key: \(error.localizedDescription, privacy: .public)")
         }
-
-        self.transactions = AppUserDefaults.shared.walletTransactions.isEmpty
-            ? []
-            : try! JSONDecoder().decode([Transaction].self, from: AppUserDefaults.shared.walletTransactions)
 
         self.web3 = Web3(rpcURL: ConfigManager.shared.api.evmRpcURL.absoluteString)
     }
@@ -132,6 +130,59 @@ class WalletManager: ObservableObject {
                 type: .sent
             )
         )
+    }
+
+    @MainActor
+    func pullTransactions() {
+        if isTransactionsLoading || isLastTXsPage {
+            return
+        }
+
+        isTransactionsLoading = true
+
+        Task { @MainActor in
+            do {
+                guard let ethereumAddress = UserManager.shared.ethereumAddress else {
+                    return
+                }
+
+                let transactionResponse = try await EvmScanAPI.shared.getTransactions(ethereumAddress, scanTXsNextPageParams)
+
+                for tx in transactionResponse.items {
+                    let isSending = tx.from.hash.lowercased() == ethereumAddress.lowercased()
+
+                    guard let amount = Decimal(string: tx.value) else {
+                        continue
+                    }
+
+                    var title: String
+                    if let method = tx.method {
+                        title = method
+                    } else {
+                        title = isSending ? String(localized: "Send") : String(localized: "Received")
+                    }
+
+                    transactions.append(Transaction(
+                        title: title,
+                        icon: isSending ? Icons.arrowUp : Icons.arrowDown,
+                        amount: NSDecimalNumber(decimal: amount).doubleValue,
+                        date: tx.date,
+                        type: isSending ? .sent : .received
+                    ))
+                }
+
+                scanTXsNextPageParams = transactionResponse.nextPageParams
+                if scanTXsNextPageParams == nil {
+                    isLastTXsPage = true
+                }
+
+                isTransactionsLoading = false
+            } catch {
+                LoggerUtil.common.error("Failed to pull transactions: \(error, privacy: .public)")
+
+                AlertManager.shared.emitError(.unknown("Failed to pull transactions"))
+            }
+        }
     }
 
     func reset() {

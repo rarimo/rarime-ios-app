@@ -291,5 +291,7 @@
 	<string>${AIRDROP_TERMS_URL}</string>
 	<key>EVM_CHAIN_ID</key>
 	<string>${EVM_CHAIN_ID}</string>
+	<key>EVM_SCAN_API_URL</key>
+	<string>${EVM_SCAN_API_URL}</string>
 </dict>
 </plist>
