@@ -132,7 +132,7 @@ struct HomeView: View {
                 .environmentObject(viewModel)
                 .environmentObject(findFaceViewModel)
             }
-            .background(Color.bgPrimary)
+            .background(.bgPrimary)
         }
     }
 
@@ -176,7 +176,7 @@ struct HomeView: View {
                 }
 
                 if notificationManager.unreadNotificationsCounter > 0 {
-                    Text("\(notificationManager.unreadNotificationsCounter)")
+                    Text(verbatim: "\(notificationManager.unreadNotificationsCounter)")
                         .overline3()
                         .foregroundStyle(.baseWhite)
                         .frame(width: 16, height: 16)

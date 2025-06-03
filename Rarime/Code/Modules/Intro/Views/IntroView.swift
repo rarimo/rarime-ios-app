@@ -12,6 +12,9 @@ private struct AuthMethod: Identifiable, Hashable {
 
 struct IntroView: View {
     @EnvironmentObject private var userManager: UserManager
+    @EnvironmentObject private var securityManager: SecurityManager
+    @EnvironmentObject private var likenessManager: LikenessManager
+    @EnvironmentObject private var walletManager: WalletManager
 
     var onFinish: () -> Void
 
@@ -141,8 +144,17 @@ struct IntroView: View {
     private func createNewUser() {
         do {
             try userManager.createNewUser()
-            try userManager.user?.save()
+            guard let user = userManager.user else {
+                throw Errors.userCreationFailed
+            }
+
+            try user.save()
             LoggerUtil.common.info("New user created: \(userManager.ethereumAddress ?? "", privacy: .public)")
+
+            walletManager.privateKey = user.secretKey
+            securityManager.disablePasscode()
+            likenessManager.postInitialization()
+
             onFinish()
         } catch {
             userManager.user = nil
@@ -155,4 +167,7 @@ struct IntroView: View {
 #Preview {
     IntroView(onFinish: {})
         .environmentObject(UserManager.shared)
+        .environmentObject(SecurityManager.shared)
+        .environmentObject(LikenessManager.shared)
+        .environmentObject(WalletManager.shared)
 }

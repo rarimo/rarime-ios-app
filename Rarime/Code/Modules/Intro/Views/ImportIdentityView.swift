@@ -6,6 +6,7 @@ struct ImportIdentityView: View {
     @EnvironmentObject private var likenessManager: LikenessManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var userManager: UserManager
+    @EnvironmentObject private var securityManager: SecurityManager
     
     var onNext: () -> Void
     var onBack: () -> Void
@@ -145,6 +146,7 @@ struct ImportIdentityView: View {
                 walletManager.privateKey = userManager.user?.secretKey
                 
                 likenessManager.postInitialization()
+                securityManager.disablePasscode()
                 
                 onNext()
             } catch {
@@ -182,6 +184,7 @@ struct ImportIdentityView: View {
                 walletManager.privateKey = userManager.user?.secretKey
                 
                 likenessManager.postInitialization()
+                securityManager.disablePasscode()
                 
                 onNext()
             } catch {
@@ -237,4 +240,5 @@ private func isValidPrivateKey(_ privateKey: String) throws -> Bool {
         .environmentObject(UserManager.shared)
         .environmentObject(LikenessManager.shared)
         .environmentObject(WalletManager.shared)
+        .environmentObject(SecurityManager.shared)
 }
