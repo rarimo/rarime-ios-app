@@ -7,7 +7,7 @@ struct PassportScanTutorialButton: View {
         Button(action: { isTutorialPresented = true }) {
             HStack(spacing: 20) {
                 ZStack {
-                    Image(Images.passportTutorialThumbnail)
+                    Image(.passportTutorialThumbnail)
                         .resizable()
                         .scaledToFit()
                         .frame(height: 56)

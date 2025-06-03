@@ -46,7 +46,7 @@ struct ClaimTokensView: View {
                 AppIconButton(variant: .secondary, icon: Icons.closeFill, action: onClose)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding([.top, .trailing], 20)
-                Image(Images.rarimoTokens)
+                Image(.rarimoTokens)
                     .resizable()
                     .scaledToFit()
                     .padding(.top, 96)

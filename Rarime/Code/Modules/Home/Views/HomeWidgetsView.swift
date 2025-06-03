@@ -86,7 +86,7 @@ struct HomeWidgetsView: View {
                     topIcon: Icons.freedomtool,
                     bottomIcon: Icons.arrowRightUpLine,
                     imageContent: {
-                        Image(Images.dotCountry)
+                        Image(.dotCountry)
                             .resizable()
                             .scaledToFit()
                             .padding(.top, 20)
@@ -136,7 +136,7 @@ struct HomeWidgetsView: View {
                     topIcon: Icons.rarimo,
                     bottomIcon: Icons.arrowRightUpLine,
                     imageContent: {
-                        Image(Images.rarimoTokens)
+                        Image(.rarimoTokens)
                             .resizable()
                             .scaledToFit()
                             .padding(.top, 100)
@@ -156,7 +156,7 @@ struct HomeWidgetsView: View {
                     bottomIcon: Icons.arrowRightUpLine,
                     imageContent: {
                         ZStack(alignment: .bottomTrailing) {
-                            Image(Images.peopleEmojis)
+                            Image(.peopleEmojis)
                                 .resizable()
                                 .scaledToFit()
                                 .padding(.top, 84)

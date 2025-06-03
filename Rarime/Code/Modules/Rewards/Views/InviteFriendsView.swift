@@ -18,7 +18,7 @@ struct InviteFriendsView: View {
                     maxHeight: 730,
                     maxBlur: 70,
                     background: {
-                        Image(Images.peopleEmojis)
+                        Image(.peopleEmojis)
                             .resizable()
                             .scaledToFit()
                             .padding(.top, 77)

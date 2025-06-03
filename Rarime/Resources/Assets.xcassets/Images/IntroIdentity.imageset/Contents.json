@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "intro_app.png",
+      "filename" : "intro-identity.png",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "intro_app 1.png",
+      "filename" : "intro-identity-dark.png",
       "idiom" : "universal"
     }
   ],
