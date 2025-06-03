@@ -182,6 +182,12 @@
     "Active" : {
 
     },
+    "Add different type of applications that you can intersect with anonymously" : {
+
+    },
+    "Add widgets" : {
+
+    },
     "Address" : {
       "localizations" : {
         "uk" : {
@@ -734,9 +740,6 @@
         }
       }
     },
-    "Create a new identity" : {
-
-    },
     "Create Account" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1071,6 +1074,9 @@
         }
       }
     },
+    "Explore Apps" : {
+
+    },
     "Export Keys" : {
       "localizations" : {
         "uk" : {
@@ -1208,9 +1214,6 @@
     "Generate Proof" : {
 
     },
-    "Generates new keys" : {
-
-    },
     "Generating..." : {
 
     },
@@ -1232,9 +1235,6 @@
           }
         }
       }
-    },
-    "Get Started" : {
-
     },
     "Ghana" : {
 
@@ -1654,6 +1654,9 @@
     "Malta" : {
 
     },
+    "Managing identity" : {
+
+    },
     "Marshall Islands" : {
 
     },
@@ -1829,6 +1832,9 @@
 
     },
     "No notifications" : {
+
+    },
+    "No one can trace your actions\nNo system can connect the dots\nNo data ever leaves your phone" : {
 
     },
     "No polls yet" : {
@@ -2080,6 +2086,9 @@
     "Pre-elections polls" : {
 
     },
+    "Privacy" : {
+
+    },
     "Privacy Policy" : {
       "localizations" : {
         "uk" : {
@@ -2230,6 +2239,9 @@
           }
         }
       }
+    },
+    "RariMe lets you prove your identity - without giving anything away" : {
+
     },
     "RariMe Privacy Notice" : {
       "localizations" : {
@@ -2790,6 +2802,9 @@
     "This action is irreversible and will delete all your data." : {
 
     },
+    "This app is where you privately store your digital identities, enabling you to go incognito across the web" : {
+
+    },
     "This app is where you privately store your digital identities, enabling you to go incognito across the web." : {
       "localizations" : {
         "uk" : {
@@ -2942,9 +2957,6 @@
     "User creation failed" : {
 
     },
-    "Uses pregenerated keys or iCloud" : {
-
-    },
     "Uzbekistan" : {
 
     },
@@ -3025,6 +3037,9 @@
       }
     },
     "Welcome To" : {
+
+    },
+    "Welcome!" : {
 
     },
     "Western Sahara" : {

@@ -8,6 +8,9 @@ public class AppUserDefaults: ObservableObject {
     @AppStorage("is_intro_finished")
     public var isIntroFinished = false
 
+    @AppStorage("is_home_onboarding_completed")
+    public var isHomeOnboardingCompleted = false
+
     @AppStorage("passcode_state")
     public var passcodeState = SecurityItemState.unset.rawValue
 

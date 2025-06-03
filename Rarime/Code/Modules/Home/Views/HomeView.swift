@@ -26,6 +26,7 @@ struct HomeView: View {
 
     @State private var path: [HomeRoute] = []
     @State private var selectedCardId: HomeCardId? = nil
+    @State private var isOnboardingPresented = false
 
     @Namespace private var recoveryNamespace
     @Namespace private var findFaceNamespace
@@ -99,9 +100,24 @@ struct HomeView: View {
             default:
                 mainLayoutContent
             }
+
+            HomeOnboardingView(
+                isPresented: isOnboardingPresented,
+                onComplete: {
+                    isOnboardingPresented = false
+                    AppUserDefaults.shared.isHomeOnboardingCompleted = true
+                }
+            )
+            .transition(.identity)
+            .zIndex(1)
         }
         .animation(.interpolatingSpring(stiffness: 100, damping: 15),
                    value: selectedCardId)
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                isOnboardingPresented = !AppUserDefaults.shared.isHomeOnboardingCompleted
+            }
+        }
     }
 
     @ViewBuilder
@@ -186,4 +202,14 @@ struct HomeView: View {
         case .claimTokens: return claimTokensNamespace
         }
     }
+}
+
+#Preview {
+    HomeView()
+        .environmentObject(MainView.ViewModel())
+        .environmentObject(PassportManager())
+        .environmentObject(NotificationManager())
+        .environmentObject(LikenessManager())
+        .environmentObject(ConfigManager())
+        .environmentObject(PollsViewModel())
 }
