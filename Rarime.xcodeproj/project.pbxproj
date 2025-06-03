@@ -39,6 +39,9 @@
 		5641CC432C872F77007B7A0D /* ExternalRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5641CC422C872F77007B7A0D /* ExternalRequestsView.swift */; };
 		5641CC452C874E2B007B7A0D /* AppAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5641CC442C874E2B007B7A0D /* AppAlert.swift */; };
 		564715C12DEDAF3D00B1334B /* RecoveryMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564715C02DEDAF3D00B1334B /* RecoveryMethodView.swift */; };
+		564715C32DEDBAC200B1334B /* RecoveryMethodSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564715C22DEDBAC200B1334B /* RecoveryMethodSelectionView.swift */; };
+		564715C52DEDFCE500B1334B /* RecoveryMethodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564715C42DEDFCE500B1334B /* RecoveryMethodItem.swift */; };
+		564715C82DEDFD3A00B1334B /* ICloudRecoveryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564715C72DEDFD3A00B1334B /* ICloudRecoveryViewModel.swift */; };
 		56474AD62BB9860E0017AA25 /* FaceIdAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */; };
 		56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */; };
 		56474ADA2BB9ED6E0017AA25 /* AnyTransition+Backslide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */; };
@@ -463,6 +466,9 @@
 		5641CC422C872F77007B7A0D /* ExternalRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalRequestsView.swift; sourceTree = "<group>"; };
 		5641CC442C874E2B007B7A0D /* AppAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAlert.swift; sourceTree = "<group>"; };
 		564715C02DEDAF3D00B1334B /* RecoveryMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryMethodView.swift; sourceTree = "<group>"; };
+		564715C22DEDBAC200B1334B /* RecoveryMethodSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryMethodSelectionView.swift; sourceTree = "<group>"; };
+		564715C42DEDFCE500B1334B /* RecoveryMethodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryMethodItem.swift; sourceTree = "<group>"; };
+		564715C72DEDFD3A00B1334B /* ICloudRecoveryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudRecoveryViewModel.swift; sourceTree = "<group>"; };
 		56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIdAuth.swift; sourceTree = "<group>"; };
 		56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
 		56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+Backslide.swift"; sourceTree = "<group>"; };
@@ -985,6 +991,7 @@
 		564715BE2DEDAF1800B1334B /* Recovery */ = {
 			isa = PBXGroup;
 			children = (
+				564715C62DEDFD2400B1334B /* ViewModels */,
 				564715BF2DEDAF3200B1334B /* Views */,
 			);
 			path = Recovery;
@@ -994,8 +1001,18 @@
 			isa = PBXGroup;
 			children = (
 				564715C02DEDAF3D00B1334B /* RecoveryMethodView.swift */,
+				564715C22DEDBAC200B1334B /* RecoveryMethodSelectionView.swift */,
+				564715C42DEDFCE500B1334B /* RecoveryMethodItem.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		564715C62DEDFD2400B1334B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				564715C72DEDFD3A00B1334B /* ICloudRecoveryViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		56474AD42BB985E00017AA25 /* Utilities */ = {
@@ -2189,6 +2206,7 @@
 				564169602BE273260057AC03 /* PassportCardLook.swift in Sources */,
 				5655E4352BD5173200B86C5C /* AppView+ViewModel.swift in Sources */,
 				C7D624572D6DB4E2007BA5A6 /* Multicall3Contract.swift in Sources */,
+				564715C52DEDFCE500B1334B /* RecoveryMethodItem.swift in Sources */,
 				CE0659112DC8C1B1004FBDD5 /* UIImage+resize.swift in Sources */,
 				566E93CF2DDCDEC9007C596A /* CountdownView.swift in Sources */,
 				568D45C82C29AC200065D467 /* PassportChipErrorView.swift in Sources */,
@@ -2199,6 +2217,7 @@
 				56E6AD4D2BD273BC00E4DDC1 /* ProfileRouteLayout.swift in Sources */,
 				56E2D91B2BCEA66A006E725D /* PassportCard.swift in Sources */,
 				5617AB132C8F47C2003947C9 /* ProofRequestView.swift in Sources */,
+				564715C32DEDBAC200B1334B /* RecoveryMethodSelectionView.swift in Sources */,
 				CE3E0D3B2C2025CE0039DD50 /* AFError+RetriveOpenApiHttpCode.swift in Sources */,
 				CEC562112BD926AA002D4954 /* ZKUtils.swift in Sources */,
 				56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */,
@@ -2223,6 +2242,7 @@
 				563529E92BB072B80027C910 /* IdentityView.swift in Sources */,
 				CE3CD7952DB6834B00112E46 /* DebugAssets.swift in Sources */,
 				56722F202BCD62BB00300AD0 /* ProfileView.swift in Sources */,
+				564715C82DEDFD3A00B1334B /* ICloudRecoveryViewModel.swift in Sources */,
 				C7D6244F2D6DB337007BA5A6 /* PollsViewModel.swift in Sources */,
 				CEF8C7F72BE0DE9700F8E1A4 /* CosmosTransferResponse.swift in Sources */,
 				CEDC578F2CA2C9EB00F02132 /* MRZScanView+ViewModel.swift in Sources */,

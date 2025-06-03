@@ -35,11 +35,22 @@ enum Gradients {
         startPoint: .top,
         endPoint: .bottom
     )
+    
+    // MARK: - Background Gradients
+
     static let purpleBg = LinearGradient(
         gradient: Gradient(colors: [.purpleBgGradient1, .purpleBgGradient2, .purpleBgGradient3]),
         startPoint: .top,
         endPoint: .bottom
     )
+    static let lightGreenBg = LinearGradient(
+        gradient: Gradient(colors: [.lightGreenBgGradient1, .lightGreenBgGradient2]),
+        startPoint: .leading,
+        endPoint: .trailing
+    )
+    
+    // MARK: - Text Gradients
+
     static let purpleText = LinearGradient(
         gradient: Gradient(colors: [.purpleTextGradient1, .purpleTextGradient2]),
         startPoint: .leading,

@@ -1,8 +1,12 @@
 import SwiftUI
 
 struct RecoveryMethodView: View {
+    @EnvironmentObject private var userManager: UserManager
+
     var animation: Namespace.ID
     let onClose: () -> Void
+
+    @State private var isMethodSheetPresented = false
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -54,15 +58,23 @@ struct RecoveryMethodView: View {
                     .padding(.top, 12)
             }
             HorizontalDivider()
-            AppButton(text: "Choose your method", action: {})
-                .controlSize(.large)
+            AppButton(text: "Choose your method", action: {
+                isMethodSheetPresented = true
+            })
+            .controlSize(.large)
         }
         .padding([.top, .horizontal], 20)
         .padding(.bottom, 8)
         .background(.bgBlur, in: RoundedRectangle(cornerRadius: 16))
+        .dynamicSheet(isPresented: $isMethodSheetPresented, fullScreen: true) {
+            RecoveryMethodSelectionView(
+                onClose: { isMethodSheetPresented = false }
+            )
+        }
     }
 }
 
 #Preview {
     RecoveryMethodView(animation: Namespace().wrappedValue, onClose: {})
+        .environmentObject(UserManager())
 }

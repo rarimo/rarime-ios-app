@@ -179,9 +179,9 @@ struct NewIdentityView: View {
                     return
                 }
 
-                let isSaved = try await userManager.user?.saveUserPrivateKeyToCloud() ?? false
+                let record = try await userManager.user?.saveUserPrivateKeyToCloud()
 
-                if !isSaved {
+                if record == nil {
                     AlertManager.shared.emitError(.unknown(String(localized: "Backup already exists, try restore instead")))
                     onBack()
                     return

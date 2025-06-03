@@ -24,9 +24,6 @@
         }
       }
     },
-    "* Nothing leaves this device" : {
-
-    },
     "%@" : {
 
     },
@@ -419,6 +416,9 @@
     "Backup already exists, try restore instead" : {
 
     },
+    "Backup key stored in iCloud" : {
+
+    },
     "Bahamas" : {
 
     },
@@ -472,6 +472,9 @@
       }
     },
     "Bhutan" : {
+
+    },
+    "Biometric facial key" : {
 
     },
     "Birth date" : {
@@ -625,6 +628,9 @@
     "China" : {
 
     },
+    "Choose your method" : {
+
+    },
     "Christmas Island" : {
 
     },
@@ -704,6 +710,9 @@
           }
         }
       }
+    },
+    "Copy" : {
+
     },
     "Copy to clipboard" : {
       "localizations" : {
@@ -1106,6 +1115,15 @@
         }
       }
     },
+    "Failed to back up, try again later" : {
+
+    },
+    "Failed to delete backup" : {
+
+    },
+    "Failed to load backup status" : {
+
+    },
     "Failed to register, try again later" : {
 
     },
@@ -1164,6 +1182,9 @@
 
     },
     "Force registration" : {
+
+    },
+    "Forget traditional methods. Use something truly yours: a personal item, your face, or even a unique gesture. Security has never felt this natural." : {
 
     },
     "France" : {
@@ -1336,6 +1357,12 @@
 
     },
     "Iceland" : {
+
+    },
+    "iCloud backup" : {
+
+    },
+    "iCloud backup already exists" : {
 
     },
     "iCloud is not available" : {
@@ -1557,6 +1584,7 @@
 
     },
     "Let’s Start" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1598,6 +1626,9 @@
 
     },
     "Maintenance in progress" : {
+
+    },
+    "Make any object your key" : {
 
     },
     "Make sure you remove the case from the device" : {
@@ -1662,6 +1693,9 @@
       }
     },
     "Mayotte" : {
+
+    },
+    "Method" : {
 
     },
     "Mexico" : {
@@ -1831,6 +1865,9 @@
     "Notifications" : {
 
     },
+    "Objects" : {
+
+    },
     "Okay" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1882,6 +1919,9 @@
 
     },
     "Out of daily scans? Earn extra scans for every friend who joins and a one-time by sharing the hunt" : {
+
+    },
+    "Overwrite your iCloud backup? This will replace the existing backup with the current private key." : {
 
     },
     "Pakistan" : {
@@ -2055,6 +2095,9 @@
           }
         }
       }
+    },
+    "Private Key" : {
+
     },
     "Prize-pool:" : {
 
@@ -2283,6 +2326,15 @@
         }
       }
     },
+    "Recommended" : {
+
+    },
+    "Recovery" : {
+
+    },
+    "Recovery Method" : {
+
+    },
     "Remove Case" : {
 
     },
@@ -2476,6 +2528,9 @@
 
     },
     "Set a rule" : {
+
+    },
+    "Set up a new way to recover your account" : {
 
     },
     "Settings" : {
@@ -3094,13 +3149,7 @@
     "Your Address" : {
 
     },
-    "Your Device" : {
-
-    },
     "Your face never leaves the device. You create an anonymous record that carries your rules, so AI knows how to treat you" : {
-
-    },
-    "Your Identity" : {
 
     },
     "Your internet connection is down" : {
@@ -3157,6 +3206,9 @@
 
     },
     "Zimbabwe" : {
+
+    },
+    "zkFace" : {
 
     }
   },
