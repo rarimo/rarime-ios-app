@@ -52,12 +52,20 @@ struct WalletView: View {
                 }
             }
         }
+        .onAppear {
+            if !walletManager.transactions.isEmpty {
+                return
+            }
+
+            walletManager.pullTransactions()
+        }
     }
 
     private var content: some View {
         MainViewLayout {
             VStack(alignment: .leading, spacing: 20) {
                 header
+                Spacer()
                 // TODO: add full support for assets
 //                    AssetsSlider(walletAssets: [selectedAsset], isLoading: isBalanceFetching)
 //                    HorizontalDivider()
@@ -128,16 +136,37 @@ struct WalletView: View {
                     .subtitle5()
                     .foregroundStyle(.textPrimary)
                 if walletManager.transactions.isEmpty {
-                    Text("No transactions yet")
-                        .body4()
-                        .foregroundStyle(.textSecondary)
+                    if walletManager.isTransactionsLoading {
+                        ProgressView()
+                            .align(.center)
+                    } else {
+                        Text("No transactions yet")
+                            .body4()
+                            .foregroundStyle(.textSecondary)
+                    }
                 } else {
-                    ScrollView {
-                        ForEach(walletManager.transactions.reversed()) { tx in
-                            TransactionItem(tx: tx, token: token)
+                    DetectableScrollView(
+                        onTop: {
+                            walletManager.transactions = []
+                            walletManager.scanTXsNextPageParams = nil
+                            walletManager.isLastTXsPage = false
+
+                            walletManager.pullTransactions()
+                        },
+                        onBottom: walletManager.pullTransactions
+                    ) {
+                        VStack {
+                            ForEach(walletManager.transactions) { tx in
+                                TransactionItem(tx: tx, token: token)
+                                    .padding(.vertical, 5)
+                            }
                         }
                     }
                     .scrollIndicators(.hidden)
+                    if walletManager.isTransactionsLoading {
+                        ProgressView()
+                            .align(.center)
+                    }
                 }
             }
         }
@@ -201,9 +230,11 @@ private struct TransactionItem: View {
                     .foregroundStyle(.textSecondary)
             }
             Spacer()
-            Text("\(balanceModifier)\(tx.amount.formatted()) \(token.rawValue)")
-                .subtitle7()
-                .foregroundStyle(tx.type == .sent ? .errorMain : .successMain)
+            if tx.amount != 0 {
+                Text("\(balanceModifier)\(tx.amount.formatted()) \(token.rawValue)")
+                    .subtitle7()
+                    .foregroundStyle(tx.type == .sent ? .errorMain : .successMain)
+            }
         }
     }
 }
