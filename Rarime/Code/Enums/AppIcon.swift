@@ -10,9 +10,9 @@ enum AppIcon: String, CaseIterable {
 extension AppIcon {
     var image: String {
         switch self {
-        case .blackAndWhite: return Images.blackAndWhiteIcon
-        case .blackAndGreen: return Images.blackAndGreenIcon
-        case .greenAndBlack: return Images.greenAndBlackIcon
+        case .blackAndWhite: return "BlackAndWhiteIcon"
+        case .blackAndGreen: return "BlackAndGreenIcon"
+        case .greenAndBlack: return "GreenAndBlackIcon"
         }
     }
 }

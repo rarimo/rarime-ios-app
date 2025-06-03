@@ -55,7 +55,7 @@ struct PollsView: View {
                     maxHeight: 730,
                     maxBlur: 20,
                     background: {
-                        Image(Images.dotCountry)
+                        Image(.dotCountry)
                             .resizable()
                             .scaledToFit()
                             .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)

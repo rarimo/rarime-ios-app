@@ -111,7 +111,7 @@ struct HomeCardView<Content: View, TopContent: View, BottomContent: View>: View 
         topIcon: Icons.rarime,
         bottomIcon: Icons.arrowRightUpLine,
         imageContent: {
-            Image(Images.handWithPhone)
+            Image(.handWithPhone)
                 .resizable()
                 .scaledToFit()
                 .scaleEffect(0.85)

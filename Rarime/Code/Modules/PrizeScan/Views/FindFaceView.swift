@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct FindFaceView: View {
-    @EnvironmentObject private var userManager: UserManager
-    @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var viewModel: FindFaceViewModel
 
     var animation: Namespace.ID
@@ -348,9 +346,7 @@ struct FindFaceView: View {
 
     private func getExtraAttempt() async {
         do {
-            guard let user = userManager.user else { throw "failed to get user" }
-            let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-            try await viewModel.getExtraAttempt(jwt: accessJwt)
+            try await viewModel.getExtraAttempt()
         } catch {
             LoggerUtil.common.error("failed to get extra attempt: \(error.localizedDescription, privacy: .public)")
         }
@@ -359,7 +355,5 @@ struct FindFaceView: View {
 
 #Preview {
     FindFaceView(animation: Namespace().wrappedValue, onClose: {}, onViewWallet: {})
-        .environmentObject(UserManager())
-        .environmentObject(DecentralizedAuthManager())
         .environmentObject(FindFaceViewModel())
 }

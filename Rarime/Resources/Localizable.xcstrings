@@ -166,9 +166,6 @@
     "3. When we support your country, you will be notified in the app" : {
 
     },
-    "49,421 other already joined" : {
-
-    },
     "Account" : {
       "localizations" : {
         "uk" : {
@@ -183,6 +180,12 @@
 
     },
     "Active" : {
+
+    },
+    "Add different type of applications that you can intersect with anonymously" : {
+
+    },
+    "Add widgets" : {
 
     },
     "Address" : {
@@ -269,9 +272,6 @@
 
     },
     "An identification and privacy solution that revolutionizes polling, surveying and election processes" : {
-
-    },
-    "An Unforgettable" : {
 
     },
     "Andorra" : {
@@ -740,9 +740,6 @@
         }
       }
     },
-    "Create a new identity" : {
-
-    },
     "Create Account" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -867,6 +864,9 @@
 
     },
     "Denmark" : {
+
+    },
+    "Development" : {
 
     },
     "Different photos of the same person return the same result, try scanning a new face" : {
@@ -1074,6 +1074,9 @@
         }
       }
     },
+    "Explore Apps" : {
+
+    },
     "Export Keys" : {
       "localizations" : {
         "uk" : {
@@ -1211,9 +1214,6 @@
     "Generate Proof" : {
 
     },
-    "Generates new keys" : {
-
-    },
     "Generating..." : {
 
     },
@@ -1235,9 +1235,6 @@
           }
         }
       }
-    },
-    "Get Started" : {
-
     },
     "Ghana" : {
 
@@ -1517,9 +1514,6 @@
         }
       }
     },
-    "Join Waitlist" : {
-
-    },
     "Jordan" : {
 
     },
@@ -1658,6 +1652,9 @@
 
     },
     "Malta" : {
+
+    },
+    "Managing identity" : {
 
     },
     "Marshall Islands" : {
@@ -1835,6 +1832,9 @@
 
     },
     "No notifications" : {
+
+    },
+    "No one can trace your actions\nNo system can connect the dots\nNo data ever leaves your phone" : {
 
     },
     "No polls yet" : {
@@ -2086,6 +2086,9 @@
     "Pre-elections polls" : {
 
     },
+    "Privacy" : {
+
+    },
     "Privacy Policy" : {
       "localizations" : {
         "uk" : {
@@ -2236,6 +2239,9 @@
           }
         }
       }
+    },
+    "RariMe lets you prove your identity - without giving anything away" : {
+
     },
     "RariMe Privacy Notice" : {
       "localizations" : {
@@ -2430,9 +2436,6 @@
 
     },
     "Save your passport data" : {
-
-    },
-    "Say goodbye to seed phrases! ZK Face Wallet leverages cutting-edge zero-knowledge (ZK) cryptography and biometric authentication to give you a seamless, secure, and self-sovereign crypto experience." : {
 
     },
     "Scan" : {
@@ -2799,6 +2802,9 @@
     "This action is irreversible and will delete all your data." : {
 
     },
+    "This app is where you privately store your digital identities, enabling you to go incognito across the web" : {
+
+    },
     "This app is where you privately store your digital identities, enabling you to go incognito across the web." : {
       "localizations" : {
         "uk" : {
@@ -2951,9 +2957,6 @@
     "User creation failed" : {
 
     },
-    "Uses pregenerated keys or iCloud" : {
-
-    },
     "Uzbekistan" : {
 
     },
@@ -3034,6 +3037,9 @@
       }
     },
     "Welcome To" : {
+
+    },
+    "Welcome!" : {
 
     },
     "Western Sahara" : {

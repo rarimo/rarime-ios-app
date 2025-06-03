@@ -121,7 +121,7 @@ struct GlassBottomSheet<Background: View, Content: View, Footer: View>: View {
             maxBlur: 20,
             dimBackground: true,
             background: {
-                Image(Images.dotCountry)
+                Image(.dotCountry)
                     .resizable()
                     .scaledToFit()
             }

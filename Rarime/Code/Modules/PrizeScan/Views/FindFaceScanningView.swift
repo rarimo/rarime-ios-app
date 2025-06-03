@@ -3,8 +3,6 @@ import SwiftUI
 struct FindFaceScanningView: View {
     @EnvironmentObject private var cameraViewModel: FindFaceCameraViewModel
     @EnvironmentObject private var findFaceViewModel: FindFaceViewModel
-    @EnvironmentObject private var userManager: UserManager
-    @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
 
     let onSubmit: (_ result: Bool) -> Void
 
@@ -118,11 +116,7 @@ struct FindFaceScanningView: View {
             do {
                 LoggerUtil.common.info("Submitting guess")
 
-                guard let user = userManager.user else { throw "failed to get user" }
-                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-
                 let isSuccess = try await findFaceViewModel.submitGuess(
-                    jwt: accessJwt,
                     image: UIImage(cgImage: cameraViewModel.currentFrame!)
                 )
 
@@ -168,6 +162,4 @@ private struct FaceSquare: Shape {
     FindFaceScanningView(onSubmit: { _ in })
         .environmentObject(FindFaceViewModel())
         .environmentObject(FindFaceCameraViewModel())
-        .environmentObject(UserManager())
-        .environmentObject(DecentralizedAuthManager())
 }

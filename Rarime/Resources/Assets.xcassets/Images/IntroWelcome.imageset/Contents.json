@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "reward-coin.png",
+      "filename" : "intro-welcome.png",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "reward-coin-dark.png",
+      "filename" : "intro-welcome-dark.png",
       "idiom" : "universal"
     }
   ],

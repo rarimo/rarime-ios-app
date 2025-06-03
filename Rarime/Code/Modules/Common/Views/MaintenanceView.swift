@@ -3,7 +3,7 @@ import SwiftUI
 struct MaintenanceView: View {
     var body: some View {
         VStack(spacing: 32) {
-            Image(Images.gears)
+            Image(.gears)
                 .resizable()
                 .scaledToFit()
                 .frame(height: 136)

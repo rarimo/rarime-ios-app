@@ -14,7 +14,7 @@ struct ScanPassportMRZView: View {
         ) {
             ZStack {
                 MRZScanView(onMrzKey: onNext)
-                Image(Images.passportFrame)
+                Image(.passportFrame)
                     .resizable()
                     .scaledToFit()
                     .frame(height: 228)
