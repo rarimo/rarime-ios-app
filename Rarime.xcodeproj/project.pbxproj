@@ -42,6 +42,7 @@
 		564715C32DEDBAC200B1334B /* RecoveryMethodSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564715C22DEDBAC200B1334B /* RecoveryMethodSelectionView.swift */; };
 		564715C52DEDFCE500B1334B /* RecoveryMethodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564715C42DEDFCE500B1334B /* RecoveryMethodItem.swift */; };
 		564715C82DEDFD3A00B1334B /* ICloudRecoveryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564715C72DEDFD3A00B1334B /* ICloudRecoveryViewModel.swift */; };
+		564715ED2DEEEDFE00B1334B /* HomeWidgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564715EC2DEEEDFE00B1334B /* HomeWidgetsView.swift */; };
 		56474AD62BB9860E0017AA25 /* FaceIdAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */; };
 		56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */; };
 		56474ADA2BB9ED6E0017AA25 /* AnyTransition+Backslide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */; };
@@ -137,7 +138,6 @@
 		56E7AD112BDBA81000D3A258 /* PullToRefreshSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 56E7AD102BDBA81000D3A258 /* PullToRefreshSwiftUI */; };
 		56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F48BBD2BC02E82001F3AA4 /* AppButton.swift */; };
 		C71161B32CAAE3DB00ED41EA /* String+BigUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71161B22CAAE3DB00ED41EA /* String+BigUInt.swift */; };
-		C726E8B42D6389F7000C9CA6 /* WalletWaitlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C726E8B32D638953000C9CA6 /* WalletWaitlistView.swift */; };
 		C726E8D22D647FED000C9CA6 /* SnapCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C726E8D12D647FE9000C9CA6 /* SnapCarouselView.swift */; };
 		C72F33182D677DBA00AC1814 /* AppIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72F33172D677DB200AC1814 /* AppIconButton.swift */; };
 		C72F331C2D68A8E400AC1814 /* View+Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72F331B2D68A8D600AC1814 /* View+Blur.swift */; };
@@ -471,6 +471,7 @@
 		564715C22DEDBAC200B1334B /* RecoveryMethodSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryMethodSelectionView.swift; sourceTree = "<group>"; };
 		564715C42DEDFCE500B1334B /* RecoveryMethodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryMethodItem.swift; sourceTree = "<group>"; };
 		564715C72DEDFD3A00B1334B /* ICloudRecoveryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudRecoveryViewModel.swift; sourceTree = "<group>"; };
+		564715EC2DEEEDFE00B1334B /* HomeWidgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWidgetsView.swift; sourceTree = "<group>"; };
 		56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIdAuth.swift; sourceTree = "<group>"; };
 		56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
 		56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+Backslide.swift"; sourceTree = "<group>"; };
@@ -560,7 +561,6 @@
 		56E7AD092BDAA4F000D3A258 /* AppRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRadioButton.swift; sourceTree = "<group>"; };
 		56F48BBD2BC02E82001F3AA4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		C71161B22CAAE3DB00ED41EA /* String+BigUInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+BigUInt.swift"; sourceTree = "<group>"; };
-		C726E8B32D638953000C9CA6 /* WalletWaitlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletWaitlistView.swift; sourceTree = "<group>"; };
 		C726E8D12D647FE9000C9CA6 /* SnapCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarouselView.swift; sourceTree = "<group>"; };
 		C72F33172D677DB200AC1814 /* AppIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconButton.swift; sourceTree = "<group>"; };
 		C72F331B2D68A8D600AC1814 /* View+Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Blur.swift"; sourceTree = "<group>"; };
@@ -1380,10 +1380,10 @@
 		C7DF8BE02D5F686200C8E2D2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C726E8B32D638953000C9CA6 /* WalletWaitlistView.swift */,
+				C7DF8BDF2D5F686200C8E2D2 /* HomeView.swift */,
+				564715EC2DEEEDFE00B1334B /* HomeWidgetsView.swift */,
 				C726E8D12D647FE9000C9CA6 /* SnapCarouselView.swift */,
 				C7DF8BDE2D5F686200C8E2D2 /* HomeCardView.swift */,
-				C7DF8BDF2D5F686200C8E2D2 /* HomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2293,6 +2293,7 @@
 				CEEE2B572DDCC63D00532E72 /* WalletManager.swift in Sources */,
 				56337CE12DBA385B00973721 /* LikenessFaceImageView.swift in Sources */,
 				C7FFB5302C9ACE900037CBD4 /* ClaimableNotificationContent.swift in Sources */,
+				564715ED2DEEEDFE00B1334B /* HomeWidgetsView.swift in Sources */,
 				568034D02D95ADBD00BA7F2A /* RewardsViewModel.swift in Sources */,
 				CE31E54A2C11FE150039CAA5 /* ImportIdentityView.swift in Sources */,
 				569258942D709B30009E2F9E /* VisionUtils.swift in Sources */,
@@ -2392,7 +2393,6 @@
 				CEFE5F3B2CB5718100498F39 /* SODAlgorithm.swift in Sources */,
 				564CE3112DD62CC500D03E6D /* FindFaceSuccessView.swift in Sources */,
 				CEEE2B442DDCBF5500532E72 /* WalletReceiveView.swift in Sources */,
-				C726E8B42D6389F7000C9CA6 /* WalletWaitlistView.swift in Sources */,
 				CE3CD7922DB6819B00112E46 /* PreviewUtils.swift in Sources */,
 				CE19CB492BE3AD4200B26DF7 /* LockScreenView.swift in Sources */,
 				CEDC4D832BE949F300459D4E /* Ethereum.swift in Sources */,

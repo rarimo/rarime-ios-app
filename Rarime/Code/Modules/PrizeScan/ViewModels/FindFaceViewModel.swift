@@ -54,14 +54,18 @@ class FindFaceViewModel: ObservableObject {
     @Published var foundFace: UIImage? = nil
 
     @MainActor
-    func loadUser(jwt: JWT, referralCode: String? = nil) async {
+    func loadUser(referralCode: String? = nil) async {
         let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.api.pointsServiceURL)
         var userResponse: GuessCelebrityUserResponse
+        var jwt: JWT? = nil
 
         do {
-            userResponse = try await guessCelebrityService.getUserInformation(jwt: jwt)
+            guard let user = UserManager.shared.user else { throw "failed to get user" }
+            jwt = try await DecentralizedAuthManager.shared.getAccessJwt(user)
+            userResponse = try await guessCelebrityService.getUserInformation(jwt: jwt!)
         } catch {
             do {
+                guard let jwt else { throw "failed to get JWT" }
                 guard let error = error as? AFError else { throw error }
                 let openApiHttpCode = try error.retriveOpenApiHttpCode()
                 if openApiHttpCode == HTTPStatusCode.notFound.rawValue {
@@ -116,13 +120,19 @@ class FindFaceViewModel: ObservableObject {
         )
     }
 
-    func getExtraAttempt(jwt: JWT) async throws {
+    func getExtraAttempt() async throws {
+        guard let user = UserManager.shared.user else { throw "failed to get user" }
+        let jwt = try await DecentralizedAuthManager.shared.getAccessJwt(user)
+
         let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.api.pointsServiceURL)
         let _ = try await guessCelebrityService.addExtraAttempt(jwt: jwt)
-        await loadUser(jwt: jwt)
+        await loadUser()
     }
 
-    func submitGuess(jwt: JWT, image: UIImage) async throws -> Bool {
+    func submitGuess(image: UIImage) async throws -> Bool {
+        guard let user = UserManager.shared.user else { throw "failed to get user" }
+        let jwt = try await DecentralizedAuthManager.shared.getAccessJwt(user)
+
         guard let foundFace = try NeuralUtils.extractFaceFromImage(image) else {
             throw Errors.unknown("Face can not be detected")
         }
@@ -141,7 +151,7 @@ class FindFaceViewModel: ObservableObject {
 
         let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.api.pointsServiceURL)
         let guessResponse = try await guessCelebrityService.submitCelebrityGuess(jwt, features)
-        await loadUser(jwt: jwt)
+        await loadUser()
 
         let isSuccess = guessResponse.data.attributes.success
         if isSuccess {

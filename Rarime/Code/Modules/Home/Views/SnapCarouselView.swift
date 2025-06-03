@@ -110,13 +110,3 @@ struct SnapCarouselView: View {
         CGFloat(index) - (adjustedOffset / offsetHeight)
     }
 }
-
-#Preview {
-    HomeView()
-        .environmentObject(MainView.ViewModel())
-        .environmentObject(PassportManager())
-        .environmentObject(UserManager())
-        .environmentObject(ConfigManager())
-        .environmentObject(NotificationManager())
-        .environmentObject(ExternalRequestsManager())
-}

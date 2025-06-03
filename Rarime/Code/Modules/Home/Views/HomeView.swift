@@ -1,342 +1,125 @@
 import Alamofire
 import SwiftUI
 
-enum HomeRoute: Hashable {
-    case notifications, recovery, inviteFriends, claimTokens, wallet, voting, likeness, findFace
+enum HomeRoute: String, Hashable {
+    case notifications
+}
+
+enum HomeCardId: Hashable {
+    case recovery
+    case findFace
+    case likeness
+    case freedomTool
+    case inviteFriends
+    case claimTokens
+}
+
+struct HomeAnimations {
+    @Namespace var recovery
+    @Namespace var findFace
+    @Namespace var likeness
+    @Namespace var freedomTool
+    @Namespace var inviteFriends
+    @Namespace var claimTokens
+
+    func id(for key: HomeCardId) -> Namespace.ID {
+        switch key {
+        case .recovery: recovery
+        case .findFace: findFace
+        case .likeness: likeness
+        case .freedomTool: freedomTool
+        case .inviteFriends: inviteFriends
+        case .claimTokens: claimTokens
+        }
+    }
 }
 
 struct HomeView: View {
     @EnvironmentObject private var notificationManager: NotificationManager
-    @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var mainViewModel: MainView.ViewModel
     @EnvironmentObject private var passportManager: PassportManager
-    @EnvironmentObject private var userManager: UserManager
-    @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
-    @EnvironmentObject private var configManager: ConfigManager
-    @EnvironmentObject private var likenessManager: LikenessManager
-    @EnvironmentObject private var pollsViewModel: PollsViewModel
 
     @StateObject var viewModel = ViewModel()
     @StateObject var findFaceViewModel = FindFaceViewModel()
 
-    @State private var path: HomeRoute? = nil
-    @State private var isCopied = false
-
-    @State private var isBalanceFetching = true
-    @State private var pointsBalance: PointsBalanceRaw? = nil
-
-    @Namespace var recoveryAnimation
-    @Namespace var inviteFriendsAnimation
-    @Namespace var claimTokensAnimation
-    @Namespace var walletAnimation
-    @Namespace var votingAnimation
-    @Namespace var likenessAnimation
-    @Namespace var findFaceAnimation
-
-    private var activeReferralCode: String? {
-        pointsBalance?.referralCodes?
-            .filter { $0.status == .active }
-            .first?.id
-    }
-
-    private var userPointsBalance: Int {
-        pointsBalance?.amount ?? 0
-    }
-
-    private var isBalanceSufficient: Bool {
-        pointsBalance != nil && userPointsBalance > 0
-    }
-
-    private var homeCards: [HomeCarouselCard] {
-        [
-            HomeCarouselCard(action: { path = .recovery }) {
-                HomeCardView(
-                    foregroundGradient: Gradients.darkGreenText,
-                    foregroundColor: .invertedDark,
-                    topIcon: Icons.rarime,
-                    bottomIcon: Icons.arrowRightUpLine,
-                    imageContent: {
-                        Image(.recoveryShieldBg)
-                            .resizable()
-                            .scaledToFill()
-                            .clipShape(RoundedRectangle(cornerRadius: 32))
-                    },
-                    title: "Recovery",
-                    subtitle: "Method",
-                    bottomContent: {
-                        Text("Set up a new way to recover your account")
-                            .body4()
-                            .foregroundStyle(.textSecondary)
-                            .frame(maxWidth: 220, alignment: .leading)
-                            .padding(.top, 12)
-                    },
-                    animation: recoveryAnimation
-                )
-            },
-            HomeCarouselCard(
-                isVisible: findFaceViewModel.user != nil && findFaceViewModel.user?.celebrity.status != .maintenance,
-                action: { path = .findFace }
-            ) {
-                HomeCardView(
-                    foregroundGradient: Gradients.purpleText,
-                    foregroundColor: .invertedDark,
-                    topIcon: Icons.rarime,
-                    bottomIcon: Icons.arrowRightUpLine,
-                    imageContent: {
-                        Image(.findFaceBg)
-                            .resizable()
-                            .scaledToFill()
-                            .clipShape(RoundedRectangle(cornerRadius: 32))
-                    },
-                    title: "Hidden keys",
-                    subtitle: "Find a face",
-                    topContent: {
-                        FindFaceStatusChip(status: findFaceViewModel.user?.celebrity.status ?? .maintenance)
-                    },
-                    animation: findFaceAnimation
-                )
-            },
-            HomeCarouselCard(isVisible: pollsViewModel.hasVoted, action: { path = .voting }) {
-                HomeCardView(
-                    backgroundGradient: Gradients.gradientFifth,
-                    topIcon: Icons.freedomtool,
-                    bottomIcon: Icons.arrowRightUpLine,
-                    imageContent: {
-                        Image(Images.dotCountry)
-                            .resizable()
-                            .scaledToFit()
-                            .padding(.top, 20)
-                    },
-                    title: "Freedomtool",
-                    subtitle: "Voting",
-                    animation: votingAnimation
-                )
-            },
-            HomeCarouselCard(
-                // TODO: make it visible when likeness is ready
-                isVisible: false,
-                action: {
-                    if likenessManager.isLoading {
-                        return
-                    }
-
-                    path = .likeness
-                }
-            ) {
-                HomeCardView(
-                    backgroundGradient: Gradients.purpleBg,
-                    foregroundGradient: Gradients.purpleText,
-                    topIcon: Icons.rarime,
-                    bottomIcon: Icons.arrowRightUpLine,
-                    imageContent: {
-                        if let faceImage = likenessManager.faceImage {
-                            LikenessFaceImageView(image: faceImage)
-                                .padding(.top, 80)
-                        } else {
-                            Image(.likenessFace)
-                                .resizable()
-                                .scaledToFit()
-                                .scaleEffect(0.75)
-                        }
-                    },
-                    title: likenessManager.isRegistered ? nil : "Digital likeness",
-                    subtitle: likenessManager.isRegistered ? nil : "Set a rule",
-                    bottomContent: {
-                        if likenessManager.isRegistered {
-                            VStack(alignment: .leading, spacing: 0) {
-                                Text("My Rule:")
-                                    .h5()
-                                    .foregroundStyle(Gradients.purpleText)
-                                    .padding(.bottom, 12)
-                                    .matchedGeometryEffect(
-                                        id: AnimationNamespaceIds.extra,
-                                        in: likenessAnimation,
-                                        properties: .position
-                                    )
-                                Text(likenessManager.rule.title)
-                                    .additional1()
-                                    .fixedSize(horizontal: false, vertical: true)
-                                    .multilineTextAlignment(.leading)
-                                    .foregroundStyle(Gradients.purpleText)
-                                    .frame(maxWidth: 306, alignment: .leading)
-                                    .matchedGeometryEffect(
-                                        id: AnimationNamespaceIds.subtitle,
-                                        in: likenessAnimation,
-                                        properties: .position
-                                    )
-                            }
-                        } else {
-                            Text("First human-AI Contract")
-                                .body4()
-                                .foregroundStyle(.baseBlack.opacity(0.5))
-                                .padding(.top, 12)
-                                .matchedGeometryEffect(
-                                    id: AnimationNamespaceIds.extra,
-                                    in: likenessAnimation,
-                                    properties: .position
-                                )
-                        }
-                    },
-                    animation: likenessAnimation
-                )
-            },
-            HomeCarouselCard(isVisible: isBalanceSufficient, action: { path = .claimTokens }) {
-                HomeCardView(
-                    backgroundGradient: Gradients.gradientThird,
-                    topIcon: Icons.rarimo,
-                    bottomIcon: Icons.arrowRightUpLine,
-                    imageContent: {
-                        Image(Images.rarimoTokens)
-                            .resizable()
-                            .scaledToFit()
-                            .padding(.top, 100)
-                    },
-                    title: isBalanceSufficient ? "Reserved" : "Upcoming",
-                    subtitle: isBalanceSufficient ? "\(userPointsBalance) RMO" : "RMO",
-                    animation: claimTokensAnimation
-                )
-            },
-            //            TODO: uncomment after desing and flow impl
-            //            HomeCarouselCard(
-            //                isVisible: !isBalanceFetching && pointsBalance != nil,
-            //                action: { path = .inviteFriends }
-            //            ) {
-            //                HomeCardView(
-            //                    backgroundGradient: Gradients.gradientSecond,
-            //                    topIcon: Icons.rarime,
-            //                    bottomIcon: Icons.arrowRightUpLine,
-            //                    imageContent: {
-            //                        ZStack(alignment: .bottomTrailing) {
-            //                            Image(Images.peopleEmojis)
-            //                                .resizable()
-            //                                .scaledToFit()
-            //                                .padding(.top, 84)
-            //
-            //                            Image(Icons.getTokensArrow)
-            //                                .foregroundStyle(.informationalDark)
-            //                                .offset(x: -44, y: 88)
-            //                                .matchedGeometryEffect(
-            //                                    id: AnimationNamespaceIds.additionalImage,
-            //                                    in: inviteFriendsAnimation
-            //                                )
-            //                        }
-            //                    },
-            //                    title: "Invite",
-            //                    subtitle: "Others",
-            //                    bottomContent: {
-            //                        if let code = activeReferralCode {
-            //                            HStack(spacing: 16) {
-            //                                Text(code)
-            //                                    .subtitle4()
-            //                                    .foregroundStyle(.baseBlack)
-            //                                VerticalDivider(color: .bgComponentBasePrimary)
-            //                                Image(isCopied ? Icons.checkLine : Icons.fileCopyLine)
-            //                                    .iconMedium()
-            //                                    .foregroundStyle(.baseBlack.opacity(0.5))
-            //                            }
-            //                            .fixedSize(horizontal: false, vertical: true)
-            //                            .padding(.horizontal, 16)
-            //                            .padding(.vertical, 8)
-            //                            .background(.baseWhite)
-            //                            .cornerRadius(8)
-            //                            .frame(maxWidth: 280, alignment: .leading)
-            //                            .padding(.top, 24)
-            //                            .onTapGesture {
-            //                                if isCopied { return }
-            //
-            //                                isCopied = true
-            //                                FeedbackGenerator.shared.impact(.medium)
-            //
-            //                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            //                                    withAnimation(.easeInOut) {
-            //                                        isCopied = false
-            //                                    }
-            //                                }
-            //                            }
-            //                        }
-            //                    },
-            //                    animation: inviteFriendsAnimation
-            //                )
-            //            },
-//            TODO: uncomment after desing and flow impl
-//            HomeCarouselCard(action: { path = .wallet }) {
-//                HomeCardView(
-//                    backgroundGradient: Gradients.gradientFourth,
-//                    topIcon: Icons.rarime,
-//                    bottomIcon: Icons.arrowRightUpLine,
-//                    imageContent: {
-//                        Image(Images.seedPhraseShred)
-//                            .resizable()
-//                            .scaledToFit()
-//                            .padding(.top, 96)
-//                    },
-//                    title: "An Unforgettable",
-//                    subtitle: "Wallet",
-//                    animation: walletAnimation
-//                )
-//            },
-        ]
-    }
+    @State private var path: [HomeRoute] = []
+    @State private var selectedCardId: HomeCardId? = nil
+    @State private var animations = HomeAnimations()
 
     var body: some View {
-        ZStack {
-            if path == .notifications {
-                NotificationsView(onBack: { path = nil })
-                    .environment(\.managedObjectContext, notificationManager.pushNotificationContainer.viewContext)
-            } else {
-                ZStack {
-                    switch path {
-                    case .recovery:
-                        RecoveryMethodView(
-                            animation: recoveryAnimation,
-                            onClose: { path = nil }
-                        )
-                    case .inviteFriends:
-                        InviteFriendsView(
-                            balance: pointsBalance,
-                            onClose: { path = nil },
-                            animation: inviteFriendsAnimation
-                        )
-                    case .claimTokens:
-                        ClaimTokensView(
-                            onClose: { path = nil },
-                            pointsBalance: pointsBalance,
-                            animation: claimTokensAnimation
-                        )
-                    case .wallet:
-                        WalletWaitlistView(
-                            onClose: { path = nil },
-                            onJoin: { path = nil },
-                            animation: walletAnimation
-                        )
-                    case .voting:
-                        PollsView(
-                            onClose: { path = nil },
-                            animation: votingAnimation
-                        )
-                    case .likeness:
-                        LikenessView(
-                            onClose: { path = nil },
-                            animation: likenessAnimation
-                        )
-                    case .findFace:
-                        FindFaceView(
-                            animation: findFaceAnimation,
-                            onClose: { path = nil },
-                            onViewWallet: {
-                                mainViewModel.selectedTab = .wallet
-                            }
-                        )
-                        .environmentObject(findFaceViewModel)
-                    default:
-                        content
-                    }
+        NavigationStack(path: $path) {
+            content.navigationDestination(for: HomeRoute.self) { route in
+                switch route {
+                case .notifications:
+                    NotificationsView(onBack: { path.removeLast() })
+                        .environment(\.managedObjectContext, notificationManager.pushNotificationContainer.viewContext)
+                        .navigationBarBackButtonHidden()
                 }
-                .animation(.interpolatingSpring(stiffness: 100, damping: 15), value: path)
+            }
+            .task { await viewModel.fetchBalance() }
+            .task { await findFaceViewModel.loadUser() }
+        }
+    }
+
+    private var content: some View {
+        ZStack {
+            switch selectedCardId {
+            case .recovery:
+                RecoveryMethodView(
+                    animation: animations.id(for: .recovery),
+                    onClose: { selectedCardId = nil }
+                )
+            case .findFace:
+                FindFaceView(
+                    animation: animations.id(for: .findFace),
+                    onClose: { selectedCardId = nil },
+                    onViewWallet: {
+                        mainViewModel.selectedTab = .wallet
+                    }
+                )
+                .environmentObject(findFaceViewModel)
+            case .freedomTool:
+                PollsView(
+                    onClose: { selectedCardId = nil },
+                    animation: animations.id(for: .freedomTool)
+                )
+            case .likeness:
+                LikenessView(
+                    onClose: { selectedCardId = nil },
+                    animation: animations.id(for: .likeness)
+                )
+            case .inviteFriends:
+                InviteFriendsView(
+                    balance: viewModel.pointsBalance,
+                    onClose: { selectedCardId = nil },
+                    animation: animations.id(for: .inviteFriends)
+                )
+            case .claimTokens:
+                ClaimTokensView(
+                    onClose: { selectedCardId = nil },
+                    pointsBalance: viewModel.pointsBalance,
+                    animation: animations.id(for: .claimTokens)
+                )
+            default:
+                mainLayoutContent
             }
         }
-        .task { await fetchBalance() }
-        .task { await fetchFindFaceUser() }
+        .animation(.interpolatingSpring(stiffness: 100, damping: 15), value: selectedCardId)
+    }
+
+    private var mainLayoutContent: some View {
+        MainViewLayout {
+            VStack(spacing: 0) {
+                header
+                HomeWidgetsView(
+                    animations: animations,
+                    onSelect: { id in selectedCardId = id }
+                )
+                .environmentObject(viewModel)
+                .environmentObject(findFaceViewModel)
+            }
+            .background(.bgPrimary)
+        }
     }
 
     private var header: some View {
@@ -365,7 +148,7 @@ struct HomeView: View {
             #endif
             Spacer()
             ZStack {
-                Button(action: { path = .notifications }) {
+                Button(action: { path.append(.notifications) }) {
                     Image(.notification2Line)
                         .iconMedium()
                         .foregroundStyle(.textPrimary)
@@ -386,125 +169,14 @@ struct HomeView: View {
         .padding(.bottom, 16)
         .background(.bgPrimary)
     }
-
-    private var content: some View {
-        MainViewLayout {
-            VStack(spacing: 0) {
-                header
-                ZStack(alignment: .trailing) {
-                    SnapCarouselView(
-                        index: $viewModel.currentIndex,
-                        cards: homeCards.filter { $0.isVisible },
-                        spacing: 30,
-                        trailingSpace: 20
-                    )
-                    .padding(.horizontal, 22)
-                    if homeCards.count > 1 {
-                        VerticalStepIndicator(
-                            steps: homeCards.filter(\.isVisible).count,
-                            currentStep: viewModel.currentIndex
-                        )
-                        .padding(.trailing, 8)
-                    }
-                }
-            }
-            .background(.bgPrimary)
-        }
-    }
-
-    private func fetchBalance() async {
-        isBalanceFetching = true
-        defer { isBalanceFetching = false }
-
-        if userManager.user?.userReferralCode == nil { return }
-
-        do {
-            guard let user = userManager.user else { throw "failed to get user" }
-            let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-
-            let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
-            self.pointsBalance = pointsBalance
-        } catch let afError as AFError where afError.isExplicitlyCancelledError {
-            return
-        } catch {
-            LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
-        }
-    }
-
-    private func fetchFindFaceUser() async {
-        do {
-            guard let user = userManager.user else { throw "failed to get user" }
-            let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-
-            await findFaceViewModel.loadUser(jwt: accessJwt, referralCode: user.deferredReferralCode)
-        } catch let afError as AFError where afError.isExplicitlyCancelledError {
-            return
-        } catch {
-            LoggerUtil.common.error("failed to fetch find face user: \(error.localizedDescription, privacy: .public)")
-        }
-    }
-
-//    TODO: uncomment after desing and flow impl
-//    private func verifyReferralCode() async {
-//        let POINTS_REFERRAL_CODE_LENGTH = 11
-//        var referralCode = configManager.api.defaultReferralCode
-//        if let deferredReferralCode = userManager.user?.deferredReferralCode,
-//           !deferredReferralCode.isEmpty,
-//           deferredReferralCode.count == POINTS_REFERRAL_CODE_LENGTH
-//        {
-//            referralCode = deferredReferralCode
-//        }
-//
-//        await attemptToCreateBalance(with: referralCode, fallback: configManager.api.defaultReferralCode)
-//    }
-//
-//    private func attemptToCreateBalance(with referralCode: String, fallback: String) async {
-//        do {
-//            try await createBalance(referralCode)
-//        } catch {
-//            LoggerUtil.common.error("Failed to verify referral code: \(error.localizedDescription, privacy: .public)")
-//            if referralCode != fallback {
-//                await attemptToCreateBalance(with: fallback, fallback: fallback)
-//            }
-//        }
-//    }
-//
-//    private func createBalance(_ code: String) async throws {
-//        guard let user = userManager.user else { throw "user is not initalized" }
-//        let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-//
-//        let pointsSvc = Points(ConfigManager.shared.api.pointsServiceURL)
-//        let result = try await pointsSvc.createPointsBalance(
-//            accessJwt,
-//            code
-//        )
-//
-//        userManager.user?.userReferralCode = code
-//        LoggerUtil.common.info("User verified code: \(code, privacy: .public)")
-//
-//        pointsBalance = PointsBalanceRaw(
-//            id: result.data.id,
-//            amount: result.data.attributes.amount,
-//            isDisabled: result.data.attributes.isDisabled,
-//            createdAt: result.data.attributes.createdAt,
-//            updatedAt: result.data.attributes.updatedAt,
-//            rank: result.data.attributes.rank,
-//            referralCodes: result.data.attributes.referralCodes,
-//            level: result.data.attributes.level,
-//            isVerified: result.data.attributes.isVerified
-//        )
-//    }
-//
 }
 
 #Preview {
     HomeView()
         .environmentObject(MainView.ViewModel())
         .environmentObject(PassportManager())
-        .environmentObject(UserManager())
-        .environmentObject(ConfigManager())
         .environmentObject(NotificationManager())
-        .environmentObject(ExternalRequestsManager())
         .environmentObject(LikenessManager())
+        .environmentObject(ConfigManager())
         .environmentObject(PollsViewModel())
 }
