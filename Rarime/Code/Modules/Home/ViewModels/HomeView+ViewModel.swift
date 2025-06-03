@@ -6,6 +6,7 @@ extension HomeView {
         @Published var isBalanceFetching = true
         @Published var pointsBalance: PointsBalanceRaw? = nil
 
+        @MainActor
         func fetchBalance() async {
             isBalanceFetching = true
             defer { isBalanceFetching = false }

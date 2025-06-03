@@ -8,7 +8,7 @@ struct HomeWidgetsView: View {
     @EnvironmentObject private var findFaceViewModel: FindFaceViewModel
     @EnvironmentObject private var pollsViewModel: PollsViewModel
 
-    let animations: HomeAnimations
+    let namespaceProvider: (HomeCardId) -> Namespace.ID
     let onSelect: (HomeCardId) -> Void
 
     @State private var currentIndex: Int = 0
@@ -51,7 +51,7 @@ struct HomeWidgetsView: View {
                             .frame(maxWidth: 220, alignment: .leading)
                             .padding(.top, 12)
                     },
-                    animation: animations.id(for: .recovery)
+                    animation: namespaceProvider(.recovery)
                 )
             },
             HomeCarouselCard(
@@ -74,7 +74,7 @@ struct HomeWidgetsView: View {
                     topContent: {
                         FindFaceStatusChip(status: findFaceViewModel.user?.celebrity.status ?? .maintenance)
                     },
-                    animation: animations.id(for: .findFace)
+                    animation: namespaceProvider(.findFace)
                 )
             },
             HomeCarouselCard(
@@ -93,7 +93,7 @@ struct HomeWidgetsView: View {
                     },
                     title: "Freedomtool",
                     subtitle: "Voting",
-                    animation: animations.id(for: .freedomTool)
+                    animation: namespaceProvider(.freedomTool)
                 )
             },
             HomeCarouselCard(
@@ -124,7 +124,7 @@ struct HomeWidgetsView: View {
                     title: likenessManager.isRegistered ? nil : "Digital likeness",
                     subtitle: likenessManager.isRegistered ? nil : "Set a rule",
                     bottomContent: { likenessBottomContent },
-                    animation: animations.id(for: .likeness)
+                    animation: namespaceProvider(.likeness)
                 )
             },
             HomeCarouselCard(
@@ -143,7 +143,7 @@ struct HomeWidgetsView: View {
                     },
                     title: isBalanceSufficient ? "Reserved" : "Upcoming",
                     subtitle: isBalanceSufficient ? "\(userPointsBalance) RMO" : "RMO",
-                    animation: animations.id(for: .claimTokens)
+                    animation: namespaceProvider(.claimTokens)
                 )
             },
             HomeCarouselCard(
@@ -166,14 +166,14 @@ struct HomeWidgetsView: View {
                                 .offset(x: -44, y: 88)
                                 .matchedGeometryEffect(
                                     id: AnimationNamespaceIds.additionalImage,
-                                    in: animations.id(for: .inviteFriends)
+                                    in: namespaceProvider(.inviteFriends)
                                 )
                         }
                     },
                     title: "Invite",
                     subtitle: "Others",
                     bottomContent: { inviteFriendsBottomContent },
-                    animation: animations.id(for: .inviteFriends)
+                    animation: namespaceProvider(.inviteFriends)
                 )
             },
         ]
@@ -208,7 +208,7 @@ struct HomeWidgetsView: View {
                         .padding(.bottom, 12)
                         .matchedGeometryEffect(
                             id: AnimationNamespaceIds.extra,
-                            in: animations.id(for: .likeness),
+                            in: namespaceProvider(.likeness),
                             properties: .position
                         )
                     Text(likenessManager.rule.title)
@@ -219,7 +219,7 @@ struct HomeWidgetsView: View {
                         .frame(maxWidth: 306, alignment: .leading)
                         .matchedGeometryEffect(
                             id: AnimationNamespaceIds.subtitle,
-                            in: animations.id(for: .likeness),
+                            in: namespaceProvider(.likeness),
                             properties: .position
                         )
                 }
@@ -230,7 +230,7 @@ struct HomeWidgetsView: View {
                     .padding(.top, 12)
                     .matchedGeometryEffect(
                         id: AnimationNamespaceIds.extra,
-                        in: animations.id(for: .likeness),
+                        in: namespaceProvider(.likeness),
                         properties: .position
                     )
             }
@@ -274,9 +274,12 @@ struct HomeWidgetsView: View {
 }
 
 #Preview {
-    HomeWidgetsView(animations: HomeAnimations(), onSelect: { _ in })
-        .environmentObject(LikenessManager())
-        .environmentObject(HomeView.ViewModel())
-        .environmentObject(FindFaceViewModel())
-        .environmentObject(PollsViewModel())
+    HomeWidgetsView(
+        namespaceProvider: { _ in Namespace().wrappedValue },
+        onSelect: { _ in }
+    )
+    .environmentObject(LikenessManager())
+    .environmentObject(HomeView.ViewModel())
+    .environmentObject(FindFaceViewModel())
+    .environmentObject(PollsViewModel())
 }
