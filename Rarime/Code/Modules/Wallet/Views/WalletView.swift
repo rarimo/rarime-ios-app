@@ -112,12 +112,12 @@ struct WalletView: View {
             HStack(spacing: 32) {
                 WalletButton(
                     text: String(localized: "Receive"),
-                    icon: Icons.arrowDown,
+                    icon: .arrowDown,
                     action: { path.append(.receive) }
                 )
                 WalletButton(
                     text: String(localized: "Send"),
-                    icon: Icons.arrowUp,
+                    icon: .arrowUp,
                     action: { path.append(.send) }
                 )
             }
@@ -186,7 +186,7 @@ struct WalletView: View {
 
 private struct WalletButton: View {
     var text: String
-    var icon: String
+    var icon: ImageResource
     var action: () -> Void
 
     var body: some View {

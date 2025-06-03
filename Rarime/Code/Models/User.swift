@@ -71,12 +71,12 @@ class User {
         AppUserDefaults.shared.userStatus = status.rawValue
     }
     
-    func saveUserPrivateKeyToCloud() async throws -> Bool {
+    func saveUserPrivateKeyToCloud() async throws -> CKRecord? {
         let query = CKQuery(recordType: User.userCloudRecordType, predicate: NSPredicate(value: true))
         
         let records = try await CloudStorage.shared.fetchRecords(query)
         if !records.isEmpty {
-            return false
+            return nil
         }
         
         let record = CKRecord(recordType: User.userCloudRecordType)
@@ -84,7 +84,7 @@ class User {
         
         try await CloudStorage.shared.saveRecord(record)
         
-        return true
+        return record
     }
 }
 

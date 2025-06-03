@@ -2,7 +2,7 @@ import Alamofire
 import SwiftUI
 
 enum HomeRoute: Hashable {
-    case notifications, identity, inviteFriends, claimTokens, wallet, voting, likeness, findFace
+    case notifications, recovery, inviteFriends, claimTokens, wallet, voting, likeness, findFace
 }
 
 struct HomeView: View {
@@ -25,7 +25,7 @@ struct HomeView: View {
     @State private var isBalanceFetching = true
     @State private var pointsBalance: PointsBalanceRaw? = nil
 
-    @Namespace var identityAnimation
+    @Namespace var recoveryAnimation
     @Namespace var inviteFriendsAnimation
     @Namespace var claimTokensAnimation
     @Namespace var walletAnimation
@@ -49,28 +49,28 @@ struct HomeView: View {
 
     private var homeCards: [HomeCarouselCard] {
         [
-            HomeCarouselCard(action: { path = .identity }) {
+            HomeCarouselCard(action: { path = .recovery }) {
                 HomeCardView(
-                    backgroundGradient: Gradients.gradientFirst,
+                    foregroundGradient: Gradients.darkGreenText,
+                    foregroundColor: .invertedDark,
                     topIcon: Icons.rarime,
                     bottomIcon: Icons.arrowRightUpLine,
                     imageContent: {
-                        Image(Images.handWithPhone)
+                        Image(.recoveryShieldBg)
                             .resizable()
-                            .scaledToFit()
-                            .scaleEffect(0.88)
-                            .offset(x: 32)
+                            .scaledToFill()
+                            .clipShape(RoundedRectangle(cornerRadius: 32))
+                    },
+                    title: "Recovery",
+                    subtitle: "Method",
+                    bottomContent: {
+                        Text("Set up a new way to recover your account")
+                            .body4()
+                            .foregroundStyle(.textSecondary)
+                            .frame(maxWidth: 220, alignment: .leading)
                             .padding(.top, 12)
                     },
-                    title: "Your Device",
-                    subtitle: "Your Identity",
-                    bottomContent: {
-                        Text("* Nothing leaves this device")
-                            .body4()
-                            .foregroundStyle(.baseBlack.opacity(0.6))
-                            .padding(.top, 24)
-                    },
-                    animation: identityAnimation
+                    animation: recoveryAnimation
                 )
             },
             HomeCarouselCard(
@@ -286,16 +286,10 @@ struct HomeView: View {
             } else {
                 ZStack {
                     switch path {
-                    case .identity:
-                        IdentityOnboardingView(
-                            onClose: { path = nil },
-                            onStart: {
-                                path = nil
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                    mainViewModel.selectedTab = .identity
-                                }
-                            },
-                            animation: identityAnimation
+                    case .recovery:
+                        RecoveryMethodView(
+                            animation: recoveryAnimation,
+                            onClose: { path = nil }
                         )
                     case .inviteFriends:
                         InviteFriendsView(
