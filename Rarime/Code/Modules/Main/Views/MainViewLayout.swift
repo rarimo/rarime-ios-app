@@ -12,7 +12,7 @@ struct MainViewLayout<Content: View>: View {
                 selectedTab: $mainViewModel.selectedTab,
                 isQrCodeScanSheetShown: $mainViewModel.isQrCodeScanSheetShown
             )
-            // TODO: move to extenstion with blur
+            // TODO: move to extension with blur
             .background {
                 ZStack {
                     Color.bgBlur
