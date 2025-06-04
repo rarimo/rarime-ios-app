@@ -11,8 +11,8 @@ struct HomeWidgetsView: View {
     @EnvironmentObject private var homeViewModel: HomeView.ViewModel
     @EnvironmentObject private var findFaceViewModel: FindFaceViewModel
 
+    @Binding var selectedWidget: HomeWidget?
     let namespaceProvider: (HomeWidget) -> Namespace.ID
-    let onSelect: (HomeWidget) -> Void
 
     @StateObject private var viewModel = HomeWidgetsViewModel()
 
@@ -31,11 +31,13 @@ struct HomeWidgetsView: View {
             ) {
                 AppButton(
                     text: "Manage widgets",
+                    leftIcon: .filter3Line,
                     width: 160,
                     action: { isManageSheetPresented = true }
                 )
                 .controlSize(.large)
             }
+            .disabled(selectedWidget != nil)
             .padding(.horizontal, 22)
             VerticalStepIndicator(
                 steps: visibleWidgets.count,
@@ -69,7 +71,7 @@ struct HomeWidgetsView: View {
             widget: .earn,
             card: SnapCarouselCard(
                 disabled: homeViewModel.isBalanceFetching || homeViewModel.pointsBalance == nil,
-                action: { onSelect(.earn) }
+                action: { selectedWidget = .earn }
             ) {
                 HomeCardView(
                     foregroundGradient: Gradients.darkerGreenText,
@@ -100,7 +102,7 @@ struct HomeWidgetsView: View {
     private var freedomToolWidget: WidgetWrapper {
         WidgetWrapper(
             widget: .freedomTool,
-            card: SnapCarouselCard(action: { onSelect(.freedomTool) }) {
+            card: SnapCarouselCard(action: { selectedWidget = .freedomTool }) {
                 HomeCardView(
                     foregroundGradient: Gradients.darkGreenText,
                     foregroundColor: .invertedDark,
@@ -125,7 +127,7 @@ struct HomeWidgetsView: View {
             widget: .hiddenKeys,
             card: SnapCarouselCard(
                 disabled: findFaceViewModel.user == nil || findFaceViewModel.user?.celebrity.status == .maintenance,
-                action: { onSelect(.hiddenKeys) }
+                action: { selectedWidget = .hiddenKeys }
             ) {
                 HomeCardView(
                     foregroundGradient: Gradients.purpleText,
@@ -152,7 +154,7 @@ struct HomeWidgetsView: View {
     private var recoveryWidget: WidgetWrapper {
         WidgetWrapper(
             widget: .recovery,
-            card: SnapCarouselCard(action: { onSelect(.recovery) }) {
+            card: SnapCarouselCard(action: { selectedWidget = .recovery }) {
                 HomeCardView(
                     foregroundGradient: Gradients.greenText,
                     foregroundColor: .invertedDark,
@@ -184,7 +186,7 @@ struct HomeWidgetsView: View {
             widget: .likeness,
             card: SnapCarouselCard(
                 disabled: likenessManager.isLoading,
-                action: { onSelect(.likeness) }
+                action: { selectedWidget = .likeness }
             ) {
                 HomeCardView(
                     backgroundGradient: Gradients.purpleBg,
@@ -249,8 +251,11 @@ struct HomeWidgetsView: View {
 
 #Preview {
     HomeWidgetsView(
-        namespaceProvider: { _ in Namespace().wrappedValue },
-        onSelect: { _ in }
+        selectedWidget: Binding<HomeWidget?>(
+            get: { nil },
+            set: { _ in }
+        ),
+        namespaceProvider: { _ in Namespace().wrappedValue }
     )
     .environmentObject(LikenessManager())
     .environmentObject(HomeView.ViewModel())
