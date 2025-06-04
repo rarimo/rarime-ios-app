@@ -65,7 +65,6 @@ struct WalletView: View {
         MainViewLayout {
             VStack(alignment: .leading, spacing: 20) {
                 header
-                Spacer()
                 // TODO: add full support for assets
 //                    AssetsSlider(walletAssets: [selectedAsset], isLoading: isBalanceFetching)
 //                    HorizontalDivider()

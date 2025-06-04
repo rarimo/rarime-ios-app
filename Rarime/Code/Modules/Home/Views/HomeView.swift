@@ -3,17 +3,8 @@ import BigInt
 import SwiftUI
 import Web3
 
-enum HomeRoute: String, Hashable {
+private enum HomeRoute: String, Hashable {
     case notifications
-}
-
-enum HomeCardId: Hashable {
-    case recovery
-    case findFace
-    case likeness
-    case freedomTool
-    case inviteFriends
-    case claimTokens
 }
 
 struct HomeView: View {
@@ -25,14 +16,14 @@ struct HomeView: View {
     @StateObject var findFaceViewModel = FindFaceViewModel()
 
     @State private var path: [HomeRoute] = []
-    @State private var selectedCardId: HomeCardId? = nil
+    @State private var selectedCardId: HomeWidget? = nil
     @State private var isOnboardingPresented = false
 
     @Namespace private var recoveryNamespace
-    @Namespace private var findFaceNamespace
+    @Namespace private var hiddenKeysNamespace
     @Namespace private var likenessNamespace
     @Namespace private var freedomToolNamespace
-    @Namespace private var inviteFriendsNamespace
+    @Namespace private var earnNamespace
     @Namespace private var claimTokensNamespace
 
     var body: some View {
@@ -62,9 +53,9 @@ struct HomeView: View {
                     onClose: { selectedCardId = nil }
                 )
 
-            case .findFace:
+            case .hiddenKeys:
                 FindFaceView(
-                    animation: namespace(for: .findFace),
+                    animation: namespace(for: .hiddenKeys),
                     onClose: { selectedCardId = nil },
                     onViewWallet: { mainViewModel.selectedTab = .wallet }
                 )
@@ -82,20 +73,13 @@ struct HomeView: View {
                     animation: namespace(for: .likeness)
                 )
 
-            case .inviteFriends:
+            case .earn:
                 InviteFriendsView(
                     balance: viewModel.pointsBalance,
                     onClose: { selectedCardId = nil },
-                    animation: namespace(for: .inviteFriends)
+                    animation: namespace(for: .earn)
                 )
                 .environmentObject(viewModel)
-
-            case .claimTokens:
-                ClaimTokensView(
-                    onClose: { selectedCardId = nil },
-                    pointsBalance: viewModel.pointsBalance,
-                    animation: namespace(for: .claimTokens)
-                )
 
             default:
                 mainLayoutContent
@@ -192,14 +176,13 @@ struct HomeView: View {
         .background(Color.bgPrimary)
     }
 
-    private func namespace(for key: HomeCardId) -> Namespace.ID {
+    private func namespace(for key: HomeWidget) -> Namespace.ID {
         switch key {
-        case .recovery: return recoveryNamespace
-        case .findFace: return findFaceNamespace
-        case .likeness: return likenessNamespace
+        case .earn: return earnNamespace
         case .freedomTool: return freedomToolNamespace
-        case .inviteFriends: return inviteFriendsNamespace
-        case .claimTokens: return claimTokensNamespace
+        case .hiddenKeys: return hiddenKeysNamespace
+        case .recovery: return recoveryNamespace
+        case .likeness: return likenessNamespace
         }
     }
 }

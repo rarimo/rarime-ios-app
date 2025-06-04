@@ -42,16 +42,15 @@ extension View {
         return sheet(isPresented: isPresented) {
             ZStack(alignment: .topTrailing) {
                 bgColor.ignoresSafeArea(.container)
-                VStack(spacing: 0) {
+                VStack(alignment: .leading, spacing: 0) {
                     if let title {
-                        VStack(alignment: .leading, spacing: 24) {
-                            Text(title)
-                                .h4()
-                                .foregroundStyle(.textPrimary)
-                                .padding(.horizontal, 20)
-                            HorizontalDivider()
-                        }
-                        .padding(.top, 20)
+                        Text(title)
+                            .h3()
+                            .foregroundStyle(.textPrimary)
+                            .padding(.horizontal, 20)
+                            .padding(.top, 20)
+                        HorizontalDivider()
+                            .padding(.top, 20)
                     }
                     content()
                 }
@@ -67,7 +66,7 @@ extension View {
                             .iconLarge()
                             .foregroundColor(.textPrimary)
                     }
-                    .padding(.top, 24)
+                    .padding(.top, 22)
                     .padding(.trailing, 20)
                 }
             }

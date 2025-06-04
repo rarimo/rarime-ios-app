@@ -21,7 +21,7 @@ public class AppUserDefaults: ObservableObject {
     public var passportCardLook = PassportCardLook.holographicViolet.rawValue
 
     @AppStorage("v2_passport_identifiers")
-    public var passportIdentifiers = try! JSONEncoder().encode([PassportIdentifier.documentId.rawValue])
+    public var passportIdentifiers = (try? JSONEncoder().encode([PassportIdentifier.documentId.rawValue])) ?? Data()
 
     @AppStorage("is_passport_incognito_mode")
     public var isPassportIncognitoMode = false
@@ -91,4 +91,7 @@ public class AppUserDefaults: ObservableObject {
     public var isLikenessRegistered: Bool = false
     @AppStorage("is_passport_failed_by_impossible_revocation")
     public var isPassportFailedByImpossibleRevocation: Bool = false
+
+    @AppStorage("home_widgets")
+    public var homeWidgets: Data = (try? JSONEncoder().encode(DEFAULT_HOME_WIDGETS.map { $0.rawValue })) ?? Data()
 }

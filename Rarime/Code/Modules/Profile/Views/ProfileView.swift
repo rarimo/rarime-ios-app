@@ -19,6 +19,8 @@ struct ProfileView: View {
     @EnvironmentObject private var pollsViewModel: PollsViewModel
     @EnvironmentObject private var walletManager: WalletManager
 
+    @StateObject private var homeWidgetsViewModel = HomeWidgetsViewModel()
+
     @State private var path: [ProfileRoute] = []
 
     @State private var isPrivacySheetPresented = false
@@ -202,6 +204,7 @@ struct ProfileView: View {
                         pollsViewModel.reset()
                         likenessManager.reset()
                         walletManager.reset()
+                        homeWidgetsViewModel.reset()
 
                         Task {
                             try? await notificationManager.unsubscribe(fromTopic: ConfigManager.shared.general.claimableNotificationTopic)
