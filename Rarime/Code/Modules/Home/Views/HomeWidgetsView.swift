@@ -74,8 +74,8 @@ struct HomeWidgetsView: View {
                 HomeCardView(
                     foregroundGradient: Gradients.darkerGreenText,
                     foregroundColor: .invertedDark,
-                    topIcon: Icons.rarime,
-                    bottomIcon: Icons.arrowRightUpLine,
+                    topIcon: .rarime,
+                    bottomIcon: .arrowRightUpLine,
                     imageContent: {
                         Image(.earnBg)
                             .resizable()
@@ -104,8 +104,8 @@ struct HomeWidgetsView: View {
                 HomeCardView(
                     foregroundGradient: Gradients.darkGreenText,
                     foregroundColor: .invertedDark,
-                    topIcon: Icons.freedomtool,
-                    bottomIcon: Icons.arrowRightUpLine,
+                    topIcon: .freedomtool,
+                    bottomIcon: .arrowRightUpLine,
                     imageContent: {
                         Image(.freedomtoolBg)
                             .resizable()
@@ -130,8 +130,8 @@ struct HomeWidgetsView: View {
                 HomeCardView(
                     foregroundGradient: Gradients.purpleText,
                     foregroundColor: .invertedDark,
-                    topIcon: Icons.rarime,
-                    bottomIcon: Icons.arrowRightUpLine,
+                    topIcon: .rarime,
+                    bottomIcon: .arrowRightUpLine,
                     imageContent: {
                         Image(.findFaceBg)
                             .resizable()
@@ -156,8 +156,8 @@ struct HomeWidgetsView: View {
                 HomeCardView(
                     foregroundGradient: Gradients.greenText,
                     foregroundColor: .invertedDark,
-                    topIcon: Icons.rarime,
-                    bottomIcon: Icons.arrowRightUpLine,
+                    topIcon: .rarime,
+                    bottomIcon: .arrowRightUpLine,
                     imageContent: {
                         Image(.recoveryShieldBg)
                             .resizable()
@@ -189,8 +189,8 @@ struct HomeWidgetsView: View {
                 HomeCardView(
                     backgroundGradient: Gradients.purpleBg,
                     foregroundGradient: Gradients.purpleText,
-                    topIcon: Icons.rarime,
-                    bottomIcon: Icons.arrowRightUpLine,
+                    topIcon: .rarime,
+                    bottomIcon: .arrowRightUpLine,
                     imageContent: {
                         if let faceImage = likenessManager.faceImage {
                             LikenessFaceImageView(image: faceImage)

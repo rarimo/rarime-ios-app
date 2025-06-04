@@ -11,7 +11,7 @@ struct PassportScanTutorialButton: View {
                         .resizable()
                         .scaledToFit()
                         .frame(height: 56)
-                    Image(Icons.play)
+                    Image(.play)
                         .iconSmall()
                         .foregroundStyle(.baseWhite)
                         .padding(8)

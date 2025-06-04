@@ -62,7 +62,7 @@ extension View {
                 .modifier(DynamicSheetHeightModifier(fullScreen: fullScreen))
                 if !fullScreen {
                     Button(action: { isPresented.wrappedValue = false }) {
-                        Image(Icons.closeFill)
+                        Image(.closeFill)
                             .iconLarge()
                             .foregroundColor(.textPrimary)
                     }

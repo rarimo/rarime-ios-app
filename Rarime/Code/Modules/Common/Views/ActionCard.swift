@@ -32,7 +32,7 @@ struct ActionCard<Icon: View>: View {
                 }
             }
             Spacer()
-            Image(Icons.caretRight)
+            Image(.caretRight)
                 .iconSmall()
                 .padding(4)
                 .background(.primaryMain)
@@ -58,7 +58,7 @@ struct ActionCard<Icon: View>: View {
         ActionCard(
             title: "Card with icon",
             description: "Test action card with icon",
-            icon: { Image(Icons.bell).iconMedium() }
+            icon: { Image(.bell).iconMedium() }
         )
         ActionCard(
             title: "Transparent card",

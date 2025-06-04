@@ -124,7 +124,7 @@ class WalletManager: ObservableObject {
         transactions.append(
             Transaction(
                 title: String(localized: "Send"),
-                icon: Icons.arrowUp,
+                icon: .arrowUp,
                 amount: amount,
                 date: Date(),
                 type: .sent
@@ -164,7 +164,7 @@ class WalletManager: ObservableObject {
 
                     transactions.append(Transaction(
                         title: title,
-                        icon: isSending ? Icons.arrowUp : Icons.arrowDown,
+                        icon: isSending ? .arrowUp : .arrowDown,
                         amount: NSDecimalNumber(decimal: amount).doubleValue,
                         date: tx.date,
                         type: isSending ? .sent : .received

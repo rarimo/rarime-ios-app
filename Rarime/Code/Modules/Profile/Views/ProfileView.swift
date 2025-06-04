@@ -82,12 +82,12 @@ struct ProfileView: View {
                         CardContainer {
                             VStack(spacing: 20) {
                                 ProfileRow(
-                                    icon: Icons.userFocus,
+                                    icon: .userFocus,
                                     title: String(localized: "Auth Method"),
                                     action: { path.append(.authMethod) }
                                 )
                                 ProfileRow(
-                                    icon: Icons.key,
+                                    icon: .key,
                                     title: String(localized: "Export Keys"),
                                     action: { path.append(.exportKeys) }
                                 )
@@ -96,7 +96,7 @@ struct ProfileView: View {
                         CardContainer {
                             VStack(spacing: 20) {
                                 ProfileRow(
-                                    icon: Icons.globeSimple,
+                                    icon: .globeSimple,
                                     title: String(localized: "Language"),
                                     value: settingsManager.language.title,
                                     action: {
@@ -104,21 +104,21 @@ struct ProfileView: View {
                                     }
                                 )
                                 ProfileRow(
-                                    icon: Icons.sun,
+                                    icon: .sun,
                                     title: String(localized: "Theme"),
                                     value: settingsManager.colorScheme.title,
                                     action: { path.append(.theme) }
                                 )
                                 if appIconManager.isAppIconsSupported {
                                     ProfileRow(
-                                        icon: Icons.rarime,
+                                        icon: .rarime,
                                         title: String(localized: "App Icon"),
                                         value: appIconManager.appIcon.title,
                                         action: { path.append(.appIcon) }
                                     )
                                 }
                                 ProfileRow(
-                                    icon: Icons.question,
+                                    icon: .question,
                                     title: String(localized: "Privacy Policy"),
                                     action: { isPrivacySheetPresented = true }
                                 )
@@ -127,7 +127,7 @@ struct ProfileView: View {
                                         .ignoresSafeArea()
                                 }
                                 ProfileRow(
-                                    icon: Icons.flag,
+                                    icon: .flag,
                                     title: String(localized: "Terms of Use"),
                                     action: { isTermsSheetPresented = true }
                                 )
@@ -137,7 +137,7 @@ struct ProfileView: View {
                                 }
                                 if MFMailComposeViewController.canSendMail() {
                                     ProfileRow(
-                                        icon: Icons.chat,
+                                        icon: .chat,
                                         title: "Give us Feedback",
                                         action: { isShareWithDeveloper = true }
                                     )
@@ -151,7 +151,7 @@ struct ProfileView: View {
                         CardContainer {
                             VStack(spacing: 20) {
                                 ProfileRow(
-                                    icon: Icons.dotsThreeOutline,
+                                    icon: .dotsThreeOutline,
                                     title: String(localized: "Debug Options"),
                                     action: {
                                         isDebugOptionsShown = true
@@ -163,7 +163,7 @@ struct ProfileView: View {
                         CardContainer {
                             Button(action: { isAccountDeleting = true }) {
                                 HStack {
-                                    Image(Icons.trashSimple)
+                                    Image(.trashSimple)
                                         .iconMedium()
                                         .padding(6)
                                         .background(.errorLighter, in: Circle())
@@ -220,7 +220,7 @@ struct ProfileView: View {
 }
 
 private struct ProfileRow: View {
-    let icon: String
+    let icon: ImageResource
     let title: String
     var value: String? = nil
     let action: () -> Void
@@ -242,7 +242,7 @@ private struct ProfileRow: View {
                         .body4()
                         .foregroundStyle(.textSecondary)
                 }
-                Image(Icons.caretRight)
+                Image(.caretRight)
                     .iconMedium()
                     .foregroundStyle(.textSecondary)
             }

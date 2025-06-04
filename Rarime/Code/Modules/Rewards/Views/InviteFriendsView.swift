@@ -9,7 +9,7 @@ struct InviteFriendsView: View {
     var body: some View {
         PullToCloseWrapperView(action: onClose) {
             VStack(spacing: 0) {
-                AppIconButton(variant: .secondary, icon: Icons.closeFill, action: onClose)
+                AppIconButton(variant: .secondary, icon: .closeFill, action: onClose)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding([.top, .trailing], 20)
 
@@ -45,7 +45,7 @@ struct InviteFriendsView: View {
                                         properties: .position
                                     )
                             }
-                            Image(Icons.getTokensArrow)
+                            Image(.getTokensArrow)
                                 .foregroundStyle(.informationalDark)
                                 .padding(.top, 20)
                                 .matchedGeometryEffect(
@@ -117,7 +117,7 @@ private struct InviteCodeView: View {
                         subject: Text("Invite to RariMe"),
                         message: Text("Join RariMe with my invite code: \(code)\n\n\(invitationLink)")
                     ) {
-                        Image(Icons.shareLine).iconMedium().foregroundStyle(.baseBlack)
+                        Image(.shareLine).iconMedium().foregroundStyle(.baseBlack)
                     }
                 }
             } else {
@@ -139,7 +139,7 @@ private struct InviteCodeView: View {
                     // TODO: sync with RewardChip
                     HStack(spacing: 4) {
                         Text(String("+\(Rewards.invite.formatted())")).subtitle7()
-                        Image(Icons.rarimo).iconSmall()
+                        Image(.rarimo).iconSmall()
                     }
                     .padding(.vertical, 2)
                     .padding(.horizontal, 6)

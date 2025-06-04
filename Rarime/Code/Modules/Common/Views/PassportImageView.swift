@@ -15,7 +15,7 @@ struct PassportImageView: View {
                 .clipShape(Circle())
                 .overlay(Circle().stroke(.bgComponentPrimary, lineWidth: 1))
         } else {
-            Image(Icons.user)
+            Image(.user)
                 .square(size * 0.5)
                 .padding(size * 0.25)
                 .background(bgColor)

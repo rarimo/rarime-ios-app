@@ -4,8 +4,8 @@ struct HomeCardView<Content: View, TopContent: View, BottomContent: View>: View 
     let backgroundGradient: LinearGradient?
     let foregroundGradient: LinearGradient?
     let foregroundColor: Color
-    let topIcon: String
-    let bottomIcon: String
+    let topIcon: ImageResource
+    let bottomIcon: ImageResource
     let imageContent: () -> Content
     let title: String?
     let subtitle: String?
@@ -18,8 +18,8 @@ struct HomeCardView<Content: View, TopContent: View, BottomContent: View>: View 
         backgroundGradient: LinearGradient? = nil,
         foregroundGradient: LinearGradient? = nil,
         foregroundColor: Color = .baseBlack,
-        topIcon: String,
-        bottomIcon: String,
+        topIcon: ImageResource,
+        bottomIcon: ImageResource,
         @ViewBuilder imageContent: @escaping () -> Content,
         title: String?,
         subtitle: String?,
@@ -108,8 +108,8 @@ struct HomeCardView<Content: View, TopContent: View, BottomContent: View>: View 
 #Preview {
     HomeCardView(
         backgroundGradient: Gradients.gradientFirst,
-        topIcon: Icons.rarime,
-        bottomIcon: Icons.arrowRightUpLine,
+        topIcon: .rarime,
+        bottomIcon: .arrowRightUpLine,
         imageContent: {
             Image(.handWithPhone)
                 .resizable()

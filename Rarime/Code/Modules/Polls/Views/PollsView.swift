@@ -241,13 +241,13 @@ private struct PollListCard: View {
                         .multilineTextAlignment(.leading)
                     HStack(alignment: .center, spacing: 12) {
                         HStack(alignment: .center, spacing: 8) {
-                            Image(Icons.timerLine)
+                            Image(.timerLine)
                                 .iconSmall()
                             Text(poll.endAt)
                                 .subtitle7()
                         }
                         HStack(alignment: .center, spacing: 8) {
-                            Image(Icons.groupLine)
+                            Image(.groupLine)
                                 .iconSmall()
                             Text(totalParticipants.formatted())
                                 .subtitle7()

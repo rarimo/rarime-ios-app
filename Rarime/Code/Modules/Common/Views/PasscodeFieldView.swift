@@ -102,7 +102,7 @@ struct PasscodeFieldView: View {
                     passcode.removeLast()
                     errorMessage = ""
                 }) {
-                    Image(Icons.backspace).iconMedium()
+                    Image(.backspace).iconMedium()
                 }
                 .disabled(!isEnabled)
             }

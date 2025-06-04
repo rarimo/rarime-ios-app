@@ -23,7 +23,6 @@
 		5617AB102C8F4469003947C9 /* VerificatorApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5617AB0F2C8F4469003947C9 /* VerificatorApi.swift */; };
 		5617AB132C8F47C2003947C9 /* ProofRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5617AB122C8F47C2003947C9 /* ProofRequestView.swift */; };
 		5617AB152C8F48BE003947C9 /* ExternalRequestsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5617AB142C8F48BE003947C9 /* ExternalRequestsManager.swift */; };
-		561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C272BADA8A600FBB3B9 /* Icons.swift */; };
 		561C3C2B2BADBF1000FBB3B9 /* View+Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C2A2BADBF1000FBB3B9 /* View+Typography.swift */; };
 		561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C382BADE64B00FBB3B9 /* Fonts.swift */; };
 		561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C422BAEE2D600FBB3B9 /* String+Error.swift */; };
@@ -450,7 +449,6 @@
 		5617AB0F2C8F4469003947C9 /* VerificatorApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificatorApi.swift; sourceTree = "<group>"; };
 		5617AB122C8F47C2003947C9 /* ProofRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofRequestView.swift; sourceTree = "<group>"; };
 		5617AB142C8F48BE003947C9 /* ExternalRequestsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalRequestsManager.swift; sourceTree = "<group>"; };
-		561C3C272BADA8A600FBB3B9 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		561C3C2A2BADBF1000FBB3B9 /* View+Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Typography.swift"; sourceTree = "<group>"; };
 		561C3C382BADE64B00FBB3B9 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		561C3C422BAEE2D600FBB3B9 /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
@@ -1240,7 +1238,6 @@
 				C7DF8BF22D5F699400C8E2D2 /* Gradients.swift */,
 				56A6C7552BBC194800992562 /* Animations.swift */,
 				561C3C382BADE64B00FBB3B9 /* Fonts.swift */,
-				561C3C272BADA8A600FBB3B9 /* Icons.swift */,
 				CEC5620E2BD925D6002D4954 /* Circuits.swift */,
 				CE68BE4A2BD9B75100D92EBB /* ContractABI.swift */,
 				CED909DF2BDC1E0F0065E949 /* Rarimo.swift */,
@@ -2275,7 +2272,6 @@
 				CEED94D22DD3512C004BFE93 /* ImageMask.swift in Sources */,
 				CE3D41C02C77974500D0AA65 /* PushNotificationsRaw.swift in Sources */,
 				CE9E82D72BA8917100AAF885 /* LottieView.swift in Sources */,
-				561C3C282BADA8A600FBB3B9 /* Icons.swift in Sources */,
 				561C3C2B2BADBF1000FBB3B9 /* View+Typography.swift in Sources */,
 				560F0C342BD175EB00067054 /* LoggerUtil.swift in Sources */,
 				564CE30F2DD6228800D03E6D /* FindFaceScanningView.swift in Sources */,

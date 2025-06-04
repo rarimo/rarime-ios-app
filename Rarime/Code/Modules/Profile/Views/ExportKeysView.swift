@@ -34,7 +34,7 @@ struct ExportKeysView: View {
     var copyButton: some View {
         HStack {
             Spacer()
-            Image(isCopied ? Icons.check : Icons.copySimple).iconMedium()
+            Image(isCopied ? .check : .copySimple).iconMedium()
             Text(isCopied ? "Copied" : "Copy to clipboard").buttonMedium()
             Spacer()
         }

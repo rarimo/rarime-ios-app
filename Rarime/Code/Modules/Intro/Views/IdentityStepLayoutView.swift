@@ -14,7 +14,7 @@ struct IdentityStepLayoutView<Content: View, NextButton: View>: View {
             VStack {
                 HStack {
                     Button(action: onBack) {
-                        Image(Icons.caretLeft)
+                        Image(.caretLeft)
                             .iconMedium()
                             .foregroundColor(.textPrimary)
                     }

@@ -16,7 +16,7 @@ struct LikenessView: View {
     var body: some View {
         PullToCloseWrapperView(action: onClose) {
             ZStack(alignment: .topTrailing) {
-                AppIconButton(variant: .secondary, icon: Icons.closeFill, action: onClose)
+                AppIconButton(variant: .secondary, icon: .closeFill, action: onClose)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding([.top, .trailing], 20)
                 ZStack(alignment: .bottom) {
