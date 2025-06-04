@@ -47,7 +47,7 @@ struct HomeCardView<Content: View, TopContent: View, BottomContent: View>: View 
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .clipped()
             Image(topIcon)
-                .square(24)
+                .iconLarge()
                 .foregroundStyle(foregroundColor)
                 .padding(8)
                 .background(.bgComponentPrimary, in: Circle())

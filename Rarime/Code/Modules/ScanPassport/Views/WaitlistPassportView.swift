@@ -70,7 +70,7 @@ struct WaitlistPassportView: View {
                 VStack(spacing: 8) {
                     AppButton(
                         text: "Join the program",
-                        rightIcon: Icons.arrowRight,
+                        rightIcon: .arrowRight,
                         action: {
                             Task { @MainActor in
                                 await joinRewardsProgram()
@@ -177,7 +177,7 @@ struct WaitlistPassportView: View {
             Spacer()
             AppButton(
                 text: "Save to files",
-                rightIcon: Icons.arrowRight,
+                rightIcon: .arrowRight,
                 action: { isExporting = true }
             )
             .controlSize(.large)

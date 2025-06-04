@@ -39,7 +39,7 @@ struct NewIdentityView: View {
                 if let user = userManager.user {
                     AppButton(
                         text: "Continue",
-                        rightIcon: Icons.arrowRight,
+                        rightIcon: .arrowRight,
                         action: {
                             do {
                                 try user.save()

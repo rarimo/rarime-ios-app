@@ -64,10 +64,10 @@ struct GlassBottomSheet<Background: View, Content: View, Footer: View>: View {
                     .animation(.spring(response: 0.5, dampingFraction: 0.8), value: blurRadius)
                 ZStack(alignment: .bottom) {
                     ZStack(alignment: .top) {
-                        VStack(spacing: 24) {
+                        VStack(spacing: 8) {
                             if !hideDragIndicator {
                                 Capsule()
-                                    .fill(.bgComponentBaseHovered)
+                                    .fill(.bgComponentPressed)
                                     .frame(width: 36, height: 5)
                             }
                             ChildOffsetReader(offset: $scrollOffset) {
@@ -121,7 +121,7 @@ struct GlassBottomSheet<Background: View, Content: View, Footer: View>: View {
             maxBlur: 20,
             dimBackground: true,
             background: {
-                Image(.dotCountry)
+                Image(.earnBg)
                     .resizable()
                     .scaledToFit()
             }

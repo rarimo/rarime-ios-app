@@ -18,11 +18,11 @@ struct AppAlert: View {
         }
     }
 
-    private var icon: String {
+    private var icon: ImageResource {
         switch type {
-        case .success: Icons.info
-        case .error: Icons.warning
-        case .processing: Icons.info
+        case .success: .info
+        case .error: .warning
+        case .processing: .info
         }
     }
 

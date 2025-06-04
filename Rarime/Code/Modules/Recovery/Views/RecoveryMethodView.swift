@@ -46,7 +46,7 @@ struct RecoveryMethodView: View {
                 Text("Method")
                     .additional1()
                     .fixedSize(horizontal: false, vertical: true)
-                    .foregroundStyle(Gradients.darkGreenText)
+                    .foregroundStyle(Gradients.greenText)
                 Text("Set up a new way to recover your account")
                     .body4()
                     .foregroundStyle(.textSecondary)

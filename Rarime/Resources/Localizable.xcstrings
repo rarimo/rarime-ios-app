@@ -112,6 +112,16 @@
     "%lld" : {
 
     },
+    "%lld %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld %2$@"
+          }
+        }
+      }
+    },
     "%lld questions" : {
 
     },
@@ -271,9 +281,6 @@
 
     },
     "An error has occured, please try again" : {
-
-    },
-    "An identification and privacy solution that revolutionizes polling, surveying and election processes" : {
 
     },
     "Andorra" : {
@@ -612,6 +619,9 @@
         }
       }
     },
+    "Cast secure, anonymous votes from anywhere, just using your passport" : {
+
+    },
     "Cayman Islands" : {
 
     },
@@ -666,7 +676,10 @@
     "Comoros" : {
 
     },
-    "Complete various tasks and get rewarded with\nRarimo tokens." : {
+    "Complete various tasks and get rewarded with\nRarimo tokens" : {
+
+    },
+    "Complete various tasks and get rewarded with Rarimo tokens." : {
 
     },
     "Confirm" : {
@@ -739,6 +752,9 @@
           }
         }
       }
+    },
+    "Create a poll" : {
+
     },
     "Create Account" : {
       "extractionState" : "stale",
@@ -1322,9 +1338,6 @@
 
     },
     "Hidden keys" : {
-
-    },
-    "History" : {
 
     },
     "Hold your iPhone near an NFC enabled passport." : {
@@ -2626,7 +2639,7 @@
     "Some passports have a problem with chip scans" : {
 
     },
-    "Somewhere out on the open web, one famous face carries a key sealed inside its ZK-vector." : {
+    "Somewhere out on the open web, one famous face carries a key sealed inside its ZK-vector" : {
 
     },
     "Somewhere out on the open web, one famous face carries a key sealed inside its ZK-vector. Test any image you find, and the first player to prove the match claims the prize. Ready to hunt?" : {

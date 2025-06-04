@@ -156,7 +156,7 @@ struct FindFaceView: View {
                 AppButton(
                     variant: .primary,
                     text: "Scan",
-                    leftIcon: Icons.userFocus,
+                    leftIcon: .userFocus,
                     width: 160,
                     action: { isScanSheetPresented = true }
                 )
@@ -178,7 +178,7 @@ struct FindFaceView: View {
             } else {
                 HStack(spacing: 12) {
                     Image(.lock2Line)
-                        .square(24)
+                        .iconLarge()
                     CountdownView(endTimestamp: findFaceUser.resetTime)
                         .buttonLarge()
                 }
@@ -197,7 +197,7 @@ struct FindFaceView: View {
         VStack(alignment: .leading, spacing: 32) {
             VStack(alignment: .leading, spacing: 0) {
                 Image(.flashlightFill)
-                    .square(24)
+                    .iconLarge()
                     .padding(16)
                     .foregroundStyle(.additionalPurple)
                     .background(.additionalPurple.opacity(0.05), in: Circle())

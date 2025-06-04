@@ -72,27 +72,25 @@ struct HomeWidgetsView: View {
                 action: { onSelect(.earn) }
             ) {
                 HomeCardView(
-                    backgroundGradient: Gradients.gradientSecond,
+                    foregroundGradient: Gradients.darkerGreenText,
+                    foregroundColor: .invertedDark,
                     topIcon: Icons.rarime,
                     bottomIcon: Icons.arrowRightUpLine,
                     imageContent: {
-                        ZStack(alignment: .bottomTrailing) {
-                            Image(.peopleEmojis)
-                                .resizable()
-                                .scaledToFit()
-                                .padding(.top, 84)
-
-                            Image(Icons.getTokensArrow)
-                                .foregroundStyle(.informationalDark)
-                                .offset(x: -44, y: 88)
-                                .matchedGeometryEffect(
-                                    id: AnimationNamespaceIds.additionalImage,
-                                    in: namespaceProvider(.earn)
-                                )
-                        }
+                        Image(.earnBg)
+                            .resizable()
+                            .scaledToFill()
+                            .clipShape(RoundedRectangle(cornerRadius: 32))
                     },
-                    title: "Invite",
-                    subtitle: "Others",
+                    title: "Earn",
+                    subtitle: "RMO",
+                    bottomContent: {
+                        Text("Complete various tasks and get rewarded with Rarimo tokens.")
+                            .body4()
+                            .foregroundStyle(.textSecondary)
+                            .frame(maxWidth: 220, alignment: .leading)
+                            .padding(.top, 12)
+                    },
                     animation: namespaceProvider(.earn)
                 )
             }
@@ -104,14 +102,15 @@ struct HomeWidgetsView: View {
             widget: .freedomTool,
             card: SnapCarouselCard(action: { onSelect(.freedomTool) }) {
                 HomeCardView(
-                    backgroundGradient: Gradients.gradientFifth,
+                    foregroundGradient: Gradients.darkGreenText,
+                    foregroundColor: .invertedDark,
                     topIcon: Icons.freedomtool,
                     bottomIcon: Icons.arrowRightUpLine,
                     imageContent: {
-                        Image(.dotCountry)
+                        Image(.freedomtoolBg)
                             .resizable()
-                            .scaledToFit()
-                            .padding(.top, 20)
+                            .scaledToFill()
+                            .clipShape(RoundedRectangle(cornerRadius: 32))
                     },
                     title: "Freedomtool",
                     subtitle: "Voting",
@@ -155,7 +154,7 @@ struct HomeWidgetsView: View {
             widget: .recovery,
             card: SnapCarouselCard(action: { onSelect(.recovery) }) {
                 HomeCardView(
-                    foregroundGradient: Gradients.darkGreenText,
+                    foregroundGradient: Gradients.greenText,
                     foregroundColor: .invertedDark,
                     topIcon: Icons.rarime,
                     bottomIcon: Icons.arrowRightUpLine,

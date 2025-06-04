@@ -35,7 +35,7 @@ struct ImportIdentityView: View {
             nextButton: {
                 AppButton(
                     text: "Continue",
-                    rightIcon: Icons.arrowRight,
+                    rightIcon: .arrowRight,
                     action: importIdentity
                 )
                 .controlSize(.large)

@@ -99,7 +99,7 @@ struct FindFaceSuccessView: View {
                         HStack(spacing: 8) {
                             if isClaimed {
                                 Image(.checkLine)
-                                    .square(24)
+                                    .iconLarge()
                             }
                             Text(claimButtonText)
                                 .buttonLarge()
