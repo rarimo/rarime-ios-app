@@ -11,8 +11,6 @@ extension HomeView {
             isBalanceFetching = true
             defer { isBalanceFetching = false }
 
-            if UserManager.shared.user?.userReferralCode == nil { return }
-
             do {
                 guard let user = UserManager.shared.user else { throw "failed to get user" }
                 let accessJwt = try await DecentralizedAuthManager.shared.getAccessJwt(user)
@@ -22,11 +20,19 @@ extension HomeView {
             } catch let afError as AFError where afError.isExplicitlyCancelledError {
                 return
             } catch {
-                LoggerUtil.common.error("failed to fetch balance: \(error.localizedDescription, privacy: .public)")
+                if let error = error as? AFError,
+                   let openApiHttpCode = try? error.retriveOpenApiHttpCode(),
+                   openApiHttpCode == HTTPStatusCode.notFound.rawValue
+                {
+                    LoggerUtil.common.info("User has no points balance, attempting to create balance with referral code")
+                    await createBalanceWithReferralCode()
+                } else {
+                    LoggerUtil.common.error("Failed to fetch points balance: \(error.localizedDescription, privacy: .public)")
+                }
             }
         }
 
-        func verifyReferralCode() async {
+        private func createBalanceWithReferralCode() async {
             let POINTS_REFERRAL_CODE_LENGTH = 11
             var referralCode = ConfigManager.shared.api.defaultReferralCode
             if let deferredReferralCode = UserManager.shared.user?.deferredReferralCode,
@@ -42,6 +48,8 @@ extension HomeView {
         private func attemptToCreateBalance(with referralCode: String, fallback: String) async {
             do {
                 try await createBalance(referralCode)
+            } catch let afError as AFError where afError.isExplicitlyCancelledError {
+                return
             } catch {
                 LoggerUtil.common.error("Failed to verify referral code: \(error.localizedDescription, privacy: .public)")
                 if referralCode != fallback {
