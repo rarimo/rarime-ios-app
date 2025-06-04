@@ -101,7 +101,11 @@ private struct AssetCard: View {
 
 #Preview {
     AssetsSlider(
-        walletAssets: [WalletAsset(token: WalletToken.eth, balance: 3, usdBalance: nil)],
+        walletAssets: [
+            WalletAsset(token: WalletToken.eth, balance: 1, usdBalance: nil),
+            WalletAsset(token: WalletToken.eth, balance: 2, usdBalance: 10),
+            WalletAsset(token: WalletToken.eth, balance: 3, usdBalance: nil)
+        ],
         isLoading: false
     )
 }

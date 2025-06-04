@@ -2,16 +2,16 @@ import SwiftUI
 
 struct SnapCarouselCard: Identifiable {
     let id = UUID()
-    let content: () -> AnyView
+    let disabled: Bool
     let action: () -> Void
-    let isVisible: Bool
+    let content: () -> AnyView
     
     init<V: View>(
-        isVisible: Bool = true,
+        disabled: Bool = false,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> V
     ) {
-        self.isVisible = isVisible
+        self.disabled = disabled
         self.action = action
         self.content = { AnyView(content()) }
     }
@@ -73,7 +73,10 @@ struct SnapCarouselView<BottomContent: View>: View {
                             .frame(height: cardHeight)
                             .scaleEffect(scale, anchor: .top)
                             .onTapGesture {
-                                cards[idx].action()
+                                let card = cards[idx]
+                                if !card.disabled {
+                                    card.action()
+                                }
                             }
                     } else {
                         bottomContent

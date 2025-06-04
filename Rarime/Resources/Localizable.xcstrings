@@ -5,6 +5,7 @@
 
     },
     " and " : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -15,6 +16,7 @@
       }
     },
     ", " : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -113,9 +115,6 @@
     "%lld questions" : {
 
     },
-    "%lld RMO" : {
-
-    },
     "%lld/%lld invited" : {
       "localizations" : {
         "en" : {
@@ -180,6 +179,9 @@
 
     },
     "Active" : {
+
+    },
+    "Add" : {
 
     },
     "Add different type of applications that you can intersect with anonymously" : {
@@ -635,6 +637,7 @@
 
     },
     "Claim" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -643,12 +646,6 @@
           }
         }
       }
-    },
-    "Claimed" : {
-
-    },
-    "Claiming..." : {
-
     },
     "Close" : {
       "localizations" : {
@@ -667,6 +664,9 @@
 
     },
     "Comoros" : {
+
+    },
+    "Complete various tasks and get rewarded with\nRarimo tokens." : {
 
     },
     "Confirm" : {
@@ -875,6 +875,9 @@
     "Digital likeness" : {
 
     },
+    "Digital Likeness" : {
+
+    },
     "Djibouti" : {
 
     },
@@ -946,6 +949,9 @@
           }
         }
       }
+    },
+    "Earn RMO" : {
+
     },
     "Ecuador" : {
 
@@ -2223,6 +2229,7 @@
       }
     },
     "RariMe General Terms & Conditions" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2247,6 +2254,7 @@
 
     },
     "RariMe Privacy Notice" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2257,6 +2265,7 @@
       }
     },
     "Rarimo Airdrop Program Terms & Conditions" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2347,6 +2356,9 @@
     "Recovery Method" : {
 
     },
+    "Remove" : {
+
+    },
     "Remove Case" : {
 
     },
@@ -2364,9 +2376,6 @@
 
     },
     "Reserve" : {
-
-    },
-    "Reserved" : {
 
     },
     "Restore manually" : {
@@ -2387,10 +2396,10 @@
     "Review Transaction" : {
 
     },
-    "Rewards limit reached" : {
+    "Revolutionizing polling, surveying\nand election processes" : {
 
     },
-    "RMO" : {
+    "Rewards limit reached" : {
 
     },
     "Romania" : {
@@ -2539,6 +2548,9 @@
     "Set a rule" : {
 
     },
+    "Set up a new way to recover\nyour account" : {
+
+    },
     "Set up a new way to recover your account" : {
 
     },
@@ -2612,6 +2624,9 @@
 
     },
     "Some passports have a problem with chip scans" : {
+
+    },
+    "Somewhere out on the open web, one famous face carries a key sealed inside its ZK-vector." : {
 
     },
     "Somewhere out on the open web, one famous face carries a key sealed inside its ZK-vector. Test any image you find, and the first player to prove the match claims the prize. Ready to hunt?" : {
@@ -2928,9 +2943,6 @@
     "Unsupported for rewards" : {
 
     },
-    "Upcoming" : {
-
-    },
     "Upcoming airdrops will include citizens from all over the world.\n\nCreate an incognito profile by scanning your passport, and we will notify you when you become eligible." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -3159,6 +3171,9 @@
 
     },
     "Your Address" : {
+
+    },
+    "Your data, your rules" : {
 
     },
     "Your face never leaves the device. You create an anonymous record that carries your rules, so AI knows how to treat you" : {

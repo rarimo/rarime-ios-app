@@ -44,6 +44,7 @@
 		564715C82DEDFD3A00B1334B /* ICloudRecoveryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564715C72DEDFD3A00B1334B /* ICloudRecoveryViewModel.swift */; };
 		564715ED2DEEEDFE00B1334B /* HomeWidgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564715EC2DEEEDFE00B1334B /* HomeWidgetsView.swift */; };
 		564715F62DEF146700B1334B /* HomeOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564715F52DEF146700B1334B /* HomeOnboardingView.swift */; };
+		5647161C2DF05FF700B1334B /* HomeWidgetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5647161B2DF05FF700B1334B /* HomeWidgetsViewModel.swift */; };
 		56474AD62BB9860E0017AA25 /* FaceIdAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */; };
 		56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */; };
 		56474ADA2BB9ED6E0017AA25 /* AnyTransition+Backslide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */; };
@@ -78,8 +79,6 @@
 		56722F202BCD62BB00300AD0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56722F1F2BCD62BB00300AD0 /* ProfileView.swift */; };
 		567ADEC42C25CF32007070A7 /* JSONDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567ADEC32C25CF32007070A7 /* JSONDocument.swift */; };
 		567AEC9B2BBD9B8100A20E83 /* Passport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567AEC9A2BBD9B8100A20E83 /* Passport.swift */; };
-		568034D02D95ADBD00BA7F2A /* RewardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568034CF2D95ADBD00BA7F2A /* RewardsViewModel.swift */; };
-		568034D32D95ADC300BA7F2A /* ClaimTokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568034D22D95ADC300BA7F2A /* ClaimTokensView.swift */; };
 		568034D42D95ADC300BA7F2A /* InviteFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568034D12D95ADC300BA7F2A /* InviteFriendsView.swift */; };
 		568350AC2BEA304B00B70E3D /* PassportIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568350AB2BEA304B00B70E3D /* PassportIdentifier.swift */; };
 		568820FE2C18797E001B729F /* IncognitoDark.json in Resources */ = {isa = PBXBuildFile; fileRef = 568820FD2C18797E001B729F /* IncognitoDark.json */; };
@@ -112,6 +111,9 @@
 		56B589F02DB7B05F00266105 /* LikenessRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B589EF2DB7B05F00266105 /* LikenessRule.swift */; };
 		56B589F12DB7B05F00266105 /* LikenessRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B589EF2DB7B05F00266105 /* LikenessRule.swift */; };
 		56B589F32DB7B07800266105 /* LikenessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B589F22DB7B07800266105 /* LikenessView.swift */; };
+		56CF565F2DF06A83005BCD5E /* HomeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF565E2DF06A83005BCD5E /* HomeWidget.swift */; };
+		56CF56602DF06A83005BCD5E /* HomeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF565E2DF06A83005BCD5E /* HomeWidget.swift */; };
+		56CF56622DF0704E005BCD5E /* ManageWidgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF56612DF0704E005BCD5E /* ManageWidgetsView.swift */; };
 		56D8F8E92DB7CAF4002EA4A2 /* LikenessRuleSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8F8E82DB7CAF4002EA4A2 /* LikenessRuleSheetView.swift */; };
 		56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3002BB723A1002CF710 /* NewIdentityView.swift */; };
 		56DAA3052BB72E35002CF710 /* InfoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3042BB72E35002CF710 /* InfoAlert.swift */; };
@@ -470,6 +472,7 @@
 		564715C72DEDFD3A00B1334B /* ICloudRecoveryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudRecoveryViewModel.swift; sourceTree = "<group>"; };
 		564715EC2DEEEDFE00B1334B /* HomeWidgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWidgetsView.swift; sourceTree = "<group>"; };
 		564715F52DEF146700B1334B /* HomeOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOnboardingView.swift; sourceTree = "<group>"; };
+		5647161B2DF05FF700B1334B /* HomeWidgetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWidgetsViewModel.swift; sourceTree = "<group>"; };
 		56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIdAuth.swift; sourceTree = "<group>"; };
 		56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
 		56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+Backslide.swift"; sourceTree = "<group>"; };
@@ -501,9 +504,7 @@
 		56722F1F2BCD62BB00300AD0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		567ADEC32C25CF32007070A7 /* JSONDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDocument.swift; sourceTree = "<group>"; };
 		567AEC9A2BBD9B8100A20E83 /* Passport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passport.swift; sourceTree = "<group>"; };
-		568034CF2D95ADBD00BA7F2A /* RewardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsViewModel.swift; sourceTree = "<group>"; };
 		568034D12D95ADC300BA7F2A /* InviteFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsView.swift; sourceTree = "<group>"; };
-		568034D22D95ADC300BA7F2A /* ClaimTokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimTokensView.swift; sourceTree = "<group>"; };
 		568350AB2BEA304B00B70E3D /* PassportIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportIdentifier.swift; sourceTree = "<group>"; };
 		568820FD2C18797E001B729F /* IncognitoDark.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IncognitoDark.json; sourceTree = "<group>"; };
 		5689C8322BE9008900A4B767 /* IntroWelcome.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IntroWelcome.json; sourceTree = "<group>"; };
@@ -534,6 +535,8 @@
 		56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Icon.swift"; sourceTree = "<group>"; };
 		56B589EF2DB7B05F00266105 /* LikenessRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessRule.swift; sourceTree = "<group>"; };
 		56B589F22DB7B07800266105 /* LikenessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessView.swift; sourceTree = "<group>"; };
+		56CF565E2DF06A83005BCD5E /* HomeWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWidget.swift; sourceTree = "<group>"; };
+		56CF56612DF0704E005BCD5E /* ManageWidgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageWidgetsView.swift; sourceTree = "<group>"; };
 		56D8F8E82DB7CAF4002EA4A2 /* LikenessRuleSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessRuleSheetView.swift; sourceTree = "<group>"; };
 		56DAA3002BB723A1002CF710 /* NewIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIdentityView.swift; sourceTree = "<group>"; };
 		56DAA3042BB72E35002CF710 /* InfoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlert.swift; sourceTree = "<group>"; };
@@ -895,14 +898,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5609B6D72C1A15ED00CB6A1F /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				568034CF2D95ADBD00BA7F2A /* RewardsViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		5617AB112C8F47B1003947C9 /* ExternalRequests */ = {
 			isa = PBXGroup;
 			children = (
@@ -925,6 +920,7 @@
 				568350AB2BEA304B00B70E3D /* PassportIdentifier.swift */,
 				56062B992C12007A00C9BF9B /* Country.swift */,
 				C7B57B632D650FA5001E86C4 /* AnimationNamespaceIds.swift */,
+				56CF565E2DF06A83005BCD5E /* HomeWidget.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -940,7 +936,6 @@
 		563529DC2BB0717D0027C910 /* Rewards */ = {
 			isa = PBXGroup;
 			children = (
-				5609B6D72C1A15ED00CB6A1F /* ViewModels */,
 				563529DD2BB071840027C910 /* Views */,
 			);
 			path = Rewards;
@@ -950,7 +945,6 @@
 			isa = PBXGroup;
 			children = (
 				568034D12D95ADC300BA7F2A /* InviteFriendsView.swift */,
-				568034D22D95ADC300BA7F2A /* ClaimTokensView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1336,6 +1330,7 @@
 			isa = PBXGroup;
 			children = (
 				C7B57B6A2D65D585001E86C4 /* HomeView+ViewModel.swift */,
+				5647161B2DF05FF700B1334B /* HomeWidgetsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1374,6 +1369,7 @@
 			children = (
 				C7DF8BDF2D5F686200C8E2D2 /* HomeView.swift */,
 				564715EC2DEEEDFE00B1334B /* HomeWidgetsView.swift */,
+				56CF56612DF0704E005BCD5E /* ManageWidgetsView.swift */,
 				564715F52DEF146700B1334B /* HomeOnboardingView.swift */,
 				C726E8D12D647FE9000C9CA6 /* SnapCarouselView.swift */,
 				C7DF8BDE2D5F686200C8E2D2 /* HomeCardView.swift */,
@@ -2131,6 +2127,7 @@
 				CE7E95832CE7788200D86A4F /* Passport.swift in Sources */,
 				CE3D41D72C779C9E00D0AA65 /* PushNotificationsRaw.swift in Sources */,
 				CE34775A2C788620005E91FE /* String+Error.swift in Sources */,
+				56CF565F2DF06A83005BCD5E /* HomeWidget.swift in Sources */,
 				CE0659172DC8EDD6004FBDD5 /* BionetInputs.swift in Sources */,
 				CE27974E2CEB4281008649B0 /* PoseidonSMTContract.swift in Sources */,
 				CE27974C2CEB426A008649B0 /* ContractABI.swift in Sources */,
@@ -2198,6 +2195,7 @@
 				CE06BF322D083CCB00F6C721 /* PubSignals.swift in Sources */,
 				CEB91BBE2C09BAF4001EECA9 /* NFCPassportModel+getDataGroupsRead.swift in Sources */,
 				5609B6CC2C19922400CB6A1F /* LinearProgressView.swift in Sources */,
+				5647161C2DF05FF700B1334B /* HomeWidgetsViewModel.swift in Sources */,
 				CE423B782DD4E3B90025803D /* GuessCelebrityContract.swift in Sources */,
 				56B589F32DB7B07800266105 /* LikenessView.swift in Sources */,
 				564CE3032DD4CE7500D03E6D /* JsonApi.swift in Sources */,
@@ -2248,6 +2246,7 @@
 				CEDC57962CA30A9D00F02132 /* CIImage+Extension.swift in Sources */,
 				CE9E82B62BA881F400AAF885 /* RarimeApp.swift in Sources */,
 				561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */,
+				56CF56602DF06A83005BCD5E /* HomeWidget.swift in Sources */,
 				CEFF68BF2CB6A3E7008769EA /* CircuitBuilderManager.swift in Sources */,
 				CED314692C04889D00DF31D5 /* UIDevice+modelName.swift in Sources */,
 				CE06590F2DC8C0E0004FBDD5 /* NeuralUtils.swift in Sources */,
@@ -2263,7 +2262,6 @@
 				CEEE2B462DDCBF6C00532E72 /* WalletRouteLayout.swift in Sources */,
 				56DAA30F2BB8C3CB002CF710 /* EnablePasscodeView.swift in Sources */,
 				56DAA3052BB72E35002CF710 /* InfoAlert.swift in Sources */,
-				568034D32D95ADC300BA7F2A /* ClaimTokensView.swift in Sources */,
 				568034D42D95ADC300BA7F2A /* InviteFriendsView.swift in Sources */,
 				C75C4DF02D8D80D000D647DF /* HeightPreservingTabView.swift in Sources */,
 				C789A2E82CA5978B00443900 /* LightVerificationView.swift in Sources */,
@@ -2286,7 +2284,6 @@
 				56337CE12DBA385B00973721 /* LikenessFaceImageView.swift in Sources */,
 				C7FFB5302C9ACE900037CBD4 /* ClaimableNotificationContent.swift in Sources */,
 				564715ED2DEEEDFE00B1334B /* HomeWidgetsView.swift in Sources */,
-				568034D02D95ADBD00BA7F2A /* RewardsViewModel.swift in Sources */,
 				CE31E54A2C11FE150039CAA5 /* ImportIdentityView.swift in Sources */,
 				569258942D709B30009E2F9E /* VisionUtils.swift in Sources */,
 				CED314672C0483BD00DF31D5 /* MailView.swift in Sources */,
@@ -2354,6 +2351,7 @@
 				564CE3192DD7387A00D03E6D /* DotsLoadingView.swift in Sources */,
 				5655E42E2BD2C94F00B86C5C /* AppUserDefaults.swift in Sources */,
 				CEFE5F372CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift in Sources */,
+				56CF56622DF0704E005BCD5E /* ManageWidgetsView.swift in Sources */,
 				CE3CD78E2DB67D2000112E46 /* LikenessFaceViewModel.swift in Sources */,
 				CE68BE4B2BD9B75100D92EBB /* ContractABI.swift in Sources */,
 				56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */,

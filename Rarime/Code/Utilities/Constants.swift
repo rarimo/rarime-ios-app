@@ -20,3 +20,5 @@ let UNSUPPORTED_REWARD_COUNTRIES: [Country] = [
 let PASSPORT_RESERVE_TOKENS: Double = 10.0
 
 let FIND_FACE_ETH_REWARD: Double = 0.3
+
+let DEFAULT_HOME_WIDGETS: [HomeWidget] = [.earn]
