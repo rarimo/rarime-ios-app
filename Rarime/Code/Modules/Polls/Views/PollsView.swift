@@ -111,7 +111,7 @@ struct PollsView: View {
                                 }
                             }
                         }
-                        .padding(.horizontal, 24)
+                        .padding(.horizontal, 20)
                         Group {
                             switch currentTab {
                             case .active:

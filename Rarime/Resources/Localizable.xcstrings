@@ -122,6 +122,12 @@
         }
       }
     },
+    "%lld active task" : {
+
+    },
+    "%lld active tasks" : {
+
+    },
     "%lld questions" : {
 
     },
@@ -966,6 +972,9 @@
         }
       }
     },
+    "Earn" : {
+
+    },
     "Earn RMO" : {
 
     },
@@ -1451,11 +1460,24 @@
     "Invite a friend" : {
 
     },
+    "Invite others" : {
+
+    },
     "Invite to Find a Face Game" : {
 
     },
     "Invite to RariMe" : {
 
+    },
+    "Invited: %lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Invited: %1$lld/%2$lld"
+          }
+        }
+      }
     },
     "Iran" : {
 
@@ -1937,9 +1959,6 @@
         }
       }
     },
-    "Others" : {
-
-    },
     "Out of daily scans? Earn extra scans for every friend who joins and a one-time by sharing the hunt" : {
 
     },
@@ -2415,6 +2434,9 @@
     "Rewards limit reached" : {
 
     },
+    "RMO" : {
+
+    },
     "Romania" : {
 
     },
@@ -2587,7 +2609,7 @@
     "Share on socials" : {
 
     },
-    "Share your referral link and get bonuses when your friends join and make a purchase!" : {
+    "Share your referral link and get bonuses when your friends join" : {
 
     },
     "Shared" : {

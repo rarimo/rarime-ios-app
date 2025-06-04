@@ -78,7 +78,7 @@
 		56722F202BCD62BB00300AD0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56722F1F2BCD62BB00300AD0 /* ProfileView.swift */; };
 		567ADEC42C25CF32007070A7 /* JSONDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567ADEC32C25CF32007070A7 /* JSONDocument.swift */; };
 		567AEC9B2BBD9B8100A20E83 /* Passport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567AEC9A2BBD9B8100A20E83 /* Passport.swift */; };
-		568034D42D95ADC300BA7F2A /* InviteFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568034D12D95ADC300BA7F2A /* InviteFriendsView.swift */; };
+		568034D42D95ADC300BA7F2A /* EarnRmoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568034D12D95ADC300BA7F2A /* EarnRmoView.swift */; };
 		568350AC2BEA304B00B70E3D /* PassportIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568350AB2BEA304B00B70E3D /* PassportIdentifier.swift */; };
 		568820FE2C18797E001B729F /* IncognitoDark.json in Resources */ = {isa = PBXBuildFile; fileRef = 568820FD2C18797E001B729F /* IncognitoDark.json */; };
 		5689C8332BE9008900A4B767 /* IntroWelcome.json in Resources */ = {isa = PBXBuildFile; fileRef = 5689C8322BE9008900A4B767 /* IntroWelcome.json */; };
@@ -113,6 +113,7 @@
 		56CF565F2DF06A83005BCD5E /* HomeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF565E2DF06A83005BCD5E /* HomeWidget.swift */; };
 		56CF56602DF06A83005BCD5E /* HomeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF565E2DF06A83005BCD5E /* HomeWidget.swift */; };
 		56CF56622DF0704E005BCD5E /* ManageWidgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF56612DF0704E005BCD5E /* ManageWidgetsView.swift */; };
+		56CF56662DF0ECFD005BCD5E /* InviteOthersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF56652DF0ECFD005BCD5E /* InviteOthersView.swift */; };
 		56D8F8E92DB7CAF4002EA4A2 /* LikenessRuleSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8F8E82DB7CAF4002EA4A2 /* LikenessRuleSheetView.swift */; };
 		56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3002BB723A1002CF710 /* NewIdentityView.swift */; };
 		56DAA3052BB72E35002CF710 /* InfoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3042BB72E35002CF710 /* InfoAlert.swift */; };
@@ -502,7 +503,7 @@
 		56722F1F2BCD62BB00300AD0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		567ADEC32C25CF32007070A7 /* JSONDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDocument.swift; sourceTree = "<group>"; };
 		567AEC9A2BBD9B8100A20E83 /* Passport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passport.swift; sourceTree = "<group>"; };
-		568034D12D95ADC300BA7F2A /* InviteFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsView.swift; sourceTree = "<group>"; };
+		568034D12D95ADC300BA7F2A /* EarnRmoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnRmoView.swift; sourceTree = "<group>"; };
 		568350AB2BEA304B00B70E3D /* PassportIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportIdentifier.swift; sourceTree = "<group>"; };
 		568820FD2C18797E001B729F /* IncognitoDark.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IncognitoDark.json; sourceTree = "<group>"; };
 		5689C8322BE9008900A4B767 /* IntroWelcome.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IntroWelcome.json; sourceTree = "<group>"; };
@@ -535,6 +536,7 @@
 		56B589F22DB7B07800266105 /* LikenessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessView.swift; sourceTree = "<group>"; };
 		56CF565E2DF06A83005BCD5E /* HomeWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWidget.swift; sourceTree = "<group>"; };
 		56CF56612DF0704E005BCD5E /* ManageWidgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageWidgetsView.swift; sourceTree = "<group>"; };
+		56CF56652DF0ECFD005BCD5E /* InviteOthersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteOthersView.swift; sourceTree = "<group>"; };
 		56D8F8E82DB7CAF4002EA4A2 /* LikenessRuleSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessRuleSheetView.swift; sourceTree = "<group>"; };
 		56DAA3002BB723A1002CF710 /* NewIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIdentityView.swift; sourceTree = "<group>"; };
 		56DAA3042BB72E35002CF710 /* InfoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlert.swift; sourceTree = "<group>"; };
@@ -931,22 +933,6 @@
 			path = Identity;
 			sourceTree = "<group>";
 		};
-		563529DC2BB0717D0027C910 /* Rewards */ = {
-			isa = PBXGroup;
-			children = (
-				563529DD2BB071840027C910 /* Views */,
-			);
-			path = Rewards;
-			sourceTree = "<group>";
-		};
-		563529DD2BB071840027C910 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				568034D12D95ADC300BA7F2A /* InviteFriendsView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		563529DF2BB0718E0027C910 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1208,6 +1194,23 @@
 				56A6C7692BBC57B700992562 /* PassportViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		56CF56632DF0ECE8005BCD5E /* Earn */ = {
+			isa = PBXGroup;
+			children = (
+				56CF56642DF0ECF3005BCD5E /* Views */,
+			);
+			path = Earn;
+			sourceTree = "<group>";
+		};
+		56CF56642DF0ECF3005BCD5E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				568034D12D95ADC300BA7F2A /* EarnRmoView.swift */,
+				56CF56652DF0ECFD005BCD5E /* InviteOthersView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		56DAA30C2BB8C38D002CF710 /* Security */ = {
@@ -1685,6 +1688,7 @@
 			children = (
 				CE9E82C82BA8853900AAF885 /* App */,
 				CE9E82D12BA888F300AAF885 /* Common */,
+				56CF56632DF0ECE8005BCD5E /* Earn */,
 				C7DF8BE12D5F686200C8E2D2 /* Home */,
 				563529DA2BB0714A0027C910 /* Identity */,
 				568B4FC92BB6C156001C9C74 /* Intro */,
@@ -1696,7 +1700,6 @@
 				564CE2F22DD24FEF00D03E6D /* PrizeScan */,
 				563529E02BB071930027C910 /* Profile */,
 				564715BE2DEDAF1800B1334B /* Recovery */,
-				563529DC2BB0717D0027C910 /* Rewards */,
 				56933DEB2BBAB0660068C894 /* ScanPassport */,
 				56DAA30C2BB8C38D002CF710 /* Security */,
 				CEEE2B3D2DDCBF1C00532E72 /* Wallet */,
@@ -2208,6 +2211,7 @@
 				568D45CA2C29AFCB0065D467 /* FeedbackMailView.swift in Sources */,
 				C7D6245A2D6DB9DB007BA5A6 /* GlassBottomSheet.swift in Sources */,
 				56E6AD4D2BD273BC00E4DDC1 /* ProfileRouteLayout.swift in Sources */,
+				56CF56662DF0ECFD005BCD5E /* InviteOthersView.swift in Sources */,
 				56E2D91B2BCEA66A006E725D /* PassportCard.swift in Sources */,
 				5617AB132C8F47C2003947C9 /* ProofRequestView.swift in Sources */,
 				564715C32DEDBAC200B1334B /* RecoveryMethodSelectionView.swift in Sources */,
@@ -2259,7 +2263,7 @@
 				CEEE2B462DDCBF6C00532E72 /* WalletRouteLayout.swift in Sources */,
 				56DAA30F2BB8C3CB002CF710 /* EnablePasscodeView.swift in Sources */,
 				56DAA3052BB72E35002CF710 /* InfoAlert.swift in Sources */,
-				568034D42D95ADC300BA7F2A /* InviteFriendsView.swift in Sources */,
+				568034D42D95ADC300BA7F2A /* EarnRmoView.swift in Sources */,
 				C75C4DF02D8D80D000D647DF /* HeightPreservingTabView.swift in Sources */,
 				C789A2E82CA5978B00443900 /* LightVerificationView.swift in Sources */,
 				C755353F2D6F196C00A562B5 /* ChildOffsetReader.swift in Sources */,

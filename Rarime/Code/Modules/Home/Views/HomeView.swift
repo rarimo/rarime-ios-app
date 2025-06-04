@@ -74,7 +74,7 @@ struct HomeView: View {
                 )
 
             case .earn:
-                InviteFriendsView(
+                EarnRmoView(
                     balance: viewModel.pointsBalance,
                     onClose: { selectedCardId = nil },
                     animation: namespace(for: .earn)
