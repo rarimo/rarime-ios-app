@@ -239,7 +239,6 @@ struct WalletSendView: View {
             
             do {
                 try await walletManager.transfer(amount, address)
-                walletManager.registerTransfer(NSDecimalNumber(decimal: amount).doubleValue)
                 
                 isConfirmationSheetPresented = false
                 AlertManager.shared.emitSuccess("Transaction sent")

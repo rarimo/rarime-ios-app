@@ -293,5 +293,7 @@
 	<string>${EVM_CHAIN_ID}</string>
 	<key>EVM_SCAN_API_URL</key>
 	<string>${EVM_SCAN_API_URL}</string>
+	<key>EVM_SCAN_URL</key>
+	<string>${EVM_SCAN_URL}</string>
 </dict>
 </plist>

@@ -208,31 +208,37 @@ private struct TransactionItem: View {
     var tx: Transaction
     var token: WalletToken
 
-    var balanceModifier: String {
+    private var balanceModifier: String {
         tx.type == .sent ? "-" : "+"
     }
 
+    private var txScanUrl: URL {
+        EvmScanAPI.shared.getTransactionUrl(tx.hash)
+    }
+
     var body: some View {
-        HStack(spacing: 16) {
-            Image(tx.icon)
-                .iconMedium()
-                .padding(10)
-                .background(.bgComponentPrimary)
-                .foregroundStyle(.textSecondary)
-                .clipShape(Circle())
-            VStack(alignment: .leading, spacing: 4) {
-                Text(tx.title)
-                    .subtitle6()
-                    .foregroundStyle(.textPrimary)
-                Text(DateUtil.richDateFormatter.string(from: tx.date))
-                    .body5()
+        Button(action: { UIApplication.shared.open(txScanUrl) }) {
+            HStack(spacing: 16) {
+                Image(tx.icon)
+                    .iconMedium()
+                    .padding(10)
+                    .background(.bgComponentPrimary)
                     .foregroundStyle(.textSecondary)
-            }
-            Spacer()
-            if tx.amount != 0 {
-                Text("\(balanceModifier)\(tx.amount.formatted()) \(token.rawValue)")
-                    .subtitle7()
-                    .foregroundStyle(tx.type == .sent ? .errorMain : .successMain)
+                    .clipShape(Circle())
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(tx.title)
+                        .subtitle6()
+                        .foregroundStyle(.textPrimary)
+                    Text(DateUtil.dateTimeFormatter.string(from: tx.date))
+                        .body5()
+                        .foregroundStyle(.textSecondary)
+                }
+                Spacer()
+                if tx.amount != 0 {
+                    Text("\(balanceModifier)\(tx.amount.format()) \(token.rawValue)")
+                        .subtitle7()
+                        .foregroundStyle(tx.type == .sent ? .errorMain : .successMain)
+                }
             }
         }
     }
