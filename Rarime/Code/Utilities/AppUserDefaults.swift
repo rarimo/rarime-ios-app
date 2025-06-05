@@ -94,4 +94,7 @@ public class AppUserDefaults: ObservableObject {
 
     @AppStorage("home_widgets")
     public var homeWidgets: Data = (try? JSONEncoder().encode(DEFAULT_HOME_WIDGETS.map { $0.rawValue })) ?? Data()
+    
+    @AppStorage("has_points_balance")
+    public var hasPointsBalance: Bool = false
 }

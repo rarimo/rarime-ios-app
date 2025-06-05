@@ -48,8 +48,14 @@ struct HomeWidgetsView: View {
         .dynamicSheet(isPresented: $isManageSheetPresented) {
             ManageWidgetsView(
                 selectedWidgets: viewModel.widgets,
-                onAdd: viewModel.addWidget,
-                onRemove: viewModel.removeWidget
+                onAdd: { widget in
+                    viewModel.addWidget(widget)
+                    currentIndex = visibleWidgets.count
+                },
+                onRemove: { widget in
+                    viewModel.removeWidget(widget)
+                    currentIndex = visibleWidgets.count
+                }
             )
             .padding(.top, 18)
         }
@@ -63,6 +69,7 @@ struct HomeWidgetsView: View {
             recoveryWidget,
             likenessWidget,
         ]
+        .filter { $0.widget != .earn || homeViewModel.hasBalance }
         .filter { viewModel.widgets.contains($0.widget) }
     }
 

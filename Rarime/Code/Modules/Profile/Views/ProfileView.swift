@@ -195,6 +195,7 @@ struct ProfileView: View {
                     Button("Yes", role: .destructive) {
                         appViewModel.isIntroFinished = false
                         AppUserDefaults.shared.isHomeOnboardingCompleted = false
+                        AppUserDefaults.shared.hasPointsBalance = false
 
                         passportManager.reset()
                         securityManager.reset()

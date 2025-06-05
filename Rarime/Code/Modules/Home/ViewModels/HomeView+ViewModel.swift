@@ -5,6 +5,11 @@ extension HomeView {
     class ViewModel: ObservableObject {
         @Published var isBalanceFetching = true
         @Published var pointsBalance: PointsBalanceRaw? = nil
+        @Published var hasBalance = AppUserDefaults.shared.hasPointsBalance {
+            didSet {
+                AppUserDefaults.shared.hasPointsBalance = hasBalance
+            }
+        }
 
         @MainActor
         func fetchBalance() async {
@@ -29,6 +34,11 @@ extension HomeView {
                 } else {
                     LoggerUtil.common.error("Failed to fetch points balance: \(error.localizedDescription, privacy: .public)")
                 }
+            }
+
+            let balanceAmount = pointsBalance?.amount ?? 0
+            if !hasBalance && balanceAmount > 0 {
+                hasBalance = true
             }
         }
 
