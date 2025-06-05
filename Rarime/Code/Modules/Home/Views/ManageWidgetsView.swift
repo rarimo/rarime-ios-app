@@ -52,6 +52,7 @@ struct ManageWidgetsView: View {
                     }
                 }
             )
+            .disabled(!highlightedWidget.isRemovable)
             .controlSize(.large)
             .padding(.horizontal, 20)
         }

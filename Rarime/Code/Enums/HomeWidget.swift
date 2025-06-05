@@ -49,4 +49,11 @@ extension HomeWidget {
         default: return false
         }
     }
+
+    var isRemovable: Bool {
+        switch self {
+        case .earn, .recovery: return false
+        default: return true
+        }
+    }
 }
