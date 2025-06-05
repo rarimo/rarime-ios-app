@@ -12,7 +12,7 @@ struct RecoveryMethodView: View {
         ZStack(alignment: .topTrailing) {
             PullToCloseWrapperView(action: onClose) {
                 ZStack(alignment: .top) {
-                    Image(.recoveryShieldBg)
+                    Image(.recoveryBg)
                         .resizable()
                         .scaledToFit()
                         .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)

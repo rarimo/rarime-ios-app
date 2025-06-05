@@ -118,7 +118,7 @@ struct ProfileView: View {
                                     )
                                 }
                                 ProfileRow(
-                                    icon: .question,
+                                    icon: .questionLine,
                                     title: String(localized: "Privacy Policy"),
                                     action: { isPrivacySheetPresented = true }
                                 )

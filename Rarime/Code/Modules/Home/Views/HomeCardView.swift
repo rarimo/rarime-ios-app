@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct HomeCardView<Content: View, TopContent: View, BottomContent: View>: View {
-    let backgroundGradient: LinearGradient?
     let foregroundGradient: LinearGradient?
     let foregroundColor: Color
     let topIcon: ImageResource
@@ -15,7 +14,6 @@ struct HomeCardView<Content: View, TopContent: View, BottomContent: View>: View 
     var animation: Namespace.ID
 
     init(
-        backgroundGradient: LinearGradient? = nil,
         foregroundGradient: LinearGradient? = nil,
         foregroundColor: Color = .baseBlack,
         topIcon: ImageResource,
@@ -27,7 +25,6 @@ struct HomeCardView<Content: View, TopContent: View, BottomContent: View>: View 
         @ViewBuilder bottomContent: @escaping () -> BottomContent? = { EmptyView() },
         animation: Namespace.ID
     ) {
-        self.backgroundGradient = backgroundGradient
         self.foregroundGradient = foregroundGradient
         self.foregroundColor = foregroundColor
         self.topIcon = topIcon
@@ -95,7 +92,6 @@ struct HomeCardView<Content: View, TopContent: View, BottomContent: View>: View 
         .frame(maxHeight: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 32)
-                .fill(backgroundGradient == nil ? AnyShapeStyle(Color.clear) : AnyShapeStyle(backgroundGradient!))
                 .overlay(
                     RoundedRectangle(cornerRadius: 32)
                         .stroke(.bgComponentPrimary, lineWidth: 1)
@@ -107,24 +103,24 @@ struct HomeCardView<Content: View, TopContent: View, BottomContent: View>: View 
 
 #Preview {
     HomeCardView(
-        backgroundGradient: Gradients.gradientFirst,
+        foregroundGradient: Gradients.darkerGreenText,
+        foregroundColor: .invertedDark,
         topIcon: .rarime,
         bottomIcon: .arrowRightUpLine,
         imageContent: {
-            Image(.handWithPhone)
+            Image(.earnBg)
                 .resizable()
-                .scaledToFit()
-                .scaleEffect(0.85)
-                .offset(x: 28)
-                .padding(.top, 12)
+                .scaledToFill()
+                .clipShape(RoundedRectangle(cornerRadius: 32))
         },
-        title: "Your Device",
-        subtitle: "Your Identity",
+        title: "Earn",
+        subtitle: "RMO",
         bottomContent: {
-            Text("* Nothing leaves this device")
+            Text("Complete various tasks and get rewarded with Rarimo tokens.")
                 .body4()
-                .foregroundStyle(.baseBlack.opacity(0.6))
-                .padding(.top, 24)
+                .foregroundStyle(.textSecondary)
+                .frame(maxWidth: 220, alignment: .leading)
+                .padding(.top, 12)
         },
         animation: Namespace().wrappedValue
     )

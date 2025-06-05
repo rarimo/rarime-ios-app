@@ -33,7 +33,7 @@ extension HomeWidget {
 extension HomeWidget {
     var image: ImageResource {
         switch self {
-        case .earn: .rarimoTokens
+        case .earn: .earnBg
         case .freedomTool: .freedomtoolWidget
         case .hiddenKeys: .hiddenKeysWidget
         case .recovery: .recoveryWidget

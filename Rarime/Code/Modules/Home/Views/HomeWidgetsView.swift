@@ -161,7 +161,7 @@ struct HomeWidgetsView: View {
                     topIcon: .rarime,
                     bottomIcon: .arrowRightUpLine,
                     imageContent: {
-                        Image(.recoveryShieldBg)
+                        Image(.recoveryBg)
                             .resizable()
                             .scaledToFill()
                             .clipShape(RoundedRectangle(cornerRadius: 32))
@@ -189,7 +189,6 @@ struct HomeWidgetsView: View {
                 action: { selectedWidget = .likeness }
             ) {
                 HomeCardView(
-                    backgroundGradient: Gradients.purpleBg,
                     foregroundGradient: Gradients.purpleText,
                     topIcon: .rarime,
                     bottomIcon: .arrowRightUpLine,
