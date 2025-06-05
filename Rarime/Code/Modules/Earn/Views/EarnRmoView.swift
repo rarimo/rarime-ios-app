@@ -17,7 +17,7 @@ struct EarnRmoView: View {
 
     @State private var isInviteSheetPresented: Bool = false
 
-    private var referralCodes: [ReferalCode] {
+    private var referralCodes: [ReferralCode] {
         balance?.referralCodes ?? []
     }
 
@@ -72,7 +72,7 @@ struct EarnRmoView: View {
                                 .padding(.top, 12)
                         }
                         HorizontalDivider()
-                        Text(activeTasks.count == 1 ? "\(activeTasks.count) active task" : "\(activeTasks.count) active tasks")
+                        Text("\(activeTasks.count) active task\(activeTasks.count == 1 ? "" : "s")")
                             .overline2()
                             .foregroundStyle(.textSecondary)
                         ScrollView {
@@ -161,12 +161,12 @@ private struct EarnTaskView: View {
             updatedAt: Int(Date().timeIntervalSince1970),
             rank: 12,
             referralCodes: [
-                ReferalCode(id: "code1", status: .active),
-                ReferalCode(id: "code2", status: .awaiting),
-                ReferalCode(id: "code3", status: .banned),
-                ReferalCode(id: "code4", status: .consumed),
-                ReferalCode(id: "code5", status: .limited),
-                ReferalCode(id: "code6", status: .rewarded),
+                ReferralCode(id: "code1", status: .active),
+                ReferralCode(id: "code2", status: .awaiting),
+                ReferralCode(id: "code3", status: .banned),
+                ReferralCode(id: "code4", status: .consumed),
+                ReferralCode(id: "code5", status: .limited),
+                ReferralCode(id: "code6", status: .rewarded),
             ],
             level: 2,
             isVerified: true

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct InviteOthersView: View {
-    let referralCodes: [ReferalCode]
+    let referralCodes: [ReferralCode]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 32) {
@@ -119,12 +119,12 @@ private struct InviteCodeView: View {
 #Preview {
     InviteOthersView(
         referralCodes: [
-            ReferalCode(id: "code1", status: .active),
-            ReferalCode(id: "code2", status: .awaiting),
-            ReferalCode(id: "code3", status: .banned),
-            ReferalCode(id: "code4", status: .consumed),
-            ReferalCode(id: "code5", status: .limited),
-            ReferalCode(id: "code6", status: .rewarded),
+            ReferralCode(id: "code1", status: .active),
+            ReferralCode(id: "code2", status: .awaiting),
+            ReferralCode(id: "code3", status: .banned),
+            ReferralCode(id: "code4", status: .consumed),
+            ReferralCode(id: "code5", status: .limited),
+            ReferralCode(id: "code6", status: .rewarded),
         ]
     )
 }
