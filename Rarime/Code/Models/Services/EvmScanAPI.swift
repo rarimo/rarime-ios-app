@@ -5,14 +5,16 @@ import Alamofire
 class EvmScanAPI {
     static let shared = EvmScanAPI()
 
-    let url: URL
+    let scanUrl: URL
+    let apiUrl: URL
 
     init() {
-        self.url = ConfigManager.shared.api.evmScanApiUrl
+        self.scanUrl = ConfigManager.shared.api.evmScanUrl
+        self.apiUrl = ConfigManager.shared.api.evmScanApiUrl
     }
 
     func getTransactions(_ address: String, _ nextPageParams: EvmScanTransactionNextPageParams? = nil) async throws -> EvmScanTransaction {
-        var requestUrl = url.appendingPathComponent("api/v2/addresses/\(address)/transactions")
+        var requestUrl = apiUrl.appendingPathComponent("api/v2/addresses/\(address)/transactions")
 
         if let nextPageParams {
             requestUrl.append(queryItems: nextPageParams.toHTTPQueryParams())
@@ -25,5 +27,9 @@ class EvmScanAPI {
             .get()
 
         return response
+    }
+
+    func getTransactionUrl(_ hash: String) -> URL {
+        return scanUrl.appendingPathComponent("tx/\(hash)")
     }
 }

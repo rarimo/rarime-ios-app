@@ -120,19 +120,6 @@ class WalletManager: ObservableObject {
     }
 
     @MainActor
-    func registerTransfer(_ amount: Double) {
-        transactions.append(
-            Transaction(
-                title: String(localized: "Send"),
-                icon: .arrowUp,
-                amount: amount,
-                date: Date(),
-                type: .sent
-            )
-        )
-    }
-
-    @MainActor
     func pullTransactions() {
         if isTransactionsLoading || isLastTXsPage {
             return
@@ -151,23 +138,20 @@ class WalletManager: ObservableObject {
                 for tx in transactionResponse.items {
                     let isSending = tx.from.hash.lowercased() == ethereumAddress.lowercased()
 
-                    guard let amount = Decimal(string: tx.value) else {
-                        continue
-                    }
-
                     var title: String
                     if let method = tx.method {
                         title = method
                     } else {
-                        title = isSending ? String(localized: "Send") : String(localized: "Received")
+                        title = isSending ? String(localized: "Send") : String(localized: "Receive")
                     }
 
                     transactions.append(Transaction(
                         title: title,
                         icon: isSending ? .arrowUp : .arrowDown,
-                        amount: NSDecimalNumber(decimal: amount).doubleValue,
+                        amount: EthereumQuantity(quantity: BigUInt(tx.value) ?? BigUInt(0)),
                         date: tx.date,
-                        type: isSending ? .sent : .received
+                        type: isSending ? .sent : .received,
+                        hash: tx.hash
                     ))
                 }
 

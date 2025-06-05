@@ -50,6 +50,7 @@ extension ConfigManager {
         let faceRegistryContractAddress: String = try! readFromInfoPlist(key: "FACE_REGISTRY_CONTRACT_ADDRESS")
         let guessCelebrityGameContractAddress: String = try! readFromInfoPlist(key: "GUESS_CELEBRITY_GAME_CONTRACT_ADDRESS")
         let evmChainId: UInt64 = try! readUInt64FromInfoPlist(key: "EVM_CHAIN_ID")
+        let evmScanUrl: URL = try! readURLFromInfoPlist(key: "EVM_SCAN_URL")
         let evmScanApiUrl: URL = try! readURLFromInfoPlist(key: "EVM_SCAN_API_URL")
     }
 }
