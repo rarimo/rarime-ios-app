@@ -25,7 +25,7 @@ struct WalletReceiveView: View {
                                 .body4()
                                 .foregroundStyle(.textPrimary)
                                 .multilineTextAlignment(.leading)
-                            Image(isCopied ? Icons.check : Icons.copySimple)
+                            Image(isCopied ? .check : .copySimple)
                                 .iconMedium()
                                 .foregroundStyle(isCopied ? .successMain : .textSecondary)
                                 .onTapGesture {

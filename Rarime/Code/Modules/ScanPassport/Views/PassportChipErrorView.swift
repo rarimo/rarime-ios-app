@@ -27,7 +27,7 @@ struct PassportChipErrorView: View {
             VStack(spacing: 12) {
                 AppButton(
                     text: "Get in touch",
-                    rightIcon: Icons.arrowRight,
+                    rightIcon: .arrowRight,
                     action: {
                         if MFMailComposeViewController.canSendMail() {
                             isSending = true

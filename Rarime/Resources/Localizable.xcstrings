@@ -112,6 +112,26 @@
     "%lld" : {
 
     },
+    "%lld %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld %2$@"
+          }
+        }
+      }
+    },
+    "%lld active task%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld active task%2$@"
+          }
+        }
+      }
+    },
     "%lld questions" : {
 
     },
@@ -271,9 +291,6 @@
 
     },
     "An error has occured, please try again" : {
-
-    },
-    "An identification and privacy solution that revolutionizes polling, surveying and election processes" : {
 
     },
     "Andorra" : {
@@ -612,6 +629,9 @@
         }
       }
     },
+    "Cast secure, anonymous votes from anywhere, just using your passport" : {
+
+    },
     "Cayman Islands" : {
 
     },
@@ -666,7 +686,10 @@
     "Comoros" : {
 
     },
-    "Complete various tasks and get rewarded with\nRarimo tokens." : {
+    "Complete various tasks and get rewarded with\nRarimo tokens" : {
+
+    },
+    "Complete various tasks and get rewarded with Rarimo tokens." : {
 
     },
     "Confirm" : {
@@ -739,6 +762,9 @@
           }
         }
       }
+    },
+    "Create a poll" : {
+
     },
     "Create Account" : {
       "extractionState" : "stale",
@@ -949,6 +975,9 @@
           }
         }
       }
+    },
+    "Earn" : {
+
     },
     "Earn RMO" : {
 
@@ -1324,9 +1353,6 @@
     "Hidden keys" : {
 
     },
-    "History" : {
-
-    },
     "Hold your iPhone near an NFC enabled passport." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1438,11 +1464,24 @@
     "Invite a friend" : {
 
     },
+    "Invite others" : {
+
+    },
     "Invite to Find a Face Game" : {
 
     },
     "Invite to RariMe" : {
 
+    },
+    "Invited: %lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Invited: %1$lld/%2$lld"
+          }
+        }
+      }
     },
     "Iran" : {
 
@@ -1924,9 +1963,6 @@
         }
       }
     },
-    "Others" : {
-
-    },
     "Out of daily scans? Earn extra scans for every friend who joins and a one-time by sharing the hunt" : {
 
     },
@@ -2402,6 +2438,9 @@
     "Rewards limit reached" : {
 
     },
+    "RMO" : {
+
+    },
     "Romania" : {
 
     },
@@ -2574,7 +2613,7 @@
     "Share on socials" : {
 
     },
-    "Share your referral link and get bonuses when your friends join and make a purchase!" : {
+    "Share your referral link and get bonuses when your friends join" : {
 
     },
     "Shared" : {
@@ -2626,7 +2665,7 @@
     "Some passports have a problem with chip scans" : {
 
     },
-    "Somewhere out on the open web, one famous face carries a key sealed inside its ZK-vector." : {
+    "Somewhere out on the open web, one famous face carries a key sealed inside its ZK-vector" : {
 
     },
     "Somewhere out on the open web, one famous face carries a key sealed inside its ZK-vector. Test any image you find, and the first player to prove the match claims the prize. Ready to hunt?" : {

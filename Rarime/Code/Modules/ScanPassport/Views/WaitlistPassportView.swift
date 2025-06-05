@@ -34,7 +34,7 @@ struct WaitlistPassportView: View {
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            AppIconButton(icon: Icons.closeFill, action: onCancel)
+            AppIconButton(icon: .closeFill, action: onCancel)
                 .padding([.top, .trailing], 20)
             VStack(spacing: 28) {
                 Text(country.flag)
@@ -70,7 +70,7 @@ struct WaitlistPassportView: View {
                 VStack(spacing: 8) {
                     AppButton(
                         text: "Join the program",
-                        rightIcon: Icons.arrowRight,
+                        rightIcon: .arrowRight,
                         action: {
                             Task { @MainActor in
                                 await joinRewardsProgram()
@@ -120,7 +120,7 @@ struct WaitlistPassportView: View {
     var savePassportDataView: some View {
         VStack(alignment: .leading, spacing: 32) {
             VStack(spacing: 16) {
-                Image(Icons.identificationCard)
+                Image(.identificationCard)
                     .square(44)
                     .frame(width: 88, height: 88)
                     .background(.bgComponentPrimary, in: Circle())
@@ -149,7 +149,7 @@ struct WaitlistPassportView: View {
                         Text(ConfigManager.shared.feedback.feedbackEmail)
                             .body3()
                             .foregroundStyle(.textPrimary)
-                        Image(isCopied ? Icons.check : Icons.copySimple).iconMedium()
+                        Image(isCopied ? .check : .copySimple).iconMedium()
                     }
                     .onTapGesture {
                         if isCopied { return }
@@ -177,7 +177,7 @@ struct WaitlistPassportView: View {
             Spacer()
             AppButton(
                 text: "Save to files",
-                rightIcon: Icons.arrowRight,
+                rightIcon: .arrowRight,
                 action: { isExporting = true }
             )
             .controlSize(.large)

@@ -56,8 +56,18 @@ enum Gradients {
         startPoint: .leading,
         endPoint: .trailing
     )
+    static let greenText = LinearGradient(
+        gradient: Gradient(colors: [.greenTextGradient1, .greenTextGradient2]),
+        startPoint: .leading,
+        endPoint: .trailing
+    )
     static let darkGreenText = LinearGradient(
         gradient: Gradient(colors: [.darkGreenTextGradient1, .darkGreenTextGradient2]),
+        startPoint: .leading,
+        endPoint: .trailing
+    )
+    static let darkerGreenText = LinearGradient(
+        gradient: Gradient(colors: [.darkerGreenTextGradient1, .darkerGreenTextGradient2]),
         startPoint: .leading,
         endPoint: .trailing
     )

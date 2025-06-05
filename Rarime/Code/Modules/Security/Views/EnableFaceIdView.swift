@@ -12,7 +12,7 @@ struct EnableFaceIdView: View {
 
     var body: some View {
         EnableLayoutView(
-            icon: Icons.userFocus,
+            icon: .userFocus,
             title: String(localized: "Enable\nFace ID"),
             description: String(localized: "Enable Face ID Login"),
             enableAction: {

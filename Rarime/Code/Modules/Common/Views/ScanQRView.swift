@@ -34,7 +34,7 @@ struct ScanQRView: View {
             }
             .ignoresSafeArea()
             Button(action: onBack) {
-                Image(Icons.closeFill)
+                Image(.closeFill)
                     .iconMedium()
                     .foregroundStyle(.baseWhite)
             }

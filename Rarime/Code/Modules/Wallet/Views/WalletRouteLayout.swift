@@ -11,7 +11,7 @@ struct WalletRouteLayout<Content: View>: View {
         VStack(alignment: .leading, spacing: 24) {
             VStack(alignment: .leading, spacing: 24) {
                 Button(action: onBack) {
-                    Image(Icons.caretLeft)
+                    Image(.caretLeft)
                         .iconMedium()
                         .foregroundColor(.textPrimary)
                 }

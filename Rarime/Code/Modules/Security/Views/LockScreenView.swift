@@ -49,7 +49,7 @@ struct LockScreenView: View {
                         topTrailingRadius: 24
                     )
                 )
-                Image(banTimeEnd == nil ? Icons.user : Icons.lock)
+                Image(banTimeEnd == nil ? .user : .lock)
                     .iconLarge()
                     .padding(24)
                     .background(banTimeEnd == nil ? .primaryMain : .secondaryMain, in: Circle())

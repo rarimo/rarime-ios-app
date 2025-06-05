@@ -16,7 +16,7 @@ struct HomeView: View {
     @StateObject var findFaceViewModel = FindFaceViewModel()
 
     @State private var path: [HomeRoute] = []
-    @State private var selectedCardId: HomeWidget? = nil
+    @State private var selectedWidget: HomeWidget? = nil
     @State private var isOnboardingPresented = false
 
     @Namespace private var recoveryNamespace
@@ -46,37 +46,37 @@ struct HomeView: View {
     @ViewBuilder
     private var content: some View {
         ZStack {
-            switch selectedCardId {
+            switch selectedWidget {
             case .recovery:
                 RecoveryMethodView(
                     animation: namespace(for: .recovery),
-                    onClose: { selectedCardId = nil }
+                    onClose: { selectedWidget = nil }
                 )
 
             case .hiddenKeys:
                 FindFaceView(
                     animation: namespace(for: .hiddenKeys),
-                    onClose: { selectedCardId = nil },
+                    onClose: { selectedWidget = nil },
                     onViewWallet: { mainViewModel.selectedTab = .wallet }
                 )
                 .environmentObject(findFaceViewModel)
 
             case .freedomTool:
                 PollsView(
-                    onClose: { selectedCardId = nil },
+                    onClose: { selectedWidget = nil },
                     animation: namespace(for: .freedomTool)
                 )
 
             case .likeness:
                 LikenessView(
-                    onClose: { selectedCardId = nil },
+                    onClose: { selectedWidget = nil },
                     animation: namespace(for: .likeness)
                 )
 
             case .earn:
-                InviteFriendsView(
+                EarnRmoView(
                     balance: viewModel.pointsBalance,
-                    onClose: { selectedCardId = nil },
+                    onClose: { selectedWidget = nil },
                     animation: namespace(for: .earn)
                 )
                 .environmentObject(viewModel)
@@ -96,7 +96,7 @@ struct HomeView: View {
             .zIndex(1)
         }
         .animation(.interpolatingSpring(stiffness: 100, damping: 15),
-                   value: selectedCardId)
+                   value: selectedWidget)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                 isOnboardingPresented = !AppUserDefaults.shared.isHomeOnboardingCompleted
@@ -110,8 +110,8 @@ struct HomeView: View {
             VStack(spacing: 0) {
                 header
                 HomeWidgetsView(
-                    namespaceProvider: namespace,
-                    onSelect: { id in selectedCardId = id }
+                    selectedWidget: $selectedWidget,
+                    namespaceProvider: namespace
                 )
                 .environmentObject(viewModel)
                 .environmentObject(findFaceViewModel)

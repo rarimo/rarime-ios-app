@@ -7,7 +7,7 @@ private enum IntroRoute: Hashable {
 private struct AuthMethod: Identifiable, Hashable {
     var id: IntroRoute
     var name: String
-    var icon: String
+    var icon: ImageResource
 }
 
 struct IntroView: View {
@@ -32,12 +32,12 @@ struct IntroView: View {
             AuthMethod(
                 id: .newIdentity,
                 name: String(localized: "Create new identity"),
-                icon: Icons.addFill
+                icon: .addFill
             ),
             AuthMethod(
                 id: .importIdentity,
                 name: String(localized: "Re-activate old profile"),
-                icon: Icons.shareForwardLine
+                icon: .shareForwardLine
             ),
         ]
     }
@@ -63,7 +63,7 @@ struct IntroView: View {
         GeometryReader { geometry in
             ZStack(alignment: .center) {
                 Spacer()
-                Image(Icons.rarime)
+                Image(.rarime)
                     .square(96)
                     .foregroundStyle(Gradients.gradientFirst)
                     .padding(.all, 44)

@@ -40,7 +40,7 @@ struct ScanPassportView: View {
 #if DEVELOPMENT
                 AppButton(
                     text: "Import JSON",
-                    leftIcon: Icons.share1,
+                    leftIcon: .share1,
                     action: { withAnimation { state = .importJson } }
                 )
                 .controlSize(.large)

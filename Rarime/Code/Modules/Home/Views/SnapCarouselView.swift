@@ -18,6 +18,8 @@ struct SnapCarouselCard: Identifiable {
 }
 
 struct SnapCarouselView<BottomContent: View>: View {
+    @Environment(\.isEnabled) var isEnabled
+    
     @Binding var index: Int
     let cards: [SnapCarouselCard]
     
@@ -93,9 +95,13 @@ struct SnapCarouselView<BottomContent: View>: View {
             .gesture(
                 DragGesture()
                     .onChanged { value in
+                        if !isEnabled { return }
+                        
                         dragOffset = value.translation.height
                     }
                     .onEnded { value in
+                        if !isEnabled { return }
+                        
                         let progress = -value.translation.height / offsetStep * sensitivity
                         let delta = min(max(Int(progress.rounded()), -1), 1)
                         

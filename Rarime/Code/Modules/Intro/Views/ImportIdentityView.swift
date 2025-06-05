@@ -35,7 +35,7 @@ struct ImportIdentityView: View {
             nextButton: {
                 AppButton(
                     text: "Continue",
-                    rightIcon: Icons.arrowRight,
+                    rightIcon: .arrowRight,
                     action: importIdentity
                 )
                 .controlSize(.large)
@@ -61,7 +61,7 @@ struct ImportIdentityView: View {
     var backupView: some View {
         ZStack(alignment: .topLeading) {
             Button(action: onBack) {
-                Image(Icons.arrowLeft)
+                Image(.arrowLeft)
                     .iconMedium()
                     .foregroundStyle(.textPrimary)
             }
@@ -69,7 +69,7 @@ struct ImportIdentityView: View {
             .padding(.leading, 20)
             VStack(spacing: 32) {
                 VStack {
-                    Image(Icons.cloud)
+                    Image(.cloud)
                         .square(72)
                         .foregroundStyle(.primaryDarker)
                 }

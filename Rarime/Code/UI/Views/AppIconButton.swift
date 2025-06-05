@@ -67,13 +67,13 @@ struct AppIconButtonStyle: ButtonStyle {
 
 struct AppIconButton: View {
     var variant: IconButtonVariant = .primary
-    var icon: String
+    var icon: ImageResource
     var iconSize: CGFloat?
     var cornerRadius: CGFloat?
     var action: () -> Void
 
     @Environment(\.controlSize) var controlSize
-    
+
     private var calculatedIconSize: CGFloat {
         iconSize ?? {
             switch controlSize {
@@ -94,7 +94,7 @@ struct AppIconButton: View {
         default: 40
         }
     }
-    
+
     private var paddings: CGFloat {
         switch controlSize {
         case .small: 6
@@ -102,7 +102,7 @@ struct AppIconButton: View {
         default: 10
         }
     }
-    
+
     private var calculatedCornerRadius: CGFloat {
         cornerRadius ?? 100
     }
@@ -120,15 +120,15 @@ struct AppIconButton: View {
 
 #Preview {
     VStack(spacing: 12) {
-        HStack(spacing: 12){
-            AppIconButton(icon: Icons.closeFill, action: {}).controlSize(.large)
-            AppIconButton(icon: Icons.closeFill, action: {})
-            AppIconButton(icon: Icons.closeFill, action: {}).controlSize(.small)
+        HStack(spacing: 12) {
+            AppIconButton(icon: .closeFill, action: {}).controlSize(.large)
+            AppIconButton(icon: .closeFill, action: {})
+            AppIconButton(icon: .closeFill, action: {}).controlSize(.small)
         }
-        HStack(spacing: 12){
-            AppIconButton(variant: .secondary, icon: Icons.closeFill, action: {}).controlSize(.large)
-            AppIconButton(variant: .secondary, icon: Icons.closeFill, action: {})
-            AppIconButton(variant: .secondary, icon: Icons.closeFill, action: {}).controlSize(.small)
+        HStack(spacing: 12) {
+            AppIconButton(variant: .secondary, icon: .closeFill, action: {}).controlSize(.large)
+            AppIconButton(variant: .secondary, icon: .closeFill, action: {})
+            AppIconButton(variant: .secondary, icon: .closeFill, action: {}).controlSize(.small)
         }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)

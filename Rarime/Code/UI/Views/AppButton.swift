@@ -78,8 +78,8 @@ struct AppButton: View {
     var variant: ButtonVariant = .primary
 
     var text: LocalizedStringResource
-    var leftIcon: String?
-    var rightIcon: String?
+    var leftIcon: ImageResource?
+    var rightIcon: ImageResource?
 
     var width: CGFloat? = .infinity
     var action: () -> Void

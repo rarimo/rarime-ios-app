@@ -10,7 +10,7 @@ struct ProfileRouteLayout<Content: View>: View {
         VStack(alignment: .leading, spacing: 32) {
             ZStack(alignment: .topLeading) {
                 Button(action: onBack) {
-                    Image(Icons.caretLeft)
+                    Image(.caretLeft)
                         .iconMedium()
                         .foregroundColor(.textPrimary)
                 }

@@ -88,7 +88,7 @@ struct WalletSendView: View {
                             placeholder: "Long press to paste",
                             action: {
                                 Button(action: toggleScan) {
-                                    Image(Icons.qrCode)
+                                    Image(.qrCode)
                                         .iconMedium()
                                         .foregroundStyle(.textSecondary)
                                 }

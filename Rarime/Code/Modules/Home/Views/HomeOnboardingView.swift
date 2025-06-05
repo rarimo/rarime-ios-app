@@ -75,7 +75,7 @@ struct HomeOnboardingView: View {
                                 Spacer()
                                 AppButton(
                                     text: "Next",
-                                    rightIcon: Icons.arrowRight,
+                                    rightIcon: .arrowRight,
                                     width: 60,
                                     action: { currentStepIndex += 1 }
                                 )
@@ -108,7 +108,7 @@ private struct StepView: View {
                     .scaledToFill()
                     .frame(maxWidth: .infinity, maxHeight: 287)
                 Image(.rarime)
-                    .square(24)
+                    .iconLarge()
                     .foregroundStyle(.textPrimary)
                     .padding(8)
                     .background(.bgComponentBasePrimary, in: Circle())

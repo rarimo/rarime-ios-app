@@ -11,7 +11,7 @@ struct PassportScanTutorialButton: View {
                         .resizable()
                         .scaledToFit()
                         .frame(height: 56)
-                    Image(Icons.play)
+                    Image(.play)
                         .iconSmall()
                         .foregroundStyle(.baseWhite)
                         .padding(8)
@@ -114,13 +114,13 @@ private struct PassportScanTutorialStep: View {
             HorizontalDivider()
             HStack {
                 if isLastStep {
-                    AppButton(text: step.buttonText, rightIcon: Icons.arrowRight) {
+                    AppButton(text: step.buttonText, rightIcon: .arrowRight) {
                         action()
                     }
                 } else {
                     HorizontalStepIndicator(steps: PassportTutorialStep.allCases.count, currentStep: step.rawValue)
                     Spacer()
-                    AppButton(text: step.buttonText, rightIcon: Icons.arrowRight, width: nil) {
+                    AppButton(text: step.buttonText, rightIcon: .arrowRight, width: nil) {
                         currentStep += 1
                     }
                 }

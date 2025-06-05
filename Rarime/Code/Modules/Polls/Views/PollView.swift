@@ -90,7 +90,7 @@ struct PollView: View {
                     .frame(height: 228)
                 }
                 Button(action: onClose) {
-                    Image(Icons.closeFill)
+                    Image(.closeFill)
                         .iconMedium()
                         .foregroundStyle(.baseBlack)
                         .padding(.all, 10)
@@ -109,13 +109,13 @@ struct PollView: View {
                             .multilineTextAlignment(.leading)
                         HStack(alignment: .center, spacing: 12) {
                             HStack(alignment: .center, spacing: 8) {
-                                Image(Icons.timerLine)
+                                Image(.timerLine)
                                     .iconSmall()
                                 Text(poll.endAt)
                                     .subtitle7()
                             }
                             HStack(alignment: .center, spacing: 8) {
-                                Image(Icons.groupLine)
+                                Image(.groupLine)
                                     .iconSmall()
                                 Text(totalParticipants.formatted())
                                     .subtitle7()
@@ -139,7 +139,7 @@ struct PollView: View {
                             .foregroundStyle(.textSecondary)
                         ForEach(pollsViewModel.pollRequirements, id: \.id) { requirement in
                             HStack(alignment: .center, spacing: 8) {
-                                Image(requirement.isEligible ? Icons.checkboxCircleFill : Icons.closeCircleFill)
+                                Image(requirement.isEligible ? .checkboxCircleFill : .closeCircleFill)
                                     .iconMedium()
                                     .foregroundStyle(requirement.isEligible ? .secondaryMain : .errorMain)
                                 Text(requirement.text)
