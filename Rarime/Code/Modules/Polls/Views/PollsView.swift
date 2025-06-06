@@ -10,7 +10,7 @@ private enum PollsTab: CaseIterable, NavTab {
     var title: String {
         switch self {
         case .active: String(localized: "Active")
-        case .history: String(localized: "History")
+        case .history: String(localized: "Finished")
         }
     }
 }
@@ -30,7 +30,6 @@ struct PollsView: View {
     @State private var isPollSheetShown = false
     
     @State private var isPollsLoading = true
-    @State private var earlyPullTask: Task<Void, Never>? = nil
     
     private var aсtivePolls: [Poll] {
         pollsViewModel.polls.filter { poll in
@@ -45,20 +44,18 @@ struct PollsView: View {
     }
     
     var body: some View {
-        PullToCloseWrapperView(action: onClose) {
-            VStack(spacing: 0) {
-                AppIconButton(variant: .secondary, icon: Icons.closeFill, action: onClose)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding([.top, .trailing], 20)
+        ZStack(alignment: .topTrailing) {
+            PullToCloseWrapperView(action: onClose) {
                 GlassBottomSheet(
                     minHeight: 390,
                     maxHeight: 730,
                     maxBlur: 20,
                     background: {
-                        Image(Images.dotCountry)
+                        Image(.freedomtoolBg)
                             .resizable()
                             .scaledToFit()
                             .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
+                            .ignoresSafeArea()
                     }
                 ) {
                     VStack(spacing: 12) {
@@ -66,35 +63,34 @@ struct PollsView: View {
                             VStack(alignment: .leading, spacing: 0) {
                                 Text("Freedomtool")
                                     .h1()
-                                    .foregroundStyle(.baseBlack)
-                                    .matchedGeometryEffect(
-                                        id: AnimationNamespaceIds.title,
-                                        in: animation,
-                                        properties: .position
-                                    )
+                                    .foregroundStyle(.invertedDark)
                                 Text("Voting")
                                     .additional1()
-                                    .foregroundStyle(.baseBlack.opacity(0.4))
-                                    .matchedGeometryEffect(
-                                        id: AnimationNamespaceIds.subtitle,
-                                        in: animation,
-                                        properties: .position
-                                    )
+                                    .foregroundStyle(Gradients.darkGreenText)
                             }
-                            Text("An identification and privacy solution that revolutionizes polling, surveying and election processes")
+                            Text("Cast secure, anonymous votes from anywhere, just using your passport")
                                 .body3()
-                                .foregroundStyle(.baseBlack.opacity(0.5))
+                                .foregroundStyle(.textSecondary)
                                 .fixedSize(horizontal: false, vertical: true)
                             HStack(alignment: .center, spacing: 16) {
-                                AppIconButton(variant: .secondary, icon: Icons.addFill, cornerRadius: 20, action: {
-                                    guard let url = URL(string: ConfigManager.shared.api.votingWebsiteURL.absoluteString) else { return }
-                                    openURL(url)
-                                })
+                                AppButton(
+                                    variant: .secondary,
+                                    text: "Create a poll",
+                                    action: {
+                                        guard let url = URL(string: ConfigManager.shared.api.votingWebsiteURL.absoluteString) else { return }
+                                        openURL(url)
+                                    }
+                                )
                                 .controlSize(.large)
-                                AppButton(variant: .tertiary, text: "Scan a QR", action: { mainViewModel.isQrCodeScanSheetShown = true })
-                                    .controlSize(.large)
+                                AppButton(
+                                    variant: .primary,
+                                    text: "Scan a QR",
+                                    leftIcon: .qrScan2Line,
+                                    action: { mainViewModel.isQrCodeScanSheetShown = true }
+                                )
+                                .controlSize(.large)
                             }
-                            HorizontalDivider(color: .bgComponentBasePrimary)
+                            HorizontalDivider()
                             HStack(alignment: .center, spacing: 8) {
                                 ForEach(PollsTab.allCases, id: \.self) { tab in
                                     Button(action: {
@@ -104,19 +100,18 @@ struct PollsView: View {
                                     }) {
                                         Text(tab == .active
                                             ? "\(aсtivePolls.count) \(tab.title)"
-                                            : tab.title
+                                            : "\(endedPolls.count) \(tab.title)"
                                         )
                                         .overline2()
-                                        .foregroundStyle(currentTab == tab ? .baseBlack : .baseBlack.opacity(0.4))
+                                        .foregroundStyle(currentTab == tab ? .textPrimary : .textSecondary)
                                     }
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 6)
-                                    .background(currentTab == tab ? Color.bgComponentBasePrimary : Color.clear)
-                                    .clipShape(Capsule())
+                                    .background(currentTab == tab ? .bgComponentPrimary : .clear, in: Capsule())
                                 }
                             }
                         }
-                        .padding(.horizontal, 24)
+                        .padding(.horizontal, 20)
                         Group {
                             switch currentTab {
                             case .active:
@@ -127,17 +122,22 @@ struct PollsView: View {
                         }
                         .padding(.horizontal, 8)
                     }
+                    .padding(.top, 20)
                     .padding(.bottom, 24)
-                    // HACK: prevent pull to close on empty space
-                    .background(.white.opacity(0.01))
+                    .background(.bgBlur, in: RoundedRectangle(cornerRadius: 16))
                 }
             }
-            .background(
-                Gradients.gradientFifth
-                    .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
-                    .ignoresSafeArea()
-            )
+            Button(action: onClose) {
+                Image(.closeFill)
+                    .iconMedium()
+                    .foregroundStyle(.textPrimary)
+                    .padding(10)
+                    .background(.bgComponentPrimary, in: Circle())
+            }
+            .padding(.top, 12)
+            .padding(.trailing, 20)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .dynamicSheet(isPresented: $isPollSheetShown, fullScreen: true, bgColor: .additionalGreen) {
             if let selectedPoll = pollsViewModel.selectedPoll {
                 PollView(
@@ -154,27 +154,21 @@ struct PollsView: View {
                 .environmentObject(pollsViewModel)
             }
         }
-        .onAppear {
-            Task { await loadPolls() }
-        }
+        .task { await loadPolls() }
         .onReceive(pollsViewModel.$votingPollsIds) { _ in
             Task { await loadPolls() }
         }
-        .onDisappear(perform: cleanCancellables)
     }
     
     private func makePollsList(_ polls: [Poll]) -> some View {
         ZStack {
             if isPollsLoading {
                 ProgressView()
-                    .controlSize(.large)
-                    .tint(.baseBlack.opacity(0.4))
-                    .frame(height: 240, alignment: .center)
+                    .tint(.textSecondary)
             } else if !isPollsLoading && polls.isEmpty {
                 Text("No polls yet")
                     .body3()
-                    .foregroundStyle(.baseBlack.opacity(0.4))
-                    .frame(height: 240, alignment: .center)
+                    .foregroundStyle(.textSecondary)
             } else {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 8) {
@@ -189,21 +183,17 @@ struct PollsView: View {
                 }
             }
         }
+        .frame(minHeight: 340, alignment: .center)
     }
     
+    @MainActor
     private func loadPolls() async {
-        earlyPullTask = Task { @MainActor in
-            defer { isPollsLoading = false }
-            do {
-                try await pollsViewModel.loadPollsByIds(AppUserDefaults.shared.votedPollsIds)
-            } catch {
-                LoggerUtil.common.error("failed to pull polls: \(error, privacy: .public)")
-            }
+        defer { isPollsLoading = false }
+        do {
+            try await pollsViewModel.loadPollsByIds(AppUserDefaults.shared.votedPollsIds)
+        } catch {
+            LoggerUtil.common.error("failed to pull polls: \(error, privacy: .public)")
         }
-    }
-    
-    private func cleanCancellables() {
-        earlyPullTask?.cancel()
     }
 }
 
@@ -249,13 +239,13 @@ private struct PollListCard: View {
                         .multilineTextAlignment(.leading)
                     HStack(alignment: .center, spacing: 12) {
                         HStack(alignment: .center, spacing: 8) {
-                            Image(Icons.timerLine)
+                            Image(.timerLine)
                                 .iconSmall()
                             Text(poll.endAt)
                                 .subtitle7()
                         }
                         HStack(alignment: .center, spacing: 8) {
-                            Image(Icons.groupLine)
+                            Image(.groupLine)
                                 .iconSmall()
                             Text(totalParticipants.formatted())
                                 .subtitle7()

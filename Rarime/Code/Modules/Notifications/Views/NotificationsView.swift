@@ -18,7 +18,7 @@ struct NotificationsView: View {
                     .subtitle4()
                     .foregroundStyle(.textPrimary)
                 Spacer()
-                AppIconButton(icon: Icons.closeFill, action: onBack)
+                AppIconButton(icon: .closeFill, action: onBack)
             }
             if pushNotifications.isEmpty {
                 Spacer()
@@ -39,7 +39,7 @@ struct NotificationsView: View {
                                             delete(pushNotification)
                                         }
                                     }) {
-                                        Image(Icons.deleteBin6Line)
+                                        Image(.deleteBin6Line)
                                             .iconMedium()
                                             .foregroundStyle(.baseWhite)
                                     }
@@ -153,19 +153,19 @@ private struct NotificationView: View {
         .environmentObject(NotificationManager.shared)
         .environment(\.managedObjectContext, NotificationManager.shared.pushNotificationContainer.viewContext)
         .onAppear {
-           let context = NotificationManager.shared.pushNotificationContainer.viewContext
+            let context = NotificationManager.shared.pushNotificationContainer.viewContext
            
-           let pushNotification = PushNotification(context: context)
-           pushNotification.id = UUID()
-           pushNotification.title = "Other title"
-           pushNotification.body = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text"
-           pushNotification.receivedAt = Date()
-           pushNotification.isRead = true
+            let pushNotification = PushNotification(context: context)
+            pushNotification.id = UUID()
+            pushNotification.title = "Other title"
+            pushNotification.body = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text"
+            pushNotification.receivedAt = Date()
+            pushNotification.isRead = true
            
-           do {
-               try context.save()
-           } catch {
-               LoggerUtil.common.error("Error saving test notifications: \(error, privacy: .public)")
-           }
-       }
+            do {
+                try context.save()
+            } catch {
+                LoggerUtil.common.error("Error saving test notifications: \(error, privacy: .public)")
+            }
+        }
 }

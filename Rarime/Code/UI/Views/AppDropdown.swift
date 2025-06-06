@@ -19,7 +19,7 @@ struct AppDropdown<T: Hashable>: View {
         ZStack {
             HStack(spacing: 4) {
                 Text(selectedOption.label).overline2()
-                Image(Icons.carretDown).square(12)
+                Image(.carretDown).square(12)
             }
             .foregroundStyle(.textPrimary)
             .onTapGesture {
@@ -40,7 +40,7 @@ struct AppDropdown<T: Hashable>: View {
                                         Text(option.label).overline2()
                                         Spacer()
                                         if option.value == value {
-                                            Image(Icons.check).iconSmall()
+                                            Image(.check).iconSmall()
                                         }
                                     }
                                     .padding(.vertical, 14)

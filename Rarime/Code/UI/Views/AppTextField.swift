@@ -80,7 +80,7 @@ struct AppTextField<Hint: View, Action: View>: View {
 
             if isError {
                 HStack(spacing: 8) {
-                    Image(Icons.info).iconSmall()
+                    Image(.info).iconSmall()
                     Text(self.errorMessage).caption2()
                 }
                 .foregroundStyle(.errorMain)
@@ -103,7 +103,7 @@ private struct PreviewView: View {
                 label: "Regular",
                 placeholder: "Enter text here",
                 action: {
-                    Image(Icons.qrCode)
+                    Image(.qrCode)
                         .iconMedium()
                         .foregroundStyle(.textSecondary)
                 }
@@ -111,7 +111,7 @@ private struct PreviewView: View {
                 HStack {
                     Text(verbatim: "Some hint text").caption2()
                     Spacer()
-                    Image(Icons.info).iconSmall()
+                    Image(.info).iconSmall()
                 }
             }
             AppTextField(

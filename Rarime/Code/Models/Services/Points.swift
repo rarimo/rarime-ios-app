@@ -383,7 +383,7 @@ struct CreatePointBalanceResponseAttributes: Codable {
     let isDisabled: Bool
     let createdAt, updatedAt, rank: Int
     let level: Int
-    let referralCodes: [ReferalCode]?
+    let referralCodes: [ReferralCode]?
     let isVerified: Bool
 
     enum CodingKeys: String, CodingKey {
@@ -446,7 +446,7 @@ struct PointsBalanceRaw: Codable {
     let isDisabled: Bool
     let createdAt, updatedAt: Int
     let rank: Int?
-    let referralCodes: [ReferalCode]?
+    let referralCodes: [ReferralCode]?
     let level: Int
     let isVerified: Bool
 
@@ -474,7 +474,7 @@ struct PointsBalanceRaw: Codable {
     }
 }
 
-struct ReferalCode: Codable {
+struct ReferralCode: Codable {
     let id: String
     let status: ReferralCodeStatus
 }

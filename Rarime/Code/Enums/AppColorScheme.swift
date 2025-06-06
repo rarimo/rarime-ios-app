@@ -16,11 +16,11 @@ extension AppColorScheme {
 }
 
 extension AppColorScheme {
-    var image: String {
+    var image: ImageResource {
         switch self {
-        case .light: Images.lightTheme
-        case .dark: Images.darkTheme
-        case .system: Images.systemTheme
+        case .light: .lightTheme
+        case .dark: .darkTheme
+        case .system: .systemTheme
         }
     }
 }

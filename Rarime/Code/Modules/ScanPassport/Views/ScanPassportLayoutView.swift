@@ -5,11 +5,11 @@ struct ScanPassportLayoutView<Content: View>: View {
     let title: LocalizedStringResource
     let onPrevious: (() -> Void)?
     let onClose: () -> Void
-    
+
     var steps: Int = 2
-    
+
     @ViewBuilder let content: Content
-    
+
     init(
         currentStep: Int,
         title: LocalizedStringResource,
@@ -29,13 +29,13 @@ struct ScanPassportLayoutView<Content: View>: View {
             VStack(alignment: .leading, spacing: 38) {
                 ZStack(alignment: .center) {
                     HorizontalStepIndicator(steps: steps, currentStep: currentStep)
-                    
+
                     HStack(alignment: .center) {
                         if let onPrevious {
-                            AppIconButton(icon: Icons.arrowLeftSLine, action: onPrevious)
+                            AppIconButton(icon: .arrowLeftSLine, action: onPrevious)
                         }
                         Spacer()
-                        AppIconButton(icon: Icons.closeFill, action: onClose)
+                        AppIconButton(icon: .closeFill, action: onClose)
                     }
                 }
                 Text(title)

@@ -2,16 +2,16 @@ import SwiftUI
 
 struct UnsupportedPassportView: View {
     @EnvironmentObject var passportManager: PassportManager
-    
+
     let onClose: () -> Void
-    
+
     var country: Country {
         passportManager.passportCountry
     }
-    
-    var body: some View  {
+
+    var body: some View {
         ZStack(alignment: .topTrailing) {
-            AppIconButton(icon: Icons.closeFill, action: onClose)
+            AppIconButton(icon: .closeFill, action: onClose)
                 .padding([.top, .trailing], 20)
             VStack(spacing: 28) {
                 Text(country.flag)

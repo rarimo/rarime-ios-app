@@ -14,7 +14,7 @@ struct NotificationDetailsView: View {
     
     var body: some View {
         VStack(spacing: 12) {
-            AppIconButton(icon: Icons.closeFill, action: onClose)
+            AppIconButton(icon: .closeFill, action: onClose)
                 .padding([.top, .trailing], 20)
                 .frame(maxWidth: .infinity, alignment: .trailing)
             VStack(alignment: .leading, spacing: 24) {
@@ -113,7 +113,7 @@ struct NotificationDetailsView: View {
     pushNotification.receivedAt = Date()
     pushNotification.isRead = false
     
-    return ZStack{}
+    return ZStack {}
         .dynamicSheet(isPresented: .constant(true), fullScreen: true) {
             NotificationDetailsView(notification: pushNotification) {}
                 .environmentObject(UserManager())

@@ -1,109 +1,123 @@
 import SwiftUI
 
-struct HomeCardView<Content: View, BottomAdditionalContent: View>: View {
-    let backgroundGradient: LinearGradient
-    let topIcon: String
-    let bottomIcon: String
+struct HomeCardView<Content: View, TopContent: View, BottomContent: View>: View {
+    let foregroundGradient: LinearGradient?
+    let foregroundColor: Color
+    let topIcon: ImageResource
+    let bottomIcon: ImageResource
     let imageContent: () -> Content
-    let title: String
-    let subtitle: String
-    let bottomAdditionalContent: () -> BottomAdditionalContent?
-    
+    let title: String?
+    let subtitle: String?
+    let topContent: () -> TopContent?
+    let bottomContent: () -> BottomContent?
+
     var animation: Namespace.ID
-    
+
     init(
-        backgroundGradient: LinearGradient,
-        topIcon: String,
-        bottomIcon: String,
+        foregroundGradient: LinearGradient? = nil,
+        foregroundColor: Color = .baseBlack,
+        topIcon: ImageResource,
+        bottomIcon: ImageResource,
         @ViewBuilder imageContent: @escaping () -> Content,
-        title: String,
-        subtitle: String,
-        @ViewBuilder bottomAdditionalContent: @escaping () -> BottomAdditionalContent? =  { EmptyView() },
+        title: String?,
+        subtitle: String?,
+        @ViewBuilder topContent: @escaping () -> TopContent? = { EmptyView() },
+        @ViewBuilder bottomContent: @escaping () -> BottomContent? = { EmptyView() },
         animation: Namespace.ID
     ) {
-        self.backgroundGradient = backgroundGradient
+        self.foregroundGradient = foregroundGradient
+        self.foregroundColor = foregroundColor
         self.topIcon = topIcon
         self.bottomIcon = bottomIcon
         self.imageContent = imageContent
         self.title = title
         self.subtitle = subtitle
-        self.bottomAdditionalContent = bottomAdditionalContent
+        self.topContent = topContent
+        self.bottomContent = bottomContent
         self.animation = animation
     }
-    
+
     var body: some View {
         ZStack(alignment: .trailing) {
-            Image(topIcon)
-                .square(32)
-                .foregroundStyle(.baseBlack.opacity(0.5))
-                .frame(maxHeight: .infinity, alignment: .top)
-                .padding(.trailing, 20)
-                .padding(.top, 20)
             imageContent()
                 .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .clipped()
+            Image(topIcon)
+                .iconLarge()
+                .foregroundStyle(foregroundColor)
+                .padding(8)
+                .background(.bgComponentPrimary, in: Circle())
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .padding([.top, .leading], 20)
             VStack(alignment: .leading, spacing: 0) {
-                Text(title)
-                    .h2()
-                    .foregroundStyle(.baseBlack)
-                    .matchedGeometryEffect(
-                        id: AnimationNamespaceIds.title,
-                        in: animation,
-                        properties: .position
-                    )
-                Text(subtitle)
-                    .additional2()
-                    .foregroundStyle(.baseBlack.opacity(0.4))
-                    .matchedGeometryEffect(
-                        id: AnimationNamespaceIds.subtitle,
-                        in: animation,
-                        properties: .position
-                    )
-                if let bottomView = bottomAdditionalContent() {
+                if let topView = topContent() {
+                    topView
+                }
+                if let title {
+                    Text(title)
+                        .h1()
+                        .foregroundStyle(foregroundColor)
+                        .matchedGeometryEffect(
+                            id: AnimationNamespaceIds.title,
+                            in: animation,
+                            properties: .position
+                        )
+                }
+                if let subtitle {
+                    Text(subtitle)
+                        .additional1()
+                        .foregroundStyle(foregroundGradient == nil ? AnyShapeStyle(foregroundColor.opacity(0.4)) : AnyShapeStyle(foregroundGradient!))
+                        .matchedGeometryEffect(
+                            id: AnimationNamespaceIds.subtitle,
+                            in: animation,
+                            properties: .position
+                        )
+                }
+                if let bottomView = bottomContent() {
                     bottomView
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(maxHeight: .infinity, alignment: .bottom)
             .padding(.leading, 24)
-            .padding(.bottom, 24)
+            .padding(.bottom, 32)
             Image(bottomIcon)
                 .iconLarge()
-                .foregroundStyle(.baseBlack)
+                .foregroundStyle(foregroundColor)
                 .frame(maxHeight: .infinity, alignment: .bottom)
-                .padding(.bottom, 24)
+                .padding(.bottom, 32)
                 .padding(.trailing, 24)
         }
         .frame(maxHeight: .infinity)
-        .background(
+        .overlay(
             RoundedRectangle(cornerRadius: 32)
-                .fill(backgroundGradient)
-                .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
+                .stroke(.bgComponentPrimary, lineWidth: 1)
         )
+        .clipShape(RoundedRectangle(cornerRadius: 32))
     }
 }
 
 #Preview {
     HomeCardView(
-        backgroundGradient: Gradients.gradientFirst,
-        topIcon: Icons.rarime,
-        bottomIcon: Icons.arrowRightUpLine,
+        foregroundGradient: Gradients.darkerGreenText,
+        foregroundColor: .invertedDark,
+        topIcon: .rarime,
+        bottomIcon: .arrowRightUpLine,
         imageContent: {
-            Image(Images.handWithPhone)
+            Image(.earnBg)
                 .resizable()
-                .scaledToFit()
-                .scaleEffect(0.85)
-                .offset(x: 28)
-                .padding(.top, 12)
+                .scaledToFill()
+                .clipShape(RoundedRectangle(cornerRadius: 32))
         },
-        title: "Your Device",
-        subtitle: "Your Identity",
-        bottomAdditionalContent: {
-            Text("* Nothing leaves this device")
+        title: "Earn",
+        subtitle: "RMO",
+        bottomContent: {
+            Text("Complete various tasks and get rewarded with Rarimo tokens")
                 .body4()
-                .foregroundStyle(.baseBlack.opacity(0.6))
-                .padding(.top, 24)
+                .foregroundStyle(.textSecondary)
+                .frame(maxWidth: 220, alignment: .leading)
+                .padding(.top, 12)
         },
         animation: Namespace().wrappedValue
     )

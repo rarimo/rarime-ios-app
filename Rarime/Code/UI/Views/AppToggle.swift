@@ -30,7 +30,7 @@ struct AppToggle: View {
                 .shadow(color: isOn ? .clear : .baseBlack.opacity(0.12), radius: 1, x: 1, y: 1)
                 .padding(2)
                 .offset(x: isOn ? 8 : -8)
-            Image(Icons.lockFill).square(12)
+            Image(.lockFill).square(12)
                 .foregroundStyle(.textDisabled)
                 .offset(x: isOn ? 8 : -8)
                 .opacity(isEnabled ? 0 : 1)

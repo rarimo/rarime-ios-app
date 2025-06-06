@@ -14,12 +14,6 @@ struct ThemedAnimation {
 }
 
 enum Animations {
-    static let passport = ThemedAnimation("Passport")
-    static let introWelcome = ThemedAnimation("IntroWelcome")
-    static let introIncognito = ThemedAnimation("IntroIncognito")
-    static let introProofs = ThemedAnimation("IntroProofs")
-    static let introRewards = ThemedAnimation("IntroRewards")
     static let incognito = ThemedAnimation(light: "IncognitoLight", dark: "IncognitoDark")
-    static let scanPassport = ThemedAnimation("ScanPassport")
     static let processing = ThemedAnimation("Processing")
 }

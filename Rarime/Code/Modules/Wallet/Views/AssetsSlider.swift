@@ -64,9 +64,9 @@ private struct AssetCard: View {
     let asset: WalletAsset
     let isLoading: Bool
 
-    var icon: String {
+    var icon: ImageResource {
         switch asset.token {
-        case .rmo: Icons.rarimo
+        case .eth: .ethereum
         }
     }
 
@@ -101,7 +101,11 @@ private struct AssetCard: View {
 
 #Preview {
     AssetsSlider(
-        walletAssets: [WalletAsset(token: WalletToken.rmo, balance: 3, usdBalance: nil)],
+        walletAssets: [
+            WalletAsset(token: WalletToken.eth, balance: 1, usdBalance: nil),
+            WalletAsset(token: WalletToken.eth, balance: 2, usdBalance: 10),
+            WalletAsset(token: WalletToken.eth, balance: 3, usdBalance: nil)
+        ],
         isLoading: false
     )
 }

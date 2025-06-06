@@ -42,7 +42,7 @@ struct AppView: View {
                 }
             } else {
                 Spacer()
-                Image(Icons.rarime)
+                Image(.rarime)
                     .square(96)
                     .foregroundStyle(Gradients.gradientFirst)
                     .padding(.all, 44)

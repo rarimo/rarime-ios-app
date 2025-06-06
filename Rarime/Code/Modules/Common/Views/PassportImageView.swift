@@ -15,7 +15,7 @@ struct PassportImageView: View {
                 .clipShape(Circle())
                 .overlay(Circle().stroke(.bgComponentPrimary, lineWidth: 1))
         } else {
-            Image(Icons.user)
+            Image(.user)
                 .square(size * 0.5)
                 .padding(size * 0.25)
                 .background(bgColor)
@@ -27,7 +27,7 @@ struct PassportImageView: View {
 
 #Preview {
     VStack {
-        PassportImageView(image: UIImage(named: Images.passportNfc))
+        PassportImageView(image: UIImage(resource: .debugFace))
         PassportImageView(image: nil, bgColor: .primaryMain)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)

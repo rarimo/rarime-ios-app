@@ -10,19 +10,21 @@ struct ProfileRouteLayout<Content: View>: View {
         VStack(alignment: .leading, spacing: 32) {
             ZStack(alignment: .topLeading) {
                 Button(action: onBack) {
-                    Image(Icons.caretLeft)
+                    Image(.arrowLeftSLine)
                         .iconMedium()
                         .foregroundColor(.textPrimary)
                 }
                 Text(title)
-                    .subtitle6()
+                    .buttonMedium()
                     .foregroundColor(.textPrimary)
                     .frame(maxWidth: .infinity)
             }
+            .padding(.horizontal, 12)
             content()
             Spacer()
         }
-        .padding(20)
+        .padding(.vertical, 20)
+        .padding(.horizontal, 8)
         .background(.bgPrimary)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

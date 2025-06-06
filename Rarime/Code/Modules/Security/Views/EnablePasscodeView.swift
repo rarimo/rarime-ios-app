@@ -16,7 +16,7 @@ struct EnablePasscodeView: View {
     var body: some View {
         NavigationStack(path: $path) {
             EnableLayoutView(
-                icon: Icons.password,
+                icon: .password,
                 title: String(localized: "Enable\nPasscode"),
                 description: String(localized: "Enable Passcode Login"),
                 enableAction: { path.append(.enterPasscode) },
@@ -93,7 +93,7 @@ struct PasscodeView: View {
         ZStack(alignment: .topTrailing) {
             if isClosable {
                 Button(action: onClose) {
-                    Image(Icons.close)
+                    Image(.close)
                         .iconMedium()
                         .foregroundColor(.textPrimary)
                         .padding(.top, 20)

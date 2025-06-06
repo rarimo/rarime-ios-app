@@ -29,6 +29,10 @@ class PollsViewModel: ObservableObject {
         self.selectedPoll = poll
     }
     
+    var hasVoted: Bool {
+        votingPollsIds.count > 0
+    }
+    
     var hasMorePolls: Bool {
         polls.count < lastProposalId
     }

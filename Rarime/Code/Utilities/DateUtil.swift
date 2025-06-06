@@ -38,6 +38,12 @@ class DateUtil {
         return formatter
     }()
 
+    static let dateTimeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyyy HH:mm"
+        return formatter
+    }()
+
     static let mrzDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yy"
@@ -55,7 +61,6 @@ class DateUtil {
             // substract 100 years from date
             let calendar = Calendar.current
             let components = calendar.dateComponents([.year], from: date)
-            let year = components.year ?? 0
             let newDate = calendar.date(byAdding: .year, value: -100, to: date)
             return newDate ?? date
         }

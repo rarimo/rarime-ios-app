@@ -8,7 +8,7 @@ struct QRCodeView: View {
     var qrImage: UIImage? {
         let doc = QRCode.Document(utf8String: code)
         doc.logoTemplate = QRCode.LogoTemplate(
-            image: UIImage(named: Icons.rarime)!.cgImage!,
+            image: UIImage(resource: .rarime).cgImage!,
             path: CGPath(rect: CGRect(x: 0.35, y: 0.35, width: 0.3, height: 0.3), transform: nil),
             inset: 3
         )
@@ -23,7 +23,7 @@ struct QRCodeView: View {
                 if let qrImage {
                     Image(uiImage: qrImage).square(size)
                 } else {
-                    Image(Icons.qrCode)
+                    Image(.qrCode)
                         .square(size)
                         .foregroundColor(.errorMain)
                 }

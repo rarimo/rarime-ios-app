@@ -26,7 +26,7 @@ struct ActivePollOptionsView: View {
                     .subtitle6()
                     .foregroundStyle(.textSecondary)
                 Spacer()
-                AppIconButton(icon: Icons.closeFill, action: onClose)
+                AppIconButton(icon: .closeFill, action: onClose)
                     .frame(maxWidth: .infinity, alignment: .trailing)
             }
             .padding(.horizontal, 20)
@@ -60,7 +60,7 @@ struct ActivePollOptionsView: View {
                                 }) {
                                     HStack(alignment: .center, spacing: 16) {
                                         if selectedOption == index {
-                                            Image(Icons.checkLine)
+                                            Image(.checkLine)
                                                 .iconMedium()
                                                 .foregroundStyle(.textPrimary)
                                         } else {

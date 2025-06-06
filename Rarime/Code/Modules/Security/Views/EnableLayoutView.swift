@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct EnableLayoutView: View {
-    let icon: String
+    let icon: ImageResource
     let title: String
     let description: String
     let enableAction: () -> Void
@@ -49,7 +49,7 @@ struct EnableLayoutView: View {
 
 #Preview {
     EnableLayoutView(
-        icon: Icons.password,
+        icon: .password,
         title: "Enable\nPasscode",
         description: "Enable Passcode Authentication",
         enableAction: {},

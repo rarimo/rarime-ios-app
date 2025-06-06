@@ -1,4 +1,3 @@
-import AVKit
 import SwiftUI
 
 struct PassportScanTutorialButton: View {
@@ -8,11 +7,11 @@ struct PassportScanTutorialButton: View {
         Button(action: { isTutorialPresented = true }) {
             HStack(spacing: 20) {
                 ZStack {
-                    Image(Images.passportTutorialThumbnail)
+                    Image(.passportTutorialThumbnail)
                         .resizable()
                         .scaledToFit()
                         .frame(height: 56)
-                    Image(Icons.play)
+                    Image(.play)
                         .iconSmall()
                         .foregroundStyle(.baseWhite)
                         .padding(8)
@@ -50,8 +49,8 @@ struct PassportScanTutorialView: View {
             ForEach(PassportTutorialStep.allCases, id: \.self) { step in
                 PassportScanTutorialStep(
                     step: step,
-                    action: onStart,
                     isUSA: passportViewModel.isUSA,
+                    action: onStart,
                     currentStep: $currentStep
                 )
                 .tag(step.rawValue)
@@ -64,19 +63,19 @@ struct PassportScanTutorialView: View {
 
 private struct PassportScanTutorialStep: View {
     let step: PassportTutorialStep
+    let isUSA: Bool
     let action: () -> Void
     @Binding var currentStep: Int
-    @State private var player: AVPlayer
     
     init(
         step: PassportTutorialStep,
-        action: @escaping () -> Void,
         isUSA: Bool = false,
+        action: @escaping () -> Void,
         currentStep: Binding<Int>
     ) {
         self.step = step
+        self.isUSA = isUSA
         self.action = action
-        self.player = AVPlayer(url: step.video(isUSA))
         self._currentStep = currentStep
     }
     
@@ -90,22 +89,11 @@ private struct PassportScanTutorialStep: View {
     
     var body: some View {
         VStack(spacing: 32) {
-            VideoPlayer(player: player)
-                .disabled(true)
+            LoopVideoPlayer(url: step.video(isUSA))
                 .aspectRatio(362 / 404, contentMode: .fill)
                 .frame(height: 404)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
                 .padding(.horizontal, 14)
-                .onAppear {
-                    player.play()
-                    NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: nil, queue: .main) { _ in
-                        player.seek(to: .zero)
-                        player.play()
-                    }
-                }
-                .onDisappear {
-                    player.pause()
-                }
             
             VStack(alignment: .leading, spacing: 16) {
                 Text(step.title)
@@ -126,13 +114,13 @@ private struct PassportScanTutorialStep: View {
             HorizontalDivider()
             HStack {
                 if isLastStep {
-                    AppButton(text: step.buttonText, rightIcon: Icons.arrowRight) {
+                    AppButton(text: step.buttonText, rightIcon: .arrowRight) {
                         action()
                     }
                 } else {
                     HorizontalStepIndicator(steps: PassportTutorialStep.allCases.count, currentStep: step.rawValue)
                     Spacer()
-                    AppButton(text: step.buttonText, rightIcon: Icons.arrowRight, width: nil) {
+                    AppButton(text: step.buttonText, rightIcon: .arrowRight, width: nil) {
                         currentStep += 1
                     }
                 }

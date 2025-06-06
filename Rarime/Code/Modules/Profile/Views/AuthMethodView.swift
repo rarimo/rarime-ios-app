@@ -15,7 +15,7 @@ struct AuthMethodView: View {
                         get: { securityManager.faceIdState == .enabled },
                         set: { $0 ? securityManager.enableFaceId() : securityManager.disableFaceId() }
                     ),
-                    icon: Icons.userFocus,
+                    icon: .userFocus,
                     label: String(localized: "Face ID")
                 )
                 .disabled(securityManager.passcodeState == .disabled)
@@ -24,7 +24,7 @@ struct AuthMethodView: View {
                         get: { securityManager.passcodeState == .enabled },
                         set: { $0 ? securityManager.enablePasscode() : securityManager.disablePasscode() }
                     ),
-                    icon: Icons.password,
+                    icon: .password,
                     label: String(localized: "Passcode")
                 )
             }
@@ -34,7 +34,7 @@ struct AuthMethodView: View {
 
 private struct AuthMethodItem: View {
     @Binding var isOn: Bool
-    let icon: String
+    let icon: ImageResource
     let label: String
 
     var body: some View {

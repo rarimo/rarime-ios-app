@@ -57,11 +57,11 @@ struct PassportCard: View {
     private var passportBadgeWrapper: some View {
         HStack(spacing: 16) {
             if isWaitlisted {
-                Image(Icons.globeSimpleTime)
+                Image(.globeSimpleTime)
                     .iconLarge()
                     .foregroundStyle(.warningMain)
             } else {
-                Image(Icons.globeSimpleX)
+                Image(.globeSimpleX)
                     .iconLarge()
                     .foregroundStyle(.errorMain)
             }
@@ -70,7 +70,7 @@ struct PassportCard: View {
                 .foregroundStyle(.textPrimary)
             Spacer()
             Button(action: { isWaitlisted ? onWaitlisted() : onUnsupported() }) {
-                Image(Icons.informationLine)
+                Image(.informationLine)
                     .iconMedium()
                     .foregroundStyle(.textSecondary)
             }
@@ -251,7 +251,7 @@ struct PassportCard: View {
 
     private var cardProofError: some View {
         HStack(alignment: .center, spacing: 8) {
-            Image(Icons.informationLine)
+            Image(.informationLine)
                 .iconMedium()
                 .foregroundStyle(.errorDark)
             VStack(alignment: .leading, spacing: 0) {
@@ -278,7 +278,7 @@ struct PassportCard: View {
                     }
                 }) {
                     HStack(alignment: .center, spacing: 8) {
-                        Image(Icons.restartLine)
+                        Image(.restartLine)
                             .iconMedium()
                         Text("Retry")
                             .buttonMedium()

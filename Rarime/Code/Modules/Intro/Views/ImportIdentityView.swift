@@ -2,8 +2,11 @@ import Alamofire
 import SwiftUI
 
 struct ImportIdentityView: View {
+    @EnvironmentObject private var walletManager: WalletManager
+    @EnvironmentObject private var likenessManager: LikenessManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var userManager: UserManager
+    @EnvironmentObject private var securityManager: SecurityManager
     
     var onNext: () -> Void
     var onBack: () -> Void
@@ -32,7 +35,7 @@ struct ImportIdentityView: View {
             nextButton: {
                 AppButton(
                     text: "Continue",
-                    rightIcon: Icons.arrowRight,
+                    rightIcon: .arrowRight,
                     action: importIdentity
                 )
                 .controlSize(.large)
@@ -58,7 +61,7 @@ struct ImportIdentityView: View {
     var backupView: some View {
         ZStack(alignment: .topLeading) {
             Button(action: onBack) {
-                Image(Icons.arrowLeft)
+                Image(.arrowLeft)
                     .iconMedium()
                     .foregroundStyle(.textPrimary)
             }
@@ -66,7 +69,7 @@ struct ImportIdentityView: View {
             .padding(.leading, 20)
             VStack(spacing: 32) {
                 VStack {
-                    Image(Icons.cloud)
+                    Image(.cloud)
                         .square(72)
                         .foregroundStyle(.primaryDarker)
                 }
@@ -140,6 +143,11 @@ struct ImportIdentityView: View {
                 
                 LoggerUtil.common.info("Identity was imported")
                 
+                walletManager.privateKey = userManager.user?.secretKey
+                
+                likenessManager.postInitialization()
+                securityManager.disablePasscode()
+                
                 onNext()
             } catch {
                 LoggerUtil.common.error("Failed to restore from iCloud: \(error, privacy: .public)")
@@ -172,6 +180,11 @@ struct ImportIdentityView: View {
                 try await setReferralCodeIfUserHasPointsBalance()
                 
                 LoggerUtil.common.info("Identity was imported")
+                
+                walletManager.privateKey = userManager.user?.secretKey
+                
+                likenessManager.postInitialization()
+                securityManager.disablePasscode()
                 
                 onNext()
             } catch {
@@ -225,4 +238,7 @@ private func isValidPrivateKey(_ privateKey: String) throws -> Bool {
     ImportIdentityView(onNext: {}, onBack: {})
         .environmentObject(DecentralizedAuthManager.shared)
         .environmentObject(UserManager.shared)
+        .environmentObject(LikenessManager.shared)
+        .environmentObject(WalletManager.shared)
+        .environmentObject(SecurityManager.shared)
 }
