@@ -79,7 +79,7 @@ struct LikenessView: View {
                         Button(action: { isRuleSheetPresented = true }) {
                             (
                                 Text(likenessManager.rule.title) +
-                                    Text(" ") +
+                                    Text(verbatim: " ") +
                                     Text(Image(.arrowDownSLine))
                                     .foregroundColor(.baseBlack)
                             )

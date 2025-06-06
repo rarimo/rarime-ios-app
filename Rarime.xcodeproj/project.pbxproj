@@ -69,7 +69,6 @@
 		5655E4352BD5173200B86C5C /* AppView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E4342BD5173200B86C5C /* AppView+ViewModel.swift */; };
 		5655E4372BD51E8E00B86C5C /* AppKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E4362BD51E8E00B86C5C /* AppKeychain.swift */; };
 		5655E43A2BD51F5100B86C5C /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 5655E4392BD51F5100B86C5C /* KeychainAccess */; };
-		5655E43C2BD522E800B86C5C /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E43B2BD522E700B86C5C /* AppLanguage.swift */; };
 		5659151B2BE927A20050795A /* AppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659151A2BE927A20050795A /* AppIconView.swift */; };
 		5659151D2BE92AA90050795A /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659151C2BE92AA90050795A /* AppIcon.swift */; };
 		5659151F2BE92B1F0050795A /* AppIconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659151E2BE92B1F0050795A /* AppIconManager.swift */; };
@@ -125,7 +124,6 @@
 		56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */ = {isa = PBXBuildFile; productRef = 56E2D9312BD01E71006E725D /* NFCPassportReader */; };
 		56E6AD452BD272D100E4DDC1 /* AuthMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD442BD272D100E4DDC1 /* AuthMethodView.swift */; };
 		56E6AD472BD272FB00E4DDC1 /* ExportKeysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD462BD272FB00E4DDC1 /* ExportKeysView.swift */; };
-		56E6AD492BD2731100E4DDC1 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD482BD2731100E4DDC1 /* LanguageView.swift */; };
 		56E6AD4B2BD2732300E4DDC1 /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4A2BD2732300E4DDC1 /* ThemeView.swift */; };
 		56E6AD4D2BD273BC00E4DDC1 /* ProfileRouteLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */; };
 		56E6AD4F2BD2756200E4DDC1 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */; };
@@ -215,7 +213,6 @@
 		CE2797432CEB41DF008649B0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9B2C12032700C9BF9B /* Constants.swift */; };
 		CE2797442CEB41F0008649B0 /* SecurityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E4312BD2CF6900B86C5C /* SecurityManager.swift */; };
 		CE2797452CEB41F7008649B0 /* AppColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E42F2BD2CA5500B86C5C /* AppColorScheme.swift */; };
-		CE2797462CEB4200008649B0 /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E43B2BD522E700B86C5C /* AppLanguage.swift */; };
 		CE2797472CEB420A008649B0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251392BD6E22700050507 /* User.swift */; };
 		CE2797482CEB421B008649B0 /* Data+Utf8.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72101D2BD7BD9D0043DB7F /* Data+Utf8.swift */; };
 		CE27974A2CEB4246008649B0 /* RegistrationContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68BE412BD9B6A200D92EBB /* RegistrationContract.swift */; };
@@ -487,7 +484,6 @@
 		5655E4312BD2CF6900B86C5C /* SecurityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityManager.swift; sourceTree = "<group>"; };
 		5655E4342BD5173200B86C5C /* AppView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppView+ViewModel.swift"; sourceTree = "<group>"; };
 		5655E4362BD51E8E00B86C5C /* AppKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeychain.swift; sourceTree = "<group>"; };
-		5655E43B2BD522E700B86C5C /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
 		5659151A2BE927A20050795A /* AppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconView.swift; sourceTree = "<group>"; };
 		5659151C2BE92AA90050795A /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		5659151E2BE92B1F0050795A /* AppIconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconManager.swift; sourceTree = "<group>"; };
@@ -540,7 +536,6 @@
 		56E2D92C2BD0196B006E725D /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		56E6AD442BD272D100E4DDC1 /* AuthMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethodView.swift; sourceTree = "<group>"; };
 		56E6AD462BD272FB00E4DDC1 /* ExportKeysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportKeysView.swift; sourceTree = "<group>"; };
-		56E6AD482BD2731100E4DDC1 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
 		56E6AD4A2BD2732300E4DDC1 /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
 		56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouteLayout.swift; sourceTree = "<group>"; };
 		56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
@@ -901,7 +896,6 @@
 				5659151C2BE92AA90050795A /* AppIcon.swift */,
 				5655E42F2BD2CA5500B86C5C /* AppColorScheme.swift */,
 				56B589EF2DB7B05F00266105 /* LikenessRule.swift */,
-				5655E43B2BD522E700B86C5C /* AppLanguage.swift */,
 				5641695F2BE273260057AC03 /* PassportCardLook.swift */,
 				568350AB2BEA304B00B70E3D /* PassportIdentifier.swift */,
 				56062B992C12007A00C9BF9B /* Country.swift */,
@@ -942,7 +936,6 @@
 				56722F1F2BCD62BB00300AD0 /* ProfileView.swift */,
 				56E6AD442BD272D100E4DDC1 /* AuthMethodView.swift */,
 				56E6AD462BD272FB00E4DDC1 /* ExportKeysView.swift */,
-				56E6AD482BD2731100E4DDC1 /* LanguageView.swift */,
 				56E6AD4A2BD2732300E4DDC1 /* ThemeView.swift */,
 				5659151A2BE927A20050795A /* AppIconView.swift */,
 				56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */,
@@ -1994,7 +1987,6 @@
 			knownRegions = (
 				en,
 				Base,
-				uk,
 			);
 			mainGroup = CE9E82A92BA881F400AAF885;
 			packageReferences = (
@@ -2121,7 +2113,6 @@
 				CE7E95812CE774DC00D86A4F /* AppKeychain.swift in Sources */,
 				CEBA50052CF0E6F30069151C /* SupportRegisterIdentityCircuitAAType.swift in Sources */,
 				CE27974F2CEB4287008649B0 /* PassportUtils.swift in Sources */,
-				CE2797462CEB4200008649B0 /* AppLanguage.swift in Sources */,
 				CE00DF4D2D9ACD5E00614151 /* NoirRegisterIdentityInputs.swift in Sources */,
 				CE27974B2CEB4258008649B0 /* DateUtil.swift in Sources */,
 				CE2FF4BA2DCCB85D00E4151D /* FaceRegistryNoInclusionInputs.swift in Sources */,
@@ -2269,7 +2260,6 @@
 				56A6C7562BBC194800992562 /* Animations.swift in Sources */,
 				CE3CD78C2DB67B4200112E46 /* FaceCaptureSession.swift in Sources */,
 				56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */,
-				56E6AD492BD2731100E4DDC1 /* LanguageView.swift in Sources */,
 				CE7210332BD818020043DB7F /* Double+Rounded.swift in Sources */,
 				CEE167E82DB794280044E1EB /* LikenessProcessingView.swift in Sources */,
 				CE77EDA32DEDA51400F3B91E /* EvmScanTransaction.swift in Sources */,
@@ -2389,7 +2379,6 @@
 				C7D624512D6DB351007BA5A6 /* PollsMockedData.swift in Sources */,
 				5659151D2BE92AA90050795A /* AppIcon.swift in Sources */,
 				56062BA02C120B3400C9BF9B /* WaitlistPassportView.swift in Sources */,
-				5655E43C2BD522E800B86C5C /* AppLanguage.swift in Sources */,
 				56E7AD0A2BDAA4F000D3A258 /* AppRadioButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

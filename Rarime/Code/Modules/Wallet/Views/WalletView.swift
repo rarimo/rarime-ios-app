@@ -235,7 +235,7 @@ private struct TransactionItem: View {
                 }
                 Spacer()
                 if tx.amount != 0 {
-                    Text("\(balanceModifier)\(tx.amount.format()) \(token.rawValue)")
+                    Text(verbatim: "\(balanceModifier)\(tx.amount.format()) \(token.rawValue)")
                         .subtitle7()
                         .foregroundStyle(tx.type == .sent ? .errorMain : .successMain)
                 }

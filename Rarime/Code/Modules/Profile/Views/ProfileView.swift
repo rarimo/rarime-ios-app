@@ -2,7 +2,7 @@ import MessageUI
 import SwiftUI
 
 private enum ProfileRoute: Hashable {
-    case authMethod, exportKeys, language, theme, appIcon
+    case authMethod, exportKeys, theme, appIcon
 }
 
 struct ProfileView: View {
@@ -40,9 +40,6 @@ struct ProfileView: View {
                 case .exportKeys:
                     ExportKeysView(onBack: { path.removeLast() })
                         .navigationBarBackButtonHidden()
-                case .language:
-                    LanguageView(onBack: { path.removeLast() })
-                        .navigationBarBackButtonHidden()
                 case .theme:
                     ThemeView(onBack: { path.removeLast() })
                         .navigationBarBackButtonHidden()
@@ -71,7 +68,7 @@ struct ProfileView: View {
                                     Text("Account")
                                         .buttonLarge()
                                         .foregroundStyle(.textPrimary)
-                                    Text("\(userManager.ethereumAddress ?? "")")
+                                    Text(verbatim: Ethereum.formatAddress(userManager.ethereumAddress ?? ""))
                                         .body4()
                                         .foregroundStyle(.textSecondary)
                                 }
@@ -95,14 +92,6 @@ struct ProfileView: View {
                         }
                         CardContainer {
                             VStack(spacing: 20) {
-                                ProfileRow(
-                                    icon: .globeSimple,
-                                    title: String(localized: "Language"),
-                                    value: settingsManager.language.title,
-                                    action: {
-                                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-                                    }
-                                )
                                 ProfileRow(
                                     icon: .sun,
                                     title: String(localized: "Theme"),
