@@ -2,17 +2,21 @@ import Foundation
 import SwiftUI
 
 enum AppIcon: String, CaseIterable {
-    case blackAndWhite
-    case blackAndGreen
-    case greenAndBlack
+    case black
+    case green
+    case gradient
+    case white
+    case cat
 }
 
 extension AppIcon {
     var image: String {
         switch self {
-        case .blackAndWhite: return "BlackAndWhiteIcon"
-        case .blackAndGreen: return "BlackAndGreenIcon"
-        case .greenAndBlack: return "GreenAndBlackIcon"
+        case .black: return "BlackIcon"
+        case .green: return "GreenIcon"
+        case .gradient: return "GradientIcon"
+        case .white: return "WhiteIcon"
+        case .cat: return "CatIcon"
         }
     }
 }
@@ -20,9 +24,11 @@ extension AppIcon {
 extension AppIcon {
     var title: String {
         switch self {
-        case .blackAndWhite: return String(localized: "Black & White")
-        case .blackAndGreen: return String(localized: "Black & Green")
-        case .greenAndBlack: return String(localized: "Green & Black")
+        case .black: return String(localized: "Black")
+        case .green: return String(localized: "Green")
+        case .gradient: return String(localized: "Gradient")
+        case .white: return String(localized: "White")
+        case .cat: return String(localized: "Cat")
         }
     }
 }

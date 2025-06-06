@@ -507,7 +507,6 @@
       }
     },
     "Black" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -518,6 +517,7 @@
       }
     },
     "Black & Green" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -528,6 +528,7 @@
       }
     },
     "Black & White" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -630,6 +631,9 @@
       }
     },
     "Cast secure, anonymous votes from anywhere, just using your passport" : {
+
+    },
+    "Cat" : {
 
     },
     "Cayman Islands" : {
@@ -1262,6 +1266,7 @@
 
     },
     "Get Rewarded" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1278,6 +1283,7 @@
 
     },
     "Go Incognito" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1287,11 +1293,13 @@
         }
       }
     },
+    "Gradient" : {
+
+    },
     "Greece" : {
 
     },
     "Green" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -1302,6 +1310,7 @@
       }
     },
     "Green & Black" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2191,6 +2200,7 @@
 
     },
     "Proofs" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2201,6 +2211,7 @@
       }
     },
     "Prove your eligibility, belonging, identity, and contributions — all without revealing your personal details." : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2255,6 +2266,7 @@
       }
     },
     "RariMe ensures your history, reputation and actions are not lost, and remain under your control." : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2707,6 +2719,7 @@
 
     },
     "Start building your incognito profile and earn rewards as an early community member." : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -2860,6 +2873,7 @@
 
     },
     "This app is where you privately store your digital identities, enabling you to go incognito across the web." : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -3078,6 +3092,7 @@
 
     },
     "Welcome" : {
+      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
@@ -3119,7 +3134,6 @@
       }
     },
     "White" : {
-      "extractionState" : "stale",
       "localizations" : {
         "uk" : {
           "stringUnit" : {
