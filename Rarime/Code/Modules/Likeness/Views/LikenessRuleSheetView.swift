@@ -77,7 +77,7 @@ struct LikenessSetRuleView: View {
                     .align(.center)
             } else {
                 AppButton(
-                    text: "\(saveButtonText)",
+                    text: saveButtonText,
                     action: { onSave(selectedRule) }
                 )
                 .disabled(selectedRule == .unset)
@@ -88,7 +88,7 @@ struct LikenessSetRuleView: View {
         .padding(.vertical, 20)
     }
 
-    var saveButtonText: String {
+    var saveButtonText: LocalizedStringResource {
         if selectedRule == .unset {
             return "Set a rule"
         }

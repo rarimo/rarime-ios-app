@@ -53,7 +53,6 @@ struct LikenessView: View {
             }
             .background(
                 Gradients.purpleBg
-                    .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
                     .ignoresSafeArea()
             )
         }
@@ -79,7 +78,7 @@ struct LikenessView: View {
                         Button(action: { isRuleSheetPresented = true }) {
                             (
                                 Text(likenessManager.rule.title) +
-                                    Text(" ") +
+                                    Text(verbatim: " ") +
                                     Text(Image(.arrowDownSLine))
                                     .foregroundColor(.baseBlack)
                             )

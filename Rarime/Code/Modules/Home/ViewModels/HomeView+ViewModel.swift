@@ -3,6 +3,8 @@ import Foundation
 
 extension HomeView {
     class ViewModel: ObservableObject {
+        @Published var currentWidgetIndex = 0
+
         @Published var isBalanceFetching = true
         @Published var pointsBalance: PointsBalanceRaw? = nil
         @Published var hasBalance = AppUserDefaults.shared.hasPointsBalance {

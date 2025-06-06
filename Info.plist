@@ -28,20 +28,38 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
-			<key>BlackAndGreenIcon</key>
+			<key>GreenIcon</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>BlackAndGreenIcon</string>
+					<string>GreenIcon</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
-			<key>GreenAndBlackIcon</key>
+			<key>GradientIcon</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>GreenAndBlackIcon</string>
+					<string>GradientIcon</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>WhiteIcon</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>WhiteIcon</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>CatIcon</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>CatIcon</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -51,7 +69,7 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>BlackAndWhiteIcon</string>
+				<string>BlackIcon</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<false/>

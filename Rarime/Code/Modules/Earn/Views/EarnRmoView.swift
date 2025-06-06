@@ -65,7 +65,7 @@ struct EarnRmoView: View {
                             Text("RMO")
                                 .additional1()
                                 .foregroundStyle(Gradients.greenText)
-                            Text("Complete various tasks and get rewarded with Rarimo tokens.")
+                            Text("Complete various tasks and get rewarded with Rarimo tokens")
                                 .body3()
                                 .foregroundStyle(.textSecondary)
                                 .fixedSize(horizontal: false, vertical: true)

@@ -16,14 +16,13 @@ struct HomeWidgetsView: View {
 
     @StateObject private var viewModel = HomeWidgetsViewModel()
 
-    @State private var currentIndex: Int = 0
     @State private var isCopied = false
     @State private var isManageSheetPresented = false
 
     var body: some View {
         ZStack(alignment: .trailing) {
             SnapCarouselView(
-                index: $currentIndex,
+                index: $homeViewModel.currentWidgetIndex,
                 cards: visibleWidgets.map { $0.card },
                 spacing: 30,
                 trailingSpace: 20,
@@ -41,7 +40,7 @@ struct HomeWidgetsView: View {
             .padding(.horizontal, 22)
             VerticalStepIndicator(
                 steps: visibleWidgets.count,
-                currentStep: currentIndex
+                currentStep: homeViewModel.currentWidgetIndex
             )
             .padding(.trailing, 8)
         }
@@ -50,11 +49,11 @@ struct HomeWidgetsView: View {
                 selectedWidgets: viewModel.widgets,
                 onAdd: { widget in
                     viewModel.addWidget(widget)
-                    currentIndex = visibleWidgets.count
+                    homeViewModel.currentWidgetIndex = visibleWidgets.count
                 },
                 onRemove: { widget in
                     viewModel.removeWidget(widget)
-                    currentIndex = visibleWidgets.count
+                    homeViewModel.currentWidgetIndex = visibleWidgets.count
                 }
             )
             .padding(.top, 18)
@@ -94,7 +93,7 @@ struct HomeWidgetsView: View {
                     title: "Earn",
                     subtitle: "RMO",
                     bottomContent: {
-                        Text("Complete various tasks and get rewarded with Rarimo tokens.")
+                        Text("Complete various tasks and get rewarded with Rarimo tokens")
                             .body4()
                             .foregroundStyle(.textSecondary)
                             .frame(maxWidth: 220, alignment: .leading)

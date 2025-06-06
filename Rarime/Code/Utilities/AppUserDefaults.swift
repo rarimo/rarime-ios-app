@@ -29,9 +29,6 @@ public class AppUserDefaults: ObservableObject {
     @AppStorage("color_scheme")
     public var colorScheme = AppColorScheme.system.rawValue
 
-    @AppStorage("language")
-    public var language = AppLanguage.english.rawValue
-
     @AppStorage("is_first_launch")
     public var isFirstLaunch = true
 
@@ -94,7 +91,7 @@ public class AppUserDefaults: ObservableObject {
 
     @AppStorage("home_widgets")
     public var homeWidgets: Data = (try? JSONEncoder().encode(DEFAULT_HOME_WIDGETS.map { $0.rawValue })) ?? Data()
-    
+
     @AppStorage("has_points_balance")
     public var hasPointsBalance: Bool = false
 }
