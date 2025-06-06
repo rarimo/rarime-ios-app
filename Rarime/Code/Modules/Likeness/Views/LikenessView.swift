@@ -53,7 +53,6 @@ struct LikenessView: View {
             }
             .background(
                 Gradients.purpleBg
-                    .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
                     .ignoresSafeArea()
             )
         }

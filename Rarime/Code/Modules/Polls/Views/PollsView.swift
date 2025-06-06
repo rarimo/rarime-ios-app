@@ -138,6 +138,7 @@ struct PollsView: View {
             .padding(.trailing, 20)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .background(.bgBlur)
         .dynamicSheet(isPresented: $isPollSheetShown, fullScreen: true, bgColor: .additionalGreen) {
             if let selectedPoll = pollsViewModel.selectedPoll {
                 PollView(

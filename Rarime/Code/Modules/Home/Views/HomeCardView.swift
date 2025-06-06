@@ -90,14 +90,11 @@ struct HomeCardView<Content: View, TopContent: View, BottomContent: View>: View 
                 .padding(.trailing, 24)
         }
         .frame(maxHeight: .infinity)
-        .background(
+        .overlay(
             RoundedRectangle(cornerRadius: 32)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 32)
-                        .stroke(.bgComponentPrimary, lineWidth: 1)
-                )
-                .matchedGeometryEffect(id: AnimationNamespaceIds.background, in: animation)
+                .stroke(.bgComponentPrimary, lineWidth: 1)
         )
+        .clipShape(RoundedRectangle(cornerRadius: 32))
     }
 }
 
@@ -116,7 +113,7 @@ struct HomeCardView<Content: View, TopContent: View, BottomContent: View>: View 
         title: "Earn",
         subtitle: "RMO",
         bottomContent: {
-            Text("Complete various tasks and get rewarded with Rarimo tokens.")
+            Text("Complete various tasks and get rewarded with Rarimo tokens")
                 .body4()
                 .foregroundStyle(.textSecondary)
                 .frame(maxWidth: 220, alignment: .leading)

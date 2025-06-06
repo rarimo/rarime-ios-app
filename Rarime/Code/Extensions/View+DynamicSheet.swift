@@ -35,7 +35,7 @@ extension View {
         isPresented: Binding<Bool>,
         fullScreen: Bool = false,
         title: LocalizedStringResource? = nil,
-        bgColor: Color = .bgPrimary,
+        bgColor: Color = .bgSurface1,
         onDismiss: (() -> Void)? = nil,
         @ViewBuilder content: @escaping () -> Content
     ) -> some View where Content: View {

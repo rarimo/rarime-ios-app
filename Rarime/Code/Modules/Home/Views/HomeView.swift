@@ -95,8 +95,10 @@ struct HomeView: View {
             .transition(.identity)
             .zIndex(1)
         }
-        .animation(.interpolatingSpring(stiffness: 100, damping: 15),
-                   value: selectedWidget)
+        .animation(
+            .interpolatingSpring(stiffness: 100, damping: 15),
+            value: selectedWidget
+        )
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                 isOnboardingPresented = !AppUserDefaults.shared.isHomeOnboardingCompleted
