@@ -138,7 +138,6 @@ struct PollsView: View {
             .padding(.trailing, 20)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .background(.bgBlur)
         .dynamicSheet(isPresented: $isPollSheetShown, fullScreen: true, bgColor: .additionalGreen) {
             if let selectedPoll = pollsViewModel.selectedPoll {
                 PollView(
@@ -165,14 +164,11 @@ struct PollsView: View {
         ZStack {
             if isPollsLoading {
                 ProgressView()
-                    .controlSize(.large)
                     .tint(.textSecondary)
-                    .frame(height: 240, alignment: .center)
             } else if !isPollsLoading && polls.isEmpty {
                 Text("No polls yet")
                     .body3()
                     .foregroundStyle(.textSecondary)
-                    .frame(height: 240, alignment: .center)
             } else {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 8) {
@@ -187,6 +183,7 @@ struct PollsView: View {
                 }
             }
         }
+        .frame(minHeight: 340, alignment: .center)
     }
     
     @MainActor

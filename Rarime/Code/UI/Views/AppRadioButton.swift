@@ -25,6 +25,11 @@ struct AppRadioButton<Label: View>: View {
                     Spacer()
                     radioCircle
                 }
+                .padding(20)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(.bgComponentPrimary, lineWidth: 1)
+                )
             } else {
                 radioCircle
             }

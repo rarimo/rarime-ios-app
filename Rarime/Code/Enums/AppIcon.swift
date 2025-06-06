@@ -2,22 +2,16 @@ import Foundation
 import SwiftUI
 
 enum AppIcon: String, CaseIterable {
-    case black
-    case green
-    case gradient
-    case white
-    case cat
+    case black = "BlackIcon"
+    case green = "GreenIcon"
+    case gradient = "GradientIcon"
+    case white = "WhiteIcon"
+    case cat = "CatIcon"
 }
 
 extension AppIcon {
-    var image: String {
-        switch self {
-        case .black: return "BlackIcon"
-        case .green: return "GreenIcon"
-        case .gradient: return "GradientIcon"
-        case .white: return "WhiteIcon"
-        case .cat: return "CatIcon"
-        }
+    var isDefault: Bool {
+        self == .black
     }
 }
 
@@ -29,6 +23,18 @@ extension AppIcon {
         case .gradient: return String(localized: "Gradient")
         case .white: return String(localized: "White")
         case .cat: return String(localized: "Cat")
+        }
+    }
+}
+
+extension AppIcon {
+    var image: ImageResource {
+        switch self {
+        case .black: return .blackIcon
+        case .green: return .greenIcon
+        case .gradient: return .gradientIcon
+        case .white: return .whiteIcon
+        case .cat: return .catIcon
         }
     }
 }

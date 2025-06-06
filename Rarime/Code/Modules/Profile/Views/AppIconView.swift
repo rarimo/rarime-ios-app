@@ -46,11 +46,6 @@ private struct AppIconItem: View {
                     .foregroundStyle(.textPrimary)
             }
         }
-        .padding(20)
-        .overlay(
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(.bgComponentPrimary, lineWidth: 1)
-        )
     }
 }
 
