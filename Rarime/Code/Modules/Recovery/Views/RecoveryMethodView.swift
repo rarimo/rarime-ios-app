@@ -67,9 +67,24 @@ struct RecoveryMethodView: View {
         .padding(.bottom, 8)
         .background(.bgBlur, in: RoundedRectangle(cornerRadius: 16))
         .dynamicSheet(isPresented: $isMethodSheetPresented, fullScreen: true) {
-            RecoveryMethodSelectionView(
-                onClose: { isMethodSheetPresented = false }
-            )
+            VStack(spacing: 24) {
+                HStack {
+                    Text("Recovery Method")
+                        .subtitle4()
+                        .foregroundStyle(.textPrimary)
+                    Spacer()
+                    Button(action: { isMethodSheetPresented = false }) {
+                        Image(.closeFill)
+                            .iconLarge()
+                            .foregroundStyle(.textPrimary)
+                    }
+                }
+                .padding(.horizontal, 12)
+                RecoveryMethodSelectionView()
+                Spacer()
+            }
+            .padding(.vertical, 20)
+            .padding(.horizontal, 8)
         }
     }
 }

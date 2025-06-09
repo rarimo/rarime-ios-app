@@ -63,6 +63,8 @@ class FindFaceViewModel: ObservableObject {
             guard let user = UserManager.shared.user else { throw "failed to get user" }
             jwt = try await DecentralizedAuthManager.shared.getAccessJwt(user)
             userResponse = try await guessCelebrityService.getUserInformation(jwt: jwt!)
+        } catch let afError as AFError where afError.isExplicitlyCancelledError {
+            return
         } catch {
             do {
                 guard let jwt else { throw "failed to get JWT" }

@@ -17,6 +17,7 @@ class ICloudRecoveryViewModel: ObservableObject {
         return user.secretKey.hex == cloudKey?.hex
     }
 
+    @MainActor
     func loadBackupStatus() async {
         defer { isLoading = false }
         do {

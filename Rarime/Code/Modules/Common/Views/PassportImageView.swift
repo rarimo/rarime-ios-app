@@ -9,7 +9,7 @@ struct PassportImageView: View {
         if let image {
             Image(uiImage: image)
                 .resizable()
-                .scaledToFit()
+                .scaledToFill()
                 .frame(width: size, height: size)
                 .background(.white)
                 .clipShape(Circle())
@@ -28,7 +28,7 @@ struct PassportImageView: View {
 #Preview {
     VStack {
         PassportImageView(image: UIImage(resource: .debugFace))
-        PassportImageView(image: nil, bgColor: .primaryMain)
+        PassportImageView(image: nil, bgColor: .bgComponentPrimary)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(.bgPrimary)

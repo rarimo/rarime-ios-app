@@ -103,6 +103,8 @@ class WalletManager: ObservableObject {
         }
 
         LoggerUtil.common.info("Transfer transaction hash: \(receipt!.transactionHash.hex(), privacy: .public)")
+
+        await pullTransactions()
     }
 
     func waitForTransactionReceipt(txHash: EthereumData, timeout: TimeInterval = 60) async -> EthereumTransactionReceiptObject? {

@@ -96,6 +96,25 @@ struct EarnRmoView: View {
             }
             .padding(.top, 12)
             .padding(.trailing, 20)
+            HStack {
+                HStack(spacing: 8) {
+                    Text("Reserved:")
+                        .subtitle6()
+                    HStack(spacing: 4) {
+                        Text(verbatim: balance?.amount.formatted() ?? "0")
+                            .h6()
+                        Image(.rarimo)
+                            .square(18)
+                    }
+                }
+                .foregroundStyle(.textPrimary)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                .background(.bgComponentPrimary, in: Capsule())
+                Spacer()
+            }
+            .padding(.top, 12)
+            .padding(.leading, 20)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .dynamicSheet(isPresented: $isInviteSheetPresented) {

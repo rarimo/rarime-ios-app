@@ -4,75 +4,56 @@ import SwiftUI
 struct RecoveryMethodSelectionView: View {
     @EnvironmentObject private var userManager: UserManager
 
-    let onClose: () -> Void
-
     @StateObject var viewModel = ICloudRecoveryViewModel()
 
     @State private var isCopied = false
     @State private var isRewriteAlertPresented = false
 
     var body: some View {
-        VStack(spacing: 24) {
-            HStack {
-                Text("Recovery Method")
-                    .subtitle4()
-                    .foregroundStyle(.textPrimary)
-                Spacer()
-                Button(action: onClose) {
-                    Image(.closeFill)
-                        .iconLarge()
-                        .foregroundStyle(.textPrimary)
-                }
-            }
-            .padding(.horizontal, 12)
-            VStack(spacing: 12) {
-                privateKeyCard
-                if viewModel.isLoading {
-                    ProgressView()
-                        .padding(.vertical, 32)
-                } else {
-                    if viewModel.isICloudAvailable {
-                        RecoveryMethodItem(
-                            icon: .cloudLine,
-                            title: String(localized: "iCloud backup"),
-                            description: String(localized: "Backup key stored in iCloud"),
-                            isRecommended: true,
-                            isDisabled: viewModel.isProcessing
-                        ) {
-                            AppToggle(isOn: Binding(
-                                get: { viewModel.isKeysEqual },
-                                set: { val in
-                                    Task {
-                                        await toggleBackup(val)
-                                    }
+        VStack(spacing: 12) {
+            privateKeyCard
+            if viewModel.isLoading {
+                ProgressView()
+                    .padding(.vertical, 32)
+            } else {
+                if viewModel.isICloudAvailable {
+                    RecoveryMethodItem(
+                        icon: .cloudLine,
+                        title: String(localized: "iCloud backup"),
+                        description: String(localized: "Backup key stored in iCloud"),
+                        isRecommended: true,
+                        isDisabled: viewModel.isProcessing
+                    ) {
+                        AppToggle(isOn: Binding(
+                            get: { viewModel.isKeysEqual },
+                            set: { val in
+                                Task {
+                                    await toggleBackup(val)
                                 }
-                            ))
-                        }
-                    }
-                    RecoveryMethodItem(
-                        icon: .emotionHappyLine,
-                        title: String(localized: "zkFace"),
-                        description: String(localized: "Biometric facial key"),
-                        isRecommended: false,
-                        isDisabled: true
-                    ) {
-                        soonBadge
-                    }
-                    RecoveryMethodItem(
-                        icon: .box3Line,
-                        title: String(localized: "Objects"),
-                        description: String(localized: "Make any object your key"),
-                        isRecommended: false,
-                        isDisabled: true
-                    ) {
-                        soonBadge
+                            }
+                        ))
                     }
                 }
+                RecoveryMethodItem(
+                    icon: .emotionHappyLine,
+                    title: String(localized: "zkFace"),
+                    description: String(localized: "Biometric facial key"),
+                    isRecommended: false,
+                    isDisabled: true
+                ) {
+                    soonBadge
+                }
+                RecoveryMethodItem(
+                    icon: .box3Line,
+                    title: String(localized: "Objects"),
+                    description: String(localized: "Make any object your key"),
+                    isRecommended: false,
+                    isDisabled: true
+                ) {
+                    soonBadge
+                }
             }
-            Spacer()
         }
-        .padding(.vertical, 20)
-        .padding(.horizontal, 8)
         .onAppear {
             Task { await viewModel.loadBackupStatus() }
         }
@@ -185,9 +166,6 @@ struct RecoveryMethodSelectionView: View {
 }
 
 #Preview {
-    ZStack {}
-        .dynamicSheet(isPresented: .constant(true), fullScreen: true) {
-            RecoveryMethodSelectionView(onClose: {})
-                .environmentObject(UserManager.shared)
-        }
+    RecoveryMethodSelectionView()
+        .environmentObject(UserManager.shared)
 }

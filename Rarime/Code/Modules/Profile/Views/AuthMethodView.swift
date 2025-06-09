@@ -12,21 +12,21 @@ struct AuthMethodView: View {
             VStack(spacing: 12) {
                 AuthMethodItem(
                     isOn: Binding(
-                        get: { securityManager.faceIdState == .enabled },
-                        set: { $0 ? securityManager.enableFaceId() : securityManager.disableFaceId() }
-                    ),
-                    icon: .userFocus,
-                    label: String(localized: "Face ID")
-                )
-                .disabled(securityManager.passcodeState == .disabled)
-                AuthMethodItem(
-                    isOn: Binding(
                         get: { securityManager.passcodeState == .enabled },
                         set: { $0 ? securityManager.enablePasscode() : securityManager.disablePasscode() }
                     ),
-                    icon: .password,
+                    icon: .hashtag,
                     label: String(localized: "Passcode")
                 )
+                AuthMethodItem(
+                    isOn: Binding(
+                        get: { securityManager.faceIdState == .enabled },
+                        set: { $0 ? securityManager.enableFaceId() : securityManager.disableFaceId() }
+                    ),
+                    icon: .focusMode,
+                    label: String(localized: "Face ID")
+                )
+                .disabled(securityManager.passcodeState == .disabled)
             }
         }
     }
@@ -41,8 +41,6 @@ private struct AuthMethodItem: View {
         HStack(spacing: 16) {
             Image(icon)
                 .iconMedium()
-                .padding(6)
-                .background(.bgComponentPrimary, in: Circle())
                 .foregroundStyle(.textPrimary)
             Text(label)
                 .subtitle6()
@@ -50,8 +48,11 @@ private struct AuthMethodItem: View {
             Spacer()
             AppToggle(isOn: $isOn)
         }
-        .padding(16)
-        .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 12))
+        .padding(20)
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(.bgComponentPrimary)
+        )
     }
 }
 

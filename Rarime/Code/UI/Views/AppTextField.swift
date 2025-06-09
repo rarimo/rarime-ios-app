@@ -80,7 +80,7 @@ struct AppTextField<Hint: View, Action: View>: View {
 
             if isError {
                 HStack(spacing: 8) {
-                    Image(.info).iconSmall()
+                    Image(.informationLine).iconSmall()
                     Text(self.errorMessage).caption2()
                 }
                 .foregroundStyle(.errorMain)
@@ -111,7 +111,7 @@ private struct PreviewView: View {
                 HStack {
                     Text(verbatim: "Some hint text").caption2()
                     Spacer()
-                    Image(.info).iconSmall()
+                    Image(.informationLine).iconSmall()
                 }
             }
             AppTextField(

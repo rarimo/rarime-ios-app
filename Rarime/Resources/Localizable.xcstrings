@@ -101,6 +101,9 @@
     "Address" : {
 
     },
+    "Address: %@" : {
+
+    },
     "Afghanistan" : {
 
     },
@@ -1303,6 +1306,9 @@
 
     },
     "Reserve" : {
+
+    },
+    "Reserved:" : {
 
     },
     "Restore manually" : {
