@@ -13,12 +13,16 @@ struct NotificationsView: View {
     
     var body: some View {
         VStack(spacing: 24) {
-            HStack(alignment: .center) {
+            ZStack(alignment: .topLeading) {
+                Button(action: onBack) {
+                    Image(.arrowLeftSLine)
+                        .iconMedium()
+                        .foregroundColor(.textPrimary)
+                }
                 Text("Notifications")
-                    .subtitle4()
-                    .foregroundStyle(.textPrimary)
-                Spacer()
-                AppIconButton(icon: .closeFill, action: onBack)
+                    .buttonMedium()
+                    .foregroundColor(.textPrimary)
+                    .frame(maxWidth: .infinity)
             }
             if pushNotifications.isEmpty {
                 Spacer()
@@ -54,6 +58,7 @@ struct NotificationsView: View {
                         }
                     }
                     .listStyle(.plain)
+                    .scrollIndicators(.hidden)
                     .onAppear {
                         scrollView.scrollTo(pushNotifications.last?.id)
                     }
@@ -108,42 +113,26 @@ private struct NotificationView: View {
 
     var body: some View {
         VStack(spacing: 8) {
-            if notification.isRead {
-                HStack(alignment: .center) {
-                    Text(notification.title ?? "")
-                        .body4()
-                        .foregroundStyle(.textPrimary)
-                    Spacer()
+            HStack(alignment: .center) {
+                Text(notification.title ?? "")
+                    .subtitle6()
+                Spacer()
+                HStack(alignment: .center, spacing: 4) {
+                    if !notification.isRead {
+                        Circle()
+                            .fill(.textPrimary)
+                            .frame(width: 8)
+                    }
                     Text(notification.receivedAt?.formatted(date: .abbreviated, time: .omitted) ?? "")
                         .caption3()
-                        .foregroundStyle(.textSecondary)
                 }
-                Text(notification.body ?? "")
-                    .body5()
-                    .foregroundStyle(.textSecondary)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(2)
-            } else {
-                HStack(alignment: .center) {
-                    Text(notification.title ?? "")
-                        .subtitle6()
-                        .foregroundStyle(.textPrimary)
-                    Spacer()
-                    HStack(alignment: .center, spacing: 4) {
-                        Circle()
-                            .fill(.secondaryDark)
-                            .frame(width: 8)
-                        Text(notification.receivedAt?.formatted(date: .abbreviated, time: .omitted) ?? "")
-                            .caption3()
-                            .foregroundStyle(.secondaryDark)
-                    }
-                }
-                Text(notification.body ?? "")
-                    .subtitle7()
-                    .foregroundStyle(.textSecondary)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(2)
             }
+            .foregroundStyle(notification.isRead ? .textSecondary : .textPrimary)
+            Text(notification.body ?? "")
+                .body5()
+                .foregroundStyle(.textSecondary)
+                .multilineTextAlignment(.leading)
+                .lineLimit(2)
         }
     }
 }
