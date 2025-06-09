@@ -2,7 +2,7 @@ import MessageUI
 import SwiftUI
 
 private enum ProfileRoute: Hashable {
-    case authMethod, exportKeys, theme, appIcon
+    case authMethod, recovery, theme, appIcon
 }
 
 struct ProfileView: View {
@@ -37,9 +37,14 @@ struct ProfileView: View {
                 case .authMethod:
                     AuthMethodView(onBack: { path.removeLast() })
                         .navigationBarBackButtonHidden()
-                case .exportKeys:
-                    ExportKeysView(onBack: { path.removeLast() })
-                        .navigationBarBackButtonHidden()
+                case .recovery:
+                    ProfileRouteLayout(
+                        title: String(localized: "Recovery Method"),
+                        onBack: { path.removeLast() }
+                    ) {
+                        RecoveryMethodSelectionView()
+                    }
+                    .navigationBarBackButtonHidden()
                 case .theme:
                     ThemeView(onBack: { path.removeLast() })
                         .navigationBarBackButtonHidden()
@@ -68,7 +73,7 @@ struct ProfileView: View {
                                     Text("Account")
                                         .buttonLarge()
                                         .foregroundStyle(.textPrimary)
-                                    Text(verbatim: Ethereum.formatAddress(userManager.ethereumAddress ?? ""))
+                                    Text("Address: \(Ethereum.formatAddress(userManager.ethereumAddress ?? ""))")
                                         .body4()
                                         .foregroundStyle(.textSecondary)
                                 }
@@ -79,21 +84,21 @@ struct ProfileView: View {
                         CardContainer {
                             VStack(spacing: 20) {
                                 ProfileRow(
-                                    icon: .userFocus,
-                                    title: String(localized: "Auth Method"),
-                                    action: { path.append(.authMethod) }
+                                    icon: .userShared2Line,
+                                    title: String(localized: "Recovery Method"),
+                                    action: { path.append(.recovery) }
                                 )
                                 ProfileRow(
-                                    icon: .key,
-                                    title: String(localized: "Export Keys"),
-                                    action: { path.append(.exportKeys) }
+                                    icon: .shieldKeyholeLine,
+                                    title: String(localized: "Auth Method"),
+                                    action: { path.append(.authMethod) }
                                 )
                             }
                         }
                         CardContainer {
                             VStack(spacing: 20) {
                                 ProfileRow(
-                                    icon: .sun,
+                                    icon: .sunLine,
                                     title: String(localized: "Theme"),
                                     value: settingsManager.colorScheme.title,
                                     action: { path.append(.theme) }
@@ -106,6 +111,10 @@ struct ProfileView: View {
                                         action: { path.append(.appIcon) }
                                     )
                                 }
+                            }
+                        }
+                        CardContainer {
+                            VStack(spacing: 20) {
                                 ProfileRow(
                                     icon: .questionLine,
                                     title: String(localized: "Privacy Policy"),
@@ -116,7 +125,7 @@ struct ProfileView: View {
                                         .ignoresSafeArea()
                                 }
                                 ProfileRow(
-                                    icon: .flag,
+                                    icon: .flagLine,
                                     title: String(localized: "Terms of Use"),
                                     action: { isTermsSheetPresented = true }
                                 )
@@ -126,7 +135,7 @@ struct ProfileView: View {
                                 }
                                 if MFMailComposeViewController.canSendMail() {
                                     ProfileRow(
-                                        icon: .chat,
+                                        icon: .chat2Line,
                                         title: "Give us Feedback",
                                         action: { isShareWithDeveloper = true }
                                     )
@@ -152,7 +161,7 @@ struct ProfileView: View {
                         CardContainer {
                             Button(action: { isAccountDeleting = true }) {
                                 HStack {
-                                    Image(.trashSimple)
+                                    Image(.deleteBin6Line)
                                         .iconMedium()
                                         .padding(6)
                                         .background(.errorLighter, in: Circle())

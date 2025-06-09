@@ -20,9 +20,9 @@ struct AppAlert: View {
 
     private var icon: ImageResource {
         switch type {
-        case .success: .info
+        case .success: .informationLine
         case .error: .warning
-        case .processing: .info
+        case .processing: .informationLine
         }
     }
 
