@@ -37,10 +37,6 @@ struct AppView: View {
                     securityManager.faceIdState != .unset
                 {
                     LockScreenView()
-                } else if securityManager.passcodeState != .unset {
-                    EnableFaceIdView().transition(.backslide)
-                } else if viewModel.isIntroFinished {
-                    EnablePasscodeView().transition(.backslide)
                 } else {
                     IntroView(onFinish: { viewModel.finishIntro() })
                         .transition(.backslide)

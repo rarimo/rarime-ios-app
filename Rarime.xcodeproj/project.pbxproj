@@ -112,9 +112,6 @@
 		56DAA3052BB72E35002CF710 /* InfoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3042BB72E35002CF710 /* InfoAlert.swift */; };
 		56DAA3072BB77550002CF710 /* IdentityStepLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3062BB77550002CF710 /* IdentityStepLayoutView.swift */; };
 		56DAA30B2BB8B977002CF710 /* View+DynamicSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA30A2BB8B977002CF710 /* View+DynamicSheet.swift */; };
-		56DAA30F2BB8C3CB002CF710 /* EnablePasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA30E2BB8C3CB002CF710 /* EnablePasscodeView.swift */; };
-		56DAA3112BB8C97D002CF710 /* EnableLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3102BB8C97D002CF710 /* EnableLayoutView.swift */; };
-		56DAA3132BB8CA4F002CF710 /* EnableFaceIdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3122BB8CA4F002CF710 /* EnableFaceIdView.swift */; };
 		56DAA3152BB8CC95002CF710 /* PasscodeFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3142BB8CC95002CF710 /* PasscodeFieldView.swift */; };
 		56E2D9172BCE938F006E725D /* ActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D9162BCE938F006E725D /* ActionCard.swift */; };
 		56E2D91B2BCEA66A006E725D /* PassportCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D91A2BCEA66A006E725D /* PassportCard.swift */; };
@@ -123,7 +120,6 @@
 		56E2D92D2BD0196B006E725D /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D92C2BD0196B006E725D /* QRCodeView.swift */; };
 		56E2D9322BD01E71006E725D /* NFCPassportReader in Frameworks */ = {isa = PBXBuildFile; productRef = 56E2D9312BD01E71006E725D /* NFCPassportReader */; };
 		56E6AD452BD272D100E4DDC1 /* AuthMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD442BD272D100E4DDC1 /* AuthMethodView.swift */; };
-		56E6AD472BD272FB00E4DDC1 /* ExportKeysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD462BD272FB00E4DDC1 /* ExportKeysView.swift */; };
 		56E6AD4B2BD2732300E4DDC1 /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4A2BD2732300E4DDC1 /* ThemeView.swift */; };
 		56E6AD4D2BD273BC00E4DDC1 /* ProfileRouteLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */; };
 		56E6AD4F2BD2756200E4DDC1 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */; };
@@ -525,9 +521,6 @@
 		56DAA3042BB72E35002CF710 /* InfoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlert.swift; sourceTree = "<group>"; };
 		56DAA3062BB77550002CF710 /* IdentityStepLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityStepLayoutView.swift; sourceTree = "<group>"; };
 		56DAA30A2BB8B977002CF710 /* View+DynamicSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+DynamicSheet.swift"; sourceTree = "<group>"; };
-		56DAA30E2BB8C3CB002CF710 /* EnablePasscodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnablePasscodeView.swift; sourceTree = "<group>"; };
-		56DAA3102BB8C97D002CF710 /* EnableLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableLayoutView.swift; sourceTree = "<group>"; };
-		56DAA3122BB8CA4F002CF710 /* EnableFaceIdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableFaceIdView.swift; sourceTree = "<group>"; };
 		56DAA3142BB8CC95002CF710 /* PasscodeFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeFieldView.swift; sourceTree = "<group>"; };
 		56E2D9162BCE938F006E725D /* ActionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCard.swift; sourceTree = "<group>"; };
 		56E2D91A2BCEA66A006E725D /* PassportCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportCard.swift; sourceTree = "<group>"; };
@@ -535,7 +528,6 @@
 		56E2D9212BCFBA0B006E725D /* PassportImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportImageView.swift; sourceTree = "<group>"; };
 		56E2D92C2BD0196B006E725D /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		56E6AD442BD272D100E4DDC1 /* AuthMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethodView.swift; sourceTree = "<group>"; };
-		56E6AD462BD272FB00E4DDC1 /* ExportKeysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportKeysView.swift; sourceTree = "<group>"; };
 		56E6AD4A2BD2732300E4DDC1 /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
 		56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouteLayout.swift; sourceTree = "<group>"; };
 		56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
@@ -935,7 +927,6 @@
 			children = (
 				56722F1F2BCD62BB00300AD0 /* ProfileView.swift */,
 				56E6AD442BD272D100E4DDC1 /* AuthMethodView.swift */,
-				56E6AD462BD272FB00E4DDC1 /* ExportKeysView.swift */,
 				56E6AD4A2BD2732300E4DDC1 /* ThemeView.swift */,
 				5659151A2BE927A20050795A /* AppIconView.swift */,
 				56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */,
@@ -1173,25 +1164,6 @@
 			children = (
 				568034D12D95ADC300BA7F2A /* EarnRmoView.swift */,
 				56CF56652DF0ECFD005BCD5E /* InviteOthersView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		56DAA30C2BB8C38D002CF710 /* Security */ = {
-			isa = PBXGroup;
-			children = (
-				56DAA30D2BB8C395002CF710 /* Views */,
-			);
-			path = Security;
-			sourceTree = "<group>";
-		};
-		56DAA30D2BB8C395002CF710 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				56DAA30E2BB8C3CB002CF710 /* EnablePasscodeView.swift */,
-				56DAA3122BB8CA4F002CF710 /* EnableFaceIdView.swift */,
-				56DAA3102BB8C97D002CF710 /* EnableLayoutView.swift */,
-				CE19CB482BE3AD4200B26DF7 /* LockScreenView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1665,7 +1637,6 @@
 				563529E02BB071930027C910 /* Profile */,
 				564715BE2DEDAF1800B1334B /* Recovery */,
 				56933DEB2BBAB0660068C894 /* ScanPassport */,
-				56DAA30C2BB8C38D002CF710 /* Security */,
 				CEEE2B3D2DDCBF1C00532E72 /* Wallet */,
 			);
 			path = Modules;
@@ -1684,6 +1655,7 @@
 			isa = PBXGroup;
 			children = (
 				CE9E82B72BA881F400AAF885 /* AppView.swift */,
+				CE19CB482BE3AD4200B26DF7 /* LockScreenView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2216,7 +2188,6 @@
 				CE68BE3D2BD9B23D00D92EBB /* ZkProof.swift in Sources */,
 				56474ADA2BB9ED6E0017AA25 /* AnyTransition+Backslide.swift in Sources */,
 				CEEE2B462DDCBF6C00532E72 /* WalletRouteLayout.swift in Sources */,
-				56DAA30F2BB8C3CB002CF710 /* EnablePasscodeView.swift in Sources */,
 				56DAA3052BB72E35002CF710 /* InfoAlert.swift in Sources */,
 				568034D42D95ADC300BA7F2A /* EarnRmoView.swift in Sources */,
 				C75C4DF02D8D80D000D647DF /* HeightPreservingTabView.swift in Sources */,
@@ -2274,7 +2245,6 @@
 				563529EB2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift in Sources */,
 				CE06BF342D08567500F6C721 /* LightRegistrationService.swift in Sources */,
 				CEFF68BD2CB6A1C2008769EA /* RegisterIdentityInputs.swift in Sources */,
-				56DAA3132BB8CA4F002CF710 /* EnableFaceIdView.swift in Sources */,
 				CE0DA0D72BDA6F1900696503 /* EvmTxResponse.swift in Sources */,
 				56062B9A2C12007A00C9BF9B /* Country.swift in Sources */,
 				CE39DF852D3FA84400799A4B /* DocumentType.swift in Sources */,
@@ -2285,7 +2255,6 @@
 				CEC9D8E72BFF41A800EACD0F /* HTTPStatusCode.swift in Sources */,
 				C7BD524B2D82ED7E0072F0BA /* View+Shadow.swift in Sources */,
 				568B4FD12BB6D88F001C9C74 /* Divider.swift in Sources */,
-				56DAA3112BB8C97D002CF710 /* EnableLayoutView.swift in Sources */,
 				564CE2F52DD2500600D03E6D /* FindFaceView.swift in Sources */,
 				56E2D9202BCED460006E725D /* AppCheckbox.swift in Sources */,
 				CE72101E2BD7BD9D0043DB7F /* Data+Utf8.swift in Sources */,
@@ -2294,7 +2263,6 @@
 				CE3CD7902DB67E9700112E46 /* FaceLikenessView.swift in Sources */,
 				5655E4232BD2C3AC00B86C5C /* SettingsManager.swift in Sources */,
 				CEDC4D812BE9475400459D4E /* Certificates.swift in Sources */,
-				56E6AD472BD272FB00E4DDC1 /* ExportKeysView.swift in Sources */,
 				CEFE5F352CB522A700498F39 /* RegisterIdentityCircuitType.swift in Sources */,
 				CE0DC57D2C0DB9B200EFC0D7 /* VersionUpdateView.swift in Sources */,
 				CE8FEB5F2C1AFF0A0008381A /* JWT.swift in Sources */,
