@@ -56,7 +56,7 @@ struct LikenessProcessingView: View {
             likenessManager.setFaceImage(nil)
             FeedbackGenerator.shared.notify(.error)
 
-            LoggerUtil.common.error("Likeness registration error: \(error)")
+            LoggerUtil.common.error("Likeness registration error: \(error, privacy: .public)")
             AlertManager.shared.emitError("Error during likeness registration, please try again")
 
             onError()
