@@ -13,7 +13,9 @@ struct ScanPassportMRZView: View {
             onClose: onClose
         ) {
             ZStack {
-                MRZScanView(onMrzKey: onNext)
+                CameraPermissionView(onCancel: onClose) {
+                    MRZScanView(onMrzKey: onNext)
+                }
                 Image(.passportFrame)
                     .resizable()
                     .scaledToFit()

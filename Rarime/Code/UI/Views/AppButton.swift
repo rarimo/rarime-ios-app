@@ -82,6 +82,7 @@ struct AppButton: View {
     var rightIcon: ImageResource?
 
     var width: CGFloat? = .infinity
+    var loading: Bool = false
     var action: () -> Void
 
     @Environment(\.controlSize) var controlSize
@@ -121,21 +122,29 @@ struct AppButton: View {
                 .frame(maxWidth: width)
                 .padding(.horizontal, paddingHorizontal)
         }
+        .disabled(loading)
         .buttonStyle(AppButtonStyle(variant: variant))
         .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
     }
 
     var label: some View {
-        HStack(spacing: 8) {
-            if let leftIcon {
-                Image(leftIcon).square(iconSize)
-            }
-            switch controlSize {
-            case .large: Text(text).buttonLarge()
-            default: Text(text).buttonMedium()
-            }
-            if let rightIcon {
-                Image(rightIcon).square(iconSize)
+        ZStack {
+            if loading {
+                ProgressView()
+                    .controlSize(controlSize == .small ? .small : .regular)
+            } else {
+                HStack(spacing: 8) {
+                    if let leftIcon {
+                        Image(leftIcon).square(iconSize)
+                    }
+                    switch controlSize {
+                    case .large: Text(text).buttonLarge()
+                    default: Text(text).buttonMedium()
+                    }
+                    if let rightIcon {
+                        Image(rightIcon).square(iconSize)
+                    }
+                }
             }
         }
     }
@@ -145,6 +154,12 @@ struct AppButton: View {
     VStack {
         AppButton(
             text: LocalizedStringResource("Primary", table: "preview"),
+            action: {}
+        )
+        .controlSize(.large)
+        AppButton(
+            text: LocalizedStringResource("Primary", table: "preview"),
+            loading: true,
             action: {}
         )
         .controlSize(.large)

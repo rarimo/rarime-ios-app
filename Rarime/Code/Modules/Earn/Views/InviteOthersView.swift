@@ -31,7 +31,7 @@ private struct InviteCodeView: View {
     let status: ReferralCodeStatus
 
     var invitationLink: String {
-        ConfigManager.shared.api.referralURL.appendingPathComponent("\(code)").absoluteString
+        ConfigManager.shared.api.webAppURL.appendingPathComponent("r/\(code)").absoluteString
     }
 
     var usedStatusText: String {

@@ -35,7 +35,7 @@ struct FindFaceView: View {
     }
 
     private var invitationLink: String {
-        ConfigManager.shared.api.referralURL.appendingPathComponent(findFaceUser.referralCode).absoluteString
+        ConfigManager.shared.api.webAppURL.appendingPathComponent("r/\(findFaceUser.referralCode)").absoluteString
     }
 
     private var imageToShare: Data {
@@ -230,8 +230,9 @@ struct FindFaceView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     ShareLink(
                         item: imageToShare,
-                        subject: Text("Find a face"),
-                        preview: SharePreview("Find a face", image: Image(uiImage: UIImage(data: imageToShare)!))
+                        subject: Text("Hidden face"),
+                        message: Text("Join RariMe with my invite code"),
+                        preview: SharePreview("Hidden face", image: Image(uiImage: UIImage(data: imageToShare)!))
                     ) {
                         Text("Share")
                             .buttonMedium()

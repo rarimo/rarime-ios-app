@@ -71,4 +71,9 @@ enum Gradients {
         startPoint: .leading,
         endPoint: .trailing
     )
+    static let limeText = LinearGradient(
+        gradient: Gradient(colors: [.limeTextGradient1, .limeTextGradient2]),
+        startPoint: .leading,
+        endPoint: .trailing
+    )
 }
