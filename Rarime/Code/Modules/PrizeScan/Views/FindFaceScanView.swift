@@ -4,13 +4,13 @@ private enum ScanState {
     case scanning, failed, success
 }
 
-struct FindFaceScanView: View {
-    @EnvironmentObject private var findFaceViewModel: FindFaceViewModel
+struct HiddenKeysScanView: View {
+    @EnvironmentObject private var hiddenKeysViewModel: HiddenKeysViewModel
 
     let onClose: () -> Void
     let onViewWallet: () -> Void
 
-    @StateObject var viewModel = FindFaceCameraViewModel()
+    @StateObject var viewModel = HiddenKeysCameraViewModel()
     @State private var scanState: ScanState = .scanning
 
     var body: some View {
@@ -30,22 +30,22 @@ struct FindFaceScanView: View {
         ZStack {
             switch scanState {
                 case .scanning:
-                    FindFaceScanningView(onSubmit: { result in
+                    HiddenKeysScanningView(onSubmit: { result in
                         scanState = result ? .success : .failed
                     })
                     .environmentObject(viewModel)
-                    .environmentObject(findFaceViewModel)
+                    .environmentObject(hiddenKeysViewModel)
                 case .failed:
-                    FindFaceFailedView(onScanAgain: {
+                    HiddenKeysFailedView(onScanAgain: {
                         scanState = .scanning
                     })
-                    .environmentObject(findFaceViewModel)
+                    .environmentObject(hiddenKeysViewModel)
                 case .success:
-                    FindFaceSuccessView(onViewWallet: {
+                    HiddenKeysSuccessView(onViewWallet: {
                         cleanup()
                         onViewWallet()
                     })
-                    .environmentObject(findFaceViewModel)
+                    .environmentObject(hiddenKeysViewModel)
             }
         }
     }
@@ -88,7 +88,7 @@ struct FindFaceScanView: View {
 #Preview {
     ZStack {}
         .sheet(isPresented: .constant(true)) {
-            FindFaceScanView(onClose: {}, onViewWallet: {})
-                .environmentObject(FindFaceViewModel())
+            HiddenKeysScanView(onClose: {}, onViewWallet: {})
+                .environmentObject(HiddenKeysViewModel())
         }
 }

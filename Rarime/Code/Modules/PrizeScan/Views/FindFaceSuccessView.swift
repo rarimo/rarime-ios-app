@@ -1,8 +1,8 @@
 import ConfettiSwiftUI
 import SwiftUI
 
-struct FindFaceSuccessView: View {
-    @EnvironmentObject private var findFaceViewModel: FindFaceViewModel
+struct HiddenKeysSuccessView: View {
+    @EnvironmentObject private var hiddenKeysViewModel: HiddenKeysViewModel
 
     let onViewWallet: () -> Void
 
@@ -12,12 +12,14 @@ struct FindFaceSuccessView: View {
     @State private var isClaiming = false
     @State private var isClaimed = false
 
-    private var findFaceUser: FindFaceUser {
-        findFaceViewModel.user ?? FindFaceUser.empty()
+    @State private var isShareSheetPresented = false
+
+    private var hiddenKeysUser: HiddenKeysUser {
+        hiddenKeysViewModel.user ?? HiddenKeysUser.empty()
     }
 
     private var imageToShare: Data {
-        UIImage(resource: .findFaceWinner).pngData() ?? Data()
+        UIImage(resource: .hiddenKeysWinnerShare).pngData() ?? Data()
     }
 
     private var claimButtonText: String {
@@ -34,12 +36,12 @@ struct FindFaceSuccessView: View {
         ZStack(alignment: .top) {
             GeometryReader { geo in
                 ZStack(alignment: .top) {
-                    Image(.findFaceBg)
+                    Image(.hiddenKeysBg)
                         .resizable()
                         .scaledToFit()
                         .ignoresSafeArea()
                     AsyncImage(
-                        url: URL(string: findFaceUser.celebrity.image),
+                        url: URL(string: hiddenKeysUser.celebrity.image),
                         content: { image in
                             image
                                 .resizable()
@@ -131,18 +133,11 @@ struct FindFaceSuccessView: View {
                         Spacer()
                         AppButton(variant: .quartenary, text: "View Wallet", action: onViewWallet)
                             .controlSize(.large)
-                        ShareLink(
-                            item: imageToShare,
-                            subject: Text("I've found the key!"),
-                            preview: SharePreview("I've found the key!", image: Image(uiImage: UIImage(data: imageToShare)!))
-                        ) {
-                            Text("Share")
-                                .buttonLarge()
-                                .foregroundStyle(.invertedLight)
-                                .padding(18)
-                                .frame(maxWidth: .infinity, maxHeight: 56)
-                                .background(.invertedDark, in: RoundedRectangle(cornerRadius: 20))
-                        }
+                        AppButton(text: "Share", action: { isShareSheetPresented = true })
+                            .controlSize(.large)
+                            .sheet(isPresented: $isShareSheetPresented) {
+                                ShareActivityView(activityItems: [imageToShare, "Hidden keys: found. Prize: secured. Who’s next to join the winners’ circle? 🔑🏆"])
+                            }
                     }
                 }
             }
@@ -173,7 +168,7 @@ struct FindFaceSuccessView: View {
     func claimReward() async {
         do {
             isClaiming = true
-            try await findFaceViewModel.claimReward { progress in
+            try await hiddenKeysViewModel.claimReward { progress in
                 self.progress = Int(progress.fractionCompleted * 100)
             }
 
@@ -181,7 +176,7 @@ struct FindFaceSuccessView: View {
             isClaimed = true
         } catch {
             FeedbackGenerator.shared.notify(.error)
-            LoggerUtil.common.error("FindFace: Failed to claim reward: \(error)")
+            LoggerUtil.common.error("HiddenKeys: Failed to claim reward: \(error)")
             AlertManager.shared.emitError("Failed to claim reward, try again")
         }
 
@@ -192,7 +187,7 @@ struct FindFaceSuccessView: View {
 #Preview {
     ZStack {}
         .sheet(isPresented: .constant(true)) {
-            FindFaceSuccessView(onViewWallet: {})
-                .environmentObject(FindFaceViewModel())
+            HiddenKeysSuccessView(onViewWallet: {})
+                .environmentObject(HiddenKeysViewModel())
         }
 }

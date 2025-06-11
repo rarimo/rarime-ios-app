@@ -9,7 +9,7 @@ private struct WidgetWrapper {
 struct HomeWidgetsView: View {
     @EnvironmentObject private var likenessManager: LikenessManager
     @EnvironmentObject private var homeViewModel: HomeView.ViewModel
-    @EnvironmentObject private var findFaceViewModel: FindFaceViewModel
+    @EnvironmentObject private var hiddenKeysViewModel: HiddenKeysViewModel
 
     @Binding var selectedWidget: HomeWidget?
     let namespaceProvider: (HomeWidget) -> Namespace.ID
@@ -132,7 +132,7 @@ struct HomeWidgetsView: View {
         WidgetWrapper(
             widget: .hiddenKeys,
             card: SnapCarouselCard(
-                disabled: findFaceViewModel.user == nil || findFaceViewModel.user?.celebrity.status == .maintenance,
+                disabled: hiddenKeysViewModel.user == nil || hiddenKeysViewModel.user?.celebrity.status == .maintenance,
                 action: { selectedWidget = .hiddenKeys }
             ) {
                 HomeCardView(
@@ -141,7 +141,7 @@ struct HomeWidgetsView: View {
                     topIcon: .rarime,
                     bottomIcon: .arrowRightUpLine,
                     imageContent: {
-                        Image(.findFaceBg)
+                        Image(.hiddenKeysBg)
                             .resizable()
                             .scaledToFill()
                             .clipShape(RoundedRectangle(cornerRadius: 32))
@@ -149,7 +149,7 @@ struct HomeWidgetsView: View {
                     title: "Hidden keys",
                     subtitle: "Find a face",
                     topContent: {
-                        FindFaceStatusChip(status: findFaceViewModel.user?.celebrity.status ?? .maintenance)
+                        HiddenKeysStatusChip(status: hiddenKeysViewModel.user?.celebrity.status ?? .maintenance)
                     },
                     animation: namespaceProvider(.hiddenKeys)
                 )
@@ -195,19 +195,15 @@ struct HomeWidgetsView: View {
                 action: { selectedWidget = .likeness }
             ) {
                 HomeCardView(
-                    foregroundGradient: Gradients.purpleText,
+                    foregroundGradient: Gradients.limeText,
+                    foregroundColor: .invertedDark,
                     topIcon: .rarime,
                     bottomIcon: .arrowRightUpLine,
                     imageContent: {
-                        if let faceImage = likenessManager.faceImage {
-                            LikenessFaceImageView(image: faceImage)
-                                .padding(.top, 80)
-                        } else {
-                            Image(.likenessFace)
-                                .resizable()
-                                .scaledToFit()
-                                .scaleEffect(0.75)
-                        }
+                        Image(.likenessBg)
+                            .resizable()
+                            .scaledToFill()
+                            .clipShape(RoundedRectangle(cornerRadius: 32))
                     },
                     title: likenessManager.isRegistered ? nil : "Digital likeness",
                     subtitle: likenessManager.isRegistered ? nil : "Set a rule",
@@ -215,36 +211,21 @@ struct HomeWidgetsView: View {
                         if likenessManager.isRegistered {
                             VStack(alignment: .leading, spacing: 0) {
                                 Text("My Rule:")
-                                    .h5()
-                                    .foregroundStyle(Gradients.purpleText)
-                                    .padding(.bottom, 12)
-                                    .matchedGeometryEffect(
-                                        id: AnimationNamespaceIds.extra,
-                                        in: namespaceProvider(.likeness),
-                                        properties: .position
-                                    )
+                                    .subtitle5()
+                                    .foregroundStyle(.textPrimary)
+                                    .padding(.bottom, 8)
                                 Text(likenessManager.rule.title)
                                     .additional1()
                                     .fixedSize(horizontal: false, vertical: true)
                                     .multilineTextAlignment(.leading)
-                                    .foregroundStyle(Gradients.purpleText)
+                                    .foregroundStyle(Gradients.limeText)
                                     .frame(maxWidth: 306, alignment: .leading)
-                                    .matchedGeometryEffect(
-                                        id: AnimationNamespaceIds.subtitle,
-                                        in: namespaceProvider(.likeness),
-                                        properties: .position
-                                    )
                             }
                         } else {
-                            Text("First human-AI Contract")
+                            Text("Your data, your rules")
                                 .body4()
                                 .foregroundStyle(.baseBlack.opacity(0.5))
                                 .padding(.top, 12)
-                                .matchedGeometryEffect(
-                                    id: AnimationNamespaceIds.extra,
-                                    in: namespaceProvider(.likeness),
-                                    properties: .position
-                                )
                         }
                     },
                     animation: namespaceProvider(.likeness)
@@ -264,5 +245,5 @@ struct HomeWidgetsView: View {
     )
     .environmentObject(LikenessManager())
     .environmentObject(HomeView.ViewModel())
-    .environmentObject(FindFaceViewModel())
+    .environmentObject(HiddenKeysViewModel())
 }

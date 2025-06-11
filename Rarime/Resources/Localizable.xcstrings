@@ -40,9 +40,6 @@
         }
       }
     },
-    "%lld%%" : {
-
-    },
     "%lldm %llds" : {
       "localizations" : {
         "en" : {
@@ -332,6 +329,9 @@
     "Center the person's face" : {
 
     },
+    "Center your face" : {
+
+    },
     "Central African Republic" : {
 
     },
@@ -411,9 +411,6 @@
 
     },
     "Creating" : {
-
-    },
-    "Creating likeness record" : {
 
     },
     "Criteria" : {
@@ -512,22 +509,7 @@
     "El Salvador" : {
 
     },
-    "Enable" : {
-
-    },
-    "Enable\nFace ID" : {
-
-    },
-    "Enable\nPasscode" : {
-
-    },
     "Enable Face ID in Settings > RariMe." : {
-
-    },
-    "Enable Face ID Login" : {
-
-    },
-    "Enable Passcode Login" : {
 
     },
     "Enter" : {
@@ -558,9 +540,6 @@
 
     },
     "Explore Apps" : {
-
-    },
-    "Export Keys" : {
 
     },
     "Face ID" : {
@@ -609,9 +588,6 @@
 
     },
     "Finland" : {
-
-    },
-    "First human-AI Contract" : {
 
     },
     "Force light registration" : {
@@ -734,7 +710,7 @@
     "Hungary" : {
 
     },
-    "I've found the key!" : {
+    "I just set a personal AI-usage rule for my digital likeness in rariMe. Take charge of yours in under a minute—privacy starts with you." : {
 
     },
     "Iceland" : {
@@ -759,6 +735,9 @@
 
     },
     "Impossible to revoke your account" : {
+
+    },
+    "Incorrect passcode" : {
 
     },
     "India" : {
@@ -797,7 +776,7 @@
     "Invite others" : {
 
     },
-    "Invite to Find a Face Game" : {
+    "Invite to Hidden Keys" : {
 
     },
     "Invite to RariMe" : {
@@ -840,9 +819,6 @@
     "Jersey" : {
 
     },
-    "Join Find a face game with my link:\n\n%@" : {
-
-    },
     "Join RariMe with my invite code: %@\n\n%@" : {
       "localizations" : {
         "en" : {
@@ -860,9 +836,6 @@
 
     },
     "Kazakhstan" : {
-
-    },
-    "Keep your face in the frame" : {
 
     },
     "Kenya" : {
@@ -967,9 +940,6 @@
     "MAX" : {
 
     },
-    "Maybe Later" : {
-
-    },
     "Mayotte" : {
 
     },
@@ -1007,6 +977,9 @@
 
     },
     "MRZ Key not valid for this document." : {
+
+    },
+    "My face, my rules ✅" : {
 
     },
     "My Rule:" : {
@@ -1275,6 +1248,9 @@
         }
       }
     },
+    "Ready to test faces for hidden keys? Tap my invite, get free scans, and let’s race for the prize!\n\n%@" : {
+
+    },
     "Receive" : {
 
     },
@@ -1534,9 +1510,6 @@
     "Success" : {
 
     },
-    "Success! Your rule is set. You can update it anytime by clicking the title." : {
-
-    },
     "Sudan" : {
 
     },
@@ -1592,6 +1565,9 @@
 
     },
     "This app is where you privately store your digital identities, enabling you to go incognito across the web" : {
+
+    },
+    "This can take up to a minute" : {
 
     },
     "Timor-Leste" : {
@@ -1792,6 +1768,9 @@
     "You can restore your account using your iCloud backup or private key" : {
 
     },
+    "You can update it anytime by clicking the title" : {
+
+    },
     "You can use the QR code or the wallet address to deposit the %@ token to your account" : {
 
     },
@@ -1801,6 +1780,9 @@
     "You've found the hidden keys" : {
 
     },
+    "You've successfully set your likeness rule" : {
+
+    },
     "Your account is not backed up. If you lose your device, you will lose access to your account" : {
 
     },
@@ -1808,9 +1790,6 @@
 
     },
     "Your data, your rules" : {
-
-    },
-    "Your face never leaves the device. You create an anonymous record that carries your rules, so AI knows how to treat you" : {
 
     },
     "Your internet connection is down" : {

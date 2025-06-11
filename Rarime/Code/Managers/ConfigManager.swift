@@ -36,7 +36,7 @@ extension ConfigManager {
         let stateKeeperContractAddress: String = try! readFromInfoPlist(key: "STATE_KEEPER_CONTRACT_ADDRESS")
         let pointsServiceURL: URL = try! readURLFromInfoPlist(key: "POINTS_SERVICE_URL")
         let authorizeURL: URL = try! readURLFromInfoPlist(key: "AUTHORIZE_URL")
-        let referralURL: URL = try! readURLFromInfoPlist(key: "REFERRAL_URL")
+        let webAppURL: URL = try! readURLFromInfoPlist(key: "WEB_APP_URL")
         let joinRewardsKey: String = try! readFromInfoPlist(key: "JOIN_REWARDS_KEY")
         let defaultReferralCode: String = try! readFromInfoPlist(key: "DEFAULT_REFERRAL_CODE")
         let lightSignaturePrivateKey: String = try! readFromInfoPlist(key: "LIGHT_SIGNATURE_PRIVATE_KEY")

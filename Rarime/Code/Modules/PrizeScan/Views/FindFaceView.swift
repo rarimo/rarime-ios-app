@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct FindFaceView: View {
-    @EnvironmentObject private var viewModel: FindFaceViewModel
+struct HiddenKeysView: View {
+    @EnvironmentObject private var viewModel: HiddenKeysViewModel
 
     var animation: Namespace.ID
     let onClose: () -> Void
@@ -10,12 +10,14 @@ struct FindFaceView: View {
     @State private var isScanSheetPresented = false
     @State private var isBonusScanSheetPresented = false
 
-    private var findFaceUser: FindFaceUser {
-        viewModel.user ?? FindFaceUser.empty()
+    @State private var isShareSheetPresented = false
+
+    private var hiddenKeysUser: HiddenKeysUser {
+        viewModel.user ?? HiddenKeysUser.empty()
     }
 
     private var totalAttemptsLeft: Int {
-        findFaceUser.attemptsLeft + findFaceUser.extraAttemptsLeft
+        hiddenKeysUser.attemptsLeft + hiddenKeysUser.extraAttemptsLeft
     }
 
     private var hasAttempts: Bool {
@@ -23,31 +25,30 @@ struct FindFaceView: View {
     }
 
     private var canGetBonusScans: Bool {
-        !findFaceUser.socialShare || findFaceUser.referralsCount < findFaceUser.referralsLimit
+        !hiddenKeysUser.socialShare || hiddenKeysUser.referralsCount < hiddenKeysUser.referralsLimit
     }
 
     private var tip: String {
-        findFaceUser.celebrity.hint
+        hiddenKeysUser.celebrity.hint
     }
 
     private var isCompleted: Bool {
-        findFaceUser.celebrity.status == .completed
+        hiddenKeysUser.celebrity.status == .completed
     }
 
     private var invitationLink: String {
-        ConfigManager.shared.api.referralURL.appendingPathComponent(findFaceUser.referralCode).absoluteString
+        ConfigManager.shared.api.webAppURL.appendingPathComponent("r/\(hiddenKeysUser.referralCode)").absoluteString
     }
 
     private var imageToShare: Data {
-        // TODO: use different image for sharing
-        UIImage(resource: .findFaceBg).pngData() ?? Data()
+        UIImage(resource: .hiddenKeysSocialShare).pngData() ?? Data()
     }
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
             PullToCloseWrapperView(action: onClose) {
                 ZStack(alignment: .top) {
-                    Image(.findFaceBg)
+                    Image(.hiddenKeysBg)
                         .resizable()
                         .scaledToFit()
                         .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
@@ -70,7 +71,7 @@ struct FindFaceView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .sheet(isPresented: $isScanSheetPresented) {
-            FindFaceScanView(
+            HiddenKeysScanView(
                 onClose: { isScanSheetPresented = false },
                 onViewWallet: {
                     isScanSheetPresented = false
@@ -84,7 +85,7 @@ struct FindFaceView: View {
     var mainSheetContent: some View {
         VStack(alignment: .leading, spacing: 24) {
             VStack(alignment: .leading, spacing: 0) {
-                FindFaceStatusChip(status: findFaceUser.celebrity.status)
+                HiddenKeysStatusChip(status: hiddenKeysUser.celebrity.status)
                 Text("Hidden keys")
                     .h1()
                     .foregroundStyle(.invertedDark)
@@ -179,7 +180,7 @@ struct FindFaceView: View {
                 HStack(spacing: 12) {
                     Image(.lock2Line)
                         .iconLarge()
-                    CountdownView(endTimestamp: findFaceUser.resetTime)
+                    CountdownView(endTimestamp: hiddenKeysUser.resetTime)
                         .buttonLarge()
                 }
                 .padding(18)
@@ -223,27 +224,29 @@ struct FindFaceView: View {
                         Text("Share on socials")
                             .subtitle5()
                             .foregroundStyle(.textPrimary)
-                        Text(findFaceUser.socialShare ? "Shared" : "+1 scan")
+                        Text(hiddenKeysUser.socialShare ? "Shared" : "+1 scan")
                             .body5()
                             .foregroundStyle(.textSecondary)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    ShareLink(
-                        item: imageToShare,
-                        subject: Text("Find a face"),
-                        preview: SharePreview("Find a face", image: Image(uiImage: UIImage(data: imageToShare)!))
-                    ) {
+                    Button(action: {
+                        isShareSheetPresented = true
+                        Task {
+                            await getExtraAttempt()
+                        }
+                    }) {
                         Text("Share")
                             .buttonMedium()
                             .foregroundStyle(.invertedLight)
                     }
                     .frame(width: 100, height: 32)
                     .background(.textPrimary, in: RoundedRectangle(cornerRadius: 12))
-                    .simultaneousGesture(TapGesture().onEnded {
-                        Task {
-                            await getExtraAttempt()
-                        }
-                    })
+                    .sheet(isPresented: $isShareSheetPresented) {
+                        ShareActivityView(activityItems: [
+                            imageToShare,
+                            "Think you can spot the famous face and unlock the key? Join the hunt in rariMe now!\n\n\(invitationLink)"
+                        ])
+                    }
                 }
                 .frame(maxWidth: .infinity)
 
@@ -257,15 +260,15 @@ struct FindFaceView: View {
                         Text("Invite a friend")
                             .subtitle5()
                             .foregroundStyle(.textPrimary)
-                        Text("\(findFaceUser.referralsCount)/\(findFaceUser.referralsLimit) invited")
+                        Text("\(hiddenKeysUser.referralsCount)/\(hiddenKeysUser.referralsLimit) invited")
                             .body5()
                             .foregroundStyle(.textSecondary)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     ShareLink(
                         item: URL(string: invitationLink)!,
-                        subject: Text("Invite to Find a Face Game"),
-                        message: Text("Join Find a face game with my link:\n\n\(invitationLink)")
+                        subject: Text("Invite to Hidden Keys"),
+                        message: Text("Ready to test faces for hidden keys? Tap my invite, get free scans, and let’s race for the prize!\n\n\(invitationLink)")
                     ) {
                         Text("Invite")
                             .buttonMedium()
@@ -288,7 +291,7 @@ struct FindFaceView: View {
                 .subtitle6()
                 .foregroundStyle(.textPrimary)
             HStack(spacing: 16) {
-                AsyncImage(url: URL(string: findFaceUser.celebrity.image)) { image in
+                AsyncImage(url: URL(string: hiddenKeysUser.celebrity.image)) { image in
                     image
                         .resizable()
                         .scaledToFill()
@@ -300,10 +303,10 @@ struct FindFaceView: View {
                         .frame(width: 80, height: 80)
                 }
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(findFaceUser.celebrity.title)
+                    Text(hiddenKeysUser.celebrity.title)
                         .h5()
                         .foregroundStyle(.textPrimary)
-                    Text(findFaceUser.celebrity.description)
+                    Text(hiddenKeysUser.celebrity.description)
                         .body5()
                         .foregroundStyle(.textSecondary)
                 }
@@ -315,7 +318,7 @@ struct FindFaceView: View {
                         .subtitle6()
                         .foregroundStyle(.textPrimary)
                     Spacer()
-                    Text(verbatim: Ethereum.formatAddress(findFaceUser.celebrity.winner))
+                    Text(verbatim: Ethereum.formatAddress(hiddenKeysUser.celebrity.winner))
                         .body4()
                         .foregroundStyle(.textSecondary)
                 }
@@ -354,6 +357,6 @@ struct FindFaceView: View {
 }
 
 #Preview {
-    FindFaceView(animation: Namespace().wrappedValue, onClose: {}, onViewWallet: {})
-        .environmentObject(FindFaceViewModel())
+    HiddenKeysView(animation: Namespace().wrappedValue, onClose: {}, onViewWallet: {})
+        .environmentObject(HiddenKeysViewModel())
 }

@@ -33,59 +33,50 @@ struct LikenessSetRuleView: View {
                     .body3()
                     .foregroundStyle(.textSecondary)
             }
-            .padding(.horizontal, 20)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
-                    ForEach(displayedLikenessRules, id: \.self) { item in
-                        Button(action: {
-                            selectedRule = item
-                            FeedbackGenerator.shared.impact(.light)
-                        }) {
-                            VStack(alignment: .leading, spacing: 0) {
-                                Image(item.icon)
-                                    .iconMedium()
-                                    .padding(10)
-                                    .background(item == selectedRule ? .invertedDark : .bgComponentPrimary, in: Circle())
-                                    .foregroundStyle(item == selectedRule ? .invertedLight : .textPrimary)
+            VStack(spacing: 12) {
+                ForEach(displayedLikenessRules, id: \.self) { item in
+                    Button(action: {
+                        selectedRule = item
+                        FeedbackGenerator.shared.impact(.light)
+                    }) {
+                        HStack(spacing: 20) {
+                            Image(item.icon)
+                                .iconMedium()
+                                .padding(10)
+                                .background(item == selectedRule ? .invertedDark : .bgComponentPrimary, in: Circle())
+                                .foregroundStyle(item == selectedRule ? .invertedLight : .textPrimary)
+                            VStack(alignment: .leading, spacing: 8) {
                                 Text("Soon")
                                     .overline3()
                                     .foregroundStyle(.informationalDark)
                                     .padding(.vertical, 2)
                                     .padding(.horizontal, 4)
                                     .background(.informationalLighter, in: Capsule())
-                                    .padding(.top, 20)
                                 Text(item.title)
                                     .subtitle6()
                                     .foregroundStyle(.textPrimary)
                                     .multilineTextAlignment(.leading)
-                                    .padding(.top, 8)
                             }
-                            .padding(16)
-                            .frame(width: 148, alignment: .leading)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(item == selectedRule ? .invertedDark : .bgComponentPrimary, lineWidth: 1)
-                            )
+                            Spacer()
                         }
+                        .padding(16)
+                        .background(item == selectedRule ? .bgComponentPrimary : .clear, in: RoundedRectangle(cornerRadius: 20))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(item == selectedRule ? .clear : .bgComponentPrimary, lineWidth: 1)
+                        )
                     }
                 }
-                .padding(.horizontal, 20)
-                .padding(.vertical, 1)
             }
-            if likenessManager.isRuleUpdating {
-                ProgressView()
-                    .align(.center)
-            } else {
-                AppButton(
-                    text: saveButtonText,
-                    action: { onSave(selectedRule) }
-                )
-                .disabled(selectedRule == .unset)
-                .controlSize(.large)
-                .padding(.horizontal, 20)
-            }
+            AppButton(
+                text: saveButtonText,
+                loading: likenessManager.isRuleUpdating,
+                action: { onSave(selectedRule) }
+            )
+            .disabled(selectedRule == .unset)
+            .controlSize(.large)
         }
-        .padding(.vertical, 20)
+        .padding(20)
     }
 
     var saveButtonText: LocalizedStringResource {

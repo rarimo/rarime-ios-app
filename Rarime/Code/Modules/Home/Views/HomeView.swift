@@ -13,7 +13,7 @@ struct HomeView: View {
     @EnvironmentObject private var passportManager: PassportManager
 
     @StateObject var viewModel = ViewModel()
-    @StateObject var findFaceViewModel = FindFaceViewModel()
+    @StateObject var hiddenKeysViewModel = HiddenKeysViewModel()
 
     @State private var path: [HomeRoute] = []
     @State private var selectedWidget: HomeWidget? = nil
@@ -39,7 +39,7 @@ struct HomeView: View {
                     }
                 }
                 .task { await viewModel.fetchBalance() }
-                .task { await findFaceViewModel.loadUser() }
+                .task { await hiddenKeysViewModel.loadUser() }
         }
     }
 
@@ -54,12 +54,12 @@ struct HomeView: View {
                 )
 
             case .hiddenKeys:
-                FindFaceView(
+                HiddenKeysView(
                     animation: namespace(for: .hiddenKeys),
                     onClose: { selectedWidget = nil },
                     onViewWallet: { mainViewModel.selectedTab = .wallet }
                 )
-                .environmentObject(findFaceViewModel)
+                .environmentObject(hiddenKeysViewModel)
 
             case .freedomTool:
                 PollsView(
@@ -116,7 +116,7 @@ struct HomeView: View {
                     namespaceProvider: namespace
                 )
                 .environmentObject(viewModel)
-                .environmentObject(findFaceViewModel)
+                .environmentObject(hiddenKeysViewModel)
             }
             .background(.bgPrimary)
         }

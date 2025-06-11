@@ -16,48 +16,35 @@ struct LockScreenView: View {
     
     var body: some View {
         ZStack {
-            ZStack(alignment: .top) {
-                VStack(spacing: 0) {
-                    VStack(spacing: 12) {
-                        Text(banTimeEnd == nil ? "Enter Passcode" : "Account Locked")
-                            .h2()
-                            .foregroundStyle(.textPrimary)
-                        Text(lockedMessage)
-                            .body4()
-                            .foregroundStyle(.textSecondary)
-                            .multilineTextAlignment(.center)
-                            .frame(minHeight: 40)
-                    }
-                    PasscodeFieldView(
-                        passcode: $passcode,
-                        errorMessage: $errorMessage,
-                        isFaceIdEnabled: securityManager.faceIdState == .enabled,
-                        onFill: handlePasscode,
-                        onFaceIdClick: authByFaceID
-                    )
-                    .disabled(banTimeEnd != nil)
-                }
-                .padding(.top, 48)
-                .padding(.bottom, 48)
-                .padding(.horizontal, 8)
-                .background(.bgPure)
-                .clipShape(
-                    .rect(
-                        topLeadingRadius: 24,
-                        bottomLeadingRadius: 0,
-                        bottomTrailingRadius: 0,
-                        topTrailingRadius: 24
-                    )
-                )
+            VStack(spacing: 0) {
                 Image(banTimeEnd == nil ? .user : .lock2Line)
-                    .iconLarge()
-                    .padding(24)
-                    .background(banTimeEnd == nil ? .primaryMain : .secondaryMain, in: Circle())
-                    .foregroundStyle(banTimeEnd == nil ? .baseBlack : .baseWhite)
-                    .overlay(Circle().stroke(.bgPure, lineWidth: 10))
-                    .padding(.top, -36)
+                    .square(32)
+                    .padding(16)
+                    .background(.bgComponentPrimary, in: Circle())
+                    .foregroundStyle(.textPrimary)
+                VStack(spacing: 12) {
+                    Text(banTimeEnd == nil ? "Enter Passcode" : "Account Locked")
+                        .h2()
+                        .foregroundStyle(.textPrimary)
+                    Text(lockedMessage)
+                        .body4()
+                        .foregroundStyle(.textSecondary)
+                        .multilineTextAlignment(.center)
+                        .frame(minHeight: 40)
+                }
+                .padding(.top, 24)
+                PasscodeFieldView(
+                    passcode: $passcode,
+                    errorMessage: $errorMessage,
+                    isFaceIdEnabled: securityManager.faceIdState == .enabled,
+                    onFill: handlePasscode,
+                    onFaceIdClick: authByFaceID
+                )
+                .disabled(banTimeEnd != nil)
             }
-            .padding(.top, 190)
+            .padding(.top, 148)
+            .padding(.bottom, 48)
+            .padding(.horizontal, 8)
         }
         .ignoresSafeArea()
         .frame(maxWidth: .infinity, maxHeight: .infinity)

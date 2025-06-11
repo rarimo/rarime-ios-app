@@ -1,176 +1,98 @@
 import SwiftUI
 
-struct LikenessProcessing<ProcessingTask: LikenessProcessingTask>: View {
+struct LikenessProcessingView: View {
     @EnvironmentObject private var likenessManager: LikenessManager
 
     let onComplete: () -> Void
-    let onError: (Error) -> Void
-    let onClose: () -> Void
+    let onError: () -> Void
 
-    @State private var completedTasks: [ProcessingTask] = []
-    @State private var currentTask: ProcessingTask = .allCases.first!
+    @State private var currentTask: LikenessProcessingTask = .allCases.first!
     @State private var progress: Double = 0
 
     @State private var isExecutionCompleted = false
 
-    @State private var task: Task<Void, Never>? = nil
-
     var body: some View {
-        ZStack(alignment: .topTrailing) {
-            VStack(spacing: 16) {
-                // TODO: use actual animation
-                LoopVideoPlayer(url: Videos.likenessProcessing)
-                    .aspectRatio(16 / 9, contentMode: .fill)
-                    .frame(maxWidth: 320, maxHeight: 320)
-                Text("Please wait")
-                    .h1()
-                    .foregroundStyle(.textPrimary)
-                Text("Creating likeness record")
-                    .body3()
-                    .foregroundStyle(.textSecondary)
-                Spacer()
-                VStack(spacing: 8) {
-                    ForEach(Array(ProcessingTask.allCases), id: \.rawValue) { task in
-                        LikenessProcessingEntry(
-                            task: task,
-                            completedTasks: $completedTasks,
-                            currentTask: $currentTask
-                        )
-                    }
-                }
-                .padding(.horizontal, 20)
-                .onChange(of: completedTasks.count) { val in
-                    Task {
-                        FeedbackGenerator.shared.impact(.light)
-
-                        if val == ProcessingTask.allCases.count {
-                            while !isExecutionCompleted {
-                                try await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
-                            }
-
-                            onComplete()
-                        }
-                    }
-                }
-            }
-
-            AppIconButton(variant: .secondary, icon: .closeFill, action: onClose)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .padding([.top, .trailing], 20)
-        }
-        .padding(.bottom, 20)
-        .onAppear(perform: runProcess)
-        .onDisappear {
-            task?.cancel()
-        }
-    }
-
-    func runProcess() {
-        task = Task {
-            do {
-                try await likenessManager.runRegistration()
-
-                isExecutionCompleted = true
-            } catch {
-                LoggerUtil.common.error("Face registration: \(error)")
-
-                onError(error)
-            }
-        }
-    }
-}
-
-struct LikenessProcessingEntry<ActionTask: LikenessProcessingTask>: View {
-    let task: ActionTask
-
-    @Binding var completedTasks: [ActionTask]
-    @Binding var currentTask: ActionTask
-
-    @State private var progress: Double = 0
-
-    var isCompleted: Bool {
-        completedTasks.contains(where: { $0.rawValue == task.rawValue })
-    }
-
-    var isProgressing: Bool {
-        task.rawValue == currentTask.rawValue && !isCompleted
-    }
-
-    var textColor: Color {
-        if isCompleted {
-            return .successDarker
-        } else if isProgressing {
-            return .textPrimary
-        } else {
-            return .textSecondary
-        }
-    }
-
-    var body: some View {
-        HStack {
-            Text(task.description)
-                .subtitle5()
-                .foregroundStyle(textColor)
+        VStack(spacing: 0) {
+            DotsLoadingView(size: 4, spacing: 3)
+                .frame(width: 24, height: 24)
+                .padding(12)
+                .background(.baseWhite.opacity(0.2), in: Circle())
+                .foregroundStyle(.baseWhite)
+                .overlay(Circle().stroke(.baseWhite, lineWidth: 3))
+            Text(currentTask.description)
+                .h3()
+                .foregroundStyle(.baseWhite)
+                .padding(.top, 32)
+            LinearProgressView(
+                progress: progress,
+                height: 4,
+                backgroundFill: AnyShapeStyle(Color.baseWhite.opacity(0.1)),
+                foregroundFill: AnyShapeStyle(Color.baseWhite)
+            )
+            .padding(.top, 92)
+            .frame(width: 290)
+            Text("This can take up to a minute")
+                .body4()
+                .foregroundStyle(.baseWhite.opacity(0.6))
+                .padding(.top, 24)
             Spacer()
-            Group {
-                if isCompleted {
-                    Image(.checkLine)
-                        .foregroundStyle(.successDarker)
-                } else if isProgressing {
-                    Text("\(Int(progress * 100))%")
-                        .subtitle5()
-                        .foregroundStyle(.textPrimary)
-                }
-            }
         }
-        .padding(20)
-        .overlay {
-            RoundedRectangle(cornerRadius: 24)
-                .stroke(isCompleted ? .clear : .bgComponentPrimary, lineWidth: 1)
+        .padding(.top, 240)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .task { await registerLikeness() }
+        .task { await simulateProcessing() }
+    }
 
-            if isProgressing {
-                GeometryReader { geo in
-                    Rectangle()
-                        .fill(.bgComponentPrimary)
-                        .frame(width: geo.size.width * CGFloat(progress))
-                }
-            }
-        }
-        .background(isCompleted ? .successLighter : .clear)
-        .clipShape(RoundedRectangle(cornerRadius: 24))
-        .onAppear(perform: startTask)
-        .onChange(of: currentTask.rawValue) { _ in
-            startTask()
+    @MainActor
+    func registerLikeness() async {
+        do {
+            try await likenessManager.runRegistration()
+
+            likenessManager.setIsRegistered(true)
+            FeedbackGenerator.shared.notify(.success)
+
+            onComplete()
+        } catch {
+            likenessManager.setFaceImage(nil)
+            FeedbackGenerator.shared.notify(.error)
+
+            LoggerUtil.common.error("Likeness registration error: \(error, privacy: .public)")
+            AlertManager.shared.emitError("Error during likeness registration, please try again")
+
+            onError()
         }
     }
 
-    func startTask() {
-        if !isProgressing {
-            return
-        }
+    @MainActor
+    func simulateProcessing() async {
+        let allTasks = Array(LikenessProcessingTask.allCases)
+        let progressTimes = allTasks.map { Double($0.progressTime) }
+        let totalTime = progressTimes.reduce(0, +)
 
-        Task { @MainActor in
-            while progress <= 0.99 {
-                progress += 0.01
+        for (i, task) in allTasks.enumerated() {
+            currentTask = task
+            FeedbackGenerator.shared.impact(.light)
 
-                try await Task.sleep(nanoseconds: UInt64(task.progressTime) * NSEC_PER_SEC / 100)
+            let previousSum = progressTimes.prefix(i).reduce(0, +)
+            let newSum = previousSum + progressTimes[i]
+
+            progress = previousSum / totalTime
+            withAnimation(.linear(duration: progressTimes[i])) {
+                progress = newSum / totalTime
             }
 
-            completedTasks.append(task)
-
-            if currentTask.rawValue == Array(ActionTask.allCases).last?.rawValue {
-                return
-            }
-
-            currentTask = Array(ActionTask.allCases)[currentTask.rawValue + 1]
+            try? await Task.sleep(nanoseconds: UInt64(progressTimes[i]) * NSEC_PER_SEC)
         }
+
+        progress = 1
     }
 }
 
 #Preview {
     VStack {}
         .sheet(isPresented: .constant(true)) {
-            LikenessProcessing<LikenessProcessingRegisterTask>(onComplete: {}, onError: { _ in }, onClose: {})
-                .environmentObject(LikenessManager.shared)
+            LikenessProcessingView(onComplete: {}, onError: {})
+                .background(.baseBlack)
+                .environmentObject(LikenessManager())
         }
 }
