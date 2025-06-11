@@ -14,11 +14,8 @@ struct LikenessView: View {
     let RULES_SET_COUNT = 49421
 
     var body: some View {
-        PullToCloseWrapperView(action: onClose) {
-            ZStack(alignment: .topTrailing) {
-                AppIconButton(variant: .secondary, icon: .closeFill, action: onClose)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding([.top, .trailing], 20)
+        ZStack(alignment: .topTrailing) {
+            PullToCloseWrapperView(action: onClose) {
                 ZStack(alignment: .bottom) {
                     GlassBottomSheet(
                         minHeight: 410,
@@ -27,50 +24,59 @@ struct LikenessView: View {
                         maxBlur: 200,
                         dimBackground: true,
                         background: {
-                            if let faceImage = likenessManager.faceImage {
-                                LikenessFaceImageView(image: faceImage)
-                                    .padding(.top, 80)
-                            } else {
-                                Image(.likenessFace)
+                            ZStack {
+                                Image(.likenessBg)
                                     .resizable()
                                     .scaledToFit()
-                                    .scaleEffect(0.75)
                                     .matchedGeometryEffect(id: AnimationNamespaceIds.image, in: animation)
+                                    .ignoresSafeArea()
                             }
+                            .background(.invertedLight)
                         }
                     ) {
                         mainSheetContent
                     }
                     footer
                 }
-                .dynamicSheet(isPresented: $isRuleSheetPresented) {
-                    LikenessSetRuleView(rule: likenessManager.rule, onSave: onRuleUpdate)
-                }
+                .background(.invertedLight)
+            }
+            .dynamicSheet(isPresented: $isRuleSheetPresented) {
+                LikenessSetRuleView(rule: likenessManager.rule, onSave: onRuleUpdate)
             }
             .sheet(isPresented: $isScanSheetPresented) {
-                scanSheetContent
-                    .interactiveDismissDisabled()
+                LikenessScanView(
+                    onComplete: {
+                        isScanSheetPresented = false
+                        showSuccessTooltip()
+                    },
+                    onClose: {
+                        isScanSheetPresented = false
+                        likenessManager.setFaceImage(nil)
+                    }
+                )
+                .interactiveDismissDisabled()
+                .environmentObject(likenessManager)
             }
-            .background(
-                Gradients.purpleBg
-                    .ignoresSafeArea()
-            )
+            Button(action: onClose) {
+                Image(.closeFill)
+                    .iconMedium()
+                    .foregroundStyle(.textPrimary)
+                    .padding(10)
+                    .background(.bgComponentPrimary, in: Circle())
+            }
+            .padding(.top, 12)
+            .padding(.trailing, 20)
         }
     }
 
     var mainSheetContent: some View {
-        VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 0) {
                 if likenessManager.isRegistered {
                     Text("My Rule:")
                         .h5()
                         .foregroundStyle(Gradients.purpleText)
                         .padding(.bottom, 12)
-                        .matchedGeometryEffect(
-                            id: AnimationNamespaceIds.extra,
-                            in: animation,
-                            properties: .position
-                        )
                     ZStack(alignment: .topLeading) {
                         if isSuccessTooltipShown {
                             ruleTooltip
@@ -87,50 +93,30 @@ struct LikenessView: View {
                             .multilineTextAlignment(.leading)
                             .foregroundStyle(Gradients.purpleText)
                             .frame(maxWidth: 306, alignment: .leading)
-                            .matchedGeometryEffect(
-                                id: AnimationNamespaceIds.subtitle,
-                                in: animation,
-                                properties: .position
-                            )
                         }
                     }
                 } else {
                     Text("Digital likeness")
                         .h1()
-                        .foregroundStyle(.baseBlack)
-                        .matchedGeometryEffect(
-                            id: AnimationNamespaceIds.title,
-                            in: animation,
-                            properties: .position
-                        )
+                        .foregroundStyle(.invertedDark)
                     Text("Set a rule")
                         .additional1()
                         .fixedSize(horizontal: false, vertical: true)
-                        .foregroundStyle(Gradients.purpleText)
-                        .matchedGeometryEffect(
-                            id: AnimationNamespaceIds.subtitle,
-                            in: animation,
-                            properties: .position
-                        )
-                    Text("First human-AI Contract")
+                        .foregroundStyle(Gradients.limeText)
+                    Text("Your data, your rules")
                         .body4()
-                        .foregroundStyle(.baseBlack.opacity(0.5))
+                        .foregroundStyle(.textSecondary)
                         .padding(.top, 12)
-                        .matchedGeometryEffect(
-                            id: AnimationNamespaceIds.extra,
-                            in: animation,
-                            properties: .position
-                        )
                 }
             }
             Text("AI can now replicate your face, voice, and identity without asking for your permission. But you never agreed to that, raising a fundamental question: who owns your likeness?\n\nRarimo is building the infrastructure to give you back that control. With this app, you can create a private, verifiable record that defines how your likeness can and can’t be used.\n\nYour face stays on your device. No company owns it. And over time, no AI model will be able to ignore your rule.")
-                .body3()
-                .foregroundStyle(.baseBlack.opacity(0.5))
+                .body4()
+                .foregroundStyle(.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
         }
-        // HACK: prevent pull to close on empty space
-        .background(.white.opacity(0.01))
-        .padding(.horizontal, 20)
+        .padding(20)
+        .padding(.bottom, 180)
+        .background(.invertedLight, in: RoundedRectangle(cornerRadius: 16))
     }
 
     var footer: some View {
@@ -140,10 +126,10 @@ struct LikenessView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(RULES_SET_COUNT.formatted(.number))
                         .h4()
-                        .foregroundStyle(.baseBlack)
+                        .foregroundStyle(.invertedDark)
                     Text("Other already set")
                         .body4()
-                        .foregroundStyle(.baseBlack.opacity(0.5))
+                        .foregroundStyle(.textSecondary)
                 }
                 Spacer()
                 AppButton(
@@ -157,48 +143,9 @@ struct LikenessView: View {
         .padding(20)
     }
 
-    var scanSheetContent: some View {
-        ZStack {
-            if likenessManager.faceImage == nil {
-                FaceLikenessView(
-                    onConfirm: { image in
-                        likenessManager.setFaceImage(UIImage(cgImage: image))
-                    },
-                    onBack: { isScanSheetPresented = false }
-                )
-            } else {
-                LikenessProcessing<LikenessProcessingRegisterTask>(
-                    onComplete: {
-                        likenessManager.setIsRegistered(true)
-                        isScanSheetPresented = false
-                        FeedbackGenerator.shared.notify(.success)
-                        showSuccessTooltip()
-                    },
-                    onError: { error in
-                        likenessManager.setFaceImage(nil)
-
-                        FeedbackGenerator.shared.notify(.error)
-
-                        isScanSheetPresented = false
-
-                        if let error = error as? Errors {
-                            AlertManager.shared.emitError(error)
-                        } else {
-                            AlertManager.shared.emitError(.unknown("Unknown error occurred"))
-                        }
-                    },
-                    onClose: {
-                        likenessManager.setFaceImage(nil)
-                        isScanSheetPresented = false
-                    }
-                )
-            }
-        }
-    }
-
     var ruleTooltip: some View {
         ZStack(alignment: .bottomLeading) {
-            Text("Success! Your rule is set. You can update it anytime by clicking the title.")
+            Text("You can update it anytime by clicking the title")
                 .body5()
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)
@@ -240,16 +187,13 @@ struct LikenessView: View {
                     try await likenessManager.updateRule()
 
                     FeedbackGenerator.shared.notify(.success)
-
                     AlertManager.shared.emitSuccess("Rule updated successfully")
                 } else {
                     isScanSheetPresented = true
                 }
             } catch {
                 FeedbackGenerator.shared.notify(.error)
-
                 AlertManager.shared.emitError(.unknown("Unknown error occurred"))
-
                 LoggerUtil.common.error("Failed to update the rule: \(error)")
             }
         }

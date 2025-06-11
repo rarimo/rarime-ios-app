@@ -1,23 +1,15 @@
-import Web3
-
 import SwiftUI
 
-protocol LikenessProcessingTask: CaseIterable {
-    var rawValue: Int { get }
-    var description: String { get }
-    var progressTime: Int { get }
-}
-
-enum LikenessProcessingRegisterTask: Int, CaseIterable, LikenessProcessingTask {
+enum LikenessProcessingTask: Int, CaseIterable {
     case downloadingCircuitData = 0
     case extractionImageFeatures = 1
     case runningZKMK = 2
     
     var description: String {
         switch self {
-        case .downloadingCircuitData: return "Downloading circuit data"
+        case .downloadingCircuitData: return "Downloading circuits"
         case .extractionImageFeatures: return "Extracting image features"
-        case .runningZKMK: return "Running ZKML"
+        case .runningZKMK: return "Creating rules"
         }
     }
     
@@ -31,11 +23,10 @@ enum LikenessProcessingRegisterTask: Int, CaseIterable, LikenessProcessingTask {
 }
 
 class LikenessFaceViewModel: ObservableObject {
-    @Published var maskFrame: UIImage?
+    private var cameraManager = FaceCaptureSession(cameraPosition: .front)
+    
     @Published var currentFrame: CGImage?
-        
-    private var cameraManager = FaceCaptureSession()
-        
+    @Published var maskFrame: UIImage?
     @Published var cameraTask: Task<Void, Never>? = nil
         
     func startScanning() {
@@ -57,14 +48,14 @@ class LikenessFaceViewModel: ObservableObject {
     func handleCameraPreviews() async {
         for await image in cameraManager.previewStream {
             Task { @MainActor in
-                maskFrame = try ImageMasks.processFace(image)
-                
                 currentFrame = image
+                maskFrame = try ImageMasks.processFace(image)
             }
         }
     }
-    
+        
     func clearImages() {
         currentFrame = nil
+        maskFrame = nil
     }
 }
