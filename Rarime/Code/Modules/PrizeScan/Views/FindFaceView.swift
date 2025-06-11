@@ -10,6 +10,8 @@ struct FindFaceView: View {
     @State private var isScanSheetPresented = false
     @State private var isBonusScanSheetPresented = false
 
+    @State private var isShareSheetPresented = false
+
     private var findFaceUser: FindFaceUser {
         viewModel.user ?? FindFaceUser.empty()
     }
@@ -39,8 +41,7 @@ struct FindFaceView: View {
     }
 
     private var imageToShare: Data {
-        // TODO: use different image for sharing
-        UIImage(resource: .findFaceBg).pngData() ?? Data()
+        UIImage(resource: .hiddenKeysSocialShare).pngData() ?? Data()
     }
 
     var body: some View {
@@ -228,23 +229,24 @@ struct FindFaceView: View {
                             .foregroundStyle(.textSecondary)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    ShareLink(
-                        item: imageToShare,
-                        subject: Text("Hidden face"),
-                        message: Text("Join RariMe with my invite code"),
-                        preview: SharePreview("Hidden face", image: Image(uiImage: UIImage(data: imageToShare)!))
-                    ) {
+                    Button(action: {
+                        isShareSheetPresented = true
+                        Task {
+                            await getExtraAttempt()
+                        }
+                    }) {
                         Text("Share")
                             .buttonMedium()
                             .foregroundStyle(.invertedLight)
                     }
                     .frame(width: 100, height: 32)
                     .background(.textPrimary, in: RoundedRectangle(cornerRadius: 12))
-                    .simultaneousGesture(TapGesture().onEnded {
-                        Task {
-                            await getExtraAttempt()
-                        }
-                    })
+                    .sheet(isPresented: $isShareSheetPresented) {
+                        ShareActivityView(activityItems: [
+                            imageToShare,
+                            "Think you can spot the famous face and unlock the key? Join the hunt in rariMe now!\n\n\(invitationLink)"
+                        ])
+                    }
                 }
                 .frame(maxWidth: .infinity)
 
@@ -265,8 +267,8 @@ struct FindFaceView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     ShareLink(
                         item: URL(string: invitationLink)!,
-                        subject: Text("Invite to Find a Face Game"),
-                        message: Text("Join Find a face game with my link:\n\n\(invitationLink)")
+                        subject: Text("Invite to Hidden Keys"),
+                        message: Text("Ready to test faces for hidden keys? Tap my invite, get free scans, and let’s race for the prize!\n\n\(invitationLink)")
                     ) {
                         Text("Invite")
                             .buttonMedium()

@@ -686,9 +686,6 @@
     "Hi" : {
 
     },
-    "Hidden face" : {
-
-    },
     "Hidden face:" : {
 
     },
@@ -714,9 +711,6 @@
 
     },
     "I just set a personal AI-usage rule for my digital likeness in rariMe. Take charge of yours in under a minute—privacy starts with you." : {
-
-    },
-    "I've found the key!" : {
 
     },
     "Iceland" : {
@@ -782,7 +776,7 @@
     "Invite others" : {
 
     },
-    "Invite to Find a Face Game" : {
+    "Invite to Hidden Keys" : {
 
     },
     "Invite to RariMe" : {
@@ -823,12 +817,6 @@
 
     },
     "Jersey" : {
-
-    },
-    "Join Find a face game with my link:\n\n%@" : {
-
-    },
-    "Join RariMe with my invite code" : {
 
     },
     "Join RariMe with my invite code: %@\n\n%@" : {
@@ -1259,6 +1247,9 @@
           }
         }
       }
+    },
+    "Ready to test faces for hidden keys? Tap my invite, get free scans, and let’s race for the prize!\n\n%@" : {
+
     },
     "Receive" : {
 

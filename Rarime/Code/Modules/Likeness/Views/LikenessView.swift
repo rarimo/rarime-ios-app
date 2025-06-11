@@ -20,7 +20,7 @@ struct LikenessView: View {
                     GlassBottomSheet(
                         minHeight: 410,
                         maxHeight: 730,
-                        bottomOffset: 146,
+                        bottomOffset: likenessManager.isRegistered ? 0 : 146,
                         maxBlur: 200,
                         dimBackground: true,
                         background: {
@@ -36,7 +36,9 @@ struct LikenessView: View {
                     ) {
                         mainSheetContent
                     }
-                    footer
+                    if !likenessManager.isRegistered {
+                        footer
+                    }
                 }
                 .background(.invertedLight)
             }
@@ -74,8 +76,8 @@ struct LikenessView: View {
             VStack(alignment: .leading, spacing: 0) {
                 if likenessManager.isRegistered {
                     Text("My Rule:")
-                        .h5()
-                        .foregroundStyle(Gradients.purpleText)
+                        .subtitle5()
+                        .foregroundStyle(.invertedDark)
                         .padding(.bottom, 12)
                     ZStack(alignment: .topLeading) {
                         if isSuccessTooltipShown {
@@ -86,12 +88,12 @@ struct LikenessView: View {
                                 Text(likenessManager.rule.title) +
                                     Text(verbatim: " ") +
                                     Text(Image(.arrowDownSLine))
-                                    .foregroundColor(.baseBlack)
+                                    .foregroundColor(.textSecondary)
                             )
                             .additional1()
                             .fixedSize(horizontal: false, vertical: true)
                             .multilineTextAlignment(.leading)
-                            .foregroundStyle(Gradients.purpleText)
+                            .foregroundStyle(Gradients.limeText)
                             .frame(maxWidth: 306, alignment: .leading)
                         }
                     }
@@ -108,6 +110,9 @@ struct LikenessView: View {
                         .foregroundStyle(.textSecondary)
                         .padding(.top, 12)
                 }
+            }
+            if likenessManager.isRegistered {
+                HorizontalDivider()
             }
             Text("AI can now replicate your face, voice, and identity without asking for your permission. But you never agreed to that, raising a fundamental question: who owns your likeness?\n\nRarimo is building the infrastructure to give you back that control. With this app, you can create a private, verifiable record that defines how your likeness can and can’t be used.\n\nYour face stays on your device. No company owns it. And over time, no AI model will be able to ignore your rule.")
                 .body4()
@@ -151,7 +156,7 @@ struct LikenessView: View {
                 .padding(.vertical, 8)
                 .background(.baseBlack, in: RoundedRectangle(cornerRadius: 12))
                 .foregroundStyle(.baseWhite)
-                .frame(maxWidth: 243)
+                .frame(maxWidth: 200)
                 .fixedSize(horizontal: false, vertical: true)
             Rectangle()
                 .fill(.baseBlack)

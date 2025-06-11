@@ -12,12 +12,14 @@ struct FindFaceSuccessView: View {
     @State private var isClaiming = false
     @State private var isClaimed = false
 
+    @State private var isShareSheetPresented = false
+
     private var findFaceUser: FindFaceUser {
         findFaceViewModel.user ?? FindFaceUser.empty()
     }
 
     private var imageToShare: Data {
-        UIImage(resource: .findFaceWinner).pngData() ?? Data()
+        UIImage(resource: .hiddenKeysWinnerShare).pngData() ?? Data()
     }
 
     private var claimButtonText: String {
@@ -131,18 +133,11 @@ struct FindFaceSuccessView: View {
                         Spacer()
                         AppButton(variant: .quartenary, text: "View Wallet", action: onViewWallet)
                             .controlSize(.large)
-                        ShareLink(
-                            item: imageToShare,
-                            subject: Text("I've found the key!"),
-                            preview: SharePreview("I've found the key!", image: Image(uiImage: UIImage(data: imageToShare)!))
-                        ) {
-                            Text("Share")
-                                .buttonLarge()
-                                .foregroundStyle(.invertedLight)
-                                .padding(18)
-                                .frame(maxWidth: .infinity, maxHeight: 56)
-                                .background(.invertedDark, in: RoundedRectangle(cornerRadius: 20))
-                        }
+                        AppButton(text: "Share", action: { isShareSheetPresented = true })
+                            .controlSize(.large)
+                            .sheet(isPresented: $isShareSheetPresented) {
+                                ShareActivityView(activityItems: [imageToShare, "Hidden keys: found. Prize: secured. Who’s next to join the winners’ circle? 🔑🏆"])
+                            }
                     }
                 }
             }
