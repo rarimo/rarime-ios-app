@@ -1,8 +1,8 @@
 import SwiftUI
 
-struct FindFaceScanningView: View {
-    @EnvironmentObject private var cameraViewModel: FindFaceCameraViewModel
-    @EnvironmentObject private var findFaceViewModel: FindFaceViewModel
+struct HiddenKeysScanningView: View {
+    @EnvironmentObject private var cameraViewModel: HiddenKeysCameraViewModel
+    @EnvironmentObject private var hiddenKeysViewModel: HiddenKeysViewModel
 
     let onSubmit: (_ result: Bool) -> Void
 
@@ -116,7 +116,7 @@ struct FindFaceScanningView: View {
             do {
                 LoggerUtil.common.info("Submitting guess")
 
-                let isSuccess = try await findFaceViewModel.submitGuess(
+                let isSuccess = try await hiddenKeysViewModel.submitGuess(
                     image: UIImage(cgImage: cameraViewModel.currentFrame!)
                 )
 
@@ -159,7 +159,7 @@ private struct FaceSquare: Shape {
 }
 
 #Preview {
-    FindFaceScanningView(onSubmit: { _ in })
-        .environmentObject(FindFaceViewModel())
-        .environmentObject(FindFaceCameraViewModel())
+    HiddenKeysScanningView(onSubmit: { _ in })
+        .environmentObject(HiddenKeysViewModel())
+        .environmentObject(HiddenKeysCameraViewModel())
 }

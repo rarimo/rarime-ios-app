@@ -3,12 +3,12 @@ import Foundation
 import Identity
 import SwiftUI
 
-struct FindFaceCelebrity {
+struct HiddenKeysCelebrity {
     let id, title, description, image, hint, winner: String
     let status: GuessCelebrityStatus
 }
 
-struct FindFaceUser {
+struct HiddenKeysUser {
     let id, referralCode: String
     let referralsCount, referralsLimit: Int
     let socialShare: Bool
@@ -16,12 +16,12 @@ struct FindFaceUser {
     let attemptsLeft, extraAttemptsLeft, totalAttemptsCount: Int
     let resetTime: TimeInterval
 
-    let celebrity: FindFaceCelebrity
+    let celebrity: HiddenKeysCelebrity
 }
 
-extension FindFaceUser {
-    static func empty() -> FindFaceUser {
-        FindFaceUser(
+extension HiddenKeysUser {
+    static func empty() -> HiddenKeysUser {
+        HiddenKeysUser(
             id: "",
             referralCode: "",
             referralsCount: 0,
@@ -31,7 +31,7 @@ extension FindFaceUser {
             extraAttemptsLeft: 0,
             totalAttemptsCount: 0,
             resetTime: 0,
-            celebrity: FindFaceCelebrity(
+            celebrity: HiddenKeysCelebrity(
                 id: "",
                 title: "",
                 description: "",
@@ -46,10 +46,10 @@ extension FindFaceUser {
 
 private let FIND_FACE_REFERRAL_CODE_LENGTH = 10
 
-class FindFaceViewModel: ObservableObject {
+class HiddenKeysViewModel: ObservableObject {
     static let faceThreshold = 74088185856
 
-    @Published var user: FindFaceUser? = nil
+    @Published var user: HiddenKeysUser? = nil
     @Published var originalFeatures: [Float] = []
     @Published var foundFace: UIImage? = nil
 
@@ -71,7 +71,7 @@ class FindFaceViewModel: ObservableObject {
                 guard let error = error as? AFError else { throw error }
                 let openApiHttpCode = try error.retriveOpenApiHttpCode()
                 if openApiHttpCode == HTTPStatusCode.notFound.rawValue {
-                    LoggerUtil.common.info("FindFace: User is not found, creating a new user")
+                    LoggerUtil.common.info("HiddenKeys: User is not found, creating a new user")
 
                     // Because referral codes can be used in different services,
                     // we check whether the code belongs to the guess celebrity service
@@ -87,7 +87,7 @@ class FindFaceViewModel: ObservableObject {
                 return
             } catch {
                 AlertManager.shared.emitError("Failed to load user information")
-                LoggerUtil.common.error("FindFace: Failed to load user information: \(error, privacy: .public)")
+                LoggerUtil.common.error("HiddenKeys: Failed to load user information: \(error, privacy: .public)")
                 return
             }
         }
@@ -98,7 +98,7 @@ class FindFaceViewModel: ObservableObject {
         let celebrityRel = userResponse.data.relationships.celebrity.data
         let celebrity = userResponse.included.first(where: { $0.id == celebrityRel.id && $0.type == celebrityRel.type })
 
-        user = FindFaceUser(
+        user = HiddenKeysUser(
             id: userResponse.data.id,
             referralCode: userResponse.data.attributes.referralCode,
             referralsCount: userResponse.data.attributes.referralsCount,
@@ -110,7 +110,7 @@ class FindFaceViewModel: ObservableObject {
             totalAttemptsCount: userStats?.attributes.totalAttemptsCount ?? 0,
             resetTime: userStats?.attributes.resetTime ?? 0,
 
-            celebrity: FindFaceCelebrity(
+            celebrity: HiddenKeysCelebrity(
                 id: celebrity?.id ?? "",
                 title: celebrity?.attributes.title ?? "",
                 description: celebrity?.attributes.description ?? "",
@@ -184,7 +184,7 @@ class FindFaceViewModel: ObservableObject {
         let nonceBigUint = try await faceRegistryContract.getVerificationNonce(inputAddress.fullHex())
         let nonce = try BN(dec: nonceBigUint.description)
 
-        let guessInputs = CircuitBuilderManager.shared.bionetCircuit.inputs(grayscaleData, originalFeatures, nonce, inputAddress, FindFaceViewModel.faceThreshold)
+        let guessInputs = CircuitBuilderManager.shared.bionetCircuit.inputs(grayscaleData, originalFeatures, nonce, inputAddress, HiddenKeysViewModel.faceThreshold)
         let zkProof = try await LikenessManager.shared.generateBionettaProof(guessInputs.json, downloadProgress)
 
         let guessCalldata = try IdentityCallDataBuilder().buildGuessCelebrityClaimRewardCalldata(address, zkPointsJSON: zkProof.json)

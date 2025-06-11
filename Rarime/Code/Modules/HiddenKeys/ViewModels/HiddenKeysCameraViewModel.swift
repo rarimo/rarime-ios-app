@@ -1,6 +1,6 @@
 import SwiftUI
 
-class FindFaceCameraViewModel: ObservableObject {
+class HiddenKeysCameraViewModel: ObservableObject {
     private var cameraManager = FaceCaptureSession(cameraPosition: .back)
     
     @Published var currentFrame: CGImage?

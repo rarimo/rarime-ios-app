@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct FindFaceStatusChip: View {
+struct HiddenKeysStatusChip: View {
     let status: GuessCelebrityStatus
 
     var body: some View {
@@ -25,5 +25,5 @@ struct FindFaceStatusChip: View {
 }
 
 #Preview {
-    FindFaceStatusChip(status: .active)
+    HiddenKeysStatusChip(status: .active)
 }

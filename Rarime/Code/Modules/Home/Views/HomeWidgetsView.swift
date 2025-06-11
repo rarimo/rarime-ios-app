@@ -9,7 +9,7 @@ private struct WidgetWrapper {
 struct HomeWidgetsView: View {
     @EnvironmentObject private var likenessManager: LikenessManager
     @EnvironmentObject private var homeViewModel: HomeView.ViewModel
-    @EnvironmentObject private var findFaceViewModel: FindFaceViewModel
+    @EnvironmentObject private var hiddenKeysViewModel: HiddenKeysViewModel
 
     @Binding var selectedWidget: HomeWidget?
     let namespaceProvider: (HomeWidget) -> Namespace.ID
@@ -132,7 +132,7 @@ struct HomeWidgetsView: View {
         WidgetWrapper(
             widget: .hiddenKeys,
             card: SnapCarouselCard(
-                disabled: findFaceViewModel.user == nil || findFaceViewModel.user?.celebrity.status == .maintenance,
+                disabled: hiddenKeysViewModel.user == nil || hiddenKeysViewModel.user?.celebrity.status == .maintenance,
                 action: { selectedWidget = .hiddenKeys }
             ) {
                 HomeCardView(
@@ -141,7 +141,7 @@ struct HomeWidgetsView: View {
                     topIcon: .rarime,
                     bottomIcon: .arrowRightUpLine,
                     imageContent: {
-                        Image(.findFaceBg)
+                        Image(.hiddenKeysBg)
                             .resizable()
                             .scaledToFill()
                             .clipShape(RoundedRectangle(cornerRadius: 32))
@@ -149,7 +149,7 @@ struct HomeWidgetsView: View {
                     title: "Hidden keys",
                     subtitle: "Find a face",
                     topContent: {
-                        FindFaceStatusChip(status: findFaceViewModel.user?.celebrity.status ?? .maintenance)
+                        HiddenKeysStatusChip(status: hiddenKeysViewModel.user?.celebrity.status ?? .maintenance)
                     },
                     animation: namespaceProvider(.hiddenKeys)
                 )
@@ -245,5 +245,5 @@ struct HomeWidgetsView: View {
     )
     .environmentObject(LikenessManager())
     .environmentObject(HomeView.ViewModel())
-    .environmentObject(FindFaceViewModel())
+    .environmentObject(HiddenKeysViewModel())
 }
