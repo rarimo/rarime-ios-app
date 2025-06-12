@@ -18,10 +18,6 @@ struct HiddenKeysSuccessView: View {
         hiddenKeysViewModel.user ?? HiddenKeysUser.empty()
     }
 
-    private var imageToShare: Data {
-        UIImage(resource: .hiddenKeysWinnerShare).pngData() ?? Data()
-    }
-
     private var claimButtonText: String {
         if isClaimed {
             return "Claimed"
@@ -136,7 +132,10 @@ struct HiddenKeysSuccessView: View {
                         AppButton(text: "Share", action: { isShareSheetPresented = true })
                             .controlSize(.large)
                             .sheet(isPresented: $isShareSheetPresented) {
-                                ShareActivityView(activityItems: [imageToShare, "Hidden keys: found. Prize: secured. Who’s next to join the winners’ circle? 🔑🏆"])
+                                ShareActivityView(activityItems: [
+                                    UIImage(resource: .hiddenKeysWinnerShare),
+                                    "Hidden keys: found. Prize: secured. Who’s next to join the winners’ circle? 🔑🏆"
+                                ])
                             }
                     }
                 }

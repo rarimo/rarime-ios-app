@@ -3,13 +3,21 @@ import SwiftUI
 struct ShareActivityView: UIViewControllerRepresentable {
     let activityItems: [Any]
     let applicationActivities: [UIActivity]? = nil
+
     func makeUIViewController(
         context: Context
     ) -> UIActivityViewController {
-        UIActivityViewController(
+        let controller = UIActivityViewController(
             activityItems: activityItems,
             applicationActivities: applicationActivities
         )
+
+        controller.excludedActivityTypes = [
+            .assignToContact,
+            .print
+        ]
+
+        return controller
     }
 
     func updateUIViewController(

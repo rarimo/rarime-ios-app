@@ -62,13 +62,13 @@ class ImageMasks {
         
         let shapeLayer = CAShapeLayer()
         shapeLayer.frame = .init(x: 0, y: 0, width: image.width, height: image.height)
-        shapeLayer.lineWidth = 4.0
+        shapeLayer.lineWidth = 6.0
         
         // draw triangles
         for triangle in triangles {
             let triangleLayer = CAShapeLayer()
             triangleLayer.path = triangle.toPath()
-            triangleLayer.strokeColor = UIColor.white.cgColor.copy(alpha: 0.3)
+            triangleLayer.strokeColor = UIColor.white.cgColor.copy(alpha: 0.4)
             triangleLayer.lineWidth = 3.0
             triangleLayer.fillColor = UIColor.clear.cgColor
             triangleLayer.backgroundColor = UIColor.clear.cgColor
@@ -78,12 +78,12 @@ class ImageMasks {
         
         // draw points
         for vertex in newVertices {
-            let POINT_RADIUS: CGFloat = 6.0
+            let POINT_RADIUS: CGFloat = 8.0
             let pointLayer = CAShapeLayer()
             pointLayer.path = UIBezierPath(
                 ovalIn: CGRect(x: vertex.x - POINT_RADIUS, y: vertex.y - POINT_RADIUS, width: POINT_RADIUS * 2, height: POINT_RADIUS * 2)
             ).cgPath
-            pointLayer.fillColor = UIColor.white.cgColor.copy(alpha: 0.6)
+            pointLayer.fillColor = UIColor.white.cgColor
             pointLayer.backgroundColor = UIColor.clear.cgColor
             
             shapeLayer.addSublayer(pointLayer)
