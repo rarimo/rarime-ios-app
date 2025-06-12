@@ -40,10 +40,6 @@ struct HiddenKeysView: View {
         ConfigManager.shared.api.webAppURL.appendingPathComponent("r/\(hiddenKeysUser.referralCode)").absoluteString
     }
 
-    private var imageToShare: Data {
-        UIImage(resource: .hiddenKeysSocialShare).pngData() ?? Data()
-    }
-
     var body: some View {
         ZStack(alignment: .topTrailing) {
             PullToCloseWrapperView(action: onClose) {
@@ -243,7 +239,7 @@ struct HiddenKeysView: View {
                     .background(.textPrimary, in: RoundedRectangle(cornerRadius: 12))
                     .sheet(isPresented: $isShareSheetPresented) {
                         ShareActivityView(activityItems: [
-                            imageToShare,
+                            UIImage(resource: .hiddenKeysSocialShare),
                             "Think you can spot the famous face and unlock the key? Join the hunt in rariMe now!\n\n\(invitationLink)"
                         ])
                     }
