@@ -13,12 +13,16 @@ struct NotificationsView: View {
     
     var body: some View {
         VStack(spacing: 24) {
-            HStack(alignment: .center) {
+            ZStack(alignment: .topLeading) {
+                Button(action: onBack) {
+                    Image(.arrowLeftSLine)
+                        .iconMedium()
+                        .foregroundColor(.textPrimary)
+                }
                 Text("Notifications")
-                    .subtitle4()
-                    .foregroundStyle(.textPrimary)
-                Spacer()
-                AppIconButton(icon: Icons.closeFill, action: onBack)
+                    .buttonMedium()
+                    .foregroundColor(.textPrimary)
+                    .frame(maxWidth: .infinity)
             }
             if pushNotifications.isEmpty {
                 Spacer()
@@ -39,7 +43,7 @@ struct NotificationsView: View {
                                             delete(pushNotification)
                                         }
                                     }) {
-                                        Image(Icons.deleteBin6Line)
+                                        Image(.deleteBin6Line)
                                             .iconMedium()
                                             .foregroundStyle(.baseWhite)
                                     }
@@ -54,6 +58,7 @@ struct NotificationsView: View {
                         }
                     }
                     .listStyle(.plain)
+                    .scrollIndicators(.hidden)
                     .onAppear {
                         scrollView.scrollTo(pushNotifications.last?.id)
                     }
@@ -108,42 +113,26 @@ private struct NotificationView: View {
 
     var body: some View {
         VStack(spacing: 8) {
-            if notification.isRead {
-                HStack(alignment: .center) {
-                    Text(notification.title ?? "")
-                        .body4()
-                        .foregroundStyle(.textPrimary)
-                    Spacer()
+            HStack(alignment: .center) {
+                Text(notification.title ?? "")
+                    .subtitle6()
+                Spacer()
+                HStack(alignment: .center, spacing: 4) {
+                    if !notification.isRead {
+                        Circle()
+                            .fill(.textPrimary)
+                            .frame(width: 8)
+                    }
                     Text(notification.receivedAt?.formatted(date: .abbreviated, time: .omitted) ?? "")
                         .caption3()
-                        .foregroundStyle(.textSecondary)
                 }
-                Text(notification.body ?? "")
-                    .body5()
-                    .foregroundStyle(.textSecondary)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(2)
-            } else {
-                HStack(alignment: .center) {
-                    Text(notification.title ?? "")
-                        .subtitle6()
-                        .foregroundStyle(.textPrimary)
-                    Spacer()
-                    HStack(alignment: .center, spacing: 4) {
-                        Circle()
-                            .fill(.secondaryDark)
-                            .frame(width: 8)
-                        Text(notification.receivedAt?.formatted(date: .abbreviated, time: .omitted) ?? "")
-                            .caption3()
-                            .foregroundStyle(.secondaryDark)
-                    }
-                }
-                Text(notification.body ?? "")
-                    .subtitle7()
-                    .foregroundStyle(.textSecondary)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(2)
             }
+            .foregroundStyle(notification.isRead ? .textSecondary : .textPrimary)
+            Text(notification.body ?? "")
+                .body5()
+                .foregroundStyle(.textSecondary)
+                .multilineTextAlignment(.leading)
+                .lineLimit(2)
         }
     }
 }
@@ -153,19 +142,19 @@ private struct NotificationView: View {
         .environmentObject(NotificationManager.shared)
         .environment(\.managedObjectContext, NotificationManager.shared.pushNotificationContainer.viewContext)
         .onAppear {
-           let context = NotificationManager.shared.pushNotificationContainer.viewContext
+            let context = NotificationManager.shared.pushNotificationContainer.viewContext
            
-           let pushNotification = PushNotification(context: context)
-           pushNotification.id = UUID()
-           pushNotification.title = "Other title"
-           pushNotification.body = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text"
-           pushNotification.receivedAt = Date()
-           pushNotification.isRead = true
+            let pushNotification = PushNotification(context: context)
+            pushNotification.id = UUID()
+            pushNotification.title = "Other title"
+            pushNotification.body = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text"
+            pushNotification.receivedAt = Date()
+            pushNotification.isRead = true
            
-           do {
-               try context.save()
-           } catch {
-               LoggerUtil.common.error("Error saving test notifications: \(error, privacy: .public)")
-           }
-       }
+            do {
+                try context.save()
+            } catch {
+                LoggerUtil.common.error("Error saving test notifications: \(error, privacy: .public)")
+            }
+        }
 }

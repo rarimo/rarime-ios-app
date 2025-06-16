@@ -1,42 +1,48 @@
 import SwiftUI
 
-struct HomeCarouselCard: Identifiable {
+struct SnapCarouselCard: Identifiable {
     let id = UUID()
-    let content: () -> AnyView
+    let disabled: Bool
     let action: () -> Void
-    let isShouldDisplay: Bool
+    let content: () -> AnyView
     
     init<V: View>(
-        isShouldDisplay: Bool = true,
+        disabled: Bool = false,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> V
     ) {
-        self.isShouldDisplay = isShouldDisplay
+        self.disabled = disabled
         self.action = action
         self.content = { AnyView(content()) }
     }
 }
 
-struct SnapCarouselView: View {
-    let cards: [HomeCarouselCard]
+struct SnapCarouselView<BottomContent: View>: View {
+    @Environment(\.isEnabled) var isEnabled
+    
     @Binding var index: Int
+    let cards: [SnapCarouselCard]
     
     var spacing: CGFloat
     var trailingSpace: CGFloat
     var sensitivity: CGFloat
     var dampFactor: CGFloat
     var nextCardScaleFactor: CGFloat
-    
+    var bottomContentHeight: CGFloat
+    let bottomContent: BottomContent
+
     @State private var dragOffset: CGFloat = 0
-    
+
     init(
         index: Binding<Int>,
-        cards: [HomeCarouselCard],
+        cards: [SnapCarouselCard],
         spacing: CGFloat = 40,
         trailingSpace: CGFloat = 68,
         sensitivity: CGFloat = 2.5,
         dampFactor: CGFloat = 0.4,
-        nextCardScaleFactor: CGFloat = 0.9
+        nextCardScaleFactor: CGFloat = 0.9,
+        bottomContentHeight: CGFloat = 0,
+        @ViewBuilder bottomContent: @escaping () -> BottomContent = { EmptyView() }
     ) {
         self.spacing = spacing
         self.trailingSpace = trailingSpace
@@ -45,6 +51,8 @@ struct SnapCarouselView: View {
         self.sensitivity = sensitivity
         self.dampFactor = dampFactor
         self.nextCardScaleFactor = nextCardScaleFactor
+        self.bottomContentHeight = bottomContentHeight
+        self.bottomContent = bottomContent()
     }
     
     var body: some View {
@@ -52,40 +60,53 @@ struct SnapCarouselView: View {
             let containerHeight = proxy.size.height
             let cardHeight = (containerHeight - trailingSpace) * nextCardScaleFactor
             let freeSpace = containerHeight - cardHeight
-            let offsetHeight = cardHeight + spacing
-            let currentAdjustedOffset = self.adjustedOffset(for: dragOffset)
-            let effectiveIndex = self.effectiveIndex(using: currentAdjustedOffset, offsetHeight: offsetHeight)
+            let offsetStep = cardHeight + spacing
+            
+            let adjustedDrag = adjustedOffset(for: dragOffset)
+            let floatingIndex = effectiveIndex(using: adjustedDrag, offsetStep: offsetStep)
+            
             VStack(spacing: spacing) {
-                ForEach(0 ..< cards.count, id: \.self) { idx in
-                    let distance = abs(CGFloat(idx) - effectiveIndex)
-                    let scale = 1 - ((1 - nextCardScaleFactor) * min(distance, 1))
-                    
-                    cards[idx].content()
-                        .frame(height: cardHeight)
-                        .scaleEffect(scale, anchor: .top)
-                        .onTapGesture {
-                            cards[idx].action()
-                        }
+                ForEach(0 ..< totalSlots, id: \.self) { idx in
+                    if idx < cards.count {
+                        let distance = idx == cards.count - 1 ? 0 : abs(CGFloat(idx) - floatingIndex)
+                        let scale = 1 - ((1 - nextCardScaleFactor) * min(distance, 1))
+                        
+                        cards[idx].content()
+                            .frame(height: cardHeight)
+                            .scaleEffect(scale, anchor: .top)
+                            .onTapGesture {
+                                let card = cards[idx]
+                                if !card.disabled {
+                                    card.action()
+                                }
+                            }
+                    } else {
+                        bottomContent
+                    }
                 }
             }
-            .offset(y:
-                (CGFloat(index) * -offsetHeight) +
-                    currentAdjustedOffset +
-                    (freeSpace / 2) -
-                    (spacing / 2)
-            )
+            .offset(y: yOffset(
+                containerHeight: containerHeight,
+                cardHeight: cardHeight,
+                freeSpace: freeSpace,
+                offsetStep: offsetStep,
+                adjustedDrag: adjustedDrag
+            ))
             .gesture(
                 DragGesture()
                     .onChanged { value in
+                        if !isEnabled { return }
+                        
                         dragOffset = value.translation.height
                     }
                     .onEnded { value in
-                        let offsetY = value.translation.height
-                        let progress = -offsetY / offsetHeight * sensitivity
+                        if !isEnabled { return }
+                        
+                        let progress = -value.translation.height / offsetStep * sensitivity
                         let delta = min(max(Int(progress.rounded()), -1), 1)
                         
                         withAnimation(.interpolatingSpring(mass: 1, stiffness: 100, damping: 15)) {
-                            let newIndex = max(min(index + delta, cards.count - 1), 0)
+                            let newIndex = max(min(index + delta, totalSlots - 1), 0)
                             if newIndex != index {
                                 FeedbackGenerator.shared.impact(.light)
                             }
@@ -97,26 +118,78 @@ struct SnapCarouselView: View {
         }
     }
     
-    private func adjustedOffset(for gestureOffset: CGFloat) -> CGFloat {
-        if index == 0 && gestureOffset > 0 {
-            return gestureOffset * dampFactor
-        } else if index == cards.count - 1 && gestureOffset < 0 {
-            return gestureOffset * dampFactor
-        }
-        return gestureOffset
+    private var totalSlots: Int {
+        cards.count + (bottomContentHeight > 0 ? 1 : 0)
     }
     
-    private func effectiveIndex(using adjustedOffset: CGFloat, offsetHeight: CGFloat) -> CGFloat {
-        CGFloat(index) - (adjustedOffset / offsetHeight)
+    private func adjustedOffset(for gestureOffset: CGFloat) -> CGFloat {
+        let atTop = (index == 0 && gestureOffset > 0)
+        let atLastCard = (index == cards.count - 1 && gestureOffset < 0)
+        let atBottom = index >= cards.count
+        
+        let factor = (atTop || atLastCard || atBottom) ? dampFactor : 1
+        return gestureOffset * factor
+    }
+    
+    private func effectiveIndex(using adjustedDrag: CGFloat, offsetStep: CGFloat) -> CGFloat {
+        CGFloat(index) - (adjustedDrag / offsetStep)
+    }
+    
+    private func yOffset(
+        containerHeight: CGFloat,
+        cardHeight: CGFloat,
+        freeSpace: CGFloat,
+        offsetStep: CGFloat,
+        adjustedDrag: CGFloat
+    ) -> CGFloat {
+        if index < cards.count {
+            return (CGFloat(index) * -offsetStep)
+                + adjustedDrag
+                + (freeSpace / 2)
+                - (spacing / 2)
+        }
+        
+        let lastCardCenteredOffset =
+            (CGFloat(cards.count - 1) * -offsetStep)
+                + (freeSpace / 2)
+                - (spacing / 2)
+        
+        return lastCardCenteredOffset
+            - spacing
+            - bottomContentHeight
+            + adjustedDrag
+    }
+}
+
+private struct PreviewView: View {
+    @State private var currentIndex: Int = 0
+    
+    let sampleCards: [SnapCarouselCard] = [
+        SnapCarouselCard(action: { print("Card 0 tapped") }) { Color.green },
+        SnapCarouselCard(action: { print("Card 1 tapped") }) { Color.purple },
+        SnapCarouselCard(action: { print("Card 2 tapped") }) { Color.cyan }
+    ]
+    
+    var body: some View {
+        VStack {
+            SnapCarouselView(
+                index: $currentIndex,
+                cards: sampleCards,
+                spacing: 32,
+                trailingSpace: 100,
+                sensitivity: 2.5,
+                dampFactor: 0.4,
+                nextCardScaleFactor: 0.9,
+                bottomContentHeight: 56
+            ) {
+                Image(.rarime)
+                    .iconMedium()
+            }
+            .frame(height: UIScreen.main.bounds.height * 0.9)
+        }
     }
 }
 
 #Preview {
-    HomeView()
-        .environmentObject(MainView.ViewModel())
-        .environmentObject(PassportManager())
-        .environmentObject(UserManager())
-        .environmentObject(ConfigManager())
-        .environmentObject(NotificationManager())
-        .environmentObject(ExternalRequestsManager())
+    PreviewView()
 }

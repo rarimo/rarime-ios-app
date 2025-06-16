@@ -18,7 +18,7 @@ REGISTRATION_SMT_CONTRACT_ADDRESS = "0x550B483129807BA148482152dEb3ac7a85e53cfe"
 STATE_KEEPER_CONTRACT_ADDRESS = "0x1021fC4e4693D729b69939A2066d16dF120B7F38"
 POINTS_SERVICE_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
 AUTHORIZE_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
-REFERRAL_URL = "https:${SLASH}/app.stage.rarime.com/r"
+WEB_APP_URL = "https:${SLASH}/app.stage.rarime.com"
 DEFAULT_REFERRAL_CODE = "kPRQYQUcWzW"
 JOIN_REWARDS_KEY = "15690e4461abffc8a0057282af199b7345fa492d28ec1ae60049459389752e3ee714947cc64edcde3c5b25c10081a003d15a88cf137bcc97049da465781eff3c"
 LIGHT_SIGNATURE_PRIVATE_KEY = "86494b0b827f6c096e1b65cc1e738a0c6f0c492250db7257fc19c35b74b4f568"
@@ -29,6 +29,11 @@ IPFS_NODE_URL="https:${SLASH}/ipfs.rarimo.com"
 VOTING_WEBSITE_URL="https:${SLASH}/stage.voting.freedomtool.org"
 VOTING_RELAYER_URL="https:${SLASH}/api.stage.freedomtool.org"
 VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS="0xFbae44a113A6f07687b180605f425e43066a6179"
+FACE_REGISTRY_CONTRACT_ADDRESS="0x3C0f27AC1817820C1BA41337B53090652aE4F448"
+GUESS_CELEBRITY_GAME_CONTRACT_ADDRESS="0x411AA3eF21AdC9e84c60e17451B0732119C8f0c7"
+EVM_CHAIN_ID = "201411"
+EVM_SCAN_URL = "https:${SLASH}/evmscan.rarimo.com"
+EVM_SCAN_API_URL = "https:${SLASH}/api.evmscan.rarimo.com"
 
 // MARK: Cosmos
 CHAIN_ID = "rarimo_42-1"
@@ -88,7 +93,6 @@ CIRCUIT_DATA_URL_37 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passpo
 CIRCUIT_DATA_URL_38 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.12/registerIdentity_20_160_3_3_736_200_NA-download.zip"
 
 // MARK: NoirCircuitsData
-NOIR_TRUSTED_SETUP_URL = "https:${SLASH}/storage.googleapis.com/rarimo-store/trusted-setups/ultraPlonkTrustedSetup.dat" 
 
 NOIR_CIRCUIT_DATA_URL_0 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.3/registerIdentity_2_256_3_6_336_264_21_2448_6_2008.json"
 NOIR_CIRCUIT_DATA_URL_1 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.3/registerIdentity_2_256_3_6_336_248_1_2432_3_256.json"
@@ -131,3 +135,10 @@ NOIR_CIRCUIT_DATA_URL_27 = "https:${SLASH}/storage.googleapis.com/rarimo-store/p
 // MARK: AppsFlyer
 APPSFLYER_DEV_KEY = "FsxpXXrjsFBLiF6jMe7jZY"
 APPSFLYER_APP_ID = "id6503300598"
+
+// MARK: ZKeys
+ZKEY_URL_0 = "https:${SLASH}/storage.googleapis.com/rarimo-store/zkey/circuit_final.zkey"
+
+// MARK: DownloadableFile
+DOWNLOADABLE_FILE_URL_0 = "https:${SLASH}/storage.googleapis.com/rarimo-store/face-recognition/face-recognition.tflite"
+DOWNLOADABLE_FILE_URL_1 = "https:${SLASH}/storage.googleapis.com/rarimo-store/trusted-setups/ultraPlonkTrustedSetup.dat"

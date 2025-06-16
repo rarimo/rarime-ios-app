@@ -3,7 +3,7 @@ import SwiftUI
 struct InternetConnectionRequiredView: View {
     var body: some View {
         VStack(spacing: 32) {
-            Image(Icons.globeSimpleX)
+            Image(.globeSimpleX)
                 .iconLarge()
                 .padding(24)
                 .background(.errorLighter, in: Circle())

@@ -9,14 +9,16 @@ struct AppIconView: View {
             title: String(localized: "App Icon"),
             onBack: onBack
         ) {
-            VStack(spacing: 12) {
-                ForEach(AppIcon.allCases, id: \.self) { icon in
-                    AppIconItem(
-                        icon: icon,
-                        isSelected: appIconManager.appIcon == icon
-                    ) {
-                        appIconManager.setAppIcon(icon)
-                        FeedbackGenerator.shared.impact(.light)
+            ScrollView {
+                VStack(spacing: 12) {
+                    ForEach(AppIcon.allCases, id: \.self) { icon in
+                        AppIconItem(
+                            icon: icon,
+                            isSelected: appIconManager.appIcon == icon
+                        ) {
+                            appIconManager.setAppIcon(icon)
+                            FeedbackGenerator.shared.impact(.light)
+                        }
                     }
                 }
             }
@@ -31,16 +33,16 @@ private struct AppIconItem: View {
 
     var body: some View {
         AppRadioButton(isSelected: isSelected, onSelect: onSelect) {
-            HStack(spacing: 16) {
+            HStack(spacing: 20) {
                 Image(icon.image)
-                    .square(40)
+                    .square(48)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
                             .strokeBorder(.bgComponentPrimary, lineWidth: 1)
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 Text(icon.title)
-                    .buttonMedium()
+                    .subtitle5()
                     .foregroundStyle(.textPrimary)
             }
         }

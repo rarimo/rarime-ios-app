@@ -6,7 +6,7 @@ private enum WalletRoute: String, Hashable {
 
 // TODO: move to model/manager
 enum WalletToken: String {
-    case rmo = "RMO"
+    case eth = "ETH"
 }
 
 // TODO: move to model/manager
@@ -17,21 +17,20 @@ struct WalletAsset {
 }
 
 struct WalletView: View {
+    @EnvironmentObject private var walletManager: WalletManager
     @EnvironmentObject private var userManager: UserManager
 
     @State private var path: [WalletRoute] = []
 
-    @State private var isBalanceFetching = false
-    @State private var cancelables: [Task<Void, Never>] = []
-
     // TODO: use the token from the manager and save to store
-    @State private var token = WalletToken.rmo
+    @State private var token = WalletToken.eth
 
-    @State private var selectedAsset = WalletAsset(
-        token: WalletToken.rmo,
-        balance: 0,
-        usdBalance: nil
-    )
+    // TODO: use the assets from the manager and save to store
+//    @State private var selectedAsset = WalletAsset(
+//        token: WalletToken.eth,
+//        balance: 0,
+//        usdBalance: nil
+//    )
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -53,25 +52,30 @@ struct WalletView: View {
                 }
             }
         }
+        .onAppear {
+            if !walletManager.transactions.isEmpty {
+                return
+            }
+
+            walletManager.pullTransactions()
+        }
     }
 
     private var content: some View {
         MainViewLayout {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    header
-                    AssetsSlider(walletAssets: [selectedAsset], isLoading: isBalanceFetching)
-                    HorizontalDivider()
-                        .padding(.horizontal, 20)
-                    transactionsList
-                }
-                .padding(.bottom, 120)
+            VStack(alignment: .leading, spacing: 20) {
+                header
+                // TODO: add full support for assets
+//                    AssetsSlider(walletAssets: [selectedAsset], isLoading: isBalanceFetching)
+//                    HorizontalDivider()
+//                        .padding(.horizontal, 20)
+                transactionsList
+                Spacer()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.bgPrimary)
         }
-        .onAppear(perform: fetchBalance)
-        .onDisappear(perform: cleanup)
+        .task { await fetchBalance() }
     }
 
     private var header: some View {
@@ -84,34 +88,35 @@ struct WalletView: View {
                     .body4()
                     .foregroundStyle(.textSecondary)
                 HStack(alignment: .center, spacing: 8) {
-                    if isBalanceFetching {
+                    if walletManager.isBalanceLoading {
                         ProgressView()
                     } else {
-                        Text(RarimoUtils.formatBalance(userManager.balance))
-                            .h4()
-                            .foregroundStyle(.textPrimary)
+                        Button(action: {
+                            Task { await fetchBalance() }
+                        }) {
+                            Text(walletManager.displayedBalance)
+                                .h4()
+                                .foregroundStyle(.textPrimary)
+                        }
                     }
-                    Text(WalletToken.rmo.rawValue)
+                    Text(WalletToken.eth.rawValue)
                         .overline2()
                         .foregroundStyle(.textPrimary)
                 }
                 .frame(height: 40)
                 .zIndex(1)
-                Text(try! String(selectedAsset.usdBalance == nil ? "---" : "≈$\((selectedAsset.usdBalance ?? 0).formatted())"))
-                    .caption2()
-                    .foregroundStyle(.textSecondary)
             }
             .frame(maxWidth: .infinity)
             .zIndex(1)
             HStack(spacing: 32) {
                 WalletButton(
                     text: String(localized: "Receive"),
-                    icon: Icons.arrowDown,
+                    icon: .arrowDown,
                     action: { path.append(.receive) }
                 )
                 WalletButton(
                     text: String(localized: "Send"),
-                    icon: Icons.arrowUp,
+                    icon: .arrowUp,
                     action: { path.append(.send) }
                 )
             }
@@ -129,33 +134,58 @@ struct WalletView: View {
                 Text("Transactions")
                     .subtitle5()
                     .foregroundStyle(.textPrimary)
+                if walletManager.transactions.isEmpty {
+                    if walletManager.isTransactionsLoading {
+                        ProgressView()
+                            .align(.center)
+                    } else {
+                        Text("No transactions yet")
+                            .body4()
+                            .foregroundStyle(.textSecondary)
+                    }
+                } else {
+                    DetectableScrollView(
+                        onTop: {
+                            walletManager.transactions = []
+                            walletManager.scanTXsNextPageParams = nil
+                            walletManager.isLastTXsPage = false
+
+                            walletManager.pullTransactions()
+                        },
+                        onBottom: walletManager.pullTransactions
+                    ) {
+                        VStack {
+                            ForEach(walletManager.transactions) { tx in
+                                TransactionItem(tx: tx, token: token)
+                                    .padding(.vertical, 5)
+                            }
+                        }
+                    }
+                    .scrollIndicators(.hidden)
+                    if walletManager.isTransactionsLoading {
+                        ProgressView()
+                            .align(.center)
+                    }
+                }
             }
         }
         .padding(.horizontal, 12)
     }
 
-    func fetchBalance() {
-        isBalanceFetching = true
-
-        let cancelable = Task { @MainActor in
-            defer {
-                self.isBalanceFetching = false
-            }
-        }
-
-        cancelables.append(cancelable)
-    }
-
-    func cleanup() {
-        for cancelable in cancelables {
-            cancelable.cancel()
+    @MainActor
+    func fetchBalance() async {
+        do {
+            try await walletManager.updateBalance()
+        } catch {
+            LoggerUtil.common.error("Failed to fetch balance: \(error.localizedDescription, privacy: .public)")
+            AlertManager.shared.emitError(.unknown("Failed to fetch balance"))
         }
     }
 }
 
 private struct WalletButton: View {
     var text: String
-    var icon: String
+    var icon: ImageResource
     var action: () -> Void
 
     var body: some View {
@@ -178,30 +208,38 @@ private struct TransactionItem: View {
     var tx: Transaction
     var token: WalletToken
 
-    var balanceModifier: String {
+    private var balanceModifier: String {
         tx.type == .sent ? "-" : "+"
     }
 
+    private var txScanUrl: URL {
+        EvmScanAPI.shared.getTransactionUrl(tx.hash)
+    }
+
     var body: some View {
-        HStack(spacing: 16) {
-            Image(tx.icon)
-                .iconMedium()
-                .padding(10)
-                .background(.bgComponentPrimary)
-                .foregroundStyle(.textSecondary)
-                .clipShape(Circle())
-            VStack(alignment: .leading, spacing: 4) {
-                Text(tx.title)
-                    .subtitle6()
-                    .foregroundStyle(.textPrimary)
-                Text(DateUtil.richDateFormatter.string(from: tx.date))
-                    .body5()
+        Button(action: { UIApplication.shared.open(txScanUrl) }) {
+            HStack(spacing: 16) {
+                Image(tx.icon)
+                    .iconMedium()
+                    .padding(10)
+                    .background(.bgComponentPrimary)
                     .foregroundStyle(.textSecondary)
+                    .clipShape(Circle())
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(tx.title)
+                        .subtitle6()
+                        .foregroundStyle(.textPrimary)
+                    Text(DateUtil.dateTimeFormatter.string(from: tx.date))
+                        .body5()
+                        .foregroundStyle(.textSecondary)
+                }
+                Spacer()
+                if tx.amount != 0 {
+                    Text(verbatim: "\(balanceModifier)\(tx.amount.format()) \(token.rawValue)")
+                        .subtitle7()
+                        .foregroundStyle(tx.type == .sent ? .errorMain : .successMain)
+                }
             }
-            Spacer()
-            Text("\(balanceModifier)\(tx.amount.formatted()) \(token.rawValue)")
-                .subtitle7()
-                .foregroundStyle(tx.type == .sent ? .errorMain : .successMain)
         }
     }
 }
@@ -210,4 +248,5 @@ private struct TransactionItem: View {
     WalletView()
         .environmentObject(MainView.ViewModel())
         .environmentObject(UserManager())
+        .environmentObject(WalletManager())
 }

@@ -18,11 +18,11 @@ struct AppAlert: View {
         }
     }
 
-    private var icon: String {
+    private var icon: ImageResource {
         switch type {
-        case .success: Icons.info
-        case .error: Icons.warning
-        case .processing: Icons.info
+        case .success: .informationLine
+        case .error: .warning
+        case .processing: .informationLine
         }
     }
 
@@ -57,6 +57,7 @@ struct AppAlert: View {
                 Text(message ?? defaultMessage)
                     .body4()
                     .opacity(0.7)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             Spacer()
         }

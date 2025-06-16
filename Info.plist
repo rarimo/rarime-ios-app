@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>PROPOSALS_STATE_CONTRACT_ADDRESS</key>
 	<string>${PROPOSALS_STATE_CONTRACT_ADDRESS}</string>
 	<key>MULTICALL3_CONTRACT_ADDRESS</key>
@@ -28,20 +30,38 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
-			<key>BlackAndGreenIcon</key>
+			<key>GreenIcon</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>BlackAndGreenIcon</string>
+					<string>GreenIcon</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
-			<key>GreenAndBlackIcon</key>
+			<key>GradientIcon</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>GreenAndBlackIcon</string>
+					<string>GradientIcon</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>WhiteIcon</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>WhiteIcon</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>CatIcon</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>CatIcon</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -51,7 +71,7 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>BlackAndWhiteIcon</string>
+				<string>BlackIcon</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<false/>
@@ -165,8 +185,8 @@
 	<string>${POINTS_SERVICE_URL}</string>
 	<key>PRIVACY_POLICY_URL</key>
 	<string>${PRIVACY_POLICY_URL}</string>
-	<key>REFERRAL_URL</key>
-	<string>${REFERRAL_URL}</string>
+	<key>WEB_APP_URL</key>
+	<string>${WEB_APP_URL}</string>
 	<key>REGISTER_CONTRACT_ADDRESS</key>
 	<string>${REGISTER_CONTRACT_ADDRESS}</string>
 	<key>REGISTRATION_SMT_CONTRACT_ADDRESS</key>
@@ -210,8 +230,6 @@
 	</array>
 	<key>REGISTRATION_SIMPLE_CONTRACT_ADRRESS</key>
 	<string>${REGISTRATION_SIMPLE_CONTRACT_ADRRESS}</string>
-	<key>NOIR_TRUSTED_SETUP_URL</key>
-	<string>${NOIR_TRUSTED_SETUP_URL}</string>
 	<key>NOIR_CIRCUIT_DATA_URLS</key>
 	<dict>
 		<key>registerIdentity_2_256_3_6_336_264_21_2448_6_2008</key>
@@ -273,7 +291,29 @@
 	</dict>
 	<key>VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS</key>
 	<string>${VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS}</string>
+	<key>ZKEY_URLS</key>
+	<dict>
+		<key>likeness</key>
+		<string>${ZKEY_URL_0}</string>
+	</dict>
+	<key>FACE_REGISTRY_CONTRACT_ADDRESS</key>
+	<string>${FACE_REGISTRY_CONTRACT_ADDRESS}</string>
+	<key>DOWNLOADABLE_FILE_URLS</key>
+	<dict>
+		<key>faceRecognitionTFLite</key>
+		<string>${DOWNLOADABLE_FILE_URL_0}</string>
+		<key>ultraPlonkTrustedSetup.dat</key>
+		<string>${DOWNLOADABLE_FILE_URL_1}</string>
+	</dict>
+	<key>GUESS_CELEBRITY_GAME_CONTRACT_ADDRESS</key>
+	<string>${GUESS_CELEBRITY_GAME_CONTRACT_ADDRESS}</string>
 	<key>AIRDROP_TERMS_URL</key>
 	<string>${AIRDROP_TERMS_URL}</string>
+	<key>EVM_CHAIN_ID</key>
+	<string>${EVM_CHAIN_ID}</string>
+	<key>EVM_SCAN_API_URL</key>
+	<string>${EVM_SCAN_API_URL}</string>
+	<key>EVM_SCAN_URL</key>
+	<string>${EVM_SCAN_URL}</string>
 </dict>
 </plist>

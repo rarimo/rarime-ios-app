@@ -4,13 +4,13 @@ struct AppRadioButton<Label: View>: View {
     let isSelected: Bool
     let onSelect: () -> Void
     let label: (() -> Label)?
-    
+
     init(isSelected: Bool, onSelect: @escaping () -> Void, @ViewBuilder label: @escaping () -> Label) {
-            self.isSelected = isSelected
-            self.onSelect = onSelect
-            self.label = label
-        }
-        
+        self.isSelected = isSelected
+        self.onSelect = onSelect
+        self.label = label
+    }
+
     init(isSelected: Bool, onSelect: @escaping () -> Void) where Label == EmptyView {
         self.isSelected = isSelected
         self.onSelect = onSelect
@@ -25,21 +25,24 @@ struct AppRadioButton<Label: View>: View {
                     Spacer()
                     radioCircle
                 }
-                .padding(16)
-                .background(.bgComponentPrimary, in: RoundedRectangle(cornerRadius: 12))
+                .padding(20)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(.bgComponentPrimary, lineWidth: 1)
+                )
             } else {
                 radioCircle
             }
         }
     }
-    
+
     private var radioCircle: some View {
         Circle()
-            .stroke(isSelected ? .secondaryMain : .bgComponentHovered, lineWidth: 1)
-            .frame(width: 20)
+            .stroke(isSelected ? .textPrimary : .textPlaceholder, lineWidth: 1.5)
+            .frame(width: 18)
             .overlay(
                 Circle()
-                    .fill(isSelected ? .secondaryMain : .clear)
+                    .fill(isSelected ? .textPrimary : .clear)
                     .frame(width: 10)
             )
     }

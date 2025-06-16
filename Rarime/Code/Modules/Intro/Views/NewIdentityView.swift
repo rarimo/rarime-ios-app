@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct NewIdentityView: View {
+    @EnvironmentObject private var walletManager: WalletManager
+    @EnvironmentObject private var likenessManager: LikenessManager
+    
     @EnvironmentObject private var userManager: UserManager
     
     let onBack: () -> Void
@@ -36,10 +39,14 @@ struct NewIdentityView: View {
                 if let user = userManager.user {
                     AppButton(
                         text: "Continue",
-                        rightIcon: Icons.arrowRight,
+                        rightIcon: .arrowRight,
                         action: {
                             do {
                                 try user.save()
+                                
+                                walletManager.privateKey = user.secretKey
+                                
+                                likenessManager.postInitialization()
                             } catch {
                                 LoggerUtil.common.error("failed to save user: \(error.localizedDescription, privacy: .public)")
                                 
@@ -84,7 +91,7 @@ struct NewIdentityView: View {
     var backupView: some View {
         ZStack(alignment: .topLeading) {
             Button(action: onBack) {
-                Image(Icons.arrowLeft)
+                Image(.arrowLeft)
                     .iconMedium()
                     .foregroundStyle(.textPrimary)
             }
@@ -92,7 +99,7 @@ struct NewIdentityView: View {
             .padding(.leading, 20)
             VStack(alignment: .center, spacing: 32) {
                 VStack {
-                    Image(Icons.cloud)
+                    Image(.cloud)
                         .square(72)
                         .foregroundStyle(.primaryDarker)
                 }
@@ -151,7 +158,7 @@ struct NewIdentityView: View {
             }
         }) {
             HStack {
-                Image(isCopied ? Icons.check : Icons.copySimple).iconMedium()
+                Image(isCopied ? .check : .copySimple).iconMedium()
                 Text(isCopied ? "Copied" : "Copy to clipboard").buttonMedium()
             }
             .foregroundStyle(.textPrimary)
@@ -172,9 +179,9 @@ struct NewIdentityView: View {
                     return
                 }
 
-                let isSaved = try await userManager.user?.saveUserPrivateKeyToCloud() ?? false
+                let record = try await userManager.user?.saveUserPrivateKeyToCloud()
 
-                if !isSaved {
+                if record == nil {
                     AlertManager.shared.emitError(.unknown(String(localized: "Backup already exists, try restore instead")))
                     onBack()
                     return
@@ -233,5 +240,6 @@ struct NewIdentityView: View {
 
 #Preview {
     NewIdentityView(onBack: {}, onNext: {})
-        .environmentObject(UserManager())
+        .environmentObject(LikenessManager())
+        .environmentObject(WalletManager())
 }

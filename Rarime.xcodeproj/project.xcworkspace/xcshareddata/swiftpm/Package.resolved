@@ -1,5 +1,5 @@
 {
-  "originHash" : "c38828b7ae47f965c375736e6acd9b3a3dd71bce23858a5bfbbc5d23cdb41e1c",
+  "originHash" : "07bfecc256b823c9f46af28660dc95b1e63023c98976b9b72ea7cfea583963be",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Static",
       "state" : {
-        "revision" : "f24c9b42e7e3139d7668fb1987abc172757a1188",
-        "version" : "6.16.0"
+        "revision" : "65945f5d9c37bc98434d48af39540f326adbfa35",
+        "version" : "6.15.3"
       }
     },
     {
@@ -423,6 +423,24 @@
       }
     },
     {
+      "identity" : "tensorflowlitec",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/rarimo/TensorFlowLiteC.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "4238cdcaf1fb760d97808d3820c924514d683c6e"
+      }
+    },
+    {
+      "identity" : "tensorflowliteswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/rarimo/TensorFlowLiteSwift",
+      "state" : {
+        "branch" : "main",
+        "revision" : "189d43414cb0185f60d64328f3fd129e46281825"
+      }
+    },
+    {
       "identity" : "web3.swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Boilertalk/Web3.swift.git",
@@ -438,6 +456,15 @@
       "state" : {
         "revision" : "4232d34efa49f633ba61afde365d3896fc7f8740",
         "version" : "2.15.0"
+      }
+    },
+    {
+      "identity" : "wrappinghstack",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:dkk/WrappingHStack.git",
+      "state" : {
+        "revision" : "425d9488ba55f58f0b34498c64c054c77fc2a44b",
+        "version" : "2.2.11"
       }
     },
     {

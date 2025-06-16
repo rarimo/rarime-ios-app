@@ -9,7 +9,7 @@ struct PassportChipErrorView: View {
     var body: some View {
         VStack(spacing: 32) {
             Spacer()
-            Image(Images.gears)
+            Image(.gears)
                 .resizable()
                 .scaledToFit()
                 .frame(height: 136)
@@ -27,7 +27,7 @@ struct PassportChipErrorView: View {
             VStack(spacing: 12) {
                 AppButton(
                     text: "Get in touch",
-                    rightIcon: Icons.arrowRight,
+                    rightIcon: .arrowRight,
                     action: {
                         if MFMailComposeViewController.canSendMail() {
                             isSending = true

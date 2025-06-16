@@ -31,11 +31,19 @@ extension View {
     
     // additional
     func additional1() -> some View {
-        self.applyFont(fontFamily: Fonts.playfairBold, fontSize: 48, lineHeight: 56, fontWeight: .bold)
+        self
+            .applyFont(fontFamily: Fonts.playfairBold, fontSize: 48, lineHeight: 48, fontWeight: .bold)
+            .kerning(-1.92)
     }
     
     func additional2() -> some View {
         self.applyFont(fontFamily: Fonts.playfairBold, fontSize: 40, lineHeight: 36, fontWeight: .bold)
+    }
+    
+    func additional3() -> some View {
+        self
+            .applyFont(fontFamily: Fonts.playfairBold, fontSize: 24, lineHeight: 24, fontWeight: .bold)
+            .kerning(-0.96)
     }
     
     // headline

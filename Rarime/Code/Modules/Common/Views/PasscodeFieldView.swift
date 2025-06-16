@@ -85,7 +85,8 @@ struct PasscodeFieldView: View {
             HStack(spacing: 0) {
                 if isFaceIdEnabled {
                     InputButton(action: onFaceIdClick) {
-                        Image(Icons.userFocus).square(24)
+                        Image(.userFocus)
+                            .iconLarge()
                     }
                     .disabled(!isEnabled)
                 } else {
@@ -101,7 +102,7 @@ struct PasscodeFieldView: View {
                     passcode.removeLast()
                     errorMessage = ""
                 }) {
-                    Image(Icons.backspace).iconMedium()
+                    Image(.backspace).iconMedium()
                 }
                 .disabled(!isEnabled)
             }

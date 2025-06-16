@@ -1,6 +1,6 @@
+import AVKit
 import NFCPassportReader
 import SwiftUI
-import AVKit
 
 struct ReadPassportNFCView: View {
     @EnvironmentObject private var passportViewModel: PassportViewModel
@@ -12,11 +12,6 @@ struct ReadPassportNFCView: View {
     let onClose: () -> Void
 
     @State private var useExtendedMode = false
-    @State private var player: AVPlayer = AVPlayer(url: Videos.readNfc)
-    
-    private var playerVideoURL: URL {
-        passportViewModel.isUSA ? Videos.readNfcUsa : Videos.readNfc
-    }
 
     var body: some View {
         ScanPassportLayoutView(
@@ -27,28 +22,11 @@ struct ReadPassportNFCView: View {
         ) {
             GeometryReader { geometry in
                 VStack(spacing: 24) {
-                    VideoPlayer(player: player)
-                        .disabled(true)
-                        .aspectRatio(16/9, contentMode: .fill)
+                    LoopVideoPlayer(url: passportViewModel.isUSA ? Videos.readNfcUsa : Videos.readNfc)
+                        .aspectRatio(16 / 9, contentMode: .fill)
                         .frame(width: geometry.size.width)
                         .clipped()
-                        .onAppear {
-                            player = AVPlayer(url: playerVideoURL)
-                            player.play()
-                            player.volume = 0
-                            NotificationCenter.default.addObserver(
-                                forName: .AVPlayerItemDidPlayToEndTime,
-                                object: nil,
-                                queue: .main
-                            ) { _ in
-                                player.seek(to: .zero)
-                                player.play()
-                            }
-                        }
-                        .onDisappear {
-                            player.pause()
-                        }
-                    
+
                     Spacer()
 
                     AppButton(text: "Scan", action: scanPassport)

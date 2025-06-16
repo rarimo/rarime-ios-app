@@ -2,7 +2,7 @@ import MessageUI
 import SwiftUI
 
 private enum ProfileRoute: Hashable {
-    case authMethod, exportKeys, language, theme, appIcon
+    case authMethod, recovery, theme, appIcon
 }
 
 struct ProfileView: View {
@@ -15,7 +15,11 @@ struct ProfileView: View {
     @EnvironmentObject private var securityManager: SecurityManager
     @EnvironmentObject private var decentralizedAuthManager: DecentralizedAuthManager
     @EnvironmentObject private var notificationManager: NotificationManager
+    @EnvironmentObject private var likenessManager: LikenessManager
     @EnvironmentObject private var pollsViewModel: PollsViewModel
+    @EnvironmentObject private var walletManager: WalletManager
+
+    @StateObject private var homeWidgetsViewModel = HomeWidgetsViewModel()
 
     @State private var path: [ProfileRoute] = []
 
@@ -33,12 +37,14 @@ struct ProfileView: View {
                 case .authMethod:
                     AuthMethodView(onBack: { path.removeLast() })
                         .navigationBarBackButtonHidden()
-                case .exportKeys:
-                    ExportKeysView(onBack: { path.removeLast() })
-                        .navigationBarBackButtonHidden()
-                case .language:
-                    LanguageView(onBack: { path.removeLast() })
-                        .navigationBarBackButtonHidden()
+                case .recovery:
+                    ProfileRouteLayout(
+                        title: String(localized: "Recovery Method"),
+                        onBack: { path.removeLast() }
+                    ) {
+                        RecoveryMethodSelectionView()
+                    }
+                    .navigationBarBackButtonHidden()
                 case .theme:
                     ThemeView(onBack: { path.removeLast() })
                         .navigationBarBackButtonHidden()
@@ -67,7 +73,7 @@ struct ProfileView: View {
                                     Text("Account")
                                         .buttonLarge()
                                         .foregroundStyle(.textPrimary)
-                                    Text("\(userManager.ethereumAddress ?? "")")
+                                    Text("Address: \(Ethereum.formatAddress(userManager.ethereumAddress ?? ""))")
                                         .body4()
                                         .foregroundStyle(.textSecondary)
                                 }
@@ -78,43 +84,39 @@ struct ProfileView: View {
                         CardContainer {
                             VStack(spacing: 20) {
                                 ProfileRow(
-                                    icon: Icons.userFocus,
-                                    title: String(localized: "Auth Method"),
-                                    action: { path.append(.authMethod) }
+                                    icon: .userShared2Line,
+                                    title: String(localized: "Recovery Method"),
+                                    action: { path.append(.recovery) }
                                 )
                                 ProfileRow(
-                                    icon: Icons.key,
-                                    title: String(localized: "Export Keys"),
-                                    action: { path.append(.exportKeys) }
+                                    icon: .shieldKeyholeLine,
+                                    title: String(localized: "Auth Method"),
+                                    action: { path.append(.authMethod) }
                                 )
                             }
                         }
                         CardContainer {
                             VStack(spacing: 20) {
                                 ProfileRow(
-                                    icon: Icons.globeSimple,
-                                    title: String(localized: "Language"),
-                                    value: settingsManager.language.title,
-                                    action: {
-                                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-                                    }
-                                )
-                                ProfileRow(
-                                    icon: Icons.sun,
+                                    icon: .sunLine,
                                     title: String(localized: "Theme"),
                                     value: settingsManager.colorScheme.title,
                                     action: { path.append(.theme) }
                                 )
                                 if appIconManager.isAppIconsSupported {
                                     ProfileRow(
-                                        icon: Icons.rarime,
+                                        icon: .rarime,
                                         title: String(localized: "App Icon"),
                                         value: appIconManager.appIcon.title,
                                         action: { path.append(.appIcon) }
                                     )
                                 }
+                            }
+                        }
+                        CardContainer {
+                            VStack(spacing: 20) {
                                 ProfileRow(
-                                    icon: Icons.question,
+                                    icon: .questionLine,
                                     title: String(localized: "Privacy Policy"),
                                     action: { isPrivacySheetPresented = true }
                                 )
@@ -123,7 +125,7 @@ struct ProfileView: View {
                                         .ignoresSafeArea()
                                 }
                                 ProfileRow(
-                                    icon: Icons.flag,
+                                    icon: .flagLine,
                                     title: String(localized: "Terms of Use"),
                                     action: { isTermsSheetPresented = true }
                                 )
@@ -133,7 +135,7 @@ struct ProfileView: View {
                                 }
                                 if MFMailComposeViewController.canSendMail() {
                                     ProfileRow(
-                                        icon: Icons.chat,
+                                        icon: .chat2Line,
                                         title: "Give us Feedback",
                                         action: { isShareWithDeveloper = true }
                                     )
@@ -147,7 +149,7 @@ struct ProfileView: View {
                         CardContainer {
                             VStack(spacing: 20) {
                                 ProfileRow(
-                                    icon: Icons.dotsThreeOutline,
+                                    icon: .dotsThreeOutline,
                                     title: String(localized: "Debug Options"),
                                     action: {
                                         isDebugOptionsShown = true
@@ -159,7 +161,7 @@ struct ProfileView: View {
                         CardContainer {
                             Button(action: { isAccountDeleting = true }) {
                                 HStack {
-                                    Image(Icons.trashSimple)
+                                    Image(.deleteBin6Line)
                                         .iconMedium()
                                         .padding(6)
                                         .background(.errorLighter, in: Circle())
@@ -190,12 +192,18 @@ struct ProfileView: View {
                     }
                     Button("Yes", role: .destructive) {
                         appViewModel.isIntroFinished = false
+                        AppUserDefaults.shared.isHomeOnboardingCompleted = false
+                        AppUserDefaults.shared.hasPointsBalance = false
+
                         passportManager.reset()
                         securityManager.reset()
                         userManager.reset()
                         decentralizedAuthManager.reset()
                         notificationManager.reset()
                         pollsViewModel.reset()
+                        likenessManager.reset()
+                        walletManager.reset()
+                        homeWidgetsViewModel.reset()
 
                         Task {
                             try? await notificationManager.unsubscribe(fromTopic: ConfigManager.shared.general.claimableNotificationTopic)
@@ -211,7 +219,7 @@ struct ProfileView: View {
 }
 
 private struct ProfileRow: View {
-    let icon: String
+    let icon: ImageResource
     let title: String
     var value: String? = nil
     let action: () -> Void
@@ -233,7 +241,7 @@ private struct ProfileRow: View {
                         .body4()
                         .foregroundStyle(.textSecondary)
                 }
-                Image(Icons.caretRight)
+                Image(.caretRight)
                     .iconMedium()
                     .foregroundStyle(.textSecondary)
             }
@@ -254,7 +262,9 @@ private struct ProfileRow: View {
         .environmentObject(AppIconManager())
         .environmentObject(DecentralizedAuthManager())
         .environmentObject(NotificationManager())
+        .environmentObject(LikenessManager())
         .environmentObject(userManager)
+        .environmentObject(WalletManager())
         .onAppear {
             _ = try? userManager.createNewUser()
         }

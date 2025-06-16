@@ -1,4 +1,5 @@
 import SwiftUI
+import WrappingHStack
 
 struct ProofRequestView: View {
     @EnvironmentObject private var userManager: UserManager
@@ -31,18 +32,25 @@ struct ProofRequestView: View {
         return Calendar.current.dateComponents([.year], from: birthDate, to: Date()).year
     }
 
+    private var selector: QueryProofSelector? {
+        if let selectorValue = proofParamsResponse?.data.attributes.selector {
+            return QueryProofSelector(decimalString: selectorValue)
+        } else {
+            return nil
+        }
+    }
+
     var body: some View {
         ZStack {
             if proofParamsResponse == nil {
                 ProgressView()
-                    .padding(.vertical, 100)
+                    .padding(.vertical, 200)
             } else {
-                VStack(spacing: 32) {
-                    VStack(spacing: 16) {
-                        makeItemRow(
-                            title: String(localized: "ID"),
-                            value: StringUtils.cropMiddle(proofParamsResponse!.data.id)
-                        )
+                VStack(alignment: .leading, spacing: 24) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Verification Criteria")
+                            .overline2()
+                            .foregroundStyle(.textSecondary)
                         if minAge != nil {
                             makeItemRow(
                                 title: String(localized: "Age"),
@@ -60,6 +68,41 @@ struct ProofRequestView: View {
                             value: hasUniqueness ? "Yes" : "No"
                         )
                     }
+
+                    HorizontalDivider()
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Requestor")
+                            .overline2()
+                            .foregroundStyle(.textSecondary)
+                        makeItemRow(
+                            title: String(localized: "ID"),
+                            value: StringUtils.cropMiddle(proofParamsResponse!.data.id)
+                        )
+                        makeItemRow(
+                            title: String(localized: "Host"),
+                            value: URL(string: proofParamsResponse!.data.attributes.callbackURL)?.host() ?? "–"
+                        )
+                    }
+
+                    if let selector {
+                        HorizontalDivider()
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Revealed data")
+                                .overline2()
+                                .foregroundStyle(.textSecondary)
+
+                            WrappingHStack(selector.enabledFields, spacing: .constant(4)) { field in
+                                Text(field.displayName)
+                                    .subtitle6()
+                                    .foregroundStyle(.textPrimary)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 4)
+                                    .background(.bgComponentPrimary, in: Capsule())
+                                    .padding(.vertical, 2)
+                            }
+                        }
+                    }
+
                     VStack(spacing: 4) {
                         AppButton(
                             text: isSubmitting ? "Generating..." : "Generate Proof",
@@ -78,14 +121,11 @@ struct ProofRequestView: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity)
         .padding(.horizontal, 20)
         .padding(.top, 24)
         .padding(.bottom, 8)
-        .onAppear {
-            Task { @MainActor in
-                await loadProofParams()
-            }
-        }
+        .task { await loadProofParams() }
     }
 
     private func makeItemRow(title: String, value: String) -> some View {
@@ -100,11 +140,12 @@ struct ProofRequestView: View {
         .foregroundStyle(.textPrimary)
     }
 
+    @MainActor
     private func loadProofParams() async {
         do {
             proofParamsResponse = try await VerificatorApi.getExternalRequestParams(url: proofParamsUrl)
         } catch {
-            AlertManager.shared.emitError(.unknown("Failed to load proof params"))
+            AlertManager.shared.emitError("Failed to load proof params")
             LoggerUtil.common.error("Failed to load proof params: \(error, privacy: .public)")
             onDismiss()
         }
@@ -130,10 +171,8 @@ struct ProofRequestView: View {
                 )
 
                 if response.data.attributes.status == .uniquenessCheckFailed {
-                    AlertManager.shared.emitError(.unknown("Uniqueness check failed"))
-
+                    AlertManager.shared.emitError("Uniqueness check failed")
                     onDismiss()
-
                     return
                 }
 
@@ -144,7 +183,7 @@ struct ProofRequestView: View {
                 AlertManager.shared.emitSuccess("Proof generated successfully")
                 onSuccess()
             } catch {
-                AlertManager.shared.emitError(.unknown("Failed to generate proof"))
+                AlertManager.shared.emitError("Failed to generate proof")
                 LoggerUtil.common.error("Failed to generate query proof: \(error, privacy: .public)")
                 onDismiss()
             }
@@ -156,7 +195,7 @@ struct ProofRequestView: View {
     ZStack {}
         .dynamicSheet(isPresented: .constant(true), title: "Proof Request") {
             ProofRequestView(
-                proofParamsUrl: URL(string: "https://api.orgs.app.stage.rarime.com/integrations/verificator-svc/public/proof-params/0x19e8958c2c9cf59d1bab2933754513f5ac20f546c691f51b5b63c07e732dee06")!,
+                proofParamsUrl: URL(string: "https://api.orgs.app.stage.rarime.com/integrations/verificator-svc/public/proof-params/0x69d9c5f9dd91dbaff7815947e58dade0db8c8d89e1223259399de86bfc9abd")!,
                 onSuccess: {},
                 onDismiss: {}
             )

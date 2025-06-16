@@ -11,6 +11,8 @@ class CircuitBuilderManager {
     let registerIdentityCircuit = RegisterIdentityCircuit()
     let registerIdentityLightCircuit = RegisterIdentityLightCircuit()
     let noirRegisterIdentityCircuit = NoirRegisterIdentityCircuit()
+    let bionetCircuit = BionetCircuit()
+    let faceRegistryNoInclusionCircuit = FaceRegistryNoInclusionCircuit()
 }
 
 extension CircuitBuilderManager {
@@ -146,6 +148,61 @@ extension CircuitBuilderManager {
                 sa: signedAttributes.map { $0.description },
                 sig: sig,
                 skIdentity: BN(privateKey).dec()
+            )
+        }
+    }
+}
+
+extension CircuitBuilderManager {
+    private static let imageMultiplier: Float = 32768
+    
+    private static let threshold: Int = 107374182
+    
+    class BionetCircuit {
+        func inputs(
+            _ imageData: Data,
+            _ features: [Float],
+            _ nonce: BN,
+            _ address: BN,
+            _ threshold: Int = CircuitBuilderManager.threshold
+        ) -> BionetInputs {
+            var imageMatrix: [[String]] = []
+            for x in 0..<TensorFlow.bionetImageBoundary {
+                var imageRow: [String] = []
+                for y in 0..<TensorFlow.bionetImageBoundary {
+                    let pixelValue = Float(imageData[x * TensorFlow.bionetImageBoundary + y])
+                    
+                    let normalizedValue = (pixelValue / 255) * CircuitBuilderManager.imageMultiplier
+                    
+                    imageRow.append(Int(normalizedValue).description)
+                }
+                
+                imageMatrix.append(imageRow)
+            }
+            
+            return .init(
+                image: [imageMatrix],
+                features: features.map { Int($0 * CircuitBuilderManager.imageMultiplier).description },
+                nonce: nonce.dec(),
+                address: address.dec(),
+                threshold: threshold.description
+            )
+        }
+    }
+}
+
+extension CircuitBuilderManager {
+    class FaceRegistryNoInclusionCircuit {
+        func inputs(
+            eventId: String,
+            nonce: String,
+            privateKey: String
+        ) -> FaceRegistryNoInclusionInputs {
+            return .init(
+                eventId: eventId,
+                nonce: nonce,
+                value: "0",
+                skIdentity: privateKey
             )
         }
     }

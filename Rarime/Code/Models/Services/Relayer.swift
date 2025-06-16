@@ -37,6 +37,36 @@ class Relayer {
         .result
         .get()
     }
+
+    func likenessRegistry(
+        _ calldata: Data,
+        _ destination: String? = nil,
+        _ noSend: Bool = false,
+        meta: [String: String]? = nil
+    ) async throws -> EvmTxResponse {
+        var requestURL = url
+        requestURL.append(path: "/integrations/registration-relayer/v1/likeness-registry")
+
+        let payload = RegisterRequest(
+            data: RegisterRequestData(
+                txData: "0x" + calldata.hex,
+                destination: destination,
+                noSend: noSend,
+                meta: meta
+            )
+        )
+
+        return try await AF.request(
+            requestURL,
+            method: .post,
+            parameters: payload,
+            encoder: JSONParameterEncoder.default
+        )
+        .validate(OpenApiError.catchInstance)
+        .serializingDecodable(EvmTxResponse.self)
+        .result
+        .get()
+    }
 }
 
 struct RegisterRequest: Encodable {

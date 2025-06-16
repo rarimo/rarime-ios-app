@@ -8,6 +8,9 @@ public class AppUserDefaults: ObservableObject {
     @AppStorage("is_intro_finished")
     public var isIntroFinished = false
 
+    @AppStorage("is_home_onboarding_completed")
+    public var isHomeOnboardingCompleted = false
+
     @AppStorage("passcode_state")
     public var passcodeState = SecurityItemState.unset.rawValue
 
@@ -18,16 +21,13 @@ public class AppUserDefaults: ObservableObject {
     public var passportCardLook = PassportCardLook.holographicViolet.rawValue
 
     @AppStorage("v2_passport_identifiers")
-    public var passportIdentifiers = try! JSONEncoder().encode([PassportIdentifier.documentId.rawValue])
+    public var passportIdentifiers = (try? JSONEncoder().encode([PassportIdentifier.documentId.rawValue])) ?? Data()
 
     @AppStorage("is_passport_incognito_mode")
     public var isPassportIncognitoMode = false
 
     @AppStorage("color_scheme")
     public var colorScheme = AppColorScheme.system.rawValue
-
-    @AppStorage("language")
-    public var language = AppLanguage.english.rawValue
 
     @AppStorage("is_first_launch")
     public var isFirstLaunch = true
@@ -81,6 +81,17 @@ public class AppUserDefaults: ObservableObject {
     @AppStorage("last_mrz_key")
     public var lastMRZKey: String = ""
 
+    @AppStorage("likeness_rule")
+    public var likenessRule: Int = LikenessRule.unset.rawValue
+
+    @AppStorage("is_likeness_registered")
+    public var isLikenessRegistered: Bool = false
     @AppStorage("is_passport_failed_by_impossible_revocation")
     public var isPassportFailedByImpossibleRevocation: Bool = false
+
+    @AppStorage("home_widgets")
+    public var homeWidgets: Data = (try? JSONEncoder().encode(DEFAULT_HOME_WIDGETS.map { $0.rawValue })) ?? Data()
+
+    @AppStorage("has_points_balance")
+    public var hasPointsBalance: Bool = false
 }

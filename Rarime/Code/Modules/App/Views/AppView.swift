@@ -4,7 +4,7 @@ import SwiftUI
 
 struct AppView: View {
     @EnvironmentObject private var internetConnectionManager: InternetConnectionManager
-    @EnvironmentObject private var circuitDataManager: CircuitDataManager
+    @EnvironmentObject private var DownloadableDataManager: DownloadableDataManager
     @EnvironmentObject private var updateManager: UpdateManager
     @EnvironmentObject private var alertManager: AlertManager
     @EnvironmentObject private var securityManager: SecurityManager
@@ -37,10 +37,6 @@ struct AppView: View {
                     securityManager.faceIdState != .unset
                 {
                     LockScreenView()
-                } else if securityManager.passcodeState != .unset {
-                    EnableFaceIdView().transition(.backslide)
-                } else if viewModel.isIntroFinished {
-                    EnablePasscodeView().transition(.backslide)
                 } else {
                     IntroView(onFinish: { viewModel.finishIntro() })
                         .transition(.backslide)
@@ -48,7 +44,7 @@ struct AppView: View {
             } else {
                 VStack {
                     Spacer()
-                    Image(Icons.rarime)
+                    Image(.rarime)
                         .square(96)
                         .foregroundStyle(Gradients.gradientFirst)
                         .padding(.all, 44)
@@ -59,7 +55,6 @@ struct AppView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(.bgPrimary)
             }
-            AlertManagerView()
         }
         .preferredColorScheme(settingsManager.colorScheme.rawScheme ?? colorScheme)
         .blur(radius: blurRadius)
@@ -88,7 +83,7 @@ struct AppView: View {
 
 #Preview {
     AppView()
-        .environmentObject(CircuitDataManager())
+        .environmentObject(DownloadableDataManager())
         .environmentObject(AlertManager())
         .environmentObject(SecurityManager())
         .environmentObject(SettingsManager())

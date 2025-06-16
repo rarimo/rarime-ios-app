@@ -3,7 +3,7 @@ import SwiftUI
 struct AppCheckbox: View {
     @Binding var checked: Bool
     var onToggle: ((Bool) -> Void)?
-    
+
     @ViewBuilder var background: some View {
         if checked {
             Gradients.gradientSixth
@@ -14,7 +14,7 @@ struct AppCheckbox: View {
 
     var body: some View {
         ZStack {
-            Image(Icons.checkLine)
+            Image(.checkLine)
                 .iconSmall()
                 .foregroundStyle(.invertedLight)
                 .opacity(checked ? 1 : 0)

@@ -24,7 +24,7 @@ struct ScanQRView: View {
                 Color.baseBlack
                     .opacity(0.6)
                     .mask(MaskShape(size: 247).fill(style: FillStyle(eoFill: true)))
-                Image(Images.qrFrame).square(247)
+                Image(.qrFrame).square(247)
                 Text("Position the QR code in the middle of the scanner")
                     .body3()
                     .foregroundStyle(.baseWhite)
@@ -34,7 +34,7 @@ struct ScanQRView: View {
             }
             .ignoresSafeArea()
             Button(action: onBack) {
-                Image(Icons.closeFill)
+                Image(.closeFill)
                     .iconMedium()
                     .foregroundStyle(.baseWhite)
             }

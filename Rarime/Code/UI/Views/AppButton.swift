@@ -78,10 +78,11 @@ struct AppButton: View {
     var variant: ButtonVariant = .primary
 
     var text: LocalizedStringResource
-    var leftIcon: String?
-    var rightIcon: String?
+    var leftIcon: ImageResource?
+    var rightIcon: ImageResource?
 
     var width: CGFloat? = .infinity
+    var loading: Bool = false
     var action: () -> Void
 
     @Environment(\.controlSize) var controlSize
@@ -101,7 +102,7 @@ struct AppButton: View {
         default: 24
         }
     }
-    
+
     private var cornerRadius: CGFloat {
         switch controlSize {
         case .small: 12
@@ -109,7 +110,7 @@ struct AppButton: View {
         default: 16
         }
     }
-    
+
     private var iconSize: CGFloat {
         controlSize == .small ? 16 : 20
     }
@@ -121,22 +122,29 @@ struct AppButton: View {
                 .frame(maxWidth: width)
                 .padding(.horizontal, paddingHorizontal)
         }
+        .disabled(loading)
         .buttonStyle(AppButtonStyle(variant: variant))
         .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
     }
 
     var label: some View {
-        HStack(spacing: 8) {
-            if let leftIcon {
-                Image(leftIcon).square(iconSize)
-            }
-            switch controlSize {
-            case .small: Text(text).buttonSmall()
-            case .large: Text(text).buttonLarge()
-            default: Text(text).buttonMedium()
-            }
-            if let rightIcon {
-                Image(rightIcon).square(iconSize)
+        ZStack {
+            if loading {
+                ProgressView()
+                    .controlSize(controlSize == .small ? .small : .regular)
+            } else {
+                HStack(spacing: 8) {
+                    if let leftIcon {
+                        Image(leftIcon).square(iconSize)
+                    }
+                    switch controlSize {
+                    case .large: Text(text).buttonLarge()
+                    default: Text(text).buttonMedium()
+                    }
+                    if let rightIcon {
+                        Image(rightIcon).square(iconSize)
+                    }
+                }
             }
         }
     }
@@ -146,6 +154,12 @@ struct AppButton: View {
     VStack {
         AppButton(
             text: LocalizedStringResource("Primary", table: "preview"),
+            action: {}
+        )
+        .controlSize(.large)
+        AppButton(
+            text: LocalizedStringResource("Primary", table: "preview"),
+            loading: true,
             action: {}
         )
         .controlSize(.large)

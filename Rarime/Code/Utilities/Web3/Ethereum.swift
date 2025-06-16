@@ -1,11 +1,11 @@
 import Foundation
 
 import Web3
-import Web3PromiseKit
 import Web3ContractABI
+import Web3PromiseKit
 
 class Ethereum {
-    static let ZERO_BYTES32: Data = Data(repeating: 0, count: 32)
+    static let ZERO_BYTES32: Data = .init(repeating: 0, count: 32)
     
     static let TX_PULL_INTERVAL: UInt64 = NSEC_PER_SEC * 3
     
@@ -56,5 +56,56 @@ class Ethereum {
             
             try await Task.sleep(nanoseconds: Ethereum.TX_PULL_INTERVAL)
         }
+    }
+    
+    static func isValidAddress(_ address: String) -> Bool {
+        let pattern = "^0x[a-fA-F0-9]{40}$"
+        return address.range(of: pattern, options: .regularExpression) != nil
+    }
+    
+    static func formatAddress(_ address: String) -> String {
+        return isValidAddress(address) ? "\(address.prefix(6))...\(address.suffix(4))" : "–"
+    }
+}
+
+extension Web3.Eth {
+    func getBalanceAsync(address: EthereumAddress, block: EthereumQuantityTag) async throws -> EthereumQuantity {
+        try await withCheckedThrowingContinuation { continuation in
+            firstly {
+                getBalance(address: address, block: block)
+            }.done { qty in
+                continuation.resume(returning: qty)
+            }.catch { err in
+                continuation.resume(throwing: err)
+            }
+        }
+    }
+}
+
+let ONE_ETHER = Decimal(sign: .plus, exponent: 18, significand: Decimal(1))
+
+extension EthereumQuantity {
+    var decimal: Decimal {
+        let weiDecimal = Decimal(string: quantity.description) ?? .zero
+        return weiDecimal / ONE_ETHER
+    }
+    
+    init(decimal: Decimal) {
+        let weiString = NSDecimalNumber(decimal: decimal * ONE_ETHER).stringValue
+        self.init(quantity: BigUInt(weiString) ?? BigUInt(0))
+    }
+}
+
+extension EthereumQuantity {
+    func format(
+        minFractionDigits: Int = 2,
+        maxFractionDigits: Int = 6
+    ) -> String {
+        let fmt = NumberFormatter()
+        fmt.numberStyle = .decimal
+        fmt.minimumFractionDigits = minFractionDigits
+        fmt.maximumFractionDigits = maxFractionDigits
+
+        return fmt.string(from: NSDecimalNumber(decimal: decimal)) ?? "–"
     }
 }

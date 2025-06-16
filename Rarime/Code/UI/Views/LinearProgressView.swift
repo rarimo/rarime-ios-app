@@ -2,6 +2,27 @@ import SwiftUI
 
 struct LinearProgressView: View {
     let progress: Double
+    let height: CGFloat
+    let backgroundFill: AnyShapeStyle
+    let foregroundFill: AnyShapeStyle
+
+    init(
+        progress: Double,
+        height: CGFloat = 8,
+        backgroundFill: AnyShapeStyle = AnyShapeStyle(Color.bgComponentPrimary),
+        foregroundFill: AnyShapeStyle = AnyShapeStyle(
+            LinearGradient(
+                colors: [.primaryMain, .primaryDark, .primaryDarker],
+                startPoint: .leading,
+                endPoint: .trailing
+            )
+        )
+    ) {
+        self.progress = progress
+        self.height = height
+        self.backgroundFill = backgroundFill
+        self.foregroundFill = foregroundFill
+    }
 
     var normalizedProgress: Double {
         max(0, min(1, progress))
@@ -11,17 +32,11 @@ struct LinearProgressView: View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 100)
-                    .fill(.bgComponentPrimary)
-                    .frame(width: geometry.size.width, height: 8)
+                    .fill(backgroundFill)
+                    .frame(width: geometry.size.width, height: height)
                 RoundedRectangle(cornerRadius: 100)
-                    .fill(
-                        LinearGradient(
-                            colors: [.primaryMain, .primaryDark, .primaryDarker],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    )
-                    .frame(width: geometry.size.width * CGFloat(normalizedProgress), height: 8)
+                    .fill(foregroundFill)
+                    .frame(width: geometry.size.width * CGFloat(normalizedProgress), height: height)
             }
         }
         .frame(height: 8)

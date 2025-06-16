@@ -19,10 +19,12 @@ struct RarimeApp: App {
                 .environmentObject(AppIconManager.shared)
                 .environmentObject(UpdateManager.shared)
                 .environmentObject(DecentralizedAuthManager.shared)
-                .environmentObject(CircuitDataManager.shared)
+                .environmentObject(DownloadableDataManager.shared)
                 .environmentObject(NotificationManager.shared)
                 .environmentObject(ExternalRequestsManager.shared)
                 .environmentObject(InternetConnectionManager.shared)
+                .environmentObject(LikenessManager.shared)
+                .environmentObject(WalletManager.shared)
         }
     }
 }

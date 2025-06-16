@@ -6,7 +6,7 @@ struct InfoAlert<Content: View>: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            Image(Icons.info).iconMedium()
+            Image(.informationLine).iconMedium()
             Text(text).body5()
             Spacer()
             actionButton()
@@ -24,7 +24,7 @@ struct InfoAlert<Content: View>: View {
         InfoAlert(text: LocalizedStringResource("This is a warning message", table: "preview")) {}
         InfoAlert(text: LocalizedStringResource("This is a warning message with an action button on the right", table: "preview")) {
             Button(action: {}) {
-                Image(Icons.caretRight).iconMedium()
+                Image(.caretRight).iconMedium()
             }
         }
     }
