@@ -68,6 +68,7 @@ struct HomeWidgetsView: View {
             recoveryWidget,
             likenessWidget,
         ]
+        .filter { $0.widget.isVisible }
         .filter { $0.widget != .earn || homeViewModel.hasBalance }
         .filter { viewModel.widgets.contains($0.widget) }
     }

@@ -8,7 +8,7 @@ struct ManageWidgetsView: View {
     @State private var widgetIndex: Int = 0
 
     private var manageableWidgets: [HomeWidget] {
-        HomeWidget.allCases.filter { $0.isManageable }
+        HomeWidget.allCases.filter { $0.isVisible && $0.isManageable }
     }
 
     private var highlightedWidget: HomeWidget {

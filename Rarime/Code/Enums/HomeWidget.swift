@@ -43,6 +43,15 @@ extension HomeWidget {
 }
 
 extension HomeWidget {
+    var isVisible: Bool {
+        switch self {
+        case .earn, .freedomTool, .recovery:
+            return true
+        default:
+            return false
+        }
+    }
+
     var isManageable: Bool {
         switch self {
         case .freedomTool, .hiddenKeys, .recovery: return true
