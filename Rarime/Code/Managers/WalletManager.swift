@@ -128,6 +128,7 @@ class WalletManager: ObservableObject {
         }
 
         isTransactionsLoading = true
+        defer { isTransactionsLoading = false }
 
         Task { @MainActor in
             do {
@@ -164,14 +165,20 @@ class WalletManager: ObservableObject {
 
                 isTransactionsLoading = false
             } catch {
-                LoggerUtil.common.error("Failed to pull transactions: \(error, privacy: .public)")
-
-                AlertManager.shared.emitError(.unknown("Failed to pull transactions"))
+                if error.asAFError?.isResponseValidationError == true {
+                    transactions = []
+                } else {
+                    LoggerUtil.common.error("Failed to pull transactions: \(error, privacy: .public)")
+                    AlertManager.shared.emitError(.unknown("Failed to pull transactions"))
+                }
             }
         }
     }
 
     func reset() {
         transactions = []
+        isTransactionsLoading = false
+        scanTXsNextPageParams = nil
+        isLastTXsPage = false
     }
 }
