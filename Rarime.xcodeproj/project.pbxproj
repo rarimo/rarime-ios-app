@@ -108,6 +108,8 @@
 		56D7FC792DF9803900B13A61 /* LikenessScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7FC782DF9803900B13A61 /* LikenessScanView.swift */; };
 		56D7FC7B2DF9870700B13A61 /* LikenessSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7FC7A2DF9870700B13A61 /* LikenessSuccessView.swift */; };
 		56D7FC7D2DF9CCAA00B13A61 /* ShareActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7FC7C2DF9CCAA00B13A61 /* ShareActivityView.swift */; };
+		56D7FC962DFB0E2F00B13A61 /* QueryProofSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7FC952DFB0E2F00B13A61 /* QueryProofSelector.swift */; };
+		56D7FC9C2DFC3F1100B13A61 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 56D7FC9B2DFC3F1100B13A61 /* WrappingHStack */; };
 		56D8F8E92DB7CAF4002EA4A2 /* LikenessRuleSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8F8E82DB7CAF4002EA4A2 /* LikenessRuleSheetView.swift */; };
 		56DAA3012BB723A1002CF710 /* NewIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3002BB723A1002CF710 /* NewIdentityView.swift */; };
 		56DAA3052BB72E35002CF710 /* InfoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAA3042BB72E35002CF710 /* InfoAlert.swift */; };
@@ -518,6 +520,7 @@
 		56D7FC782DF9803900B13A61 /* LikenessScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessScanView.swift; sourceTree = "<group>"; };
 		56D7FC7A2DF9870700B13A61 /* LikenessSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessSuccessView.swift; sourceTree = "<group>"; };
 		56D7FC7C2DF9CCAA00B13A61 /* ShareActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareActivityView.swift; sourceTree = "<group>"; };
+		56D7FC952DFB0E2F00B13A61 /* QueryProofSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryProofSelector.swift; sourceTree = "<group>"; };
 		56D8F8E82DB7CAF4002EA4A2 /* LikenessRuleSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikenessRuleSheetView.swift; sourceTree = "<group>"; };
 		56DAA3002BB723A1002CF710 /* NewIdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIdentityView.swift; sourceTree = "<group>"; };
 		56DAA3042BB72E35002CF710 /* InfoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlert.swift; sourceTree = "<group>"; };
@@ -812,6 +815,7 @@
 				CEC562192BD92B3E002D4954 /* libresolv.9.tbd in Frameworks */,
 				56E7AD112BDBA81000D3A258 /* PullToRefreshSwiftUI in Frameworks */,
 				560F0C1D2BD0234300067054 /* QRCode in Frameworks */,
+				56D7FC9C2DFC3F1100B13A61 /* WrappingHStack in Frameworks */,
 				CEE4FEA92CFDB851007C31F3 /* libfr.a in Frameworks */,
 				CE30FA9D2D50DF6D0057F897 /* libwitnesscalc_registerIdentity_14_256_3_4_336_64_1_1480_5_296.a in Frameworks */,
 				CE30FA9E2D50DF6D0057F897 /* libwitnesscalc_registerIdentity_4_160_3_3_336_216_1_1296_3_256.a in Frameworks */,
@@ -1059,6 +1063,7 @@
 				CEF251392BD6E22700050507 /* User.swift */,
 				CEFF68B82CB692A7008769EA /* BN.swift */,
 				564CE3012DD4CE7500D03E6D /* JsonApi.swift */,
+				56D7FC952DFB0E2F00B13A61 /* QueryProofSelector.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1928,6 +1933,7 @@
 				C7BBDBD82D71E59800E2905E /* ConfettiSwiftUI */,
 				CE53BCC12D9A9A2C007B1892 /* Swoir */,
 				CE937B072DC8B98900D254D1 /* TensorFlowLiteSwift */,
+				56D7FC9B2DFC3F1100B13A61 /* WrappingHStack */,
 			);
 			productName = Rarime;
 			productReference = CE9E82B22BA881F400AAF885 /* Rarime.app */;
@@ -1983,6 +1989,7 @@
 				C7BBDBD72D71E59800E2905E /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
 				CE53BCC02D9A9A2C007B1892 /* XCRemoteSwiftPackageReference "Swoir" */,
 				CE937B062DC8B98900D254D1 /* XCRemoteSwiftPackageReference "TensorFlowLiteSwift" */,
+				56D7FC9A2DFC3E5100B13A61 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 			);
 			productRefGroup = CE9E82B32BA881F400AAF885 /* Products */;
 			projectDirPath = "";
@@ -2162,6 +2169,7 @@
 				CEFF68C12CB6AF46008769EA /* Encodable+json.swift in Sources */,
 				5655E4372BD51E8E00B86C5C /* AppKeychain.swift in Sources */,
 				CE937B032DC8B65300D254D1 /* TensorFlow.swift in Sources */,
+				56D7FC962DFB0E2F00B13A61 /* QueryProofSelector.swift in Sources */,
 				56D7FC7B2DF9870700B13A61 /* LikenessSuccessView.swift in Sources */,
 				5655E42A2BD2C7C800B86C5C /* ConfigManager.swift in Sources */,
 				563529E92BB072B80027C910 /* IdentityView.swift in Sources */,
@@ -3537,8 +3545,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Static";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.15.3;
+				kind = exactVersion;
+				version = 6.15.3;
+			};
+		};
+		56D7FC9A2DFC3E5100B13A61 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:dkk/WrappingHStack.git";
+			requirement = {
+				kind = exactVersion;
+				version = 2.2.11;
 			};
 		};
 		56E2D92F2BD01C77006E725D /* XCRemoteSwiftPackageReference "qrcode" */ = {
@@ -3680,6 +3696,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5655E4382BD51F5100B86C5C /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
+		};
+		56D7FC9B2DFC3F1100B13A61 /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 56D7FC9A2DFC3E5100B13A61 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
 		};
 		56E2D9312BD01E71006E725D /* NFCPassportReader */ = {
 			isa = XCSwiftPackageProductDependency;
