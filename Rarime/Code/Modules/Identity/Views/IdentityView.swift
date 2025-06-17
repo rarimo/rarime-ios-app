@@ -69,10 +69,10 @@ struct IdentityView: View {
                 }
             }
             .onChange(of: isScanDocumentSheetPresented) { newValue in
-                if !newValue && !hasDocument {
-                    Task {
-                        // Delay to allow the sheet to dismiss
-                        try await Task.sleep(for: .seconds(0.1))
+                Task {
+                    // Delay to allow the sheet to dismiss
+                    try await Task.sleep(for: .seconds(0.1))
+                    if !newValue && passportManager.passport == nil {
                         mainViewModel.selectedTab = .home
                     }
                 }
