@@ -578,6 +578,7 @@ class UserManager: ObservableObject {
         AppUserDefaults.shared.isUserRevoked = false
         AppUserDefaults.shared.userReferralCode = ""
         AppUserDefaults.shared.deferredReferralCode = ""
+        AppUserDefaults.shared.userStatus = User.Status.unscanned.rawValue
         
         do {
             try AppKeychain.removeValue(.privateKey)

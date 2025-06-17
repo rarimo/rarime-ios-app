@@ -278,6 +278,7 @@ class PassportViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     func generateGrothRegisterProof(
         _ user: User,
         _ passport: Passport,
@@ -316,6 +317,7 @@ class PassportViewModel: ObservableObject {
         return proof
     }
     
+    @MainActor
     func generatePlonkRegisterProof(
         _ user: User,
         _ passport: Passport,
