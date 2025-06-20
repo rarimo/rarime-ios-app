@@ -33,7 +33,7 @@ struct PassportChipErrorView: View {
                             isSending = true
                         } else {
                             UIApplication.shared.open(
-                                URL(string: "mailto:\(ConfigManager.shared.feedback.feedbackEmail)?subject=Passport Chip Error")!
+                                URL(string: "mailto:\(ConfigManager.shared.general.feedbackEmail)?subject=Passport Chip Error")!
                             )
                             onClose()
                         }

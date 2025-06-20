@@ -41,7 +41,7 @@ class WalletManager: ObservableObject {
             LoggerUtil.common.error("Failed to get private key: \(error.localizedDescription, privacy: .public)")
         }
 
-        self.web3 = Web3(rpcURL: ConfigManager.shared.api.evmRpcURL.absoluteString)
+        self.web3 = Web3(rpcURL: ConfigManager.shared.evm.rpcURL.absoluteString)
     }
 
     var displayedBalance: String {
@@ -94,7 +94,7 @@ class WalletManager: ObservableObject {
             value: amountToTransfer
         )
 
-        let signedTx = try tx.sign(with: ethPrivateKey, chainId: .init(ConfigManager.shared.api.evmChainId))
+        let signedTx = try tx.sign(with: ethPrivateKey, chainId: .init(ConfigManager.shared.evm.chainId))
         let txHash = try web3.eth.sendRawTransaction(transaction: signedTx).wait()
 
         let receipt = await waitForTransactionReceipt(txHash: txHash)

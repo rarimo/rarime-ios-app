@@ -128,6 +128,7 @@
 		56E6AD4F2BD2756200E4DDC1 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */; };
 		56E7AD0A2BDAA4F000D3A258 /* AppRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7AD092BDAA4F000D3A258 /* AppRadioButton.swift */; };
 		56E7AD112BDBA81000D3A258 /* PullToRefreshSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 56E7AD102BDBA81000D3A258 /* PullToRefreshSwiftUI */; };
+		56F22B2D2E04611200456A7B /* CircuitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F22B2C2E04611200456A7B /* CircuitData.swift */; };
 		56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F48BBD2BC02E82001F3AA4 /* AppButton.swift */; };
 		C71161B32CAAE3DB00ED41EA /* String+BigUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71161B22CAAE3DB00ED41EA /* String+BigUInt.swift */; };
 		C726E8D22D647FED000C9CA6 /* SnapCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C726E8D12D647FE9000C9CA6 /* SnapCarouselView.swift */; };
@@ -354,7 +355,6 @@
 		CEC9D8E72BFF41A800EACD0F /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */; };
 		CED314672C0483BD00DF31D5 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED314662C0483BD00DF31D5 /* MailView.swift */; };
 		CED314692C04889D00DF31D5 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED314682C04889D00DF31D5 /* UIDevice+modelName.swift */; };
-		CED909D02BDBA9FC0065E949 /* Cosmos.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED909CF2BDBA9FC0065E949 /* Cosmos.swift */; };
 		CED909E02BDC1E0F0065E949 /* Rarimo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED909DF2BDC1E0F0065E949 /* Rarimo.swift */; };
 		CEDB7BE72DDC72E5008431C0 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7BE62DDC72E5008431C0 /* Identity.xcframework */; };
 		CEDC4D7F2BE9267300459D4E /* PoseidonSMTContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC4D7E2BE9267300459D4E /* PoseidonSMTContract.swift */; };
@@ -381,7 +381,6 @@
 		CEF2513A2BD6E22700050507 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF251392BD6E22700050507 /* User.swift */; };
 		CEF5C2B62D3FEC3500E143D7 /* RarimeIOSUtils in Frameworks */ = {isa = PBXBuildFile; productRef = CEF5C2B52D3FEC3500E143D7 /* RarimeIOSUtils */; };
 		CEF723142BF4BB9000E79198 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF723132BF4BB9000E79198 /* Errors.swift */; };
-		CEF8C7F72BE0DE9700F8E1A4 /* CosmosTransferResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF8C7F62BE0DE9700F8E1A4 /* CosmosTransferResponse.swift */; };
 		CEFE5F352CB522A700498F39 /* RegisterIdentityCircuitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F342CB522A700498F39 /* RegisterIdentityCircuitType.swift */; };
 		CEFE5F372CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F362CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift */; };
 		CEFE5F392CB56C8700498F39 /* CryptoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5F382CB56C8700498F39 /* CryptoUtils.swift */; };
@@ -537,6 +536,7 @@
 		56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouteLayout.swift; sourceTree = "<group>"; };
 		56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
 		56E7AD092BDAA4F000D3A258 /* AppRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRadioButton.swift; sourceTree = "<group>"; };
+		56F22B2C2E04611200456A7B /* CircuitData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircuitData.swift; sourceTree = "<group>"; };
 		56F48BBD2BC02E82001F3AA4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		C71161B22CAAE3DB00ED41EA /* String+BigUInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+BigUInt.swift"; sourceTree = "<group>"; };
 		C726E8D12D647FE9000C9CA6 /* SnapCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarouselView.swift; sourceTree = "<group>"; };
@@ -735,7 +735,6 @@
 		CED5B3A32D075D2C007D04C4 /* witnesscalc_registerIdentityLight256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentityLight256.h; sourceTree = "<group>"; };
 		CED5B3A42D075D2C007D04C4 /* witnesscalc_registerIdentityLight384.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentityLight384.h; sourceTree = "<group>"; };
 		CED5B3A52D075D2C007D04C4 /* witnesscalc_registerIdentityLight512.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentityLight512.h; sourceTree = "<group>"; };
-		CED909CF2BDBA9FC0065E949 /* Cosmos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cosmos.swift; sourceTree = "<group>"; };
 		CED909DF2BDC1E0F0065E949 /* Rarimo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rarimo.swift; sourceTree = "<group>"; };
 		CED9CEE22CF8C9CF00FD3929 /* witnesscalc_registerIdentity_1_256_3_3_576_248_NA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_1_256_3_3_576_248_NA.h; sourceTree = "<group>"; };
 		CEDB7BE62DDC72E5008431C0 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
@@ -765,7 +764,6 @@
 		CEF56DE72CF5D9CF00F4A477 /* witnesscalc_registerIdentity_21_256_3_3_336_232_NA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_21_256_3_3_336_232_NA.h; sourceTree = "<group>"; };
 		CEF56DE82CF5D9D600F4A477 /* witnesscalc_registerIdentity_24_256_3_4_336_232_NA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_24_256_3_4_336_232_NA.h; sourceTree = "<group>"; };
 		CEF723132BF4BB9000E79198 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		CEF8C7F62BE0DE9700F8E1A4 /* CosmosTransferResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosTransferResponse.swift; sourceTree = "<group>"; };
 		CEFE5F342CB522A700498F39 /* RegisterIdentityCircuitType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterIdentityCircuitType.swift; sourceTree = "<group>"; };
 		CEFE5F362CB5471600498F39 /* SupportRegisterIdentityCircuitSignatureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportRegisterIdentityCircuitSignatureType.swift; sourceTree = "<group>"; };
 		CEFE5F382CB56C8700498F39 /* CryptoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUtils.swift; sourceTree = "<group>"; };
@@ -1189,6 +1187,7 @@
 				CED909DF2BDC1E0F0065E949 /* Rarimo.swift */,
 				CEDC4D802BE9475400459D4E /* Certificates.swift */,
 				C75512892C860414000258AD /* Videos.swift */,
+				56F22B2C2E04611200456A7B /* CircuitData.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -1522,8 +1521,6 @@
 				5655E4272BD2C3FD00B86C5C /* Transaction.swift */,
 				CE68BE3C2BD9B23D00D92EBB /* ZkProof.swift */,
 				CE0DA0D62BDA6F1800696503 /* EvmTxResponse.swift */,
-				CED909CF2BDBA9FC0065E949 /* Cosmos.swift */,
-				CEF8C7F62BE0DE9700F8E1A4 /* CosmosTransferResponse.swift */,
 			);
 			path = Blockchain;
 			sourceTree = "<group>";
@@ -2179,7 +2176,6 @@
 				56722F202BCD62BB00300AD0 /* ProfileView.swift in Sources */,
 				564715C82DEDFD3A00B1334B /* ICloudRecoveryViewModel.swift in Sources */,
 				C7D6244F2D6DB337007BA5A6 /* PollsViewModel.swift in Sources */,
-				CEF8C7F72BE0DE9700F8E1A4 /* CosmosTransferResponse.swift in Sources */,
 				CEDC578F2CA2C9EB00F02132 /* MRZScanView+ViewModel.swift in Sources */,
 				564CE3002DD4C88000D03E6D /* GuessCelebrityService.swift in Sources */,
 				CEDC57962CA30A9D00F02132 /* CIImage+Extension.swift in Sources */,
@@ -2236,7 +2232,6 @@
 				C71161B32CAAE3DB00ED41EA /* String+BigUInt.swift in Sources */,
 				564CE2FA2DD34A5300D03E6D /* HiddenKeysCameraViewModel.swift in Sources */,
 				563706792C5CF374002F3AF4 /* MrzFormView.swift in Sources */,
-				CED909D02BDBA9FC0065E949 /* Cosmos.swift in Sources */,
 				56A6C76E2BBD474200992562 /* DateUtil.swift in Sources */,
 				56A6C7562BBC194800992562 /* Animations.swift in Sources */,
 				CE3CD78C2DB67B4200112E46 /* FaceCaptureSession.swift in Sources */,
@@ -2306,6 +2301,7 @@
 				CE7D8AAC2BFB52EE009AF212 /* OpenApiError.swift in Sources */,
 				56933DF12BBAC1B10068C894 /* ScanPassportLayoutView.swift in Sources */,
 				5659151B2BE927A20050795A /* AppIconView.swift in Sources */,
+				56F22B2D2E04611200456A7B /* CircuitData.swift in Sources */,
 				560F0C272BD1146C00067054 /* ScanQRView.swift in Sources */,
 				56933DFB2BBAFBD90068C894 /* AppToggle.swift in Sources */,
 				CEDC578B2CA2C9A600F02132 /* MRZScanView.swift in Sources */,

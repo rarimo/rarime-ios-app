@@ -14,7 +14,7 @@ class Ethereum {
     let web3: Web3
     
     init() {
-        self.web3 = Web3(rpcURL: ConfigManager.shared.api.evmRpcURL.absoluteString)
+        self.web3 = Web3(rpcURL: ConfigManager.shared.evm.rpcURL.absoluteString)
     }
     
     func isTxSuccessful(_ txHash: String) async throws -> Bool? {

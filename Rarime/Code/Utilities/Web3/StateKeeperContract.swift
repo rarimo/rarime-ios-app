@@ -12,9 +12,9 @@ class StateKeeperContract {
     let contract: DynamicContract
     
     init() throws {
-        self.web3 = Web3(rpcURL: ConfigManager.shared.api.evmRpcURL.absoluteString)
+        self.web3 = Web3(rpcURL: ConfigManager.shared.evm.rpcURL.absoluteString)
         
-        let contractAddress = try EthereumAddress(hex: ConfigManager.shared.api.stateKeeperContractAddress, eip55: false)
+        let contractAddress = try EthereumAddress(hex: ConfigManager.shared.contracts.stateKeeperAddress, eip55: false)
         
         self.contract = try web3.eth.Contract(
             json: ContractABI.stateKeeperAbiJSON,

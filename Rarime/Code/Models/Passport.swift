@@ -161,7 +161,7 @@ struct Passport: Codable {
     }
     
     func getCertificateSmtProof(_ slaveCertPem: Data) async throws -> SMTProof {
-        let certificatesSMTAddress = try EthereumAddress(hex: ConfigManager.shared.api.certificatesSmtContractAddress, eip55: false)
+        let certificatesSMTAddress = try EthereumAddress(hex: ConfigManager.shared.contracts.certificatesSmtAddress, eip55: false)
         let certificatesSMTContract = try PoseidonSMT(contractAddress: certificatesSMTAddress)
         
         let x509Utils = IdentityX509Util()

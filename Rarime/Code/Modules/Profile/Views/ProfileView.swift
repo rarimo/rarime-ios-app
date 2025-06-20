@@ -206,7 +206,7 @@ struct ProfileView: View {
                         homeWidgetsViewModel.reset()
 
                         Task {
-                            try? await notificationManager.unsubscribe(fromTopic: ConfigManager.shared.general.claimableNotificationTopic)
+                            try? await notificationManager.unsubscribe(fromTopic: ConfigManager.shared.notifications.claimableTopic)
                         }
                     }
                 },

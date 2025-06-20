@@ -35,7 +35,7 @@ class UpdateManager: ObservableObject {
     @MainActor
     func checkMaintenanceMode() async {
         do {
-            let points = Points(ConfigManager.shared.api.pointsServiceURL)
+            let points = Points(ConfigManager.shared.general.appApiURL)
             let maintenanceResponse = try await points.getMaintenanceMode()
             
             self.isMaintenance = maintenanceResponse.data.attributes.maintenance

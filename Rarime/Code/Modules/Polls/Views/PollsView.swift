@@ -77,7 +77,7 @@ struct PollsView: View {
                                     variant: .secondary,
                                     text: "Create a poll",
                                     action: {
-                                        guard let url = URL(string: ConfigManager.shared.api.votingWebsiteURL.absoluteString) else { return }
+                                        guard let url = URL(string: ConfigManager.shared.freedomTool.websiteURL.absoluteString) else { return }
                                         openURL(url)
                                     }
                                 )

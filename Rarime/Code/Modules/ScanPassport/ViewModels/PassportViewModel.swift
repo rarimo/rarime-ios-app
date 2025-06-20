@@ -238,7 +238,7 @@ class PassportViewModel: ObservableObject {
             PassportManager.shared.setPassport(passport)
             try UserManager.shared.saveRegisterZkProof(proof)
             
-            try await NotificationManager.shared.subscribe(toTopic: ConfigManager.shared.general.claimableNotificationTopic)
+            try await NotificationManager.shared.subscribe(toTopic: ConfigManager.shared.notifications.claimableTopic)
             
             isUserRegistered = true
             
@@ -390,7 +390,7 @@ class PassportViewModel: ObservableObject {
                 registeredCircuitData
             )
             
-            let lightRegistrationService = LightRegistrationService(ConfigManager.shared.api.relayerURL)
+            let lightRegistrationService = LightRegistrationService(ConfigManager.shared.general.appApiURL)
             let registerResponse = try await lightRegistrationService.register(passport, zkProof)
             
             LoggerUtil.common.info("Passport light registration signature received")
@@ -431,7 +431,7 @@ class PassportViewModel: ObservableObject {
             try UserManager.shared.saveRegisterZkProof(zkProof)
             try UserManager.shared.saveLightRegistrationData(registerResponse.data.attributes)
             
-            try await NotificationManager.shared.subscribe(toTopic: ConfigManager.shared.general.claimableNotificationTopic)
+            try await NotificationManager.shared.subscribe(toTopic: ConfigManager.shared.notifications.claimableTopic)
             
             isUserRegistered = true
             

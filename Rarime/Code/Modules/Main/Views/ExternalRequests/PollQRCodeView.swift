@@ -46,7 +46,7 @@ struct PollQRCodeView: View {
     
     private func fetchPoll() async throws {
         do {
-            let qrLinkService = QRLink(ConfigManager.shared.api.votingRelayerURL)
+            let qrLinkService = QRLink(ConfigManager.shared.freedomTool.apiURL)
             let scanedQRLink = try await qrLinkService.scanQRLink(qrCodeUrl)
             
             pollsViewModel.selectedPoll = try await PollsService.fetchPoll(

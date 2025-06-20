@@ -13,7 +13,7 @@ class PoseidonSMT {
     let web3: Web3
     let contract: DynamicContract
     
-    init(contractAddress: EthereumAddress, rpcUrl: URL = ConfigManager.shared.api.evmRpcURL) throws {
+    init(contractAddress: EthereumAddress, rpcUrl: URL = ConfigManager.shared.evm.rpcURL) throws {
         self.web3 = Web3(rpcURL: rpcUrl.absoluteString)
         
         self.contract = try web3.eth.Contract(

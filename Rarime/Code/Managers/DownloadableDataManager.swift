@@ -105,18 +105,6 @@ class DownloadableDataManager: ObservableObject {
     
     static let shared = DownloadableDataManager()
 
-    let circuitDataURLs: [String: URL]
-    let noirCircuitDataURLs: [String: URL]
-    let zkeyURLs: [String: URL]
-    let downloadbleFileURLs: [String: URL]
-
-    init() {
-        self.circuitDataURLs = ConfigManager.shared.circuitData.circuitDataURLs
-        self.noirCircuitDataURLs = ConfigManager.shared.noirCircuitData.noirCircuitDataURLs
-        self.zkeyURLs = ConfigManager.shared.circuitData.zkeyURLs
-        self.downloadbleFileURLs = ConfigManager.shared.general.downloadbleFileURLs
-    }
-    
     func retriveCircuitData(
         _ circuitName: RegisteredCircuitData,
         _ downloadProgress: @escaping (Progress) -> Void = { _ in }
@@ -127,7 +115,7 @@ class DownloadableDataManager: ObservableObject {
             AppUserDefaults.shared.isCircuitsStorageCleared = true
         }
         
-        guard let circuitDataURL = circuitDataURLs[circuitName.rawValue] else {
+        guard let circuitDataURL = CIRCUIT_DATA_URLS[circuitName.rawValue] else {
             throw "Circuit data URL not found"
         }
         
@@ -178,7 +166,7 @@ class DownloadableDataManager: ObservableObject {
     ) async throws -> URL {
         return try await retriveFilePath(
             circuitDataName.rawValue,
-            noirCircuitDataURLs,
+            NOIR_CIRCUIT_DATA_URLS,
             DownloadableDataManager.noirSaveDirectory,
             downloadProgress
         )
@@ -190,7 +178,7 @@ class DownloadableDataManager: ObservableObject {
     ) async throws -> URL {
         return try await retriveFilePath(
             zkeyName.rawValue,
-            zkeyURLs,
+            ZKEY_URLS,
             DownloadableDataManager.zkeySaveDirectory,
             downloadProgress
         )
@@ -202,7 +190,7 @@ class DownloadableDataManager: ObservableObject {
     ) async throws -> URL {
         return try await retriveFilePath(
             fileName.rawValue,
-            downloadbleFileURLs,
+            DOWNLOADABLE_FILE_URLS,
             DownloadableDataManager.downloadablesSaveDirectory,
             downloadProgress
         )

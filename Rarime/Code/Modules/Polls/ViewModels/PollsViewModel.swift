@@ -151,7 +151,7 @@ class PollsViewModel: ObservableObject {
         guard let poll = selectedPoll else { throw "No selected poll" }
         
         let stateKeeperContract = try StateKeeperContract()
-        let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.api.registrationSmtContractAddress, eip55: false)
+        let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.contracts.registrationSmtAddress, eip55: false)
         let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
         
         guard let passportKey = UserManager.shared.getPassportKey(passport) else {
@@ -203,7 +203,7 @@ class PollsViewModel: ObservableObject {
             isRegisteredAfterVoting: isRegisteredAfterVoting
         )
         
-        let votingRelayer = VotingRelayer(ConfigManager.shared.api.votingRelayerURL)
+        let votingRelayer = VotingRelayer(ConfigManager.shared.freedomTool.apiURL)
         let voteResponse = try await votingRelayer.vote(
             calldata.fullHex,
             poll.votingsAddresses[0].hex(eip55: false)
@@ -226,8 +226,8 @@ class PollsViewModel: ObservableObject {
         let eventData = try profile.calculateVotingEventData(pollResultsJson)
         let votingData = try PollsService.decodeVotingData(poll)
         
-        let registrationSMTAddress = try EthereumAddress(hex: ConfigManager.shared.api.votingRegistartionSmtContractAddress, eip55: false)
-        let registrationSMTContract = try PoseidonSMT(contractAddress: registrationSMTAddress, rpcUrl: ConfigManager.shared.api.votingRpcURL)
+        let registrationSMTAddress = try EthereumAddress(hex: ConfigManager.shared.contracts.votingRegistrationSmtAddress, eip55: false)
+        let registrationSMTContract = try PoseidonSMT(contractAddress: registrationSMTAddress, rpcUrl: ConfigManager.shared.freedomTool.rpcURL)
         
         let root_validity = try await registrationSMTContract.ROOT_VALIDITY()
         
@@ -281,7 +281,7 @@ class PollsViewModel: ObservableObject {
        
         let proposalSmtContract = try PoseidonSMT(
             contractAddress: poll.proposalSMT,
-            rpcUrl: ConfigManager.shared.api.votingRpcURL
+            rpcUrl: ConfigManager.shared.freedomTool.rpcURL
         )
         
         let proof = try await proposalSmtContract.getProof(Data(hex: nullifier))

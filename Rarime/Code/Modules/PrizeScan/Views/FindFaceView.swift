@@ -37,7 +37,7 @@ struct HiddenKeysView: View {
     }
 
     private var invitationLink: String {
-        ConfigManager.shared.api.webAppURL.appendingPathComponent("r/\(hiddenKeysUser.referralCode)").absoluteString
+        ConfigManager.shared.general.webAppURL.appendingPathComponent("r/\(hiddenKeysUser.referralCode)").absoluteString
     }
 
     private var imageToShare: Data {

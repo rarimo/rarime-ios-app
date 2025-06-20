@@ -55,7 +55,7 @@ class HiddenKeysViewModel: ObservableObject {
 
     @MainActor
     func loadUser(referralCode: String? = nil) async {
-        let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.api.pointsServiceURL)
+        let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.general.appApiURL)
         var userResponse: GuessCelebrityUserResponse
         var jwt: JWT? = nil
 
@@ -126,7 +126,7 @@ class HiddenKeysViewModel: ObservableObject {
         guard let user = UserManager.shared.user else { throw "failed to get user" }
         let jwt = try await DecentralizedAuthManager.shared.getAccessJwt(user)
 
-        let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.api.pointsServiceURL)
+        let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.general.appApiURL)
         let _ = try await guessCelebrityService.addExtraAttempt(jwt: jwt)
         await loadUser()
     }
@@ -151,7 +151,7 @@ class HiddenKeysViewModel: ObservableObject {
 
         let features = try TensorFlowManager.shared.compute(normalizedInput, tfData: faceRecognitionTFLile)
 
-        let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.api.pointsServiceURL)
+        let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.general.appApiURL)
         let guessResponse = try await guessCelebrityService.submitCelebrityGuess(jwt, features)
         await loadUser()
 
@@ -189,8 +189,8 @@ class HiddenKeysViewModel: ObservableObject {
 
         let guessCalldata = try IdentityCallDataBuilder().buildGuessCelebrityClaimRewardCalldata(address, zkPointsJSON: zkProof.json)
 
-        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.register(guessCalldata, ConfigManager.shared.api.guessCelebrityGameContractAddress)
+        let relayer = Relayer(ConfigManager.shared.general.appApiURL)
+        let response = try await relayer.register(guessCalldata, ConfigManager.shared.contracts.guessCelebrityAddress)
 
         LoggerUtil.common.info("Claim reward EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
 

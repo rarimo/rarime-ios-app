@@ -147,7 +147,7 @@ class PollsService {
         )
         
         let call = try Multicall3Contract.Call3(
-            target: EthereumAddress(hex: ConfigManager.shared.api.proposalsStateContractAddress, eip55: false),
+            target: EthereumAddress(hex: ConfigManager.shared.contracts.proposalsStateAddress, eip55: false),
             allowFailure: true,
             callData: Data(hex: calldata)
         )
