@@ -148,6 +148,11 @@ struct HomeView: View {
                 .padding(.vertical, 4)
                 .background(Color.warningLighter, in: Capsule())
                 .foregroundStyle(Color.warningDark)
+            ReserveTokensButton()
+                .environmentObject(viewModel)
+                .environmentObject(UserManager.shared)
+                .environmentObject(DecentralizedAuthManager.shared)
+                .environmentObject(PassportManager.shared)
             #endif
 
             Spacer()
