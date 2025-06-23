@@ -72,5 +72,5 @@ let ZKEY_URLS: [String: URL] = [
 
 let DOWNLOADABLE_FILE_URLS: [String: URL] = [
     "faceRecognitionTFLite": URL(string: "https://storage.googleapis.com/rarimo-store/face-recognition/face-recognition.tflite")!,
-    "ultraPlonkTrustedSetup.data": URL(string: "https://storage.googleapis.com/rarimo-store/trusted-setups/ultraPlonkTrustedSetup.dat")!,
+    "ultraPlonkTrustedSetup.dat": URL(string: "https://storage.googleapis.com/rarimo-store/trusted-setups/ultraPlonkTrustedSetup.dat")!
 ]

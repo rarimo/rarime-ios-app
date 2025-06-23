@@ -12,8 +12,6 @@
 	<string>${APPSFLYER_DEV_KEY}</string>
 	<key>APPSFLYER_APP_ID</key>
 	<string>${APPSFLYER_APP_ID}</string>
-	<key>AUTHORIZE_URL</key>
-	<string>${AUTHORIZE_URL}</string>
 	<key>FREEDOM_TOOL_WEBSITE_URL</key>
 	<string>${FREEDOM_TOOL_WEBSITE_URL}</string>
 	<key>FREEDOM_TOOL_API_URL</key>
@@ -104,8 +102,8 @@
 	<string>${JOIN_REWARDS_KEY}</string>
 	<key>DEFAULT_REFERRAL_CODE</key>
 	<string>${DEFAULT_REFERRAL_CODE}</string>
-	<key>POINTS_SERVICE_URL</key>
-	<string>${POINTS_SERVICE_URL}</string>
+	<key>APP_API_URL</key>
+	<string>${APP_API_URL}</string>
 	<key>PRIVACY_POLICY_URL</key>
 	<string>${PRIVACY_POLICY_URL}</string>
 	<key>WEB_APP_URL</key>
@@ -153,11 +151,6 @@
 	<string>${REGISTRATION_SIMPLE_CONTRACT_ADRRESS}</string>
 	<key>VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS</key>
 	<string>${VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS}</string>
-	<key>ZKEY_URLS</key>
-	<dict>
-		<key>likeness</key>
-		<string>${ZKEY_URL_0}</string>
-	</dict>
 	<key>FACE_REGISTRY_CONTRACT_ADDRESS</key>
 	<string>${FACE_REGISTRY_CONTRACT_ADDRESS}</string>
 	<key>GUESS_CELEBRITY_CONTRACT_ADDRESS</key>

@@ -6,7 +6,7 @@ struct PassportRevocationView: View {
     var body: some View {
         VStack(spacing: 28) {
             Spacer()
-            Image(.alertLine)
+            Image(.warning)
                 .square(44)
                 .foregroundColor(.warningMain)
                 .padding(22)
