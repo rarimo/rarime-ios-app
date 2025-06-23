@@ -90,7 +90,7 @@ extension Country {
         case "CYP": .cyprus
         case "CZE": .czechia
         // German passports have one-letter country codes instead of three-letter ones
-        case "DEU", "D": .germany
+        case "DEU", "D", "D<<": .germany
         case "DJI": .djibouti
         case "DMA": .dominica
         case "DNK": .denmark
