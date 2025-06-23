@@ -3,10 +3,9 @@ import SwiftUI
 struct VersionUpdateView: View {
     var body: some View {
         VStack(spacing: 32) {
-            Image(.gears)
-                .resizable()
-                .scaledToFit()
-                .frame(height: 136)
+            Image(.rarime)
+                .square(128)
+                .foregroundStyle(.textPrimary)
             VStack(spacing: 8) {
                 Text("Update app")
                     .h3()

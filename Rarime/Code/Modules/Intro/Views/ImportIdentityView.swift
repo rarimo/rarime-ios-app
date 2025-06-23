@@ -199,7 +199,7 @@ struct ImportIdentityView: View {
             
             let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
             
-            let points = Points(ConfigManager.shared.api.pointsServiceURL)
+            let points = Points(ConfigManager.shared.general.appApiURL)
             let _ = try await points.getPointsBalance(accessJwt)
             
             LoggerUtil.common.info("User has points balance, setting referral code")

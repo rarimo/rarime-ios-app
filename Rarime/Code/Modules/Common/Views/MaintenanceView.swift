@@ -3,19 +3,18 @@ import SwiftUI
 struct MaintenanceView: View {
     var body: some View {
         VStack(spacing: 32) {
-            Image(.gears)
-                .resizable()
-                .scaledToFit()
-                .frame(height: 136)
-            VStack(spacing: 24) {
+            Image(.rarime)
+                .square(128)
+                .foregroundStyle(.textPrimary)
+            VStack(spacing: 8) {
                 Text("Maintenance in progress")
-                    .subtitle3()
+                    .h3()
                     .foregroundStyle(.textPrimary)
                 Text("We're upgrading for a better experience. Back soon!")
                     .body4()
                     .foregroundStyle(.textSecondary)
             }
-            .frame(width: 300)
+            .frame(width: 250)
             .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

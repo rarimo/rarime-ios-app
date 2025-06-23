@@ -1,11 +1,11 @@
+import Alamofire
 import Foundation
 import UIKit
-import Alamofire
 
 class IPFS {
     let url: URL
     
-    init(_ url: URL = ConfigManager.shared.api.ipfsNodeURL) {
+    init(_ url: URL = ConfigManager.shared.freedomTool.ipfsNodeURL) {
         self.url = url
     }
     

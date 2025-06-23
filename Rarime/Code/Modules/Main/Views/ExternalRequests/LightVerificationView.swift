@@ -133,7 +133,7 @@ struct LightVerificationView: View {
                 
                 var error: NSError? = nil
                 let signedPubSignals = IdentitySignPubSignalsWithSecp256k1(
-                    ConfigManager.shared.api.lightSignaturePrivateKey,
+                    ConfigManager.shared.secrets.lightSignaturePrivateKey,
                     pubSignalsJSON,
                     &error
                 )

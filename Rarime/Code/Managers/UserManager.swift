@@ -259,8 +259,8 @@ class UserManager: ObservableObject {
             )
         }
         
-        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.register(calldata, ConfigManager.shared.api.registerContractAddress)
+        let relayer = Relayer(ConfigManager.shared.general.appApiURL)
+        let response = try await relayer.register(calldata, ConfigManager.shared.contracts.registration2Address)
         
         LoggerUtil.common.info("Passport register EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
         
@@ -290,8 +290,8 @@ class UserManager: ObservableObject {
             verifierAddress: verifySodResponse.data.attributes.verifier
         )
         
-        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.register(calldata, ConfigManager.shared.api.registrationSimpleContractAddress, false)
+        let relayer = Relayer(ConfigManager.shared.general.appApiURL)
+        let response = try await relayer.register(calldata, ConfigManager.shared.contracts.registrationSimpleAddress, false)
         
         LoggerUtil.common.info("Passport light register EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
         
@@ -316,8 +316,8 @@ class UserManager: ObservableObject {
             ecSizeInBits: ec.count * 8
         )
         
-        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
-        let response = try await relayer.register(calldata, ConfigManager.shared.api.registerContractAddress)
+        let relayer = Relayer(ConfigManager.shared.general.appApiURL)
+        let response = try await relayer.register(calldata, ConfigManager.shared.contracts.registration2Address)
         
         LoggerUtil.common.info("Passport revoke EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
         
@@ -326,7 +326,7 @@ class UserManager: ObservableObject {
     }
     
     func registerCertificate(_ passport: Passport) async throws {
-        let certificatesSMTAddress = try EthereumAddress(hex: ConfigManager.shared.api.certificatesSmtContractAddress, eip55: false)
+        let certificatesSMTAddress = try EthereumAddress(hex: ConfigManager.shared.contracts.certificatesSmtAddress, eip55: false)
         let certificatesSMTContract = try PoseidonSMT(contractAddress: certificatesSMTAddress)
         
         let sod = try SOD([UInt8](passport.sod))
@@ -354,10 +354,10 @@ class UserManager: ObservableObject {
             throw "calldata build response does not contain calldata"
         }
         
-        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
+        let relayer = Relayer(ConfigManager.shared.general.appApiURL)
         let response = try await relayer.register(
             calldata,
-            ConfigManager.shared.api.registerContractAddress,
+            ConfigManager.shared.contracts.registration2Address,
             meta: ["dispatcherName": buildCalldataResponse.dispatcherName]
         )
         
@@ -374,7 +374,7 @@ class UserManager: ObservableObject {
         guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
         
         let stateKeeperContract = try StateKeeperContract()
-        let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.api.registrationSmtContractAddress, eip55: false)
+        let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.contracts.registrationSmtAddress, eip55: false)
         let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
         
         guard let passportKey = getPassportKey(passport) else {
@@ -485,7 +485,7 @@ class UserManager: ObservableObject {
         
         let stateKeeperContract = try StateKeeperContract()
         
-        let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.api.registrationSmtContractAddress, eip55: false)
+        let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.contracts.registrationSmtAddress, eip55: false)
         
         let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
         
@@ -536,7 +536,7 @@ class UserManager: ObservableObject {
     }
     
     func fetchPointsBalance(_ jwt: JWT) async throws -> PointsBalanceRaw {
-        let points = Points(ConfigManager.shared.api.pointsServiceURL)
+        let points = Points(ConfigManager.shared.general.appApiURL)
         
         let balanceResponse = try await points.getPointsBalance(jwt, true, true)
         
@@ -558,11 +558,11 @@ class UserManager: ObservableObject {
             throw error
         }
         
-        let key = Data(hex: ConfigManager.shared.api.joinRewardsKey) ?? Data()
+        let key = Data(hex: ConfigManager.shared.secrets.joinRewardsKey) ?? Data()
         
         let hmacSingature = HMACUtils.hmacSha256(hmacMessage ?? Data(), key)
         
-        let points = Points(ConfigManager.shared.api.pointsServiceURL)
+        let points = Points(ConfigManager.shared.general.appApiURL)
         let _ = try await points.verifyPassport(
             jwt,
             queryProof,

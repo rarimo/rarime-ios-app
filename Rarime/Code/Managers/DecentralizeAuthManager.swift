@@ -15,7 +15,7 @@ class DecentralizedAuthManager: ObservableObject {
     private let semaphore = AsyncSemaphore(value: 1)
     
     init() {
-        self.authorize = AuthorizeService(ConfigManager.shared.api.authorizeURL)
+        self.authorize = AuthorizeService(ConfigManager.shared.general.appApiURL)
     }
     
     func initializeJWT(_ secretKey: Data) async throws {

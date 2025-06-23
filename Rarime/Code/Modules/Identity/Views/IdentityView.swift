@@ -13,15 +13,6 @@ struct IdentityView: View {
     @State private var isWaitlistedCountrySheetPresented = false
     @State private var isUnsupportedCountrySheetPresented = false
 
-    //    TODO: implement claiming tokens
-    //    var canReserveTokens: Bool {
-    //        !(pointsBalance?.isVerified ?? false)
-    //            && !passportManager.isUnsupportedForRewards
-    //            && userManager.registerZkProof != nil
-    //            && !userManager.isRevoked
-    //            && userManager.user?.userReferralCode != nil
-    //    }
-
     private var hasDocument: Bool {
         passportManager.passport != nil
     }

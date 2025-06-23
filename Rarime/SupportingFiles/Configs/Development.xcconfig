@@ -1,144 +1,46 @@
-// MARK: General
+// MARK: Utils
 SLASH=/
+
+// MARK: General
+FEEDBACK_EMAIL="info@rarilabs.com"
+DEFAULT_REFERRAL_CODE="kPRQYQUcWzW"
+WEB_APP_URL="https:${SLASH}/app.stage.rarime.com"
+TERMS_OF_USE_URL="https:${SLASH}/staging.rarime.com/general-terms.html"
+PRIVACY_POLICY_URL="https:${SLASH}/staging.rarime.com/privacy-notice.html"
+APP_API_URL="https:${SLASH}/api.orgs.app.stage.rarime.com"
+
+// MARK: Notifications
 GENERAL_NOTIFICATION_TOPIC="rarime-stage"
-CLAIMABLE_NOTIFICATION_TOPIC = "rarime-rewardable-stage"
+CLAIMABLE_NOTIFICATION_TOPIC="rarime-rewardable-stage"
 
-// MARK: Intro
-PRIVACY_POLICY_URL = "https:${SLASH}/staging.rarime.com/privacy-notice.html"
-TERMS_OF_USE_URL = "https:${SLASH}/staging.rarime.com/general-terms.html"
-AIRDROP_TERMS_URL = "https:${SLASH}/staging.rarime.com/airdrop-terms.html"
-
-// MARK: API
-RELAYER_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
-EVM_RPC_URL = "https:${SLASH}/rpc.evm.mainnet.rarimo.com"
-REGISTER_CONTRACT_ADDRESS = "0x70aadcdb5624dC458c22D47f6c458d1D5cE1768C"
-REGISTRATION_SIMPLE_CONTRACT_ADRRESS = "0x7815E9d49Ce74ca1c56a7276CE7DCA61d4f9878d"
-CERTIFICATES_SMT_CONTRACT_ADDRESS = "0x3DA489Eca2E8BC19cF8E5a9B60a7BE87f8D54fc0"
-REGISTRATION_SMT_CONTRACT_ADDRESS = "0x550B483129807BA148482152dEb3ac7a85e53cfe"
-STATE_KEEPER_CONTRACT_ADDRESS = "0x1021fC4e4693D729b69939A2066d16dF120B7F38"
-POINTS_SERVICE_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
-AUTHORIZE_URL = "https:${SLASH}/api.orgs.app.stage.rarime.com"
-WEB_APP_URL = "https:${SLASH}/app.stage.rarime.com"
-DEFAULT_REFERRAL_CODE = "kPRQYQUcWzW"
-JOIN_REWARDS_KEY = "15690e4461abffc8a0057282af199b7345fa492d28ec1ae60049459389752e3ee714947cc64edcde3c5b25c10081a003d15a88cf137bcc97049da465781eff3c"
-LIGHT_SIGNATURE_PRIVATE_KEY = "86494b0b827f6c096e1b65cc1e738a0c6f0c492250db7257fc19c35b74b4f568"
-VOTING_RPC_URL="https:${SLASH}/rpc.qtestnet.org"
-PROPOSALS_STATE_CONTRACT_ADDRESS = "0x4C61d7454653720DAb9e26Ca25dc7B8a5cf7065b"
-MULTICALL3_CONTRACT_ADDRESS = "0xcA11bde05977b3631167028862bE2a173976CA11"
-IPFS_NODE_URL="https:${SLASH}/ipfs.rarimo.com"
-VOTING_WEBSITE_URL="https:${SLASH}/stage.voting.freedomtool.org"
-VOTING_RELAYER_URL="https:${SLASH}/api.stage.freedomtool.org"
+// MARK: Contracts
+REGISTRATION2_CONTRACT_ADDRESS="0x70aadcdb5624dC458c22D47f6c458d1D5cE1768C"
+REGISTRATION_SIMPLE_CONTRACT_ADRRESS="0x7815E9d49Ce74ca1c56a7276CE7DCA61d4f9878d"
+CERTIFICATES_SMT_CONTRACT_ADDRESS="0x3DA489Eca2E8BC19cF8E5a9B60a7BE87f8D54fc0"
+REGISTRATION_SMT_CONTRACT_ADDRESS="0x550B483129807BA148482152dEb3ac7a85e53cfe"
+STATE_KEEPER_CONTRACT_ADDRESS="0x1021fC4e4693D729b69939A2066d16dF120B7F38"
+MULTICALL3_CONTRACT_ADDRESS="0xcA11bde05977b3631167028862bE2a173976CA11"
 VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS="0xFbae44a113A6f07687b180605f425e43066a6179"
+PROPOSALS_STATE_CONTRACT_ADDRESS="0x4C61d7454653720DAb9e26Ca25dc7B8a5cf7065b"
 FACE_REGISTRY_CONTRACT_ADDRESS="0x3C0f27AC1817820C1BA41337B53090652aE4F448"
-GUESS_CELEBRITY_GAME_CONTRACT_ADDRESS="0x411AA3eF21AdC9e84c60e17451B0732119C8f0c7"
-EVM_CHAIN_ID = "201411"
-EVM_SCAN_URL = "https:${SLASH}/evmscan.rarimo.com"
-EVM_SCAN_API_URL = "https:${SLASH}/api.evmscan.rarimo.com"
+GUESS_CELEBRITY_CONTRACT_ADDRESS="0x411AA3eF21AdC9e84c60e17451B0732119C8f0c7"
 
-// MARK: Cosmos
-CHAIN_ID = "rarimo_42-1"
-DENOM = "stake"
-RPC_IP = "core-api.node1.mainnet-beta.rarimo.com:443"
+// MARK: EVM
+EVM_RPC_URL="https:${SLASH}/rpc.evm.mainnet.rarimo.com"
+EVM_CHAIN_ID="201411"
+EVM_SCAN_URL="https:${SLASH}/evmscan.rarimo.com"
+EVM_SCAN_API_URL="https:${SLASH}/api.evmscan.rarimo.com"
 
-// MARK: CertificatesStorage
-MASTER_CERTIFICATES_BUCKETNAME = "rarimo-temp"
-MASTER_CERTIFICATES_FILENAME = "icaopkd-list.ldif"
-ICAO_COSMOS_RPC = "core-api.node1.mainnet-beta.rarimo.com:443"
-
-// MARK: Feedback
-FEEDBACK_EMAIL = "info@rarilabs.com"
-
-// MARK: CircuitsData
-CIRCUIT_DATA_URL_1 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.0/registerIdentity_1_256_3_6_576_248_1_2432_5_296-download.zip"
-CIRCUIT_DATA_URL_2 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.0/registerIdentity_2_256_3_6_336_264_21_2448_6_2008-download.zip"
-CIRCUIT_DATA_URL_3 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.0/registerIdentity_21_256_3_7_336_264_21_3072_6_2008-download.zip"
-
-CIRCUIT_DATA_URL_5 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.1/registerIdentity_2_256_3_6_336_248_1_2432_3_256-download.zip"
-
-CIRCUIT_DATA_URL_7 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.2/registerIdentity_11_256_3_3_576_248_1_1184_5_264-download.zip"
-CIRCUIT_DATA_URL_8 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.2/registerIdentity_12_256_3_3_336_232_NA-download.zip"
-CIRCUIT_DATA_URL_9 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.2/registerIdentity_1_256_3_4_336_232_1_1480_5_296-download.zip"
-
-CIRCUIT_DATA_URL_11 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.4/registerIdentity_1_160_3_3_576_200_NA-download.zip"
-CIRCUIT_DATA_URL_12 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.3/registerIdentity_21_256_3_3_336_232_NA-download.zip"
-CIRCUIT_DATA_URL_13 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.3/registerIdentity_24_256_3_4_336_232_NA-download.zip"
-CIRCUIT_DATA_URL_14 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.4/registerIdentity_1_256_3_3_576_248_NA-download.zip"
-CIRCUIT_DATA_URL_15 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.4/registerIdentity_20_256_3_3_336_224_NA-download.zip"
-CIRCUIT_DATA_URL_17 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.5/registerIdentity_11_256_3_5_576_248_1_1808_4_256-download.zip"
-
-CIRCUIT_DATA_URL_19 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.6-light/registerIdentityLight160-download.zip"
-CIRCUIT_DATA_URL_20 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.6-light/registerIdentityLight224-download.zip"
-CIRCUIT_DATA_URL_21 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.6-light/registerIdentityLight256-download.zip"
-CIRCUIT_DATA_URL_22 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.6-light/registerIdentityLight384-download.zip"
-CIRCUIT_DATA_URL_23 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.6-light/registerIdentityLight512-download.zip"
-
-CIRCUIT_DATA_URL_24 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.7-fix/registerIdentity_2_256_3_6_336_264_1_2448_3_256-download.zip"
-CIRCUIT_DATA_URL_25 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.7-fix/registerIdentity_3_160_3_3_336_200_NA-download.zip"
-CIRCUIT_DATA_URL_26 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.7-fix/registerIdentity_3_160_3_4_576_216_1_1512_3_256-download.zip"
-
-CIRCUIT_DATA_URL_27 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.8/registerIdentity_11_256_3_3_576_240_1_864_5_264-download.zip"
-
-CIRCUIT_DATA_URL_29 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.9/registerIdentity_11_256_3_5_576_248_1_1808_5_296-download.zip"
-
-CIRCUIT_DATA_URL_30 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.10/registerIdentity_11_256_3_3_336_248_NA-download.zip"
-CIRCUIT_DATA_URL_31 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.10/registerIdentity_14_256_3_4_336_64_1_1480_5_296-download.zip"
-CIRCUIT_DATA_URL_32 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.10/registerIdentity_21_256_3_5_576_232_NA-download.zip"
-
-CIRCUIT_DATA_URL_33 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.11/registerIdentity_1_256_3_6_336_560_1_2744_4_256-download.zip"
-CIRCUIT_DATA_URL_34 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.11/registerIdentity_1_256_3_6_336_248_1_2744_4_256-download.zip"
-CIRCUIT_DATA_URL_35 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.11/registerIdentity_20_256_3_5_336_72_NA-download.zip"
-
-CIRCUIT_DATA_URL_36 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.12/registerIdentity_4_160_3_3_336_216_1_1296_3_256-download.zip"
-CIRCUIT_DATA_URL_37 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.12/registerIdentity_15_512_3_3_336_248_NA-download.zip"
-CIRCUIT_DATA_URL_38 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.12/registerIdentity_20_160_3_3_736_200_NA-download.zip"
-
-// MARK: NoirCircuitsData
-
-NOIR_CIRCUIT_DATA_URL_0 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.3/registerIdentity_2_256_3_6_336_264_21_2448_6_2008.json"
-NOIR_CIRCUIT_DATA_URL_1 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.3/registerIdentity_2_256_3_6_336_248_1_2432_3_256.json"
-NOIR_CIRCUIT_DATA_URL_2 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.3/registerIdentity_20_256_3_3_336_224_NA.json"
-
-NOIR_CIRCUIT_DATA_URL_3 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v1.0.4/registerIdentity_10_256_3_3_576_248_1_1184_5_264.json"
-NOIR_CIRCUIT_DATA_URL_4 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v1.0.4/registerIdentity_1_256_3_4_600_248_1_1496_3_256.json"
-NOIR_CIRCUIT_DATA_URL_5 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v1.0.4/registerIdentity_21_256_3_3_576_232_NA.json"
-
-NOIR_CIRCUIT_DATA_URL_6 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.5-fix/registerIdentity_21_256_3_4_576_232_NA.json"
-
-NOIR_CIRCUIT_DATA_URL_7 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.6-fix/registerIdentity_11_256_3_4_336_232_1_1480_4_256.json"
-NOIR_CIRCUIT_DATA_URL_8 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.6-fix/registerIdentity_2_256_3_6_576_248_1_2432_3_256.json"
-NOIR_CIRCUIT_DATA_URL_9 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.6-fix/registerIdentity_3_512_3_3_336_264_NA.json"
-
-NOIR_CIRCUIT_DATA_URL_10 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.7-fix/registerIdentity_1_256_3_5_336_248_1_2120_4_256.json"
-NOIR_CIRCUIT_DATA_URL_11 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.7-fix/registerIdentity_2_256_3_4_336_232_1_1480_4_256.json"
-NOIR_CIRCUIT_DATA_URL_12 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.7-fix/registerIdentity_2_256_3_4_336_248_NA.json"
-
-NOIR_CIRCUIT_DATA_URL_13 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.8-fix/registerIdentity_14_256_3_3_576_240_NA.json"
-NOIR_CIRCUIT_DATA_URL_14 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.8-fix/registerIdentity_14_256_3_4_576_248_1_1496_3_256.json"
-NOIR_CIRCUIT_DATA_URL_15 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.8-fix/registerIdentity_20_160_3_2_576_184_NA.json"
-
-NOIR_CIRCUIT_DATA_URL_16 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.9-fix/registerIdentity_1_256_3_5_576_248_NA.json"
-NOIR_CIRCUIT_DATA_URL_17 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.9-fix/registerIdentity_1_256_3_6_576_264_1_2448_3_256.json"
-NOIR_CIRCUIT_DATA_URL_18 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.9-fix/registerIdentity_20_160_3_3_576_200_NA.json"
-
-NOIR_CIRCUIT_DATA_URL_19 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.10-fix/registerIdentity_11_256_3_3_576_248_NA.json"
-NOIR_CIRCUIT_DATA_URL_20 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.10-fix/registerIdentity_23_160_3_3_576_200_NA.json"
-NOIR_CIRCUIT_DATA_URL_21 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.10-fix/registerIdentity_3_256_3_4_600_248_1_1496_3_256.json"
-
-NOIR_CIRCUIT_DATA_URL_22 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.11-fix/registerIdentity_20_256_3_5_336_248_NA.json"
-NOIR_CIRCUIT_DATA_URL_23 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.11-fix/registerIdentity_24_256_3_4_336_248_NA.json"
-NOIR_CIRCUIT_DATA_URL_24 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.11-fix/registerIdentity_6_160_3_3_336_216_1_1080_3_256.json"
-
-NOIR_CIRCUIT_DATA_URL_25 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.12-fix/registerIdentity_11_256_3_5_576_248_NA.json"
-NOIR_CIRCUIT_DATA_URL_26 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.12-fix/registerIdentity_14_256_3_4_336_232_1_1480_5_296.json"
-NOIR_CIRCUIT_DATA_URL_27 = "https:${SLASH}/storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.12-fix/registerIdentity_1_256_3_4_576_232_1_1480_3_256.json"
+// MARK: Freedom Tool
+FREEDOM_TOOL_RPC_URL="https:${SLASH}/rpc.qtestnet.org"
+FREEDOM_TOOL_IPFS_NODE_URL="https:${SLASH}/ipfs.rarimo.com"
+FREEDOM_TOOL_WEBSITE_URL="https:${SLASH}/stage.voting.freedomtool.org"
+FREEDOM_TOOL_API_URL="https:${SLASH}/api.stage.freedomtool.org"
 
 // MARK: AppsFlyer
-APPSFLYER_DEV_KEY = "FsxpXXrjsFBLiF6jMe7jZY"
-APPSFLYER_APP_ID = "id6503300598"
+APPSFLYER_DEV_KEY="FsxpXXrjsFBLiF6jMe7jZY"
+APPSFLYER_APP_ID="id6503300598"
 
-// MARK: ZKeys
-ZKEY_URL_0 = "https:${SLASH}/storage.googleapis.com/rarimo-store/zkey/circuit_final.zkey"
-
-// MARK: DownloadableFile
-DOWNLOADABLE_FILE_URL_0 = "https:${SLASH}/storage.googleapis.com/rarimo-store/face-recognition/face-recognition.tflite"
-DOWNLOADABLE_FILE_URL_1 = "https:${SLASH}/storage.googleapis.com/rarimo-store/trusted-setups/ultraPlonkTrustedSetup.dat"
+// MARK: Secrets
+JOIN_REWARDS_KEY="15690e4461abffc8a0057282af199b7345fa492d28ec1ae60049459389752e3ee714947cc64edcde3c5b25c10081a003d15a88cf137bcc97049da465781eff3c"
+LIGHT_SIGNATURE_PRIVATE_KEY="86494b0b827f6c096e1b65cc1e738a0c6f0c492250db7257fc19c35b74b4f568"

@@ -40,7 +40,7 @@ class NotificationManager: ObservableObject {
     func request() async throws {
         try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound])
         
-        let globalNotificationTopic = ConfigManager.shared.general.generalNotificationTopic
+        let globalNotificationTopic = ConfigManager.shared.notifications.generalTopic
         
         // Firebase recommends to run this on the main thread
         DispatchQueue.main.async {

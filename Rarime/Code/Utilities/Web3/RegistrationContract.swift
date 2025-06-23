@@ -1,8 +1,8 @@
 import Identity
 
 import Web3
-import Web3PromiseKit
 import Web3ContractABI
+import Web3PromiseKit
 
 import OSLog
 import SwiftUI
@@ -12,9 +12,9 @@ class RegistrationContract {
     let registrationContract: DynamicContract
     
     init() throws {
-        self.web3 = Web3(rpcURL: ConfigManager.shared.api.evmRpcURL.absoluteString)
+        self.web3 = Web3(rpcURL: ConfigManager.shared.evm.rpcURL.absoluteString)
         
-        let registrationContractAddress = try EthereumAddress(hex: ConfigManager.shared.api.registerContractAddress, eip55: false)
+        let registrationContractAddress = try EthereumAddress(hex: ConfigManager.shared.contracts.registration2Address, eip55: false)
                 
         self.registrationContract = try web3.eth.Contract(
             json: ContractABI.registrationAbiJSON,

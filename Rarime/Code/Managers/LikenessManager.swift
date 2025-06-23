@@ -104,7 +104,7 @@ class LikenessManager: ObservableObject {
 
         let registerUserCalldata = try IdentityCallDataBuilder().buildFaceRegistryRegisterUser(zkProof.json)
 
-        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
+        let relayer = Relayer(ConfigManager.shared.general.appApiURL)
         let response = try await relayer.likenessRegistry(registerUserCalldata)
 
         LoggerUtil.common.info("Face register EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")
@@ -139,7 +139,7 @@ class LikenessManager: ObservableObject {
             zkPointsJSON: zkProof.json
         )
 
-        let relayer = Relayer(ConfigManager.shared.api.relayerURL)
+        let relayer = Relayer(ConfigManager.shared.general.appApiURL)
         let response = try await relayer.likenessRegistry(updateRuleCalldata)
 
         LoggerUtil.common.info("Update face rule EVM Tx Hash: \(response.data.attributes.txHash, privacy: .public)")

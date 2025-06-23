@@ -146,14 +146,14 @@ struct WaitlistPassportView: View {
                         .body4()
                         .foregroundStyle(.textPrimary)
                     HStack(spacing: 8) {
-                        Text(ConfigManager.shared.feedback.feedbackEmail)
+                        Text(ConfigManager.shared.general.feedbackEmail)
                             .body3()
                             .foregroundStyle(.textPrimary)
                         Image(isCopied ? .check : .copySimple).iconMedium()
                     }
                     .onTapGesture {
                         if isCopied { return }
-                        UIPasteboard.general.string = ConfigManager.shared.feedback.feedbackEmail
+                        UIPasteboard.general.string = ConfigManager.shared.general.feedbackEmail
                         isCopied = true
                         FeedbackGenerator.shared.impact(.medium)
 
@@ -227,11 +227,11 @@ struct WaitlistPassportView: View {
                 throw error
             }
                 
-            let key = Data(hex: ConfigManager.shared.api.joinRewardsKey) ?? Data()
+            let key = Data(hex: ConfigManager.shared.secrets.joinRewardsKey) ?? Data()
                 
             let hmacSingature = HMACUtils.hmacSha256(hmacMessage ?? Data(), key)
                 
-            let points = Points(ConfigManager.shared.api.pointsServiceURL)
+            let points = Points(ConfigManager.shared.general.appApiURL)
             let _ = try await points.joinRewardsProgram(
                 accessJwt,
                 country,

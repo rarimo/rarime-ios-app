@@ -46,7 +46,7 @@ extension HomeView {
 
         private func createBalanceWithReferralCode() async {
             let POINTS_REFERRAL_CODE_LENGTH = 11
-            var referralCode = ConfigManager.shared.api.defaultReferralCode
+            var referralCode = ConfigManager.shared.general.defaultReferralCode
             if let deferredReferralCode = UserManager.shared.user?.deferredReferralCode,
                !deferredReferralCode.isEmpty,
                deferredReferralCode.count == POINTS_REFERRAL_CODE_LENGTH
@@ -54,7 +54,7 @@ extension HomeView {
                 referralCode = deferredReferralCode
             }
 
-            await attemptToCreateBalance(with: referralCode, fallback: ConfigManager.shared.api.defaultReferralCode)
+            await attemptToCreateBalance(with: referralCode, fallback: ConfigManager.shared.general.defaultReferralCode)
         }
 
         private func attemptToCreateBalance(with referralCode: String, fallback: String) async {
@@ -74,7 +74,7 @@ extension HomeView {
             guard let user = UserManager.shared.user else { throw "user is not initalized" }
             let accessJwt = try await DecentralizedAuthManager.shared.getAccessJwt(user)
 
-            let pointsSvc = Points(ConfigManager.shared.api.pointsServiceURL)
+            let pointsSvc = Points(ConfigManager.shared.general.appApiURL)
             let result = try await pointsSvc.createPointsBalance(
                 accessJwt,
                 code

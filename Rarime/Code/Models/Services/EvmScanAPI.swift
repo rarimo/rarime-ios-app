@@ -9,8 +9,8 @@ class EvmScanAPI {
     let apiUrl: URL
 
     init() {
-        self.scanUrl = ConfigManager.shared.api.evmScanUrl
-        self.apiUrl = ConfigManager.shared.api.evmScanApiUrl
+        self.scanUrl = ConfigManager.shared.evm.scanUrl
+        self.apiUrl = ConfigManager.shared.evm.scanApiUrl
     }
 
     func getTransactions(_ address: String, _ nextPageParams: EvmScanTransactionNextPageParams? = nil) async throws -> EvmScanTransaction {

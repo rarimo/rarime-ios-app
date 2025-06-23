@@ -40,7 +40,7 @@ struct LikenessSuccessView: View {
                             .background(.baseWhite.opacity(0.1), in: RoundedRectangle(cornerRadius: 20))
                     }
                     ShareLink(
-                        item: ConfigManager.shared.api.webAppURL.appendingPathComponent("download-app"),
+                        item: ConfigManager.shared.general.webAppURL.appendingPathComponent("download-app"),
                         subject: Text("My face, my rules ✅"),
                         message: Text("I just set a personal AI-usage rule for my digital likeness in rariMe. Take charge of yours in under a minute—privacy starts with you.")
                     ) {

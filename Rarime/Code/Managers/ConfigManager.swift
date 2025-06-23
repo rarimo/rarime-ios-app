@@ -4,83 +4,63 @@ class ConfigManager: ObservableObject {
     static let shared = ConfigManager()
 
     let general = General()
-    let api = API()
-    let cosmos = Cosmos()
-    let certificatesStorage = CertificatesStorage()
-    let feedback = Feedback()
-    let circuitData = CircuitData()
+    let notifications = Notifications()
+    let contracts = Contracts()
+    let evm = EVM()
+    let freedomTool = FreedomTool()
     let appsFlyer = AppsFlyer()
-    let noirCircuitData = NoirCircuitData()
+    let secrets = Secrets()
 }
 
 extension ConfigManager {
     class General {
-        let privacyPolicyURL: URL = try! readURLFromInfoPlist(key: "PRIVACY_POLICY_URL")
-        let termsOfUseURL: URL = try! readURLFromInfoPlist(key: "TERMS_OF_USE_URL")
-        let airdropTerms: URL = try! readURLFromInfoPlist(key: "AIRDROP_TERMS_URL")
         let version: String = try! readFromInfoPlist(key: "CFBundleShortVersionString")
-        let generalNotificationTopic: String = try! readFromInfoPlist(key: "GENERAL_NOTIFICATION_TOPIC")
-        let claimableNotificationTopic: String = try! readFromInfoPlist(key: "CLAIMABLE_NOTIFICATION_TOPIC")
-        let downloadbleFileURLs: [String: URL] = try! readURLDictionaryFromInfoPlist(key: "DOWNLOADABLE_FILE_URLS")
-    }
-}
-
-extension ConfigManager {
-    class API {
-        let relayerURL: URL = try! readURLFromInfoPlist(key: "RELAYER_URL")
-        let evmRpcURL: URL = try! readURLFromInfoPlist(key: "EVM_RPC_URL")
-        let registerContractAddress: String = try! readFromInfoPlist(key: "REGISTER_CONTRACT_ADDRESS")
-        let registrationSimpleContractAddress: String = try! readFromInfoPlist(key: "REGISTRATION_SIMPLE_CONTRACT_ADRRESS")
-        let certificatesSmtContractAddress: String = try! readFromInfoPlist(key: "CERTIFICATES_SMT_CONTRACT_ADDRESS")
-        let registrationSmtContractAddress: String = try! readFromInfoPlist(key: "REGISTRATION_SMT_CONTRACT_ADDRESS")
-        let stateKeeperContractAddress: String = try! readFromInfoPlist(key: "STATE_KEEPER_CONTRACT_ADDRESS")
-        let pointsServiceURL: URL = try! readURLFromInfoPlist(key: "POINTS_SERVICE_URL")
-        let authorizeURL: URL = try! readURLFromInfoPlist(key: "AUTHORIZE_URL")
-        let webAppURL: URL = try! readURLFromInfoPlist(key: "WEB_APP_URL")
-        let joinRewardsKey: String = try! readFromInfoPlist(key: "JOIN_REWARDS_KEY")
-        let defaultReferralCode: String = try! readFromInfoPlist(key: "DEFAULT_REFERRAL_CODE")
-        let lightSignaturePrivateKey: String = try! readFromInfoPlist(key: "LIGHT_SIGNATURE_PRIVATE_KEY")
-        let proposalsStateContractAddress: String = try! readFromInfoPlist(key: "PROPOSALS_STATE_CONTRACT_ADDRESS")
-        let multicall3ContractAddress: String = try! readFromInfoPlist(key: "MULTICALL3_CONTRACT_ADDRESS")
-        let ipfsNodeURL: URL = try! readURLFromInfoPlist(key: "IPFS_NODE_URL")
-        let votingWebsiteURL: URL = try! readURLFromInfoPlist(key: "VOTING_WEBSITE_URL")
-        let votingRelayerURL: URL = try! readURLFromInfoPlist(key: "VOTING_RELAYER_URL")
-        let votingRpcURL: URL = try! readURLFromInfoPlist(key: "VOTING_RPC_URL")
-        let votingRegistartionSmtContractAddress: String = try! readFromInfoPlist(key: "VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS")
-        let faceRegistryContractAddress: String = try! readFromInfoPlist(key: "FACE_REGISTRY_CONTRACT_ADDRESS")
-        let guessCelebrityGameContractAddress: String = try! readFromInfoPlist(key: "GUESS_CELEBRITY_GAME_CONTRACT_ADDRESS")
-        let evmChainId: UInt64 = try! readUInt64FromInfoPlist(key: "EVM_CHAIN_ID")
-        let evmScanUrl: URL = try! readURLFromInfoPlist(key: "EVM_SCAN_URL")
-        let evmScanApiUrl: URL = try! readURLFromInfoPlist(key: "EVM_SCAN_API_URL")
-    }
-}
-
-extension ConfigManager {
-    class Cosmos {
-        let chainId: String = try! readFromInfoPlist(key: "CHAIN_ID")
-        let denom: String = try! readFromInfoPlist(key: "DENOM")
-        let rpcIp: String = try! readFromInfoPlist(key: "RPC_IP")
-    }
-}
-
-extension ConfigManager {
-    class CertificatesStorage {
-        let icaoCosmosRpc: String = try! readFromInfoPlist(key: "ICAO_COSMOS_RPC")
-        let masterCertificatesBucketname: String = try! readFromInfoPlist(key: "MASTER_CERTIFICATES_BUCKETNAME")
-        let masterCertificatesFilename: String = try! readFromInfoPlist(key: "MASTER_CERTIFICATES_FILENAME")
-    }
-}
-
-extension ConfigManager {
-    class CircuitData {
-        let circuitDataURLs: [String: URL] = try! readURLDictionaryFromInfoPlist(key: "CIRCUIT_DATA_URLS")
-        let zkeyURLs: [String: URL] = try! readURLDictionaryFromInfoPlist(key: "ZKEY_URLS")
-    }
-}
-
-extension ConfigManager {
-    class Feedback {
         let feedbackEmail: String = try! readFromInfoPlist(key: "FEEDBACK_EMAIL")
+        let defaultReferralCode: String = try! readFromInfoPlist(key: "DEFAULT_REFERRAL_CODE")
+        let webAppURL: URL = try! readURLFromInfoPlist(key: "WEB_APP_URL")
+        let termsOfUseURL: URL = try! readURLFromInfoPlist(key: "TERMS_OF_USE_URL")
+        let privacyPolicyURL: URL = try! readURLFromInfoPlist(key: "PRIVACY_POLICY_URL")
+        let appApiURL: URL = try! readURLFromInfoPlist(key: "APP_API_URL")
+    }
+}
+
+extension ConfigManager {
+    class Notifications {
+        let generalTopic: String = try! readFromInfoPlist(key: "GENERAL_NOTIFICATION_TOPIC")
+        let claimableTopic: String = try! readFromInfoPlist(key: "CLAIMABLE_NOTIFICATION_TOPIC")
+    }
+}
+
+extension ConfigManager {
+    class Contracts {
+        let registration2Address: String = try! readFromInfoPlist(key: "REGISTRATION2_CONTRACT_ADDRESS")
+        let registrationSimpleAddress: String = try! readFromInfoPlist(key: "REGISTRATION_SIMPLE_CONTRACT_ADRRESS")
+        let certificatesSmtAddress: String = try! readFromInfoPlist(key: "CERTIFICATES_SMT_CONTRACT_ADDRESS")
+        let registrationSmtAddress: String = try! readFromInfoPlist(key: "REGISTRATION_SMT_CONTRACT_ADDRESS")
+        let stateKeeperAddress: String = try! readFromInfoPlist(key: "STATE_KEEPER_CONTRACT_ADDRESS")
+        let multicall3Address: String = try! readFromInfoPlist(key: "MULTICALL3_CONTRACT_ADDRESS")
+        let votingRegistrationSmtAddress: String = try! readFromInfoPlist(key: "VOTING_REGISTRATION_SMT_CONTRACT_ADDRESS")
+        let proposalsStateAddress: String = try! readFromInfoPlist(key: "PROPOSALS_STATE_CONTRACT_ADDRESS")
+        let faceRegistryAddress: String = try! readFromInfoPlist(key: "FACE_REGISTRY_CONTRACT_ADDRESS")
+        let guessCelebrityAddress: String = try! readFromInfoPlist(key: "GUESS_CELEBRITY_CONTRACT_ADDRESS")
+    }
+}
+
+extension ConfigManager {
+    class EVM {
+        let rpcURL: URL = try! readURLFromInfoPlist(key: "EVM_RPC_URL")
+        let chainId: UInt64 = try! readUInt64FromInfoPlist(key: "EVM_CHAIN_ID")
+        let scanUrl: URL = try! readURLFromInfoPlist(key: "EVM_SCAN_URL")
+        let scanApiUrl: URL = try! readURLFromInfoPlist(key: "EVM_SCAN_API_URL")
+    }
+}
+
+extension ConfigManager {
+    class FreedomTool {
+        let rpcURL: URL = try! readURLFromInfoPlist(key: "FREEDOM_TOOL_RPC_URL")
+        let ipfsNodeURL: URL = try! readURLFromInfoPlist(key: "FREEDOM_TOOL_IPFS_NODE_URL")
+        let websiteURL: URL = try! readURLFromInfoPlist(key: "FREEDOM_TOOL_WEBSITE_URL")
+        let apiURL: URL = try! readURLFromInfoPlist(key: "FREEDOM_TOOL_API_URL")
     }
 }
 
@@ -92,8 +72,9 @@ extension ConfigManager {
 }
 
 extension ConfigManager {
-    class NoirCircuitData {
-        let noirCircuitDataURLs: [String: URL] = try! readURLDictionaryFromInfoPlist(key: "NOIR_CIRCUIT_DATA_URLS")
+    class Secrets {
+        let joinRewardsKey: String = try! readFromInfoPlist(key: "JOIN_REWARDS_KEY")
+        let lightSignaturePrivateKey: String = try! readFromInfoPlist(key: "LIGHT_SIGNATURE_PRIVATE_KEY")
     }
 }
 
@@ -123,19 +104,6 @@ private func readUInt64FromInfoPlist(key: String) throws -> UInt64 {
     guard let uint64 = UInt64(value) else { throw "\(key) isn't UInt64" }
 
     return uint64
-}
-
-private func readURLDictionaryFromInfoPlist(key: String) throws -> [String: URL] {
-    let value: [String: String] = try readFromInfoPlist(key: key)
-
-    var result: [String: URL] = [:]
-    for item in value {
-        guard let url = URL(string: normalizeInfoPlistString(item.value)) else { throw "\(key) isn't URL" }
-
-        result[item.key] = url
-    }
-
-    return result
 }
 
 private func normalizeInfoPlistString(_ value: String) -> String {

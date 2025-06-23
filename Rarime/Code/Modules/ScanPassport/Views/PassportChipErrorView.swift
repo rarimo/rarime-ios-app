@@ -9,20 +9,19 @@ struct PassportChipErrorView: View {
     var body: some View {
         VStack(spacing: 32) {
             Spacer()
-            Image(.gears)
-                .resizable()
-                .scaledToFit()
-                .frame(height: 136)
-            VStack(spacing: 16) {
+            Image(.rarime)
+                .square(128)
+                .foregroundStyle(.textPrimary)
+            VStack(spacing: 8) {
                 Text("We’re working on a fix")
-                    .subtitle4()
+                    .h3()
                     .foregroundStyle(.textPrimary)
                 Text("Some passports have a problem with chip scans")
                     .body4()
-                    .multilineTextAlignment(.center)
                     .foregroundStyle(.textSecondary)
             }
-            .frame(width: 250)
+            .frame(width: 300)
+            .multilineTextAlignment(.center)
             Spacer()
             VStack(spacing: 12) {
                 AppButton(
@@ -33,7 +32,7 @@ struct PassportChipErrorView: View {
                             isSending = true
                         } else {
                             UIApplication.shared.open(
-                                URL(string: "mailto:\(ConfigManager.shared.feedback.feedbackEmail)?subject=Passport Chip Error")!
+                                URL(string: "mailto:\(ConfigManager.shared.general.feedbackEmail)?subject=Passport Chip Error")!
                             )
                             onClose()
                         }

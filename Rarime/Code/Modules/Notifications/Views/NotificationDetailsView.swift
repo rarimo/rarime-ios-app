@@ -55,7 +55,7 @@ struct NotificationDetailsView: View {
             defer { isClaiming = false }
             
             do {
-                let points = Points(ConfigManager.shared.api.pointsServiceURL)
+                let points = Points(ConfigManager.shared.general.appApiURL)
                 
                 let _ = try await points.claimPointsForEvent(self.notificationEventId)
                 
@@ -83,7 +83,7 @@ struct NotificationDetailsView: View {
                 
                 let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
                 
-                let points = Points(ConfigManager.shared.api.pointsServiceURL)
+                let points = Points(ConfigManager.shared.general.appApiURL)
                 
                 let eventResponse = try await points.listEvents(
                     accessJwt,

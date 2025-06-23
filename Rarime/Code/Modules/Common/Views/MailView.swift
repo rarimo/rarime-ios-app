@@ -1,16 +1,16 @@
-import UIKit
-import SwiftUI
 import MessageUI
+import SwiftUI
+import UIKit
 
 struct MailView: UIViewControllerRepresentable {
     let subject: String
     let attachment: Data
     let fileName: String
-    
+
     @Binding var isShowing: Bool
     @Binding var result: Result<MFMailComposeResult, Error>?
 
-    class Coordinator: NSObject, MFMailComposeViewControllerDelegate {        
+    class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
         @Binding var isShowing: Bool
         @Binding var result: Result<MFMailComposeResult, Error>?
 
@@ -30,12 +30,12 @@ struct MailView: UIViewControllerRepresentable {
             defer {
                 isShowing = false
             }
-            
+
             guard error == nil else {
                 self.result = .failure(error!)
                 return
             }
-            
+
             self.result = .success(result)
         }
     }
@@ -50,16 +50,16 @@ struct MailView: UIViewControllerRepresentable {
     func makeUIViewController(
         context: UIViewControllerRepresentableContext<MailView>
     ) -> MFMailComposeViewController {
-        let recipient = ConfigManager.shared.feedback.feedbackEmail
-        
+        let recipient = ConfigManager.shared.general.feedbackEmail
+
         let vc = MFMailComposeViewController()
-        
+
         vc.setSubject(subject)
         vc.setToRecipients([recipient])
         vc.addAttachmentData(attachment, mimeType: "text/plain", fileName: fileName)
-        
+
         vc.mailComposeDelegate = context.coordinator
-        
+
         return vc
     }
 
