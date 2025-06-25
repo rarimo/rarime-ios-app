@@ -1,3 +1,4 @@
+import Alamofire
 import SwiftUI
 
 import PromiseKit
@@ -25,12 +26,8 @@ class WalletManager: ObservableObject {
     @Published var isBalanceLoading = false
 
     @Published var transactions: [Transaction] = []
-
     @Published var isTransactionsLoading = false
-
-    var scanTXsNextPageParams: EvmScanTransactionNextPageParams?
-
-    var isLastTXsPage = false
+    @Published private var scanTXsNextPageParams: EvmScanTransactionNextPageParams?
 
     init() {
         do {
@@ -42,6 +39,10 @@ class WalletManager: ObservableObject {
         }
 
         self.web3 = Web3(rpcURL: ConfigManager.shared.evm.rpcURL.absoluteString)
+    }
+
+    var hasMoreTransactions: Bool {
+        return scanTXsNextPageParams != nil
     }
 
     var displayedBalance: String {
@@ -70,6 +71,7 @@ class WalletManager: ObservableObject {
         return .init(quantity: fee)
     }
 
+    @MainActor
     func transfer(
         _ amount: Decimal,
         _ to: String
@@ -104,7 +106,7 @@ class WalletManager: ObservableObject {
 
         LoggerUtil.common.info("Transfer transaction hash: \(receipt!.transactionHash.hex(), privacy: .public)")
 
-        await pullTransactions()
+        await loadTransactions()
     }
 
     func waitForTransactionReceipt(txHash: EthereumData, timeout: TimeInterval = 60) async -> EthereumTransactionReceiptObject? {
@@ -122,55 +124,77 @@ class WalletManager: ObservableObject {
     }
 
     @MainActor
-    func pullTransactions() {
-        if isTransactionsLoading || isLastTXsPage {
+    func loadTransactions() async {
+        if isTransactionsLoading {
             return
         }
 
         isTransactionsLoading = true
         defer { isTransactionsLoading = false }
 
-        Task { @MainActor in
-            do {
-                guard let ethereumAddress = UserManager.shared.ethereumAddress else {
-                    return
-                }
+        scanTXsNextPageParams = nil
 
-                let transactionResponse = try await EvmScanAPI.shared.getTransactions(ethereumAddress, scanTXsNextPageParams)
+        do {
+            transactions = try await fetchTransactions()
+        } catch {
+            LoggerUtil.common.error("Failed to load transactions: \(error, privacy: .public)")
+            AlertManager.shared.emitError("Failed to load transactions")
+        }
+    }
 
-                for tx in transactionResponse.items {
-                    let isSending = tx.from.hash.lowercased() == ethereumAddress.lowercased()
+    @MainActor
+    func loadNextTransactions() async {
+        if scanTXsNextPageParams == nil {
+            return
+        }
 
-                    var title: String
-                    if let method = tx.method {
-                        title = method
-                    } else {
-                        title = isSending ? String(localized: "Send") : String(localized: "Receive")
-                    }
+        do {
+            try transactions.append(contentsOf: await fetchTransactions())
+        } catch {
+            LoggerUtil.common.error("Failed to load next transactions: \(error, privacy: .public)")
+            AlertManager.shared.emitError("Failed to load transactions")
+        }
+    }
 
-                    transactions.append(Transaction(
-                        title: title,
-                        icon: isSending ? .arrowUp : .arrowDown,
-                        amount: EthereumQuantity(quantity: BigUInt(tx.value) ?? BigUInt(0)),
-                        date: tx.date,
-                        type: isSending ? .sent : .received,
-                        hash: tx.hash
-                    ))
-                }
+    @MainActor
+    private func fetchTransactions() async throws -> [Transaction] {
+        do {
+            guard let ethereumAddress = UserManager.shared.ethereumAddress else {
+                return []
+            }
 
-                scanTXsNextPageParams = transactionResponse.nextPageParams
-                if scanTXsNextPageParams == nil {
-                    isLastTXsPage = true
-                }
+            let transactionResponse = try await EvmScanAPI.shared.getTransactions(ethereumAddress, scanTXsNextPageParams)
 
-                isTransactionsLoading = false
-            } catch {
-                if error.asAFError?.isResponseValidationError == true {
-                    transactions = []
+            var transactions: [Transaction] = []
+            for tx in transactionResponse.items {
+                let isSending = tx.from.hash.lowercased() == ethereumAddress.lowercased()
+
+                var title: String
+                if let method = tx.method {
+                    title = method
                 } else {
-                    LoggerUtil.common.error("Failed to pull transactions: \(error, privacy: .public)")
-                    AlertManager.shared.emitError(.unknown("Failed to pull transactions"))
+                    title = isSending ? String(localized: "Send") : String(localized: "Receive")
                 }
+
+                transactions.append(Transaction(
+                    title: title,
+                    icon: isSending ? .arrowUp : .arrowDown,
+                    amount: EthereumQuantity(quantity: BigUInt(tx.value) ?? BigUInt(0)),
+                    date: tx.date,
+                    type: isSending ? .sent : .received,
+                    hash: tx.hash
+                ))
+            }
+
+            scanTXsNextPageParams = transactionResponse.nextPageParams
+            return transactions
+        } catch let error as AFError where error.isExplicitlyCancelledError {
+            return []
+        } catch {
+            if error.asAFError?.isResponseValidationError == true {
+                return []
+            } else {
+                throw error
             }
         }
     }
@@ -179,6 +203,5 @@ class WalletManager: ObservableObject {
         transactions = []
         isTransactionsLoading = false
         scanTXsNextPageParams = nil
-        isLastTXsPage = false
     }
 }

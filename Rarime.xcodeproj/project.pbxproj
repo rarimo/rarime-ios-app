@@ -11,7 +11,6 @@
 		56062B9C2C12032700C9BF9B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9B2C12032700C9BF9B /* Constants.swift */; };
 		56062BA02C120B3400C9BF9B /* WaitlistPassportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56062B9F2C120B3400C9BF9B /* WaitlistPassportView.swift */; };
 		560781762DBA64930073654B /* LoopVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560781752DBA64930073654B /* LoopVideoPlayer.swift */; };
-		5609B6C82C188C7500CB6A1F /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5609B6C72C188C7500CB6A1F /* MarkdownUI */; };
 		5609B6CC2C19922400CB6A1F /* LinearProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609B6CB2C19922400CB6A1F /* LinearProgressView.swift */; };
 		560F0C1D2BD0234300067054 /* QRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 560F0C1C2BD0234300067054 /* QRCode */; };
 		560F0C252BD036F900067054 /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C242BD036F900067054 /* AppTextField.swift */; };
@@ -45,6 +44,7 @@
 		56474AD62BB9860E0017AA25 /* FaceIdAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */; };
 		56474AD82BB986A40017AA25 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */; };
 		56474ADA2BB9ED6E0017AA25 /* AnyTransition+Backslide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */; };
+		564AF0822E0A99F30081D6D3 /* RefreshableInfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564AF0812E0A99F30081D6D3 /* RefreshableInfiniteScrollView.swift */; };
 		564CE2F52DD2500600D03E6D /* HiddenKeysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE2F42DD2500200D03E6D /* HiddenKeysView.swift */; };
 		564CE2F72DD348BA00D03E6D /* HiddenKeysScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE2F62DD348BA00D03E6D /* HiddenKeysScanView.swift */; };
 		564CE2FA2DD34A5300D03E6D /* HiddenKeysCameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE2F92DD34A5300D03E6D /* HiddenKeysCameraViewModel.swift */; };
@@ -124,7 +124,6 @@
 		56E6AD4D2BD273BC00E4DDC1 /* ProfileRouteLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4C2BD273BC00E4DDC1 /* ProfileRouteLayout.swift */; };
 		56E6AD4F2BD2756200E4DDC1 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E6AD4E2BD2756200E4DDC1 /* SafariWebView.swift */; };
 		56E7AD0A2BDAA4F000D3A258 /* AppRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7AD092BDAA4F000D3A258 /* AppRadioButton.swift */; };
-		56E7AD112BDBA81000D3A258 /* PullToRefreshSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 56E7AD102BDBA81000D3A258 /* PullToRefreshSwiftUI */; };
 		56F22B2D2E04611200456A7B /* CircuitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F22B2C2E04611200456A7B /* CircuitData.swift */; };
 		56F22B2F2E059A9200456A7B /* DocumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F22B2E2E059A9200456A7B /* DocumentType.swift */; };
 		56F22B302E059A9200456A7B /* DocumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F22B2E2E059A9200456A7B /* DocumentType.swift */; };
@@ -252,7 +251,6 @@
 		CE30FAA42D50DF6D0057F897 /* libwitnesscalc_registerIdentity_20_160_3_3_736_200_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE30FA9A2D50DF6D0057F897 /* libwitnesscalc_registerIdentity_20_160_3_3_736_200_NA.a */; };
 		CE30FAA52D50DF6D0057F897 /* libwitnesscalc_registerIdentity_20_256_3_5_336_72_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE30FA9B2D50DF6D0057F897 /* libwitnesscalc_registerIdentity_20_256_3_5_336_72_NA.a */; };
 		CE31E54A2C11FE150039CAA5 /* ImportIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31E5492C11FE150039CAA5 /* ImportIdentityView.swift */; };
-		CE32CF522BAC981300E507B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE32CF512BAC981300E507B6 /* Lottie */; };
 		CE3477512C7885DA005E91FE /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CE3477502C7885DA005E91FE /* FirebaseAnalytics */; };
 		CE3477532C7885DA005E91FE /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = CE3477522C7885DA005E91FE /* FirebaseMessaging */; };
 		CE3477552C7885EC005E91FE /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CE3477542C7885EC005E91FE /* FirebaseAnalytics */; };
@@ -306,7 +304,6 @@
 		CE7210332BD818020043DB7F /* Double+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7210322BD818020043DB7F /* Double+Rounded.swift */; };
 		CE77EDA32DEDA51400F3B91E /* EvmScanTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77EDA22DEDA50F00F3B91E /* EvmScanTransaction.swift */; };
 		CE77EDA52DEDAA7C00F3B91E /* EvmScanAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77EDA42DEDAA6700F3B91E /* EvmScanAPI.swift */; };
-		CE77EDA82DEDE76B00F3B91E /* DetectableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77EDA72DEDE74600F3B91E /* DetectableScrollView.swift */; };
 		CE7BFAFD2D5A0A8D00B7CBAC /* ReadNfcUsa.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CE7BFAFB2D5A0A8D00B7CBAC /* ReadNfcUsa.mp4 */; };
 		CE7BFAFE2D5A0A8D00B7CBAC /* ScanMrzUsa.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CE7BFAFC2D5A0A8D00B7CBAC /* ScanMrzUsa.mp4 */; };
 		CE7D8AAC2BFB52EE009AF212 /* OpenApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7D8AAB2BFB52EE009AF212 /* OpenApiError.swift */; };
@@ -325,7 +322,6 @@
 		CE8FEB5C2C1AFC3F0008381A /* libwitnesscalc_auth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8FEB5B2C1AFC3F0008381A /* libwitnesscalc_auth.a */; };
 		CE8FEB5F2C1AFF0A0008381A /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB5E2C1AFF0A0008381A /* JWT.swift */; };
 		CE8FEB622C1B03C10008381A /* AuthCircuitInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FEB612C1B03C10008381A /* AuthCircuitInputs.swift */; };
-		CE9347732C205B340034885C /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = CE9347722C205B340034885C /* CachedAsyncImage */; };
 		CE937B032DC8B65300D254D1 /* TensorFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE937B022DC8B64F00D254D1 /* TensorFlow.swift */; };
 		CE937B052DC8B6EC00D254D1 /* TensorFlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE937B042DC8B6E000D254D1 /* TensorFlowManager.swift */; };
 		CE937B082DC8B98900D254D1 /* TensorFlowLiteSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE937B072DC8B98900D254D1 /* TensorFlowLiteSwift */; };
@@ -456,6 +452,7 @@
 		56474AD52BB9860E0017AA25 /* FaceIdAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIdAuth.swift; sourceTree = "<group>"; };
 		56474AD72BB986A40017AA25 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
 		56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+Backslide.swift"; sourceTree = "<group>"; };
+		564AF0812E0A99F30081D6D3 /* RefreshableInfiniteScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableInfiniteScrollView.swift; sourceTree = "<group>"; };
 		564CE2F42DD2500200D03E6D /* HiddenKeysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenKeysView.swift; sourceTree = "<group>"; };
 		564CE2F62DD348BA00D03E6D /* HiddenKeysScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenKeysScanView.swift; sourceTree = "<group>"; };
 		564CE2F92DD34A5300D03E6D /* HiddenKeysCameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenKeysCameraViewModel.swift; sourceTree = "<group>"; };
@@ -678,7 +675,6 @@
 		CE7210322BD818020043DB7F /* Double+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Rounded.swift"; sourceTree = "<group>"; };
 		CE77EDA22DEDA50F00F3B91E /* EvmScanTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmScanTransaction.swift; sourceTree = "<group>"; };
 		CE77EDA42DEDAA6700F3B91E /* EvmScanAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmScanAPI.swift; sourceTree = "<group>"; };
-		CE77EDA72DEDE74600F3B91E /* DetectableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectableScrollView.swift; sourceTree = "<group>"; };
 		CE7BFAFB2D5A0A8D00B7CBAC /* ReadNfcUsa.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ReadNfcUsa.mp4; sourceTree = "<group>"; };
 		CE7BFAFC2D5A0A8D00B7CBAC /* ScanMrzUsa.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ScanMrzUsa.mp4; sourceTree = "<group>"; };
 		CE7D8AAB2BFB52EE009AF212 /* OpenApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenApiError.swift; sourceTree = "<group>"; };
@@ -801,7 +797,6 @@
 			files = (
 				CE3477532C7885DA005E91FE /* FirebaseMessaging in Frameworks */,
 				CEC562192BD92B3E002D4954 /* libresolv.9.tbd in Frameworks */,
-				56E7AD112BDBA81000D3A258 /* PullToRefreshSwiftUI in Frameworks */,
 				560F0C1D2BD0234300067054 /* QRCode in Frameworks */,
 				56D7FC9C2DFC3F1100B13A61 /* WrappingHStack in Frameworks */,
 				CEE4FEA92CFDB851007C31F3 /* libfr.a in Frameworks */,
@@ -842,8 +837,6 @@
 				CE28D5112D3E887300042E1D /* libwitnesscalc_registerIdentity_1_160_3_3_576_200_NA.a in Frameworks */,
 				CE53BCC22D9A9A2C007B1892 /* Swoir in Frameworks */,
 				CE28D5132D3E887300042E1D /* libwitnesscalc_registerIdentityLight512.a in Frameworks */,
-				CE9347732C205B340034885C /* CachedAsyncImage in Frameworks */,
-				CE32CF522BAC981300E507B6 /* Lottie in Frameworks */,
 				5655E43A2BD51F5100B86C5C /* KeychainAccess in Frameworks */,
 				CE68BE452BD9B6EA00D92EBB /* Web3 in Frameworks */,
 				CE72102E2BD7F6780043DB7F /* Alamofire in Frameworks */,
@@ -855,7 +848,6 @@
 				CE68BE472BD9B6EA00D92EBB /* Web3ContractABI in Frameworks */,
 				CEF5C2B62D3FEC3500E143D7 /* RarimeIOSUtils in Frameworks */,
 				CEC562042BD923B4002D4954 /* librapidsnark.a in Frameworks */,
-				5609B6C82C188C7500CB6A1F /* MarkdownUI in Frameworks */,
 				CE7210312BD807140043DB7F /* ZipArchive in Frameworks */,
 				560F0C2A2BD114EE00067054 /* CodeScanner in Frameworks */,
 				CE68BE492BD9B6EA00D92EBB /* Web3PromiseKit in Frameworks */,
@@ -1181,7 +1173,7 @@
 		56F48BBC2BC02E02001F3AA4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CE77EDA72DEDE74600F3B91E /* DetectableScrollView.swift */,
+				564AF0812E0A99F30081D6D3 /* RefreshableInfiniteScrollView.swift */,
 				C75C4DEF2D8D80C800D647DF /* HeightPreservingTabView.swift */,
 				C755353E2D6F196700A562B5 /* ChildOffsetReader.swift */,
 				C7D624592D6DB9D0007BA5A6 /* GlassBottomSheet.swift */,
@@ -1886,7 +1878,6 @@
 			);
 			name = Rarime;
 			packageProductDependencies = (
-				CE32CF512BAC981300E507B6 /* Lottie */,
 				56E2D9312BD01E71006E725D /* NFCPassportReader */,
 				560F0C1C2BD0234300067054 /* QRCode */,
 				560F0C292BD114EE00067054 /* CodeScanner */,
@@ -1896,9 +1887,6 @@
 				CE68BE442BD9B6EA00D92EBB /* Web3 */,
 				CE68BE462BD9B6EA00D92EBB /* Web3ContractABI */,
 				CE68BE482BD9B6EA00D92EBB /* Web3PromiseKit */,
-				56E7AD102BDBA81000D3A258 /* PullToRefreshSwiftUI */,
-				5609B6C72C188C7500CB6A1F /* MarkdownUI */,
-				CE9347722C205B340034885C /* CachedAsyncImage */,
 				CE61E8822C24240000940129 /* Semaphore */,
 				CE3477502C7885DA005E91FE /* FirebaseAnalytics */,
 				CE3477522C7885DA005E91FE /* FirebaseMessaging */,
@@ -1945,7 +1933,6 @@
 			);
 			mainGroup = CE9E82A92BA881F400AAF885;
 			packageReferences = (
-				CE32CF502BAC981300E507B6 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				56E2D92F2BD01C77006E725D /* XCRemoteSwiftPackageReference "qrcode" */,
 				56E2D9302BD01E71006E725D /* XCRemoteSwiftPackageReference "NFCPassportReader" */,
 				560F0C282BD114EE00067054 /* XCRemoteSwiftPackageReference "CodeScanner" */,
@@ -1953,9 +1940,6 @@
 				CE72102C2BD7F6780043DB7F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				CE72102F2BD807140043DB7F /* XCRemoteSwiftPackageReference "ZipArchive" */,
 				CE68BE432BD9B6EA00D92EBB /* XCRemoteSwiftPackageReference "Web3.swift" */,
-				56E7AD0F2BDBA81000D3A258 /* XCRemoteSwiftPackageReference "PullToRefreshSwiftUI" */,
-				5609B6C62C188C7500CB6A1F /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
-				CE9347712C205B340034885C /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 				CE61E8812C24240000940129 /* XCRemoteSwiftPackageReference "Semaphore" */,
 				CE34774F2C7885DA005E91FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				568EEE992CB9445E00F0950A /* XCRemoteSwiftPackageReference "AppsFlyerFramework-Static" */,
@@ -2116,6 +2100,7 @@
 				566E93CF2DDCDEC9007C596A /* CountdownView.swift in Sources */,
 				568D45C82C29AC200065D467 /* PassportChipErrorView.swift in Sources */,
 				56E2D9172BCE938F006E725D /* ActionCard.swift in Sources */,
+				564AF0822E0A99F30081D6D3 /* RefreshableInfiniteScrollView.swift in Sources */,
 				CEFE5F392CB56C8700498F39 /* CryptoUtils.swift in Sources */,
 				568D45CA2C29AFCB0065D467 /* FeedbackMailView.swift in Sources */,
 				C7D6245A2D6DB9DB007BA5A6 /* GlassBottomSheet.swift in Sources */,
@@ -2267,7 +2252,6 @@
 				CEC8C36C2CB8134F0006352C /* SupportRegisterIdentityCircuitAAType.swift in Sources */,
 				CEDC4D7F2BE9267300459D4E /* PoseidonSMTContract.swift in Sources */,
 				CEF2513A2BD6E22700050507 /* User.swift in Sources */,
-				CE77EDA82DEDE76B00F3B91E /* DetectableScrollView.swift in Sources */,
 				CE0881A12BF773CC00B31735 /* AlertManager.swift in Sources */,
 				CE2FF4B92DCCB85D00E4151D /* FaceRegistryNoInclusionInputs.swift in Sources */,
 				CE7D8AAC2BFB52EE009AF212 /* OpenApiError.swift in Sources */,
@@ -3485,14 +3469,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5609B6C62C188C7500CB6A1F /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:gonzalezreal/swift-markdown-ui.git";
-			requirement = {
-				kind = exactVersion;
-				version = 2.4.0;
-			};
-		};
 		560F0C282BD114EE00067054 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/twostraws/CodeScanner";
@@ -3541,28 +3517,12 @@
 				revision = 4c463a687f59eb6cc5c7955af854c7d41295d54f;
 			};
 		};
-		56E7AD0F2BDBA81000D3A258 /* XCRemoteSwiftPackageReference "PullToRefreshSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/shakurocom/PullToRefreshSwiftUI.git";
-			requirement = {
-				kind = exactVersion;
-				version = 1.3.1;
-			};
-		};
 		C7BBDBD72D71E59800E2905E /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI";
 			requirement = {
 				kind = exactVersion;
 				version = 2.0.2;
-			};
-		};
-		CE32CF502BAC981300E507B6 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:airbnb/lottie-spm.git";
-			requirement = {
-				kind = exactVersion;
-				version = 4.4.1;
 			};
 		};
 		CE34774F2C7885DA005E91FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -3613,14 +3573,6 @@
 				version = 2.5.5;
 			};
 		};
-		CE9347712C205B340034885C /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:lorenzofiamingo/swiftui-cached-async-image.git";
-			requirement = {
-				kind = exactVersion;
-				version = 2.1.1;
-			};
-		};
 		CE937B062DC8B98900D254D1 /* XCRemoteSwiftPackageReference "TensorFlowLiteSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rarimo/TensorFlowLiteSwift";
@@ -3640,11 +3592,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5609B6C72C188C7500CB6A1F /* MarkdownUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5609B6C62C188C7500CB6A1F /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
-			productName = MarkdownUI;
-		};
 		560F0C1C2BD0234300067054 /* QRCode */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 56E2D92F2BD01C77006E725D /* XCRemoteSwiftPackageReference "qrcode" */;
@@ -3675,11 +3622,6 @@
 			package = 56E2D9302BD01E71006E725D /* XCRemoteSwiftPackageReference "NFCPassportReader" */;
 			productName = NFCPassportReader;
 		};
-		56E7AD102BDBA81000D3A258 /* PullToRefreshSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 56E7AD0F2BDBA81000D3A258 /* XCRemoteSwiftPackageReference "PullToRefreshSwiftUI" */;
-			productName = PullToRefreshSwiftUI;
-		};
 		C7BBDBD82D71E59800E2905E /* ConfettiSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C7BBDBD72D71E59800E2905E /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
@@ -3709,11 +3651,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE61E8812C24240000940129 /* XCRemoteSwiftPackageReference "Semaphore" */;
 			productName = Semaphore;
-		};
-		CE32CF512BAC981300E507B6 /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CE32CF502BAC981300E507B6 /* XCRemoteSwiftPackageReference "lottie-spm" */;
-			productName = Lottie;
 		};
 		CE3477502C7885DA005E91FE /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -3779,11 +3716,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 56E2D9302BD01E71006E725D /* XCRemoteSwiftPackageReference "NFCPassportReader" */;
 			productName = NFCPassportReader;
-		};
-		CE9347722C205B340034885C /* CachedAsyncImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CE9347712C205B340034885C /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
-			productName = CachedAsyncImage;
 		};
 		CE937B072DC8B98900D254D1 /* TensorFlowLiteSwift */ = {
 			isa = XCSwiftPackageProductDependency;
