@@ -57,11 +57,11 @@ class FaceCaptureSession: NSObject {
         videoOutput.setSampleBufferDelegate(self, queue: sessionQueue)
             
         guard captureSession.canAddInput(deviceInput) else {
-            throw "Device input not added"
+            throw FaceCaptureSessionError.deviceInputNotAdded
         }
             
         guard captureSession.canAddOutput(videoOutput) else {
-            throw "Video output not added"
+            throw FaceCaptureSessionError.videoOutputNotAdded
         }
             
         captureSession.addInput(deviceInput)
@@ -97,5 +97,19 @@ extension FaceCaptureSession: AVCaptureVideoDataOutputSampleBufferDelegate {
         
         connection.videoOrientation = .portrait
         addToPreviewStream?(currentFrame)
+    }
+}
+
+enum FaceCaptureSessionError: Error {
+    case deviceInputNotAdded
+    case videoOutputNotAdded
+    
+    var localizedDescription: String {
+        switch self {
+        case .deviceInputNotAdded:
+            return "Device input could not be added to the capture session."
+        case .videoOutputNotAdded:
+            return "Video output could not be added to the capture session."
+        }
     }
 }

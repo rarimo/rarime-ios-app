@@ -1,8 +1,8 @@
 import Identity
 
 import Web3
-import Web3PromiseKit
 import Web3ContractABI
+import Web3PromiseKit
 
 import Foundation
 import Semaphore
@@ -34,7 +34,7 @@ class Multicall3Contract {
             throw error
         }
         
-        let call = EthereumCall(to: contract.address!, data: try EthereumData(calldata!))
+        let call = try EthereumCall(to: contract.address!, data: EthereumData(calldata!))
         
         var result: [String: Any]?
         var callError: Error?
@@ -50,7 +50,7 @@ class Multicall3Contract {
                     )
                 )
             ]
-        ) { (_result, error) in
+        ) { _result, error in
             result = _result
             callError = error
             
@@ -63,22 +63,22 @@ class Multicall3Contract {
             throw callError
         }
         
-        guard let rawArray = result!["returnData"] as? Array<Any> else {
-            throw "Response does not contain returnData"
+        guard let rawArray = result!["returnData"] as? [Any] else {
+            throw Multicall3ContractError.invalidResponse("Response does not contain returnData")
         }
         
         var results: [Result] = []
         for raw in rawArray {
-            guard let dict = raw as? Array<Any> else {
-                throw "Response does not contain returnData"
+            guard let dict = raw as? [Any] else {
+                throw Multicall3ContractError.invalidResponse("Response does not contain returnData")
             }
             
             guard let success = dict[0] as? Bool else {
-                throw "Response does not contain success"
+                throw Multicall3ContractError.invalidResponse("Response does not contain success")
             }
             
             guard let returnData = dict[1] as? Data else {
-                throw "Response contains invalid status"
+                throw Multicall3ContractError.invalidResponse("Response contains invalid status")
             }
             
             results.append(Result(success: success, returnData: returnData))
@@ -94,7 +94,7 @@ extension Multicall3Contract {
             let result = try? ABI.encodeParameter(.tuple(.address(target), .bool(allowFailure), .bytes(callData)))
             
             return result.map { value in
-                return String(value.dropFirst(2))
+                String(value.dropFirst(2))
             }
         }
         
@@ -111,16 +111,21 @@ extension Multicall3Contract {
     class MockedSolHandler: SolidityFunctionHandler {
         var address: EthereumAddress?
         
-        func call(_ call: EthereumCall, outputs: [SolidityFunctionParameter], block: EthereumQuantityTag, completion: @escaping ([String : Any]?, (any Error)?) -> Void) {
-            return
-        }
+        func call(_ call: EthereumCall, outputs: [SolidityFunctionParameter], block: EthereumQuantityTag, completion: @escaping ([String: Any]?, (any Error)?) -> Void) {}
         
-        func send(_ transaction: EthereumTransaction, completion: @escaping (EthereumData?, (any Error)?) -> Void) {
-            return
-        }
+        func send(_ transaction: EthereumTransaction, completion: @escaping (EthereumData?, (any Error)?) -> Void) {}
         
-        func estimateGas(_ call: EthereumCall, completion: @escaping (EthereumQuantity?, (any Error)?) -> Void) {
-            return
+        func estimateGas(_ call: EthereumCall, completion: @escaping (EthereumQuantity?, (any Error)?) -> Void) {}
+    }
+}
+
+enum Multicall3ContractError: Error {
+    case invalidResponse(String)
+    
+    var localizedDescription: String {
+        switch self {
+        case .invalidResponse(let message):
+            return "Invalid response - \(message)"
         }
     }
 }

@@ -41,7 +41,7 @@ class NotificationService: UNNotificationServiceExtension {
     
     func handleUniversalNotification(_ notification: PushNotificationRaw) throws -> Bool {
         guard let content = notification.content else {
-            throw "content is nil"
+            throw NotificationServiceError.invalidContent
         }
         
         let universalNotificationContent = try JSONDecoder().decode(UniversalNotificationContent.self, from: content.data(using: .utf8) ?? Data())
@@ -104,5 +104,16 @@ class NotificationService: UNNotificationServiceExtension {
         }
         
         return .unscanned
+    }
+}
+
+enum NotificationServiceError: Error {
+    case invalidContent
+    
+    var localizedDescription: String {
+        switch self {
+        case .invalidContent:
+            return "Invalid notification content"
+        }
     }
 }

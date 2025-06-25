@@ -31,19 +31,19 @@ class PoseidonSMT {
         let response = try contract["getProof"]!(index).call().wait()
         
         guard let proof = response[""] as? [String: Any] else {
-            throw "Proof is not hex"
+            throw SMTProofError.invalidProofFormat("Proof is not hex")
         }
         
         guard let siblings = proof["siblings"] as? [Data] else {
-            throw "Proof does not contain siblings"
+            throw SMTProofError.invalidProofFormat("Proof does not contain siblings")
         }
         
         guard let root = proof["root"] as? Data else {
-            throw "Proof does not contain root"
+            throw SMTProofError.invalidProofFormat("Proof does not contain root")
         }
         
         guard let existence = proof["existence"] as? Bool else {
-            throw "Proof does not contain existense"
+            throw SMTProofError.invalidProofFormat("Proof does not contain existense")
         }
         
         return SMTProof(
@@ -57,7 +57,7 @@ class PoseidonSMT {
         let response = try contract["getRoot"]!().call().wait()
         
         guard let root = response[""] as? Data else {
-            throw "Response does not contain root"
+            throw SMTProofError.invalidProofFormat("Response does not contain root")
         }
         
         return root
@@ -67,7 +67,7 @@ class PoseidonSMT {
         let response = try contract["ROOT_VALIDITY"]!().call().wait()
         
         guard let root = response[""] as? BigUInt else {
-            throw "Response does not contain BigUInt"
+            throw SMTProofError.invalidProofFormat("Response does not contain BigUInt")
         }
         
         return root
@@ -79,31 +79,31 @@ class PoseidonSMT {
         let response = try contract["getNodeByKey"]!(index).call().wait()
         
         guard let proof = response[""] as? [String: Any] else {
-            throw "Proof is not hex"
+            throw SMTProofError.invalidProofFormat("Proof is not hex")
         }
         
         guard let nodeType = proof["nodeType"] as? UInt8 else {
-            throw "Proof does not contain nodeType"
+            throw SMTProofError.invalidProofFormat("Proof does not contain nodeType")
         }
         
         guard let childLeft = proof["childLeft"] as? UInt64 else {
-            throw "Proof does not contain childLeft"
+            throw SMTProofError.invalidProofFormat("Proof does not contain childLeft")
         }
         
         guard let childRight = proof["childRight"] as? UInt64 else {
-            throw "Proof does not contain childRight"
+            throw SMTProofError.invalidProofFormat("Proof does not contain childRight")
         }
         
         guard let nodeHash = proof["nodeHash"] as? Data else {
-            throw "Proof does not contain nodeHash"
+            throw SMTProofError.invalidProofFormat("Proof does not contain nodeHash")
         }
         
         guard let key = proof["key"] as? Data else {
-            throw "Proof does not contain key"
+            throw SMTProofError.invalidProofFormat("Proof does not contain key")
         }
         
         guard let value = proof["value"] as? Data else {
-            throw "Proof does not contain value"
+            throw SMTProofError.invalidProofFormat("Proof does not contain value")
         }
         
         return SMTNode(
@@ -130,4 +130,15 @@ struct SMTNode: Codable {
     let nodeHash: Data
     let key: Data
     let value: Data
+}
+
+enum SMTProofError: Error {
+    case invalidProofFormat(String)
+    
+    var localizedDescription: String {
+        switch self {
+        case .invalidProofFormat(let message):
+            return "Invalid SMT proof format: \(message)"
+        }
+    }
 }

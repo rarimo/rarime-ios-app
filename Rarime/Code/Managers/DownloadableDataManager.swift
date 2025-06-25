@@ -116,7 +116,7 @@ class DownloadableDataManager: ObservableObject {
         }
         
         guard let circuitDataURL = CIRCUIT_DATA_URLS[circuitName.rawValue] else {
-            throw "Circuit data URL not found"
+            throw DownloadableDataManagerError.circuitDataNotFound(circuitName.rawValue)
         }
         
         if let circuitData = try retriveCircuitDataFromCache(circuitName.rawValue) {
@@ -137,7 +137,7 @@ class DownloadableDataManager: ObservableObject {
         SSZipArchive.unzipFile(atPath: archivePath, toDestination: unarchivePath)
         
         guard let circuitData = try retriveCircuitDataFromCache(circuitName.rawValue) else {
-            throw "Failed to retrive circuit data from cache"
+            throw DownloadableDataManagerError.cacheRetrievalError(circuitName.rawValue)
         }
         
         return circuitData
@@ -213,7 +213,7 @@ class DownloadableDataManager: ObservableObject {
         }
         
         guard let fileURL = fileURLsMap[fileName] else {
-            throw "File URL not found"
+            throw DownloadableDataManagerError.fileNotFound(fileName)
         }
 
         let downloadedfileUrl = try await AF.download(fileURL)
@@ -233,7 +233,7 @@ class DownloadableDataManager: ObservableObject {
         try FileManager.default.moveItem(atPath: downloadedfileUrl.path(), toPath: moveDirectory.path())
         
         guard let filePath = try retriveFilePathFromCache(fileName, saveDirectory) else {
-            throw "Failed to retrive file path from cache"
+            throw DownloadableDataManagerError.cacheRetrievalError(fileName)
         }
         
         return filePath
@@ -267,5 +267,22 @@ struct CircuitData {
     
     var circuitZkey: Data {
         FileManager.default.contents(atPath: circuitZkeyPath) ?? Data()
+    }
+}
+
+enum DownloadableDataManagerError: Error {
+    case circuitDataNotFound(String)
+    case fileNotFound(String)
+    case cacheRetrievalError(String)
+    
+    var localizedDescription: String {
+        switch self {
+        case .circuitDataNotFound(let circuitName):
+            return "Circuit data for \(circuitName) not found."
+        case .fileNotFound(let fileName):
+            return "File \(fileName) not found."
+        case .cacheRetrievalError(let fileName):
+            return "Cache retrieval error for \(fileName)."
+        }
     }
 }

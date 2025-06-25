@@ -23,7 +23,6 @@
 		5617AB152C8F48BE003947C9 /* ExternalRequestsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5617AB142C8F48BE003947C9 /* ExternalRequestsManager.swift */; };
 		561C3C2B2BADBF1000FBB3B9 /* View+Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C2A2BADBF1000FBB3B9 /* View+Typography.swift */; };
 		561C3C392BADE64B00FBB3B9 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C382BADE64B00FBB3B9 /* Fonts.swift */; };
-		561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C422BAEE2D600FBB3B9 /* String+Error.swift */; };
 		561DA2EB2DDC7FCA004BC001 /* HiddenKeysStatusChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DA2EA2DDC7FCA004BC001 /* HiddenKeysStatusChip.swift */; };
 		562241432C107E16000239FA /* AppDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562241422C107E16000239FA /* AppDropdown.swift */; };
 		56337CE32DBA3D1500973721 /* LikenessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56337CE22DBA3D1500973721 /* LikenessManager.swift */; };
@@ -257,7 +256,6 @@
 		CE3477572C7885EC005E91FE /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = CE3477562C7885EC005E91FE /* FirebaseMessaging */; };
 		CE3477582C788602005E91FE /* LoggerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F0C332BD175EB00067054 /* LoggerUtil.swift */; };
 		CE3477592C78860C005E91FE /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655E4292BD2C7C800B86C5C /* ConfigManager.swift */; };
-		CE34775A2C788620005E91FE /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561C3C422BAEE2D600FBB3B9 /* String+Error.swift */; };
 		CE34775F2C7888E1005E91FE /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE34775B2C7888E1005E91FE /* NotificationsView.swift */; };
 		CE3477622C78892F005E91FE /* View+Align.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3477612C78892F005E91FE /* View+Align.swift */; };
 		CE39DFE12D3FAA5200799A4B /* libwitnesscalc_registerIdentity_3_160_3_3_336_200_NA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE39DFDF2D3FAA5200799A4B /* libwitnesscalc_registerIdentity_3_160_3_3_336_200_NA.a */; };
@@ -430,7 +428,6 @@
 		5617AB142C8F48BE003947C9 /* ExternalRequestsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalRequestsManager.swift; sourceTree = "<group>"; };
 		561C3C2A2BADBF1000FBB3B9 /* View+Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Typography.swift"; sourceTree = "<group>"; };
 		561C3C382BADE64B00FBB3B9 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
-		561C3C422BAEE2D600FBB3B9 /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
 		561DA2EA2DDC7FCA004BC001 /* HiddenKeysStatusChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenKeysStatusChip.swift; sourceTree = "<group>"; };
 		562241422C107E16000239FA /* AppDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDropdown.swift; sourceTree = "<group>"; };
 		56296A2A2DE848AC004D87EC /* RarimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RarimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1413,7 +1410,6 @@
 				C72F331B2D68A8D600AC1814 /* View+Blur.swift */,
 				56AC033F2BB06A2D00A34A00 /* Image+Icon.swift */,
 				56474AD92BB9ED6E0017AA25 /* AnyTransition+Backslide.swift */,
-				561C3C422BAEE2D600FBB3B9 /* String+Error.swift */,
 				56DAA30A2BB8B977002CF710 /* View+DynamicSheet.swift */,
 				561C3C2A2BADBF1000FBB3B9 /* View+Typography.swift */,
 				563529EA2BB072FD0027C910 /* UINavigationController+HiddenNavBar.swift */,
@@ -2019,7 +2015,6 @@
 				CE2797482CEB421B008649B0 /* Data+Utf8.swift in Sources */,
 				CE7E95832CE7788200D86A4F /* Passport.swift in Sources */,
 				CE3D41D72C779C9E00D0AA65 /* PushNotificationsRaw.swift in Sources */,
-				CE34775A2C788620005E91FE /* String+Error.swift in Sources */,
 				56CF565F2DF06A83005BCD5E /* HomeWidget.swift in Sources */,
 				CE0659172DC8EDD6004FBDD5 /* BionetInputs.swift in Sources */,
 				CE27974E2CEB4281008649B0 /* PoseidonSMTContract.swift in Sources */,
@@ -2081,7 +2076,6 @@
 				CEFF68BB2CB69EB3008769EA /* CircuitUtils.swift in Sources */,
 				C72F331C2D68A8E400AC1814 /* View+Blur.swift in Sources */,
 				CE8FEB5A2C1AF1BE0008381A /* DecentralizeAuthManager.swift in Sources */,
-				561C3C432BAEE2D600FBB3B9 /* String+Error.swift in Sources */,
 				CE51E2FB2C21CA0B00043D9A /* StateKeeperContract.swift in Sources */,
 				C755354C2D6F4E6000A562B5 /* PollsService.swift in Sources */,
 				56DAA30B2BB8B977002CF710 /* View+DynamicSheet.swift in Sources */,
@@ -3102,7 +3096,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.3.2;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
@@ -3159,7 +3153,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.3.2;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
@@ -3282,7 +3276,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.3.2;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
@@ -3398,7 +3392,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.3.2;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = (

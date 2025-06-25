@@ -33,9 +33,20 @@ class IPFS {
             .get()
         
         guard let image = UIImage(data: data) else {
-            throw "invalid image data"
+            throw IPFSError.invalidImageData
         }
         
         return image
+    }
+}
+
+enum IPFSError: LocalizedError {
+    case invalidImageData
+    
+    var localizedDescription: String? {
+        switch self {
+        case .invalidImageData:
+            return "Invalid image data"
+        }
     }
 }

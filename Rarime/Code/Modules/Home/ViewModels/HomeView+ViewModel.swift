@@ -19,7 +19,7 @@ extension HomeView {
             defer { isBalanceFetching = false }
 
             do {
-                guard let user = UserManager.shared.user else { throw "failed to get user" }
+                guard let user = UserManager.shared.user else { throw UserManagerError.userNotInitialized }
                 let accessJwt = try await DecentralizedAuthManager.shared.getAccessJwt(user)
 
                 let pointsBalance = try await UserManager.shared.fetchPointsBalance(accessJwt)
@@ -71,7 +71,7 @@ extension HomeView {
         }
 
         private func createBalance(_ code: String) async throws {
-            guard let user = UserManager.shared.user else { throw "user is not initalized" }
+            guard let user = UserManager.shared.user else { throw UserManagerError.userNotInitialized }
             let accessJwt = try await DecentralizedAuthManager.shared.getAccessJwt(user)
 
             let pointsSvc = Points(ConfigManager.shared.general.appApiURL)

@@ -62,12 +62,23 @@ class NFCScanner {
                         activeAuthenticationChallenge: [UInt8](challenge)
                     )
                 
-                guard let passport = Passport.fromNFCPassportModel(nfcPassport) else { throw "failed to read raw passport data" }
+                guard let passport = Passport.fromNFCPassportModel(nfcPassport) else { throw NFCScannerError.passportReadingFailed }
                 
                 onCompletion(.success(passport))
             } catch {
                 onCompletion(.failure(error))
             }
+        }
+    }
+}
+
+enum NFCScannerError: Error {
+    case passportReadingFailed
+    
+    var localizedDescription: String {
+        switch self {
+        case .passportReadingFailed:
+            return "Passport reading failed"
         }
     }
 }

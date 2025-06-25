@@ -22,7 +22,7 @@ public extension UIImage {
         }
 
         guard let resizedCgImage = resized.cgImage else {
-            throw "Invalid image data"
+            throw UIImageResizeError.invalidImageData
         }
 
         var x = 0
@@ -40,9 +40,23 @@ public extension UIImage {
         }
 
         guard let croppedCgImage = resizedCgImage.cropping(to: CGRect(x: x, y: y, width: width, height: height)) else {
-            throw "Failed to crop image"
+            throw UIImageResizeError.croppingFailed
         }
 
         return UIImage(cgImage: croppedCgImage)
+    }
+}
+
+enum UIImageResizeError: Error {
+    case invalidImageData
+    case croppingFailed
+
+    var localizedDescription: String {
+        switch self {
+        case .invalidImageData:
+            return "Invalid image data"
+        case .croppingFailed:
+            return "Failed to crop image"
+        }
     }
 }

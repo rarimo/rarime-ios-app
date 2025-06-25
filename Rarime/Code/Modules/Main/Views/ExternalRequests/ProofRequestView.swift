@@ -157,7 +157,7 @@ struct ProofRequestView: View {
             defer { isSubmitting = false }
 
             do {
-                guard let passport = passportManager.passport else { throw "failed to get passport" }
+                guard let passport = passportManager.passport else { throw PassportManagerError.passportNotFound }
 
                 let proof = try await userManager.generateQueryProof(
                     passport: passport,
@@ -177,7 +177,7 @@ struct ProofRequestView: View {
                 }
 
                 if response.data.attributes.status != .verified {
-                    throw "Proof status is not verified"
+                    throw VerificatorApiError.proofStatusNotVerified
                 }
 
                 AlertManager.shared.emitSuccess("Proof generated successfully")

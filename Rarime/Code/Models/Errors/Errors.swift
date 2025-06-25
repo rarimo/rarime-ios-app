@@ -9,10 +9,8 @@ enum Errors: Error {
     case userCreationFailed
     case unknown(String?)
     case connectionUnstable
-}
 
-extension Errors: LocalizedError {
-    public var errorDescription: String? {
+    public var localizedDescription: String {
         switch self {
         case .openAPIErrors(let errors):
             return errors.localizedDescription
@@ -32,11 +30,5 @@ extension Errors: LocalizedError {
         case .connectionUnstable:
             return String(localized: "Internet connection is unstable")
         }
-    }
-}
-
-extension Errors {
-    var localizedDescription: String {
-        return errorDescription ?? "Unknown error"
     }
 }

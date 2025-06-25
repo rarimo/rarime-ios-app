@@ -41,8 +41,8 @@ struct ReserveTokensButton: View {
         defer { isReserving = false }
 
         do {
-            guard let user = userManager.user else { throw "failed to get user" }
-            guard let passport = passportManager.passport else { throw "passport not found" }
+            guard let user = userManager.user else { throw UserManagerError.userNotInitialized }
+            guard let passport = passportManager.passport else { throw PassportManagerError.passportNotFound }
 
             let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
             try await userManager.reserveTokens(accessJwt, passport)

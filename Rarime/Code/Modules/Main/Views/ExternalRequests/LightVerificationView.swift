@@ -110,7 +110,7 @@ struct LightVerificationView: View {
             defer { isSubmitting = false }
             
             do {
-                guard let passport = passportManager.passport else { throw "failed to get passport" }
+                guard let passport = passportManager.passport else { throw PassportManagerError.passportNotFound }
                 
                 if Int(passport.ageString)! < minAge ?? 0 {
                     AlertManager.shared.emitError(.unknown("Your age does not meet the requirements"))
@@ -138,7 +138,7 @@ struct LightVerificationView: View {
                     &error
                 )
                 
-                if let error { throw error.localizedDescription }
+                if let error { throw error }
                 
                 let response = try await VerificatorApi.sendSignature(
                     url: URL(string: verificationParamsResponse!.data.attributes.callbackURL)!,
@@ -156,7 +156,7 @@ struct LightVerificationView: View {
                 }
                 
                 if response.data.attributes.status != .verified {
-                    throw "Proof status is not verified"
+                    throw VerificatorApiError.proofStatusNotVerified
                 }
                 
                 AlertManager.shared.emitSuccess("The verification is successful")

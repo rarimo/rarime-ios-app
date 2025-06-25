@@ -148,18 +148,18 @@ class PollsViewModel: ObservableObject {
         _ passport: Passport,
         _ results: [PollResult]
     ) async throws {
-        guard let poll = selectedPoll else { throw "No selected poll" }
+        guard let poll = selectedPoll else { throw PollsViewModelError.noSelectedPoll }
         
         let stateKeeperContract = try StateKeeperContract()
         let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.contracts.registrationSmtAddress, eip55: false)
         let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
         
         guard let passportKey = UserManager.shared.getPassportKey(passport) else {
-            throw "Failed to get passport key"
+            throw UserManagerError.passportKeyNotFound
         }
         
         guard let identityKey = UserManager.shared.getIdentityKey(passport) else {
-            throw "Failed to get identity key"
+            throw UserManagerError.identityKeyNotFound
         }
         
         var error: NSError? = nil
@@ -169,7 +169,7 @@ class PollsViewModel: ObservableObject {
             &error
         )
         if let error { throw error }
-        guard let proofIndex else { throw "Proof index is not initialized" }
+        guard let proofIndex else { throw UserManagerError.proofIndexNotInitialized }
         
         let smtProof = try await registrationSmtContract.getProof(proofIndex)
         let smtProofJson = try JSONEncoder().encode(smtProof)
@@ -221,7 +221,7 @@ class PollsViewModel: ObservableObject {
         _ passportInfo: PassportInfo,
         _ identityInfo: IdentityInfo
     ) async throws -> (ZkProof, Bool) {
-        guard let poll = selectedPoll else { throw "No selected poll" }
+        guard let poll = selectedPoll else { throw PollsViewModelError.noSelectedPoll }
         
         let eventData = try profile.calculateVotingEventData(pollResultsJson)
         let votingData = try PollsService.decodeVotingData(poll)
@@ -237,7 +237,7 @@ class PollsViewModel: ObservableObject {
         var isRegisteredAfterVoting = false
         if identityInfo.issueTimestamp > identityCreationTimestampUpperBound {
             if passportInfo.identityReissueCounter > votingData.identityCounterUpperbound {
-                throw "Your identity can not be uniquely verified for voting"
+                throw PollsViewModelError.notUniqueIdentity
             }
             
             identityCreationTimestampUpperBound = try BigUInt(identityInfo.issueTimestamp + 1)
@@ -277,7 +277,7 @@ class PollsViewModel: ObservableObject {
     }
     
     func checkUserVote(_ nullifier: String) async throws -> Bool {
-        guard let poll = selectedPoll else { throw "No selected poll" }
+        guard let poll = selectedPoll else { throw PollsViewModelError.noSelectedPoll }
        
         let proposalSmtContract = try PoseidonSMT(
             contractAddress: poll.proposalSMT,
@@ -291,5 +291,19 @@ class PollsViewModel: ObservableObject {
     
     func reset() {
         AppUserDefaults.shared.votedPollsIds = []
+    }
+}
+
+enum PollsViewModelError: Error {
+    case noSelectedPoll
+    case notUniqueIdentity
+    
+    var localizedDescription: String {
+        switch self {
+        case .noSelectedPoll:
+            return "No selected poll"
+        case .notUniqueIdentity:
+            return "Your identity can not be uniquely verified for voting"
+        }
     }
 }

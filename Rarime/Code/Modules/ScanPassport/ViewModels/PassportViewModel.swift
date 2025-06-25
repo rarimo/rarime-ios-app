@@ -88,21 +88,21 @@ class PassportViewModel: ObservableObject {
         do {
 #if DEVELOPMENT
             if DebugManager.shared.shouldForceLightRegistration {
-                throw "DEBUG"
+                throw Errors.unknown("DEBUG error")
             }
 #endif
             
-            guard let passport = PassportManager.shared.passport else { throw "failed to get passport" }
-            guard let user = UserManager.shared.user else { throw "failed to get user" }
+            guard let passport = PassportManager.shared.passport else { throw PassportManagerError.passportNotFound }
+            guard let user = UserManager.shared.user else { throw UserManagerError.userNotInitialized }
             
             try await UserManager.shared.registerCertificate(passport)
             
             guard let registerIdentityCircuitType = try passport.getRegisterIdentityCircuitType() else {
-                throw "failed to get register identity circuit"
+                throw PassportViewModelError.invalidCircuit
             }
             
             guard let registerIdentityCircuitName = registerIdentityCircuitType.buildName() else {
-                throw "failed to get register identity circuit name"
+                throw PassportViewModelError.invalidCircuitName
             }
             
             LoggerUtil.common.info("Registering passport with circuit: \(registerIdentityCircuitName)")
@@ -125,7 +125,7 @@ class PassportViewModel: ObservableObject {
                     &isCriticalRegistrationProcessInProgress
                 )
             } else {
-                throw "failed to get registered circuit data, circuit does not exist"
+                throw PassportViewModelError.circuitNotFound
             }
             
             LoggerUtil.common.info("Passport registration proof generated")
@@ -216,7 +216,7 @@ class PassportViewModel: ObservableObject {
                 let passport: Passport
                 do {
                     guard let newPassport = try await iterator.next() else {
-                        throw "failed to get passport"
+                        throw PassportManagerError.passportNotFound
                     }
                     
                     passport = newPassport
@@ -369,15 +369,15 @@ class PassportViewModel: ObservableObject {
     @MainActor
     func lightRegister() async throws -> ZkProof {
         do {
-            guard let passport = PassportManager.shared.passport else { throw "failed to get passport" }
-            guard let user = UserManager.shared.user else { throw "failed to get user" }
+            guard let passport = PassportManager.shared.passport else { throw PassportManagerError.passportNotFound }
+            guard let user = UserManager.shared.user else { throw UserManagerError.userNotInitialized }
             
             let registerIdentityLightCircuitName = try passport.getRegisterIdentityLightCircuitName()
             
             LoggerUtil.common.info("Registering passport with light circuit: \(registerIdentityLightCircuitName, privacy: .public)")
             
             guard let registeredCircuitData = RegisteredCircuitData(rawValue: registerIdentityLightCircuitName) else {
-                throw "failed to get registered circuit data, circuit does not exist"
+                throw PassportViewModelError.circuitNotFound
             }
             
             let circuitData = try await DownloadableDataManager.shared.retriveCircuitData(registeredCircuitData)
@@ -500,5 +500,22 @@ class PassportViewModel: ObservableObject {
         let targetProgress = min(overallProgress + stepFraction, 1.0)
         overallProgress = targetProgress
         progressTimer?.cancel()
+    }
+}
+
+enum PassportViewModelError: Error {
+    case invalidCircuit
+    case invalidCircuitName
+    case circuitNotFound
+    
+    var localizedDescription: String {
+        switch self {
+        case .invalidCircuit:
+            return "Failed to get register identity circuit"
+        case .invalidCircuitName:
+            return "Failed to get register identity circuit name"
+        case .circuitNotFound:
+            return "Register identity circuit not found"
+        }
     }
 }

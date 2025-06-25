@@ -1,8 +1,8 @@
 import Alamofire
 
 import Web3
-import Web3PromiseKit
 import Web3ContractABI
+import Web3PromiseKit
 
 import SwiftUI
 
@@ -29,11 +29,11 @@ class ProposalsStateContract {
         let response = try method.call().wait()
         
         guard let keys = response["keys_"] as? [String] else {
-            throw "Response does not contain keys"
+            throw ProposalsStateContractError.invalidResponse("Response does not contain keys")
         }
         
         guard let addresses = response["values_"] as? [EthereumAddress] else {
-            throw "Response does not contain addresses"
+            throw ProposalsStateContractError.invalidResponse("Response does not contain values")
         }
         
         var result: [VotingMetadata] = []
@@ -50,7 +50,7 @@ class ProposalsStateContract {
         let response = try method.call().wait()
         
         guard let lastProposalId = response[""] as? BigUInt else {
-            throw "Response does not contain lastProposalId"
+            throw ProposalsStateContractError.invalidResponse("Response does not contain lastProposalId")
         }
         
         return lastProposalId
@@ -62,55 +62,55 @@ class ProposalsStateContract {
         let response = try method.call().wait()
         
         guard let raw = response["info_"] as? [String: Any] else {
-            throw "Response does not contain info"
+            throw ProposalsStateContractError.invalidResponse("Response does not contain proposal info")
         }
         
         guard let proposalSMT = raw["proposalSMT"] as? EthereumAddress else {
-            throw "Response does not contain proposalSMT"
+            throw ProposalsStateContractError.invalidResponse("Response does not contain proposalSMT")
         }
         
         guard let statusRaw = raw["status"] as? UInt8 else {
-            throw "Response does not contain status"
+            throw ProposalsStateContractError.invalidResponse("Response does not contain status")
         }
         
         guard let status = ProposalStatus(rawValue: statusRaw) else {
-            throw "Response contains invalid status"
+            throw ProposalsStateContractError.invalidResponse("Response contains invalid status")
         }
         
         guard let configRaw = raw["config"] as? [String: Any] else {
-            throw "Response does not contain config"
+            throw ProposalsStateContractError.invalidResponse("Response does not contain config")
         }
         
         guard let startTimestamp = configRaw["startTimestamp"] as? UInt64 else {
-            throw "Response does not contain startTimestamp"
+            throw ProposalsStateContractError.invalidResponse("Response does not contain startTimestamp")
         }
         
         guard let duration = configRaw["duration"] as? UInt64 else {
-            throw "Response does not contain duration"
+            throw ProposalsStateContractError.invalidResponse("Response does not contain duration")
         }
         
         guard let multichoice = configRaw["multichoice"] as? BigUInt else {
-            throw "Response does not contain multichoice"
+            throw ProposalsStateContractError.invalidResponse("Response does not contain multichoice")
         }
         
         guard let acceptedOptions = configRaw["acceptedOptions"] as? [BigUInt] else {
-            throw "Response does not contain acceptedOptions"
+            throw ProposalsStateContractError.invalidResponse("Response does not contain acceptedOptions")
         }
         
         guard let description = configRaw["description"] as? String else {
-            throw "Response does not contain description"
+            throw ProposalsStateContractError.invalidResponse("Response does not contain description")
         }
         
         guard let votingWhitelist = configRaw["votingWhitelist"] as? [EthereumAddress] else {
-            throw "Response does not contain votingWhitelist"
+            throw ProposalsStateContractError.invalidResponse("Response does not contain votingWhitelist")
         }
         
         guard let votingWhitelistData = configRaw["votingWhitelistData"] as? [Data] else {
-            throw "Response does not contain votingWhitelistData"
+            throw ProposalsStateContractError.invalidResponse("Response does not contain votingWhitelistData")
         }
         
         guard let votingResults = raw["votingResults"] as? [[BigUInt]] else {
-            throw "Response does not contain votingResults"
+            throw ProposalsStateContractError.invalidResponse("Response does not contain votingResults")
         }
         
         return ProposalInfo(
@@ -136,7 +136,7 @@ class ProposalsStateContract {
         let response = try method.call().wait()
         
         guard let eventId = response[""] as? BigUInt else {
-            throw  "Response does not contain eventId"
+            throw ProposalsStateContractError.invalidResponse("Response does not contain eventId")
         }
         
         return eventId
@@ -189,4 +189,15 @@ struct ProposalMetadataAcceptedOption: Codable {
     let title: String
     let description: String?
     let variants: [String]
+}
+
+enum ProposalsStateContractError: Error {
+    case invalidResponse(String)
+    
+    var localizedDescription: String {
+        switch self {
+        case .invalidResponse(let message):
+            return "Invalid response: \(message)"
+        }
+    }
 }

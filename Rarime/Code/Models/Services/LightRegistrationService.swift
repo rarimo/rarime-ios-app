@@ -21,7 +21,7 @@ class LightRegistrationService {
         let certPem = try passport.getSlaveSodCertificatePem()
 
         guard let encapsulatedContentDigestAlgorithm = try passport.getEncapsulatedContentDigestAlgorithm(sod) else {
-            throw "invalid encapsulated content digest algorithm"
+            throw LightRegistrationError.invalidEncapsulatedContentDigestAlgorithm
         }
 
         let sodSignatureAlgorithmName = try sod.getSignatureAlgorithm().lowercased()
@@ -36,7 +36,7 @@ class LightRegistrationService {
         } else if sodSignatureAlgorithmName.contains("rsa") {
             signatureAlgorithm = "RSA"
         } else {
-            throw "invalid signature algorithm"
+            throw LightRegistrationError.invalidSignatureAlgorithm
         }
 
         let request = VerifySodRequest(
@@ -127,5 +127,19 @@ struct LightRegistrationData: Codable {
         case passportHash = "passport_hash"
         case publicKey = "public_key"
         case signature, verifier
+    }
+}
+
+enum LightRegistrationError: Error {
+    case invalidEncapsulatedContentDigestAlgorithm
+    case invalidSignatureAlgorithm
+
+    var localizedDescription: String {
+        switch self {
+        case .invalidEncapsulatedContentDigestAlgorithm:
+            return "Invalid encapsulated content digest algorithm"
+        case .invalidSignatureAlgorithm:
+            return "Invalid signature algorithm"
+        }
     }
 }

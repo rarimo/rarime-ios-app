@@ -195,7 +195,7 @@ struct ImportIdentityView: View {
     
     func setReferralCodeIfUserHasPointsBalance() async throws {
         do {
-            guard let user = userManager.user else { throw "failed to get user" }
+            guard let user = userManager.user else { throw UserManagerError.userNotInitialized }
             
             let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
             

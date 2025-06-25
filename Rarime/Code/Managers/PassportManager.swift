@@ -62,3 +62,14 @@ class PassportManager: ObservableObject {
         AppUserDefaults.shared.isPassportFailedByImpossibleRevocation = false
     }
 }
+
+enum PassportManagerError: Error {
+    case passportNotFound
+
+    var localizedDescription: String {
+        switch self {
+        case .passportNotFound:
+            return "Passport not found"
+        }
+    }
+}
