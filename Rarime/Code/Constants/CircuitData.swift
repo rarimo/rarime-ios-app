@@ -63,7 +63,12 @@ let NOIR_CIRCUIT_DATA_URLS: [String: URL] = [
     "registerIdentity_6_160_3_3_336_216_1_1080_3_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.11-fix/registerIdentity_6_160_3_3_336_216_1_1080_3_256.json")!,
     "registerIdentity_11_256_3_5_576_248_NA": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.12-fix/registerIdentity_11_256_3_5_576_248_NA.json")!,
     "registerIdentity_14_256_3_4_336_232_1_1480_5_296": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.12-fix/registerIdentity_14_256_3_4_336_232_1_1480_5_296.json")!,
-    "registerIdentity_1_256_3_4_576_232_1_1480_3_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.12-fix/registerIdentity_1_256_3_4_576_232_1_1480_3_256.json")!
+    "registerIdentity_1_256_3_4_576_232_1_1480_3_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.12-fix/registerIdentity_1_256_3_4_576_232_1_1480_3_256.json")!,
+    "registerIdentity_11_256_3_5_576_248_1_1808_4_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.13/registerIdentity_11_256_3_5_576_248_1_1808_4_256.json")!,
+    "registerIdentity_11_256_3_5_576_264_NA": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.13/registerIdentity_11_256_3_5_576_264_NA.json")!,
+    "registerIdentity_11_256_3_5_584_264_1_2136_4_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.13/registerIdentity_11_256_3_5_584_264_1_2136_4_256.json")!,
+    "registerIdentity_1_256_3_4_336_232_NA": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.14/registerIdentity_1_256_3_4_336_232_NA.json")!,
+    "registerIdentity_2_256_3_4_336_248_22_1496_7_2408": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.14/registerIdentity_2_256_3_4_336_248_22_1496_7_2408.json")!
 ]
 
 let ZKEY_URLS: [String: URL] = [

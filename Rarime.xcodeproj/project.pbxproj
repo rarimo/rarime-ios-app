@@ -304,6 +304,7 @@
 		CE7210332BD818020043DB7F /* Double+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7210322BD818020043DB7F /* Double+Rounded.swift */; };
 		CE77EDA32DEDA51400F3B91E /* EvmScanTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77EDA22DEDA50F00F3B91E /* EvmScanTransaction.swift */; };
 		CE77EDA52DEDAA7C00F3B91E /* EvmScanAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77EDA42DEDAA6700F3B91E /* EvmScanAPI.swift */; };
+		CE78AA902E0ABB09003395DA /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE78AA8F2E0ABB09003395DA /* Identity.xcframework */; };
 		CE7BFAFD2D5A0A8D00B7CBAC /* ReadNfcUsa.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CE7BFAFB2D5A0A8D00B7CBAC /* ReadNfcUsa.mp4 */; };
 		CE7BFAFE2D5A0A8D00B7CBAC /* ScanMrzUsa.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CE7BFAFC2D5A0A8D00B7CBAC /* ScanMrzUsa.mp4 */; };
 		CE7D8AAC2BFB52EE009AF212 /* OpenApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7D8AAB2BFB52EE009AF212 /* OpenApiError.swift */; };
@@ -347,7 +348,6 @@
 		CEC9D8E72BFF41A800EACD0F /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */; };
 		CED314672C0483BD00DF31D5 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED314662C0483BD00DF31D5 /* MailView.swift */; };
 		CED314692C04889D00DF31D5 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED314682C04889D00DF31D5 /* UIDevice+modelName.swift */; };
-		CEDB7BE72DDC72E5008431C0 /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7BE62DDC72E5008431C0 /* Identity.xcframework */; };
 		CEDC4D7F2BE9267300459D4E /* PoseidonSMTContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC4D7E2BE9267300459D4E /* PoseidonSMTContract.swift */; };
 		CEDC4D812BE9475400459D4E /* Certificates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC4D802BE9475400459D4E /* Certificates.swift */; };
 		CEDC4D832BE949F300459D4E /* Ethereum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC4D822BE949F300459D4E /* Ethereum.swift */; };
@@ -675,6 +675,7 @@
 		CE7210322BD818020043DB7F /* Double+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Rounded.swift"; sourceTree = "<group>"; };
 		CE77EDA22DEDA50F00F3B91E /* EvmScanTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmScanTransaction.swift; sourceTree = "<group>"; };
 		CE77EDA42DEDAA6700F3B91E /* EvmScanAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmScanAPI.swift; sourceTree = "<group>"; };
+		CE78AA8F2E0ABB09003395DA /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE7BFAFB2D5A0A8D00B7CBAC /* ReadNfcUsa.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ReadNfcUsa.mp4; sourceTree = "<group>"; };
 		CE7BFAFC2D5A0A8D00B7CBAC /* ScanMrzUsa.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ScanMrzUsa.mp4; sourceTree = "<group>"; };
 		CE7D8AAB2BFB52EE009AF212 /* OpenApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenApiError.swift; sourceTree = "<group>"; };
@@ -723,7 +724,6 @@
 		CED5B3A42D075D2C007D04C4 /* witnesscalc_registerIdentityLight384.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentityLight384.h; sourceTree = "<group>"; };
 		CED5B3A52D075D2C007D04C4 /* witnesscalc_registerIdentityLight512.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentityLight512.h; sourceTree = "<group>"; };
 		CED9CEE22CF8C9CF00FD3929 /* witnesscalc_registerIdentity_1_256_3_3_576_248_NA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_1_256_3_3_576_248_NA.h; sourceTree = "<group>"; };
-		CEDB7BE62DDC72E5008431C0 /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CEDC4D7E2BE9267300459D4E /* PoseidonSMTContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoseidonSMTContract.swift; sourceTree = "<group>"; };
 		CEDC4D802BE9475400459D4E /* Certificates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Certificates.swift; sourceTree = "<group>"; };
 		CEDC4D822BE949F300459D4E /* Ethereum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ethereum.swift; sourceTree = "<group>"; };
@@ -803,8 +803,8 @@
 				CE30FA9D2D50DF6D0057F897 /* libwitnesscalc_registerIdentity_14_256_3_4_336_64_1_1480_5_296.a in Frameworks */,
 				CE30FA9E2D50DF6D0057F897 /* libwitnesscalc_registerIdentity_4_160_3_3_336_216_1_1296_3_256.a in Frameworks */,
 				CE30FA9F2D50DF6D0057F897 /* libwitnesscalc_registerIdentity_11_256_3_3_336_248_NA.a in Frameworks */,
+				CE78AA902E0ABB09003395DA /* Identity.xcframework in Frameworks */,
 				CE30FAA02D50DF6D0057F897 /* libwitnesscalc_registerIdentity_21_256_3_5_576_232_NA.a in Frameworks */,
-				CEDB7BE72DDC72E5008431C0 /* Identity.xcframework in Frameworks */,
 				CE30FAA12D50DF6D0057F897 /* libwitnesscalc_registerIdentity_15_512_3_3_336_248_NA.a in Frameworks */,
 				CE30FAA22D50DF6D0057F897 /* libwitnesscalc_registerIdentity_1_256_3_6_336_560_1_2744_4_256.a in Frameworks */,
 				CE30FAA32D50DF6D0057F897 /* libwitnesscalc_registerIdentity_1_256_3_6_336_248_1_2744_4_256.a in Frameworks */,
@@ -1675,7 +1675,7 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CEDB7BE62DDC72E5008431C0 /* Identity.xcframework */,
+				CE78AA8F2E0ABB09003395DA /* Identity.xcframework */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562002BD923B3002D4954 /* prover.h */,
 				CE6FFBCD2DC3709B0083E855 /* bionet.h */,
