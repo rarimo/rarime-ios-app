@@ -21,16 +21,7 @@ struct WalletView: View {
     @EnvironmentObject private var userManager: UserManager
 
     @State private var path: [WalletRoute] = []
-
-    // TODO: use the token from the manager and save to store
-    @State private var token = WalletToken.eth
-
-    // TODO: use the assets from the manager and save to store
-//    @State private var selectedAsset = WalletAsset(
-//        token: WalletToken.eth,
-//        balance: 0,
-//        usdBalance: nil
-//    )
+    @State private var isTransactionsLoading = false
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -39,13 +30,13 @@ struct WalletView: View {
                 case .receive:
                     WalletReceiveView(
                         address: userManager.ethereumAddress ?? "",
-                        token: token,
+                        token: WalletToken.eth,
                         onBack: { path.removeLast() }
                     )
                     .navigationBarBackButtonHidden()
                 case .send:
                     WalletSendView(
-                        token: token,
+                        token: WalletToken.eth,
                         onBack: { path.removeLast() }
                     )
                     .navigationBarBackButtonHidden()
@@ -53,11 +44,14 @@ struct WalletView: View {
             }
         }
         .onAppear {
-            if !walletManager.transactions.isEmpty {
-                return
+            isTransactionsLoading = walletManager.transactions.isEmpty
+        }
+        .task { await fetchBalance() }
+        .task {
+            if isTransactionsLoading {
+                await walletManager.loadTransactions()
+                isTransactionsLoading = false
             }
-
-            walletManager.pullTransactions()
         }
     }
 
@@ -65,17 +59,12 @@ struct WalletView: View {
         MainViewLayout {
             VStack(alignment: .leading, spacing: 20) {
                 header
-                // TODO: add full support for assets
-//                    AssetsSlider(walletAssets: [selectedAsset], isLoading: isBalanceFetching)
-//                    HorizontalDivider()
-//                        .padding(.horizontal, 20)
                 transactionsList
                 Spacer()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.bgPrimary)
         }
-        .task { await fetchBalance() }
     }
 
     private var header: some View {
@@ -130,42 +119,34 @@ struct WalletView: View {
 
     private var transactionsList: some View {
         CardContainer {
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 16) {
                 Text("Transactions")
                     .subtitle5()
                     .foregroundStyle(.textPrimary)
-                if walletManager.transactions.isEmpty {
-                    if walletManager.isTransactionsLoading {
-                        ProgressView()
-                            .align(.center)
-                    } else {
-                        Text("No transactions yet")
-                            .body4()
-                            .foregroundStyle(.textSecondary)
-                    }
+                if isTransactionsLoading {
+                    ProgressView()
+                        .controlSize(.large)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
-                    DetectableScrollView(
-                        onTop: {
-                            walletManager.transactions = []
-                            walletManager.scanTXsNextPageParams = nil
-                            walletManager.isLastTXsPage = false
-
-                            walletManager.pullTransactions()
-                        },
-                        onBottom: walletManager.pullTransactions
+                    RefreshableInfiniteScrollView(
+                        hasMore: walletManager.hasMoreTransactions,
+                        onRefresh: { await walletManager.loadTransactions() },
+                        onLoadMore: { await walletManager.loadNextTransactions() }
                     ) {
-                        VStack {
-                            ForEach(walletManager.transactions) { tx in
-                                TransactionItem(tx: tx, token: token)
-                                    .padding(.vertical, 5)
+                        if walletManager.transactions.isEmpty {
+                            Text("No transactions yet")
+                                .body4()
+                                .foregroundStyle(.textSecondary)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        } else {
+                            VStack(spacing: 8) {
+                                ForEach(walletManager.transactions) { tx in
+                                    TransactionItem(tx: tx, token: WalletToken.eth)
+                                }
                             }
                         }
                     }
                     .scrollIndicators(.hidden)
-                    if walletManager.isTransactionsLoading {
-                        ProgressView()
-                            .align(.center)
-                    }
                 }
             }
         }
@@ -178,7 +159,7 @@ struct WalletView: View {
             try await walletManager.updateBalance()
         } catch {
             LoggerUtil.common.error("Failed to fetch balance: \(error.localizedDescription, privacy: .public)")
-            AlertManager.shared.emitError(.unknown("Failed to fetch balance"))
+            AlertManager.shared.emitError("Failed to fetch balance")
         }
     }
 }
