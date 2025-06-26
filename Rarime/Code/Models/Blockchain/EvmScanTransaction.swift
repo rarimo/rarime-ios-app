@@ -20,7 +20,7 @@ struct EvmScanTransactionItem: Codable {
     let from: EvmScanTransactionAddress
     let to: EvmScanTransactionAddress?
     let method: String?
-    let timestamp: String
+    let timestamp: String?
 
     var date: Date {
         let localFormatter = DateFormatter()
@@ -28,7 +28,7 @@ struct EvmScanTransactionItem: Codable {
         localFormatter.timeZone = TimeZone.current
         localFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
 
-        guard let localDate = localFormatter.date(from: timestamp) else {
+        guard let timestamp, let localDate = localFormatter.date(from: timestamp) else {
             return Date()
         }
 
