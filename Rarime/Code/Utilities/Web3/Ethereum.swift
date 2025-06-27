@@ -23,7 +23,7 @@ class Ethereum {
         var receipt: EthereumTransactionReceiptObject
         do {
             guard let responseReceipt = try web3.eth.getTransactionReceipt(transactionHash: txHash).wait() else {
-                throw "Transaction receipt is nil"
+                throw EthereumError.transactionReceiptNotFound
             }
             
             receipt = responseReceipt
@@ -32,7 +32,7 @@ class Ethereum {
                 return nil
             }
             
-            throw "Failed to get transaction receipt: \(error)"
+            throw EthereumError.invalidTransactionReceipt(error.localizedDescription)
         }
         
         guard let status = receipt.status else {
@@ -51,7 +51,7 @@ class Ethereum {
                     break
                 }
                 
-                throw "Transaction failed"
+                throw EthereumError.transactionFailed
             }
             
             try await Task.sleep(nanoseconds: Ethereum.TX_PULL_INTERVAL)
@@ -107,5 +107,25 @@ extension EthereumQuantity {
         fmt.maximumFractionDigits = maxFractionDigits
 
         return fmt.string(from: NSDecimalNumber(decimal: decimal)) ?? "–"
+    }
+}
+
+enum EthereumError: Error {
+    case transactionFailed
+    case transactionNotFound
+    case transactionReceiptNotFound
+    case invalidTransactionReceipt(String)
+    
+    var localizedDescription: String {
+        switch self {
+        case .transactionFailed:
+            return "Transaction failed"
+        case .transactionNotFound:
+            return "Transaction not found"
+        case .transactionReceiptNotFound:
+            return "Transaction receipt not found"
+        case .invalidTransactionReceipt(let message):
+            return "Invalid transaction receipt: \(message)"
+        }
     }
 }

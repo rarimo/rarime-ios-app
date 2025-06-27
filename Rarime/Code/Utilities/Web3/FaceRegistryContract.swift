@@ -25,7 +25,7 @@ class FaceRegistryContract {
     
     func isUserRegistered(_ userAddressHex: String) async throws -> Bool {
         guard let userAddress = BigUInt(String(userAddressHex.dropFirst(2)), radix: 16) else {
-            throw "Invalid user address hex"
+            throw FaceRegistryContractError.invalidInput("Invalid user address hex")
         }
         
         let method = contract["isUserRegistered"]!(userAddress)
@@ -33,7 +33,7 @@ class FaceRegistryContract {
         let response = try method.call().wait()
         
         guard let result = response[""] as? Bool else {
-            throw "Response does not contain bool"
+            throw FaceRegistryContractError.invalidResponse("Response does not contain bool")
         }
         
         return result
@@ -41,7 +41,7 @@ class FaceRegistryContract {
     
     func getVerificationNonce(_ userAddressHex: String) async throws -> BigUInt {
         guard let userAddress = BigUInt(String(userAddressHex.dropFirst(2)), radix: 16) else {
-            throw "Invalid user address hex"
+            throw FaceRegistryContractError.invalidInput("Invalid user address hex")
         }
         
         let method = contract["getVerificationNonce"]!(userAddress)
@@ -49,7 +49,7 @@ class FaceRegistryContract {
         let response = try method.call().wait()
         
         guard let nonce = response[""] as? BigUInt else {
-            throw "Response does not contain nonce"
+            throw FaceRegistryContractError.invalidResponse("Response does not contain nonce")
         }
         
         return nonce
@@ -57,7 +57,7 @@ class FaceRegistryContract {
     
     func getRule(_ userAddressHex: String) async throws -> BigUInt {
         guard let userAddress = BigUInt(String(userAddressHex.dropFirst(2)), radix: 16) else {
-            throw "Invalid user address hex"
+            throw FaceRegistryContractError.invalidInput("Invalid user address hex")
         }
         
         let method = contract["getRule"]!(userAddress)
@@ -65,9 +65,23 @@ class FaceRegistryContract {
         let response = try method.call().wait()
         
         guard let rule = response[""] as? BigUInt else {
-            throw "Response does not contain rule"
+            throw FaceRegistryContractError.invalidResponse("Response does not contain rule")
         }
         
         return rule
+    }
+}
+
+enum FaceRegistryContractError: Error {
+    case invalidResponse(String)
+    case invalidInput(String)
+    
+    var localizedDescription: String {
+        switch self {
+        case .invalidResponse(let message):
+            return "Invalid response - \(message)"
+        case .invalidInput(let message):
+            return "Invalid input - \(message)"
+        }
     }
 }

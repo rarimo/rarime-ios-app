@@ -28,7 +28,7 @@ class BN: Codable {
         bn = BN_new()
         let charNum = BN_hex2bn(&bn, hex)
         if charNum == 0 {
-            throw "Failed to convert hex to BN"
+            throw BNError.invalidHex(hex)
         }
     }
     
@@ -36,7 +36,7 @@ class BN: Codable {
         bn = BN_new()
         let charNum = BN_dec2bn(&bn, dec)
         if charNum == 0 {
-            throw "Failed to convert dec to BN"
+            throw BNError.invalidDec(dec)
         }
     }
     
@@ -47,7 +47,7 @@ class BN: Codable {
         bn = BN_new()
         let charNum = BN_dec2bn(&bn, dec)
         if charNum == 0 {
-            throw "Failed to convert dec to BN"
+            throw BNError.invalidDec(dec)
         }
     }
     
@@ -178,5 +178,19 @@ extension BN {
         }
         
         return String(cString: dec!)
+    }
+}
+
+enum BNError: Error {
+    case invalidHex(String)
+    case invalidDec(String)
+    
+    var localizedDescription: String {
+        switch self {
+        case .invalidHex(let hex):
+            return "Invalid hex string: \(hex)"
+        case .invalidDec(let dec):
+            return "Invalid decimal string: \(dec)"
+        }
     }
 }

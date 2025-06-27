@@ -72,11 +72,11 @@ class LikenessManager: ObservableObject {
         LoggerUtil.common.info("Face registration is running")
 
         guard let faceImage else {
-            throw "Face image is not initialized"
+            throw LikenessManagerError.faceImageNotInitialized
         }
 
         guard let foundFace = try NeuralUtils.extractFaceFromImage(faceImage) else {
-            throw Errors.unknown("Face can not be detected")
+            throw NeuralUtilsError.faceNotDetected
         }
 
         let address = try UserManager.shared.generateNullifierForEvent(FaceRegistryContract.eventId)
@@ -123,7 +123,7 @@ class LikenessManager: ObservableObject {
         let nonceBigUint = try await faceRegistryContract.getVerificationNonce(address)
 
         guard let user = UserManager.shared.user else {
-            throw "user is not initialized"
+            throw UserManagerError.userNotInitialized
         }
 
         let zkInputs = CircuitBuilderManager.shared.faceRegistryNoInclusionCircuit.inputs(
@@ -176,11 +176,11 @@ class LikenessManager: ObservableObject {
         let rawRule = try await faceRegistryContract.getRule(address)
 
         guard let rawRuleValue = Int(rawRule.description) else {
-            throw "Invalid rule format"
+            throw LikenessManagerError.invalidRuleFormat
         }
 
         guard let rule = LikenessRule(rawValue: rawRuleValue) else {
-            throw "Invalid rule value"
+            throw LikenessManagerError.invalidRuleValue
         }
 
         AppUserDefaults.shared.likenessRule = rawRuleValue
@@ -220,5 +220,22 @@ class LikenessManager: ObservableObject {
         setRule(.unset)
         setIsRegistered(false)
         setFaceImage(nil)
+    }
+}
+
+enum LikenessManagerError: Error {
+    case faceImageNotInitialized
+    case invalidRuleFormat
+    case invalidRuleValue
+
+    var localizedDescription: String {
+        switch self {
+        case .faceImageNotInitialized:
+            return "Face image is not initialized"
+        case .invalidRuleFormat:
+            return "Invalid rule format"
+        case .invalidRuleValue:
+            return "Invalid rule value"
+        }
     }
 }

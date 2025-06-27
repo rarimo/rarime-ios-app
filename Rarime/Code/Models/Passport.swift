@@ -96,11 +96,11 @@ struct Passport: Codable {
         } else if let ecdsaPublicKey = dg15.ecdsaPublicKey {
             pubkey = ecdsaPublicKey
         } else {
-            throw "Public key is missing"
+            throw PassportError.missingPublicKey
         }
         
         guard let pubKeyPem = OpenSSLUtils.pubKeyToPEM(pubKey: pubkey).data(using: .utf8) else {
-            throw "Failed to convert public key to PEM"
+            throw PassportError.invalidPublicKeyFormat
         }
         
         return pubKeyPem
@@ -154,7 +154,7 @@ struct Passport: Codable {
         let sod = try SOD([UInt8](sod))
         
         guard let cert = try OpenSSLUtils.getX509CertificatesFromPKCS7(pkcs7Der: Data(sod.pkcs7CertificateData)).first else {
-            throw "Slave certificate in sod is missing"
+            throw PassportError.missingSlaveCertificate
         }
         
         return cert.certToPEM().data(using: .utf8) ?? Data()
@@ -182,4 +182,21 @@ struct Passport: Codable {
 
 enum PassportProcessingStatus: Int, Equatable {
     case processing, success, failure
+}
+
+enum PassportError: Error {
+    case missingPublicKey
+    case missingSlaveCertificate
+    case invalidPublicKeyFormat
+    
+    var localizedDescription: String {
+        switch self {
+        case .missingPublicKey:
+            return "Public key is missing"
+        case .missingSlaveCertificate:
+            return "Slave certificate in SOD is missing"
+        case .invalidPublicKeyFormat:
+            return "Invalid public key format"
+        }
+    }
 }

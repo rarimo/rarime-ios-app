@@ -91,13 +91,23 @@ class DecentralizedAuthManager: ObservableObject {
             try await self.refreshIfNeeded(user.secretKey)
         }
 
-        guard let accessJwt = self.accessJwt else { throw "accessJwt is nil" }
-        
+        guard let accessJwt = self.accessJwt else { throw DecentralizedAuthManagerError.jwtNotInitialized }
         return accessJwt
     }
     
     func reset() {
         self.accessJwt = nil
         self.refreshJwt = nil
+    }
+}
+
+enum DecentralizedAuthManagerError: Error {
+    case jwtNotInitialized
+    
+    var localizedDescription: String {
+        switch self {
+        case .jwtNotInitialized:
+            return "JWT is not initialized"
+        }
     }
 }

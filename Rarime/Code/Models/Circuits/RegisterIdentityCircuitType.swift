@@ -167,12 +167,12 @@ extension Passport {
         let sodSignatureAlgorithmName = try sod.getSignatureAlgorithm()
 
         guard let sodSignatureAlgorithm = SODAlgorithm(rawValue: sodSignatureAlgorithmName) else {
-            throw "Invalid SOD signature algorithm"
+            throw RegisterIdentityCircuitError.invalidSODSignatureAlgorithm
         }
 
         let sodPublicKey = try sod.getPublicKey()
         guard let publicKeySize = getPublicKeySupportedSize(CryptoUtils.getPublicKeySize(sodPublicKey)) else {
-            throw "Invalid public key size"
+            throw RegisterIdentityCircuitError.invalidPublicKeySize
         }
 
         let signatureType = RegisterIdentityCircuitType.CircuitSignatureType(
@@ -186,11 +186,11 @@ extension Passport {
         )
 
         guard let passportHashType = try getEncapsulatedContentDigestAlgorithm(sod) else {
-            throw "Invalid passport hash type"
+            throw RegisterIdentityCircuitError.invalidPassportHashType
         }
 
         guard let documentType = RegisterIdentityCircuitType.CircuitDocumentType(rawValue: getStardartalizedDocumentType()) else {
-            throw "Invalid document type"
+            throw RegisterIdentityCircuitError.invalidDocumentType
         }
 
         let encapsulatedContent = try sod.getEncapsulatedContent()
@@ -200,12 +200,12 @@ extension Passport {
         let ecHash = try sod.getMessageDigestFromSignedAttributes()
 
         guard let ecDigestPosition = signedAttributes.findSubarrayIndex(subarray: ecHash) else {
-            throw "Unable to find EC digest position"
+            throw RegisterIdentityCircuitError.unableToFindDigestPosition("EC")
         }
 
         let dg1Hash = Data(dg1.hash(passportHashType.rawValue.uppercased()))
         guard let dg1DigestPositionShift = encapsulatedContent.findSubarrayIndex(subarray: dg1Hash) else {
-            throw "Unable to find DG1 digest position"
+            throw RegisterIdentityCircuitError.unableToFindDigestPosition("DG1")
         }
 
         var circuitType = RegisterIdentityCircuitType(
@@ -224,7 +224,7 @@ extension Passport {
             let dg15Hash = Data(dg15Wrapper.hash(passportHashType.rawValue.uppercased()))
 
             guard let dg15DigestPositionShift = encapsulatedContent.findSubarrayIndex(subarray: dg15Hash) else {
-                throw "Unable to find DG15 digest position"
+                throw RegisterIdentityCircuitError.unableToFindDigestPosition("DG15")
             }
 
             let dg15ChunkNumber = getChunkNumber(dg15, passportHashType.getChunkSize())
@@ -246,11 +246,11 @@ extension Passport {
 
                 aaCurve = getPublicKeyCurve(ecdsaPublicKey)
             } else {
-                throw "Unable to find public key"
+                throw RegisterIdentityCircuitError.unableToFindPublicKey
             }
 
             guard let aaKeyPositionShift = dg15.findSubarrayIndex(subarray: pubkeyData) else {
-                throw "Unable to find AA key position"
+                throw RegisterIdentityCircuitError.unableToFindAAKeyPosition
             }
 
             circuitType.aaType = RegisterIdentityCircuitType.CircuitAAType(
@@ -432,11 +432,40 @@ extension Passport {
         let sod = try getSod()
 
         guard let ecDigestAlgorithm = try getEncapsulatedContentDigestAlgorithm(sod) else {
-            throw "Invalid passport hash type"
+            throw RegisterIdentityCircuitError.invalidPassportHashType
         }
 
         circuitName += "\(ecDigestAlgorithm.getId())"
 
         return circuitName
+    }
+}
+
+enum RegisterIdentityCircuitError: Error {
+    case invalidSODSignatureAlgorithm
+    case invalidPublicKeySize
+    case invalidPassportHashType
+    case invalidDocumentType
+    case unableToFindDigestPosition(String)
+    case unableToFindPublicKey
+    case unableToFindAAKeyPosition
+
+    var localizedDescription: String {
+        switch self {
+        case .invalidSODSignatureAlgorithm:
+            return "Invalid SOD signature algorithm"
+        case .invalidPublicKeySize:
+            return "Invalid public key size"
+        case .invalidPassportHashType:
+            return "Invalid passport hash type"
+        case .invalidDocumentType:
+            return "Invalid document type"
+        case .unableToFindDigestPosition(let name):
+            return "Unable to find \(name) digest position"
+        case .unableToFindPublicKey:
+            return "Unable to find public key"
+        case .unableToFindAAKeyPosition:
+            return "Unable to find AA key position"
+        }
     }
 }

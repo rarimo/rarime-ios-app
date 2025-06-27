@@ -60,11 +60,11 @@ class MRZCameraManager: NSObject {
         videoOutput.setSampleBufferDelegate(self, queue: sessionQueue)
             
         guard captureSession.canAddInput(deviceInput) else {
-            throw "Device input not added"
+            throw FaceCaptureSessionError.deviceInputNotAdded
         }
             
         guard captureSession.canAddOutput(videoOutput) else {
-            throw "Video output not added"
+            throw FaceCaptureSessionError.videoOutputNotAdded
         }
             
         captureSession.addInput(deviceInput)

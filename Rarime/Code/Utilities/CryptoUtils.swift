@@ -83,12 +83,27 @@ class CryptoUtils {
     static func decodeECDSASignatureFromASN1(_ asn1Signature: Data) throws -> Data {
         let asn1 = try SimpleASN1DumpParser().parse(data: asn1Signature)
         
-        guard let xObject = asn1.getChild(0) else { throw "asn1Signature does not have X" }
-        guard let yObject = asn1.getChild(1) else { throw "asn1Signature does not have Y" }
+        guard let xObject = asn1.getChild(0) else {
+            throw CryptoUtilsError.asn1ParsingFailed("asn1Signature does not have X")
+        }
+        guard let yObject = asn1.getChild(1) else {
+            throw CryptoUtilsError.asn1ParsingFailed("asn1Signature does not have Y")
+        }
         
         let xData = Data(hex: xObject.value) ?? Data()
         let yData = Data(hex: yObject.value) ?? Data()
         
         return xData + yData
+    }
+}
+
+enum CryptoUtilsError: Error {
+    case asn1ParsingFailed(String)
+    
+    var localizedDescription: String {
+        switch self {
+        case .asn1ParsingFailed(let message):
+            return "ASN.1 parsing failed: \(message)"
+        }
     }
 }

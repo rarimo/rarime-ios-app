@@ -80,7 +80,7 @@ extension ConfigManager {
 
 private func readFromInfoPlist<T>(key: String) throws -> T {
     guard let value = Bundle.main.object(forInfoDictionaryKey: key) as? T else {
-        throw "Couldn't find \(key) in Info.plist"
+        throw ConfigManagerError.missingValue(key)
     }
 
     if let value = value as? String {
@@ -93,7 +93,9 @@ private func readFromInfoPlist<T>(key: String) throws -> T {
 private func readURLFromInfoPlist(key: String) throws -> URL {
     let value: String = try readFromInfoPlist(key: key)
 
-    guard let url = URL(string: value) else { throw "\(key) isn't URL" }
+    guard let url = URL(string: value) else {
+        throw ConfigManagerError.invalidURL(value)
+    }
 
     return url
 }
@@ -101,7 +103,9 @@ private func readURLFromInfoPlist(key: String) throws -> URL {
 private func readUInt64FromInfoPlist(key: String) throws -> UInt64 {
     let value: String = try readFromInfoPlist(key: key)
 
-    guard let uint64 = UInt64(value) else { throw "\(key) isn't UInt64" }
+    guard let uint64 = UInt64(value) else {
+        throw ConfigManagerError.invalidUInt64(value)
+    }
 
     return uint64
 }
@@ -110,4 +114,21 @@ private func normalizeInfoPlistString(_ value: String) -> String {
     return value.starts(with: "\"")
         ? String(value.dropFirst().dropLast())
         : value
+}
+
+enum ConfigManagerError: Error {
+    case invalidURL(String)
+    case invalidUInt64(String)
+    case missingValue(String)
+
+    var localizedDescription: String {
+        switch self {
+        case .invalidURL(let url):
+            return "Invalid URL: \(url)"
+        case .invalidUInt64(let value):
+            return "Invalid UInt64 value: \(value)"
+        case .missingValue(let key):
+            return "Missing value for key: \(key)"
+        }
+    }
 }

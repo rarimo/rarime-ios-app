@@ -120,7 +120,9 @@ class ZKUtils {
 #else
         let result = bionet((inputs as NSData).bytes, UInt(inputs.count))
         if result.error != nil {
-            throw String(data: Data(bytes: result.error!, count: Int(result.error_size)), encoding: .utf8)!
+            throw ZKUtilsError.bionettaError(
+                String(data: Data(bytes: result.error!, count: Int(result.error_size)), encoding: .utf8) ?? "Unknown error"
+            )
         }
         
         return Data(bytes: result.data, count: Int(result.len))
@@ -148,12 +150,13 @@ class ZKUtils {
         _ errorBuffer: UnsafeMutablePointer<UInt8>
     ) throws {
         if result == PROVER_ERROR {
-            throw String(bytes: Data(bytes: errorBuffer, count: Int(ERROR_SIZE)), encoding: .utf8)!
-                .replacingOccurrences(of: "\0", with: "")
+            throw ZKUtilsError.groth16ProverError(
+                String(bytes: Data(bytes: errorBuffer, count: Int(ERROR_SIZE)), encoding: .utf8) ?? "Unknown error"
+            )
         }
         
         if result == PROVER_ERROR_SHORT_BUFFER {
-            throw "Proof or public signals buffer is too short"
+            throw ZKUtilsError.shortBufferError("short groth16 proof buffer")
         }
     }
     
@@ -163,12 +166,33 @@ class ZKUtils {
         _ wtnsSize: UnsafeMutablePointer<UInt>
     ) throws {
         if result == WITNESSCALC_ERROR {
-            throw String(bytes: Data(bytes: errorBuffer, count: Int(ERROR_SIZE)), encoding: .utf8)!
-                .replacingOccurrences(of: "\0", with: "")
+            throw ZKUtilsError.witnessCalculationError(
+                String(bytes: Data(bytes: errorBuffer, count: Int(ERROR_SIZE)), encoding: .utf8) ?? "Unknown error"
+            )
         }
         
         if result == WITNESSCALC_ERROR_SHORT_BUFFER {
-            throw String("Buffer to short, should be at least: \(wtnsSize.pointee)")
+            throw ZKUtilsError.shortBufferError("should be at least: \(wtnsSize.pointee)")
+        }
+    }
+}
+
+enum ZKUtilsError: Error {
+    case bionettaError(String)
+    case groth16ProverError(String)
+    case witnessCalculationError(String)
+    case shortBufferError(String)
+    
+    var localizedDescription: String {
+        switch self {
+        case .bionettaError(let message):
+            return "Bionetta Error: \(message)"
+        case .groth16ProverError(let message):
+            return "Groth16 Prover Error: \(message)"
+        case .witnessCalculationError(let message):
+            return "Witness Calculation Error: \(message)"
+        case .shortBufferError(let message):
+            return "Short Buffer Error: \(message)"
         }
     }
 }

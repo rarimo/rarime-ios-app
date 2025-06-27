@@ -21,7 +21,7 @@ struct ImportFileView: View {
             case .success(let url):
                 do {
                     if !url.startAccessingSecurityScopedResource() {
-                        throw "Failed to access file"
+                        throw Errors.unknown("Failed to access file")
                     }
                         
                     let passport = try JSONDecoder().decode(Passport.self, from: Data(contentsOf: url))

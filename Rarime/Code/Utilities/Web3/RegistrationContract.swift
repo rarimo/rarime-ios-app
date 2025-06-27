@@ -32,24 +32,26 @@ class RegistrationContract {
         )
         if let error { throw error }
         
-        guard let proofIndex else { throw "failed to calculate proofIndex" }
+        guard let proofIndex else {
+            throw RegistrationContractError.invalidInput("Failed to calculate proofIndex")
+        }
         
         let response = try registrationContract["getProof"]!(proofIndex).call().wait()
         
         guard let proof = response[""] as? [String: Any] else {
-            throw "Proof is not hex"
+            throw RegistrationContractError.invalidResponse("Response does not contain proof")
         }
         
         guard let siblings = proof["siblings"] as? [Data] else {
-            throw "Proof does not contain siblings"
+            throw RegistrationContractError.invalidResponse("Proof does not contain siblings")
         }
         
         guard let root = proof["root"] as? Data else {
-            throw "Proof does not contain root"
+            throw RegistrationContractError.invalidResponse("Proof does not contain root")
         }
         
         guard let existence = proof["existence"] as? Bool else {
-            throw "Proof does not contain existense"
+            throw RegistrationContractError.invalidResponse("Proof does not contain existense")
         }
         
         return SMTProof(
@@ -63,7 +65,7 @@ class RegistrationContract {
         let response = try registrationContract["icaoMasterTreeMerkleRoot"]!().call().wait()
         
         guard let root = response[""] as? Data else {
-            throw "Response does not contain root"
+            throw RegistrationContractError.invalidResponse("Response does not contain root")
         }
         
         return root
@@ -84,4 +86,18 @@ struct PassportInfo: Codable {
 struct IdentityInfo: Codable {
     let activePassport: Data
     let issueTimestamp: UInt64
+}
+
+enum RegistrationContractError: Error {
+    case invalidInput(String)
+    case invalidResponse(String)
+
+    var localizedDescription: String {
+        switch self {
+        case .invalidInput(let message):
+            return "Invalid input: \(message)"
+        case .invalidResponse(let message):
+            return "Invalid response: \(message)"
+        }
+    }
 }

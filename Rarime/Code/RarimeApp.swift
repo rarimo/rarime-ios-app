@@ -56,7 +56,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate, UNUserNot
     }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        LoggerUtil.common.info("User's FCM Token: \(fcmToken, privacy: .public)")
+        LoggerUtil.common.info("User's FCM Token: \(fcmToken ?? "", privacy: .public)")
         
         let dataDict: [String: String] = ["token": fcmToken ?? ""]
         

@@ -60,14 +60,14 @@ class HiddenKeysViewModel: ObservableObject {
         var jwt: JWT? = nil
 
         do {
-            guard let user = UserManager.shared.user else { throw "failed to get user" }
+            guard let user = UserManager.shared.user else { throw UserManagerError.userNotInitialized }
             jwt = try await DecentralizedAuthManager.shared.getAccessJwt(user)
             userResponse = try await guessCelebrityService.getUserInformation(jwt: jwt!)
         } catch let afError as AFError where afError.isExplicitlyCancelledError {
             return
         } catch {
             do {
-                guard let jwt else { throw "failed to get JWT" }
+                guard let jwt else { throw DecentralizedAuthManagerError.jwtNotInitialized }
                 guard let error = error as? AFError else { throw error }
                 let openApiHttpCode = try error.retriveOpenApiHttpCode()
                 if openApiHttpCode == HTTPStatusCode.notFound.rawValue {
@@ -123,7 +123,7 @@ class HiddenKeysViewModel: ObservableObject {
     }
 
     func getExtraAttempt() async throws {
-        guard let user = UserManager.shared.user else { throw "failed to get user" }
+        guard let user = UserManager.shared.user else { throw UserManagerError.userNotInitialized }
         let jwt = try await DecentralizedAuthManager.shared.getAccessJwt(user)
 
         let guessCelebrityService = GuessCelebrityService(ConfigManager.shared.general.appApiURL)
@@ -132,7 +132,7 @@ class HiddenKeysViewModel: ObservableObject {
     }
 
     func submitGuess(image: UIImage) async throws -> Bool {
-        guard let user = UserManager.shared.user else { throw "failed to get user" }
+        guard let user = UserManager.shared.user else { throw UserManagerError.userNotInitialized }
         let jwt = try await DecentralizedAuthManager.shared.getAccessJwt(user)
 
         guard let foundFace = try NeuralUtils.extractFaceFromImage(image) else {

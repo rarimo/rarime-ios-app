@@ -157,3 +157,14 @@ struct SendSignatureResponseData: Codable {
 struct SendSignatureResponseAttributes: Codable {
     let status: ReceivedUserStatus
 }
+
+enum VerificatorApiError: Error {
+    case proofStatusNotVerified
+
+    var localizedDescription: String {
+        switch self {
+        case .proofStatusNotVerified:
+            return "Proof status is not verified"
+        }
+    }
+}

@@ -157,7 +157,7 @@ class PollsService {
     
     static func decodeVotingData(_ poll: Poll) throws -> VotingData {
         guard let encodedVotingData = poll.votingData.abiEncode(dynamic: false) else {
-            throw "Empty or nil voting data"
+            throw PollsServiceError.decodingError("Empty or nil voting data")
         }
         
         let rawDecoded = try ABIDecoder.decodeTuple(
@@ -175,39 +175,39 @@ class PollsService {
         )
         
         guard let rawArray = rawDecoded as? [Any], rawArray.count == 8 else {
-            throw "Decoding error: unexpected structure"
+            throw PollsServiceError.decodingError("Invalid voting data structure")
         }
         
         guard let selector = rawArray[0] as? BigUInt else {
-            throw "Response does not contain selector"
+            throw PollsServiceError.decodingError("Response does not contain selector")
         }
         
         guard let citizenshipWhitelist = rawArray[1] as? [BigUInt] else {
-            throw "Response does not contain array of citizenship whitelist"
+            throw PollsServiceError.decodingError("Response does not contain citizenship whitelist")
         }
         
         guard let timestampUpperbound = rawArray[2] as? BigUInt else {
-            throw "Response does not contain timestamp upperbound"
+            throw PollsServiceError.decodingError("Response does not contain timestamp upperbound")
         }
         
         guard let identityCounterUpperbound = rawArray[3] as? BigUInt else {
-            throw "Response does not contain identity counter upperbound"
+            throw PollsServiceError.decodingError("Response does not contain identity counter upperbound")
         }
         
         guard let gender = rawArray[4] as? BigUInt else {
-            throw "Response does not contain gender"
+            throw PollsServiceError.decodingError("Response does not contain gender")
         }
         
         guard let birthDateLowerbound = rawArray[5] as? BigUInt else {
-            throw "Response does not contain birth date lowerbound"
+            throw PollsServiceError.decodingError("Response does not contain birth date lowerbound")
         }
         
         guard let birthDateUpperbound = rawArray[6] as? BigUInt else {
-            throw "Response does not contain birth date upperbound"
+            throw PollsServiceError.decodingError("Response does not contain birth date upperbound")
         }
         
         guard let expirationDateLowerbound = rawArray[7] as? BigUInt else {
-            throw "Response does not contain expiration date lowerbound"
+            throw PollsServiceError.decodingError("Response does not contain expiration date lowerbound")
         }
         
         return VotingData(
@@ -296,7 +296,7 @@ extension BigUInt {
         let decoded = try ABIDecoder.decodeTuple(.uint256, from: data.fullHex)
         
         guard let value = decoded as? BigUInt else {
-            throw "Response does not contain value"
+            throw PollsServiceError.decodingError("Response does not contain value")
         }
         
         return value
@@ -324,55 +324,55 @@ extension ProposalInfo {
         )
         
         guard let raw = decoded as? [Any] else {
-            throw "Decoding error"
+            throw PollsServiceError.invalidResponse
         }
         
         guard let proposalSMT = raw[0] as? EthereumAddress else {
-            throw "Response does not contain proposalSMT"
+            throw PollsServiceError.decodingError("Response does not contain proposalSMT")
         }
         
         guard let statusRaw = raw[1] as? UInt8 else {
-            throw "Response does not contain status"
+            throw PollsServiceError.decodingError("Response does not contain status")
         }
         
         guard let status = ProposalStatus(rawValue: statusRaw) else {
-            throw "Response contains invalid status"
+            throw PollsServiceError.decodingError("Invalid proposal status: \(statusRaw)")
         }
         
         guard let configRaw = raw[2] as? [Any] else {
-            throw "Response does not contain config"
+            throw PollsServiceError.decodingError("Response does not contain config")
         }
         
         guard let startTimestamp = configRaw[0] as? UInt64 else {
-            throw "Response does not contain startTimestamp"
+            throw PollsServiceError.decodingError("Response does not contain startTimestamp")
         }
         
         guard let duration = configRaw[1] as? UInt64 else {
-            throw "Response does not contain duration"
+            throw PollsServiceError.decodingError("Response does not contain duration")
         }
         
         guard let multichoice = configRaw[2] as? BigUInt else {
-            throw "Response does not contain multichoice"
+            throw PollsServiceError.decodingError("Response does not contain multichoice")
         }
         
         guard let acceptedOptions = configRaw[3] as? [BigUInt] else {
-            throw "Response does not contain acceptedOptions"
+            throw PollsServiceError.decodingError("Response does not contain acceptedOptions")
         }
         
         guard let description = configRaw[4] as? String else {
-            throw "Response does not contain description"
+            throw PollsServiceError.decodingError("Response does not contain description")
         }
         
         guard let votingWhitelist = configRaw[5] as? [EthereumAddress] else {
-            throw "Response does not contain votingWhitelist"
+            throw PollsServiceError.decodingError("Response does not contain votingWhitelist")
         }
         
         guard let votingWhitelistData = configRaw[6] as? [Data] else {
-            throw "Response does not contain votingWhitelistData"
+            throw PollsServiceError.decodingError("Response does not contain votingWhitelistData")
         }
         
         guard let votingResults = raw[3] as? [[BigUInt]] else {
-            throw "Response does not contain votingResults"
+            throw PollsServiceError.decodingError("Response does not contain votingResults")
         }
         
         return ProposalInfo(
@@ -390,5 +390,19 @@ extension ProposalInfo {
             ),
             votingResults: votingResults
         )
+    }
+}
+
+enum PollsServiceError: Error {
+    case invalidResponse
+    case decodingError(String)
+    
+    var localizedDescription: String {
+        switch self {
+        case .invalidResponse:
+            return "Invalid response from server"
+        case .decodingError(let message):
+            return "Decoding error: \(message)"
+        }
     }
 }

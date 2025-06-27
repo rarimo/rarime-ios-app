@@ -58,7 +58,7 @@ class User {
         guard let record = records.last else { return nil }
         
         guard let privateKey = record.value(forKey: userCloudPrivateKeyKey) as? Data else {
-            throw "User private key not found in cloud"
+            throw UserError.privateKeyNotFound
         }
         
         let status = Status(rawValue: AppUserDefaults.shared.userStatus) ?? .unscanned
@@ -93,5 +93,19 @@ extension User {
         case unscanned
         case passportScanned
         case passportVerified
+    }
+}
+
+enum UserError: Error {
+    case privateKeyNotFound
+    case userCreationFailed
+    
+    var localizedDescription: String {
+        switch self {
+        case .privateKeyNotFound:
+            return "User private key not found in cloud"
+        case .userCreationFailed:
+            return "User creation failed"
+        }
     }
 }

@@ -17,7 +17,7 @@ class UpdateManager: ObservableObject {
             let currentVersion = info["CFBundleShortVersionString"] as? String,
             let identifier = info["CFBundleIdentifier"] as? String
         else {
-            throw "Invalid bundle info"
+            throw UpdateManagerError.invalidBundleInfo
         }
         
         let response = try await AF.request("https://itunes.apple.com/lookup?bundleId=\(identifier)")
@@ -26,7 +26,7 @@ class UpdateManager: ObservableObject {
             .get()
         
         guard let firstResult = response.results.first else {
-            throw "response are empty"
+            throw UpdateManagerError.emptyResponse
         }
         
         return firstResult.version.compare(currentVersion, options: .numeric) == .orderedDescending
@@ -64,4 +64,18 @@ struct ITunesLookupResponse: Codable {
 
 struct ITunesLookupResponseResult: Codable {
     let version: String
+}
+
+enum UpdateManagerError: Error {
+    case invalidBundleInfo
+    case emptyResponse
+    
+    var localizedDescription: String {
+        switch self {
+        case .invalidBundleInfo:
+            return "Invalid bundle info"
+        case .emptyResponse:
+            return "Response is empty"
+        }
+    }
 }

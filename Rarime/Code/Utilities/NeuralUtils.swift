@@ -8,7 +8,7 @@ class NeuralUtils {
         let detectFaceRequest = VNDetectFaceCaptureQualityRequest()
 
         guard let cgImage = image.cgImage else {
-            throw "Invalid image data"
+            throw NeuralUtilsError.invalidImageData
         }
 
         let requestHandler = VNImageRequestHandler(cgImage: cgImage, orientation: .up, options: [:])
@@ -16,7 +16,7 @@ class NeuralUtils {
         try requestHandler.perform([detectFaceRequest])
 
         guard let results = detectFaceRequest.results else {
-            throw "Failed to detect face"
+            throw NeuralUtilsError.faceNotDetected
         }
 
         if results.isEmpty {
@@ -30,7 +30,7 @@ class NeuralUtils {
         let preProcessedImage = try image.resize(boundary, boundary)
 
         guard let cgImage = preProcessedImage.cgImage else {
-            throw "Invalid image data"
+            throw NeuralUtilsError.invalidImageData
         }
 
         let width = cgImage.width
@@ -51,7 +51,7 @@ class NeuralUtils {
         context?.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
 
         guard let grayscaleCgImage = context?.makeImage() else {
-            throw "Failed to convert image to grayscale"
+            throw NeuralUtilsError.imageProcessingFailed("Failed to create grayscale image")
         }
 
         return (UIImage(cgImage: grayscaleCgImage), Data(pixelsData))
@@ -61,7 +61,7 @@ class NeuralUtils {
         let preProcessedImage = try image.resize(boundary, boundary)
 
         guard let cgImage = preProcessedImage.cgImage else {
-            throw "Invalid image data"
+            throw NeuralUtilsError.invalidImageData
         }
 
         let width = cgImage.width
@@ -82,7 +82,7 @@ class NeuralUtils {
         context?.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
 
         guard let rgbCgImage = context?.makeImage() else {
-            throw "Failed to convert image to rgb"
+            throw NeuralUtilsError.imageProcessingFailed("Failed to create RGB image")
         }
 
         var pixelsDataWithoutAlpha: [UInt8] = []
@@ -110,8 +110,28 @@ private func extractFaceFromImageObservation(
     let rect = CGRect(origin: origin, size: size)
 
     guard let faceCgImage = image.cropping(to: rect) else {
-        throw "Failed to crop face"
+        throw NeuralUtilsError.faceCropFailed
     }
 
     return UIImage(cgImage: faceCgImage)
+}
+
+enum NeuralUtilsError: Error {
+    case invalidImageData
+    case faceNotDetected
+    case faceCropFailed
+    case imageProcessingFailed(String)
+
+    var localizedDescription: String {
+        switch self {
+        case .invalidImageData:
+            return "Invalid image data"
+        case .faceNotDetected:
+            return "No face detected in the image"
+        case .faceCropFailed:
+            return "Failed to crop the face from the image"
+        case .imageProcessingFailed(let message):
+            return "Image processing failed: \(message)"
+        }
+    }
 }

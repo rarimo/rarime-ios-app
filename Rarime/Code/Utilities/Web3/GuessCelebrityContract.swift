@@ -23,7 +23,7 @@ class GuessCelebrityContract {
     
     func getVerificationNonce(_ userAddressHex: String) async throws -> BigUInt {
         guard let userAddress = BigUInt(String(userAddressHex.dropFirst(2)), radix: 16) else {
-            throw "Invalid user address hex"
+            throw GuessCelebrityContractError.invalidInput("Invalid user address format")
         }
         
         let method = contract["getVerificationNonce"]!(userAddress)
@@ -31,7 +31,7 @@ class GuessCelebrityContract {
         let response = try method.call().wait()
         
         guard let nonce = response[""] as? BigUInt else {
-            throw "Response does not contain nonce"
+            throw GuessCelebrityContractError.invalidResponse("Response does not contain nonce")
         }
         
         return nonce
@@ -43,9 +43,23 @@ class GuessCelebrityContract {
         let response = try method.call().wait()
         
         guard let nonce = response[""] as? BigUInt else {
-            throw "Response does not contain balance"
+            throw GuessCelebrityContractError.invalidResponse("Response does not contain balance")
         }
         
         return nonce
+    }
+}
+
+enum GuessCelebrityContractError: Error {
+    case invalidInput(String)
+    case invalidResponse(String)
+    
+    var localizedDescription: String {
+        switch self {
+        case .invalidInput(let message):
+            return "Invalid input: \(message)"
+        case .invalidResponse(let message):
+            return "Invalid response: \(message)"
+        }
     }
 }

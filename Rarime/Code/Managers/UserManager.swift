@@ -14,9 +14,7 @@ class UserManager: ObservableObject {
     @Published var user: User?
     
     @Published var registerZkProof: ZkProof?
-    
     @Published var lightRegistrationData: LightRegistrationData?
-    
     @Published var masterCertProof: SMTProof?
     
     @Published var isRevoked: Bool
@@ -48,7 +46,7 @@ class UserManager: ObservableObject {
                 } else if let plonkZkProof = try? JSONDecoder().decode(Data.self, from: registerZkProofJson) {
                     self.registerZkProof = .plonk(plonkZkProof)
                 } else {
-                    throw "failed to decode registerZkProof"
+                    throw UserManagerError.invalidZkProofFormat
                 }
             }
             
@@ -63,7 +61,7 @@ class UserManager: ObservableObject {
     }
     
     func createNewUser() throws {
-        guard let secretKey = IdentityNewBJJSecretKey() else { throw "failed to create new secret key" }
+        guard let secretKey = IdentityNewBJJSecretKey() else { throw UserManagerError.secretKeyNotGenerated }
         
         self.user = try User(secretKey: secretKey)
     }
@@ -110,7 +108,7 @@ class UserManager: ObservableObject {
         case .registerIdentityLight512:
             wtns = try ZKUtils.calcWtns_registerIdentityLight512(circuitData.circuitDat, inputs)
         default:
-            throw "invalid register identity light circuit"
+            throw UserManagerError.invalidRegisteredLightCircuitData
         }
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16Prover(circuitData.circuitZkey, wtns)
@@ -154,7 +152,7 @@ class UserManager: ObservableObject {
         case .failure(let error):
             throw error
         case .none:
-            throw "failed to get proof"
+            throw UserManagerError.invalidProof
         }
     }
     
@@ -214,7 +212,7 @@ class UserManager: ObservableObject {
         case .registerIdentity_20_160_3_3_736_200_NA:
             wtns = try ZKUtils.calcWtns_registerIdentity_20_160_3_3_736_200_NA(circuitData.circuitDat, inputs)
         default:
-            throw "invalid register identity circuit"
+            throw UserManagerError.invalidRegisteredCircuitData
         }
         
         let (proofJson, pubSignalsJson) = try ZKUtils.groth16Prover(circuitData.circuitZkey, wtns)
@@ -270,15 +268,15 @@ class UserManager: ObservableObject {
     
     func lightRegister(_ registerZKProof: ZkProof, _ verifySodResponse: VerifySodResponse) async throws {
         guard let signature = Data(hex: verifySodResponse.data.attributes.signature) else {
-            throw "Invalid signature"
+            throw UserManagerError.invalidSignature
         }
         
         guard let passportHash = Data(hex: verifySodResponse.data.attributes.passportHash) else {
-            throw "Invalid passport hash"
+            throw UserManagerError.invalidPassportHash
         }
         
         guard let publicKey = Data(hex: verifySodResponse.data.attributes.publicKey) else {
-            throw "Invalid public key"
+            throw UserManagerError.invalidPublicKey
         }
         
         let calldataBuilder = IdentityCallDataBuilder()
@@ -332,7 +330,7 @@ class UserManager: ObservableObject {
         let sod = try SOD([UInt8](passport.sod))
         
         guard let cert = try OpenSSLUtils.getX509CertificatesFromPKCS7(pkcs7Der: Data(sod.pkcs7CertificateData)).first else {
-            throw "Slave certificate in sod is missing"
+            throw PassportError.missingSlaveCertificate
         }
         
         let certPem = cert.certToPEM().data(using: .utf8) ?? Data()
@@ -351,7 +349,7 @@ class UserManager: ObservableObject {
         let buildCalldataResponse = try IdentityCallDataBuilder().buildRegisterCertificateCalldata(Certificates.ICAO, slavePem: certPem)
         
         guard let calldata = buildCalldataResponse.calldata else {
-            throw "calldata build response does not contain calldata"
+            throw UserManagerError.calldataBuildFailed
         }
         
         let relayer = Relayer(ConfigManager.shared.general.appApiURL)
@@ -371,18 +369,18 @@ class UserManager: ObservableObject {
         passport: Passport,
         params: GetProofParamsResponseAttributes
     ) async throws -> ZkProof {
-        guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
+        guard let secretKey = self.user?.secretKey else { throw UserManagerError.secretKeyNotInitialized }
         
         let stateKeeperContract = try StateKeeperContract()
         let registrationSmtContractAddress = try EthereumAddress(hex: ConfigManager.shared.contracts.registrationSmtAddress, eip55: false)
         let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
         
         guard let passportKey = getPassportKey(passport) else {
-            throw "failed to get passport key"
+            throw UserManagerError.passportKeyNotFound
         }
         
         guard let identityKey = getIdentityKey(passport) else {
-            throw "failed to get identity key"
+            throw UserManagerError.identityKeyNotFound
         }
         
         var error: NSError? = nil
@@ -392,7 +390,7 @@ class UserManager: ObservableObject {
             &error
         )
         if let error { throw error }
-        guard let proofIndex else { throw "proof index is not initialized" }
+        guard let proofIndex else { throw UserManagerError.proofIndexNotInitialized }
         
         let smtProof = try await registrationSmtContract.getProof(proofIndex)
         let smtProofJson = try JSONEncoder().encode(smtProof)
@@ -450,7 +448,7 @@ class UserManager: ObservableObject {
         }
         
         guard let anonymousID else {
-            throw "failed to calculate anonymousID"
+            throw UserManagerError.anonymousIDNotCalculated
         }
         
         return [
@@ -481,7 +479,7 @@ class UserManager: ObservableObject {
     }
     
     func generatePointsProof(_ passport: Passport) async throws -> ZkProof {
-        guard let secretKey = self.user?.secretKey else { throw "Secret Key is not initialized" }
+        guard let secretKey = self.user?.secretKey else { throw UserManagerError.secretKeyNotInitialized }
         
         let stateKeeperContract = try StateKeeperContract()
         
@@ -490,11 +488,11 @@ class UserManager: ObservableObject {
         let registrationSmtContract = try PoseidonSMT(contractAddress: registrationSmtContractAddress)
         
         guard let passportKey = getPassportKey(passport) else {
-            throw "failed to get passport key"
+            throw UserManagerError.passportKeyNotFound
         }
         
         guard let identityKey = getIdentityKey(passport) else {
-            throw "failed to get identity key"
+            throw UserManagerError.identityKeyNotFound
         }
         
         var error: NSError? = nil
@@ -504,7 +502,7 @@ class UserManager: ObservableObject {
             &error
         )
         if let error { throw error }
-        guard let proofIndex else { throw "proof index is not initialized" }
+        guard let proofIndex else { throw UserManagerError.proofIndexNotInitialized }
         
         let smtProof = try await registrationSmtContract.getProof(proofIndex)
         
@@ -594,7 +592,7 @@ class UserManager: ObservableObject {
     }
     
     func generateNullifierForEvent(_ eventId: String) throws -> String {
-        guard let user else { throw "User is not initialized" }
+        guard let user else { throw UserManagerError.userNotInitialized }
         
         var error: NSError?
         let nullifier = user.profile.calculateEventNullifierHex(eventId, error: &error)
@@ -663,5 +661,61 @@ class UserManager: ObservableObject {
         }
         
         return ethereumPrivateKey.address.hex(eip55: true)
+    }
+}
+
+enum UserManagerError: Error {
+    case userNotInitialized
+    case passportKeyNotFound
+    case identityKeyNotFound
+    case secretKeyNotInitialized
+    case proofIndexNotInitialized
+    case invalidSignature
+    case invalidPassportHash
+    case invalidPublicKey
+    case invalidCircuitData
+    case invalidRegisteredCircuitData
+    case invalidRegisteredLightCircuitData
+    case invalidProof
+    case anonymousIDNotCalculated
+    case calldataBuildFailed
+    case invalidZkProofFormat
+    case secretKeyNotGenerated
+
+    var localizedDescription: String {
+        switch self {
+        case .userNotInitialized:
+            return "User is not initialized"
+        case .passportKeyNotFound:
+            return "Failed to get passport key"
+        case .identityKeyNotFound:
+            return "Failed to get identity key"
+        case .secretKeyNotInitialized:
+            return "Secret key is not initialized"
+        case .proofIndexNotInitialized:
+            return "Proof index is not initialized"
+        case .invalidSignature:
+            return "Invalid signature"
+        case .invalidPassportHash:
+            return "Invalid passport hash"
+        case .invalidPublicKey:
+            return "Invalid public key"
+        case .invalidCircuitData:
+            return "Invalid circuit data"
+        case .invalidRegisteredCircuitData:
+            return "Invalid registered circuit data"
+        case .invalidRegisteredLightCircuitData:
+            return "Invalid registered light circuit data"
+        case .invalidProof:
+            return "Invalid proof"
+        case .anonymousIDNotCalculated:
+            return "Failed to calculate anonymous ID"
+        case .calldataBuildFailed:
+            return "Failed to build calldata"
+        case .invalidZkProofFormat:
+            return "Invalid ZK Proof format"
+        case .secretKeyNotGenerated:
+            return "Failed to generate secret key"
+        }
     }
 }

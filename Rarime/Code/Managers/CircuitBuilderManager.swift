@@ -33,7 +33,7 @@ extension CircuitBuilderManager {
             let publicKey = try sod.getPublicKey()
             
             guard let pubkeyData = CryptoUtils.getDataFromPublicKey(publicKey) else {
-                throw "invalid pubkey data"
+                throw CircuitBuilderManagerError.invalidPubkeyData
             }
             
             let smartChunkingNumber = CircuitUtils.calculateSmartChunkingNumber(pubkeyData.count * 8)
@@ -107,7 +107,7 @@ extension CircuitBuilderManager {
             let publicKey = try sod.getPublicKey()
             
             guard let pubkeyData = CryptoUtils.getDataFromPublicKey(publicKey) else {
-                throw "invalid pubkey data"
+                throw CircuitBuilderManagerError.invalidPubkeyData
             }
             
             let reductionPk: [String]
@@ -204,6 +204,17 @@ extension CircuitBuilderManager {
                 value: "0",
                 skIdentity: privateKey
             )
+        }
+    }
+}
+
+enum CircuitBuilderManagerError: Error {
+    case invalidPubkeyData
+    
+    var localizedDescription: String {
+        switch self {
+        case .invalidPubkeyData:
+            return "Invalid public key data"
         }
     }
 }

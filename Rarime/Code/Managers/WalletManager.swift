@@ -4,17 +4,6 @@ import SwiftUI
 import PromiseKit
 import Web3
 
-enum WalletError: Error, LocalizedError {
-    case transactionTimeout
-
-    var errorDescription: String? {
-        switch self {
-        case .transactionTimeout:
-            return String(localized: "Transaction timed out")
-        }
-    }
-}
-
 class WalletManager: ObservableObject {
     static let shared = WalletManager()
 
@@ -101,7 +90,7 @@ class WalletManager: ObservableObject {
 
         let receipt = await waitForTransactionReceipt(txHash: txHash)
         if receipt == nil {
-            throw WalletError.transactionTimeout
+            throw WalletManagerError.transactionTimeout
         }
 
         LoggerUtil.common.info("Transfer transaction hash: \(receipt!.transactionHash.hex(), privacy: .public)")
@@ -203,5 +192,16 @@ class WalletManager: ObservableObject {
         transactions = []
         isTransactionsLoading = false
         scanTXsNextPageParams = nil
+    }
+}
+
+enum WalletManagerError: Error {
+    case transactionTimeout
+
+    var localizedDescription: String? {
+        switch self {
+        case .transactionTimeout:
+            return "Transaction timed out"
+        }
     }
 }

@@ -207,7 +207,7 @@ struct WaitlistPassportView: View {
         }
         
         do {
-            guard let user = userManager.user else { throw "failed to get user" }
+            guard let user = userManager.user else { throw UserManagerError.userNotInitialized }
                 
             let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
                 
@@ -251,7 +251,7 @@ struct WaitlistPassportView: View {
         let cancelable = Task { @MainActor in
             defer { self.isBalanceLoading = false }
             do {
-                guard let user = userManager.user else { throw "failed to get user" }
+                guard let user = userManager.user else { throw UserManagerError.userNotInitialized }
                 let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
 
                 let pointsBalance = try await userManager.fetchPointsBalance(accessJwt)
