@@ -16,7 +16,7 @@ struct Passport: Codable {
     var dateOfBirth: String
     var nationality: String
     let dg1: Data
-    let dg15: Data
+    var dg15: Data
     let sod: Data
     let signature: Data
     
