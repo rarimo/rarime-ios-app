@@ -181,8 +181,6 @@ class PassportViewModel: ObservableObject {
                 return proof
             }
             
-            if !passport.dg15.isEmpty {}
-            
             var isUserRevoking = passportInfo.activeIdentity != Ethereum.ZERO_BYTES32
 #if DEVELOPMENT
             if DebugManager.shared.shouldForceRegistration {
