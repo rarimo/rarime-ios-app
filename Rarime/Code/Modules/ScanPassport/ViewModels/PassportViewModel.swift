@@ -147,7 +147,7 @@ class PassportViewModel: ObservableObject {
             } else {
                 passportInfoKey = registerProofPubSignals.getSignalRaw(.passportKey)
                 (passportInfo, _) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
-                if passportInfo.activeIdentity != Ethereum.ZERO_BYTES32 || passportInfo.activeIdentity != currentIdentityKey {
+                if passportInfo.activeIdentity != Ethereum.ZERO_BYTES32 && passportInfo.activeIdentity != currentIdentityKey {
                     let passportInfoKeyByPassportHash = registerProofPubSignals.getSignalRaw(.passportHash)
                     let (passportInfoByPassportHash, _) = try await stateKeeperContract.getPassportInfo(passportInfoKeyByPassportHash)
                     if passportInfoByPassportHash.activeIdentity == Ethereum.ZERO_BYTES32 || passportInfoByPassportHash.activeIdentity == currentIdentityKey {
