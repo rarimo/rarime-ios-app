@@ -92,7 +92,7 @@ class PassportViewModel: ObservableObject {
             }
 #endif
             
-            guard let passport = PassportManager.shared.passport else { throw PassportManagerError.passportNotFound }
+            guard var passport = PassportManager.shared.passport else { throw PassportManagerError.passportNotFound }
             guard let user = UserManager.shared.user else { throw UserManagerError.userNotInitialized }
             
             try await UserManager.shared.registerCertificate(passport)
@@ -136,19 +136,27 @@ class PassportViewModel: ObservableObject {
             let stateKeeperContract = try StateKeeperContract()
             
             let registerProofPubSignals = RegisterIdentityPubSignals(proof)
-            
-            let passportInfoKey: String
-            if passport.dg15.isEmpty {
-                passportInfoKey = registerProofPubSignals.getSignalRaw(.passportHash)
-            } else {
-                passportInfoKey = registerProofPubSignals.getSignalRaw(.passportKey)
-            }
-            
             let profile = try IdentityProfile().newProfile(UserManager.shared.user?.secretKey)
             
             let currentIdentityKey = try profile.getPublicKeyHash()
-            
-            let (passportInfo, _) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
+            var passportInfoKey: String
+            var passportInfo: PassportInfo
+            if passport.dg15.isEmpty {
+                passportInfoKey = registerProofPubSignals.getSignalRaw(.passportHash)
+                (passportInfo, _) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
+            } else {
+                passportInfoKey = registerProofPubSignals.getSignalRaw(.passportKey)
+                (passportInfo, _) = try await stateKeeperContract.getPassportInfo(passportInfoKey)
+                if passportInfo.activeIdentity != Ethereum.ZERO_BYTES32 || passportInfo.activeIdentity != currentIdentityKey {
+                    let passportInfoKeyByPassportHash = registerProofPubSignals.getSignalRaw(.passportHash)
+                    let (passportInfoByPassportHash, _) = try await stateKeeperContract.getPassportInfo(passportInfoKeyByPassportHash)
+                    if passportInfoByPassportHash.activeIdentity == Ethereum.ZERO_BYTES32 || passportInfoByPassportHash.activeIdentity == currentIdentityKey {
+                        passportInfoKey = passportInfoKeyByPassportHash
+                        passportInfo = passportInfoByPassportHash
+                        passport.dg15 = Data()
+                    }
+                }
+            }
             
             if passportInfo.activeIdentity == currentIdentityKey {
                 LoggerUtil.common.info("Passport is already registered")
