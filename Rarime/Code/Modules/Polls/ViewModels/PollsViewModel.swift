@@ -47,14 +47,18 @@ class PollsViewModel: ObservableObject {
         let decodedBirthDateUpperbound = votingData.birthDateUpperbound.serialize().ascii
         let decodedBirthDateLowerbound = votingData.birthDateLowerbound.serialize().ascii
         let decodedGender = votingData.gender.serialize().ascii
+        let decodedExpirationDateLowerbound = votingData.expirationDateLowerbound.serialize().ascii
         
         let upperboundBirthDate = try? DateUtil.parsePassportDate(decodedBirthDateUpperbound, true)
         let lowerBoundBirthDate = try? DateUtil.parsePassportDate(decodedBirthDateLowerbound, true)
         let userBirthDate = (try? DateUtil.parsePassportDate(passport.dateOfBirth, true)) ?? Date()
         
+        let expirationDateLowerbound = try? DateUtil.parsePassportDate(decodedExpirationDateLowerbound, true)
+        let userExpirationDate = (try? DateUtil.parsePassportDate(passport.documentExpiryDate, true)) ?? Date()
+        
         let isNationalityEligible = decodedCountries.contains(Country.fromISOCode(passport.nationality))
         let isAgeEligible: Bool = {
-            if upperboundBirthDate == nil && lowerBoundBirthDate == nil {
+            if upperboundBirthDate == nil, lowerBoundBirthDate == nil {
                 return true
             }
 
@@ -78,12 +82,13 @@ class PollsViewModel: ObservableObject {
             }
             return false
         }()
+        let isExpirationDateEligible = expirationDateLowerbound == nil || userExpirationDate >= expirationDateLowerbound!
         let countriesString = Set(decodedCountries.map { $0.name }).joined(separator: ", ")
         let ageString: String = {
             let minYear = DateUtil.yearsBetween(from: upperboundBirthDate ?? Date(), to: poll.startsAt)
             let maxYear = DateUtil.yearsBetween(from: lowerBoundBirthDate ?? Date(), to: poll.startsAt)
             
-            if decodedBirthDateUpperbound != "000000" && decodedBirthDateLowerbound != "000000" {
+            if decodedBirthDateUpperbound != "000000", decodedBirthDateLowerbound != "000000" {
                 return "\(minYear)-\(maxYear) years"
             }
         
@@ -98,6 +103,9 @@ class PollsViewModel: ObservableObject {
             return "-"
         }()
         let genderString = decodedGender == "M" ? "Male only" : "Female only"
+        let expirationDateString = decodedExpirationDateLowerbound != "000000"
+            ? "Valid until \(DateUtil.richDateFormatter.string(from: expirationDateLowerbound ?? Date()))"
+            : "-"
         
         var requirements: [PollRequirement] = []
         
@@ -117,6 +125,12 @@ class PollsViewModel: ObservableObject {
             requirements.append(PollRequirement(
                 text: genderString,
                 isEligible: isGengerEligible
+            ))
+        }
+        if decodedExpirationDateLowerbound != "000000" {
+            requirements.append(PollRequirement(
+                text: expirationDateString,
+                isEligible: isExpirationDateEligible
             ))
         }
         
