@@ -82,12 +82,7 @@ class PollsViewModel: ObservableObject {
             }
             return false
         }()
-        let isExpirationDateEligible: Bool = {
-            if expirationDateLowerbound == nil {
-                return true
-            }
-            return userExpirationDate >= expirationDateLowerbound!
-        }()
+        let isExpirationDateEligible = expirationDateLowerbound == nil || userExpirationDate >= expirationDateLowerbound!
         let countriesString = Set(decodedCountries.map { $0.name }).joined(separator: ", ")
         let ageString: String = {
             let minYear = DateUtil.yearsBetween(from: upperboundBirthDate ?? Date(), to: poll.startsAt)
@@ -108,12 +103,9 @@ class PollsViewModel: ObservableObject {
             return "-"
         }()
         let genderString = decodedGender == "M" ? "Male only" : "Female only"
-        let expirationDateString: String = {
-            if decodedExpirationDateLowerbound != "000000" {
-                return "Valid until \(DateUtil.richDateFormatter.string(from: expirationDateLowerbound ?? Date()))"
-            }
-            return "-"
-        }()
+        let expirationDateString = decodedExpirationDateLowerbound != "000000"
+            ? "Valid until \(DateUtil.richDateFormatter.string(from: expirationDateLowerbound ?? Date()))"
+            : "-"
         
         var requirements: [PollRequirement] = []
         
