@@ -17,7 +17,6 @@ class ZKUtils {
     #registerCircuitWitness("faceRegistryNoInclusion")
     #registerCircuitWitness("auth")
     #registerCircuitWitness("queryIdentity")
-    #registerCircuitWitness("registerIdentity_1_256_3_6_576_248_1_2432_5_296")
     #registerCircuitWitness("registerIdentity_21_256_3_7_336_264_21_3072_6_2008")
     #registerCircuitWitness("registerIdentity_11_256_3_3_576_248_1_1184_5_264")
     #registerCircuitWitness("registerIdentity_12_256_3_3_336_232_NA")

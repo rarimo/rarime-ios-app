@@ -6,7 +6,6 @@
 #include "witnesscalc_faceRegistryNoInclusion.h"
 #include "witnesscalc_queryIdentity.h"
 #include "witnesscalc_auth.h"
-#include "witnesscalc_registerIdentity_1_256_3_6_576_248_1_2432_5_296.h"
 #include "witnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.h"
 #include "witnesscalc_registerIdentity_11_256_3_3_576_248_1_1184_5_264.h"
 #include "witnesscalc_registerIdentity_12_256_3_3_336_232_NA.h"
