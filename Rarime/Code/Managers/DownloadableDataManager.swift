@@ -7,7 +7,6 @@ enum RegisteredCircuitData: String {
     
     case registerIdentity_21_256_3_7_336_264_21_3072_6_2008
     
-    case registerIdentity_11_256_3_3_576_248_1_1184_5_264
     case registerIdentity_12_256_3_3_336_232_NA
     
     
@@ -23,7 +22,6 @@ enum RegisteredCircuitData: String {
     case registerIdentityLight512
     
     
-    case registerIdentity_11_256_3_3_576_240_1_864_5_264
     case registerIdentity_11_256_3_5_576_248_1_1808_5_296
     
     case registerIdentity_14_256_3_4_336_64_1_1480_5_296
@@ -104,6 +102,10 @@ enum RegisteredNoirCircuitData: String {
     case registerIdentity_3_160_3_4_576_216_1_1512_3_256
     case registerIdentity_11_256_3_2_336_216_NA
     case registerIdentity_11_256_3_3_336_248_NA
+
+    case registerIdentity_11_256_3_3_576_240_1_864_5_264
+    case registerIdentity_11_256_3_3_576_248_1_1184_5_264
+    case registerIdentity_11_256_3_4_584_248_1_1496_4_256
 }
 
 enum RegisteredDownloadableFiles: String {
