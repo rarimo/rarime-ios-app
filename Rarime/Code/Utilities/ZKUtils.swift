@@ -18,8 +18,6 @@ class ZKUtils {
     #registerCircuitWitness("auth")
     #registerCircuitWitness("queryIdentity")
     #registerCircuitWitness("registerIdentity_21_256_3_7_336_264_21_3072_6_2008")
-    #registerCircuitWitness("registerIdentity_21_256_3_3_336_232_NA")
-    #registerCircuitWitness("registerIdentity_24_256_3_4_336_232_NA")
     #registerCircuitWitness("registerIdentity_11_256_3_5_576_248_1_1808_4_256")
     #registerCircuitWitness("registerIdentityLight160")
     #registerCircuitWitness("registerIdentityLight224")
@@ -31,7 +29,6 @@ class ZKUtils {
     #registerCircuitWitness("registerIdentity_14_256_3_4_336_64_1_1480_5_296")
     #registerCircuitWitness("registerIdentity_20_160_3_3_736_200_NA")
     #registerCircuitWitness("registerIdentity_20_256_3_5_336_72_NA")
-    #registerCircuitWitness("registerIdentity_21_256_3_5_576_232_NA")
     
     public static func groth16FaceRegistryNoInclusion(_ wtns: Data) throws -> (proof: Data, pubSignals: Data) {
         return try groth16Prover(Circuits.faceRegistryNoInclusionZkey, wtns)

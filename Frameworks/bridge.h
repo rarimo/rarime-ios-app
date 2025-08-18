@@ -7,8 +7,6 @@
 #include "witnesscalc_queryIdentity.h"
 #include "witnesscalc_auth.h"
 #include "witnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.h"
-#include "witnesscalc_registerIdentity_21_256_3_3_336_232_NA.h"
-#include "witnesscalc_registerIdentity_24_256_3_4_336_232_NA.h"
 #include "witnesscalc_registerIdentity_11_256_3_5_576_248_1_1808_4_256.h"
 #include "witnesscalc_registerIdentityLight160.h"
 #include "witnesscalc_registerIdentityLight224.h"
@@ -20,6 +18,4 @@
 #include "witnesscalc_registerIdentity_14_256_3_4_336_64_1_1480_5_296.h"
 #include "witnesscalc_registerIdentity_20_160_3_3_736_200_NA.h"
 #include "witnesscalc_registerIdentity_20_256_3_5_336_72_NA.h"
-#include "witnesscalc_registerIdentity_21_256_3_5_576_232_NA.h"
-
 #endif /* bridge_h */
