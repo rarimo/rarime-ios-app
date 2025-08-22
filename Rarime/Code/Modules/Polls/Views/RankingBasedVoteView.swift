@@ -77,7 +77,7 @@ struct RankingView: View {
 
             Text("Rank these options by priority. Drag and drop to sort them from your most preferred to least preferred choice.")
                 .font(.subheadline)
-
+            
             List {
                 ForEach(items) { item in
                     HStack(spacing: 12) {
@@ -86,27 +86,24 @@ struct RankingView: View {
                             .scaledToFit()
                             .frame(width: 20, height: 20)
                             .foregroundColor(.textPrimary)
-                            .padding(.horizontal, 12)
 
                         VerticalDivider()
-                            .padding(.horizontal, 12)
 
                         Text(item.text)
                             .font(.body)
                             .foregroundColor(.textPrimary)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.vertical, 20)
-                    .padding(.horizontal, 20)
+                    .padding(20)
                     .background(Color.bgComponentBasePrimary)
                     .cornerRadius(20)
-                    .shadow(color: .clear, radius: 0)
                     .overlay(
                         RoundedRectangle(cornerRadius: 20)
                             .stroke(Color.primary, lineWidth: 1)
                     )
                     .listRowSeparator(.hidden)
                     .listRowBackground(Color.bgContainer)
+                    .listRowInsets(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
                     .contentShape(RoundedRectangle(cornerRadius: 20))
                 }
                 .onMove { indices, newOffset in
@@ -115,8 +112,10 @@ struct RankingView: View {
             }
             .scrollDisabled(true)
             .listStyle(.plain)
+            .environment(\.defaultMinListRowHeight, 0)
             .padding(.top, 20)
-
+            .padding(.horizontal, -20)
+            
             AppButton(
                 variant: .primary,
                 text: "Submit Ranking",
@@ -132,6 +131,7 @@ struct RankingView: View {
             )
             .controlSize(.large)
             .padding(.top, 24)
+            .padding(.horizontal, 20)
         }
         .padding(.horizontal, 20)
         .onAppear {
@@ -153,7 +153,7 @@ struct RankingView: View {
     }
 }
 
-// MARK: - Preview View
+// MARK: - Preview Rank View
 
 struct PreviewRankingResponceView: View {
     let question: Question
