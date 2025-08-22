@@ -82,7 +82,7 @@ class PollsViewModel: ObservableObject {
             }
             return false
         }()
-        let isExpirationDateEligible = expirationDateLowerbound == nil || userExpirationDate >= expirationDateLowerbound!
+        let isExpirationDateEligible = decodedExpirationDateLowerbound == "000000" || userExpirationDate >= expirationDateLowerbound!
         let countriesString = Set(decodedCountries.map { $0.name }).joined(separator: ", ")
         let ageString: String = {
             let minYear = DateUtil.yearsBetween(from: upperboundBirthDate ?? Date(), to: poll.startsAt)

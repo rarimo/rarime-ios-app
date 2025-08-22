@@ -30,6 +30,9 @@
     "%lld questions" : {
 
     },
+    "%lld." : {
+
+    },
     "%lld/%lld invited" : {
       "localizations" : {
         "en" : {
@@ -501,6 +504,9 @@
 
     },
     "Ecuador" : {
+
+    },
+    "Edit" : {
 
     },
     "Egypt" : {
@@ -1232,6 +1238,15 @@
         }
       }
     },
+    "Rank these options by priority. Drag and drop to sort them from your most preferred to least preferred choice" : {
+      "extractionState" : "manual"
+    },
+    "Rank these options by priority. Drag and drop to sort them from your most preferred to least preferred choice." : {
+
+    },
+    "Ranking Based Voting" : {
+
+    },
     "RariMe" : {
 
     },
@@ -1511,6 +1526,9 @@
 
     },
     "Submit" : {
+
+    },
+    "Submit Ranking" : {
 
     },
     "Submitting..." : {
