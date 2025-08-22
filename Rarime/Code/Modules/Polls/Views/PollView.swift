@@ -49,6 +49,7 @@ struct PollView: View {
                                 }
 
                                 isQuestionsShown = false
+                                isVoted = true
                                 AlertManager.shared.emitSuccess(String(localized: "Your vote has been counted"))
                             } catch {
                                 LoggerUtil.common.error("Can't submit poll results: \(error, privacy: .public)")
@@ -94,6 +95,7 @@ struct PollView: View {
                                 }
                                 
                                 isQuestionsShown = false
+                                isVoted = true
                                 AlertManager.shared.emitSuccess(String(localized: "Your vote has been counted"))
                                 onClose()
                             } catch {

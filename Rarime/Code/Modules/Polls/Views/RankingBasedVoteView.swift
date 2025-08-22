@@ -3,8 +3,8 @@ import SwiftUI
 // MARK: - Data Models
 
 struct VariantItem: Identifiable, Equatable {
-    let id: UUID = UUID()
-    let answerIndex: Int           
+    let id: UUID = .init()
+    let answerIndex: Int
     let text: String
 }
 
@@ -81,35 +81,47 @@ struct RankingView: View {
             List {
                 ForEach(items) { item in
                     HStack(spacing: 12) {
-                        Image(systemName: "line.3.horizontal")
-                            .foregroundColor(.secondary)
-                            .font(.system(size: 18, weight: .medium))
+                        Image("Draggable")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(.textPrimary)
+                            .padding(.horizontal, 12)
+
+                        VerticalDivider()
+                            .padding(.horizontal, 12)
 
                         Text(item.text)
                             .font(.body)
-                            .foregroundColor(.primary)
-
-                        Spacer()
+                            .foregroundColor(.textPrimary)
                     }
-                    .padding()
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color.white)
-                    .cornerRadius(12)
+                    .padding(.vertical, 20)
+                    .padding(.horizontal, 20)
+                    .background(Color.bgComponentBasePrimary)
+                    .cornerRadius(20)
+                    .shadow(color: .clear, radius: 0)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color.primary, lineWidth: 1)
+                    )
                     .listRowSeparator(.hidden)
-                    .listRowBackground(Color.clear)
+                    .listRowBackground(Color.bgContainer)
+                    .contentShape(RoundedRectangle(cornerRadius: 20))
                 }
                 .onMove { indices, newOffset in
                     items.move(fromOffsets: indices, toOffset: newOffset)
                 }
-                .listRowInsets(EdgeInsets())
             }
+            .scrollDisabled(true)
             .listStyle(.plain)
+            .padding(.top, 20)
 
             AppButton(
                 variant: .primary,
                 text: "Submit Ranking",
                 action: {
-                    let rankingOrder = items.enumerated().map { (index, item) in
+                    let rankingOrder = items.enumerated().map { index, item in
                         PollResult(
                             questionIndex: index,
                             answerIndex: item.answerIndex
