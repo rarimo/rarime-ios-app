@@ -302,7 +302,8 @@ private struct PollListCard: View {
                             question: poll.questions[0].title,
                             options: rankedResults
                         ),
-                        totalVotes: totalScore
+                        totalVotes: totalScore,
+                        isRankingBased: true
                     )
                 }
                 .padding(.horizontal, 16)
