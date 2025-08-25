@@ -17,7 +17,7 @@ private enum RankingBaseVoteState {
 
 struct RankingBasedVoteView: View {
     let selectedPoll: Poll
-    let onBackClick: () -> Void
+    let onClose: () -> Void
     let onClick: ([PollResult]) -> Void
 
     @State private var currentState: RankingBaseVoteState = .rankingVote
@@ -31,7 +31,7 @@ struct RankingBasedVoteView: View {
                     .font(.headline)
                     .padding(.horizontal, 20)
                 Spacer()
-                Button(action: onBackClick) {
+                Button(action: onClose) {
                     Image(systemName: "xmark")
                         .padding()
                 }

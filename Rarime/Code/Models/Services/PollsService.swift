@@ -239,7 +239,7 @@ struct Poll: Identifiable {
     let eventId: BigUInt
     let proposalSMT: EthereumAddress
     let proposalResults: [[BigUInt]]
-    var rankingBased:Bool = false
+    var rankingBased: Bool = false
 
     var endAt: String {
         let endDate = self.startsAt.addingTimeInterval(Double(self.duration))
