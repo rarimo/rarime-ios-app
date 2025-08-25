@@ -22,55 +22,66 @@ struct PollView: View {
         return questionParticipants.max() ?? 0
     }
     
+    private func submitVote(results: [PollResult]) {
+        isSubmitting = true
+        Task { @MainActor in
+            defer { isVoted = true }
+            defer { isSubmitting = false }
+            do {
+                guard let user = userManager.user else { return }
+                let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
+
+                try await pollsViewModel.vote(
+                    accessJwt,
+                    user,
+                    userManager.registerZkProof!,
+                    passportManager.passport!,
+                    results
+                )
+                
+                if !pollsViewModel.votingPollsIds.contains(Int(poll.id)) {
+                    pollsViewModel.votingPollsIds.append(Int(poll.id))
+                }
+
+                isQuestionsShown = false
+                AlertManager.shared.emitSuccess(String(localized: "Your vote has been counted"))
+                onClose()
+            } catch {
+                LoggerUtil.common.error("Can't submit poll results: \(error, privacy: .public)")
+                
+                guard let afError = error as? AFError else {
+                    AlertManager.shared.emitError(.unknown(error.localizedDescription))
+                    onClose()
+                    return
+                }
+                
+                let openApiHttpCode = try afError.retriveOpenApiHttpCode()
+                let serverError = openApiHttpCode == HTTPStatusCode.forbidden.rawValue
+                    ? Errors.unknown("The maximum number of participants has been reached, contact the poll owner")
+                    : Errors.unknown("Service unavailable, try again later. Status code: \(openApiHttpCode)")
+                
+                AlertManager.shared.emitError(serverError)
+                onClose()
+            }
+        }
+    }
+    
     var body: some View {
         if isQuestionsShown {
-            ActivePollOptionsView(
-                poll: poll,
-                isSubmitting: isSubmitting,
-                onSubmit: { results in
-                    isSubmitting = true
-                    Task { @MainActor in
-                        defer { isSubmitting = false }
-                        do {
-                            guard let user = userManager.user else { return }
-                            let accessJwt = try await decentralizedAuthManager.getAccessJwt(user)
-                            
-                            try await pollsViewModel.vote(
-                                accessJwt,
-                                user,
-                                userManager.registerZkProof!,
-                                passportManager.passport!,
-                                results
-                            )
-                            
-                            if !pollsViewModel.votingPollsIds.contains(Int(poll.id)) {
-                                pollsViewModel.votingPollsIds.append(Int(poll.id))
-                            }
-                            
-                            isQuestionsShown = false
-                            AlertManager.shared.emitSuccess(String(localized: "Your vote has been counted"))
-                            onClose()
-                        } catch {
-                            LoggerUtil.common.error("Can't submit poll results: \(error, privacy: .public)")
-                            
-                            guard let error = error as? AFError else {
-                                AlertManager.shared.emitError(.unknown(error.localizedDescription))
-                                onClose()
-                                return
-                            }
-
-                            let openApiHttpCode = try error.retriveOpenApiHttpCode()
-                            let serverError = openApiHttpCode == HTTPStatusCode.forbidden.rawValue
-                                ? Errors.unknown("The maximum number of participants has been reached, contact the poll owner")
-                                : Errors.unknown("Service unavailable, try again later. Status code: \(openApiHttpCode)")
-                            
-                            AlertManager.shared.emitError(serverError)
-                            onClose()
-                        }
-                    }
-                },
-                onClose: { isQuestionsShown = false }
-            )
+            if poll.rankingBased {
+                RankingBasedVoteView(
+                    selectedPoll: poll,
+                    onClose: { isQuestionsShown = false },
+                    onClick: submitVote
+                )
+            } else {
+                ActivePollOptionsView(
+                    poll: poll,
+                    isSubmitting: isSubmitting,
+                    onSubmit: submitVote,
+                    onClose: { isQuestionsShown = false }
+                )
+            }
         } else {
             pollOverview
         }
@@ -123,13 +134,15 @@ struct PollView: View {
                         }
                         .foregroundStyle(.textSecondary)
                     }
-                    Group {
-                        Text(poll.description)
-                            .multilineTextAlignment(.leading)
-                        Text("\(poll.questions.count) questions")
+                    if !poll.rankingBased {
+                        Group {
+                            Text(poll.description)
+                                .multilineTextAlignment(.leading)
+                            Text("\(poll.questions.count) questions")
+                        }
+                        .body4()
+                        .foregroundStyle(.textSecondary)
                     }
-                    .body4()
-                    .foregroundStyle(.textSecondary)
                 }
                 if !pollsViewModel.pollRequirements.isEmpty {
                     HorizontalDivider()

@@ -64,7 +64,8 @@ class PollsService {
                 votingData: proposalInfo.config.votingWhitelistData,
                 eventId: proposalEventId,
                 proposalSMT: proposalInfo.proposalSMT,
-                proposalResults: proposalInfo.votingResults
+                proposalResults: proposalInfo.votingResults,
+                rankingBased: proposalMetadata.rankingBased
             )
             
             polls.append(poll)
@@ -120,7 +121,8 @@ class PollsService {
             votingData: proposalInfo.config.votingWhitelistData,
             eventId: proposalEventId,
             proposalSMT: proposalInfo.proposalSMT,
-            proposalResults: proposalInfo.votingResults
+            proposalResults: proposalInfo.votingResults,
+            rankingBased: proposalMetadata.rankingBased
         )
     }
     
@@ -237,6 +239,7 @@ struct Poll: Identifiable {
     let eventId: BigUInt
     let proposalSMT: EthereumAddress
     let proposalResults: [[BigUInt]]
+    var rankingBased: Bool = false
 
     var endAt: String {
         let endDate = self.startsAt.addingTimeInterval(Double(self.duration))
