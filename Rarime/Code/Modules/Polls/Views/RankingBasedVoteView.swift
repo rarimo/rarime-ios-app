@@ -77,7 +77,7 @@ struct RankingView: View {
 
             Text("Rank these options by priority. Drag and drop to sort them from your most preferred to least preferred choice.")
                 .font(.subheadline)
-            
+
             List {
                 ForEach(items) { item in
                     HStack(spacing: 12) {
@@ -115,10 +115,11 @@ struct RankingView: View {
             .environment(\.defaultMinListRowHeight, 0)
             .padding(.top, 20)
             .padding(.horizontal, -20)
-            
+
             AppButton(
                 variant: .primary,
-                text: "Submit Ranking",
+                text: "Preview Ranking",
+                rightIcon: .arrowRight,
                 action: {
                     let rankingOrder = items.enumerated().map { index, item in
                         PollResult(
@@ -165,21 +166,38 @@ struct PreviewRankingResponceView: View {
         VStack(alignment: .leading, spacing: 16) {
             Text(question.title)
                 .font(.title)
+                .padding(.horizontal, 24)
 
-            ForEach(ranking.indices, id: \.self) { index in
-                let result = ranking[index]
-                let answerText = result.answerIndex.map { question.variants[$0] } ?? "—"
+            List {
+                ForEach(ranking.indices, id: \.self) { index in
+                    let result = ranking[index]
+                    let answerText = result.answerIndex.map { question.variants[$0] } ?? "—"
 
-                HStack {
-                    Text("\(index + 1).")
-                        .font(.headline)
-                        .frame(width: 30)
-                    Text(answerText)
+                    HStack(spacing: 12) {
+                        Text("\(index + 1).")
+                            .font(.headline)
+                            .frame(width: 30)
+
+                        VerticalDivider()
+
+                        Text(answerText)
+                            .font(.body)
+                            .foregroundColor(.textPrimary)
+                            .padding(.leading, 12)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(20)
+                    .background(Color.bgComponentBasePrimary)
+                    .cornerRadius(20)
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(Color.bgContainer)
+                    .listRowInsets(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                    .contentShape(RoundedRectangle(cornerRadius: 20))
                 }
-                .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(12)
             }
+            .listStyle(.plain)
+            .environment(\.defaultMinListRowHeight, 0)
+            .padding(.horizontal, -10)
 
             Spacer()
 
@@ -187,6 +205,7 @@ struct PreviewRankingResponceView: View {
                 AppButton(
                     variant: .secondary,
                     text: "Edit",
+                    leftIcon: .arrowLeft,
                     action: { onEdit() }
                 )
                 .controlSize(.large)
@@ -194,11 +213,13 @@ struct PreviewRankingResponceView: View {
                 AppButton(
                     variant: .primary,
                     text: "Submit",
+                    rightIcon: .arrowRight,
                     action: { onSubmit() }
                 )
                 .controlSize(.large)
             }
+            .padding(.horizontal, 24)
         }
-        .padding(24)
+        .padding(.top, 24)
     }
 }

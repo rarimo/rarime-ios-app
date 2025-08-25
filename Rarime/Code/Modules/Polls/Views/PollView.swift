@@ -24,13 +24,14 @@ struct PollView: View {
     
     var body: some View {
         if isQuestionsShown {
-            if (poll.rankingBased) {
+            if poll.rankingBased {
                 RankingBasedVoteView(
                     selectedPoll: poll,
                     onBackClick: { isQuestionsShown = false },
                     onClick: { results in
                         isSubmitting = true
                         Task { @MainActor in
+                            defer { isVoted = true }
                             defer { isSubmitting = false }
                             do {
                                 guard let user = userManager.user else { return }
@@ -49,7 +50,6 @@ struct PollView: View {
                                 }
 
                                 isQuestionsShown = false
-                                isVoted = true
                                 AlertManager.shared.emitSuccess(String(localized: "Your vote has been counted"))
                             } catch {
                                 LoggerUtil.common.error("Can't submit poll results: \(error, privacy: .public)")
@@ -61,22 +61,22 @@ struct PollView: View {
                                 
                                 let openApiHttpCode = try error.retriveOpenApiHttpCode()
                                 let serverError = openApiHttpCode == HTTPStatusCode.forbidden.rawValue
-                                ? Errors.unknown("The maximum number of participants has been reached, contact the poll owner")
-                                : Errors.unknown("Service unavailable, try again later. Status code: \(openApiHttpCode)")
+                                    ? Errors.unknown("The maximum number of participants has been reached, contact the poll owner")
+                                    : Errors.unknown("Service unavailable, try again later. Status code: \(openApiHttpCode)")
                                 
                                 AlertManager.shared.emitError(serverError)
                             }
                         }
                     }
                 )
-            }
-            else {
+            } else {
                 ActivePollOptionsView(
                     poll: poll,
                     isSubmitting: isSubmitting,
                     onSubmit: { results in
                         isSubmitting = true
                         Task { @MainActor in
+                            defer { isVoted = true }
                             defer { isSubmitting = false }
                             do {
                                 guard let user = userManager.user else { return }
@@ -95,7 +95,6 @@ struct PollView: View {
                                 }
                                 
                                 isQuestionsShown = false
-                                isVoted = true
                                 AlertManager.shared.emitSuccess(String(localized: "Your vote has been counted"))
                                 onClose()
                             } catch {
@@ -109,8 +108,8 @@ struct PollView: View {
                                 
                                 let openApiHttpCode = try error.retriveOpenApiHttpCode()
                                 let serverError = openApiHttpCode == HTTPStatusCode.forbidden.rawValue
-                                ? Errors.unknown("The maximum number of participants has been reached, contact the poll owner")
-                                : Errors.unknown("Service unavailable, try again later. Status code: \(openApiHttpCode)")
+                                    ? Errors.unknown("The maximum number of participants has been reached, contact the poll owner")
+                                    : Errors.unknown("Service unavailable, try again later. Status code: \(openApiHttpCode)")
                                 
                                 AlertManager.shared.emitError(serverError)
                                 onClose()
@@ -172,7 +171,7 @@ struct PollView: View {
                         }
                         .foregroundStyle(.textSecondary)
                     }
-                    if(!poll.rankingBased){
+                    if !poll.rankingBased {
                         Group {
                             Text(poll.description)
                                 .multilineTextAlignment(.leading)
