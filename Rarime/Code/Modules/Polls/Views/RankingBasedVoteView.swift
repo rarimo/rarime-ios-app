@@ -51,7 +51,7 @@ struct RankingBasedVoteView: View {
                     }
                 )
             case .previewResponse:
-                PreviewRankingResponceView(
+                PreviewRankingResponseView(
                     question: selectedPoll.questions[0],
                     ranking: currentRanking,
                     onEdit: { currentState = .rankingVote },
@@ -156,7 +156,7 @@ struct RankingView: View {
 
 // MARK: - Preview Rank View
 
-struct PreviewRankingResponceView: View {
+struct PreviewRankingResponseView: View {
     let question: Question
     let ranking: [PollResult]
     let onEdit: () -> Void
