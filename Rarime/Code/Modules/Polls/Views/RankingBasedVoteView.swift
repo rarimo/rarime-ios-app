@@ -74,9 +74,11 @@ struct RankingView: View {
         VStack(alignment: .leading, spacing: 24) {
             Text(question.title)
                 .font(.title)
+                .padding(.horizontal, 20)
 
             Text("Rank these options by priority. Drag and drop to sort them from your most preferred to least preferred choice.")
                 .font(.subheadline)
+                .padding(.horizontal, 20)
 
             List {
                 ForEach(items) { item in
@@ -93,8 +95,8 @@ struct RankingView: View {
                             .font(.body)
                             .foregroundColor(.textPrimary)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(20)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .background(Color.bgComponentBasePrimary)
                     .cornerRadius(20)
                     .overlay(
@@ -102,19 +104,18 @@ struct RankingView: View {
                             .stroke(Color.primary, lineWidth: 1)
                     )
                     .listRowSeparator(.hidden)
-                    .listRowBackground(Color.bgContainer)
-                    .listRowInsets(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                    .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
+                    .listRowBackground(Color.clear)
                     .contentShape(RoundedRectangle(cornerRadius: 20))
                 }
                 .onMove { indices, newOffset in
                     items.move(fromOffsets: indices, toOffset: newOffset)
                 }
             }
-            .scrollDisabled(true)
+            .padding(.horizontal, 20)
             .listStyle(.plain)
+            .scrollDisabled(true)
             .environment(\.defaultMinListRowHeight, 0)
-            .padding(.top, 20)
-            .padding(.horizontal, -20)
 
             AppButton(
                 variant: .primary,
@@ -131,10 +132,9 @@ struct RankingView: View {
                 }
             )
             .controlSize(.large)
-            .padding(.top, 24)
             .padding(.horizontal, 20)
         }
-        .padding(.horizontal, 20)
+        .padding(.vertical, 20)
         .onAppear {
             guard items.isEmpty else { return }
 
@@ -163,10 +163,9 @@ struct PreviewRankingResponseView: View {
     let onSubmit: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 24) {
             Text(question.title)
                 .font(.title)
-                .padding(.horizontal, 24)
 
             List {
                 ForEach(ranking.indices, id: \.self) { index in
@@ -189,15 +188,20 @@ struct PreviewRankingResponseView: View {
                     .padding(20)
                     .background(Color.bgComponentBasePrimary)
                     .cornerRadius(20)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color.primary, lineWidth: 1)
+                    )
                     .listRowSeparator(.hidden)
-                    .listRowBackground(Color.bgContainer)
-                    .listRowInsets(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
-                    .contentShape(RoundedRectangle(cornerRadius: 20))
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
                 }
             }
             .listStyle(.plain)
+            .scrollDisabled(true)
+            .cornerRadius(12)
+            .scrollContentBackground(.hidden)
             .environment(\.defaultMinListRowHeight, 0)
-            .padding(.horizontal, -10)
 
             Spacer()
 
@@ -218,8 +222,8 @@ struct PreviewRankingResponseView: View {
                 )
                 .controlSize(.large)
             }
-            .padding(.horizontal, 24)
         }
         .padding(.top, 24)
+        .padding(.horizontal, 24)
     }
 }

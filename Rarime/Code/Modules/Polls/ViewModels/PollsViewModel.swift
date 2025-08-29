@@ -104,7 +104,7 @@ class PollsViewModel: ObservableObject {
         }()
         let genderString = decodedGender == "M" ? "Male only" : "Female only"
         let expirationDateString = decodedExpirationDateLowerbound != "000000"
-            ? "Valid until \(DateUtil.richDateFormatter.string(from: expirationDateLowerbound ?? Date()))"
+            ? "Document valid until \(DateUtil.richDateFormatter.string(from: expirationDateLowerbound ?? Date()))"
             : "-"
         
         var requirements: [PollRequirement] = []
