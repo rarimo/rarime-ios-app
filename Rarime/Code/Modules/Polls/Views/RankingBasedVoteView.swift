@@ -74,11 +74,9 @@ struct RankingView: View {
         VStack(alignment: .leading, spacing: 24) {
             Text(question.title)
                 .font(.title)
-                .padding(.horizontal, 20)
 
             Text("Rank these options by priority. Drag and drop to sort them from your most preferred to least preferred choice.")
                 .font(.subheadline)
-                .padding(.horizontal, 20)
 
             List {
                 ForEach(items) { item in
@@ -98,21 +96,20 @@ struct RankingView: View {
                     .padding(20)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .background(Color.bgComponentBasePrimary)
-                    .cornerRadius(20)
+                    .cornerRadius(16)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 20)
+                        RoundedRectangle(cornerRadius: 16)
                             .stroke(Color.primary, lineWidth: 1)
                     )
                     .listRowSeparator(.hidden)
-                    .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
+                    .listRowInsets(EdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5))
                     .listRowBackground(Color.clear)
-                    .contentShape(RoundedRectangle(cornerRadius: 20))
+                    .contentShape(RoundedRectangle(cornerRadius: 16))
                 }
                 .onMove { indices, newOffset in
                     items.move(fromOffsets: indices, toOffset: newOffset)
                 }
             }
-            .padding(.horizontal, 20)
             .listStyle(.plain)
             .scrollDisabled(true)
             .environment(\.defaultMinListRowHeight, 0)
@@ -132,9 +129,9 @@ struct RankingView: View {
                 }
             )
             .controlSize(.large)
-            .padding(.horizontal, 20)
         }
-        .padding(.vertical, 20)
+        .padding(.top, 24)
+        .padding(.horizontal, 24)
         .onAppear {
             guard items.isEmpty else { return }
 
@@ -187,19 +184,19 @@ struct PreviewRankingResponseView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(20)
                     .background(Color.bgComponentBasePrimary)
-                    .cornerRadius(20)
+                    .cornerRadius(16)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 20)
+                        RoundedRectangle(cornerRadius: 16)
                             .stroke(Color.primary, lineWidth: 1)
                     )
                     .listRowSeparator(.hidden)
                     .listRowBackground(Color.clear)
-                    .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
+                    .listRowInsets(EdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5))
                 }
             }
             .listStyle(.plain)
             .scrollDisabled(true)
-            .cornerRadius(12)
+            .cornerRadius(16)
             .scrollContentBackground(.hidden)
             .environment(\.defaultMinListRowHeight, 0)
 

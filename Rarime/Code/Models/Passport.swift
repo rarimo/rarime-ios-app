@@ -67,12 +67,11 @@ struct Passport: Codable {
     }
     
     var displayedFirstName: String {
-        firstName.isEmpty ? fullName.components(separatedBy: " ").first ?? "" : firstName
+        firstName.isEmpty ? firstName.components(separatedBy: " ").first ?? "" : firstName
     }
     
     var displayedLastName: String {
-        let lastNameParts = fullName.components(separatedBy: " ").dropFirst()
-        return lastNameParts.isEmpty ? lastName : lastNameParts.joined(separator: " ")
+        lastName.isEmpty ? lastName.components(separatedBy: " ").first ?? "" : lastName
     }
     
     var encapsulatedContentSize: Int {
