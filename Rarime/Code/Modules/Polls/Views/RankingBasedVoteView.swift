@@ -111,7 +111,6 @@ struct RankingView: View {
                 }
             }
             .listStyle(.plain)
-            .scrollDisabled(true)
             .environment(\.defaultMinListRowHeight, 0)
 
             AppButton(
@@ -195,7 +194,6 @@ struct PreviewRankingResponseView: View {
                 }
             }
             .listStyle(.plain)
-            .scrollDisabled(true)
             .cornerRadius(16)
             .scrollContentBackground(.hidden)
             .environment(\.defaultMinListRowHeight, 0)
