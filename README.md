@@ -38,8 +38,8 @@ Run the `prebuild.sh` script to generate the Go bindings for the iOS app.
 
 ## Resources
 
-- [Website](https://rarime.com)
-- [Documentation](https://docs.rarime.com)
+- [Website](https://rarimo.com)
+- [Documentation](https://docs.rarimo.com)
 
 ## License
 
