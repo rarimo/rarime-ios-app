@@ -2967,7 +2967,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = RariMe;
+				INFOPLIST_KEY_CFBundleDisplayName = Rarimo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "You need to authenticate on your phone to unlock the app";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Used to read the MRZ from the document";
@@ -2988,7 +2988,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
@@ -3024,7 +3024,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = RariMe;
+				INFOPLIST_KEY_CFBundleDisplayName = Rarimo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "You need to authenticate on your phone to unlock the app";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Used to read the MRZ from the document";
@@ -3045,7 +3045,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
@@ -3147,7 +3147,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = RariMe;
+				INFOPLIST_KEY_CFBundleDisplayName = Rarimo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "You need to authenticate on your phone to unlock the app";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Used to read the MRZ from the document";
@@ -3168,7 +3168,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
@@ -3263,7 +3263,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = RariMe;
+				INFOPLIST_KEY_CFBundleDisplayName = Rarimo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "You need to authenticate on your phone to unlock the app";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Used to read the MRZ from the document";
@@ -3284,7 +3284,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = (

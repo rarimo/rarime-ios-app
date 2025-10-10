@@ -49,7 +49,7 @@ struct AuthMethodView: View {
                     },
                     message: {
                         isFaceIdNotAvailableError
-                            ? Text("Enable Face ID in Settings > RariMe.")
+                            ? Text("Enable Face ID in Settings > Rarimo.")
                             : Text("Could not authenticate with Face ID. Please try again.")
                     }
                 )
