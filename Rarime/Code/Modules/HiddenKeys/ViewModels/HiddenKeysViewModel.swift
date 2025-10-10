@@ -86,8 +86,8 @@ class HiddenKeysViewModel: ObservableObject {
             } catch let afError as AFError where afError.isExplicitlyCancelledError {
                 return
             } catch {
-                AlertManager.shared.emitError("Failed to load user information")
-                LoggerUtil.common.error("HiddenKeys: Failed to load user information: \(error, privacy: .public)")
+//                AlertManager.shared.emitError("Failed to load user information")
+//                LoggerUtil.common.error("HiddenKeys: Failed to load user information: \(error, privacy: .public)")
                 return
             }
         }
