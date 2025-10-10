@@ -620,7 +620,7 @@ class UserManager: ObservableObject {
     var ethereumAddress: String? {
         guard let user else { return nil }
         
-        guard let ethereumPrivateKey = try? EthereumPrivateKey(privateKey: user.secretKey.bytes) else {
+        guard let ethereumPrivateKey = try? EthereumPrivateKey(privateKey: user.secretKey.makeBytes()) else {
             return nil
         }
         

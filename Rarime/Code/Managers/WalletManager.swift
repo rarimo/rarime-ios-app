@@ -50,7 +50,7 @@ class WalletManager: ObservableObject {
         isBalanceLoading = true
         defer { isBalanceLoading = false }
 
-        let ethPrivateKey = try EthereumPrivateKey(privateKey: privateKey.bytes)
+        let ethPrivateKey = try EthereumPrivateKey(privateKey: privateKey.makeBytes())
         balance = try await web3.eth.getBalanceAsync(address: ethPrivateKey.address, block: .latest)
     }
 
@@ -70,7 +70,7 @@ class WalletManager: ObservableObject {
         }
 
         let amountToTransfer = EthereumQuantity(decimal: amount)
-        let ethPrivateKey = try EthereumPrivateKey(privateKey: privateKey.bytes)
+        let ethPrivateKey = try EthereumPrivateKey(privateKey: privateKey.makeBytes())
         let nonce = try web3.eth.getTransactionCount(address: ethPrivateKey.address, block: .latest).wait()
 
         var gasPrice = try web3.eth.gasPrice().wait()
