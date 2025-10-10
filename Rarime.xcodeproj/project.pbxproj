@@ -128,6 +128,7 @@
 		56F22B302E059A9200456A7B /* DocumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F22B2E2E059A9200456A7B /* DocumentType.swift */; };
 		56F22B322E05ACC800456A7B /* ReserveTokensButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F22B312E05ACC800456A7B /* ReserveTokensButton.swift */; };
 		56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F48BBD2BC02E82001F3AA4 /* AppButton.swift */; };
+		638BBB1D2E99302800222A6C /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 638BBB1C2E99302800222A6C /* Identity.xcframework */; };
 		C71161B32CAAE3DB00ED41EA /* String+BigUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71161B22CAAE3DB00ED41EA /* String+BigUInt.swift */; };
 		C726E8D22D647FED000C9CA6 /* SnapCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C726E8D12D647FE9000C9CA6 /* SnapCarouselView.swift */; };
 		C72F33182D677DBA00AC1814 /* AppIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72F33172D677DB200AC1814 /* AppIconButton.swift */; };
@@ -286,7 +287,6 @@
 		CE7210332BD818020043DB7F /* Double+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7210322BD818020043DB7F /* Double+Rounded.swift */; };
 		CE77EDA32DEDA51400F3B91E /* EvmScanTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77EDA22DEDA50F00F3B91E /* EvmScanTransaction.swift */; };
 		CE77EDA52DEDAA7C00F3B91E /* EvmScanAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77EDA42DEDAA6700F3B91E /* EvmScanAPI.swift */; };
-		CE78AA902E0ABB09003395DA /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE78AA8F2E0ABB09003395DA /* Identity.xcframework */; };
 		CE7BFAFD2D5A0A8D00B7CBAC /* ReadNfcUsa.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CE7BFAFB2D5A0A8D00B7CBAC /* ReadNfcUsa.mp4 */; };
 		CE7BFAFE2D5A0A8D00B7CBAC /* ScanMrzUsa.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CE7BFAFC2D5A0A8D00B7CBAC /* ScanMrzUsa.mp4 */; };
 		CE7D8AAC2BFB52EE009AF212 /* OpenApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7D8AAB2BFB52EE009AF212 /* OpenApiError.swift */; };
@@ -508,6 +508,7 @@
 		56F22B2E2E059A9200456A7B /* DocumentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentType.swift; sourceTree = "<group>"; };
 		56F22B312E05ACC800456A7B /* ReserveTokensButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTokensButton.swift; sourceTree = "<group>"; };
 		56F48BBD2BC02E82001F3AA4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
+		638BBB1C2E99302800222A6C /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		C71161B22CAAE3DB00ED41EA /* String+BigUInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+BigUInt.swift"; sourceTree = "<group>"; };
 		C726E8D12D647FE9000C9CA6 /* SnapCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarouselView.swift; sourceTree = "<group>"; };
 		C72F33172D677DB200AC1814 /* AppIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconButton.swift; sourceTree = "<group>"; };
@@ -630,7 +631,6 @@
 		CE7210322BD818020043DB7F /* Double+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Rounded.swift"; sourceTree = "<group>"; };
 		CE77EDA22DEDA50F00F3B91E /* EvmScanTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmScanTransaction.swift; sourceTree = "<group>"; };
 		CE77EDA42DEDAA6700F3B91E /* EvmScanAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmScanAPI.swift; sourceTree = "<group>"; };
-		CE78AA8F2E0ABB09003395DA /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
 		CE7BFAFB2D5A0A8D00B7CBAC /* ReadNfcUsa.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ReadNfcUsa.mp4; sourceTree = "<group>"; };
 		CE7BFAFC2D5A0A8D00B7CBAC /* ScanMrzUsa.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ScanMrzUsa.mp4; sourceTree = "<group>"; };
 		CE7D8AAB2BFB52EE009AF212 /* OpenApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenApiError.swift; sourceTree = "<group>"; };
@@ -743,9 +743,9 @@
 				560F0C1D2BD0234300067054 /* QRCode in Frameworks */,
 				56D7FC9C2DFC3F1100B13A61 /* WrappingHStack in Frameworks */,
 				CEE4FEA92CFDB851007C31F3 /* libfr.a in Frameworks */,
+				638BBB1D2E99302800222A6C /* Identity.xcframework in Frameworks */,
 				CE30FA9D2D50DF6D0057F897 /* libwitnesscalc_registerIdentity_14_256_3_4_336_64_1_1480_5_296.a in Frameworks */,
 				CE30FA9E2D50DF6D0057F897 /* libwitnesscalc_registerIdentity_4_160_3_3_336_216_1_1296_3_256.a in Frameworks */,
-				CE78AA902E0ABB09003395DA /* Identity.xcframework in Frameworks */,
 				CE30FAA22D50DF6D0057F897 /* libwitnesscalc_registerIdentity_1_256_3_6_336_560_1_2744_4_256.a in Frameworks */,
 				CE30FAA42D50DF6D0057F897 /* libwitnesscalc_registerIdentity_20_160_3_3_736_200_NA.a in Frameworks */,
 				CE2FF4B62DCCAC6E00E4151D /* libwitnesscalc_faceRegistryNoInclusion.a in Frameworks */,
@@ -1599,7 +1599,6 @@
 		CEC562122BD92804002D4954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CE78AA8F2E0ABB09003395DA /* Identity.xcframework */,
 				CEC561FF2BD923B3002D4954 /* bridge.h */,
 				CEC562002BD923B3002D4954 /* prover.h */,
 				CE6FFBCD2DC3709B0083E855 /* bionet.h */,
@@ -1638,6 +1637,7 @@
 				CEC76C902D6750D800130CA1 /* libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a */,
 				CEC562132BD9281A002D4954 /* libresolv.9.tbd */,
 				CEC562142BD9281A002D4954 /* libresolv.tbd */,
+				638BBB1C2E99302800222A6C /* Identity.xcframework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -2967,7 +2967,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = RariMe;
+				INFOPLIST_KEY_CFBundleDisplayName = Rarimo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "You need to authenticate on your phone to unlock the app";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Used to read the MRZ from the document";
@@ -2988,7 +2988,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
@@ -3024,7 +3024,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = RariMe;
+				INFOPLIST_KEY_CFBundleDisplayName = Rarimo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "You need to authenticate on your phone to unlock the app";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Used to read the MRZ from the document";
@@ -3045,7 +3045,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
@@ -3147,7 +3147,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = RariMe;
+				INFOPLIST_KEY_CFBundleDisplayName = Rarimo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "You need to authenticate on your phone to unlock the app";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Used to read the MRZ from the document";
@@ -3168,7 +3168,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
@@ -3263,7 +3263,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = RariMe;
+				INFOPLIST_KEY_CFBundleDisplayName = Rarimo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "You need to authenticate on your phone to unlock the app";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Used to read the MRZ from the document";
@@ -3284,7 +3284,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
