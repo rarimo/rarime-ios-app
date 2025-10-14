@@ -128,7 +128,7 @@
 		56F22B302E059A9200456A7B /* DocumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F22B2E2E059A9200456A7B /* DocumentType.swift */; };
 		56F22B322E05ACC800456A7B /* ReserveTokensButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F22B312E05ACC800456A7B /* ReserveTokensButton.swift */; };
 		56F48BBE2BC02E82001F3AA4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F48BBD2BC02E82001F3AA4 /* AppButton.swift */; };
-		638BBB1D2E99302800222A6C /* Identity.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 638BBB1C2E99302800222A6C /* Identity.xcframework */; };
+		63847D692E587D0C00FAB03E /* RankingBasedVoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63847D682E587D0C00FAB03E /* RankingBasedVoteView.swift */; };
 		C71161B32CAAE3DB00ED41EA /* String+BigUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71161B22CAAE3DB00ED41EA /* String+BigUInt.swift */; };
 		C726E8D22D647FED000C9CA6 /* SnapCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C726E8D12D647FE9000C9CA6 /* SnapCarouselView.swift */; };
 		C72F33182D677DBA00AC1814 /* AppIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72F33172D677DB200AC1814 /* AppIconButton.swift */; };
@@ -508,7 +508,7 @@
 		56F22B2E2E059A9200456A7B /* DocumentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentType.swift; sourceTree = "<group>"; };
 		56F22B312E05ACC800456A7B /* ReserveTokensButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTokensButton.swift; sourceTree = "<group>"; };
 		56F48BBD2BC02E82001F3AA4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
-		638BBB1C2E99302800222A6C /* Identity.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Identity.xcframework; sourceTree = "<group>"; };
+		63847D682E587D0C00FAB03E /* RankingBasedVoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingBasedVoteView.swift; sourceTree = "<group>"; };
 		C71161B22CAAE3DB00ED41EA /* String+BigUInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+BigUInt.swift"; sourceTree = "<group>"; };
 		C726E8D12D647FE9000C9CA6 /* SnapCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarouselView.swift; sourceTree = "<group>"; };
 		C72F33172D677DB200AC1814 /* AppIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconButton.swift; sourceTree = "<group>"; };
@@ -1185,6 +1185,7 @@
 		C7D624482D6DB2F5007BA5A6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				63847D682E587D0C00FAB03E /* RankingBasedVoteView.swift */,
 				C7EB15052D91835600073E72 /* BarChartView.swift */,
 				C7D624602D6E1068007BA5A6 /* ActivePollOptionsView.swift */,
 				C7D6244C2D6DB329007BA5A6 /* PollView.swift */,
@@ -2190,6 +2191,7 @@
 				56933DF32BBAC2940068C894 /* ScanPassportMRZView.swift in Sources */,
 				56A6C75C2BBC2CD500992562 /* PassportUtils.swift in Sources */,
 				563529F62BB077AB0027C910 /* CardContainer.swift in Sources */,
+				63847D692E587D0C00FAB03E /* RankingBasedVoteView.swift in Sources */,
 				560F0C252BD036F900067054 /* AppTextField.swift in Sources */,
 				C75512902C86F4BC000258AD /* PushNotification.xcdatamodeld in Sources */,
 				C75535482D6F2EF900A562B5 /* PollQRCodeView.swift in Sources */,

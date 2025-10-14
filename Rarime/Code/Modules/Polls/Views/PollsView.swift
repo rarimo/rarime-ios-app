@@ -6,7 +6,7 @@ protocol NavTab {
 
 private enum PollsTab: CaseIterable, NavTab {
     case active, history
-    
+
     var title: String {
         switch self {
         case .active: String(localized: "Active")
@@ -17,32 +17,32 @@ private enum PollsTab: CaseIterable, NavTab {
 
 struct PollsView: View {
     @Environment(\.openURL) var openURL
-    
+
     @EnvironmentObject private var externalRequestsManager: ExternalRequestsManager
     @EnvironmentObject var mainViewModel: MainView.ViewModel
     @EnvironmentObject var pollsViewModel: PollsViewModel
-    
+
     let onClose: () -> Void
 
     var animation: Namespace.ID
-    
+
     @State private var currentTab = PollsTab.active
     @State private var isPollSheetShown = false
-    
+
     @State private var isPollsLoading = true
-    
+
     private var aсtivePolls: [Poll] {
         pollsViewModel.polls.filter { poll in
             poll.status == .waiting || poll.status == .started
         }
     }
-    
+
     private var endedPolls: [Poll] {
         pollsViewModel.polls.filter { poll in
             poll.status == .ended
         }
     }
-    
+
     var body: some View {
         ZStack(alignment: .topTrailing) {
             PullToCloseWrapperView(action: onClose) {
@@ -159,7 +159,7 @@ struct PollsView: View {
             Task { await loadPolls() }
         }
     }
-    
+
     private func makePollsList(_ polls: [Poll]) -> some View {
         ZStack {
             if isPollsLoading {
@@ -185,7 +185,7 @@ struct PollsView: View {
         }
         .frame(minHeight: 340, alignment: .center)
     }
-    
+
     @MainActor
     private func loadPolls() async {
         defer { isPollsLoading = false }
@@ -197,20 +197,26 @@ struct PollsView: View {
     }
 }
 
+struct RankedOption: Identifiable, Equatable, Hashable {
+    var id: String { text }
+    let text: String
+    var score: Double
+}
+
 private struct PollListCard: View {
     @EnvironmentObject var pollsViewModel: PollsViewModel
-    
+
     let poll: Poll
-    
+
     let onViewPoll: () -> Void
-    
+
     @State private var selectedIndex = 0
-    
+
     private var totalParticipants: Int {
         let questionParticipants = poll.proposalResults.map { $0.reduce(0) { $0 + Int($1) } }
         return questionParticipants.max() ?? 0
     }
-    
+
     private var questionResults: [QuestionResult] {
         var results: [QuestionResult] = []
         for (question, result) in zip(poll.questions, poll.proposalResults) {
@@ -228,7 +234,34 @@ private struct PollListCard: View {
         }
         return results
     }
-    
+
+    private var rankingResults: [RankedOption] {
+        return calculateRankingResult(poll: poll)
+    }
+
+    private func calculateRankingResult(poll: Poll) -> [RankedOption] {
+        var scores: [String: Double] = [:]
+        let totalRanks = Double(poll.questions.count)
+        for (rankIndex, voteCounts) in poll.proposalResults.enumerated() {
+            let scoreForRank = totalRanks - Double(rankIndex)
+
+            for (candidateIndex, count) in voteCounts.enumerated() {
+                guard candidateIndex < poll.questions[rankIndex].variants.count else { continue }
+
+                let candidateName = poll.questions[rankIndex].variants[candidateIndex]
+                let candidateScore = Double(count) * scoreForRank
+
+                scores[candidateName, default: 0.0] += candidateScore
+            }
+        }
+
+        var rankedOptions = scores.map { RankedOption(text: $0.key, score: $0.value) }
+
+        rankedOptions.sort { $0.score > $1.score }
+
+        return rankedOptions
+    }
+
     var body: some View {
         VStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 16) {
@@ -239,13 +272,13 @@ private struct PollListCard: View {
                         .multilineTextAlignment(.leading)
                     HStack(alignment: .center, spacing: 12) {
                         HStack(alignment: .center, spacing: 8) {
-                            Image(.timerLine)
+                            Image("TimerLine")
                                 .iconSmall()
                             Text(poll.endAt)
                                 .subtitle7()
                         }
                         HStack(alignment: .center, spacing: 8) {
-                            Image(.groupLine)
+                            Image("GroupLine")
                                 .iconSmall()
                             Text(totalParticipants.formatted())
                                 .subtitle7()
@@ -256,7 +289,25 @@ private struct PollListCard: View {
                 HorizontalDivider()
             }
             .padding([.top, .horizontal], 16)
-            Group {
+
+            if poll.rankingBased {
+                VStack(alignment: .leading, spacing: 16) {
+                    let rankedResults = rankingResults.map {
+                        QuestionResultOption(answer: $0.text, votes: Int($0.score))
+                    }
+                    let totalScore = rankedResults.map(\.votes).reduce(0, +)
+
+                    BarChartPollView(
+                        result: QuestionResult(
+                            question: poll.questions[0].title,
+                            options: rankedResults
+                        ),
+                        totalVotes: totalScore,
+                        isRankingBased: true
+                    )
+                }
+                .padding(.horizontal, 16)
+            } else {
                 HeightPreservingTabView(selection: $selectedIndex) {
                     ForEach(questionResults.indices, id: \.self) { index in
                         VStack(alignment: .leading, spacing: 16) {
@@ -271,14 +322,6 @@ private struct PollListCard: View {
                         }
                         .padding(.horizontal, 16)
                         .tag(index)
-                        .background(
-                            GeometryReader { geometry in
-                                Color.clear.preference(
-                                    key: TabViewHeightPreferenceKey<Int>.self,
-                                    value: [index: geometry.size.height]
-                                )
-                            }
-                        )
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
@@ -291,12 +334,11 @@ private struct PollListCard: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
-            .padding(.bottom, 16)
         }
         .onTapGesture(perform: onViewPoll)
         .background {
             RoundedRectangle(cornerRadius: 20)
-                .fill(.bgPrimary)
+                .fill(Color.bgPrimary)
         }
     }
 }
