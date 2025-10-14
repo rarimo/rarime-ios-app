@@ -53,7 +53,7 @@ class PollsViewModel: ObservableObject {
         let lowerBoundBirthDate = try? DateUtil.parsePassportDate(decodedBirthDateLowerbound, true)
         let userBirthDate = (try? DateUtil.parsePassportDate(passport.dateOfBirth, true)) ?? Date()
         
-        let expirationDateLowerbound = try? DateUtil.parsePassportDate(decodedExpirationDateLowerbound, false)
+        let expirationDateLowerbound = (try? DateUtil.parsePassportDate(decodedExpirationDateLowerbound, false)) ?? Date()
         let userExpirationDate = (try? DateUtil.parsePassportDate(passport.documentExpiryDate, false)) ?? Date()
         
         let isNationalityEligible = decodedCountries.contains(Country.fromISOCode(passport.nationality))
