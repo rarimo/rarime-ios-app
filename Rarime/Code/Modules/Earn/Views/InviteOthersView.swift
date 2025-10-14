@@ -62,8 +62,8 @@ private struct InviteCodeView: View {
                     Spacer()
                     ShareLink(
                         item: URL(string: invitationLink)!,
-                        subject: Text("Invite to RariMe"),
-                        message: Text("Join RariMe with my invite code: \(code)\n\n\(invitationLink)")
+                        subject: Text("Invite to Rarimo"),
+                        message: Text("Join Rarimo with my invite code: \(code)\n\n\(invitationLink)")
                     ) {
                         Image(.shareLine)
                             .iconMedium()

@@ -16,7 +16,7 @@ private enum HomeOnboardingStep: Int, CaseIterable {
         switch self {
         case .welcome: String(localized: "This app is where you privately store your digital identities, enabling you to go incognito across the web")
         case .privacy: String(localized: "No one can trace your actions\nNo system can connect the dots\nNo data ever leaves your phone")
-        case .identity: String(localized: "RariMe lets you prove your identity - without giving anything away")
+        case .identity: String(localized: "Rarimo lets you prove your identity - without giving anything away")
         case .widgets: String(localized: "Add different type of applications that you can intersect with anonymously")
         }
     }

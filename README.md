@@ -12,7 +12,7 @@ RariMe is a self-custody identity wallet, that unlocks private but verifiable id
 
 Requires iOS 16 or higher.
 
-[![App Store Image](https://rarime-landing-test.netlify.app/images/app-store.svg)](https://apps.apple.com/app/rarime/id6503300598)
+[![App Store Image](https://img.shields.io/badge/Available_on-App_Store-black.svg)](https://apps.apple.com/app/rarime/id6503300598)
 
 ## Requirements
 
@@ -38,8 +38,8 @@ Run the `prebuild.sh` script to generate the Go bindings for the iOS app.
 
 ## Resources
 
-- [Website](https://rarime.com)
-- [Documentation](https://docs.rarime.com)
+- [Website](https://rarimo.com)
+- [Documentation](https://docs.rarimo.com)
 
 ## License
 

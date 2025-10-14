@@ -14,9 +14,9 @@ class BN: Codable {
     }
     
     init(_ data: Data) {
-        var bytes = data.bytes
-        
-        bn = BN_bin2bn(&bytes, Int32(data.count), nil)
+        bn = data.withUnsafeBytes { (pointer: UnsafeRawBufferPointer) -> OpaquePointer? in
+            return BN_bin2bn(pointer.baseAddress, Int32(data.count), nil)
+        }
     }
     
     init(hex: String) throws {
