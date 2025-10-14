@@ -174,13 +174,15 @@ struct ProposalMetadata: Codable {
     let title, description: String
     let imageCid: String?
     let acceptedOptions: [ProposalMetadataAcceptedOption]
+    let rankingBased: Bool
     
     static func empty() -> Self {
         return Self(
             title: "",
             description: "",
             imageCid: nil,
-            acceptedOptions: []
+            acceptedOptions: [],
+            rankingBased: false
         )
     }
 }

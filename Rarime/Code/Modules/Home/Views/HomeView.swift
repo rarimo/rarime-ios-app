@@ -131,7 +131,7 @@ struct HomeView: View {
                     .foregroundStyle(.textPrimary)
 
                 if let passport = passportManager.passport {
-                    Text(passport.displayedFirstName.capitalized)
+                    Text(passport.displayedFirstName.capitalized.components(separatedBy: " ").first ?? "")
                         .additional3()
                         .foregroundStyle(.textSecondary)
                 } else {

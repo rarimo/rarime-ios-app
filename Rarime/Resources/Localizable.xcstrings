@@ -1,6 +1,16 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@"
+          }
+        }
+      }
+    },
     "%@ years old" : {
 
     },
@@ -28,6 +38,9 @@
       }
     },
     "%lld questions" : {
+
+    },
+    "%lld." : {
 
     },
     "%lld/%lld invited" : {
@@ -501,6 +514,9 @@
 
     },
     "Ecuador" : {
+
+    },
+    "Edit" : {
 
     },
     "Egypt" : {
@@ -1228,6 +1244,9 @@
 
     },
     "Pre-elections polls" : {
+
+    },
+    "Preview Ranking" : {
 
     },
     "Privacy" : {
