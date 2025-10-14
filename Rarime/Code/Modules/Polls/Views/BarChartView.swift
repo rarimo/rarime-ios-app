@@ -3,11 +3,12 @@ import SwiftUI
 struct BarChartPollView: View {
     let result: QuestionResult
     let totalVotes: Int
-    
+    var isRankingBased: Bool = false
+
     private var winnerOptionVotes: Int {
         result.options.map(\.votes).max() ?? 0
     }
-    
+
     var body: some View {
         VStack(spacing: 0) {
             ForEach(result.options, id: \.self) { option in
@@ -29,7 +30,8 @@ struct BarChartPollView: View {
                         Text(verbatim: "\(String(format: "%.2f", votePercentage * 100))%")
                             .subtitle6()
                             .foregroundStyle(.textPrimary)
-                        Text(option.votes.formatted(.number))
+                        let text = isRankingBased ? "points" : "vote(s)"
+                        Text("\(option.votes.formatted(.number)) \(text)")
                             .caption3()
                             .foregroundStyle(.textSecondary)
                     }
@@ -74,7 +76,8 @@ struct BarChartPollView: View {
                     answer: "Not at all",
                     votes: 200
                 )
-            ]),
+            ]
+        ),
         totalVotes: 1000
     )
 }

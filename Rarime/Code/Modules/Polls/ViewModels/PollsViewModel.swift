@@ -53,8 +53,8 @@ class PollsViewModel: ObservableObject {
         let lowerBoundBirthDate = try? DateUtil.parsePassportDate(decodedBirthDateLowerbound, true)
         let userBirthDate = (try? DateUtil.parsePassportDate(passport.dateOfBirth, true)) ?? Date()
         
-        let expirationDateLowerbound = try? DateUtil.parsePassportDate(decodedExpirationDateLowerbound, true)
-        let userExpirationDate = (try? DateUtil.parsePassportDate(passport.documentExpiryDate, true)) ?? Date()
+        let expirationDateLowerbound = (try? DateUtil.parsePassportDate(decodedExpirationDateLowerbound, false)) ?? Date()
+        let userExpirationDate = (try? DateUtil.parsePassportDate(passport.documentExpiryDate, false)) ?? Date()
         
         let isNationalityEligible = decodedCountries.contains(Country.fromISOCode(passport.nationality))
         let isAgeEligible: Bool = {
@@ -82,7 +82,7 @@ class PollsViewModel: ObservableObject {
             }
             return false
         }()
-        let isExpirationDateEligible = expirationDateLowerbound == nil || userExpirationDate >= expirationDateLowerbound!
+        let isExpirationDateEligible = decodedExpirationDateLowerbound == "000000" || userExpirationDate >= expirationDateLowerbound
         let countriesString = Set(decodedCountries.map { $0.name }).joined(separator: ", ")
         let ageString: String = {
             let minYear = DateUtil.yearsBetween(from: upperboundBirthDate ?? Date(), to: poll.startsAt)
@@ -104,7 +104,7 @@ class PollsViewModel: ObservableObject {
         }()
         let genderString = decodedGender == "M" ? "Male only" : "Female only"
         let expirationDateString = decodedExpirationDateLowerbound != "000000"
-            ? "Valid until \(DateUtil.richDateFormatter.string(from: expirationDateLowerbound ?? Date()))"
+            ? "Document valid until \(DateUtil.richDateFormatter.string(from: expirationDateLowerbound ?? Date()))"
             : "-"
         
         var requirements: [PollRequirement] = []
