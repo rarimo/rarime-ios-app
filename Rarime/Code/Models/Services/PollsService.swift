@@ -65,7 +65,7 @@ class PollsService {
                 eventId: proposalEventId,
                 proposalSMT: proposalInfo.proposalSMT,
                 proposalResults: proposalInfo.votingResults,
-                rankingBased: proposalMetadata.rankingBased
+                rankingBased: proposalMetadata.rankingBased ?? false
             )
             
             polls.append(poll)
@@ -122,7 +122,7 @@ class PollsService {
             eventId: proposalEventId,
             proposalSMT: proposalInfo.proposalSMT,
             proposalResults: proposalInfo.votingResults,
-            rankingBased: proposalMetadata.rankingBased
+            rankingBased: proposalMetadata.rankingBased ?? false
         )
     }
     
