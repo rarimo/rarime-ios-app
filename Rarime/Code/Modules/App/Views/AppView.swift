@@ -56,7 +56,7 @@ struct AppView: View {
                 .background(.bgPrimary)
             }
         }
-        .preferredColorScheme(settingsManager.colorScheme.rawScheme ?? colorScheme)
+        .preferredColorScheme(settingsManager.colorScheme.rawScheme)
         .blur(radius: blurRadius)
         .animation(.easeOut(duration: 0.1), value: blurRadius)
         .onChange(of: scenePhase, perform: { value in
