@@ -308,20 +308,40 @@ private struct PollListCard: View {
                 }
                 .padding(.horizontal, 16)
             } else {
-                HeightPreservingTabView(selection: $selectedIndex) {
-                    ForEach(questionResults.indices, id: \.self) { index in
-                        VStack(alignment: .leading, spacing: 16) {
-                            let totalVotes = questionResults[index].options.map(\.votes).reduce(0, +)
-                            Text(questionResults[index].question)
-                                .subtitle6()
-                                .foregroundStyle(.textPrimary)
-                            BarChartPollView(
-                                result: questionResults[index],
-                                totalVotes: totalVotes
+                Group {
+                    HeightPreservingTabView(selection: $selectedIndex) {
+                        ForEach(questionResults.indices, id: \.self) { index in
+                            VStack(alignment: .leading, spacing: 16) {
+                                let totalVotes = questionResults[index].options.map(\.votes).reduce(0, +)
+                                Text(questionResults[index].question)
+                                    .subtitle6()
+                                    .foregroundStyle(.textPrimary)
+                                BarChartPollView(
+                                    result: questionResults[index],
+                                    totalVotes: totalVotes
+                                )
+                            }
+                            .padding(.horizontal, 16)
+                            .tag(index)
+                            .background(
+                                GeometryReader { geometry in
+                                    Color.clear.preference(
+                                        key: TabViewHeightPreferenceKey<Int>.self,
+                                        value: [index: geometry.size.height]
+                                    )
+                                }
                             )
                         }
-                        .padding(.horizontal, 16)
-                        .tag(index)
+                        .tabViewStyle(.page(indexDisplayMode: .never))
+                        .animation(.default, value: selectedIndex)
+
+                        if poll.questions.count > 1 {
+                            HorizontalStepIndicator(
+                                steps: questionResults.count,
+                                currentStep: selectedIndex
+                            )
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        }
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))

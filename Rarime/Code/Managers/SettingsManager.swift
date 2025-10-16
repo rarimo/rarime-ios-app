@@ -6,7 +6,7 @@ class SettingsManager: ObservableObject {
     @Published private(set) var colorScheme: AppColorScheme
 
     init() {
-        colorScheme = AppColorScheme(rawValue: AppUserDefaults.shared.colorScheme)!
+        colorScheme = AppColorScheme(rawValue: AppUserDefaults.shared.colorScheme) ?? .system
     }
 
     func setColorScheme(_ colorScheme: AppColorScheme) {

@@ -81,11 +81,11 @@ struct RankingView: View {
             List {
                 ForEach(items) { item in
                     HStack(spacing: 12) {
-                        Image("Draggable")
+                        Image(.draggable)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20, height: 20)
-                            .foregroundColor(.textPrimary)
+                            .foregroundColor(Color.textPrimary)
 
                         VerticalDivider()
 
