@@ -124,7 +124,7 @@ extension RegisterIdentityCircuitType.CircuitAAType {
         let exponent: RegisterIdentityCircuitType.CircuitExponentType?
         let salt: RegisterIdentityCircuitType.CircuitSaltType?
         let curve: RegisterIdentityCircuitType.CircuitCurveType?
-        let hashAlgorithm: RegisterIdentityCircuitType.CircuitHashAlgorithmType
+        let hashAlgorithm: RegisterIdentityCircuitType.CircuitHashAlgorithmType?
 
         func getId() -> String? {
             return SupportRegisterIdentityCircuitAAType.getSupportedSignatureTypeId(self).map { $0.description }
