@@ -113,6 +113,8 @@ enum RegisteredNoirCircuitData: String {
     case registerIdentity_21_256_3_7_336_264_21_3072_6_2008
     
     case registerIdentity_1_256_3_5_336_232_NA
+    
+    case registerIdentity_1_256_3_7_336_264_20_2760_6_2008
 }
 
 enum RegisteredDownloadableFiles: String {
