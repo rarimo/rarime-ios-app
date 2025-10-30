@@ -668,7 +668,6 @@
 		CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		CED314662C0483BD00DF31D5 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		CED314682C04889D00DF31D5 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
-		CED39E2B2CB949D8001D0400 /* witnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.h; sourceTree = "<group>"; };
 		CED5B3A12D075D2C007D04C4 /* witnesscalc_registerIdentityLight160.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentityLight160.h; sourceTree = "<group>"; };
 		CED5B3A22D075D2C007D04C4 /* witnesscalc_registerIdentityLight224.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentityLight224.h; sourceTree = "<group>"; };
 		CED5B3A32D075D2C007D04C4 /* witnesscalc_registerIdentityLight256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentityLight256.h; sourceTree = "<group>"; };
@@ -1608,7 +1607,6 @@
 				CE2FF4B72DCCACAD00E4151D /* witnesscalc_faceRegistryNoInclusion.h */,
 				CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */,
 				CEC561FD2BD923B3002D4954 /* witnesscalc_queryIdentity.h */,
-				CED39E2B2CB949D8001D0400 /* witnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.h */,
 				CED5B3A12D075D2C007D04C4 /* witnesscalc_registerIdentityLight160.h */,
 				CED5B3A22D075D2C007D04C4 /* witnesscalc_registerIdentityLight224.h */,
 				CED5B3A32D075D2C007D04C4 /* witnesscalc_registerIdentityLight256.h */,

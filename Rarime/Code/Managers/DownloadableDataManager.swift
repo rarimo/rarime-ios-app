@@ -4,7 +4,6 @@ import Foundation
 import ZipArchive
 
 enum RegisteredCircuitData: String {
-    case registerIdentity_21_256_3_7_336_264_21_3072_6_2008
     
     case registerIdentityLight160
     case registerIdentityLight224
@@ -109,6 +108,9 @@ enum RegisteredNoirCircuitData: String {
     
     case registerIdentity_11_256_3_4_576_248_1_1496_5_296
     case registerIdentity_1_256_3_4_336_248_1_1496_4_256
+    
+    case registerIdentity_1_256_3_5_344_232_NA
+    case registerIdentity_21_256_3_7_336_264_21_3072_6_2008
 }
 
 enum RegisteredDownloadableFiles: String {
