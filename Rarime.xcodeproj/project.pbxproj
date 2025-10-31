@@ -325,7 +325,6 @@
 		CEC5620F2BD925D6002D4954 /* Circuits.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC5620E2BD925D6002D4954 /* Circuits.swift */; };
 		CEC562112BD926AA002D4954 /* ZKUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC562102BD926AA002D4954 /* ZKUtils.swift */; };
 		CEC562192BD92B3E002D4954 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC562132BD9281A002D4954 /* libresolv.9.tbd */; };
-		CEC76C932D6750D800130CA1 /* libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC76C902D6750D800130CA1 /* libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a */; };
 		CEC8C36C2CB8134F0006352C /* SupportRegisterIdentityCircuitAAType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC8C36B2CB8134F0006352C /* SupportRegisterIdentityCircuitAAType.swift */; };
 		CEC9D8E72BFF41A800EACD0F /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */; };
 		CED314672C0483BD00DF31D5 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED314662C0483BD00DF31D5 /* MailView.swift */; };
@@ -663,12 +662,10 @@
 		CEC562102BD926AA002D4954 /* ZKUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZKUtils.swift; sourceTree = "<group>"; };
 		CEC562132BD9281A002D4954 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		CEC562142BD9281A002D4954 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
-		CEC76C902D6750D800130CA1 /* libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a; sourceTree = "<group>"; };
 		CEC8C36B2CB8134F0006352C /* SupportRegisterIdentityCircuitAAType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportRegisterIdentityCircuitAAType.swift; sourceTree = "<group>"; };
 		CEC9D8E62BFF41A800EACD0F /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		CED314662C0483BD00DF31D5 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		CED314682C04889D00DF31D5 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
-		CED39E2B2CB949D8001D0400 /* witnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.h; sourceTree = "<group>"; };
 		CED5B3A12D075D2C007D04C4 /* witnesscalc_registerIdentityLight160.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentityLight160.h; sourceTree = "<group>"; };
 		CED5B3A22D075D2C007D04C4 /* witnesscalc_registerIdentityLight224.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentityLight224.h; sourceTree = "<group>"; };
 		CED5B3A32D075D2C007D04C4 /* witnesscalc_registerIdentityLight256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = witnesscalc_registerIdentityLight256.h; sourceTree = "<group>"; };
@@ -756,7 +753,6 @@
 				5651D07A2CB94C4400C6A704 /* AppsFlyerLib-Static in Frameworks */,
 				CE3477512C7885DA005E91FE /* FirebaseAnalytics in Frameworks */,
 				CEC562072BD923B4002D4954 /* libfq.a in Frameworks */,
-				CEC76C932D6750D800130CA1 /* libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a in Frameworks */,
 				CE28D4FB2D3E887300042E1D /* libwitnesscalc_registerIdentityLight256.a in Frameworks */,
 				CE28D5002D3E887300042E1D /* libwitnesscalc_registerIdentityLight224.a in Frameworks */,
 				CE28D5032D3E887300042E1D /* libwitnesscalc_queryIdentity.a in Frameworks */,
@@ -1608,7 +1604,6 @@
 				CE2FF4B72DCCACAD00E4151D /* witnesscalc_faceRegistryNoInclusion.h */,
 				CE8FEB5D2C1AFC780008381A /* witnesscalc_auth.h */,
 				CEC561FD2BD923B3002D4954 /* witnesscalc_queryIdentity.h */,
-				CED39E2B2CB949D8001D0400 /* witnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.h */,
 				CED5B3A12D075D2C007D04C4 /* witnesscalc_registerIdentityLight160.h */,
 				CED5B3A22D075D2C007D04C4 /* witnesscalc_registerIdentityLight224.h */,
 				CED5B3A32D075D2C007D04C4 /* witnesscalc_registerIdentityLight256.h */,
@@ -1637,7 +1632,6 @@
 				CE30FA982D50DF6D0057F897 /* libwitnesscalc_registerIdentity_14_256_3_4_336_64_1_1480_5_296.a */,
 				CE30FA9A2D50DF6D0057F897 /* libwitnesscalc_registerIdentity_20_160_3_3_736_200_NA.a */,
 				CE30FA9B2D50DF6D0057F897 /* libwitnesscalc_registerIdentity_20_256_3_5_336_72_NA.a */,
-				CEC76C902D6750D800130CA1 /* libwitnesscalc_registerIdentity_21_256_3_7_336_264_21_3072_6_2008.a */,
 				CEC562132BD9281A002D4954 /* libresolv.9.tbd */,
 				CEC562142BD9281A002D4954 /* libresolv.tbd */,
 				638BBB1C2E99302800222A6C /* Identity.xcframework */,

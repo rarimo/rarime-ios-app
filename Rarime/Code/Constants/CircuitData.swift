@@ -2,7 +2,6 @@ import Foundation
 
 let CIRCUIT_DATA_URLS: [String: URL] = [
     "registerIdentity_2_256_3_6_336_264_21_2448_6_2008": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.0/registerIdentity_2_256_3_6_336_264_21_2448_6_2008-download.zip")!,
-    "registerIdentity_21_256_3_7_336_264_21_3072_6_2008": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.0/registerIdentity_21_256_3_7_336_264_21_3072_6_2008-download.zip")!,
     "registerIdentity_2_256_3_6_336_248_1_2432_3_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.1/registerIdentity_2_256_3_6_336_248_1_2432_3_256-download.zip")!,
     "registerIdentity_20_256_3_3_336_224_NA": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.4/registerIdentity_20_256_3_3_336_224_NA-download.zip")!,
     "registerIdentityLight160": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits/v0.2.6-light/registerIdentityLight160-download.zip")!,
@@ -50,7 +49,7 @@ let NOIR_CIRCUIT_DATA_URLS: [String: URL] = [
     "registerIdentity_11_256_3_5_584_264_1_2136_4_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.13/registerIdentity_11_256_3_5_584_264_1_2136_4_256.json")!,
     "registerIdentity_1_256_3_4_336_232_NA": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.14/registerIdentity_1_256_3_4_336_232_NA.json")!,
     "registerIdentity_2_256_3_4_336_248_22_1496_7_2408": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.14/registerIdentity_2_256_3_4_336_248_22_1496_7_2408.json")!,
-    
+
     "registerIdentity_1_256_3_5_336_248_1_2120_3_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.18/registerIdentity_1_256_3_5_336_248_1_2120_3_256.json")!,
     "registerIdentity_7_160_3_3_336_216_1_1080_3_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.18/registerIdentity_7_160_3_3_336_216_1_1080_3_256.json")!,
 
@@ -69,7 +68,7 @@ let NOIR_CIRCUIT_DATA_URLS: [String: URL] = [
     "registerIdentity_1_256_3_4_336_232_1_1480_5_296": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.23/registerIdentity_1_256_3_4_336_232_1_1480_5_296.json")!,
 
     "registerIdentity_1_256_3_6_336_248_1_2744_4_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.24/registerIdentity_1_256_3_6_336_248_1_2744_4_256.json")!,
-    "registerIdentity_2_256_3_6_336_264_1_2448_3_256" : URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.24/registerIdentity_2_256_3_6_336_264_1_2448_3_256.json")!,
+    "registerIdentity_2_256_3_6_336_264_1_2448_3_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.24/registerIdentity_2_256_3_6_336_264_1_2448_3_256.json")!,
     "registerIdentity_3_160_3_3_336_200_NA": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.24/registerIdentity_3_160_3_3_336_200_NA.json")!,
 
     "registerIdentity_3_160_3_4_576_216_1_1512_3_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.25/registerIdentity_3_160_3_4_576_216_1_1512_3_256.json")!,
@@ -88,9 +87,27 @@ let NOIR_CIRCUIT_DATA_URLS: [String: URL] = [
     "registerIdentity_21_256_3_5_576_232_NA": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.28/registerIdentity_21_256_3_5_576_232_NA.json")!,
     "registerIdentity_24_256_3_4_336_232_NA": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.28/registerIdentity_24_256_3_4_336_232_NA.json")!,
 
-    "registerIdentity_11_256_3_5_576_248_1_1808_4_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.29/registerIdentity_11_256_3_5_576_248_1_1808_4_256.json")!
+    "registerIdentity_11_256_3_5_576_248_1_1808_4_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.29/registerIdentity_11_256_3_5_576_248_1_1808_4_256.json")!,
 
-    
+    "registerIdentity_25_384_3_5_576_248_20_3768_3_2008": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.30/registerIdentity_25_384_3_5_576_248_20_3768_3_2008.json")!,
+    "registerIdentity_1_256_3_6_336_248_1_2432_3_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.30/registerIdentity_1_256_3_6_336_248_1_2432_3_256.json")!,
+    "registerIdentity_2_256_3_5_336_248_22_1808_7_2408": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.30/registerIdentity_2_256_3_5_336_248_22_1808_7_2408.json")!,
+
+    "registerIdentity_11_256_3_4_576_248_1_1496_5_296": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.31/registerIdentity_11_256_3_4_576_248_1_1496_5_296.json")!,
+    "registerIdentity_1_256_3_4_336_248_1_1496_4_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.31/registerIdentity_1_256_3_4_336_248_1_1496_4_256.json")!,
+
+    "registerIdentity_21_256_3_7_336_264_21_3072_6_2008": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.32/registerIdentity_21_256_3_7_336_264_21_3072_6_2008.json")!,
+    "registerIdentity_1_256_3_5_344_232_NA": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.32/registerIdentity_1_256_3_5_344_232_NA.json")!,
+
+    "registerIdentity_1_256_3_5_336_232_NA": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.33/registerIdentity_1_256_3_5_336_232_NA.json")!,
+
+    "registerIdentity_1_256_3_7_336_264_20_2760_6_2008": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.34/registerIdentity_1_256_3_7_336_264_20_2760_6_2008.json")!,
+
+    "registerIdentity_1_256_3_4_336_232_1_1480_4_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.36/registerIdentity_1_256_3_4_336_232_1_1480_4_256.json")!,
+
+    "registerIdentity_1_256_3_4_336_248_1_560_4_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.37/registerIdentity_1_256_3_4_336_248_1_560_4_256.json")!,
+
+    "registerIdentity_26_512_3_2_336_248_1_1384_2_256": URL(string: "https://storage.googleapis.com/rarimo-store/passport-zk-circuits-noir/v0.1.38/registerIdentity_26_512_3_2_336_248_1_1384_2_256.json")!
 ]
 
 let ZKEY_URLS: [String: URL] = [
