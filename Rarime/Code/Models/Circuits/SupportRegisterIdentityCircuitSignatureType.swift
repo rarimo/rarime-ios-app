@@ -7,6 +7,10 @@ class SupportRegisterIdentityCircuitSignatureType {
         .init(staticId: 2, algorithm: .RSA, keySize: .B4096, exponent: .E65537, salt: nil, curve: nil, hashAlgorithm: .HA256),
         .init(staticId: 3, algorithm: .RSA, keySize: .B2048, exponent: .E65537, salt: nil, curve: nil, hashAlgorithm: .HA160),
         .init(staticId: 4, algorithm: .RSA, keySize: .B3072, exponent: .E37187, salt: nil, curve: nil, hashAlgorithm: .HA160),
+        .init(staticId: 5, algorithm: .RSA, keySize: .B2048, exponent: .E65537, salt: nil, curve: nil, hashAlgorithm: .HA512),
+        .init(staticId: 6, algorithm: .RSA, keySize: .B2048, exponent: .E58333, salt: nil, curve: nil, hashAlgorithm: .HA160),
+        .init(staticId: 7, algorithm: .RSA, keySize: .B3072, exponent: .E45347, salt: nil, curve: nil, hashAlgorithm: .HA160),
+        .init(staticId: 8, algorithm: .RSA, keySize: .B3072, exponent: .E46271, salt: nil, curve: nil, hashAlgorithm: .HA160),
 
         // RSAPSS
         .init(staticId: 10, algorithm: .RSAPSS, keySize: .B2048, exponent: .E3, salt: .S32, curve: nil, hashAlgorithm: .HA256),
@@ -23,6 +27,9 @@ class SupportRegisterIdentityCircuitSignatureType {
         .init(staticId: 23, algorithm: .ECDSA, keySize: .B192, exponent: nil, salt: nil, curve: .SECP192R1, hashAlgorithm: .HA160),
         .init(staticId: 24, algorithm: .ECDSA, keySize: .B224, exponent: nil, salt: nil, curve: .SECP224R1, hashAlgorithm: .HA224),
         .init(staticId: 25, algorithm: .ECDSA, keySize: .B384, exponent: nil, salt: nil, curve: .BRAINPOOLP384R1, hashAlgorithm: .HA384),
+        .init(staticId: 26, algorithm: .ECDSA, keySize: .B512, exponent: nil, salt: nil, curve: .BRAINPOOLP512R1, hashAlgorithm: .HA512),
+        .init(staticId: 27, algorithm: .ECDSA, keySize: .B521, exponent: nil, salt: nil, curve: .SECP521R1, hashAlgorithm: .HA512),
+        .init(staticId: 28, algorithm: .ECDSA, keySize: .B384, exponent: nil, salt: nil, curve: .SECP384R1, hashAlgorithm: .HA384),
     ]
 
     static func getSupportedSignatureTypeId(_ type: RegisterIdentityCircuitType.CircuitSignatureType) -> UInt? {

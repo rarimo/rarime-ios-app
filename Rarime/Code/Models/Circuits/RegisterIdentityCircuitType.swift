@@ -124,7 +124,7 @@ extension RegisterIdentityCircuitType.CircuitAAType {
         let exponent: RegisterIdentityCircuitType.CircuitExponentType?
         let salt: RegisterIdentityCircuitType.CircuitSaltType?
         let curve: RegisterIdentityCircuitType.CircuitCurveType?
-        let hashAlgorithm: RegisterIdentityCircuitType.CircuitHashAlgorithmType
+        let hashAlgorithm: RegisterIdentityCircuitType.CircuitHashAlgorithmType?
 
         func getId() -> String? {
             return SupportRegisterIdentityCircuitAAType.getSupportedSignatureTypeId(self).map { $0.description }
@@ -138,11 +138,11 @@ extension RegisterIdentityCircuitType {
     }
 
     enum CircuitKeySizeType {
-        case B1024, B2048, B3072, B4096, B160, B192, B224, B256, B320, B384, B512
+        case B1024, B2048, B3072, B4096, B160, B192, B224, B256, B320, B384, B512, B521
     }
 
     enum CircuitExponentType {
-        case E3, E65537, E37187
+        case E3, E65537, E37187, E58333, E45347, E46271
     }
 
     enum CircuitSaltType {
@@ -150,7 +150,7 @@ extension RegisterIdentityCircuitType {
     }
 
     enum CircuitCurveType {
-        case SECP160R1, SECP192R1, SECP224R1, SECP256R1, SECP384R1, SECP512R1
+        case SECP160R1, SECP192R1, SECP224R1, SECP256R1, SECP384R1, SECP512R1, SECP521R1
         case BRAINPOOLP160R1, BRAINPOOLP192R1, BRAINPOOLP224R1, BRAINPOOLP256R1, BRAINPOOLP320R1, BRAINPOOLP384R1, BRAINPOOLP512R1
     }
 
@@ -296,6 +296,8 @@ extension Passport {
             return .B384
         case 512:
             return .B512
+        case 521:
+            return .B521
         default:
             return nil
         }
@@ -312,6 +314,12 @@ extension Passport {
             return .E37187
         } else if exponentBN.cmp(BN(65537)) == 0 {
             return .E65537
+        } else if exponentBN.cmp(BN(58333)) == 0 {
+            return .E58333
+        } else if exponentBN.cmp(BN(45347)) == 0 {
+            return .E45347
+        } else if exponentBN.cmp(BN(46271)) == 0 {
+            return .E46271
         } else {
             return nil
         }
@@ -397,8 +405,10 @@ extension Passport {
             return .SECP256R1
         case "secp384r1", "prime384v1", "P-384":
             return .SECP384R1
-        case "secp521r1", "prime521v1", "P-521":
+        case "secp512r1", "prime512v1", "P-512":
             return .SECP512R1
+        case "secp521r1", "prime521v1", "P-521":
+            return .SECP521R1
         case "brainpoolP160r1":
             return .BRAINPOOLP160R1
         case "brainpoolP192r1":
